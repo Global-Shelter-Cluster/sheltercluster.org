@@ -565,3 +565,39 @@ $conf['404_fast_html'] = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML+RDFa 1.0//EN"
  * Remove the leading hash signs to disable.
  */
 # $conf['allow_authorize_operations'] = FALSE;
+
+/**
+ *  * Appnovation/Local dev settings file. Change as needed
+ *   * stored on server, in the folder specific to the correct branch
+ *    */
+$file = __DIR__ . '/dev_settings.inc';
+if (file_exists($file)) {
+	  include_once($file);
+}
+
+/**
+ *  * Appnovation/Local stage settings file. Change as needed
+ *   * Stored on server, in the folder specific to the correct branch
+ *    */
+$file = __DIR__ . '/stage_settings.inc';
+if (file_exists($file)) {
+	  include_once($file);
+}
+
+/**
+ *  * Appnovation/Local prod settings file. Change as needed
+ *   * Stored on server, in the folder specific to the correct branch
+ *    */
+$file = __DIR__ . '/prod_settings.inc';
+if (file_exists($file)) {
+	  include_once($file);
+}
+
+/**
+ *  * Localhost settings file. Change as needed
+ *   * Stored on dev's machine, in the folder specific to the correct branch
+ *    */
+$file = __DIR__ . '/localhost_settings.inc';
+if (file_exists($file)) {
+	  include_once($file);
+}
