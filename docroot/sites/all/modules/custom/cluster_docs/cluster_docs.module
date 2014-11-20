@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the cluster_docs feature.
+ */
+
+include_once 'cluster_docs.features.inc';
