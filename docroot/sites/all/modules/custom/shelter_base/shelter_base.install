@@ -1,0 +1,64 @@
+<?php
+
+/**
+ * @file
+ *  Enable required modules and perform general updates using hook_update_N().
+ */
+
+/**
+ * Implements hook_install().
+ */
+function shelter_base_install() {
+  module_disable(array('dashboard', 'toolbar'));
+  
+  // Enable core modules.
+  foreach(_shelter_base_required_core() as $m) {
+    if (! module_enable(array($m))) {
+      watchdog('shelter_base', 'Failed enabling core ' . $m);
+    }
+  }
+
+  // Enable contrib modules.
+  foreach(_shelter_base_required_contrib() as $m) {
+    if (! module_enable(array($m))) {
+      watchdog('shelter_base', 'Failed enabling contrib ' . $m);
+    }
+  }
+
+  // Enable custom modules.
+  foreach(_shelter_base_required_custom() as $m) {
+    if (! module_enable(array($m))) {
+      watchdog('shelter_base', 'Failed enabling custom ' . $m);
+    }
+  }
+}
+
+/**
+ * List of required contrib modules.
+ */
+function _shelter_base_required_contrib() {
+  return array('addressfield', 'admin_menu', 'backup_migrate', 'ctools', 'date', 'devel', 'email', 'entity', 'entity_translation',
+    'entityreference', 'features', 'flag', 'link', 'og', 'og_access', 'og_register', 'og_ui', 'strongarm', 'title', 'token',
+    'transliteration', 'url', 'views', 'views_ui', 'views_bulk_operations');
+}
+
+/**
+ * List of required core modules.
+ */
+function _shelter_base_required_core() {
+  return array('locale');
+}
+
+/**
+ * List of required custom modules.
+ */
+function _shelter_base_required_custom() {
+  return array('cluster_docs', 'cluster_og');
+}
+
+/**
+ * List of enabled languages.
+ */
+function _shelter_base_enabled_lang() {
+  return array();
+}
