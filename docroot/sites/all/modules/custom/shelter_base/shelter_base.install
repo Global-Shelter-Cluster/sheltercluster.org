@@ -10,25 +10,23 @@
  */
 function shelter_base_install() {
   module_disable(array('dashboard', 'toolbar'));
-  
-  // Enable core modules.
-  foreach(_shelter_base_required_core() as $m) {
-    if (! module_enable(array($m))) {
-      watchdog('shelter_base', 'Failed enabling core ' . $m);
-    }
-  }
+  _shelter_base_modules_enable('core');
+  _shelter_base_modules_enable('contrib');
+  _shelter_base_modules_enable('custom');
+}
 
-  // Enable contrib modules.
-  foreach(_shelter_base_required_contrib() as $m) {
-    if (! module_enable(array($m))) {
-      watchdog('shelter_base', 'Failed enabling contrib ' . $m);
-    }
-  }
-
-  // Enable custom modules.
-  foreach(_shelter_base_required_custom() as $m) {
-    if (! module_enable(array($m))) {
-      watchdog('shelter_base', 'Failed enabling custom ' . $m);
+/**
+ * Enable modules.
+ * @param $type
+ *   Module type: one of contrib, custom or core.
+ */
+function _shelter_base_modules_enable($type) {
+  $f = '_shelter_base_required_' . $type;
+  if (function_exists($f)) {
+    foreach ($f() as $module) {
+      if (! module_enable(array($module))) {
+        watchdog('shelter_base', "Failed enabling $f $module", WATCHDOG_ERROR);
+      }
     }
   }
 }
@@ -38,8 +36,8 @@ function shelter_base_install() {
  */
 function _shelter_base_required_contrib() {
   return array('addressfield', 'admin_menu', 'backup_migrate', 'ctools', 'date', 'devel', 'email', 'entity', 'entity_translation',
-    'entityreference', 'features', 'flag', 'link', 'og', 'og_access', 'og_register', 'og_ui', 'strongarm', 'title', 'token',
-    'transliteration', 'url', 'views', 'views_ui', 'views_bulk_operations');
+    'entityreference', 'features', 'flag', 'link', 'og', 'og_access', 'og_register', 'og_ui', 'pathauto', 'strongarm', 'title',
+    'token', 'transliteration', 'url', 'views', 'views_ui', 'views_bulk_operations');
 }
 
 /**
@@ -57,8 +55,8 @@ function _shelter_base_required_custom() {
 }
 
 /**
- * List of enabled languages.
+ * Update required module list.
  */
-function _shelter_base_enabled_lang() {
-  return array();
+function shelter_base_update_7001() {
+  _shelter_base_modules_enable('contrib');
 }
