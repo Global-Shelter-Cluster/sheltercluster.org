@@ -91,7 +91,7 @@ function shelter_base_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'comment_page';
-  $strongarm->value = '0';
+  $strongarm->value = 0;
   $export['comment_page'] = $strongarm;
 
   $strongarm = new stdClass();
@@ -372,7 +372,7 @@ function shelter_base_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'node_submitted_page';
-  $strongarm->value = 0;
+  $strongarm->value = FALSE;
   $export['node_submitted_page'] = $strongarm;
 
   $strongarm = new stdClass();
@@ -407,7 +407,7 @@ function shelter_base_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'pathauto_node_geographic_region_pattern';
-  $strongarm->value = 'region/[node:title]';
+  $strongarm->value = '';
   $export['pathauto_node_geographic_region_pattern'] = $strongarm;
 
   $strongarm = new stdClass();
@@ -428,7 +428,7 @@ function shelter_base_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'pathauto_node_pattern';
-  $strongarm->value = 'content/[node:title]';
+  $strongarm->value = '';
   $export['pathauto_node_pattern'] = $strongarm;
 
   $strongarm = new stdClass();

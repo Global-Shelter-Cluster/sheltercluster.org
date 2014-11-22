@@ -1,7 +1,62 @@
 <?php
 /**
  * @file
- * Code for the cluster_og feature.
+ * Handles all OG related funcitonalities.
  */
 
 include_once 'cluster_og.features.inc';
+
+function cluster_og_menu() {
+  $items = array();
+  $query = new EntityFieldQuery();
+  $res = $query->entityCondition('entity_type', 'node')
+    ->entityCondition('bundle', 'geographic_region')
+    ->propertyCondition('status', NODE_PUBLISHED)
+    ->execute();
+
+  if (! isset($res['node'])) {
+    return;
+  }
+
+  // Loop over all geographic_region node to create menu items.
+  foreach (node_load_multiple(array_keys($res['node'])) as $node) {
+    $wrapper = entity_metadata_wrapper('node', $node);
+    $items[_cluster_og_generate_region_path($wrapper)] = array(
+      'title' => $wrapper->label(),
+      'page callback' => 'cluster_og_geographic_region',
+      'page arguments' => array("$node->nid"),
+      'access callback' => TRUE,
+      'type' => MENU_NORMAL_ITEM,
+    );
+  }
+  return $items;
+}
+
+/**
+ * Generate path alias for a Geographic region group by prefixing all parents and ancestors labels
+ * to the group label.
+ */
+function _cluster_og_generate_region_path($wrapper, $path = '') {
+  $path = strtolower($wrapper->label() . '/' . $path);
+  if ($wrapper->field_parent_region->value()) {
+    return _cluster_og_generate_region_path($wrapper->field_parent_region, $path);
+  }
+  return trim($path, '/');
+}
+
+/**
+ * Menu callback, wrapper for node_view().
+ */
+function cluster_og_geographic_region($nid) {
+  return node_view(node_load($nid));
+}
+
+/**
+ * Implements hook_node_save().
+ */
+function cluster_og_node_presave($node) {
+  // Clear the menu cache to add the new region to the menu.
+  if ($node->type == 'geographic_region') {
+    menu_rebuild();
+  }
+}
