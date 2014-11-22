@@ -21,13 +21,16 @@ function cluster_og_menu() {
   // Loop over all geographic_region node to create menu items.
   foreach (node_load_multiple(array_keys($res['node'])) as $node) {
     $wrapper = entity_metadata_wrapper('node', $node);
-    $items[_cluster_og_generate_region_path($wrapper)] = array(
+    $path = _cluster_og_generate_region_path($wrapper);
+    $items[$path] = array(
       'title' => $wrapper->label(),
       'page callback' => 'cluster_og_geographic_region',
       'page arguments' => array("$node->nid"),
       'access callback' => TRUE,
       'type' => MENU_NORMAL_ITEM,
     );
+    $alias = array('source' => 'node/' . $node->nid, 'alias' => $path);
+    path_save($alias);
   }
   return $items;
 }
