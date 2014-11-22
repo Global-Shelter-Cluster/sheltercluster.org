@@ -54,6 +54,7 @@ function cluster_og_geographic_region($nid) {
 
 /**
  * Implements hook_node_save().
+ * @TODO this doesn't work.
  */
 function cluster_og_node_presave($node) {
   // Clear the menu cache to add the new region to the menu.
