@@ -29,8 +29,10 @@ function cluster_og_menu() {
       'access callback' => TRUE,
       'type' => MENU_NORMAL_ITEM,
     );
-    $alias = array('source' => 'node/' . $node->nid, 'alias' => $path);
-    path_save($alias);
+    $source = 'node/' . $node->nid;
+    $alias = array('source' => $source, 'alias' => $path);
+    path_delete(array('source' => $source));
+    //path_save($alias);
   }
   return $items;
 }
