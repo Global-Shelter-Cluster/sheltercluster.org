@@ -36,8 +36,9 @@ function _shelter_base_modules_enable($type) {
  */
 function _shelter_base_required_contrib() {
   return array('addressfield', 'admin_menu', 'backup_migrate', 'ctools', 'date', 'devel', 'email', 'entity', 'entity_translation',
-    'entityreference', 'features', 'flag', 'link', 'og', 'og_access', 'og_register', 'og_ui', 'pathauto', 'strongarm', 'title',
-    'token', 'transliteration', 'url', 'views', 'views_ui', 'views_bulk_operations');
+    'entityreference', 'features', 'flag', 'link', 'og', 'og_access', 'og_register', 'og_ui', 'pathauto', 'restrict_node_page_view',
+    'strongarm', 'title', 'token', 'transliteration', 'url', 'views', 'views_ui', 'views_bulk_operations'
+  );
 }
 
 /**
