@@ -74,11 +74,22 @@ function cluster_og_node_insert($node) {
 }
 
 /**
+ * Returns render array for a given menu.
+ * @param $menu_name
+ *  Machine name of the required menu.
+ * @param $current_page_only
+ *  If TRUE menu is only expended for the currently viewed page / path.
+ *  If FALSE the whole menu tree is provided.
  * @return
  *  Regions menu render array.
  */
-function _cluster_og_get_regions_menu() {
-  $tree = menu_tree_page_data('menu-regions', NULL, TRUE);
+function _cluster_og_get_regions_menu($menu_name, $current_page_only = TRUE) {
+  if ($current_page_only) {
+    $tree = menu_tree_page_data($menu_name, NULL, TRUE);
+  }
+  else {
+    $tree = menu_tree_all_data($menu_name); 
+  }
   $output = menu_tree_output($tree);
   return $output;
 }
@@ -95,5 +106,5 @@ function cluster_og_theme() {
  */
 function cluster_og_preprocess_page(&$vars) {
   // Add the Region Groups menu to the page.
-  $vars['page']['footer_firstcolumn'][] = _cluster_og_get_regions_menu();
+  $vars['page']['footer_firstcolumn'][] = _cluster_og_get_regions_menu('menu-regions');
 }
