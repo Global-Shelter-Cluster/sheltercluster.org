@@ -9,7 +9,7 @@
  * Implements hook_install().
  */
 function shelter_base_install() {
-  module_disable(array('dashboard', 'toolbar'));
+  module_disable(array('dashboard', 'toolbar', 'overlay'));
   _shelter_base_modules_enable('core');
   _shelter_base_modules_enable('contrib');
   _shelter_base_modules_enable('custom');
