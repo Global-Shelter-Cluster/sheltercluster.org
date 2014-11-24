@@ -18,6 +18,17 @@ function cluster_og_menu() {
 }
 
 /**
+* Implements hook_entity_info_alter().
+*/
+function cluster_og_entity_info_alter(&$entity_info) {
+  // Add a contact member view mode to users.
+  $entity_info['user']['view modes']['alternate'] = array(
+    'label' => t('Contact member'),
+    'custom settings' => TRUE,
+  );
+}
+
+/**
  * Generate path for a Geographic region group by prefixing all parents and ancestors labels
  * to the group label.
  */
@@ -43,6 +54,30 @@ function cluster_og_geographic_region($nid, $path) {
 }
 
 /**
+ * Implements hook_node_load().
+ */
+function cluster_og_node_view($node) {
+  $bundle = $node->type;
+
+  // Group specific actions.
+  if (og_is_group_type('node', $bundle)) {
+    $gid = $node->nid;
+
+    // Make a list of contact member users.
+    if ($contact_member_rid = _cluster_og_get_role_id_by_name($bundle, 'contact member')) {
+      if ($contact_members_ids = _cluster_og_get_group_users_by_role($gid, $contact_member_rid)) {
+        $member = array(
+          '#theme' => 'cluster_og_contact_member',
+          'contact_members' => user_load_multiple($contact_members_ids),
+        );
+        $node->content['contact_members'] = $member;
+      }
+    }
+
+  }
+}
+
+/**
  * Implements hook_node_insert().
  */
 function cluster_og_node_insert($node) {
@@ -50,6 +85,38 @@ function cluster_og_node_insert($node) {
   if ($node->type == 'geographic_region') {
     menu_rebuild();
   }
+}
+
+/**
+ * Get the role id for a group from the role name.
+ * @param $bundle,
+ *  Group entity bundle name.
+ * @param $role_name
+ *  The role name as stored in the database.
+ */
+function _cluster_og_get_role_id_by_name($bundle, $role_name) {
+  return db_select('og_role', 'og_r')
+    ->fields('og_r', array('rid'))
+    ->condition('group_bundle', $bundle)
+    ->condition('name', $role_name)
+    ->execute()->fetchField();
+}
+
+/**
+ * Get all users with specified role for a group.
+ * @param $gid
+ *  Group id.
+ * @param $rid
+ *  OG role id.
+ * @return
+ *  array of user ids.
+ */
+function _cluster_og_get_group_users_by_role($gid, $rid) {
+  return db_select('og_users_roles', 'og_ur')
+    ->fields('og_ur', array('uid'))
+    ->condition('gid', $gid)
+    ->condition('rid', $rid)
+    ->execute()->fetchCol();
 }
 
 /**
@@ -77,7 +144,12 @@ function _cluster_og_get_regions_menu($menu_name, $current_page_only = TRUE) {
  * Implements hook_theme().
  */
 function cluster_og_theme() {
-  return array();
+  return array(
+    'cluster_og_contact_member' => array(
+      'file' => 'theme/cluster_og.theme.inc',
+      'render element' => 'element',
+    ),
+  );
 }
 
 /**
