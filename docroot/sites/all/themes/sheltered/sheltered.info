@@ -1,0 +1,7 @@
+name = Sheltered
+description = Red Cross - Shelter Cluster
+package = Core
+version = VERSION
+core = 7.x
+
+stylesheets[all][] = layout.css
