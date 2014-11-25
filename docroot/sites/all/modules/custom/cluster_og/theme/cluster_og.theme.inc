@@ -7,15 +7,13 @@
 
 /**
  * Theme a contact members user data.
+ * $vars['element']['total']: the contact members total count.
+ * $vars['element']['#children']: markup for all contact member accounts.
+ * $vars['element'][UID]: each user account render array and markup.
  */
 function theme_cluster_og_contact_member($vars) {
-  if (! $members = $vars['element']['contact_members']) {
-    return;
-  }
-
   $output = '<div><div>' . t('Contact members') . '</div>';
-  foreach ($vars['element']['contact_members'] as $user) {
-    $output .= '<div>' . $user->name . '</div>';
-  }
-  return '</div>' . $output;
+  $output .= $vars['element']['#children']; 
+  $output .= '</div>';
+  return $output;
 }

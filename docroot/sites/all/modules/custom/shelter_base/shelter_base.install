@@ -36,8 +36,8 @@ function _shelter_base_modules_enable($type) {
  */
 function _shelter_base_required_contrib() {
   return array('addressfield', 'admin_menu', 'backup_migrate', 'ctools', 'date', 'devel', 'email', 'entity', 'entity_translation',
-    'entityreference', 'features', 'flag', 'link', 'og', 'og_access', 'og_register', 'og_ui', 'pathauto', 'restrict_node_page_view',
-    'strongarm', 'title', 'token', 'transliteration', 'url', 'views', 'views_ui', 'views_bulk_operations'
+    'entityreference', 'features', 'flag', 'link', 'name', 'og', 'og_access', 'og_register', 'og_ui', 'pathauto',
+    'restrict_node_page_view', 'strongarm', 'title', 'token', 'transliteration', 'url', 'views', 'views_ui', 'views_bulk_operations'
   );
 }
 
@@ -52,12 +52,21 @@ function _shelter_base_required_core() {
  * List of required custom modules.
  */
 function _shelter_base_required_custom() {
-  return array('cluster_docs', 'cluster_og');
+  return array('cluster_docs', 'cluster_og', 'cluster_user');
 }
 
 /**
  * Update required module list.
  */
 function shelter_base_update_7001() {
+  _shelter_base_modules_enable('contrib');
+}
+
+/**
+ * Update required module list.
+ */
+function shelter_base_update_7002() {
+  _shelter_base_modules_enable('core');
+  _shelter_base_modules_enable('custom');
   _shelter_base_modules_enable('contrib');
 }

@@ -55,10 +55,17 @@ function cluster_og_node_view($node) {
     // Make a list of contact member users.
     if ($contact_member_rid = _cluster_og_get_role_id_by_name($bundle, 'contact member')) {
       if ($contact_members_ids = _cluster_og_get_group_users_by_role($gid, $contact_member_rid)) {
+        $accounts = user_load_multiple($contact_members_ids);
+        // Prepare a render array.
         $member = array(
-          '#theme' => 'cluster_og_contact_member',
-          'contact_members' => user_load_multiple($contact_members_ids),
+          '#theme_wrappers' => array('cluster_og_contact_member'),
+          'total' => count($accounts),
         );
+
+        // Add account render arrays.
+        foreach ($accounts as $account) {
+          $member[$account->uid] = array(user_view($account, 'contact_member'));
+        }
         $node->content['contact_members'] = $member;
       }
     }
