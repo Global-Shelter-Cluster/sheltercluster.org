@@ -1,0 +1,16 @@
+<?php
+/**
+ * @file
+ * Feature module which hanldes user parameters.
+ */
+
+/**
+* Implements hook_entity_info_alter().
+*/
+function cluster_user_entity_info_alter(&$entity_info) {
+  // Add a contact member view mode to users.
+  $entity_info['user']['view modes']['alternate'] = array(
+    'label' => t('Contact member'),
+    'custom settings' => TRUE,
+  );
+}

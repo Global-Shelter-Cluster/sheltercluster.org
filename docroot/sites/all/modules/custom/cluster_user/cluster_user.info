@@ -1,0 +1,5 @@
+name = cluster_user
+core = 7.x
+package = Cluster
+features[features_api][] = api:2
+project path = sites/all/modules/custom
