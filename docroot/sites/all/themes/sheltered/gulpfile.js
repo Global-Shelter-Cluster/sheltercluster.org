@@ -21,7 +21,8 @@ gulp.task('compass', function() {
     .pipe(compass({
       css: './assets/css',
       sass: './assets/sass',
-      image: './assets/images'
+      image: './assets/images',
+      require: ['breakpoint', 'compass-normalize']
     }))
     .on('error', function(err) {
       // Error Handling
