@@ -1,4 +1,4 @@
-name = Shelter
+name = shelter
 description = Red Cross - Shelter Cluster
 package = Core
 version = VERSION

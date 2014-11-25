@@ -88,6 +88,10 @@ function cluster_og_theme() {
       'file' => 'theme/cluster_og.theme.inc',
       'render element' => 'element',
     ),
+    'cluter_og_region_reference_field' => array(
+      'file' => 'theme/cluster_og.theme.inc',
+      'render element' => 'element',
+    ),
   );
 }
 
