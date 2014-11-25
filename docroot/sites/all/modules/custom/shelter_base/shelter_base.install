@@ -13,6 +13,15 @@ function shelter_base_install() {
   _shelter_base_modules_enable('core');
   _shelter_base_modules_enable('contrib');
   _shelter_base_modules_enable('custom');
+  // Set default theme.
+  shelter_base_update_7003();
+}
+
+function _shelter_base_module_enable_all() {
+  $types = array('core', 'contrib', 'custom');
+  foreach($types as $type) {
+    _shelter_base_modules_enable($type);
+  }
 }
 
 /**
@@ -66,7 +75,13 @@ function shelter_base_update_7001() {
  * Update required module list.
  */
 function shelter_base_update_7002() {
-  _shelter_base_modules_enable('core');
-  _shelter_base_modules_enable('custom');
-  _shelter_base_modules_enable('contrib');
+  _shelter_base_module_enable_all();
+}
+
+/**
+ * Enable shelter theme and set as default.
+ */
+function shelter_base_update_7003() {
+  theme_enable(array('theme_default' => 'shelter'));
+  variable_set('theme_default', 'shelter');
 }
