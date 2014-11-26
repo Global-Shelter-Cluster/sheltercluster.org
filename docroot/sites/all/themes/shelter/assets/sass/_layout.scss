@@ -8,23 +8,19 @@ html {
   font-size: 100%
 }
 
-html,
-body  {
-  height: 100%;
-  margin: 0;
-  overflow: hidden;
-}
-
 body {
   background-color: $master-background;
-  font: $main-arial;
-  font-weight: 300;
+  font-family: arial, sans-serif;
+  font-size: rem($body-font-size);
+  font-weight: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  @include rem(font-size, $body-font-size);
 }
 
-#page {
-  width: 100%;
+.page-margin {
+  width: 90%;
+  margin: 0 auto;
+  @include breakpoint(900px) {
+    width: 95%;
+  }
 }
-
