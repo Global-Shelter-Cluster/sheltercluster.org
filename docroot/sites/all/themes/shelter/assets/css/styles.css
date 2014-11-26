@@ -336,6 +336,7 @@ footer ul {
 footer li {
   padding: 0 8px 8px;
   padding: 0 0.5rem 0.5rem;
+  list-style: none;
 }
 footer section {
   margin-bottom: 32px;
@@ -354,10 +355,10 @@ footer #active-clusters-list {
     width: 50%;
   }
 }
-footer .active-clusters-list-cluster {
+footer #active-clusters-list .cluster {
   list-style: none;
 }
-footer .active-clusters-complete-list {
+footer #active-clusters-list .complete-list {
   padding: 0 8px 8px;
   padding: 0 0.5rem 0.5rem;
 }
@@ -370,25 +371,21 @@ footer #regions-list {
     width: 50%;
   }
 }
-footer .regions-region,
-footer .regions-region-countries-country {
-  list-style: none;
-}
-footer .general-information-links {
+footer #general-information .links {
   display: inline-block;
   vertical-align: top;
   width: 100%;
   padding: 0;
 }
 @media (min-width: 700px) {
-  footer .general-information-links {
+  footer #general-information .links {
     width: 33%;
   }
 }
-footer .general-information-link {
+footer #general-information .link {
   list-style: none;
 }
-footer .partners-list-partner {
+footer #partners-list .partner {
   list-style: none;
   display: inline-block;
 }

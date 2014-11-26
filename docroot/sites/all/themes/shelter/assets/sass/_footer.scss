@@ -12,6 +12,7 @@ footer {
   }
   li {
     @include rem(padding, 0 0.5rem 0.5rem);
+    list-style: none;
   }
   section {
     @include rem(margin-bottom, 2rem);
@@ -26,12 +27,13 @@ footer {
     @include breakpoint(700px) {
       width: 50%;
     }
-  }
-  .active-clusters-list-cluster {
-    list-style: none;
-  }
-  .active-clusters-complete-list {
-    @include rem(padding, 0 0.5rem 0.5rem);
+
+    .cluster {
+      list-style: none;
+    }
+    .complete-list {
+      @include rem(padding, 0 0.5rem 0.5rem);
+    }
   }
 
   #regions-list {
@@ -41,26 +43,27 @@ footer {
       width: 50%;
     }
   }
-  .regions-region,
-  .regions-region-countries-country {
-    list-style: none;
-  }
 
-  .general-information-links {
-    display: inline-block;
-    vertical-align: top;
-    width: 100%;
-    padding: 0;
-    @include breakpoint(700px) {
-      width: 33%;
+  #general-information {
+    .links {
+      display: inline-block;
+      vertical-align: top;
+      width: 100%;
+      padding: 0;
+      @include breakpoint(700px) {
+        width: 33%;
+      }
+    }
+    .link {
+      list-style: none;
     }
   }
-  .general-information-link {
-    list-style: none;
-  }
-  .partners-list-partner {
-    list-style: none;
-    display: inline-block;
+
+  #partners-list {
+    .partner {
+      list-style: none;
+      display: inline-block;
+    }
   }
 
 }
