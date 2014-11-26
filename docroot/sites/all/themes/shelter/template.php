@@ -1,8 +1,9 @@
 <?php
 
-/*
-function shelter_field__field_parent_region($vars) {
-  dpm($vars);
-  return FNORD;
+/**
+ * Implements hook_preprocess_page().
+ */
+function shelter_preprocess_page($variables) {
+  // drupal_add_css();
+  // drupal_add_js();
 }
-*/

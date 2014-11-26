@@ -7,3 +7,7 @@ core = 7.x
 stylesheets[all][] = assets/css/styles.css
 
 scripts[] = 'assets/javascripts/modernizr.custom.js'
+
+regions[header] = Header
+regions[content] = Content
+regions[footer] = Footer
