@@ -6,7 +6,7 @@
  */
 
 /**
- * Theme a contact members user data.
+ * TRender the group contact members.
  * $vars['element']['total']: the contact members total count.
  * $vars['element']['#children']: markup for all contact member accounts.
  * $vars['element'][UID]: each user account render array and markup.
@@ -18,8 +18,18 @@ function theme_cluster_og_contact_member($vars) {
   return $output;
 }
 
-function cluter_og_region_reference_field($vars) {
-  return 'FNORD';
+/**
+ * Render a group's related responses.
+ */
+function theme_cluster_og_related_responses($vars) {
+
+}
+
+/**
+ * Render a group's related hubs.
+ */
+function theme_cluster_og_related_hubs($vars) {
+
 }
 
 /**
@@ -34,7 +44,7 @@ function _cluster_og_preprocess_page(&$vars) {
  * Is wrapped by module implementation of  hook_preprocess_field().
  */
 function _cluster_og_preprocess_field(&$vars) {
-  // Change the path of region fields to use the custom hierarchy implementation.
+  // Brutally change the path of region fields to use the custom hierarchy implementation.
   $region_fields = array('field_associated_regions', 'field_parent_region');
   if (in_array($vars['element']['#field_name'], $region_fields)) {
     $vars['element']['#theme'] = 'cluter_og_region_reference_field';

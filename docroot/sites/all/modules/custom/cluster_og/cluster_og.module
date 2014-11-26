@@ -12,7 +12,7 @@ include_once 'cluster_og.features.inc';
 function cluster_og_menu() {
   module_load_include('inc', 'cluster_og', 'includes/cluster_og.menu');
   $items = array();
-  // Generate the geographic_regions menu.
+  // Generate the geographic_region menu.
   $items = array_merge(cluster_og_menu_region(), $items);
   return $items;
 }
@@ -88,7 +88,11 @@ function cluster_og_theme() {
       'file' => 'theme/cluster_og.theme.inc',
       'render element' => 'element',
     ),
-    'cluter_og_region_reference_field' => array(
+    'cluster_og_related_responses' => array(
+      'file' => 'theme/cluster_og.theme.inc',
+      'render element' => 'element',
+    ),
+    'cluster_og_related_hubs' => array(
       'file' => 'theme/cluster_og.theme.inc',
       'render element' => 'element',
     ),
@@ -114,6 +118,55 @@ function cluster_og_preprocess_field(&$vars) {
 /**
  * Helpers.
  */
+
+/**
+ * Recursively get all the children for the argued regions.
+ * @param $nids
+ *  Array of entity ids from which to perform the search.
+ * @param $collected_nids
+ *  Recursively agregate node ids.
+ * @return
+ *  Array of node ids representing the set of all descendants for one region.
+ */
+function _cluster_og_get_region_children($nids, $collected_nids = array()) {
+  $collected_nids = $nids + $collected_nids;
+  // Recursively look for regions that have the argued $nid for parent.
+  $query = new EntityFieldQuery();
+  foreach ($nids as $nid) {
+    $res = $query->entityCondition('entity_type', 'node')
+      ->entityCondition('bundle', 'geographic_region')
+      ->fieldCondition('field_parent_region', 'target_id', $nids, 'IN')
+      ->execute();
+    if (isset($res['node'])) {
+      $res_nids = array_keys($res['node']);
+      $collected_nids = array_merge($res_nids, $collected_nids);
+      return _cluster_og_get_region_children($res_nids, $collected_nids);
+    }
+  }
+
+return $collected_nids;
+}
+
+/**
+ * Get all responses for a set of regions.
+ * @param $nids
+ *  Array of region node ids.
+ * @return
+ *  Array of all responses that are associated to one of the argued region ids.
+ */
+function _cluster_og_get_region_responses($nids) {
+  $query = new EntityFieldQuery();
+  foreach ($nids as $nid) {
+    $res =   $query->entityCondition('entity_type', 'node')
+      ->entityCondition('bundle', 'response')
+      ->fieldCondition('field_associated_regions', 'target_id', $nids, 'IN')
+      ->execute();
+
+    $response_ids = array_merge(array_keys($res['node']), $response_nids);
+  }
+  return $response_ids;
+}
+
 
 /**
  * Get the role id for a group from the role name.
