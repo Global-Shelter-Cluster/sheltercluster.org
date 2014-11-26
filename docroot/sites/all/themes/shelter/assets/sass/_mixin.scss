@@ -7,6 +7,12 @@
   overflow: hidden;
 }
 
+@mixin reset-list {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
 //Opacity cross-browser
 @mixin opacity($opacity) {
   opacity: $opacity;

@@ -21,20 +21,10 @@ body {
   font-weight: 300;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  font-size: rem($body-font-size);
+  @include rem(font-size, $body-font-size);
 }
 
-.full-width {
-  position: relative;
-  text-align: center;
-  margin: 0 auto;
-  // width: $master-fullwidth;
-}
-
-#content {
-  position: relative;
-  text-align: center;
-  margin: 0 auto;
+#page {
   width: 100%;
 }
 

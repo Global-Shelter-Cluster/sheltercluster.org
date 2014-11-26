@@ -1,0 +1,53 @@
+/* _header.scss */
+
+
+header {
+  width: 100%;
+}
+  #bandwidth-selector, #language-selector {
+    @include rem(font-size,14px);
+    @include rem(padding, 5px)
+  }
+  #bandwidth-selector {
+    float: left;
+    //une image éventuellement en background
+    a {
+      &:first-child + a:before {
+        content: '/';
+        @include rem(padding, 0 5px 0 0);
+      }
+    }
+  }
+  #language-selector {
+    float: right;
+    ul.languages {
+      @include reset-list;
+      li.language {
+        float: left;
+        &:before {
+          content: '/';
+          @include rem(padding, 0 5px 0 5px);
+        }
+        &:first-child:before {
+          content: '';
+        }
+      }
+    }
+  }
+  #btn-dropdown-shelter {
+    clear: both;
+    background: rgb(0,0,0);
+    @include rem(padding, 5px);
+    width: 100%;
+    max-width: 150px;
+  }
+  ul#profile-items {
+    @include reset-list;
+  }
+  nav#nav-shelter {
+    display: none;
+    ul#nav-items {
+      @include reset-list;
+    }
+  }
+
