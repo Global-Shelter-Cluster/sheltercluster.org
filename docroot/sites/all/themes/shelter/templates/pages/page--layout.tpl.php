@@ -14,7 +14,7 @@
           <li class="language">ar</li>
         </ul>
       </div>
-      <div id="btn-dropdown-shelter">menu</div>
+      <a id="btn-dropdown-shelter">menu</a>
       <ul id="profile-items">
         <li class="profile-item"><a>Login</a></li>
         <li class="profile-item"><a>Create an account</a></li>
@@ -31,9 +31,9 @@
         </ul>
       </nav>
       <a id="logo-shelter">
-          <?php print _svg('icons/information'); ?>
-          <div id="title-shelter">ShelterCluster.org</div>
-          <div id="subtitle-shelter">Coordinating Humanitarian Shelter</div>
+        <?php print _svg('icons/information'); ?>
+        <div id="title-shelter">ShelterCluster.org</div>
+        <div id="subtitle-shelter">Coordinating Humanitarian Shelter</div>
       </a>
     </div>
   </header>

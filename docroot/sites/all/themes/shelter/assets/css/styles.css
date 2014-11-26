@@ -264,67 +264,97 @@ body {
 
 /* _header.scss */
 header {
-  width: 100%;
+  min-height: 128px;
+  min-height: 8rem;
 }
-
-#bandwidth-selector, #language-selector {
-  font-size: 14px;
-  font-size: 0.875rem;
-  padding: 5px;
-  padding: 0.3125rem;
+header ul {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+header a#btn-dropdown-shelter {
+  float: left;
+  display: table;
+  clear: both;
+  background: black;
+  padding: 8px;
+  padding: 0.5rem;
+  color: white;
+}
+header ul#profile-items {
+  float: right;
+}
+header ul#profile-items li.profile-item {
+  float: left;
+}
+header ul#profile-items li.profile-item:first-child:after {
+  content: '/';
+  padding: 0 8px 0 8px;
+  padding: 0 0.5rem 0 0.5rem;
+}
+header a#logo-shelter {
+  display: block;
+}
+header a#logo-shelter #title-shelter {
+  color: #7f1416;
+}
+header a#logo-shelter #subtitle-shelter {
+  color: #575757;
 }
 
 #bandwidth-selector {
   float: left;
+  padding: 8px 0 8px 0;
+  padding: 0.5rem 0 0.5rem 0;
 }
 #bandwidth-selector a:first-child + a:before {
   content: '/';
-  padding: 0 5px 0 0;
-  padding: 0 0.3125rem 0 0;
+  padding: 0 8px 0 0;
+  padding: 0 0.5rem 0 0;
 }
 
 #language-selector {
   float: right;
-}
-#language-selector ul.languages {
-  padding: 0;
-  margin: 0;
-  list-style: none;
+  padding: 8px 0 8px 0;
+  padding: 0.5rem 0 0.5rem 0;
 }
 #language-selector ul.languages li.language {
   float: left;
 }
 #language-selector ul.languages li.language:before {
   content: '/';
-  padding: 0 5px 0 5px;
-  padding: 0 0.3125rem 0 0.3125rem;
+  padding: 0 8px 0 8px;
+  padding: 0 0.5rem 0 0.5rem;
 }
 #language-selector ul.languages li.language:first-child:before {
   content: '';
-}
-
-#btn-dropdown-shelter {
-  clear: both;
-  background: black;
-  padding: 5px;
-  padding: 0.3125rem;
-  width: 100%;
-  max-width: 150px;
-}
-
-ul#profile-items {
   padding: 0;
-  margin: 0;
-  list-style: none;
 }
 
 nav#nav-shelter {
-  display: none;
+  clear: both;
+  background-color: black;
+  color: white;
+  padding: 8px;
+  padding: 0.5rem;
 }
-nav#nav-shelter ul#nav-items {
-  padding: 0;
-  margin: 0;
-  list-style: none;
+
+ul#nav-items li.nav-item a {
+  display: block;
+  margin: 4px 0 4px 0;
+  margin: 0.25rem 0 0.25rem 0;
+  padding: 4px 8px 4px 8px;
+  padding: 0.25rem 0.5rem 0.25rem 0.5rem;
+  background-color: #333333;
+}
+ul#nav-items li.nav-item .total {
+  font-size: 12px;
+  font-size: 0.75rem;
+}
+ul#nav-items li.nav-item .total-ended {
+  float: right;
+  font-size: 12px;
+  font-size: 0.75rem;
 }
 
 footer {
