@@ -3,3 +3,8 @@
 # Ignore paths that contain user-generated content.
 sites/*/files
 sites/*/private
+
+# Theming related exclusions
+
+node_modules
+.sass-cache
