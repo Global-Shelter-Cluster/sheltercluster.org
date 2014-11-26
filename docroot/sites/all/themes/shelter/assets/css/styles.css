@@ -236,33 +236,96 @@ html {
   font-size: 100%;
 }
 
-html,
 body {
-  height: 100%;
-  margin: 0;
-  overflow: hidden;
-}
-
-body {
-  background-color: white;
-  font: normal normal 16px arial, sans-serif;
-  font-weight: 300;
+  background-color: #d7d7d7;
+  font-family: arial, sans-serif;
+  font-size: rem(13px);
+  font-weight: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  font-size: rem(13px);
 }
 
-.full-width {
-  position: relative;
-  text-align: center;
+.page-margin {
+  width: 90%;
   margin: 0 auto;
 }
+@media (min-width: 900px) {
+  .page-margin {
+    width: 95%;
+  }
+}
 
-#content {
-  position: relative;
-  text-align: center;
-  margin: 0 auto;
+footer {
+  background: #171717;
+  color: #fff;
+  padding-bottom: 32px;
+  padding-bottom: 2rem;
+}
+footer a {
+  color: #fff;
+}
+footer ul {
+  margin: 0 0 0 0;
+  padding: 0 0 0 0;
+}
+footer li {
+  padding: 0 8px 8px;
+  padding: 0 0.5rem 0.5rem;
+}
+footer section {
+  margin-bottom: 32px;
+  margin-bottom: 2rem;
+}
+footer h3 {
+  padding: 8px;
+  padding: 0.5rem;
+}
+footer #active-clusters-list {
+  display: inline-block;
+  vertical-align: top;
+}
+@media (min-width: 700px) {
+  footer #active-clusters-list {
+    width: 50%;
+  }
+}
+footer .active-clusters-list-cluster {
+  list-style: none;
+}
+footer .active-clusters-complete-list {
+  padding: 0 8px 8px;
+  padding: 0 0.5rem 0.5rem;
+}
+footer #regions-list {
+  display: inline-block;
+  vertical-align: top;
+}
+@media (min-width: 700px) {
+  footer #regions-list {
+    width: 50%;
+  }
+}
+footer .regions-region,
+footer .regions-region-countries-country {
+  list-style: none;
+}
+footer .general-information-links {
+  display: inline-block;
+  vertical-align: top;
   width: 100%;
+  padding: 0;
+}
+@media (min-width: 700px) {
+  footer .general-information-links {
+    width: 33%;
+  }
+}
+footer .general-information-link {
+  list-style: none;
+}
+footer .partners-list-partner {
+  list-style: none;
+  display: inline-block;
 }
 
 body #admin-menu {

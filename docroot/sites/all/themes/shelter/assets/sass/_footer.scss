@@ -1,0 +1,66 @@
+footer {
+  background: darken($shelter-grey, 25%);
+  color: #fff;
+  @include rem(padding-bottom, 2rem);
+
+  a {
+    color: #fff;
+  }
+  ul {
+    margin: 0 0 0 0;
+    padding: 0 0 0 0;
+  }
+  li {
+    @include rem(padding, 0 0.5rem 0.5rem);
+  }
+  section {
+    @include rem(margin-bottom, 2rem);
+  }
+  h3 {
+    @include rem(padding, 0.5rem);
+  }
+
+  #active-clusters-list {
+    display: inline-block;
+    vertical-align: top;
+    @include breakpoint(700px) {
+      width: 50%;
+    }
+  }
+  .active-clusters-list-cluster {
+    list-style: none;
+  }
+  .active-clusters-complete-list {
+    @include rem(padding, 0 0.5rem 0.5rem);
+  }
+
+  #regions-list {
+    display: inline-block;
+    vertical-align: top;
+    @include breakpoint(700px) {
+      width: 50%;
+    }
+  }
+  .regions-region,
+  .regions-region-countries-country {
+    list-style: none;
+  }
+
+  .general-information-links {
+    display: inline-block;
+    vertical-align: top;
+    width: 100%;
+    padding: 0;
+    @include breakpoint(700px) {
+      width: 33%;
+    }
+  }
+  .general-information-link {
+    list-style: none;
+  }
+  .partners-list-partner {
+    list-style: none;
+    display: inline-block;
+  }
+
+}

@@ -1,8 +1,6 @@
 /* _vars.scss */
 
 // Fonts
-$main-verdana: normal bold 16px Verdana, sans-serif;
-$main-arial: normal normal 16px arial, sans-serif;
 $body-font-size: 13px;
 
 //Shelter brand guidelines colors
@@ -18,4 +16,4 @@ $chart-red: rgb(252,0,0);
 $chart-blue: rgb(22,135,203);
 $chart-dark-blue: rgb(4,49,76);
 
-$master-background: rgb(255,255,255);
+$master-background: lighten($shelter-grey, 50%);
