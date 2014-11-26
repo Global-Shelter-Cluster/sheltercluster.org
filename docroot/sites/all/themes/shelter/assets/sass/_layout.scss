@@ -24,3 +24,8 @@ body {
     width: 95%;
   }
 }
+
+#content {
+  @include rem(padding, 2rem 0);
+  @include rem(min-height, 10rem);
+}

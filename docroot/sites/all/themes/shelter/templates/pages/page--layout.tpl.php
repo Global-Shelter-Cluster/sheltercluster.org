@@ -31,16 +31,19 @@
         </ul>
       </nav>
       <a id="logo-shelter">
-          <div id="title-shelter">ShelterCluster.org<div>
-          <div id="subtitle-shelter">Coordinating Humanitarian Shelter<div>
+          <?php print _svg('icons/information'); ?>
+          <div id="title-shelter">ShelterCluster.org</div>
+          <div id="subtitle-shelter">Coordinating Humanitarian Shelter</div>
       </a>
     </div>
   </header>
 
   <div id="content">
-
+    <div class="page-margin">
+      <?php print $messages; ?>
+      <?php print render($page['content']); ?>
+    </div>
   </div>
-
 
   <footer>
     <div class="page-margin">
