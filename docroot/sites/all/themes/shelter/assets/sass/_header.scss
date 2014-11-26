@@ -65,12 +65,16 @@ header {
     clear: both;
     background-color: $nav-bkg;
     color: $nav-color;
-    @include rem(padding, 1rem);
+    @include rem(padding, 0.50rem);
   }
     ul#nav-items {
       li.nav-item {
-        background-color: $nav-list-bkg;
-        @include rem(padding, 0.25rem 0.5rem 0.25rem 0.5rem);
+        a {
+          display: block;
+          @include rem(margin, 0.25rem 0 0.25rem 0);
+          @include rem(padding, 0.25rem 0.5rem 0.25rem 0.5rem);
+          background-color: $nav-list-bkg;
+        }
         .total {
           @include rem(font-size, 0.75rem);
         }
