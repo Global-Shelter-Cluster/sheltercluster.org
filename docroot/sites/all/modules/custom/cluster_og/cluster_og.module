@@ -120,8 +120,6 @@ function cluster_og_preprocess_field(&$vars) {
  */
 
 /**
- * @TODO complete the implementation.
- *
  * Recursively get all the children for the argued regions.
  * @param $nids
  *  Array of entity ids from which to perform the search.
@@ -131,23 +129,25 @@ function cluster_og_preprocess_field(&$vars) {
  *  Array of node ids representing the set of all descendants for one region.
  */
 function _cluster_og_get_region_children($nids, $collected_nids = array()) {
-
+  $collected_nids = $nids + $collected_nids;
   // Recursively look for regions that have the argued $nid for parent.
   $query = new EntityFieldQuery();
   foreach ($nids as $nid) {
-    $res = $query->entityProperty('entity_type', 'node')
-      ->entityProperty('bundle', 'geographic_region')
-      ->fieldCondition('field_parent_region', $nids, 'IN')
+    $res = $query->entityCondition('entity_type', 'node')
+      ->entityCondition('bundle', 'geographic_region')
+      ->fieldCondition('field_parent_region', 'target_id', $nids, 'IN')
       ->execute();
-
-      // Make recursive call.
+    if (isset($res['node'])) {
+      $res_nids = array_keys($res['node']);
+      $collected_nids = array_merge($res_nids, $collected_nids);
+      return _cluster_og_get_region_children($res_nids, $collected_nids);
+    }
   }
 
+return $collected_nids;
 }
 
 /**
- * @TODO complete the implementation.
- *
  * Get all responses for a set of regions.
  * @param $nids
  *  Array of region node ids.
@@ -155,17 +155,16 @@ function _cluster_og_get_region_children($nids, $collected_nids = array()) {
  *  Array of all responses that are associated to one of the argued region ids.
  */
 function _cluster_og_get_region_responses($nids) {
-  $response_nids = array();
   $query = new EntityFieldQuery();
   foreach ($nids as $nid) {
-    $res =   $query->entityProperty('entity_type', 'node')
-      ->entityProperty('bundle', 'response')
-      ->fieldCondition('field_associated_regions');
+    $res =   $query->entityCondition('entity_type', 'node')
+      ->entityCondition('bundle', 'response')
+      ->fieldCondition('field_associated_regions', 'target_id', $nids, 'IN')
       ->execute();
 
-    array_merge(array_key($res['node']), $response_nids);
+    $response_ids = array_merge(array_keys($res['node']), $response_nids);
   }
-  return $all_res;
+  return $response_ids;
 }
 
 
