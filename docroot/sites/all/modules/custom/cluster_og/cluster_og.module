@@ -35,10 +35,15 @@ function cluster_og_geographic_region($nid, $path) {
  */
 
 /**
- * Implements hook_node_load().
+ * Implements hook_node_view().
  */
-function cluster_og_node_view($node) {
+function cluster_og_node_view($node, $view_mode) {
   $bundle = $node->type;
+
+  if ($view_mode !== 'full') {
+    // Only add these blocks to the full page view of the nodes.
+    return;
+  }
 
   // Group specific actions.
   if (og_is_group_type('node', $bundle)) {
@@ -62,6 +67,24 @@ function cluster_og_node_view($node) {
       }
     }
 
+    // Make a list of responses associated to this region and to its descendants.
+    if ($bundle === 'geographic_region') {
+      $region_nids = _cluster_og_get_region_descendants(array($node->nid));
+      if ($related_response_ids = _cluster_og_get_region_responses($region_nids)) {
+        $response_nodes = node_load_multiple($related_response_ids);
+        // Prepare a render array.
+        $responses = array(
+          '#theme_wrappers' => array('cluster_og_related_responses'),
+          'total' => count($response_nodes),
+        );
+
+        // Add node render arrays.
+        foreach ($response_nodes as $response_node) {
+          $responses[$response_node->nid] = node_view($response_node, 'teaser'); //TODO: change teaser to custom view mode
+        }
+        $node->content['related_responses'] = $responses;
+      }
+    }
   }
 }
 
@@ -120,31 +143,32 @@ function cluster_og_preprocess_field(&$vars) {
  */
 
 /**
- * Recursively get all the children for the argued regions.
+ * Recursively get all the descendants for the argued regions, including the ones specified.
  * @param $nids
  *  Array of entity ids from which to perform the search.
  * @param $collected_nids
- *  Recursively agregate node ids.
+ *  Recursively aggregate node ids.
  * @return
  *  Array of node ids representing the set of all descendants for one region.
  */
-function _cluster_og_get_region_children($nids, $collected_nids = array()) {
-  $collected_nids = $nids + $collected_nids;
-  // Recursively look for regions that have the argued $nid for parent.
+function _cluster_og_get_region_descendants($nids, $collected_nids = array()) {
+  $collected_nids = array_unique(array_merge($nids, $collected_nids));
+
+  // Recursively look for regions that have any of the argued $nids for parent.
   $query = new EntityFieldQuery();
-  foreach ($nids as $nid) {
-    $res = $query->entityCondition('entity_type', 'node')
-      ->entityCondition('bundle', 'geographic_region')
-      ->fieldCondition('field_parent_region', 'target_id', $nids, 'IN')
-      ->execute();
-    if (isset($res['node'])) {
-      $res_nids = array_keys($res['node']);
-      $collected_nids = array_merge($res_nids, $collected_nids);
-      return _cluster_og_get_region_children($res_nids, $collected_nids);
-    }
+  $res = $query->entityCondition('entity_type', 'node')
+    ->entityCondition('bundle', 'geographic_region')
+    ->propertyCondition('status', NODE_PUBLISHED)
+    ->fieldCondition('field_parent_region', 'target_id', $nids, 'IN')
+    ->execute();
+
+  if (isset($res['node'])) {
+    $res_nids = array_keys($res['node']);
+    $collected_nids = array_unique(array_merge($res_nids, $collected_nids));
+    return _cluster_og_get_region_descendants($res_nids, $collected_nids);
   }
 
-return $collected_nids;
+  return $collected_nids;
 }
 
 /**
@@ -156,13 +180,14 @@ return $collected_nids;
  */
 function _cluster_og_get_region_responses($nids) {
   $query = new EntityFieldQuery();
+  $response_ids = array();
   foreach ($nids as $nid) {
-    $res =   $query->entityCondition('entity_type', 'node')
+    $res = $query->entityCondition('entity_type', 'node')
       ->entityCondition('bundle', 'response')
       ->fieldCondition('field_associated_regions', 'target_id', $nids, 'IN')
       ->execute();
 
-    $response_ids = array_merge(array_keys($res['node']), $response_nids);
+    $response_ids = array_unique(array_merge(array_keys($res['node']), $response_ids));
   }
   return $response_ids;
 }
