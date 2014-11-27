@@ -226,7 +226,7 @@ th {
 }
 
 /* _vars.scss */
-/* _mixing.scss */
+/* _mixin.scss */
 /* _layout.scss */
 * {
   -webkit-tap-highlight-color: transparent;
@@ -272,7 +272,7 @@ header ul {
   margin: 0;
   list-style: none;
 }
-header a#btn-dropdown-shelter {
+header #btn-dropdown-shelter {
   float: left;
   display: table;
   clear: both;
@@ -281,24 +281,28 @@ header a#btn-dropdown-shelter {
   padding: 0.5rem;
   color: white;
 }
-header ul#profile-items {
+header #profile-items {
   float: right;
 }
-header ul#profile-items li.profile-item {
+header #profile-items .profile-item {
   float: left;
 }
-header ul#profile-items li.profile-item:first-child:after {
+header #profile-items .profile-item:first-child:after {
   content: '/';
   padding: 0 8px 0 8px;
   padding: 0 0.5rem 0 0.5rem;
 }
-header a#logo-shelter {
+header #logo-shelter-cluster {
   display: block;
 }
-header a#logo-shelter #title-shelter {
+header #logo-shelter-cluster .svg {
+  height: 100px;
+  fill: #7f1416;
+}
+header #logo-shelter-cluster #title-shelter {
   color: #7f1416;
 }
-header a#logo-shelter #subtitle-shelter {
+header #logo-shelter-cluster #subtitle-shelter {
   color: #575757;
 }
 
@@ -318,20 +322,20 @@ header a#logo-shelter #subtitle-shelter {
   padding: 8px 0 8px 0;
   padding: 0.5rem 0 0.5rem 0;
 }
-#language-selector ul.languages li.language {
+#language-selector .language {
   float: left;
 }
-#language-selector ul.languages li.language:before {
+#language-selector .language:before {
   content: '/';
   padding: 0 8px 0 8px;
   padding: 0 0.5rem 0 0.5rem;
 }
-#language-selector ul.languages li.language:first-child:before {
+#language-selector .language:first-child:before {
   content: '';
   padding: 0;
 }
 
-nav#nav-shelter {
+#nav-shelter {
   clear: both;
   background-color: black;
   color: white;
@@ -339,7 +343,7 @@ nav#nav-shelter {
   padding: 0.5rem;
 }
 
-ul#nav-items li.nav-item a {
+#nav-items .nav-item a {
   display: block;
   margin: 4px 0 4px 0;
   margin: 0.25rem 0 0.25rem 0;
@@ -347,11 +351,11 @@ ul#nav-items li.nav-item a {
   padding: 0.25rem 0.5rem 0.25rem 0.5rem;
   background-color: #333333;
 }
-ul#nav-items li.nav-item .total {
+#nav-items .nav-item .total {
   font-size: 12px;
   font-size: 0.75rem;
 }
-ul#nav-items li.nav-item .total-ended {
+#nav-items .nav-item .total-ended {
   float: right;
   font-size: 12px;
   font-size: 0.75rem;
@@ -407,6 +411,11 @@ footer #regions-list {
   footer #regions-list {
     width: 50%;
   }
+}
+footer #regions-list .region {
+  display: inline-block;
+  vertical-align: top;
+  width: 46%;
 }
 footer #general-information .links {
   display: inline-block;

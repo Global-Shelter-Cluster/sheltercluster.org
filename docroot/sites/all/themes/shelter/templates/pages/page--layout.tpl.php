@@ -14,7 +14,7 @@
           <li class="language">ar</li>
         </ul>
       </div>
-      <a id="btn-dropdown-shelter">menu</a>
+      <a id="btn-dropdown-shelter">Menu</a>
       <ul id="profile-items">
         <li class="profile-item"><a>Login</a></li>
         <li class="profile-item"><a>Create an account</a></li>
@@ -30,8 +30,8 @@
           <li class="nav-item"><a>Disconnect</a></li>
         </ul>
       </nav>
-      <a id="logo-shelter">
-        <?php print _svg('icons/information'); ?>
+      <a id="logo-shelter-cluster">
+        <?php print _svg('icons/information', array('id'=>'shelter-cluster')); ?>
         <div id="title-shelter">ShelterCluster.org</div>
         <div id="subtitle-shelter">Coordinating Humanitarian Shelter</div>
       </a>
@@ -65,16 +65,12 @@
               <li class="country"><a href="#">Central African Republic</a></li>
               <li class="country"><a href="#">Chad</a></li>
             </ul>
-          </li>
-
-          <li class="region"><a href="#">Americas</a>
+          </li><li class="region"><a href="#">Americas</a>
             <ul class="countries">
               <li class="country"><a href="#">Colombia</a></li>
               <li class="country"><a href="#">Haiti</a></li>
             </ul>
-          </li>
-
-          <li class="region"><a href="#">MENA</a>
+          </li><li class="region"><a href="#">MENA</a>
             <ul class="countries">
               <li class="country"><a href="#">Iraq</a></li>
               <li class="country"><a href="#">Palestine</a></li>
