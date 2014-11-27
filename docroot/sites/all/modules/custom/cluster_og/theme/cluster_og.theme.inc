@@ -51,6 +51,8 @@ function _cluster_og_preprocess_page(&$vars) {
  */
 function _cluster_og_preprocess_field(&$vars) {
   // Brutally change the path of region fields to use the custom hierarchy implementation.
+  // Time permitting, explore moving this higher in execution chain into a field formatter.
+  // @see https://api.drupal.org/api/drupal/modules%21field%21field.api.php/group/field_formatter/7
   $region_fields = array('field_associated_regions', 'field_parent_region');
   if (in_array($vars['element']['#field_name'], $region_fields)) {
     $vars['element']['#theme'] = 'cluter_og_region_reference_field';
