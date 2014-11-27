@@ -33,9 +33,15 @@ function theme_cluster_og_related_responses($vars) {
 
 /**
  * Render a group's related hubs.
+ * $vars['element']['#total']: the hubs total count.
+ * $vars['element']['#children']: markup for all related hub nodes.
+ * $vars['element'][UID]: each hub render array and markup.
  */
 function theme_cluster_og_related_hubs($vars) {
-
+  $output = '<div class="field"><div class="field-label">' . t('Related hubs') . ':</div>';
+  $output .= $vars['element']['#children'];
+  $output .= '</div>';
+  return $output;
 }
 
 /**
