@@ -12,7 +12,7 @@
  * $vars['element'][UID]: each user account render array and markup.
  */
 function theme_cluster_og_contact_member($vars) {
-  $output = '<div><div>' . t('Contact members') . '</div>';
+  $output = '<div class="field"><div class="field-label">' . t('Contact members') . ':</div>';
   $output .= $vars['element']['#children']; 
   $output .= '</div>';
   return $output;
@@ -20,9 +20,15 @@ function theme_cluster_og_contact_member($vars) {
 
 /**
  * Render a group's related responses.
+ * $vars['element']['total']: the responses total count.
+ * $vars['element']['#children']: markup for all related response nodes.
+ * $vars['element'][UID]: each response render array and markup.
  */
 function theme_cluster_og_related_responses($vars) {
-
+  $output = '<div class="field"><div class="field-label">' . t('Related responses') . ':</div>';
+  $output .= $vars['element']['#children'];
+  $output .= '</div>';
+  return $output;
 }
 
 /**
