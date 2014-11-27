@@ -7,7 +7,7 @@
 
 /**
  * TRender the group contact members.
- * $vars['element']['total']: the contact members total count.
+ * $vars['element']['#total']: the contact members total count.
  * $vars['element']['#children']: markup for all contact member accounts.
  * $vars['element'][UID]: each user account render array and markup.
  */
@@ -20,7 +20,7 @@ function theme_cluster_og_contact_member($vars) {
 
 /**
  * Render a group's related responses.
- * $vars['element']['total']: the responses total count.
+ * $vars['element']['#total']: the responses total count.
  * $vars['element']['#children']: markup for all related response nodes.
  * $vars['element'][UID]: each response render array and markup.
  */
