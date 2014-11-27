@@ -297,7 +297,7 @@ header #logo-shelter-cluster {
 }
 header #logo-shelter-cluster .svg {
   height: 100px;
-  fill: #7f1416;
+  fill: #ff0;
 }
 header #logo-shelter-cluster #title-shelter {
   color: #7f1416;
@@ -377,7 +377,6 @@ footer ul {
 footer li {
   padding: 0 8px 8px;
   padding: 0 0.5rem 0.5rem;
-  list-style: none;
 }
 footer section {
   margin-bottom: 32px;
@@ -395,9 +394,6 @@ footer #active-clusters-list {
   footer #active-clusters-list {
     width: 50%;
   }
-}
-footer #active-clusters-list .cluster {
-  list-style: none;
 }
 footer #active-clusters-list .complete-list {
   padding: 0 8px 8px;
@@ -417,6 +413,15 @@ footer #regions-list .region {
   vertical-align: top;
   width: 46%;
 }
+footer #regions-list .region-name {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 8px;
+  margin-bottom: 0.5rem;
+}
+footer #regions-list .country {
+  list-style: disc inside;
+}
 footer #general-information .links {
   display: inline-block;
   vertical-align: top;
@@ -427,9 +432,6 @@ footer #general-information .links {
   footer #general-information .links {
     width: 33%;
   }
-}
-footer #general-information .link {
-  list-style: none;
 }
 footer #partners-list .partner {
   list-style: none;

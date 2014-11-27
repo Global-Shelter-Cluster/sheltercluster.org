@@ -12,7 +12,6 @@ footer {
   }
   li {
     @include rem(padding, 0 0.5rem 0.5rem);
-    list-style: none;
   }
   section {
     @include rem(margin-bottom, 2rem);
@@ -28,9 +27,6 @@ footer {
       width: 50%;
     }
 
-    .cluster {
-      list-style: none;
-    }
     .complete-list {
       @include rem(padding, 0 0.5rem 0.5rem);
     }
@@ -48,6 +44,14 @@ footer {
       vertical-align: top;
       width: 46%;
     }
+    .region-name {
+      display: block;
+      font-weight: bold;
+      @include rem(margin-bottom, 0.5rem);
+    }
+    .country {
+      list-style: disc inside;
+    }
   }
 
   #general-information {
@@ -59,9 +63,6 @@ footer {
       @include breakpoint(700px) {
         width: 33%;
       }
-    }
-    .link {
-      list-style: none;
     }
   }
 
