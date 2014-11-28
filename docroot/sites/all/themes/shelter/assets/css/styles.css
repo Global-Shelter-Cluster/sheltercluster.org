@@ -226,7 +226,7 @@ th {
 }
 
 /* _vars.scss */
-/* _mixing.scss */
+/* _mixin.scss */
 /* _layout.scss */
 * {
   -webkit-tap-highlight-color: transparent;
@@ -236,33 +236,206 @@ html {
   font-size: 100%;
 }
 
-html,
-body {
-  height: 100%;
-  margin: 0;
-  overflow: hidden;
-}
-
 body {
   background-color: white;
-  font: normal normal 16px arial, sans-serif;
-  font-weight: 300;
+  font-family: arial, sans-serif;
+  font-size: rem(16px);
+  font-weight: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  font-size: rem(13px);
 }
 
-.full-width {
-  position: relative;
-  text-align: center;
+.page-margin {
+  width: 90%;
   margin: 0 auto;
+}
+@media (min-width: 900px) {
+  .page-margin {
+    width: 95%;
+  }
 }
 
 #content {
-  position: relative;
-  text-align: center;
-  margin: 0 auto;
+  padding: 32px 0;
+  padding: 2rem 0;
+  min-height: 160px;
+  min-height: 10rem;
+}
+
+/* _header.scss */
+header {
+  min-height: 128px;
+  min-height: 8rem;
+}
+header ul {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+header #btn-dropdown-shelter {
+  float: left;
+  display: table;
+  clear: both;
+  background: black;
+  padding: 8px;
+  padding: 0.5rem;
+  color: white;
+}
+header #profile-items {
+  float: right;
+}
+header #profile-items .profile-item {
+  float: left;
+}
+header #profile-items .profile-item:first-child:after {
+  content: '/';
+  padding: 0 8px 0 8px;
+  padding: 0 0.5rem 0 0.5rem;
+}
+header #logo-shelter-cluster {
+  display: block;
+}
+header #logo-shelter-cluster .svg {
+  height: 100px;
+  fill: #ff0;
+}
+header #logo-shelter-cluster #title-shelter {
+  color: #7f1416;
+}
+header #logo-shelter-cluster #subtitle-shelter {
+  color: #575757;
+}
+
+#bandwidth-selector {
+  float: left;
+  padding: 8px 0 8px 0;
+  padding: 0.5rem 0 0.5rem 0;
+}
+#bandwidth-selector a:first-child + a:before {
+  content: '/';
+  padding: 0 8px 0 0;
+  padding: 0 0.5rem 0 0;
+}
+
+#language-selector {
+  float: right;
+  padding: 8px 0 8px 0;
+  padding: 0.5rem 0 0.5rem 0;
+}
+#language-selector .language {
+  float: left;
+}
+#language-selector .language:before {
+  content: '/';
+  padding: 0 8px 0 8px;
+  padding: 0 0.5rem 0 0.5rem;
+}
+#language-selector .language:first-child:before {
+  content: '';
+  padding: 0;
+}
+
+#nav-shelter {
+  clear: both;
+  background-color: black;
+  color: white;
+  padding: 8px;
+  padding: 0.5rem;
+}
+
+#nav-items .nav-item a {
+  display: block;
+  margin: 4px 0 4px 0;
+  margin: 0.25rem 0 0.25rem 0;
+  padding: 4px 8px 4px 8px;
+  padding: 0.25rem 0.5rem 0.25rem 0.5rem;
+  background-color: #333333;
+}
+#nav-items .nav-item .total {
+  font-size: 12px;
+  font-size: 0.75rem;
+}
+#nav-items .nav-item .total-ended {
+  float: right;
+  font-size: 12px;
+  font-size: 0.75rem;
+}
+
+footer {
+  background: #171717;
+  color: #fff;
+  padding-bottom: 32px;
+  padding-bottom: 2rem;
+}
+footer a {
+  color: #fff;
+}
+footer ul {
+  margin: 0 0 0 0;
+  padding: 0 0 0 0;
+}
+footer li {
+  padding: 0 8px 8px;
+  padding: 0 0.5rem 0.5rem;
+}
+footer section {
+  margin-bottom: 32px;
+  margin-bottom: 2rem;
+}
+footer h3 {
+  padding: 8px;
+  padding: 0.5rem;
+}
+footer #active-clusters-list {
+  display: inline-block;
+  vertical-align: top;
+}
+@media (min-width: 700px) {
+  footer #active-clusters-list {
+    width: 50%;
+  }
+}
+footer #active-clusters-list .complete-list {
+  padding: 0 8px 8px;
+  padding: 0 0.5rem 0.5rem;
+}
+footer #regions-list {
+  display: inline-block;
+  vertical-align: top;
+}
+@media (min-width: 700px) {
+  footer #regions-list {
+    width: 50%;
+  }
+}
+footer #regions-list .region {
+  display: inline-block;
+  vertical-align: top;
+  width: 46%;
+}
+footer #regions-list .region-name {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 8px;
+  margin-bottom: 0.5rem;
+}
+footer #regions-list .country {
+  list-style: disc inside;
+}
+footer #general-information .links {
+  display: inline-block;
+  vertical-align: top;
   width: 100%;
+  padding: 0;
+}
+@media (min-width: 700px) {
+  footer #general-information .links {
+    width: 33%;
+  }
+}
+footer #partners-list .partner {
+  list-style: none;
+  display: inline-block;
 }
 
 body #admin-menu {
