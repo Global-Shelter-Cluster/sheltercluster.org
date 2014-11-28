@@ -45,6 +45,29 @@
     </nav>
 
     <div class="page-margin clearfix">
+      <section id="operation-information">
+        <h1>Typhoon Haiyan</h1>
+        <p>Operation started November 8th, 2013, and is on going.</p>
+        <ul id="meta-data">
+          <li class="data-item"><span>Type:</span> Windstorm</li>
+          <li class="data-item"><span>Damage Location:</span> Rural, Peri-Urban, Urban</li>
+          <li class="data-item"><span>Degree of Displacement:</span> Hight</li>
+          <li class="data-item"><span>Emergency Lead Agency</span> IFRC</li>
+        </ul>
+      </section>
+
+      <section id="operation-group">
+        <h2>Join this Operation Group and</h2>
+        <fieldset id="checkboxgroup">
+          <label><input type="checkbox">  Receive notifications;</label>
+          <label><input type="checkbox">  Register to this group the mailing list;</label>
+          <label><input type="checkbox"> Register to the "Global Response" mailinglist</label>
+        </fieldset>
+        <a id="button-join-group" class="button" href="">Join</a>
+      </section>
+    </div>
+
+    <div class="page-margin">
       <a id="logo-shelter-cluster" href="http://sheltercluster.org">
         <?php print _svg('logo-global-shelter-cluster', array('id'=>'shelter-cluster', 'alt' => 'Global Shelter Cluster - ShelterCluster.org - Coordinating Humanitarian Shelter')); ?>
       </a>
