@@ -40,20 +40,14 @@
       </div>
     </nav>
 
-    <div class="page-margin">
+    <div class="page-margin clearfix">
       <a id="logo-shelter-cluster" href="http://sheltercluster.org">
         <?php print _svg('logo-global-shelter-cluster', array('id'=>'shelter-cluster', 'alt' => 'Global Shelter Cluster - ShelterCluster.org - Coordinating Humanitarian Shelter')); ?>
       </a>
-      <ul id="profile-items">
-        <li class="profile-item"><a>Login</a></li>
-        <li class="profile-item"><a>Create an account</a></li>
-      </ul>
-      <div>
-        <form action="http://www.google.com/search" method="get">
-          <label>Search: <input type="search" placeholder="Search documents" name="q"></label>
-           <input type="submit" value="Search">
-        </form>
-      </div>
+      <form class="search" action="http://www.google.com/search" method="get">
+        <input class="text-field" type="search" placeholder="Search documents" name="q">
+        <input class="submit" type="submit" value="Search">
+      </form>
     </div>
 
   </header>
@@ -66,8 +60,14 @@
   </div>
 
   <footer>
-    <div class="page-margin">
+    <div class="page-margin clearfix">
+      <form class="search" action="http://www.google.com/search" method="get">
+        <input class="text-field" type="search" placeholder="Search documents" name="q">
+        <input class="submit" type="submit" value="Search">
+      </form>
+    </div>
 
+    <div class="page-margin">
       <section id="active-clusters-list">
         <h3>With 24 <a href='#'>active shelter clusters</a> and cluster like mechanism</h3>
         <ul class="clusters">

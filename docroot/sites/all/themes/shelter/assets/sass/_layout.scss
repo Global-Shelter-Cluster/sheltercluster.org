@@ -8,12 +8,14 @@ html {
   font-size: 100%
 }
 
+/* Not sure I want this
 a {
   &:link { color: $a-link-color ; }
   &:visited { color: $a-visited-color; }
   &:hover { color: $a-hover-color; }
   &:active { color: $a-active-color; }
 }
+*/
 
 body {
   background-color: $master-background;
@@ -27,9 +29,6 @@ body {
 .page-margin {
   width: 90%;
   margin: 0 auto;
-  @include breakpoint(900px) {
-    width: 95%;
-  }
 }
 
 #content {

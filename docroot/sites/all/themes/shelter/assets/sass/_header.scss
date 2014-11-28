@@ -75,9 +75,10 @@ header {
 
 #nav-shelter {
   float: left;
-  background-color: $nav-shelter-color;
+  background-color: $shelter-grey;
+  @include background-image(linear-gradient(darken($shelter-grey, 55%), darken($shelter-grey,33%) 40%, darken($shelter-grey, 2%)));
   color: $nav-shelter-links-color;
-  @include rem(padding, 0.50rem);
+  @include rem(padding, 1rem 0.5rem 0.5rem);
 }
 
 #nav-items {
@@ -86,14 +87,8 @@ header {
 
     a {
       float: left;
-      display: block;
-      @include rem(margin, 0.25rem 0.25rem 0.25rem 0);
-      @include rem(padding, 0.25rem 0.5rem 0.25rem 0.5rem);
-      background-color: $nav-item-bkg;
-      color: $nav-item-color;
-      &:hover, &:active {
-        background-color: $nav-item-hover;
-      }
+      @extend .button;
+      @include rem(margin-bottom, 0.5rem);
     }
     .total {
       @include rem(font-size, 0.75rem);

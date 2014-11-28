@@ -1,0 +1,17 @@
+.search {
+  float: right;
+  display: inline-block;
+  @include rem('padding', 1rem 0);
+  color: #000;
+
+  .text-field {
+    float: left;
+    @include rem('padding', 0.5rem 0.5rem 0.5rem );
+    @include border-radius(3px);
+    border: 1px solid darken(white,5%);
+  }
+  .submit {
+    float: left;
+    @extend .button;
+  }
+}
