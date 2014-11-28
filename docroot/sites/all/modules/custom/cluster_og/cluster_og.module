@@ -31,6 +31,21 @@ function cluster_og_geographic_region($nid, $path) {
 }
 
 /**
+ *  Implements hook_entity_info_alter().
+ */
+function cluster_og_entity_info_alter(&$entity_info) {
+  $entity_info['node']['view modes']['related_response'] = array(
+    'label' => t('Related response'),
+    'custom settings' => FALSE,
+  );
+
+  $entity_info['node']['view modes']['related_hub'] = array(
+    'label' => t('Related hub'),
+    'custom settings' => FALSE,
+  );
+}
+
+/**
  * Node API.
  */
 
@@ -56,7 +71,7 @@ function cluster_og_node_view($node, $view_mode) {
         // Prepare a render array.
         $member = array(
           '#theme_wrappers' => array('cluster_og_contact_member'),
-          'total' => count($accounts),
+          '#total' => count($accounts),
         );
 
         // Add account render arrays.
@@ -67,20 +82,74 @@ function cluster_og_node_view($node, $view_mode) {
       }
     }
 
-    // Make a list of responses associated to this region and to its descendants.
     if ($bundle === 'geographic_region') {
-      $region_nids = _cluster_og_get_region_descendants(array($node->nid));
-      if ($related_response_ids = _cluster_og_get_region_responses($region_nids)) {
-        $response_nodes = node_load_multiple($related_response_ids);
+      $region_and_descendants_ids = _cluster_og_get_region_descendants($node->nid, TRUE);
+
+      // Make a list of responses associated to this region and to its descendants.
+      if ($descendant_response_ids = _cluster_og_get_region_responses($region_and_descendants_ids)) {
+        $response_nodes = node_load_multiple($descendant_response_ids);
         // Prepare a render array.
         $responses = array(
           '#theme_wrappers' => array('cluster_og_related_responses'),
-          'total' => count($response_nodes),
+          '#total' => count($response_nodes),
         );
 
         // Add node render arrays.
         foreach ($response_nodes as $response_node) {
-          $responses[$response_node->nid] = node_view($response_node, 'teaser'); //TODO: change teaser to custom view mode
+          $responses[$response_node->nid] = node_view($response_node, 'related_response');
+        }
+        $node->content['related_responses'] = $responses;
+      }
+
+      // Make a list of hubs associated to this region and to its descendants.
+      if ($related_hub_ids = _cluster_og_get_region_hubs($region_and_descendants_ids)) {
+        $hub_nodes = node_load_multiple($related_hub_ids);
+        // Prepare a render array.
+        $hubs = array(
+          '#theme_wrappers' => array('cluster_og_related_hubs'),
+          '#total' => count($hub_nodes),
+        );
+
+        // Add node render arrays.
+        foreach ($hub_nodes as $hub_node) {
+          $hubs[$hub_node->nid] = node_view($hub_node, 'related_hub');
+        }
+        $node->content['related_hubs'] = $hubs;
+      }
+    }
+
+    if ($bundle === 'response') {
+      $descendant_response_ids = _cluster_og_get_response_descendants($node->nid);
+      $response_and_descendant_ids = array_merge(array($node->nid), $descendant_response_ids);
+
+      // Make a list of hubs associated to this response and to its descendants.
+      if ($related_hub_ids = _cluster_og_get_response_hubs($response_and_descendant_ids)) {
+        $hub_nodes = node_load_multiple($related_hub_ids);
+        // Prepare a render array.
+        $hubs = array(
+          '#theme_wrappers' => array('cluster_og_related_hubs'),
+          '#total' => count($hub_nodes),
+        );
+
+        // Add node render arrays.
+        foreach ($hub_nodes as $hub_node) {
+          $hubs[$hub_node->nid] = node_view($hub_node, 'related_hub');
+        }
+        $node->content['related_hubs'] = $hubs;
+      }
+
+      // Make a list of responses associated to this region and to its descendants.
+      if ($descendant_response_ids) {
+        $response_nodes = node_load_multiple($descendant_response_ids);
+        // Prepare a render array.
+        $responses = array(
+          '#theme_wrappers' => array('cluster_og_related_responses'),
+          '#total' => count($response_nodes),
+        );
+
+        // Add node render arrays.
+        foreach ($response_nodes as $response_node) {
+          $responses[$response_node->nid] = node_view($response_node, 'related_response');
         }
         $node->content['related_responses'] = $responses;
       }
@@ -143,16 +212,24 @@ function cluster_og_preprocess_field(&$vars) {
  */
 
 /**
- * Recursively get all the descendants for the argued regions, including the ones specified.
+ * Recursively get all the descendants for the argued regions.
  * @param $nids
  *  Array of entity ids from which to perform the search.
+ * @param $include_self
+ *  Whether to include the given ids in the response.
  * @param $collected_nids
  *  Recursively aggregate node ids.
  * @return
- *  Array of node ids representing the set of all descendants for one region.
+ *  Array of node ids representing the set of all descendants for the given regions.
  */
-function _cluster_og_get_region_descendants($nids, $collected_nids = array()) {
-  $collected_nids = array_unique(array_merge($nids, $collected_nids));
+function _cluster_og_get_region_descendants($nids, $include_self = FALSE, $collected_nids = array()) {
+  if (!is_array($nids)) {
+    $nids = array($nids);
+  }
+
+  if ($include_self) {
+    $collected_nids = array_unique(array_merge($nids, $collected_nids));
+  }
 
   // Recursively look for regions that have any of the argued $nids for parent.
   $query = new EntityFieldQuery();
@@ -165,7 +242,44 @@ function _cluster_og_get_region_descendants($nids, $collected_nids = array()) {
   if (isset($res['node'])) {
     $res_nids = array_keys($res['node']);
     $collected_nids = array_unique(array_merge($res_nids, $collected_nids));
-    return _cluster_og_get_region_descendants($res_nids, $collected_nids);
+    return _cluster_og_get_region_descendants($res_nids, TRUE, $collected_nids);
+  }
+
+  return $collected_nids;
+}
+
+/**
+ * Recursively get all the descendants for the argued responses.
+ * @param $nids
+ *  Array of entity ids from which to perform the search.
+ * @param $include_self
+ *  Whether to include the given ids in the response.
+ * @param $collected_nids
+ *  Recursively aggregate node ids.
+ * @return
+ *  Array of node ids representing the set of all descendants for the given responses.
+ */
+function _cluster_og_get_response_descendants($nids, $include_self = FALSE, $collected_nids = array()) {
+  if (!is_array($nids)) {
+    $nids = array($nids);
+  }
+
+  if ($include_self) {
+    $collected_nids = array_unique(array_merge($nids, $collected_nids));
+  }
+
+  // Recursively look for responses that have any of the argued $nids for parent.
+  $query = new EntityFieldQuery();
+  $res = $query->entityCondition('entity_type', 'node')
+    ->entityCondition('bundle', 'response')
+    ->propertyCondition('status', NODE_PUBLISHED)
+    ->fieldCondition('field_parent_response', 'target_id', $nids, 'IN')
+    ->execute();
+
+  if (isset($res['node'])) {
+    $res_nids = array_keys($res['node']);
+    $collected_nids = array_unique(array_merge($res_nids, $collected_nids));
+    return _cluster_og_get_response_descendants($res_nids, TRUE, $collected_nids);
   }
 
   return $collected_nids;
@@ -176,22 +290,66 @@ function _cluster_og_get_region_descendants($nids, $collected_nids = array()) {
  * @param $nids
  *  Array of region node ids.
  * @return
- *  Array of all responses that are associated to one of the argued region ids.
+ *  Array of all responses that are associated to any of the argued region ids.
  */
 function _cluster_og_get_region_responses($nids) {
-  $query = new EntityFieldQuery();
-  $response_ids = array();
-  foreach ($nids as $nid) {
-    $res = $query->entityCondition('entity_type', 'node')
-      ->entityCondition('bundle', 'response')
-      ->fieldCondition('field_associated_regions', 'target_id', $nids, 'IN')
-      ->execute();
-
-    $response_ids = array_unique(array_merge(array_keys($res['node']), $response_ids));
+  if (!is_array($nids)) {
+    $nids = array($nids);
   }
+
+  $query = new EntityFieldQuery();
+  $res = $query->entityCondition('entity_type', 'node')
+    ->entityCondition('bundle', 'response')
+    ->fieldCondition('field_associated_regions', 'target_id', $nids, 'IN')
+    ->execute();
+
+  $response_ids = isset($res['node']) ? array_keys($res['node']) : array();
   return $response_ids;
 }
 
+/**
+ * Get all hubs for a set of regions.
+ * @param $nids
+ *  Array of region node ids.
+ * @return
+ *  Array of all hubs that are associated to any of the argued region ids.
+ */
+function _cluster_og_get_region_hubs($nids) {
+  if (!is_array($nids)) {
+    $nids = array($nids);
+  }
+
+  $query = new EntityFieldQuery();
+  $res = $query->entityCondition('entity_type', 'node')
+    ->entityCondition('bundle', 'hub')
+    ->fieldCondition('field_parent_region', 'target_id', $nids, 'IN')
+    ->execute();
+
+  $hub_ids = isset($res['node']) ? array_keys($res['node']) : array();
+  return $hub_ids;
+}
+
+/**
+ * Get all hubs for a set of responses.
+ * @param $nids
+ *  Array of response node ids.
+ * @return
+ *  Array of all hubs that are associated to any of the argued response ids.
+ */
+function _cluster_og_get_response_hubs($nids) {
+  if (!is_array($nids)) {
+    $nids = array($nids);
+  }
+
+  $query = new EntityFieldQuery();
+  $res = $query->entityCondition('entity_type', 'node')
+    ->entityCondition('bundle', 'hub')
+    ->fieldCondition('field_parent_response', 'target_id', $nids, 'IN')
+    ->execute();
+
+  $hub_ids = isset($res['node']) ? array_keys($res['node']) : array();
+  return $hub_ids;
+}
 
 /**
  * Get the role id for a group from the role name.

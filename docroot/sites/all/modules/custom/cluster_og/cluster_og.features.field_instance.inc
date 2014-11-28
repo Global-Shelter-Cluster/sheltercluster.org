@@ -367,6 +367,13 @@ function cluster_og_field_default_field_instances() {
         'type' => 'text_default',
         'weight' => 2,
       ),
+      'related_hub' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 2,
+      ),
       'teaser' => array(
         'label' => 'above',
         'settings' => array(),
@@ -404,6 +411,15 @@ function cluster_og_field_default_field_instances() {
     'description' => 'Select the most specific region associated with this response.',
     'display' => array(
       'default' => array(
+        'label' => 'above',
+        'module' => 'entityreference',
+        'settings' => array(
+          'link' => 1,
+        ),
+        'type' => 'entityreference_label',
+        'weight' => 0,
+      ),
+      'related_hub' => array(
         'label' => 'above',
         'module' => 'entityreference',
         'settings' => array(
@@ -456,6 +472,15 @@ function cluster_og_field_default_field_instances() {
         'type' => 'entityreference_label',
         'weight' => 1,
       ),
+      'related_hub' => array(
+        'label' => 'above',
+        'module' => 'entityreference',
+        'settings' => array(
+          'link' => 1,
+        ),
+        'type' => 'entityreference_label',
+        'weight' => 1,
+      ),
       'teaser' => array(
         'label' => 'above',
         'settings' => array(),
@@ -496,6 +521,15 @@ function cluster_og_field_default_field_instances() {
     'description' => 'Determine if this is an OG group.',
     'display' => array(
       'default' => array(
+        'label' => 'above',
+        'module' => 'og_ui',
+        'settings' => array(
+          'field_name' => FALSE,
+        ),
+        'type' => 'og_group_subscribe',
+        'weight' => 5,
+      ),
+      'related_hub' => array(
         'label' => 'above',
         'module' => 'og_ui',
         'settings' => array(
@@ -561,6 +595,13 @@ function cluster_og_field_default_field_instances() {
         'type' => 'list_default',
         'weight' => 4,
       ),
+      'related_hub' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 4,
+      ),
       'teaser' => array(
         'label' => 'above',
         'settings' => array(),
@@ -607,6 +648,13 @@ function cluster_og_field_default_field_instances() {
     'description' => '',
     'display' => array(
       'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 6,
+      ),
+      'related_hub' => array(
         'label' => 'above',
         'module' => 'list',
         'settings' => array(),
@@ -661,6 +709,12 @@ function cluster_og_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 3,
       ),
+      'related_hub' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 3,
+      ),
       'teaser' => array(
         'label' => 'above',
         'settings' => array(),
@@ -704,6 +758,12 @@ function cluster_og_field_default_field_instances() {
         'settings' => array(),
         'type' => 'text_default',
         'weight' => 5,
+      ),
+      'related_response' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 6,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -750,6 +810,12 @@ function cluster_og_field_default_field_instances() {
         'type' => 'entityreference_label',
         'weight' => 3,
       ),
+      'related_response' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 4,
+      ),
       'teaser' => array(
         'label' => 'above',
         'settings' => array(),
@@ -793,6 +859,12 @@ function cluster_og_field_default_field_instances() {
         ),
         'type' => 'entityreference_label',
         'weight' => 4,
+      ),
+      'related_response' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 5,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -841,6 +913,12 @@ function cluster_og_field_default_field_instances() {
         ),
         'type' => 'og_group_subscribe',
         'weight' => 9,
+      ),
+      'related_response' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 3,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -899,6 +977,12 @@ function cluster_og_field_default_field_instances() {
         'type' => 'list_default',
         'weight' => 8,
       ),
+      'related_response' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 2,
+      ),
       'teaser' => array(
         'label' => 'above',
         'settings' => array(),
@@ -951,6 +1035,12 @@ function cluster_og_field_default_field_instances() {
         'type' => 'list_default',
         'weight' => 7,
       ),
+      'related_response' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 1,
+      ),
       'teaser' => array(
         'label' => 'above',
         'settings' => array(),
@@ -998,6 +1088,12 @@ function cluster_og_field_default_field_instances() {
         'settings' => array(),
         'type' => 'hidden',
         'weight' => 2,
+      ),
+      'related_response' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
       ),
       'teaser' => array(
         'label' => 'above',
