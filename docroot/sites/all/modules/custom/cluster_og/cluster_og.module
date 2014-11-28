@@ -31,6 +31,21 @@ function cluster_og_geographic_region($nid, $path) {
 }
 
 /**
+ *  Implements hook_entity_info_alter().
+ */
+function cluster_og_entity_info_alter(&$entity_info) {
+  $entity_info['node']['view modes']['related_response'] = array(
+    'label' => t('Related response'),
+    'custom settings' => FALSE,
+  );
+
+  $entity_info['node']['view modes']['related_hub'] = array(
+    'label' => t('Related hub'),
+    'custom settings' => FALSE,
+  );
+}
+
+/**
  * Node API.
  */
 
@@ -81,7 +96,7 @@ function cluster_og_node_view($node, $view_mode) {
 
         // Add node render arrays.
         foreach ($response_nodes as $response_node) {
-          $responses[$response_node->nid] = node_view($response_node, 'teaser'); //TODO: change teaser to custom view mode
+          $responses[$response_node->nid] = node_view($response_node, 'related_response');
         }
         $node->content['related_responses'] = $responses;
       }
@@ -97,7 +112,7 @@ function cluster_og_node_view($node, $view_mode) {
 
         // Add node render arrays.
         foreach ($hub_nodes as $hub_node) {
-          $hubs[$hub_node->nid] = node_view($hub_node, 'teaser'); //TODO: change teaser to custom view mode
+          $hubs[$hub_node->nid] = node_view($hub_node, 'related_hub');
         }
         $node->content['related_hubs'] = $hubs;
       }
@@ -118,7 +133,7 @@ function cluster_og_node_view($node, $view_mode) {
 
         // Add node render arrays.
         foreach ($hub_nodes as $hub_node) {
-          $hubs[$hub_node->nid] = node_view($hub_node, 'teaser'); //TODO: change teaser to custom view mode
+          $hubs[$hub_node->nid] = node_view($hub_node, 'related_hub');
         }
         $node->content['related_hubs'] = $hubs;
       }
@@ -134,7 +149,7 @@ function cluster_og_node_view($node, $view_mode) {
 
         // Add node render arrays.
         foreach ($response_nodes as $response_node) {
-          $responses[$response_node->nid] = node_view($response_node, 'teaser'); //TODO: change teaser to custom view mode
+          $responses[$response_node->nid] = node_view($response_node, 'related_response');
         }
         $node->content['related_responses'] = $responses;
       }
