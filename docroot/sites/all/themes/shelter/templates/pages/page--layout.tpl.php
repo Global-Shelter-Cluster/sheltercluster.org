@@ -5,36 +5,43 @@
     <div class="page-margin">
       <div id="bandwidth-selector">
         <?php print _svg('icons/signal', array('id'=>'bandwidth-selector-icon', 'alt' => 'Bandwidth indication icon')); ?>
-        <a>Low</a>
-        <a>High</a>
+        <a href="">Low</a>
+        <a href="">High</a>
       </div>
       <div id="language-selector">
         <ul class="languages">
-          <li class="language">en</li>
-          <li class="language">fr</li>
-          <li class="language">es</li>
-          <li class="language">ar</li>
+          <li class="language"><a href="">en</a></li>
+          <li class="language"><a href="">fr</a></li>
+          <li class="language"><a href="">es</a></li>
+          <li class="language"><a href="">ar</a></li>
         </ul>
       </div>
-      <a id="btn-dropdown-shelter">Menu</a>
+      <a id="button-menu-dropdown">Menu</a>
+
+      <ul id="profile-items">
+        <li class="profile-item"><a href="">Login</a></li>
+        <li class="profile-item"><a href="">Create an account</a></li>
+      </ul>
+
     </div>
 
     <nav id="nav-shelter">
       <div class="page-margin">
         <ul id="nav-items">
-          <li class="nav-item"><a>Home</a></li>
-          <li class="nav-item"><a>Search Documents <span class="total">(8 200)</span></a></li>
-          <li class="nav-item"><a>Regional Groups <span class="total">(6)</span></a></li>
-          <li class="nav-item"><a>Countries <span class="total">(34)</span></a></li>
-          <li class="nav-item"><a>Crises <span class="total">(3)</span><span class="total-ended">(20) ended</span></a></li>
-          <li class="nav-item"><a>Manage your profile</a></li>
-          <li class="nav-item"><a>Disconnect</a></li>
+          <li class="nav-item"><a href="">Home</a></li>
+          <li class="nav-item"><a href="">Current Operations <span class="total">(10)</span></a></li>
+          <li class="nav-item"><a href="">Documents <span class="total">(8200)</span></a></li>
+          <li class="nav-item"><a href="">Geographic Aggregators</a></li>
+          <li class="nav-item"><a href="">Communities of Practice <span class="total">(6)</span></a></li>
+          <li class="nav-item"><a href="">References <span class="total">(34)</span></a></li>
+          <li class="nav-item"><a href="">Manage your profile</a></li>
+          <li class="nav-item"><a href="">Disconnect</a></li>
         </ul>
       </div>
     </nav>
 
     <div class="page-margin">
-      <a id="logo-shelter-cluster">
+      <a id="logo-shelter-cluster" href="http://sheltercluster.org">
         <?php print _svg('logo-global-shelter-cluster', array('id'=>'shelter-cluster', 'alt' => 'Global Shelter Cluster - ShelterCluster.org - Coordinating Humanitarian Shelter')); ?>
       </a>
       <ul id="profile-items">
