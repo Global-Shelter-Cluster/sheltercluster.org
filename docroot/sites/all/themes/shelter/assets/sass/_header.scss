@@ -75,20 +75,26 @@ header {
 
 #nav-shelter {
   float: left;
-  background-color: $shelter-grey;
-  @include background-image(linear-gradient(darken($shelter-grey, 55%), darken($shelter-grey,33%) 40%, darken($shelter-grey, 2%)));
+  background-color: white;
+  //@include background-image(linear-gradient(darken($shelter-grey, 55%), darken($shelter-grey,33%) 40%, darken($shelter-grey, 2%)));
   color: $nav-shelter-links-color;
-  @include rem(padding, 1rem 0.5rem 0.5rem);
+  @include rem(padding, 1rem 0.5rem 0.5rem 0);
 }
 
 #nav-items {
+  .sub-nav {
+    display: block;
+    @include breakpoint( 500px ) {
+      display: none;
+    }
+  }
   .nav-item {
     float: left;
 
     a {
       float: left;
       @extend .button;
-      @include rem(margin-bottom, 0.5rem);
+      @include rem(margin, 0 0.5rem 0.5rem 0);
     }
     .total {
       @include rem(font-size, 0.75rem);

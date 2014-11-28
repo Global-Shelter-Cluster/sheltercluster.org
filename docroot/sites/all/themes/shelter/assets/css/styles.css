@@ -387,25 +387,27 @@ header #logo-shelter-cluster #subtitle-shelter {
 
 #nav-shelter {
   float: left;
-  background-color: #575757;
-  background-image: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJvYmplY3RCb3VuZGluZ0JveCIgeDE9IjAuNSIgeTE9IjAuMCIgeDI9IjAuNSIgeTI9IjEuMCI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzAwMDAwMCIvPjxzdG9wIG9mZnNldD0iNDAlIiBzdG9wLWNvbG9yPSIjMDMwMzAzIi8+PHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjNTI1MjUyIi8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNncmFkKSIgLz48L3N2Zz4g');
-  background-size: 100%;
-  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #000000), color-stop(40%, #030303), color-stop(100%, #525252));
-  background-image: -moz-linear-gradient(#000000, #030303 40%, #525252);
-  background-image: -webkit-linear-gradient(#000000, #030303 40%, #525252);
-  background-image: linear-gradient(#000000, #030303 40%, #525252);
+  background-color: white;
   color: white;
-  padding: 16px 8px 8px;
-  padding: 1rem 0.5rem 0.5rem;
+  padding: 16px 8px 8px 0;
+  padding: 1rem 0.5rem 0.5rem 0;
 }
 
+#nav-items .sub-nav {
+  display: block;
+}
+@media (min-width: 500px) {
+  #nav-items .sub-nav {
+    display: none;
+  }
+}
 #nav-items .nav-item {
   float: left;
 }
 #nav-items .nav-item a {
   float: left;
-  margin-bottom: 8px;
-  margin-bottom: 0.5rem;
+  margin: 0 8px 8px 0;
+  margin: 0 0.5rem 0.5rem 0;
 }
 #nav-items .nav-item .total {
   font-size: 12px;

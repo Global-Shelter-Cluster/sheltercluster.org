@@ -34,8 +34,12 @@
           <li class="nav-item"><a href="">Geographic Aggregators</a></li>
           <li class="nav-item"><a href="">Communities of Practice <span class="total">(6)</span></a></li>
           <li class="nav-item"><a href="">References <span class="total">(34)</span></a></li>
-          <li class="nav-item"><a href="">Manage your profile</a></li>
-          <li class="nav-item"><a href="">Disconnect</a></li>
+          <li class="sub-nav">
+            <ul>
+              <li class="nav-item"><a href="">Manage your profile</a></li>
+              <li class="nav-item"><a href="">Disconnect</a></li>
+            </ul>
+          </li>
         </ul>
       </div>
     </nav>
