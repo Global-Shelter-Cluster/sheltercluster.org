@@ -296,14 +296,18 @@ header #logo-shelter-cluster {
   display: block;
 }
 header #logo-shelter-cluster .svg {
-  height: 100px;
-  fill: #ff0;
+  height: 80px;
 }
 header #logo-shelter-cluster #title-shelter {
   color: #7f1416;
 }
 header #logo-shelter-cluster #subtitle-shelter {
   color: #575757;
+}
+
+#bandwidth-selector-icon {
+  height: 13px;
+  width: 13px;
 }
 
 #bandwidth-selector {

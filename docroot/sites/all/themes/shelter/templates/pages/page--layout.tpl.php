@@ -1,8 +1,10 @@
 <div id="page">
 
   <header>
+
     <div class="page-margin">
       <div id="bandwidth-selector">
+        <?php print _svg('icons/signal', array('id'=>'bandwidth-selector-icon', 'alt' => 'Bandwidth indication icon')); ?>
         <a>Low</a>
         <a>High</a>
       </div>
@@ -15,11 +17,10 @@
         </ul>
       </div>
       <a id="btn-dropdown-shelter">Menu</a>
-      <ul id="profile-items">
-        <li class="profile-item"><a>Login</a></li>
-        <li class="profile-item"><a>Create an account</a></li>
-      </ul>
-      <nav id="nav-shelter">
+    </div>
+
+    <nav id="nav-shelter">
+      <div class="page-margin">
         <ul id="nav-items">
           <li class="nav-item"><a>Home</a></li>
           <li class="nav-item"><a>Search Documents <span class="total">(8 200)</span></a></li>
@@ -29,13 +30,25 @@
           <li class="nav-item"><a>Manage your profile</a></li>
           <li class="nav-item"><a>Disconnect</a></li>
         </ul>
-      </nav>
+      </div>
+    </nav>
+
+    <div class="page-margin">
       <a id="logo-shelter-cluster">
-        <?php print _svg('icons/information', array('id'=>'shelter-cluster')); ?>
-        <div id="title-shelter">ShelterCluster.org</div>
-        <div id="subtitle-shelter">Coordinating Humanitarian Shelter</div>
+        <?php print _svg('logo-global-shelter-cluster', array('id'=>'shelter-cluster', 'alt' => 'Global Shelter Cluster - ShelterCluster.org - Coordinating Humanitarian Shelter')); ?>
       </a>
+      <ul id="profile-items">
+        <li class="profile-item"><a>Login</a></li>
+        <li class="profile-item"><a>Create an account</a></li>
+      </ul>
+      <div>
+        <form action="http://www.google.com/search" method="get">
+          <label>Search: <input type="search" placeholder="Search documents" name="q"></label>
+           <input type="submit" value="Search">
+        </form>
+      </div>
     </div>
+
   </header>
 
   <div id="content">

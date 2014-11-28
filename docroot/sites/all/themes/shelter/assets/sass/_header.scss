@@ -30,8 +30,7 @@ header {
     display: block;
 
     .svg {
-      height: 100px;
-      fill: #ff0;
+      height: 80px;
     }
     #title-shelter {
       color: $shelter-red;
@@ -41,7 +40,10 @@ header {
     }
   }
 }
-
+#bandwidth-selector-icon {
+  height: 13px;
+  width: 13px;
+}
 #bandwidth-selector {
   float: left;
   @include rem(padding, 0.5rem 0 0.5rem 0);
