@@ -1,5 +1,7 @@
 <?php
 
+require_once dirname(__FILE__) . '/includes/shelter.helpers.inc';
+
 /**
  * Implements hook_preprocess_page().
  */
