@@ -236,6 +236,19 @@ html {
   font-size: 100%;
 }
 
+a:link {
+  color: black;
+}
+a:visited {
+  color: black;
+}
+a:hover {
+  color: black;
+}
+a:active {
+  color: black;
+}
+
 body {
   background-color: white;
   font-family: arial, sans-serif;
@@ -263,23 +276,21 @@ body {
 }
 
 /* _header.scss */
-header {
-  min-height: 128px;
-  min-height: 8rem;
-}
 header ul {
   padding: 0;
   margin: 0;
   list-style: none;
 }
-header #btn-dropdown-shelter {
-  float: left;
+header a {
+  text-decoration: none;
+}
+header #button-menu-dropdown {
   display: table;
   clear: both;
   background: black;
   padding: 8px;
   padding: 0.5rem;
-  color: white;
+  color: black;
 }
 header #profile-items {
   float: right;
@@ -291,9 +302,6 @@ header #profile-items .profile-item:first-child:after {
   content: '/';
   padding: 0 8px 0 8px;
   padding: 0 0.5rem 0 0.5rem;
-}
-header #logo-shelter-cluster {
-  display: block;
 }
 header #logo-shelter-cluster .svg {
   height: 100px;
@@ -336,20 +344,28 @@ header #logo-shelter-cluster #subtitle-shelter {
 }
 
 #nav-shelter {
-  clear: both;
+  float: left;
   background-color: black;
   color: white;
   padding: 8px;
   padding: 0.5rem;
 }
 
+#nav-items .nav-item {
+  float: left;
+}
 #nav-items .nav-item a {
+  float: left;
   display: block;
-  margin: 4px 0 4px 0;
-  margin: 0.25rem 0 0.25rem 0;
+  margin: 4px 4px 4px 0;
+  margin: 0.25rem 0.25rem 0.25rem 0;
   padding: 4px 8px 4px 8px;
   padding: 0.25rem 0.5rem 0.25rem 0.5rem;
   background-color: #333333;
+  color: white;
+}
+#nav-items .nav-item a:hover, #nav-items .nav-item a:active {
+  background-color: #656565;
 }
 #nav-items .nav-item .total {
   font-size: 12px;

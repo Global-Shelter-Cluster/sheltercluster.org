@@ -8,6 +8,13 @@ html {
   font-size: 100%
 }
 
+a {
+  &:link { color: $a-link-color ; }
+  &:visited { color: $a-visited-color; }
+  &:hover { color: $a-hover-color; }
+  &:active { color: $a-active-color; }
+}
+
 body {
   background-color: $master-background;
   font-family: arial, sans-serif;

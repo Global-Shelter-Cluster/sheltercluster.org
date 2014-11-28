@@ -16,9 +16,23 @@ $chart-red: rgb(252,0,0);
 $chart-blue: rgb(22,135,203);
 $chart-dark-blue: rgb(4,49,76);
 
-$master-background: white;
+$master-background: rgb(255,255,255);
 
 //Main nav colors
-$nav-bkg: rgb(0,0,0);
-$nav-color: rgb(255,255,255);
-$nav-list-bkg: rgb(051,051,051);
+$nav-shelter-color: rgb(0,0,0);
+$nav-shelter-links-color: rgb(255,255,255);
+$nav-item-color: rgb(255,255,255);
+$nav-item-hover: rgb(101,101,101);
+$nav-item-bkg: rgb(51,51,51);
+
+$a-link-color: rgb(0,0,0);
+$a-visited-color: rgb(0,0,0);
+$a-hover-color: rgb(0,0,0);
+$a-active-color: rgb(0,0,0);
+
+
+
+//Dropdown button color
+$btn-dropdown-shelter: rgb(0,0,0);
+
+
