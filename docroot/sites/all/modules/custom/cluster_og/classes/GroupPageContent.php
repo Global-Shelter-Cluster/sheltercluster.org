@@ -1,17 +1,16 @@
 <?php
 
-interface GroupContent {
-  public function getRelatedResponses($view_mode);
-  public function getRelatedHubs($view_mode);
+abstract class GroupContent {
+  abstract public function getRelatedResponses($view_mode);
+  abstract public function getRelatedHubs($view_mode);
 
   /**
    * @var Entity reference field name used to get children for the node.
    * Classes that inherit from this will need to override this value to make
    * $this->getDescendantIds() work.
    */
-  protected $parent_field = NULL;
 
-  protected function getDescendantIds($include_self = FALSE, &$collected_nids = array()) {
+  function getDescendantIds($include_self = FALSE, &$collected_nids = array()) {
     if (!$this->parent_field) {
       return NULL;
     }
@@ -41,7 +40,7 @@ interface GroupContent {
    *  Content type to look for.
    * @return Array of node IDs.
    */
-  protected static function queryChildren($parent_nids, $field, $bundle) {
+  static function queryChildren($parent_nids, $field, $bundle) {
     return self::queryDescendants($parent_nids, $field, $bundle, FALSE, TRUE);
   }
 
@@ -102,7 +101,7 @@ interface GroupContent {
   }
 }
 
-class GroupContentResponse implements GroupContent {
+class GroupContentResponse extends GroupContent {
   protected $parent_field = 'field_parent_response';
 
   public function getRelatedResponses($view_mode = 'related_response') {
@@ -116,7 +115,7 @@ class GroupContentResponse implements GroupContent {
   }
 }
 
-class GroupContentGeographicRegion implements GroupContent {
+class GroupContentGeographicRegion extends GroupContent {
   protected $parent_field = 'field_parent_region';
 
   public function getRelatedResponses($view_mode = 'related_response') {
