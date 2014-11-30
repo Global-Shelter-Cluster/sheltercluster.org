@@ -1,15 +1,23 @@
 <?php
 
-abstract class GroupContent {
+abstract class GroupTypeContent {
   abstract public function getRelatedResponses($view_mode);
   abstract public function getRelatedHubs($view_mode);
+
+  static public function getInstance($node) {
+    switch ($node->type) {
+      case 'geographic_region':
+        return new GroupContentGeographicRegion();
+      case 'response':
+        return new GroupContentReponse();
+    }
+  }
 
   /**
    * @var Entity reference field name used to get children for the node.
    * Classes that inherit from this will need to override this value to make
    * $this->getDescendantIds() work.
    */
-
   function getDescendantIds($include_self = FALSE, &$collected_nids = array()) {
     if (!$this->parent_field) {
       return NULL;
@@ -101,7 +109,7 @@ abstract class GroupContent {
   }
 }
 
-class GroupContentResponse extends GroupContent {
+class GroupContentResponse extends GroupTypeContent {
   protected $parent_field = 'field_parent_response';
 
   public function getRelatedResponses($view_mode = 'related_response') {
@@ -115,7 +123,7 @@ class GroupContentResponse extends GroupContent {
   }
 }
 
-class GroupContentGeographicRegion extends GroupContent {
+class GroupContentGeographicRegion extends GroupTypeContent {
   protected $parent_field = 'field_parent_region';
 
   public function getRelatedResponses($view_mode = 'related_response') {
@@ -145,16 +153,7 @@ class GroupPageContent {
 
   function __construct($node) {
     $this->node = $node;
-
-    switch ($node->type) {
-      case 'geographic_region':
-        $this->manager = new GroupContentGeographicRegion();
-        break;
-      case 'response':
-        $this->manager = new GroupContentReponse();
-        break;
-    }
-
+    $this->manager = GroupTypeContent::getInstance($node);
   }
 
   public function getContactMembers($view_mode = 'contact_member') {
