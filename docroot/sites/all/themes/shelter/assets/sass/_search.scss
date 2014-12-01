@@ -9,7 +9,7 @@
     float: left;
     @include rem('padding', 0.5rem 0.5rem 0.5rem );
     @include border-radius(3px);
-    border: 1px solid darken(white,5%);
+    border: 1px solid darken(white,12%);
   }
   .submit {
     float: left;
