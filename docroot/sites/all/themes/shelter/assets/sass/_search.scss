@@ -4,6 +4,7 @@
   display: inline-block;
   @include rem('padding', 1rem 0);
   color: #000;
+  @include rem(font-size, 0.80rem);
 
   .text-field {
     float: left;

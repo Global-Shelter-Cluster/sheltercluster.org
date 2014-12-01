@@ -28,11 +28,13 @@ header {
 }
 #profile-menu-items {
   float: right;
+  @include rem(font-size, 0.9rem);
 
   .profile-item {
     float: left;
      a {
       color: #222;
+      text-decoration: underline;
     }
     &:first-child:after {
       content: '/';
@@ -110,7 +112,6 @@ header {
 }
 
 #nav-shelter {
-  float: left;
   background-color: white;
   //@include background-image(linear-gradient(darken($shelter-grey, 55%), darken($shelter-grey,33%) 40%, darken($shelter-grey, 2%)));
   color: $nav-shelter-links-color;

@@ -335,6 +335,8 @@ body {
   padding: 16px 0;
   padding: 1rem 0;
   color: #000;
+  font-size: 12.8px;
+  font-size: 0.8rem;
 }
 .search .text-field {
   float: left;
@@ -391,12 +393,15 @@ header a {
 
 #profile-menu-items {
   float: right;
+  font-size: 14.4px;
+  font-size: 0.9rem;
 }
 #profile-menu-items .profile-item {
   float: left;
 }
 #profile-menu-items .profile-item a {
   color: #222;
+  text-decoration: underline;
 }
 #profile-menu-items .profile-item:first-child:after {
   content: '/';
@@ -480,7 +485,6 @@ header a {
 }
 
 #nav-shelter {
-  float: left;
   background-color: white;
   color: white;
   padding: 16px 8px 8px 0;
