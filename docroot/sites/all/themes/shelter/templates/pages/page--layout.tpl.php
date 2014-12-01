@@ -137,6 +137,63 @@
           </ul>
         </section>
 
+        <section id="key-information">
+          <h3>Key Information</h3>
+          <h4>Coordination information</h4>
+          <ul>
+            <li>
+              <img src="" alt="" />
+              <a href="">id lobortis leo maximus tristique</a>
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc aliquet justo leo, id lobortis leo maximus tristique. Sed non odio eros. Aenean pulvinar sapien quam, a bibendum ante lobortis eu.</p>
+              <span class="file-size">150k</span>
+              <span class="file-type">pdf</span>
+              <span class="file-source">ipsum dolor sit</span>
+            </li>
+            <li>
+              <img src="" alt="" />
+              <a href="">id lobortis leo maximus tristique</a>
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc aliquet justo leo, id lobortis leo maximus tristique. Sed non odio eros. Aenean pulvinar sapien quam, a bibendum ante lobortis eu.</p>
+              <span class="file-size">250k</span>
+              <span class="file-type">docx</span>
+              <span class="file-source">Aenean pulvinar</span>
+            </li>
+            <li>
+              <img src="" alt="" />
+              <a href="">id lobortis leo maximus tristique</a>
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc aliquet justo leo, id lobortis leo maximus tristique. Sed non odio eros. Aenean pulvinar sapien quam, a bibendum ante lobortis eu.</p>
+              <span class="file-size">300k</span>
+              <span class="file-type">pdf</span>
+              <span class="file-source">consectetur adipiscing elit</span>
+            </li>
+          </ul>
+          <h4>Cluster Guidance</h4>
+          <ul>
+            <li>
+              <img src="" alt="" />
+              <a href="">id lobortis leo maximus tristique</a>
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc aliquet justo leo, id lobortis leo maximus tristique. Sed non odio eros. Aenean pulvinar sapien quam, a bibendum ante lobortis eu.</p>
+              <span class="file-size">150k</span>
+              <span class="file-type">pdf</span>
+              <span class="file-source">ipsum dolor sit</span>
+            </li>
+            <li>
+              <img src="" alt="" />
+              <a href="">id lobortis leo maximus tristique</a>
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc aliquet justo leo, id lobortis leo maximus tristique. Sed non odio eros. Aenean pulvinar sapien quam, a bibendum ante lobortis eu.</p>
+              <span class="file-size">250k</span>
+              <span class="file-type">docx</span>
+              <span class="file-source">Aenean pulvinar</span>
+            </li>
+            <li>
+              <img src="" alt="" />
+              <a href="">id lobortis leo maximus tristique</a>
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc aliquet justo leo, id lobortis leo maximus tristique. Sed non odio eros. Aenean pulvinar sapien quam, a bibendum ante lobortis eu.</p>
+              <span class="file-size">300k</span>
+              <span class="file-type">pdf</span>
+              <span class="file-source">consectetur adipiscing elit</span>
+            </li>
+          </ul>
+        </section>
       </div>
 
       <div id="content-rendered">

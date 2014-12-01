@@ -338,6 +338,9 @@ body {
 #featured-documents ul {
   height: 350px;
   height: 21.875rem;
+  padding: 0;
+  margin: 0;
+  list-style: none;
 }
 #featured-documents li {
   display: inline;
@@ -363,6 +366,7 @@ body {
   height: 100%;
 }
 
+/* _key-information.scss */
 .search {
   float: right;
   clear: right;
