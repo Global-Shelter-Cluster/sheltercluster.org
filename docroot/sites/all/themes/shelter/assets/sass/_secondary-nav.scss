@@ -1,9 +1,30 @@
 /* _secondary-nav.scss */
 
 #secondary-nav {
-  @include rem(margin, 0 0 2rem 0);
+  ul {
+    @include reset-list;
+  }
 
+  float: left;
+  width: 300px;
+  @include rem(margin, 0 0 0.25rem 0);
+  @include rem(padding, 0.75rem 0 0 0);
+  border-top: 1px solid darken(white, 7%);
+  border-bottom: 1px solid darken(white, 7%);
+  background: $shelter-light-blue;
+
+  .nav-group {
+    clear: both;
+    border-top: 1px solid darken($shelter-light-blue, 7%);
+
+    h3 {
+      @include rem(font-size, 0.8rem);
+      @include rem(margin, 0.25rem 0);
+      color: darken($shelter-light-blue, 27%);
+    }
+  }
   .nav-items {
+
     .sub-nav {
       display: block;
       @include breakpoint( 500px ) {
@@ -12,19 +33,43 @@
     }
     .nav-item {
       float: left;
+      @include rem(margin, 0 0 0.25rem 0);
+      min-width: 100%;
 
       a {
+        width: 98%;
+        $button-color: lighten($shelter-grey, 15%);
         float: left;
-        @extend .button;
+        background: $button-color;
+        @include background-image(linear-gradient(lighten($button-color, 3%), lighten($button-color,4%) 10%, $button-color));
+        background-repeat: no-repeat;
+        color: black;
+        margin: 0 0 0 0.3rem;
+        @include rem('padding', 0.5rem 1.25rem 0.5rem);
+        @include border-radius(3px);
+        border: 1px solid darken($button-color,9%);
         @include rem(margin, 0 0.5rem 0.5rem 0);
+        @include rem(font-size, 0.8rem);
+        &:hover {
+          @include background-image(linear-gradient(lighten($button-color, 7%), lighten($button-color,8%) 60%, lighten($button-color, 5%)));
+        }
+        &.active {
+          $button-color: lighten($shelter-red, 1%);
+          color: $accent-yellow;
+          border-color: $shelter-red;
+          font-weight: bold;
+          @include background-image(linear-gradient(lighten($button-color, 3%), lighten($button-color,4%) 10%, $button-color));
+
+        }
       }
       .total {
-        @include rem(font-size, 0.75rem);
+        color: darken($shelter-grey,10%);
+        @include rem(font-size, 0.7rem);
       }
       .total-ended {
         float: right;
         @include rem(font-size, 0.75rem);
       }
+    }
   }
-}
 }

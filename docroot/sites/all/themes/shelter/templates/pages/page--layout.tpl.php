@@ -4,7 +4,7 @@
 
     <section id="site-options-bar" class="clearfix">
       <div class="page-margin">
-        <div id="language-selector">
+        <div id="language-selector" class="clearfix">
           <ul class="languages">
             <li class="language"><a href="">en</a></li>
             <li class="language"><a href="">fr</a></li>
@@ -14,14 +14,14 @@
         </div>
         <div id="bandwidth-selector">
           <?php print _svg('icons/signal', array('id'=>'bandwidth-selector-icon', 'alt' => 'Bandwidth indication icon')); ?>
-          <a href="">Low</a>
+          <a href="" class="active">Low bandwidth environment</a>
           <span>/</span>
-          <a href="">High</a>
+          <a href="">Swicth to high</a>
         </div>
       </div>
     </section>
 
-    <div class="page-margin">
+    <div class="page-margin clearfix">
 
       <a id="logo-shelter-cluster" href="http://sheltercluster.org">
         <?php print _svg('logo-global-shelter-cluster', array('id'=>'shelter-cluster', 'alt' => 'Global Shelter Cluster - ShelterCluster.org - Coordinating Humanitarian Shelter')); ?>
@@ -39,7 +39,7 @@
 
     </div>
 
-    <nav id="nav-shelter">
+    <nav id="nav-shelter" class="clearfix">
       <div class="page-margin">
         <a href="#" id="button-menu-dropdown">Menu</a>
         <ul class="nav-items">
@@ -59,27 +59,43 @@
       </div>
     </nav>
 
-    <section id="secondary-nav">
-      <div class="page-margin">
-        <ul class="nav-items">
-          <li class="nav-item"><a href="">Dashboard</a></li>
-          <li class="nav-item"><a href="">Documents <span class="total">(8200)</span></a></li>
-          <li class="nav-item"><a href="">Discussions</a></li>
-          <li class="nav-item"><a href="">Agenda</a></li>
-          <li class="nav-item"><a href="">Strategic Advisory</a></li>
-          <li class="nav-item"><a href="">Manilla Hub</a></li>
-          <li class="nav-item"><a href="">Cebu Hub</a></li>
-          <li class="nav-item"><a href="">Guiuian Hub</a></li>
-          <li class="nav-item"><a href="">Roxas Hub</a></li>
-          <li class="nav-item"><a href="">Ormoc Hub</a></li>
-        </ul>
-      </div>
-    </section>
-
   </header>
 
   <div id="content">
-    <div class="page-margin">
+    <div class="page-margin clearfix">
+
+      <?php if ($messages) { print $messages; } ?>
+
+      <section id="secondary-nav">
+        <div class="page-margin clearfix">
+          <ul class="nav-items">
+            <li class="nav-item"><a href="" class="active">Dashboard</a></li>
+            <li class="nav-item"><a href="">Documents <span class="total">(8200)</span></a></li>
+            <li class="nav-item"><a href="">Discussions</a></li>
+            <li class="nav-item"><a href="">Agenda</a></li>
+            <li class="nav-item"><a href="">Strategic Advisory</a></li>
+            <li class="nav-group clearfix">
+              <h3>Hubs</h3>
+              <ul class="nav-items">
+                <li class="nav-item"><a href="">Manilla Hub</a></li>
+                <li class="nav-item"><a href="">Cebu Hub</a></li>
+                <li class="nav-item"><a href="">Guiuian Hub</a></li>
+                <li class="nav-item"><a href="">Roxas Hub</a></li>
+                <li class="nav-item"><a href="">Ormoc Hub</a></li>
+              </ul>
+            </li>
+            <li class="nav-group clearfix">
+              <h3>Pages</h3>
+              <ul class="nav-items">
+                <li class="nav-item"><a href="">Something</a></li>
+                <li class="nav-item"><a href="">More</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <div id="content-header">
 
       <section id="operation-information">
         <h1>Typhoon Haiyan</h1>
@@ -120,8 +136,12 @@
           </li>
         </ul>
       </section>
-      <?php print $messages; ?>
-      <?php print render($page['content']); ?>
+
+      </div>
+
+      <div id="content-rendered">
+        <?php print render($page['content']); ?>
+      </div>
 
     </div>
   </div>
