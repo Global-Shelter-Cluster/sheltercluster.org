@@ -1,9 +1,22 @@
 <?php
 
 abstract class GroupTypeContent {
+
+  /**
+   * @var Entity reference field name used to get children for the node.
+   * Classes that inherit from this will need to override this value to make
+   * $this->getDescendantIds() work.
+   */
+  protected $parent_field = NULL;
+
   abstract public function getRelatedResponses($view_mode);
   abstract public function getRelatedHubs($view_mode);
 
+  /**
+   * Builder for class implementation of the appropriate type for the node.
+   * @param $node
+   *  Drupal node object.
+   */
   static public function getInstance($node) {
     switch ($node->type) {
       case 'geographic_region':
@@ -13,11 +26,6 @@ abstract class GroupTypeContent {
     }
   }
 
-  /**
-   * @var Entity reference field name used to get children for the node.
-   * Classes that inherit from this will need to override this value to make
-   * $this->getDescendantIds() work.
-   */
   function getDescendantIds($include_self = FALSE, &$collected_nids = array()) {
     if (!$this->parent_field) {
       return NULL;
@@ -147,7 +155,7 @@ class GroupPageContent {
   protected $descendant_ids;
 
   /**
-   * @var Implements GroupContent interface.
+   * @var GroupContent implementation.
    */
   private $manager;
 
@@ -157,7 +165,7 @@ class GroupPageContent {
   }
 
   public function getContactMembers($view_mode = 'contact_member') {
-    $contact_members_ids = $this->getUsersByRole('contact member');
+    $contact_members_ids = self::getUsersByRole('contact member');
     return self::getList($contact_members_ids, $view_mode, 'cluster_og_contact_member', 'user');
   }
 
@@ -177,7 +185,7 @@ class GroupPageContent {
    *  The role name as stored in the database.
    * @return Integer representing the role ID.
    */
-  private function getRoleIdByName($role_name) {
+  static public function getRoleIdByName($role_name) {
     return db_select('og_role', 'og_r')
       ->fields('og_r', array('rid'))
       ->condition('group_bundle', $this->node->type)
@@ -191,8 +199,8 @@ class GroupPageContent {
    *  The role name as stored in the database.
    * @return Array of user IDs.
    */
-  private function getUsersByRole($role_name) {
-    $rid = $this->getRoleIdByName($role_name);
+  static public function getUsersByRole($role_name) {
+    $rid = self::getRoleIdByName($role_name);
     if (!$rid) {
       return;
     }
@@ -218,8 +226,9 @@ class GroupPageContent {
    * @return Render array.
    */
   protected static function getList($ids, $view_mode = 'teaser', $theme_wrapper = NULL, $entity_type = 'node') {
-    if (!$ids)
+    if (!$ids) {
       return NULL;
+    }
 
     $entities = entity_load($entity_type, $ids);
 
@@ -235,7 +244,6 @@ class GroupPageContent {
     if ($theme_wrapper) {
       $ret['#theme_wrappers'] = array($theme_wrapper);
     }
-
     return $ret;
   }
 
