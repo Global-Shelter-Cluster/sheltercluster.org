@@ -332,6 +332,7 @@ body {
 
 .search {
   float: right;
+  clear: right;
   display: inline-block;
   padding: 16px 0;
   padding: 1rem 0;
@@ -360,26 +361,33 @@ header a {
   text-decoration: none;
 }
 header #button-menu-dropdown {
-  display: table;
-  clear: both;
   background: black;
   padding: 8px;
   padding: 0.5rem;
-  color: black;
+  color: #fff;
+  display: inline-block;
+  margin-bottom: 8px;
+  margin-bottom: 0.5rem;
 }
-header #profile-items {
+header #profile-menu-items {
   float: right;
 }
-header #profile-items .profile-item {
+header #profile-menu-items .profile-item {
   float: left;
 }
-header #profile-items .profile-item:first-child:after {
+header #profile-menu-items .profile-item a {
+  color: #222;
+}
+header #profile-menu-items .profile-item:first-child:after {
   content: '/';
   padding: 0 8px 0 8px;
   padding: 0 0.5rem 0 0.5rem;
 }
 header #logo-shelter-cluster .svg {
   height: 80px;
+  position: relative;
+  left: -10px;
+  top: -7px;
 }
 header #logo-shelter-cluster #title-shelter {
   color: #7f1416;
@@ -388,15 +396,42 @@ header #logo-shelter-cluster #subtitle-shelter {
   color: #575757;
 }
 
+#site-options-bar {
+  background: #688394;
+  font-size: 12.8px;
+  font-size: 0.8rem;
+  margin-bottom: 16px;
+  margin-bottom: 1rem;
+  color: #536876;
+}
+#site-options-bar a {
+  color: #29333a;
+  text-decoration: underline;
+}
+#site-options-bar .active {
+  color: #000;
+  text-decoration: none;
+}
+#site-options-bar .svg {
+  fill: #11689d;
+  position: relative;
+  top: 2px;
+}
+
 #bandwidth-selector-icon {
   height: 13px;
   width: 13px;
 }
 
 #bandwidth-selector {
-  float: left;
+  float: none;
   padding: 8px 0 8px 0;
   padding: 0.5rem 0 0.5rem 0;
+}
+@media (min-width: 600px) {
+  #bandwidth-selector {
+    float: left;
+  }
 }
 #bandwidth-selector span {
   padding: 0 4.8px 0 4.8px;
@@ -404,9 +439,15 @@ header #logo-shelter-cluster #subtitle-shelter {
 }
 
 #language-selector {
-  float: right;
-  padding: 8px 0 8px 0;
-  padding: 0.5rem 0 0.5rem 0;
+  float: none;
+  padding: 4px 0 4px 0;
+  padding: 0.25rem 0 0.25rem 0;
+  border-bottom: 1px solid #627b8b;
+}
+@media (min-width: 600px) {
+  #language-selector {
+    float: right;
+  }
 }
 #language-selector .language {
   float: left;

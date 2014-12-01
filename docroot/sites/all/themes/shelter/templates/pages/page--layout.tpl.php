@@ -2,32 +2,46 @@
 
   <header>
 
-    <div class="page-margin">
-      <div id="bandwidth-selector">
-        <?php print _svg('icons/signal', array('id'=>'bandwidth-selector-icon', 'alt' => 'Bandwidth indication icon')); ?>
-        <a href="">Low</a>
-        <span>/</span>
-        <a href="">High</a>
+    <section id="site-options-bar" class="clearfix">
+      <div class="page-margin">
+        <div id="language-selector">
+          <ul class="languages">
+            <li class="language"><a href="">en</a></li>
+            <li class="language"><a href="">fr</a></li>
+            <li class="language"><a href="">es</a></li>
+            <li class="language"><a href="">ar</a></li>
+          </ul>
+        </div>
+        <div id="bandwidth-selector">
+          <?php print _svg('icons/signal', array('id'=>'bandwidth-selector-icon', 'alt' => 'Bandwidth indication icon')); ?>
+          <a href="">Low</a>
+          <span>/</span>
+          <a href="">High</a>
+        </div>
       </div>
-      <div id="language-selector">
-        <ul class="languages">
-          <li class="language"><a href="">en</a></li>
-          <li class="language"><a href="">fr</a></li>
-          <li class="language"><a href="">es</a></li>
-          <li class="language"><a href="">ar</a></li>
-        </ul>
-      </div>
-      <a id="button-menu-dropdown">Menu</a>
+    </section>
 
-      <ul id="profile-items">
+    <div class="page-margin">
+
+      <a id="logo-shelter-cluster" href="http://sheltercluster.org">
+        <?php print _svg('logo-global-shelter-cluster', array('id'=>'shelter-cluster', 'alt' => 'Global Shelter Cluster - ShelterCluster.org - Coordinating Humanitarian Shelter')); ?>
+      </a>
+
+      <ul id="profile-menu-items">
         <li class="profile-item"><a href="">Login</a></li>
         <li class="profile-item"><a href="">Create an account</a></li>
       </ul>
+
+      <form class="search" action="http://www.google.com/search" method="get">
+        <input class="text-field" type="search" placeholder="Search documents" name="q">
+        <input class="submit" type="submit" value="Search">
+      </form>
 
     </div>
 
     <nav id="nav-shelter">
       <div class="page-margin">
+        <a href="#" id="button-menu-dropdown">Menu</a>
         <ul class="nav-items">
           <li class="nav-item"><a href="">Home</a></li>
           <li class="nav-item"><a href="">Current Operations <span class="total">(10)</span></a></li>
@@ -44,6 +58,23 @@
         </ul>
       </div>
     </nav>
+
+    <section id="secondary-nav">
+      <div class="page-margin">
+        <ul class="nav-items">
+          <li class="nav-item"><a href="">Dashboard</a></li>
+          <li class="nav-item"><a href="">Documents <span class="total">(8200)</span></a></li>
+          <li class="nav-item"><a href="">Discussions</a></li>
+          <li class="nav-item"><a href="">Agenda</a></li>
+          <li class="nav-item"><a href="">Strategic Advisory</a></li>
+          <li class="nav-item"><a href="">Manilla Hub</a></li>
+          <li class="nav-item"><a href="">Cebu Hub</a></li>
+          <li class="nav-item"><a href="">Guiuian Hub</a></li>
+          <li class="nav-item"><a href="">Roxas Hub</a></li>
+          <li class="nav-item"><a href="">Ormoc Hub</a></li>
+        </ul>
+      </div>
+    </section>
 
     <div class="page-margin clearfix">
       <section id="operation-information">
@@ -66,32 +97,6 @@
         </fieldset>
         <div id="button-join-group"><a class="button" href="">Join</a></div>
       </section>
-
-      <section id="secondary-nav">
-        <ul class="nav-items">
-          <li class="nav-item"><a href="">Dashboard</a></li>
-          <li class="nav-item"><a href="">Documents <span class="total">(8200)</span></a></li>
-          <li class="nav-item"><a href="">Discussions</a></li>
-          <li class="nav-item"><a href="">Agenda</a></li>
-          <li class="nav-item"><a href="">Strategic Advisory</a></li>
-          <li class="nav-item"><a href="">Manilla Hub</a></li>
-          <li class="nav-item"><a href="">Cebu Hub</a></li>
-          <li class="nav-item"><a href="">Guiuian Hub</a></li>
-          <li class="nav-item"><a href="">Roxas Hub</a></li>
-          <li class="nav-item"><a href="">Ormoc Hub</a></li>
-        </ul>
-      </section>
-
-    </div>
-
-    <div class="page-margin">
-      <a id="logo-shelter-cluster" href="http://sheltercluster.org">
-        <?php print _svg('logo-global-shelter-cluster', array('id'=>'shelter-cluster', 'alt' => 'Global Shelter Cluster - ShelterCluster.org - Coordinating Humanitarian Shelter')); ?>
-      </a>
-      <form class="search" action="http://www.google.com/search" method="get">
-        <input class="text-field" type="search" placeholder="Search documents" name="q">
-        <input class="submit" type="submit" value="Search">
-      </form>
     </div>
 
   </header>
