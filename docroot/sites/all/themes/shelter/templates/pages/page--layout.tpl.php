@@ -59,52 +59,71 @@
       </div>
     </nav>
 
-    <section id="secondary-nav">
-      <div class="page-margin clearfix">
-        <ul class="nav-items">
-          <li class="nav-item"><a href="">Dashboard</a></li>
-          <li class="nav-item"><a href="">Documents <span class="total">(8200)</span></a></li>
-          <li class="nav-item"><a href="">Discussions</a></li>
-          <li class="nav-item"><a href="">Agenda</a></li>
-          <li class="nav-item"><a href="">Strategic Advisory</a></li>
-          <li class="nav-item"><a href="">Manilla Hub</a></li>
-          <li class="nav-item"><a href="">Cebu Hub</a></li>
-          <li class="nav-item"><a href="">Guiuian Hub</a></li>
-          <li class="nav-item"><a href="">Roxas Hub</a></li>
-          <li class="nav-item"><a href="">Ormoc Hub</a></li>
-        </ul>
-      </div>
-    </section>
-
-    <div class="page-margin clearfix">
-      <section id="operation-information">
-        <h1>Typhoon Haiyan</h1>
-        <p>Operation started November 8th, 2013, and is on going.</p>
-        <ul id="meta-data">
-          <li class="data-item"><span>Type:</span> Windstorm</li>
-          <li class="data-item"><span>Damage Location:</span> Rural, Peri-Urban, Urban</li>
-          <li class="data-item"><span>Degree of Displacement:</span> Hight</li>
-          <li class="data-item"><span>Emergency Lead Agency</span> IFRC</li>
-        </ul>
-      </section>
-
-      <section id="operation-group">
-        <h2>Join this Operation Group and</h2>
-        <fieldset id="checkboxgroup">
-          <label><input type="checkbox"/> Receive notifications</label>
-          <label><input type="checkbox"/> Register to this group the mailing list</label>
-          <label><input type="checkbox"/> Register to the "Global Response" mailinglist</label>
-        </fieldset>
-        <div id="button-join-group"><a class="button" href="">Join</a></div>
-      </section>
-    </div>
-
   </header>
 
   <div id="content">
-    <div class="page-margin">
-      <?php print $messages; ?>
-      <?php print render($page['content']); ?>
+    <div class="page-margin clearfix">
+
+      <?php if ($messages) { print $messages; } ?>
+
+      <section id="secondary-nav">
+        <div class="page-margin clearfix">
+          <ul class="nav-items">
+            <li class="nav-item"><a href="" class="active">Dashboard</a></li>
+            <li class="nav-item"><a href="">Documents <span class="total">(8200)</span></a></li>
+            <li class="nav-item"><a href="">Discussions</a></li>
+            <li class="nav-item"><a href="">Agenda</a></li>
+            <li class="nav-item"><a href="">Strategic Advisory</a></li>
+            <li class="nav-group clearfix">
+              <h3>Hubs</h3>
+              <ul class="nav-items">
+                <li class="nav-item"><a href="">Manilla Hub</a></li>
+                <li class="nav-item"><a href="">Cebu Hub</a></li>
+                <li class="nav-item"><a href="">Guiuian Hub</a></li>
+                <li class="nav-item"><a href="">Roxas Hub</a></li>
+                <li class="nav-item"><a href="">Ormoc Hub</a></li>
+              </ul>
+            </li>
+            <li class="nav-group clearfix">
+              <h3>Pages</h3>
+              <ul class="nav-items">
+                <li class="nav-item"><a href="">Something</a></li>
+                <li class="nav-item"><a href="">More</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <div id="content-header">
+
+        <section id="operation-information">
+          <h1>Typhoon Haiyan</h1>
+          <p>Operation started November 8th, 2013, and is on going.</p>
+          <ul id="meta-data">
+            <li class="data-item"><span>Type:</span> Windstorm</li>
+            <li class="data-item"><span>Damage Location:</span> Rural, Peri-Urban, Urban</li>
+            <li class="data-item"><span>Degree of Displacement:</span> Hight</li>
+            <li class="data-item"><span>Emergency Lead Agency</span> IFRC</li>
+          </ul>
+        </section>
+
+        <section id="operation-group">
+          <h2>Join this Operation Group and</h2>
+          <fieldset id="checkboxgroup">
+            <label><input type="checkbox"/> Receive notifications</label>
+            <label><input type="checkbox"/> Register to this group the mailing list</label>
+            <label><input type="checkbox"/> Register to the "Global Response" mailinglist</label>
+          </fieldset>
+          <div id="button-join-group"><a class="button" href="">Join</a></div>
+        </section>
+
+      </div>
+
+      <div id="content-rendered">
+        <?php print render($page['content']); ?>
+      </div>
+
     </div>
   </div>
 
