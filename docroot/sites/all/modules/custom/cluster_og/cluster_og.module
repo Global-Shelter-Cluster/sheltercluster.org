@@ -55,17 +55,14 @@ function cluster_og_entity_info_alter(&$entity_info) {
 function cluster_og_node_view($node, $view_mode) {
   $bundle = $node->type;
 
-  if ($view_mode !== 'full') {
-    // Only add these blocks to the full page view of the nodes.
-    return;
-  }
-
   // Group specific actions.
   if (og_is_group_type('node', $bundle)) {
     $group_content = new GroupPageContent($node, $view_mode);
     $node->content['contact_members'] = $group_content->getContactMembers();
     $node->content['related_hubs'] = $group_content->getRelatedHubs();
     $node->content['related_responses'] = $group_content->getRelatedResponses();
+    $node->content['key_documents'] = $group_content->getKeyDocuments();
+    $node->content['recent_documents'] = $group_content->getRecentDocuments();
   }
 }
 
@@ -97,6 +94,18 @@ function cluster_og_theme() {
       'render element' => 'element',
     ),
     'cluster_og_related_hubs' => array(
+      'file' => 'theme/cluster_og.theme.inc',
+      'render element' => 'element',
+    ),
+    'cluster_og_key_documents' => array(
+      'file' => 'theme/cluster_og.theme.inc',
+      'render element' => 'element',
+    ),
+    'cluster_og_key_documents_by_tag' => array(
+      'file' => 'theme/cluster_og.theme.inc',
+      'render element' => 'element',
+    ),
+    'cluster_og_recent_documents' => array(
       'file' => 'theme/cluster_og.theme.inc',
       'render element' => 'element',
     ),

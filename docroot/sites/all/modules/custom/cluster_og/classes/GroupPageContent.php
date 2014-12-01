@@ -1,6 +1,13 @@
 <?php
 
-abstract class GroupTypeContent {
+class GroupContentManager {
+
+  protected $node;
+
+  /**
+   * @var Array of descendant IDs, stored for caching purposes in a single request.
+   */
+  protected $descendant_ids;
 
   /**
    * @var Entity reference field name used to get children for the node.
@@ -9,8 +16,153 @@ abstract class GroupTypeContent {
    */
   protected $parent_field = NULL;
 
-  abstract public function getRelatedResponses($view_mode);
-  abstract public function getRelatedHubs($view_mode);
+  public function __construct($node) {
+    $this->node = $node;
+  }
+
+  public function getRelatedResponses() {
+    return NULL;
+  }
+
+  public function getRelatedHubs() {
+    return NULL;
+  }
+
+  public function getContactMembers() {
+    $contact_members_ids = self::getUsersByRole('contact member', $this->node);
+    return GroupPageContent::getList($contact_members_ids, 'contact_member', 'cluster_og_contact_member', 'user');
+  }
+
+  public function getRecentDocuments() {
+    $query = new EntityFieldQuery();
+    $res = $query->entityCondition('entity_type', 'node')
+      ->entityCondition('bundle', 'document')
+      ->fieldCondition('og_group_ref', 'target_id', $this->node->nid)
+      ->propertyCondition('status', NODE_PUBLISHED)
+      ->propertyOrderBy('changed', 'DESC')
+      ->range(0, 5) // This is a hard limit, not a paginator.
+      ->execute();
+
+    if (!isset($res['node'])) {
+      return NULL;
+    }
+
+    $ret = GroupPageContent::getList(array_keys($res['node']), 'teaser', 'cluster_og_recent_documents');
+    $ret['#all_documents_link'] = 'node/' . $this->node->nid . '/documents';
+
+    return $ret;
+  }
+
+  /**
+   * Returns the Key Documents for this group, grouped by Document Tags.
+   * The outer array uses the cluster_og_key_documents theme wrapper;
+   * the inner arrays (which render the actual documents), use cluster_og_key_documents_by_tag.
+   * @return Nested render array.
+   */
+  public function getKeyDocuments() {
+    $query = new EntityFieldQuery();
+    $res = $query->entityCondition('entity_type', 'node')
+      ->entityCondition('bundle', 'document')
+      ->fieldCondition('og_group_ref', 'target_id', $this->node->nid)
+      ->fieldCondition('field_key_document', 'value', 1)
+      ->propertyCondition('status', NODE_PUBLISHED)
+      ->execute();
+
+    if (!isset($res['node'])) {
+      return NULL;
+    }
+
+    $documents = entity_load('node', array_keys($res['node']));
+
+    uasort($documents, function($a, $b) {
+      $a_wrapper = entity_metadata_wrapper('node', $a);
+      $b_wrapper = entity_metadata_wrapper('node', $b);
+      $a_tag = $a_wrapper->field_document_tag->value();
+      $b_tag = $b_wrapper->field_document_tag->value();
+      return ($a_tag ? $a_tag->weight : -99999) - ($b_tag ? $b_tag->weight : -99999);
+    });
+
+    $ret = array(
+      '#theme_wrappers' => array('cluster_og_key_documents'),
+    );
+
+    $current_document_tag = NULL;
+    $current_document_group = array();
+    foreach ($documents as $document) {
+      $wrapper = entity_metadata_wrapper('node', $document);
+      $tag = $wrapper->field_document_tag->value();
+
+      if (is_null($current_document_tag) && !$tag) {
+        $current_document_group[] = $document->nid;
+      }
+      elseif (is_null($current_document_tag) && $tag) {
+        // First group (no tag) is over, render it.
+        $ret[] = GroupPageContent::getList($current_document_group, 'teaser', 'cluster_og_key_documents_by_tag');
+
+        $current_document_group = array($document->nid);
+        $current_document_tag = $tag;
+      }
+      elseif ($current_document_tag->tid == $tag->tid) {
+        $current_document_group[] = $document->nid;
+      }
+      else {
+        // Group is over, render it and move on.
+        $group = GroupPageContent::getList($current_document_group, 'teaser', 'cluster_og_key_documents_by_tag');
+        $group['#document_tag_name'] = $current_document_tag->name;
+        $ret[] = $group;
+
+        $current_document_group = array($document->nid);
+        $current_document_tag = $tag;
+      }
+    }
+    if ($current_document_group) {
+      if (is_null($current_document_tag)) {
+        $ret[] = GroupPageContent::getList($current_document_group, 'teaser', 'cluster_og_key_documents_by_tag');
+      }
+      else {
+        $group = GroupPageContent::getList($current_document_group, 'teaser', 'cluster_og_key_documents_by_tag');
+        $group['#document_tag_name'] = $current_document_tag->name;
+        $ret[] = $group;
+      }
+    }
+
+    return $ret;
+  }
+
+  /**
+   * Get the role id for a group from the role name.
+   * @param $role_name
+   *  The role name as stored in the database.
+   * @param $group_bundle
+   *  The bundle (e.g. content type) as a string.
+   * @return Integer representing the role ID.
+   */
+  static public function getRoleIdByName($role_name, $group_bundle) {
+    return db_select('og_role', 'og_r')
+      ->fields('og_r', array('rid'))
+      ->condition('group_bundle', $group_bundle)
+      ->condition('name', $role_name)
+      ->execute()->fetchField();
+  }
+
+  /**
+   * Get all users with specified role for a group.
+   * @param $role_name
+   *  The role name as stored in the database.
+   * @return Array of user IDs.
+   */
+  static public function getUsersByRole($role_name, $node) {
+    $rid = self::getRoleIdByName($role_name, $node->type);
+    if (!$rid) {
+      return;
+    }
+
+    return db_select('og_users_roles', 'og_ur')
+      ->fields('og_ur', array('uid'))
+      ->condition('gid', $node->nid)
+      ->condition('rid', $rid)
+      ->execute()->fetchCol();
+  }
 
   /**
    * Builder for class implementation of the appropriate type for the node.
@@ -20,13 +172,15 @@ abstract class GroupTypeContent {
   static public function getInstance($node) {
     switch ($node->type) {
       case 'geographic_region':
-        return new GroupContentGeographicRegion();
+        return new GroupContentManagerGeographicRegion($node);
       case 'response':
-        return new GroupContentReponse();
+        return new GroupContentManagerResponse($node);
+      default:
+        return new GroupContentManager($node);
     }
   }
 
-  function getDescendantIds($include_self = FALSE, &$collected_nids = array()) {
+  public function getDescendantIds($include_self = FALSE, &$collected_nids = array()) {
     if (!$this->parent_field) {
       return NULL;
     }
@@ -117,31 +271,31 @@ abstract class GroupTypeContent {
   }
 }
 
-class GroupContentResponse extends GroupTypeContent {
+class GroupContentManagerResponse extends GroupContentManager {
   protected $parent_field = 'field_parent_response';
 
-  public function getRelatedResponses($view_mode = 'related_response') {
-    return $this->getDescendantIds(FALSE);
-    //return $this->getList($nids, $view_mode, 'cluster_og_related_responses');
+  public function getRelatedResponses() {
+    $nids = $this->getDescendantIds(FALSE);
+    return GroupPageContent::getList($nids, 'related_response', 'cluster_og_related_responses');
   }
 
-  public function getRelatedHubs($view_mode = 'related_hub') {
-    return $this->queryChildren($this->getDescendantIds(TRUE), 'field_parent_response', 'hub');
-    //return $this->getList($nids, $view_mode, 'cluster_og_related_hubs');
+  public function getRelatedHubs() {
+    $nids = $this->queryChildren($this->getDescendantIds(TRUE), 'field_parent_response', 'hub');
+    return GroupPageContent::getList($nids, 'related_hub', 'cluster_og_related_hubs');
   }
 }
 
-class GroupContentGeographicRegion extends GroupTypeContent {
+class GroupContentManagerGeographicRegion extends GroupContentManager {
   protected $parent_field = 'field_parent_region';
 
-  public function getRelatedResponses($view_mode = 'related_response') {
-    return self::queryChildren($this->getDescendantIds(TRUE), 'field_associated_regions', 'response');
-    //return self::getList($nids, $view_mode, 'cluster_og_related_responses');
+  public function getRelatedResponses() {
+    $nids = self::queryChildren($this->getDescendantIds(TRUE), 'field_associated_regions', 'response');
+    return GroupPageContent::getList($nids, 'related_response', 'cluster_og_related_responses');
   }
 
-  public function getRelatedHubs($view_mode = 'related_hub') {
-    return self::queryChildren($this->getDescendantIds(TRUE), 'field_parent_region', 'hub');
-    //return self::getList($nids, $view_mode, 'cluster_og_related_hubs');
+  public function getRelatedHubs() {
+    $nids = self::queryChildren($this->getDescendantIds(TRUE), 'field_parent_region', 'hub');
+    return GroupPageContent::getList($nids, 'related_hub', 'cluster_og_related_hubs');
   }
 }
 
@@ -151,67 +305,49 @@ class GroupPageContent {
   protected $view_mode;
 
   /**
-   * @var Array of descendant IDs, stored for caching purposes in a single request.
-   */
-  protected $descendant_ids;
-
-  /**
-   * @var GroupContent implementation.
+   * @var GroupContentManager implementation.
    */
   private $manager;
 
   function __construct($node, $view_mode) {
     $this->node = $node;
-    $this->manager = GroupTypeContent::getInstance($node);
+    $this->manager = GroupContentManager::getInstance($node);
     $this->view_mode = $view_mode;
   }
 
   public function getContactMembers() {
-    $contact_members_ids = self::getUsersByRole('contact member');
-    return self::getList($contact_members_ids, $this->view_mode, 'cluster_og_contact_member', 'user');
-  }
-
-  public function getRelatedResponses($view_mode = 'related_response') {
-    $nids = $this->manager->getRelatedResponses();
-    return self::getList($nids, $view_mode, 'cluster_og_related_responses');
-  }
-
-  public function getRelatedHubs($view_mode = 'related_hub') {
-    $nids =  $this->manager->getRelatedHubs();
-    return self::getList($nids, $view_mode, 'cluster_og_related_hubs');
-  }
-
-  /**
-   * Get the role id for a group from the role name.
-   * @param $role_name
-   *  The role name as stored in the database.
-   * @return Integer representing the role ID.
-   */
-  static public function getRoleIdByName($role_name) {
-    return db_select('og_role', 'og_r')
-      ->fields('og_r', array('rid'))
-      ->condition('group_bundle', $this->node->type)
-      ->condition('name', $role_name)
-      ->execute()->fetchField();
-  }
-
-  /**
-   * Get all users with specified role for a group.
-   * @param $role_name
-   *  The role name as stored in the database.
-   * @return Array of user IDs.
-   */
-  static public function getUsersByRole($role_name) {
-    $rid = self::getRoleIdByName($role_name);
-    if (!$rid) {
-      return;
+    if ($this->view_mode != 'full') {
+      return NULL;
     }
+    return $this->manager->getContactMembers();
+  }
 
-    return db_select('og_users_roles', 'og_ur')
-      ->fields('og_ur', array('uid'))
-      ->condition('gid', $this->node->nid)
-      ->condition('rid', $rid)
-      ->execute()->fetchCol();
+  public function getRelatedResponses() {
+    if ($this->view_mode != 'full') {
+      return NULL;
+    }
+    return $this->manager->getRelatedResponses();
+  }
+
+  public function getRelatedHubs() {
+    if ($this->view_mode != 'full') {
+      return NULL;
+    }
+    return $this->manager->getRelatedHubs();
+  }
+
+  public function getKeyDocuments() {
+    if ($this->view_mode != 'full') {
+      return NULL;
+    }
+    return $this->manager->getKeyDocuments();
+  }
+
+  public function getRecentDocuments() {
+    if ($this->view_mode != 'full') {
+      return NULL;
+    }
+    return $this->manager->getRecentDocuments();
   }
 
   /**
@@ -227,7 +363,7 @@ class GroupPageContent {
    *  The entity type for the given IDs.
    * @return Render array.
    */
-  protected static function getList($ids, $view_mode = 'teaser', $theme_wrapper = NULL, $entity_type = 'node') {
+  static public function getList($ids, $view_mode = 'teaser', $theme_wrapper = NULL, $entity_type = 'node') {
     if (!$ids) {
       return NULL;
     }
