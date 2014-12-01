@@ -46,12 +46,8 @@ header {
 #bandwidth-selector {
   float: left;
   @include rem(padding, 0.5rem 0 0.5rem 0);
-
-  a {
-    &:first-child + a:before {
-      content: '/';
-      @include rem(padding, 0 0.5rem 0 0);
-    }
+  span {
+    @include rem(padding, 0 0.3rem 0 0.3rem);
   }
 }
 
@@ -79,32 +75,34 @@ header {
   //@include background-image(linear-gradient(darken($shelter-grey, 55%), darken($shelter-grey,33%) 40%, darken($shelter-grey, 2%)));
   color: $nav-shelter-links-color;
   @include rem(padding, 1rem 0.5rem 0.5rem 0);
-}
 
-#nav-items {
-  .sub-nav {
-    display: block;
-    @include breakpoint( 500px ) {
-      display: none;
+  .nav-items {
+    .sub-nav {
+      display: block;
+      @include breakpoint( 500px ) {
+        display: none;
+      }
     }
-  }
-  .nav-item {
-    float: left;
-
-    a {
+    .nav-item {
       float: left;
-      @extend .button;
-      @include rem(margin, 0 0.5rem 0.5rem 0);
-    }
-    .total {
-      @include rem(font-size, 0.75rem);
-    }
-    .total-ended {
-      float: right;
-      @include rem(font-size, 0.75rem);
+
+      a {
+        float: left;
+        @extend .button;
+        @include rem(margin, 0 0.5rem 0.5rem 0);
+      }
+      .total {
+        @include rem(font-size, 0.75rem);
+      }
+      .total-ended {
+        float: right;
+        @include rem(font-size, 0.75rem);
+      }
     }
   }
 }
+
+
 
 
 

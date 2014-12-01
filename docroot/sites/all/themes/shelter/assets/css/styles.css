@@ -227,7 +227,7 @@ th {
 
 /* _vars.scss */
 /* _mixin.scss */
-.button, .search .submit, #nav-items .nav-item a {
+.button, .search .submit, #nav-shelter .nav-items .nav-item a, #secondary-nav .nav-items .nav-item a {
   background: gainsboro;
   background-image: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJvYmplY3RCb3VuZGluZ0JveCIgeDE9IjAuNSIgeTE9IjAuMCIgeDI9IjAuNSIgeTI9IjEuMCI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2ZhZmFmYSIvPjxzdG9wIG9mZnNldD0iMTAlIiBzdG9wLWNvbG9yPSIjZmRmZGZkIi8+PHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjZGNkY2RjIi8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNncmFkKSIgLz48L3N2Zz4g');
   background-size: 100%;
@@ -246,7 +246,7 @@ th {
   border: 1px solid #ededed;
   border-bottom: 1px solid #cfcfcf;
 }
-.button:hover, .search .submit:hover, #nav-items .nav-item a:hover {
+.button:hover, .search .submit:hover, #nav-shelter .nav-items .nav-item a:hover, #secondary-nav .nav-items .nav-item a:hover {
   background-image: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJvYmplY3RCb3VuZGluZ0JveCIgeDE9IjAuNSIgeTE9IjAuMCIgeDI9IjAuNSIgeTI9IjEuMCI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2UxZTFlMSIvPjxzdG9wIG9mZnNldD0iNjAlIiBzdG9wLWNvbG9yPSIjZTNlM2UzIi8+PHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjZTFlMWUxIi8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNncmFkKSIgLz48L3N2Zz4g');
   background-size: 100%;
   background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #e1e1e1), color-stop(60%, #e3e3e3), color-stop(100%, #e1e1e1));
@@ -302,8 +302,7 @@ body {
 
 #operation-group {
   display: table;
-  width: 100%;
-  height: 100%;
+  width: 95%;
   background-color: #cccccc;
   padding: 20px;
   padding: 1.25rem;
@@ -311,10 +310,11 @@ body {
   margin: 0 0 2rem 0;
 }
 #operation-group h2 {
+  display: table-row;
   margin: 0;
 }
 #operation-group #checkboxgroup {
-  float: left;
+  display: table-cell;
   border: none;
   margin: 0;
   padding: 0;
@@ -325,7 +325,9 @@ body {
   margin: 0.5rem 0 0 0;
 }
 #operation-group #button-join-group {
-  float: right;
+  display: table-cell;
+  vertical-align: bottom;
+  text-align: right;
 }
 
 .search {
@@ -396,10 +398,9 @@ header #logo-shelter-cluster #subtitle-shelter {
   padding: 8px 0 8px 0;
   padding: 0.5rem 0 0.5rem 0;
 }
-#bandwidth-selector a:first-child + a:before {
-  content: '/';
-  padding: 0 8px 0 0;
-  padding: 0 0.5rem 0 0;
+#bandwidth-selector span {
+  padding: 0 4.8px 0 4.8px;
+  padding: 0 0.3rem 0 0.3rem;
 }
 
 #language-selector {
@@ -427,28 +428,58 @@ header #logo-shelter-cluster #subtitle-shelter {
   padding: 16px 8px 8px 0;
   padding: 1rem 0.5rem 0.5rem 0;
 }
-
-#nav-items .sub-nav {
+#nav-shelter .nav-items .sub-nav {
   display: block;
 }
 @media (min-width: 500px) {
-  #nav-items .sub-nav {
+  #nav-shelter .nav-items .sub-nav {
     display: none;
   }
 }
-#nav-items .nav-item {
+#nav-shelter .nav-items .nav-item {
   float: left;
 }
-#nav-items .nav-item a {
+#nav-shelter .nav-items .nav-item a {
   float: left;
   margin: 0 8px 8px 0;
   margin: 0 0.5rem 0.5rem 0;
 }
-#nav-items .nav-item .total {
+#nav-shelter .nav-items .nav-item .total {
   font-size: 12px;
   font-size: 0.75rem;
 }
-#nav-items .nav-item .total-ended {
+#nav-shelter .nav-items .nav-item .total-ended {
+  float: right;
+  font-size: 12px;
+  font-size: 0.75rem;
+}
+
+/* _secondary-nav.scss */
+#secondary-nav {
+  margin: 0 0 32px 0;
+  margin: 0 0 2rem 0;
+}
+#secondary-nav .nav-items .sub-nav {
+  display: block;
+}
+@media (min-width: 500px) {
+  #secondary-nav .nav-items .sub-nav {
+    display: none;
+  }
+}
+#secondary-nav .nav-items .nav-item {
+  float: left;
+}
+#secondary-nav .nav-items .nav-item a {
+  float: left;
+  margin: 0 8px 8px 0;
+  margin: 0 0.5rem 0.5rem 0;
+}
+#secondary-nav .nav-items .nav-item .total {
+  font-size: 12px;
+  font-size: 0.75rem;
+}
+#secondary-nav .nav-items .nav-item .total-ended {
   float: right;
   font-size: 12px;
   font-size: 0.75rem;

@@ -6,6 +6,7 @@
       <div id="bandwidth-selector">
         <?php print _svg('icons/signal', array('id'=>'bandwidth-selector-icon', 'alt' => 'Bandwidth indication icon')); ?>
         <a href="">Low</a>
+        <span>/</span>
         <a href="">High</a>
       </div>
       <div id="language-selector">
@@ -27,7 +28,7 @@
 
     <nav id="nav-shelter">
       <div class="page-margin">
-        <ul id="nav-items">
+        <ul class="nav-items">
           <li class="nav-item"><a href="">Home</a></li>
           <li class="nav-item"><a href="">Current Operations <span class="total">(10)</span></a></li>
           <li class="nav-item"><a href="">Documents <span class="total">(8200)</span></a></li>
@@ -59,12 +60,28 @@
       <section id="operation-group">
         <h2>Join this Operation Group and</h2>
         <fieldset id="checkboxgroup">
-          <label><input type="checkbox">  Receive notifications;</label>
-          <label><input type="checkbox">  Register to this group the mailing list;</label>
-          <label><input type="checkbox"> Register to the "Global Response" mailinglist</label>
+          <label><input type="checkbox"/> Receive notifications</label>
+          <label><input type="checkbox"/> Register to this group the mailing list</label>
+          <label><input type="checkbox"/> Register to the "Global Response" mailinglist</label>
         </fieldset>
-        <a id="button-join-group" class="button" href="">Join</a>
+        <div id="button-join-group"><a class="button" href="">Join</a></div>
       </section>
+
+      <section id="secondary-nav">
+        <ul class="nav-items">
+          <li class="nav-item"><a href="">Dashboard</a></li>
+          <li class="nav-item"><a href="">Documents <span class="total">(8200)</span></a></li>
+          <li class="nav-item"><a href="">Discussions</a></li>
+          <li class="nav-item"><a href="">Agenda</a></li>
+          <li class="nav-item"><a href="">Strategic Advisory</a></li>
+          <li class="nav-item"><a href="">Manilla Hub</a></li>
+          <li class="nav-item"><a href="">Cebu Hub</a></li>
+          <li class="nav-item"><a href="">Guiuian Hub</a></li>
+          <li class="nav-item"><a href="">Roxas Hub</a></li>
+          <li class="nav-item"><a href="">Ormoc Hub</a></li>
+        </ul>
+      </section>
+
     </div>
 
     <div class="page-margin">
