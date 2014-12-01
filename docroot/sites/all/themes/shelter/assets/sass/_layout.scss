@@ -2,20 +2,12 @@
 
 * {
   -webkit-tap-highlight-color: rgba(0,0,0,0);
+  @include box-sizing(border-box);
 }
 
 html {
   font-size: 100%
 }
-
-/* Not sure I want this
-a {
-  &:link { color: $a-link-color ; }
-  &:visited { color: $a-visited-color; }
-  &:hover { color: $a-hover-color; }
-  &:active { color: $a-active-color; }
-}
-*/
 
 body {
   background-color: $master-background;

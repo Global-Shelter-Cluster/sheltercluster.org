@@ -258,20 +258,15 @@ th {
 /* _layout.scss */
 * {
   -webkit-tap-highlight-color: transparent;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 html {
   font-size: 100%;
 }
 
-/* Not sure I want this
-a {
-  &:link { color: $a-link-color ; }
-  &:visited { color: $a-visited-color; }
-  &:hover { color: $a-hover-color; }
-  &:active { color: $a-active-color; }
-}
-*/
 body {
   background-color: white;
   font-family: arial, sans-serif;
@@ -302,14 +297,14 @@ body {
 
 #operation-group {
   display: table;
-  width: 95%;
+  width: 100%;
   background-color: #cccccc;
   padding: 20px;
   padding: 1.25rem;
   margin: 0 0 32px 0;
   margin: 0 0 2rem 0;
 }
-#operation-group h2 {
+#operation-group h3 {
   display: table-row;
   margin: 0;
 }
@@ -328,6 +323,44 @@ body {
   display: table-cell;
   vertical-align: bottom;
   text-align: right;
+}
+#operation-group #button-join-group a {
+  text-decoration: none;
+}
+
+#featured-documents {
+  position: relative;
+  color: #fff;
+  overflow: hidden;
+  margin-bottom: 32px;
+  margin-bottom: 2rem;
+}
+#featured-documents ul {
+  height: 350px;
+  height: 21.875rem;
+}
+#featured-documents li {
+  display: inline;
+}
+#featured-documents li .document-information {
+  bottom: 0;
+  left: 0;
+  position: absolute;
+  background-color: #000;
+  opacity: 0.8;
+  filter: alpha(opacity=80);
+  padding: 16px;
+  padding: 1rem;
+}
+#featured-documents li .document-information h2 {
+  margin: 0;
+}
+#featured-documents li .document-information p {
+  margin-bottom: 0;
+}
+#featured-documents li img {
+  margin-left: -50%;
+  height: 100%;
 }
 
 .search {

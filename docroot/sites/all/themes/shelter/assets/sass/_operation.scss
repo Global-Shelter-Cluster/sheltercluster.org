@@ -3,17 +3,16 @@
 #operation-information {
   clear: both;
   @include rem('margin', 0 0 2rem 0);
-
 }
 
 #operation-group {
   display: table;
-  width: 95%;
+  width: 100%;
   background-color: rgb(204,204,204);
   @include rem('padding', 1.25rem);
   @include rem('margin', 0 0 2rem 0);
 
-  h2 {
+  h3 {
     display: table-row;
     margin: 0;
   }
@@ -34,5 +33,42 @@
     display: table-cell;
     vertical-align: bottom;
     text-align: right;
+
+    a {
+      text-decoration: none;
+    }
   }
 }
+
+#featured-documents {
+  position: relative;
+  color: #fff;
+  overflow: hidden;
+  @include rem('margin-bottom', 2rem);
+
+  ul {
+    @include rem('height', 350px);
+  }
+  li {
+    display: inline;
+
+    .document-information {
+      @include absolute(bottom 0 left 0);
+      background-color: #000;
+      @include opacity(0.8);
+      @include rem('padding', 1rem);
+
+      h2 {
+        margin: 0;
+      }
+      p {
+        @include rem('margin-bottom', 0 );
+      }
+    }
+    img {
+      margin-left: -50%;
+      height: 100%;
+    }
+  }
+}
+

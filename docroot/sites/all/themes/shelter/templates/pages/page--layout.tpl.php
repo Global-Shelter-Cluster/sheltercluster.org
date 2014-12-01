@@ -76,7 +76,11 @@
       </div>
     </section>
 
-    <div class="page-margin clearfix">
+  </header>
+
+  <div id="content">
+    <div class="page-margin">
+
       <section id="operation-information">
         <h1>Typhoon Haiyan</h1>
         <p>Operation started November 8th, 2013, and is on going.</p>
@@ -89,7 +93,7 @@
       </section>
 
       <section id="operation-group">
-        <h2>Join this Operation Group and</h2>
+        <h3>Join this Operation Group and</h3>
         <fieldset id="checkboxgroup">
           <label><input type="checkbox"/> Receive notifications</label>
           <label><input type="checkbox"/> Register to this group the mailing list</label>
@@ -97,14 +101,28 @@
         </fieldset>
         <div id="button-join-group"><a class="button" href="">Join</a></div>
       </section>
-    </div>
 
-  </header>
-
-  <div id="content">
-    <div class="page-margin">
+      <section id="featured-documents">
+        <ul>
+          <li>
+             <img src="sites/all/themes/shelter/assets/images/fake/feature-document.jpg" alt="" />
+              <div class="document-information">
+                <h2>Featured Document Title 1</h2>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc aliquet justo leo, id lobortis leo maximus tristique. Sed non odio eros. Aenean pulvinar sapien quam, a bibendum ante lobortis eu.</p>
+              </div>
+          </li>
+          <li>
+            <img src="sites/all/themes/shelter/assets/images/fake/feature-document.jpg" alt="" />
+            <div class="document-information">
+              <h2>Featured Document Title 2</h2>
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc aliquet justo leo, id lobortis leo maximus tristique. Sed non odio eros. Aenean pulvinar sapien quam, a bibendum ante lobortis eu.</p>
+            </div>
+          </li>
+        </ul>
+      </section>
       <?php print $messages; ?>
       <?php print render($page['content']); ?>
+
     </div>
   </div>
 
