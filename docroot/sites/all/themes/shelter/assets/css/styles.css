@@ -357,6 +357,24 @@ header ul {
 header a {
   text-decoration: none;
 }
+header #site-options-bar {
+  background: #688394;
+  font-size: 12.8px;
+  font-size: 0.8rem;
+  margin-bottom: 0.5em;
+  color: #536876;
+}
+header #site-options-bar a {
+  color: #29333a;
+  text-decoration: underline;
+}
+header #site-options-bar .active {
+  color: #000;
+  text-decoration: none;
+}
+header #site-options-bar .svg {
+  fill: black;
+}
 header #button-menu-dropdown {
   display: table;
   clear: both;
@@ -393,19 +411,14 @@ header #logo-shelter-cluster #subtitle-shelter {
 
 #bandwidth-selector {
   float: left;
-  padding: 8px 0 8px 0;
-  padding: 0.5rem 0 0.5rem 0;
-}
-#bandwidth-selector a:first-child + a:before {
-  content: '/';
-  padding: 0 8px 0 0;
-  padding: 0 0.5rem 0 0;
+  padding: 4px 0 4px 0;
+  padding: 0.25rem 0 0.25rem 0;
 }
 
 #language-selector {
   float: right;
-  padding: 8px 0 8px 0;
-  padding: 0.5rem 0 0.5rem 0;
+  padding: 4px 0 4px 0;
+  padding: 0.25rem 0 0.25rem 0;
 }
 #language-selector .language {
   float: left;

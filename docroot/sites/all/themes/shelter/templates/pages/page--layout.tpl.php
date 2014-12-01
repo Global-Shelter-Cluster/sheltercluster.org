@@ -2,20 +2,30 @@
 
   <header>
 
+    <section id="site-options-bar" class="clearfix">
+      <div class="page-margin">
+
+        <div id="language-selector">
+          <ul class="languages">
+            <li class="language"><a href="" class="active">en</a></li>
+            <li class="language"><a href="">fr</a></li>
+            <li class="language"><a href="">es</a></li>
+            <li class="language"><a href="">ar</a></li>
+          </ul>
+        </div>
+
+        <div id="bandwidth-selector">
+          <?php print _svg('icons/signal', array('id'=>'bandwidth-selector-icon', 'alt' => 'Bandwidth indication icon')); ?>
+          <a href="" class="active">Low bandwidth environment</a>
+          <span>/</span>
+          <a href="">Swicth to high</a>
+        </div>
+
+      </div>
+    </section>
+
     <div class="page-margin">
-      <div id="bandwidth-selector">
-        <?php print _svg('icons/signal', array('id'=>'bandwidth-selector-icon', 'alt' => 'Bandwidth indication icon')); ?>
-        <a href="">Low</a>
-        <a href="">High</a>
-      </div>
-      <div id="language-selector">
-        <ul class="languages">
-          <li class="language"><a href="">en</a></li>
-          <li class="language"><a href="">fr</a></li>
-          <li class="language"><a href="">es</a></li>
-          <li class="language"><a href="">ar</a></li>
-        </ul>
-      </div>
+
       <a id="button-menu-dropdown">Menu</a>
 
       <ul id="profile-items">
