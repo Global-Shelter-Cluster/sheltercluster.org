@@ -9,37 +9,21 @@ header {
     text-decoration: none;
   }
 
-  #site-options-bar {
-    background: $shelter-dark-blue;
-    @include rem( font-size, 0.8rem );
-    margin-bottom: 0.5em;
-    color: darken($shelter-dark-blue, 10%);
-
-    a {
-      color: darken($shelter-dark-blue, 30%);
-      text-decoration: underline;
-    }
-    .active {
-      color : #000;
-      text-decoration: none;
-    }
-    .svg {
-      fill: darken($shelter-dark-blue, 50%);
-    }
-  }
   #button-menu-dropdown {
-    display: table;
-    clear: both;
     background: rgb(0,0,0);
     @include rem(padding, 0.5rem);
-    color: $btn-dropdown-shelter;
+    color: #fff;
+    display: inline-block;
+    @include rem(margin-bottom, 0.5rem);
   }
-  #profile-items {
+  #profile-menu-items {
     float: right;
 
     .profile-item {
       float: left;
-
+       a {
+        color: #222;
+      }
       &:first-child:after {
         content: '/';
         @include rem(padding, 0 0.5rem 0 0.5rem);
@@ -49,6 +33,9 @@ header {
   #logo-shelter-cluster {
     .svg {
       height: 80px;
+      position: relative;
+      left: -10px;
+      top: -7px;
     }
     #title-shelter {
       color: $shelter-red;
@@ -59,18 +46,44 @@ header {
   }
 }
 
+#site-options-bar {
+  background: $shelter-dark-blue;
+  @include rem( font-size, 0.8rem );
+  @include rem( margin-bottom, 1rem );
+  color: darken($shelter-dark-blue, 10%);
+
+  a {
+    color: darken($shelter-dark-blue, 30%);
+    text-decoration: underline;
+  }
+  .active {
+    color : #000;
+    text-decoration: none;
+  }
+  .svg {
+    fill: darken($accent-blue, 10%);
+    position: relative;
+    top: 2px;
+  }
+}
 #bandwidth-selector-icon {
   height: 13px;
   width: 13px;
 }
 #bandwidth-selector {
-  float: left;
+  float: none;
+  @include breakpoint( 600px ) {
+    float: left;
+  }
   @include rem(padding, 0.25rem 0 0.25rem 0);
 }
-
 #language-selector {
-  float: right;
+  float: none;
   @include rem(padding, 0.25rem 0 0.25rem 0);
+  border-bottom: 1px solid darken($shelter-dark-blue,3%);
+  @include breakpoint( 600px ) {
+    float: right;
+  }
 
   .language {
     float: left;

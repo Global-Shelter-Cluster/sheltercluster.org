@@ -5,7 +5,7 @@
     <section id="site-options-bar" class="clearfix">
       <div class="page-margin">
 
-        <div id="language-selector">
+        <div id="language-selector" class="clearfix">
           <ul class="languages">
             <li class="language"><a href="" class="active">en</a></li>
             <li class="language"><a href="">fr</a></li>
@@ -26,17 +26,25 @@
 
     <div class="page-margin">
 
-      <a id="button-menu-dropdown">Menu</a>
+      <a id="logo-shelter-cluster" href="http://sheltercluster.org">
+        <?php print _svg('logo-global-shelter-cluster', array('id'=>'shelter-cluster', 'alt' => 'Global Shelter Cluster - ShelterCluster.org - Coordinating Humanitarian Shelter')); ?>
+      </a>
 
-      <ul id="profile-items">
+      <ul id="profile-menu-items">
         <li class="profile-item"><a href="">Login</a></li>
         <li class="profile-item"><a href="">Create an account</a></li>
       </ul>
+
+      <form class="search" action="http://www.google.com/search" method="get">
+        <input class="text-field" type="search" placeholder="Search documents" name="q">
+        <input class="submit" type="submit" value="Search">
+      </form>
 
     </div>
 
     <nav id="nav-shelter">
       <div class="page-margin">
+        <a href="#" id="button-menu-dropdown">Menu</a>
         <ul id="nav-items">
           <li class="nav-item"><a href="">Home</a></li>
           <li class="nav-item"><a href="">Current Operations <span class="total">(10)</span></a></li>
@@ -55,13 +63,7 @@
     </nav>
 
     <div class="page-margin">
-      <a id="logo-shelter-cluster" href="http://sheltercluster.org">
-        <?php print _svg('logo-global-shelter-cluster', array('id'=>'shelter-cluster', 'alt' => 'Global Shelter Cluster - ShelterCluster.org - Coordinating Humanitarian Shelter')); ?>
-      </a>
-      <form class="search" action="http://www.google.com/search" method="get">
-        <input class="text-field" type="search" placeholder="Search documents" name="q">
-        <input class="submit" type="submit" value="Search">
-      </form>
+
     </div>
 
     <div class="page-margin clearfix">
