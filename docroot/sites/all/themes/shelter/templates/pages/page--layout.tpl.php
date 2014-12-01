@@ -44,6 +44,16 @@
       </div>
     </nav>
 
+    <div class="page-margin">
+      <a id="logo-shelter-cluster" href="http://sheltercluster.org">
+        <?php print _svg('logo-global-shelter-cluster', array('id'=>'shelter-cluster', 'alt' => 'Global Shelter Cluster - ShelterCluster.org - Coordinating Humanitarian Shelter')); ?>
+      </a>
+      <form class="search" action="http://www.google.com/search" method="get">
+        <input class="text-field" type="search" placeholder="Search documents" name="q">
+        <input class="submit" type="submit" value="Search">
+      </form>
+    </div>
+
     <div class="page-margin clearfix">
       <section id="operation-information">
         <h1>Typhoon Haiyan</h1>
@@ -65,16 +75,6 @@
         </fieldset>
         <a id="button-join-group" class="button" href="">Join</a>
       </section>
-    </div>
-
-    <div class="page-margin">
-      <a id="logo-shelter-cluster" href="http://sheltercluster.org">
-        <?php print _svg('logo-global-shelter-cluster', array('id'=>'shelter-cluster', 'alt' => 'Global Shelter Cluster - ShelterCluster.org - Coordinating Humanitarian Shelter')); ?>
-      </a>
-      <form class="search" action="http://www.google.com/search" method="get">
-        <input class="text-field" type="search" placeholder="Search documents" name="q">
-        <input class="submit" type="submit" value="Search">
-      </form>
     </div>
 
   </header>
