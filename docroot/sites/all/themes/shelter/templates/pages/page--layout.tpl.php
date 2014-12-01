@@ -97,45 +97,45 @@
 
       <div id="content-header">
 
-      <section id="operation-information">
-        <h1>Typhoon Haiyan</h1>
-        <p>Operation started November 8th, 2013, and is on going.</p>
-        <ul id="meta-data">
-          <li class="data-item"><span>Type:</span> Windstorm</li>
-          <li class="data-item"><span>Damage Location:</span> Rural, Peri-Urban, Urban</li>
-          <li class="data-item"><span>Degree of Displacement:</span> Hight</li>
-          <li class="data-item"><span>Emergency Lead Agency</span> IFRC</li>
-        </ul>
-      </section>
+        <section id="operation-information">
+          <h1>Typhoon Haiyan</h1>
+          <p>Operation started November 8th, 2013, and is on going.</p>
+          <ul id="meta-data">
+            <li class="data-item"><span>Type:</span> Windstorm</li>
+            <li class="data-item"><span>Damage Location:</span> Rural, Peri-Urban, Urban</li>
+            <li class="data-item"><span>Degree of Displacement:</span> Hight</li>
+            <li class="data-item"><span>Emergency Lead Agency</span> IFRC</li>
+          </ul>
+        </section>
 
-      <section id="operation-group">
-        <h3>Join this Operation Group and</h3>
-        <fieldset id="checkboxgroup">
-          <label><input type="checkbox"/> Receive notifications</label>
-          <label><input type="checkbox"/> Register to this group the mailing list</label>
-          <label><input type="checkbox"/> Register to the "Global Response" mailinglist</label>
-        </fieldset>
-        <div id="button-join-group"><a class="button" href="">Join</a></div>
-      </section>
+        <section id="operation-group">
+          <h3>Join this Operation Group and</h3>
+          <fieldset id="checkboxgroup">
+            <label><input type="checkbox"/> Receive notifications</label>
+            <label><input type="checkbox"/> Register to this group the mailing list</label>
+            <label><input type="checkbox"/> Register to the "Global Response" mailinglist</label>
+          </fieldset>
+          <div id="button-join-group"><a class="button" href="">Join</a></div>
+        </section>
 
-      <section id="featured-documents">
-        <ul>
-          <li>
-             <img src="sites/all/themes/shelter/assets/images/fake/feature-document.jpg" alt="" />
+        <section id="featured-documents">
+          <ul>
+            <li>
+               <img src="sites/all/themes/shelter/assets/images/fake/feature-document.jpg" alt="" />
+                <div class="document-information">
+                  <h2>Featured Document Title 1</h2>
+                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc aliquet justo leo, id lobortis leo maximus tristique. Sed non odio eros. Aenean pulvinar sapien quam, a bibendum ante lobortis eu.</p>
+                </div>
+            </li>
+            <li>
+              <img src="sites/all/themes/shelter/assets/images/fake/feature-document.jpg" alt="" />
               <div class="document-information">
-                <h2>Featured Document Title 1</h2>
+                <h2>Featured Document Title 2</h2>
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc aliquet justo leo, id lobortis leo maximus tristique. Sed non odio eros. Aenean pulvinar sapien quam, a bibendum ante lobortis eu.</p>
               </div>
-          </li>
-          <li>
-            <img src="sites/all/themes/shelter/assets/images/fake/feature-document.jpg" alt="" />
-            <div class="document-information">
-              <h2>Featured Document Title 2</h2>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc aliquet justo leo, id lobortis leo maximus tristique. Sed non odio eros. Aenean pulvinar sapien quam, a bibendum ante lobortis eu.</p>
-            </div>
-          </li>
-        </ul>
-      </section>
+            </li>
+          </ul>
+        </section>
 
       </div>
 
