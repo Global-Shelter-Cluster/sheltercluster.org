@@ -8,18 +8,18 @@
 
 #operation-group {
   display: table;
-  width: 100%;
-  height: 100%;
+  width: 95%;
   background-color: rgb(204,204,204);
   @include rem('padding', 1.25rem);
   @include rem('margin', 0 0 2rem 0);
 
   h2 {
+    display: table-row;
     margin: 0;
   }
 
   #checkboxgroup {
-    float: left;
+    display: table-cell;
     border: none;
     margin: 0;
     padding: 0;
@@ -31,7 +31,8 @@
   }
 
   #button-join-group {
-    float: right;
-
+    display: table-cell;
+    vertical-align: bottom;
+    text-align: right;
   }
 }

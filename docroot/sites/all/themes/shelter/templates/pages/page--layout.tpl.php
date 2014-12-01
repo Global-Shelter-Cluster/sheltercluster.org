@@ -4,23 +4,20 @@
 
     <section id="site-options-bar" class="clearfix">
       <div class="page-margin">
-
-        <div id="language-selector" class="clearfix">
+        <div id="language-selector">
           <ul class="languages">
-            <li class="language"><a href="" class="active">en</a></li>
+            <li class="language"><a href="">en</a></li>
             <li class="language"><a href="">fr</a></li>
             <li class="language"><a href="">es</a></li>
             <li class="language"><a href="">ar</a></li>
           </ul>
         </div>
-
         <div id="bandwidth-selector">
           <?php print _svg('icons/signal', array('id'=>'bandwidth-selector-icon', 'alt' => 'Bandwidth indication icon')); ?>
-          <a href="" class="active">Low bandwidth environment</a>
+          <a href="">Low</a>
           <span>/</span>
-          <a href="">Swicth to high</a>
+          <a href="">High</a>
         </div>
-
       </div>
     </section>
 
@@ -45,7 +42,7 @@
     <nav id="nav-shelter">
       <div class="page-margin">
         <a href="#" id="button-menu-dropdown">Menu</a>
-        <ul id="nav-items">
+        <ul class="nav-items">
           <li class="nav-item"><a href="">Home</a></li>
           <li class="nav-item"><a href="">Current Operations <span class="total">(10)</span></a></li>
           <li class="nav-item"><a href="">Documents <span class="total">(8200)</span></a></li>
@@ -62,9 +59,22 @@
       </div>
     </nav>
 
-    <div class="page-margin">
-
-    </div>
+    <section id="secondary-nav">
+      <div class="page-margin">
+        <ul class="nav-items">
+          <li class="nav-item"><a href="">Dashboard</a></li>
+          <li class="nav-item"><a href="">Documents <span class="total">(8200)</span></a></li>
+          <li class="nav-item"><a href="">Discussions</a></li>
+          <li class="nav-item"><a href="">Agenda</a></li>
+          <li class="nav-item"><a href="">Strategic Advisory</a></li>
+          <li class="nav-item"><a href="">Manilla Hub</a></li>
+          <li class="nav-item"><a href="">Cebu Hub</a></li>
+          <li class="nav-item"><a href="">Guiuian Hub</a></li>
+          <li class="nav-item"><a href="">Roxas Hub</a></li>
+          <li class="nav-item"><a href="">Ormoc Hub</a></li>
+        </ul>
+      </div>
+    </section>
 
     <div class="page-margin clearfix">
       <section id="operation-information">
@@ -81,11 +91,11 @@
       <section id="operation-group">
         <h2>Join this Operation Group and</h2>
         <fieldset id="checkboxgroup">
-          <label><input type="checkbox">  Receive notifications;</label>
-          <label><input type="checkbox">  Register to this group the mailing list;</label>
-          <label><input type="checkbox"> Register to the "Global Response" mailinglist</label>
+          <label><input type="checkbox"/> Receive notifications</label>
+          <label><input type="checkbox"/> Register to this group the mailing list</label>
+          <label><input type="checkbox"/> Register to the "Global Response" mailinglist</label>
         </fieldset>
-        <a id="button-join-group" class="button" href="">Join</a>
+        <div id="button-join-group"><a class="button" href="">Join</a></div>
       </section>
     </div>
 

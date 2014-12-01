@@ -1,0 +1,30 @@
+/* _secondary-nav.scss */
+
+#secondary-nav {
+  @include rem(margin, 0 0 2rem 0);
+
+  .nav-items {
+    .sub-nav {
+      display: block;
+      @include breakpoint( 500px ) {
+        display: none;
+      }
+    }
+    .nav-item {
+      float: left;
+
+      a {
+        float: left;
+        @extend .button;
+        @include rem(margin, 0 0.5rem 0.5rem 0);
+      }
+      .total {
+        @include rem(font-size, 0.75rem);
+      }
+      .total-ended {
+        float: right;
+        @include rem(font-size, 0.75rem);
+      }
+  }
+}
+}
