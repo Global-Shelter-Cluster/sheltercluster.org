@@ -59,41 +59,42 @@
       </div>
     </nav>
 
+    <section id="secondary-nav">
+      <div class="page-margin clearfix">
+        <ul class="nav-items">
+          <li class="nav-item"><a href="" class="active">Dashboard</a></li>
+          <li class="nav-item"><a href="">Documents <span class="total">(8200)</span></a></li>
+          <li class="nav-item"><a href="">Discussions</a></li>
+          <li class="nav-item"><a href="">Agenda</a></li>
+          <li class="nav-item"><a href="">Strategic Advisory</a></li>
+          <li class="nav-group clearfix">
+            <h3>Hubs</h3>
+            <ul class="nav-items">
+              <li class="nav-item"><a href="">Manilla Hub</a></li>
+              <li class="nav-item"><a href="">Cebu Hub</a></li>
+              <li class="nav-item"><a href="">Guiuian Hub</a></li>
+              <li class="nav-item"><a href="">Roxas Hub</a></li>
+              <li class="nav-item"><a href="">Ormoc Hub</a></li>
+            </ul>
+          </li>
+          <li class="nav-group clearfix">
+            <h3>Pages</h3>
+            <ul class="nav-items">
+              <li class="nav-item"><a href="">Something</a></li>
+              <li class="nav-item"><a href="">More</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </section>
+
   </header>
 
   <div id="content">
+
     <div class="page-margin clearfix">
 
       <?php if ($messages) { print $messages; } ?>
-
-      <section id="secondary-nav">
-        <div class="page-margin clearfix">
-          <ul class="nav-items">
-            <li class="nav-item"><a href="" class="active">Dashboard</a></li>
-            <li class="nav-item"><a href="">Documents <span class="total">(8200)</span></a></li>
-            <li class="nav-item"><a href="">Discussions</a></li>
-            <li class="nav-item"><a href="">Agenda</a></li>
-            <li class="nav-item"><a href="">Strategic Advisory</a></li>
-            <li class="nav-group clearfix">
-              <h3>Hubs</h3>
-              <ul class="nav-items">
-                <li class="nav-item"><a href="">Manilla Hub</a></li>
-                <li class="nav-item"><a href="">Cebu Hub</a></li>
-                <li class="nav-item"><a href="">Guiuian Hub</a></li>
-                <li class="nav-item"><a href="">Roxas Hub</a></li>
-                <li class="nav-item"><a href="">Ormoc Hub</a></li>
-              </ul>
-            </li>
-            <li class="nav-group clearfix">
-              <h3>Pages</h3>
-              <ul class="nav-items">
-                <li class="nav-item"><a href="">Something</a></li>
-                <li class="nav-item"><a href="">More</a></li>
-              </ul>
-            </li>
-          </ul>
-        </div>
-      </section>
 
       <div id="content-header">
 
