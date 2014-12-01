@@ -84,22 +84,18 @@ header {
 }
 #bandwidth-selector {
   float: none;
-  @include rem(padding, 0.5rem 0 0.5rem 0);
+  @include rem(padding, 0.25rem 0 0.25rem 0);
   @include breakpoint( 600px ) {
     float: left;
-  }
-
-  span {
-    @include rem(padding, 0 0.3rem 0 0.3rem);
   }
 }
 #language-selector {
   float: none;
-  @include rem(padding, 0.25rem 0 0.25rem 0);
-  border-bottom: 1px solid darken($shelter-dark-blue,3%);
   @include breakpoint( 600px ) {
     float: right;
   }
+  @include rem(padding, 0.25rem 0 0.25rem 0);
+  border-bottom: 1px solid darken($shelter-dark-blue,3%);
 
   .language {
     float: left;
@@ -119,7 +115,6 @@ header {
   background-color: white;
   //@include background-image(linear-gradient(darken($shelter-grey, 55%), darken($shelter-grey,33%) 40%, darken($shelter-grey, 2%)));
   color: $nav-shelter-links-color;
-  @include rem(padding, 1rem 0.5rem 0.5rem 0);
 
   .nav-items {
     .sub-nav {

@@ -4,7 +4,7 @@
 
     <section id="site-options-bar" class="clearfix">
       <div class="page-margin">
-        <div id="language-selector">
+        <div id="language-selector" class="clearfix">
           <ul class="languages">
             <li class="language"><a href="">en</a></li>
             <li class="language"><a href="">fr</a></li>
@@ -14,9 +14,9 @@
         </div>
         <div id="bandwidth-selector">
           <?php print _svg('icons/signal', array('id'=>'bandwidth-selector-icon', 'alt' => 'Bandwidth indication icon')); ?>
-          <a href="">Low</a>
+          <a href="" class="active">Low bandwidth environment</a>
           <span>/</span>
-          <a href="">High</a>
+          <a href="">Swicth to high</a>
         </div>
       </div>
     </section>
@@ -39,7 +39,7 @@
 
     </div>
 
-    <nav id="nav-shelter">
+    <nav id="nav-shelter" class="clearfix">
       <div class="page-margin">
         <a href="#" id="button-menu-dropdown">Menu</a>
         <ul class="nav-items">
@@ -60,7 +60,7 @@
     </nav>
 
     <section id="secondary-nav">
-      <div class="page-margin">
+      <div class="page-margin clearfix">
         <ul class="nav-items">
           <li class="nav-item"><a href="">Dashboard</a></li>
           <li class="nav-item"><a href="">Documents <span class="total">(8200)</span></a></li>

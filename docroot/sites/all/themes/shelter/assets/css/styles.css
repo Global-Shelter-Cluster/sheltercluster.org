@@ -453,17 +453,13 @@ header a {
 
 #bandwidth-selector {
   float: none;
-  padding: 8px 0 8px 0;
-  padding: 0.5rem 0 0.5rem 0;
+  padding: 4px 0 4px 0;
+  padding: 0.25rem 0 0.25rem 0;
 }
 @media (min-width: 600px) {
   #bandwidth-selector {
     float: left;
   }
-}
-#bandwidth-selector span {
-  padding: 0 4.8px 0 4.8px;
-  padding: 0 0.3rem 0 0.3rem;
 }
 
 #language-selector {
@@ -493,8 +489,6 @@ header a {
 #nav-shelter {
   background-color: white;
   color: white;
-  padding: 16px 8px 8px 0;
-  padding: 1rem 0.5rem 0.5rem 0;
 }
 #nav-shelter .nav-items .sub-nav {
   display: block;
@@ -524,8 +518,13 @@ header a {
 
 /* _secondary-nav.scss */
 #secondary-nav {
-  margin: 0 0 32px 0;
-  margin: 0 0 2rem 0;
+  margin: 0 0 4px 0;
+  margin: 0 0 0.25rem 0;
+}
+#secondary-nav .page-margin {
+  border-top: 1px solid #ededed;
+  padding-top: 0.5em;
+  border-bottom: 1px solid #ededed;
 }
 #secondary-nav .nav-items .sub-nav {
   display: block;
@@ -542,6 +541,8 @@ header a {
   float: left;
   margin: 0 8px 8px 0;
   margin: 0 0.5rem 0.5rem 0;
+  font-size: 12.8px;
+  font-size: 0.8rem;
 }
 #secondary-nav .nav-items .nav-item .total {
   font-size: 12px;

@@ -1,8 +1,13 @@
 /* _secondary-nav.scss */
 
 #secondary-nav {
-  @include rem(margin, 0 0 2rem 0);
+  @include rem(margin, 0 0 0.25rem 0);
 
+  .page-margin {
+    border-top: 1px solid darken(white, 7%);
+    padding-top: 0.5em;
+    border-bottom: 1px solid darken(white, 7%);
+  }
   .nav-items {
     .sub-nav {
       display: block;
@@ -17,6 +22,7 @@
         float: left;
         @extend .button;
         @include rem(margin, 0 0.5rem 0.5rem 0);
+        @include rem(font-size, 0.8rem);
       }
       .total {
         @include rem(font-size, 0.75rem);
