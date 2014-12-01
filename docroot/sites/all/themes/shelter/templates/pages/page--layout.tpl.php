@@ -21,7 +21,7 @@
       </div>
     </section>
 
-    <div class="page-margin">
+    <div class="page-margin clearfix">
 
       <a id="logo-shelter-cluster" href="http://sheltercluster.org">
         <?php print _svg('logo-global-shelter-cluster', array('id'=>'shelter-cluster', 'alt' => 'Global Shelter Cluster - ShelterCluster.org - Coordinating Humanitarian Shelter')); ?>
