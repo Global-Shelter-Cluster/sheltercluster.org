@@ -62,7 +62,7 @@ function cluster_og_node_view($node, $view_mode) {
 
   // Group specific actions.
   if (og_is_group_type('node', $bundle)) {
-    $group_content = new GroupPageContent($node);
+    $group_content = new GroupPageContent($node, $view_mode);
     $node->content['contact_members'] = $group_content->getContactMembers();
     $node->content['related_hubs'] = $group_content->getRelatedHubs();
     $node->content['related_responses'] = $group_content->getRelatedResponses();

@@ -148,6 +148,7 @@ class GroupContentGeographicRegion extends GroupTypeContent {
 class GroupPageContent {
 
   protected $node;
+  protected $view_mode;
 
   /**
    * @var Array of descendant IDs, stored for caching purposes in a single request.
@@ -159,14 +160,15 @@ class GroupPageContent {
    */
   private $manager;
 
-  function __construct($node) {
+  function __construct($node, $view_mode) {
     $this->node = $node;
     $this->manager = GroupTypeContent::getInstance($node);
+    $this->view_mode = $view_mode;
   }
 
-  public function getContactMembers($view_mode = 'contact_member') {
+  public function getContactMembers() {
     $contact_members_ids = self::getUsersByRole('contact member');
-    return self::getList($contact_members_ids, $view_mode, 'cluster_og_contact_member', 'user');
+    return self::getList($contact_members_ids, $this->view_mode, 'cluster_og_contact_member', 'user');
   }
 
   public function getRelatedResponses($view_mode = 'related_response') {
