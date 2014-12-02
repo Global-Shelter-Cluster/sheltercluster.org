@@ -189,61 +189,194 @@
           <h4>Coordination information</h4>
           <ul class="document-cards">
             <li class="document-card">
-              <div class="image-card"><?php print _svg('icons/share', array('class'=>'share-icon', 'alt' => 'Share icon')); ?></div>
-              <div class="information-card">
-                <a href="">id lobortis leo maximus tristique</a>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc aliquet justo leo, id lobortis leo maximus tristique. Sed non odio eros. Aenean pulvinar sapien quam, a bibendum ante lobortis eu.</p>
-                <span class="file-size">[250k]</span>
-                <span class="file-type">docx</span>
-                <span class="file-source">Aenean pulvinar</span>
-              </div>
-            </li>
-            <li class="document-card special">
-              <div class="image-card"><?php print _svg('icons/share', array('class'=>'share-icon', 'alt' => 'Share icon')); ?></div>
-              <div class="information-card">
-                <a href="">id lobortis leo maximus tristique</a>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc aliquet justo leo, id lobortis leo maximus tristique. Sed non odio eros. Aenean pulvinar sapien quam, a bibendum ante lobortis eu.</p>
-                <span class="file-size">[250k]</span>
-                <span class="file-type">docx</span>
-                <span class="file-source">Aenean pulvinar</span>
+              <div class="wrapper-card">
+                <div class="image-card"><?php print _svg('icons/share', array('class'=>'share-icon', 'alt' => 'Share icon')); ?></div>
+                <div class="information-card">
+                  <a href="">id lobortis leo maximus tristique</a>
+                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc aliquet justo leo, id lobortis leo maximus tristique. Sed non odio eros. Aenean pulvinar sapien quam, a bibendum ante lobortis eu.</p>
+                  <span class="file-size">[250k]</span>
+                  <span class="file-type">docx</span>
+                  <span class="file-source">Aenean pulvinar</span>
+                </div>
               </div>
             </li>
             <li class="document-card">
-              <div class="image-card"><?php print _svg('icons/share', array('class'=>'share-icon', 'alt' => 'Share icon')); ?></div>
-              <div class="information-card">
-                <a href="">id lobortis leo maximus tristique</a>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc aliquet justo leo, id lobortis leo maximus tristique. Sed non odio eros. Aenean pulvinar sapien quam, a bibendum ante lobortis eu.</p>
-                <span class="file-size">[250k]</span>
-                <span class="file-type">docx</span>
-                <span class="file-source">Aenean pulvinar</span>
-              </div>
-            </li>
-            <li class="document-card special">
-              <div class="image-card"><?php print _svg('icons/share', array('class'=>'share-icon', 'alt' => 'Share icon')); ?></div>
-              <div class="information-card">
-                <a href="">id lobortis leo maximus tristique</a>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc aliquet justo leo, id lobortis leo maximus tristique. Sed non odio eros. Aenean pulvinar sapien quam, a bibendum ante lobortis eu.</p>
-                <span class="file-size">[250k]</span>
-                <span class="file-type">docx</span>
-                <span class="file-source">Aenean pulvinar</span>
+              <div class="wrapper-card">
+                <div class="image-card"><?php print _svg('icons/share', array('class'=>'share-icon', 'alt' => 'Share icon')); ?></div>
+                <div class="information-card">
+                  <a href="">id lobortis leo maximus tristique</a>
+                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc aliquet justo leo, id lobortis leo maximus tristique. Sed non odio eros. Aenean pulvinar sapien quam, a bibendum ante lobortis eu.</p>
+                  <span class="file-size">[250k]</span>
+                  <span class="file-type">docx</span>
+                  <span class="file-source">Aenean pulvinar</span>
+                </div>
               </div>
             </li>
             <li class="document-card">
-              <div class="image-card"><?php print _svg('icons/share', array('class'=>'share-icon', 'alt' => 'Share icon')); ?></div>
-              <div class="information-card">
-                <a href="">id lobortis leo maximus tristique</a>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc aliquet justo leo, id lobortis leo maximus tristique. Sed non odio eros. Aenean pulvinar sapien quam, a bibendum ante lobortis eu.</p>
-                <span class="file-size">[250k]</span>
-                <span class="file-type">docx</span>
-                <span class="file-source">Aenean pulvinar</span>
+              <div class="wrapper-card">
+                <div class="image-card"><?php print _svg('icons/share', array('class'=>'share-icon', 'alt' => 'Share icon')); ?></div>
+                <div class="information-card">
+                  <a href="">id lobortis leo maximus tristique</a>
+                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc aliquet justo leo, id lobortis leo maximus tristique. Sed non odio eros. Aenean pulvinar sapien quam, a bibendum ante lobortis eu.</p>
+                  <span class="file-size">[250k]</span>
+                  <span class="file-type">docx</span>
+                  <span class="file-source">Aenean pulvinar</span>
+                </div>
+              </div>
+            </li>
+            <li class="document-card">
+              <div class="wrapper-card">
+                <div class="image-card"><?php print _svg('icons/share', array('class'=>'share-icon', 'alt' => 'Share icon')); ?></div>
+                <div class="information-card">
+                  <a href="">id lobortis leo maximus tristique</a>
+                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc aliquet justo leo, id lobortis leo maximus tristique. Sed non odio eros. Aenean pulvinar sapien quam, a bibendum ante lobortis eu.</p>
+                  <span class="file-size">[250k]</span>
+                  <span class="file-type">docx</span>
+                  <span class="file-source">Aenean pulvinar</span>
+                </div>
+              </div>
+            </li>
+            <li class="document-card">
+              <div class="wrapper-card">
+                <div class="image-card"><?php print _svg('icons/share', array('class'=>'share-icon', 'alt' => 'Share icon')); ?></div>
+                <div class="information-card">
+                  <a href="">id lobortis leo maximus tristique</a>
+                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc aliquet justo leo, id lobortis leo maximus tristique. Sed non odio eros. Aenean pulvinar sapien quam, a bibendum ante lobortis eu.</p>
+                  <span class="file-size">[250k]</span>
+                  <span class="file-type">docx</span>
+                  <span class="file-source">Aenean pulvinar</span>
+                </div>
               </div>
             </li>
           </ul>
+
+          <h4>Cluster Guidance</h4>
+          <ul class="document-cards">
+            <li class="document-card">
+              <div class="wrapper-card">
+                <div class="image-card"><?php print _svg('icons/share', array('class'=>'share-icon', 'alt' => 'Share icon')); ?></div>
+                <div class="information-card">
+                  <a href="">id lobortis leo maximus tristique</a>
+                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc aliquet justo leo, id lobortis leo maximus tristique. Sed non odio eros. Aenean pulvinar sapien quam, a bibendum ante lobortis eu.</p>
+                  <span class="file-size">[250k]</span>
+                  <span class="file-type">docx</span>
+                  <span class="file-source">Aenean pulvinar</span>
+                </div>
+              </div>
+            </li>
+            <li class="document-card">
+              <div class="wrapper-card">
+                <div class="image-card"><?php print _svg('icons/share', array('class'=>'share-icon', 'alt' => 'Share icon')); ?></div>
+                <div class="information-card">
+                  <a href="">id lobortis leo maximus tristique</a>
+                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc aliquet justo leo, id lobortis leo maximus tristique. Sed non odio eros. Aenean pulvinar sapien quam, a bibendum ante lobortis eu.</p>
+                  <span class="file-size">[250k]</span>
+                  <span class="file-type">docx</span>
+                  <span class="file-source">Aenean pulvinar</span>
+                </div>
+              </div>
+            </li>
+            <li class="document-card">
+              <div class="wrapper-card">
+                <div class="image-card"><?php print _svg('icons/share', array('class'=>'share-icon', 'alt' => 'Share icon')); ?></div>
+                <div class="information-card">
+                  <a href="">id lobortis leo maximus tristique</a>
+                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc aliquet justo leo, id lobortis leo maximus tristique. Sed non odio eros. Aenean pulvinar sapien quam, a bibendum ante lobortis eu.</p>
+                  <span class="file-size">[250k]</span>
+                  <span class="file-type">docx</span>
+                  <span class="file-source">Aenean pulvinar</span>
+                </div>
+              </div>
+            </li>
+            <li class="document-card">
+              <div class="wrapper-card">
+                <div class="image-card"><?php print _svg('icons/share', array('class'=>'share-icon', 'alt' => 'Share icon')); ?></div>
+                <div class="information-card">
+                  <a href="">id lobortis leo maximus tristique</a>
+                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc aliquet justo leo, id lobortis leo maximus tristique. Sed non odio eros. Aenean pulvinar sapien quam, a bibendum ante lobortis eu.</p>
+                  <span class="file-size">[250k]</span>
+                  <span class="file-type">docx</span>
+                  <span class="file-source">Aenean pulvinar</span>
+                </div>
+              </div>
+            </li>
+          </ul>
+          <h4>Other Sources of Information</h4>
+          <ul class="document-cards">
+            <li class="document-card">
+              <div class="wrapper-card">
+                <div class="image-card"><?php print _svg('icons/share', array('class'=>'share-icon', 'alt' => 'Share icon')); ?></div>
+                <div class="information-card">
+                  <a href="">id lobortis leo maximus tristique</a>
+                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc aliquet justo leo, id lobortis leo maximus tristique. Sed non odio eros. Aenean pulvinar sapien quam, a bibendum ante lobortis eu.</p>
+                  <span class="file-size">[250k]</span>
+                  <span class="file-type">docx</span>
+                  <span class="file-source">Aenean pulvinar</span>
+                </div>
+              </div>
+            </li>
+            <li class="document-card">
+              <div class="wrapper-card">
+                <div class="image-card"><?php print _svg('icons/share', array('class'=>'share-icon', 'alt' => 'Share icon')); ?></div>
+                <div class="information-card">
+                  <a href="">id lobortis leo maximus tristique</a>
+                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc aliquet justo leo, id lobortis leo maximus tristique. Sed non odio eros. Aenean pulvinar sapien quam, a bibendum ante lobortis eu.</p>
+                  <span class="file-size">[250k]</span>
+                  <span class="file-type">docx</span>
+                  <span class="file-source">Aenean pulvinar</span>
+                </div>
+              </div>
+            </li>
+          </ul>
+
+          <h4>Recent Documents</h4>
+          <ul class="document-cards">
+            <li class="document-card">
+              <div class="wrapper-card">
+                <div class="image-card"><?php print _svg('icons/share', array('class'=>'share-icon', 'alt' => 'Share icon')); ?></div>
+                <div class="information-card">
+                  <a href="">id lobortis leo maximus tristique</a>
+                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc aliquet justo leo, id lobortis leo maximus tristique. Sed non odio eros. Aenean pulvinar sapien quam, a bibendum ante lobortis eu.</p>
+                  <span class="file-size">[250k]</span>
+                  <span class="file-type">docx</span>
+                  <span class="file-source">Aenean pulvinar</span>
+                </div>
+              </div>
+            </li>
+            <li class="document-card">
+              <div class="wrapper-card">
+                <div class="image-card"><?php print _svg('icons/share', array('class'=>'share-icon', 'alt' => 'Share icon')); ?></div>
+                <div class="information-card">
+                  <a href="">id lobortis leo maximus tristique</a>
+                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc aliquet justo leo, id lobortis leo maximus tristique. Sed non odio eros. Aenean pulvinar sapien quam, a bibendum ante lobortis eu.</p>
+                  <span class="file-size">[250k]</span>
+                  <span class="file-type">docx</span>
+                  <span class="file-source">Aenean pulvinar</span>
+                </div>
+              </div>
+            </li>
+            <li class="document-card">
+              <div class="wrapper-card">
+                <div class="image-card"><?php print _svg('icons/share', array('class'=>'share-icon', 'alt' => 'Share icon')); ?></div>
+                <div class="information-card">
+                  <a href="">id lobortis leo maximus tristique</a>
+                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc aliquet justo leo, id lobortis leo maximus tristique. Sed non odio eros. Aenean pulvinar sapien quam, a bibendum ante lobortis eu.</p>
+                  <span class="file-size">[250k]</span>
+                  <span class="file-type">docx</span>
+                  <span class="file-source">Aenean pulvinar</span>
+                </div>
+              </div>
+            </li>
+          </ul>
+
         </section>
 
         <div id="content-rendered">
           <?php print render($page['content']); ?>
         </div>
+      </div>
+      <div class="side-column">
+
       </div>
     </div>
   </div>

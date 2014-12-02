@@ -265,6 +265,7 @@ th {
 
 html {
   font-size: 100%;
+  height: 100%;
 }
 
 body {
@@ -274,6 +275,7 @@ body {
   font-weight: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  min-height: 100%;
 }
 
 .page-margin {
@@ -402,25 +404,34 @@ body {
   padding: 0;
   margin: 0;
   list-style: none;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  -webkit-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -ms-flex-pack: justify;
+  -webkit-justify-content: space-between;
+  justify-content: space-between;
+  margin: 0 0 40px -10px;
+}
+.document-cards .wrapper-card {
   display: table;
-  width: 100%;
-  border-spacing: 10px;
-  border-spacing: 0.625rem;
-  margin: 0 0 0 -10px;
-  margin: 0 0 0 -0.625rem;
-  border-collapse: separate;
 }
 .document-cards .document-card {
-  display: table-cell;
-  width: 100%;
-  min-width: 310px;
-  max-width: 450px;
+  -ms-flex: 1 1 310px;
+  -webkit-flex: 1 1 310px;
+  flex: 1 1 310px;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -ms-flex-direction: column;
+  -webkit-flex-direction: column;
+  flex-direction: column;
+  margin: 10px 0 0 10px;
   background-color: #b6b6b6;
-  margin: 0 0.5rem 0 0;
 }
 .document-cards .document-card .information-card {
-  display: table-cell;
-  vertical-align: top;
   padding: 15px 15px 15px 0;
   padding: 0.9375rem 0.9375rem 0.9375rem 0;
 }
@@ -439,6 +450,16 @@ body {
   height: 55px;
 }
 
+/*
+    Legacy Firefox implementation treats all flex containers
+    as inline-block elements.
+*/
+@-moz-document url-prefix() {
+  .document-cards {
+    width: 100%;
+    -moz-box-sizing: border-box;
+  }
+}
 .search {
   float: right;
   clear: right;
