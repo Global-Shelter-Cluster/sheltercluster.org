@@ -359,8 +359,14 @@ body {
   margin-bottom: 0;
 }
 #featured-documents li img {
-  margin-left: -50%;
   height: 100%;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -moz-transform: scale(1) translateY(-50%) translateX(-50%);
+  -ms-transform: scale(1) translateY(-50%) translateX(-50%);
+  -webkit-transform: scale(1) translateY(-50%) translateX(-50%);
+  transform: scale(1) translateY(-50%) translateX(-50%);
 }
 
 .search {
