@@ -1,6 +1,17 @@
 #content-header {
+  @include rem(padding, 1rem 0 0 0);
 }
+#operation-information {
+  h1 {
+    @include rem(margin, 0 0 1rem 0);
+  }
+}
+#operation-group {
 
+}
+#featured-documents {
+
+}
 #content-rendered {
 
 }

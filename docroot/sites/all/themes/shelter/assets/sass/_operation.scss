@@ -26,6 +26,8 @@
 
     label{
       @include rem('margin', 0.5rem 0 0 0);
+      @include rem('font-size', 0.9rem);
+      font-weight: normal;
     }
   }
 

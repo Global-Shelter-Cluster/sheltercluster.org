@@ -282,10 +282,32 @@ body {
 }
 
 #content {
-  padding: 32px 0;
-  padding: 2rem 0;
+  padding: 0 0 32px 0;
+  padding: 0 0 2rem 0;
   min-height: 160px;
   min-height: 10rem;
+}
+
+.main-column {
+  float: none;
+  width: 100%;
+}
+@media (min-width: 980px) {
+  .main-column {
+    float: left;
+    width: 62%;
+  }
+}
+
+.side-column {
+  float: none;
+  width: 100%;
+}
+@media (min-width: 980px) {
+  .side-column {
+    float: left;
+    width: 38%;
+  }
 }
 
 /* _operation.scss */
@@ -318,6 +340,9 @@ body {
 #operation-group #checkboxgroup label {
   margin: 8px 0 0 0;
   margin: 0.5rem 0 0 0;
+  font-size: 14.4px;
+  font-size: 0.9rem;
+  font-weight: normal;
 }
 #operation-group #button-join-group {
   display: table-cell;
@@ -560,8 +585,8 @@ header a {
 #secondary-nav {
   margin: 0 0 4px 0;
   margin: 0 0 0.25rem 0;
-  padding: 12px 0 0 0;
-  padding: 0.75rem 0 0 0;
+  padding: 20px 0 8px 0;
+  padding: 1.25rem 0 0.5rem 0;
   border-top: 1px solid #ededed;
   border-bottom: 1px solid #ededed;
   background: #cdd6db;
@@ -570,6 +595,17 @@ header a {
   padding: 0;
   margin: 0;
   list-style: none;
+}
+#secondary-nav .svg {
+  fill: #cccccc;
+  width: 13px;
+  height: 13px;
+  position: relative;
+  top: 2px;
+  left: -2px;
+}
+#secondary-nav .hide-this {
+  display: none;
 }
 #secondary-nav .nav-group {
   clear: both;
@@ -648,6 +684,16 @@ header a {
   float: right;
   font-size: 12px;
   font-size: 0.75rem;
+}
+
+#content-header {
+  padding: 16px 0 0 0;
+  padding: 1rem 0 0 0;
+}
+
+#operation-information h1 {
+  margin: 0 0 16px 0;
+  margin: 0 0 1rem 0;
 }
 
 footer {

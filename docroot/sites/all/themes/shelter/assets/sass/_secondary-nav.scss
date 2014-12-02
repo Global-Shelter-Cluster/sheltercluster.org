@@ -1,16 +1,26 @@
 /* _secondary-nav.scss */
 
 #secondary-nav {
-  ul {
-    @include reset-list;
-  }
-
   @include rem(margin, 0 0 0.25rem 0);
-  @include rem(padding, 0.75rem 0 0 0);
+  @include rem(padding, 1.25rem 0 0.5rem 0);
   border-top: 1px solid darken(white, 7%);
   border-bottom: 1px solid darken(white, 7%);
   background: $shelter-light-blue;
 
+  ul {
+    @include reset-list;
+  }
+  .svg {
+    fill: darken(white, 20%);
+    width: 13px;
+    height: 13px;
+    position: relative;
+    top: 2px;
+    left: -2px;
+  }
+  .hide-this {
+    display: none;
+  }
   .nav-group {
     clear: both;
     border-top: 1px solid darken($shelter-light-blue, 7%);
@@ -43,11 +53,12 @@
         background-repeat: no-repeat;
         color: black;
         margin: 0 0 0 0.3rem;
-        @include rem('padding', 0.5rem 1.25rem 0.5rem);
+        @include rem(padding, 0.5rem 1.25rem 0.5rem);
         @include border-radius(3px);
         border: 1px solid darken($button-color,9%);
         @include rem(margin, 0 0.5rem 0.5rem 0);
         @include rem(font-size, 0.8rem);
+
         &:hover {
           @include background-image(linear-gradient(lighten($button-color, 7%), lighten($button-color,8%) 60%, lighten($button-color, 5%)));
         }
@@ -57,7 +68,6 @@
           border-color: $shelter-red;
           font-weight: bold;
           @include background-image(linear-gradient(lighten($button-color, 3%), lighten($button-color,4%) 10%, $button-color));
-
         }
       }
       .total {
