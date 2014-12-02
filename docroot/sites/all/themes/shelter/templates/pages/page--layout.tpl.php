@@ -61,13 +61,17 @@
 
     <section id="secondary-nav">
       <div class="page-margin clearfix">
-        <ul class="nav-items">
+        <ul class="nav-items clearfix">
           <li class="nav-item"><a href="" class="active">Dashboard</a></li>
           <li class="nav-item"><a href="">Documents <span class="total">(8200)</span></a></li>
           <li class="nav-item"><a href="">Discussions</a></li>
           <li class="nav-item"><a href="">Agenda</a></li>
           <li class="nav-item"><a href="">Strategic Advisory</a></li>
         </ul>
+        <a href="#secondary-nav" class="collapse-menu">
+          <?php print _svg('icons/collapse-down', array('alt' => 'Icon for collapsing the menu')); ?>
+          more
+        </a>
         <ul class="nav-items collapsable hide-this">
           <li class="nav-group clearfix">
             <h3>Hubs</h3>

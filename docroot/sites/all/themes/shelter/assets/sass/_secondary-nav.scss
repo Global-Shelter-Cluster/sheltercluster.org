@@ -21,6 +21,19 @@
   .hide-this {
     display: none;
   }
+  .collapse-menu {
+    clear: both;
+    position: relative;
+    top: -11px;
+    left: 4px;
+    color: darken($shelter-grey,20%);
+    @include rem(font-size, 0.70rem);
+    .svg {
+      fill: darken($shelter-grey,20%);
+      width: 8px;
+      height: 8px;
+    }
+  }
   .nav-group {
     clear: both;
     border-top: 1px solid darken($shelter-light-blue, 7%);
