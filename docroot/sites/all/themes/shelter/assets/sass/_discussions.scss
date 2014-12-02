@@ -1,0 +1,45 @@
+/* _discussions.scss */
+
+#shelter-discussions {
+  .see-all {
+    @include rem(font-size, 0.9rem);
+  }
+}
+
+#discussions-items {
+
+  .discussions-item  {
+    float: left;
+    width: 100%;
+    @include rem(margin, 0 0 10px 0);
+  }
+  .replies, .information {
+    float: left;
+  }
+  .replies {
+    width: 25%;
+    @include rem(font-size,0.9rem);
+  }
+  .information {
+    width: 73%;
+    margin: 0 0 0 2%;
+
+    .topic {
+      display: block;
+      @include rem(font-size, 0.95rem);
+      @include rem(padding, 0 0 0.2rem 0);
+    }
+    .date {
+      @include rem(font-size, 0.8rem);
+    }
+  }
+  .new {
+    display: block;
+    color: red;
+  }
+}
+
+
+#discussions-items {
+  @include reset-list;
+}

@@ -42,7 +42,7 @@ body {
   float: none;
   width: 100%;
   @include breakpoint(980px) {
-    float: left;
-    width: 38%;
+    float: right;
+    width: 35%;
   }
 }

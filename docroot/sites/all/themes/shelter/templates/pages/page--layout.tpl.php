@@ -151,7 +151,7 @@
 
         <div class="side-column">
           <section id="operation-group">
-            <h3>Join this Operation Group and</h3>
+            <h4>Join this Operation Group and</h4>
             <fieldset id="checkboxgroup">
               <label><input type="checkbox" selected="selected"/> Receive notifications</label>
               <label><input type="checkbox" selected="selected"/> Register to this group the mailing list</label>
@@ -376,7 +376,26 @@
         </div>
       </div>
       <div class="side-column">
-
+        <section id="shelter-discussions">
+          <h3>Discussions</h3>
+          <ul id="discussions-items">
+            <li class="discussions-item">
+              <div class="replies">24 replies</div>
+              <div class="information">
+                <a href="" class="topic">Where can I find lumber?</a>
+                <span class="date">2014/10/03 by <a class="author" href="">Jane Wikionsons</a></span>
+              </div>
+            </li>
+            <li class="discussions-item">
+              <div class="replies">no replies <span class="new">New</span></div>
+              <div class="information">
+                <a href="" class="topic">Are any special requirements for protection needed when entering the</a>
+                <span class="date">2014/10/15 by <a class="author" href="">John Tremblay</a></span>
+              </div>
+            </li>
+          </ul>
+          <a class="see-all" href="">All other discussions</a>
+        </section>
       </div>
     </div>
   </div>

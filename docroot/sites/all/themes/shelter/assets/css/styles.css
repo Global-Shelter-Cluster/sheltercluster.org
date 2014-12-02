@@ -307,8 +307,8 @@ body {
 }
 @media (min-width: 980px) {
   .side-column {
-    float: left;
-    width: 38%;
+    float: right;
+    width: 35%;
   }
 }
 
@@ -766,23 +766,74 @@ header a {
   font-size: 0.75rem;
 }
 
-/* _operation.scss */
-#content-header {
+/* _content.scss */
+.main-column,
+.side-column {
   padding: 16px 0 0 0;
   padding: 1rem 0 0 0;
 }
-#content-header h3 {
-  margin: 0;
+.main-column h3,
+.side-column h3 {
   font-size: 24px;
   font-size: 1.5rem;
+  margin-top: 0;
 }
-#content-header h4 {
-  margin: 0;
+.main-column h4,
+.side-column h4 {
+  margin-top: 0;
+  font-size: 16px;
+  font-size: 1rem;
 }
 
 #operation-information h1 {
   margin: 0 0 16px 0;
   margin: 0 0 1rem 0;
+}
+
+/* _discussions.scss */
+#shelter-discussions .see-all {
+  font-size: 14.4px;
+  font-size: 0.9rem;
+}
+
+#discussions-items .discussions-item {
+  float: left;
+  width: 100%;
+  margin: 0 0 10px 0;
+  margin: 0 0 0.625rem 0;
+}
+#discussions-items .replies, #discussions-items .information {
+  float: left;
+}
+#discussions-items .replies {
+  width: 25%;
+  font-size: 14.4px;
+  font-size: 0.9rem;
+}
+#discussions-items .information {
+  width: 73%;
+  margin: 0 0 0 2%;
+}
+#discussions-items .information .topic {
+  display: block;
+  font-size: 15.2px;
+  font-size: 0.95rem;
+  padding: 0 0 3.2px 0;
+  padding: 0 0 0.2rem 0;
+}
+#discussions-items .information .date {
+  font-size: 12.8px;
+  font-size: 0.8rem;
+}
+#discussions-items .new {
+  display: block;
+  color: red;
+}
+
+#discussions-items {
+  padding: 0;
+  margin: 0;
+  list-style: none;
 }
 
 footer {
