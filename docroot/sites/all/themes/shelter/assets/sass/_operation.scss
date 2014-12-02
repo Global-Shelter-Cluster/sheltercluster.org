@@ -26,6 +26,8 @@
 
     label{
       @include rem(margin, 0.5rem 0 0 0);
+      @include rem(font-size, 0.9rem);
+      font-weight: normal;
     }
   }
 
@@ -67,8 +69,11 @@
       }
     }
     img {
-      margin-left: -50%;
       height: 100%;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      @include transform(scale(1) translateY(-50%) translateX(-50%));
     }
   }
 }

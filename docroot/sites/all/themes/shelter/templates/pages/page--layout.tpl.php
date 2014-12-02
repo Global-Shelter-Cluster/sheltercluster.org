@@ -6,7 +6,7 @@
       <div class="page-margin">
         <div id="language-selector" class="clearfix">
           <ul class="languages">
-            <li class="language"><a href="">en</a></li>
+            <li class="language"><a href="" class="active">en</a></li>
             <li class="language"><a href="">fr</a></li>
             <li class="language"><a href="">es</a></li>
             <li class="language"><a href="">ar</a></li>
@@ -59,83 +59,136 @@
       </div>
     </nav>
 
+    <section id="secondary-nav">
+      <div class="page-margin clearfix">
+        <ul class="nav-items clearfix">
+          <li class="nav-item"><a href="" class="active">Dashboard</a></li>
+          <li class="nav-item"><a href="">Documents <span class="total">(8200)</span></a></li>
+          <li class="nav-item"><a href="">Discussions</a></li>
+          <li class="nav-item"><a href="">Agenda</a></li>
+          <li class="nav-item"><a href="">Strategic Advisory</a></li>
+        </ul>
+        <a href="#secondary-nav" class="collapse-menu">
+          <?php print _svg('icons/collapse-down', array('alt' => 'Icon for collapsing the menu')); ?>
+          more
+        </a>
+        <ul class="nav-items collapsable hide-this">
+          <li class="nav-group clearfix">
+            <h3>Hubs</h3>
+            <ul class="nav-items">
+              <li class="nav-item">
+                <a href="">
+                  <?php print _svg('icons/grid-three-up', array('alt' => 'Icon for Hubs')); ?>
+                  Manilla Hub
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="">
+                  <?php print _svg('icons/grid-three-up', array('alt' => 'Icon for Hubs')); ?>
+                  Cebu Hub
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="">
+                  <?php print _svg('icons/grid-three-up', array('alt' => 'Icon for Hubs')); ?>
+                  Guiuian Hub
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="">
+                  <?php print _svg('icons/grid-three-up', array('alt' => 'Icon for Hubs')); ?>
+                  Roxas Hub
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="">
+                  <?php print _svg('icons/grid-three-up', array('alt' => 'Icon for Hubs')); ?>
+                  Ormoc Hub
+                </a>
+              </li>
+            </ul>
+          </li><li class="nav-group clearfix">
+            <h3>Pages</h3>
+            <ul class="nav-items">
+              <li class="nav-item"><a href="">Something</a></li>
+              <li class="nav-item"><a href="">More</a></li>
+            </ul>
+          </li><li class="nav-group clearfix">
+            <h3>More Stuff</h3>
+            <ul class="nav-items">
+              <li class="nav-item"><a href="">Something</a></li>
+              <li class="nav-item"><a href="">More</a></li>
+              <li class="nav-item"><a href="">And then Some</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </section>
+
   </header>
 
   <div id="content">
+
     <div class="page-margin clearfix">
-
       <?php if ($messages) { print $messages; } ?>
+    </div>
 
-      <section id="secondary-nav">
-        <div class="page-margin clearfix">
-          <ul class="nav-items">
-            <li class="nav-item"><a href="" class="active">Dashboard</a></li>
-            <li class="nav-item"><a href="">Documents <span class="total">(8200)</span></a></li>
-            <li class="nav-item"><a href="">Discussions</a></li>
-            <li class="nav-item"><a href="">Agenda</a></li>
-            <li class="nav-item"><a href="">Strategic Advisory</a></li>
-            <li class="nav-group clearfix">
-              <h3>Hubs</h3>
-              <ul class="nav-items">
-                <li class="nav-item"><a href="">Manilla Hub</a></li>
-                <li class="nav-item"><a href="">Cebu Hub</a></li>
-                <li class="nav-item"><a href="">Guiuian Hub</a></li>
-                <li class="nav-item"><a href="">Roxas Hub</a></li>
-                <li class="nav-item"><a href="">Ormoc Hub</a></li>
-              </ul>
-            </li>
-            <li class="nav-group clearfix">
-              <h3>Pages</h3>
-              <ul class="nav-items">
-                <li class="nav-item"><a href="">Something</a></li>
-                <li class="nav-item"><a href="">More</a></li>
-              </ul>
-            </li>
-          </ul>
+    <div id="content-header">
+      <div class="page-margin clearfix">
+
+        <div class="main-column">
+          <section id="operation-information">
+            <h1>Typhoon Haiyan</h1>
+            <p>Operation started November 8th, 2013, and is on going.</p>
+            <ul id="meta-data">
+              <li class="data-item"><span>Type:</span> Windstorm</li>
+              <li class="data-item"><span>Damage Location:</span> Rural, Peri-Urban, Urban</li>
+              <li class="data-item"><span>Degree of Displacement:</span> Hight</li>
+              <li class="data-item"><span>Emergency Lead Agency</span> IFRC</li>
+            </ul>
+          </section>
         </div>
-      </section>
+
 
       <div id="content-header" class="clearfix">
 
-        <section id="operation-information">
-          <h1>Typhoon Haiyan</h1>
-          <p>Operation started November 8th, 2013, and is on going.</p>
-          <ul id="meta-data">
-            <li class="data-item"><span>Type:</span> Windstorm</li>
-            <li class="data-item"><span>Damage Location:</span> Rural, Peri-Urban, Urban</li>
-            <li class="data-item"><span>Degree of Displacement:</span> Hight</li>
-            <li class="data-item"><span>Emergency Lead Agency</span> IFRC</li>
-          </ul>
-        </section>
+        <div class="side-column">
+          <section id="operation-group">
+            <h3>Join this Operation Group and</h3>
+            <fieldset id="checkboxgroup">
+              <label><input type="checkbox" selected="selected"/> Receive notifications</label>
+              <label><input type="checkbox" selected="selected"/> Register to this group the mailing list</label>
+              <label><input type="checkbox"/> Register to the "Global Response" mailinglist</label>
+            </fieldset>
+            <div id="button-join-group"><a class="button" href="">Join</a></div>
+          </section>
+        </div>
 
-        <section id="operation-group">
-          <h3>Join this Operation Group and</h3>
-          <fieldset id="checkboxgroup">
-            <label><input type="checkbox"/> Receive notifications</label>
-            <label><input type="checkbox"/> Register to this group the mailing list</label>
-            <label><input type="checkbox"/> Register to the "Global Response" mailinglist</label>
-          </fieldset>
-          <div id="button-join-group"><a class="button" href="">Join</a></div>
-        </section>
 
-        <section id="featured-documents">
-          <ul>
-            <li>
-               <img src="sites/all/themes/shelter/assets/images/fake/feature-document.jpg" alt="" />
+      </div>
+    </div>
+    <div>
+      <div class="page-margin clearfix">
+        <div class="main-column">
+
+          <section id="featured-documents">
+            <ul>
+              <li>
+                 <img src="sites/all/themes/shelter/assets/images/fake/feature-document.jpg" alt="" />
+                  <div class="document-information">
+                    <h2>Featured Document Title 1</h2>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc aliquet justo leo, id lobortis leo maximus tristique. Sed non odio eros. Aenean pulvinar sapien quam, a bibendum ante lobortis eu.</p>
+                  </div>
+              </li>
+              <li>
+                <img src="sites/all/themes/shelter/assets/images/fake/feature-document.jpg" alt="" />
                 <div class="document-information">
-                  <h2>Featured Document Title 1</h2>
+                  <h2>Featured Document Title 2</h2>
                   <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc aliquet justo leo, id lobortis leo maximus tristique. Sed non odio eros. Aenean pulvinar sapien quam, a bibendum ante lobortis eu.</p>
                 </div>
-            </li>
-            <li>
-              <img src="sites/all/themes/shelter/assets/images/fake/feature-document.jpg" alt="" />
-              <div class="document-information">
-                <h2>Featured Document Title 2</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc aliquet justo leo, id lobortis leo maximus tristique. Sed non odio eros. Aenean pulvinar sapien quam, a bibendum ante lobortis eu.</p>
-              </div>
-            </li>
-          </ul>
-        </section>
+              </li>
+            </ul>
+          </section>
 
         <section id="key-information">
           <h3>Key Information</h3>
@@ -195,11 +248,15 @@
         </section>
       </div>
 
-      <div id="content-rendered">
-        <?php print render($page['content']); ?>
-      </div>
+          <div id="content-rendered">
+            <?php print render($page['content']); ?>
+          </div>
 
+
+        </div>
+      </div>
     </div>
+
   </div>
 
   <footer>

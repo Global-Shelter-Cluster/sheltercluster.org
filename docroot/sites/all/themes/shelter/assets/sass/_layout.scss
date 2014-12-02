@@ -24,6 +24,23 @@ body {
 }
 
 #content {
-  @include rem(padding, 2rem 0);
+  @include rem(padding, 0 0 2rem 0);
   @include rem(min-height, 10rem);
+}
+
+.main-column {
+  float: none;
+  width: 100%;
+  @include breakpoint(980px) {
+    float: left;
+    width: 62%;
+  }
+}
+.side-column {
+  float: none;
+  width: 100%;
+  @include breakpoint(980px) {
+    float: left;
+    width: 38%;
+  }
 }
