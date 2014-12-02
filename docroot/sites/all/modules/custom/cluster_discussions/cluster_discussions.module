@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the cluster_discussions feature.
+ */
+
+include_once 'cluster_discussions.features.inc';
