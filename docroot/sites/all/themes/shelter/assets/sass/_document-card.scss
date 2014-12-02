@@ -1,8 +1,47 @@
 /* _key-information.scss */
 
 #key-information {
-  .document-card {
 
+}
+
+.document-cards {
+  @include reset-list;
+  display: table;
+  width: 100%;
+  @include rem(border-spacing, 0.625rem);
+  @include rem(margin,0 0 0 -0.625rem);
+  border-collapse: separate;
+
+  .document-card {
+    display: table-cell;
+    width: 100%;
+    min-width: 310px;
+    max-width: 450px;
+    background-color: rgb(182,182,182);
+    margin: 0 0.5rem 0 0;
+
+    .information-card {
+      display: table-cell;
+      vertical-align: top;
+      @include rem(padding, 0.9375rem 0.9375rem 0.9375rem 0);
+      p {
+        @include rem(font-size, 0.8rem);
+      }
+    }
+    .image-card {
+      display: table-cell;
+      vertical-align: middle;
+      @include rem(padding, 0 0.9375rem 0 0.9375rem);
+      svg {
+        width: 55px;
+        height: 55px;
+      }
+    }
+    &.special {
+      // display: table-row;
+    }
   }
 }
+
+
 

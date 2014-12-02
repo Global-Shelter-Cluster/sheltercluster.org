@@ -1,5 +1,13 @@
+/* _operation.scss */
+
 #content-header {
-  width: auto;
+  h3 {
+    margin: 0;
+    @include rem(font-size, 1.5rem);
+  }
+  h4 {
+    margin: 0;
+  }
 }
 
 #content-rendered {

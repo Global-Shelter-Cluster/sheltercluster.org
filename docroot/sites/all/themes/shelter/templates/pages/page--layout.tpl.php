@@ -95,7 +95,7 @@
         </div>
       </section>
 
-      <div id="content-header">
+      <div id="content-header" class="clearfix">
 
         <section id="operation-information">
           <h1>Typhoon Haiyan</h1>
@@ -140,57 +140,56 @@
         <section id="key-information">
           <h3>Key Information</h3>
           <h4>Coordination information</h4>
-          <ul>
-            <li>
-              <img src="" alt="" />
-              <a href="">id lobortis leo maximus tristique</a>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc aliquet justo leo, id lobortis leo maximus tristique. Sed non odio eros. Aenean pulvinar sapien quam, a bibendum ante lobortis eu.</p>
-              <span class="file-size">150k</span>
-              <span class="file-type">pdf</span>
-              <span class="file-source">ipsum dolor sit</span>
+          <ul class="document-cards">
+            <li class="document-card">
+              <div class="image-card"><?php print _svg('icons/share', array('class'=>'share-icon', 'alt' => 'Share icon')); ?></div>
+              <div class="information-card">
+                <a href="">id lobortis leo maximus tristique</a>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc aliquet justo leo, id lobortis leo maximus tristique. Sed non odio eros. Aenean pulvinar sapien quam, a bibendum ante lobortis eu.</p>
+                <span class="file-size">[250k]</span>
+                <span class="file-type">docx</span>
+                <span class="file-source">Aenean pulvinar</span>
+              </div>
             </li>
-            <li>
-              <img src="" alt="" />
-              <a href="">id lobortis leo maximus tristique</a>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc aliquet justo leo, id lobortis leo maximus tristique. Sed non odio eros. Aenean pulvinar sapien quam, a bibendum ante lobortis eu.</p>
-              <span class="file-size">250k</span>
-              <span class="file-type">docx</span>
-              <span class="file-source">Aenean pulvinar</span>
+            <li class="document-card special">
+              <div class="image-card"><?php print _svg('icons/share', array('class'=>'share-icon', 'alt' => 'Share icon')); ?></div>
+              <div class="information-card">
+                <a href="">id lobortis leo maximus tristique</a>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc aliquet justo leo, id lobortis leo maximus tristique. Sed non odio eros. Aenean pulvinar sapien quam, a bibendum ante lobortis eu.</p>
+                <span class="file-size">[250k]</span>
+                <span class="file-type">docx</span>
+                <span class="file-source">Aenean pulvinar</span>
+              </div>
             </li>
-            <li>
-              <img src="" alt="" />
-              <a href="">id lobortis leo maximus tristique</a>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc aliquet justo leo, id lobortis leo maximus tristique. Sed non odio eros. Aenean pulvinar sapien quam, a bibendum ante lobortis eu.</p>
-              <span class="file-size">300k</span>
-              <span class="file-type">pdf</span>
-              <span class="file-source">consectetur adipiscing elit</span>
+            <li class="document-card">
+              <div class="image-card"><?php print _svg('icons/share', array('class'=>'share-icon', 'alt' => 'Share icon')); ?></div>
+              <div class="information-card">
+                <a href="">id lobortis leo maximus tristique</a>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc aliquet justo leo, id lobortis leo maximus tristique. Sed non odio eros. Aenean pulvinar sapien quam, a bibendum ante lobortis eu.</p>
+                <span class="file-size">[250k]</span>
+                <span class="file-type">docx</span>
+                <span class="file-source">Aenean pulvinar</span>
+              </div>
             </li>
-          </ul>
-          <h4>Cluster Guidance</h4>
-          <ul>
-            <li>
-              <img src="" alt="" />
-              <a href="">id lobortis leo maximus tristique</a>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc aliquet justo leo, id lobortis leo maximus tristique. Sed non odio eros. Aenean pulvinar sapien quam, a bibendum ante lobortis eu.</p>
-              <span class="file-size">150k</span>
-              <span class="file-type">pdf</span>
-              <span class="file-source">ipsum dolor sit</span>
+            <li class="document-card special">
+              <div class="image-card"><?php print _svg('icons/share', array('class'=>'share-icon', 'alt' => 'Share icon')); ?></div>
+              <div class="information-card">
+                <a href="">id lobortis leo maximus tristique</a>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc aliquet justo leo, id lobortis leo maximus tristique. Sed non odio eros. Aenean pulvinar sapien quam, a bibendum ante lobortis eu.</p>
+                <span class="file-size">[250k]</span>
+                <span class="file-type">docx</span>
+                <span class="file-source">Aenean pulvinar</span>
+              </div>
             </li>
-            <li>
-              <img src="" alt="" />
-              <a href="">id lobortis leo maximus tristique</a>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc aliquet justo leo, id lobortis leo maximus tristique. Sed non odio eros. Aenean pulvinar sapien quam, a bibendum ante lobortis eu.</p>
-              <span class="file-size">250k</span>
-              <span class="file-type">docx</span>
-              <span class="file-source">Aenean pulvinar</span>
-            </li>
-            <li>
-              <img src="" alt="" />
-              <a href="">id lobortis leo maximus tristique</a>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc aliquet justo leo, id lobortis leo maximus tristique. Sed non odio eros. Aenean pulvinar sapien quam, a bibendum ante lobortis eu.</p>
-              <span class="file-size">300k</span>
-              <span class="file-type">pdf</span>
-              <span class="file-source">consectetur adipiscing elit</span>
+            <li class="document-card">
+              <div class="image-card"><?php print _svg('icons/share', array('class'=>'share-icon', 'alt' => 'Share icon')); ?></div>
+              <div class="information-card">
+                <a href="">id lobortis leo maximus tristique</a>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc aliquet justo leo, id lobortis leo maximus tristique. Sed non odio eros. Aenean pulvinar sapien quam, a bibendum ante lobortis eu.</p>
+                <span class="file-size">[250k]</span>
+                <span class="file-type">docx</span>
+                <span class="file-source">Aenean pulvinar</span>
+              </div>
             </li>
           </ul>
         </section>
@@ -204,7 +203,7 @@
   </div>
 
   <footer>
-    <div class="page-margin clearfix">
+    <div class="page-margin">
       <form class="search" action="http://www.google.com/search" method="get">
         <input class="text-field" type="search" placeholder="Search documents" name="q">
         <input class="submit" type="submit" value="Search">
