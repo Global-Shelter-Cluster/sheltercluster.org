@@ -5,3 +5,39 @@
  */
 
 include_once 'cluster_docs.features.inc';
+
+/**
+ *  Implements hook_menu().
+ */
+function cluster_docs_menu() {
+  $items['node/%/documents'] = array(
+    'title' => 'Documents',
+    'page callback' => 'cluster_docs_all',
+    'page arguments' => array(1),
+    'access callback' => TRUE,
+    'type' => MENU_NORMAL_ITEM,
+  );
+  return $items;
+}
+
+function cluster_docs_all($nid) {
+  $query = new EntityFieldQuery();
+  $res = $query->entityCondition('entity_type', 'node')
+    ->entityCondition('bundle', 'document')
+    ->fieldCondition('og_group_ref', 'target_id', $nid)
+    ->propertyCondition('status', NODE_PUBLISHED)
+    ->propertyOrderBy('changed', 'DESC')
+    ->pager(5)
+    ->execute();
+
+  if (!isset($res['node'])) {
+    return NULL;
+  }
+
+  $ret = GroupPageContent::getList(array_keys($res['node']), 'teaser', 'cluster_og_recent_documents');
+  $ret['pager'] = array(
+    '#theme' => 'pager',
+  );
+
+  return $ret;
+}
