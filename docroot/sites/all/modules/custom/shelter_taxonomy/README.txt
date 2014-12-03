@@ -1,0 +1,1 @@
+Manages all the taxonomy vocabulaires and uses uuid to export terms.
