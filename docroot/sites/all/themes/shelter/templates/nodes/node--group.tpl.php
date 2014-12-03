@@ -41,6 +41,10 @@
     <div class="page-margin clearfix">
 
       <div class="main-column">
+
+        <?php $contextual_navigation = node_view($node, 'contextual_navigation') ?>
+        <?php print render($contextual_navigation); ?>
+
         <section id="operation-information">
           <h1><?php print $title; ?></h1>
           <p>Operation started November 8th, 2013, and is on going.</p>
