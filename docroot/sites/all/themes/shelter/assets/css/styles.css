@@ -596,6 +596,9 @@ header a {
   margin: 0;
   list-style: none;
 }
+#secondary-nav a {
+  text-decoration: none;
+}
 #secondary-nav .svg {
   fill: #cccccc;
   width: 13px;

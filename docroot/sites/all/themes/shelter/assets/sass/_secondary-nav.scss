@@ -10,6 +10,9 @@
   ul {
     @include reset-list;
   }
+  a {
+    text-decoration: none;
+  }
   .svg {
     fill: darken(white, 20%);
     width: 13px;

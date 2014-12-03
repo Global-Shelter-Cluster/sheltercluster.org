@@ -163,34 +163,33 @@
 
       </div>
     </div>
-    <div>
-      <div class="page-margin clearfix">
-        <div class="main-column">
 
-          <section id="featured-documents">
-            <ul>
-              <li>
-                 <img src="sites/all/themes/shelter/assets/images/fake/feature-document.jpg" alt="" />
-                  <div class="document-information">
-                    <h2>Featured Document Title 1</h2>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc aliquet justo leo, id lobortis leo maximus tristique. Sed non odio eros. Aenean pulvinar sapien quam, a bibendum ante lobortis eu.</p>
-                  </div>
-              </li>
-              <li>
-                <img src="sites/all/themes/shelter/assets/images/fake/feature-document.jpg" alt="" />
+    <div class="page-margin clearfix">
+      <div class="main-column">
+
+        <section id="featured-documents">
+          <ul>
+            <li>
+               <img src="sites/all/themes/shelter/assets/images/fake/feature-document.jpg" alt="" />
                 <div class="document-information">
-                  <h2>Featured Document Title 2</h2>
+                  <h2>Featured Document Title 1</h2>
                   <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc aliquet justo leo, id lobortis leo maximus tristique. Sed non odio eros. Aenean pulvinar sapien quam, a bibendum ante lobortis eu.</p>
                 </div>
-              </li>
-            </ul>
-          </section>
+            </li>
+            <li>
+              <img src="sites/all/themes/shelter/assets/images/fake/feature-document.jpg" alt="" />
+              <div class="document-information">
+                <h2>Featured Document Title 2</h2>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc aliquet justo leo, id lobortis leo maximus tristique. Sed non odio eros. Aenean pulvinar sapien quam, a bibendum ante lobortis eu.</p>
+              </div>
+            </li>
+          </ul>
+        </section>
 
-          <div id="content-rendered">
-            <?php print render($page['content']); ?>
-          </div>
-
+        <div id="content-rendered">
+          <?php print render($page['content']); ?>
         </div>
+
       </div>
     </div>
 

@@ -13,7 +13,7 @@
  */
 function theme_cluster_og_contact_member($vars) {
   $output = '<div class="field"><div class="field-label">' . t('Contact members') . ':</div>';
-  $output .= $vars['element']['#children']; 
+  $output .= $vars['element']['#children'];
   $output .= '</div>';
   return $output;
 }
@@ -25,9 +25,10 @@ function theme_cluster_og_contact_member($vars) {
  * $vars['element'][UID]: each response render array and markup.
  */
 function theme_cluster_og_related_responses($vars) {
-  $output = '<div class="field"><div class="field-label">' . t('Related responses') . ':</div>';
+  $output = '<h3>' . t('Related Responses') . '</h3>';
+  $output .= '<ul class="nav-items">';
   $output .= $vars['element']['#children'];
-  $output .= '</div>';
+  $output .= '</ul>';
   return $output;
 }
 
@@ -38,9 +39,10 @@ function theme_cluster_og_related_responses($vars) {
  * $vars['element'][UID]: each hub render array and markup.
  */
 function theme_cluster_og_related_hubs($vars) {
-  $output = '<div class="field"><div class="field-label">' . t('Related hubs') . ':</div>';
+  $output = '<h3>' . t('Hubs') . '</h3>';
+  $output .= '<ul class="nav-items">';
   $output .= $vars['element']['#children'];
-  $output .= '</div>';
+  $output .= '</ul>';
   return $output;
 }
 

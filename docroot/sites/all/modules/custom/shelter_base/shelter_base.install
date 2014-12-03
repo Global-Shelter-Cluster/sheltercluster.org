@@ -96,3 +96,11 @@ function shelter_base_update_7004() {
   variable_set('jquery_update_compression_type', 'min');
   variable_set('jquery_update_jquery_cdn', 'google');
 }
+
+/**
+ * Set jquery version back to 1.8 so it doesn't conflict with admin menu
+ */
+function shelter_base_update_7006() {
+  variable_set('jquery_update_jquery_version', '1.8');
+  variable_set('jquery_update_jquery_admin_version', '1.8');
+}
