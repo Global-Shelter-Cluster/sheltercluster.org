@@ -162,6 +162,7 @@
         </div>
       </div>
     </div>
+
     <div class="page-margin clearfix">
       <div class="main-column">
 
@@ -374,6 +375,7 @@
         <div id="content-rendered">
           <?php print render($page['content']); ?>
         </div>
+
       </div>
       <div class="side-column">
         <section id="shelter-discussions">

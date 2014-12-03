@@ -31,6 +31,21 @@ function cluster_og_geographic_region($nid, $path) {
 }
 
 /**
+ *  Implements hook_entity_info_alter().
+ */
+function cluster_og_entity_info_alter(&$entity_info) {
+  $entity_info['node']['view modes']['related_response'] = array(
+    'label' => t('Related response'),
+    'custom settings' => FALSE,
+  );
+
+  $entity_info['node']['view modes']['related_hub'] = array(
+    'label' => t('Related hub'),
+    'custom settings' => FALSE,
+  );
+}
+
+/**
  * Node API.
  */
 
@@ -40,51 +55,14 @@ function cluster_og_geographic_region($nid, $path) {
 function cluster_og_node_view($node, $view_mode) {
   $bundle = $node->type;
 
-  if ($view_mode !== 'full') {
-    // Only add these blocks to the full page view of the nodes.
-    return;
-  }
-
   // Group specific actions.
   if (og_is_group_type('node', $bundle)) {
-    $gid = $node->nid;
-
-    // Make a list of contact member users.
-    if ($contact_member_rid = _cluster_og_get_role_id_by_name($bundle, 'contact member')) {
-      if ($contact_members_ids = _cluster_og_get_group_users_by_role($gid, $contact_member_rid)) {
-        $accounts = user_load_multiple($contact_members_ids);
-        // Prepare a render array.
-        $member = array(
-          '#theme_wrappers' => array('cluster_og_contact_member'),
-          'total' => count($accounts),
-        );
-
-        // Add account render arrays.
-        foreach ($accounts as $account) {
-          $member[$account->uid] = array(user_view($account, 'contact_member'));
-        }
-        $node->content['contact_members'] = $member;
-      }
-    }
-
-    // Make a list of responses associated to this region and to its descendants.
-    if ($bundle === 'geographic_region') {
-      $region_nids = _cluster_og_get_region_descendants(array($node->nid));
-      if ($related_response_ids = _cluster_og_get_region_responses($region_nids)) {
-        $response_nodes = node_load_multiple($related_response_ids);
-        // Prepare a render array.
-        $responses = array(
-          '#theme_wrappers' => array('cluster_og_related_responses'),
-          'total' => count($response_nodes),
-        );
-
-        // Add node render arrays.
-        foreach ($response_nodes as $response_node) {
-          $responses[$response_node->nid] = node_view($response_node, 'teaser'); //TODO: change teaser to custom view mode
-        }
-        $node->content['related_responses'] = $responses;
-      }
-    }
+    $group_content = new GroupPageContent($node, $view_mode);
+    $node->content['contact_members'] = $group_content->getContactMembers();
+    $node->content['related_hubs'] = $group_content->getRelatedHubs();
+    $node->content['related_responses'] = $group_content->getRelatedResponses();
+    $node->content['key_documents'] = $group_content->getKeyDocuments();
+    $node->content['recent_documents'] = $group_content->getRecentDocuments();
   }
 }
 
@@ -119,6 +97,18 @@ function cluster_og_theme() {
       'file' => 'theme/cluster_og.theme.inc',
       'render element' => 'element',
     ),
+    'cluster_og_key_documents' => array(
+      'file' => 'theme/cluster_og.theme.inc',
+      'render element' => 'element',
+    ),
+    'cluster_og_key_documents_by_tag' => array(
+      'file' => 'theme/cluster_og.theme.inc',
+      'render element' => 'element',
+    ),
+    'cluster_og_recent_documents' => array(
+      'file' => 'theme/cluster_og.theme.inc',
+      'render element' => 'element',
+    ),
   );
 }
 
@@ -141,89 +131,6 @@ function cluster_og_preprocess_field(&$vars) {
 /**
  * Helpers.
  */
-
-/**
- * Recursively get all the descendants for the argued regions, including the ones specified.
- * @param $nids
- *  Array of entity ids from which to perform the search.
- * @param $collected_nids
- *  Recursively aggregate node ids.
- * @return
- *  Array of node ids representing the set of all descendants for one region.
- */
-function _cluster_og_get_region_descendants($nids, $collected_nids = array()) {
-  $collected_nids = array_unique(array_merge($nids, $collected_nids));
-
-  // Recursively look for regions that have any of the argued $nids for parent.
-  $query = new EntityFieldQuery();
-  $res = $query->entityCondition('entity_type', 'node')
-    ->entityCondition('bundle', 'geographic_region')
-    ->propertyCondition('status', NODE_PUBLISHED)
-    ->fieldCondition('field_parent_region', 'target_id', $nids, 'IN')
-    ->execute();
-
-  if (isset($res['node'])) {
-    $res_nids = array_keys($res['node']);
-    $collected_nids = array_unique(array_merge($res_nids, $collected_nids));
-    return _cluster_og_get_region_descendants($res_nids, $collected_nids);
-  }
-
-  return $collected_nids;
-}
-
-/**
- * Get all responses for a set of regions.
- * @param $nids
- *  Array of region node ids.
- * @return
- *  Array of all responses that are associated to one of the argued region ids.
- */
-function _cluster_og_get_region_responses($nids) {
-  $query = new EntityFieldQuery();
-  $response_ids = array();
-  foreach ($nids as $nid) {
-    $res = $query->entityCondition('entity_type', 'node')
-      ->entityCondition('bundle', 'response')
-      ->fieldCondition('field_associated_regions', 'target_id', $nids, 'IN')
-      ->execute();
-
-    $response_ids = array_unique(array_merge(array_keys($res['node']), $response_ids));
-  }
-  return $response_ids;
-}
-
-
-/**
- * Get the role id for a group from the role name.
- * @param $bundle,
- *  Group entity bundle name.
- * @param $role_name
- *  The role name as stored in the database.
- */
-function _cluster_og_get_role_id_by_name($bundle, $role_name) {
-  return db_select('og_role', 'og_r')
-    ->fields('og_r', array('rid'))
-    ->condition('group_bundle', $bundle)
-    ->condition('name', $role_name)
-    ->execute()->fetchField();
-}
-
-/**
- * Get all users with specified role for a group.
- * @param $gid
- *  Group id.
- * @param $rid
- *  OG role id.
- * @return
- *  array of user ids.
- */
-function _cluster_og_get_group_users_by_role($gid, $rid) {
-  return db_select('og_users_roles', 'og_ur')
-    ->fields('og_ur', array('uid'))
-    ->condition('gid', $gid)
-    ->condition('rid', $rid)
-    ->execute()->fetchCol();
-}
 
 /**
  * Returns render array for a given menu.
