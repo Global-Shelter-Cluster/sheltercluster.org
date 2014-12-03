@@ -398,8 +398,8 @@ body {
   float: right;
   clear: right;
   display: inline-block;
-  padding: 16px 0;
-  padding: 1rem 0;
+  padding: 12.8px 0;
+  padding: 0.8rem 0;
   color: #000;
   font-size: 12.8px;
   font-size: 0.8rem;
@@ -456,11 +456,16 @@ header a {
   background-image: -webkit-linear-gradient(#050505, #080808 60%, #050505);
   background-image: linear-gradient(#050505, #080808 60%, #050505);
 }
+@media (min-width: 100px) {
+  #button-menu-dropdown {
+    display: none;
+  }
+}
 
 #profile-menu-items {
   float: right;
-  font-size: 14.4px;
-  font-size: 0.9rem;
+  font-size: 13.6px;
+  font-size: 0.85rem;
 }
 #profile-menu-items .profile-item {
   float: left;
@@ -475,8 +480,12 @@ header a {
   padding: 0 0.5rem 0 0.5rem;
 }
 
+#logo-shelter-cluster {
+  display: block;
+  float: left;
+}
 #logo-shelter-cluster .svg {
-  height: 80px;
+  height: 76px;
   max-width: 100%;
   position: relative;
   left: -10px;
@@ -493,8 +502,8 @@ header a {
   background: #688394;
   font-size: 12.8px;
   font-size: 0.8rem;
-  margin-bottom: 16px;
-  margin-bottom: 1rem;
+  margin-bottom: 24px;
+  margin-bottom: 1.5rem;
   color: #536876;
 }
 #site-options-bar a {
@@ -509,6 +518,11 @@ header a {
   fill: #11689d;
   position: relative;
   top: 2px;
+}
+
+#site-branding {
+  margin-bottom: 24px;
+  margin-bottom: 1.5rem;
 }
 
 #bandwidth-selector-icon {

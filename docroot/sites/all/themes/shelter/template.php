@@ -48,6 +48,8 @@ function shelter_preprocess_node(&$variables) {
   if (function_exists($view_mode_based_preprocess)) {
     $view_mode_based_preprocess($variables);
   }
+
+  dpm($variables);
 }
 
 /**

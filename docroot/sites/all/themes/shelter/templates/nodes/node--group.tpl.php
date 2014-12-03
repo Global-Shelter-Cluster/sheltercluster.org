@@ -8,12 +8,7 @@
       <li class="nav-item"><a href="">Strategic Advisory</a></li>
     </ul>
 
-    <a href="#secondary-nav" class="collapse-menu">
-      <?php print _svg('icons/collapse-down', array('alt' => 'Icon for collapsing the menu')); ?>
-      more
-    </a>
-
-    <ul class="nav-items collapsable hide-this">
+    <ul class="nav-items">
       <?php if (isset($content['related_hubs'])): ?>
         <li class="nav-group clearfix">
           <?php print render($content['related_hubs']); ?>
@@ -26,6 +21,17 @@
       <?php endif; ?>
     </ul>
 
+    <a href="#secondary-nav" class="collapse-menu">
+      <?php print _svg('icons/collapse-down', array('alt' => 'Icon for collapsing the menu')); ?>
+      more
+    </a>
+
+    <ul class="nav-items collapsable hide-this">
+        <li class="nav-group clearfix">
+          TEST
+        </li>
+    </ul>
+
   </div>
 </section>
 
@@ -35,9 +41,8 @@
     <div class="page-margin clearfix">
 
       <div class="main-column">
-        <?php print render($content); ?>
         <section id="operation-information">
-          <h1>Typhoon Haiyan</h1>
+          <h1><?php print $title; ?></h1>
           <p>Operation started November 8th, 2013, and is on going.</p>
           <ul id="meta-data">
             <li class="data-item"><span>Type:</span> Windstorm</li>
@@ -46,6 +51,7 @@
             <li class="data-item"><span>Emergency Lead Agency</span> IFRC</li>
           </ul>
         </section>
+        <?php print render($content); ?>
       </div>
 
       <div class="side-column">
