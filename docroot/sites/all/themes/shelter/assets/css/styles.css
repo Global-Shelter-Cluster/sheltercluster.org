@@ -317,6 +317,11 @@ body {
   margin: 0 0 32px 0;
   margin: 0 0 2rem 0;
 }
+#operation-information .operation-image {
+  float: left;
+  margin: 0 16px 16px 0;
+  margin: 0 1rem 1rem 0;
+}
 
 #operation-group {
   display: table;
