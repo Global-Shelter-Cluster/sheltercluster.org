@@ -63,6 +63,7 @@ function cluster_og_node_view($node, $view_mode) {
     $node->content['related_responses'] = $group_content->getRelatedResponses();
     $node->content['key_documents'] = $group_content->getKeyDocuments();
     $node->content['recent_documents'] = $group_content->getRecentDocuments();
+    $node->content['recent_discussions'] = $group_content->getRecentDiscussions();
   }
 }
 
@@ -106,6 +107,10 @@ function cluster_og_theme() {
       'render element' => 'element',
     ),
     'cluster_og_recent_documents' => array(
+      'file' => 'theme/cluster_og.theme.inc',
+      'render element' => 'element',
+    ),
+    'cluster_og_recent_discussions' => array(
       'file' => 'theme/cluster_og.theme.inc',
       'render element' => 'element',
     ),
