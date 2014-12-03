@@ -34,10 +34,22 @@ function cluster_docs_all($nid) {
     return NULL;
   }
 
-  $ret = GroupPageContent::getList(array_keys($res['node']), 'teaser', 'cluster_og_recent_documents');
+  $ret = GroupPageContent::getList(array_keys($res['node']), 'teaser', 'cluster_docs_all');
   $ret['pager'] = array(
     '#theme' => 'pager',
   );
 
   return $ret;
+}
+
+/**
+ * Implements hook_theme().
+ */
+function cluster_docs_theme() {
+  return array(
+    'cluster_docs_all' => array(
+      'file' => 'theme/cluster_docs.theme.inc',
+      'render element' => 'element',
+    ),
+  );
 }
