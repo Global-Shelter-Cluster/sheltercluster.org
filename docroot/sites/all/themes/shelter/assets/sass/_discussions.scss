@@ -9,20 +9,22 @@
 }
 
 #discussions-items {
+  @include reset-list;
 
   .discussions-item  {
     float: left;
     width: 100%;
     @include rem(margin, 0 0 10px 0);
   }
-  .replies, .information {
-    float: left;
-  }
+
   .replies {
+    float: left;
     width: 25%;
     @include rem(font-size,0.9rem);
   }
+
   .information {
+    float: left;
     width: 73%;
     margin: 0 0 0 2%;
 
@@ -31,6 +33,7 @@
       @include rem(font-size, 0.95rem);
       @include rem(padding, 0 0 0.2rem 0);
     }
+
     .date {
       @include rem(font-size, 0.8rem);
     }
@@ -39,8 +42,4 @@
     display: block;
     color: red;
   }
-}
-
-#discussions-items {
-  @include reset-list;
 }

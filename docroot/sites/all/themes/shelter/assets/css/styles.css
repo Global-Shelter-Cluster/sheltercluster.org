@@ -227,6 +227,7 @@ th {
 
 /* _vars.scss */
 /* _mixin.scss */
+/* _reusable.scss */
 .button, .search .submit, #nav-shelter .nav-items .nav-item a {
   background: gainsboro;
   background-image: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJvYmplY3RCb3VuZGluZ0JveCIgeDE9IjAuNSIgeTE9IjAuMCIgeDI9IjAuNSIgeTI9IjEuMCI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2ZhZmFmYSIvPjxzdG9wIG9mZnNldD0iMTAlIiBzdG9wLWNvbG9yPSIjZmRmZGZkIi8+PHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjZGNkY2RjIi8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNncmFkKSIgLz48L3N2Zz4g');
@@ -399,7 +400,7 @@ body {
   transform: scale(1) translateY(-50%) translateX(-50%);
 }
 
-/* _key-information.scss */
+/* _document-card.scss */
 .document-cards {
   padding: 0;
   margin: 0;
@@ -460,6 +461,7 @@ body {
     -moz-box-sizing: border-box;
   }
 }
+/* _search.scss */
 .search {
   float: right;
   clear: right;
@@ -800,21 +802,25 @@ header a {
   font-size: 0.9rem;
 }
 
+#discussions-items {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
 #discussions-items .discussions-item {
   float: left;
   width: 100%;
   margin: 0 0 10px 0;
   margin: 0 0 0.625rem 0;
 }
-#discussions-items .replies, #discussions-items .information {
-  float: left;
-}
 #discussions-items .replies {
+  float: left;
   width: 25%;
   font-size: 14.4px;
   font-size: 0.9rem;
 }
 #discussions-items .information {
+  float: left;
   width: 73%;
   margin: 0 0 0 2%;
 }
@@ -834,54 +840,14 @@ header a {
   color: red;
 }
 
-#discussions-items {
-  padding: 0;
-  margin: 0;
-  list-style: none;
-}
-
 /* _coordination.scss */
 #shelter-coordination-team {
-  margin: 32px;
-  margin: 2rem;
+  margin: 0 0 32px 0;
+  margin: 0 0 2rem 0;
 }
-#shelter-coordination-team .see-all {
-  font-size: 14.4px;
-  font-size: 0.9rem;
-}
-
-#coordination-items .coordination-item {
-  float: left;
-  width: 100%;
-  margin: 0 0 10px 0;
-  margin: 0 0 0.625rem 0;
-}
-#coordination-items .replies, #coordination-items .information {
-  float: left;
-}
-#coordination-items .replies {
-  width: 25%;
-  font-size: 14.4px;
-  font-size: 0.9rem;
-}
-#coordination-items .information {
-  width: 73%;
-  margin: 0 0 0 2%;
-}
-#coordination-items .information .topic {
-  display: block;
-  font-size: 15.2px;
-  font-size: 0.95rem;
-  padding: 0 0 3.2px 0;
-  padding: 0 0 0.2rem 0;
-}
-#coordination-items .information .date {
-  font-size: 12.8px;
-  font-size: 0.8rem;
-}
-#coordination-items .new {
-  display: block;
-  color: red;
+#shelter-coordination-team h4 {
+  margin: 32px 0 16px 0;
+  margin: 2rem 0 1rem 0;
 }
 
 #coordination-items {
@@ -889,7 +855,43 @@ header a {
   margin: 0;
   list-style: none;
 }
+#coordination-items .coordination-item {
+  float: left;
+  width: 100%;
+  margin: 0 0 10px 0;
+  margin: 0 0 0.625rem 0;
+}
+#coordination-items .avatar {
+  float: left;
+  width: 25%;
+  text-align: center;
+}
+#coordination-items .avatar svg {
+  width: 40px;
+  height: 40px;
+}
+#coordination-items .information {
+  float: left;
+  width: 73%;
+  margin: 0 0 0 2%;
+  font-size: 14.4px;
+  font-size: 0.9rem;
+  line-height: 18px;
+  line-height: 1.125rem;
+}
+#coordination-items .information .name {
+  font-weight: bold;
+}
+#coordination-items .information .job-title {
+  display: block;
+}
+#coordination-items .information .telephone {
+  display: block;
+  text-decoration: none;
+  color: #000;
+}
 
+/* _footer.scss */
 footer {
   background: #5d7685;
   color: #fff;
