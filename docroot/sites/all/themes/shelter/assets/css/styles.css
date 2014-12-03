@@ -411,13 +411,23 @@ body {
 .document-cards .document-card {
   float: left;
   width: 100%;
-  margin: 0 2% 2% 0;
-  background: #eee;
-  -moz-box-shadow: rgba(0, 0, 0, 0.05) 3px 3px 4px;
-  -webkit-box-shadow: rgba(0, 0, 0, 0.05) 3px 3px 4px;
-  box-shadow: rgba(0, 0, 0, 0.05) 3px 3px 4px;
-  padding: 10px;
-  padding: 0.625rem;
+  margin: 0 2% 4% 0;
+  background: #ebeef0;
+  color: #859caa;
+  border: 1px solid #688394;
+  border: 1px solid #d7d7d7;
+  -webkit-background-clip: padding-box;
+  /* for Safari */
+  background-clip: padding-box;
+  /* for IE9+, Firefox 4+, Opera, Chrome */
+  -moz-border-radius: 0.1875rem;
+  -webkit-border-radius: 0.1875rem;
+  border-radius: 0.1875rem;
+  -moz-box-shadow: rgba(0, 0, 0, 0.09) 3px 3px 4px;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.09) 3px 3px 4px;
+  box-shadow: rgba(0, 0, 0, 0.09) 3px 3px 4px;
+  padding: 8px 0 0 0;
+  padding: 0.5rem 0 0 0;
 }
 @media (min-width: 700px) {
   .document-cards .document-card {
@@ -427,22 +437,53 @@ body {
 .document-cards .document-card.even {
   margin-right: 0;
 }
-.document-cards .document-card .wrapper-card {
-  display: table;
-  height: 100%;
-}
 .document-cards .document-card .image-card {
-  display: table-cell;
-  vertical-align: middle;
+  float: left;
+  width: 60px;
+  padding: 0 10px 0 10px;
 }
 .document-cards .document-card .image-card svg {
-  width: 55px;
-  height: 55px;
+  fill: #8a8a8a;
+  width: 45px;
+  height: 45px;
 }
 .document-cards .document-card .information-card {
-  display: table-cell;
-  padding: 0 0 0 10px;
-  padding: 0 0 0 0.625rem;
+  padding: 0 8px 0 8px;
+  padding: 0 0.5rem 0 0.5rem;
+}
+.document-cards .document-card .information-card a {
+  color: #242424;
+}
+.document-cards .document-card .information-card a:hover, .document-cards .document-card .information-card a:active {
+  text-decoration: none;
+}
+.document-cards .document-card .information-card p {
+  margin: 8px 0;
+  margin: 0.5rem 0;
+  font-size: 13.6px;
+  font-size: 0.85rem;
+}
+.document-cards .document-card .information-file {
+  float: left;
+  width: 100%;
+  background-color: #688394;
+  color: white;
+  font-size: 14.4px;
+  font-size: 0.9rem;
+  padding: 8px;
+  padding: 0.5rem;
+  -moz-border-radius-bottomleft: 0.15rem;
+  -webkit-border-bottom-left-radius: 0.15rem;
+  border-bottom-left-radius: 0.15rem;
+  -moz-border-radius-bottomright: 0.15rem;
+  -webkit-border-bottom-right-radius: 0.15rem;
+  border-bottom-right-radius: 0.15rem;
+}
+.document-cards .document-card .information-file .size-type {
+  float: left;
+}
+.document-cards .document-card .information-file .source {
+  float: right;
 }
 
 /* _search.scss */
