@@ -1,0 +1,55 @@
+/* _coordination.scss */
+
+#shelter-coordination-team {
+  @include rem(margin, 0 0 2rem 0);
+
+  h4 {
+    @include rem(margin, 2rem 0 1rem 0);
+  }
+}
+
+#coordination-items {
+  @include reset-list;
+
+  .coordination-item  {
+    float: left;
+    width: 100%;
+    @include rem(margin, 0 0 10px 0);
+  }
+
+  .avatar {
+    float: left;
+    width: 25%;
+    text-align: center;
+
+    svg {
+      width: 40px;
+      height: 40px;
+    }
+  }
+
+  .information {
+    float: left;
+    width: 73%;
+    margin: 0 0 0 2%;
+    @include rem(font-size, 0.9rem);
+    @include rem(line-height, 1.125rem);
+
+      .name {
+        font-weight: bold;
+      }
+      .job-title {
+        display: block;
+      }
+      .telephone {
+        display: block;
+        text-decoration: none;
+        color: #000;
+      }
+      .email {
+
+      }
+  }
+}
+
+

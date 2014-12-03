@@ -227,6 +227,7 @@ th {
 
 /* _vars.scss */
 /* _mixin.scss */
+/* _reusable.scss */
 .button, .search .submit, #nav-shelter .nav-items .nav-item a {
   background: gainsboro;
   background-image: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJvYmplY3RCb3VuZGluZ0JveCIgeDE9IjAuNSIgeTE9IjAuMCIgeDI9IjAuNSIgeTI9IjEuMCI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2ZhZmFmYSIvPjxzdG9wIG9mZnNldD0iMTAlIiBzdG9wLWNvbG9yPSIjZmRmZGZkIi8+PHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjZGNkY2RjIi8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNncmFkKSIgLz48L3N2Zz4g');
@@ -265,6 +266,7 @@ th {
 
 html {
   font-size: 100%;
+  height: 100%;
 }
 
 body {
@@ -274,6 +276,7 @@ body {
   font-weight: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  min-height: 100%;
 }
 
 .page-margin {
@@ -305,8 +308,8 @@ body {
 }
 @media (min-width: 980px) {
   .side-column {
-    float: left;
-    width: 38%;
+    float: right;
+    width: 35%;
   }
 }
 
@@ -363,6 +366,9 @@ body {
 #featured-documents ul {
   height: 350px;
   height: 21.875rem;
+  padding: 0;
+  margin: 0;
+  list-style: none;
 }
 #featured-documents li {
   display: inline;
@@ -394,6 +400,68 @@ body {
   transform: scale(1) translateY(-50%) translateX(-50%);
 }
 
+/* _document-card.scss */
+.document-cards {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  -webkit-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -ms-flex-pack: justify;
+  -webkit-justify-content: space-between;
+  justify-content: space-between;
+  margin: 0 0 40px -10px;
+}
+.document-cards .wrapper-card {
+  display: table;
+}
+.document-cards .document-card {
+  -ms-flex: 1 1 310px;
+  -webkit-flex: 1 1 310px;
+  flex: 1 1 310px;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -ms-flex-direction: column;
+  -webkit-flex-direction: column;
+  flex-direction: column;
+  margin: 10px 0 0 10px;
+  background-color: #b6b6b6;
+}
+.document-cards .document-card .information-card {
+  padding: 15px 15px 15px 0;
+  padding: 0.9375rem 0.9375rem 0.9375rem 0;
+}
+.document-cards .document-card .information-card p {
+  font-size: 12.8px;
+  font-size: 0.8rem;
+}
+.document-cards .document-card .image-card {
+  display: table-cell;
+  vertical-align: middle;
+  padding: 0 15px 0 15px;
+  padding: 0 0.9375rem 0 0.9375rem;
+}
+.document-cards .document-card .image-card svg {
+  width: 55px;
+  height: 55px;
+}
+
+/*
+    Legacy Firefox implementation treats all flex containers
+    as inline-block elements.
+*/
+@-moz-document url-prefix() {
+  .document-cards {
+    width: 100%;
+    -moz-box-sizing: border-box;
+  }
+}
+/* _search.scss */
 .search {
   float: right;
   clear: right;
@@ -717,9 +785,23 @@ header a {
   font-size: 0.75rem;
 }
 
-#content-header {
+/* _content.scss */
+.main-column,
+.side-column {
   padding: 16px 0 0 0;
   padding: 1rem 0 0 0;
+}
+.main-column h3,
+.side-column h3 {
+  font-size: 24px;
+  font-size: 1.5rem;
+  margin-top: 0;
+}
+.main-column h4,
+.side-column h4 {
+  margin-top: 0;
+  font-size: 16px;
+  font-size: 1rem;
 }
 
 #operation-information h1 {
@@ -727,6 +809,106 @@ header a {
   margin: 0 0 1rem 0;
 }
 
+/* _discussions.scss */
+#shelter-discussions {
+  margin: 0 0 32px 0;
+  margin: 0 0 2rem 0;
+}
+#shelter-discussions .see-all {
+  font-size: 14.4px;
+  font-size: 0.9rem;
+}
+
+#discussions-items {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+#discussions-items .discussions-item {
+  float: left;
+  width: 100%;
+  margin: 0 0 10px 0;
+  margin: 0 0 0.625rem 0;
+}
+#discussions-items .replies {
+  float: left;
+  width: 25%;
+  font-size: 14.4px;
+  font-size: 0.9rem;
+}
+#discussions-items .information {
+  float: left;
+  width: 73%;
+  margin: 0 0 0 2%;
+}
+#discussions-items .information .topic {
+  display: block;
+  font-size: 15.2px;
+  font-size: 0.95rem;
+  padding: 0 0 3.2px 0;
+  padding: 0 0 0.2rem 0;
+}
+#discussions-items .information .date {
+  font-size: 12.8px;
+  font-size: 0.8rem;
+}
+#discussions-items .new {
+  display: block;
+  color: red;
+}
+
+/* _coordination.scss */
+#shelter-coordination-team {
+  margin: 0 0 32px 0;
+  margin: 0 0 2rem 0;
+}
+#shelter-coordination-team h4 {
+  margin: 32px 0 16px 0;
+  margin: 2rem 0 1rem 0;
+}
+
+#coordination-items {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+#coordination-items .coordination-item {
+  float: left;
+  width: 100%;
+  margin: 0 0 10px 0;
+  margin: 0 0 0.625rem 0;
+}
+#coordination-items .avatar {
+  float: left;
+  width: 25%;
+  text-align: center;
+}
+#coordination-items .avatar svg {
+  width: 40px;
+  height: 40px;
+}
+#coordination-items .information {
+  float: left;
+  width: 73%;
+  margin: 0 0 0 2%;
+  font-size: 14.4px;
+  font-size: 0.9rem;
+  line-height: 18px;
+  line-height: 1.125rem;
+}
+#coordination-items .information .name {
+  font-weight: bold;
+}
+#coordination-items .information .job-title {
+  display: block;
+}
+#coordination-items .information .telephone {
+  display: block;
+  text-decoration: none;
+  color: #000;
+}
+
+/* _footer.scss */
 footer {
   background: #5d7685;
   color: #fff;

@@ -1,0 +1,109 @@
+/* _document-card.scss */
+
+#key-information {
+
+}
+
+// PLEASE KEEP THIS CSS BELOW I WILL REMOVE IT
+// .document-cards {
+//   @include reset-list;
+//   display: table;
+//   width: 100%;
+//   @include rem(border-spacing, 0.625rem);
+//   @include rem(margin,0 0 0 -0.625rem);
+//   border-collapse: separate;
+
+//   .document-card {
+//     display: table-cell;
+//     width: 100%;
+//     min-width: 310px;
+//     max-width: 450px;
+//     background-color: rgb(182,182,182);
+//     margin: 0 0.5rem 0 0;
+
+//     .information-card {
+//       display: table-cell;
+//       vertical-align: top;
+//       @include rem(padding, 0.9375rem 0.9375rem 0.9375rem 0);
+//       p {
+//         @include rem(font-size, 0.8rem);
+//       }
+//     }
+//     .image-card {
+//       display: table-cell;
+//       vertical-align: middle;
+//       @include rem(padding, 0 0.9375rem 0 0.9375rem);
+//       svg {
+//         width: 55px;
+//         height: 55px;
+//       }
+//     }
+//     &.special {
+//       // display: table-row;
+//     }
+//   }
+// }
+
+.document-cards {
+  @include reset-list;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  -webkit-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -ms-flex-pack: justify;
+  -webkit-justify-content: space-between;
+  justify-content: space-between;
+  margin: 0 0 40px -10px;
+
+  .wrapper-card {
+    display: table;
+  }
+
+  .document-card {
+    -ms-flex: 1 1 310px;
+    -webkit-flex: 1 1 310px;
+    flex: 1 1 310px;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -ms-flex-direction: column;
+    -webkit-flex-direction: column;
+    flex-direction: column;
+    margin: 10px 0 0 10px;
+    background-color: rgb(182,182,182);
+
+    .information-card {
+      @include rem(padding, 0.9375rem 0.9375rem 0.9375rem 0);
+      p {
+        @include rem(font-size, 0.8rem);
+      }
+    }
+    .image-card {
+      display: table-cell;
+      vertical-align: middle;
+      @include rem(padding, 0 0.9375rem 0 0.9375rem);
+      svg {
+        width: 55px;
+        height: 55px;
+      }
+    }
+    &.special {
+      // display: table-row;
+    }
+  }
+}
+
+/*
+    Legacy Firefox implementation treats all flex containers
+    as inline-block elements.
+*/
+
+@-moz-document url-prefix() {
+.document-cards {
+    width: 100%;
+    -moz-box-sizing: border-box;
+    }
+
+}

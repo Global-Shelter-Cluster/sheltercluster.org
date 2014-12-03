@@ -151,7 +151,7 @@
 
         <div class="side-column">
           <section id="operation-group">
-            <h3>Join this Operation Group and</h3>
+            <h4>Join this Operation Group and</h4>
             <fieldset id="checkboxgroup">
               <label><input type="checkbox" selected="selected"/> Receive notifications</label>
               <label><input type="checkbox" selected="selected"/> Register to this group the mailing list</label>
@@ -160,7 +160,6 @@
             <div id="button-join-group"><a class="button" href="">Join</a></div>
           </section>
         </div>
-
       </div>
     </div>
 
@@ -186,17 +185,340 @@
           </ul>
         </section>
 
+        <section id="key-information">
+          <h3>Key Information</h3>
+          <h4>Coordination information</h4>
+          <ul class="document-cards">
+            <li class="document-card">
+              <div class="wrapper-card">
+                <div class="image-card"><?php print _svg('icons/share', array('class'=>'share-icon', 'alt' => 'Share icon')); ?></div>
+                <div class="information-card">
+                  <a href="">id lobortis leo maximus tristique</a>
+                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc aliquet justo leo, id lobortis leo maximus tristique. Sed non odio eros. Aenean pulvinar sapien quam, a bibendum ante lobortis eu.</p>
+                  <span class="file-size">[250k]</span>
+                  <span class="file-type">docx</span>
+                  <span class="file-source">Aenean pulvinar</span>
+                </div>
+              </div>
+            </li>
+            <li class="document-card">
+              <div class="wrapper-card">
+                <div class="image-card"><?php print _svg('icons/share', array('class'=>'share-icon', 'alt' => 'Share icon')); ?></div>
+                <div class="information-card">
+                  <a href="">id lobortis leo maximus tristique</a>
+                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc aliquet justo leo, id lobortis leo maximus tristique. Sed non odio eros. Aenean pulvinar sapien quam, a bibendum ante lobortis eu.</p>
+                  <span class="file-size">[250k]</span>
+                  <span class="file-type">docx</span>
+                  <span class="file-source">Aenean pulvinar</span>
+                </div>
+              </div>
+            </li>
+            <li class="document-card">
+              <div class="wrapper-card">
+                <div class="image-card"><?php print _svg('icons/share', array('class'=>'share-icon', 'alt' => 'Share icon')); ?></div>
+                <div class="information-card">
+                  <a href="">id lobortis leo maximus tristique</a>
+                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc aliquet justo leo, id lobortis leo maximus tristique. Sed non odio eros. Aenean pulvinar sapien quam, a bibendum ante lobortis eu.</p>
+                  <span class="file-size">[250k]</span>
+                  <span class="file-type">docx</span>
+                  <span class="file-source">Aenean pulvinar</span>
+                </div>
+              </div>
+            </li>
+            <li class="document-card">
+              <div class="wrapper-card">
+                <div class="image-card"><?php print _svg('icons/share', array('class'=>'share-icon', 'alt' => 'Share icon')); ?></div>
+                <div class="information-card">
+                  <a href="">id lobortis leo maximus tristique</a>
+                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc aliquet justo leo, id lobortis leo maximus tristique. Sed non odio eros. Aenean pulvinar sapien quam, a bibendum ante lobortis eu.</p>
+                  <span class="file-size">[250k]</span>
+                  <span class="file-type">docx</span>
+                  <span class="file-source">Aenean pulvinar</span>
+                </div>
+              </div>
+            </li>
+            <li class="document-card">
+              <div class="wrapper-card">
+                <div class="image-card"><?php print _svg('icons/share', array('class'=>'share-icon', 'alt' => 'Share icon')); ?></div>
+                <div class="information-card">
+                  <a href="">id lobortis leo maximus tristique</a>
+                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc aliquet justo leo, id lobortis leo maximus tristique. Sed non odio eros. Aenean pulvinar sapien quam, a bibendum ante lobortis eu.</p>
+                  <span class="file-size">[250k]</span>
+                  <span class="file-type">docx</span>
+                  <span class="file-source">Aenean pulvinar</span>
+                </div>
+              </div>
+            </li>
+          </ul>
+
+          <h4>Cluster Guidance</h4>
+          <ul class="document-cards">
+            <li class="document-card">
+              <div class="wrapper-card">
+                <div class="image-card"><?php print _svg('icons/share', array('class'=>'share-icon', 'alt' => 'Share icon')); ?></div>
+                <div class="information-card">
+                  <a href="">id lobortis leo maximus tristique</a>
+                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc aliquet justo leo, id lobortis leo maximus tristique. Sed non odio eros. Aenean pulvinar sapien quam, a bibendum ante lobortis eu.</p>
+                  <span class="file-size">[250k]</span>
+                  <span class="file-type">docx</span>
+                  <span class="file-source">Aenean pulvinar</span>
+                </div>
+              </div>
+            </li>
+            <li class="document-card">
+              <div class="wrapper-card">
+                <div class="image-card"><?php print _svg('icons/share', array('class'=>'share-icon', 'alt' => 'Share icon')); ?></div>
+                <div class="information-card">
+                  <a href="">id lobortis leo maximus tristique</a>
+                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc aliquet justo leo, id lobortis leo maximus tristique. Sed non odio eros. Aenean pulvinar sapien quam, a bibendum ante lobortis eu.</p>
+                  <span class="file-size">[250k]</span>
+                  <span class="file-type">docx</span>
+                  <span class="file-source">Aenean pulvinar</span>
+                </div>
+              </div>
+            </li>
+            <li class="document-card">
+              <div class="wrapper-card">
+                <div class="image-card"><?php print _svg('icons/share', array('class'=>'share-icon', 'alt' => 'Share icon')); ?></div>
+                <div class="information-card">
+                  <a href="">id lobortis leo maximus tristique</a>
+                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc aliquet justo leo, id lobortis leo maximus tristique. Sed non odio eros. Aenean pulvinar sapien quam, a bibendum ante lobortis eu.</p>
+                  <span class="file-size">[250k]</span>
+                  <span class="file-type">docx</span>
+                  <span class="file-source">Aenean pulvinar</span>
+                </div>
+              </div>
+            </li>
+            <li class="document-card">
+              <div class="wrapper-card">
+                <div class="image-card"><?php print _svg('icons/share', array('class'=>'share-icon', 'alt' => 'Share icon')); ?></div>
+                <div class="information-card">
+                  <a href="">id lobortis leo maximus tristique</a>
+                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc aliquet justo leo, id lobortis leo maximus tristique. Sed non odio eros. Aenean pulvinar sapien quam, a bibendum ante lobortis eu.</p>
+                  <span class="file-size">[250k]</span>
+                  <span class="file-type">docx</span>
+                  <span class="file-source">Aenean pulvinar</span>
+                </div>
+              </div>
+            </li>
+          </ul>
+          <h4>Other Sources of Information</h4>
+          <ul class="document-cards">
+            <li class="document-card">
+              <div class="wrapper-card">
+                <div class="image-card"><?php print _svg('icons/share', array('class'=>'share-icon', 'alt' => 'Share icon')); ?></div>
+                <div class="information-card">
+                  <a href="">id lobortis leo maximus tristique</a>
+                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc aliquet justo leo, id lobortis leo maximus tristique. Sed non odio eros. Aenean pulvinar sapien quam, a bibendum ante lobortis eu.</p>
+                  <span class="file-size">[250k]</span>
+                  <span class="file-type">docx</span>
+                  <span class="file-source">Aenean pulvinar</span>
+                </div>
+              </div>
+            </li>
+            <li class="document-card">
+              <div class="wrapper-card">
+                <div class="image-card"><?php print _svg('icons/share', array('class'=>'share-icon', 'alt' => 'Share icon')); ?></div>
+                <div class="information-card">
+                  <a href="">id lobortis leo maximus tristique</a>
+                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc aliquet justo leo, id lobortis leo maximus tristique. Sed non odio eros. Aenean pulvinar sapien quam, a bibendum ante lobortis eu.</p>
+                  <span class="file-size">[250k]</span>
+                  <span class="file-type">docx</span>
+                  <span class="file-source">Aenean pulvinar</span>
+                </div>
+              </div>
+            </li>
+          </ul>
+
+          <h4>Recent Documents</h4>
+          <ul class="document-cards">
+            <li class="document-card">
+              <div class="wrapper-card">
+                <div class="image-card"><?php print _svg('icons/share', array('class'=>'share-icon', 'alt' => 'Share icon')); ?></div>
+                <div class="information-card">
+                  <a href="">id lobortis leo maximus tristique</a>
+                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc aliquet justo leo, id lobortis leo maximus tristique. Sed non odio eros. Aenean pulvinar sapien quam, a bibendum ante lobortis eu.</p>
+                  <span class="file-size">[250k]</span>
+                  <span class="file-type">docx</span>
+                  <span class="file-source">Aenean pulvinar</span>
+                </div>
+              </div>
+            </li>
+            <li class="document-card">
+              <div class="wrapper-card">
+                <div class="image-card"><?php print _svg('icons/share', array('class'=>'share-icon', 'alt' => 'Share icon')); ?></div>
+                <div class="information-card">
+                  <a href="">id lobortis leo maximus tristique</a>
+                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc aliquet justo leo, id lobortis leo maximus tristique. Sed non odio eros. Aenean pulvinar sapien quam, a bibendum ante lobortis eu.</p>
+                  <span class="file-size">[250k]</span>
+                  <span class="file-type">docx</span>
+                  <span class="file-source">Aenean pulvinar</span>
+                </div>
+              </div>
+            </li>
+            <li class="document-card">
+              <div class="wrapper-card">
+                <div class="image-card"><?php print _svg('icons/share', array('class'=>'share-icon', 'alt' => 'Share icon')); ?></div>
+                <div class="information-card">
+                  <a href="">id lobortis leo maximus tristique</a>
+                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc aliquet justo leo, id lobortis leo maximus tristique. Sed non odio eros. Aenean pulvinar sapien quam, a bibendum ante lobortis eu.</p>
+                  <span class="file-size">[250k]</span>
+                  <span class="file-type">docx</span>
+                  <span class="file-source">Aenean pulvinar</span>
+                </div>
+              </div>
+            </li>
+          </ul>
+
+        </section>
+
         <div id="content-rendered">
           <?php print render($page['content']); ?>
         </div>
 
       </div>
-    </div>
+      <div class="side-column">
+        <section id="shelter-discussions">
+          <h3>Discussions</h3>
+          <ul id="discussions-items">
+            <li class="discussions-item">
+              <div class="replies">24 replies</div>
+              <div class="information">
+                <a href="" class="topic">Where can I find lumber?</a>
+                <span class="date">2014/10/03 by <a class="author" href="">Jane Wikionsons</a></span>
+              </div>
+            </li>
+            <li class="discussions-item">
+              <div class="replies">no replies <span class="new">New</span></div>
+              <div class="information">
+                <a href="" class="topic">Are any special requirements for protection needed when entering the</a>
+                <span class="date">2014/10/15 by <a class="author" href="">John Tremblay</a></span>
+              </div>
+            </li>
+          </ul>
+          <a class="see-all" href="">All other discussions</a>
+        </section>
 
+        <section id="shelter-coordination-team">
+          <h3>Coordination Team</h3>
+          <h4>National Team</h4>
+          <ul id="coordination-items" class="clearfix">
+            <li class="coordination-item">
+              <div class="avatar">
+                <?php print _svg('icons/person', array('id'=>'person-avatar', 'alt' => 'Avatar person icon')); ?>
+              </div>
+              <div class="information">
+                <span class="name">Victoria Stodard (IFRC)</span>
+                <span class="job-title">National Coordinator</span>
+                <a class="telephone" href="tel:+09084011218">0908 401 1218</a>
+                <a class="email" href="mailto:coord.phil@sheltercluster.org">coord.phil@sheltercluster.org</a>
+              </div>
+            </li>
+            <li class="coordination-item">
+              <div class="avatar">
+                <?php print _svg('icons/person', array('id'=>'person-avatar', 'alt' => 'Avatar person icon')); ?>
+              </div>
+              <div class="information">
+                <span class="name">Tom York (CRS)</span>
+                <span class="job-title">National Information Management</span>
+                <a class="telephone" href="tel:+09084011218">0908 555 1790</a>
+                <a class="email" href="mailto:tom.york@sheltercluster.org">tom.york@sheltercluster.org</a>
+              </div>
+            </li>
+            <li class="coordination-item">
+              <div class="avatar">
+                <?php print _svg('icons/person', array('id'=>'person-avatar', 'alt' => 'Avatar person icon')); ?>
+              </div>
+              <div class="information">
+                <span class="name">Gian Gimang (IFRC)</span>
+                <span class="job-title">Assistant Techhical Coordination</span>
+                <a class="telephone" href="tel:+09084011218">0966 666 1256</a>
+                <a class="email" href="mailto:gian.gimang@sheltercluster.org">gian.gimang@sheltercluster.org</a>
+              </div>
+            </li>
+          </ul>
+
+          <h4>Region VIII</h4>
+          <ul id="coordination-items" class="clearfix">
+            <li class="coordination-item">
+              <div class="avatar">
+                <?php print _svg('icons/person', array('id'=>'person-avatar', 'alt' => 'Avatar person icon')); ?>
+              </div>
+              <div class="information">
+                <span class="name">Victoria Stodard (IFRC)</span>
+                <span class="job-title">National Coordinator</span>
+                <a class="telephone" href="tel:+09084011218">0908 401 1218</a>
+                <a class="email" href="mailto:coord.phil@sheltercluster.org">coord.phil@sheltercluster.org</a>
+              </div>
+            </li>
+            <li class="coordination-item">
+              <div class="avatar">
+                <?php print _svg('icons/person', array('id'=>'person-avatar', 'alt' => 'Avatar person icon')); ?>
+              </div>
+              <div class="information">
+                <span class="name">Tom York (CRS)</span>
+                <span class="job-title">National Information Management</span>
+                <a class="telephone" href="tel:+09084011218">0908 555 1790</a>
+                <a class="email" href="mailto:tom.york@sheltercluster.org">tom.york@sheltercluster.org</a>
+              </div>
+            </li>
+            <li class="coordination-item">
+              <div class="avatar">
+                <?php print _svg('icons/person', array('id'=>'person-avatar', 'alt' => 'Avatar person icon')); ?>
+              </div>
+              <div class="information">
+                <span class="name">Gian Gimang (IFRC)</span>
+                <span class="job-title">Assistant Techhical Coordination</span>
+                <a class="telephone" href="tel:+09084011218">0966 666 1256</a>
+                <a class="email" href="mailto:gian.gimang@sheltercluster.org">gian.gimang@sheltercluster.org</a>
+              </div>
+            </li>
+          </ul>
+
+          <h4>Guiuan Sub-Hub</h4>
+          <ul id="coordination-items" class="clearfix">
+            <li class="coordination-item">
+              <div class="avatar">
+                <?php print _svg('icons/person', array('id'=>'person-avatar', 'alt' => 'Avatar person icon')); ?>
+              </div>
+              <div class="information">
+                <span class="name">Victoria Stodard (IFRC)</span>
+                <span class="job-title">National Coordinator</span>
+                <a class="telephone" href="tel:+09084011218">0908 401 1218</a>
+                <a class="email" href="mailto:coord.phil@sheltercluster.org">coord.phil@sheltercluster.org</a>
+              </div>
+            </li>
+            <li class="coordination-item">
+              <div class="avatar">
+                <?php print _svg('icons/person', array('id'=>'person-avatar', 'alt' => 'Avatar person icon')); ?>
+              </div>
+              <div class="information">
+                <span class="name">Tom York (CRS)</span>
+                <span class="job-title">National Information Management</span>
+                <a class="telephone" href="tel:+09084011218">0908 555 1790</a>
+                <a class="email" href="mailto:tom.york@sheltercluster.org">tom.york@sheltercluster.org</a>
+              </div>
+            </li>
+            <li class="coordination-item">
+              <div class="avatar">
+                <?php print _svg('icons/person', array('id'=>'person-avatar', 'alt' => 'Avatar person icon')); ?>
+              </div>
+              <div class="information">
+                <span class="name">Gian Gimang (IFRC)</span>
+                <span class="job-title">Assistant Techhical Coordination</span>
+                <a class="telephone" href="tel:+09084011218">0966 666 1256</a>
+                <a class="email" href="mailto:gian.gimang@sheltercluster.org">gian.gimang@sheltercluster.org</a>
+              </div>
+            </li>
+          </ul>
+        </section>
+
+      </div>
+    </div>
   </div>
 
   <footer>
-    <div class="page-margin clearfix">
+    <div class="page-margin">
       <form class="search" action="http://www.google.com/search" method="get">
         <input class="text-field" type="search" placeholder="Search documents" name="q">
         <input class="submit" type="submit" value="Search">

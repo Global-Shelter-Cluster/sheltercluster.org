@@ -1,4 +1,15 @@
-#content-header {
+/* _content.scss */
+
+.main-column,
+.side-column {
+  h3 {
+    @include rem(font-size, 1.5rem);
+    margin-top: 0;
+  }
+  h4 {
+    margin-top: 0;
+    @include rem(font-size, 1rem);
+  }
   @include rem(padding, 1rem 0 0 0);
 }
 #operation-information {
