@@ -396,6 +396,24 @@
           </ul>
           <a class="see-all" href="">All other discussions</a>
         </section>
+
+        <section id="shelter-coordination-team">
+          <h3>Coordination Team</h3>
+          <h4>National Team</h4>
+          <ul id="coordination-items">
+            <li class="coordination-item">
+              <div class="avatar">
+                <?php print _svg('icons/person', array('id'=>'person-avatar', 'alt' => 'Avatar person icon')); ?>
+              </div>
+              <div class="information">
+                <span class="date">2014/10/03 by <a class="author" href="">Jane Wikionsons</a></span>
+                <a href="" class="topic">Where can I find lumber?</a>
+              </div>
+            </li>
+          </ul>
+          <a class="see-all" href="">All other discussions</a>
+        </section>
+
       </div>
     </div>
   </div>

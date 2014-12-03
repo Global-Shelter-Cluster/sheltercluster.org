@@ -1,16 +1,16 @@
-/* _discussions.scss */
+/* _coordination.scss */
 
-#shelter-discussions {
-  @include rem(margin, 0 0 2rem 0);
+#shelter-coordination-team {
+  @include rem(margin, 2rem);
 
   .see-all {
     @include rem(font-size, 0.9rem);
   }
 }
 
-#discussions-items {
+#coordination-items {
 
-  .discussions-item  {
+  .coordination-item  {
     float: left;
     width: 100%;
     @include rem(margin, 0 0 10px 0);
@@ -41,6 +41,6 @@
   }
 }
 
-#discussions-items {
+#coordination-items {
   @include reset-list;
 }
