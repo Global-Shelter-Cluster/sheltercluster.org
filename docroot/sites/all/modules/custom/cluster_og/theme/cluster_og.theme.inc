@@ -45,6 +45,21 @@ function theme_cluster_og_related_hubs($vars) {
 }
 
 /**
+ * Render a group's recent discussions.
+ * $vars['element']['#total']: the discussions total count (maximum of 2).
+ * $vars['element']['#children']: markup for all discussion nodes.
+ * $vars['element']['#all_discussions_link']: link for the "all discussions" page.
+ * $vars['element'][UID]: each discussion render array and markup.
+ */
+function theme_cluster_og_recent_discussions($vars) {
+  $output = '<div class="field"><div class="field-label">' . t('Discussions') . '</div>';
+  $output .= $vars['element']['#children'];
+  $output .= l(t('All other discussions'), $vars['element']['#all_discussions_link']);
+  $output .= '</div>';
+  return $output;
+}
+
+/**
  * Render a group's recent documents.
  * $vars['element']['#total']: the documents total count (maximum of 5).
  * $vars['element']['#children']: markup for all document nodes.

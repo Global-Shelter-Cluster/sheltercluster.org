@@ -61,7 +61,7 @@ function _shelter_base_required_core() {
  * List of required custom modules.
  */
 function _shelter_base_required_custom() {
-  return array('cluster_docs', 'cluster_og', 'cluster_user');
+  return array('cluster_docs', 'cluster_og', 'cluster_user', 'cluster_discussions');
 }
 
 /**
@@ -84,4 +84,11 @@ function shelter_base_update_7002() {
 function shelter_base_update_7003() {
   theme_enable(array('theme_default' => 'shelter'));
   variable_set('theme_default', 'shelter');
+}
+
+/**
+ * Update required module list.
+ */
+function shelter_base_update_7005() {
+  _shelter_base_module_enable_all();
 }

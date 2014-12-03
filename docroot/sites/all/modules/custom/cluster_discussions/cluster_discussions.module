@@ -1,18 +1,18 @@
 <?php
 /**
  * @file
- * Code for the cluster_docs feature.
+ * Code for the cluster_discussions feature.
  */
 
-include_once 'cluster_docs.features.inc';
+include_once 'cluster_discussions.features.inc';
 
 /**
  *  Implements hook_menu().
  */
-function cluster_docs_menu() {
-  $items['node/%/documents'] = array(
-    'title' => 'Documents',
-    'page callback' => 'cluster_docs_all',
+function cluster_discussions_menu() {
+  $items['node/%/discussions'] = array(
+    'title' => 'Discussions',
+    'page callback' => 'cluster_discussions_all',
     'page arguments' => array(1),
     'access callback' => 'og_is_group',
     'access arguments' => array(0, 1),
@@ -21,10 +21,10 @@ function cluster_docs_menu() {
   return $items;
 }
 
-function cluster_docs_all($nid) {
+function cluster_discussions_all($nid) {
   $query = new EntityFieldQuery();
   $res = $query->entityCondition('entity_type', 'node')
-    ->entityCondition('bundle', 'document')
+    ->entityCondition('bundle', 'discussion')
     ->fieldCondition('og_group_ref', 'target_id', $nid)
     ->propertyCondition('status', NODE_PUBLISHED)
     ->propertyOrderBy('changed', 'DESC')
@@ -35,7 +35,7 @@ function cluster_docs_all($nid) {
     return NULL;
   }
 
-  $ret = GroupPageContent::getList(array_keys($res['node']), 'teaser', 'cluster_docs_all');
+  $ret = GroupPageContent::getList(array_keys($res['node']), 'teaser', 'cluster_discussions_all');
   $ret['pager'] = array(
     '#theme' => 'pager',
   );
@@ -46,10 +46,10 @@ function cluster_docs_all($nid) {
 /**
  * Implements hook_theme().
  */
-function cluster_docs_theme() {
+function cluster_discussions_theme() {
   return array(
-    'cluster_docs_all' => array(
-      'file' => 'theme/cluster_docs.theme.inc',
+    'cluster_discussions_all' => array(
+      'file' => 'theme/cluster_discussions.theme.inc',
       'render element' => 'element',
     ),
   );
