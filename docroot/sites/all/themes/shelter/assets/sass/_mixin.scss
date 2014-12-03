@@ -78,11 +78,11 @@
 
       @if $unit == "px" {
         $px : append($px,  $value);
-        $rem: append($rem, ($val / 16 + rem));
+        $rem: append($rem, ($val / $body-font-size + rem));
       }
 
       @if $unit == "rem" {
-        $px : append($px,  ($val * 16 + px));
+        $px : append($px,  ($val * $body-font-size + px));
         $rem: append($rem, $value);
       }
     }
