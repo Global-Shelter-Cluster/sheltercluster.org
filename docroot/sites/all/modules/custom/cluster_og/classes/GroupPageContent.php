@@ -33,6 +33,26 @@ class GroupContentManager {
     return GroupPageContent::getList($contact_members_ids, 'contact_member', 'cluster_og_contact_member', 'user');
   }
 
+  public function getRecentDiscussions() {
+    $query = new EntityFieldQuery();
+    $res = $query->entityCondition('entity_type', 'node')
+      ->entityCondition('bundle', 'discussion')
+      ->fieldCondition('og_group_ref', 'target_id', $this->node->nid)
+      ->propertyCondition('status', NODE_PUBLISHED)
+      ->propertyOrderBy('changed', 'DESC')
+      ->range(0, 2) // This is a hard limit, not a paginator.
+      ->execute();
+
+    if (!isset($res['node'])) {
+      return NULL;
+    }
+
+    $ret = GroupPageContent::getList(array_keys($res['node']), 'teaser', 'cluster_og_recent_discussions');
+    $ret['#all_discussions_link'] = 'node/' . $this->node->nid . '/discussions';
+
+    return $ret;
+  }
+
   public function getRecentDocuments() {
     $query = new EntityFieldQuery();
     $res = $query->entityCondition('entity_type', 'node')
@@ -348,6 +368,13 @@ class GroupPageContent {
       return NULL;
     }
     return $this->manager->getRecentDocuments();
+  }
+
+  public function getRecentDiscussions() {
+    if ($this->view_mode != 'full') {
+      return NULL;
+    }
+    return $this->manager->getRecentDiscussions();
   }
 
   /**
