@@ -14,7 +14,7 @@
   .coordination-item  {
     float: left;
     width: 100%;
-    @include rem(margin, 0 0 10px 0);
+    @include rem(margin, 0 0 0.625rem 0);
   }
 
   .avatar {
@@ -23,8 +23,8 @@
     text-align: center;
 
     svg {
-      width: 40px;
-      height: 40px;
+      @include rem(width, 2.5rem);
+      @include rem(height, 2.5rem);
     }
   }
 
@@ -35,20 +35,20 @@
     @include rem(font-size, 0.9rem);
     @include rem(line-height, 1.125rem);
 
-      .name {
-        font-weight: bold;
-      }
-      .job-title {
-        display: block;
-      }
-      .telephone {
-        display: block;
-        text-decoration: none;
-        color: #000;
-      }
-      .email {
+    .name {
+      font-weight: bold;
+    }
+    .job-title {
+      display: block;
+    }
+    .telephone {
+      display: block;
+      text-decoration: none;
+      color: #000;
+    }
+    .email {
 
-      }
+    }
   }
 }
 

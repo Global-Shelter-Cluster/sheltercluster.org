@@ -188,8 +188,8 @@
         <section id="key-information">
           <h3>Key Information</h3>
           <h4>Coordination information</h4>
-          <ul class="document-cards">
-            <li class="document-card">
+          <ul class="document-cards clearfix">
+            <li class="document-card odd">
               <div class="wrapper-card">
                 <div class="image-card"><?php print _svg('icons/share', array('class'=>'share-icon', 'alt' => 'Share icon')); ?></div>
                 <div class="information-card">
@@ -201,7 +201,7 @@
                 </div>
               </div>
             </li>
-            <li class="document-card">
+            <li class="document-card even">
               <div class="wrapper-card">
                 <div class="image-card"><?php print _svg('icons/share', array('class'=>'share-icon', 'alt' => 'Share icon')); ?></div>
                 <div class="information-card">
@@ -213,7 +213,7 @@
                 </div>
               </div>
             </li>
-            <li class="document-card">
+            <li class="document-card odd">
               <div class="wrapper-card">
                 <div class="image-card"><?php print _svg('icons/share', array('class'=>'share-icon', 'alt' => 'Share icon')); ?></div>
                 <div class="information-card">
@@ -225,7 +225,7 @@
                 </div>
               </div>
             </li>
-            <li class="document-card">
+            <li class="document-card even">
               <div class="wrapper-card">
                 <div class="image-card"><?php print _svg('icons/share', array('class'=>'share-icon', 'alt' => 'Share icon')); ?></div>
                 <div class="information-card">
@@ -237,7 +237,7 @@
                 </div>
               </div>
             </li>
-            <li class="document-card">
+            <li class="document-card odd">
               <div class="wrapper-card">
                 <div class="image-card"><?php print _svg('icons/share', array('class'=>'share-icon', 'alt' => 'Share icon')); ?></div>
                 <div class="information-card">
@@ -252,8 +252,8 @@
           </ul>
 
           <h4>Cluster Guidance</h4>
-          <ul class="document-cards">
-            <li class="document-card">
+          <ul class="document-cards clearfix">
+            <li class="document-card odd">
               <div class="wrapper-card">
                 <div class="image-card"><?php print _svg('icons/share', array('class'=>'share-icon', 'alt' => 'Share icon')); ?></div>
                 <div class="information-card">
@@ -265,7 +265,7 @@
                 </div>
               </div>
             </li>
-            <li class="document-card">
+            <li class="document-card even">
               <div class="wrapper-card">
                 <div class="image-card"><?php print _svg('icons/share', array('class'=>'share-icon', 'alt' => 'Share icon')); ?></div>
                 <div class="information-card">
@@ -277,7 +277,7 @@
                 </div>
               </div>
             </li>
-            <li class="document-card">
+            <li class="document-card odd">
               <div class="wrapper-card">
                 <div class="image-card"><?php print _svg('icons/share', array('class'=>'share-icon', 'alt' => 'Share icon')); ?></div>
                 <div class="information-card">
@@ -289,7 +289,7 @@
                 </div>
               </div>
             </li>
-            <li class="document-card">
+            <li class="document-card even">
               <div class="wrapper-card">
                 <div class="image-card"><?php print _svg('icons/share', array('class'=>'share-icon', 'alt' => 'Share icon')); ?></div>
                 <div class="information-card">
@@ -302,9 +302,10 @@
               </div>
             </li>
           </ul>
+
           <h4>Other Sources of Information</h4>
-          <ul class="document-cards">
-            <li class="document-card">
+          <ul class="document-cards clearfix">
+            <li class="document-card odd">
               <div class="wrapper-card">
                 <div class="image-card"><?php print _svg('icons/share', array('class'=>'share-icon', 'alt' => 'Share icon')); ?></div>
                 <div class="information-card">
@@ -316,7 +317,7 @@
                 </div>
               </div>
             </li>
-            <li class="document-card">
+            <li class="document-card even">
               <div class="wrapper-card">
                 <div class="image-card"><?php print _svg('icons/share', array('class'=>'share-icon', 'alt' => 'Share icon')); ?></div>
                 <div class="information-card">
@@ -331,8 +332,8 @@
           </ul>
 
           <h4>Recent Documents</h4>
-          <ul class="document-cards">
-            <li class="document-card">
+          <ul class="document-cards clearfix">
+            <li class="document-card odd">
               <div class="wrapper-card">
                 <div class="image-card"><?php print _svg('icons/share', array('class'=>'share-icon', 'alt' => 'Share icon')); ?></div>
                 <div class="information-card">
@@ -344,7 +345,7 @@
                 </div>
               </div>
             </li>
-            <li class="document-card">
+            <li class="document-card even">
               <div class="wrapper-card">
                 <div class="image-card"><?php print _svg('icons/share', array('class'=>'share-icon', 'alt' => 'Share icon')); ?></div>
                 <div class="information-card">
@@ -356,7 +357,7 @@
                 </div>
               </div>
             </li>
-            <li class="document-card">
+            <li class="document-card odd">
               <div class="wrapper-card">
                 <div class="image-card"><?php print _svg('icons/share', array('class'=>'share-icon', 'alt' => 'Share icon')); ?></div>
                 <div class="information-card">

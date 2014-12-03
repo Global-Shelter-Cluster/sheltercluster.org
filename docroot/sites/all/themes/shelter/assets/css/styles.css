@@ -272,7 +272,7 @@ html {
 body {
   background-color: white;
   font-family: arial, sans-serif;
-  font-size: rem(16px);
+  font-size: rem("16px");
   font-weight: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -405,62 +405,46 @@ body {
   padding: 0;
   margin: 0;
   list-style: none;
-  display: -ms-flexbox;
-  display: -webkit-flex;
-  display: flex;
-  -ms-flex-wrap: wrap;
-  -webkit-flex-wrap: wrap;
-  flex-wrap: wrap;
-  -ms-flex-pack: justify;
-  -webkit-justify-content: space-between;
-  justify-content: space-between;
-  margin: 0 0 40px -10px;
-}
-.document-cards .wrapper-card {
-  display: table;
+  margin: 0 0 32px 0;
+  margin: 0 0 2rem 0;
 }
 .document-cards .document-card {
-  -ms-flex: 1 1 310px;
-  -webkit-flex: 1 1 310px;
-  flex: 1 1 310px;
-  display: -ms-flexbox;
-  display: -webkit-flex;
-  display: flex;
-  -ms-flex-direction: column;
-  -webkit-flex-direction: column;
-  flex-direction: column;
-  margin: 10px 0 0 10px;
-  background-color: #b6b6b6;
+  float: left;
+  width: 100%;
+  margin: 0 2% 2% 0;
+  background: #eee;
+  -moz-box-shadow: rgba(0, 0, 0, 0.05) 3px 3px 4px;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.05) 3px 3px 4px;
+  box-shadow: rgba(0, 0, 0, 0.05) 3px 3px 4px;
+  padding: 10px;
+  padding: 0.625rem;
 }
-.document-cards .document-card .information-card {
-  padding: 15px 15px 15px 0;
-  padding: 0.9375rem 0.9375rem 0.9375rem 0;
+@media (min-width: 700px) {
+  .document-cards .document-card {
+    width: 49%;
+  }
 }
-.document-cards .document-card .information-card p {
-  font-size: 12.8px;
-  font-size: 0.8rem;
+.document-cards .document-card.even {
+  margin-right: 0;
+}
+.document-cards .document-card .wrapper-card {
+  display: table;
+  height: 100%;
 }
 .document-cards .document-card .image-card {
   display: table-cell;
   vertical-align: middle;
-  padding: 0 15px 0 15px;
-  padding: 0 0.9375rem 0 0.9375rem;
 }
 .document-cards .document-card .image-card svg {
   width: 55px;
   height: 55px;
 }
-
-/*
-    Legacy Firefox implementation treats all flex containers
-    as inline-block elements.
-*/
-@-moz-document url-prefix() {
-  .document-cards {
-    width: 100%;
-    -moz-box-sizing: border-box;
-  }
+.document-cards .document-card .information-card {
+  display: table-cell;
+  padding: 0 0 0 10px;
+  padding: 0 0 0 0.625rem;
 }
+
 /* _search.scss */
 .search {
   float: right;
@@ -871,7 +855,9 @@ header a {
 }
 #coordination-items .avatar svg {
   width: 40px;
+  width: 2.5rem;
   height: 40px;
+  height: 2.5rem;
 }
 #coordination-items .information {
   float: left;

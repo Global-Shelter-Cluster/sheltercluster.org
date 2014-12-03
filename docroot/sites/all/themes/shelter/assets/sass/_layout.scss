@@ -11,9 +11,9 @@ html {
 }
 
 body {
-  background-color: $master-background;
+  background-color: rgb(255,255,255);
   font-family: arial, sans-serif;
-  font-size: rem($body-font-size);
+  font-size: rem( $body-font-size + 'px' );
   font-weight: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
