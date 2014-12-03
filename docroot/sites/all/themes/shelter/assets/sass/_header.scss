@@ -24,11 +24,13 @@ header {
   &:hover {
     @include background-image(linear-gradient(lighten(black, 2%), lighten(black,3%) 60%, lighten(black, 2%)));
   }
-
+  @include breakpoint(100px) {
+    display: none;
+  }
 }
 #profile-menu-items {
   float: right;
-  @include rem(font-size, 0.9rem);
+  @include rem(font-size, 0.85rem);
 
   .profile-item {
     float: left;
@@ -43,8 +45,11 @@ header {
   }
 }
 #logo-shelter-cluster {
+  display: block;
+  float:left;
+
   .svg {
-    height: 80px;
+    height: 76px;
     max-width: 100%;
     position: relative;
     left: -10px;
@@ -60,8 +65,8 @@ header {
 
 #site-options-bar {
   background: $shelter-dark-blue;
-  @include rem( font-size, 0.8rem );
-  @include rem( margin-bottom, 1rem );
+  @include rem(font-size, 0.8rem);
+  @include rem(margin-bottom, 1.5rem);
   color: darken($shelter-dark-blue, 10%);
 
   a {
@@ -78,7 +83,9 @@ header {
     top: 2px;
   }
 }
-
+#site-branding {
+  @include rem(margin-bottom,1.5rem);
+}
 #bandwidth-selector-icon {
   height: 13px;
   width: 13px;
@@ -113,8 +120,7 @@ header {
 }
 
 #nav-shelter {
-  background-color: white;
-  //@include background-image(linear-gradient(darken($shelter-grey, 55%), darken($shelter-grey,33%) 40%, darken($shelter-grey, 2%)));
+  background-color: rgb(255,255,255);
   color: rgb(255,255,255);
 
   .nav-items {

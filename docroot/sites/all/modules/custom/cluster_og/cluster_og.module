@@ -147,7 +147,7 @@ function _cluster_og_get_regions_menu($menu_name, $current_page_only = TRUE) {
     $tree = menu_tree_page_data($menu_name, NULL, TRUE);
   }
   else {
-    $tree = menu_tree_all_data($menu_name); 
+    $tree = menu_tree_all_data($menu_name);
   }
   $output = menu_tree_output($tree);
   return $output;
