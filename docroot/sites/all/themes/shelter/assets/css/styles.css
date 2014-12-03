@@ -441,7 +441,7 @@ body {
   padding: 0 10px 0 10px;
 }
 .document-cards .document-card .image-card svg {
-  fill: #8a8a8a;
+  fill: #bdbdbd;
   width: 45px;
   height: 45px;
 }
@@ -823,7 +823,8 @@ header a {
 }
 .main-column h4,
 .side-column h4 {
-  margin-top: 0;
+  margin: 0 0 9.6px 0;
+  margin: 0 0 0.6rem 0;
   font-size: 16px;
   font-size: 1rem;
 }
@@ -841,6 +842,12 @@ header a {
 #shelter-discussions .see-all {
   font-size: 14.4px;
   font-size: 0.9rem;
+}
+#shelter-discussions a {
+  color: #242424;
+}
+#shelter-discussions a:hover, #shelter-discussions a:active {
+  text-decoration: none;
 }
 
 #discussions-items {
@@ -932,6 +939,12 @@ header a {
   display: block;
   text-decoration: none;
   color: #000;
+}
+#coordination-items .information .email {
+  color: #242424;
+}
+#coordination-items .information .email:hover, #coordination-items .information .email:active {
+  text-decoration: none;
 }
 
 /* _footer.scss */

@@ -47,7 +47,11 @@
       color: #000;
     }
     .email {
-
+      color: darken($shelter-grey,20%);
+      &:hover,
+      &:active {
+        text-decoration: none;
+      }
     }
   }
 }

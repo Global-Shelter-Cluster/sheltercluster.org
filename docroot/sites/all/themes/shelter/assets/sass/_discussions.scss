@@ -6,6 +6,13 @@
   .see-all {
     @include rem(font-size, 0.9rem);
   }
+  a {
+    color: darken($shelter-grey,20%);
+    &:hover,
+    &:active {
+      text-decoration: none;
+    }
+  }
 }
 
 #discussions-items {
