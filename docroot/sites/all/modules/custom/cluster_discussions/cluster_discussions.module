@@ -14,7 +14,8 @@ function cluster_discussions_menu() {
     'title' => 'Discussions',
     'page callback' => 'cluster_discussions_all',
     'page arguments' => array(1),
-    'access callback' => TRUE,
+    'access callback' => 'og_is_group',
+    'access arguments' => array(0, 1),
     'type' => MENU_NORMAL_ITEM,
   );
   return $items;

@@ -14,7 +14,8 @@ function cluster_docs_menu() {
     'title' => 'Documents',
     'page callback' => 'cluster_docs_all',
     'page arguments' => array(1),
-    'access callback' => TRUE,
+    'access callback' => 'og_is_group',
+    'access arguments' => array(0, 1),
     'type' => MENU_NORMAL_ITEM,
   );
   return $items;
