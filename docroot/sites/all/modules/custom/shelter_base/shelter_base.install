@@ -45,7 +45,7 @@ function _shelter_base_modules_enable($type) {
  */
 function _shelter_base_required_contrib() {
   return array('addressfield', 'admin_menu', 'backup_migrate', 'ctools', 'date', 'devel', 'email', 'entity', 'entity_translation',
-    'entityreference', 'features', 'flag', 'link', 'name', 'og', 'og_access', 'og_register', 'og_ui', 'pathauto',
+    'entityreference', 'features', 'field_group', 'flag', 'link', 'name', 'og', 'og_access', 'og_register', 'og_ui', 'pathauto',
     'restrict_node_page_view', 'strongarm', 'title', 'token', 'transliteration', 'uuid', 'uuid_features', 'url', 'views', 'views_ui', 
     'views_bulk_operations'
   );
@@ -98,5 +98,12 @@ function shelter_base_update_7005() {
  * Update required module list (uuid).
  */
 function shelter_base_update_7006() {
+  _shelter_base_modules_enable('contrib');
+}
+
+/**
+ * Update required module list (field_group).
+ */
+function shelter_base_update_7007() {
   _shelter_base_modules_enable('contrib');
 }
