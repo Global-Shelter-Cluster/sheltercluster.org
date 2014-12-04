@@ -281,6 +281,11 @@ body {
   width: 90%;
   margin: 0 auto;
 }
+@media (min-width: 1200px) {
+  .page-margin {
+    width: 1200px;
+  }
+}
 
 #content {
   padding: 0 0 32px 0;
@@ -579,8 +584,14 @@ header a {
 }
 
 #logo-shelter-cluster {
+  width: 100%;
   display: block;
-  float: left;
+}
+@media (min-width: 700px) {
+  #logo-shelter-cluster {
+    float: left;
+    width: auto;
+  }
 }
 #logo-shelter-cluster .svg {
   height: 76px;
@@ -676,12 +687,23 @@ header a {
   }
 }
 #nav-shelter .nav-items .nav-item {
-  float: left;
+  float: none;
+}
+@media (min-width: 440px) {
+  #nav-shelter .nav-items .nav-item {
+    float: left;
+  }
 }
 #nav-shelter .nav-items .nav-item a {
-  float: left;
-  margin: 0 8px 8px 0;
-  margin: 0 0.5rem 0.5rem 0;
+  display: block;
+  margin: 0 0 8px 0;
+  margin: 0 0 0.5rem 0;
+}
+@media (min-width: 440px) {
+  #nav-shelter .nav-items .nav-item a {
+    margin: 0 8px 8px 0;
+    margin: 0 0.5rem 0.5rem 0;
+  }
 }
 #nav-shelter .nav-items .nav-item .total {
   font-size: 12px;
@@ -725,7 +747,7 @@ header a {
 #secondary-nav .collapse-menu {
   clear: both;
   position: relative;
-  top: -11px;
+  top: -5px;
   left: 4px;
   color: #242424;
   font-size: 11.2px;
@@ -757,9 +779,12 @@ header a {
 }
 #secondary-nav .nav-items .nav-item {
   float: left;
-  margin: 0 0 4px 0;
-  margin: 0 0 0.25rem 0;
-  min-width: 20%;
+  min-width: 50%;
+}
+@media (min-width: 440px) {
+  #secondary-nav .nav-items .nav-item {
+    min-width: 20%;
+  }
 }
 #secondary-nav .nav-items .nav-item a {
   width: 98%;
@@ -780,8 +805,8 @@ header a {
   -webkit-border-radius: 3px;
   border-radius: 3px;
   border: 1px solid #666666;
-  margin: 0 8px 8px 0;
-  margin: 0 0.5rem 0.5rem 0;
+  margin: 0 2px 4px 2px;
+  margin: 0 0.125rem 0.25rem 0.125rem;
   font-size: 12.8px;
   font-size: 0.8rem;
 }

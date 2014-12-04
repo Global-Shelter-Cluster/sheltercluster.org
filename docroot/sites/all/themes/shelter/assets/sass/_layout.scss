@@ -21,6 +21,9 @@ body {
 .page-margin {
   width: 90%;
   margin: 0 auto;
+  @include breakpoint(1200px) {
+    width: 1200px;
+  }
 }
 
 #content {
