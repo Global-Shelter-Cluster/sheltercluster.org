@@ -21,7 +21,7 @@ function cluster_docs_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Advanced tags',
-    'weight' => '23',
+    'weight' => '10',
     'children' => array(
       0 => 'field_inter_cluster',
       1 => 'field_cross_cutting_issues',
@@ -56,7 +56,7 @@ function cluster_docs_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Basic tags',
-    'weight' => '22',
+    'weight' => '9',
     'children' => array(
       0 => 'field_information_management',
       1 => 'field_assess_monitor_eval',

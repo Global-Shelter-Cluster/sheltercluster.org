@@ -124,21 +124,23 @@ function cluster_docs_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-document-field_document_tag'
-  $field_instances['node-document-field_document_tag'] = array(
+  // Exported field_instance: 'node-document-field_document_source'
+  $field_instances['node-document-field_document_source'] = array(
     'bundle' => 'document',
-    'default_value' => NULL,
+    'default_value' => array(
+      0 => array(
+        'value' => 'Shelter Cluster',
+      ),
+    ),
     'deleted' => 0,
     'description' => '',
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'entityreference',
-        'settings' => array(
-          'link' => FALSE,
-        ),
-        'type' => 'entityreference_label',
-        'weight' => 0,
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 23,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -148,28 +150,22 @@ function cluster_docs_field_default_field_instances() {
       ),
     ),
     'entity_type' => 'node',
-    'field_name' => 'field_document_tag',
-    'label' => 'Document Tag',
+    'field_name' => 'field_document_source',
+    'label' => 'Source',
     'required' => 0,
     'settings' => array(
-      'behaviors' => array(
-        'taxonomy-index' => array(
-          'status' => TRUE,
-        ),
-      ),
       'entity_translation_sync' => FALSE,
+      'text_processing' => 0,
       'user_register_form' => FALSE,
     ),
     'widget' => array(
       'active' => 1,
-      'module' => 'entityreference',
+      'module' => 'text',
       'settings' => array(
-        'match_operator' => 'CONTAINS',
-        'path' => '',
         'size' => 60,
       ),
-      'type' => 'entityreference_autocomplete_tags',
-      'weight' => 2,
+      'type' => 'text_textfield',
+      'weight' => 26,
     ),
   );
 
@@ -412,6 +408,50 @@ function cluster_docs_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-document-field_is_resource_document'
+  $field_instances['node-document-field_is_resource_document'] = array(
+    'bundle' => 'document',
+    'default_value' => array(
+      0 => array(
+        'value' => 0,
+      ),
+    ),
+    'deleted' => 0,
+    'description' => 'Is this a resource document that needs to appear in the resource section (as well as any groups in which the document belongs) ?',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 21,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_is_resource_document',
+    'label' => 'Is Resource document',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(
+        'display_label' => 0,
+      ),
+      'type' => 'options_onoff',
+      'weight' => 3,
+    ),
+  );
+
   // Exported field_instance: 'node-document-field_issues'
   $field_instances['node-document-field_issues'] = array(
     'bundle' => 'document',
@@ -477,7 +517,7 @@ function cluster_docs_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'field_name' => 'field_key_document',
-    'label' => 'Key Document',
+    'label' => 'Is Key Document',
     'required' => 0,
     'settings' => array(
       'entity_translation_sync' => FALSE,
@@ -490,7 +530,7 @@ function cluster_docs_field_default_field_instances() {
         'display_label' => 1,
       ),
       'type' => 'options_onoff',
-      'weight' => 3,
+      'weight' => 2,
     ),
   );
 
@@ -638,6 +678,60 @@ function cluster_docs_field_default_field_instances() {
       ),
       'type' => 'image_image',
       'weight' => 8,
+    ),
+  );
+
+  // Exported field_instance: 'node-document-field_report_meeting_date'
+  $field_instances['node-document-field_report_meeting_date'] = array(
+    'bundle' => 'document',
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'date',
+        'settings' => array(
+          'format_type' => 'long',
+          'fromto' => 'both',
+          'multiple_from' => '',
+          'multiple_number' => '',
+          'multiple_to' => '',
+        ),
+        'type' => 'date_default',
+        'weight' => 22,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_report_meeting_date',
+    'label' => 'Report / Meeting date',
+    'required' => 0,
+    'settings' => array(
+      'default_value' => 'now',
+      'default_value2' => 'same',
+      'default_value_code' => '',
+      'default_value_code2' => '',
+      'entity_translation_sync' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'date',
+      'settings' => array(
+        'increment' => 15,
+        'input_format' => 'm/d/Y - H:i:s',
+        'input_format_custom' => '',
+        'label_position' => 'above',
+        'text_parts' => array(),
+        'year_range' => '-3:+3',
+      ),
+      'type' => 'date_text',
+      'weight' => 25,
     ),
   );
 
@@ -858,7 +952,6 @@ function cluster_docs_field_default_field_instances() {
   t('Assessment, Monitoring and Evaluation');
   t('Coordination Management');
   t('Cross-Cutting Issues');
-  t('Document Tag');
   t('Featured');
   t('File');
   t('Groups audience');
@@ -866,13 +959,17 @@ function cluster_docs_field_default_field_instances() {
   t('Inter-Cluster');
   t('Intervention Materials');
   t('Intervention Programming');
+  t('Is Key Document');
+  t('Is Resource document');
+  t('Is this a resource document that needs to appear in the resource section (as well as any groups in which the document belongs) ?');
   t('Issues');
-  t('Key Document');
   t('Link');
   t('Non Food Items');
   t('Preview');
+  t('Report / Meeting date');
   t('Response Phase');
   t('Settlement Type');
+  t('Source');
   t('Technical Support and Design');
   t('Toolkit');
 
