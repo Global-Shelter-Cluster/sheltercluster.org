@@ -1,5 +1,7 @@
 <?php
 /**
  * @file
- * Drupal needs this blank file.
+ * Code for the cluster_taxonomy feature.
  */
+
+include_once 'cluster_taxonomy.features.inc';
