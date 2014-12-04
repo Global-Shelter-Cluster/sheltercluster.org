@@ -12,6 +12,16 @@
   }
   @include rem(padding, 1rem 0 0 0);
 }
+#contextual-navigation {
+  @include rem(font-size, 0.8rem);
+
+  span {
+    @include rem(margin-right, 0.25rem);
+  }
+  a {
+    color: $shelter-red;
+  }
+}
 #operation-information {
   h1 {
     @include rem(margin, 0 0 1rem 0);

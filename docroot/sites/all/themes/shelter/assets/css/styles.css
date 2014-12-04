@@ -834,6 +834,18 @@ header a {
   font-size: 1rem;
 }
 
+#contextual-navigation {
+  font-size: 12.8px;
+  font-size: 0.8rem;
+}
+#contextual-navigation span {
+  margin-right: 4px;
+  margin-right: 0.25rem;
+}
+#contextual-navigation a {
+  color: #7f1416;
+}
+
 #operation-information h1 {
   margin: 0 0 16px 0;
   margin: 0 0 1rem 0;
@@ -1038,8 +1050,4 @@ footer #general-information .links {
 footer #partners-list .partner {
   list-style: none;
   display: inline-block;
-}
-
-body #admin-menu {
-  font-size: 12px;
 }

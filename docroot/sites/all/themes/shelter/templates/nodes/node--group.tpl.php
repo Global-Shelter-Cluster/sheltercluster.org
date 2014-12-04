@@ -42,8 +42,9 @@
 
       <div class="main-column">
 
-        <?php $contextual_navigation = node_view($node, 'contextual_navigation') ?>
-        <?php print render($contextual_navigation); ?>
+        <?php if (isset($contextual_navigation)): ?>
+          <?php print $contextual_navigation; ?>
+        <?php endif; ?>
 
         <section id="operation-information">
           <h1><?php print $title; ?></h1>
@@ -55,10 +56,11 @@
             <li class="data-item"><span>Emergency Lead Agency</span> IFRC</li>
           </ul>
         </section>
-        <?php print render($content); ?>
+
       </div>
 
       <div class="side-column">
+
         <section id="operation-group">
           <h3>Join this Operation Group and</h3>
           <fieldset id="checkboxgroup">
@@ -68,6 +70,7 @@
           </fieldset>
           <div id="button-join-group"><a class="button" href="">Join</a></div>
         </section>
+
       </div>
 
     </div>
@@ -91,6 +94,146 @@
               <div class="document-information">
                 <h2>Featured Document Title 2</h2>
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc aliquet justo leo, id lobortis leo maximus tristique. Sed non odio eros. Aenean pulvinar sapien quam, a bibendum ante lobortis eu.</p>
+              </div>
+            </li>
+          </ul>
+        </section>
+
+        <?php print render($content); ?>
+
+      </div>
+
+      <div class="side-column">
+        <section id="shelter-discussions">
+          <h3>Discussions</h3>
+          <ul id="discussions-items">
+            <li class="discussions-item">
+              <div class="replies">24 replies</div>
+              <div class="information">
+                <a href="#" class="topic">Where can I find lumber?</a>
+                <span class="date">2014/10/03 by <a class="author" href="#">Jane Wikionsons</a></span>
+              </div>
+            </li>
+            <li class="discussions-item">
+              <div class="replies">no replies <span class="new">New</span></div>
+              <div class="information">
+                <a href="#" class="topic">Are any special requirements for protection needed when entering the</a>
+                <span class="date">2014/10/15 by <a class="author" href="#">John Tremblay</a></span>
+              </div>
+            </li>
+          </ul>
+          <a class="see-all" href="#">All other discussions</a>
+        </section>
+
+        <section id="shelter-coordination-team">
+          <h3>Coordination Team</h3>
+          <h4>National Team</h4>
+          <ul id="coordination-items" class="clearfix">
+            <li class="coordination-item">
+              <div class="avatar">
+                <?php print _svg('icons/person', array('id'=>'person-avatar', 'alt' => 'Avatar person icon')); ?>
+              </div>
+              <div class="information">
+                <span class="name">Victoria Stodard (IFRC)</span>
+                <span class="job-title">National Coordinator</span>
+                <a class="telephone" href="tel:+09084011218">0908 401 1218</a>
+                <a class="email" href="mailto:coord.phil@sheltercluster.org">coord.phil@sheltercluster.org</a>
+              </div>
+            </li>
+            <li class="coordination-item">
+              <div class="avatar">
+                <?php print _svg('icons/person', array('id'=>'person-avatar', 'alt' => 'Avatar person icon')); ?>
+              </div>
+              <div class="information">
+                <span class="name">Tom York (CRS)</span>
+                <span class="job-title">National Information Management</span>
+                <a class="telephone" href="tel:+09084011218">0908 555 1790</a>
+                <a class="email" href="mailto:tom.york@sheltercluster.org">tom.york@sheltercluster.org</a>
+              </div>
+            </li>
+            <li class="coordination-item">
+              <div class="avatar">
+                <?php print _svg('icons/person', array('id'=>'person-avatar', 'alt' => 'Avatar person icon')); ?>
+              </div>
+              <div class="information">
+                <span class="name">Gian Gimang (IFRC)</span>
+                <span class="job-title">Assistant Techhical Coordination</span>
+                <a class="telephone" href="tel:+09084011218">0966 666 1256</a>
+                <a class="email" href="mailto:gian.gimang@sheltercluster.org">gian.gimang@sheltercluster.org</a>
+              </div>
+            </li>
+          </ul>
+
+          <h4>Region VIII</h4>
+          <ul id="coordination-items" class="clearfix">
+            <li class="coordination-item">
+              <div class="avatar">
+                <?php print _svg('icons/person', array('id'=>'person-avatar', 'alt' => 'Avatar person icon')); ?>
+              </div>
+              <div class="information">
+                <span class="name">Victoria Stodard (IFRC)</span>
+                <span class="job-title">National Coordinator</span>
+                <a class="telephone" href="tel:+09084011218">0908 401 1218</a>
+                <a class="email" href="mailto:coord.phil@sheltercluster.org">coord.phil@sheltercluster.org</a>
+              </div>
+            </li>
+            <li class="coordination-item">
+              <div class="avatar">
+                <?php print _svg('icons/person', array('id'=>'person-avatar', 'alt' => 'Avatar person icon')); ?>
+              </div>
+              <div class="information">
+                <span class="name">Tom York (CRS)</span>
+                <span class="job-title">National Information Management</span>
+                <a class="telephone" href="tel:+09084011218">0908 555 1790</a>
+                <a class="email" href="mailto:tom.york@sheltercluster.org">tom.york@sheltercluster.org</a>
+              </div>
+            </li>
+            <li class="coordination-item">
+              <div class="avatar">
+                <?php print _svg('icons/person', array('id'=>'person-avatar', 'alt' => 'Avatar person icon')); ?>
+              </div>
+              <div class="information">
+                <span class="name">Gian Gimang (IFRC)</span>
+                <span class="job-title">Assistant Techhical Coordination</span>
+                <a class="telephone" href="tel:+09084011218">0966 666 1256</a>
+                <a class="email" href="mailto:gian.gimang@sheltercluster.org">gian.gimang@sheltercluster.org</a>
+              </div>
+            </li>
+          </ul>
+
+          <h4>Guiuan Sub-Hub</h4>
+          <ul id="coordination-items" class="clearfix">
+            <li class="coordination-item">
+              <div class="avatar">
+                <?php print _svg('icons/person', array('id'=>'person-avatar', 'alt' => 'Avatar person icon')); ?>
+              </div>
+              <div class="information">
+                <span class="name">Victoria Stodard (IFRC)</span>
+                <span class="job-title">National Coordinator</span>
+                <a class="telephone" href="tel:+09084011218">0908 401 1218</a>
+                <a class="email" href="mailto:coord.phil@sheltercluster.org">coord.phil@sheltercluster.org</a>
+              </div>
+            </li>
+            <li class="coordination-item">
+              <div class="avatar">
+                <?php print _svg('icons/person', array('id'=>'person-avatar', 'alt' => 'Avatar person icon')); ?>
+              </div>
+              <div class="information">
+                <span class="name">Tom York (CRS)</span>
+                <span class="job-title">National Information Management</span>
+                <a class="telephone" href="tel:+09084011218">0908 555 1790</a>
+                <a class="email" href="mailto:tom.york@sheltercluster.org">tom.york@sheltercluster.org</a>
+              </div>
+            </li>
+            <li class="coordination-item">
+              <div class="avatar">
+                <?php print _svg('icons/person', array('id'=>'person-avatar', 'alt' => 'Avatar person icon')); ?>
+              </div>
+              <div class="information">
+                <span class="name">Gian Gimang (IFRC)</span>
+                <span class="job-title">Assistant Techhical Coordination</span>
+                <a class="telephone" href="tel:+09084011218">0966 666 1256</a>
+                <a class="email" href="mailto:gian.gimang@sheltercluster.org">gian.gimang@sheltercluster.org</a>
               </div>
             </li>
           </ul>
