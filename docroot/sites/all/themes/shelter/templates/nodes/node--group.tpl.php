@@ -80,7 +80,7 @@
         <section id="featured-documents">
           <ul>
             <li>
-               <img src="sites/all/themes/shelter/assets/images/fake/feature-document.jpg" alt="" />
+               <img src="/sites/all/themes/shelter/assets/images/fake/feature-document.jpg" alt="" />
                 <div class="document-information">
                   <h2>Featured Document Title 1</h2>
                   <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc aliquet justo leo, id lobortis leo maximus tristique. Sed non odio eros. Aenean pulvinar sapien quam, a bibendum ante lobortis eu.</p>

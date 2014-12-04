@@ -76,16 +76,16 @@ function shelter_preprocess_node_partial__contextual_navigation(&$variables) {
     $node_wrapper = entity_metadata_wrapper('node', $node);
 
     if (isset($node_wrapper->field_parent_response)) {
-      dpm('response');
+      //dpm('response');
     }
     if (isset($node_wrapper->field_parent_region)) {
-      dpm('region');
+      //dpm('region');
     }
     if (isset($node_wrapper->field_associated_regions )) {
-      dpm('associated regions');
+      //dpm('associated regions');
     }
 
-    dpm($node_wrapper->getPropertyInfo());
+    //dpm($node_wrapper->getPropertyInfo());
   }
   catch (EntityMetadataWrapperException $exception) {
     _log_entity_metadata_wrapper_error($exception, 'po_promoted');
