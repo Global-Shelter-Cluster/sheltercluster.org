@@ -45,8 +45,12 @@ header {
   }
 }
 #logo-shelter-cluster {
+  width: 100%;
   display: block;
-  float:left;
+  @include breakpoint(700px) {
+    float:left;
+    width: auto;
+  }
 
   .svg {
     height: 76px;

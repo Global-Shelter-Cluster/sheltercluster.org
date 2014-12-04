@@ -578,8 +578,14 @@ header a {
 }
 
 #logo-shelter-cluster {
+  width: 100%;
   display: block;
-  float: left;
+}
+@media (min-width: 700px) {
+  #logo-shelter-cluster {
+    float: left;
+    width: auto;
+  }
 }
 #logo-shelter-cluster .svg {
   height: 76px;
