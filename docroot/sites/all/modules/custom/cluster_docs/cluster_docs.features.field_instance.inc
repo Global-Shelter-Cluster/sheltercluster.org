@@ -43,8 +43,46 @@ function cluster_docs_field_default_field_instances() {
       'active' => 1,
       'module' => 'options',
       'settings' => array(),
-      'type' => 'options_buttons',
-      'weight' => 11,
+      'type' => 'options_select',
+      'weight' => 23,
+    ),
+  );
+
+  // Exported field_instance: 'node-document-field_coordination_management'
+  $field_instances['node-document-field_coordination_management'] = array(
+    'bundle' => 'document',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'taxonomy',
+        'settings' => array(),
+        'type' => 'taxonomy_term_reference_link',
+        'weight' => 20,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_coordination_management',
+    'label' => 'Coordination Management',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_select',
+      'weight' => 21,
     ),
   );
 
@@ -81,8 +119,8 @@ function cluster_docs_field_default_field_instances() {
       'active' => 1,
       'module' => 'options',
       'settings' => array(),
-      'type' => 'options_buttons',
-      'weight' => 14,
+      'type' => 'options_select',
+      'weight' => 13,
     ),
   );
 
@@ -255,8 +293,8 @@ function cluster_docs_field_default_field_instances() {
       'active' => 1,
       'module' => 'options',
       'settings' => array(),
-      'type' => 'options_buttons',
-      'weight' => 10,
+      'type' => 'options_select',
+      'weight' => 22,
     ),
   );
 
@@ -293,8 +331,8 @@ function cluster_docs_field_default_field_instances() {
       'active' => 1,
       'module' => 'options',
       'settings' => array(),
-      'type' => 'options_buttons',
-      'weight' => 13,
+      'type' => 'options_select',
+      'weight' => 12,
     ),
   );
 
@@ -331,8 +369,8 @@ function cluster_docs_field_default_field_instances() {
       'active' => 1,
       'module' => 'options',
       'settings' => array(),
-      'type' => 'options_buttons',
-      'weight' => 16,
+      'type' => 'options_select',
+      'weight' => 15,
     ),
   );
 
@@ -369,8 +407,8 @@ function cluster_docs_field_default_field_instances() {
       'active' => 1,
       'module' => 'options',
       'settings' => array(),
-      'type' => 'options_buttons',
-      'weight' => 17,
+      'type' => 'options_select',
+      'weight' => 16,
     ),
   );
 
@@ -407,8 +445,8 @@ function cluster_docs_field_default_field_instances() {
       'active' => 1,
       'module' => 'options',
       'settings' => array(),
-      'type' => 'options_buttons',
-      'weight' => 20,
+      'type' => 'options_select',
+      'weight' => 19,
     ),
   );
 
@@ -547,8 +585,8 @@ function cluster_docs_field_default_field_instances() {
       'active' => 1,
       'module' => 'options',
       'settings' => array(),
-      'type' => 'options_buttons',
-      'weight' => 19,
+      'type' => 'options_select',
+      'weight' => 18,
     ),
   );
 
@@ -636,8 +674,8 @@ function cluster_docs_field_default_field_instances() {
       'active' => 1,
       'module' => 'options',
       'settings' => array(),
-      'type' => 'options_buttons',
-      'weight' => 15,
+      'type' => 'options_select',
+      'weight' => 14,
     ),
   );
 
@@ -674,8 +712,8 @@ function cluster_docs_field_default_field_instances() {
       'active' => 1,
       'module' => 'options',
       'settings' => array(),
-      'type' => 'options_buttons',
-      'weight' => 18,
+      'type' => 'options_select',
+      'weight' => 17,
     ),
   );
 
@@ -712,8 +750,8 @@ function cluster_docs_field_default_field_instances() {
       'active' => 1,
       'module' => 'options',
       'settings' => array(),
-      'type' => 'options_buttons',
-      'weight' => 12,
+      'type' => 'options_select',
+      'weight' => 24,
     ),
   );
 
@@ -750,8 +788,8 @@ function cluster_docs_field_default_field_instances() {
       'active' => 1,
       'module' => 'options',
       'settings' => array(),
-      'type' => 'options_buttons',
-      'weight' => 21,
+      'type' => 'options_select',
+      'weight' => 20,
     ),
   );
 
