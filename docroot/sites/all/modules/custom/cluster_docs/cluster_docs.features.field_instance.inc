@@ -48,44 +48,6 @@ function cluster_docs_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-document-field_coordination_management'
-  $field_instances['node-document-field_coordination_management'] = array(
-    'bundle' => 'document',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'taxonomy',
-        'settings' => array(),
-        'type' => 'taxonomy_term_reference_link',
-        'weight' => 8,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'field_name' => 'field_coordination_management',
-    'label' => 'Coordination Management',
-    'required' => 0,
-    'settings' => array(
-      'entity_translation_sync' => FALSE,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'options',
-      'settings' => array(),
-      'type' => 'options_buttons',
-      'weight' => 9,
-    ),
-  );
-
   // Exported field_instance: 'node-document-field_cross_cutting_issues'
   $field_instances['node-document-field_cross_cutting_issues'] = array(
     'bundle' => 'document',
@@ -793,6 +755,66 @@ function cluster_docs_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-document-og_group_ref'
+  $field_instances['node-document-og_group_ref'] = array(
+    'bundle' => 'document',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'og_ui',
+        'settings' => array(),
+        'type' => 'og_list_default',
+        'weight' => 5,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'og_group_ref',
+    'label' => 'Groups audience',
+    'required' => FALSE,
+    'settings' => array(
+      'behaviors' => array(
+        'og_widget' => array(
+          'admin' => array(
+            'widget_type' => 'entityreference_autocomplete',
+          ),
+          'default' => array(
+            'widget_type' => 'options_select',
+          ),
+          'status' => TRUE,
+        ),
+      ),
+      'entity_translation_sync' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'view modes' => array(
+      'full' => array(
+        'custom settings' => FALSE,
+        'label' => 'Full',
+        'type' => 'og_list_default',
+      ),
+      'teaser' => array(
+        'custom settings' => FALSE,
+        'label' => 'Teaser',
+        'type' => 'og_list_default',
+      ),
+    ),
+    'widget' => array(
+      'module' => 'og',
+      'settings' => array(),
+      'type' => 'og_complex',
+      'weight' => 7,
+    ),
+  );
+
   // Translatables
   // Included for use with string extractors like potx.
   t('Assessment, Monitoring and Evaluation');
@@ -801,6 +823,7 @@ function cluster_docs_field_default_field_instances() {
   t('Document Tag');
   t('Featured');
   t('File');
+  t('Groups audience');
   t('Information Management');
   t('Inter-Cluster');
   t('Intervention Materials');
