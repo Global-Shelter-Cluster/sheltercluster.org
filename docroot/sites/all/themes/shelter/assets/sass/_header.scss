@@ -52,6 +52,7 @@ header {
     width: auto;
   }
 
+
   .svg {
     height: 76px;
     max-width: 100%;
@@ -135,12 +136,18 @@ header {
       }
     }
     .nav-item {
-      float: left;
+      float: none;
+      @include breakpoint(440px) {
+        float: left;
+      }
 
       a {
-        float: left;
+        display: block;
         @extend .button;
-        @include rem(margin, 0 0.5rem 0.5rem 0);
+        @include rem(margin, 0 0 0.5rem 0);
+        @include breakpoint(440px) {
+          @include rem(margin, 0 0.5rem 0.5rem 0);
+        }
       }
       .total {
         @include rem(font-size, 0.75rem);
@@ -152,8 +159,3 @@ header {
     }
   }
 }
-
-
-
-
-

@@ -27,7 +27,7 @@
   .collapse-menu {
     clear: both;
     position: relative;
-    top: -11px;
+    top: -5px;
     left: 4px;
     color: darken($shelter-grey,20%);
     @include rem(font-size, 0.70rem);
@@ -57,8 +57,10 @@
     }
     .nav-item {
       float: left;
-      @include rem(margin, 0 0 0.25rem 0);
-      min-width: 20%;
+      min-width: 50%;
+      @include breakpoint(440px) {
+        min-width: 20%;
+      }
 
       a {
         width: 98%;
@@ -72,7 +74,7 @@
         @include rem(padding, 0.5rem 1.25rem 0.5rem);
         @include border-radius(3px);
         border: 1px solid darken($button-color,9%);
-        @include rem(margin, 0 0.5rem 0.5rem 0);
+        @include rem(margin, 0 0.125rem 0.25rem 0.125rem);
         @include rem(font-size, 0.8rem);
 
         &:hover {
