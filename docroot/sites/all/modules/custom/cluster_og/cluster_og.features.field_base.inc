@@ -142,6 +142,33 @@ function cluster_og_field_default_field_bases() {
     'type' => 'entityreference',
   );
 
+  // Exported field_base: 'field_response_status'
+  $field_bases['field_response_status'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_response_status',
+    'foreign keys' => array(),
+    'indexes' => array(
+      'value' => array(
+        0 => 'value',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'list',
+    'settings' => array(
+      'allowed_values' => array(
+        'active' => 'Active',
+        'archived' => 'Archived',
+      ),
+      'allowed_values_function' => '',
+      'entity_translation_sync' => FALSE,
+    ),
+    'translatable' => 0,
+    'type' => 'list_text',
+  );
+
   // Exported field_base: 'group_group'
   $field_bases['group_group'] = array(
     'active' => 1,

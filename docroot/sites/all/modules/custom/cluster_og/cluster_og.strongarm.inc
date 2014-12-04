@@ -524,7 +524,11 @@ function cluster_og_strongarm() {
       ),
     ),
     'extra_fields' => array(
-      'form' => array(),
+      'form' => array(
+        'path' => array(
+          'weight' => '30',
+        ),
+      ),
       'display' => array(),
     ),
   );

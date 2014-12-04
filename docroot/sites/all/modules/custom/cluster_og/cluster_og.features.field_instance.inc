@@ -882,6 +882,54 @@ function cluster_og_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-response-field_response_status'
+  $field_instances['node-response-field_response_status'] = array(
+    'bundle' => 'response',
+    'default_value' => array(
+      0 => array(
+        'value' => 'active',
+      ),
+    ),
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 10,
+      ),
+      'related_response' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_response_status',
+    'label' => 'Response status',
+    'required' => 1,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_select',
+      'weight' => 34,
+    ),
+  );
+
   // Exported field_instance: 'node-response-group_group'
   $field_instances['node-response-group_group'] = array(
     'bundle' => 'response',
@@ -1626,6 +1674,7 @@ function cluster_og_field_default_field_instances() {
   t('Parent region');
   t('Parent response');
   t('Response');
+  t('Response status');
   t('Select all appropriate regions to associate with this response.');
   t('Select the most specific region associated with this response.');
   t('Select the parent response if this is a child response.');
