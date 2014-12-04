@@ -8,6 +8,16 @@ require_once dirname(__FILE__) . '/includes/shelter.helpers.inc';
 function shelter_preprocess_page($variables) {
   // drupal_add_css();
   // drupal_add_js();
+
+  // Adding the viewport for mobile view
+    $viewport = array(
+    '#tag' => 'meta',
+    '#attributes' => array(
+      'name' => 'viewport',
+      'content' => 'width=device-width, initial-scale=1, maximum-scale=1, minimal-ui',
+    ),
+  );
+  drupal_add_html_head($viewport, 'viewport');
 }
 
 /**

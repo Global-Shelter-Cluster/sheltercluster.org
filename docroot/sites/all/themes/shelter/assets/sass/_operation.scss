@@ -3,6 +3,11 @@
 #operation-information {
   clear: both;
   @include rem(margin, 0 0 2rem 0);
+
+  .operation-image {
+    float: left;
+    @include rem(margin, 0 1rem 1rem 0);
+  }
 }
 
 #operation-group {
