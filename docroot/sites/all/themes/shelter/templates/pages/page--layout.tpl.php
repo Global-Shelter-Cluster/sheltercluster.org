@@ -371,6 +371,19 @@
 
       </div>
       <div class="side-column">
+
+        <section id="shelter-calendar">
+          <div id="calendar-box">
+            <div id="calendar-date">
+              <?php print _svg('icons/pin', array('id'=>'calendar-pin', 'alt' => 'Pin icon')); ?>Nov. 24th<br/>2014
+            </div>
+            <div id="calendar-event">
+              Upcoming envent to <a href="#">agenda</a>:
+              <a class="event" href="#">Shelter Technical Meeting 2014</a></div>
+          </div>
+          <a class="see-all" href="#">All calendar events</a>
+        </section>
+
         <section id="shelter-discussions">
           <h3>Discussions</h3>
           <ul id="discussions-items">
