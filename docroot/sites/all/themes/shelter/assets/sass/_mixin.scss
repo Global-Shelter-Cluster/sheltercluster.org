@@ -32,15 +32,15 @@
 }
 
 @mixin absolute($args) {
-  @include position("absolute", $args);
+  @include position(absolute, $args);
 }
 
 @mixin fixed($args) {
-  @include position("fixed", $args);
+  @include position(fixed, $args);
 }
 
 @mixin relative($args) {
-  @include position("relative", $args);
+  @include position(relative, $args);
 }
 
 //Make a element not selectable
@@ -48,6 +48,12 @@
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
+}
+
+@mixin text-truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 //Make text px or rem, with fallback
@@ -72,11 +78,11 @@
 
       @if $unit == "px" {
         $px : append($px,  $value);
-        $rem: append($rem, ($val / 16 + rem));
+        $rem: append($rem, ($val / $body-font-size + rem));
       }
 
       @if $unit == "rem" {
-        $px : append($px,  ($val * 16 + px));
+        $px : append($px,  ($val * $body-font-size + px));
         $rem: append($rem, $value);
       }
     }
@@ -89,4 +95,3 @@
     #{$property}: $rem;
   }
 }
-
