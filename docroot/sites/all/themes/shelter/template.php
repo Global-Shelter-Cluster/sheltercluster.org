@@ -40,6 +40,32 @@ function shelter_entity_info_alter(&$entity_info) {
   );
 }
 
+function shelter_preprocess_user_profile(&$variables) {
+
+  if (isset($variables['elements']['#view_mode'])) {
+    $view_mode = $variables['elements']['#view_mode'];
+
+    $variables['theme_hook_suggestions'][] = 'user_profile__' . $view_mode;
+
+    $account = $variables['elements']['#account'];
+    $variables['user_profile']['name']['#prefix'] = '<span class="name">';
+    $variables['user_profile']['name']['#markup'] = $account->name;
+    $variables['user_profile']['name']['#suffix'] = '</span>';
+    $variables['user_profile']['email']['#markup'] = l($account->mail, 'mailto:' . $account->mail, array('class' => array('email'), 'absolute' => TRUE));
+    if ( empty($account->picture)) {
+      $variables['user_profile']['user_picture']['#markup'] = _svg('icons/person', array('class'=>'person-avatar', 'alt' => 'Team member\'s people picture missing.'));
+    } else {
+      $variables['user_profile']['user_picture']['#markup'] = theme('image_style', array(
+        'style_name' => 'thumbnail',
+        'path' => $account->picture->uri,
+        'width' => 100,
+        'height' => 100,
+        'alt' => t('@name\'s picture', array('@name' => $account->name))
+      ));
+    }
+  }
+}
+
 /**
  * Implements hook_preprocess().
  * Define view mode based templates and specific preprocesses
@@ -118,6 +144,6 @@ function shelter_preprocess_node_partial__related_hub(&$variables) {
 
 function shelter_preprocess_node_partial__related_response(&$variables) {
   $node = $variables['node'];
-  $markup = _svg('icons/grid-three-up', array('alt' => 'Icon for Hubs')) . ' ' . $node->title;
+  $markup = _svg('icons/globe', array('alt' => 'Icon for Related Responses')) . ' ' . $node->title;
   $variables['link'] = l( $markup, 'node/' . $node->nid , array('html'=>true));
 }
