@@ -6,6 +6,8 @@
 
 include_once 'cluster_docs.features.inc';
 
+const CLUSTER_DOCS_PER_PAGE = 5;
+
 /**
  *  Implements hook_menu().
  */
@@ -22,20 +24,26 @@ function cluster_docs_menu() {
 }
 
 function cluster_docs_all($nid) {
-  $query = new EntityFieldQuery();
-  $res = $query->entityCondition('entity_type', 'node')
-    ->entityCondition('bundle', 'document')
-    ->fieldCondition('og_group_ref', 'target_id', $nid)
-    ->propertyCondition('status', NODE_PUBLISHED)
-    ->propertyOrderBy('changed', 'DESC')
-    ->pager(5)
-    ->execute();
+  global $language;
+  $query = search_api_query('default_node_index', array(
+    'languages' => array($language->language),
+  ));
 
-  if (!isset($res['node'])) {
-    return NULL;
-  }
+  $filter = $query->createFilter();
+  $filter->condition('og_group_ref', $nid);
+  $filter->condition('type', 'document');
+  $query->filter($filter);
 
-  $ret = GroupPageContent::getList(array_keys($res['node']), 'teaser', 'cluster_docs_all');
+  $offset = pager_find_page() * CLUSTER_DOCS_PER_PAGE;
+  $query->range($offset, CLUSTER_DOCS_PER_PAGE);
+
+  $results = $query->execute();
+
+  pager_default_initialize($results['result count'], CLUSTER_DOCS_PER_PAGE);
+
+  $nids = array_keys($results['results']);
+
+  $ret = GroupPageContent::getList($nids, 'teaser', 'cluster_docs_all');
   $ret['pager'] = array(
     '#theme' => 'pager',
   );
