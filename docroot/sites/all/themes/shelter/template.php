@@ -89,10 +89,22 @@ function shelter_preprocess_node(&$variables) {
 
   // Create some contextual navigation if viewing a group
   if ($is_group && $view_mode == 'full'){
-    dpm($variables);
-    $variables['content']['body']['#label_display'] = 'hidden';
+
     try {
       $group_wrapper = entity_metadata_wrapper('node', $node);
+
+      if ( isset($group_wrapper->field_image)) {
+        $group_image = $group_wrapper->field_image->value();
+        $variables['group_image'] = theme('image_style', array(
+          'style_name' => 'large',
+          'path' => $group_image['uri'],
+          'width' => 290,
+          'alt' => t('A picture representing @group_name', array('@group_name' => $group_wrapper->title->value())),
+          'attributes' => array(
+            'class' => array('operation-image'),
+          ),
+        ));
+      }
 
       $variables['contextual_navigation'] = '<nav id="contextual-navigation">';
 

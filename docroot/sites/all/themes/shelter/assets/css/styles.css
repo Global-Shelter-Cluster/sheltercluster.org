@@ -1027,13 +1027,10 @@ header a {
   margin: 0 0 8px 0;
   margin: 0 0 0.5rem 0;
   background-color: #7f1416;
-  border: 2px solid #000;
+  border: 1px solid #530d0e;
   -moz-border-radius: 0.1875rem;
   -webkit-border-radius: 0.1875rem;
   border-radius: 0.1875rem;
-  -moz-box-shadow: rgba(0, 0, 0, 0.2) 2px 2px 3px;
-  -webkit-box-shadow: rgba(0, 0, 0, 0.2) 2px 2px 3px;
-  box-shadow: rgba(0, 0, 0, 0.2) 2px 2px 3px;
 }
 @media (min-width: 500px) {
   #calendar-box {
@@ -1072,12 +1069,12 @@ header a {
   font-size: 1.1rem;
   padding: 10px;
   padding: 0.625rem;
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid #651011;
 }
 @media (min-width: 500px) {
   #calendar-date {
     width: 140px;
-    border-right: 1px solid black;
+    border-right: 1px solid #651011;
     border-bottom: none;
   }
 }
@@ -1085,7 +1082,7 @@ header a {
   #calendar-date {
     width: initial;
     border-right: none;
-    border-bottom: 1px solid black;
+    border-bottom: 1px solid #651011;
   }
 }
 #calendar-date svg {

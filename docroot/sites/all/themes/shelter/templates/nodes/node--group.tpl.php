@@ -50,7 +50,9 @@
       <div class="main-column">
 
         <section id="operation-information">
-          <img class="operation-image" src="http://placehold.it/290x150">
+          <?php if (isset($group_image)): ?>
+            <?php print $group_image; ?>
+          <?php endif; ?>
           <?php print render($content['body']); ?>
           <p>Operation started November 8th, 2013, and is on going.</p>
           <ul id="meta-data">
