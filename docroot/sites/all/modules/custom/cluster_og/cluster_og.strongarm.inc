@@ -442,7 +442,11 @@ function cluster_og_strongarm() {
       ),
     ),
     'extra_fields' => array(
-      'form' => array(),
+      'form' => array(
+        'path' => array(
+          'weight' => '30',
+        ),
+      ),
       'display' => array(),
     ),
   );
@@ -483,7 +487,11 @@ function cluster_og_strongarm() {
       ),
     ),
     'extra_fields' => array(
-      'form' => array(),
+      'form' => array(
+        'path' => array(
+          'weight' => '30',
+        ),
+      ),
       'display' => array(),
     ),
   );
@@ -541,7 +549,11 @@ function cluster_og_strongarm() {
   $strongarm->value = array(
     'view_modes' => array(),
     'extra_fields' => array(
-      'form' => array(),
+      'form' => array(
+        'path' => array(
+          'weight' => '30',
+        ),
+      ),
       'display' => array(),
     ),
   );
@@ -573,7 +585,11 @@ function cluster_og_strongarm() {
       ),
     ),
     'extra_fields' => array(
-      'form' => array(),
+      'form' => array(
+        'path' => array(
+          'weight' => '30',
+        ),
+      ),
       'display' => array(),
     ),
   );
