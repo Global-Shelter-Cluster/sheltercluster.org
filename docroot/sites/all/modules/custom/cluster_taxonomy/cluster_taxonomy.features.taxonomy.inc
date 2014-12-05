@@ -35,7 +35,7 @@ function cluster_taxonomy_taxonomy_default_vocabularies() {
     'coordination_management' => array(
       'name' => 'Coordination Management',
       'machine_name' => 'coordination_management',
-      'description' => '',
+      'description' => 'Related to the management and policies of the cluster',
       'hierarchy' => 0,
       'module' => 'taxonomy',
       'weight' => -10,
@@ -150,7 +150,7 @@ function cluster_taxonomy_taxonomy_default_vocabularies() {
     'information_management' => array(
       'name' => 'Information Management',
       'machine_name' => 'information_management',
-      'description' => '',
+      'description' => 'Information and communications products of the cluster',
       'hierarchy' => 0,
       'module' => 'taxonomy',
       'weight' => -9,
