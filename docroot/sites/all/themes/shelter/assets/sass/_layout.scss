@@ -1,0 +1,31 @@
+/* _layout.scss */
+
+* {
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+
+html {
+  font-size: 100%
+}
+
+body {
+  background-color: $master-background;
+  font-family: arial, sans-serif;
+  font-size: rem($body-font-size);
+  font-weight: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.page-margin {
+  width: 90%;
+  margin: 0 auto;
+  @include breakpoint(900px) {
+    width: 95%;
+  }
+}
+
+#content {
+  @include rem(padding, 2rem 0);
+  @include rem(min-height, 10rem);
+}

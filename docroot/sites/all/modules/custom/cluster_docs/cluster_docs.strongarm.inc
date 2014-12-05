@@ -14,7 +14,7 @@ function cluster_docs_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'additional_settings__active_tab_document';
-  $strongarm->value = 'edit-workflow';
+  $strongarm->value = 'edit-og';
   $export['additional_settings__active_tab_document'] = $strongarm;
 
   $strongarm = new stdClass();
@@ -106,7 +106,14 @@ function cluster_docs_strongarm() {
       ),
     ),
     'extra_fields' => array(
-      'form' => array(),
+      'form' => array(
+        'title' => array(
+          'weight' => '0',
+        ),
+        'path' => array(
+          'weight' => '1',
+        ),
+      ),
       'display' => array(),
     ),
   );

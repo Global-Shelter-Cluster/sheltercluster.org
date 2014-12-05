@@ -1,7 +1,178 @@
 <?php
 /**
  * @file
- * Code for the cluster_og feature.
+ * Handles all OG related funcitonalities.
  */
 
 include_once 'cluster_og.features.inc';
+
+/**
+ * Implements hook_menu().
+ */
+function cluster_og_menu() {
+  module_load_include('inc', 'cluster_og', 'includes/cluster_og.menu');
+  $items = array();
+  // Generate the geographic_region menu.
+  $items = array_merge(cluster_og_menu_region(), $items);
+  return $items;
+}
+
+/**
+ * Page callback.
+ * Display a Region Group page.
+ * @param $nid
+ *  The geographic_region node id.
+ * @param $path
+ *  The associated menu item path.
+ */
+function cluster_og_geographic_region($nid, $path) {
+  $content['region_group'] = node_view(node_load($nid), 'full');
+  return $content;
+}
+
+/**
+ *  Implements hook_entity_info_alter().
+ */
+function cluster_og_entity_info_alter(&$entity_info) {
+  $entity_info['node']['view modes']['related_response'] = array(
+    'label' => t('Related response'),
+    'custom settings' => FALSE,
+  );
+
+  $entity_info['node']['view modes']['related_hub'] = array(
+    'label' => t('Related hub'),
+    'custom settings' => FALSE,
+  );
+}
+
+/**
+ * Node API.
+ */
+
+/**
+ * Implements hook_node_view().
+ */
+function cluster_og_node_view($node, $view_mode) {
+  $bundle = $node->type;
+
+  // Group specific actions.
+  if (og_is_group_type('node', $bundle)) {
+    $group_content = new GroupPageContent($node, $view_mode);
+    $node->content['contact_members'] = $group_content->getContactMembers();
+    $node->content['related_hubs'] = $group_content->getRelatedHubs();
+    $node->content['related_responses'] = $group_content->getRelatedResponses();
+    $node->content['key_documents'] = $group_content->getKeyDocuments();
+    $node->content['recent_documents'] = $group_content->getRecentDocuments();
+    $node->content['recent_discussions'] = $group_content->getRecentDiscussions();
+  }
+}
+
+/**
+ * Implements hook_node_insert().
+ */
+function cluster_og_node_insert($node) {
+  // Clear the menu cache to add the new region to the menu.
+  if ($node->type == 'geographic_region') {
+    menu_rebuild();
+  }
+}
+
+/**
+ * Theme API.
+ */
+
+/**
+ * Implements hook_theme().
+ */
+function cluster_og_theme() {
+  return array(
+    'cluster_og_contact_member' => array(
+      'file' => 'theme/cluster_og.theme.inc',
+      'render element' => 'element',
+    ),
+    'cluster_og_related_responses' => array(
+      'file' => 'theme/cluster_og.theme.inc',
+      'render element' => 'element',
+    ),
+    'cluster_og_related_hubs' => array(
+      'file' => 'theme/cluster_og.theme.inc',
+      'render element' => 'element',
+    ),
+    'cluster_og_key_documents' => array(
+      'file' => 'theme/cluster_og.theme.inc',
+      'render element' => 'element',
+    ),
+    'cluster_og_key_documents_by_tag' => array(
+      'file' => 'theme/cluster_og.theme.inc',
+      'render element' => 'element',
+    ),
+    'cluster_og_recent_documents' => array(
+      'file' => 'theme/cluster_og.theme.inc',
+      'render element' => 'element',
+    ),
+    'cluster_og_recent_discussions' => array(
+      'file' => 'theme/cluster_og.theme.inc',
+      'render element' => 'element',
+    ),
+  );
+}
+
+/**
+ * Implements hook_preprocess_page().
+ */
+function cluster_og_preprocess_page(&$vars) {
+  module_load_include('inc', 'cluster_og', 'theme/cluster_og.theme');
+  _cluster_og_preprocess_page($vars);
+}
+
+/**
+ * Implements hook_preprocess_field().
+ */
+function cluster_og_preprocess_field(&$vars) {
+  module_load_include('inc', 'cluster_og', 'theme/cluster_og.theme');
+  _cluster_og_preprocess_field($vars);
+}
+
+/**
+ * Helpers.
+ */
+
+/**
+ * Returns render array for a given menu.
+ * @param $menu_name
+ *  Machine name of the required menu.
+ * @param $current_page_only
+ *  If TRUE menu is only expended for the currently viewed page / path.
+ *  If FALSE the whole menu tree is provided.
+ * @return
+ *  Regions menu render array.
+ */
+function _cluster_og_get_regions_menu($menu_name, $current_page_only = TRUE) {
+  if ($current_page_only) {
+    $tree = menu_tree_page_data($menu_name, NULL, TRUE);
+  }
+  else {
+    $tree = menu_tree_all_data($menu_name); 
+  }
+  $output = menu_tree_output($tree);
+  return $output;
+}
+
+/**
+ * Generate path for a Geographic region group by prefixing all parents and ancestors labels
+ * to the group label.
+ * @param $wrapper
+ *  Entity metadata wrapper.
+ * @param $path
+ *  Recursively obtained path for previous wrappers in the hierarchy.
+ * @return
+ *  Path string to a geographic_region entity that includes the label of all parent and ancestor geographic_region,
+ *  such as asia/philippines/manilla.
+ */
+function _cluster_og_generate_region_path($wrapper, $path = '') {
+  $path = strtolower($wrapper->label() . '/' . $path);
+  if ($wrapper->field_parent_region->value()) {
+    return _cluster_og_generate_region_path($wrapper->field_parent_region, $path);
+  }
+  return trim($path, '/');
+}

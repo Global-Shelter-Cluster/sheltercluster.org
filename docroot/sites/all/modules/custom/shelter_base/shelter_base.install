@@ -9,26 +9,33 @@
  * Implements hook_install().
  */
 function shelter_base_install() {
-  module_disable(array('dashboard', 'toolbar'));
-  
-  // Enable core modules.
-  foreach(_shelter_base_required_core() as $m) {
-    if (! module_enable(array($m))) {
-      watchdog('shelter_base', 'Failed enabling core ' . $m);
-    }
-  }
+  module_disable(array('dashboard', 'toolbar', 'overlay'));
+  _shelter_base_modules_enable('core');
+  _shelter_base_modules_enable('contrib');
+  _shelter_base_modules_enable('custom');
+  // Set default theme.
+  shelter_base_update_7003();
+}
 
-  // Enable contrib modules.
-  foreach(_shelter_base_required_contrib() as $m) {
-    if (! module_enable(array($m))) {
-      watchdog('shelter_base', 'Failed enabling contrib ' . $m);
-    }
+function _shelter_base_module_enable_all() {
+  $types = array('core', 'contrib', 'custom');
+  foreach($types as $type) {
+    _shelter_base_modules_enable($type);
   }
+}
 
-  // Enable custom modules.
-  foreach(_shelter_base_required_custom() as $m) {
-    if (! module_enable(array($m))) {
-      watchdog('shelter_base', 'Failed enabling custom ' . $m);
+/**
+ * Enable modules.
+ * @param $type
+ *   Module type: one of contrib, custom or core.
+ */
+function _shelter_base_modules_enable($type) {
+  $f = '_shelter_base_required_' . $type;
+  if (function_exists($f)) {
+    foreach ($f() as $module) {
+      if (! module_enable(array($module))) {
+        watchdog('shelter_base', "Failed enabling $f $module", WATCHDOG_ERROR);
+      }
     }
   }
 }
@@ -38,8 +45,10 @@ function shelter_base_install() {
  */
 function _shelter_base_required_contrib() {
   return array('addressfield', 'admin_menu', 'backup_migrate', 'ctools', 'date', 'devel', 'email', 'entity', 'entity_translation',
-    'entityreference', 'features', 'flag', 'link', 'og', 'og_access', 'og_register', 'og_ui', 'strongarm', 'title', 'token',
-    'transliteration', 'url', 'views', 'views_ui', 'views_bulk_operations');
+    'entityreference', 'features', 'field_group', 'flag', 'link', 'name', 'og', 'og_access', 'og_register', 'og_ui', 'pathauto',
+    'restrict_node_page_view', 'strongarm', 'title', 'token', 'transliteration', 'uuid', 'uuid_features', 'url', 'views', 'views_ui', 
+    'views_bulk_operations'
+  );
 }
 
 /**
@@ -53,12 +62,48 @@ function _shelter_base_required_core() {
  * List of required custom modules.
  */
 function _shelter_base_required_custom() {
-  return array('cluster_docs', 'cluster_og');
+  return array('cluster_docs', 'cluster_discussions', 'cluster_og', 'cluster_taxonomy', 'cluster_user');
 }
 
 /**
- * List of enabled languages.
+ * Update required module list.
  */
-function _shelter_base_enabled_lang() {
-  return array();
+function shelter_base_update_7001() {
+  _shelter_base_modules_enable('contrib');
+}
+
+/**
+ * Update required module list.
+ */
+function shelter_base_update_7002() {
+  _shelter_base_module_enable_all();
+}
+
+/**
+ * Enable shelter theme and set as default.
+ */
+function shelter_base_update_7003() {
+  theme_enable(array('theme_default' => 'shelter'));
+  variable_set('theme_default', 'shelter');
+}
+
+/**
+ * Update required module list.
+ */
+function shelter_base_update_7005() {
+  _shelter_base_module_enable_all();
+}
+
+/**
+ * Update required module list (uuid).
+ */
+function shelter_base_update_7006() {
+  _shelter_base_modules_enable('contrib');
+}
+
+/**
+ * Update required module list (field_group).
+ */
+function shelter_base_update_7007() {
+  _shelter_base_modules_enable('contrib');
 }
