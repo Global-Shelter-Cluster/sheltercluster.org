@@ -1,5 +1,7 @@
+/* _footer.scss */
+
 footer {
-  background: darken($shelter-grey, 25%);
+  background: darken($shelter-dark-blue, 5%);
   color: #fff;
   @include rem(padding-bottom, 2rem);
 
@@ -17,13 +19,14 @@ footer {
     @include rem(margin-bottom, 2rem);
   }
   h3 {
-    @include rem(padding, 0.5rem);
+    @include rem(padding, 0.5rem );
+    @include rem(margin, 0 0 1rem );
   }
 
   #active-clusters-list {
     display: inline-block;
     vertical-align: top;
-    @include breakpoint(700px) {
+    @include breakpoint(900px) {
       width: 50%;
     }
 
@@ -35,19 +38,24 @@ footer {
   #regions-list {
     display: inline-block;
     vertical-align: top;
-    @include breakpoint(700px) {
+    width: 100%;
+    @include breakpoint(900px) {
       width: 50%;
     }
 
-    .region {
-      display: inline-block;
-      vertical-align: top;
-      width: 46%;
-    }
-    .region-name {
+    & > .menu > li > a{
       display: block;
       font-weight: bold;
-      @include rem(margin-bottom, 0.5rem);
+      @include rem(margin-bottom, 0.25rem);
+    }
+    & > .menu > li {
+      display: inline-block;
+      vertical-align: top;
+      width: 100%;
+      @include rem(margin-bottom, 1.25rem);
+      @include breakpoint(500px) {
+        width: 46%;
+      }
     }
     .country {
       list-style: disc inside;

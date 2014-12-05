@@ -35,12 +35,12 @@ function cluster_og_geographic_region($nid, $path) {
  */
 function cluster_og_entity_info_alter(&$entity_info) {
   $entity_info['node']['view modes']['related_response'] = array(
-    'label' => t('Related response'),
+    'label' => t('Related Response'),
     'custom settings' => FALSE,
   );
 
   $entity_info['node']['view modes']['related_hub'] = array(
-    'label' => t('Related hub'),
+    'label' => t('Related Hub'),
     'custom settings' => FALSE,
   );
 }
@@ -86,6 +86,10 @@ function cluster_og_node_insert($node) {
  */
 function cluster_og_theme() {
   return array(
+    'cluster_og_contextual_navigation' => array(
+      'file' => 'theme/cluster_og.theme.inc',
+      'render element' => 'element',
+    ),
     'cluster_og_contact_member' => array(
       'file' => 'theme/cluster_og.theme.inc',
       'render element' => 'element',
@@ -152,7 +156,7 @@ function _cluster_og_get_regions_menu($menu_name, $current_page_only = TRUE) {
     $tree = menu_tree_page_data($menu_name, NULL, TRUE);
   }
   else {
-    $tree = menu_tree_all_data($menu_name); 
+    $tree = menu_tree_all_data($menu_name);
   }
   $output = menu_tree_output($tree);
   return $output;
