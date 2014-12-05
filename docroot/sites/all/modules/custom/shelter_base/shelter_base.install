@@ -45,8 +45,9 @@ function _shelter_base_modules_enable($type) {
  */
 function _shelter_base_required_contrib() {
   return array('addressfield', 'admin_menu', 'backup_migrate', 'ctools', 'date', 'devel', 'email', 'entity', 'entity_translation',
-    'entityreference', 'features', 'flag', 'link', 'name', 'og', 'og_access', 'og_register', 'og_ui', 'pathauto',
-    'restrict_node_page_view', 'strongarm', 'title', 'token', 'transliteration', 'url', 'views', 'views_ui', 'views_bulk_operations'
+    'entityreference', 'features', 'field_group', 'flag', 'link', 'name', 'og', 'og_access', 'og_register', 'og_ui', 'pathauto',
+    'restrict_node_page_view', 'strongarm', 'title', 'token', 'transliteration', 'uuid', 'uuid_features', 'url', 'views', 'views_ui',
+    'views_bulk_operations'
   );
 }
 
@@ -61,7 +62,7 @@ function _shelter_base_required_core() {
  * List of required custom modules.
  */
 function _shelter_base_required_custom() {
-  return array('cluster_docs', 'cluster_og', 'cluster_user', 'cluster_discussions');
+  return array('cluster_docs', 'cluster_discussions', 'cluster_og', 'cluster_taxonomy', 'cluster_user');
 }
 
 /**
@@ -105,10 +106,23 @@ function shelter_base_update_7005() {
 }
 
 /**
- * Set jquery version back to 1.8 so it doesn't conflict with admin menu
+ * Update required module list (uuid).
  */
 function shelter_base_update_7006() {
+  _shelter_base_modules_enable('contrib');
+}
+
+/**
+ * Update required module list (field_group).
+ */
+function shelter_base_update_7007() {
+  _shelter_base_modules_enable('contrib');
+}
+
+/**
+ * Set jquery version back to 1.8 so it doesn't conflict with admin menu
+ */
+function shelter_base_update_7008() {
   variable_set('jquery_update_jquery_version', '1.8');
   variable_set('jquery_update_jquery_admin_version', '1.8');
 }
-
