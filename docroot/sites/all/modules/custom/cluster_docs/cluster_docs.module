@@ -44,6 +44,13 @@ function cluster_docs_all($nid) {
 }
 
 /**
+ *
+ */
+function cluster_docs_get_key_docs($gid) {
+
+}
+
+/**
  * Implements hook_theme().
  */
 function cluster_docs_theme() {
@@ -51,6 +58,14 @@ function cluster_docs_theme() {
     'cluster_docs_all' => array(
       'file' => 'theme/cluster_docs.theme.inc',
       'render element' => 'element',
+    ),
+    'cluster_docs_cards' => array(
+      'file' => 'theme/cluster_docs.theme.inc',
+      'variables' => array(
+        'category' => '',
+        'nodes' => array(),
+      ),
+      'template' => 'theme/cluster_docs_cards'
     ),
   );
 }
