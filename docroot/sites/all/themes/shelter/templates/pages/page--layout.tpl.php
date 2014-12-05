@@ -378,7 +378,7 @@
               <?php print _svg('icons/pin', array('id'=>'calendar-pin', 'alt' => 'Pin icon')); ?>Nov. 24th 2014
             </div>
             <div id="calendar-event">
-              <span class="upcoming" href="#">Upcoming envent to <a href="#">agenda</a>:</span>
+              <span class="upcoming" href="#">Upcoming event to the <a href="#">agenda</a>:</span>
               <a class="event" href="#">Shelter Technical Meeting 2014</a></div>
           </div>
           <a class="see-all" href="#">All calendar events</a>

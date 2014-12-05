@@ -89,6 +89,8 @@ function shelter_preprocess_node(&$variables) {
 
   // Create some contextual navigation if viewing a group
   if ($is_group && $view_mode == 'full'){
+    dpm($variables);
+    $variables['content']['body']['#label_display'] = 'hidden';
     try {
       $group_wrapper = entity_metadata_wrapper('node', $node);
 

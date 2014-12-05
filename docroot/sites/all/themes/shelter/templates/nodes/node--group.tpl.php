@@ -40,14 +40,18 @@
   <div id="content-header">
     <div class="page-margin clearfix">
 
-      <div class="main-column">
-
+      <section id="operation-title">
         <?php if (isset($contextual_navigation)): ?>
           <?php print $contextual_navigation; ?>
         <?php endif; ?>
+        <h1><?php print $title; ?></h1>
+      </section>
+
+      <div class="main-column">
 
         <section id="operation-information">
-          <h1><?php print $title; ?></h1>
+          <img class="operation-image" src="http://placehold.it/290x150">
+          <?php print render($content['body']); ?>
           <p>Operation started November 8th, 2013, and is on going.</p>
           <ul id="meta-data">
             <li class="data-item"><span>Type:</span> Windstorm</li>
@@ -101,6 +105,19 @@
       </div>
 
       <div class="side-column">
+
+        <section id="shelter-calendar">
+          <div id="calendar-box">
+            <div id="calendar-date">
+              <?php print _svg('icons/pin', array('id'=>'calendar-pin', 'alt' => 'Pin icon')); ?>Nov. 24th 2014
+            </div>
+            <div id="calendar-event">
+              <span class="upcoming" href="#">Upcoming event to the <a href="#">agenda</a>:</span>
+              <a class="event" href="#">Shelter Technical Meeting 2014</a></div>
+          </div>
+          <a class="see-all" href="#">All calendar events</a>
+        </section>
+
         <section id="shelter-discussions">
           <h3>Discussions</h3>
           <ul id="discussions-items">

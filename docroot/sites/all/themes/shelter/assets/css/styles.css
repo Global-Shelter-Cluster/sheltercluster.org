@@ -317,10 +317,21 @@ body {
 }
 
 /* _operation.scss */
+#operation-title {
+  padding: 8px 0 0 0;
+  padding: 0.5rem 0 0 0;
+}
+#operation-title h1 {
+  margin: 0 0 0 0;
+}
+
 #operation-information {
   clear: both;
   margin: 0 0 32px 0;
   margin: 0 0 2rem 0;
+  position: relative;
+  top: -16px;
+  top: -1rem;
 }
 #operation-information .operation-image {
   float: left;
@@ -873,11 +884,6 @@ header a {
 }
 #contextual-navigation a {
   color: #7f1416;
-}
-
-#operation-information h1 {
-  margin: 0 0 16px 0;
-  margin: 0 0 1rem 0;
 }
 
 /* _discussions.scss */
