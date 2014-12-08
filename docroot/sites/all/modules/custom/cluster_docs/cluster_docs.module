@@ -19,7 +19,7 @@ function cluster_docs_menu() {
     'page arguments' => array(1),
     'access callback' => 'og_is_group',
     'access arguments' => array(0, 1),
-    'type' => MENU_NORMAL_ITEM,
+    'type' => MENU_CALLBACK,
   );
   return $items;
 }
@@ -73,7 +73,6 @@ function cluster_docs_get_grouped_key_docs($gid) {
   }
 
   $documents = entity_load('node', array_keys($res['node']));
-  dpm($documents);
 }
 
 /**

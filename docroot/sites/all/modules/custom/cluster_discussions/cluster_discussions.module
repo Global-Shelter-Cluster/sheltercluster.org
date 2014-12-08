@@ -19,7 +19,7 @@ function cluster_discussions_menu() {
     'page arguments' => array(1),
     'access callback' => 'og_is_group',
     'access arguments' => array(0, 1),
-    'type' => MENU_NORMAL_ITEM,
+    'type' => MENU_CALLBACK,
   );
   return $items;
 }
