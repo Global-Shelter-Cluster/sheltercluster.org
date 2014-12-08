@@ -51,20 +51,27 @@ function cluster_docs_all($nid) {
  *  array of node ids for document nodes keyed by category vocabulary machine name, or FALSE if no matching result.
  */
 function cluster_docs_get_grouped_key_docs($gid) {
-  $query = new EntityFieldQuery();
-  $res = $query->entityCondition('entity_type', 'node')
-    ->entityCondition('bundle', 'document')
-    ->fieldCondition('og_group_ref', 'target_id', $gid)
-    ->fieldCondition('field_key_document', 'value', 1)
-    ->propertyCondition('status', NODE_PUBLISHED)
-    ->execute();
+  // Use the field_group module API to generate a list of categories.
+  $info = field_group_info_groups('node', 'document', 'form', TRUE);
+  $basic_tag_fields = $info['group_basic_tags']->children;
+  $advanced_tag_fields = $info['group_advanced_tags']->children;
+  $categories = array_merge($basic_tag_fields, $advanced_tag_fields);
 
-  if (!isset($res['node'])) {
-    return FALSE;
+  $grouped_docs = array();
+  foreach ($categories as $category) {
+    $query = new EntityFieldQuery();
+    $res = $query->entityCondition('entity_type', 'node')
+      ->entityCondition('bundle', 'document')
+      ->fieldCondition('og_group_ref', 'target_id', $gid)
+      ->fieldCondition('field_key_document', 'value', 1)
+      ->fieldCondition($category, 'tid', 'NULL', '!=')
+      ->propertyCondition('status', NODE_PUBLISHED)
+      ->execute();
+    if (isset($res['node'])) {
+      $grouped_docs[$category] = array_keys($res['node']);
+    }
   }
-
-  $documents = entity_load('node', array_keys($res['node']));
-  dpm($documents);
+  dpm($grouped_docs);
 }
 
 /**
