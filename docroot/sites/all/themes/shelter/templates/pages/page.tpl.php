@@ -1,99 +1,121 @@
-<?php
+<div id="page">
 
-/**
- * @file
- * Default theme implementation to display a single Drupal page.
- */
+  <header>
 
-?>
-<div id="page-wrapper">
-  <div id="page">
-
-    <div id="header">
-      <div class="section clearfix">
-
-        <?php if ($logo): ?>
-          <a href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>" rel="home" id="logo">
-            <img src="<?php print $logo; ?>" alt="<?php print t('Home'); ?>" />
-          </a>
-        <?php endif; ?>
-
-        <?php if ($site_name || $site_slogan): ?>
-          <div id="name-and-slogan">
-            <?php if ($site_name): ?>
-              <?php if ($title): ?>
-                <div id="site-name"><strong>
-                  <a href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>" rel="home"><span><?php print $site_name; ?></span></a>
-                </strong></div>
-              <?php else: /* Use h1 when the content title is empty */ ?>
-                <h1 id="site-name">
-                  <a href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>" rel="home"><span><?php print $site_name; ?></span></a>
-                </h1>
-              <?php endif; ?>
-            <?php endif; ?>
-
-            <?php if ($site_slogan): ?>
-              <div id="site-slogan"><?php print $site_slogan; ?></div>
-            <?php endif; ?>
-          </div>
-        <?php endif; ?>
-
-        <?php print render($page['header']); ?>
-
-      </div>
-    </div>
-
-    <?php if ($main_menu || $secondary_menu): ?>
-      <div id="navigation"><div class="section">
-        <?php print theme('links__system_main_menu', array('links' => $main_menu, 'attributes' => array('id' => 'main-menu', 'class' => array('links', 'inline', 'clearfix')), 'heading' => t('Main menu'))); ?>
-        <?php print theme('links__system_secondary_menu', array('links' => $secondary_menu, 'attributes' => array('id' => 'secondary-menu', 'class' => array('links', 'inline', 'clearfix')), 'heading' => t('Secondary menu'))); ?>
-      </div></div>
-    <?php endif; ?>
-
-    <?php if ($breadcrumb): ?>
-      <div id="breadcrumb"><?php print $breadcrumb; ?></div>
-    <?php endif; ?>
-
-    <?php print $messages; ?>
-
-    <div id="main-wrapper">
-      <div id="main" class="clearfix">
-
-        <div id="content" class="column">
-          <div class="section">
-            <?php if ($page['highlighted']): ?><div id="highlighted"><?php print render($page['highlighted']); ?></div><?php endif; ?>
-            <a id="main-content"></a>
-            <?php print render($title_prefix); ?>
-            <?php if ($title): ?><h1 class="title" id="page-title"><?php print $title; ?></h1><?php endif; ?>
-            <?php print render($title_suffix); ?>
-            <?php if ($tabs): ?><div class="tabs"><?php print render($tabs); ?></div><?php endif; ?>
-            <?php print render($page['help']); ?>
-            <?php if ($action_links): ?><ul class="action-links"><?php print render($action_links); ?></ul><?php endif; ?>
-            <?php print render($page['content']); ?>
-            <?php print $feed_icons; ?>
-          </div>
+    <section id="site-options-bar" class="clearfix">
+      <div class="page-margin">
+        <div id="language-selector" class="clearfix">
+          <ul class="languages">
+            <li class="language"><a href="" class="active">en</a></li>
+            <li class="language"><a href="">fr</a></li>
+            <li class="language"><a href="">es</a></li>
+            <li class="language"><a href="">ar</a></li>
+          </ul>
         </div>
+        <div id="bandwidth-selector">
+          <?php print _svg('icons/signal', array('id'=>'bandwidth-selector-icon', 'alt' => 'Bandwidth indication icon')); ?>
+          <a href="" class="active">Low bandwidth environment</a>
+          <span>/</span>
+          <a href="">Swicth to high</a>
+        </div>
+      </div>
+    </section>
 
-        <?php if ($page['sidebar_first']): ?>
-          <div id="sidebar-first" class="column sidebar"><div class="section">
-            <?php print render($page['sidebar_first']); ?>
-          </div></div>
-        <?php endif; ?>
+    <section id="site-branding" class="clearfix">
+      <div class="page-margin clearfix">
 
-        <?php if ($page['sidebar_second']): ?>
-          <div id="sidebar-second" class="column sidebar"><div class="section">
-            <?php print render($page['sidebar_second']); ?>
-          </div></div>
-        <?php endif; ?>
+        <a id="logo-shelter-cluster" href="http://sheltercluster.org">
+          <?php print _svg('logo-global-shelter-cluster', array('id'=>'shelter-cluster', 'alt' => 'Global Shelter Cluster - ShelterCluster.org - Coordinating Humanitarian Shelter')); ?>
+        </a>
+
+        <ul id="profile-menu-items">
+          <li class="profile-item"><a href="">Login</a></li>
+          <li class="profile-item"><a href="">Create an account</a></li>
+        </ul>
+
+        <form class="search" action="http://www.google.com/search" method="get">
+          <input class="text-field" type="search" placeholder="Search documents" name="q">
+          <input class="submit" type="submit" value="Search">
+        </form>
 
       </div>
+    </section>
+
+    <div class="page-margin clearfix">
+      <?php if ($messages) { print $messages; } ?>
     </div>
 
-    <div id="footer">
-      <div class="section">
-        <?php print render($page['footer']); ?>
+    <nav id="nav-shelter" class="clearfix">
+      <div class="page-margin">
+        <a href="#" id="button-menu-dropdown">Menu</a>
+        <ul class="nav-items">
+          <li class="nav-item"><a href="">Home</a></li>
+          <li class="nav-item"><a href="">Current Operations <span class="total">(10)</span></a></li>
+          <li class="nav-item"><a href="">Documents <span class="total">(8200)</span></a></li>
+          <li class="nav-item"><a href="">Geographic Aggregators</a></li>
+          <li class="nav-item"><a href="">Communities of Practice <span class="total">(6)</span></a></li>
+          <li class="nav-item"><a href="">References <span class="total">(34)</span></a></li>
+          <li class="sub-nav">
+            <ul>
+              <li class="nav-item"><a href="">Manage your profile</a></li>
+              <li class="nav-item"><a href="">Disconnect</a></li>
+            </ul>
+          </li>
+        </ul>
       </div>
+    </nav>
+  </header>
+
+  <?php print render($page['content']); ?>
+
+  <footer>
+    <div class="page-margin clearfix">
+      <form class="search" action="http://www.google.com/search" method="get">
+        <input class="text-field" type="search" placeholder="Search documents" name="q">
+        <input class="submit" type="submit" value="Search">
+      </form>
     </div>
 
-  </div>
+    <div class="page-margin">
+      <section id="active-clusters-list">
+        <h3>With 24 <a href='#'>active shelter clusters</a> and cluster like mechanism</h3>
+        <ul class="clusters">
+          <li class="cluster"><a href="#">Myanmar Rakhine and Kachin Emergency Response</a></li>
+          <li class="cluster"><a href="#">Philippines Bohol Earthquake</a></li>
+          <li class="cluster"><a href="#">Solomon Islands Floods 2014</a></li>
+        </ul>
+        <a class="complete-list" href="#">[...] more</a>
+
+      </section><section id="regions-list">
+        <h3>Shelter Cluster is present in over <a href="#">34 countries</a></h3>
+        <?php print render($page['footer']['menu_regions']); ?>
+      </section>
+
+      <section id="general-information">
+        <h3>General Information</h3>
+        <ul class="links">
+          <li class="link"><a href="#">About this site</a></li>
+          <li class="link"><a href="#">Contact information</a></li>
+          <li class="link"><a href="#">Twitter account</a></li>
+        </ul><ul class="links">
+          <li class="link"><a href="#">Support Team</a></li>
+          <li class="link"><a href="#">Partnership</a></li>
+        </ul><ul class="links">
+          <li class="link"><a href="#">Other</a></li>
+          <li class="link"><a href="#">More information</a></li>
+          <li class="link"><a href="#">Twitter account</a></li>
+        </ul>
+      </section>
+
+      <section id="partners-list">
+        <ul class="partners clearfix">
+          <li class="partner"><a href="#">ECHO</a></li>
+          <li class="partner"><a href="#">IFRC</a></li>
+          <li class="partner"><a href="#">UNHCR</a></li>
+        </ul>
+      </section>
+
+    </div>
+  </footer>
+
 </div>
