@@ -17,7 +17,7 @@ function cluster_discussions_pathauto($op) {
 }
 
 /**
- * Helper function.
+ * Helper function to create aliases for group discussion list pages.
  */
 function cluster_discussions_create_alias($node, $op) {
   module_load_include('inc', 'pathauto');
@@ -42,9 +42,11 @@ function cluster_discussions_node_update($node) {
   }
 }
 
+/**
+ * Refreshes all aliases.
+ */
 function cluster_discussions_pathauto_bulkupdate() {
   $query = db_select('node', 'n');
-  //TODO: filter only group nodes
   $query->fields('n', array('nid'));
   $results = $query->execute()->fetchCol();
   $count = 0;

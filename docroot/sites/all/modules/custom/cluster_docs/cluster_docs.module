@@ -24,6 +24,11 @@ function cluster_docs_menu() {
   return $items;
 }
 
+/**
+ * Page callback, shows a group's documents using Search API.
+ * @param $nid
+ * @return Render array
+ */
 function cluster_docs_all($nid) {
   global $language;
   $query = search_api_query('default_node_index', array(

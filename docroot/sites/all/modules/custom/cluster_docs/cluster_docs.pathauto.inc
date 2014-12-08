@@ -17,7 +17,7 @@ function cluster_docs_pathauto($op) {
 }
 
 /**
- * Helper function.
+ * Helper function to create aliases for group document list pages.
  */
 function cluster_docs_create_alias($node, $op) {
   module_load_include('inc', 'pathauto');
@@ -42,15 +42,17 @@ function cluster_docs_node_update($node) {
   }
 }
 
+/**
+ * Refreshes all aliases.
+ */
 function cluster_docs_pathauto_bulkupdate() {
   $query = db_select('node', 'n');
-  //TODO: filter only group nodes
   $query->fields('n', array('nid'));
   $results = $query->execute()->fetchCol();
   $count = 0;
   foreach ($results as $nid) {
     $node = node_load($nid);
-    if (og_is_group('node', $node)) { //TODO: move this logic to query
+    if (og_is_group('node', $node)) { //TODO: move this logic to query?
       cluster_docs_create_alias($node, 'bulkupdate');
     }
     $count++;

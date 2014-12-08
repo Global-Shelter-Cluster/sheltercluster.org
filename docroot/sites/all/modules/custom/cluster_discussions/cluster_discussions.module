@@ -24,6 +24,11 @@ function cluster_discussions_menu() {
   return $items;
 }
 
+/**
+ * Page callback, shows a group's discussions using Search API.
+ * @param $nid
+ * @return Render array
+ */
 function cluster_discussions_all($nid) {
   global $language;
   $query = search_api_query('default_node_index', array(
