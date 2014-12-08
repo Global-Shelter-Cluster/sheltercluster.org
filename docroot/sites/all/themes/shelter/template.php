@@ -39,11 +39,12 @@ function shelter_preprocess_node(&$variables) {
   $node = $variables['node'];
   $view_mode = $variables['view_mode'];
 
-  if ( $view_mode == full ){
+  if ($view_mode == 'full'){
     if (og_is_group('node', $node)) {
       $variables['theme_hook_suggestions'][] = 'node__group';
     }
-  } else {
+  }
+  else {
     // Adding view mode based theme suggestions and preprocesses
     $variables['theme_hook_suggestions'][] = 'node__partial__' . $variables['view_mode'];
     $view_mode_based_preprocess = 'shelter_preprocess_node_partial__' . $variables['view_mode'];
@@ -85,7 +86,7 @@ function shelter_preprocess_node_partial__contextual_navigation(&$variables) {
       dpm('associated regions');
     }
 
-    dpm($node_wrapper->getPropertyInfo());
+    //dpm($node_wrapper->getPropertyInfo());
   }
   catch (EntityMetadataWrapperException $exception) {
     _log_entity_metadata_wrapper_error($exception, 'po_promoted');
