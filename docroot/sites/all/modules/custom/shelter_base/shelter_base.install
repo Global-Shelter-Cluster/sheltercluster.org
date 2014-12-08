@@ -46,8 +46,8 @@ function _shelter_base_modules_enable($type) {
 function _shelter_base_required_contrib() {
   return array('addressfield', 'admin_menu', 'backup_migrate', 'ctools', 'date', 'devel', 'email', 'entity', 'entity_translation',
     'entityreference', 'features', 'field_group', 'flag', 'link', 'name', 'og', 'og_access', 'og_register', 'og_ui', 'pathauto',
-    'restrict_node_page_view', 'strongarm', 'title', 'token', 'transliteration', 'uuid', 'uuid_features', 'url', 'views', 'views_ui', 
-    'views_bulk_operations'
+    'restrict_node_page_view', 'search_api', 'search_api_db','strongarm', 'title', 'token', 'transliteration', 'uuid', 'uuid_features', 'url',
+    'views', 'views_ui', 'views_bulk_operations'
   );
 }
 
@@ -62,7 +62,7 @@ function _shelter_base_required_core() {
  * List of required custom modules.
  */
 function _shelter_base_required_custom() {
-  return array('cluster_docs', 'cluster_discussions', 'cluster_og', 'cluster_taxonomy', 'cluster_user', 'cluster_workflow');
+  return array('cluster_docs', 'cluster_discussions', 'cluster_og', 'cluster_taxonomy', 'cluster_user', 'cluster_search', 'cluster_workflow');
 }
 
 /**
@@ -88,6 +88,17 @@ function shelter_base_update_7003() {
 }
 
 /**
+ * Enable jQuery Update and set some default settings.
+ */
+function shelter_base_update_7004() {
+  module_enable(array('jquery_update'));
+  variable_set('jquery_update_jquery_version', '1.10');
+  variable_set('jquery_update_jquery_admin_version', '1.5');
+  variable_set('jquery_update_compression_type', 'min');
+  variable_set('jquery_update_jquery_cdn', 'google');
+}
+
+/**
  * Update required module list.
  */
 function shelter_base_update_7005() {
@@ -95,15 +106,37 @@ function shelter_base_update_7005() {
 }
 
 /**
- * Update required module list (uuid).
+ * Set jquery version back to 1.8 so it doesn't conflict with admin menu
  */
 function shelter_base_update_7006() {
+  variable_set('jquery_update_jquery_version', '1.8');
+  variable_set('jquery_update_jquery_admin_version', '1.8');
+}
+
+/**
+ * Update required module list (field_group).
+ */
+function shelter_base_update_7007() {
   _shelter_base_modules_enable('contrib');
+}
+
+/**
+ * Update required module list (uuid).
+ */
+function shelter_base_update_7008() {
+  _shelter_base_modules_enable('contrib');
+}
+
+/**
+ * Update required module list (cluster_search).
+ */
+function shelter_base_update_7009() {
+  _shelter_base_modules_enable('custom');
 }
 
 /**
  * Update required module list (cluster_workflow).
  */
-function shelter_base_update_7007() {
+function shelter_base_update_7010() {
   _shelter_base_modules_enable('custom');
 }

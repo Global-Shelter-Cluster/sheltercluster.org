@@ -2,7 +2,6 @@ name = cluster_docs
 description = Documents implementation for Shelter Cluster.
 core = 7.x
 package = Cluster
-dependencies[] = cluster_og
 dependencies[] = cluster_taxonomy
 dependencies[] = date
 dependencies[] = field_group
