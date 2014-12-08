@@ -348,7 +348,7 @@ body {
   margin: 0 0 32px 0;
   margin: 0 0 2rem 0;
 }
-#operation-group h3 {
+#operation-group h4 {
   display: table-row;
   margin: 0;
 }
@@ -358,6 +358,7 @@ body {
   margin: 0;
   padding: 0;
   height: 100%;
+  width: 100%;
 }
 #operation-group #checkboxgroup label {
   margin: 8px 0 0 0;
@@ -1046,8 +1047,8 @@ header a {
 @media (min-width: 980px) {
   #calendar-box {
     display: block;
-    width: initial;
-    height: initial;
+    width: auto;
+    height: auto;
   }
   #calendar-box > div {
     display: block;
@@ -1080,7 +1081,7 @@ header a {
 }
 @media (min-width: 980px) {
   #calendar-date {
-    width: initial;
+    width: auto;
     border-right: none;
     border-bottom: 1px solid #651011;
   }
@@ -1098,7 +1099,14 @@ header a {
 }
 @media (min-width: 500px) {
   #calendar-date svg {
-    position: initial;
+    position: relative;
+    left: 0;
+  }
+}
+@media (min-width: 990px) {
+  #calendar-date svg {
+    position: absolute;
+    left: 20px;
   }
 }
 
@@ -1122,6 +1130,99 @@ header a {
   font-size: 1rem;
   padding: 4px 0 0 0;
   padding: 0.25rem 0 0 0;
+}
+
+/* _ongoing_crisis.scss */
+#home-crisis {
+  margin: 0 0 16px 0;
+  margin: 0 0 1rem 0;
+}
+#home-crisis h1 span {
+  display: block;
+  font-size: 16px;
+  font-size: 1rem;
+}
+#home-crisis h1 span a {
+  color: #000;
+}
+#home-crisis h1 span a:hover, #home-crisis h1 span a:active {
+  text-decoration: none;
+}
+#home-crisis ul {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  margin-bottom: 16px;
+  margin-bottom: 1rem;
+}
+#home-crisis #major-crisis li {
+  clear: both;
+}
+#home-crisis #major-crisis a {
+  float: left;
+  text-align: center;
+  text-decoration: none;
+  color: #000;
+  width: 100%;
+  max-width: 60%;
+  white-space: nowrap;
+  border: 1px solid #7f1416;
+  background-color: #fff;
+  -moz-transition: all 0.3s ease;
+  -o-transition: all 0.3s ease;
+  -webkit-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+  padding: 8px;
+  padding: 0.5rem;
+  margin: 0 12px 12px 0;
+  margin: 0 0.75rem 0.75rem 0;
+  -moz-box-shadow: rgba(0, 0, 0, 0.09) 2px 2px 1px;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.09) 2px 2px 1px;
+  box-shadow: rgba(0, 0, 0, 0.09) 2px 2px 1px;
+}
+#home-crisis #major-crisis a:hover, #home-crisis #major-crisis a:active {
+  background-color: #7f1416;
+  color: #fff;
+}
+#home-crisis #major-crisis div {
+  float: left;
+  margin: 4px 8px 0 0;
+  margin: 0.25rem 0.5rem 0 0;
+}
+#home-crisis #major-crisis .warning-icon {
+  fill: red;
+  width: 25px;
+  height: 25px;
+}
+#home-crisis #major-crisis .team-icon {
+  fill: #65b630;
+  width: 30px;
+  height: 30px;
+}
+#home-crisis #legend {
+  clear: both;
+  font-size: 12px;
+  font-size: 0.75rem;
+}
+#home-crisis #legend li {
+  float: left;
+  margin-right: 16px;
+  margin-right: 1rem;
+}
+#home-crisis #legend .warning-icon {
+  fill: #7f1416;
+  top: 5px;
+  width: 20px;
+  height: 20px;
+}
+#home-crisis #legend .team-icon {
+  fill: #65b630;
+  top: 6px;
+  width: 20px;
+  height: 20px;
+}
+#home-crisis #legend svg {
+  position: relative;
 }
 
 /* _footer.scss */

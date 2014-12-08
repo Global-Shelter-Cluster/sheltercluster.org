@@ -25,7 +25,7 @@
   @include rem(padding, 1.25rem);
   @include rem(margin, 0 0 2rem 0);
 
-  h3 {
+  h4 {
     display: table-row;
     margin: 0;
   }
@@ -36,6 +36,7 @@
     margin: 0;
     padding: 0;
     height: 100%;
+    width: 100%;
 
     label{
       @include rem(margin, 0.5rem 0 0 0);

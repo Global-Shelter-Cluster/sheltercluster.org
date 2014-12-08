@@ -32,8 +32,8 @@
   }
   @include breakpoint(980px) {
     display: block;
-    width: initial;
-    height: initial;
+    width: auto;
+    height: auto;
 
     > div {
       display: block;
@@ -62,7 +62,7 @@
     border-bottom: none;
   }
  @include breakpoint(980px) {
-    width: initial;
+    width: auto;
     border-right: none;
     border-bottom: 1px solid darken($shelter-red, 6%);
   }
@@ -75,7 +75,12 @@
     height: 25px;
     @include rotate(-35deg);
     @include breakpoint(500px) {
-      position: initial;
+      position: relative;
+      left: 0;
+    }
+    @include breakpoint(990px) {
+      position: absolute;
+      left: 20px;
     }
   }
 }
