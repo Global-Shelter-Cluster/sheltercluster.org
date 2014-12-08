@@ -53,6 +53,30 @@ function cluster_docs_all($nid) {
 }
 
 /**
+ *  Get all key docs for a group, grouped by category.
+ * @param $gid
+ *  Group node id.
+ * @return
+ *  array of node ids for document nodes keyed by category vocabulary machine name, or FALSE if no matching result.
+ */
+function cluster_docs_get_grouped_key_docs($gid) {
+  $query = new EntityFieldQuery();
+  $res = $query->entityCondition('entity_type', 'node')
+    ->entityCondition('bundle', 'document')
+    ->fieldCondition('og_group_ref', 'target_id', $gid)
+    ->fieldCondition('field_key_document', 'value', 1)
+    ->propertyCondition('status', NODE_PUBLISHED)
+    ->execute();
+
+  if (!isset($res['node'])) {
+    return FALSE;
+  }
+
+  $documents = entity_load('node', array_keys($res['node']));
+  dpm($documents);
+}
+
+/**
  * Implements hook_theme().
  */
 function cluster_docs_theme() {
@@ -60,6 +84,14 @@ function cluster_docs_theme() {
     'cluster_docs_all' => array(
       'file' => 'theme/cluster_docs.theme.inc',
       'render element' => 'element',
+    ),
+    'cluster_docs_cards' => array(
+      'file' => 'theme/cluster_docs.theme.inc',
+      'variables' => array(
+        'category' => '',
+        'nodes' => array(),
+      ),
+      'template' => 'theme/cluster_docs_cards'
     ),
   );
 }
