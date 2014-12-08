@@ -137,7 +137,7 @@ function shelter_base_update_7009() {
 /**
  * Refresh pathauto paths for node/%/discussions and /documents.
  */
-function shelter_base_update_7009() {
+function shelter_base_update_7010() {
   variable_set('pathauto_cluster_discussions_pattern', '[node:content-type]/[node:title]/discussions');
   variable_set('pathauto_cluster_docs_pattern', '[node:content-type]/[node:title]/documents');
   cluster_discussions_pathauto_bulkupdate();
