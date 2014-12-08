@@ -136,7 +136,6 @@ function cluster_workflow_user_default_permissions() {
     'name' => 'moderate content from needs_review to published',
     'roles' => array(
       'administrator' => 'administrator',
-      'trusted user' => 'trusted user',
     ),
     'module' => 'workbench_moderation',
   );
