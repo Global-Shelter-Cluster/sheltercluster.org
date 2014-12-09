@@ -10,6 +10,7 @@
 @import "normalize/tables";
 @import "compass/css3/box-sizing";
 @import "compass/css3/transition";
+@import "compass/css3/transform";
 @import "compass/css3/border-radius";
 @import "compass/css3/box-shadow";
 @import "compass/css3/transform";
@@ -27,9 +28,5 @@
 @import "content";
 @import "discussions";
 @import "coordination";
+@import "calendar";
 @import "footer";
-
-//Drupal Admin Font
-body #admin-menu {
-  font-size: 12px;
-}
