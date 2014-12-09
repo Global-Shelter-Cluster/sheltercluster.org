@@ -143,6 +143,20 @@ function shelter_preprocess_node(&$variables) {
     }
   }
 
+  if ($view_mode == 'full'){
+    if (og_is_group('node', $node)) {
+      $variables['theme_hook_suggestions'][] = 'node__group';
+    }
+  }
+  else {
+    // Adding view mode based theme suggestions and preprocesses
+    $variables['theme_hook_suggestions'][] = 'node__partial__' . $variables['view_mode'];
+    $view_mode_based_preprocess = 'shelter_preprocess_node_partial__' . $variables['view_mode'];
+    if (function_exists($view_mode_based_preprocess)) {
+      $view_mode_based_preprocess($variables);
+    }
+  }
+
 }
 
 /**

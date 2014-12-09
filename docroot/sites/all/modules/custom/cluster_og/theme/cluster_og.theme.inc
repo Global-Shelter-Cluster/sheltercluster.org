@@ -99,12 +99,10 @@ function theme_cluster_og_key_documents($vars) {
  * $vars['element'][UID]: each document render array and markup.
  */
 function theme_cluster_og_key_documents_by_tag($vars) {
-  $output = '<fieldset>';
-  if (isset($vars['element']['#document_tag_name']) && $vars['element']['#document_tag_name']) {
-    $output .= '<legend>' . t($vars['element']['#document_tag_name']) . '</legend>';
-  }
+  $output = '<h4>' . $vars['element']['#document_tag_name'] . '</h4>';
+  $output .= '<ul class="document-cards clearfix">';
   $output .= $vars['element']['#children'];
-  $output .= '</fieldset>';
+  $output .= '</ul>';
   return $output;
 }
 
