@@ -34,12 +34,13 @@
       padding: 0 10px 0 10px;
 
       svg {
-        fill: lighten($shelter-grey,20%);
+        fill: lighten($shelter-grey,40%);
         width: 45px;
         height: 45px;
       }
     }
     .information-card {
+      display: table; //to make the div height 100%
       @include rem(padding, 0 0.5rem 0 0.5rem);
 
       a {
@@ -59,10 +60,10 @@
       width: 100%;
       background-color: $shelter-dark-blue;
       color: rgb(255,255,255);
+      border-top: 1px solid $shelter-red;
       @include rem(font-size, 0.9rem);
       @include rem(padding, 0.5rem);
       @include border-bottom-radius(0.15rem);
-
       .size-type {
         float: left;
       }

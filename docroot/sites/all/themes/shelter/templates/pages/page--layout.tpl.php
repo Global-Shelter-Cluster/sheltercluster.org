@@ -21,23 +21,25 @@
       </div>
     </section>
 
-    <div class="page-margin clearfix">
+    <section id="site-branding" class="clearfix">
+      <div class="page-margin clearfix">
 
-      <a id="logo-shelter-cluster" href="http://sheltercluster.org">
-        <?php print _svg('logo-global-shelter-cluster', array('id'=>'shelter-cluster', 'alt' => 'Global Shelter Cluster - ShelterCluster.org - Coordinating Humanitarian Shelter')); ?>
-      </a>
+        <a id="logo-shelter-cluster" href="http://sheltercluster.org">
+          <?php print _svg('logo-global-shelter-cluster', array('id'=>'shelter-cluster', 'alt' => 'Global Shelter Cluster - ShelterCluster.org - Coordinating Humanitarian Shelter')); ?>
+        </a>
 
-      <ul id="profile-menu-items">
-        <li class="profile-item"><a href="#">Login</a></li>
-        <li class="profile-item"><a href="#">Create an account</a></li>
-      </ul>
+        <ul id="profile-menu-items">
+          <li class="profile-item"><a href="">Login</a></li>
+          <li class="profile-item"><a href="">Create an account</a></li>
+        </ul>
 
-      <form class="search" action="http://www.google.com/search" method="get">
-        <input class="text-field" type="search" placeholder="Search documents" name="q">
-        <input class="submit" type="submit" value="Search">
-      </form>
+        <form class="search" action="http://www.google.com/search" method="get">
+          <input class="text-field" type="search" placeholder="Search documents" name="q">
+          <input class="submit" type="submit" value="Search">
+        </form>
 
-    </div>
+      </div>
+    </section>
 
     <nav id="nav-shelter" class="clearfix">
       <div class="page-margin">
@@ -139,6 +141,10 @@
         <div class="main-column">
           <section id="operation-information">
             <h1>Typhoon Haiyan</h1>
+            <img class="operation-image" src="http://placehold.it/290x150"/>
+            <p>Quis enim aut eum diligat quem metuat, aut eum a quo se metui putet? Coluntur tamen simulatione dumtaxat ad tempus. Quod si forte, ut fit plerumque, ceciderunt, tum intellegitur quam fuerint inopes amicorum. Quod Tarquinium dixisse ferunt, tum exsulantem se intellexisse quos fidos amicos habuisset, quos infidos, cum iam neutris gratiam referre posset.</p>
+            <p>Orientis vero limes in longum protentus et rectum ab Euphratis fluminis ripis ad usque supercilia porrigitur Nili, laeva Saracenis conterminans gentibus, dextra pelagi fragoribus patens, quam plagam Nicator Seleucus occupatam auxit magnum in modum, cum post Alexandri Macedonis obitum successorio iure teneret regna Persidis, efficaciae inpetrabilis rex, ut indicat cognomentum.</p>
+            <p>Tantum autem cuique tribuendum, primum quantum ipse efficere possis, deinde etiam quantum ille quem diligas atque adiuves, sustinere. Non enim neque tu possis, quamvis excellas, omnes tuos ad honores amplissimos perducere, ut Scipio P. Rupilium potuit consulem efficere, fratrem eius L. non potuit. Quod si etiam possis quidvis deferre ad alterum, videndum est tamen, quid ille possit sustinere.</p>
             <p>Operation started November 8th, 2013, and is on going.</p>
             <ul id="meta-data">
               <li class="data-item"><span>Type:</span> Windstorm</li>
@@ -365,6 +371,19 @@
 
       </div>
       <div class="side-column">
+
+        <section id="shelter-calendar">
+          <div id="calendar-box">
+            <div id="calendar-date">
+              <?php print _svg('icons/pin', array('id'=>'calendar-pin', 'alt' => 'Pin icon')); ?>Nov. 24th 2014
+            </div>
+            <div id="calendar-event">
+              <span class="upcoming" href="#">Upcoming event to the <a href="#">agenda</a>:</span>
+              <a class="event" href="#">Shelter Technical Meeting 2014</a></div>
+          </div>
+          <a class="see-all" href="#">All calendar events</a>
+        </section>
+
         <section id="shelter-discussions">
           <h3>Discussions</h3>
           <ul id="discussions-items">
@@ -505,7 +524,7 @@
   </div>
 
   <footer>
-    <div class="page-margin">
+    <div class="page-margin clearfix">
       <form class="search" action="http://www.google.com/search" method="get">
         <input class="text-field" type="search" placeholder="Search documents" name="q">
         <input class="submit" type="submit" value="Search">
@@ -524,25 +543,7 @@
 
       </section><section id="regions-list">
         <h3>Shelter Cluster is present in over <a href="#">34 countries</a></h3>
-        <ul class="regions">
-          <li class="region"><a href="#" class="region-name">Africa</a>
-            <ul class="countries">
-              <li class="country"><a href="#">Central African Republic</a></li>
-              <li class="country"><a href="#">Chad</a></li>
-            </ul>
-          </li><li class="region"><a href="#" class="region-name" >Americas</a>
-            <ul class="countries">
-              <li class="country"><a href="#">Colombia</a></li>
-              <li class="country"><a href="#">Haiti</a></li>
-            </ul>
-          </li><li class="region"><a href="#" class="region-name">MENA</a>
-            <ul class="countries">
-              <li class="country"><a href="#">Iraq</a></li>
-              <li class="country"><a href="#">Palestine</a></li>
-              <li class="country"><a href="#">Yemen</a></li>
-            </ul>
-          </li>
-        </ul>
+        <?php print render($page['footer']['menu_regions']); ?>
       </section>
 
       <section id="general-information">

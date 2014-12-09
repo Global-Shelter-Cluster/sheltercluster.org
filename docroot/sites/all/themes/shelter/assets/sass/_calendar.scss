@@ -18,9 +18,8 @@
   width: 100%;
   @include rem(margin, 0 0 0.5rem 0);
   background-color: $shelter-red;
-  border: 2px solid #000;
+  border: 1px solid darken($shelter-red,10%);
   @include border-radius(0.1875rem);
-  @include box-shadow(rgba(0, 0, 0, 0.20) 2px 2px 3px);
   @include breakpoint(500px) {
     display: table;
     width: 100%;
@@ -55,18 +54,17 @@
   color: $accent-yellow;
   text-align: center;
   @include rem(font-size, 1.1rem);
-  // @include rem(padding, 0.9375rem);
   @include rem(padding, 0.625rem);
-  border-bottom: 1px solid rgb(0, 0, 0);
+  border-bottom: 1px solid darken($shelter-red, 6%);
   @include breakpoint(500px) {
     width: 140px;
-    border-right: 1px solid rgb(0, 0, 0);
+    border-right: 1px solid darken($shelter-red, 6%);
     border-bottom: none;
   }
  @include breakpoint(980px) {
     width: auto;
     border-right: none;
-    border-bottom: 1px solid rgb(0, 0, 0);
+    border-bottom: 1px solid darken($shelter-red, 6%);
   }
 
   svg {
