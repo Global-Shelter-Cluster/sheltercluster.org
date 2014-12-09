@@ -7,10 +7,6 @@
 include_once 'cluster_docs.features.inc';
 
 /**
- * @TODO prevent basic_tags and advanced_tags from being deleted in the admin ui.
- */
-
-/**
  *  Implements hook_menu().
  */
 function cluster_docs_menu() {
