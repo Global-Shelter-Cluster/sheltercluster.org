@@ -142,6 +142,7 @@ function shelter_base_update_7010() {
   variable_set('pathauto_cluster_docs_pattern', '[node:content-type]/[node:title]/documents');
   cluster_discussions_pathauto_bulkupdate();
   cluster_docs_pathauto_bulkupdate();
+}
 
 /**
  * Update required module list (cluster_workflow).
