@@ -21,16 +21,16 @@ function cluster_docs_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Advanced tags',
-    'weight' => '10',
+    'weight' => '13',
     'children' => array(
-      0 => 'field_inter_cluster',
-      1 => 'field_cross_cutting_issues',
-      2 => 'field_response_phase',
-      3 => 'field_intervention_materials',
-      4 => 'field_intervention_programming',
-      5 => 'field_settlement_type',
-      6 => 'field_non_food_items',
-      7 => 'field_issues',
+      0 => 'field_cross_cutting_issues',
+      1 => 'field_inter_cluster',
+      2 => 'field_intervention_materials',
+      3 => 'field_intervention_programming',
+      4 => 'field_issues',
+      5 => 'field_non_food_items',
+      6 => 'field_response_phase',
+      7 => 'field_settlement_type',
       8 => 'field_toolkit',
     ),
     'format_type' => 'fieldset',
@@ -56,12 +56,12 @@ function cluster_docs_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Basic tags',
-    'weight' => '9',
+    'weight' => '12',
     'children' => array(
-      0 => 'field_information_management',
-      1 => 'field_assess_monitor_eval',
-      2 => 'field_technical_support_design',
-      3 => 'field_coordination_management',
+      0 => 'field_assess_monitor_eval',
+      1 => 'field_coordination_management',
+      2 => 'field_information_management',
+      3 => 'field_technical_support_design',
     ),
     'format_type' => 'fieldset',
     'format_settings' => array(
