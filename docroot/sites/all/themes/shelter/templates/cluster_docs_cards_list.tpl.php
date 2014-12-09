@@ -20,7 +20,7 @@
 
 <ul class="document-cards clearfix">
   <?php foreach($docs as $delta => $doc): ?>
-    <?php $zebra = ($delta % 2) ? 'odd' : 'even'; ?>
+    <?php $zebra = (($delta + 1) % 2) ? 'odd' : 'even'; ?>
 
     <li class="document-card <?php print $zebra; ?>">
       <div class="image-card">
