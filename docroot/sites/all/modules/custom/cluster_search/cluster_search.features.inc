@@ -69,7 +69,7 @@ function cluster_search_default_search_api_server() {
     "class" : "search_api_db_service",
     "options" : {
       "database" : "default:default",
-      "min_chars" : "1",
+      "min_chars" : "3",
       "partial_matches" : 0,
       "indexes" : { "default_node_index" : {
           "type" : {
