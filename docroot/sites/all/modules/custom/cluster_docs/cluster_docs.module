@@ -63,22 +63,116 @@ function cluster_docs_all($nid) {
  * @param $gid
  *  Group node id.
  * @return
- *  array of node ids for document nodes keyed by category vocabulary machine name, or FALSE if no matching result.
+ *  Renderable array of documents grouped by vocabulary and displayed as cards.
  */
 function cluster_docs_get_grouped_key_docs($gid) {
-  $query = new EntityFieldQuery();
-  $res = $query->entityCondition('entity_type', 'node')
-    ->entityCondition('bundle', 'document')
-    ->fieldCondition('og_group_ref', 'target_id', $gid)
-    ->fieldCondition('field_key_document', 'value', 1)
-    ->propertyCondition('status', NODE_PUBLISHED)
-    ->execute();
+  // Use the field_group module API to generate a list of categories.
+  $info = field_group_info_groups('node', 'document', 'form', TRUE);
+  $basic_tag_fields = $info['group_basic_tags']->children;
+  $advanced_tag_fields = $info['group_advanced_tags']->children;
+  $categories = array_merge($basic_tag_fields, $advanced_tag_fields);
 
-  if (!isset($res['node'])) {
-    return FALSE;
+  $grouped_docs = array();
+  // @TODO Expose the category list to an admin form.
+  foreach ($categories as $category_field) {
+    $query = new EntityFieldQuery();
+    $res = $query->entityCondition('entity_type', 'node')
+      ->entityCondition('bundle', 'document')
+      ->fieldCondition('og_group_ref', 'target_id', $gid)
+      ->fieldCondition('field_key_document', 'value', 1)
+      ->fieldCondition($category_field, 'tid', 'NULL', '!=')
+      ->propertyCondition('status', NODE_PUBLISHED)
+      ->execute();
+
+    if (isset($res['node'])) {
+      // Get the vocabulary associated with this field.
+      $info = field_info_field($category_field);
+      $vocab_machine_name = $info['settings']['allowed_values'][0]['vocabulary'];
+      $vocab = taxonomy_vocabulary_machine_name_load($vocab_machine_name);
+      $grouped_docs[] = array(
+        '#theme' => 'cluster_docs_cards_list',
+        '#heading' => $vocab->name,
+        '#docs' => cluster_docs_prepare_card_data(array_keys($res['node'])),
+      );
+    }
   }
+  return $grouped_docs;
+}
 
-  $documents = entity_load('node', array_keys($res['node']));
+/**
+ * Prepare the data for document cards.
+ * @param $nids
+ *  Document node ids.
+ * @return
+ *  Array of document data ready to be used in cards lists.
+ */
+function cluster_docs_prepare_card_data($nids) {
+  $docs = array();
+  $properties = array('title', 'link', 'is_link', 'is_file', 'description', 'filesize', 'file_extension', 'source',);
+  
+  // @TODO language negocitation.
+  global $language;
+  $langcode = $language->language;
+  
+  foreach (node_load_multiple($nids) as $node) {
+    // Set default values.
+    $doc = array_fill_keys($properties, FALSE);
+    try {
+      // @TODO insert language negociation in info array.
+      $wrapper = entity_metadata_wrapper('node', $node);
+      $doc['title'] = $wrapper->label();
+      $doc['link'] = l($doc['title'], $wrapper->url->value());
+      
+      // Prepare the description.
+      $desc = '';
+      if ($body = $wrapper->body->value()) {
+        // Use user supplied summary if available.
+        if($body['safe_summary']) {
+          $desc = $body['safe_summary'];
+        }
+        // Create summary.
+        elseif ($body['safe_value']) {
+          $alter = array(
+            // @TODO get this value from the body field settings.
+            'max_length' => 100,
+            'ellipsis' => TRUE,
+            'word_boundary' => TRUE,
+            'html' => TRUE,
+          );
+          $desc = views_trim_text($alter, $body['safe_value']);
+        }
+      }
+      $doc['description'] = $desc;
+
+      // Test if this document is a file field.
+      if ($file = $wrapper->field_file->value()) {
+        $doc['is_file'] = TRUE;
+        $doc['file_extension'] = pathinfo($file['filename'], PATHINFO_EXTENSION);
+        $doc['filesize'] = number_format($file['filesize'] / 1048576, 2);
+      }
+
+      // Test if this document is a link field.
+      if ($link = $wrapper->field_link->value()) {
+        $doc['is_link'] = TRUE;
+      }
+
+      // Set the source value.
+      if ($source = $wrapper->field_document_source->value()) {
+        $doc['source'] = $source;
+      }
+
+      $docs[] = $doc;
+    }
+    catch (EntityMetadataWrapperException $exc) {
+      watchdog(
+        'cluster_docs',
+        'See '  . __FUNCTION__ . '() ' .  $exc->getTraceAsString(),
+         NULL,
+         WATCHDOG_ERROR
+      );
+    }
+  }
+  return $docs;
 }
 
 /**
@@ -90,13 +184,12 @@ function cluster_docs_theme() {
       'file' => 'theme/cluster_docs.theme.inc',
       'render element' => 'element',
     ),
-    'cluster_docs_cards' => array(
-      'file' => 'theme/cluster_docs.theme.inc',
+    'cluster_docs_cards_list' => array(
       'variables' => array(
-        'category' => '',
-        'nodes' => array(),
+        'heading' => FALSE,
+        'docs' => array(),
       ),
-      'template' => 'theme/cluster_docs_cards'
+      'template' => 'theme/cluster_docs_cards_list'
     ),
   );
 }
