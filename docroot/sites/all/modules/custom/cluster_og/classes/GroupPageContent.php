@@ -74,78 +74,16 @@ class GroupContentManager {
   }
 
   /**
-   * Returns the Key Documents for this group, grouped by Document Tags.
+   * Returns the Key Documents for this group, grouped by Vocabularies.
    * The outer array uses the cluster_og_key_documents theme wrapper;
-   * the inner arrays (which render the actual documents), use cluster_og_key_documents_by_tag.
+   * The document rendering is provided by cluster_docs module.
    * @return Nested render array.
    */
   public function getKeyDocuments() {
-    $query = new EntityFieldQuery();
-    $res = $query->entityCondition('entity_type', 'node')
-      ->entityCondition('bundle', 'document')
-      ->fieldCondition('og_group_ref', 'target_id', $this->node->nid)
-      ->fieldCondition('field_key_document', 'value', 1)
-      ->propertyCondition('status', NODE_PUBLISHED)
-      ->execute();
-
-    if (!isset($res['node'])) {
-      return NULL;
-    }
-
-    $documents = entity_load('node', array_keys($res['node']));
-
-    uasort($documents, function($a, $b) {
-      $a_wrapper = entity_metadata_wrapper('node', $a);
-      $b_wrapper = entity_metadata_wrapper('node', $b);
-      $a_tag = $a_wrapper->field_document_tag->value();
-      $b_tag = $b_wrapper->field_document_tag->value();
-      return ($a_tag ? $a_tag->weight : -99999) - ($b_tag ? $b_tag->weight : -99999);
-    });
-
     $ret = array(
       '#theme_wrappers' => array('cluster_og_key_documents'),
+      'docs' => cluster_docs_get_grouped_key_docs($this->node->nid),
     );
-
-    $current_document_tag = NULL;
-    $current_document_group = array();
-    foreach ($documents as $document) {
-      $wrapper = entity_metadata_wrapper('node', $document);
-      $tag = $wrapper->field_document_tag->value();
-
-      if (is_null($current_document_tag) && !$tag) {
-        $current_document_group[] = $document->nid;
-      }
-      elseif (is_null($current_document_tag) && $tag) {
-        // First group (no tag) is over, render it.
-        $ret[] = GroupPageContent::getList($current_document_group, 'teaser', 'cluster_og_key_documents_by_tag');
-
-        $current_document_group = array($document->nid);
-        $current_document_tag = $tag;
-      }
-      elseif ($current_document_tag->tid == $tag->tid) {
-        $current_document_group[] = $document->nid;
-      }
-      else {
-        // Group is over, render it and move on.
-        $group = GroupPageContent::getList($current_document_group, 'teaser', 'cluster_og_key_documents_by_tag');
-        $group['#document_tag_name'] = $current_document_tag->name;
-        $ret[] = $group;
-
-        $current_document_group = array($document->nid);
-        $current_document_tag = $tag;
-      }
-    }
-    if ($current_document_group) {
-      if (is_null($current_document_tag)) {
-        $ret[] = GroupPageContent::getList($current_document_group, 'teaser', 'cluster_og_key_documents_by_tag');
-      }
-      else {
-        $group = GroupPageContent::getList($current_document_group, 'teaser', 'cluster_og_key_documents_by_tag');
-        $group['#document_tag_name'] = $current_document_tag->name;
-        $ret[] = $group;
-      }
-    }
-
     return $ret;
   }
 

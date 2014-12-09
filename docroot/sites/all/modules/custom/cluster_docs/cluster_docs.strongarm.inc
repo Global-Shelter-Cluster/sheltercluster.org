@@ -111,7 +111,7 @@ function cluster_docs_strongarm() {
           'weight' => '0',
         ),
         'path' => array(
-          'weight' => '1',
+          'weight' => '2',
         ),
       ),
       'display' => array(),
@@ -145,7 +145,8 @@ function cluster_docs_strongarm() {
   $strongarm->api_version = 1;
   $strongarm->name = 'node_options_document';
   $strongarm->value = array(
-    0 => 'status',
+    0 => 'moderation',
+    1 => 'revision',
   );
   $export['node_options_document'] = $strongarm;
 

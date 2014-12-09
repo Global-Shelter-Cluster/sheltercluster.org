@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the cluster_search feature.
+ */
+
+include_once 'cluster_search.features.inc';
