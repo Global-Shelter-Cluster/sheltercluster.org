@@ -61,72 +61,6 @@
       </div>
     </nav>
 
-    <section id="secondary-nav">
-      <div class="page-margin clearfix">
-        <ul class="nav-items clearfix">
-          <li class="nav-item"><a href="#" class="active">Dashboard</a></li>
-          <li class="nav-item"><a href="#">Documents <span class="total">(8200)</span></a></li>
-          <li class="nav-item"><a href="#">Discussions</a></li>
-          <li class="nav-item"><a href="#">Agenda</a></li>
-          <li class="nav-item"><a href="#">Strategic Advisory</a></li>
-        </ul>
-        <a href="#secondary-nav" class="collapse-menu">
-          <?php print _svg('icons/collapse-down', array('alt' => 'Icon for collapsing the menu')); ?>
-          more
-        </a>
-        <ul class="nav-items collapsable hide-this">
-          <li class="nav-group clearfix">
-            <h3>Hubs</h3>
-            <ul class="nav-items">
-              <li class="nav-item">
-                <a href="#">
-                  <?php print _svg('icons/grid-three-up', array('alt' => 'Icon for Hubs')); ?>
-                  Manilla Hub
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="#">
-                  <?php print _svg('icons/grid-three-up', array('alt' => 'Icon for Hubs')); ?>
-                  Cebu Hub
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="#">
-                  <?php print _svg('icons/grid-three-up', array('alt' => 'Icon for Hubs')); ?>
-                  Guiuian Hub
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="#">
-                  <?php print _svg('icons/grid-three-up', array('alt' => 'Icon for Hubs')); ?>
-                  Roxas Hub
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="#">
-                  <?php print _svg('icons/grid-three-up', array('alt' => 'Icon for Hubs')); ?>
-                  Ormoc Hub
-                </a>
-              </li>
-            </ul>
-          </li><li class="nav-group clearfix">
-            <h3>Pages</h3>
-            <ul class="nav-items">
-              <li class="nav-item"><a href="#">Something</a></li>
-              <li class="nav-item"><a href="#">More</a></li>
-            </ul>
-          </li><li class="nav-group clearfix">
-            <h3>More Stuff</h3>
-            <ul class="nav-items">
-              <li class="nav-item"><a href="#">Something</a></li>
-              <li class="nav-item"><a href="#">More</a></li>
-              <li class="nav-item"><a href="#">And then Some</a></li>
-            </ul>
-          </li>
-        </ul>
-      </div>
-    </section>
-
   </header>
 
   <div id="content">
@@ -338,7 +272,7 @@
   </div>
 
   <footer>
-    <div class="page-margin">
+    <div class="page-margin clearfix">
       <form class="search" action="http://www.google.com/search" method="get">
         <input class="text-field" type="search" placeholder="Search documents" name="q">
         <input class="submit" type="submit" value="Search">
@@ -357,25 +291,7 @@
 
       </section><section id="regions-list">
         <h3>Shelter Cluster is present in over <a href="#">34 countries</a></h3>
-        <ul class="regions">
-          <li class="region"><a href="#" class="region-name">Africa</a>
-            <ul class="countries">
-              <li class="country"><a href="#">Central African Republic</a></li>
-              <li class="country"><a href="#">Chad</a></li>
-            </ul>
-          </li><li class="region"><a href="#" class="region-name" >Americas</a>
-            <ul class="countries">
-              <li class="country"><a href="#">Colombia</a></li>
-              <li class="country"><a href="#">Haiti</a></li>
-            </ul>
-          </li><li class="region"><a href="#" class="region-name">MENA</a>
-            <ul class="countries">
-              <li class="country"><a href="#">Iraq</a></li>
-              <li class="country"><a href="#">Palestine</a></li>
-              <li class="country"><a href="#">Yemen</a></li>
-            </ul>
-          </li>
-        </ul>
+        <?php print render($page['footer']['menu_regions']); ?>
       </section>
 
       <section id="general-information">

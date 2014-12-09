@@ -524,7 +524,7 @@
   </div>
 
   <footer>
-    <div class="page-margin">
+    <div class="page-margin clearfix">
       <form class="search" action="http://www.google.com/search" method="get">
         <input class="text-field" type="search" placeholder="Search documents" name="q">
         <input class="submit" type="submit" value="Search">
@@ -543,25 +543,7 @@
 
       </section><section id="regions-list">
         <h3>Shelter Cluster is present in over <a href="#">34 countries</a></h3>
-        <ul class="regions">
-          <li class="region"><a href="#" class="region-name">Africa</a>
-            <ul class="countries">
-              <li class="country"><a href="#">Central African Republic</a></li>
-              <li class="country"><a href="#">Chad</a></li>
-            </ul>
-          </li><li class="region"><a href="#" class="region-name" >Americas</a>
-            <ul class="countries">
-              <li class="country"><a href="#">Colombia</a></li>
-              <li class="country"><a href="#">Haiti</a></li>
-            </ul>
-          </li><li class="region"><a href="#" class="region-name">MENA</a>
-            <ul class="countries">
-              <li class="country"><a href="#">Iraq</a></li>
-              <li class="country"><a href="#">Palestine</a></li>
-              <li class="country"><a href="#">Yemen</a></li>
-            </ul>
-          </li>
-        </ul>
+        <?php print render($page['footer']['menu_regions']); ?>
       </section>
 
       <section id="general-information">
