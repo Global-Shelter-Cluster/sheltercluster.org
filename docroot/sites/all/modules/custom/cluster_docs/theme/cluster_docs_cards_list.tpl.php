@@ -8,8 +8,8 @@
  *    The heading for the list of cards being displayed.
  *  $docs
  *    Array of document nodes prepared for this template.
- *  Each document has the following properties: 
- *
+ *  Each document has the following elements:
+ *  array('title', 'link', 'is_link', 'is_file', 'description', 'filesize', 'file_extension', 'source',); 
  */
 
 ?>
