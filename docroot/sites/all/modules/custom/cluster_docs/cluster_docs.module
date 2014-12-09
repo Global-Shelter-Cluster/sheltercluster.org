@@ -106,7 +106,9 @@ function cluster_docs_prepare_card_data($nids) {
     try {
       // @TODO insert language negociation in info array.
       $wrapper = entity_metadata_wrapper('node', $node);
-
+      $doc['title'] = $wrapper->label();
+      $doc['link'] = l($doc['title'], $wrapper->url->value());
+      
       // Prepare the description.
       $desc = '';
       if ($body = $wrapper->body->value()) {
@@ -126,6 +128,7 @@ function cluster_docs_prepare_card_data($nids) {
           $desc = views_trim_text($alter, $body['safe_value']);
         }
       }
+      $doc['description'] = $desc;
 
       // Test if this document is a file field.
       if ($file = $wrapper->field_file->value()) {
@@ -135,7 +138,7 @@ function cluster_docs_prepare_card_data($nids) {
       }
 
       // Test if this document is a link field.
-      if ($file = $wrapper->field_file->value()) {
+      if ($link = $wrapper->field_link->value()) {
         $doc['is_link'] = TRUE;
       }
 
@@ -144,9 +147,6 @@ function cluster_docs_prepare_card_data($nids) {
         $doc['source'] = $source;
       }
 
-      $doc['title'] = $wrapper->label();
-      $doc['link'] = l($doc['title'], $wrapper->url->value());
-      $doc['description'] = $desc;
       $docs[] = $doc;
     }
     catch (EntityMetadataWrapperException $exc) {
