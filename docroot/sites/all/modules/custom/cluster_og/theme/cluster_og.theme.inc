@@ -71,7 +71,7 @@ function theme_cluster_og_recent_discussions($vars) {
  * $vars['element'][UID]: each document render array and markup.
  */
 function theme_cluster_og_recent_documents($vars) {
-  $output = '<div class="field"><div class="field-label">' . t('Recent Documents') . '</div>';
+  $output = '<div>';
   $output .= $vars['element']['#children'];
   $output .= l(t('Browse all documents'), $vars['element']['#all_documents_link']);
   $output .= '</div>';

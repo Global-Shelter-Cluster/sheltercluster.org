@@ -67,10 +67,13 @@ class GroupContentManager {
       return NULL;
     }
 
-    $ret = GroupPageContent::getList(array_keys($res['node']), 'teaser', 'cluster_og_recent_documents');
-    $ret['#all_documents_link'] = 'node/' . $this->node->nid . '/documents';
-
-    return $ret;
+    return array(
+      '#theme' => 'cluster_docs_cards_list',
+      '#theme_wrappers' => array('cluster_og_recent_documents'),
+      '#heading' => t('Recent Documents'),
+      '#docs' => cluster_docs_prepare_card_data(array_keys($res['node'])),
+      '#all_documents_link' => 'node/' . $this->node->nid . '/documents',
+    );
   }
 
   /**
