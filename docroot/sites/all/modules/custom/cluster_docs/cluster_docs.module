@@ -22,6 +22,12 @@ function cluster_docs_menu() {
     'access arguments' => array(0, 1),
     'type' => MENU_CALLBACK,
   );
+  $items['references'] = array(
+    'title' => 'References',
+    'page callback' => 'cluster_docs_reference',
+    'page arguments' => array(),
+    'type' => MENU_CALLBACK,
+  );
   return $items;
 }
 
@@ -31,6 +37,38 @@ function cluster_docs_menu() {
  * @return Render array
  */
 function cluster_docs_all($nid) {
+  global $language;
+  $query = search_api_query('default_node_index', array(
+    'languages' => array($language->language),
+  ));
+
+  $filter = $query->createFilter();
+  $filter->condition('og_group_ref', $nid);
+  $filter->condition('type', 'document');
+  $query->filter($filter);
+
+  $offset = pager_find_page() * CLUSTER_DOCS_PER_PAGE;
+  $query->range($offset, CLUSTER_DOCS_PER_PAGE);
+
+  $results = $query->execute();
+
+  pager_default_initialize($results['result count'], CLUSTER_DOCS_PER_PAGE);
+
+  $nids = array_keys($results['results']);
+
+  $ret = GroupPageContent::getList($nids, 'teaser', 'cluster_docs_all');
+  $ret['pager'] = array(
+    '#theme' => 'pager',
+  );
+
+  return $ret;
+}
+
+/**
+ * Page callback, shows all reference documents using Search API.
+ * @return Render array
+ */
+function cluster_docs_reference() {
   global $language;
   $query = search_api_query('default_node_index', array(
     'languages' => array($language->language),
