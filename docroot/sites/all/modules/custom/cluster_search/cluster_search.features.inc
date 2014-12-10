@@ -42,6 +42,7 @@ function cluster_search_default_search_api_index() {
         "changed" : { "type" : "date" },
         "comment_count" : { "type" : "integer" },
         "created" : { "type" : "date" },
+        "field_is_resource_document" : { "type" : "boolean" },
         "og_group_ref" : { "type" : "list\\u003Cinteger\\u003E", "entity_type" : "node" },
         "promote" : { "type" : "boolean" },
         "search_api_language" : { "type" : "string" },
@@ -134,6 +135,12 @@ function cluster_search_default_search_api_server() {
             "table" : "search_api_db_default_node_index_og_group_ref",
             "column" : "value",
             "type" : "list\\u003Cinteger\\u003E",
+            "boost" : "1.0"
+          },
+          "field_is_resource_document" : {
+            "table" : "search_api_db_default_node_index",
+            "column" : "field_is_resource_document",
+            "type" : "boolean",
             "boost" : "1.0"
           }
         }
