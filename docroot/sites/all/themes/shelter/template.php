@@ -5,6 +5,16 @@ require_once dirname(__FILE__) . '/includes/shelter.helpers.inc';
 /**
  * Implements hook_preprocess_page().
  */
+function shelter_preprocess_html(&$variables) {
+  // Provide the path to the IE8 polyfill js so we can use brute force to impose its order of inclusion.
+  $path = drupal_get_path('theme', 'shelter');
+  $path .= '/assets/javascripts/NAME';
+  $variables['polyfill_queries_path'] = $path;
+}
+
+/**
+ * Implements hook_preprocess_page().
+ */
 function shelter_preprocess_page($variables) {
   // drupal_add_css();
   // drupal_add_js();
