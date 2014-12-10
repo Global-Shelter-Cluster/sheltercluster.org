@@ -8,7 +8,7 @@ require_once dirname(__FILE__) . '/includes/shelter.helpers.inc';
 function shelter_preprocess_html(&$variables) {
   // Provide the path to the IE8 polyfill js so we can use brute force to impose its order of inclusion.
   $path = base_path() . drupal_get_path('theme', 'shelter');
-  $path .= '/assets/javascripts/respond.js';
+  $path .= '/assets/javascripts/respond-src.js';
   $variables['polyfill_queries_path'] = $path;
 }
 

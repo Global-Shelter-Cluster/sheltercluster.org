@@ -13,10 +13,9 @@ dpm($variables);
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php print $language->language; ?>" version="XHTML+RDFa 1.0" dir="<?php print $language->dir; ?>"<?php print $rdf_namespaces; ?>>
 
 <head profile="<?php print $grddl_profile; ?>">
-
   <?php print $head; ?>
   <title><?php print $head_title; ?></title>
-  <!--[if IE 8]><link type="text/css" rel="stylesheet" href="<?php  print $polyfill_queries_path; ?>"><![endif]-->
+  <!--[if IE 8]><script src="<?php print $polyfill_queries_path; ?>"></script><![endif]-->
   <?php print $styles; ?>
   <?php print $scripts; ?>
 </head>
