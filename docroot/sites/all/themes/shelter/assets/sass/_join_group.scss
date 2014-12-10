@@ -1,0 +1,88 @@
+/* _join_group.scss */
+
+#join-group {
+  position: relative;
+  display: table;
+  width: 100%;
+  background-color: $shelter-dark-blue;
+  @include rem(padding, 0.75rem 1.25rem 1rem 1.25rem);
+  @include rem(margin, 0 0 2rem 0);
+  @include border-radius(0.1875rem);
+  @include border-radius(0.1875rem);
+  border: 1px solid darken($shelter-light-blue,40%);
+
+  h4 {
+    display: table-row;
+    margin: 0;
+    @include rem(font-size, 1.1rem);
+  }
+
+  fieldset {
+    display: table;
+    border: none;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+
+    label{
+      display: table;
+      @include rem(margin, 0.5rem 0 0 0);
+      @include rem(font-size, 0.9rem);
+      font-weight: normal;
+
+      span {
+        display: table-cell;
+      }
+    }
+    + fieldset {
+      @include rem(margin, 0.5rem 0 2rem 0);
+      @include breakpoint(380px) {
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  #button-join-group {
+    display: table-cell;
+    vertical-align: bottom;
+    @include rem(margin, 0.75rem 0 0 0);
+    @include breakpoint(380px 980px) {
+      display: table;
+    }
+    .button {
+      text-decoration: none;
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      @include rem(bottom, 10px);
+      @include rem(right, 20px);
+      @include rem(padding, 0.375rem 0.625rem 0.4375rem);
+      @include breakpoint(380px) {
+        display: table-cell;
+        position: relative;
+        bottom: 0;
+        right: 0;
+      }
+    }
+  }
+
+
+ input[type="checkbox"] {
+  display: table-cell;
+  margin-right: 4px;
+ }
+
+  input[type="email"] {
+    display: table-cell;
+    @include rem(font-size, 0.8rem);
+    @include rem(padding, 0.5rem 0.5rem 0.5rem);
+    @include border-radius(3px);
+    border: 1px solid darken(white,12%);
+    width: 100%;
+    @include rem(max-width,18.75rem);
+    @include breakpoint(450px) {
+      width: 95%;
+    }
+  }
+}

@@ -15,6 +15,7 @@
 <head profile="<?php print $grddl_profile; ?>">
   <?php print $head; ?>
   <title><?php print $head_title; ?></title>
+  <!--[if IE 8]><link type="text/css" rel="stylesheet" href="<?php print $theme_path . '/javascripts/respond.js'; ?>"><![endif]-->
   <?php print $styles; ?>
   <?php print $scripts; ?>
 </head>

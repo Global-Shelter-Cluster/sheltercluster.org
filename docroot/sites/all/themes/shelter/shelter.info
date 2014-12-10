@@ -5,7 +5,6 @@ version = VERSION
 core = 7.x
 
 stylesheets[all][] = assets/css/styles.css
-
 scripts[] = 'assets/javascripts/modernizr.custom.js'
 scripts[] = 'assets/javascripts/svg-injector.min.js'
 scripts[] = 'assets/javascripts/svg.js'

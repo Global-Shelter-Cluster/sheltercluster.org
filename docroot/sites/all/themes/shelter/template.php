@@ -5,10 +5,10 @@ require_once dirname(__FILE__) . '/includes/shelter.helpers.inc';
 /**
  * Implements hook_preprocess_page().
  */
-function shelter_preprocess_page($variables) {
+function shelter_preprocess_page(&$variables) {
   // drupal_add_css();
-  // drupal_add_js();
-
+    $theme_path = drupal_get_path('theme', 'shelter');
+    $variables['theme_path'] = $theme_path;
   // Adding the viewport for mobile view
     $viewport = array(
     '#tag' => 'meta',

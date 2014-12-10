@@ -72,40 +72,28 @@
     <div id="content-header">
       <div class="page-margin clearfix">
 
-        <div class="main-column">
-          <section id="home-crisis">
-            <h1>3 Ongoing Crisis <span>in 3 Different <a href="#">Countries</a></span></h1>
-            <ul id="major-crisis">
-              <li>
-                <a href="#">Typhoon Haian</a>
-                <div class="team"><?php print _svg('icons/team', array('class'=>'team-icon', 'alt' => 'Team icon')); ?></div>
-                <div class="hightened"><?php print _svg('icons/warning', array('class'=>'warning-icon', 'alt' => 'Warning icon')); ?></div>
-              </li>
-              <li>
-                <a href="#">Fukushima Earthquake</a>
-                <div class="team"><?php print _svg('icons/team', array('class'=>'team-icon', 'alt' => 'Team icon')); ?></div>
-              </li>
-              <li><a href="#">Hurricane Katrina</a></li>
-            </ul>
-            <ul id="legend">
-              <li class="team"><?php print _svg('icons/team', array('class'=>'team-icon', 'alt' => 'Team icon')); ?> Team on site</li>
-              <li class="hightened"><?php print _svg('icons/warning', array('class'=>'warning-icon', 'alt' => 'Warning icon')); ?> Hightened risk</li>
-            </ul>
-          </section>
+        <section id="home-crisis">
+          <h1>Active Responses<!-- <span>in 3 different <a href="#">regions</a></span> --></h1>
+          <ul id="major-crisis">
+            <li>
+              <a href="#">Typhoon Haian</a>
+              <div class="team"><?php print _svg('icons/team', array('class'=>'team-icon', 'alt' => 'Team icon')); ?></div>
+              <div class="hightened"><?php print _svg('icons/warning', array('class'=>'warning-icon', 'alt' => 'Warning icon')); ?></div>
+            </li>
+            <li>
+              <a href="#">Fukushima Earthquake</a>
+              <div class="team"><?php print _svg('icons/team', array('class'=>'team-icon', 'alt' => 'Team icon')); ?></div>
+            </li>
+            <li><a href="#">Hurricane Katrina</a></li>
+          </ul>
+          <ul id="legend">
+            <li class="team"><?php print _svg('icons/team', array('class'=>'team-icon', 'alt' => 'Team icon')); ?> Conflict</li>
+            <li class="hightened"><?php print _svg('icons/warning', array('class'=>'warning-icon', 'alt' => 'Warning icon')); ?> Complex Crisis</li>
+            <li class="hightened"><?php print _svg('icons/warning', array('class'=>'warning-icon', 'alt' => 'Warning icon')); ?> Natural Disaster</li>
+            <li class="hightened"><?php print _svg('icons/warning', array('class'=>'warning-icon', 'alt' => 'Warning icon')); ?> Man-made disaster</li>
+          </ul>
+        </section>
 
-        </div>
-
-        <div class="side-column">
-          <section id="operation-group">
-            <h4>Join this Operation Group and</h4>
-            <fieldset id="checkboxgroup">
-              <label><input type="checkbox" selected="selected"/> Receive notifications</label>
-              <label><input type="checkbox" selected="selected"/> Register to this group the mailing list</label>
-              <label><input type="checkbox"/> Register to the "Global Response" mailinglist</label>
-            </fieldset>
-            <div id="button-join-group"><a class="button" href="#">Join</a></div>
-          </section>
-        </div>
       </div>
     </div>
 
@@ -120,6 +108,20 @@
       </div>
       <div class="side-column">
 
+        <section id="join-group">
+          <h4>Join our mailinglist</h4>
+          <fieldset>
+            <label>
+              <input type="checkbox"/>
+              <span>Register to the "Global Response" mailinglist</span>
+            </label>
+          </fieldset>
+          <fieldset>
+            <input type="email" name="email" placeholder="Your Email Address" />
+          </fieldset>
+          <div id="button-join-group"><a class="button" href="#">Join</a></div>
+        </section>
+
         <section id="shelter-calendar">
           <div id="calendar-box">
             <div id="calendar-date">
@@ -130,27 +132,6 @@
               <a class="event" href="#">Shelter Technical Meeting 2014</a></div>
           </div>
           <a class="see-all" href="#">All calendar events</a>
-        </section>
-
-        <section id="shelter-discussions">
-          <h3>Discussions</h3>
-          <ul id="discussions-items">
-            <li class="discussions-item">
-              <div class="replies">24 replies</div>
-              <div class="information">
-                <a href="#" class="topic">Where can I find lumber?</a>
-                <span class="date">2014/10/03 by <a class="author" href="#">Jane Wikionsons</a></span>
-              </div>
-            </li>
-            <li class="discussions-item">
-              <div class="replies">no replies <span class="new">New</span></div>
-              <div class="information">
-                <a href="#" class="topic">Are any special requirements for protection needed when entering the</a>
-                <span class="date">2014/10/15 by <a class="author" href="#">John Tremblay</a></span>
-              </div>
-            </li>
-          </ul>
-          <a class="see-all" href="#">All other discussions</a>
         </section>
 
         <section id="shelter-coordination-team">
@@ -281,7 +262,7 @@
 
     <div class="page-margin">
       <section id="active-clusters-list">
-        <h3>With 24 <a href='#'>active shelter clusters</a> and cluster like mechanism</h3>
+        <h3>With 24 <a href='#'>active responses</a> and cluster like mechanisms.</h3>
         <ul class="clusters">
           <li class="cluster"><a href="#">Myanmar Rakhine and Kachin Emergency Response</a></li>
           <li class="cluster"><a href="#">Philippines Bohol Earthquake</a></li>
@@ -290,7 +271,7 @@
         <a class="complete-list" href="#">[...] more</a>
 
       </section><section id="regions-list">
-        <h3>Shelter Cluster is present in over <a href="#">34 countries</a></h3>
+        <h3>Shelter Cluster is present in over <a href="#">34 regions</a>.</h3>
         <?php print render($page['footer']['menu_regions']); ?>
       </section>
 

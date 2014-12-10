@@ -1,4 +1,4 @@
-/* _ongoing_crisis.scss */
+/* _active_responses.scss */
 
 #home-crisis {
   @include rem(margin, 0 0 1rem 0);
@@ -29,9 +29,7 @@
       text-align: center;
       text-decoration: none;
       color: #000;
-      width: 100%;
-      max-width: 60%;
-      white-space: nowrap;
+      width: 50%;
       border: 1px solid $shelter-red;
       background-color: #fff;
       @include transition(all 0.3s ease);
@@ -46,10 +44,13 @@
     }
     div {
       float: left;
-      @include rem(margin, 0.25rem 0.5rem 0 0);
+      @include rem(margin, 0.25rem 1rem 0 0);
+      &:last-child {
+        margin-right: 0;
+      }
     }
    .warning-icon {
-      fill: red;
+      fill: $shelter-red;
       width: 25px;
       height: 25px;
     }

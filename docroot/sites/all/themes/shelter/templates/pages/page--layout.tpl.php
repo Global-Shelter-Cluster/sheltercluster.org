@@ -156,9 +156,9 @@
         </div>
 
         <div class="side-column">
-          <section id="operation-group">
+          <section id="join-group">
             <h4>Join this Operation Group and</h4>
-            <fieldset id="checkboxgroup">
+            <fieldset>
               <label><input type="checkbox" selected="selected"/> Receive notifications</label>
               <label><input type="checkbox" selected="selected"/> Register to this group the mailing list</label>
               <label><input type="checkbox"/> Register to the "Global Response" mailinglist</label>
@@ -533,7 +533,7 @@
 
     <div class="page-margin">
       <section id="active-clusters-list">
-        <h3>With 24 <a href='#'>active shelter clusters</a> and cluster like mechanism</h3>
+        <h3>With 24 <a href='#'>active responses clusters</a> and cluster like mechanism.</h3>
         <ul class="clusters">
           <li class="cluster"><a href="#">Myanmar Rakhine and Kachin Emergency Response</a></li>
           <li class="cluster"><a href="#">Philippines Bohol Earthquake</a></li>
@@ -542,7 +542,7 @@
         <a class="complete-list" href="#">[...] more</a>
 
       </section><section id="regions-list">
-        <h3>Shelter Cluster is present in over <a href="#">34 countries</a></h3>
+        <h3>Shelter Cluster is present in over <a href="#">34 regions</a>.</h3>
         <?php print render($page['footer']['menu_regions']); ?>
       </section>
 
