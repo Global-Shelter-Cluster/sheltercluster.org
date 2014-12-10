@@ -6,8 +6,9 @@ require_once dirname(__FILE__) . '/includes/shelter.helpers.inc';
  * Implements hook_preprocess_page().
  */
 function shelter_preprocess_html(&$variables) {
+  global $base_url;
   // Provide the path to the IE8 polyfill js so we can use brute force to impose its order of inclusion.
-  $path = base_path() . drupal_get_path('theme', 'shelter');
+  $path = $base_url . '/' . drupal_get_path('theme', 'shelter');
   $path .= '/assets/javascripts/respond.js';
   $variables['polyfill_queries_path'] = $path;
 }
