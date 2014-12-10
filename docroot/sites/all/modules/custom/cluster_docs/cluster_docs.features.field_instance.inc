@@ -478,7 +478,7 @@ function cluster_docs_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'field_name' => 'field_is_resource_document',
-    'label' => 'Is Resource document',
+    'label' => 'Is Resource Document',
     'required' => 0,
     'settings' => array(
       'entity_translation_sync' => FALSE,
@@ -488,7 +488,7 @@ function cluster_docs_field_default_field_instances() {
       'active' => 1,
       'module' => 'options',
       'settings' => array(
-        'display_label' => 0,
+        'display_label' => 1,
       ),
       'type' => 'options_onoff',
       'weight' => 4,
@@ -1047,7 +1047,7 @@ function cluster_docs_field_default_field_instances() {
   t('Intervention Materials');
   t('Intervention Programming');
   t('Is Key Document');
-  t('Is Resource document');
+  t('Is Resource Document');
   t('Is this a resource document that needs to appear in the resource section (as well as any groups in which the document belongs) ?');
   t('Issues');
   t('Link');
