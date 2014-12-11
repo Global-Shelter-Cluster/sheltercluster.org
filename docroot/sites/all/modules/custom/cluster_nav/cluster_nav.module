@@ -12,7 +12,8 @@ include_once 'cluster_nav.theme.inc';
 function cluster_nav_preprocess_page(&$variables) {
   if (arg(0) == 'node' && is_numeric(arg(1))) {
     $node = node_load(arg(1));
-  } else {
+  }
+  else {
     return;
   }
 //  $node = menu_get_object(); //this doesn't work for node/%/documents pages, for some reason
@@ -25,7 +26,8 @@ function cluster_nav_preprocess_page(&$variables) {
 
   if (og_is_group('node', $node)) {
     $group_page_content = GroupContentManager::getInstance($node);
-  } elseif ($node->type == 'discussion') {
+  }
+  elseif ($node->type == 'discussion') {
     $wrapper = entity_metadata_wrapper('node', $node);
     $group = $wrapper->og_group_ref->value();
     if (count($group) > 0) {
