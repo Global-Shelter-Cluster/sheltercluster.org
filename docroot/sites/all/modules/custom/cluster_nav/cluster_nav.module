@@ -24,8 +24,11 @@ function cluster_nav_preprocess_page(&$variables) {
   if (og_is_group('node', $node)) {
     $group_page_content = GroupContentManager::getInstance($node);
   } elseif ($node->type == 'discussion') {
-    //TODO: find this discussion's "parent" group, and load its group content manager
-    dpm($node, 'discussion node!');
+    $wrapper = entity_metadata_wrapper('node', $node);
+    $group = $wrapper->og_group_ref->value();
+    if (count($group) > 0) {
+      $group_page_content = GroupContentManager::getInstance($group[0]);
+    }
   }
 
   if ($group_page_content) {
