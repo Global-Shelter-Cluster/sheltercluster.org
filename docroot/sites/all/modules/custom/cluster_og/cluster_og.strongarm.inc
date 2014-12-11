@@ -14,7 +14,7 @@ function cluster_og_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'additional_settings__active_tab_geographic_region';
-  $strongarm->value = 'edit-display';
+  $strongarm->value = 'edit-menu';
   $export['additional_settings__active_tab_geographic_region'] = $strongarm;
 
   $strongarm = new stdClass();
@@ -634,7 +634,9 @@ function cluster_og_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'menu_options_geographic_region';
-  $strongarm->value = array();
+  $strongarm->value = array(
+    0 => 'menu-regions',
+  );
   $export['menu_options_geographic_region'] = $strongarm;
 
   $strongarm = new stdClass();
@@ -669,7 +671,7 @@ function cluster_og_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'menu_parent_geographic_region';
-  $strongarm->value = 'main-menu:0';
+  $strongarm->value = 'menu-regions:0';
   $export['menu_parent_geographic_region'] = $strongarm;
 
   $strongarm = new stdClass();
