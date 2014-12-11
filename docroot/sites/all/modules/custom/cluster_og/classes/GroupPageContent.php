@@ -20,6 +20,102 @@ class GroupContentManager {
     $this->node = $node;
   }
 
+  public function getDashboardMenu() {
+    $items = array();
+
+    $items[] = array(
+      'label' => t('Dashboard'),
+      'path' => 'node/'.$this->node->nid,
+    );
+
+    $items[] = array(
+      'label' => t('Documents'),
+      'path' => 'node/'.$this->node->nid.'/documents',
+      'total' => $this->getDocumentCount(),
+    );
+
+    $items[] = array(
+      'label' => t('Discussions'),
+      'path' => 'node/'.$this->node->nid.'/discussions',
+      'total' => $this->getDiscussionCount(),
+    );
+
+    $items[] = array(
+      'label' => t('Agenda'),
+      'path' => 'node/'.$this->node->nid.'/edit', //TODO: change this to actual Agenda link
+//      'total' => $total,
+    );
+
+    if ($parent = $this->getStrategicAdvisoryParentId()) {
+      $items[] = array(
+        'label' => t('Parent'), //TODO: revise this item
+        'path' => 'node/'.$parent->nid,
+      );
+    }
+
+    if ($strategic_advisory = $this->getStrategicAdvisoryId()) {
+      $items[] = array(
+        'label' => t('Strategic Advisory'),
+        'path' => 'node/'.$strategic_advisory->nid,
+      );
+    }
+
+    $secondary = array();
+
+    $secondary['hubs'] = $this->getRelatedHubs();
+    $secondary['responses'] = $this->getRelatedResponses();
+
+    return array(
+      '#theme' => 'cluster_nav',
+      '#items' => $items,
+      '#secondary' => $secondary,
+    );
+  }
+
+  /**
+   * Returns the parent node ID. Only works if the current node is a Strategic Advisory group.
+   */
+  public function getStrategicAdvisoryParentId() {
+    if ($this->node->type != 'strategic_advisory') {
+      return;
+    }
+
+    //TODO: implement
+  }
+
+  /**
+   * Finds a strategic advisory node ID for the current group.
+   * Only works if the current group is not a strategic advisory itself.
+   * If there is more than one, it is not defined which one will be returned.
+   */
+  public function getStrategicAdvisoryId() {
+    if ($this->node->type == 'strategic_advisory') {
+      return;
+    }
+
+    //TODO: implement
+  }
+
+  public function getDocumentCount() {
+    $query = new EntityFieldQuery();
+    return $query->entityCondition('entity_type', 'node')
+      ->entityCondition('bundle', 'document')
+      ->fieldCondition('og_group_ref', 'target_id', $this->node->nid)
+      ->propertyCondition('status', NODE_PUBLISHED)
+      ->count()
+      ->execute();
+  }
+
+  public function getDiscussionCount() {
+    $query = new EntityFieldQuery();
+    return $query->entityCondition('entity_type', 'node')
+      ->entityCondition('bundle', 'discussion')
+      ->fieldCondition('og_group_ref', 'target_id', $this->node->nid)
+      ->propertyCondition('status', NODE_PUBLISHED)
+      ->count()
+      ->execute();
+  }
+
   public function getRelatedResponses() {
     return NULL;
   }

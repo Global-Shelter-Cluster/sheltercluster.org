@@ -64,6 +64,14 @@
         </ul>
       </div>
     </nav>
+
+    <?php if (isset($dashboard_menu)): ?>
+    <section id="secondary-nav">
+      <div class="page-margin clearfix">
+        <?php print render($dashboard_menu); ?>
+      </div>
+    </section>
+    <?php endif; ?>
   </header>
 
   <?php print render($page['content']); ?>
