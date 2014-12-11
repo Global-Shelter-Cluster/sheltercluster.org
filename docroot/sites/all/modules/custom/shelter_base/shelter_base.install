@@ -157,3 +157,10 @@ function shelter_base_update_7011() {
 function shelter_base_update_7012() {
   search_api_index_reindex('default_node_index');
 }
+
+/**
+ * Regenerate region aliases and menu items.
+ */
+function shelter_base_update_7013() {
+  cluster_og_regenerate_region_aliases();
+}

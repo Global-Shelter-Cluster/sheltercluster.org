@@ -193,6 +193,7 @@ function cluster_og_node_presave($node) {
     $node->menu['enabled'] = 1;
     $node->menu['menu_name'] = 'menu-regions';
     $node->menu['link_title'] = $node->title;
+    $node->menu['description'] = '';
 
     $wrapper = entity_metadata_wrapper('node', $node);
     $parent = $wrapper->field_parent_region->value();
@@ -211,6 +212,9 @@ function cluster_og_node_presave($node) {
   }
 }
 
+/**
+ * Recursive function to generate a region node's alias.
+ */
 function _cluster_og_region_alias($node) {
   $wrapper = entity_metadata_wrapper('node', $node);
   $parent = $wrapper->field_parent_region->value();
@@ -218,4 +222,35 @@ function _cluster_og_region_alias($node) {
   module_load_include('inc', 'pathauto');
   $prefix = $parent ? _cluster_og_region_alias($parent).'/' : '';
   return $prefix . pathauto_cleanstring($node->title);
+}
+
+/**
+ * Calls node_save() on all regions, in the correct order so that the aliases and
+ * menu links get regenerated.
+ * Call this without any parameters.
+ */
+function cluster_og_regenerate_region_aliases($parent_nid = NULL) {
+  if (is_null($parent_nid)) {
+    // Delete the whole regions menu on the main call to this function.
+    menu_delete_links('menu-regions');
+  }
+
+  $query = db_select('node', 'n');
+  $query->fields('n', array('nid'))
+    ->condition('n.type', 'geographic_region')
+    ->addJoin('LEFT', 'field_data_field_parent_region', 'f', 'f.entity_type = :type AND f.entity_id = n.nid', array(':type' => 'node'));
+
+  if ($parent_nid) {
+    $query->condition('f.field_parent_region_target_id', $parent_nid);
+  }
+  else {
+    $query->isNull('f.field_parent_region_target_id');
+  }
+
+  foreach ($query->execute()->fetchCol() as $child_nid) {
+    $node = node_load($child_nid);
+    node_save($node);
+
+    cluster_og_regenerate_region_aliases($child_nid);
+  }
 }
