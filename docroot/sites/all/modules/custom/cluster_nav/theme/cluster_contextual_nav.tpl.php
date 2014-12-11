@@ -30,6 +30,8 @@
       print t('Related to');
     }
 
+    print ' ';
+
     print l($response['title'], $response['path']);
 
     ?>
