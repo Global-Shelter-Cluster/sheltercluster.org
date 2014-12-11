@@ -46,12 +46,13 @@ class GroupContentManager {
 //      'total' => $total,
     );
 
-    if ($parent = $this->getStrategicAdvisoryParent()) {
-      $items[] = array(
-        'label' => t('Parent'), //TODO: revise this item
-        'path' => 'node/'.$parent->nid,
-      );
-    }
+    // This is a reference to the Strategic Advisory "parent" group. Disabled because the link is in the breadcrumb.
+//    if ($parent = $this->getStrategicAdvisoryParent()) {
+//      $items[] = array(
+//        'label' => t('Parent'),
+//        'path' => 'node/'.$parent->nid,
+//      );
+//    }
 
     if ($strategic_advisory = $this->getStrategicAdvisory()) {
       $items[] = array(
