@@ -8,11 +8,16 @@
  *  Implements hook_preprocess_page().
  */
 function cluster_nav_preprocess_page(&$variables) {
-  $node = menu_get_object();
-
-  if (!$node) {
+  if (arg(0) == 'node' && is_numeric(arg(1))) {
+    $node = node_load(arg(1));
+  } else {
     return;
   }
+//  $node = menu_get_object(); //this doesn't work for node/%/documents pages, for some reason
+//
+//  if (!$node) {
+//    return;
+//  }
 
   $group_page_content = NULL;
 
