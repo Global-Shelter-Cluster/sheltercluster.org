@@ -304,11 +304,6 @@ body {
     width: 62%;
   }
 }
-@media (min-width: 310px) and (max-width: 450px) {
-  .main-column {
-    background-color: red;
-  }
-}
 
 .side-column {
   float: none;

@@ -38,9 +38,6 @@ body {
     float: left;
     width: 62%;
   }
-@include breakpoint(310px 450px) {
-  background-color: red;
-}
 }
 
 .side-column {

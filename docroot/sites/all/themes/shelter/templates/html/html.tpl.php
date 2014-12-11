@@ -14,7 +14,6 @@
 <head profile="<?php print $grddl_profile; ?>">
   <?php print $head; ?>
   <title><?php print $head_title; ?></title>
-  <!--[if IE 8]><script src="<?php print $polyfill_queries_path; ?>"></script><![endif]-->
   <?php print $styles; ?>
   <?php print $scripts; ?>
 </head>
