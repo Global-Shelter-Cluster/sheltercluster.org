@@ -10,6 +10,8 @@ include_once 'cluster_og.features.inc';
  * Implements hook_menu().
  */
 function cluster_og_menu() {
+  return;
+
   module_load_include('inc', 'cluster_og', 'includes/cluster_og.menu');
   $items = array();
   // Generate the geographic_region menu.
@@ -179,4 +181,41 @@ function _cluster_og_generate_region_path($wrapper, $path = '') {
     return _cluster_og_generate_region_path($wrapper->field_parent_region, $path);
   }
   return trim($path, '/');
+}
+
+/**
+ *  Implements hook_node_presave().
+ */
+function cluster_og_node_presave($node) {
+  if ($node->type = 'geographic_region') {
+    $node->path['alias'] = _cluster_og_region_alias($node);
+
+    $node->menu['enabled'] = 1;
+    $node->menu['menu_name'] = 'menu-regions';
+    $node->menu['link_title'] = $node->title;
+
+    $wrapper = entity_metadata_wrapper('node', $node);
+    $parent = $wrapper->field_parent_region->value();
+    if ($parent) {
+      $mlid = db_select('menu_links', 'ml')
+        ->condition('ml.link_path', 'node/'.$parent->nid)
+        ->condition('ml.menu_name', 'menu-regions')
+        ->fields('ml', array('mlid'))
+        ->execute()
+        ->fetchField();
+
+      if ($mlid) {
+        $node->menu['plid'] = $mlid;
+      }
+    }
+  }
+}
+
+function _cluster_og_region_alias($node) {
+  $wrapper = entity_metadata_wrapper('node', $node);
+  $parent = $wrapper->field_parent_region->value();
+
+  module_load_include('inc', 'pathauto');
+  $prefix = $parent ? _cluster_og_region_alias($parent).'/' : '';
+  return $prefix . pathauto_cleanstring($node->title);
 }
