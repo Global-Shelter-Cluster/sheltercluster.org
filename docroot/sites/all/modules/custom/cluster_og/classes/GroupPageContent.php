@@ -46,14 +46,14 @@ class GroupContentManager {
 //      'total' => $total,
     );
 
-    if ($parent = $this->getStrategicAdvisoryParentId()) {
+    if ($parent = $this->getStrategicAdvisoryParent()) {
       $items[] = array(
         'label' => t('Parent'), //TODO: revise this item
         'path' => 'node/'.$parent->nid,
       );
     }
 
-    if ($strategic_advisory = $this->getStrategicAdvisoryId()) {
+    if ($strategic_advisory = $this->getStrategicAdvisory()) {
       $items[] = array(
         'label' => t('Strategic Advisory'),
         'path' => 'node/'.$strategic_advisory->nid,
@@ -73,27 +73,52 @@ class GroupContentManager {
   }
 
   /**
-   * Returns the parent node ID. Only works if the current node is a Strategic Advisory group.
+   * Returns the parent node. Only works if the current node is a Strategic Advisory group.
    */
-  public function getStrategicAdvisoryParentId() {
+  public function getStrategicAdvisoryParent() {
     if ($this->node->type != 'strategic_advisory') {
       return;
     }
 
-    //TODO: implement
+    $wrapper = entity_metadata_wrapper('node', $this->node);
+    if ($wrapper->field_parent_response->value()) {
+      return $wrapper->field_parent_response->value();
+    } elseif ($wrapper->field_parent_region->value()) {
+      return $wrapper->field_parent_region->value();
+    }
   }
 
   /**
-   * Finds a strategic advisory node ID for the current group.
+   * Finds a strategic advisory node for the current group.
    * Only works if the current group is not a strategic advisory itself.
    * If there is more than one, it is not defined which one will be returned.
    */
-  public function getStrategicAdvisoryId() {
+  public function getStrategicAdvisory() {
     if ($this->node->type == 'strategic_advisory') {
       return;
     }
 
-    //TODO: implement
+    $query = new EntityFieldQuery();
+    $result = $query->entityCondition('entity_type', 'node')
+      ->entityCondition('bundle', 'strategic_advisory')
+      ->fieldCondition('field_parent_response', 'target_id', $this->node->nid)
+      ->propertyCondition('status', NODE_PUBLISHED)
+      ->execute();
+
+    if (isset($result['node'])) {
+      return node_load(key($result['node']));
+    }
+
+    $query = new EntityFieldQuery();
+    $result = $query->entityCondition('entity_type', 'node')
+      ->entityCondition('bundle', 'strategic_advisory')
+      ->fieldCondition('field_parent_region', 'target_id', $this->node->nid)
+      ->propertyCondition('status', NODE_PUBLISHED)
+      ->execute();
+
+    if (isset($result['node'])) {
+      return node_load(key($result['node']));
+    }
   }
 
   public function getDocumentCount() {
