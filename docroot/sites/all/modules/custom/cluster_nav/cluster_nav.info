@@ -2,3 +2,5 @@ name = cluster_nav
 description = Navigation logic.
 core = 7.x
 package = Cluster
+dependencies[] = cluster_og
+dependencies[] = cluster_docs
