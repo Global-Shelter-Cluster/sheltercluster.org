@@ -73,6 +73,42 @@ class GroupContentManager {
     );
   }
 
+  public function getContextualNavigation() {
+    $wrapper = entity_metadata_wrapper('node', $this->node);
+
+    $ret = array(
+      '#theme' => 'cluster_contextual_nav',
+    );
+
+    if (isset($wrapper->field_parent_region)) {
+      $ret['#regions'] = array(array(
+        'title' => $wrapper->field_parent_region->title->value(),
+        'path' => 'node/'.$wrapper->field_parent_region->nid->value(),
+      ));
+    } elseif (isset($wrapper->field_associated_regions )) {
+      $ret['#regions'] = array();
+
+      foreach ($wrapper->field_associated_regions->value() as $region) {
+        $ret['#regions'][] = array(
+          'title' => $region->title,
+          'path' => 'node/'.$region->nid,
+        );
+      }
+    }
+
+    if (isset($wrapper->field_parent_response)) {
+      $response = $wrapper->field_parent_response->value();
+      if (!empty($response)) {
+        $ret['#response'] = array(
+          'title' => $response->title,
+          'path' => 'node/'.$response->nid,
+        );
+      }
+    }
+
+    return $ret;
+  }
+
   /**
    * Returns the parent node. Only works if the current node is a Strategic Advisory group.
    */

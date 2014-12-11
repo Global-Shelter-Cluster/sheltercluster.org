@@ -24,11 +24,13 @@ function cluster_nav_preprocess_page(&$variables) {
   if (og_is_group('node', $node)) {
     $group_page_content = GroupContentManager::getInstance($node);
   } elseif ($node->type == 'discussion') {
+    //TODO: find this discussion's "parent" group, and load its group content manager
     dpm($node, 'discussion node!');
   }
 
   if ($group_page_content) {
     $variables['dashboard_menu'] = $group_page_content->getDashboardMenu();
+    $variables['contextual_navigation'] = $group_page_content->getContextualNavigation();
   }
 }
 
@@ -43,6 +45,13 @@ function cluster_nav_theme($existing, $type, $theme, $path) {
         'secondary' => array(),
       ),
       'template' => 'theme/cluster_nav',
+    ),
+    'cluster_contextual_nav' => array(
+      'variables' => array(
+        'regions' => array(),
+        'response' => array(),
+      ),
+      'template' => 'theme/cluster_contextual_nav',
     ),
   );
 }
