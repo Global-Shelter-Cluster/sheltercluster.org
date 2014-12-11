@@ -3,13 +3,6 @@
   <div id="content-header">
     <div class="page-margin clearfix">
 
-      <section id="operation-title">
-        <?php if (isset($contextual_navigation)): ?>
-          <?php print $contextual_navigation; ?>
-        <?php endif; ?>
-        <h1><?php print $title; ?></h1>
-      </section>
-
       <div class="main-column">
 
         <section id="operation-information">

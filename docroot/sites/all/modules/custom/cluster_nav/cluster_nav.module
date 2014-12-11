@@ -4,6 +4,8 @@
  * Handles all functionality related to navigation.
  */
 
+include_once 'cluster_nav.theme.inc';
+
 /**
  *  Implements hook_preprocess_page().
  */
@@ -35,26 +37,4 @@ function cluster_nav_preprocess_page(&$variables) {
     $variables['dashboard_menu'] = $group_page_content->getDashboardMenu();
     $variables['contextual_navigation'] = $group_page_content->getContextualNavigation();
   }
-}
-
-/**
- *  Implements hook_theme().
- */
-function cluster_nav_theme($existing, $type, $theme, $path) {
-  return array(
-    'cluster_nav' => array(
-      'variables' => array(
-        'items' => array(),
-        'secondary' => array(),
-      ),
-      'template' => 'theme/cluster_nav',
-    ),
-    'cluster_contextual_nav' => array(
-      'variables' => array(
-        'regions' => array(),
-        'response' => array(),
-      ),
-      'template' => 'theme/cluster_contextual_nav',
-    ),
-  );
 }

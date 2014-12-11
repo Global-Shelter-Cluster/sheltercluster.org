@@ -2,13 +2,7 @@
   <?php foreach ($items as $item): ?>
   <li class="nav-item">
     <?php
-    $text = t($item['label']);
-
-    if (isset($item['total'])) {
-      $text .= ' <span class="total">(' . $item['total'] . ')</span>';
-    }
-
-    print l($text, $item['path'], array('html' => TRUE));
+      print $item;
     ?>
   </li>
   <?php endforeach; ?>

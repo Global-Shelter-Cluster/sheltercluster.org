@@ -81,11 +81,16 @@ class GroupContentManager {
     );
 
     if (isset($wrapper->field_parent_region)) {
-      $ret['#regions'] = array(array(
-        'title' => $wrapper->field_parent_region->title->value(),
-        'path' => 'node/'.$wrapper->field_parent_region->nid->value(),
-      ));
-    } elseif (isset($wrapper->field_associated_regions )) {
+      $region = $wrapper->field_parent_region->value();
+      if ($region) {
+        $ret['#regions'] = array(
+          array(
+            'title' => $region->title,
+            'path' => 'node/'.$region->nid,
+          )
+        );
+      }
+    } elseif (isset($wrapper->field_associated_regions)) {
       $ret['#regions'] = array();
 
       foreach ($wrapper->field_associated_regions->value() as $region) {

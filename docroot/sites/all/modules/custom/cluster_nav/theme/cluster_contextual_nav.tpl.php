@@ -2,10 +2,13 @@
 
   <?php if ($regions): ?>
   <span>
-    In
     <?php
+
+    print t('In');
+
     for ($i = 0; $i < count($regions); $i++) {
-      if ($i == count($regions) - 1) {
+
+      if (count($regions) > 1 && $i == count($regions) - 1) {
         // Last item
         print ' '.t('and').' ';
       } elseif ($i > 0) {
@@ -13,7 +16,8 @@
         print ', ';
       }
 
-      print l($regions[$i]['title'], $regions[$i]['path']);
+      print $regions[$i];
+
     }
     ?>
   </span>
@@ -23,16 +27,8 @@
   <span>
     <?php
 
-    if ($regions) {
-      print t('and related to');
-    }
-    else {
-      print t('Related to');
-    }
-
-    print ' ';
-
-    print l($response['title'], $response['path']);
+    print $regions ? t('and related to') : t('Related to');
+    print ' '.$response;
 
     ?>
   </span>
