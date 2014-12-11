@@ -4,7 +4,7 @@
   <span>
     <?php
 
-    print t('In');
+    print t('In').' ';
 
     for ($i = 0; $i < count($regions); $i++) {
 
