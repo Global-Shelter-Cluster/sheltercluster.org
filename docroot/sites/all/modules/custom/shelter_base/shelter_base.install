@@ -157,3 +157,10 @@ function shelter_base_update_7011() {
 function shelter_base_update_7012() {
   search_api_index_reindex('default_node_index');
 }
+
+/**
+ * Update taxonomy terms.
+ */
+function shelter_base_update_7013() {
+  features_revert(array('cluster_taxonomy'));
+}
