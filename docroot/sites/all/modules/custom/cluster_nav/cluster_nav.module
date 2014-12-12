@@ -1,0 +1,42 @@
+<?php
+/**
+ * @file
+ * Handles all functionality related to navigation.
+ */
+
+include_once 'cluster_nav.theme.inc';
+
+/**
+ *  Implements hook_preprocess_page().
+ */
+function cluster_nav_preprocess_page(&$variables) {
+  if (arg(0) == 'node' && is_numeric(arg(1))) {
+    $node = node_load(arg(1));
+  }
+  else {
+    return;
+  }
+//  $node = menu_get_object(); //this doesn't work for node/%/documents pages, for some reason
+//
+//  if (!$node) {
+//    return;
+//  }
+
+  $group_page_content = NULL;
+
+  if (og_is_group('node', $node)) {
+    $group_page_content = GroupContentManager::getInstance($node);
+  }
+  elseif ($node->type == 'discussion') {
+    $wrapper = entity_metadata_wrapper('node', $node);
+    $group = $wrapper->og_group_ref->value();
+    if (count($group) > 0) {
+      $group_page_content = GroupContentManager::getInstance($group[0]);
+    }
+  }
+
+  if ($group_page_content) {
+    $variables['dashboard_menu'] = $group_page_content->getDashboardMenu();
+    $variables['contextual_navigation'] = $group_page_content->getContextualNavigation();
+  }
+}

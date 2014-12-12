@@ -1,51 +1,7 @@
-<section id="secondary-nav">
-  <div class="page-margin clearfix">
-    <ul class="nav-items clearfix">
-      <li class="nav-item"><a href="" class="active">Dashboard</a></li>
-      <li class="nav-item"><a href="">Documents <span class="total">(8200)</span></a></li>
-      <li class="nav-item"><a href="">Discussions</a></li>
-      <li class="nav-item"><a href="">Agenda</a></li>
-      <li class="nav-item"><a href="">Strategic Advisory</a></li>
-    </ul>
-
-    <ul class="nav-items">
-      <?php if (isset($content['related_hubs'])): ?>
-        <li class="nav-group clearfix">
-          <?php print render($content['related_hubs']); ?>
-        </li>
-      <?php endif; ?>
-      <?php if (isset($content['related_responses'])): ?>
-        <li class="nav-group clearfix">
-          <?php print render($content['related_responses']); ?>
-        </li>
-      <?php endif; ?>
-    </ul>
-
-    <a href="#secondary-nav" class="collapse-menu">
-      <?php print _svg('icons/collapse-down', array('alt' => 'Icon for collapsing the menu')); ?>
-      more
-    </a>
-
-    <ul class="nav-items collapsable hide-this">
-        <li class="nav-group clearfix">
-          TEST
-        </li>
-    </ul>
-
-  </div>
-</section>
-
 <div id="content">
 
   <div id="content-header">
     <div class="page-margin clearfix">
-
-      <section id="operation-title">
-        <?php if (isset($contextual_navigation)): ?>
-          <?php print $contextual_navigation; ?>
-        <?php endif; ?>
-        <h1><?php print $title; ?></h1>
-      </section>
 
       <div class="main-column">
 
