@@ -7,22 +7,18 @@
     margin-top: 0;
   }
   h4 {
-    margin-top: 0;
+    @include rem(margin,0 0 0.6rem 0 );
     @include rem(font-size, 1rem);
   }
   @include rem(padding, 1rem 0 0 0);
 }
-#operation-information {
-  h1 {
-    @include rem(margin, 0 0 1rem 0);
+#contextual-navigation {
+  @include rem(font-size, 0.8rem);
+
+  span {
+    @include rem(margin-right, 0.25rem);
   }
-}
-#operation-group {
-
-}
-#featured-documents {
-
-}
-#content-rendered {
-
+  a {
+    color: $shelter-red;
+  }
 }

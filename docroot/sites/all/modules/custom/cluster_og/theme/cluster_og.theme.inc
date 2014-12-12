@@ -12,9 +12,11 @@
  * $vars['element'][UID]: each user account render array and markup.
  */
 function theme_cluster_og_contact_member($vars) {
-  $output = '<div class="field"><div class="field-label">' . t('Contact members') . ':</div>';
+  $output = '<h3>' . t('Coordination Team') . '</h3>';
+  $output .= '<h4>National Team</h4>';
+  $output .= '<ul id="coordination-items" class="clearfix">';
   $output .= $vars['element']['#children'];
-  $output .= '</div>';
+  $output .= '</ul>';
   return $output;
 }
 
@@ -69,7 +71,7 @@ function theme_cluster_og_recent_discussions($vars) {
  * $vars['element'][UID]: each document render array and markup.
  */
 function theme_cluster_og_recent_documents($vars) {
-  $output = '<div class="field"><div class="field-label">' . t('Recent Documents') . '</div>';
+  $output = '<div>';
   $output .= $vars['element']['#children'];
   $output .= l(t('Browse all documents'), $vars['element']['#all_documents_link']);
   $output .= '</div>';
