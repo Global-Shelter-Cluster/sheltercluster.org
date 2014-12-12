@@ -9,6 +9,7 @@ dependencies[] = image
 dependencies[] = menu
 dependencies[] = node
 dependencies[] = og
+dependencies[] = pathauto
 dependencies[] = restrict_node_page_view
 dependencies[] = taxonomy
 dependencies[] = text
