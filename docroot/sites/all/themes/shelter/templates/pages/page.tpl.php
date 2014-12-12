@@ -64,6 +64,21 @@
         </ul>
       </div>
     </nav>
+
+    <section id="operation-title">
+      <?php if (isset($contextual_navigation)): ?>
+        <?php print render($contextual_navigation); ?>
+      <?php endif; ?>
+      <h1><?php print $title; ?></h1>
+    </section>
+
+    <?php if (isset($dashboard_menu)): ?>
+    <section id="secondary-nav">
+      <div class="page-margin clearfix">
+        <?php print render($dashboard_menu); ?>
+      </div>
+    </section>
+    <?php endif; ?>
   </header>
 
   <?php print render($page['content']); ?>

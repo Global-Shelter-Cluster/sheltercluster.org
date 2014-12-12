@@ -20,6 +20,169 @@ class GroupContentManager {
     $this->node = $node;
   }
 
+  public function getDashboardMenu() {
+    $items = array();
+
+    $items[] = array(
+      'label' => t('Dashboard'),
+      'path' => 'node/'.$this->node->nid,
+    );
+
+    $items[] = array(
+      'label' => t('Documents'),
+      'path' => 'node/'.$this->node->nid.'/documents',
+      'total' => $this->getDocumentCount(),
+    );
+
+    $items[] = array(
+      'label' => t('Discussions'),
+      'path' => 'node/'.$this->node->nid.'/discussions',
+      'total' => $this->getDiscussionCount(),
+    );
+
+    $items[] = array(
+      'label' => t('Agenda'),
+      'path' => 'node/'.$this->node->nid.'/edit', //TODO: change this to actual Agenda link
+//      'total' => $total,
+    );
+
+    // This is a reference to the Strategic Advisory "parent" group. Disabled because the link is in the breadcrumb.
+//    if ($parent = $this->getStrategicAdvisoryParent()) {
+//      $items[] = array(
+//        'label' => t('Parent'),
+//        'path' => 'node/'.$parent->nid,
+//      );
+//    }
+
+    if ($strategic_advisory = $this->getStrategicAdvisory()) {
+      $items[] = array(
+        'label' => t('Strategic Advisory'),
+        'path' => 'node/'.$strategic_advisory->nid,
+      );
+    }
+
+    $secondary = array();
+
+    $secondary['hubs'] = $this->getRelatedHubs();
+    $secondary['responses'] = $this->getRelatedResponses();
+
+    return array(
+      '#theme' => 'cluster_nav',
+      '#items' => $items,
+      '#secondary' => $secondary,
+    );
+  }
+
+  public function getContextualNavigation() {
+    $wrapper = entity_metadata_wrapper('node', $this->node);
+
+    $ret = array(
+      '#theme' => 'cluster_contextual_nav',
+    );
+
+    if (isset($wrapper->field_parent_region)) {
+      $region = $wrapper->field_parent_region->value();
+      if ($region) {
+        $ret['#regions'] = array(
+          array(
+            'title' => $region->title,
+            'path' => 'node/'.$region->nid,
+          )
+        );
+      }
+    } elseif (isset($wrapper->field_associated_regions)) {
+      $ret['#regions'] = array();
+
+      foreach ($wrapper->field_associated_regions->value() as $region) {
+        $ret['#regions'][] = array(
+          'title' => $region->title,
+          'path' => 'node/'.$region->nid,
+        );
+      }
+    }
+
+    if (isset($wrapper->field_parent_response)) {
+      $response = $wrapper->field_parent_response->value();
+      if (!empty($response)) {
+        $ret['#response'] = array(
+          'title' => $response->title,
+          'path' => 'node/'.$response->nid,
+        );
+      }
+    }
+
+    return $ret;
+  }
+
+  /**
+   * Returns the parent node. Only works if the current node is a Strategic Advisory group.
+   */
+  public function getStrategicAdvisoryParent() {
+    if ($this->node->type != 'strategic_advisory') {
+      return;
+    }
+
+    $wrapper = entity_metadata_wrapper('node', $this->node);
+    if ($wrapper->field_parent_response->value()) {
+      return $wrapper->field_parent_response->value();
+    } elseif ($wrapper->field_parent_region->value()) {
+      return $wrapper->field_parent_region->value();
+    }
+  }
+
+  /**
+   * Finds a strategic advisory node for the current group.
+   * Only works if the current group is not a strategic advisory itself.
+   * If there is more than one, it is not defined which one will be returned.
+   */
+  public function getStrategicAdvisory() {
+    if ($this->node->type == 'strategic_advisory') {
+      return;
+    }
+
+    $query = new EntityFieldQuery();
+    $result = $query->entityCondition('entity_type', 'node')
+      ->entityCondition('bundle', 'strategic_advisory')
+      ->fieldCondition('field_parent_response', 'target_id', $this->node->nid)
+      ->propertyCondition('status', NODE_PUBLISHED)
+      ->execute();
+
+    if (isset($result['node'])) {
+      return node_load(key($result['node']));
+    }
+
+    $query = new EntityFieldQuery();
+    $result = $query->entityCondition('entity_type', 'node')
+      ->entityCondition('bundle', 'strategic_advisory')
+      ->fieldCondition('field_parent_region', 'target_id', $this->node->nid)
+      ->propertyCondition('status', NODE_PUBLISHED)
+      ->execute();
+
+    if (isset($result['node'])) {
+      return node_load(key($result['node']));
+    }
+  }
+
+  public function getDocumentCount() {
+    $query = new EntityFieldQuery();
+    return $query->entityCondition('entity_type', 'node')
+      ->entityCondition('bundle', 'document')
+      ->fieldCondition('og_group_ref', 'target_id', $this->node->nid)
+      ->propertyCondition('status', NODE_PUBLISHED)
+      ->count()
+      ->execute();
+  }
+
+  public function getDiscussionCount() {
+    $query = new EntityFieldQuery();
+    return $query->entityCondition('entity_type', 'node')
+      ->entityCondition('bundle', 'discussion')
+      ->fieldCondition('og_group_ref', 'target_id', $this->node->nid)
+      ->propertyCondition('status', NODE_PUBLISHED)
+      ->count()
+      ->execute();
+  }
+
   public function getRelatedResponses() {
     return NULL;
   }

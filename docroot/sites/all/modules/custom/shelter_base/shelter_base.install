@@ -62,7 +62,7 @@ function _shelter_base_required_core() {
  * List of required custom modules.
  */
 function _shelter_base_required_custom() {
-  return array('cluster_docs', 'cluster_discussions', 'cluster_og', 'cluster_taxonomy', 'cluster_user', 'cluster_search', 'cluster_workflow');
+  return array('cluster_docs', 'cluster_discussions', 'cluster_og', 'cluster_taxonomy', 'cluster_user', 'cluster_search', 'cluster_workflow', 'cluster_nav');
 }
 
 /**
@@ -163,4 +163,11 @@ function shelter_base_update_7012() {
  */
 function shelter_base_update_7013() {
   features_revert(array('cluster_taxonomy'));
+}
+
+/**
+ * Update required module list (cluster_nav).
+ */
+function shelter_base_update_7013() {
+  _shelter_base_modules_enable('custom');
 }
