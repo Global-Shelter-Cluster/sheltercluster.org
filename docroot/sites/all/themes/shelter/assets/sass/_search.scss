@@ -1,8 +1,9 @@
 /* _search.scss */
 
 .search {
-  float: right;
-  clear: right;
+  position: absolute;
+  bottom: 0;
+  right: 0;
   display: inline-block;
   @include rem(padding, 0.8rem 0);
   color: #000;

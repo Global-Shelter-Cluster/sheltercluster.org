@@ -5,7 +5,11 @@
   @include rem(padding, 1.25rem 0 0.5rem 0);
   border-top: 1px solid darken(white, 7%);
   border-bottom: 1px solid darken(white, 7%);
-  background: $shelter-light-blue;
+
+  h1 {
+    color: $shelter-red;
+    font: bold 2em verdana, sans-serif;
+  }
 
   ul {
     @include reset-list;

@@ -34,35 +34,34 @@
         </ul>
 
         <form class="search" action="http://www.google.com/search" method="get">
-          <input class="text-field" type="search" placeholder="Search documents" name="q">
-          <input class="submit" type="submit" value="Search">
+          <input class="text-field" type="search" placeholder="Search site" name="q">
+          <input class="submit" type="submit" value="Go">
         </form>
 
       </div>
     </section>
 
-    <nav id="nav-shelter" class="clearfix">
-      <div class="page-margin">
+    <div class="page-margin">
+      <nav id="nav-shelter" class="clearfix">
         <a href="#" id="button-menu-dropdown">Menu</a>
         <ul class="nav-items">
           <li class="nav-item"><a href="#">Home</a></li>
-          <li class="nav-item"><a href="#">Current Operations <span class="total">(10)</span></a></li>
-          <li class="nav-item"><a href="#">Documents <span class="total">(8200)</span></a></li>
-          <li class="nav-item"><a href="#">Geographic Aggregators</a></li>
-          <li class="nav-item"><a href="#">Communities of Practice <span class="total">(6)</span></a></li>
-          <li class="nav-item"><a href="#">References <span class="total">(34)</span></a></li>
-          <li class="sub-nav">
-            <ul>
-              <li class="nav-item"><a href="#">Manage your profile</a></li>
-              <li class="nav-item"><a href="#">Disconnect</a></li>
-            </ul>
-          </li>
+          <li class="nav-item"><a href="#">Current Operations</a></li>
+          <li class="nav-item"><a href="#">Global</a></li>
+          <li class="nav-item"><a href="#">Regions & Countries</a></li>
+          <li class="nav-item"><a href="#">Communities of Practice</a></li>
+          <li class="nav-item"><a href="#">References</a></li>
         </ul>
-      </div>
-    </nav>
+        <ul class="sub-nav">
+          <li class="nav-item"><a href="#">Manage your profile</a></li>
+          <li class="nav-item"><a href="#">Disconnect</a></li>
+        </ul>
+      </nav>
+    </div>
 
     <section id="secondary-nav">
       <div class="page-margin clearfix">
+        <h1>Typhoon Haiyan</h1>
         <ul class="nav-items clearfix">
           <li class="nav-item"><a href="#" class="active">Dashboard</a></li>
           <li class="nav-item"><a href="#">Documents <span class="total">(8200)</span></a></li>
@@ -140,37 +139,11 @@
 
         <div class="main-column">
           <section id="operation-information">
-            <h1>Typhoon Haiyan</h1>
             <img class="operation-image" src="http://placehold.it/290x150"/>
             <p>Quis enim aut eum diligat quem metuat, aut eum a quo se metui putet? Coluntur tamen simulatione dumtaxat ad tempus. Quod si forte, ut fit plerumque, ceciderunt, tum intellegitur quam fuerint inopes amicorum. Quod Tarquinium dixisse ferunt, tum exsulantem se intellexisse quos fidos amicos habuisset, quos infidos, cum iam neutris gratiam referre posset.</p>
             <p>Orientis vero limes in longum protentus et rectum ab Euphratis fluminis ripis ad usque supercilia porrigitur Nili, laeva Saracenis conterminans gentibus, dextra pelagi fragoribus patens, quam plagam Nicator Seleucus occupatam auxit magnum in modum, cum post Alexandri Macedonis obitum successorio iure teneret regna Persidis, efficaciae inpetrabilis rex, ut indicat cognomentum.</p>
             <p>Tantum autem cuique tribuendum, primum quantum ipse efficere possis, deinde etiam quantum ille quem diligas atque adiuves, sustinere. Non enim neque tu possis, quamvis excellas, omnes tuos ad honores amplissimos perducere, ut Scipio P. Rupilium potuit consulem efficere, fratrem eius L. non potuit. Quod si etiam possis quidvis deferre ad alterum, videndum est tamen, quid ille possit sustinere.</p>
-            <p>Operation started November 8th, 2013, and is on going.</p>
-            <ul id="meta-data">
-              <li class="data-item"><span>Type:</span> Windstorm</li>
-              <li class="data-item"><span>Damage Location:</span> Rural, Peri-Urban, Urban</li>
-              <li class="data-item"><span>Degree of Displacement:</span> Hight</li>
-              <li class="data-item"><span>Emergency Lead Agency</span> IFRC</li>
-            </ul>
           </section>
-        </div>
-
-        <div class="side-column">
-          <section id="join-group">
-            <h4>Join this Operation Group and</h4>
-            <fieldset>
-              <label><input type="checkbox" selected="selected"/> Receive notifications</label>
-              <label><input type="checkbox" selected="selected"/> Register to this group the mailing list</label>
-              <label><input type="checkbox"/> Register to the "Global Response" mailinglist</label>
-            </fieldset>
-            <div id="button-join-group"><a class="button" href="#">Join</a></div>
-          </section>
-        </div>
-      </div>
-    </div>
-
-    <div class="page-margin clearfix">
-      <div class="main-column">
 
         <section id="featured-documents">
           <ul>
@@ -326,7 +299,7 @@
             </li>
           </ul>
 
-          <h4>Recent Documents</h4>
+          <h3>Recent Documents</h3>
           <ul class="document-cards clearfix">
             <li class="document-card odd">
               <div class="image-card"><?php print _svg('icons/file', array('class'=>'file-icon', 'alt' => 'File icon')); ?></div>
@@ -365,12 +338,27 @@
 
         </section>
 
-        <div id="content-rendered">
-          <?php print render($page['content']); ?>
-        </div>
-
       </div>
       <div class="side-column">
+
+        <section id="join-group">
+          <h4>Join this Operation Group and</h4>
+          <fieldset>
+            <label>
+              <input type="checkbox"/>
+              <span>Receive notifications</span>
+            </label>
+            <label>
+              <input type="checkbox"/>
+              <span>Register to this group the mailing list</span>
+            </label>
+            <label>
+              <input type="checkbox"/>
+              <span>Register to the "Global Response" mailinglist</span>
+            </label>
+          </fieldset>
+          <div id="button-join-group"><a href="#">Join</a></div>
+        </section>
 
         <section id="shelter-calendar">
           <div id="calendar-box">
@@ -519,6 +507,27 @@
           </ul>
         </section>
 
+        <section id="operation-data">
+          <h4>Operation started November 8th, 2013, and is on going.</h4>
+          <ul id="meta-data">
+            <li class="data-item"><span>Type:</span> Windstorm</li>
+            <li class="data-item"><span>Damage Location:</span> Rural, Peri-Urban, Urban</li>
+            <li class="data-item"><span>Degree of Displacement:</span> Hight</li>
+            <li class="data-item"><span>Emergency Lead Agency</span> IFRC</li>
+          </ul>
+        </section>
+
+      </div>
+      </div>
+    </div>
+
+    <div class="page-margin clearfix">
+      <div class="main-column">
+
+        <div id="content-rendered">
+          <?php print render($page['content']); ?>
+        </div>
+
       </div>
     </div>
   </div>
@@ -526,8 +535,8 @@
   <footer>
     <div class="page-margin clearfix">
       <form class="search" action="http://www.google.com/search" method="get">
-        <input class="text-field" type="search" placeholder="Search documents" name="q">
-        <input class="submit" type="submit" value="Search">
+        <input class="text-field" type="search" placeholder="Search site" name="q">
+        <input class="submit" type="submit" value="Go">
       </form>
     </div>
 

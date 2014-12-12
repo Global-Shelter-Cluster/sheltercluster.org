@@ -11,7 +11,7 @@ html {
 
 body {
   background-color: rgb(255,255,255);
-  font-family: arial, sans-serif;
+  font-family: 'Roboto', sans-serif;
   font-size: rem( $body-font-size + 'px' );
   font-weight: normal;
   -webkit-font-smoothing: antialiased;
@@ -19,6 +19,7 @@ body {
 }
 
 .page-margin {
+  position: relative;
   width: 90%;
   margin: 0 auto;
   @include breakpoint(1200px) {

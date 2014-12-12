@@ -1,26 +1,19 @@
 /* _active_responses.scss */
 
-#home-crisis {
-  @include rem(margin, 0 0 1rem 0);
+#active-responses {
+  @include rem(margin, 0 0 1.5rem 0);
 
   h1 {
-    span {
-      display: block;
-      @include rem(font-size, 1rem);
-      a {
-        color: #000;
-        &:hover,
-        &:active {
-          text-decoration:none;
-        }
-      }
-    }
+    margin-top: 0;
   }
+
   ul {
     @include reset-list;
     @include rem(margin-bottom, 1rem);
   }
-  #major-crisis {
+
+  #major-responses {
+
     li {
       clear: both;
     }
@@ -53,11 +46,6 @@
       fill: $shelter-red;
       width: 25px;
       height: 25px;
-    }
-    .team-icon {
-      fill: $accent-green;
-      width: 30px;
-      height: 30px;
     }
   }
 

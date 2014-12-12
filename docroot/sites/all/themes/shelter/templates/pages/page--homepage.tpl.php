@@ -34,33 +34,29 @@
         </ul>
 
         <form class="search" action="http://www.google.com/search" method="get">
-          <input class="text-field" type="search" placeholder="Search documents" name="q">
-          <input class="submit" type="submit" value="Search">
+          <input class="text-field" type="search" placeholder="Search site" name="q">
+          <input class="submit" type="submit" value="Go">
         </form>
 
       </div>
     </section>
-
-    <nav id="nav-shelter" class="clearfix">
-      <div class="page-margin">
+    <div class="page-margin">
+      <nav id="nav-shelter" class="clearfix">
         <a href="#" id="button-menu-dropdown">Menu</a>
         <ul class="nav-items">
           <li class="nav-item"><a href="#">Home</a></li>
-          <li class="nav-item"><a href="#">Current Operations <span class="total">(10)</span></a></li>
-          <li class="nav-item"><a href="#">Documents <span class="total">(8200)</span></a></li>
-          <li class="nav-item"><a href="#">Geographic Aggregators</a></li>
-          <li class="nav-item"><a href="#">Communities of Practice <span class="total">(6)</span></a></li>
-          <li class="nav-item"><a href="#">References <span class="total">(34)</span></a></li>
-          <li class="sub-nav">
-            <ul>
-              <li class="nav-item"><a href="#">Manage your profile</a></li>
-              <li class="nav-item"><a href="#">Disconnect</a></li>
-            </ul>
-          </li>
+          <li class="nav-item"><a href="#">Current Operations</a></li>
+          <li class="nav-item"><a href="#">Global</a></li>
+          <li class="nav-item"><a href="#">Regions & Countries</a></li>
+          <li class="nav-item"><a href="#">Communities of Practice</a></li>
+          <li class="nav-item"><a href="#">References</a></li>
         </ul>
-      </div>
-    </nav>
-
+        <ul class="sub-nav">
+          <li class="nav-item"><a href="#">Manage your profile</a></li>
+          <li class="nav-item"><a href="#">Disconnect</a></li>
+        </ul>
+      </nav>
+    </div>
   </header>
 
   <div id="content">
@@ -71,28 +67,191 @@
 
     <div id="content-header">
       <div class="page-margin clearfix">
+        <div class="main-column">
 
-        <section id="home-crisis">
-          <h1>Active Responses<!-- <span>in 3 different <a href="#">regions</a></span> --></h1>
-          <ul id="major-crisis">
-            <li>
-              <a href="#">Typhoon Haian</a>
-              <div class="team"><?php print _svg('icons/team', array('class'=>'team-icon', 'alt' => 'Team icon')); ?></div>
-              <div class="hightened"><?php print _svg('icons/warning', array('class'=>'warning-icon', 'alt' => 'Warning icon')); ?></div>
-            </li>
-            <li>
-              <a href="#">Fukushima Earthquake</a>
-              <div class="team"><?php print _svg('icons/team', array('class'=>'team-icon', 'alt' => 'Team icon')); ?></div>
-            </li>
-            <li><a href="#">Hurricane Katrina</a></li>
-          </ul>
-          <ul id="legend">
-            <li class="team"><?php print _svg('icons/team', array('class'=>'team-icon', 'alt' => 'Team icon')); ?> Conflict</li>
-            <li class="hightened"><?php print _svg('icons/warning', array('class'=>'warning-icon', 'alt' => 'Warning icon')); ?> Complex Crisis</li>
-            <li class="hightened"><?php print _svg('icons/warning', array('class'=>'warning-icon', 'alt' => 'Warning icon')); ?> Natural Disaster</li>
-            <li class="hightened"><?php print _svg('icons/warning', array('class'=>'warning-icon', 'alt' => 'Warning icon')); ?> Man-made disaster</li>
-          </ul>
-        </section>
+          <section id="active-responses" class="clearfix">
+            <h1>Active Responses</h1>
+            <ul id="major-responses">
+              <li>
+                <a href="#">Typhoon Haian</a>
+                <div class="hightened"><?php print _svg('icons/warning', array('class'=>'warning-icon', 'alt' => 'Warning icon')); ?></div>
+              </li>
+              <li>
+                <a href="#">Fukushima Earthquake</a>
+              </li>
+              <li><a href="#">Hurricane Katrina</a></li>
+            </ul>
+            <ul id="legend">
+              <li class="team"><?php print _svg('icons/warning', array('class'=>'warning-icon', 'alt' => 'Warning icon')); ?> Conflict</li>
+              <li class="hightened"><?php print _svg('icons/warning', array('class'=>'warning-icon', 'alt' => 'Warning icon')); ?> Complex Crisis</li>
+              <li class="hightened"><?php print _svg('icons/warning', array('class'=>'warning-icon', 'alt' => 'Warning icon')); ?> Natural Disaster</li>
+              <li class="hightened"><?php print _svg('icons/warning', array('class'=>'warning-icon', 'alt' => 'Warning icon')); ?> Man-made disaster</li>
+            </ul>
+          </section>
+
+          <section id="featured-documents">
+            <ul>
+              <li>
+                 <img src="sites/all/themes/shelter/assets/images/fake/feature-document.jpg" alt="" />
+                  <div class="document-information">
+                    <h2>Featured Document Title 1</h2>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc aliquet justo leo, id lobortis leo maximus tristique. Sed non odio eros. Aenean pulvinar sapien quam, a bibendum ante lobortis eu.</p>
+                  </div>
+              </li>
+              <li>
+                <img src="sites/all/themes/shelter/assets/images/fake/feature-document.jpg" alt="" />
+                <div class="document-information">
+                  <h2>Featured Document Title 2</h2>
+                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc aliquet justo leo, id lobortis leo maximus tristique. Sed non odio eros. Aenean pulvinar sapien quam, a bibendum ante lobortis eu.</p>
+                </div>
+              </li>
+            </ul>
+          </section>
+
+        </div>
+        <div class="side-column">
+
+          <section id="join-group">
+            <h4>Join our mailinglist</h4>
+            <fieldset>
+              <label>
+                <input type="checkbox"/>
+                <span>Register to the "Global Response" mailinglist</span>
+              </label>
+            </fieldset>
+            <fieldset>
+              <input type="email" name="email" placeholder="Your Email Address" />
+            </fieldset>
+            <div id="button-join-group"><a href="#">Join</a></div>
+          </section>
+
+          <section id="shelter-calendar">
+            <div id="calendar-box">
+              <div id="calendar-date">
+                <?php print _svg('icons/pin', array('id'=>'calendar-pin', 'alt' => 'Pin icon')); ?>Nov. 24th 2014
+              </div>
+              <div id="calendar-event">
+                <span class="upcoming" href="#">Upcoming envent to <a href="#">agenda</a>:</span>
+                <a class="event" href="#">Shelter Technical Meeting 2014</a></div>
+            </div>
+            <a class="see-all" href="#">All calendar events</a>
+          </section>
+
+          <section id="shelter-coordination-team">
+            <h3>Coordination Team</h3>
+            <h4>National Team</h4>
+            <ul id="coordination-items" class="clearfix">
+              <li class="coordination-item">
+                <div class="avatar">
+                  <?php print _svg('icons/person', array('id'=>'person-avatar', 'alt' => 'Avatar person icon')); ?>
+                </div>
+                <div class="information">
+                  <span class="name">Victoria Stodard (IFRC)</span>
+                  <span class="job-title">National Coordinator</span>
+                  <a class="telephone" href="tel:+09084011218">0908 401 1218</a>
+                  <a class="email" href="mailto:coord.phil@sheltercluster.org">coord.phil@sheltercluster.org</a>
+                </div>
+              </li>
+              <li class="coordination-item">
+                <div class="avatar">
+                  <?php print _svg('icons/person', array('id'=>'person-avatar', 'alt' => 'Avatar person icon')); ?>
+                </div>
+                <div class="information">
+                  <span class="name">Tom York (CRS)</span>
+                  <span class="job-title">National Information Management</span>
+                  <a class="telephone" href="tel:+09084011218">0908 555 1790</a>
+                  <a class="email" href="mailto:tom.york@sheltercluster.org">tom.york@sheltercluster.org</a>
+                </div>
+              </li>
+              <li class="coordination-item">
+                <div class="avatar">
+                  <?php print _svg('icons/person', array('id'=>'person-avatar', 'alt' => 'Avatar person icon')); ?>
+                </div>
+                <div class="information">
+                  <span class="name">Gian Gimang (IFRC)</span>
+                  <span class="job-title">Assistant Techhical Coordination</span>
+                  <a class="telephone" href="tel:+09084011218">0966 666 1256</a>
+                  <a class="email" href="mailto:gian.gimang@sheltercluster.org">gian.gimang@sheltercluster.org</a>
+                </div>
+              </li>
+            </ul>
+
+            <h4>Region VIII</h4>
+            <ul id="coordination-items" class="clearfix">
+              <li class="coordination-item">
+                <div class="avatar">
+                  <?php print _svg('icons/person', array('id'=>'person-avatar', 'alt' => 'Avatar person icon')); ?>
+                </div>
+                <div class="information">
+                  <span class="name">Victoria Stodard (IFRC)</span>
+                  <span class="job-title">National Coordinator</span>
+                  <a class="telephone" href="tel:+09084011218">0908 401 1218</a>
+                  <a class="email" href="mailto:coord.phil@sheltercluster.org">coord.phil@sheltercluster.org</a>
+                </div>
+              </li>
+              <li class="coordination-item">
+                <div class="avatar">
+                  <?php print _svg('icons/person', array('id'=>'person-avatar', 'alt' => 'Avatar person icon')); ?>
+                </div>
+                <div class="information">
+                  <span class="name">Tom York (CRS)</span>
+                  <span class="job-title">National Information Management</span>
+                  <a class="telephone" href="tel:+09084011218">0908 555 1790</a>
+                  <a class="email" href="mailto:tom.york@sheltercluster.org">tom.york@sheltercluster.org</a>
+                </div>
+              </li>
+              <li class="coordination-item">
+                <div class="avatar">
+                  <?php print _svg('icons/person', array('id'=>'person-avatar', 'alt' => 'Avatar person icon')); ?>
+                </div>
+                <div class="information">
+                  <span class="name">Gian Gimang (IFRC)</span>
+                  <span class="job-title">Assistant Techhical Coordination</span>
+                  <a class="telephone" href="tel:+09084011218">0966 666 1256</a>
+                  <a class="email" href="mailto:gian.gimang@sheltercluster.org">gian.gimang@sheltercluster.org</a>
+                </div>
+              </li>
+            </ul>
+
+            <h4>Guiuan Sub-Hub</h4>
+            <ul id="coordination-items" class="clearfix">
+              <li class="coordination-item">
+                <div class="avatar">
+                  <?php print _svg('icons/person', array('id'=>'person-avatar', 'alt' => 'Avatar person icon')); ?>
+                </div>
+                <div class="information">
+                  <span class="name">Victoria Stodard (IFRC)</span>
+                  <span class="job-title">National Coordinator</span>
+                  <a class="telephone" href="tel:+09084011218">0908 401 1218</a>
+                  <a class="email" href="mailto:coord.phil@sheltercluster.org">coord.phil@sheltercluster.org</a>
+                </div>
+              </li>
+              <li class="coordination-item">
+                <div class="avatar">
+                  <?php print _svg('icons/person', array('id'=>'person-avatar', 'alt' => 'Avatar person icon')); ?>
+                </div>
+                <div class="information">
+                  <span class="name">Tom York (CRS)</span>
+                  <span class="job-title">National Information Management</span>
+                  <a class="telephone" href="tel:+09084011218">0908 555 1790</a>
+                  <a class="email" href="mailto:tom.york@sheltercluster.org">tom.york@sheltercluster.org</a>
+                </div>
+              </li>
+              <li class="coordination-item">
+                <div class="avatar">
+                  <?php print _svg('icons/person', array('id'=>'person-avatar', 'alt' => 'Avatar person icon')); ?>
+                </div>
+                <div class="information">
+                  <span class="name">Gian Gimang (IFRC)</span>
+                  <span class="job-title">Assistant Techhical Coordination</span>
+                  <a class="telephone" href="tel:+09084011218">0966 666 1256</a>
+                  <a class="email" href="mailto:gian.gimang@sheltercluster.org">gian.gimang@sheltercluster.org</a>
+                </div>
+              </li>
+            </ul>
+          </section>
+
+        </div>
 
       </div>
     </div>
@@ -106,157 +265,15 @@
         </div>
 
       </div>
-      <div class="side-column">
 
-        <section id="join-group">
-          <h4>Join our mailinglist</h4>
-          <fieldset>
-            <label>
-              <input type="checkbox"/>
-              <span>Register to the "Global Response" mailinglist</span>
-            </label>
-          </fieldset>
-          <fieldset>
-            <input type="email" name="email" placeholder="Your Email Address" />
-          </fieldset>
-          <div id="button-join-group"><a class="button" href="#">Join</a></div>
-        </section>
-
-        <section id="shelter-calendar">
-          <div id="calendar-box">
-            <div id="calendar-date">
-              <?php print _svg('icons/pin', array('id'=>'calendar-pin', 'alt' => 'Pin icon')); ?>Nov. 24th 2014
-            </div>
-            <div id="calendar-event">
-              <span class="upcoming" href="#">Upcoming envent to <a href="#">agenda</a>:</span>
-              <a class="event" href="#">Shelter Technical Meeting 2014</a></div>
-          </div>
-          <a class="see-all" href="#">All calendar events</a>
-        </section>
-
-        <section id="shelter-coordination-team">
-          <h3>Coordination Team</h3>
-          <h4>National Team</h4>
-          <ul id="coordination-items" class="clearfix">
-            <li class="coordination-item">
-              <div class="avatar">
-                <?php print _svg('icons/person', array('id'=>'person-avatar', 'alt' => 'Avatar person icon')); ?>
-              </div>
-              <div class="information">
-                <span class="name">Victoria Stodard (IFRC)</span>
-                <span class="job-title">National Coordinator</span>
-                <a class="telephone" href="tel:+09084011218">0908 401 1218</a>
-                <a class="email" href="mailto:coord.phil@sheltercluster.org">coord.phil@sheltercluster.org</a>
-              </div>
-            </li>
-            <li class="coordination-item">
-              <div class="avatar">
-                <?php print _svg('icons/person', array('id'=>'person-avatar', 'alt' => 'Avatar person icon')); ?>
-              </div>
-              <div class="information">
-                <span class="name">Tom York (CRS)</span>
-                <span class="job-title">National Information Management</span>
-                <a class="telephone" href="tel:+09084011218">0908 555 1790</a>
-                <a class="email" href="mailto:tom.york@sheltercluster.org">tom.york@sheltercluster.org</a>
-              </div>
-            </li>
-            <li class="coordination-item">
-              <div class="avatar">
-                <?php print _svg('icons/person', array('id'=>'person-avatar', 'alt' => 'Avatar person icon')); ?>
-              </div>
-              <div class="information">
-                <span class="name">Gian Gimang (IFRC)</span>
-                <span class="job-title">Assistant Techhical Coordination</span>
-                <a class="telephone" href="tel:+09084011218">0966 666 1256</a>
-                <a class="email" href="mailto:gian.gimang@sheltercluster.org">gian.gimang@sheltercluster.org</a>
-              </div>
-            </li>
-          </ul>
-
-          <h4>Region VIII</h4>
-          <ul id="coordination-items" class="clearfix">
-            <li class="coordination-item">
-              <div class="avatar">
-                <?php print _svg('icons/person', array('id'=>'person-avatar', 'alt' => 'Avatar person icon')); ?>
-              </div>
-              <div class="information">
-                <span class="name">Victoria Stodard (IFRC)</span>
-                <span class="job-title">National Coordinator</span>
-                <a class="telephone" href="tel:+09084011218">0908 401 1218</a>
-                <a class="email" href="mailto:coord.phil@sheltercluster.org">coord.phil@sheltercluster.org</a>
-              </div>
-            </li>
-            <li class="coordination-item">
-              <div class="avatar">
-                <?php print _svg('icons/person', array('id'=>'person-avatar', 'alt' => 'Avatar person icon')); ?>
-              </div>
-              <div class="information">
-                <span class="name">Tom York (CRS)</span>
-                <span class="job-title">National Information Management</span>
-                <a class="telephone" href="tel:+09084011218">0908 555 1790</a>
-                <a class="email" href="mailto:tom.york@sheltercluster.org">tom.york@sheltercluster.org</a>
-              </div>
-            </li>
-            <li class="coordination-item">
-              <div class="avatar">
-                <?php print _svg('icons/person', array('id'=>'person-avatar', 'alt' => 'Avatar person icon')); ?>
-              </div>
-              <div class="information">
-                <span class="name">Gian Gimang (IFRC)</span>
-                <span class="job-title">Assistant Techhical Coordination</span>
-                <a class="telephone" href="tel:+09084011218">0966 666 1256</a>
-                <a class="email" href="mailto:gian.gimang@sheltercluster.org">gian.gimang@sheltercluster.org</a>
-              </div>
-            </li>
-          </ul>
-
-          <h4>Guiuan Sub-Hub</h4>
-          <ul id="coordination-items" class="clearfix">
-            <li class="coordination-item">
-              <div class="avatar">
-                <?php print _svg('icons/person', array('id'=>'person-avatar', 'alt' => 'Avatar person icon')); ?>
-              </div>
-              <div class="information">
-                <span class="name">Victoria Stodard (IFRC)</span>
-                <span class="job-title">National Coordinator</span>
-                <a class="telephone" href="tel:+09084011218">0908 401 1218</a>
-                <a class="email" href="mailto:coord.phil@sheltercluster.org">coord.phil@sheltercluster.org</a>
-              </div>
-            </li>
-            <li class="coordination-item">
-              <div class="avatar">
-                <?php print _svg('icons/person', array('id'=>'person-avatar', 'alt' => 'Avatar person icon')); ?>
-              </div>
-              <div class="information">
-                <span class="name">Tom York (CRS)</span>
-                <span class="job-title">National Information Management</span>
-                <a class="telephone" href="tel:+09084011218">0908 555 1790</a>
-                <a class="email" href="mailto:tom.york@sheltercluster.org">tom.york@sheltercluster.org</a>
-              </div>
-            </li>
-            <li class="coordination-item">
-              <div class="avatar">
-                <?php print _svg('icons/person', array('id'=>'person-avatar', 'alt' => 'Avatar person icon')); ?>
-              </div>
-              <div class="information">
-                <span class="name">Gian Gimang (IFRC)</span>
-                <span class="job-title">Assistant Techhical Coordination</span>
-                <a class="telephone" href="tel:+09084011218">0966 666 1256</a>
-                <a class="email" href="mailto:gian.gimang@sheltercluster.org">gian.gimang@sheltercluster.org</a>
-              </div>
-            </li>
-          </ul>
-        </section>
-
-      </div>
     </div>
   </div>
 
   <footer>
     <div class="page-margin clearfix">
       <form class="search" action="http://www.google.com/search" method="get">
-        <input class="text-field" type="search" placeholder="Search documents" name="q">
-        <input class="submit" type="submit" value="Search">
+        <input class="text-field" type="search" placeholder="Search site" name="q">
+        <input class="submit" type="submit" value="Go">
       </form>
     </div>
 
