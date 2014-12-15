@@ -258,9 +258,7 @@ function cluster_og_og_features_default_permissions() {
 
   // Exported og permission: 'node:strategic_advisory:subscribe'
   $permissions['node:strategic_advisory:subscribe'] = array(
-    'roles' => array(
-      'non-member' => 'non-member',
-    ),
+    'roles' => array(),
   );
 
   // Exported og permission: 'node:strategic_advisory:subscribe without approval'
@@ -326,9 +324,7 @@ function cluster_og_og_features_default_permissions() {
 
   // Exported og permission: 'node:working_group:subscribe'
   $permissions['node:working_group:subscribe'] = array(
-    'roles' => array(
-      'non-member' => 'non-member',
-    ),
+    'roles' => array(),
   );
 
   // Exported og permission: 'node:working_group:subscribe without approval'
