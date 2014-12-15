@@ -10,6 +10,72 @@
 function cluster_og_og_features_default_permissions() {
   $permissions = array();
 
+  // Exported og permission: 'node:community_of_practice:add user'
+  $permissions['node:community_of_practice:add user'] = array(
+    'roles' => array(
+      'administrator member' => 'administrator member',
+    ),
+  );
+
+  // Exported og permission: 'node:community_of_practice:administer group'
+  $permissions['node:community_of_practice:administer group'] = array(
+    'roles' => array(
+      'administrator member' => 'administrator member',
+    ),
+  );
+
+  // Exported og permission: 'node:community_of_practice:approve and deny subscription'
+  $permissions['node:community_of_practice:approve and deny subscription'] = array(
+    'roles' => array(
+      'administrator member' => 'administrator member',
+    ),
+  );
+
+  // Exported og permission: 'node:community_of_practice:manage members'
+  $permissions['node:community_of_practice:manage members'] = array(
+    'roles' => array(
+      'administrator member' => 'administrator member',
+    ),
+  );
+
+  // Exported og permission: 'node:community_of_practice:manage permissions'
+  $permissions['node:community_of_practice:manage permissions'] = array(
+    'roles' => array(
+      'administrator member' => 'administrator member',
+    ),
+  );
+
+  // Exported og permission: 'node:community_of_practice:manage roles'
+  $permissions['node:community_of_practice:manage roles'] = array(
+    'roles' => array(
+      'administrator member' => 'administrator member',
+    ),
+  );
+
+  // Exported og permission: 'node:community_of_practice:subscribe'
+  $permissions['node:community_of_practice:subscribe'] = array(
+    'roles' => array(),
+  );
+
+  // Exported og permission: 'node:community_of_practice:subscribe without approval'
+  $permissions['node:community_of_practice:subscribe without approval'] = array(
+    'roles' => array(),
+  );
+
+  // Exported og permission: 'node:community_of_practice:unsubscribe'
+  $permissions['node:community_of_practice:unsubscribe'] = array(
+    'roles' => array(
+      'member' => 'member',
+    ),
+  );
+
+  // Exported og permission: 'node:community_of_practice:update group'
+  $permissions['node:community_of_practice:update group'] = array(
+    'roles' => array(
+      'administrator member' => 'administrator member',
+    ),
+  );
+
   // Exported og permission: 'node:geographic_region:add user'
   $permissions['node:geographic_region:add user'] = array(
     'roles' => array(
