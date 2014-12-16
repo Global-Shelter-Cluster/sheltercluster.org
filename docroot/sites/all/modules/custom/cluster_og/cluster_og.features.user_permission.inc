@@ -10,6 +10,13 @@
 function cluster_og_user_default_permissions() {
   $permissions = array();
 
+  // Exported permission: 'create community_of_practice content'.
+  $permissions['create community_of_practice content'] = array(
+    'name' => 'create community_of_practice content',
+    'roles' => array(),
+    'module' => 'node',
+  );
+
   // Exported permission: 'create geographic_region content'.
   $permissions['create geographic_region content'] = array(
     'name' => 'create geographic_region content',
@@ -41,6 +48,13 @@ function cluster_og_user_default_permissions() {
   // Exported permission: 'create working_group content'.
   $permissions['create working_group content'] = array(
     'name' => 'create working_group content',
+    'roles' => array(),
+    'module' => 'node',
+  );
+
+  // Exported permission: 'delete any community_of_practice content'.
+  $permissions['delete any community_of_practice content'] = array(
+    'name' => 'delete any community_of_practice content',
     'roles' => array(),
     'module' => 'node',
   );
@@ -80,6 +94,13 @@ function cluster_og_user_default_permissions() {
     'module' => 'node',
   );
 
+  // Exported permission: 'delete own community_of_practice content'.
+  $permissions['delete own community_of_practice content'] = array(
+    'name' => 'delete own community_of_practice content',
+    'roles' => array(),
+    'module' => 'node',
+  );
+
   // Exported permission: 'delete own geographic_region content'.
   $permissions['delete own geographic_region content'] = array(
     'name' => 'delete own geographic_region content',
@@ -111,6 +132,13 @@ function cluster_og_user_default_permissions() {
   // Exported permission: 'delete own working_group content'.
   $permissions['delete own working_group content'] = array(
     'name' => 'delete own working_group content',
+    'roles' => array(),
+    'module' => 'node',
+  );
+
+  // Exported permission: 'edit any community_of_practice content'.
+  $permissions['edit any community_of_practice content'] = array(
+    'name' => 'edit any community_of_practice content',
     'roles' => array(),
     'module' => 'node',
   );
@@ -150,6 +178,13 @@ function cluster_og_user_default_permissions() {
     'module' => 'node',
   );
 
+  // Exported permission: 'edit own community_of_practice content'.
+  $permissions['edit own community_of_practice content'] = array(
+    'name' => 'edit own community_of_practice content',
+    'roles' => array(),
+    'module' => 'node',
+  );
+
   // Exported permission: 'edit own geographic_region content'.
   $permissions['edit own geographic_region content'] = array(
     'name' => 'edit own geographic_region content',
@@ -183,6 +218,13 @@ function cluster_og_user_default_permissions() {
     'name' => 'edit own working_group content',
     'roles' => array(),
     'module' => 'node',
+  );
+
+  // Exported permission: 'view any node community_of_practice page'.
+  $permissions['view any node community_of_practice page'] = array(
+    'name' => 'view any node community_of_practice page',
+    'roles' => array(),
+    'module' => 'restrict_node_page_view',
   );
 
   // Exported permission: 'view any node geographic_region page'.
