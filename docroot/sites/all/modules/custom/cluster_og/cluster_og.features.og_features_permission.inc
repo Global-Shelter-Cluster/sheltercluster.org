@@ -127,7 +127,9 @@ function cluster_og_og_features_default_permissions() {
 
   // Exported og permission: 'node:geographic_region:subscribe without approval'
   $permissions['node:geographic_region:subscribe without approval'] = array(
-    'roles' => array(),
+    'roles' => array(
+      'non-member' => 'non-member',
+    ),
   );
 
   // Exported og permission: 'node:geographic_region:unsubscribe'
@@ -195,7 +197,9 @@ function cluster_og_og_features_default_permissions() {
 
   // Exported og permission: 'node:hub:subscribe without approval'
   $permissions['node:hub:subscribe without approval'] = array(
-    'roles' => array(),
+    'roles' => array(
+      'non-member' => 'non-member',
+    ),
   );
 
   // Exported og permission: 'node:hub:unsubscribe'
@@ -263,7 +267,9 @@ function cluster_og_og_features_default_permissions() {
 
   // Exported og permission: 'node:response:subscribe without approval'
   $permissions['node:response:subscribe without approval'] = array(
-    'roles' => array(),
+    'roles' => array(
+      'non-member' => 'non-member',
+    ),
   );
 
   // Exported og permission: 'node:response:unsubscribe'
