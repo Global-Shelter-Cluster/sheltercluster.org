@@ -134,7 +134,7 @@ function _cluster_og_get_regions_menu($menu_name, $current_page_only = TRUE) {
  *  Implements hook_node_presave().
  */
 function cluster_og_node_presave($node) {
-  if ($node->type = 'geographic_region') {
+  if ($node->type == 'geographic_region') {
     $node->path['alias'] = _cluster_og_region_alias($node);
 
     $node->menu['enabled'] = 1;
