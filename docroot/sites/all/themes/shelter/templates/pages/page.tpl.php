@@ -31,10 +31,7 @@
         <?php print render($user_login); ?>
         <?php print render($user_menu); ?>
 
-        <form class="search" action="http://www.google.com/search" method="get">
-          <input class="text-field" type="search" placeholder="Search documents" name="q">
-          <input class="submit" type="submit" value="Search">
-        </form>
+        <?php print render($search_form); ?>
 
       </div>
     </section>
@@ -83,10 +80,7 @@
 
   <footer>
     <div class="page-margin clearfix">
-      <form class="search" action="http://www.google.com/search" method="get">
-        <input class="text-field" type="search" placeholder="Search documents" name="q">
-        <input class="submit" type="submit" value="Search">
-      </form>
+      <?php print render($search_form); ?>
     </div>
 
     <div class="page-margin">

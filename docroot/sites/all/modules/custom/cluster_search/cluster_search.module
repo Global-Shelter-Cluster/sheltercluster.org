@@ -5,3 +5,12 @@
  */
 
 include_once 'cluster_search.features.inc';
+
+/**
+ *  Implements hook_preprocess_page().
+ */
+function cluster_search_preprocess_page(&$variables) {
+  $search_form = module_invoke('search', 'block_view', 'form');
+  $search_form['content']['search_block_form']['#attributes']['placeholder'] = t('Search site');
+  $variables['search_form'] = $search_form;
+}
