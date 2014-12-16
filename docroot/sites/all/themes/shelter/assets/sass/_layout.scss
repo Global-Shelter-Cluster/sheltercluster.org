@@ -37,7 +37,7 @@ body {
   width: 100%;
   @include breakpoint(980px) {
     float: left;
-    width: 62%;
+    width: 65%;
   }
 }
 
@@ -46,6 +46,6 @@ body {
   width: 100%;
   @include breakpoint(980px) {
     float: right;
-    width: 35%;
+    width: 32%;
   }
 }

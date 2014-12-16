@@ -42,23 +42,22 @@
     </section>
 
     <div class="page-margin">
-      <nav id="nav-shelter" class="clearfix">
-        <a href="#" id="button-menu-dropdown">Menu</a>
-        <ul class="nav-items">
-          <li class="nav-item"><a href="#">Home</a></li>
-          <li class="nav-item"><a href="#">Current Operations</a></li>
-          <li class="nav-item"><a href="#">Global</a></li>
-          <li class="nav-item"><a href="#">Regions & Countries</a></li>
-          <li class="nav-item"><a href="#">Communities of Practice</a></li>
-          <li class="nav-item"><a href="#">References</a></li>
-        </ul>
-        <ul class="sub-nav">
-          <li class="nav-item"><a href="#">Manage your profile</a></li>
-          <li class="nav-item"><a href="#">Disconnect</a></li>
-        </ul>
-      </nav>
+      <div id="nav-master">
+        <nav id="nav-shelter" class="clearfix">
+          <a href="#" id="button-menu-dropdown">Menu</a>
+          <ul class="nav-items">
+            <li class="nav-item"><a href="#">Home</a></li>
+            <li class="nav-item"><a href="#">Current Operations</a></li>
+            <li class="nav-item"><a href="#">Global</a></li>
+            <li class="nav-item"><a href="#">Regions & Countries</a></li>
+            <li class="nav-item"><a href="#">Communities of Practice</a></li>
+            <li class="nav-item"><a href="#">References</a></li>
+          </ul>
+        </nav>
+      </div>
     </div>
-
+<!--           <li class="nav-item last"><a href="#">Communities of Practice</a></li>
+          <li class="nav-item"><a href="#"></a></li> -->
     <section id="secondary-nav">
       <div class="page-margin clearfix">
         <h1>Typhoon Haiyan</h1>
@@ -139,6 +138,7 @@
 
         <div class="main-column">
           <section id="operation-information">
+            <h2>Overview</h2>
             <img class="operation-image" src="http://placehold.it/290x150"/>
             <p>Quis enim aut eum diligat quem metuat, aut eum a quo se metui putet? Coluntur tamen simulatione dumtaxat ad tempus. Quod si forte, ut fit plerumque, ceciderunt, tum intellegitur quam fuerint inopes amicorum. Quod Tarquinium dixisse ferunt, tum exsulantem se intellexisse quos fidos amicos habuisset, quos infidos, cum iam neutris gratiam referre posset.</p>
             <p>Orientis vero limes in longum protentus et rectum ab Euphratis fluminis ripis ad usque supercilia porrigitur Nili, laeva Saracenis conterminans gentibus, dextra pelagi fragoribus patens, quam plagam Nicator Seleucus occupatam auxit magnum in modum, cum post Alexandri Macedonis obitum successorio iure teneret regna Persidis, efficaciae inpetrabilis rex, ut indicat cognomentum.</p>
@@ -172,7 +172,7 @@
               <div class="image-card"><?php print _svg('icons/book', array('class'=>'document-icon', 'alt' => 'Document icon')); ?></div>
               <div class="information-card">
                 <a href="#">id lobortis leo maximus tristique</a>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc aliquet justo leo, id lobortis leo maximus tristique. Sed non odio eros. Aenean pulvinar sapien quam, a bibendum ante lobortis eu.</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc aliquet justo leo, id lobortis</p>
               </div>
               <div class="information-file">
                 <span class="size-type">[ 250k ] docx</span>
@@ -183,18 +183,18 @@
               <div class="image-card"><?php print _svg('icons/book', array('class'=>'document-icon', 'alt' => 'Document icon')); ?></div>
               <div class="information-card">
                 <a href="#">id lobortis leo maximus tristique</a>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc aliquet justo leo, id lobortis leo maximus tristique. Sed non odio eros. Aenean pulvinar sapien quam, a bibendum ante lobortis eu.</p>
+                <p>Lorem ipsum dolor sit amet.</p>
               </div>
               <div class="information-file">
                 <span class="size-type">[ 250k ] docx</span>
-                <span class="source">Aenean pulvinar</span>
+                <span class="source">Paul Demers</span>
               </div>
             </li>
             <li class="document-card odd">
               <div class="image-card"><?php print _svg('icons/book', array('class'=>'document-icon', 'alt' => 'Document icon')); ?></div>
               <div class="information-card">
                 <a href="#">id lobortis leo maximus tristique</a>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc aliquet justo leo, id lobortis leo maximus tristique. Sed non odio eros. Aenean pulvinar sapien quam, a bibendum ante lobortis eu.</p>
+                <p>Consectetur adipiscing elit. Nunc aliquet justo leo, id lobortis leo maximus tristique. Sed non odio eros. A bibendum ante lobortis eu.</p>
               </div>
               <div class="information-file">
                 <span class="size-type">[ 250k ] docx</span>

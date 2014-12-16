@@ -133,17 +133,57 @@ header {
 }
 
 #nav-shelter {
-  display: table;
-  width: 100%;
-  font-size: 0; //remove the unwanted extra height
+  // visibility: hidden;
+  font-size: 0; //remove the unwanted extra height TO VERIFY AGAIN IF USEFUL
+  @include breakpoint(1215px) {
+    display: table;
+    table-layout: fixed;
+    width: 100%;
+  }
 
   .nav-items {
-    display: table-row;
+
+    @include breakpoint(460px) {
+      display: table;
+      table-layout: fixed;
+      width: 100%;
+      @include rem(margin, 0 0 0.2rem 0);
+    }
+    @include breakpoint(1215px) {
+      display: table-row;
+    }
 
     .nav-item {
-     display: table-cell;
+      position: relative;
+      display: table;
+      width: 100%;
       text-align: center;
       background-color: $shelter-red;
+      border-bottom: 1px solid lighten(#fff,50%);
+
+      @include breakpoint(460px) {
+        display: table-cell;
+        border-bottom: none;
+
+        &:after {
+          content: '|';
+          position: absolute;
+          z-index:2;
+          @include rem(font-size, 1.3rem);
+          @include rem(top, -1.5px);
+          @include rem(right, -1.5px);
+          color: #fff;
+        }
+        &:last-child,
+        &.last {
+          &:after {
+            content: '';
+          }
+        }
+      }
+      @include breakpoint(1215px) {
+        display: table-cell;
+      }
 
       a {
         position: relative;
@@ -156,16 +196,11 @@ header {
         @include rem(padding, 0.5rem 0 0.5rem 0);
         @include rem(min-width, 8.125rem);
         @include transition(all 0.3s ease);
+        @include breakpoint(460px) {
 
-        &:after {
-          content: '|';
-          position: absolute;
-          z-index:2;
-          @include rem(font-size, 1.3rem);
-          @include rem(top, -1.5px);
-          @include rem(left, -1.5px);
+
+
         }
-
         &:hover,
         &:active,
         .active {
@@ -173,11 +208,7 @@ header {
         }
       }
 
-      &:first-child {
-        a:after {
-          content: '';
-        }
-      }
+
       .total {
         @include rem(font-size, 0.75rem);
       }
@@ -186,11 +217,20 @@ header {
         @include rem(font-size, 0.75rem);
       }
     }
-  }
-  .sub-nav {
-    display: block;
-    @include breakpoint(500px) {
+    .last + li,
+    .empty {
       display: none;
+      background: none;
+      @include breakpoint(460px) {
+        display: table-cell;
+      }
+      a,
+      a:hover,
+      a:active {
+        background: none;
+        cursor: default;
+        pointer-events: none;
+      }
     }
   }
 }

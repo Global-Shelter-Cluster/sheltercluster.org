@@ -302,7 +302,7 @@ body {
 @media (min-width: 980px) {
   .main-column {
     float: left;
-    width: 62%;
+    width: 65%;
   }
 }
 
@@ -313,7 +313,7 @@ body {
 @media (min-width: 980px) {
   .side-column {
     float: right;
-    width: 35%;
+    width: 32%;
   }
 }
 
@@ -389,81 +389,89 @@ body {
   padding: 0;
   margin: 0;
   list-style: none;
-  margin: 0 0 32px 0;
-  margin: 0 0 2rem 0;
+  margin: 24px 0 32px 8px;
+  margin: 1.5rem 0 2rem 0.5rem;
 }
 .document-cards .document-card {
   float: left;
   width: 100%;
-  margin: 0 2% 4% 0;
-  background: #ebeef0;
-  color: #859caa;
-  border: 1px solid #688394;
-  border: 1px solid #d7d7d7;
+  margin: 0 6% 3% 0;
+  background: #cdd6db;
+  color: #575757;
   -webkit-background-clip: padding-box;
   /* for Safari */
   background-clip: padding-box;
   /* for IE9+, Firefox 4+, Opera, Chrome */
-  -moz-border-radius: 0.1875rem;
-  -webkit-border-radius: 0.1875rem;
-  border-radius: 0.1875rem;
-  -moz-box-shadow: rgba(0, 0, 0, 0.09) 3px 3px 4px;
-  -webkit-box-shadow: rgba(0, 0, 0, 0.09) 3px 3px 4px;
-  box-shadow: rgba(0, 0, 0, 0.09) 3px 3px 4px;
-  padding: 8px 0 0 0;
-  padding: 0.5rem 0 0 0;
 }
 @media (min-width: 700px) {
   .document-cards .document-card {
-    width: 49%;
+    width: 47%;
   }
 }
 .document-cards .document-card.even {
   margin-right: 0;
 }
 .document-cards .document-card .image-card {
-  float: left;
-  width: 60px;
-  padding: 0 10px 0 10px;
+  position: absolute;
+  width: 35px;
 }
 .document-cards .document-card .image-card svg {
-  fill: #bdbdbd;
+  position: relative;
+  background: #fff;
+  top: -10px;
+  left: -8px;
+  fill: #575757;
   width: 45px;
   height: 45px;
+  margin: 6px 0px 6px 0px;
+  margin: 0.375rem 0px 0.375rem 0px;
+  padding: 0 0px 6px 0px;
+  padding: 0 0px 0.375rem 0px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+  -moz-box-sizing: initial;
+  -webkit-box-sizing: initial;
+  box-sizing: initial;
 }
 .document-cards .document-card .information-card {
   display: table;
-  padding: 0 8px 0 8px;
-  padding: 0 0.5rem 0 0.5rem;
+  width: 100%;
+  padding: 0 0 0 41.6px;
+  padding: 0 0 0 2.6rem;
 }
 .document-cards .document-card .information-card a {
-  color: #242424;
+  display: table;
+  width: 100%;
+  background-color: #575757;
+  color: white;
+  text-transform: uppercase;
+  text-align: center;
+  text-decoration: none;
+  font-weight: bold;
+  padding: 5px 0 5px 0;
+  padding: 0.3125rem 0 0.3125rem 0;
+  font-size: 12px;
+  font-size: 0.75rem;
 }
 .document-cards .document-card .information-card a:hover, .document-cards .document-card .information-card a:active {
   text-decoration: none;
 }
 .document-cards .document-card .information-card p {
-  margin: 8px 0;
-  margin: 0.5rem 0;
-  font-size: 13.6px;
-  font-size: 0.85rem;
+  margin: 8px 8px 8px 24px;
+  margin: 0.5rem 0.5rem 0.5rem 1.5rem;
+  font-size: 13px;
+  font-size: 0.8125rem;
 }
 .document-cards .document-card .information-file {
   float: left;
   width: 100%;
-  background-color: #688394;
-  color: white;
-  border-top: 1px solid #7f1416;
-  font-size: 14.4px;
-  font-size: 0.9rem;
-  padding: 8px;
-  padding: 0.5rem;
-  -moz-border-radius-bottomleft: 0.15rem;
-  -webkit-border-bottom-left-radius: 0.15rem;
-  border-bottom-left-radius: 0.15rem;
-  -moz-border-radius-bottomright: 0.15rem;
-  -webkit-border-bottom-right-radius: 0.15rem;
-  border-bottom-right-radius: 0.15rem;
+  background: url(../images/stripes-pattern.png) repeat 0 0 #fff;
+  color: #575757;
+  font-size: 13px;
+  font-size: 0.8125rem;
+  padding: 5px 8px;
+  padding: 0.3125rem 0.5rem;
 }
 .document-cards .document-card .information-file .size-type {
   float: left;
@@ -661,17 +669,62 @@ header a {
 }
 
 #nav-shelter {
-  display: table;
-  width: 100%;
   font-size: 0;
 }
-#nav-shelter .nav-items {
-  display: table-row;
+@media (min-width: 1215px) {
+  #nav-shelter {
+    display: table;
+    table-layout: fixed;
+    width: 100%;
+  }
+}
+@media (min-width: 460px) {
+  #nav-shelter .nav-items {
+    display: table;
+    table-layout: fixed;
+    width: 100%;
+    margin: 0 0 3.2px 0;
+    margin: 0 0 0.2rem 0;
+  }
+}
+@media (min-width: 1215px) {
+  #nav-shelter .nav-items {
+    display: table-row;
+  }
 }
 #nav-shelter .nav-items .nav-item {
-  display: table-cell;
+  position: relative;
+  display: table;
+  width: 100%;
   text-align: center;
   background-color: #7f1416;
+  border-bottom: 1px solid white;
+}
+@media (min-width: 460px) {
+  #nav-shelter .nav-items .nav-item {
+    display: table-cell;
+    border-bottom: none;
+  }
+  #nav-shelter .nav-items .nav-item:after {
+    content: '|';
+    position: absolute;
+    z-index: 2;
+    font-size: 20.8px;
+    font-size: 1.3rem;
+    top: -1.5px;
+    top: -0.09375rem;
+    right: -1.5px;
+    right: -0.09375rem;
+    color: #fff;
+  }
+  #nav-shelter .nav-items .nav-item:last-child:after, #nav-shelter .nav-items .nav-item.last:after {
+    content: '';
+  }
+}
+@media (min-width: 1215px) {
+  #nav-shelter .nav-items .nav-item {
+    display: table-cell;
+  }
 }
 #nav-shelter .nav-items .nav-item a {
   position: relative;
@@ -691,23 +744,9 @@ header a {
   -webkit-transition: all 0.3s ease;
   transition: all 0.3s ease;
 }
-#nav-shelter .nav-items .nav-item a:after {
-  content: '|';
-  position: absolute;
-  z-index: 2;
-  font-size: 20.8px;
-  font-size: 1.3rem;
-  top: -1.5px;
-  top: -0.09375rem;
-  left: -1.5px;
-  left: -0.09375rem;
-}
 #nav-shelter .nav-items .nav-item a:hover, #nav-shelter .nav-items .nav-item a:active,
 #nav-shelter .nav-items .nav-item a .active {
   background-color: #688394;
-}
-#nav-shelter .nav-items .nav-item:first-child a:after {
-  content: '';
 }
 #nav-shelter .nav-items .nav-item .total {
   font-size: 12px;
@@ -718,13 +757,26 @@ header a {
   font-size: 12px;
   font-size: 0.75rem;
 }
-#nav-shelter .sub-nav {
-  display: block;
+#nav-shelter .nav-items .last + li,
+#nav-shelter .nav-items .empty {
+  display: none;
+  background: none;
 }
-@media (min-width: 500px) {
-  #nav-shelter .sub-nav {
-    display: none;
+@media (min-width: 460px) {
+  #nav-shelter .nav-items .last + li,
+  #nav-shelter .nav-items .empty {
+    display: table-cell;
   }
+}
+#nav-shelter .nav-items .last + li a,
+#nav-shelter .nav-items .last + li a:hover,
+#nav-shelter .nav-items .last + li a:active,
+#nav-shelter .nav-items .empty a,
+#nav-shelter .nav-items .empty a:hover,
+#nav-shelter .nav-items .empty a:active {
+  background: none;
+  cursor: default;
+  pointer-events: none;
 }
 
 /* _secondary-nav.scss */
@@ -733,8 +785,6 @@ header a {
   margin: 0 0 0.25rem 0;
   padding: 20px 0 8px 0;
   padding: 1.25rem 0 0.5rem 0;
-  border-top: 1px solid #ededed;
-  border-bottom: 1px solid #ededed;
 }
 #secondary-nav h1 {
   color: #7f1416;
@@ -809,14 +859,7 @@ header a {
 #secondary-nav .nav-items .nav-item a {
   width: 100%;
   float: left;
-  background: #7d7d7d;
-  background-image: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJvYmplY3RCb3VuZGluZ0JveCIgeDE9IjAuNSIgeTE9IjAuMCIgeDI9IjAuNSIgeTI9IjEuMCI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzg1ODU4NSIvPjxzdG9wIG9mZnNldD0iMTAlIiBzdG9wLWNvbG9yPSIjODc4Nzg3Ii8+PHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjN2Q3ZDdkIi8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNncmFkKSIgLz48L3N2Zz4g');
-  background-size: 100%;
-  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #858585), color-stop(10%, #878787), color-stop(100%, #7d7d7d));
-  background-image: -moz-linear-gradient(#858585, #878787 10%, #7d7d7d);
-  background-image: -webkit-linear-gradient(#858585, #878787 10%, #7d7d7d);
-  background-image: linear-gradient(#858585, #878787 10%, #7d7d7d);
-  background-repeat: no-repeat;
+  background: url(../images/stripes-pattern.png) repeat 0 0;
   color: black;
   margin: 0 0 0 0.3rem;
   padding: 8px 20px 8px;
@@ -869,6 +912,7 @@ header a {
   font-size: 24px;
   font-size: 1.5rem;
   margin-top: 0;
+  border-bottom: 2px solid black;
 }
 .main-column h4,
 .side-column h4 {
@@ -876,6 +920,7 @@ header a {
   margin: 0 0 0.6rem 0;
   font-size: 16px;
   font-size: 1rem;
+  border-bottom: 1px dotted black;
 }
 
 #contextual-navigation {

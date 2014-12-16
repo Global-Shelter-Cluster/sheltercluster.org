@@ -5,10 +5,12 @@
   h3 {
     @include rem(font-size, 1.5rem);
     margin-top: 0;
+    border-bottom: 2px solid rgb(0, 0, 0);
   }
   h4 {
     @include rem(margin,0 0 0.6rem 0 );
     @include rem(font-size, 1rem);
+    border-bottom: 1px dotted rgb(0, 0, 0);
   }
   @include rem(padding, 1rem 0 0 0);
 }

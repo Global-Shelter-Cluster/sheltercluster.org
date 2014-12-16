@@ -3,8 +3,6 @@
 #secondary-nav {
   @include rem(margin, 0 0 0.25rem 0);
   @include rem(padding, 1.25rem 0 0.5rem 0);
-  border-top: 1px solid darken(white, 7%);
-  border-bottom: 1px solid darken(white, 7%);
 
   h1 {
     color: $shelter-red;
@@ -73,9 +71,10 @@
         width: 100%;
         $button-color: lighten($shelter-grey, 15%);
         float: left;
-        background: $button-color;
-        @include background-image(linear-gradient(lighten($button-color, 3%), lighten($button-color,4%) 10%, $button-color));
-        background-repeat: no-repeat;
+        // background: $button-color;
+        // @include background-image(linear-gradient(lighten($button-color, 3%), lighten($button-color,4%) 10%, $button-color));
+        // background-repeat: no-repeat;
+        background: url(../images/stripes-pattern.png) repeat 0 0;
         color: black;
         margin: 0 0 0 0.3rem;
         @include rem(padding, 0.5rem 1.25rem 0.5rem);
