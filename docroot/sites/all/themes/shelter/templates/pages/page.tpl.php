@@ -50,14 +50,6 @@
           <a href="#" id="button-menu-dropdown">Menu</a>
           <div class="list-container">
             <?php print render($main_nav); ?>
-            <ul class="nav-items">
-              <li class="nav-item"><a href="#">Home</a></li>
-              <li class="nav-item"><a href="#">Current Operations</a></li>
-              <li class="nav-item"><a href="#">Global</a></li>
-              <li class="nav-item"><a href="#">Regions & Countries</a></li>
-              <li class="nav-item"><a href="#">Communities of Practice</a></li>
-              <li class="nav-item"><a href="#">References</a></li>
-            </ul>
           </div>
         </nav>
       </div>

@@ -85,10 +85,7 @@ function theme_cluster_og_recent_documents($vars) {
  * $vars['element'][UID]: each document group render array and markup.
  */
 function theme_cluster_og_key_documents($vars) {
-  $output = '<div class="field"><div class="field-label">' . t('Key Information') . '</div>';
-  $output .= $vars['element']['#children'];
-  $output .= '</div>';
-  return $output;
+  return $vars['element']['#children'];
 }
 
 /**
