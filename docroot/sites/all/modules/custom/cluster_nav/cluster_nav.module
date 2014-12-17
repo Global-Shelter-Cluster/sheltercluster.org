@@ -49,6 +49,9 @@ function _cluster_nav_main_menu_callback($view_name) {
  *  Implements hook_preprocess_page().
  */
 function cluster_nav_preprocess_page(&$variables) {
+  // Add the main menu to every page.
+  $variables['main_nav'] = menu_tree_output(menu_tree_all_data('main-menu'));
+
   if (arg(0) == 'node' && is_numeric(arg(1))) {
     $node = node_load(arg(1));
   }
