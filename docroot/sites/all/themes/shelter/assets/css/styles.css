@@ -466,8 +466,8 @@ body {
 .document-cards .document-card .information-file {
   float: left;
   width: 100%;
-  background: url(../images/stripes-pattern.png) repeat 0 0 #fff;
   color: #575757;
+  background-color: #b2c0c9;
   font-size: 12px;
   font-size: 0.75rem;
   padding: 5px 8px;
@@ -859,7 +859,7 @@ header a {
 #secondary-nav .nav-items .nav-item a {
   float: left;
   width: 100%;
-  background: url(../images/stripes-pattern.png) repeat 0 0 #fff;
+  background: #cdd6db;
   color: #575757;
   font-weight: bold;
   text-align: center;
