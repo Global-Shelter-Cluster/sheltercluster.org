@@ -1,0 +1,77 @@
+/* _active_responses.scss */
+
+#active-responses {
+  @include rem(margin, 0 0 1.5rem 0);
+
+  h1 {
+    margin-top: 0;
+  }
+
+  ul {
+    @include reset-list;
+    @include rem(margin-bottom, 1rem);
+  }
+
+  #major-responses {
+
+    li {
+      clear: both;
+    }
+    a {
+      float: left;
+      text-align: center;
+      text-decoration: none;
+      color: #000;
+      width: 50%;
+      border: 1px solid $shelter-red;
+      background-color: #fff;
+      @include transition(all 0.3s ease);
+      @include rem(padding, 0.50rem);
+      @include rem(margin, 0 0.75rem 0.75rem 0);
+      @include box-shadow(rgba(0,0,0,0.09) 2px 2px 1px);
+      &:hover,
+      &:active {
+        background-color: #7f1416;
+        color: #fff;
+      }
+    }
+    div {
+      float: left;
+      @include rem(margin, 0.25rem 1rem 0 0);
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+   .warning-icon {
+      fill: $shelter-red;
+      width: 25px;
+      height: 25px;
+    }
+  }
+
+  #legend {
+    clear: both;
+    @include rem(font-size, 0.75rem);
+
+    li {
+      float: left;
+      @include rem(margin-right, 1rem);
+    }
+    .warning-icon {
+      fill: $shelter-red;
+      top: 5px;
+      width: 20px;
+      height: 20px;
+    }
+    .team-icon {
+      fill: $accent-green;
+      top: 6px;
+      width: 20px;
+      height: 20px;
+    }
+    svg {
+      position: relative;
+    }
+  }
+}
+
