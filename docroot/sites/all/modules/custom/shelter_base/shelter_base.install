@@ -178,3 +178,11 @@ function shelter_base_update_7014() {
 function shelter_base_update_7015() {
   cluster_og_regenerate_region_aliases();
 }
+
+/**
+ * Field name change: 'field_is_resource_document' to 'field_is_reference_document'.
+ */
+function shelter_base_update_7016() {
+  field_delete_field('field_is_resource_document');
+  search_api_index_reindex('default_node_index');
+}
