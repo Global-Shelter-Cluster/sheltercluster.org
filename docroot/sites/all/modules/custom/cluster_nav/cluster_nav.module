@@ -41,8 +41,12 @@ function cluster_nav_menu() {
  * Page callback for main menu items.
  */
 function _cluster_nav_main_menu_callback($view_name) {
-  $view = views_get_view($view_name); 
-  return $view->execute_display();
+  $view = views_get_view($view_name);
+  if ($view) { 
+    return $view->execute_display();
+  }
+  watchdog('cluster_nav', 'Tried to display non-existing view @v', array('@v' => $view_name));
+  drupal_goto();
 }
 
 /**
