@@ -28,8 +28,10 @@
           <?php print _svg('logo-global-shelter-cluster', array('id'=>'shelter-cluster', 'alt' => 'Global Shelter Cluster - ShelterCluster.org - Coordinating Humanitarian Shelter')); ?>
         </a>
 
-        <?php print render($user_login); ?>
-        <?php print render($user_menu); ?>
+        <div id="user-menu-container" class="clearfix">
+          <?php print render($user_login); ?>
+          <?php print render($user_menu); ?>
+        </div>
 
         <form class="search" action="http://www.google.com/search" method="get">
           <input class="text-field" type="search" placeholder="Search documents" name="q">
