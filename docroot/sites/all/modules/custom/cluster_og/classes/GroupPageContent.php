@@ -233,7 +233,6 @@ class GroupContentManager {
     return array(
       '#theme' => 'cluster_docs_cards_list',
       '#theme_wrappers' => array('cluster_og_recent_documents'),
-      '#heading' => t('Recent Documents'),
       '#docs' => cluster_docs_prepare_card_data(array_keys($res['node'])),
       '#all_documents_link' => 'node/' . $this->node->nid . '/documents',
     );
