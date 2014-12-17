@@ -1,0 +1,10 @@
+<?php
+
+/**
+ * Implements hook_install().
+ * Be pretty and do nothing.
+ */
+/*
+function cluster_nav_install() {
+}
+*/

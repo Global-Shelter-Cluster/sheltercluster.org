@@ -1,0 +1,12 @@
+name = Cluster nav views
+description = Provides views for main navigation menu items
+core = 7.x
+package = Cluster
+dependencies[] = og_ui
+dependencies[] = views
+features[ctools][] = views:views_default:3.0
+features[features_api][] = api:2
+features[views_view][] = communities_of_practice
+features[views_view][] = current_operations
+features_exclude[dependencies][ctools] = ctools
+project path = sites/all/modules/custom/cluster_nav/

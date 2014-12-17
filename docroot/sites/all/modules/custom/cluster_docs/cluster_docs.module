@@ -24,9 +24,9 @@ function cluster_docs_menu() {
   );
   $items['references'] = array(
     'title' => 'References',
+    'menu_name' => 'main-menu',
     'page callback' => 'cluster_docs_reference',
     'access callback' => TRUE,
-    'type' => MENU_CALLBACK,
   );
   return $items;
 }
