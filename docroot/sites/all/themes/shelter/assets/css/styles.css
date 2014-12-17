@@ -1301,6 +1301,7 @@ header a {
   color: #575757;
   text-transform: uppercase;
   background-color: white;
+  font-weight: bold;
   bottom: 10px;
   bottom: 0.625rem;
   right: 20px;
