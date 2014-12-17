@@ -451,8 +451,8 @@ function cluster_docs_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-document-field_is_resource_document'
-  $field_instances['node-document-field_is_resource_document'] = array(
+  // Exported field_instance: 'node-document-field_is_reference_document'
+  $field_instances['node-document-field_is_reference_document'] = array(
     'bundle' => 'document',
     'default_value' => array(
       0 => array(
@@ -460,7 +460,7 @@ function cluster_docs_field_default_field_instances() {
       ),
     ),
     'deleted' => 0,
-    'description' => 'Is this a resource document that needs to appear in the resource section (as well as any groups in which the document belongs) ?',
+    'description' => 'Is this a reference document that needs to appear in the reference section (as well as any groups in which the document belongs) ?',
     'display' => array(
       'default' => array(
         'label' => 'hidden',
@@ -477,8 +477,8 @@ function cluster_docs_field_default_field_instances() {
       ),
     ),
     'entity_type' => 'node',
-    'field_name' => 'field_is_resource_document',
-    'label' => 'Is Resource Document',
+    'field_name' => 'field_is_reference_document',
+    'label' => 'Is Reference Document',
     'required' => 0,
     'settings' => array(
       'entity_translation_sync' => FALSE,
@@ -1047,8 +1047,8 @@ function cluster_docs_field_default_field_instances() {
   t('Intervention Materials');
   t('Intervention Programming');
   t('Is Key Document');
-  t('Is Resource Document');
-  t('Is this a resource document that needs to appear in the resource section (as well as any groups in which the document belongs) ?');
+  t('Is Reference Document');
+  t('Is this a reference document that needs to appear in the reference section (as well as any groups in which the document belongs) ?');
   t('Issues');
   t('Link');
   t('Non Food Items');

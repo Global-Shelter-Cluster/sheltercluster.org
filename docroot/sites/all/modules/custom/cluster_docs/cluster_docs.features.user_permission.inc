@@ -10,36 +10,36 @@
 function cluster_docs_user_default_permissions() {
   $permissions = array();
 
-  // Exported permission: 'create field_is_resource_document'.
-  $permissions['create field_is_resource_document'] = array(
-    'name' => 'create field_is_resource_document',
+  // Exported permission: 'create field_is_reference_document'.
+  $permissions['create field_is_reference_document'] = array(
+    'name' => 'create field_is_reference_document',
     'roles' => array(
       'administrator' => 'administrator',
     ),
     'module' => 'field_permissions',
   );
 
-  // Exported permission: 'edit field_is_resource_document'.
-  $permissions['edit field_is_resource_document'] = array(
-    'name' => 'edit field_is_resource_document',
+  // Exported permission: 'edit field_is_reference_document'.
+  $permissions['edit field_is_reference_document'] = array(
+    'name' => 'edit field_is_reference_document',
     'roles' => array(
       'administrator' => 'administrator',
     ),
     'module' => 'field_permissions',
   );
 
-  // Exported permission: 'edit own field_is_resource_document'.
-  $permissions['edit own field_is_resource_document'] = array(
-    'name' => 'edit own field_is_resource_document',
+  // Exported permission: 'edit own field_is_reference_document'.
+  $permissions['edit own field_is_reference_document'] = array(
+    'name' => 'edit own field_is_reference_document',
     'roles' => array(
       'administrator' => 'administrator',
     ),
     'module' => 'field_permissions',
   );
 
-  // Exported permission: 'view field_is_resource_document'.
-  $permissions['view field_is_resource_document'] = array(
-    'name' => 'view field_is_resource_document',
+  // Exported permission: 'view field_is_reference_document'.
+  $permissions['view field_is_reference_document'] = array(
+    'name' => 'view field_is_reference_document',
     'roles' => array(
       'administrator' => 'administrator',
       'authenticated user' => 'authenticated user',
@@ -47,9 +47,9 @@ function cluster_docs_user_default_permissions() {
     'module' => 'field_permissions',
   );
 
-  // Exported permission: 'view own field_is_resource_document'.
-  $permissions['view own field_is_resource_document'] = array(
-    'name' => 'view own field_is_resource_document',
+  // Exported permission: 'view own field_is_reference_document'.
+  $permissions['view own field_is_reference_document'] = array(
+    'name' => 'view own field_is_reference_document',
     'roles' => array(
       'administrator' => 'administrator',
       'authenticated user' => 'authenticated user',
