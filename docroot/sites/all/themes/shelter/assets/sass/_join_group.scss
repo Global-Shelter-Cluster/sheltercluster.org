@@ -1,9 +1,6 @@
 /* _join_group.scss */
 
 #join-group {
-  position: relative;
-  display: table;
-  width: 100%;
   background-color: $shelter-light-blue;
   color: $shelter-grey;
   @include rem(padding, 0.75rem 1.25rem 1rem 1.25rem);
@@ -45,30 +42,16 @@
     }
   }
 
+  p {
+    float: left;
+    margin: 7px 0 0 0;
+  }
+
   #button-join-group {
-    display: table-cell;
-    vertical-align: bottom;
-    @include rem(margin, 0.75rem 0 0 0);
-    @include breakpoint(380px 980px) {
-      display: table;
-    }
     a {
+      @extend .button;
+      float: right;
       text-decoration: none;
-      position: absolute;
-      right: 0;
-      bottom: 0;
-      color: $shelter-grey;
-      text-transform: uppercase;
-      background-color: rgb(255,255,255);
-      @include rem(bottom, 10px);
-      @include rem(right, 20px);
-      @include rem(padding, 0.375rem 0.625rem 0.4375rem);
-      @include breakpoint(380px) {
-        display: table-cell;
-        position: relative;
-        bottom: 0;
-        right: 0;
-      }
     }
   }
 

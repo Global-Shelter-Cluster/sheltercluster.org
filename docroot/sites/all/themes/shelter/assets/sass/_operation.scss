@@ -9,8 +9,6 @@
 #operation-information {
   clear: both;
   @include rem(margin, 0 0 2rem 0);
-  position: relative;
-  @include rem(top, -1rem);
 
   .operation-image {
     float: left;

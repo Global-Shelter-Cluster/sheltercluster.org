@@ -228,7 +228,7 @@ th {
 /* _vars.scss */
 /* _mixin.scss */
 /* _reusable.scss */
-.button, .search .form-submit, #user-login-container #user-login-form .form-submit {
+.button, .search .form-submit, #user-login-container #user-login-form .form-submit, #join-group #button-join-group a {
   background: gainsboro;
   background-image: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJvYmplY3RCb3VuZGluZ0JveCIgeDE9IjAuNSIgeTE9IjAuMCIgeDI9IjAuNSIgeTI9IjEuMCI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2ZhZmFmYSIvPjxzdG9wIG9mZnNldD0iMTAlIiBzdG9wLWNvbG9yPSIjZmRmZGZkIi8+PHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjZGNkY2RjIi8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNncmFkKSIgLz48L3N2Zz4g');
   background-size: 100%;
@@ -247,7 +247,7 @@ th {
   border: 1px solid #ededed;
   border-bottom: 1px solid #cfcfcf;
 }
-.button:hover, .search .form-submit:hover, #user-login-container #user-login-form .form-submit:hover {
+.button:hover, .search .form-submit:hover, #user-login-container #user-login-form .form-submit:hover, #join-group #button-join-group a:hover {
   background-image: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJvYmplY3RCb3VuZGluZ0JveCIgeDE9IjAuNSIgeTE9IjAuMCIgeDI9IjAuNSIgeTI9IjEuMCI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2UxZTFlMSIvPjxzdG9wIG9mZnNldD0iNjAlIiBzdG9wLWNvbG9yPSIjZTNlM2UzIi8+PHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjZTFlMWUxIi8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNncmFkKSIgLz48L3N2Zz4g');
   background-size: 100%;
   background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #e1e1e1), color-stop(60%, #e3e3e3), color-stop(100%, #e1e1e1));
@@ -330,9 +330,6 @@ body {
   clear: both;
   margin: 0 0 32px 0;
   margin: 0 0 2rem 0;
-  position: relative;
-  top: -16px;
-  top: -1rem;
 }
 #operation-information .operation-image {
   float: left;
@@ -1259,9 +1256,6 @@ header a {
 
 /* _join_group.scss */
 #join-group {
-  position: relative;
-  display: table;
-  width: 100%;
   background-color: #cdd6db;
   color: #575757;
   padding: 12px 20px 16px 20px;
@@ -1308,39 +1302,13 @@ header a {
     margin-bottom: 0;
   }
 }
-#join-group #button-join-group {
-  display: table-cell;
-  vertical-align: bottom;
-  margin: 12px 0 0 0;
-  margin: 0.75rem 0 0 0;
-}
-@media (min-width: 380px) and (max-width: 980px) {
-  #join-group #button-join-group {
-    display: table;
-  }
+#join-group p {
+  float: left;
+  margin: 7px 0 0 0;
 }
 #join-group #button-join-group a {
+  float: right;
   text-decoration: none;
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  color: #575757;
-  text-transform: uppercase;
-  background-color: white;
-  bottom: 10px;
-  bottom: 0.625rem;
-  right: 20px;
-  right: 1.25rem;
-  padding: 6px 10px 7px;
-  padding: 0.375rem 0.625rem 0.4375rem;
-}
-@media (min-width: 380px) {
-  #join-group #button-join-group a {
-    display: table-cell;
-    position: relative;
-    bottom: 0;
-    right: 0;
-  }
 }
 #join-group input[type="checkbox"] {
   display: table-cell;

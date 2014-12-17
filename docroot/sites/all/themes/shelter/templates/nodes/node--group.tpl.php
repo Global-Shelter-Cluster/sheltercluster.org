@@ -5,43 +5,6 @@
 
       <div class="main-column">
 
-        <section id="operation-information">
-          <?php if (isset($group_image)): ?>
-            <?php print $group_image; ?>
-          <?php endif; ?>
-          <?php print render($content['body']); ?>
-          <p>Operation started November 8th, 2013, and is on going.</p>
-          <ul id="meta-data">
-            <li class="data-item"><span>Type:</span> Windstorm</li>
-            <li class="data-item"><span>Damage Location:</span> Rural, Peri-Urban, Urban</li>
-            <li class="data-item"><span>Degree of Displacement:</span> Hight</li>
-            <li class="data-item"><span>Emergency Lead Agency</span> IFRC</li>
-          </ul>
-        </section>
-
-      </div>
-
-      <div class="side-column">
-
-        <section id="operation-group">
-          <h3>Join this Operation Group and</h3>
-          <fieldset id="checkboxgroup">
-            <label><input type="checkbox" selected="selected"/> Receive notifications</label>
-            <label><input type="checkbox" selected="selected"/> Register to this group the mailing list</label>
-            <label><input type="checkbox"/> Register to the "Global Response" mailinglist</label>
-          </fieldset>
-          <div id="button-join-group"><a class="button" href="">Join</a></div>
-        </section>
-
-      </div>
-
-    </div>
-  </div>
-
-  <div>
-    <div class="page-margin clearfix">
-      <div class="main-column">
-
         <section id="featured-documents">
           <ul>
             <li>
@@ -60,10 +23,26 @@
             </li>
           </ul>
         </section>
+
+        <h3 data-collapse="operation-information">Overview</h3>
+        <section id="operation-information">
+          <?php if (isset($group_image)): ?>
+            <?php print $group_image; ?>
+          <?php endif; ?>
+          <?php print render($content['body']); ?>
+        </section>
+
       </div>
 
       <div class="side-column">
 
+        <h3 data-collapse="operation-group">Join This Group</h3>
+        <section id="join-group" class="clearfix">
+          <p>Register and join this group</p>
+          <div id="button-join-group"><a href="#">Join</a></div>
+        </section>
+
+        <h3 data-collapse="shelter-calendar">Calendar</h3>
         <section id="shelter-calendar">
           <div id="calendar-box">
             <div id="calendar-date">
@@ -104,7 +83,7 @@
       </div>
 
       <div class="main-column">
-        <?php print render($content); ?>
+        <?php //print render($content); ?>
       </div>
 
     </div>
