@@ -164,3 +164,21 @@ function shelter_preprocess_node_partial__related_response(&$variables) {
   $markup = _svg('icons/globe', array('alt' => 'Icon for Related Responses')) . ' ' . $node->title;
   $variables['link'] = l( $markup, 'node/' . $node->nid , array('html'=>true));
 }
+
+/**
+ * Redefine menu theme functions.
+ */
+function shelter_menu_tree($variables) {
+  return '<ul class="nav-items menu">' . $variables['tree'] . '</ul>';
+}
+function shelter_menu_link(array $variables) {
+  $element = $variables['element'];
+  $sub_menu = '';
+  $element['#attributes']['class'][] = 'nav-item';
+
+  if ($element['#below']) {
+    $sub_menu = drupal_render($element['#below']);
+  }
+  $output = l($element['#title'], $element['#href'], $element['#localized_options']);
+  return '<li' . drupal_attributes($element['#attributes']) . '>' . $output . $sub_menu . "</li>\n";
+}

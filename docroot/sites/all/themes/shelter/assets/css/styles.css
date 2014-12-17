@@ -605,6 +605,8 @@ header a {
 #user-profile-container {
   float: right;
   position: relative;
+  padding: 0 0 64px 0;
+  padding: 0 0 4rem 0;
   font-size: 13.6px;
   font-size: 0.85rem;
 }
@@ -759,6 +761,7 @@ header a {
   text-align: center;
   background-color: #7f1416;
   border-bottom: 1px solid white;
+  padding: 0;
 }
 @media (min-width: 460px) {
   #nav-shelter .nav-items .nav-item {

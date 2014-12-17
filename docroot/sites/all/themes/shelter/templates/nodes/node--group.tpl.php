@@ -32,6 +32,16 @@
           <?php print render($content['body']); ?>
         </section>
 
+        <h3 data-collapse="key-information">Key Information</h3>
+        <section id="key-information">
+        <?php print render($content['key_documents']); ?>
+        </section>
+
+        <h3 data-collapse="recent-documents">Recent Documents</h3>
+        <section id="recent-documents">
+          <?php print render($content['recent_documents']); ?>
+        </section>
+
       </div>
 
       <div class="side-column">
@@ -83,7 +93,7 @@
       </div>
 
       <div class="main-column">
-        <?php //print render($content); ?>
+        <?php dpm($content); ?>
       </div>
 
     </div>
