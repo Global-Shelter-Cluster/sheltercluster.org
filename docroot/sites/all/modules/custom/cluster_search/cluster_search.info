@@ -8,3 +8,7 @@ dependencies[] = search_api_db
 features[features_api][] = api:2
 features[search_api_index][] = default_node_index
 features[search_api_server][] = local
+features[user_permission][] = search content
+features_exclude[dependencies][features] = features
+features_exclude[dependencies][search] = search
+mtime = 1418834676

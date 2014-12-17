@@ -211,6 +211,14 @@ function cluster_taxonomy_uuid_features_default_terms() {
     'vocabulary_machine_name' => 'cross_cutting_issues',
   );
   $terms[] = array(
+    'name' => 'Country',
+    'description' => '',
+    'format' => 'filtered_html',
+    'weight' => 1,
+    'uuid' => '35142595-f137-4547-8b45-d9391c796b35',
+    'vocabulary_machine_name' => 'geographic_region_type',
+  );
+  $terms[] = array(
     'name' => 'Owner-occupier',
     'description' => '',
     'format' => 'filtered_html',
@@ -609,6 +617,14 @@ function cluster_taxonomy_uuid_features_default_terms() {
     'weight' => 0,
     'uuid' => 'a756083b-3669-4f15-acca-853cedac05a0',
     'vocabulary_machine_name' => 'intervention_programming',
+  );
+  $terms[] = array(
+    'name' => 'Region',
+    'description' => '',
+    'format' => 'filtered_html',
+    'weight' => 0,
+    'uuid' => 'a7c99647-9ffa-40bb-b537-a01308e9cb40',
+    'vocabulary_machine_name' => 'geographic_region_type',
   );
   $terms[] = array(
     'name' => 'Formal Camps',

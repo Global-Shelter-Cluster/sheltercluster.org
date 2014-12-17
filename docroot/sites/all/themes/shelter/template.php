@@ -103,7 +103,6 @@ function shelter_preprocess_node(&$variables) {
     $view_mode_based_preprocess($variables);
   }
 
-  // Create some contextual navigation if viewing a group
   if ($is_group && $view_mode == 'full'){
 
     try {
@@ -122,37 +121,6 @@ function shelter_preprocess_node(&$variables) {
         ));
       }
 
-      $variables['contextual_navigation'] = '<nav id="contextual-navigation">';
-
-      if (isset($group_wrapper->field_parent_region)) {
-        $nid = $group_wrapper->field_parent_region->nid->value();
-        $title = $group_wrapper->field_parent_region->title->value();
-        $variables['contextual_navigation'] .= '<span>'. t('In ') . l($title, 'node/' . $nid ) . '</span>';
-      }
-      if (isset($group_wrapper->field_associated_regions )) {
-        $variables['contextual_navigation'] .= '<span>' . t('In ');
-        $regions = $group_wrapper->field_associated_regions->value();
-        $region_count = count($regions);
-        foreach ($regions as $index => $region) {
-          $nid = $region->nid;
-          $title = $region->title;
-          $variables['contextual_navigation'] .= l($title, 'node/' . $nid );
-          if ($index+1 == $region_count-1) {
-            $variables['contextual_navigation'] .= t(' and ');
-          } elseif ($index+1 < $region_count) {
-            $variables['contextual_navigation'] .= ', ';
-          }
-        }
-        $variables['contextual_navigation'] .= '</span>';
-      }
-      if (isset($group_wrapper->field_parent_response)) {
-        $response = $group_wrapper->field_parent_response->value();
-        if (!empty($response)) {
-          $variables['contextual_navigation'] .= '<span>' . t('and related to ' ) . l($response->title, 'node/' . $response->nid ) . '</span>';
-        }
-      }
-
-      $variables['contextual_navigation'] .= '</nav>';
     }
     catch (EntityMetadataWrapperException $exception) {
       _log_entity_metadata_wrapper_error($exception, 'shelter');

@@ -71,7 +71,7 @@ function theme_cluster_og_recent_discussions($vars) {
  * $vars['element'][UID]: each document render array and markup.
  */
 function theme_cluster_og_recent_documents($vars) {
-  $output = '<div class="field"><div class="field-label">' . t('Recent Documents') . '</div>';
+  $output = '<div>';
   $output .= $vars['element']['#children'];
   $output .= l(t('Browse all documents'), $vars['element']['#all_documents_link']);
   $output .= '</div>';
@@ -112,22 +112,4 @@ function theme_cluster_og_key_documents_by_tag($vars) {
 function _cluster_og_preprocess_page(&$vars) {
   // Add the Region Groups menu to the page.
   $vars['page']['footer']['menu_regions'] = _cluster_og_get_regions_menu('menu-regions', FALSE);
-}
-
-/**
- * Is wrapped by module implementation of  hook_preprocess_field().
- */
-function _cluster_og_preprocess_field(&$vars) {
-  // Brutally change the path of region fields to use the custom hierarchy implementation.
-  // Time permitting, explore moving this higher in execution chain into a field formatter.
-  // @see https://api.drupal.org/api/drupal/modules%21field%21field.api.php/group/field_formatter/7
-  $region_fields = array('field_associated_regions', 'field_parent_region');
-  if (in_array($vars['element']['#field_name'], $region_fields)) {
-    $vars['element']['#theme'] = 'cluter_og_region_reference_field';
-    foreach ($vars['items'] as $k => $item) {
-      $wrapper = entity_metadata_wrapper('node', node_load($vars['element']['#items'][$k]['target_id']));
-      $path = _cluster_og_generate_region_path($wrapper);
-      $vars['items'][$k]['#markup'] = l($wrapper->label(), $path);
-    }
-  }
 }

@@ -28,15 +28,12 @@
           <?php print _svg('logo-global-shelter-cluster', array('id'=>'shelter-cluster', 'alt' => 'Global Shelter Cluster - ShelterCluster.org - Coordinating Humanitarian Shelter')); ?>
         </a>
 
-        <ul id="profile-menu-items">
-          <li class="profile-item"><a href="">Login</a></li>
-          <li class="profile-item"><a href="">Create an account</a></li>
-        </ul>
+        <div id="user-menu-container" class="clearfix">
+          <?php print render($user_login); ?>
+          <?php print render($user_menu); ?>
+        </div>
 
-        <form class="search" action="http://www.google.com/search" method="get">
-          <input class="text-field" type="search" placeholder="Search documents" name="q">
-          <input class="submit" type="submit" value="Search">
-        </form>
+        <?php print render($search_form); ?>
 
       </div>
     </section>
@@ -64,16 +61,28 @@
         </ul>
       </div>
     </nav>
+
+    <section id="operation-title" class="page-margin">
+      <?php if (isset($contextual_navigation)): ?>
+        <?php print render($contextual_navigation); ?>
+      <?php endif; ?>
+      <h1><?php print $title; ?></h1>
+    </section>
+
+    <?php if (isset($dashboard_menu)): ?>
+    <section id="secondary-nav">
+      <div class="page-margin clearfix">
+        <?php print render($dashboard_menu); ?>
+      </div>
+    </section>
+    <?php endif; ?>
   </header>
 
   <?php print render($page['content']); ?>
 
   <footer>
     <div class="page-margin clearfix">
-      <form class="search" action="http://www.google.com/search" method="get">
-        <input class="text-field" type="search" placeholder="Search documents" name="q">
-        <input class="submit" type="submit" value="Search">
-      </form>
+      <?php print render($search_form); ?>
     </div>
 
     <div class="page-margin">

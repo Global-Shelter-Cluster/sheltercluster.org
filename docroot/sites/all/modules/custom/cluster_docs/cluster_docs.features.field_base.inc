@@ -346,13 +346,13 @@ function cluster_docs_field_default_field_bases() {
     'type' => 'taxonomy_term_reference',
   );
 
-  // Exported field_base: 'field_is_resource_document'
-  $field_bases['field_is_resource_document'] = array(
+  // Exported field_base: 'field_is_reference_document'
+  $field_bases['field_is_reference_document'] = array(
     'active' => 1,
     'cardinality' => 1,
     'deleted' => 0,
     'entity_types' => array(),
-    'field_name' => 'field_is_resource_document',
+    'field_name' => 'field_is_reference_document',
     'field_permissions' => array(
       'type' => 2,
     ),

@@ -18,6 +18,14 @@ function cluster_og_ctools_plugin_api($module = NULL, $api = NULL) {
  */
 function cluster_og_node_info() {
   $items = array(
+    'community_of_practice' => array(
+      'name' => t('Community of Practice'),
+      'base' => 'node_content',
+      'description' => '',
+      'has_title' => '1',
+      'title_label' => t('Title'),
+      'help' => '',
+    ),
     'geographic_region' => array(
       'name' => t('Geographic region'),
       'base' => 'node_content',

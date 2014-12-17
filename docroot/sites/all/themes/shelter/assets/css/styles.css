@@ -228,7 +228,7 @@ th {
 /* _vars.scss */
 /* _mixin.scss */
 /* _reusable.scss */
-.button, .search .submit {
+.button, .search .form-submit, #user-menu-container #user-login-form #edit-submit {
   background: gainsboro;
   background-image: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJvYmplY3RCb3VuZGluZ0JveCIgeDE9IjAuNSIgeTE9IjAuMCIgeDI9IjAuNSIgeTI9IjEuMCI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2ZhZmFmYSIvPjxzdG9wIG9mZnNldD0iMTAlIiBzdG9wLWNvbG9yPSIjZmRmZGZkIi8+PHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjZGNkY2RjIi8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNncmFkKSIgLz48L3N2Zz4g');
   background-size: 100%;
@@ -239,15 +239,15 @@ th {
   background-repeat: no-repeat;
   color: #434343;
   margin: 0 0 0 0.3rem;
-  padding: 8px 20px 8px;
-  padding: 0.5rem 1.25rem 0.5rem;
+  padding: 5.6px 20px 5.6px;
+  padding: 0.35rem 1.25rem 0.35rem;
   -moz-border-radius: 3px;
   -webkit-border-radius: 3px;
   border-radius: 3px;
   border: 1px solid #ededed;
   border-bottom: 1px solid #cfcfcf;
 }
-.button:hover, .search .submit:hover {
+.button:hover, .search .form-submit:hover, #user-menu-container #user-login-form #edit-submit:hover {
   background-image: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJvYmplY3RCb3VuZGluZ0JveCIgeDE9IjAuNSIgeTE9IjAuMCIgeDI9IjAuNSIgeTI9IjEuMCI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2UxZTFlMSIvPjxzdG9wIG9mZnNldD0iNjAlIiBzdG9wLWNvbG9yPSIjZTNlM2UzIi8+PHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjZTFlMWUxIi8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNncmFkKSIgLz48L3N2Zz4g');
   background-size: 100%;
   background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #e1e1e1), color-stop(60%, #e3e3e3), color-stop(100%, #e1e1e1));
@@ -492,16 +492,19 @@ body {
   font-size: 12.8px;
   font-size: 0.8rem;
 }
-.search .text-field {
+.search .form-text {
   float: left;
-  padding: 8px 8px 8px;
-  padding: 0.5rem 0.5rem 0.5rem;
+  padding: 5.6px 8px 5.6px;
+  padding: 0.35rem 0.5rem 0.35rem;
   -moz-border-radius: 3px;
   -webkit-border-radius: 3px;
   border-radius: 3px;
   border: 1px solid #e0e0e0;
+  -moz-box-shadow: rgba(0, 0, 0, 0.1) 0 0 3px inset;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.1) 0 0 3px inset;
+  box-shadow: rgba(0, 0, 0, 0.1) 0 0 3px inset;
 }
-.search .submit {
+.search .form-submit {
   float: left;
 }
 
@@ -550,19 +553,53 @@ header a {
   }
 }
 
-#profile-menu-items {
+#user-menu-container {
   float: right;
+  position: relative;
+  top: -20px;
+  font-size: 13.6px;
+  font-size: 0.85rem;
+  padding: 0 0 48px 0;
+  padding: 0 0 3rem 0;
+}
+#user-menu-container #user-login-form {
+  padding: 0 80px 0 0;
+  padding: 0 5rem 0 0;
+}
+#user-menu-container #user-login-form #edit-submit {
+  position: absolute;
+  top: 30px;
+  right: 0;
+}
+#user-menu-container #user-login-form .form-item {
+  float: left;
+  margin: 0 4px 0 0;
+  margin: 0 0.25rem 0 0;
+}
+#user-menu-container #user-login-form .form-item label {
+  font-size: 11.2px;
+  font-size: 0.7rem;
+}
+#user-menu-container #user-login-form .form-text {
+  border: 1px solid #e0e0e0;
+  border-radius: 3px;
+  float: left;
+  padding: 0.35rem;
+  -moz-box-shadow: rgba(0, 0, 0, 0.1) 0 0 3px inset;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.1) 0 0 3px inset;
+  box-shadow: rgba(0, 0, 0, 0.1) 0 0 3px inset;
+}
+#user-menu-container #user-login-form .item-list li {
+  float: left;
+  margin: 0;
+}
+#user-menu-container #user-login-form .item-list li a {
+  color: #222;
+  text-decoration: underline;
   font-size: 13.6px;
   font-size: 0.85rem;
 }
-#profile-menu-items .profile-item {
-  float: left;
-}
-#profile-menu-items .profile-item a {
-  color: #222;
-  text-decoration: underline;
-}
-#profile-menu-items .profile-item:first-child:after {
+#user-menu-container #user-login-form .item-list li:first-child:after {
   content: '/';
   padding: 0 8px 0 8px;
   padding: 0 0.5rem 0 0.5rem;
