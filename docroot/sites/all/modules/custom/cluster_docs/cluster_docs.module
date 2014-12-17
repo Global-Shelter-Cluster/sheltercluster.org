@@ -81,7 +81,7 @@ function cluster_docs_reference() {
   ));
 
   $filter = $query->createFilter();
-  $filter->condition('field_is_resource_document', TRUE);
+  $filter->condition('field_is_reference_document', TRUE);
   $filter->condition('type', 'document');
   $query->filter($filter);
 
