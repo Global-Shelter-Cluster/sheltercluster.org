@@ -16,7 +16,6 @@
     color: $shelter-grey;
     -webkit-background-clip: padding-box; /* for Safari */
     background-clip: padding-box; /* for IE9+, Firefox 4+, Opera, Chrome */
-    // @include box-shadow(rgba(0,0,0,0.09) 1px 2px 4px);
     @include breakpoint(700px) {
       width: 47%;
     }
@@ -73,7 +72,7 @@
       width: 100%;
       background: url(../images/stripes-pattern.png) repeat 0 0 #fff;
       color: $shelter-grey;
-      @include rem(font-size, 0.8125rem);
+      @include rem(font-size, 0.75rem);
       @include rem(padding, 0.3125rem 0.5rem);
       .size-type {
         float: left;

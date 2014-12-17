@@ -2,10 +2,11 @@
 
 #shelter-calendar {
   @include rem(margin, 0 0 2rem 0);
+  color: rgb(255,255,255);
 
   .see-all {
     @include rem(font-size, 0.9rem);
-    color: darken($shelter-grey,20%);
+    color: $shelter-red;
 
     &:hover,
     &:active {
@@ -16,9 +17,9 @@
 
 #calendar-box {
   width: 100%;
-  @include rem(margin, 0 0 0.5rem 0);
   background-color: $shelter-red;
-  border: 1px solid darken($shelter-red,10%);
+  @include reset-list;
+  @include rem(margin, 0 0 0.5rem 0);
   @include border-radius(0.1875rem);
   @include breakpoint(500px) {
     display: table;
@@ -28,6 +29,7 @@
     > div {
       display: table-cell;
       vertical-align: middle;
+      text-align: center;
     }
   }
   @include breakpoint(980px) {
@@ -51,11 +53,11 @@
 
 #calendar-date {
   position: relative;
-  color: $accent-yellow;
   text-align: center;
+  text-transform: uppercase;
   @include rem(font-size, 1.1rem);
   @include rem(padding, 0.625rem);
-  border-bottom: 1px solid darken($shelter-red, 6%);
+  border-bottom: 1px dashed rgb(255,255,255);
   @include breakpoint(500px) {
     width: 140px;
     border-right: 1px solid darken($shelter-red, 6%);
@@ -64,20 +66,26 @@
  @include breakpoint(980px) {
     width: auto;
     border-right: none;
-    border-bottom: 1px solid darken($shelter-red, 6%);
+    border-bottom: 1px dashed lighten($shelter-grey,30%);
   }
 
-  svg {
-    position: absolute;
-    left: 20px;
-    fill: $accent-yellow;
-    width: 25px;
-    height: 25px;
-    @include rotate(-35deg);
-    @include breakpoint(500px) {
-      position: relative;
-      left: 0;
-    }
+  .image-calendar {
+      position: absolute;
+      width: 35px;
+
+      svg {
+        position: relative;
+        background: #fff;
+        top: -10px;
+        left: -8px;
+        fill: $shelter-grey;
+        width: 45px;
+        height: 45px;
+        @include rem(margin, 0.375rem 0px 0.375rem 0px);
+        @include rem(padding, 0 0px 0.375rem 0px);
+        @include border-radius(5px);
+        @include box-sizing(initial);
+      }
     @include breakpoint(990px) {
       position: absolute;
       left: 20px;

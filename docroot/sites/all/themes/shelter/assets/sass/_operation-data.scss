@@ -11,9 +11,17 @@
   }
   li {
     @include rem(padding, 0 0 0.5rem 0);
+    @include rem(font-size, 0.8rem);
   }
   span {
     text-transform: uppercase;
     @include rem(padding-right, 0.5rem);
   }
+  h4 {
+    border: none;
+    text-transform: none;
+    color: white;
+    @include rem(font-size, 0.875rem);
+  }
 }
+

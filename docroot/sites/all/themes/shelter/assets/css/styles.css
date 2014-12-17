@@ -468,8 +468,8 @@ body {
   width: 100%;
   background: url(../images/stripes-pattern.png) repeat 0 0 #fff;
   color: #575757;
-  font-size: 13px;
-  font-size: 0.8125rem;
+  font-size: 12px;
+  font-size: 0.75rem;
   padding: 5px 8px;
   padding: 0.3125rem 0.5rem;
 }
@@ -857,27 +857,21 @@ header a {
   }
 }
 #secondary-nav .nav-items .nav-item a {
-  width: 100%;
   float: left;
-  background: url(../images/stripes-pattern.png) repeat 0 0;
-  color: black;
+  width: 100%;
+  background: url(../images/stripes-pattern.png) repeat 0 0 #fff;
+  color: #575757;
+  font-weight: bold;
+  text-align: center;
+  margin: 0 0 0 4.8px;
   margin: 0 0 0 0.3rem;
   padding: 8px 20px 8px;
   padding: 0.5rem 1.25rem 0.5rem;
-  -moz-border-radius: 3px;
-  -webkit-border-radius: 3px;
-  border-radius: 3px;
-  border: 1px solid #666666;
   font-size: 12.8px;
   font-size: 0.8rem;
 }
 #secondary-nav .nav-items .nav-item a:hover {
-  background-image: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJvYmplY3RCb3VuZGluZ0JveCIgeDE9IjAuNSIgeTE9IjAuMCIgeDI9IjAuNSIgeTI9IjEuMCI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzhmOGY4ZiIvPjxzdG9wIG9mZnNldD0iNjAlIiBzdG9wLWNvbG9yPSIjOTI5MjkyIi8+PHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjOGE4YThhIi8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNncmFkKSIgLz48L3N2Zz4g');
-  background-size: 100%;
-  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #8f8f8f), color-stop(60%, #929292), color-stop(100%, #8a8a8a));
-  background-image: -moz-linear-gradient(#8f8f8f, #929292 60%, #8a8a8a);
-  background-image: -webkit-linear-gradient(#8f8f8f, #929292 60%, #8a8a8a);
-  background-image: linear-gradient(#8f8f8f, #929292 60%, #8a8a8a);
+  background: #cdd6db;
 }
 #secondary-nav .nav-items .nav-item a.active {
   color: #ffb100;
@@ -909,18 +903,28 @@ header a {
 }
 .main-column h3,
 .side-column h3 {
-  font-size: 24px;
-  font-size: 1.5rem;
   margin-top: 0;
-  border-bottom: 2px solid black;
+  border-bottom: 2px solid #575757;
+  text-transform: uppercase;
+  color: #575757;
+  font-size: 16px;
+  font-size: 1rem;
+  padding: 0 0 3.2px 0;
+  padding: 0 0 0.2rem 0;
+  margin: 0 0 24px 0;
+  margin: 0 0 1.5rem 0;
 }
 .main-column h4,
 .side-column h4 {
+  border-bottom: 1px dashed #a4a4a4;
+  text-transform: uppercase;
+  color: #575757;
+  padding: 0 0 3.2px 0;
+  padding: 0 0 0.2rem 0;
   margin: 0 0 9.6px 0;
   margin: 0 0 0.6rem 0;
-  font-size: 16px;
-  font-size: 1rem;
-  border-bottom: 1px dotted black;
+  font-size: 12px;
+  font-size: 0.75rem;
 }
 
 #contextual-navigation {
@@ -1061,11 +1065,12 @@ header a {
 #shelter-calendar {
   margin: 0 0 32px 0;
   margin: 0 0 2rem 0;
+  color: white;
 }
 #shelter-calendar .see-all {
   font-size: 14.4px;
   font-size: 0.9rem;
-  color: #242424;
+  color: #7f1416;
 }
 #shelter-calendar .see-all:hover, #shelter-calendar .see-all:active {
   text-decoration: none;
@@ -1073,10 +1078,12 @@ header a {
 
 #calendar-box {
   width: 100%;
+  background-color: #7f1416;
+  padding: 0;
+  margin: 0;
+  list-style: none;
   margin: 0 0 8px 0;
   margin: 0 0 0.5rem 0;
-  background-color: #7f1416;
-  border: 1px solid #530d0e;
   -moz-border-radius: 0.1875rem;
   -webkit-border-radius: 0.1875rem;
   border-radius: 0.1875rem;
@@ -1090,6 +1097,7 @@ header a {
   #calendar-box > div {
     display: table-cell;
     vertical-align: middle;
+    text-align: center;
   }
 }
 @media (min-width: 980px) {
@@ -1112,13 +1120,13 @@ header a {
 
 #calendar-date {
   position: relative;
-  color: #ffb100;
   text-align: center;
+  text-transform: uppercase;
   font-size: 17.6px;
   font-size: 1.1rem;
   padding: 10px;
   padding: 0.625rem;
-  border-bottom: 1px solid #651011;
+  border-bottom: 1px dashed white;
 }
 @media (min-width: 500px) {
   #calendar-date {
@@ -1131,28 +1139,34 @@ header a {
   #calendar-date {
     width: auto;
     border-right: none;
-    border-bottom: 1px solid #651011;
+    border-bottom: 1px dashed #a4a4a4;
   }
 }
-#calendar-date svg {
+#calendar-date .image-calendar {
   position: absolute;
-  left: 20px;
-  fill: #ffb100;
-  width: 25px;
-  height: 25px;
-  -moz-transform: rotate(-35deg);
-  -ms-transform: rotate(-35deg);
-  -webkit-transform: rotate(-35deg);
-  transform: rotate(-35deg);
+  width: 35px;
 }
-@media (min-width: 500px) {
-  #calendar-date svg {
-    position: relative;
-    left: 0;
-  }
+#calendar-date .image-calendar svg {
+  position: relative;
+  background: #fff;
+  top: -10px;
+  left: -8px;
+  fill: #575757;
+  width: 45px;
+  height: 45px;
+  margin: 6px 0px 6px 0px;
+  margin: 0.375rem 0px 0.375rem 0px;
+  padding: 0 0px 6px 0px;
+  padding: 0 0px 0.375rem 0px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+  -moz-box-sizing: initial;
+  -webkit-box-sizing: initial;
+  box-sizing: initial;
 }
 @media (min-width: 990px) {
-  #calendar-date svg {
+  #calendar-date .image-calendar {
     position: absolute;
     left: 20px;
   }
@@ -1387,11 +1401,20 @@ header a {
 #operation-data li {
   padding: 0 0 8px 0;
   padding: 0 0 0.5rem 0;
+  font-size: 12.8px;
+  font-size: 0.8rem;
 }
 #operation-data span {
   text-transform: uppercase;
   padding-right: 8px;
   padding-right: 0.5rem;
+}
+#operation-data h4 {
+  border: none;
+  text-transform: none;
+  color: white;
+  font-size: 14px;
+  font-size: 0.875rem;
 }
 
 /* _footer.scss */
