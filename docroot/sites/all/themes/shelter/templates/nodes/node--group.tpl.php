@@ -34,7 +34,7 @@
 
         <h3 data-collapse="key-information">Key Information</h3>
         <section id="key-information">
-        <?php print render($content['key_documents']); ?>
+          <?php print render($content['key_documents']); ?>
         </section>
 
         <h3 data-collapse="recent-documents">Recent Documents</h3>
@@ -93,7 +93,7 @@
       </div>
 
       <div class="main-column">
-        <?php dpm($content); ?>
+        <?php //print render($content); ?>
       </div>
 
     </div>
