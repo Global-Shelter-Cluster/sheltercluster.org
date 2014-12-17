@@ -101,6 +101,8 @@ function shelter_preprocess_node(&$variables) {
 
   // Adding view mode based theme suggestions and preprocesses
   $variables['theme_hook_suggestions'][] = 'node__partial__' . $variables['view_mode'];
+  $variables['theme_hook_suggestions'][] = 'node__' . $node->type .'__' . $variables['view_mode'];
+
   $view_mode_based_preprocess = 'shelter_preprocess_node_partial__' . $variables['view_mode'];
   if (function_exists($view_mode_based_preprocess)) {
     $view_mode_based_preprocess($variables);
