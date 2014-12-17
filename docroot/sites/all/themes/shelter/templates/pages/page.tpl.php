@@ -62,7 +62,7 @@
       </div>
     </nav>
 
-    <section id="operation-title">
+    <section id="operation-title" class="page-margin">
       <?php if (isset($contextual_navigation)): ?>
         <?php print render($contextual_navigation); ?>
       <?php endif; ?>
