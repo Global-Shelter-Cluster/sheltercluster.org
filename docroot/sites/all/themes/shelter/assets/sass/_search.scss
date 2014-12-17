@@ -9,13 +9,13 @@
   color: #000;
   @include rem(font-size, 0.80rem);
 
-  .text-field {
+  .form-text {
     float: left;
     @include rem(padding, 0.5rem 0.5rem 0.5rem);
     @include border-radius(3px);
     border: 1px solid darken(white,12%);
   }
-  .submit {
+  .form-submit {
     float: left;
     @extend .button;
   }
