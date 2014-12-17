@@ -11,6 +11,7 @@ include_once 'cluster_search.features.inc';
  */
 function cluster_search_preprocess_page(&$variables) {
   $search_form = module_invoke('search', 'block_view', 'form');
+  $search_form['content']['#attributes']['class'] = 'search';
   $search_form['content']['search_block_form']['#attributes']['placeholder'] = t('Search site');
   $variables['search_form'] = $search_form;
 }
