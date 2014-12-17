@@ -49,6 +49,7 @@
         <nav id="nav-shelter" class="clearfix">
           <a href="#" id="button-menu-dropdown">Menu</a>
           <div class="list-container">
+            <?php print render($main_nav); ?>
             <ul class="nav-items">
               <li class="nav-item"><a href="#">Home</a></li>
               <li class="nav-item"><a href="#">Current Operations</a></li>
