@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Cluster nav views feature.
+ */
+
+include_once 'cluster_nav_views.features.inc';
