@@ -1,0 +1,27 @@
+/* _operation-data.scss */
+
+#operation-data {
+  background-color: $shelter-grey;
+  color: rgb(255,255,255);
+  @include rem(padding, 1rem 0.8rem);
+  @include rem(font-size, 0.85rem);
+
+  ul {
+    @include reset-list;
+  }
+  li {
+    @include rem(padding, 0 0 0.5rem 0);
+    @include rem(font-size, 0.8rem);
+  }
+  span {
+    text-transform: uppercase;
+    @include rem(padding-right, 0.5rem);
+  }
+  h4 {
+    border: none;
+    text-transform: none;
+    color: white;
+    @include rem(font-size, 0.875rem);
+  }
+}
+

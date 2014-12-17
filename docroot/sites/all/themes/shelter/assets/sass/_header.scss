@@ -47,6 +47,8 @@ header {
 #logo-shelter-cluster {
   width: 100%;
   display: block;
+  @include rem(padding, 2rem 0 0 0);
+
   @include breakpoint(700px) {
     float:left;
     width: auto;
@@ -70,20 +72,25 @@ header {
 
 #site-options-bar {
   background: $shelter-dark-blue;
-  @include rem(font-size, 0.8rem);
+  @include rem(font-size, 0.9rem);
   @include rem(margin-bottom, 1.5rem);
   color: darken($shelter-dark-blue, 10%);
-
+  span {
+    color: #fff;
+  }
   a {
-    color: darken($shelter-dark-blue, 30%);
+    color: #fff;
     text-decoration: underline;
+    &:hover {
+      text-decoration: none;
+    }
   }
   .active {
-    color : #000;
+    color : #fff;
     text-decoration: none;
   }
   .svg {
-    fill: darken($accent-blue, 10%);
+    fill: #fff;
     position: relative;
     top: 2px;
   }
@@ -116,6 +123,7 @@ header {
     &:before {
       content: '/';
       @include rem(padding, 0 0.5rem 0 0.5rem);
+      color: #fff;
     }
     &:first-child:before {
       content: '';
@@ -125,36 +133,103 @@ header {
 }
 
 #nav-shelter {
-  background-color: rgb(255,255,255);
-  color: rgb(255,255,255);
+  // visibility: hidden;
+  font-size: 0; //remove the unwanted extra height TO VERIFY AGAIN IF USEFUL
+  @include breakpoint(1215px) {
+    display: table;
+    table-layout: fixed;
+    width: 100%;
+  }
 
   .nav-items {
-    .sub-nav {
-      display: block;
-      @include breakpoint( 500px ) {
-        display: none;
-      }
+
+    @include breakpoint(460px) {
+      display: table;
+      table-layout: fixed;
+      width: 100%;
+      @include rem(margin, 0 0 0.2rem 0);
     }
+    @include breakpoint(1215px) {
+      display: table-row;
+    }
+
     .nav-item {
-      float: none;
-      @include breakpoint(440px) {
-        float: left;
+      position: relative;
+      display: table;
+      width: 100%;
+      text-align: center;
+      background-color: $shelter-red;
+      border-bottom: 1px solid lighten(#fff,50%);
+
+      @include breakpoint(460px) {
+        display: table-cell;
+        border-bottom: none;
+
+        &:after {
+          content: '|';
+          position: absolute;
+          z-index:2;
+          @include rem(font-size, 1.3rem);
+          @include rem(top, -1.5px);
+          @include rem(right, -1.5px);
+          color: #fff;
+        }
+        &:last-child,
+        &.last {
+          &:after {
+            content: '';
+          }
+        }
+      }
+      @include breakpoint(1215px) {
+        display: table-cell;
       }
 
       a {
+        position: relative;
         display: block;
-        @extend .button;
-        @include rem(margin, 0 0 0.5rem 0);
-        @include breakpoint(440px) {
-          @include rem(margin, 0 0.5rem 0.5rem 0);
+        background-color: $shelter-red;
+        text-transform: uppercase;
+        white-space: nowrap;
+        color: rgb(255,255,255);
+        @include rem(font-size, 0.8rem);
+        @include rem(padding, 0.5rem 0 0.5rem 0);
+        @include rem(min-width, 8.125rem);
+        @include transition(all 0.3s ease);
+        @include breakpoint(460px) {
+
+
+
+        }
+        &:hover,
+        &:active,
+        .active {
+          background-color: $shelter-dark-blue;
         }
       }
+
+
       .total {
         @include rem(font-size, 0.75rem);
       }
       .total-ended {
         float: right;
         @include rem(font-size, 0.75rem);
+      }
+    }
+    .last + li,
+    .empty {
+      display: none;
+      background: none;
+      @include breakpoint(460px) {
+        display: table-cell;
+      }
+      a,
+      a:hover,
+      a:active {
+        background: none;
+        cursor: default;
+        pointer-events: none;
       }
     }
   }

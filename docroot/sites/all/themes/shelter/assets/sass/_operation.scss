@@ -18,43 +18,6 @@
   }
 }
 
-#operation-group {
-  display: table;
-  width: 100%;
-  background-color: rgb(204,204,204);
-  @include rem(padding, 1.25rem);
-  @include rem(margin, 0 0 2rem 0);
-
-  h3 {
-    display: table-row;
-    margin: 0;
-  }
-
-  #checkboxgroup {
-    display: table-cell;
-    border: none;
-    margin: 0;
-    padding: 0;
-    height: 100%;
-
-    label{
-      @include rem(margin, 0.5rem 0 0 0);
-      @include rem(font-size, 0.9rem);
-      font-weight: normal;
-    }
-  }
-
-  #button-join-group {
-    display: table-cell;
-    vertical-align: bottom;
-    text-align: right;
-
-    a {
-      text-decoration: none;
-    }
-  }
-}
-
 #featured-documents {
   position: relative;
   color: #fff;

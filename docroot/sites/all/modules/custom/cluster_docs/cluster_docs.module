@@ -81,7 +81,7 @@ function cluster_docs_reference() {
   ));
 
   $filter = $query->createFilter();
-  $filter->condition('field_is_resource_document', TRUE);
+  $filter->condition('field_is_reference_document', TRUE);
   $filter->condition('type', 'document');
   $query->filter($filter);
 
@@ -169,8 +169,15 @@ function cluster_docs_prepare_card_data($nids) {
       // @TODO insert language negociation in info array.
       $wrapper = entity_metadata_wrapper('node', $node);
       $doc['title'] = $wrapper->label();
-      $doc['link'] = l($doc['title'], $wrapper->url->value());
-      
+
+      if ($file = $wrapper->field_file->value()) {
+        $url = file_create_url($file['uri']);
+      }
+      else {
+        $url = $wrapper->field_link->url->value();
+      }
+      $doc['link'] = l($doc['title'], $url, array('attributes' => array('target' => '_blank')));
+
       // Prepare the description.
       $desc = '';
       if ($body = $wrapper->body->value()) {

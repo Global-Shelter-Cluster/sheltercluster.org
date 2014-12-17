@@ -1,8 +1,9 @@
 /* _search.scss */
 
 .search {
-  float: right;
-  clear: right;
+  position: absolute;
+  bottom: 0;
+  right: 0;
   display: inline-block;
   @include rem(padding, 0.8rem 0);
   color: #000;
@@ -10,7 +11,7 @@
 
   .form-text {
     float: left;
-    @include rem(padding, 0.5rem 0.5rem 0.5rem );
+    @include rem(padding, 0.5rem 0.5rem 0.5rem);
     @include border-radius(3px);
     border: 1px solid darken(white,12%);
   }

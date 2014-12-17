@@ -14,5 +14,5 @@ function _svg($filename, $attributes = array() ) {
     $attributes['class'] = array('svg');
   }
   $resolution = '4x';
-  return '<img src="'. $assets_path . '/svg/' . $filename .'.svg" data-src="' . $assets_path . '/svg/' . $filename .'.svg" data-replacement="' . $assets_path . 'svg/replacement/' . $filename .'-' . $resolution . '.png" '.drupal_attributes($attributes).' />';
+  return '<img data-src="' . $assets_path . '/svg/' . $filename .'.svg" data-fallback="' . $assets_path . '/svg/replacement/' . $filename .'-' . $resolution . '.png" '.drupal_attributes($attributes).' />';
 }

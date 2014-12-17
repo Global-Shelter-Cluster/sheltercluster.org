@@ -6,10 +6,16 @@ require_once dirname(__FILE__) . '/includes/shelter.helpers.inc';
  * Implements hook_preprocess_page().
  */
 function shelter_preprocess_html(&$variables) {
-  // Provide the path to the IE8 polyfill js so we can use brute force to impose its order of inclusion.
-  $path = drupal_get_path('theme', 'shelter');
-  $path .= '/assets/javascripts/NAME';
-  $variables['polyfill_queries_path'] = $path;
+  $file = drupal_get_path('module', 'sb_carousel').'/js/slide.js';
+  $options = array(
+    'weight' => -1000, // High number to push this file to the bottom of the list
+    'scope' => 'footer' // This will output the JS file in the footer scope, so at the end of the document
+  );
+  drupal_add_js($file, $options);
+
+  //Adding Roboto Google Font Normal 400 and Bold 700
+  drupal_add_css('http://fonts.googleapis.com/css?family=Roboto:700,400', array('group' => CSS_THEME));
+
 }
 
 /**
@@ -17,8 +23,8 @@ function shelter_preprocess_html(&$variables) {
  */
 function shelter_preprocess_page($variables) {
   // drupal_add_css();
-  // drupal_add_js();
-
+    $theme_path = drupal_get_path('theme', 'shelter');
+    $variables['theme_path'] = $theme_path;
   // Adding the viewport for mobile view
     $viewport = array(
     '#tag' => 'meta',
