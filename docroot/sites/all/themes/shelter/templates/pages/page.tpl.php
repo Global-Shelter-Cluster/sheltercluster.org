@@ -28,8 +28,10 @@
           <?php print _svg('logo-global-shelter-cluster', array('id'=>'shelter-cluster', 'alt' => 'Global Shelter Cluster - ShelterCluster.org - Coordinating Humanitarian Shelter')); ?>
         </a>
 
-        <div id="user-menu-container" class="clearfix">
+        <div id="user-login-container" class="clearfix">
           <?php print render($user_login); ?>
+        </div>
+        <div id="user-profile-container" class="clearfix">
           <?php print render($user_menu); ?>
         </div>
 
@@ -42,25 +44,23 @@
       <?php if ($messages) { print $messages; } ?>
     </div>
 
-    <nav id="nav-shelter" class="clearfix">
-      <div class="page-margin">
-        <a href="#" id="button-menu-dropdown">Menu</a>
-        <ul class="nav-items">
-          <li class="nav-item"><a href="">Home</a></li>
-          <li class="nav-item"><a href="">Current Operations <span class="total">(10)</span></a></li>
-          <li class="nav-item"><a href="">Documents <span class="total">(8200)</span></a></li>
-          <li class="nav-item"><a href="">Geographic Aggregators</a></li>
-          <li class="nav-item"><a href="">Communities of Practice <span class="total">(6)</span></a></li>
-          <li class="nav-item"><a href="">References <span class="total">(34)</span></a></li>
-          <li class="sub-nav">
-            <ul>
-              <li class="nav-item"><a href="">Manage your profile</a></li>
-              <li class="nav-item"><a href="">Disconnect</a></li>
+    <div class="page-margin">
+      <div id="nav-master">
+        <nav id="nav-shelter" class="clearfix">
+          <a href="#" id="button-menu-dropdown">Menu</a>
+          <div class="list-container">
+            <ul class="nav-items">
+              <li class="nav-item"><a href="#">Home</a></li>
+              <li class="nav-item"><a href="#">Current Operations</a></li>
+              <li class="nav-item"><a href="#">Global</a></li>
+              <li class="nav-item"><a href="#">Regions & Countries</a></li>
+              <li class="nav-item"><a href="#">Communities of Practice</a></li>
+              <li class="nav-item"><a href="#">References</a></li>
             </ul>
-          </li>
-        </ul>
+          </div>
+        </nav>
       </div>
-    </nav>
+    </div>
 
     <section id="operation-title" class="page-margin">
       <?php if (isset($contextual_navigation)): ?>

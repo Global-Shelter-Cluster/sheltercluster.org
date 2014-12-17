@@ -34,6 +34,9 @@ function shelter_preprocess_page($variables) {
     ),
   );
   drupal_add_html_head($viewport, 'viewport');
+
+  libraries_load('underscore');
+  drupal_add_library('underscore', 'underscore');
 }
 
 /**

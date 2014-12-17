@@ -228,7 +228,7 @@ th {
 /* _vars.scss */
 /* _mixin.scss */
 /* _reusable.scss */
-.button, .search .form-submit, #user-menu-container #user-login-form #edit-submit {
+.button, .search .form-submit, #user-login-container #user-login-form .form-submit {
   background: gainsboro;
   background-image: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJvYmplY3RCb3VuZGluZ0JveCIgeDE9IjAuNSIgeTE9IjAuMCIgeDI9IjAuNSIgeTI9IjEuMCI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2ZhZmFmYSIvPjxzdG9wIG9mZnNldD0iMTAlIiBzdG9wLWNvbG9yPSIjZmRmZGZkIi8+PHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjZGNkY2RjIi8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNncmFkKSIgLz48L3N2Zz4g');
   background-size: 100%;
@@ -247,7 +247,7 @@ th {
   border: 1px solid #ededed;
   border-bottom: 1px solid #cfcfcf;
 }
-.button:hover, .search .form-submit:hover, #user-menu-container #user-login-form #edit-submit:hover {
+.button:hover, .search .form-submit:hover, #user-login-container #user-login-form .form-submit:hover {
   background-image: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJvYmplY3RCb3VuZGluZ0JveCIgeDE9IjAuNSIgeTE9IjAuMCIgeDI9IjAuNSIgeTI9IjEuMCI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2UxZTFlMSIvPjxzdG9wIG9mZnNldD0iNjAlIiBzdG9wLWNvbG9yPSIjZTNlM2UzIi8+PHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjZTFlMWUxIi8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNncmFkKSIgLz48L3N2Zz4g');
   background-size: 100%;
   background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #e1e1e1), color-stop(60%, #e3e3e3), color-stop(100%, #e1e1e1));
@@ -553,7 +553,7 @@ header a {
   }
 }
 
-#user-menu-container {
+#user-login-container {
   float: right;
   position: relative;
   top: -20px;
@@ -562,25 +562,25 @@ header a {
   padding: 0 0 48px 0;
   padding: 0 0 3rem 0;
 }
-#user-menu-container #user-login-form {
+#user-login-container #user-login-form {
   padding: 0 80px 0 0;
   padding: 0 5rem 0 0;
 }
-#user-menu-container #user-login-form #edit-submit {
+#user-login-container #user-login-form .form-submit {
   position: absolute;
   top: 30px;
   right: 0;
 }
-#user-menu-container #user-login-form .form-item {
+#user-login-container #user-login-form .form-item {
   float: left;
   margin: 0 4px 0 0;
   margin: 0 0.25rem 0 0;
 }
-#user-menu-container #user-login-form .form-item label {
+#user-login-container #user-login-form .form-item label {
   font-size: 11.2px;
   font-size: 0.7rem;
 }
-#user-menu-container #user-login-form .form-text {
+#user-login-container #user-login-form .form-text {
   border: 1px solid #e0e0e0;
   border-radius: 3px;
   float: left;
@@ -589,17 +589,39 @@ header a {
   -webkit-box-shadow: rgba(0, 0, 0, 0.1) 0 0 3px inset;
   box-shadow: rgba(0, 0, 0, 0.1) 0 0 3px inset;
 }
-#user-menu-container #user-login-form .item-list li {
+#user-login-container .item-list li {
   float: left;
   margin: 0;
 }
-#user-menu-container #user-login-form .item-list li a {
+#user-login-container .item-list li a {
   color: #222;
   text-decoration: underline;
   font-size: 13.6px;
   font-size: 0.85rem;
 }
-#user-menu-container #user-login-form .item-list li:first-child:after {
+#user-login-container .item-list li:first-child:after {
+  content: '/';
+  padding: 0 8px 0 8px;
+  padding: 0 0.5rem 0 0.5rem;
+}
+
+#user-profile-container {
+  float: right;
+  position: relative;
+  font-size: 13.6px;
+  font-size: 0.85rem;
+}
+#user-profile-container .profile-item {
+  float: left;
+  margin: 0;
+}
+#user-profile-container .profile-item a {
+  color: #222;
+  text-decoration: underline;
+  font-size: 13.6px;
+  font-size: 0.85rem;
+}
+#user-profile-container .profile-item:first-child:after {
   content: '/';
   padding: 0 8px 0 8px;
   padding: 0 0.5rem 0 0.5rem;
@@ -705,11 +727,15 @@ header a {
   padding: 0;
 }
 
-#nav-shelter {
-  font-size: 0;
-}
 @media (min-width: 1215px) {
   #nav-shelter {
+    display: table;
+    table-layout: fixed;
+    width: 100%;
+  }
+}
+@media (min-width: 1215px) {
+  #nav-shelter .list-container {
     display: table;
     table-layout: fixed;
     width: 100%;
