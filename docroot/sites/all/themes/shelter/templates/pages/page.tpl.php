@@ -86,13 +86,9 @@
 
     <div class="page-margin">
       <section id="active-clusters-list">
-        <h3>With 24 <a href='#'>active responses</a> and cluster like mechanisms.</h3>
-        <ul class="clusters">
-          <li class="cluster"><a href="#">Myanmar Rakhine and Kachin Emergency Response</a></li>
-          <li class="cluster"><a href="#">Philippines Bohol Earthquake</a></li>
-          <li class="cluster"><a href="#">Solomon Islands Floods 2014</a></li>
-        </ul>
-        <a class="complete-list" href="#">[...] more</a>
+        <h3>Hot responses</h3>
+        <?php print render($page['footer']['hot_responses']); ?>
+        <?php dpm($page['footer']['hot_responses']); ?>
 
       </section><section id="regions-list">
         <h3>Shelter Cluster is present in over <a href="#">34 regions</a></h3>
