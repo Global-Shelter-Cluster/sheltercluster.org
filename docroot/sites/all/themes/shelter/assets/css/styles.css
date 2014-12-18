@@ -988,6 +988,7 @@ header a {
 
 /* _discussions.scss */
 #shelter-discussions {
+  position: relative;
   margin: 0 0 32px 0;
   margin: 0 0 2rem 0;
   color: #688394;
@@ -997,6 +998,24 @@ header a {
   -moz-border-radius-bottomright: 0.1875rem;
   -webkit-border-bottom-right-radius: 0.1875rem;
   border-bottom-right-radius: 0.1875rem;
+}
+#shelter-discussions svg {
+  position: absolute;
+  top: -22px;
+  left: -24px;
+  background: #fff;
+  fill: #575757;
+  width: 60px;
+  margin: 6px 0px 6px 0px;
+  margin: 0.375rem 0px 0.375rem 0px;
+  padding: 0 6px 6px 0;
+  padding: 0 0.375rem 0.375rem 0;
+  -moz-border-radius: 15px;
+  -webkit-border-radius: 15px;
+  border-radius: 15px;
+  -moz-box-sizing: initial;
+  -webkit-box-sizing: initial;
+  box-sizing: initial;
 }
 #shelter-discussions h3 {
   background-color: #688394;
@@ -1031,6 +1050,7 @@ header a {
 }
 
 #discussions-items {
+  display: table;
   background-color: #dadee4;
   padding: 0;
   margin: 0;
@@ -1069,7 +1089,7 @@ header a {
 }
 #discussions-items .new {
   display: block;
-  color: red;
+  color: #7f1416;
 }
 
 /* _coordination.scss */

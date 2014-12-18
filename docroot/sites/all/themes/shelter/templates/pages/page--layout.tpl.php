@@ -373,6 +373,7 @@
         </section>
 
         <section id="shelter-discussions">
+          <?php print _svg('icons/discussion', array('id'=>'discussion-icon', 'alt' => 'discussion icon')); ?>
           <h3>Discussions</h3>
           <ul id="discussions-items">
             <li class="discussions-item">
