@@ -94,6 +94,10 @@ function cluster_og_theme() {
       'file' => 'theme/cluster_og.theme.inc',
       'render element' => 'element',
     ),
+    'cluster_og_hot_responses' => array(
+      'file' => 'theme/cluster_og.theme.inc',
+      'template' => 'theme/cluster_og_hot_response',
+    ),
   );
 }
 
