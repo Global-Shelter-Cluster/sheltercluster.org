@@ -361,12 +361,15 @@
         </section>
 
         <section id="shelter-calendar">
-          <?php print _svg('icons/pin', array('id'=>'calendar-pin', 'alt' => 'Pin icon')); ?>
-          <div id="date-calendar">Nov. 24<sup>th</sup> 2014</div>
-          <div class="information-card">
-            Upcoming event to the <a href="#">agenda</a>:<br/>
-            <a class="event" href="#">Shelter Technical Meeting 2014</a>
+          <div id="box-calendar">
+            <?php print _svg('icons/pin', array('id'=>'calendar-pin', 'alt' => 'Pin icon')); ?>
+            <div id="date-calendar">Nov. 24<sup>th</sup> 2014</div>
+            <div class="information-card">
+              Upcoming event to the <a href="#">agenda</a>:<br/>
+              <a class="event" href="#">Shelter Technical Meeting 2014</a>
+            </div>
           </div>
+          <a class="see-all" href="#">All calendar events</a>
         </section>
 
         <section id="shelter-discussions">

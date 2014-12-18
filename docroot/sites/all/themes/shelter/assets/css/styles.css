@@ -1110,6 +1110,22 @@ header a {
 
 /* _calendar.scss */
 #shelter-calendar {
+  margin: 0 0 24px 0;
+  margin: 0 0 1.5rem 0;
+}
+#shelter-calendar .see-all {
+  text-transform: uppercase;
+  color: #7f1416;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 12px;
+  font-size: 0.75rem;
+}
+#shelter-calendar a:hover, #shelter-calendar a:active {
+  text-decoration: underline;
+}
+
+#box-calendar {
   position: relative;
   width: 100%;
   background-color: #7f1416;
@@ -1121,24 +1137,19 @@ header a {
   -webkit-border-radius: 0.1875rem;
   border-radius: 0.1875rem;
 }
-#shelter-calendar a {
+#box-calendar a {
   color: white;
   width: 100%;
   text-align: center;
 }
-#shelter-calendar a:hover, #shelter-calendar a:active {
+#box-calendar a:hover, #box-calendar a:active {
   text-decoration: none;
 }
-#shelter-calendar .see-all {
-  font-size: 14.4px;
-  font-size: 0.9rem;
-  color: #7f1416;
-}
 @media (min-width: 500px) and (max-width: 979px) {
-  #shelter-calendar {
+  #box-calendar {
     display: table;
   }
-  #shelter-calendar > div {
+  #box-calendar > div {
     display: table-cell;
     vertical-align: middle;
     text-align: center;
@@ -1147,23 +1158,23 @@ header a {
   }
 }
 @media (min-width: 980px) {
-  #shelter-calendar {
+  #box-calendar {
     display: block;
     width: auto;
     height: auto;
   }
-  #shelter-calendar > div {
+  #box-calendar > div {
     display: block;
     vertical-align: initial;
   }
 }
-#shelter-calendar .information-card {
+#box-calendar .information-card {
   padding: 12px;
   padding: 0.75rem;
   line-height: 24px;
   line-height: 1.5rem;
 }
-#shelter-calendar .information-card .event {
+#box-calendar .information-card .event {
   font-weight: bold;
 }
 

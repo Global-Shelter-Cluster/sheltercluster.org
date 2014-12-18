@@ -1,6 +1,23 @@
 /* _calendar.scss */
-
 #shelter-calendar {
+  @include rem(margin, 0 0 1.5rem 0);
+
+  .see-all {
+    text-transform: uppercase;
+    color: $shelter-red;
+    text-decoration: none;
+    font-weight: bold;
+    @include rem(font-size, 0.75rem);
+  }
+  a {
+    &:hover,
+    &:active {
+      text-decoration: underline;
+    }
+  }
+}
+
+#box-calendar {
   position: relative;
   width: 100%;
   background-color: $shelter-red;
@@ -13,16 +30,13 @@
     color: rgb(255, 255, 255);
     width: 100%;
     text-align: center;
+
     &:hover,
     &:active {
       text-decoration: none;
     }
   }
 
-  .see-all {
-    @include rem(font-size, 0.9rem);
-    color: $shelter-red;
-  }
 
   @include breakpoint(500px 979px) {
     display: table;
