@@ -5,13 +5,25 @@
   @include rem(margin,1.5rem 0 2rem 0.5rem);
 
   .document-card {
+    position: relative;
     float: left;
     width: 100%;
     margin: 0 6% 3% 0;
-    background: $shelter-light-blue;
-    color: $shelter-grey;
+    color: darken($shelter-grey,10%);
+    background: rgb(208, 205, 206);
     -webkit-background-clip: padding-box; /* for Safari */
     background-clip: padding-box; /* for IE9+, Firefox 4+, Opera, Chrome */
+    &.local-file {
+      .information-card a {
+        background-color: $shelter-dark-blue;
+      }
+      .image-card svg {
+        fill: $shelter-dark-blue;
+        width: 30px;
+        height: 38px;
+      }
+    }
+
     @include breakpoint(700px) {
       width: 47%;
     }
@@ -21,26 +33,23 @@
     }
     .image-card {
       position: absolute;
-      width: 35px;
+      top: -17px;
+      left: -16px;
+      background: rgb(255,255,255);
+      pointer-events: none;
+      @include rem(padding, 0.4375rem 0.3125rem 0.0625rem 0.625rem );
+      @include border-radius(7px);
+      @include box-sizing(initial);
 
       svg {
-        position: relative;
-        background: #fff;
-        top: -10px;
-        left: -8px;
         fill: $shelter-grey;
-        width: 45px;
-        height: 45px;
-        @include rem(margin, 0.375rem 0px 0.375rem 0px);
-        @include rem(padding, 0 0px 0.375rem 0px);
-        @include border-radius(5px);
-        @include box-sizing(initial);
+        width: 32px;
+        height: 39px;
       }
     }
     .information-card {
       display: table; //to make the div height 100%
       width: 100%;
-      @include rem(padding, 0 0 0 2.6rem);
 
       a {
         display: table;
@@ -51,11 +60,14 @@
         text-align: center;
         text-decoration: none;
         font-weight: bold;
-        @include rem(padding, 0.3125rem 0 0.3125rem 0);
+        text-indent: 34px;
+        @include transition(all 0.3s ease);
+        @include rem(padding, 0.375rem 0 0.375rem 0);
         @include rem(font-size, 0.75rem);
         &:hover,
         &:active {
           text-decoration: none;
+          background-color: $shelter-red;
         }
       }
       p {
@@ -67,7 +79,7 @@
       float: left;
       width: 100%;
       color: $shelter-grey;
-      background-color: lighten($shelter-dark-blue,25%);
+      border-top: 1px dotted $shelter-grey;
       @include rem(font-size, 0.75rem);
       @include rem(padding, 0.3125rem 0.5rem);
       .size-type {
@@ -103,5 +115,7 @@
     text-decoration: none;
   }
 }
+
+
 
 

@@ -29,7 +29,11 @@
         </a>
 
         <div id="user-login-container" class="clearfix">
-          <?php print render($user_login); ?>
+          <?php
+          if ($user_login) {
+            print render($user_login);
+          }
+          ?>
         </div>
         <div id="user-profile-container" class="clearfix">
           <?php print render($user_menu); ?>

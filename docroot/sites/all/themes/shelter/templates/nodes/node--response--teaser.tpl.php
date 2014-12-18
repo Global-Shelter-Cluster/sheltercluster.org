@@ -1,8 +1,1 @@
-<?php
-// Respone teaser
-
-//print render($content);
-
-?>
-
-RESPONSE TEASER
+<?php print l($node->title, 'node/'.$node->nid); ?>

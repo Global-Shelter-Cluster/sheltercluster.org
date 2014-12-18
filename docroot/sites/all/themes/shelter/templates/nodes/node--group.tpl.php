@@ -22,22 +22,26 @@
     </section>
 
     <h3 data-collapse="operation-information">Overview</h3>
-    <section id="operation-information">
+    <section id="operation-information" class="clearfix">
       <?php if (isset($group_image)): ?>
         <?php print $group_image; ?>
       <?php endif; ?>
       <?php print render($content['body']); ?>
     </section>
 
-    <h3 data-collapse="key-information">Key Information</h3>
-    <section id="key-information">
-      <?php print render($content['key_documents']); ?>
-    </section>
+    <?php if ($content['key_documents']['docs']): ?>
+      <h3 data-collapse="key-information">Key Information</h3>
+      <section id="key-information">
+        <?php print render($content['key_documents']); ?>
+      </section>
+    <?php endif; ?>
 
-    <h3 data-collapse="recent-documents">Recent Documents</h3>
-    <section id="recent-documents">
-      <?php print render($content['recent_documents']); ?>
-    </section>
+    <?php if (isset($content['recent_documents'])): ?>
+      <h3 data-collapse="recent-documents">Recent Documents</h3>
+      <section id="recent-documents">
+        <?php print render($content['recent_documents']); ?>
+      </section>
+    <?php endif; ?>
 
   </div>
 
