@@ -237,7 +237,7 @@
                 <span class="source">Aenean pulvinar</span>
               </div>
             </li>
-            <li class="document-card even">
+            <li class="document-card even local-file">
               <div class="image-card"><?php print _svg('icons/file', array('class'=>'file-icon', 'alt' => 'Document icon')); ?></div>
               <div class="information-card">
                 <a href="#">id lobortis leo maximus tristique</a>
@@ -300,7 +300,7 @@
 
           <h2>Recent Documents</h2>
           <ul class="document-cards clearfix">
-            <li class="document-card odd">
+            <li class="document-card odd local-file">
               <div class="image-card"><?php print _svg('icons/file', array('class'=>'file-icon', 'alt' => 'File icon')); ?></div>
               <div class="information-card">
                 <a href="#">id lobortis leo maximus tristique</a>
@@ -311,7 +311,7 @@
                 <span class="source">Aenean pulvinar</span>
               </div>
             </li>
-            <li class="document-card even">
+            <li class="document-card even local-file">
               <div class="image-card"><?php print _svg('icons/file', array('class'=>'file-icon', 'alt' => 'File icon')); ?></div>
               <div class="information-card">
                 <a href="#">id lobortis leo maximus tristique</a>
@@ -322,7 +322,7 @@
                 <span class="source">Aenean pulvinar</span>
               </div>
             </li>
-            <li class="document-card odd">
+            <li class="document-card odd local-file">
               <div class="image-card"><?php print _svg('icons/file', array('class'=>'file-icon', 'alt' => 'File icon')); ?></div>
               <div class="information-card">
                 <a href="#">id lobortis leo maximus tristique</a>
