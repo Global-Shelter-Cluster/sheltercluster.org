@@ -10,14 +10,6 @@
 function cluster_og_og_features_default_roles() {
   $roles = array();
 
-  // Exported OG Role: 'node:community_of_practice:contact member'.
-  $roles['node:community_of_practice:contact member'] = array(
-    'gid' => 0,
-    'group_type' => 'node',
-    'group_bundle' => 'community_of_practice',
-    'name' => 'contact member',
-  );
-
   // Exported OG Role: 'node:geographic_region:contact member'.
   $roles['node:geographic_region:contact member'] = array(
     'gid' => 0,
