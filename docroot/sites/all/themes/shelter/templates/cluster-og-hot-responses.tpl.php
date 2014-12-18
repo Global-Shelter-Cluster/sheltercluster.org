@@ -2,7 +2,6 @@
 /**
  * Template file for hot responses list.
  */
-dpm('TEST');
 ?>
 
 <section id="active-responses" class="clearfix">
