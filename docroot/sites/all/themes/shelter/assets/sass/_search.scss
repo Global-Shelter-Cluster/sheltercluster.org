@@ -21,3 +21,48 @@
     @extend .button;
   }
 }
+
+.page-search {
+  #search-form {
+    background: $shelter-light-blue;
+    @include rem(margin, 1rem 0 0 0);
+    @include rem(padding, 2rem 2rem 1rem);
+
+    label {
+      text-transform: uppercase;
+      font-weight: normal;
+      color: $shelter-grey;
+      @include rem(font-size, 0.75rem);
+    }
+    .form-type-checkbox label {
+      text-transform: none;
+      color: darken($shelter-grey, 20%);
+    }
+    .form-item-keys label {
+      display: none;
+    }
+    .form-type-textfield {
+
+      .form-text {
+        @include rem(padding, 0.35rem 0.5rem 0.35rem);
+        @include border-radius(3px);
+        border: 1px solid darken(white,12%);
+        @include box-shadow(rgba(0,0,0,0.1) 0 0 3px inset);
+      }
+    }
+    .form-submit {
+      @extend .button;
+    }
+    #edit-advanced {
+      @include rem(margin, 1rem 0 0 0);
+
+      .fieldset-title {
+        text-transform: uppercase;
+        font-weight: bold;
+        color: $shelter-grey;
+        text-decoration: none;
+        @include rem(font-size, 0.75rem);
+      }
+    }
+  }
+}
