@@ -85,12 +85,13 @@
     </div>
 
     <div class="page-margin">
+      
       <section id="active-clusters-list">
         <h3>Hot responses</h3>
         <?php print render($page['footer']['hot_responses']); ?>
-        <?php dpm($page['footer']['hot_responses']); ?>
+      </section>
 
-      </section><section id="regions-list">
+      <section id="regions-list">
         <h3>Shelter Cluster is present in over <a href="#">34 regions</a></h3>
         <?php print render($page['footer']['menu_regions']); ?>
       </section>
