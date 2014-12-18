@@ -5,14 +5,13 @@
   .see-all {
     text-transform: uppercase;
     color: $shelter-red;
-    text-decoration: none;
     font-weight: bold;
     @include rem(font-size, 0.75rem);
   }
   a {
     &:hover,
     &:active {
-      text-decoration: underline;
+      text-decoration: none;
     }
   }
 }

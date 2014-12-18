@@ -489,6 +489,9 @@ body {
   text-transform: uppercase;
   font-weight: bold;
   color: #575757;
+  display: block;
+  margin: 0 0 16px 0;
+  margin: 0 0 1rem 0;
   font-size: 12px;
   font-size: 0.75rem;
   padding: 0 0 0 8px;
@@ -1214,13 +1217,12 @@ header a {
 #shelter-calendar .see-all {
   text-transform: uppercase;
   color: #7f1416;
-  text-decoration: none;
   font-weight: bold;
   font-size: 12px;
   font-size: 0.75rem;
 }
 #shelter-calendar a:hover, #shelter-calendar a:active {
-  text-decoration: underline;
+  text-decoration: none;
 }
 
 #box-calendar {
@@ -1518,6 +1520,23 @@ header a {
   color: white;
   font-size: 14px;
   font-size: 0.875rem;
+}
+
+.page-regions-countries {
+  background-color: #575757;
+}
+.page-regions-countries #site-options-bar {
+  background-color: #575757;
+}
+.page-regions-countries #language-selector {
+  border-bottom: none;
+}
+.page-regions-countries #logo-shelter-cluster .svg polygon,
+.page-regions-countries #logo-shelter-cluster .svg path {
+  fill: #fff;
+}
+.page-regions-countries footer {
+  background-color: #575757;
 }
 
 /* _footer.scss */

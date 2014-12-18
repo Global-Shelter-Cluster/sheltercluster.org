@@ -56,8 +56,7 @@
         </nav>
       </div>
     </div>
-<!--           <li class="nav-item last"><a href="#">Communities of Practice</a></li>
-          <li class="nav-item"><a href="#"></a></li> -->
+
     <section id="secondary-nav">
       <div class="page-margin clearfix">
         <h1>Typhoon Haiyan</h1>

@@ -93,6 +93,8 @@
   text-transform: uppercase;
   font-weight: bold;
   color: $shelter-grey;
+  display: block;
+  @include rem(margin, 0 0 1rem 0);
   @include rem(font-size, 0.75rem);
   @include rem(padding, 0 0 0 0.5rem);
 
