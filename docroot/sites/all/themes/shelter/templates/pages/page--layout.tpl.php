@@ -164,11 +164,11 @@
         </section>
 
         <section id="key-information">
-          <h3><?php print _svg('icons/key-information', array('class'=>'key-icon', 'alt' => 'Key icon')); ?><span>Key Information</span></h3>
-          <h4>Coordination information</h4>
+          <h2><?php print _svg('icons/key-information', array('class'=>'key-icon', 'alt' => 'Key icon')); ?><span>Key Information</span></h2>
+          <h3>Coordination information</h3>
           <ul class="document-cards clearfix">
             <li class="document-card odd">
-              <div class="image-card"><?php print _svg('icons/book', array('class'=>'document-icon', 'alt' => 'Document icon')); ?></div>
+              <div class="image-card"><?php print _svg('icons/external', array('class'=>'external-link-icon', 'alt' => 'External link icon')); ?></div>
               <div class="information-card">
                 <a href="#">id lobortis leo maximus tristique</a>
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc aliquet justo leo, id lobortis</p>
@@ -179,7 +179,7 @@
               </div>
             </li>
             <li class="document-card even">
-              <div class="image-card"><?php print _svg('icons/book', array('class'=>'document-icon', 'alt' => 'Document icon')); ?></div>
+              <div class="image-card"><?php print _svg('icons/external', array('class'=>'external-link-icon', 'alt' => 'External link icon')); ?></div>
               <div class="information-card">
                 <a href="#">id lobortis leo maximus tristique</a>
                 <p>Lorem ipsum dolor sit amet.</p>
@@ -190,7 +190,7 @@
               </div>
             </li>
             <li class="document-card odd">
-              <div class="image-card"><?php print _svg('icons/book', array('class'=>'document-icon', 'alt' => 'Document icon')); ?></div>
+              <div class="image-card"><?php print _svg('icons/external', array('class'=>'external-link-icon', 'alt' => 'External link icon')); ?></div>
               <div class="information-card">
                 <a href="#">id lobortis leo maximus tristique</a>
                 <p>Consectetur adipiscing elit. Nunc aliquet justo leo, id lobortis leo maximus tristique. Sed non odio eros. A bibendum ante lobortis eu.</p>
@@ -201,7 +201,7 @@
               </div>
             </li>
             <li class="document-card even">
-              <div class="image-card"><?php print _svg('icons/book', array('class'=>'document-icon', 'alt' => 'Document icon')); ?></div>
+              <div class="image-card"><?php print _svg('icons/external', array('class'=>'external-link-icon', 'alt' => 'External link icon')); ?></div>
               <div class="information-card">
                 <a href="#">id lobortis leo maximus tristique</a>
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc aliquet justo leo, id lobortis leo maximus tristique. Sed non odio eros. Aenean pulvinar sapien quam, a bibendum ante lobortis eu.</p>
@@ -211,7 +211,7 @@
                 <span class="source">Aenean pulvinar</span>
               </div>
             </li>
-            <li class="document-card odd">
+            <li class="document-card odd local-file">
               <div class="image-card"><?php print _svg('icons/file', array('class'=>'file-icon', 'alt' => 'File icon')); ?></div>
               <div class="information-card">
                 <a href="#">id lobortis leo maximus tristique</a>
@@ -224,10 +224,10 @@
             </li>
           </ul>
 
-          <h4>Cluster Guidance</h4>
+          <h3>Cluster Guidance</h3>
           <ul class="document-cards clearfix">
             <li class="document-card odd">
-              <div class="image-card"><?php print _svg('icons/book', array('class'=>'document-icon', 'alt' => 'Document icon')); ?></div>
+              <div class="image-card"><?php print _svg('icons/external', array('class'=>'external-link-icon', 'alt' => 'External link icon')); ?></div>
               <div class="information-card">
                 <a href="#">id lobortis leo maximus tristique</a>
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc aliquet justo leo, id lobortis leo maximus tristique. Sed non odio eros. Aenean pulvinar sapien quam, a bibendum ante lobortis eu.</p>
@@ -249,7 +249,7 @@
               </div>
             </li>
             <li class="document-card odd">
-              <div class="image-card"><?php print _svg('icons/book', array('class'=>'document-icon', 'alt' => 'Document icon')); ?></div>
+              <div class="image-card"><?php print _svg('icons/external', array('class'=>'external-link-icon', 'alt' => 'External link icon')); ?></div>
               <div class="information-card">
                 <a href="#">id lobortis leo maximus tristique</a>
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc aliquet justo leo, id lobortis leo maximus tristique. Sed non odio eros. Aenean pulvinar sapien quam, a bibendum ante lobortis eu.</p>
@@ -260,7 +260,7 @@
               </div>
             </li>
             <li class="document-card even">
-              <div class="image-card"><?php print _svg('icons/book', array('class'=>'document-icon', 'alt' => 'Document icon')); ?></div>
+              <div class="image-card"><?php print _svg('icons/external', array('class'=>'external-link-icon', 'alt' => 'External link icon')); ?></div>
               <div class="information-card">
                 <a href="#">id lobortis leo maximus tristique</a>
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc aliquet justo leo, id lobortis leo maximus tristique. Sed non odio eros. Aenean pulvinar sapien quam, a bibendum ante lobortis eu.</p>
@@ -272,10 +272,10 @@
             </li>
           </ul>
 
-          <h4>Other Sources of Information</h4>
+          <h3>Other Sources of Information</h3>
           <ul class="document-cards clearfix">
             <li class="document-card odd">
-              <div class="image-card"><?php print _svg('icons/book', array('class'=>'document-icon', 'alt' => 'Document icon')); ?></div>
+              <div class="image-card"><?php print _svg('icons/external', array('class'=>'external-link-icon', 'alt' => 'External link icon')); ?></div>
               <div class="information-card">
                 <a href="#">id lobortis leo maximus tristique</a>
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc aliquet justo leo, id lobortis leo maximus tristique. Sed non odio eros. Aenean pulvinar sapien quam, a bibendum ante lobortis eu.</p>
@@ -286,7 +286,7 @@
               </div>
             </li>
             <li class="document-card even">
-              <div class="image-card"><?php print _svg('icons/book', array('class'=>'document-icon', 'alt' => 'Document icon')); ?></div>
+              <div class="image-card"><?php print _svg('icons/external', array('class'=>'external-link-icon', 'alt' => 'External link icon')); ?></div>
               <div class="information-card">
                 <a href="#">id lobortis leo maximus tristique</a>
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc aliquet justo leo, id lobortis leo maximus tristique. Sed non odio eros. Aenean pulvinar sapien quam, a bibendum ante lobortis eu.</p>
@@ -298,7 +298,7 @@
             </li>
           </ul>
 
-          <h3>Recent Documents</h3>
+          <h2>Recent Documents</h2>
           <ul class="document-cards clearfix">
             <li class="document-card odd">
               <div class="image-card"><?php print _svg('icons/file', array('class'=>'file-icon', 'alt' => 'File icon')); ?></div>

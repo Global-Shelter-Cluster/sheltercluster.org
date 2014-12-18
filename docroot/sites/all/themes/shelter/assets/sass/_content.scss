@@ -2,7 +2,7 @@
 
 .main-column,
 .side-column {
-  h3 {
+  h2 {
     margin-top: 0;
     border-bottom: 2px solid $shelter-grey;
     text-transform: uppercase;
@@ -19,11 +19,11 @@
       width: 50px;
     }
   }
-  h4 {
+  h3 {
     border-bottom: 1px dashed lighten($shelter-grey,30%);
     text-transform: uppercase;
     color: $shelter-grey;
-    @include rem(padding, 0 0 0.2rem 0);
+    @include rem(padding, 0 0 0.4rem 0);
     @include rem(margin,0 0 0.6rem 0 );
     @include rem(font-size, 0.75rem);
   }
