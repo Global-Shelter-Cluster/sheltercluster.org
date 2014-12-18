@@ -774,8 +774,8 @@ header a {
     z-index: 2;
     font-size: 20.8px;
     font-size: 1.3rem;
-    top: -1.5px;
-    top: -0.09375rem;
+    top: 1px;
+    top: 0.0625rem;
     right: -1.5px;
     right: -0.09375rem;
     color: #fff;

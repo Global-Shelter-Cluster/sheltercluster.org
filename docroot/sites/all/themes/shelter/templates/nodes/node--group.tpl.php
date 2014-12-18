@@ -52,39 +52,42 @@
           <div id="button-join-group"><a href="#">Join</a></div>
         </section>
 
-        <h3 data-collapse="shelter-calendar">Calendar</h3>
-        <section id="shelter-calendar">
-          <div id="calendar-box">
-            <div id="calendar-date">
-              <?php print _svg('icons/pin', array('id'=>'calendar-pin', 'alt' => 'Pin icon')); ?>Nov. 24th 2014
+        <?php if (isset($content['upcoming_event'])): ?>
+          <h3 data-collapse="shelter-calendar">Calendar</h3>
+          <section id="shelter-calendar">
+            <div id="box-calendar">
+              <?php print _svg('icons/pin', array('id'=>'calendar-pin', 'alt' => 'Pin icon')); ?>
+              <div id="date-calendar">No upcoming event</div>
+              <div class="information-card">
+                <a class="event" href="#">See past events</a>
+              </div>
             </div>
-            <div id="calendar-event">
-              <span class="upcoming" href="#">Upcoming event to the <a href="#">agenda</a>:</span>
-              <a class="event" href="#">Shelter Technical Meeting 2014</a></div>
-          </div>
-          <a class="see-all" href="#">All calendar events</a>
-        </section>
+            <a class="see-all" href="#">All calendar events</a>
+          </section>
+        <?php endif; ?>
 
-        <section id="shelter-discussions">
-          <h3>Discussions</h3>
-          <ul id="discussions-items">
-            <li class="discussions-item">
-              <div class="replies">24 replies</div>
-              <div class="information">
-                <a href="#" class="topic">Where can I find lumber?</a>
-                <span class="date">2014/10/03 by <a class="author" href="#">Jane Wikionsons</a></span>
-              </div>
-            </li>
-            <li class="discussions-item">
-              <div class="replies">no replies <span class="new">New</span></div>
-              <div class="information">
-                <a href="#" class="topic">Are any special requirements for protection needed when entering the</a>
-                <span class="date">2014/10/15 by <a class="author" href="#">John Tremblay</a></span>
-              </div>
-            </li>
-          </ul>
-          <a class="see-all" href="#">All other discussions</a>
-        </section>
+        <?php if (isset($content['recent_discussions'])): ?>
+          <section id="shelter-discussions">
+            <h3>Discussions</h3>
+            <ul id="discussions-items">
+              <li class="discussions-item">
+                <div class="replies">24 replies</div>
+                <div class="information">
+                  <a href="#" class="topic">Where can I find lumber?</a>
+                  <span class="date">2014/10/03 by <a class="author" href="#">Jane Wikionsons</a></span>
+                </div>
+              </li>
+              <li class="discussions-item">
+                <div class="replies">no replies <span class="new">New</span></div>
+                <div class="information">
+                  <a href="#" class="topic">Are any special requirements for protection needed when entering the</a>
+                  <span class="date">2014/10/15 by <a class="author" href="#">John Tremblay</a></span>
+                </div>
+              </li>
+            </ul>
+            <a class="see-all" href="#">All other discussions</a>
+          </section>
+        <?php endif; ?>
 
         <section id="shelter-coordination-team">
           <?php print render($content['contact_members']); ?>
@@ -94,6 +97,7 @@
 
       <div class="main-column">
         <?php //print render($content); ?>
+        <?php dpm($content); ?>
       </div>
 
     </div>
