@@ -156,7 +156,7 @@ function cluster_docs_get_grouped_key_docs($gid) {
  */
 function cluster_docs_prepare_card_data($nids) {
   $docs = array();
-  $properties = array('title', 'link', 'link_url', 'is_link', 'is_file', 'description', 'filesize', 'file_extension', 'source',);
+  $properties = array('title', 'link', 'link_url', 'is_link', 'is_file', 'is_file_class', 'description', 'filesize', 'file_extension', 'source',);
 
   // @TODO language negocitation.
   global $language;
@@ -203,6 +203,11 @@ function cluster_docs_prepare_card_data($nids) {
       // Test if this document is a file field.
       if ($file = $wrapper->field_file->value()) {
         $doc['is_file'] = TRUE;
+        $doc['is_file_class'] = '';
+        if ($doc['is_file']) {
+          $doc['is_file_class'] = 'local-file';
+        }
+
         $doc['file_extension'] = l(pathinfo($file['filename'], PATHINFO_EXTENSION), $url, array('attributes' => array('target' => '_blank')));
         $doc['filesize'] = number_format($file['filesize'] / 1048576, 2);
       }
