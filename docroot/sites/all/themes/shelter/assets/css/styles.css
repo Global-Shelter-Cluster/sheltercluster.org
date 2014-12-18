@@ -393,15 +393,24 @@ body {
   margin: 1.5rem 0 2rem 0.5rem;
 }
 .document-cards .document-card {
+  position: relative;
   float: left;
   width: 100%;
   margin: 0 6% 3% 0;
-  background: #cdd6db;
-  color: #575757;
+  color: #3e3e3e;
+  background: #d0cdce;
   -webkit-background-clip: padding-box;
   /* for Safari */
   background-clip: padding-box;
   /* for IE9+, Firefox 4+, Opera, Chrome */
+}
+.document-cards .document-card.local-file .information-card a {
+  background-color: #688394;
+}
+.document-cards .document-card.local-file .image-card svg {
+  fill: #688394;
+  width: 30px;
+  height: 38px;
 }
 @media (min-width: 700px) {
   .document-cards .document-card {
@@ -413,32 +422,27 @@ body {
 }
 .document-cards .document-card .image-card {
   position: absolute;
-  width: 35px;
-}
-.document-cards .document-card .image-card svg {
-  position: relative;
-  background: #fff;
-  top: -10px;
-  left: -8px;
-  fill: #575757;
-  width: 45px;
-  height: 45px;
-  margin: 6px 0px 6px 0px;
-  margin: 0.375rem 0px 0.375rem 0px;
-  padding: 0 0px 6px 0px;
-  padding: 0 0px 0.375rem 0px;
-  -moz-border-radius: 5px;
-  -webkit-border-radius: 5px;
-  border-radius: 5px;
+  top: -17px;
+  left: -16px;
+  background: white;
+  pointer-events: none;
+  padding: 7px 5px 1px 10px;
+  padding: 0.4375rem 0.3125rem 0.0625rem 0.625rem;
+  -moz-border-radius: 7px;
+  -webkit-border-radius: 7px;
+  border-radius: 7px;
   -moz-box-sizing: initial;
   -webkit-box-sizing: initial;
   box-sizing: initial;
 }
+.document-cards .document-card .image-card svg {
+  fill: #575757;
+  width: 32px;
+  height: 39px;
+}
 .document-cards .document-card .information-card {
   display: table;
   width: 100%;
-  padding: 0 0 0 41.6px;
-  padding: 0 0 0 2.6rem;
 }
 .document-cards .document-card .information-card a {
   display: table;
@@ -449,13 +453,19 @@ body {
   text-align: center;
   text-decoration: none;
   font-weight: bold;
-  padding: 5px 0 5px 0;
-  padding: 0.3125rem 0 0.3125rem 0;
+  text-indent: 34px;
+  -moz-transition: all 0.3s ease;
+  -o-transition: all 0.3s ease;
+  -webkit-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+  padding: 6px 0 6px 0;
+  padding: 0.375rem 0 0.375rem 0;
   font-size: 12px;
   font-size: 0.75rem;
 }
 .document-cards .document-card .information-card a:hover, .document-cards .document-card .information-card a:active {
   text-decoration: none;
+  background-color: #7f1416;
 }
 .document-cards .document-card .information-card p {
   margin: 8px 8px 8px 24px;
@@ -467,7 +477,7 @@ body {
   float: left;
   width: 100%;
   color: #575757;
-  background-color: #b2c0c9;
+  border-top: 1px dotted #575757;
   font-size: 12px;
   font-size: 0.75rem;
   padding: 5px 8px;
@@ -938,8 +948,8 @@ header a {
   padding: 16px 0 0 0;
   padding: 1rem 0 0 0;
 }
-.main-column h3,
-.side-column h3 {
+.main-column h2,
+.side-column h2 {
   margin-top: 0;
   border-bottom: 2px solid #575757;
   text-transform: uppercase;
@@ -951,23 +961,23 @@ header a {
   margin: 0 0 24px 0;
   margin: 0 0 1.5rem 0;
 }
-.main-column h3 span,
-.side-column h3 span {
+.main-column h2 span,
+.side-column h2 span {
   position: relative;
   top: -7px;
   left: 10px;
 }
-.main-column h3 svg,
-.side-column h3 svg {
+.main-column h2 svg,
+.side-column h2 svg {
   width: 50px;
 }
-.main-column h4,
-.side-column h4 {
+.main-column h3,
+.side-column h3 {
   border-bottom: 1px dashed #a4a4a4;
   text-transform: uppercase;
   color: #575757;
-  padding: 0 0 3.2px 0;
-  padding: 0 0 0.2rem 0;
+  padding: 0 0 6.4px 0;
+  padding: 0 0 0.4rem 0;
   margin: 0 0 9.6px 0;
   margin: 0 0 0.6rem 0;
   font-size: 12px;
@@ -1001,18 +1011,18 @@ header a {
 }
 #shelter-discussions svg {
   position: absolute;
-  top: -22px;
-  left: -24px;
+  top: -19px;
+  left: -11px;
   background: #fff;
-  fill: #575757;
-  width: 60px;
+  fill: #688394;
+  width: 55px;
   margin: 6px 0px 6px 0px;
   margin: 0.375rem 0px 0.375rem 0px;
-  padding: 0 6px 6px 0;
-  padding: 0 0.375rem 0.375rem 0;
-  -moz-border-radius: 15px;
-  -webkit-border-radius: 15px;
-  border-radius: 15px;
+  padding: 0 5px 5px 0;
+  padding: 0 0.3125rem 0.3125rem 0;
+  -moz-border-radius: 11px;
+  -webkit-border-radius: 11px;
+  border-radius: 11px;
   -moz-box-sizing: initial;
   -webkit-box-sizing: initial;
   box-sizing: initial;
@@ -1042,6 +1052,16 @@ header a {
 #shelter-discussions .see-all:hover, #shelter-discussions .see-all:active {
   text-decoration: underline;
 }
+#shelter-discussions .see-all:before {
+  display: inline-block;
+  position: relative;
+  top: 1px;
+  content: '+';
+  font-size: 17.6px;
+  font-size: 1.1rem;
+  padding: 0 5px 0 0;
+  padding: 0 0.3125rem 0 0;
+}
 #shelter-discussions a {
   color: #688394;
 }
@@ -1059,6 +1079,8 @@ header a {
   padding: 1rem 2rem 1rem 2rem;
   margin: 0 0 8px 0;
   margin: 0 0 0.5rem 0;
+  font-size: 14px;
+  font-size: 0.875rem;
 }
 #discussions-items .discussions-item {
   float: left;
@@ -1173,6 +1195,16 @@ header a {
   font-size: 12px;
   font-size: 0.75rem;
 }
+#shelter-calendar .see-all:before {
+  display: inline-block;
+  position: relative;
+  top: 1px;
+  content: '+';
+  font-size: 17.6px;
+  font-size: 1.1rem;
+  padding: 0 5px 0 0;
+  padding: 0 0.3125rem 0 0;
+}
 #shelter-calendar a:hover, #shelter-calendar a:active {
   text-decoration: underline;
 }
@@ -1260,12 +1292,12 @@ header a {
   top: -22px;
   left: -24px;
   background: #fff;
-  fill: #575757;
-  width: 70px;
+  fill: #7f1416;
+  width: 62px;
   margin: 6px 0px 6px 0px;
   margin: 0.375rem 0px 0.375rem 0px;
-  padding: 0 6px 6px 0;
-  padding: 0 0.375rem 0.375rem 0;
+  padding: 0 5px 5px 0;
+  padding: 0 0.3125rem 0.3125rem 0;
   -moz-border-radius: 15px;
   -webkit-border-radius: 15px;
   border-radius: 15px;
