@@ -14,6 +14,7 @@ function cluster_discussions_user_default_permissions() {
   $permissions['view any node discussion page'] = array(
     'name' => 'view any node discussion page',
     'roles' => array(
+      'anonymous user' => 'anonymous user',
       'authenticated user' => 'authenticated user',
     ),
     'module' => 'restrict_node_page_view',

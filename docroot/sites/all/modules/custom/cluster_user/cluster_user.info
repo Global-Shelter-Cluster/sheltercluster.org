@@ -30,5 +30,5 @@ features[user_role][] = administrator
 features[user_role][] = trusted user
 features[variable][] = user_email_verification
 features[variable][] = user_register
-mtime = 1418834676
+mtime = 1418931648
 project path = sites/all/modules/custom
