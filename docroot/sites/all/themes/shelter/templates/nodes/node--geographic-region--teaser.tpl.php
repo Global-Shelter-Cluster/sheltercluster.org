@@ -1,8 +1,1 @@
-<?php
-// Geographic region teaser
-
-//print render($content);
-
-?>
-
-GEOGRAPHIC REGIONS TEASER
+<?php print l($node->title, 'node/'.$node->nid); ?>

@@ -27,9 +27,9 @@ body {
   }
 }
 
-#content {
+.content {
   @include rem(padding, 0 0 2rem 0);
-  @include rem(min-height, 10rem);
+  @include rem(min-height, 15rem);
 }
 
 .main-column {

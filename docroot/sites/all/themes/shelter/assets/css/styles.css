@@ -288,11 +288,11 @@ body {
   }
 }
 
-#content {
+.content {
   padding: 0 0 32px 0;
   padding: 0 0 2rem 0;
-  min-height: 160px;
-  min-height: 10rem;
+  min-height: 240px;
+  min-height: 15rem;
 }
 
 .main-column {
@@ -1522,18 +1522,37 @@ header a {
   font-size: 0.875rem;
 }
 
-.page-regions-countries {
-  background-color: #575757;
+.page-regions-countries #map {
+  position: relative;
 }
-.page-regions-countries #site-options-bar {
-  background-color: #575757;
+.page-regions-countries #regions-overlay {
+  position: absolute;
+  top: 48px;
+  top: 3rem;
+  padding: 16px 48px 16px 0;
+  padding: 1rem 3rem 1rem 0;
+  left: 10%;
 }
-.page-regions-countries #language-selector {
-  border-bottom: none;
+.page-regions-countries #regions-overlay .background {
+  background: rgba(0, 0, 0, 0.65);
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
 }
-.page-regions-countries #logo-shelter-cluster .svg polygon,
-.page-regions-countries #logo-shelter-cluster .svg path {
-  fill: #fff;
+.page-regions-countries #regions-overlay .menu {
+  position: relative;
+  z-index: 50;
+}
+.page-regions-countries #regions-overlay a {
+  color: #fff;
+}
+.page-regions-countries #map-canvas {
+  width: 100%;
+  height: 650px;
+  margin: 16px 0 80px 0;
+  margin: 1rem 0 5rem 0;
 }
 .page-regions-countries footer {
   background-color: #575757;
