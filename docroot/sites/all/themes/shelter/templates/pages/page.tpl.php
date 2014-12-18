@@ -98,18 +98,7 @@
 
       <section id="general-information">
         <h3>General Information</h3>
-        <ul class="links">
-          <li class="link"><a href="#">About this site</a></li>
-          <li class="link"><a href="#">Contact information</a></li>
-          <li class="link"><a href="#">Twitter account</a></li>
-        </ul><ul class="links">
-          <li class="link"><a href="#">Support Team</a></li>
-          <li class="link"><a href="#">Partnership</a></li>
-        </ul><ul class="links">
-          <li class="link"><a href="#">Other</a></li>
-          <li class="link"><a href="#">More information</a></li>
-          <li class="link"><a href="#">Twitter account</a></li>
-        </ul>
+          <?php print render($page['footer']['general_information']); ?>
       </section>
 
       <section id="partners-list">
