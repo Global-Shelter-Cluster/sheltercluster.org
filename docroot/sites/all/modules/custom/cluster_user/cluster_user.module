@@ -55,7 +55,10 @@ function cluster_user_preprocess_user_profile($vars) {
  */
 function cluster_user_preprocess_page(&$variables) {
   // User login block (form, register, forgot pwd)
-  $variables['user_login'] = module_invoke('user', 'block_view', 'login');
+  $user_login = module_invoke('user', 'block_view', 'login');
+  if ($user_login) {
+    $variables['user_login'] = $user_login['content'];
+  }
 
   // User menu (my account, logout)
   $user_menu = menu_tree('user-menu');
