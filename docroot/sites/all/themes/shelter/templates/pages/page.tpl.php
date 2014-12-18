@@ -84,7 +84,7 @@
       <?php print render($search_form); ?>
     </div>
 
-    <div class="page-margin">
+    <div class="page-margin inside-footer">
       <section id="active-clusters-list">
         <h3>With 24 <a href='#'>active responses</a> and cluster like mechanisms.</h3>
         <ul class="clusters">
@@ -92,7 +92,7 @@
           <li class="cluster"><a href="#">Philippines Bohol Earthquake</a></li>
           <li class="cluster"><a href="#">Solomon Islands Floods 2014</a></li>
         </ul>
-        <a class="complete-list" href="#">[...] more</a>
+        <a class="see-all" href="#">more</a>
 
       </section><section id="regions-list">
         <h3>Shelter Cluster is present in over <a href="#">34 regions</a></h3>

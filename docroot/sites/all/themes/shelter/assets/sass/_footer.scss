@@ -1,26 +1,94 @@
 /* _footer.scss */
 
 footer {
-  background: darken($shelter-dark-blue, 5%);
-  color: #fff;
+  background: darken(rgb(235, 239, 243), 5%);
+  color: $shelter-grey;
   @include rem(padding-bottom, 2rem);
 
-  a {
-    color: #fff;
+  .inside-footer {
+    background-color: $shelter-light-blue;
+    @include rem(padding, 1.5625rem);
   }
+
+  a {
+    position: relative;
+    color: $shelter-grey;
+    text-decoration: none;
+
+    &:hover,
+    &:active {
+      text-decoration: none;
+      &:after {
+        content: '';
+        width: 100%;
+        position: absolute;
+        left: 0;
+        bottom: 1px;
+        border-width: 0 0 1px;
+        border-style: solid;
+      }
+    }
+  }
+
+  .see-all {
+    text-indent: -15px;
+    margin: 0 0 0 15px;
+    text-transform: uppercase;
+    font-weight: bold;
+    @include rem(font-size, 0.75rem);
+
+    &:before {
+      position: absolute;
+      top: -4px;
+      content: '+';
+      @include rem(font-size, 1.1rem);
+      @include rem(padding, 0 0.3125rem 0 0);
+    }
+    &:hover,
+    &:active {
+      text-decoration: none;
+      &:before {
+        border-style: none;
+      }
+    }
+  }
+
   ul {
     margin: 0 0 0 0;
     padding: 0 0 0 0;
+    list-style-position: inside;
   }
   li {
-    @include rem(padding, 0 0.5rem 0.5rem);
+    @include rem(padding, 0 0 0.25rem);
+    @include rem(font-size, 0.85rem);
   }
   section {
     @include rem(margin-bottom, 2rem);
   }
   h3 {
-    @include rem(padding, 0.5rem );
+    text-transform: uppercase;
+    @include rem(font-size, 0.85rem);
     @include rem(margin, 0 0 1rem );
+    a {
+      text-decoration: none;
+      position: relative;
+      &:hover,
+      &:active {
+        text-decoration: none;
+        &:after {
+          border-style: none;
+        }
+      }
+      &:after {
+        content: '';
+        width: 100%;
+        position: absolute;
+        left: 0;
+        bottom: 1px;
+        border-width: 0 0 1px;
+        border-style: solid;
+      }
+    }
   }
 
   #active-clusters-list {

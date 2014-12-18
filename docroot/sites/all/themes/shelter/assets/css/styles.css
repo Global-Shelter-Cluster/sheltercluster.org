@@ -812,6 +812,7 @@ header a {
     display: table;
     table-layout: fixed;
     width: 100%;
+    height: 100%;
   }
 }
 @media (min-width: 1215px) {
@@ -838,16 +839,17 @@ header a {
 #nav-shelter .nav-items .nav-item {
   position: relative;
   display: table;
-  width: 100%;
   text-align: center;
   background-color: #7f1416;
   border-bottom: 1px solid white;
   padding: 0;
+  width: 100%;
 }
 @media (min-width: 460px) {
   #nav-shelter .nav-items .nav-item {
     display: table-cell;
     border-bottom: none;
+    width: auto;
   }
   #nav-shelter .nav-items .nav-item:after {
     content: '|';
@@ -1639,31 +1641,96 @@ header a {
 
 /* _footer.scss */
 footer {
-  background: #5d7685;
-  color: #fff;
+  background: #dbe2e9;
+  color: #575757;
   padding-bottom: 32px;
   padding-bottom: 2rem;
 }
+footer .inside-footer {
+  background-color: #cdd6db;
+  padding: 25px;
+  padding: 1.5625rem;
+}
 footer a {
-  color: #fff;
+  position: relative;
+  color: #575757;
+  text-decoration: none;
+}
+footer a:hover, footer a:active {
+  text-decoration: none;
+}
+footer a:hover:after, footer a:active:after {
+  content: '';
+  width: 100%;
+  position: absolute;
+  left: 0;
+  bottom: 1px;
+  border-width: 0 0 1px;
+  border-style: solid;
+}
+footer .see-all {
+  text-indent: -15px;
+  margin: 0 0 0 15px;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 12px;
+  font-size: 0.75rem;
+}
+footer .see-all:before {
+  position: absolute;
+  top: -4px;
+  content: '+';
+  font-size: 17.6px;
+  font-size: 1.1rem;
+  padding: 0 5px 0 0;
+  padding: 0 0.3125rem 0 0;
+}
+footer .see-all:hover, footer .see-all:active {
+  text-decoration: none;
+}
+footer .see-all:hover:before, footer .see-all:active:before {
+  border-style: none;
 }
 footer ul {
   margin: 0 0 0 0;
   padding: 0 0 0 0;
+  list-style-position: inside;
 }
 footer li {
-  padding: 0 8px 8px;
-  padding: 0 0.5rem 0.5rem;
+  padding: 0 0 4px;
+  padding: 0 0 0.25rem;
+  font-size: 13.6px;
+  font-size: 0.85rem;
 }
 footer section {
   margin-bottom: 32px;
   margin-bottom: 2rem;
 }
 footer h3 {
-  padding: 8px;
-  padding: 0.5rem;
+  text-transform: uppercase;
+  font-size: 13.6px;
+  font-size: 0.85rem;
   margin: 0 0 16px;
   margin: 0 0 1rem;
+}
+footer h3 a {
+  text-decoration: none;
+  position: relative;
+}
+footer h3 a:hover, footer h3 a:active {
+  text-decoration: none;
+}
+footer h3 a:hover:after, footer h3 a:active:after {
+  border-style: none;
+}
+footer h3 a:after {
+  content: '';
+  width: 100%;
+  position: absolute;
+  left: 0;
+  bottom: 1px;
+  border-width: 0 0 1px;
+  border-style: solid;
 }
 footer #active-clusters-list {
   display: inline-block;
