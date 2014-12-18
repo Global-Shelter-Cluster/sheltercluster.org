@@ -245,7 +245,7 @@ function cluster_docs_theme() {
         'heading' => FALSE,
         'docs' => array(),
       ),
-      'template' => 'theme/cluster_docs_cards_list'
+      'template' => 'theme/cluster-docs-cards-list'
     ),
   );
 }
