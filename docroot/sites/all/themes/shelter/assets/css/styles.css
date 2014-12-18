@@ -473,6 +473,9 @@ body {
 .document-cards .document-card .information-file .size-type {
   float: left;
 }
+.document-cards .document-card .information-file .size-type a {
+  color: #222;
+}
 .document-cards .document-card .information-file .source {
   float: right;
 }

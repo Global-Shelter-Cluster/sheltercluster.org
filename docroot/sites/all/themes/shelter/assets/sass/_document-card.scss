@@ -76,6 +76,9 @@
       @include rem(padding, 0.3125rem 0.5rem);
       .size-type {
         float: left;
+        a {
+          color: #222;
+        }
       }
       .source {
         float: right;
