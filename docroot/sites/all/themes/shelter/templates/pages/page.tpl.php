@@ -30,7 +30,7 @@
 
         <div id="user-login-container" class="clearfix">
           <?php
-          if ($user_login) {
+          if (isset($user_login)) {
             print render($user_login);
           }
           ?>
