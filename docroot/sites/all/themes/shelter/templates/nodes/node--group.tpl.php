@@ -97,7 +97,6 @@
 
       <div class="main-column">
         <?php //print render($content); ?>
-        <?php dpm($content); ?>
       </div>
 
     </div>
