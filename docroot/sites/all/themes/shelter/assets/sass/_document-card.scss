@@ -1,9 +1,5 @@
 /* _document-card.scss */
 
-#key-information {
-
-}
-
 .document-cards {
   @include reset-list;
   @include rem(margin,1.5rem 0 2rem 0.5rem);
@@ -78,12 +74,31 @@
         float: left;
         a {
           color: #222;
+          text-transform: uppercase;
+          font-weight: bold;
+          &:hover,
+          &:active {
+            text-decoration: none;
+          }
         }
       }
       .source {
         float: right;
       }
     }
+  }
+}
+
+.browse-all-documents {
+  text-transform: uppercase;
+  font-weight: bold;
+  color: $shelter-grey;
+  @include rem(font-size, 0.75rem);
+  @include rem(padding, 0 0 0 0.5rem);
+
+  &:hover,
+  &:active {
+    text-decoration: none;
   }
 }
 

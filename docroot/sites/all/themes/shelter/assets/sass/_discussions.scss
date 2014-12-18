@@ -31,13 +31,13 @@
 
   .see-all {
     text-transform: uppercase;
-    text-decoration: none;
     font-weight: bold;
     @include rem(font-size, 0.75rem);
-      &:hover,
-      &:active {
-        text-decoration: underline;
-      }
+
+    &:hover,
+    &:active {
+      text-decoration: none;
+    }
   }
 
   a {

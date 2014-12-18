@@ -73,7 +73,7 @@ function theme_cluster_og_recent_discussions($vars) {
 function theme_cluster_og_recent_documents($vars) {
   $output = '<div>';
   $output .= $vars['element']['#children'];
-  $output .= l(t('Browse all documents'), $vars['element']['#all_documents_link']);
+  $output .= l(t('Browse all documents'), $vars['element']['#all_documents_link'], array('attributes' => array('class' => array('browse-all-documents'))));
   $output .= '</div>';
   return $output;
 }
