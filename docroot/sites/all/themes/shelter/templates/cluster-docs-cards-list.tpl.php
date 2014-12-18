@@ -22,7 +22,7 @@
   <?php foreach($docs as $delta => $doc): ?>
     <?php $zebra = (($delta + 1) % 2) ? 'odd' : 'even'; ?>
 
-    <li class="document-card <?php print $zebra; ?>">
+    <li class="document-card <?php print $zebra; ?> <?php print $doc['is_file_class']; ?>">
       <div class="image-card">
         <?php if ($doc['is_link']): ?>
           <?php print l( _svg('icons/external', array('class'=>'document-external', 'alt' => 'Icon for an external resource')), $doc['link_url'], array('html' => TRUE, 'attributes' => array('target' => '_blank'))); ?>

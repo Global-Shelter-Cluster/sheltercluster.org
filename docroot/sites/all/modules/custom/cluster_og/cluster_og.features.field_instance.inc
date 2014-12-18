@@ -1318,6 +1318,53 @@ function cluster_og_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-response-field_current_sc_lead_agency'
+  $field_instances['node-response-field_current_sc_lead_agency'] = array(
+    'bundle' => 'response',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 17,
+      ),
+      'related_response' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_current_sc_lead_agency',
+    'label' => 'Current SC Lead Agency',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 15,
+    ),
+  );
+
   // Exported field_instance: 'node-response-field_disaster_causes'
   $field_instances['node-response-field_disaster_causes'] = array(
     'bundle' => 'response',
@@ -1407,6 +1454,100 @@ function cluster_og_field_default_field_instances() {
       ),
       'type' => 'options_select',
       'weight' => 12,
+    ),
+  );
+
+  // Exported field_instance: 'node-response-field_emergency_sc_lead'
+  $field_instances['node-response-field_emergency_sc_lead'] = array(
+    'bundle' => 'response',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 18,
+      ),
+      'related_response' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_emergency_sc_lead',
+    'label' => 'Emergency SC Lead',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 16,
+    ),
+  );
+
+  // Exported field_instance: 'node-response-field_govt_counterpart_agency'
+  $field_instances['node-response-field_govt_counterpart_agency'] = array(
+    'bundle' => 'response',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 16,
+      ),
+      'related_response' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_govt_counterpart_agency',
+    'label' => 'Government Counterpart Agency',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 14,
     ),
   );
 
@@ -1564,6 +1705,53 @@ function cluster_og_field_default_field_instances() {
       ),
       'type' => 'entityreference_autocomplete',
       'weight' => 3,
+    ),
+  );
+
+  // Exported field_instance: 'node-response-field_recovery_sc_lead'
+  $field_instances['node-response-field_recovery_sc_lead'] = array(
+    'bundle' => 'response',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 19,
+      ),
+      'related_response' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_recovery_sc_lead',
+    'label' => 'Recovery SC Lead',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 17,
     ),
   );
 
@@ -2691,10 +2879,13 @@ function cluster_og_field_default_field_instances() {
   t('Body');
   t('Check this if the response is a "hot" response and needs to be displayed accordingly.');
   t('Crisis date: day');
+  t('Current SC Lead Agency');
   t('Determine if this is an OG group.');
   t('Disaster Causes');
   t('Disaster Type');
+  t('Emergency SC Lead');
   t('Geographic region type');
+  t('Government Counterpart Agency');
   t('Group');
   t('Group register');
   t('Group roles and permissions');
@@ -2704,6 +2895,7 @@ function cluster_og_field_default_field_instances() {
   t('Image');
   t('Parent region');
   t('Parent response');
+  t('Recovery SC Lead');
   t('Region');
   t('Response');
   t('Response status');

@@ -17,10 +17,15 @@
       .information-card a {
         background-color: $shelter-dark-blue;
       }
-      .image-card svg {
-        fill: $shelter-dark-blue;
-        width: 30px;
-        height: 38px;
+      .image-card {
+        @include rem(padding, 0.4375rem 0.3125rem 0px 0.625rem);
+        height: 42px;
+
+        svg {
+          fill: $shelter-dark-blue;
+          width: 30px;
+          height: 39px;
+        }
       }
     }
 
@@ -33,12 +38,11 @@
     }
     .image-card {
       position: absolute;
-      top: -17px;
+      top: -16px;
       left: -16px;
       background: rgb(255,255,255);
       pointer-events: none;
-      @include rem(padding, 0.4375rem 0.3125rem 0.0625rem 0.625rem );
-      @include border-radius(7px);
+      @include rem(padding, 7px 3px 0px 10px );
       @include box-sizing(initial);
 
       svg {
@@ -85,7 +89,7 @@
       .size-type {
         float: left;
         a {
-          color: #222;
+          color: $shelter-grey;
           text-transform: uppercase;
           font-weight: bold;
           &:hover,

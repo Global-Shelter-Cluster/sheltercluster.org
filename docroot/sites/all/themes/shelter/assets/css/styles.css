@@ -404,10 +404,15 @@ body {
 .document-cards .document-card.local-file .information-card a {
   background-color: #688394;
 }
+.document-cards .document-card.local-file .image-card {
+  padding: 7px 5px 0px 10px;
+  padding: 0.4375rem 0.3125rem 0px 0.625rem;
+  height: 42px;
+}
 .document-cards .document-card.local-file .image-card svg {
   fill: #688394;
   width: 30px;
-  height: 38px;
+  height: 39px;
 }
 @media (min-width: 700px) {
   .document-cards .document-card {
@@ -419,15 +424,12 @@ body {
 }
 .document-cards .document-card .image-card {
   position: absolute;
-  top: -17px;
+  top: -16px;
   left: -16px;
   background: white;
   pointer-events: none;
-  padding: 7px 5px 1px 10px;
-  padding: 0.4375rem 0.3125rem 0.0625rem 0.625rem;
-  -moz-border-radius: 7px;
-  -webkit-border-radius: 7px;
-  border-radius: 7px;
+  padding: 7px 3px 0px 10px;
+  padding: 0.4375rem 0.1875rem 0px 0.625rem;
   -moz-box-sizing: initial;
   -webkit-box-sizing: initial;
   box-sizing: initial;
@@ -484,7 +486,7 @@ body {
   float: left;
 }
 .document-cards .document-card .information-file .size-type a {
-  color: #222;
+  color: #575757;
   text-transform: uppercase;
   font-weight: bold;
 }
