@@ -463,8 +463,8 @@ body {
 .document-cards .document-card .information-file {
   float: left;
   width: 100%;
-  background: url(../images/stripes-pattern.png) repeat 0 0 #fff;
   color: #575757;
+  background-color: #b2c0c9;
   font-size: 12px;
   font-size: 0.75rem;
   padding: 5px 8px;
@@ -922,7 +922,7 @@ header a {
 #secondary-nav .nav-items .nav-item a {
   float: left;
   width: 100%;
-  background: url(../images/stripes-pattern.png) repeat 0 0 #fff;
+  background: #cdd6db;
   color: #575757;
   font-weight: bold;
   text-align: center;
@@ -977,6 +977,16 @@ header a {
   margin: 0 0 24px 0;
   margin: 0 0 1.5rem 0;
 }
+.main-column h3 span,
+.side-column h3 span {
+  position: relative;
+  top: -7px;
+  left: 10px;
+}
+.main-column h3 svg,
+.side-column h3 svg {
+  width: 50px;
+}
 .main-column h4,
 .side-column h4 {
   border-bottom: 1px dashed #a4a4a4;
@@ -1004,24 +1014,77 @@ header a {
 
 /* _discussions.scss */
 #shelter-discussions {
+  position: relative;
   margin: 0 0 32px 0;
   margin: 0 0 2rem 0;
+  color: #688394;
+  -moz-border-radius-bottomleft: 0.1875rem;
+  -webkit-border-bottom-left-radius: 0.1875rem;
+  border-bottom-left-radius: 0.1875rem;
+  -moz-border-radius-bottomright: 0.1875rem;
+  -webkit-border-bottom-right-radius: 0.1875rem;
+  border-bottom-right-radius: 0.1875rem;
+}
+#shelter-discussions svg {
+  position: absolute;
+  top: -22px;
+  left: -24px;
+  background: #fff;
+  fill: #575757;
+  width: 60px;
+  margin: 6px 0px 6px 0px;
+  margin: 0.375rem 0px 0.375rem 0px;
+  padding: 0 6px 6px 0;
+  padding: 0 0.375rem 0.375rem 0;
+  -moz-border-radius: 15px;
+  -webkit-border-radius: 15px;
+  border-radius: 15px;
+  -moz-box-sizing: initial;
+  -webkit-box-sizing: initial;
+  box-sizing: initial;
+}
+#shelter-discussions h3 {
+  background-color: #688394;
+  color: white;
+  text-align: center;
+  border-bottom: none;
+  margin: 0;
+  -moz-border-radius-topleft: 0.1875rem;
+  -webkit-border-top-left-radius: 0.1875rem;
+  border-top-left-radius: 0.1875rem;
+  -moz-border-radius-topright: 0.1875rem;
+  -webkit-border-top-right-radius: 0.1875rem;
+  border-top-right-radius: 0.1875rem;
+  padding: 5.6px;
+  padding: 0.35rem;
 }
 #shelter-discussions .see-all {
-  font-size: 14.4px;
-  font-size: 0.9rem;
+  text-transform: uppercase;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 12px;
+  font-size: 0.75rem;
+}
+#shelter-discussions .see-all:hover, #shelter-discussions .see-all:active {
+  text-decoration: underline;
 }
 #shelter-discussions a {
-  color: #242424;
+  color: #688394;
 }
 #shelter-discussions a:hover, #shelter-discussions a:active {
   text-decoration: none;
 }
 
 #discussions-items {
+  display: table;
+  background-color: #dadee4;
   padding: 0;
   margin: 0;
   list-style: none;
+  padding: 16px 32px 16px 32px;
+  padding: 1rem 2rem 1rem 2rem;
+  margin: 0 0 8px 0;
+  margin: 0 0 0.5rem 0;
 }
 #discussions-items .discussions-item {
   float: left;
@@ -1029,11 +1092,12 @@ header a {
   margin: 0 0 10px 0;
   margin: 0 0 0.625rem 0;
 }
+#discussions-items .discussions-item:last-child {
+  margin: 0;
+}
 #discussions-items .replies {
   float: left;
   width: 25%;
-  font-size: 14.4px;
-  font-size: 0.9rem;
 }
 #discussions-items .information {
   float: left;
@@ -1042,8 +1106,6 @@ header a {
 }
 #discussions-items .information .topic {
   display: block;
-  font-size: 15.2px;
-  font-size: 0.95rem;
   padding: 0 0 3.2px 0;
   padding: 0 0 0.2rem 0;
 }
@@ -1053,7 +1115,7 @@ header a {
 }
 #discussions-items .new {
   display: block;
-  color: red;
+  color: #7f1416;
 }
 
 /* _coordination.scss */
@@ -1126,113 +1188,116 @@ header a {
 
 /* _calendar.scss */
 #shelter-calendar {
-  margin: 0 0 32px 0;
-  margin: 0 0 2rem 0;
-  color: white;
+  margin: 0 0 24px 0;
+  margin: 0 0 1.5rem 0;
 }
 #shelter-calendar .see-all {
-  font-size: 14.4px;
-  font-size: 0.9rem;
+  text-transform: uppercase;
   color: #7f1416;
-}
-#shelter-calendar .see-all:hover, #shelter-calendar .see-all:active {
   text-decoration: none;
+  font-weight: bold;
+  font-size: 12px;
+  font-size: 0.75rem;
+}
+#shelter-calendar a:hover, #shelter-calendar a:active {
+  text-decoration: underline;
 }
 
-#calendar-box {
+#box-calendar {
+  position: relative;
   width: 100%;
   background-color: #7f1416;
-  padding: 0;
-  margin: 0;
-  list-style: none;
+  color: white;
+  text-align: center;
   margin: 0 0 8px 0;
   margin: 0 0 0.5rem 0;
   -moz-border-radius: 0.1875rem;
   -webkit-border-radius: 0.1875rem;
   border-radius: 0.1875rem;
 }
-@media (min-width: 500px) {
-  #calendar-box {
+#box-calendar a {
+  color: white;
+  width: 100%;
+  text-align: center;
+}
+#box-calendar a:hover, #box-calendar a:active {
+  text-decoration: none;
+}
+@media (min-width: 500px) and (max-width: 979px) {
+  #box-calendar {
     display: table;
-    width: 100%;
-    height: 100%;
   }
-  #calendar-box > div {
+  #box-calendar > div {
     display: table-cell;
     vertical-align: middle;
     text-align: center;
+    padding-left: 32px;
+    padding-left: 2rem;
   }
 }
 @media (min-width: 980px) {
-  #calendar-box {
+  #box-calendar {
     display: block;
     width: auto;
     height: auto;
   }
-  #calendar-box > div {
+  #box-calendar > div {
     display: block;
     vertical-align: initial;
   }
 }
-#calendar-box a {
-  color: #242424;
+#box-calendar .information-card {
+  padding: 12px;
+  padding: 0.75rem;
+  line-height: 24px;
+  line-height: 1.5rem;
 }
-#calendar-box a:hover, #calendar-box a:active {
-  text-decoration: none;
+#box-calendar .information-card .event {
+  font-weight: bold;
 }
 
-#calendar-date {
-  position: relative;
-  text-align: center;
-  text-transform: uppercase;
-  font-size: 17.6px;
-  font-size: 1.1rem;
-  padding: 10px;
-  padding: 0.625rem;
+#date-calendar {
   border-bottom: 1px dashed white;
+  text-indent: -36px;
+  text-indent: -2.25rem;
+  margin: 0 10px 0 60px;
+  margin: 0 0.625rem 0 3.75rem;
+  padding: 8px 0 8px 0;
+  padding: 0.5rem 0 0.5rem 0;
 }
-@media (min-width: 500px) {
-  #calendar-date {
-    width: 140px;
-    border-right: 1px solid #651011;
+@media (min-width: 500px) and (max-width: 979px) {
+  #date-calendar {
     border-bottom: none;
+    border-right: 1px dashed white;
+    width: 200px;
+    text-indent: 24px;
+    text-indent: 1.5rem;
   }
 }
-@media (min-width: 980px) {
-  #calendar-date {
-    width: auto;
-    border-right: none;
-    border-bottom: 1px dashed #a4a4a4;
-  }
-}
-#calendar-date .image-calendar {
-  position: absolute;
-  width: 35px;
-}
-#calendar-date .image-calendar svg {
+#date-calendar sup {
   position: relative;
+  vertical-align: top;
+  vertical-align: 1.6px;
+  vertical-align: 0.1rem;
+}
+
+#calendar-pin {
+  position: absolute;
+  top: -22px;
+  left: -24px;
   background: #fff;
-  top: -10px;
-  left: -8px;
   fill: #575757;
-  width: 45px;
-  height: 45px;
+  width: 70px;
   margin: 6px 0px 6px 0px;
   margin: 0.375rem 0px 0.375rem 0px;
-  padding: 0 0px 6px 0px;
-  padding: 0 0px 0.375rem 0px;
-  -moz-border-radius: 5px;
-  -webkit-border-radius: 5px;
-  border-radius: 5px;
+  padding: 0 6px 6px 0;
+  padding: 0 0.375rem 0.375rem 0;
+  -moz-border-radius: 15px;
+  -webkit-border-radius: 15px;
+  border-radius: 15px;
   -moz-box-sizing: initial;
   -webkit-box-sizing: initial;
   box-sizing: initial;
-}
-@media (min-width: 990px) {
-  #calendar-date .image-calendar {
-    position: absolute;
-    left: 20px;
-  }
 }
 
 #calendar-event {
@@ -1381,16 +1446,10 @@ header a {
 }
 #active-responses #major-responses div {
   float: left;
-  margin: 4px 16px 0 0;
-  margin: 0.25rem 1rem 0 0;
 }
-#active-responses #major-responses div:last-child {
-  margin-right: 0;
-}
-#active-responses #major-responses .warning-icon {
-  fill: #7f1416;
-  width: 25px;
-  height: 25px;
+#active-responses #major-responses svg {
+  width: 40px;
+  height: 40px;
 }
 #active-responses #legend {
   clear: both;
@@ -1402,20 +1461,10 @@ header a {
   margin-right: 16px;
   margin-right: 1rem;
 }
-#active-responses #legend .warning-icon {
-  fill: #7f1416;
-  top: 5px;
-  width: 20px;
-  height: 20px;
-}
-#active-responses #legend .team-icon {
-  fill: #65b630;
-  top: 6px;
-  width: 20px;
-  height: 20px;
-}
 #active-responses #legend svg {
   position: relative;
+  width: 30px;
+  height: 30px;
 }
 
 /* _operation-data.scss */

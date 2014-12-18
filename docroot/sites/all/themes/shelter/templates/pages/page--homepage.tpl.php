@@ -74,18 +74,23 @@
             <ul id="major-responses">
               <li>
                 <a href="#">Typhoon Haian</a>
-                <div class="hightened"><?php print _svg('icons/warning', array('class'=>'warning-icon', 'alt' => 'Warning icon')); ?></div>
+                <?php print _svg('icons/complex-crisis', array('class'=>'complex-crisis-icon', 'alt' => 'Complex crisis icon')); ?>
               </li>
               <li>
                 <a href="#">Fukushima Earthquake</a>
+                <?php print _svg('icons/natural-disaster', array('class'=>'natural-disaster-icon', 'alt' => 'Natural disaster icon')); ?>
               </li>
-              <li><a href="#">Hurricane Katrina</a></li>
+              <li>
+                <a href="#">Hurricane Katrina</a>
+                <?php print _svg('icons/natural-disaster', array('class'=>'natural-disaster-icon', 'alt' => 'Natural disaster icon')); ?>
+                <?php print _svg('icons/complex-crisis', array('class'=>'complex-crisis-icon', 'alt' => 'Complex crisis icon')); ?>
+              </li>
             </ul>
             <ul id="legend">
-              <li class="team"><?php print _svg('icons/warning', array('class'=>'warning-icon', 'alt' => 'Warning icon')); ?> Conflict</li>
-              <li class="hightened"><?php print _svg('icons/warning', array('class'=>'warning-icon', 'alt' => 'Warning icon')); ?> Complex Crisis</li>
-              <li class="hightened"><?php print _svg('icons/warning', array('class'=>'warning-icon', 'alt' => 'Warning icon')); ?> Natural Disaster</li>
-              <li class="hightened"><?php print _svg('icons/warning', array('class'=>'warning-icon', 'alt' => 'Warning icon')); ?> Man-made disaster</li>
+              <li><?php print _svg('icons/conflict', array('class'=>'conflict-icon', 'alt' => 'Conflict icon')); ?> Conflict</li>
+              <li><?php print _svg('icons/complex-crisis', array('class'=>'complex-crisis-icon', 'alt' => 'Complex crisis icon')); ?> Complex Crisis</li>
+              <li><?php print _svg('icons/natural-disaster', array('class'=>'natural-disaster-icon', 'alt' => 'Natural disaster icon')); ?> Natural Disaster</li>
+              <li><?php print _svg('icons/man-made-disaster', array('class'=>'man-made-disaster-icon', 'alt' => 'Man-made disaster icon')); ?> Man-made disaster</li>
             </ul>
           </section>
 

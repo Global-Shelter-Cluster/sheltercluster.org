@@ -70,8 +70,8 @@
     .information-file {
       float: left;
       width: 100%;
-      background: url(../images/stripes-pattern.png) repeat 0 0 #fff;
       color: $shelter-grey;
+      background-color: lighten($shelter-dark-blue,25%);
       @include rem(font-size, 0.75rem);
       @include rem(padding, 0.3125rem 0.5rem);
       .size-type {

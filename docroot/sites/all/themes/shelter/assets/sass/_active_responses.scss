@@ -37,15 +37,10 @@
     }
     div {
       float: left;
-      @include rem(margin, 0.25rem 1rem 0 0);
-      &:last-child {
-        margin-right: 0;
-      }
     }
-   .warning-icon {
-      fill: $shelter-red;
-      width: 25px;
-      height: 25px;
+    svg {
+      width: 40px;
+      height: 40px;
     }
   }
 
@@ -57,20 +52,10 @@
       float: left;
       @include rem(margin-right, 1rem);
     }
-    .warning-icon {
-      fill: $shelter-red;
-      top: 5px;
-      width: 20px;
-      height: 20px;
-    }
-    .team-icon {
-      fill: $accent-green;
-      top: 6px;
-      width: 20px;
-      height: 20px;
-    }
     svg {
       position: relative;
+      width: 30px;
+      height: 30px;
     }
   }
 }

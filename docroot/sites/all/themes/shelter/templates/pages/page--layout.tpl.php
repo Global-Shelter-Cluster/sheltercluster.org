@@ -165,7 +165,7 @@
         </section>
 
         <section id="key-information">
-          <h3>Key Information</h3>
+          <h3><?php print _svg('icons/key-information', array('class'=>'key-icon', 'alt' => 'Key icon')); ?><span>Key Information</span></h3>
           <h4>Coordination information</h4>
           <ul class="document-cards clearfix">
             <li class="document-card odd">
@@ -361,34 +361,19 @@
         </section>
 
         <section id="shelter-calendar">
-
-
-          <ul id="calendar-box">
-            <li id="calendar-date">
-              <div class="image-calendar"><?php print _svg('icons/pin', array('id'=>'calendar-pin', 'alt' => 'Pin icon')); ?></div>
-              <div class="information-card">
-                <a href="#">Nov. 24th 2014</a>
-                <span class="upcoming" href="#">Upcoming event to the <a href="#">agenda</a>:</span>
-                <a class="event" href="#">Shelter Technical Meeting 2014</a>
-              </div>
-
-            </li>
-
-
-
-<!--
-          <div id="calendar-box">
-            <div id="calendar-date">
-
+          <div id="box-calendar">
+            <?php print _svg('icons/pin', array('id'=>'calendar-pin', 'alt' => 'Pin icon')); ?>
+            <div id="date-calendar">Nov. 24<sup>th</sup> 2014</div>
+            <div class="information-card">
+              Upcoming event to the <a href="#">agenda</a>:<br/>
+              <a class="event" href="#">Shelter Technical Meeting 2014</a>
             </div>
-            <p></p>
-            <div id="calendar-event">
-              </div>
-          </div> -->
-
+          </div>
+          <a class="see-all" href="#">All calendar events</a>
         </section>
 
         <section id="shelter-discussions">
+          <?php print _svg('icons/discussion', array('id'=>'discussion-icon', 'alt' => 'discussion icon')); ?>
           <h3>Discussions</h3>
           <ul id="discussions-items">
             <li class="discussions-item">
