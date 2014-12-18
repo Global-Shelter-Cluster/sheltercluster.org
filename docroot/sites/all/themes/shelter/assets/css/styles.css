@@ -990,22 +990,55 @@ header a {
 #shelter-discussions {
   margin: 0 0 32px 0;
   margin: 0 0 2rem 0;
+  color: #688394;
+  -moz-border-radius-bottomleft: 0.1875rem;
+  -webkit-border-bottom-left-radius: 0.1875rem;
+  border-bottom-left-radius: 0.1875rem;
+  -moz-border-radius-bottomright: 0.1875rem;
+  -webkit-border-bottom-right-radius: 0.1875rem;
+  border-bottom-right-radius: 0.1875rem;
+}
+#shelter-discussions h3 {
+  background-color: #688394;
+  color: white;
+  text-align: center;
+  border-bottom: none;
+  margin: 0;
+  -moz-border-radius-topleft: 0.1875rem;
+  -webkit-border-top-left-radius: 0.1875rem;
+  border-top-left-radius: 0.1875rem;
+  -moz-border-radius-topright: 0.1875rem;
+  -webkit-border-top-right-radius: 0.1875rem;
+  border-top-right-radius: 0.1875rem;
+  padding: 5.6px;
+  padding: 0.35rem;
 }
 #shelter-discussions .see-all {
-  font-size: 14.4px;
-  font-size: 0.9rem;
+  text-transform: uppercase;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 12px;
+  font-size: 0.75rem;
+}
+#shelter-discussions .see-all:hover, #shelter-discussions .see-all:active {
+  text-decoration: underline;
 }
 #shelter-discussions a {
-  color: #242424;
+  color: #688394;
 }
 #shelter-discussions a:hover, #shelter-discussions a:active {
   text-decoration: none;
 }
 
 #discussions-items {
+  background-color: #dadee4;
   padding: 0;
   margin: 0;
   list-style: none;
+  padding: 16px 32px 16px 32px;
+  padding: 1rem 2rem 1rem 2rem;
+  margin: 0 0 8px 0;
+  margin: 0 0 0.5rem 0;
 }
 #discussions-items .discussions-item {
   float: left;
@@ -1013,11 +1046,12 @@ header a {
   margin: 0 0 10px 0;
   margin: 0 0 0.625rem 0;
 }
+#discussions-items .discussions-item:last-child {
+  margin: 0;
+}
 #discussions-items .replies {
   float: left;
   width: 25%;
-  font-size: 14.4px;
-  font-size: 0.9rem;
 }
 #discussions-items .information {
   float: left;
@@ -1026,8 +1060,6 @@ header a {
 }
 #discussions-items .information .topic {
   display: block;
-  font-size: 15.2px;
-  font-size: 0.95rem;
   padding: 0 0 3.2px 0;
   padding: 0 0 0.2rem 0;
 }
