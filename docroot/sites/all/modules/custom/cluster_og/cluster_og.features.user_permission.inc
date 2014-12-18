@@ -223,7 +223,10 @@ function cluster_og_user_default_permissions() {
   // Exported permission: 'view any node community_of_practice page'.
   $permissions['view any node community_of_practice page'] = array(
     'name' => 'view any node community_of_practice page',
-    'roles' => array(),
+    'roles' => array(
+      'anonymous user' => 'anonymous user',
+      'authenticated user' => 'authenticated user',
+    ),
     'module' => 'restrict_node_page_view',
   );
 
@@ -232,6 +235,7 @@ function cluster_og_user_default_permissions() {
     'name' => 'view any node geographic_region page',
     'roles' => array(
       'administrator' => 'administrator',
+      'anonymous user' => 'anonymous user',
       'authenticated user' => 'authenticated user',
     ),
     'module' => 'restrict_node_page_view',
