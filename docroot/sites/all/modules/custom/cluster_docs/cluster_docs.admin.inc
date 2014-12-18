@@ -42,20 +42,30 @@ function cluster_docs_menu_alter(&$items) {
  * Adds custom validation function to the document node form.
  */
 function cluster_docs_form_document_node_form_alter(&$form, &$form_state, $form_id) {
-  $form['#validate'][] = 'cluster_docs_validate_link';
+  $form['#validate'][] = 'cluster_docs_validate';
 }
 
 /**
- * Custom validation function for the Document node form. Forces the link to be external.
- * For example, if the user types "google.com", the link becomes "http://google.com".
+ * Custom validation function for the Document node form.
+ * Forces the link to be external, for example, if the user types "google.com",
+ * the link becomes "http://google.com".
+ * Checks that the user entered either a link or a file.
  */
-function cluster_docs_validate_link($form, &$form_state) {
+function cluster_docs_validate($form, &$form_state) {
   $node = (object) $form_state['values'];
   $wrapper = entity_metadata_wrapper('node', $node);
-  $link = $wrapper->field_link->value();
 
+  $link = $wrapper->field_link->value();
   if ($link['url'] && !preg_match('/^https?:\/\//', $link['url'])) {
     $link['url'] = 'http://' . $link['url'];
     form_set_value($form['field_link'], array(LANGUAGE_NONE => array($link)), $form_state);
+  }
+
+  $file = $wrapper->field_file->value();
+
+  if ((bool) $link['url'] == (bool) $file['fid']) {
+    // If none of the two fields have values, or if they both do.
+    form_set_error('field_file', t('Document must contain either a file or a link (but not both).'));
+    form_set_error('field_link');
   }
 }
