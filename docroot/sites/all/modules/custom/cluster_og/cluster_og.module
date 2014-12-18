@@ -97,7 +97,11 @@ function cluster_og_theme() {
     ),
     'cluster_og_hot_responses' => array(
       'file' => 'theme/cluster_og.theme.inc',
-      'template' => 'theme/cluster_og_hot_response',
+      'template' => 'theme/cluster-og-hot-responses',
+      'variables' => array(
+        'icons' => FALSE,
+        'responses' => FALSE,
+      ),
     ),
   );
 }
@@ -205,4 +209,52 @@ function cluster_og_regenerate_region_aliases($parent_nid = NULL) {
 
     cluster_og_regenerate_region_aliases($child_nid);
   }
+}
+
+/**
+ * Returns themed the hot responses content.
+ */
+function cluster_og_hot_responses() {
+  // Get the response types terms.
+  // @TODO make this more robust to withstand term / vocab changes in the admin interface.
+  $vocab = taxonomy_vocabulary_machine_name_load('disaster_type');
+  $terms = entity_load('taxonomy_term', FALSE, array('vid' => $vocab->vid));
+  foreach ($terms as $term) {
+    $icon = str_replace(' ', '-', strtolower($term->name));
+    $term->icon_name = $icon;
+    $term->icon_class = $icon . '-icon';
+  }
+
+  // Get hot response nodes.
+  $query = new EntityFieldQuery();
+  $res = $query->entityCondition('entity_type', 'node')
+    ->entityCondition('bundle', 'response')
+    ->propertyCondition('status', NODE_PUBLISHED)
+    ->fieldCondition('field_is_hot_response', 'value', 1)
+    ->execute();
+  if (isset($res['node'])) {
+    $nodes = node_load_multiple(array_keys($res['node']));
+    $responses = array();
+    foreach ($nodes as $node) {
+      try {
+        // @TODO manage multilingual entity wrapper.
+        $wrapper = entity_metadata_wrapper('node', $node);
+
+        $responses[$node->nid] = array(
+          'link' => l($wrapper->label(), 'node/' . $node->nid),
+          'type' => $terms[$wrapper->field_disaster_type->value()->tid],
+        );
+      }
+      catch (EntityMetadataWrapperException $exc) {
+        watchdog(
+          'cluster_ogs',
+          'See '  . __FUNCTION__ . '() ' .  $exc->getTraceAsString(),
+           NULL,
+           WATCHDOG_ERROR
+        );
+      }
+    }
+  }
+
+  return theme('cluster_og_hot_responses', array('responses' => $responses, 'icons' => $terms));
 }
