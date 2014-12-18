@@ -1,9 +1,5 @@
 /* _document-card.scss */
 
-#key-information {
-
-}
-
 .document-cards {
   @include reset-list;
   @include rem(margin,1.5rem 0 2rem 0.5rem);
@@ -70,17 +66,41 @@
     .information-file {
       float: left;
       width: 100%;
-      background: url(../images/stripes-pattern.png) repeat 0 0 #fff;
       color: $shelter-grey;
+      background-color: lighten($shelter-dark-blue,25%);
       @include rem(font-size, 0.75rem);
       @include rem(padding, 0.3125rem 0.5rem);
       .size-type {
         float: left;
+        a {
+          color: #222;
+          text-transform: uppercase;
+          font-weight: bold;
+          &:hover,
+          &:active {
+            text-decoration: none;
+          }
+        }
       }
       .source {
         float: right;
       }
     }
+  }
+}
+
+.browse-all-documents {
+  text-transform: uppercase;
+  font-weight: bold;
+  color: $shelter-grey;
+  display: block;
+  @include rem(margin, 0 0 1rem 0);
+  @include rem(font-size, 0.75rem);
+  @include rem(padding, 0 0 0 0.5rem);
+
+  &:hover,
+  &:active {
+    text-decoration: none;
   }
 }
 

@@ -40,6 +40,7 @@ function cluster_og_node_view($node, $view_mode) {
     $node->content['key_documents'] = $group_content->getKeyDocuments();
     $node->content['recent_documents'] = $group_content->getRecentDocuments();
     $node->content['recent_discussions'] = $group_content->getRecentDiscussions();
+    $node->content['upcoming_event'] = NULL;
   }
 }
 

@@ -2,14 +2,11 @@
   Drupal.behaviors.shelterNav = {
     attach: function (context, settings) {
       $('#nav-shelter').once('shelterNav', function() {
+        var shelterNavReference = $("#nav-shelter .list-container").html();
 
-        var shelterNavReference = $("#nav-shelter").clone();
-        var target = $('#nav-master');
-        var shelterNavLength = $("#nav-shelter ul li").length;
-
-        var divideTo = function(reference, size) {
+        var divide_menu_into = function(reference, size) {
           var list_markup = $();
-          var list = reference.find('li');
+          var list = $(reference).find('li');
           var list_length = list.length;
 
           for (i = 0; i < list_length; i += size) {
@@ -19,31 +16,29 @@
           return list_markup;
         };
 
-          $(window).bind('resize', function(e) {
-            if (resize_event_id != undefined) {
-              clearTimeout(resize_event_id);
+        $(window).bind('resize', function() {
+          if (resize_event_id != undefined) {
+            clearTimeout(resize_event_id);
+          }
+
+          var resize_event_id = _.delay( function(reference) {
+            var window_size = $(window).width();
+            var markup_output = '';
+            var divisions = 6;
+
+            if (window_size >= 460 && window_size <= 650) {
+              divisions = 2;
+            } else if (window_size >= 461 && window_size <= 1215) {
+              divisions = 3;
             }
 
-            var resize_event_id = _.delay( function(shelterNavReference) {
-              var windowsize = $(window).width();
-              var divisions = 6;
-              var markup_output = '';
+            $('#nav-shelter .list-container').html(
+              divide_menu_into(reference, divisions).parent().html()
+            );
 
-              if (windowsize >= 460 && windowsize <= 650) {
-                divisions = 2;
-              } else if (windowsize >= 461 && windowsize <= 1215) {
-                divisions = 3;
-              }
-              results = divideTo(shelterNavReference, divisions);
-              results.each( function() {
-                markup_output += $(this).parent().html();
-              });
+          }, 100, shelterNavReference);
 
-              $('#nav-shelter .list-container').html(markup_output);
-
-            }, 50, shelterNavReference);
-
-          });
+        });
 
         $(window).resize();
 

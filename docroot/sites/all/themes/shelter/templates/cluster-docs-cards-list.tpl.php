@@ -10,7 +10,7 @@
  *    Array of document nodes prepared for this template.
  *    @see cluster_docs_prepare_card_data().
  *  Each document has the following elements:
- *  array('title', 'link', 'is_link', 'is_file', 'description', 'filesize', 'file_extension', 'source',); 
+ *  array('title', 'link', 'is_link', 'is_file', 'description', 'filesize', 'file_extension', 'source',);
  */
 
 ?>
@@ -25,9 +25,9 @@
     <li class="document-card <?php print $zebra; ?>">
       <div class="image-card">
         <?php if ($doc['is_link']): ?>
-          <?php print _svg('icons/book', array('class'=>'document-external', 'alt' => 'Icon for an external resource')); ?>
+          <?php print l( _svg('icons/book', array('class'=>'document-external', 'alt' => 'Icon for an external resource')), $doc['link_url'], array('html' => TRUE, 'attributes' => array('target' => '_blank'))); ?>
         <?php elseif($doc['is_file']): ?>
-          <?php print _svg('icons/file', array('class'=>'file-icon', 'alt' => 'Icon for a file')); ?>
+          <?php print l( _svg('icons/file', array('class'=>'document-external', 'alt' => 'Icon for an external resource')), $doc['link_url'], array('html' => TRUE, 'attributes' => array('target' => '_blank'))); ?>
         <?php endif; ?>
       </div>
 

@@ -156,12 +156,12 @@ function cluster_docs_get_grouped_key_docs($gid) {
  */
 function cluster_docs_prepare_card_data($nids) {
   $docs = array();
-  $properties = array('title', 'link', 'is_link', 'is_file', 'description', 'filesize', 'file_extension', 'source',);
-  
+  $properties = array('title', 'link', 'link_url', 'is_link', 'is_file', 'description', 'filesize', 'file_extension', 'source',);
+
   // @TODO language negocitation.
   global $language;
   $langcode = $language->language;
-  
+
   foreach (node_load_multiple($nids) as $node) {
     // Set default values.
     $doc = array_fill_keys($properties, FALSE);
@@ -176,6 +176,7 @@ function cluster_docs_prepare_card_data($nids) {
       else {
         $url = $wrapper->field_link->url->value();
       }
+      $doc['link_url'] = $url;
       $doc['link'] = l($doc['title'], $url, array('attributes' => array('target' => '_blank')));
 
       // Prepare the description.
@@ -202,7 +203,7 @@ function cluster_docs_prepare_card_data($nids) {
       // Test if this document is a file field.
       if ($file = $wrapper->field_file->value()) {
         $doc['is_file'] = TRUE;
-        $doc['file_extension'] = pathinfo($file['filename'], PATHINFO_EXTENSION);
+        $doc['file_extension'] = l(pathinfo($file['filename'], PATHINFO_EXTENSION), $url, array('attributes' => array('target' => '_blank')));
         $doc['filesize'] = number_format($file['filesize'] / 1048576, 2);
       }
 

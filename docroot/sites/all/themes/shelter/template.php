@@ -15,18 +15,14 @@ function shelter_preprocess_html(&$variables) {
 
   //Adding Roboto Google Font Normal 400 and Bold 700
   drupal_add_css('http://fonts.googleapis.com/css?family=Roboto:700,400', array('group' => CSS_THEME));
-
 }
 
 /**
  * Implements hook_preprocess_page().
  */
 function shelter_preprocess_page($variables) {
-  // drupal_add_css();
-    $theme_path = drupal_get_path('theme', 'shelter');
-    $variables['theme_path'] = $theme_path;
   // Adding the viewport for mobile view
-    $viewport = array(
+  $viewport = array(
     '#tag' => 'meta',
     '#attributes' => array(
       'name' => 'viewport',
@@ -37,26 +33,6 @@ function shelter_preprocess_page($variables) {
 
   libraries_load('underscore');
   drupal_add_library('underscore', 'underscore');
-}
-
-/**
- * Available view modes
- *
- * contact_member
- * related_hub
- * related_response
- */
-
-/**
- * Implements hook_entity_info_alter().
- * Define available view modes.
- * @param $entity_info
- */
-function shelter_entity_info_alter(&$entity_info) {
-  $entity_info['node']['view modes']['contextual_navigation'] = array(
-    'label' => t('Contextual Navigation'),
-    'custom settings' => TRUE,
-  );
 }
 
 function shelter_preprocess_user_profile(&$variables) {

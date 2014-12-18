@@ -1,0 +1,22 @@
+.page-regions-countries {
+  background-color: $shelter-grey;
+
+  #site-options-bar {
+    background-color: $shelter-grey;
+  }
+
+  #language-selector {
+    border-bottom: none;
+  }
+
+  #logo-shelter-cluster .svg {
+    polygon,
+    path{
+      fill: #fff;
+    }
+  }
+
+  footer {
+    background-color: $shelter-grey;
+  }
+}

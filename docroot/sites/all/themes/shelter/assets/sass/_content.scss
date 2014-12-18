@@ -10,6 +10,14 @@
     @include rem(font-size, 1rem);
     @include rem(padding, 0 0 0.2rem 0);
     @include rem(margin, 0 0 1.5rem 0);
+    span  {
+      position: relative;
+      top: -7px;
+      left: 10px;
+    }
+    svg {
+      width: 50px;
+    }
   }
   h4 {
     border-bottom: 1px dashed lighten($shelter-grey,30%);

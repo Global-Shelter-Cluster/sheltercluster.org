@@ -227,7 +227,7 @@ header {
           position: absolute;
           z-index:2;
           @include rem(font-size, 1.3rem);
-          @include rem(top, -1.5px);
+          @include rem(top, 1px);
           @include rem(right, -1.5px);
           color: #fff;
         }
