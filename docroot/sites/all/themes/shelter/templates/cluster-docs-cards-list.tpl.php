@@ -25,7 +25,7 @@
     <li class="document-card <?php print $zebra; ?>">
       <div class="image-card">
         <?php if ($doc['is_link']): ?>
-          <?php print l( _svg('icons/book', array('class'=>'document-external', 'alt' => 'Icon for an external resource')), $doc['link_url'], array('html' => TRUE, 'attributes' => array('target' => '_blank'))); ?>
+          <?php print l( _svg('icons/external', array('class'=>'document-external', 'alt' => 'Icon for an external resource')), $doc['link_url'], array('html' => TRUE, 'attributes' => array('target' => '_blank'))); ?>
         <?php elseif($doc['is_file']): ?>
           <?php print l( _svg('icons/file', array('class'=>'document-external', 'alt' => 'Icon for an external resource')), $doc['link_url'], array('html' => TRUE, 'attributes' => array('target' => '_blank'))); ?>
         <?php endif; ?>
