@@ -137,7 +137,7 @@
 
         <div class="main-column">
           <section id="operation-information">
-            <h2>Overview</h2>
+            <h2><?php print _svg('icons/overview', array('id'=>'bandwidth-selector-icon', 'alt' => 'Bandwidth indication icon')); ?><span>Overview</span></h2>
             <img class="operation-image" src="http://placehold.it/290x150"/>
             <p>Quis enim aut eum diligat quem metuat, aut eum a quo se metui putet? Coluntur tamen simulatione dumtaxat ad tempus. Quod si forte, ut fit plerumque, ceciderunt, tum intellegitur quam fuerint inopes amicorum. Quod Tarquinium dixisse ferunt, tum exsulantem se intellexisse quos fidos amicos habuisset, quos infidos, cum iam neutris gratiam referre posset.</p>
             <p>Orientis vero limes in longum protentus et rectum ab Euphratis fluminis ripis ad usque supercilia porrigitur Nili, laeva Saracenis conterminans gentibus, dextra pelagi fragoribus patens, quam plagam Nicator Seleucus occupatam auxit magnum in modum, cum post Alexandri Macedonis obitum successorio iure teneret regna Persidis, efficaciae inpetrabilis rex, ut indicat cognomentum.</p>
