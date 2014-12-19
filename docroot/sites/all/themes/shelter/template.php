@@ -33,6 +33,10 @@ function shelter_preprocess_page($variables) {
 
   libraries_load('underscore');
   drupal_add_library('underscore', 'underscore');
+
+  if ($variables['is_front']) {
+    $variables['hot_reponses'] = cluster_og_hot_responses();
+  }
 }
 
 function shelter_preprocess_user_profile(&$variables) {
@@ -85,12 +89,14 @@ function shelter_preprocess_node(&$variables) {
   }
 
   if ($is_group && $view_mode == 'full'){
+    if ($variables['content']['featured_documents']) {
 
+    }
     try {
       $group_wrapper = entity_metadata_wrapper('node', $node);
 
-      if ( isset($group_wrapper->field_image)) {
-        $group_image = $group_wrapper->field_image->value();
+      if ($group_image = $group_wrapper->field_image->value()) {
+
         $variables['group_image'] = theme('image_style', array(
           'style_name' => 'large',
           'path' => $group_image['uri'],
