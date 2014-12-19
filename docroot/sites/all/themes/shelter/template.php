@@ -20,7 +20,7 @@ function shelter_preprocess_html(&$variables) {
 /**
  * Implements hook_preprocess_page().
  */
-function shelter_preprocess_page($variables) {
+function shelter_preprocess_page(&$variables) {
   // Adding the viewport for mobile view
   $viewport = array(
     '#tag' => 'meta',
@@ -33,10 +33,7 @@ function shelter_preprocess_page($variables) {
 
   libraries_load('underscore');
   drupal_add_library('underscore', 'underscore');
-
-  if ($variables['is_front']) {
-    $variables['hot_reponses'] = cluster_og_hot_responses();
-  }
+  $variables['hot_responses'] = cluster_og_hot_responses();
 }
 
 function shelter_preprocess_user_profile(&$variables) {

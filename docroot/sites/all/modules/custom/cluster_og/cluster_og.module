@@ -231,8 +231,8 @@ function cluster_og_hot_responses() {
   }
 
   // Get hot response nodes.
-  if ($nodes = _cluster_og_get_hot_responses()) {
-    $nodes = node_load_multiple($node);
+  if ($res = _cluster_og_get_hot_responses()) {
+    $nodes = node_load_multiple(array_keys($res));
     $responses = array();
     foreach ($nodes as $node) {
       try {
@@ -253,13 +253,13 @@ function cluster_og_hot_responses() {
         );
       }
     }
+    return array(
+      '#theme' => 'cluster_og_hot_responses',
+      '#responses' => $responses,
+      '#icons' => $terms,
+    );
   }
-
-  return array(
-    '#theme' => 'cluster_og_hot_responses',
-    '#responses' => $responses,
-    '#icons' => $terms,
-  );
+  return FALSE;
 }
 
 /**

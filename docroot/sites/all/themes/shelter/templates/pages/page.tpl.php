@@ -58,6 +58,11 @@
         </nav>
       </div>
     </div>
+    <?php if($hot_responses): ?>
+      <div class="page-margin">
+        <?php print render($hot_responses); ?>
+      </div>
+    <?php endif; ?>
 
     <?php if (!$is_front): ?>
       <section id="operation-title" class="page-margin">
