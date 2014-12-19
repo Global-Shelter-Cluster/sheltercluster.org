@@ -5,3 +5,4 @@
  */
 
 include_once 'cluster_workflow.features.inc';
+include_once 'cluster_workflow.views.inc';
