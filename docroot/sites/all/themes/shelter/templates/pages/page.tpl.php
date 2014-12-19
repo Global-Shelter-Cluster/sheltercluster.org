@@ -59,12 +59,14 @@
       </div>
     </div>
 
-    <section id="operation-title" class="page-margin">
-      <?php if (isset($contextual_navigation)): ?>
-        <?php print render($contextual_navigation); ?>
-      <?php endif; ?>
-      <h1><?php print $title; ?></h1>
-    </section>
+    <?php if (!$is_front): ?>
+      <section id="operation-title" class="page-margin">
+        <?php if (isset($contextual_navigation)): ?>
+          <?php print render($contextual_navigation); ?>
+        <?php endif; ?>
+        <h1><?php print $title; ?></h1>
+      </section>
+    <?php endif; ?>
 
     <?php if (isset($dashboard_menu)): ?>
     <section id="secondary-nav">
@@ -85,7 +87,7 @@
     </div>
 
     <div class="page-margin">
-      
+
       <section id="active-clusters-list">
         <h3>Hot responses</h3>
         <?php print render($page['footer']['hot_responses']); ?>

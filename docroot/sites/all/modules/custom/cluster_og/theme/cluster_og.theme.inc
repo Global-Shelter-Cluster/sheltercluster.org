@@ -79,6 +79,16 @@ function theme_cluster_og_recent_documents($vars) {
 }
 
 /**
+ * Render a group's featured documents.
+ */
+function theme_cluster_og_featured_documents($vars) {
+  $output = '<ul>';
+  $output .= $vars['element']['#children'];
+  $output .= '</ul>';
+  return $output;
+}
+
+/**
  * Render a group's key document groups.
  * Doesn't render documents directly, but groups of documents which use the cluster_og_key_documents_by_tag theme.
  * $vars['element']['#children']: markup for all document groups.

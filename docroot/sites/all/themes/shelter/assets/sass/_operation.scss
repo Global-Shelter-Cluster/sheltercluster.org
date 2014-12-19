@@ -19,36 +19,43 @@
 #featured-documents {
   position: relative;
   color: #fff;
-  overflow: hidden;
   @include rem(margin-bottom, 2rem);
 
   ul {
-    @include rem(height, 350px);
     @include reset-list;
   }
   li {
-    display: inline;
+    @include rem(max-height, 20rem);
+    overflow: hidden;
 
     .document-information {
-      @include absolute(bottom 0 left 0);
-      background-color: #000;
-      @include opacity(0.8);
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      @include background-image(linear-gradient(to right, rgba($shelter-grey, 0), rgba($shelter-grey, 0.7) 20%, rgba($shelter-grey, 0.9) 50%, $shelter-grey 80%, $shelter-grey));
       @include rem(padding, 1rem);
+      width: 100%;
 
       h2 {
+        color: #fff;
         margin: 0;
+        border-bottom: 1px solid #fff;
       }
       p {
-        @include rem(margin-bottom, 0 );
+        @include rem(margin, 0.25rem 0 0 0);
+        @include rem(font-size, 0.75rem );
+        text-transform: uppercase;
+        color: $shelter-light-blue;
       }
     }
     img {
-      height: 100%;
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      @include transform(scale(1) translateY(-50%) translateX(-50%));
+      width: 100%;
+      float: left;
     }
+  }
+  .image-document {
+    @include rem(max-height, 40rem);
+    overflow: visible;
   }
 }
 

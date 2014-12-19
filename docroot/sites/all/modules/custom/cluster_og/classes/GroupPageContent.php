@@ -238,6 +238,27 @@ class GroupContentManager {
     );
   }
 
+  public function getFeaturedDocuments() {
+    $query = new EntityFieldQuery();
+    $res = $query->entityCondition('entity_type', 'node')
+      ->entityCondition('bundle', 'document')
+      ->fieldCondition('og_group_ref', 'target_id', $this->node->nid)
+      ->fieldCondition('field_featured', 'value', 1)
+      ->propertyCondition('status', NODE_PUBLISHED)
+      ->propertyOrderBy('changed', 'DESC')
+      ->execute();
+
+    if (!isset($res['node'])) {
+      return NULL;
+    }
+
+    return array(
+      '#theme' => 'cluster_docs_featured_documents',
+      '#theme_wrappers' => array('cluster_og_featured_documents'),
+      '#docs' => cluster_docs_prepare_card_data(array_keys($res['node'])),
+    );
+  }
+
   /**
    * Returns the Key Documents for this group, grouped by Vocabularies.
    * The outer array uses the cluster_og_key_documents theme wrapper;
@@ -464,6 +485,13 @@ class GroupPageContent {
       return NULL;
     }
     return $this->manager->getKeyDocuments();
+  }
+
+  public function getFeaturedDocuments() {
+    if ($this->view_mode != 'full') {
+      return NULL;
+    }
+    return $this->manager->getFeaturedDocuments();
   }
 
   public function getRecentDocuments() {
