@@ -5,29 +5,52 @@ footer {
   color: $shelter-grey;
   @include rem(padding-bottom, 2rem);
 
+
+
+
+
+    ul {
+    list-style: none;
+    margin: 0 0 0 0;
+    padding: 0 0 0 0;
+    list-style-position: inside;
+
+  li {
+
+    position: relative;
+    @include rem(margin,0 0 0.25em 1em);
+
+    &:before {
+      position: absolute;
+      top: 7px;
+      left: -11px;
+      content: '';
+      background: url(../images/footer-bullet.png) no-repeat 0 0 transparent;
+      width: 6px;
+      height: 6px;
+    }
+    @include rem(padding, 0 0 0.25rem 0);
+    @include rem(font-size, 0.85rem);
+  }
+  }
+
+
+
   .inside-footer {
+    display: table;
+    table-layout: fixed;
     background-color: $shelter-light-blue;
     @include rem(padding, 1.5625rem);
+
+    > section {
+      display: table-cell;
+    }
   }
 
   a {
-    position: relative;
     color: $shelter-grey;
-    text-decoration: none;
-
-    &:hover,
-    &:active {
-      text-decoration: none;
-      &:after {
-        content: '';
-        width: 100%;
-        position: absolute;
-        left: 0;
-        bottom: 1px;
-        border-width: 0 0 1px;
-        border-style: solid;
-      }
-    }
+    @extend .underlined-links;
+    white-space: nowrap;
   }
 
   .see-all {
@@ -39,7 +62,6 @@ footer {
 
     &:before {
       position: absolute;
-      top: -4px;
       content: '+';
       @include rem(font-size, 1.1rem);
       @include rem(padding, 0 0.3125rem 0 0);
@@ -53,49 +75,25 @@ footer {
     }
   }
 
-  ul {
-    margin: 0 0 0 0;
-    padding: 0 0 0 0;
-    list-style-position: inside;
-  }
-  li {
-    @include rem(padding, 0 0 0.25rem);
-    @include rem(font-size, 0.85rem);
-  }
   section {
     @include rem(margin-bottom, 2rem);
   }
   h3 {
     text-transform: uppercase;
     @include rem(font-size, 0.85rem);
-    @include rem(margin, 0 0 1rem );
-    a {
-      text-decoration: none;
-      position: relative;
-      &:hover,
-      &:active {
-        text-decoration: none;
-        &:after {
-          border-style: none;
-        }
-      }
-      &:after {
-        content: '';
-        width: 100%;
-        position: absolute;
-        left: 0;
-        bottom: 1px;
-        border-width: 0 0 1px;
-        border-style: solid;
-      }
-    }
+    @include rem(margin, 0 0 0.5rem );
   }
 
   #active-clusters-list {
-    display: inline-block;
+    display: table-cell;
     vertical-align: top;
+
+   .item-list ul li {
+      @include rem(margin, 0 0 0.25rem 0.8125rem);
+    }
+
     @include breakpoint(900px) {
-      width: 50%;
+      // width: 50%;
     }
 
     .complete-list {
@@ -104,29 +102,62 @@ footer {
   }
 
   #regions-list {
-    display: inline-block;
     vertical-align: top;
-    width: 100%;
     @include breakpoint(900px) {
-      width: 50%;
+      // width: 50%;
     }
+    .nav-items {
+      display: table;
 
+      li {
+        &:before {
+          left: 0;
+          top: 9px;
+        }
+        .nav-items {
+          li {
+            @include rem(font-size, 0.75rem);
+            // @include rem(padding, 0 0.3125rem 0 0.6875rem);
+            @include rem(margin, 0 0.3125rem 0 0.625rem);
+            &:before {
+              content: '\2013';
+              background: none;
+              position: absolute;
+              left: 0;
+              top: 0;
+              position: relative;
+              @include rem(margin, 0 0.3125rem 0 0);
+               a {
+                text-transform: uppercase;
+
+                }
+              }
+            }
+            &:before {
+                background: none;
+            }
+          }
+        }
+      }
+    .menu li {
+      list-style: none;
+    }
     & > .menu > li > a{
-      display: block;
       font-weight: bold;
-      @include rem(margin-bottom, 0.25rem);
+      @include rem(margin, 0 0 0.25rem 0.625rem);
     }
     & > .menu > li {
-      display: inline-block;
+      display: table-cell;
       vertical-align: top;
       width: 100%;
+      list-style: disc inside;
+      .expanded {
+        padding: 0 0 0 10px;
+      }
       @include rem(margin-bottom, 1.25rem);
       @include breakpoint(500px) {
         width: 46%;
       }
-    }
-    .country {
-      list-style: disc inside;
     }
   }
 

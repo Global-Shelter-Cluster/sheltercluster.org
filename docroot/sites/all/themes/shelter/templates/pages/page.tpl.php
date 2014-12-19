@@ -30,7 +30,7 @@
 
         <div id="user-login-container" class="clearfix">
           <?php
-          if ($user_login) {
+          if (isset($user_login)) {
             print render($user_login);
           }
           ?>
@@ -85,42 +85,20 @@
     </div>
 
     <div class="page-margin inside-footer">
-      <section id="active-clusters-list">
-        <h3>With 24 <a href='#'>active responses</a> and cluster like mechanisms.</h3>
-        <ul class="clusters">
-          <li class="cluster"><a href="#">Myanmar Rakhine and Kachin Emergency Response</a></li>
-          <li class="cluster"><a href="#">Philippines Bohol Earthquake</a></li>
-          <li class="cluster"><a href="#">Solomon Islands Floods 2014</a></li>
-        </ul>
-        <a class="see-all" href="#">more</a>
 
-      </section><section id="regions-list">
-        <h3>Shelter Cluster is present in over <a href="#">34 regions</a></h3>
+      <section id="active-clusters-list">
+        <h3>Hot responses</h3>
+        <?php print render($page['footer']['hot_responses']); ?>
+      </section>
+
+      <section id="regions-list">
+        <h3>Shelter Cluster is present in many countries</a></h3>
         <?php print render($page['footer']['menu_regions']); ?>
       </section>
 
       <section id="general-information">
         <h3>General Information</h3>
-        <ul class="links">
-          <li class="link"><a href="#">About this site</a></li>
-          <li class="link"><a href="#">Contact information</a></li>
-          <li class="link"><a href="#">Twitter account</a></li>
-        </ul><ul class="links">
-          <li class="link"><a href="#">Support Team</a></li>
-          <li class="link"><a href="#">Partnership</a></li>
-        </ul><ul class="links">
-          <li class="link"><a href="#">Other</a></li>
-          <li class="link"><a href="#">More information</a></li>
-          <li class="link"><a href="#">Twitter account</a></li>
-        </ul>
-      </section>
-
-      <section id="partners-list">
-        <ul class="partners clearfix">
-          <li class="partner"><a href="#">ECHO</a></li>
-          <li class="partner"><a href="#">IFRC</a></li>
-          <li class="partner"><a href="#">UNHCR</a></li>
-        </ul>
+          <?php print render($page['footer']['general_information']); ?>
       </section>
 
     </div>

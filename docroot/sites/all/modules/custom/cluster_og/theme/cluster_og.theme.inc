@@ -109,4 +109,6 @@ function theme_cluster_og_key_documents_by_tag($vars) {
 function _cluster_og_preprocess_page(&$vars) {
   // Add the Region Groups menu to the page.
   $vars['page']['footer']['menu_regions'] = _cluster_og_get_regions_menu('menu-regions', FALSE);
+  $vars['page']['footer']['hot_responses'] = cluster_og_hot_responses_list();
+  $vars['page']['footer']['general_information'] = _cluster_og_get_regions_menu('menu-general-information', FALSE);
 }

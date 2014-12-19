@@ -256,6 +256,23 @@ th {
   background-image: linear-gradient(#e1e1e1, #e3e3e3 60%, #e1e1e1);
 }
 
+.underlined-links, footer a {
+  position: relative;
+  text-decoration: none;
+}
+.underlined-links:hover, footer a:hover, .underlined-links:active, footer a:active {
+  text-decoration: none;
+}
+.underlined-links:hover:after, footer a:hover:after, .underlined-links:active:after, footer a:active:after {
+  content: '';
+  width: 100%;
+  position: absolute;
+  left: 0;
+  bottom: 1px;
+  border-width: 0 0 1px;
+  border-style: solid;
+}
+
 /* _layout.scss */
 * {
   -webkit-tap-highlight-color: transparent;
@@ -1646,27 +1663,42 @@ footer {
   padding-bottom: 32px;
   padding-bottom: 2rem;
 }
+footer ul {
+  list-style: none;
+  margin: 0 0 0 0;
+  padding: 0 0 0 0;
+  list-style-position: inside;
+}
+footer ul li {
+  position: relative;
+  margin: 0 0;
+  padding: 0 0 4px 0;
+  padding: 0 0 0.25rem 0;
+  font-size: 13.6px;
+  font-size: 0.85rem;
+}
+footer ul li:before {
+  position: absolute;
+  top: 7px;
+  left: -11px;
+  content: '';
+  background: url(../images/footer-bullet.png) no-repeat 0 0 transparent;
+  width: 6px;
+  height: 6px;
+}
 footer .inside-footer {
+  display: table;
+  table-layout: fixed;
   background-color: #cdd6db;
   padding: 25px;
   padding: 1.5625rem;
 }
+footer .inside-footer > section {
+  display: table-cell;
+}
 footer a {
-  position: relative;
   color: #575757;
-  text-decoration: none;
-}
-footer a:hover, footer a:active {
-  text-decoration: none;
-}
-footer a:hover:after, footer a:active:after {
-  content: '';
-  width: 100%;
-  position: absolute;
-  left: 0;
-  bottom: 1px;
-  border-width: 0 0 1px;
-  border-style: solid;
+  white-space: nowrap;
 }
 footer .see-all {
   text-indent: -15px;
@@ -1678,7 +1710,6 @@ footer .see-all {
 }
 footer .see-all:before {
   position: absolute;
-  top: -4px;
   content: '+';
   font-size: 17.6px;
   font-size: 1.1rem;
@@ -1691,17 +1722,6 @@ footer .see-all:hover, footer .see-all:active {
 footer .see-all:hover:before, footer .see-all:active:before {
   border-style: none;
 }
-footer ul {
-  margin: 0 0 0 0;
-  padding: 0 0 0 0;
-  list-style-position: inside;
-}
-footer li {
-  padding: 0 0 4px;
-  padding: 0 0 0.25rem;
-  font-size: 13.6px;
-  font-size: 0.85rem;
-}
 footer section {
   margin-bottom: 32px;
   margin-bottom: 2rem;
@@ -1710,71 +1730,76 @@ footer h3 {
   text-transform: uppercase;
   font-size: 13.6px;
   font-size: 0.85rem;
-  margin: 0 0 16px;
-  margin: 0 0 1rem;
-}
-footer h3 a {
-  text-decoration: none;
-  position: relative;
-}
-footer h3 a:hover, footer h3 a:active {
-  text-decoration: none;
-}
-footer h3 a:hover:after, footer h3 a:active:after {
-  border-style: none;
-}
-footer h3 a:after {
-  content: '';
-  width: 100%;
-  position: absolute;
-  left: 0;
-  bottom: 1px;
-  border-width: 0 0 1px;
-  border-style: solid;
+  margin: 0 0 8px;
+  margin: 0 0 0.5rem;
 }
 footer #active-clusters-list {
-  display: inline-block;
+  display: table-cell;
   vertical-align: top;
 }
-@media (min-width: 900px) {
-  footer #active-clusters-list {
-    width: 50%;
-  }
+footer #active-clusters-list .item-list ul li {
+  margin: 0 0 4px 13px;
+  margin: 0 0 0.25rem 0.8125rem;
 }
 footer #active-clusters-list .complete-list {
   padding: 0 8px 8px;
   padding: 0 0.5rem 0.5rem;
 }
 footer #regions-list {
-  display: inline-block;
   vertical-align: top;
-  width: 100%;
 }
-@media (min-width: 900px) {
-  footer #regions-list {
-    width: 50%;
-  }
+footer #regions-list .nav-items {
+  display: table;
+}
+footer #regions-list .nav-items li:before {
+  left: 0;
+  top: 9px;
+}
+footer #regions-list .nav-items li .nav-items li {
+  font-size: 12px;
+  font-size: 0.75rem;
+  margin: 0 5px 0 10px;
+  margin: 0 0.3125rem 0 0.625rem;
+}
+footer #regions-list .nav-items li .nav-items li:before {
+  content: '\2013';
+  background: none;
+  position: absolute;
+  left: 0;
+  top: 0;
+  position: relative;
+  margin: 0 5px 0 0;
+  margin: 0 0.3125rem 0 0;
+}
+footer #regions-list .nav-items li .nav-items li:before a {
+  text-transform: uppercase;
+}
+footer #regions-list .nav-items li .nav-items:before {
+  background: none;
+}
+footer #regions-list .menu li {
+  list-style: none;
 }
 footer #regions-list > .menu > li > a {
-  display: block;
   font-weight: bold;
-  margin-bottom: 4px;
-  margin-bottom: 0.25rem;
+  margin: 0 0 4px 10px;
+  margin: 0 0 0.25rem 0.625rem;
 }
 footer #regions-list > .menu > li {
-  display: inline-block;
+  display: table-cell;
   vertical-align: top;
   width: 100%;
+  list-style: disc inside;
   margin-bottom: 20px;
   margin-bottom: 1.25rem;
+}
+footer #regions-list > .menu > li .expanded {
+  padding: 0 0 0 10px;
 }
 @media (min-width: 500px) {
   footer #regions-list > .menu > li {
     width: 46%;
   }
-}
-footer #regions-list .country {
-  list-style: disc inside;
 }
 footer #general-information .links {
   display: inline-block;

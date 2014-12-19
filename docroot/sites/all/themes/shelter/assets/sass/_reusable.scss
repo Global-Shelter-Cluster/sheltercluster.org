@@ -15,3 +15,22 @@ $button-color: lighten($shelter-grey,52%);
     @include background-image(linear-gradient(lighten($button-color, 2%), lighten($button-color,3%) 60%, lighten($button-color, 2%)));
   }
 }
+
+.underlined-links {
+  position: relative;
+  text-decoration: none;
+
+  &:hover,
+  &:active {
+  text-decoration: none;
+    &:after {
+      content: '';
+      width: 100%;
+      position: absolute;
+      left: 0;
+      bottom: 1px;
+      border-width: 0 0 1px;
+      border-style: solid;
+    }
+  }
+}
