@@ -91,7 +91,7 @@
       <?php print render($search_form); ?>
     </div>
 
-    <div class="page-margin">
+    <div class="page-margin inside-footer">
 
       <section id="active-clusters-list">
         <h3>Hot responses</h3>
@@ -99,21 +99,13 @@
       </section>
 
       <section id="regions-list">
-        <h3>Shelter Cluster is present in over <a href="#">34 regions</a></h3>
+        <h3>Shelter Cluster is present in many countries</a></h3>
         <?php print render($page['footer']['menu_regions']); ?>
       </section>
 
       <section id="general-information">
         <h3>General Information</h3>
           <?php print render($page['footer']['general_information']); ?>
-      </section>
-
-      <section id="partners-list">
-        <ul class="partners clearfix">
-          <li class="partner"><a href="#">ECHO</a></li>
-          <li class="partner"><a href="#">IFRC</a></li>
-          <li class="partner"><a href="#">UNHCR</a></li>
-        </ul>
       </section>
 
     </div>
