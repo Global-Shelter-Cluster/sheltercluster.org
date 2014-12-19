@@ -26,7 +26,12 @@ footer {
       }
       @include rem(padding, 0 0 0.25rem 0);
       @include rem(font-size, 0.85rem);
+      &.leaf {
+        list-style-image: none;
+        list-style-type: none;
+      }
     }
+
   }
 
   .inside-footer {
@@ -36,7 +41,10 @@ footer {
     @include rem(padding, 1.5625rem 1.5625rem 20px 1.5625rem);
 
     > section {
-      display: table-cell;
+      display: table;
+      width: 100%;
+      @include rem(margin, 0 0 20px 0);
+      // display: table-cell;
     }
   }
 
@@ -134,7 +142,7 @@ footer {
       @include rem(margin, 0 0 0.25rem 0.625rem);
     }
     & > .menu > li {
-      display: table-cell;
+      // display: table-cell;
       vertical-align: top;
       width: 100%;
       list-style: disc inside;

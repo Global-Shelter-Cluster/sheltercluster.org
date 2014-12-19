@@ -1690,6 +1690,10 @@ footer ul li:before {
   width: 6px;
   height: 6px;
 }
+footer ul li.leaf {
+  list-style-image: none;
+  list-style-type: none;
+}
 footer .inside-footer {
   display: table;
   table-layout: fixed;
@@ -1698,7 +1702,10 @@ footer .inside-footer {
   padding: 1.5625rem 1.5625rem 1.25rem 1.5625rem;
 }
 footer .inside-footer > section {
-  display: table-cell;
+  display: table;
+  width: 100%;
+  margin: 0 0 20px 0;
+  margin: 0 0 1.25rem 0;
 }
 footer a {
   color: #575757;
@@ -1779,7 +1786,6 @@ footer #regions-list > .menu > li > a {
   margin: 0 0 0.25rem 0.625rem;
 }
 footer #regions-list > .menu > li {
-  display: table-cell;
   vertical-align: top;
   width: 100%;
   list-style: disc inside;
