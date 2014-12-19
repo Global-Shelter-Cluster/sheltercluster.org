@@ -1694,8 +1694,8 @@ footer .inside-footer {
   display: table;
   table-layout: fixed;
   background-color: #cdd6db;
-  padding: 25px;
-  padding: 1.5625rem;
+  padding: 25px 25px 20px 25px;
+  padding: 1.5625rem 1.5625rem 1.25rem 1.5625rem;
 }
 footer .inside-footer > section {
   display: table-cell;
@@ -1726,20 +1726,12 @@ footer .see-all:hover, footer .see-all:active {
 footer .see-all:hover:before, footer .see-all:active:before {
   border-style: none;
 }
-footer section {
-  margin-bottom: 32px;
-  margin-bottom: 2rem;
-}
 footer h3 {
   text-transform: uppercase;
   font-size: 13.6px;
   font-size: 0.85rem;
   margin: 0 0 8px;
   margin: 0 0 0.5rem;
-}
-footer #active-clusters-list {
-  display: table-cell;
-  vertical-align: top;
 }
 footer #active-clusters-list .item-list ul li {
   margin: 0 0 4px 13px;
@@ -1748,9 +1740,6 @@ footer #active-clusters-list .item-list ul li {
 footer #active-clusters-list .complete-list {
   padding: 0 8px 8px;
   padding: 0 0.5rem 0.5rem;
-}
-footer #regions-list {
-  vertical-align: top;
 }
 footer #regions-list .nav-items {
   display: table;

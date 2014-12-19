@@ -5,42 +5,35 @@ footer {
   color: $shelter-grey;
   @include rem(padding-bottom, 2rem);
 
+  ul {
+  list-style: none;
+  margin: 0 0 0 0;
+  padding: 0 0 0 0;
+  list-style-position: inside;
 
+    li {
+      position: relative;
+      @include rem(margin,0 0 0.25em 1em);
 
-
-
-    ul {
-    list-style: none;
-    margin: 0 0 0 0;
-    padding: 0 0 0 0;
-    list-style-position: inside;
-
-  li {
-
-    position: relative;
-    @include rem(margin,0 0 0.25em 1em);
-
-    &:before {
-      position: absolute;
-      top: 7px;
-      left: -11px;
-      content: '';
-      background: url(../images/footer-bullet.png) no-repeat 0 0 transparent;
-      width: 6px;
-      height: 6px;
+      &:before {
+        position: absolute;
+        top: 7px;
+        left: -11px;
+        content: '';
+        background: url(../images/footer-bullet.png) no-repeat 0 0 transparent;
+        width: 6px;
+        height: 6px;
+      }
+      @include rem(padding, 0 0 0.25rem 0);
+      @include rem(font-size, 0.85rem);
     }
-    @include rem(padding, 0 0 0.25rem 0);
-    @include rem(font-size, 0.85rem);
   }
-  }
-
-
 
   .inside-footer {
     display: table;
     table-layout: fixed;
     background-color: $shelter-light-blue;
-    @include rem(padding, 1.5625rem);
+    @include rem(padding, 1.5625rem 1.5625rem 20px 1.5625rem);
 
     > section {
       display: table-cell;
@@ -75,9 +68,6 @@ footer {
     }
   }
 
-  section {
-    @include rem(margin-bottom, 2rem);
-  }
   h3 {
     text-transform: uppercase;
     @include rem(font-size, 0.85rem);
@@ -85,8 +75,7 @@ footer {
   }
 
   #active-clusters-list {
-    display: table-cell;
-    vertical-align: top;
+
 
    .item-list ul li {
       @include rem(margin, 0 0 0.25rem 0.8125rem);
@@ -102,7 +91,6 @@ footer {
   }
 
   #regions-list {
-    vertical-align: top;
     @include breakpoint(900px) {
       // width: 50%;
     }
