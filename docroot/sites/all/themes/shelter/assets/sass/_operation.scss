@@ -31,7 +31,7 @@
     @include reset-list;
   }
   li {
-    @include rem(max-height, 20rem);
+    @include rem(max-height, 10rem);
     overflow: hidden;
 
     .document-information {
@@ -46,6 +46,13 @@
         color: #fff;
         margin: 0;
         border-bottom: 1px solid #fff;
+        a {
+          color: #fff;
+          text-decoration: none;
+          .svg {
+            fill: #fff;
+          }
+        }
       }
       p {
         @include rem(margin, 0.25rem 0 0 0);

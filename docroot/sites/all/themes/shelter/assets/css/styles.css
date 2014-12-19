@@ -370,8 +370,8 @@ body {
   list-style: none;
 }
 #featured-documents li {
-  max-height: 320px;
-  max-height: 20rem;
+  max-height: 160px;
+  max-height: 10rem;
   overflow: hidden;
 }
 #featured-documents li .document-information {
@@ -392,6 +392,13 @@ body {
   color: #fff;
   margin: 0;
   border-bottom: 1px solid #fff;
+}
+#featured-documents li .document-information h2 a {
+  color: #fff;
+  text-decoration: none;
+}
+#featured-documents li .document-information h2 a .svg {
+  fill: #fff;
 }
 #featured-documents li .document-information p {
   margin: 4px 0 0 0;
