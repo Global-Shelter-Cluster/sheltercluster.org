@@ -118,7 +118,7 @@ footer {
           li {
             @include rem(font-size, 0.75rem);
             // @include rem(padding, 0 0.3125rem 0 0.6875rem);
-            @include rem(margin, 0 0.3125rem 0 0.625rem);
+            @include rem(margin, 0 0.3125rem 0 0);
             &:before {
               content: '\2013';
               background: none;
