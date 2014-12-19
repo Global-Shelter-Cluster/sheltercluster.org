@@ -7,6 +7,12 @@
   }
 }
 #operation-information {
+  h2 {
+    svg {
+      width: 35px;
+      height: 32px;
+    }
+  }
   clear: both;
   @include rem(margin, 0 0 2rem 0);
 
