@@ -37,6 +37,7 @@ function cluster_og_node_view($node, $view_mode) {
     $node->content['contact_members'] = $group_content->getContactMembers();
     $node->content['related_hubs'] = $group_content->getRelatedHubs();
     $node->content['related_responses'] = $group_content->getRelatedResponses();
+    $node->content['featured_documents'] = $group_content->getFeaturedDocuments();
     $node->content['key_documents'] = $group_content->getKeyDocuments();
     $node->content['recent_documents'] = $group_content->getRecentDocuments();
     $node->content['recent_discussions'] = $group_content->getRecentDiscussions();
@@ -80,6 +81,10 @@ function cluster_og_theme() {
       'render element' => 'element',
     ),
     'cluster_og_key_documents' => array(
+      'file' => 'theme/cluster_og.theme.inc',
+      'render element' => 'element',
+    ),
+    'cluster_og_featured_documents' => array(
       'file' => 'theme/cluster_og.theme.inc',
       'render element' => 'element',
     ),
@@ -278,10 +283,10 @@ function cluster_og_hot_responses_list() {
       }
     }
   }
-  $items[] = l(t('All current operations'), 'current-operations', array('attributes' => array('class' => array('see-all'))));
   return array(
     '#theme' => 'item_list',
-    '#items' => $items
+    '#items' => $items,
+    '#suffix' => $items[] = l(t('All current operations'), 'current-operations', array('attributes' => array('class' => array('see-all')))),
   );
 }
 

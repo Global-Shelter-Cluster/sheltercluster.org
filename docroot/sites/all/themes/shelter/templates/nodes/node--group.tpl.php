@@ -3,22 +3,7 @@
   <div class="main-column">
 
     <section id="featured-documents">
-      <ul>
-        <li>
-           <img src="/sites/all/themes/shelter/assets/images/fake/feature-document.jpg" alt="" />
-            <div class="document-information">
-              <h2>Featured Document Title 1</h2>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc aliquet justo leo, id lobortis leo maximus tristique. Sed non odio eros. Aenean pulvinar sapien quam, a bibendum ante lobortis eu.</p>
-            </div>
-        </li>
-        <li>
-          <img src="sites/all/themes/shelter/assets/images/fake/feature-document.jpg" alt="" />
-          <div class="document-information">
-            <h2>Featured Document Title 2</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc aliquet justo leo, id lobortis leo maximus tristique. Sed non odio eros. Aenean pulvinar sapien quam, a bibendum ante lobortis eu.</p>
-          </div>
-        </li>
-      </ul>
+      <?php print render($content['featured_documents']); ?>
     </section>
 
     <h3 data-collapse="operation-information">Overview</h3>
@@ -53,7 +38,7 @@
       <div id="button-join-group"><a href="#">Join</a></div>
     </section>
 
-    <?php if (isset($content['upcoming_event'])): ?>
+    <?php if (!isset($content['upcoming_event'])): ?>
       <h3 data-collapse="shelter-calendar">Calendar</h3>
       <section id="shelter-calendar">
         <div id="box-calendar">
@@ -69,6 +54,7 @@
 
     <?php if (isset($content['recent_discussions'])): ?>
       <section id="shelter-discussions">
+        <?php print _svg('icons/discussion', array('id'=>'discussion-icon', 'alt' => 'discussion icon')); ?>
         <h3>Discussions</h3>
         <ul id="discussions-items">
           <li class="discussions-item">

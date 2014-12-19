@@ -127,6 +127,7 @@ function cluster_docs_get_grouped_key_docs($gid) {
     $res = $query->entityCondition('entity_type', 'node')
       ->entityCondition('bundle', 'document')
       ->fieldCondition('og_group_ref', 'target_id', $gid)
+      ->fieldCondition('field_featured', 'value', 1, '!=')
       ->fieldCondition('field_key_document', 'value', 1)
       ->fieldCondition($category_field, 'tid', 'NULL', '!=')
       ->propertyCondition('status', NODE_PUBLISHED)
@@ -156,7 +157,7 @@ function cluster_docs_get_grouped_key_docs($gid) {
  */
 function cluster_docs_prepare_card_data($nids) {
   $docs = array();
-  $properties = array('title', 'link', 'link_url', 'is_link', 'is_file', 'is_file_class', 'description', 'filesize', 'file_extension', 'source',);
+  $properties = array('title', 'link', 'link_url', 'is_link', 'is_file', 'is_file_class', 'description', 'filesize', 'file_extension', 'is_image', 'image_uri', 'has_preview', 'preview_uri', 'source',);
 
   // @TODO language negocitation.
   global $language;
@@ -208,8 +209,23 @@ function cluster_docs_prepare_card_data($nids) {
           $doc['is_file_class'] = 'local-file';
         }
 
-        $doc['file_extension'] = l(pathinfo($file['filename'], PATHINFO_EXTENSION), $url, array('attributes' => array('target' => '_blank')));
+        $file_extension = pathinfo($file['filename'], PATHINFO_EXTENSION);
+        $doc['file_extension'] = l($file_extension, $url, array('attributes' => array('target' => '_blank')));
+        switch ($file_extension) {
+          case 'png':
+          case 'jpg':
+          case 'gif':
+            $doc['is_image'] = TRUE;
+            $doc['image_uri'] = $file['uri'];
+            break;
+        }
         $doc['filesize'] = number_format($file['filesize'] / 1048576, 2);
+      }
+
+      // Test if this document has a preview image .
+      if ($file = $wrapper->field_preview->value()) {
+        $doc['has_preview'] = TRUE;
+        $doc['preview_uri'] = $file['uri'];
       }
 
       // Test if this document is a link field.
@@ -251,6 +267,12 @@ function cluster_docs_theme() {
         'docs' => array(),
       ),
       'template' => 'theme/cluster-docs-cards-list'
+    ),
+    'cluster_docs_featured_documents' => array(
+      'variables' => array(
+        'docs' => array(),
+      ),
+      'template' => 'theme/cluster-docs-featured-documents'
     ),
   );
 }
