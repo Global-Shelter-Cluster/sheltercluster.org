@@ -35,7 +35,7 @@ function cluster_og_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'additional_settings__active_tab_strategic_advisory';
-  $strongarm->value = 'edit-workflow';
+  $strongarm->value = 'edit-submission';
   $export['additional_settings__active_tab_strategic_advisory'] = $strongarm;
 
   $strongarm = new stdClass();

@@ -407,4 +407,4 @@ features_exclude[dependencies][options] = options
 features_exclude[dependencies][strongarm] = strongarm
 features_exclude[field_base][body] = body
 files[] = classes/GroupPageContent.php
-mtime = 1418934653
+mtime = 1419098242

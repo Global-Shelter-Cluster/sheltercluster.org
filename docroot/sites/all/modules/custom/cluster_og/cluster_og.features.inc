@@ -51,7 +51,7 @@ function cluster_og_node_info() {
       'help' => '',
     ),
     'strategic_advisory' => array(
-      'name' => t('Strategic Advisory'),
+      'name' => t('Strategic Advisory Group'),
       'base' => 'node_content',
       'description' => '',
       'has_title' => '1',
