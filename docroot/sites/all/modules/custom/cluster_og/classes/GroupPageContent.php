@@ -248,6 +248,7 @@
    */
   public function getContactMembers() {
     $contact_members_ids = self::getUsersByRole('contact member', $this->node);
+    // @TODO: This tight coupling to the GroupPageContent class should not be happening.
     return GroupPageContent::getList($contact_members_ids, 'contact_member', 'cluster_og_contact_member', 'user');
   }
 
@@ -271,6 +272,7 @@
       return NULL;
     }
 
+    // @TODO: This tight coupling to the GroupPageContent class should not be happening.
     $ret = GroupPageContent::getList(array_keys($res['node']), 'teaser', 'cluster_og_recent_discussions');
     $ret['#all_discussions_link'] = 'node/' . $this->node->nid . '/discussions';
 
@@ -517,17 +519,21 @@
 
   public function getRelatedResponses() {
     $nids = self::queryChildren($this->getDescendantIds(TRUE), 'field_associated_regions', 'response');
+
+    // @TODO: This tight coupling to the GroupPageContent class should not be happening.
     return GroupPageContent::getList($nids, 'related_response', 'cluster_og_related_responses');
   }
 
   public function getRelatedHubs() {
     $nids = self::queryChildren($this->getDescendantIds(TRUE), 'field_parent_region', 'hub');
+    // @TODO: This tight coupling to the GroupPageContent class should not be happening.
     return GroupPageContent::getList($nids, 'related_hub', 'cluster_og_related_hubs');
   }
 }
 
   /**
-   * @TODO describe class.
+   * @TODO this class should have been the entry point through which external calls got access to the content managers
+   * to generate page content.
    */
   class GroupPageContent {
 
