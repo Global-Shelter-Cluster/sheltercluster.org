@@ -14,22 +14,22 @@ function cluster_nav_menu() {
     'current-operations' => array(
       'menu_name' => 'main-menu',
       'title' => 'Current operations',
-      'page callback' => '_cluster_nav_main_menu_callback',
-      'page arguments' => array('current_operations'),
+      'page callback' => '_cluster_nav_paged_teaser_list',
+      'page arguments' => array('response'),
       'access arguments' => array('access content'),
     ),
     'regions-countries' => array(
       'menu_name' => 'main-menu',
       'title' => 'Regions / Countries',
-      'page callback' => '_cluster_nav_main_menu_callback',
-      'page arguments' => array('regions_countries'),
+      'page callback' => '_cluster_nav_paged_teaser_list',
+      'page arguments' => array('geographic_region'),
       'access arguments' => array('access content'),
     ),
     'communities-of-practice' => array(
       'menu_name' => 'main-menu',
       'title' => 'Communities of practice',
-      'page callback' => '_cluster_nav_main_menu_callback',
-      'page arguments' => array('communities_of_practice'),
+      'page callback' => '_cluster_nav_paged_teaser_list',
+      'page arguments' => array('community_of_practice'),
       'access arguments' => array('access content'),
     ),
   );
@@ -39,14 +39,34 @@ function cluster_nav_menu() {
 
 /**
  * Page callback for main menu items.
+ * @param $bundle
+ *  An node entity bundle name.
+ * @return
+ *  Paged node teaser render array.
  */
-function _cluster_nav_main_menu_callback($view_name) {
-  $view = views_get_view($view_name);
-  if ($view) { 
-    return $view->execute_display();
+function _cluster_nav_paged_teaser_list($bundle) {
+  $query = new EntityFieldQuery();
+  $results = $query->entityCondition('entity_type', 'node')
+    ->entityCondition('bundle', $bundle)
+    ->propertyCondition('status', NODE_PUBLISHED)
+    ->pager(10)
+    ->execute();
+
+  if (! isset($results['node'])) {
+    $content = array(
+      '#markup' => t('No content for the moment.'),
+    ); 
   }
-  watchdog('cluster_nav', 'Tried to display non-existing view @v', array('@v' => $view_name));
-  drupal_goto();
+  else {
+    $content = node_view_multiple(node_load_multiple(array_keys($results['node'])));
+  }
+  return array(
+    'content' => $content,
+    'pager' => array(
+      '#markup' => theme('pager'),
+      '#weight' => 10
+    )
+  );
 }
 
 /**
