@@ -1,19 +1,34 @@
 <?php
 
+/**
+ * Provides theme layer integration for group content.
+ */
 class GroupDisplayProvider {
   public static function getDisplayProvider($node, $view_mode = 'full') {
+    
     switch ($view_mode) {
       case 'full':
-      default:
         return new GroupPageDisplayProvider($node, $view_mode);
+        break;
+      default:
+        return new GroupDisplayProvider();
     }
-  } 
+  }
+
+  /**
+   * Magic callback.
+   * Provides a default return value of FALSE for all methods that are not implemented in a specific view mode
+   * descendent class.
+   */
+  public function __call($name, $arguments) {
+    return FALSE;
+  }
 }
 
 /**
  * Provide renderable content for full page view mode. 
  */
-class GroupPageDisplayProvider {
+class GroupPageDisplayProvider extends GroupDisplayProvider{
 
   protected $node;
   protected $view_mode;

@@ -1,7 +1,8 @@
 <?php
 
   /**
-   * @TODO - describe class.
+   * Generates a content manager appropriate to the viewed content.
+   * Provides related entity data, typically node ids, for the viewed content.
    */
   class GroupContentManager {
 
