@@ -1,6 +1,9 @@
 <?php
 
-class GroupContentManager {
+  /**
+   * @TODO - describe class.
+   */
+  class GroupContentManager {
 
   protected $node;
 
@@ -16,10 +19,18 @@ class GroupContentManager {
    */
   protected $parent_field = NULL;
 
+  /**
+   * Constructor.
+   */
   public function __construct($node) {
     $this->node = $node;
   }
 
+  /**
+   * Generate the dashboard links for a group node.
+   * @return
+   *  Render array of dashboard links.
+   */
   public function getDashboardMenu() {
     $items = array();
 
@@ -41,12 +52,15 @@ class GroupContentManager {
     );
 
     $items[] = array(
-      'label' => t('Agenda'),
-      'path' => 'node/'.$this->node->nid.'/edit', //TODO: change this to actual Agenda link
+      'label' => t('Events'),
+      'path' => '/', //TODO: change this to actual events calendar link
 //      'total' => $total,
     );
 
     // This is a reference to the Strategic Advisory "parent" group. Disabled because the link is in the breadcrumb.
+    
+    // @TODO, if link is in breadcrumb, can we delete this code ?
+
 //    if ($parent = $this->getStrategicAdvisoryParent()) {
 //      $items[] = array(
 //        'label' => t('Parent'),
@@ -56,7 +70,7 @@ class GroupContentManager {
 
     if ($strategic_advisory = $this->getStrategicAdvisory()) {
       $items[] = array(
-        'label' => t('Strategic Advisory'),
+        'label' => t('Strategic Advisory Group'),
         'path' => 'node/'.$strategic_advisory->nid,
       );
     }
@@ -73,6 +87,11 @@ class GroupContentManager {
     );
   }
 
+  /**
+   * Generates contextual navigation (breadcrumb-like) for groups.
+   * @return
+   *  Render array of contextual navigation elements.
+   */
   public function getContextualNavigation() {
     $wrapper = entity_metadata_wrapper('node', $this->node);
 
@@ -80,33 +99,38 @@ class GroupContentManager {
       '#theme' => 'cluster_contextual_nav',
     );
 
+    // The the group parent region.
     if (isset($wrapper->field_parent_region)) {
       $region = $wrapper->field_parent_region->value();
       if ($region) {
         $ret['#regions'] = array(
           array(
             'title' => $region->title,
-            'path' => 'node/'.$region->nid,
+            'path' => 'node/' . $region->nid,
           )
         );
       }
-    } elseif (isset($wrapper->field_associated_regions)) {
+    }
+
+    // Add the group associated regions.
+    elseif (isset($wrapper->field_associated_regions)) {
       $ret['#regions'] = array();
 
       foreach ($wrapper->field_associated_regions->value() as $region) {
         $ret['#regions'][] = array(
           'title' => $region->title,
-          'path' => 'node/'.$region->nid,
+          'path' => 'node/' . $region->nid,
         );
       }
     }
 
+    // Add the group parent response.
     if (isset($wrapper->field_parent_response)) {
       $response = $wrapper->field_parent_response->value();
       if (!empty($response)) {
         $ret['#response'] = array(
           'title' => $response->title,
-          'path' => 'node/'.$response->nid,
+          'path' => 'node/' . $response->nid,
         );
       }
     }
@@ -115,7 +139,13 @@ class GroupContentManager {
   }
 
   /**
-   * Returns the parent node. Only works if the current node is a Strategic Advisory group.
+   * Get the node to which a Strategic Advisory Group is associated. 
+   *
+   * @TODO should this not go into class named
+   *    GroupContentManagerStategicAdvisoryGroup extends GroupContentManager ?
+   *
+   * @return
+   *   The parent node for Strategic Advisory group.
    */
   public function getStrategicAdvisoryParent() {
     if ($this->node->type != 'strategic_advisory') {
@@ -125,7 +155,8 @@ class GroupContentManager {
     $wrapper = entity_metadata_wrapper('node', $this->node);
     if ($wrapper->field_parent_response->value()) {
       return $wrapper->field_parent_response->value();
-    } elseif ($wrapper->field_parent_region->value()) {
+    }
+    elseif ($wrapper->field_parent_region->value()) {
       return $wrapper->field_parent_region->value();
     }
   }
@@ -134,8 +165,12 @@ class GroupContentManager {
    * Finds a strategic advisory node for the current group.
    * Only works if the current group is not a strategic advisory itself.
    * If there is more than one, it is not defined which one will be returned.
+   *
+   * @return
+   *   node object of bundle type response or region.
    */
   public function getStrategicAdvisory() {
+    // @TODO: why is this necessary ?
     if ($this->node->type == 'strategic_advisory') {
       return;
     }
@@ -163,6 +198,11 @@ class GroupContentManager {
     }
   }
 
+  /**
+   * Provide a count value for all pubished document nodes added to the group.
+   * @return
+   *  Count query result.
+   */
   public function getDocumentCount() {
     $query = new EntityFieldQuery();
     return $query->entityCondition('entity_type', 'node')
@@ -173,6 +213,11 @@ class GroupContentManager {
       ->execute();
   }
 
+  /**
+   * Provide a count value for all pubished discussion nodes added to the group.
+   * @return
+   *  Count query result.
+   */
   public function getDiscussionCount() {
     $query = new EntityFieldQuery();
     return $query->entityCondition('entity_type', 'node')
@@ -183,27 +228,43 @@ class GroupContentManager {
       ->execute();
   }
 
+  /**
+   * 
+   */
   public function getRelatedResponses() {
     return NULL;
   }
 
+  /**
+   * 
+   */
   public function getRelatedHubs() {
     return NULL;
   }
 
+  /**
+   * Get users with the contact member role for the group.
+   *  @return 
+   */
   public function getContactMembers() {
     $contact_members_ids = self::getUsersByRole('contact member', $this->node);
     return GroupPageContent::getList($contact_members_ids, 'contact_member', 'cluster_og_contact_member', 'user');
   }
 
-  public function getRecentDiscussions() {
+  /**
+   * Get recent discussions for a group node.
+   * @TODO expose admin settings form for range default argument.
+   * @return
+   *  Render array of discussion nodes.
+   */
+  public function getRecentDiscussions($range = 2) {
     $query = new EntityFieldQuery();
     $res = $query->entityCondition('entity_type', 'node')
       ->entityCondition('bundle', 'discussion')
       ->fieldCondition('og_group_ref', 'target_id', $this->node->nid)
       ->propertyCondition('status', NODE_PUBLISHED)
       ->propertyOrderBy('changed', 'DESC')
-      ->range(0, 2) // This is a hard limit, not a paginator.
+      ->range(0, $range) // This is a hard limit, not a paginator.
       ->execute();
 
     if (!isset($res['node'])) {
@@ -216,14 +277,20 @@ class GroupContentManager {
     return $ret;
   }
 
-  public function getRecentDocuments() {
+  /**
+   * Get 5 latest document nodes added to a group.
+   * @TODO expose admin settings form for range default argument.
+   *  @return
+   *    Render array of documents themed as cards.
+   */
+  public function getRecentDocuments($range = 5) {
     $query = new EntityFieldQuery();
     $res = $query->entityCondition('entity_type', 'node')
       ->entityCondition('bundle', 'document')
       ->fieldCondition('og_group_ref', 'target_id', $this->node->nid)
       ->propertyCondition('status', NODE_PUBLISHED)
       ->propertyOrderBy('changed', 'DESC')
-      ->range(0, 5) // This is a hard limit, not a paginator.
+      ->range(0, $range) // This is a hard limit, not a paginator.
       ->execute();
 
     if (!isset($res['node'])) {
@@ -238,6 +305,11 @@ class GroupContentManager {
     );
   }
 
+  /**
+   * Get documents with the 'field_featured' flag for the current group.
+   *  @return
+   *   Return render array of featured documents.
+   */
   public function getFeaturedDocuments() {
     $query = new EntityFieldQuery();
     $res = $query->entityCondition('entity_type', 'node')
@@ -252,6 +324,7 @@ class GroupContentManager {
       return NULL;
     }
 
+    // @TODO move theme responsibility completely to cluster_docs - i.e. wrapper should not be in cluster_og.
     return array(
       '#theme' => 'cluster_docs_featured_documents',
       '#theme_wrappers' => array('cluster_og_featured_documents'),
@@ -324,6 +397,9 @@ class GroupContentManager {
     }
   }
 
+  /**
+   * @TODO write doc for this method.
+   */
   public function getDescendantIds($include_self = FALSE, &$collected_nids = array()) {
     if (!$this->parent_field) {
       return NULL;
@@ -400,7 +476,7 @@ class GroupContentManager {
         $return_nids = array_merge($return_nids, $parent_nids);
       }
 
-      // We call array_unique just in case there are duplicates. There shouldn't.
+      // We call array_unique just in case there are duplicates. There shouldn't be any.
       return array_unique($return_nids);
 
     }
@@ -413,9 +489,13 @@ class GroupContentManager {
       return array();
     }
   }
+
 }
 
-class GroupContentManagerResponse extends GroupContentManager {
+  /**
+   * @TODO describe class.
+   */
+  class GroupContentManagerResponse extends GroupContentManager {
   protected $parent_field = 'field_parent_response';
 
   public function getRelatedResponses() {
@@ -429,7 +509,10 @@ class GroupContentManagerResponse extends GroupContentManager {
   }
 }
 
-class GroupContentManagerGeographicRegion extends GroupContentManager {
+  /**
+   * @TODO describe class.
+   */
+  class GroupContentManagerGeographicRegion extends GroupContentManager {
   protected $parent_field = 'field_parent_region';
 
   public function getRelatedResponses() {
@@ -443,7 +526,10 @@ class GroupContentManagerGeographicRegion extends GroupContentManager {
   }
 }
 
-class GroupPageContent {
+  /**
+   * @TODO describe class.
+   */
+  class GroupPageContent {
 
   protected $node;
   protected $view_mode;
@@ -459,6 +545,9 @@ class GroupPageContent {
     $this->view_mode = $view_mode;
   }
 
+  /**
+   * 
+   */
   public function getContactMembers() {
     if ($this->view_mode != 'full') {
       return NULL;
@@ -466,6 +555,9 @@ class GroupPageContent {
     return $this->manager->getContactMembers();
   }
 
+  /**
+   * 
+   */
   public function getRelatedResponses() {
     if ($this->view_mode != 'full') {
       return NULL;
@@ -473,6 +565,9 @@ class GroupPageContent {
     return $this->manager->getRelatedResponses();
   }
 
+  /**
+   * 
+   */
   public function getRelatedHubs() {
     if ($this->view_mode != 'full') {
       return NULL;
@@ -480,6 +575,9 @@ class GroupPageContent {
     return $this->manager->getRelatedHubs();
   }
 
+  /**
+   * 
+   */
   public function getKeyDocuments() {
     if ($this->view_mode != 'full') {
       return NULL;
@@ -487,6 +585,9 @@ class GroupPageContent {
     return $this->manager->getKeyDocuments();
   }
 
+  /**
+   * 
+   */
   public function getFeaturedDocuments() {
     if ($this->view_mode != 'full') {
       return NULL;
@@ -494,6 +595,9 @@ class GroupPageContent {
     return $this->manager->getFeaturedDocuments();
   }
 
+  /**
+   * 
+   */
   public function getRecentDocuments() {
     if ($this->view_mode != 'full') {
       return NULL;
@@ -501,6 +605,9 @@ class GroupPageContent {
     return $this->manager->getRecentDocuments();
   }
 
+  /**
+   * 
+   */
   public function getRecentDiscussions() {
     if ($this->view_mode != 'full') {
       return NULL;
@@ -511,6 +618,7 @@ class GroupPageContent {
   /**
    * Helper function. Returns a list of entities as a render array using the given
    * view mode and theme wrapper.
+   *
    * @param $ids
    *  Array of entity IDs to show in the list.
    * @param $view_mode

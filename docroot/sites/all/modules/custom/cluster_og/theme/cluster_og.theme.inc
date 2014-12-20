@@ -79,7 +79,7 @@ function theme_cluster_og_recent_documents($vars) {
 }
 
 /**
- * Render a group's featured documents.
+ * Theme wrapper for featured documents.
  */
 function theme_cluster_og_featured_documents($vars) {
   $output = '<ul>';
