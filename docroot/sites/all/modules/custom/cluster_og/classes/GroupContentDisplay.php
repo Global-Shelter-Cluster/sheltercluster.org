@@ -73,7 +73,7 @@ class GroupPageDisplayProvider {
   }
 
   /**
-   * 
+   * @TODO delegate theming completely to cluster_docs. 
    */
   public function getFeaturedDocuments() {
     if ($nids = $this->manager->getFeaturedDocuments()) {
@@ -88,7 +88,7 @@ class GroupPageDisplayProvider {
   }
 
   /**
-   * 
+   * @TODO delegate theming completely to cluster_docs. 
    */
   public function getRecentDocuments() {
     if ($nids = $this->manager->getRecentDocuments()) {
@@ -103,7 +103,8 @@ class GroupPageDisplayProvider {
   }
 
   /**
-   * 
+   * Provide recent discussion nodes for the group.
+   * @return render array of discussions. 
    */
   public function getRecentDiscussions() {
     $content = FALSE;
