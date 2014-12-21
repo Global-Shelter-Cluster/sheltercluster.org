@@ -4,73 +4,23 @@
  * Provides theme layer integration for group content.
  */
 class GroupDisplayProvider {
-  public static function getDisplayProvider($node, $view_mode = 'full') {
-    
-    switch ($view_mode) {
-      case 'full':
-        return new GroupPageDisplayProvider($node, $view_mode);
-        break;
-      default:
-        return new GroupDisplayProvider();
-    }
-  }
-
-  /**
-   * Magic callback.
-   * Provides a default return value of FALSE for all methods that are not implemented in a specific view mode
-   * descendent class.
-   */
-  public function __call($name, $arguments) {
-    return FALSE;
-  }
-
-  /**
-   * Returns a list of entities as a render array using the given view mode and theme wrapper.
-   *
-   * @param $ids
-   *  Array of entity IDs to show in the list.
-   * @param $view_mode
-   *  What view mode to use for showing the entities.
-   * @param $theme_wrapper
-   *  An optional theme wrapper.
-   * @param $entity_type
-   *  The entity type for the given IDs.
-   * @return Render array.
-   */
-  protected function getList($ids, $view_mode = 'teaser', $theme_wrapper = NULL, $entity_type = 'node') {
-    if (!$ids) {
-      return FALSE;
-    }
-    $entities = entity_load($entity_type, $ids);
-
-    $ret = array(
-      '#total' => count($entities),
-    );
-
-    $info = entity_get_info($entity_type);
-    foreach ($entities as $entity) {
-      $ret[$entity->{$info['entity keys']['id']}] = entity_view($entity_type, array($entity), $view_mode);
-    }
-
-    if ($theme_wrapper) {
-      $ret['#theme_wrappers'] = array($theme_wrapper);
-    }
-    return $ret;
-  }
-}
-
-/**
- * Provide renderable content for full page view mode. 
- */
-class GroupPageDisplayProvider extends GroupDisplayProvider{
-
   protected $node;
   protected $view_mode;
 
   /**
    * @var GroupContentManager implementation.
    */
-  private $manager;
+  protected $manager;
+
+  public static function getDisplayProvider($node, $view_mode = 'full') {
+    switch ($view_mode) {
+      case 'full':
+        return new GroupFullDisplayProvider($node, $view_mode);
+        break;
+      default:
+        return new GroupDisplayProvider($node, $view_mode);
+    }
+  }
 
   function __construct($node, $view_mode) {
     $this->node = $node;
@@ -79,14 +29,11 @@ class GroupPageDisplayProvider extends GroupDisplayProvider{
   }
 
   /**
-   * Get the contact members for the group.
-   * @return
-   *  Render array of contact members or FALSE if none exist.
+   * Magic callback.
+   * Provides a default return value of FALSE for all methods that are not implemented in a specific view mode
+   * descendent class.
    */
-  public function getContactMembers() {
-    if ($contact_members_ids = $this->manager->getContactMembers()) {
-      return $this->getList($contact_members_ids, 'contact_member', 'cluster_og_contact_member', 'user');
-    }
+  public function __call($name, $arguments) {
     return FALSE;
   }
 
@@ -108,60 +55,6 @@ class GroupPageDisplayProvider extends GroupDisplayProvider{
       return $this->getList($nids, 'related_hub', 'cluster_og_related_hubs');
     }
     return FALSE;
-  }
-
-  /**
-   * Returns the Key Documents for this group, grouped by Vocabularies.
-   * @return render array of key documents. 
-   */
-  public function getKeyDocuments() {
-    if ($docs = $this->manager->getKeyDocuments()) {
-      return array('docs' => $docs);
-    }
-    return FALSE;
-  }
-
-  /**
-   * @TODO delegate theming completely to cluster_docs. 
-   */
-  public function getFeaturedDocuments() {
-    if ($nids = $this->manager->getFeaturedDocuments()) {
-      return array(
-        '#theme' => 'cluster_docs_featured_documents',
-        '#theme_wrappers' => array('cluster_og_featured_documents'),
-        '#docs' => cluster_docs_prepare_card_data($nids),
-        '#all_documents_link' => 'node/' . $this->node->nid . '/documents',
-      );
-    }
-    return FALSE;
-  }
-
-  /**
-   * @TODO delegate theming completely to cluster_docs. 
-   */
-  public function getRecentDocuments() {
-    if ($nids = $this->manager->getRecentDocuments()) {
-      return array(
-        '#theme' => 'cluster_docs_cards_list',
-        '#theme_wrappers' => array('cluster_og_recent_documents'),
-        '#docs' => cluster_docs_prepare_card_data($nids),
-        '#all_documents_link' => 'node/' . $this->node->nid . '/documents',
-      );
-    }
-    return FALSE;
-  }
-
-  /**
-   * Provide recent discussion nodes for the group.
-   * @return render array of discussions. 
-   */
-  public function getRecentDiscussions() {
-    $content = FALSE;
-    if ($nodes = $this->manager->getRecentDiscussions()) {
-      $content = $this->getList($nodes, 'teaser', 'cluster_og_recent_discussions');
-      $content['#all_discussions_link'] = 'node/' . $this->node->nid . '/discussions';
-    }
-    return $content;
   }
 
   /**
@@ -281,6 +174,145 @@ class GroupPageDisplayProvider extends GroupDisplayProvider{
     return $output;
   }
 
+  /**
+   * Returns a list of entities as a render array using the given view mode and theme wrapper.
+   *
+   * @param $ids
+   *  Array of entity IDs to show in the list.
+   * @param $view_mode
+   *  What view mode to use for showing the entities.
+   * @param $theme_wrapper
+   *  An optional theme wrapper.
+   * @param $entity_type
+   *  The entity type for the given IDs.
+   * @return Render array.
+   */
+  protected function getList($ids, $view_mode = 'teaser', $theme_wrapper = NULL, $entity_type = 'node') {
+    if (!$ids) {
+      return FALSE;
+    }
+    $entities = entity_load($entity_type, $ids);
 
+    $ret = array(
+      '#total' => count($entities),
+    );
 
+    $info = entity_get_info($entity_type);
+    foreach ($entities as $entity) {
+      $ret[$entity->{$info['entity keys']['id']}] = entity_view($entity_type, array($entity), $view_mode);
+    }
+
+    if ($theme_wrapper) {
+      $ret['#theme_wrappers'] = array($theme_wrapper);
+    }
+    return $ret;
+  }
+}
+
+/**
+ * Provide renderable content for full page view mode. 
+ */
+class GroupFullDisplayProvider extends GroupDisplayProvider{
+
+  function __construct($node, $view_mode) {
+    parent::__construct($node, $view_mode);
+  }
+
+  /**
+   * Get the contact members for the group.
+   * @return
+   *  Render array of contact members or FALSE if none exist.
+   */
+  public function getContactMembers() {
+    if ($contact_members_ids = $this->manager->getContactMembers()) {
+      return $this->getList($contact_members_ids, 'contact_member', 'cluster_og_contact_member', 'user');
+    }
+    return FALSE;
+  }
+
+  /**
+   * Returns the Key Documents for this group, grouped by Vocabularies.
+   * @return render array of key documents. 
+   */
+  public function getKeyDocuments() {
+    if ($docs = $this->manager->getKeyDocuments()) {
+      return array('docs' => $docs);
+    }
+    return FALSE;
+  }
+
+  /**
+   * @TODO delegate theming completely to cluster_docs. 
+   */
+  public function getFeaturedDocuments() {
+    if ($nids = $this->manager->getFeaturedDocuments()) {
+      return array(
+        '#theme' => 'cluster_docs_featured_documents',
+        '#docs' => cluster_docs_prepare_card_data($nids),
+        '#all_documents_link' => 'node/' . $this->node->nid . '/documents',
+      );
+    }
+    return FALSE;
+  }
+
+  /**
+   * Get a list of recent documents for the current group.
+   * Delegate theming completely to cluster_docs.
+   * @return
+   *  Render array of recent documents.
+   */
+  public function getRecentDocuments() {
+    if ($nids = $this->manager->getRecentDocuments()) {
+      return array(
+        '#theme' => 'cluster_docs_cards_list',
+        '#docs' => cluster_docs_prepare_card_data($nids),
+        '#all_documents_link' => array(
+          '#theme' => 'cluster_docs_all_docs_link',
+          '#path' => 'node/' . $this->node->nid . '/documents',
+        ),
+      );
+    }
+    return FALSE;
+  }
+
+  /**
+   * Provide recent discussion nodes for the group.
+   * @return render array of discussions. 
+   */
+  public function getRecentDiscussions() {
+    if ($nodes = $this->manager->getRecentDiscussions()) {
+      $content = $this->getList($nodes, 'teaser', 'cluster_og_recent_discussions');
+      $content['#all_discussions_link'] = 'node/' . $this->node->nid . '/discussions';
+      return $content;
+    }
+    return FALSE;
+  }
+
+  /**
+   * Not shown for this display.
+   */
+  public function getRelatedResponses() {
+    return FALSE;
+  }
+
+  /**
+   * Not shown for this display.
+   */
+  public function getRelatedHubs() {
+    return FALSE;
+  }
+
+  /**
+   * Not shown for this display.
+   */
+  public function getDashboardMenu() {
+    return FALSE;
+  }
+
+  /**
+   * Not shown for this display.
+   */
+  public function getContextualNavigation() {
+    return FALSE;
+  }
 }

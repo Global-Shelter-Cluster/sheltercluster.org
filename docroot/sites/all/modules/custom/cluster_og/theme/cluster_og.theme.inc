@@ -64,22 +64,8 @@ function theme_cluster_og_recent_discussions($vars) {
 }
 
 /**
- * Render a group's recent documents.
- * $vars['element']['#total']: the documents total count (maximum of 5).
- * $vars['element']['#children']: markup for all document nodes.
- * $vars['element']['#all_documents_link']: link for the "all documents" page.
- * $vars['element'][UID]: each document render array and markup.
- */
-function theme_cluster_og_recent_documents($vars) {
-  $output = '<div>';
-  $output .= $vars['element']['#children'];
-  $output .= l(t('Browse all documents'), $vars['element']['#all_documents_link'], array('attributes' => array('class' => array('browse-all-documents'))));
-  $output .= '</div>';
-  return $output;
-}
-
-/**
  * Theme wrapper for featured documents.
+ * @TODO delegate to cluster_docs module.
  */
 function theme_cluster_og_featured_documents($vars) {
   $output = '<ul>';

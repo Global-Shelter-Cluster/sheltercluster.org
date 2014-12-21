@@ -83,13 +83,14 @@ function cluster_nav_preprocess_page(&$variables) {
     return;
   }
 
-  $group_page_content = FALSE;
+  // Provide dashboard and contextual navigation at page level.
+  $display_provider = FALSE;
   $variables['dashboard_menu'] = FALSE;
   $variables['contextual_navigation'] = FALSE;
 
   // If viewing a group node page, use it.
   if (og_is_group('node', $node)) {
-    $group_page_content = GroupDisplayProvider::getDisplayProvider($node);
+    $display_provider = GroupDisplayProvider::getDisplayProvider($node, 'page_level');
   }
 
   // If viewing a discussion node page, use the associated group node.
@@ -97,12 +98,12 @@ function cluster_nav_preprocess_page(&$variables) {
     $wrapper = entity_metadata_wrapper('node', $node);
     $group = $wrapper->og_group_ref->value();
     if (count($group) > 0) {
-      $group_page_content = GroupDisplayProvider::getDisplayProvider($group[0]);
+      $display_provider = GroupDisplayProvider::getDisplayProvider($group[0], 'page_level');
     }
   }
 
-  if ($group_page_content) {
-    $variables['dashboard_menu'] = $group_page_content->getDashboardMenu();
-    $variables['contextual_navigation'] = $group_page_content->getContextualNavigation();
+  if ($display_provider) {
+    $variables['dashboard_menu'] = $display_provider->getDashboardMenu();
+    $variables['contextual_navigation'] = $display_provider->getContextualNavigation();
   }
 }

@@ -264,6 +264,7 @@ function cluster_docs_theme() {
       'variables' => array(
         'heading' => FALSE,
         'docs' => array(),
+        'all_documents_link' => FALSE,
       ),
       'template' => 'theme/cluster-docs-cards-list'
     ),
@@ -272,6 +273,14 @@ function cluster_docs_theme() {
         'docs' => array(),
       ),
       'template' => 'theme/cluster-docs-featured-documents'
+    ),
+    'cluster_docs_all_docs_link' => array(
+      'variables' => array(
+        'path' => FALSE,
+        'text' => t('Browse all documents'),
+        'class' => 'browse-all-documents',
+      ),
+      'file' => 'theme/cluster_docs.theme.inc',
     ),
   );
 }

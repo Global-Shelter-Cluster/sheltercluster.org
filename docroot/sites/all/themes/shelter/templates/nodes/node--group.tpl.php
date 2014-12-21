@@ -21,7 +21,7 @@
       </section>
     <?php endif; ?>
 
-    <?php if (isset($content['recent_documents'])): ?>
+    <?php if ($content['recent_documents']): ?>
       <h3 data-collapse="recent-documents">Recent Documents</h3>
       <section id="recent-documents">
         <?php print render($content['recent_documents']); ?>
