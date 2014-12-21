@@ -48,8 +48,10 @@ function cluster_discussions_all($nid) {
   pager_default_initialize($results['result count'], CLUSTER_DISCUSSIONS_PER_PAGE);
 
   $nids = array_keys($results['results']);
-
-  $ret = GroupPageContent::getList($nids, 'teaser', 'cluster_discussions_all');
+  
+  // @TODO generate the list. 
+  //$ret = array();
+  $ret['#markup'] = 'Not implemented';
   $ret['pager'] = array(
     '#theme' => 'pager',
   );

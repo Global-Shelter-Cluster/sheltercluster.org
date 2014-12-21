@@ -23,6 +23,40 @@ class GroupDisplayProvider {
   public function __call($name, $arguments) {
     return FALSE;
   }
+
+  /**
+   * Returns a list of entities as a render array using the given view mode and theme wrapper.
+   *
+   * @param $ids
+   *  Array of entity IDs to show in the list.
+   * @param $view_mode
+   *  What view mode to use for showing the entities.
+   * @param $theme_wrapper
+   *  An optional theme wrapper.
+   * @param $entity_type
+   *  The entity type for the given IDs.
+   * @return Render array.
+   */
+  protected function getList($ids, $view_mode = 'teaser', $theme_wrapper = NULL, $entity_type = 'node') {
+    if (!$ids) {
+      return FALSE;
+    }
+    $entities = entity_load($entity_type, $ids);
+
+    $ret = array(
+      '#total' => count($entities),
+    );
+
+    $info = entity_get_info($entity_type);
+    foreach ($entities as $entity) {
+      $ret[$entity->{$info['entity keys']['id']}] = entity_view($entity_type, array($entity), $view_mode);
+    }
+
+    if ($theme_wrapper) {
+      $ret['#theme_wrappers'] = array($theme_wrapper);
+    }
+    return $ret;
+  }
 }
 
 /**
@@ -51,7 +85,7 @@ class GroupPageDisplayProvider extends GroupDisplayProvider{
    */
   public function getContactMembers() {
     if ($contact_members_ids = $this->manager->getContactMembers()) {
-      return self::getList($contact_members_ids, 'contact_member', 'cluster_og_contact_member', 'user');
+      return $this->getList($contact_members_ids, 'contact_member', 'cluster_og_contact_member', 'user');
     }
     return FALSE;
   }
@@ -61,7 +95,7 @@ class GroupPageDisplayProvider extends GroupDisplayProvider{
    */
   public function getRelatedResponses() {
     if ($nids = $this->manager->getRelatedResponses()) {
-      return self::getList($nids, 'related_response', 'cluster_og_related_responses');
+      return $this->getList($nids, 'related_response', 'cluster_og_related_responses');
     }
     return FALSE;
   }
@@ -71,7 +105,7 @@ class GroupPageDisplayProvider extends GroupDisplayProvider{
    */
   public function getRelatedHubs() {
     if ($nids = $this->manager->getRelatedHubs()) {
-      return self::getList($nids, 'related_hub', 'cluster_og_related_hubs');
+      return $this->getList($nids, 'related_hub', 'cluster_og_related_hubs');
     }
     return FALSE;
   }
@@ -124,7 +158,7 @@ class GroupPageDisplayProvider extends GroupDisplayProvider{
   public function getRecentDiscussions() {
     $content = FALSE;
     if ($nodes = $this->manager->getRecentDiscussions()) {
-      $content = GroupPageContent::getList($nodes, 'teaser', 'cluster_og_recent_discussions');
+      $content = $this->getList($nodes, 'teaser', 'cluster_og_recent_discussions');
       $content['#all_discussions_link'] = 'node/' . $this->node->nid . '/discussions';
     }
     return $content;
@@ -247,39 +281,6 @@ class GroupPageDisplayProvider extends GroupDisplayProvider{
     return $output;
   }
 
-  /**
-   * Helper function. Returns a list of entities as a render array using the given
-   * view mode and theme wrapper.
-   *
-   * @param $ids
-   *  Array of entity IDs to show in the list.
-   * @param $view_mode
-   *  What view mode to use for showing the entities.
-   * @param $theme_wrapper
-   *  An optional theme wrapper.
-   * @param $entity_type
-   *  The entity type for the given IDs.
-   * @return Render array.
-   */
-  static public function getList($ids, $view_mode = 'teaser', $theme_wrapper = NULL, $entity_type = 'node') {
-    if (!$ids) {
-      return FALSE;
-    }
-    $entities = entity_load($entity_type, $ids);
 
-    $ret = array(
-      '#total' => count($entities),
-    );
-
-    $info = entity_get_info($entity_type);
-    foreach ($entities as $entity) {
-      $ret[$entity->{$info['entity keys']['id']}] = entity_view($entity_type, array($entity), $view_mode);
-    }
-
-    if ($theme_wrapper) {
-      $ret['#theme_wrappers'] = array($theme_wrapper);
-    }
-    return $ret;
-  }
 
 }
