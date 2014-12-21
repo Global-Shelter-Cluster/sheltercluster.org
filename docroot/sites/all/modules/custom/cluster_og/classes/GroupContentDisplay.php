@@ -41,7 +41,9 @@ class GroupDisplayProvider {
   }
 
   /**
-   * 
+   * Get related response type nodes for the viewed group.
+   * @return
+   *  Render array of nodes.
    */
   public function getRelatedResponses() {
     if ($nids = $this->manager->getRelatedResponses()) {
@@ -51,7 +53,9 @@ class GroupDisplayProvider {
   }
 
   /**
-   * 
+   * Get related hub type nodes for the viewed group.
+   * @return
+   *  Render array of nodes.
    */
   public function getRelatedHubs() {
     if ($nids = $this->manager->getRelatedHubs()) {
