@@ -132,6 +132,7 @@ class GroupPageDisplayProvider extends GroupDisplayProvider{
 
   /**
    * Generate the dashboard links for a group node.
+   * Delegates theme implementation to cluster_nav module.
    * @return
    *  Render array of dashboard links.
    */
@@ -180,20 +181,23 @@ class GroupPageDisplayProvider extends GroupDisplayProvider{
     }
 
     $secondary = array();
-
-    $secondary['hubs'] = $this->getRelatedHubs();
-    $secondary['responses'] = $this->getRelatedResponses();
+    if ($hubs = $this->getRelatedHubs()) {
+      $secondary['hubs'] = $hubs;
+    }
+    if ($responses = $this->getRelatedResponses()) {
+      $secondary['responses'] = $responses;
+    }
 
     return array(
-      '#theme' => 'cluster_nav',
+      '#theme' => 'cluster_dashboard_nav',
       '#items' => $items,
       '#secondary' => $secondary,
     );
   }
 
-
   /**
    * Generates contextual navigation (breadcrumb-like) for groups.
+   * Delegates theme implementation to cluster_nav module.
    * @return
    *  Render array of contextual navigation elements.
    */
@@ -259,7 +263,7 @@ class GroupPageDisplayProvider extends GroupDisplayProvider{
    */
   static public function getList($ids, $view_mode = 'teaser', $theme_wrapper = NULL, $entity_type = 'node') {
     if (!$ids) {
-      return NULL;
+      return FALSE;
     }
     $entities = entity_load($entity_type, $ids);
 

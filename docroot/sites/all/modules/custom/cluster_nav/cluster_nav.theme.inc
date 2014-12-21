@@ -5,7 +5,7 @@
  */
 function cluster_nav_theme($existing, $type, $theme, $path) {
   return array(
-    'cluster_nav' => array(
+    'cluster_dashboard_nav' => array(
       'variables' => array(
         'items' => array(),
         'secondary' => array(),
@@ -23,9 +23,9 @@ function cluster_nav_theme($existing, $type, $theme, $path) {
 }
 
 /**
- *  Implements hook_preprocess_cluster_nav().
+ *  Implements hook_preprocess_cluster_dashboard_nav().
  */
-function cluster_nav_preprocess_cluster_nav(&$variables) {
+function template_preprocess_cluster_dashboard_nav(&$variables) {
   foreach ($variables['items'] as &$item) {
     $text = t($item['label']);
 
@@ -40,7 +40,7 @@ function cluster_nav_preprocess_cluster_nav(&$variables) {
 /**
  *  Implements hook_preprocess_cluster_nav().
  */
-function cluster_nav_preprocess_cluster_contextual_nav(&$variables) {
+function template_preprocess_cluster_contextual_nav(&$variables) {
   foreach ($variables['regions'] as &$item) {
     $item = l($item['title'], $item['path']);
   }

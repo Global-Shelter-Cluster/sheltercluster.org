@@ -1,14 +1,12 @@
 <ul class="nav-items clearfix">
   <?php foreach ($items as $item): ?>
   <li class="nav-item">
-    <?php
-      print $item;
-    ?>
+    <?php print $item; ?>
   </li>
   <?php endforeach; ?>
 </ul>
 
-<?php if (isset($secondary)): ?>
+<?php if ($secondary): ?>
   <a href="#secondary-nav" class="collapse-menu">
     <?php print _svg('icons/collapse-down', array('alt' => 'Icon for collapsing the menu')); ?>
     more
