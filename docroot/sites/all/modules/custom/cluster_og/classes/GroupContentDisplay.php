@@ -12,6 +12,9 @@ class GroupDisplayProvider {
    */
   protected $manager;
 
+  /**
+   * Get a provider instance of the appropriate subclass for the view mode.
+   */
   public static function getDisplayProvider($node, $view_mode = 'full') {
     switch ($view_mode) {
       case 'full':
@@ -31,7 +34,7 @@ class GroupDisplayProvider {
   /**
    * Magic callback.
    * Provides a default return value of FALSE for all methods that are not implemented in a specific view mode
-   * descendent class.
+   * subclass.
    */
   public function __call($name, $arguments) {
     return FALSE;
