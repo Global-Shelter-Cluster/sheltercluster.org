@@ -216,3 +216,10 @@ function shelter_base_update_7019() {
 function shelter_base_update_7020() {
   _shelter_base_modules_enable('contrib');
 }
+
+/**
+ * Delete old document_tag field.
+ */
+function shelter_base_update_7021() {
+  field_delete_field('field_document_tag');
+}
