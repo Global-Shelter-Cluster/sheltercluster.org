@@ -10,7 +10,7 @@
     <?php foreach($responses as $id => $response): ?>
       <li>
         <?php print $response['link']; ?>
-        <?php print _svg('icons/' . $response['type']->icon_name, array('class' => $response['type']->icon_class, 'alt' => $respone['type']->name . ' icon')); ?>
+        <?php print _svg('icons/' . $response['type']->icon_name, array('class' => $response['type']->icon_class, 'alt' => $response['type']->name . ' icon')); ?>
       </li>
     <?php endforeach; ?>
   </ul>

@@ -75,6 +75,11 @@ function _cluster_nav_paged_teaser_list($bundle) {
 function cluster_nav_preprocess_page(&$variables) {
   // Add the main menu to every page.
   $variables['main_nav'] = menu_tree_output(menu_tree_all_data('main-menu'));
+  
+  // Provide dashboard and contextual navigation at page level.
+  $display_provider = FALSE;
+  $variables['dashboard_menu'] = FALSE;
+  $variables['contextual_navigation'] = FALSE;
 
   if (arg(0) == 'node' && is_numeric(arg(1))) {
     $node = node_load(arg(1));
@@ -82,11 +87,6 @@ function cluster_nav_preprocess_page(&$variables) {
   else {
     return;
   }
-
-  // Provide dashboard and contextual navigation at page level.
-  $display_provider = FALSE;
-  $variables['dashboard_menu'] = FALSE;
-  $variables['contextual_navigation'] = FALSE;
 
   // If viewing a group node page, use it.
   if (og_is_group('node', $node)) {
