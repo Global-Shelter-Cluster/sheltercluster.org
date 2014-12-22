@@ -16,7 +16,7 @@ $button-color: lighten($shelter-grey,52%);
   }
 }
 
-.underlined-links {
+.not-underlined-links {
   position: relative;
   text-decoration: none;
 
@@ -31,6 +31,28 @@ $button-color: lighten($shelter-grey,52%);
       bottom: 1px;
       border-width: 0 0 1px;
       border-style: solid;
+    }
+  }
+}
+
+.underlined-links {
+  position: relative;
+  text-decoration: none;
+
+  &:after {
+    content: '';
+    width: 100%;
+    position: absolute;
+    left: 0;
+    bottom: 1px;
+    border-width: 0 0 1px;
+    border-style: solid;
+  }
+  &:hover,
+  &:active {
+    text-decoration: none;
+    &:after {
+      border-style: none;
     }
   }
 }

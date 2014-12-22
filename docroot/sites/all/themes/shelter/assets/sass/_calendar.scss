@@ -1,20 +1,21 @@
 /* _calendar.scss */
 #shelter-calendar {
-  @include rem(margin, 0 0 1.5rem 0);
+  @include rem(margin, 0 0 2rem 0);
 
   .see-all {
+    position: relative;
     text-transform: uppercase;
     color: $shelter-red;
     font-weight: bold;
+    @extend .underlined-links;
     @include rem(font-size, 0.75rem);
+    @include rem(margin, 0 0 0 0.9375rem);
 
     &:before {
-      display:inline-block;
-      position: relative;
-      top: 1px;
+      position: absolute;
       content: '+';
       @include rem(font-size, 1.1rem);
-      @include rem(padding, 0 0.3125rem 0 0);
+      @include rem(margin, 0 0 0 -0.9375rem);
     }
   }
   a {
@@ -81,7 +82,7 @@
 #date-calendar {
   border-bottom: 1px dashed rgb(255,255,255);
   @include rem(text-indent, -2.25rem);
-  @include rem(margin, 0 0.625rem 0 3.75rem);
+  @include rem(margin, 0 0.625rem 0 3.125rem);
   @include rem(padding, 0.5rem 0 0.5rem 0);
   @include breakpoint(500px 979px) {
     border-bottom: none;
