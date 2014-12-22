@@ -158,7 +158,7 @@
       return FALSE;
     }
 
-    return $result['node'];
+    return array_keys($result['node']);
   }
 
   /**
