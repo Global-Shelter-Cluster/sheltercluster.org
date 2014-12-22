@@ -15,7 +15,7 @@ class GroupDisplayProvider {
   /**
    * Get a provider instance of the appropriate subclass for the view mode.
    */
-  public static function getDisplayProvider($node, $view_mode = 'full') {
+  public static function getDisplayProvider($node, $view_mode = FALSE) {
     switch ($view_mode) {
       case 'full':
         return new GroupFullDisplayProvider($node, $view_mode);
