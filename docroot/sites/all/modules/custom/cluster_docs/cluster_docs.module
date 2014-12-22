@@ -20,6 +20,8 @@ function cluster_docs_menu() {
     'page arguments' => array(1),
     'access callback' => 'og_is_group',
     'access arguments' => array(0, 1),
+    'title callback' => '_cluster_docs_title_callback',
+    'title arguments' => array(1),
     'type' => MENU_CALLBACK,
   );
   $items['references'] = array(
@@ -29,6 +31,32 @@ function cluster_docs_menu() {
     'access callback' => TRUE,
   );
   return $items;
+}
+
+/**
+ * Menu title callback.
+ */
+function _cluster_docs_title_callback($nid) {
+  global $language;
+  $title = t('Documents');
+  if (! is_numeric($nid)) {
+    return $title;
+  }
+
+  try {
+    // @TODO manage multilinigual loading of entities.
+    $wrapper = entity_metadata_wrapper('node', node_load($nid), array('langcode' => LANGUAGE_NONE));
+    return $wrapper->label();
+  }
+  catch (EntityMetadataWrapperException $exc) {
+    watchdog(
+      'cluster_docs',
+      'See '  . __FUNCTION__ . '() ' .  $exc->getTraceAsString(),
+       NULL,
+       WATCHDOG_ERROR
+    );
+  }
+  return $title;
 }
 
 /**
