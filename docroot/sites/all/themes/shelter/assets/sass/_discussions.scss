@@ -2,8 +2,8 @@
 
 #shelter-discussions {
   position: relative;
-  @include rem(margin, 0 0 2rem 0);
   color: $shelter-dark-blue;
+  @include rem(margin, 0 0 1.5rem 0);
   @include border-bottom-radius(0.1875rem);
 
   svg {
@@ -29,27 +29,27 @@
     @include rem(padding, 0.35rem);
   }
 
-  .see-all {
-    text-transform: uppercase;
-    font-weight: bold;
-    @include rem(font-size, 0.75rem);
-
-    &:hover,
-    &:active {
-      text-decoration: none;
-    }
-    &:before {
-      display:inline-block;
-      position: relative;
-      top: 1px;
-      content: '+';
-      @include rem(font-size, 1.1rem);
-      @include rem(padding, 0 0.3125rem 0 0);
-    }
-  }
-
   a {
     color: $shelter-dark-blue;
+  }
+
+  .see-all {
+    position: relative;
+    text-transform: uppercase;
+    color: $shelter-dark-blue;
+    font-weight: bold;
+    @extend .underlined-links;
+    @include rem(font-size, 0.75rem);
+    @include rem(margin, 0 0 0 0.9375rem);
+
+    &:before {
+      position: absolute;
+      content: '+';
+      @include rem(font-size, 1.1rem);
+      @include rem(margin, 0 0 0 -0.9375rem);
+    }
+  }
+  a {
     &:hover,
     &:active {
       text-decoration: none;

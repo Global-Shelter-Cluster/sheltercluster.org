@@ -1,8 +1,8 @@
 /* _operation-data.scss */
 
 #operation-data {
-  background-color: $shelter-grey;
-  color: rgb(255,255,255);
+  background-color: $shelter-light-blue;
+  color: $shelter-grey;
   @include rem(padding, 1rem 0.8rem);
   @include rem(font-size, 0.85rem);
 
@@ -20,8 +20,10 @@
   h4 {
     border: none;
     text-transform: none;
-    color: white;
-    @include rem(font-size, 0.875rem);
+    color: $shelter-grey;
+    font-weight: normal;
+    @include rem(margin, 0 0 0.625rem 0);
+    @include rem(font-size, 0.85rem);
   }
 }
 
