@@ -73,7 +73,7 @@
       </section>
     <?php endif; ?>
 
-    <?php if (isset($dashboard_menu)): ?>
+    <?php if ($dashboard_menu): ?>
     <section id="secondary-nav">
       <div class="page-margin clearfix">
         <?php print render($dashboard_menu); ?>

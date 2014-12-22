@@ -64,50 +64,11 @@ function theme_cluster_og_recent_discussions($vars) {
 }
 
 /**
- * Render a group's recent documents.
- * $vars['element']['#total']: the documents total count (maximum of 5).
- * $vars['element']['#children']: markup for all document nodes.
- * $vars['element']['#all_documents_link']: link for the "all documents" page.
- * $vars['element'][UID]: each document render array and markup.
- */
-function theme_cluster_og_recent_documents($vars) {
-  $output = '<div>';
-  $output .= $vars['element']['#children'];
-  $output .= l(t('Browse all documents'), $vars['element']['#all_documents_link'], array('attributes' => array('class' => array('browse-all-documents'))));
-  $output .= '</div>';
-  return $output;
-}
-
-/**
- * Render a group's featured documents.
+ * Theme wrapper for featured documents.
+ * @TODO delegate to cluster_docs module.
  */
 function theme_cluster_og_featured_documents($vars) {
   $output = '<ul>';
-  $output .= $vars['element']['#children'];
-  $output .= '</ul>';
-  return $output;
-}
-
-/**
- * Render a group's key document groups.
- * Doesn't render documents directly, but groups of documents which use the cluster_og_key_documents_by_tag theme.
- * $vars['element']['#children']: markup for all document groups.
- * $vars['element'][UID]: each document group render array and markup.
- */
-function theme_cluster_og_key_documents($vars) {
-  return $vars['element']['#children'];
-}
-
-/**
- * Render a group's key documents for a single Document Tag.
- * $vars['element']['#document_tag_name']: empty if these documents have no tag.
- * $vars['element']['#total']: the documents total count.
- * $vars['element']['#children']: markup for all document nodes.
- * $vars['element'][UID]: each document render array and markup.
- */
-function theme_cluster_og_key_documents_by_tag($vars) {
-  $output = '<h4>' . $vars['element']['#document_tag_name'] . '</h4>';
-  $output .= '<ul class="document-cards clearfix">';
   $output .= $vars['element']['#children'];
   $output .= '</ul>';
   return $output;

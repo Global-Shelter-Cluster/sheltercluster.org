@@ -121,7 +121,6 @@ function cluster_docs_get_grouped_key_docs($gid) {
   $categories = array_merge($basic_tag_fields, $advanced_tag_fields);
 
   $grouped_docs = array();
-  // @TODO Expose the category list to an admin form.
   foreach ($categories as $category_field) {
     $query = new EntityFieldQuery();
     $res = $query->entityCondition('entity_type', 'node')
@@ -265,6 +264,7 @@ function cluster_docs_theme() {
       'variables' => array(
         'heading' => FALSE,
         'docs' => array(),
+        'all_documents_link' => FALSE,
       ),
       'template' => 'theme/cluster-docs-cards-list'
     ),
@@ -273,6 +273,15 @@ function cluster_docs_theme() {
         'docs' => array(),
       ),
       'template' => 'theme/cluster-docs-featured-documents'
+    ),
+    // @TODO more general for any link.
+    'cluster_docs_all_docs_link' => array(
+      'variables' => array(
+        'path' => FALSE,
+        'text' => t('Browse all documents'),
+        'class' => 'browse-all-documents',
+      ),
+      'file' => 'theme/cluster_docs.theme.inc',
     ),
   );
 }

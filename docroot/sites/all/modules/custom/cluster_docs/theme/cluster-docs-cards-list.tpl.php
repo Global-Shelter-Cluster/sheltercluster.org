@@ -12,7 +12,6 @@
  *  Each document has the following elements:
  *  array('title', 'link', 'is_link', 'is_file', 'description', 'filesize', 'file_extension', 'source',); 
  */
-
 ?>
 <?php if ($heading): ?>
   <h4><?php print $heading; ?></h4>
@@ -49,3 +48,7 @@
 
   <?php endforeach; ?>
 </ul>
+
+<?php if ($all_documents_link): ?>
+  <?php print render($all_documents_link); ?>
+<?php endif; ?>
