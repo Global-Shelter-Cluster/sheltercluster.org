@@ -71,15 +71,19 @@ function cluster_discussions_all($nid) {
   $offset = pager_find_page() * CLUSTER_DISCUSSIONS_PER_PAGE;
   $query->range($offset, CLUSTER_DISCUSSIONS_PER_PAGE);
 
-  $results = $query->execute();
+  $result = $query->execute();
 
-  pager_default_initialize($results['result count'], CLUSTER_DISCUSSIONS_PER_PAGE);
+  pager_default_initialize($result['result count'], CLUSTER_DISCUSSIONS_PER_PAGE);
 
-  $nids = array_keys($results['results']);
-  
-  // @TODO generate the list. 
-  //$ret = array();
-  $ret['#markup'] = 'Not implemented';
+  if ($result['results'] === 0) {
+    $content = array(
+      '#markup' => t('No content for the moment.'),
+    ); 
+  }
+  else {
+    $content = node_view_multiple(node_load_multiple(array_keys($result['results'])));
+  }
+  $ret['content'] = $content;
   $ret['pager'] = array(
     '#theme' => 'pager',
   );

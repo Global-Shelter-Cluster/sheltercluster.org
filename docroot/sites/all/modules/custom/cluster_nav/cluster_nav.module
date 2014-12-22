@@ -107,3 +107,11 @@ function cluster_nav_preprocess_page(&$variables) {
     $variables['contextual_navigation'] = $display_provider->getContextualNavigation();
   }
 }
+
+function cluster_nav_node_view($node) {
+  static $static_flag = FALSE;
+  if (og_is_group_type('node', $node->type)) {
+    $static_flag = TRUE;
+    // dpm(drupal_render(menu_local_tasks()));
+  }
+}
