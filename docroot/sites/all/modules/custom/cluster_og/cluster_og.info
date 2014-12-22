@@ -407,5 +407,5 @@ features_exclude[dependencies][options] = options
 features_exclude[dependencies][strongarm] = strongarm
 features_exclude[field_base][body] = body
 files[] = classes/GroupContentDisplay.php
-files[] = classes/CroupContentManager.php
+files[] = classes/GroupContentManager.php
 mtime = 1418936616
