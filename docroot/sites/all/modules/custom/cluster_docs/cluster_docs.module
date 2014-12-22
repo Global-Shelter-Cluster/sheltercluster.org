@@ -274,6 +274,7 @@ function cluster_docs_theme() {
       ),
       'template' => 'theme/cluster-docs-featured-documents'
     ),
+    // @TODO more general for any link.
     'cluster_docs_all_docs_link' => array(
       'variables' => array(
         'path' => FALSE,

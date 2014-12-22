@@ -386,6 +386,7 @@ class GroupContentManagerStategicAdvisory extends GroupContentManager {
    *   The parent node for Strategic Advisory group or FALSE if none exist.
    */
   public function getStrategicAdvisoryParent() {
+    // @TODO wrap in try / catch.
     $wrapper = entity_metadata_wrapper('node', $this->node);
     if ($wrapper->field_parent_response->value()) {
       return $wrapper->field_parent_response->value();
