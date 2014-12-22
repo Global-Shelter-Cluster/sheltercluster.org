@@ -107,6 +107,14 @@ function cluster_docs_uuid_features_default_terms() {
     'vocabulary_machine_name' => 'issues',
   );
   $terms[] = array(
+    'name' => 'Assessment, Monitoring, and Evaluation',
+    'description' => '',
+    'format' => 'filtered_html',
+    'weight' => 0,
+    'uuid' => '23f38dd8-ce9d-4a11-b750-1ee3498b0568',
+    'vocabulary_machine_name' => 'information_management',
+  );
+  $terms[] = array(
     'name' => 'Cash and Vouchers',
     'description' => '',
     'format' => 'filtered_html',
@@ -246,7 +254,7 @@ function cluster_docs_uuid_features_default_terms() {
     'name' => 'Beneficiary Communications',
     'description' => 'Documents related to messaging that is specifically targetted towards affected populations',
     'format' => 'filtered_html',
-    'weight' => 5,
+    'weight' => 6,
     'uuid' => '469926b7-f52d-4fc1-8484-cca05acff9ac',
     'vocabulary_machine_name' => 'information_management',
   );
@@ -374,7 +382,7 @@ function cluster_docs_uuid_features_default_terms() {
     'name' => 'Maps and GIS',
     'description' => 'Graphic mapping products',
     'format' => 'filtered_html',
-    'weight' => 0,
+    'weight' => 1,
     'uuid' => '79772c36-ed3f-4cbf-99f1-c3361a854563',
     'vocabulary_machine_name' => 'information_management',
   );
@@ -390,7 +398,7 @@ function cluster_docs_uuid_features_default_terms() {
     'name' => 'Communications Messaging',
     'description' => 'Documentation that illustrate key messaging of advocacy messages targeted to stakeholders of the cluster and media',
     'format' => 'filtered_html',
-    'weight' => 4,
+    'weight' => 5,
     'uuid' => '7eafa2d9-220d-44bc-a0ff-fe5b759065fe',
     'vocabulary_machine_name' => 'information_management',
   );
@@ -638,7 +646,7 @@ function cluster_docs_uuid_features_default_terms() {
     'name' => 'Infographic',
     'description' => 'Visual image representing information used to communicate a set of messages related to the crisis',
     'format' => 'filtered_html',
-    'weight' => 3,
+    'weight' => 4,
     'uuid' => 'c8f1e2b4-dd4f-4b39-854d-cb2c11a6ad96',
     'vocabulary_machine_name' => 'information_management',
   );
@@ -726,7 +734,7 @@ function cluster_docs_uuid_features_default_terms() {
     'name' => 'IM reports and analysis',
     'description' => 'Reporting related to needs, gap, or 3W analyses usually as a table or dashboard document',
     'format' => 'filtered_html',
-    'weight' => 1,
+    'weight' => 2,
     'uuid' => 'dca64835-75f4-46a0-acf5-513570d0e8c1',
     'vocabulary_machine_name' => 'information_management',
   );
@@ -774,7 +782,7 @@ function cluster_docs_uuid_features_default_terms() {
     'name' => 'Dataset',
     'description' => 'Structured data made available for sharing',
     'format' => 'filtered_html',
-    'weight' => 2,
+    'weight' => 3,
     'uuid' => 'ea80df1b-3815-4059-b0ce-e6f57cdeef9d',
     'vocabulary_machine_name' => 'information_management',
   );

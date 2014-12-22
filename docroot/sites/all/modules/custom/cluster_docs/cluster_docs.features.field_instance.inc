@@ -169,7 +169,7 @@ function cluster_docs_field_default_field_instances() {
         'apply_chosen' => '',
       ),
       'type' => 'options_select',
-      'weight' => 13,
+      'weight' => 37,
     ),
   );
 
@@ -381,7 +381,7 @@ function cluster_docs_field_default_field_instances() {
         'apply_chosen' => '',
       ),
       'type' => 'options_select',
-      'weight' => 12,
+      'weight' => 36,
     ),
   );
 
@@ -421,7 +421,7 @@ function cluster_docs_field_default_field_instances() {
         'apply_chosen' => '',
       ),
       'type' => 'options_select',
-      'weight' => 15,
+      'weight' => 39,
     ),
   );
 
@@ -461,7 +461,7 @@ function cluster_docs_field_default_field_instances() {
         'apply_chosen' => '',
       ),
       'type' => 'options_select',
-      'weight' => 16,
+      'weight' => 40,
     ),
   );
 
@@ -545,7 +545,7 @@ function cluster_docs_field_default_field_instances() {
         'apply_chosen' => '',
       ),
       'type' => 'options_select',
-      'weight' => 19,
+      'weight' => 43,
     ),
   );
 
@@ -687,7 +687,7 @@ function cluster_docs_field_default_field_instances() {
         'apply_chosen' => '',
       ),
       'type' => 'options_select',
-      'weight' => 18,
+      'weight' => 42,
     ),
   );
 
@@ -832,7 +832,7 @@ function cluster_docs_field_default_field_instances() {
         'apply_chosen' => '',
       ),
       'type' => 'options_select',
-      'weight' => 14,
+      'weight' => 38,
     ),
   );
 
@@ -872,7 +872,7 @@ function cluster_docs_field_default_field_instances() {
         'apply_chosen' => '',
       ),
       'type' => 'options_select',
-      'weight' => 17,
+      'weight' => 41,
     ),
   );
 
@@ -952,7 +952,7 @@ function cluster_docs_field_default_field_instances() {
         'apply_chosen' => '',
       ),
       'type' => 'options_select',
-      'weight' => 20,
+      'weight' => 44,
     ),
   );
 
