@@ -256,7 +256,6 @@ class GroupFullDisplayProvider extends GroupDisplayProvider{
       return array(
         '#theme' => 'cluster_docs_featured_documents',
         '#docs' => cluster_docs_prepare_card_data($nids),
-        '#all_documents_link' => 'node/' . $this->node->nid . '/documents',
       );
     }
     return FALSE;

@@ -161,11 +161,11 @@ function cluster_docs_prepare_card_data($nids) {
   // @TODO language negocitation.
   global $language;
   $langcode = $language->language;
-
   foreach (node_load_multiple($nids) as $node) {
     // Set default values.
     $doc = array_fill_keys($properties, FALSE);
     try {
+      
       // @TODO insert language negociation in info array.
       $wrapper = entity_metadata_wrapper('node', $node);
       $doc['title'] = $wrapper->label();
@@ -238,6 +238,7 @@ function cluster_docs_prepare_card_data($nids) {
       }
 
       $docs[] = $doc;
+      
     }
     catch (EntityMetadataWrapperException $exc) {
       watchdog(
