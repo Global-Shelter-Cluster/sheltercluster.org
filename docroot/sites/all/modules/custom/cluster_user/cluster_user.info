@@ -9,7 +9,6 @@ dependencies[] = email
 dependencies[] = features
 dependencies[] = name
 dependencies[] = node
-dependencies[] = restrict_node_page_view
 dependencies[] = strongarm
 dependencies[] = system
 features[ctools][] = strongarm:strongarm:1

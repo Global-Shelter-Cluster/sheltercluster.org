@@ -8,7 +8,6 @@ dependencies[] = entityreference
 dependencies[] = features
 dependencies[] = og
 dependencies[] = og_ui
-dependencies[] = restrict_node_page_view
 dependencies[] = shelter_base
 dependencies[] = strongarm
 dependencies[] = text
