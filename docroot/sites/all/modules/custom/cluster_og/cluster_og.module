@@ -119,7 +119,7 @@ function cluster_og_theme() {
 /**
  * Create the join or login link markup for a group that allows members to join.
  * @return
- * Themed join or login link.
+ *  Themed join or login link.
  */
 function cluster_og_join_links($gid) {
   $node = node_load($gid);
