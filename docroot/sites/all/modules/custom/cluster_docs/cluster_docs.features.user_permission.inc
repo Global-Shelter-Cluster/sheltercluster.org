@@ -42,8 +42,6 @@ function cluster_docs_user_default_permissions() {
     'name' => 'view any node document page',
     'roles' => array(
       'administrator' => 'administrator',
-      'anonymous user' => 'anonymous user',
-      'authenticated user' => 'authenticated user',
     ),
     'module' => 'restrict_node_page_view',
   );
