@@ -1,4 +1,4 @@
-name = cluster_discussions
+name = Cluster Discussions
 description = Discussions implementation for Shelter Cluster.
 core = 7.x
 package = Cluster

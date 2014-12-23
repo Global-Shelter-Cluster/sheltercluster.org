@@ -1,4 +1,4 @@
-name = cluster_og
+name = Cluster OG
 description = Organic group implementation and permission for Shelter Cluster.
 core = 7.x
 package = Cluster

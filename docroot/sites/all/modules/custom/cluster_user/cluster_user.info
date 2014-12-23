@@ -1,4 +1,4 @@
-name = cluster_user
+name = Cluster user
 description = User related business logic, fields and features
 core = 7.x
 package = Cluster

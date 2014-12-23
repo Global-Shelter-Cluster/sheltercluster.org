@@ -1,4 +1,4 @@
-name = cluster_docs
+name = Cluster Docs
 description = Documents implementation for Shelter Cluster.
 core = 7.x
 package = Cluster

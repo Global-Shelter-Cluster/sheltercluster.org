@@ -1,4 +1,4 @@
-name = shelter_base
+name = Sheltercluster Base
 description = Handles initial deployment and subsequent module enabling and feature reverting.
 core = 7.x
 package = Cluster

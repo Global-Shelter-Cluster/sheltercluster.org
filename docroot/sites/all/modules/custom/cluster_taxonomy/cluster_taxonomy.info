@@ -1,4 +1,4 @@
-name = cluster_taxonomy
+name = Cluster Taxonomy
 description = Feature module which exports vocabularies and uses uuid to export terms
 core = 7.x
 package = Cluster
