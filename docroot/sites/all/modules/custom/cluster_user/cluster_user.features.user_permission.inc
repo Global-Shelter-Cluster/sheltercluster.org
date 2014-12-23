@@ -59,17 +59,6 @@ function cluster_user_user_default_permissions() {
     'module' => 'node',
   );
 
-  // Exported permission: 'view any node page'.
-  $permissions['view any node page'] = array(
-    'name' => 'view any node page',
-    'roles' => array(
-      'administrator' => 'administrator',
-      'anonymous user' => 'anonymous user',
-      'authenticated user' => 'authenticated user',
-    ),
-    'module' => 'restrict_node_page_view',
-  );
-
   // Exported permission: 'view own unpublished content'.
   $permissions['view own unpublished content'] = array(
     'name' => 'view own unpublished content',

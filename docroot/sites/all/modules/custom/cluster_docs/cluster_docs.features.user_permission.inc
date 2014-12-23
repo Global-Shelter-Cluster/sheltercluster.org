@@ -37,13 +37,13 @@ function cluster_docs_user_default_permissions() {
     'module' => 'field_permissions',
   );
 
-  // Exported permission: 'view any node document page'.
-  $permissions['view any node document page'] = array(
-    'name' => 'view any node document page',
+  // Exported permission: 'view document full node'.
+  $permissions['view document full node'] = array(
+    'name' => 'view document full node',
     'roles' => array(
       'administrator' => 'administrator',
     ),
-    'module' => 'restrict_node_page_view',
+    'module' => 'cluster_docs',
   );
 
   // Exported permission: 'view field_is_reference_document'.
