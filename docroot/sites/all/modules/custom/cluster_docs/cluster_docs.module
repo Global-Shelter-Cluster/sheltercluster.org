@@ -184,7 +184,8 @@ function cluster_docs_get_grouped_key_docs($gid) {
  */
 function cluster_docs_prepare_card_data($nids) {
   $docs = array();
-  $properties = array('title', 'link', 'link_url', 'is_link', 'is_file', 'is_file_class', 'description', 'filesize', 'file_extension', 'is_image', 'image_uri', 'has_preview', 'preview_uri', 'source',);
+  $properties = array('title', 'link', 'link_url', 'is_link', 'is_file', 'is_file_class', 'description', 'filesize',
+    'file_extension', 'is_image', 'image_uri', 'has_preview', 'preview_uri', 'source',);
 
   // @TODO language negocitation.
   global $language;
@@ -238,6 +239,9 @@ function cluster_docs_prepare_card_data($nids) {
 
         $file_extension = pathinfo($file['filename'], PATHINFO_EXTENSION);
         $doc['file_extension'] = l($file_extension, $url, array('attributes' => array('target' => '_blank')));
+
+        // Test if the attached file is an image.
+        // @TODO the image file will probably not be the actual document file.
         switch ($file_extension) {
           case 'png':
           case 'jpg':

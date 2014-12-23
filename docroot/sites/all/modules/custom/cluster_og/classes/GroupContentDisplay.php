@@ -17,11 +17,15 @@ class GroupDisplayProvider {
    */
   public static function getDisplayProvider($node, $view_mode = FALSE) {
     switch ($view_mode) {
+      // When not operating within a view mode, for example to print at the page level.
+      case FALSE:
+        return new GroupDisplayProvider($node, $view_mode);
+      // 'full' view mode node theming.
       case 'full':
         return new GroupFullDisplayProvider($node, $view_mode);
-        break;
+      // Defensive default for view modes which are not managed.
       default:
-        return new GroupDisplayProvider($node, $view_mode);
+        return new GroupNotImplementedDisplayProvider($node, $view_mode);
     }
   }
 
@@ -319,6 +323,13 @@ class GroupFullDisplayProvider extends GroupDisplayProvider{
    * Not shown for this display.
    */
   public function getContextualNavigation() {
+    return FALSE;
+  }
+}
+
+// Defensive default for view modes which are not managed.
+class GroupNotImplementedDisplayProvider {
+  public function __call($name, $arguments) {
     return FALSE;
   }
 }

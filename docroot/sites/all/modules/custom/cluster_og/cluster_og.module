@@ -35,8 +35,6 @@ function cluster_og_node_view($node, $view_mode) {
   // Consider alternative hooks.
   // Group specific actions.
   if (og_is_group_type('node', $bundle)) {
-      dpm($node->nid);
-      dpm($view_mode);
       // Get a display provider for the current view mode.
       $group_content = GroupDisplayProvider::getDisplayProvider($node, $view_mode);
       $node->content['contact_members'] = $group_content->getContactMembers();

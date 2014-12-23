@@ -32,6 +32,13 @@
 
   <div class="side-column">
 
+    <?php if ($content['local_tasks']): ?>
+      <h3 data-collapse="operation-group">Admin links - raw</h3>
+      <section id="join-group" class="clearfix">
+        <?php print render($content['local_tasks']); ?>
+      </section>
+    <?php endif; ?>
+ 
     <h3 data-collapse="operation-group">Join This Group</h3>
     <section id="join-group" class="clearfix">
       <p>Register and join this group</p>
@@ -52,7 +59,7 @@
       </section>
     <?php endif; ?>
 
-    <?php if (isset($content['recent_discussions'])): ?>
+   <?php if ($content['recent_discussions']): ?>
       <section id="shelter-discussions">
         <?php print _svg('icons/discussion', array('id'=>'discussion-icon', 'alt' => 'discussion icon')); ?>
         <h3>Discussions</h3>

@@ -108,10 +108,12 @@ function cluster_nav_preprocess_page(&$variables) {
   }
 }
 
-function cluster_nav_node_view($node) {
-  static $static_flag = FALSE;
-  if (og_is_group_type('node', $node->type)) {
-    $static_flag = TRUE;
-    // dpm(drupal_render(menu_local_tasks()));
+/**
+ * Implements hook_node_view().
+ */
+function cluster_nav_node_view($node, $view_mode) {
+  $node->content['local_tasks'] = FALSE;
+  if ($view_mode == 'full' && user_access('administer nodes')) {
+    $node->content['local_tasks'] = menu_local_tasks();
   }
 }
