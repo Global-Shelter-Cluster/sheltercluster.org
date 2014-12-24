@@ -858,7 +858,7 @@ function cluster_og_field_default_field_instances() {
     'entity_type' => 'node',
     'field_name' => 'field_parent_region',
     'label' => 'Hub region',
-    'required' => 0,
+    'required' => 1,
     'settings' => array(
       'entity_translation_sync' => FALSE,
       'user_register_form' => FALSE,
