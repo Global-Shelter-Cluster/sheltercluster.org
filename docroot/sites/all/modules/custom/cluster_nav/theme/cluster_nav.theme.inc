@@ -32,7 +32,7 @@ function _cluster_nav_theme($existing, $type, $theme, $path) {
         'node' => FALSE,
         'type' => FALSE,
         'related_nodes' => array(),
-        'related_types' => FALSE,
+        'related_type' => FALSE,
         'links' => array(),
       ),
       'template' => 'theme/cluster-nav-related-links',
