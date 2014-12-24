@@ -72,11 +72,6 @@ function template_preprocess_cluster_nav_related_links(&$variables) {
     }
   }
 
-  // Add a theme hook suggestion for links displayed on a specific group type.
-  if ($variables['type']) {
-    $variables['theme_hook_suggestions'][] = 'cluster_nav_related_links__' . $variables['type'];
-  }
-
   global $language;
   // Prepare the individual links render arrays.
   foreach ($variables['related_nodes'] as $node) {
