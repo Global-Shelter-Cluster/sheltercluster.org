@@ -322,4 +322,29 @@ class GroupFullDisplayProvider extends GroupDisplayProvider{
   public function getContextualNavigation() {
     return FALSE;
   }
+
+  /**
+   * Provide menu to add related content.
+   * @return render array of links.
+   */
+  public function getEditorMenu() {
+    if (!function_exists('cluster_context_links')) {
+      return FALSE;
+    }
+    $links = cluster_context_links($this->node);
+    if (!$links) {
+      return FALSE;
+    }
+
+    return array(
+      '#theme' => 'links',
+      '#links' => $links,
+      '#attributes' => array('class' => 'editor-menu'),
+      '#heading' => array(
+        'text' => t('Editor menu'),
+        'level' => 'h4',
+        'class' => 'editor-menu-title',
+      ),
+    );
+  }
 }

@@ -1,3 +1,5 @@
+<?php print render($content['editor_menu']); ?>
+
 <div id="content">
 
   <div class="main-column">
