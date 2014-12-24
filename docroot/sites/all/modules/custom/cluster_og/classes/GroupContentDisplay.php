@@ -17,11 +17,15 @@ class GroupDisplayProvider {
    */
   public static function getDisplayProvider($node, $view_mode = FALSE) {
     switch ($view_mode) {
+      // When not operating within a view mode, for example to print at the page level.
+      case FALSE:
+        return new GroupDisplayProvider($node, $view_mode);
+      // 'full' view mode node theming.
       case 'full':
         return new GroupFullDisplayProvider($node, $view_mode);
-        break;
+      // Defensive default for view modes which are not managed.
       default:
-        return new GroupDisplayProvider($node, $view_mode);
+        return new GroupNotImplementedDisplayProvider($node, $view_mode);
     }
   }
 
@@ -219,7 +223,7 @@ class GroupDisplayProvider {
 /**
  * Provide renderable content for full page view mode. 
  */
-class GroupFullDisplayProvider extends GroupDisplayProvider{
+class GroupFullDisplayProvider extends GroupDisplayProvider {
 
   function __construct($node, $view_mode) {
     parent::__construct($node, $view_mode);
@@ -256,7 +260,6 @@ class GroupFullDisplayProvider extends GroupDisplayProvider{
       return array(
         '#theme' => 'cluster_docs_featured_documents',
         '#docs' => cluster_docs_prepare_card_data($nids),
-        '#all_documents_link' => 'node/' . $this->node->nid . '/documents',
       );
     }
     return FALSE;
@@ -346,5 +349,12 @@ class GroupFullDisplayProvider extends GroupDisplayProvider{
         'class' => 'editor-menu-title',
       ),
     );
+  }
+}
+
+// Defensive default for view modes which are not managed.
+class GroupNotImplementedDisplayProvider {
+  public function __call($name, $arguments) {
+    return FALSE;
   }
 }

@@ -2,9 +2,31 @@
 
 #shelter-coordination-team {
   @include rem(margin, 0 0 2rem 0);
+  color: $shelter-red;
 
+  h3 {
+    color: $shelter-red;
+    border-bottom: 2px solid $shelter-red;
+    margin-top: 0;
+    text-transform: uppercase;
+    @include rem(font-size, 1rem);
+    @include rem(margin, 0 0 1.5rem 0);
+
+    span {
+      @include rem(padding, 0 0 0 0.5rem);
+    }
+    svg {
+      width: 50px;
+    }
+  }
   h4 {
-    @include rem(margin, 2rem 0 1rem 0);
+    color: $shelter-red;
+    text-align: center;
+    text-transform: uppercase;
+    border-bottom: 1px dashed $shelter-red;
+    @include rem(margin, 1.5rem 0 1rem 0);
+    @include rem(padding, 0 0 0.25rem 0);
+    @include rem(font-size, 13px);
   }
 }
 
@@ -14,18 +36,18 @@
   .coordination-item  {
     float: left;
     width: 100%;
-    @include rem(margin, 0 0 0.625rem 0);
+    @include rem(margin, 0 0 1rem 0);
   }
 
   .avatar {
     float: left;
     width: 25%;
     text-align: center;
+    @include rem(padding, 0.3125rem 0 0 0);
 
     svg {
-      @include rem(width, 3.5rem);
-      @include rem(height, 3.5rem);
-      padding-top: 10px;
+      @include rem(width, 60px);
+      @include rem(height, 60px);
       fill: darken($shelter-red, 7%);
     }
     img {
@@ -52,10 +74,10 @@
     .telephone {
       display: block;
       text-decoration: none;
-      color: #000;
+      color: $shelter-red;
     }
     .email {
-      color: darken($shelter-grey,20%);
+      color: $shelter-red;
       &:hover,
       &:active {
         text-decoration: none;

@@ -50,6 +50,8 @@ function theme_cluster_og_related_hubs($vars) {
 
 /**
  * Render a group's recent discussions.
+ * @TODO delegate theme responsibility completely to cluster_discussions.
+ * This theme implementation has been declared as expecting a render array.
  * $vars['element']['#total']: the discussions total count (maximum of 2).
  * $vars['element']['#children']: markup for all discussion nodes.
  * $vars['element']['#all_discussions_link']: link for the "all discussions" page.

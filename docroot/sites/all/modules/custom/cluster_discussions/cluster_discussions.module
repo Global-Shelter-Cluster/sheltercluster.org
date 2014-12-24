@@ -15,6 +15,8 @@ const CLUSTER_DISCUSSIONS_PER_PAGE = 5;
 function cluster_discussions_menu() {
   $items['node/%/discussions'] = array(
     'title' => 'Discussions',
+    'title callback' => '_cluster_discussions_title_callback',
+    'title arguments' => array(1),
     'page callback' => 'cluster_discussions_all',
     'page arguments' => array(1),
     'access callback' => 'og_is_group',
@@ -22,6 +24,32 @@ function cluster_discussions_menu() {
     'type' => MENU_CALLBACK,
   );
   return $items;
+}
+
+/**
+ * Menu title callback.
+ */
+function _cluster_discussions_title_callback($nid) {
+  global $language;
+  $title = t('Documents');
+  if (! is_numeric($nid)) {
+    return $title;
+  }
+
+  try {
+    // @TODO manage multilinigual loading of entities.
+    $wrapper = entity_metadata_wrapper('node', node_load($nid), array('langcode' => LANGUAGE_NONE));
+    return $wrapper->label();
+  }
+  catch (EntityMetadataWrapperException $exc) {
+    watchdog(
+      'cluster_docs',
+      'See '  . __FUNCTION__ . '() ' .  $exc->getTraceAsString(),
+       NULL,
+       WATCHDOG_ERROR
+    );
+  }
+  return $title;
 }
 
 /**
@@ -43,15 +71,19 @@ function cluster_discussions_all($nid) {
   $offset = pager_find_page() * CLUSTER_DISCUSSIONS_PER_PAGE;
   $query->range($offset, CLUSTER_DISCUSSIONS_PER_PAGE);
 
-  $results = $query->execute();
+  $result = $query->execute();
 
-  pager_default_initialize($results['result count'], CLUSTER_DISCUSSIONS_PER_PAGE);
+  pager_default_initialize($result['result count'], CLUSTER_DISCUSSIONS_PER_PAGE);
 
-  $nids = array_keys($results['results']);
-  
-  // @TODO generate the list. 
-  //$ret = array();
-  $ret['#markup'] = 'Not implemented';
+  if ($result['results'] === 0) {
+    $content = array(
+      '#markup' => t('No content for the moment.'),
+    ); 
+  }
+  else {
+    $content = node_view_multiple(node_load_multiple(array_keys($result['results'])));
+  }
+  $ret['content'] = $content;
   $ret['pager'] = array(
     '#theme' => 'pager',
   );

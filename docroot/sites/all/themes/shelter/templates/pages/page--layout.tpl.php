@@ -394,7 +394,7 @@
         </section>
 
         <section id="shelter-coordination-team">
-          <h3>Coordination Team</h3>
+          <h3><?php print _svg('icons/coordination-team', array('id'=>'coordination-team-icon', 'alt' => 'Coordination team icon')); ?><span>Coordination team</span></h3>
           <h4>National Team</h4>
           <ul id="coordination-items" class="clearfix">
             <li class="coordination-item">

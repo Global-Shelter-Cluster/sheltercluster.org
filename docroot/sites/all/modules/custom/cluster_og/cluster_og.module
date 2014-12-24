@@ -30,7 +30,9 @@ function cluster_og_entity_info_alter(&$entity_info) {
  */
 function cluster_og_node_view($node, $view_mode) {
   $bundle = $node->type;
-
+  // @TODO this hook is called too many times in a single page load for the same node.
+  // All the operations bellow are getting called for nothing.
+  // Consider alternative hooks.
   // Group specific actions.
   if (og_is_group_type('node', $bundle)) {
     // Get a display provider for the current view mode.
@@ -96,6 +98,14 @@ function cluster_og_theme() {
       'file' => 'theme/cluster_og.theme.inc',
       'render element' => 'element',
     ),
+    'cluster_og_join_links' => array(
+      'template' => 'theme/cluster-og-join-links',
+      'variables' => array(
+        'header' => t('Join This Group'),
+        'instructions' => t('Register and join this group'),
+        'link' => FALSE,
+      ),
+    ),
     'cluster_og_hot_responses' => array(
       'file' => 'theme/cluster_og.theme.inc',
       'template' => 'theme/cluster-og-hot-responses',
@@ -105,6 +115,41 @@ function cluster_og_theme() {
       ),
     ),
   );
+}
+
+/**
+ * Create the join or login link markup for a group that allows members to join.
+ * @return
+ *  Themed join or login link.
+ */
+function cluster_og_join_links($gid) {
+  $node = node_load($gid);
+
+  // Test ig the group is open for joining or invite only.
+  if (! $is_open = og_user_access('node', $gid, 'subscribe')) {
+    return FALSE;
+  }
+
+  $join_links = FALSE;
+  // Show login link.
+  if (user_is_anonymous()) {
+    $vars = array(
+      'header' => t('Login or register'),
+      'instructions' => t('Login with an existing account or create a new account to be able to join this group.'),
+      'link' => l(t('Login or register'), 'user')
+    );
+  }
+
+  // Show join link.
+  else {
+    $vars = array(
+      'header' => t('Join this group'),
+      'instructions' => t('Join this group.'),
+      'link' => l(t('Join'), 'group/node/' . $gid . '/subscribe')
+    );
+  }
+
+  return theme('cluster_og_join_links', $vars);
 }
 
 /**

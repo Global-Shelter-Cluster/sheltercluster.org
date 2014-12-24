@@ -187,7 +187,7 @@
   /**
    * Get documents with the 'field_featured' flag for the current group.
    *  @return
-   *   Return render array of featured documents.
+   *   Return a list of featured document nids.
    */
   public function getFeaturedDocuments() {
     $query = new EntityFieldQuery();
@@ -203,7 +203,7 @@
       return FALSE;
     }
 
-    return $res['node'];
+    return array_keys($res['node']);
   }
 
   /**

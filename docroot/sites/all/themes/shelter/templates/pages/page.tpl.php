@@ -87,11 +87,10 @@
   </div>
 
   <footer>
-    <div class="page-margin clearfix">
-      <?php print render($search_form); ?>
-    </div>
 
     <div class="page-margin inside-footer">
+
+      <?php print render($search_form); ?>
 
       <section id="active-clusters-list">
         <h3>Hot responses</h3>
