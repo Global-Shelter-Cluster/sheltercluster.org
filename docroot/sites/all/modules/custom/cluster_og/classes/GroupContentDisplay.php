@@ -51,7 +51,33 @@ class GroupDisplayProvider {
    */
   public function getRelatedResponses() {
     if ($nids = $this->manager->getRelatedResponses()) {
-      return $this->getList($nids, 'related_response', 'cluster_og_related_responses');
+      return array(
+        '#theme' => 'cluster_nav_related_links',
+        '#header' => t('Related responses'),
+        '#node' => $this->node,
+        '#type' => $this->node->type,
+        '#related_nodes' => node_load_multiple($nids),
+        '#related_type' => 'response',
+      );
+    }
+    return FALSE;
+  }
+
+  /**
+   * Get related hub type nodes for the viewed group.
+   * @return
+   *  Render array of nodes.
+   */
+  public function getRelatedWorkingGroups() {
+    if ($nids = $this->manager->getRelatedWorkingGroups()) {
+      return array(
+        '#theme' => 'cluster_nav_related_links',
+        '#header' => t('Working groups'),
+        '#node' => $this->node,
+        '#type' => $this->node->type,
+        '#related_nodes' => node_load_multiple($nids),
+        '#related_type' => 'hub',
+      );
     }
     return FALSE;
   }
@@ -63,7 +89,14 @@ class GroupDisplayProvider {
    */
   public function getRelatedHubs() {
     if ($nids = $this->manager->getRelatedHubs()) {
-      return $this->getList($nids, 'related_hub', 'cluster_og_related_hubs');
+      return array(
+        '#theme' => 'cluster_nav_related_links',
+        '#header' => t('Hubs'),
+        '#node' => $this->node,
+        '#type' => $this->node->type,
+        '#related_nodes' => node_load_multiple($nids),
+        '#related_type' => 'hub',
+      );
     }
     return FALSE;
   }
@@ -97,19 +130,7 @@ class GroupDisplayProvider {
     $items[] = array(
       'label' => t('Events'),
       'path' => '/', //TODO: change this to actual events calendar link
-//      'total' => $total,
     );
-
-    // This is a reference to the Strategic Advisory "parent" group. Disabled because the link is in the breadcrumb.
-    
-    // @TODO, if link is in breadcrumb, can we delete this code ?
-
-//    if ($parent = $this->getStrategicAdvisoryParent()) {
-//      $items[] = array(
-//        'label' => t('Parent'),
-//        'path' => 'node/'.$parent->nid,
-//      );
-//    }
 
     if ($strategic_advisory = $this->manager->getStrategicAdvisory()) {
       $items[] = array(
@@ -124,6 +145,9 @@ class GroupDisplayProvider {
     }
     if ($responses = $this->getRelatedResponses()) {
       $secondary['responses'] = $responses;
+    }
+    if ($working_groups = $this->getRelatedWorkingGroups()) {
+      $secondary['working_groups'] = $working_groups;
     }
 
     return array(

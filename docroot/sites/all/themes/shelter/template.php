@@ -66,7 +66,7 @@ function shelter_preprocess_user_profile(&$variables) {
 }
 
 /**
- * Implements hook_preprocess().
+ * Implements hook_preprocess_node().
  * Define view mode based templates and specific preprocesses
  * @param $variables
  */

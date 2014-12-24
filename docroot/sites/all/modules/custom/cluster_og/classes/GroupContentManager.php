@@ -46,25 +46,11 @@
   }
 
   /**
-   * Get the node to which a Strategic Advisory Group is associated. 
-   * @return
-   *   The parent node for Strategic Advisory group or FALSE if none exist.
+   * Magic callback.
+   * Provides a default return value of FALSE for all methods that are not implemented in a specific bundle
+   * subclass.
    */
-  public function getStrategicAdvisoryParent() {
-    return FALSE;
-  }
-
-  /**
-   * 
-   */
-  public function getRelatedResponses() {
-    return FALSE;
-  }
-
-  /**
-   * 
-   */
-  public function getRelatedHubs() {
+  public function __call($name, $arguments) {
     return FALSE;
   }
 
@@ -282,7 +268,7 @@
    *  Content type to look for.
    * @return Array of node IDs.
    */
-  static function queryChildren($parent_nids, $field, $bundle) {
+  public function queryChildren($parent_nids, $field, $bundle) {
     return self::queryDescendants($parent_nids, $field, $bundle, FALSE, TRUE);
   }
 
@@ -357,6 +343,10 @@ class GroupContentManagerResponse extends GroupContentManager {
   public function getRelatedHubs() {
     return $this->queryChildren($this->getDescendantIds(TRUE), 'field_parent_response', 'hub');
   }
+
+  public function getRelatedWorkingGroups() {
+    return $this::queryChildren($this->getDescendantIds(TRUE), 'field_parent_response', 'working_group');
+  }
 }
 
 /**
@@ -366,11 +356,15 @@ class GroupContentManagerGeographicRegion extends GroupContentManager {
   protected $parent_field = 'field_parent_region';
 
   public function getRelatedResponses() {
-    return self::queryChildren($this->getDescendantIds(TRUE), 'field_associated_regions', 'response');
+    return $this::queryChildren($this->getDescendantIds(TRUE), 'field_associated_regions', 'response');
   }
 
   public function getRelatedHubs() {
-    return self::queryChildren($this->getDescendantIds(TRUE), 'field_parent_region', 'hub');
+    return $this::queryChildren($this->getDescendantIds(TRUE), 'field_parent_region', 'hub');
+  }
+
+  public function getRelatedWorkingGroups() {
+    return $this::queryChildren($this->getDescendantIds(TRUE), 'field_parent_region', 'working_group');
   }
 }
 

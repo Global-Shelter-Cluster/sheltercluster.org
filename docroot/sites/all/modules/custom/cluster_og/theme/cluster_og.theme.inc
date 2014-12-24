@@ -21,34 +21,6 @@ function theme_cluster_og_contact_member($vars) {
 }
 
 /**
- * Render a group's related responses.
- * $vars['element']['#total']: the responses total count.
- * $vars['element']['#children']: markup for all related response nodes.
- * $vars['element'][UID]: each response render array and markup.
- */
-function theme_cluster_og_related_responses($vars) {
-  $output = '<h3>' . t('Related Responses') . '</h3>';
-  $output .= '<ul class="nav-items">';
-  $output .= $vars['element']['#children'];
-  $output .= '</ul>';
-  return $output;
-}
-
-/**
- * Render a group's related hubs.
- * $vars['element']['#total']: the hubs total count.
- * $vars['element']['#children']: markup for all related hub nodes.
- * $vars['element'][UID]: each hub render array and markup.
- */
-function theme_cluster_og_related_hubs($vars) {
-  $output = '<h3>' . t('Hubs') . '</h3>';
-  $output .= '<ul class="nav-items">';
-  $output .= $vars['element']['#children'];
-  $output .= '</ul>';
-  return $output;
-}
-
-/**
  * Render a group's recent discussions.
  * @TODO delegate theme responsibility completely to cluster_discussions.
  * This theme implementation has been declared as expecting a render array.

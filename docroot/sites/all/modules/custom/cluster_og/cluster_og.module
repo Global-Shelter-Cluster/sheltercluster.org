@@ -40,6 +40,7 @@ function cluster_og_node_view($node, $view_mode) {
       $node->content['contact_members'] = $group_content->getContactMembers();
       $node->content['related_hubs'] = $group_content->getRelatedHubs();
       $node->content['related_responses'] = $group_content->getRelatedResponses();
+      $node->content['related_working_groups'] = $group_content->getRelatedWorkingGroups();
       $node->content['featured_documents'] = $group_content->getFeaturedDocuments();
       $node->content['key_documents'] = $group_content->getKeyDocuments();
       $node->content['recent_documents'] = $group_content->getRecentDocuments();
