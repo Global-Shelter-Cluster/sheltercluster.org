@@ -10,20 +10,20 @@
  */
 function _cluster_nav_theme($existing, $type, $theme, $path) {
   $items = array(
-    'cluster_dashboard_nav' => array(
+    'cluster_nav_dashboard' => array(
       'variables' => array(
         'items' => array(),
         'secondary' => array(),
       ),
-      'template' => 'theme/cluster-nav',
+      'template' => 'theme/cluster-nav-dashboard',
       'file' => 'theme/cluster_nav.theme.inc',
     ),
-    'cluster_contextual_nav' => array(
+    'cluster_nav_contextual' => array(
       'variables' => array(
         'regions' => array(),
         'response' => array(),
       ),
-      'template' => 'theme/cluster-contextual-nav',
+      'template' => 'theme/cluster-nav-contextual',
       'file' => 'theme/cluster_nav.theme.inc',
     ),
     'cluster_nav_related_links' => array(
@@ -91,9 +91,9 @@ function template_preprocess_cluster_nav_related_links(&$variables) {
 }
 
 /**
- *  Implements hook_preprocess_cluster_dashboard_nav().
+ *  Implements hook_preprocess_cluster_nav_dashboard().
  */
-function template_preprocess_cluster_dashboard_nav(&$variables) {
+function template_preprocess_cluster_nav_dashboard(&$variables) {
   foreach ($variables['items'] as &$item) {
     $text = t($item['label']);
 
@@ -108,7 +108,7 @@ function template_preprocess_cluster_dashboard_nav(&$variables) {
 /**
  *  Implements hook_preprocess_cluster_nav().
  */
-function template_preprocess_cluster_contextual_nav(&$variables) {
+function template_preprocess_cluster_nav_contextual(&$variables) {
   foreach ($variables['regions'] as &$item) {
     $item = l($item['title'], $item['path']);
   }

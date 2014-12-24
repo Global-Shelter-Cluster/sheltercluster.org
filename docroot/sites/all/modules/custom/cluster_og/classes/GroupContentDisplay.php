@@ -151,7 +151,7 @@ class GroupDisplayProvider {
     }
 
     return array(
-      '#theme' => 'cluster_dashboard_nav',
+      '#theme' => 'cluster_nav_dashboard',
       '#items' => $items,
       '#secondary' => $secondary,
     );
@@ -167,7 +167,7 @@ class GroupDisplayProvider {
     $wrapper = entity_metadata_wrapper('node', $this->node);
 
     $output = array(
-      '#theme' => 'cluster_contextual_nav',
+      '#theme' => 'cluster_nav_contextual',
     );
 
     // The the group parent region.
