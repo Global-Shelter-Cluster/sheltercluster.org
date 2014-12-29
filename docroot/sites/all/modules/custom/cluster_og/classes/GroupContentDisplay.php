@@ -343,11 +343,6 @@ class GroupFullDisplayProvider extends GroupDisplayProvider {
       '#theme' => 'links',
       '#links' => $links,
       '#attributes' => array('class' => 'editor-menu'),
-      '#heading' => array(
-        'text' => t('Editor menu'),
-        'level' => 'h4',
-        'class' => 'editor-menu-title',
-      ),
     );
   }
 }

@@ -1,4 +1,3 @@
-<?php print render($content['editor_menu']); ?>
 
 <div id="content">
 
@@ -33,6 +32,13 @@
   </div>
 
   <div class="side-column">
+
+    <?php if ($content['editor_menu']): ?>
+      <h3 data-collapse="operation-group">Add content</h3>
+      <section id="join-group" class="clearfix">
+        <?php print render($content['editor_menu']); ?>
+      </section>
+    <?php endif; ?>
 
     <?php if ($content['local_tasks']): ?>
       <h3 data-collapse="operation-group">Admin links - raw</h3>
