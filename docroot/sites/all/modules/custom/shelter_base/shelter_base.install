@@ -62,7 +62,7 @@ function _shelter_base_required_core() {
  * List of required custom modules.
  */
 function _shelter_base_required_custom() {
-  return array( 'cluster_discussions', 'cluster_docs','cluster_og',  'cluster_search', 'cluster_taxonomy', 'cluster_user',
+  return array('cluster_context', 'cluster_discussions', 'cluster_docs','cluster_og',  'cluster_search', 'cluster_taxonomy', 'cluster_user',
     'cluster_nav', 'cluster_nav_views', 'cluster_workflow',
   );
 }
@@ -229,4 +229,11 @@ function shelter_base_update_7021() {
  */
 function shelter_base_update_7022() {
   module_disable(array('restrict_node_page_view'));
+}
+
+/**
+ * Update custom required modules list to incude cluster_context.
+ */
+function shelter_base_update_7023() {
+  _shelter_base_modules_enable('custom');
 }

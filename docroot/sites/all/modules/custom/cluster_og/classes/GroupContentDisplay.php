@@ -247,7 +247,7 @@ class GroupDisplayProvider {
 /**
  * Provide renderable content for full page view mode. 
  */
-class GroupFullDisplayProvider extends GroupDisplayProvider{
+class GroupFullDisplayProvider extends GroupDisplayProvider {
 
   function __construct($node, $view_mode) {
     parent::__construct($node, $view_mode);
@@ -348,6 +348,26 @@ class GroupFullDisplayProvider extends GroupDisplayProvider{
    */
   public function getContextualNavigation() {
     return FALSE;
+  }
+
+  /**
+   * Provide menu to add related content.
+   * @return render array of links.
+   */
+  public function getEditorMenu() {
+    if (!function_exists('cluster_context_links')) {
+      return FALSE;
+    }
+    $links = cluster_context_links($this->node);
+    if (!$links) {
+      return FALSE;
+    }
+
+    return array(
+      '#theme' => 'links',
+      '#links' => $links,
+      '#attributes' => array('class' => 'editor-menu'),
+    );
   }
 }
 
