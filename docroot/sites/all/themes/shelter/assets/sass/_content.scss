@@ -24,7 +24,7 @@
     text-transform: uppercase;
     color: $shelter-grey;
     @include rem(padding, 0 0 0.4rem 0);
-    @include rem(margin,0 0 0.6rem 0 );
+    @include rem(margin,0 0 1rem 0 );
     @include rem(font-size, 0.75rem);
   }
   @include rem(padding, 1rem 0 0 0);
@@ -39,4 +39,24 @@
   a {
     color: $shelter-red;
   }
+}
+
+.collapsible,
+.collapsed {
+  cursor: pointer;
+}
+
+.collapsible:after {
+  content: '-';
+  float: right;
+  font-weight: bold;
+}
+.collapsed:after {
+  content: '+';
+  float: right;
+  font-weight: bold;
+}
+.collapsible:hover:after,
+.collapsed:hover:after {
+  color: #000;
 }

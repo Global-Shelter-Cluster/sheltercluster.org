@@ -376,6 +376,9 @@ body {
   width: 35px;
   height: 32px;
 }
+#operation-information p {
+  margin-top: 0;
+}
 #operation-information .operation-image {
   float: left;
   margin: 0 16px 16px 0;
@@ -1144,8 +1147,8 @@ header a {
   color: #575757;
   padding: 0 0 6.4px 0;
   padding: 0 0 0.4rem 0;
-  margin: 0 0 9.6px 0;
-  margin: 0 0 0.6rem 0;
+  margin: 0 0 16px 0;
+  margin: 0 0 1rem 0;
   font-size: 12px;
   font-size: 0.75rem;
 }
@@ -1160,6 +1163,28 @@ header a {
 }
 #contextual-navigation a {
   color: #7f1416;
+}
+
+.collapsible,
+.collapsed {
+  cursor: pointer;
+}
+
+.collapsible:after {
+  content: '-';
+  float: right;
+  font-weight: bold;
+}
+
+.collapsed:after {
+  content: '+';
+  float: right;
+  font-weight: bold;
+}
+
+.collapsible:hover:after,
+.collapsed:hover:after {
+  color: #000;
 }
 
 /* _discussions.scss */

@@ -33,6 +33,7 @@ function shelter_preprocess_page(&$variables) {
 
   libraries_load('underscore');
   drupal_add_library('underscore', 'underscore');
+  drupal_add_library('system', 'jquery.cookie');
   $variables['hot_responses'] = FALSE;
   if ($variables['is_front']) {
     $variables['hot_responses'] = cluster_og_hot_responses();
