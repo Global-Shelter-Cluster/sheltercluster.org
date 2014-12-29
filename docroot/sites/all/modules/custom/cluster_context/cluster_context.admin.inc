@@ -67,6 +67,14 @@ function cluster_context_form_alter(&$form, &$form_state, $form_id) {
   }
   $type = $matches[1];
 
+  // If any of the possible query string keys is present, simplify the form.
+  foreach (array('group', 'region', 'response') as $key) {
+    if (_cluster_context_get_nid_param($key, $form_state)) {
+      _cluster_context_simplify_form($form);
+      break;
+    }
+  }
+
   _cluster_context_prepopulate($form, $form_state, 'og_group_ref', 'group');
   _cluster_context_prepopulate($form, $form_state, 'field_parent_region', 'region', 'geographic_region');
   _cluster_context_prepopulate($form, $form_state, 'field_associated_regions', 'region', 'geographic_region');
@@ -80,6 +88,58 @@ function cluster_context_form_alter(&$form, &$form_state, $form_id) {
       $response_wrapper = entity_metadata_wrapper('node', $response);
       $regions = $response_wrapper->field_associated_regions->value();
       _cluster_context_prepopulate($form, $form_state, 'field_associated_regions', $regions, 'geographic_region', FALSE);
+    }
+  }
+}
+
+function _cluster_context_simplify_form(&$form) {
+  $to_hide = array(
+    'comment_settings' => TRUE,       // "Comment settings" tab.
+    'author' => TRUE,                 // "Authoring information" tab.
+    'options' => TRUE,                // "Publishing options" tab.
+    'revision_information' => TRUE,   // "Revision information" tab.
+    'menu' => TRUE,                   // "Menu settings" tab.
+    'path' => TRUE,                   // "URL path settings" tab.
+    'group_register' => FALSE,        // "Group register" field.
+    'group_access' => FALSE,          // "Group visibility" field.
+    'og_roles_permissions' => TRUE,   // "Group roles and permissions" field.
+    'og_group_ref' => array(          // "Other groups" field.
+      LANGUAGE_NONE => array(
+        0 => array(
+          'admin' => TRUE,
+        ),
+      ),
+    ),
+  );
+
+  _cluster_context_hide($to_hide, $form);
+
+  // Attach a CSS to hide things like the text format tips.
+  $form['#attached']['css'][] = drupal_get_path('module', 'cluster_context').'/simplify.css';
+}
+
+/**
+ * Recursive function to hide form elements.
+ * @param array|bool $item
+ *  If TRUE, hides the element received using '#access'. If FALSE, uses CSS.
+ *  If an array, recursively calls on each array item.
+ * @param $element
+ *  Render array, it can be a form or a specific element.
+ */
+function _cluster_context_hide($item, &$element) {
+  if ($item === TRUE) {
+    // Hide using #access.
+    $element['#access'] = FALSE;
+    return;
+  }
+  elseif ($item === FALSE) {
+    // Add a class to hide with CSS (less elegant but necessary in some cases).
+    $element['#attributes']['class'][] = 'cluster_context_hide';
+  }
+
+  foreach ($item as $key => $child) {
+    if (isset($element[$key])) {
+      _cluster_context_hide($child, $element[$key]);
     }
   }
 }

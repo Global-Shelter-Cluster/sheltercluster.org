@@ -85,3 +85,16 @@ function cluster_context_links($node) {
 
   return $links;
 }
+
+/**
+ * Implements hook_module_implements_alter().
+ */
+function cluster_context_module_implements_alter(&$implementations, $hook) {
+  if ($hook == 'form_alter') {
+    // Make this module's form_alter hook implementation run last, to allow modification
+    // of certain elements that are added by other modules' form_alter implementations.
+    $group = $implementations['cluster_context'];
+    unset($implementations['cluster_context']);
+    $implementations['cluster_context'] = $group;
+  }
+}
