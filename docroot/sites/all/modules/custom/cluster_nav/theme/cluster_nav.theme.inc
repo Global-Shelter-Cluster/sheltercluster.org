@@ -60,10 +60,10 @@ function template_preprocess_cluster_nav_related_links(&$variables) {
   if (function_exists('_svg')) {
     switch ($variables['related_type']) {
       case 'hub':
-        $link_icon = _svg('icons/grid-three-up', array('alt' => 'Icon for links'));
+        $link_icon = _svg('icons/grid-three-up', array('alt' => 'Icon for hubs'));
         break;
       case 'response':
-        $link_icon = _svg('icons/globe', array('alt' => 'Icon for Related Responses'));
+        $link_icon = _svg('icons/globe', array('alt' => 'Icon for related responses'));
         break;
       case 'working_group':
       case 'strategic_advisory':

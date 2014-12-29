@@ -52,7 +52,7 @@ class GroupDisplayProvider {
   public function getRelatedResponses() {
     if ($nids = $this->manager->getRelatedResponses()) {
       return array(
-        '#theme' => 'cluster_nav_related_links__' , 'response',
+        '#theme' => 'cluster_nav_related_links__response',
         '#header' => t('Related responses'),
         '#node' => $this->node,
         '#type' => $this->node->type,
@@ -71,12 +71,12 @@ class GroupDisplayProvider {
   public function getRelatedWorkingGroups() {
     if ($nids = $this->manager->getRelatedWorkingGroups()) {
       return array(
-        '#theme' => 'cluster_nav_related_links__' . 'working_group',
+        '#theme' => 'cluster_nav_related_links__working_group',
         '#header' => t('Working groups'),
         '#node' => $this->node,
         '#type' => $this->node->type,
         '#related_nodes' => node_load_multiple($nids),
-        '#related_type' => 'hub',
+        '#related_type' => 'working_group',
       );
     }
     return FALSE;
@@ -90,7 +90,7 @@ class GroupDisplayProvider {
   public function getRelatedHubs() {
     if ($nids = $this->manager->getRelatedHubs()) {
       return array(
-        '#theme' => 'cluster_nav_related_links__' . 'hubs',
+        '#theme' => 'cluster_nav_related_links__hubs',
         '#header' => t('Hubs'),
         '#node' => $this->node,
         '#type' => $this->node->type,
