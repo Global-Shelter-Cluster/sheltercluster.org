@@ -7,7 +7,7 @@
 </ul>
 
 <?php if ($secondary): ?>
-  <h3 data-collapsible="dashboard-menu-secondary-elements">Other navigation options</h3>
+  <h3 data-collapsible="dashboard-menu-secondary-elements" data-collapsible-default="collapsed">Other navigation options</h3>
   <section id="dashboard-menu-secondary-elements">
   <ul class="nav-items">
     <?php foreach ($secondary as $group): ?>

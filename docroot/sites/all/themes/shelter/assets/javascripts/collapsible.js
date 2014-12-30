@@ -8,10 +8,17 @@
         // Returns an array of collapsible element states
         var get_collapsed_state = function(count) {
           var default_state = Array.apply(null, new Array(count)).map(function() {return 0;} );
+          var collapsible = $('[data-collapsible]');
 
           if ($.cookie('collapsed_state') != null) {
             return $.cookie('collapsed_state').split('');
           }
+          collapsible.each( function(index, element) {
+            var element = $(element);
+            if (element.data('collapsible-default') == 'collapsed') {
+              default_state[index] = 1;
+            }
+          });
           return default_state;
         }
 
