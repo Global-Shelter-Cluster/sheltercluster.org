@@ -46,12 +46,8 @@
         <?php print render($content['local_tasks']); ?>
       </section>
     <?php endif; ?>
- 
-    <h3 data-collapse="operation-group">Join This Group</h3>
-    <section id="join-group" class="clearfix">
-      <p>Register and join this group</p>
-      <div id="button-join-group"><a href="#">Join</a></div>
-    </section>
+
+    <?php print render($content['join_links']); ?>
 
     <?php if (!isset($content['upcoming_event'])): ?>
       <h3 data-collapse="shelter-calendar">Calendar</h3>
