@@ -73,6 +73,12 @@
       </section>
     <?php endif; ?>
 
+    <?php if ($tabs): ?>
+      <div class="tabs">
+        <?php print render($tabs); ?>
+      </div>
+    <?php endif; ?>
+
     <?php if ($dashboard_menu): ?>
     <section id="secondary-nav">
       <div class="page-margin clearfix">

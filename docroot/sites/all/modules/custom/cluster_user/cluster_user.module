@@ -69,6 +69,10 @@ function cluster_user_preprocess_page(&$variables) {
     }
   }
   $variables['user_menu'] = $user_menu;
+
+  if (arg(0) != 'user' && isset($variables['tabs'])) {
+    unset($variables['tabs']);
+  }
 }
 
 /**
