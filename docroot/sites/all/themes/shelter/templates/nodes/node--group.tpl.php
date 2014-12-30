@@ -33,7 +33,7 @@
   <div class="side-column">
 
     <?php if ($content['local_tasks']): ?>
-      <h3 data-collapsible="admin-links">Admin links - raw</h3>
+      <h3 data-collapsible="admin-links">Group Administration</h3>
       <section id="admin-links" class="clearfix">
         <?php print render($content['local_tasks']); ?>
       </section>

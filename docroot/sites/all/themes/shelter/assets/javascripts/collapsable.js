@@ -1,25 +1,3 @@
-/*! http://git.io/jcda v1.0.0 by @mathias */
-;jQuery.fn.dataAttr=function(a,b){return b?this.attr("data-"+a,b):this.attr("data-"+a)};
-
-(function ($) {
-  Drupal.behaviors.secondaryNav = {
-    dud: function (context, settings) {
-      $('#secondary-nav').once('secondaryNav', function() {
-        var secondary_menu_state = function(event) {
-          var collapsed_menu = $('#secondary-nav .collapsable');
-          collapsed_menu.toggleClass('hide-this');
-
-          // Stop event propagation if its the menu link
-          if (event.currentTarget.className == 'collapse-menu') {
-            return false;
-          }
-        }
-        $('.collapse-menu').on('click', secondary_menu_state );
-      });
-    }
-  };
-})(jQuery);
-
 (function ($) {
   Drupal.behaviors.collapsibleSections = {
     attach: function (context, settings) {
@@ -27,27 +5,29 @@
         var collapsible = $('[data-collapsible]');
         var collapsible_elements_count = collapsible.length;
 
+        // Returns an array of collapsible element states
+        var get_collapsed_state = function(count) {
+          var default_state = Array.apply(null, new Array(count)).map(function() {return 0;} );
+
+          if ($.cookie('collapsed_state') != null) {
+            return $.cookie('collapsed_state').split('');
+          }
+          return default_state;
+        }
+
         collapsible.each( function(index, element) {
           var element = $(element);
           var collapsible_target_name = element.data().collapsible;
           var collapsible_target = $('#'+collapsible_target_name);
-          var collapsed_state = $.cookie('collapsed_state').split('');
-
-          collapsible_target.css('overflow','hidden');
-          if (collapsed_state[index] == 1) {
-            collapsible_target.hide();
-            element.toggleClass('collapsed');
-          } else {
-            element.toggleClass('collapsible');
-          }
+          var collapsed_state = get_collapsed_state(collapsible_elements_count);
 
           var collapse = function(event) {
             var element = $(event.currentTarget);
             var current_domain = window.location.host;
             var current_pathname = window.location.pathname;
-            var collapsed_state = $.cookie('collapsed_state').split('');
             var count = event.data.collapsible_elements_count;
             var index =  event.data.collapsible_element_index;
+            var collapsed_state = get_collapsed_state(count);
             var collapsible_target = $('#'+event.data.collapsible_target_name);
             var new_collapsed_state = Array.apply(null, new Array(count)).map(function(){return 0;});
 
@@ -59,7 +39,7 @@
             new_collapsed_state[index] = parseInt(collapsed_state[index]) ? 0 : 1;
 
             $.cookie('collapsed_state', new_collapsed_state.toString().replace(/\,/gi,''), {
-              expires: 365,
+              expires: 7,
               path: current_pathname,
               domain: current_domain,
               secure: false
@@ -70,10 +50,16 @@
             } else {
               collapsible_target.slideUp(300);
             }
-
           };
 
-          //injectCSS('#'+collapsible_target_name+'{ max-height: '+(collapsible_target.height()+100)+'px; }');
+          collapsible_target.css('overflow','hidden');// Fixes some dom jumping issue
+
+          if (collapsed_state[index] == 1) {
+            collapsible_target.hide();
+            element.toggleClass('collapsed');
+          } else {
+            element.toggleClass('collapsible');
+          }
 
           element.on('click', {
             collapsible_target_name: collapsible_target_name,

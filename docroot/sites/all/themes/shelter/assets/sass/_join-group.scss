@@ -1,0 +1,22 @@
+/* _join_group.scss */
+
+#join-group {
+  background-color: $shelter-light-blue;
+  color: $shelter-grey;
+  @include rem(padding, 0.75rem 1.25rem 1rem 1.25rem);
+  @include rem(margin, 0 0 2rem 0);
+
+  p {
+    float: left;
+    margin: 7px 0 0 0;
+  }
+
+  #button-join-group {
+    a {
+      @extend .button;
+      float: right;
+      text-decoration: none;
+    }
+  }
+
+}

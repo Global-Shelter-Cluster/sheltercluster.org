@@ -25,13 +25,15 @@
     color: $shelter-grey;
     @include rem(padding, 0 0 0.4rem 0);
     @include rem(margin,0 0 1rem 0 );
-    @include rem(font-size, 0.75rem);
+    @include rem(font-size, 1rem);
   }
   @include rem(padding, 1rem 0 0 0);
 }
 
 #contextual-navigation {
   @include rem(font-size, 0.8rem);
+  position: relative;
+  z-index: 10;
 
   span {
     @include rem(margin-right, 0.25rem);
@@ -47,13 +49,11 @@
 }
 
 .collapsible:after {
-  content: '-';
-  float: right;
+  content: ' -';
   font-weight: bold;
 }
 .collapsed:after {
-  content: '+';
-  float: right;
+  content: ' +';
   font-weight: bold;
 }
 .collapsible:hover:after,
