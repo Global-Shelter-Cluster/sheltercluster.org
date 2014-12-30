@@ -7,8 +7,8 @@
       <?php print render($content['featured_documents']); ?>
     </section>
 
-    <h3 data-collapse="operation-information">Overview</h3>
-    <section id="operation-information" class="clearfix">
+    <h3 data-collapsible="operation-information">Overview</h3>
+    <section id="operation-information" class="slide-container clearfix">
       <?php if (isset($group_image)): ?>
         <?php print $group_image; ?>
       <?php endif; ?>
@@ -16,14 +16,14 @@
     </section>
 
     <?php if ($content['key_documents']['docs']): ?>
-      <h3 data-collapse="key-information">Key Information</h3>
+      <h3 data-collapsible="key-information">Key Information</h3>
       <section id="key-information">
         <?php print render($content['key_documents']); ?>
       </section>
     <?php endif; ?>
 
     <?php if ($content['recent_documents']): ?>
-      <h3 data-collapse="recent-documents">Recent Documents</h3>
+      <h3 data-collapsible="recent-documents">Recent Documents</h3>
       <section id="recent-documents">
         <?php print render($content['recent_documents']); ?>
       </section>
@@ -41,20 +41,20 @@
     <?php endif; ?>
 
     <?php if ($content['local_tasks']): ?>
-      <h3 data-collapse="operation-group">Admin links - raw</h3>
-      <section id="join-group" class="clearfix">
+      <h3 data-collapsible="admin-links">Group Administration</h3>
+      <section id="admin-links" class="clearfix">
         <?php print render($content['local_tasks']); ?>
       </section>
     <?php endif; ?>
- 
-    <h3 data-collapse="operation-group">Join This Group</h3>
+
+    <h3 data-collapsible="join-group">Join This Group</h3>
     <section id="join-group" class="clearfix">
       <p>Register and join this group</p>
       <div id="button-join-group"><a href="#">Join</a></div>
     </section>
 
     <?php if (!isset($content['upcoming_event'])): ?>
-      <h3 data-collapse="shelter-calendar">Calendar</h3>
+      <h3 data-collapsible="shelter-calendar">Calendar</h3>
       <section id="shelter-calendar">
         <div id="box-calendar">
           <?php print _svg('icons/pin', array('id'=>'calendar-pin', 'alt' => 'Pin icon')); ?>

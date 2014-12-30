@@ -1,21 +1,27 @@
 /* _operation.scss */
 #operation-title {
-   @include rem(padding, 0.5rem 0 0 0);
+   @include rem(padding, 1.25rem 0 0 0);
 
   h1 {
     @include rem(margin, 0 0 0 0);
+    @include rem(font-size, 2.3rem);
+    @include rem(line-height, 1.8rem);
+    color: $shelter-red;
   }
 }
 #operation-information {
+  clear: both;
+  @include rem(margin, 0 0 2rem 0);
+
   h2 {
     svg {
       width: 35px;
       height: 32px;
     }
   }
-  clear: both;
-  @include rem(margin, 0 0 2rem 0);
-
+  p {
+    margin-top: 0;
+  }
   .operation-image {
     float: left;
     @include rem(margin, 0 1rem 1rem 0);
@@ -69,6 +75,33 @@
   .image-document {
     @include rem(max-height, 40rem);
     overflow: visible;
+  }
+}
+
+#operation-data {
+  background-color: $shelter-light-blue;
+  color: $shelter-grey;
+  @include rem(padding, 1rem 0.8rem);
+  @include rem(font-size, 0.85rem);
+
+  ul {
+    @include reset-list;
+  }
+  li {
+    @include rem(padding, 0 0 0.5rem 0);
+    @include rem(font-size, 0.8rem);
+  }
+  span {
+    text-transform: uppercase;
+    @include rem(padding-right, 0.5rem);
+  }
+  h4 {
+    border: none;
+    text-transform: none;
+    color: $shelter-grey;
+    font-weight: normal;
+    @include rem(margin, 0 0 0.625rem 0);
+    @include rem(font-size, 0.85rem);
   }
 }
 

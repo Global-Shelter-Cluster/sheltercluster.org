@@ -7,12 +7,9 @@
 </ul>
 
 <?php if ($secondary): ?>
-  <a href="#secondary-nav" class="collapse-menu">
-    <?php print _svg('icons/collapse-down', array('alt' => 'Icon for collapsing the menu')); ?>
-    more
-  </a>
-
-  <ul class="nav-items collapsable hide-this">
+  <h3 data-collapsible="dashboard-menu-secondary-elements" data-collapsible-default="collapsed">Other navigation options</h3>
+  <section id="dashboard-menu-secondary-elements">
+  <ul class="nav-items">
     <?php foreach ($secondary as $group): ?>
     <li class="nav-group clearfix">
       <?php print render($group); ?>

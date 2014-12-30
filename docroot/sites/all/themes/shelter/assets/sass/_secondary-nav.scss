@@ -2,51 +2,43 @@
 
 #secondary-nav {
   @include rem(margin, 0 0 0.25rem 0);
-  @include rem(padding, 1.25rem 0 0.5rem 0);
+  @include rem(padding, 0.75rem 0 0.5rem 0);
 
   h1 {
     color: $shelter-red;
     font: bold 2em verdana, sans-serif;
   }
-
   ul {
     @include reset-list;
   }
   a {
     text-decoration: none;
+    display: block;
   }
+  h3 {
+    text-transform: uppercase;
+    @include rem(font-size, 0.65rem);
+    @include rem(margin, 0 0 0.25rem 0);
+  }
+  h3.collapsible {
+    @include opacity(0.2);
+  }
+
   .svg {
-    fill: darken(white, 20%);
-    width: 13px;
-    height: 13px;
-    position: relative;
-    top: 2px;
-    left: -2px;
-  }
-  .hide-this {
-    display: none;
-  }
-  .collapse-menu {
-    clear: both;
-    position: relative;
-    top: -5px;
-    left: 4px;
-    color: darken($shelter-grey,20%);
-    @include rem(font-size, 0.70rem);
-    .svg {
-      fill: darken($shelter-grey,20%);
-      width: 8px;
-      height: 8px;
-    }
+    fill: darken($shelter-grey,20%);
+    width: 14px;
+    height: 14px;
+    position: absolute;
+    top: 11px;
+    left: 13px;
   }
   .nav-group {
     clear: both;
-    border-top: 1px solid darken($shelter-light-blue, 7%);
 
     h3 {
-      @include rem(font-size, 0.8rem);
+      @include rem(font-size, 0.6rem);
       @include rem(margin, 0.25rem 0);
-      color: darken($shelter-light-blue, 27%);
+      color: darken($shelter-grey, 15%);
     }
   }
   .nav-items {
@@ -70,23 +62,19 @@
       a {
         float: left;
         width: 100%;
-        background: $shelter-light-blue;
+        background: lighten($shelter-light-blue, 10%);
         color: $shelter-grey;
         font-weight: bold;
         text-align: center;
         @include rem(margin, 0 0 0 0.3rem);
-        @include rem(padding, 0.5rem 1.25rem 0.5rem);
+        @include rem(padding, 0.5rem 1.8rem 0.5rem);
         @include rem(font-size, 0.8rem);
 
         &:hover {
           background: $shelter-light-blue;
         }
         &.active {
-          $button-color: lighten($shelter-red, 1%);
-          color: $accent-yellow;
-          border-color: $shelter-red;
-          font-weight: bold;
-          @include background-image(linear-gradient(lighten($button-color, 3%), lighten($button-color,4%) 10%, $button-color));
+          background: $shelter-light-blue;
         }
       }
       .total {

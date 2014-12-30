@@ -6,14 +6,8 @@ require_once dirname(__FILE__) . '/includes/shelter.helpers.inc';
  * Implements hook_preprocess_page().
  */
 function shelter_preprocess_html(&$variables) {
-  //$file = drupal_get_path('module', 'sb_carousel').'/js/slide.js';
-  //$options = array(
-  //  'weight' => -1000, // High number to push this file to the bottom of the list
-  //  'scope' => 'footer' // This will output the JS file in the footer scope, so at the end of the document
-  //);
-  //drupal_add_js($file, $options);
 
-  //Adding Roboto Google Font Normal 400 and Bold 700
+  // Adding Roboto Google Font Normal 400 and Bold 700
   drupal_add_css('http://fonts.googleapis.com/css?family=Roboto:700,400', array('group' => CSS_THEME));
 }
 
@@ -21,7 +15,7 @@ function shelter_preprocess_html(&$variables) {
  * Implements hook_preprocess_page().
  */
 function shelter_preprocess_page(&$variables) {
-  // Adding the viewport for mobile view
+  // Adding the viewport for mobile view.
   $viewport = array(
     '#tag' => 'meta',
     '#attributes' => array(
@@ -33,12 +27,16 @@ function shelter_preprocess_page(&$variables) {
 
   libraries_load('underscore');
   drupal_add_library('underscore', 'underscore');
+  drupal_add_library('system', 'jquery.cookie');
   $variables['hot_responses'] = FALSE;
   if ($variables['is_front']) {
     $variables['hot_responses'] = cluster_og_hot_responses();
   }
 }
 
+/**
+ * Implements hook_preprocess_user_profile().
+ */
 function shelter_preprocess_user_profile(&$variables) {
 
   if (isset($variables['elements']['#view_mode'])) {
@@ -51,9 +49,10 @@ function shelter_preprocess_user_profile(&$variables) {
     $variables['user_profile']['name']['#markup'] = $account->name;
     $variables['user_profile']['name']['#suffix'] = '</span>';
     $variables['user_profile']['email']['#markup'] = l($account->mail, 'mailto:' . $account->mail, array('class' => array('email'), 'absolute' => TRUE));
-    if ( empty($account->picture)) {
-      $variables['user_profile']['user_picture']['#markup'] = _svg('icons/person', array('class'=>'person-avatar', 'alt' => 'Team member\'s people picture missing.'));
-    } else {
+    if (empty($account->picture)) {
+      $variables['user_profile']['user_picture']['#markup'] = _svg('icons/person', array('class' => 'person-avatar', 'alt' => 'Team member\'s people picture missing.'));
+    }
+    else {
       $variables['user_profile']['user_picture']['#markup'] = theme('image_style', array(
         'style_name' => 'thumbnail',
         'path' => $account->picture->uri,
@@ -67,8 +66,6 @@ function shelter_preprocess_user_profile(&$variables) {
 
 /**
  * Implements hook_preprocess_node().
- * Define view mode based templates and specific preprocesses
- * @param $variables
  */
 function shelter_preprocess_node(&$variables) {
   $node = $variables['node'];
@@ -79,16 +76,16 @@ function shelter_preprocess_node(&$variables) {
     $variables['theme_hook_suggestions'][] = 'node__group';
   }
 
-  // Adding view mode based theme suggestions and preprocesses
+  // Adding view mode based theme suggestions and preprocesses.
   $variables['theme_hook_suggestions'][] = 'node__partial__' . $variables['view_mode'];
-  $variables['theme_hook_suggestions'][] = 'node__' . $node->type .'__' . $variables['view_mode'];
+  $variables['theme_hook_suggestions'][] = 'node__' . $node->type . '__' . $variables['view_mode'];
 
   $view_mode_based_preprocess = 'shelter_preprocess_node_partial__' . $variables['view_mode'];
   if (function_exists($view_mode_based_preprocess)) {
     $view_mode_based_preprocess($variables);
   }
 
-  if ($is_group && $view_mode == 'full'){
+  if ($is_group && $view_mode == 'full') {
     if ($variables['content']['featured_documents']) {
 
     }
@@ -114,13 +111,13 @@ function shelter_preprocess_node(&$variables) {
     }
   }
 
-  if ($view_mode == 'full'){
+  if ($view_mode == 'full') {
     if (og_is_group('node', $node)) {
       $variables['theme_hook_suggestions'][] = 'node__group';
     }
   }
   else {
-    // Adding view mode based theme suggestions and preprocesses
+    // Adding view mode based theme suggestions and preprocesses.
     $variables['theme_hook_suggestions'][] = 'node__partial__' . $variables['view_mode'];
     $view_mode_based_preprocess = 'shelter_preprocess_node_partial__' . $variables['view_mode'];
     if (function_exists($view_mode_based_preprocess)) {
@@ -132,19 +129,20 @@ function shelter_preprocess_node(&$variables) {
 
 /**
  * Implements hook_preprocess_node__[view mode]().
- * Define view mode based specific preprocess
- * @param $variables
  */
 function shelter_preprocess_node_partial__related_hub(&$variables) {
   $node = $variables['node'];
   $markup = _svg('icons/grid-three-up', array('alt' => 'Icon for Hubs')) . ' ' . $node->title;
-  $variables['link'] = l( $markup, 'node/' . $node->nid , array('html'=>true));
+  $variables['link'] = l($markup, 'node/' . $node->nid, array('html' => TRUE));
 }
 
+/**
+ * Implements hook_preprocess_node__[view mode]().
+ */
 function shelter_preprocess_node_partial__related_response(&$variables) {
   $node = $variables['node'];
   $markup = _svg('icons/globe', array('alt' => 'Icon for Related Responses')) . ' ' . $node->title;
-  $variables['link'] = l( $markup, 'node/' . $node->nid , array('html'=>true));
+  $variables['link'] = l($markup, 'node/' . $node->nid, array('html' => TRUE));
 }
 
 /**
@@ -153,6 +151,9 @@ function shelter_preprocess_node_partial__related_response(&$variables) {
 function shelter_menu_tree($variables) {
   return '<ul class="nav-items menu">' . $variables['tree'] . '</ul>';
 }
+/**
+ * Redefine menu theme functions.
+ */
 function shelter_menu_link(array $variables) {
   $element = $variables['element'];
   $sub_menu = '';
