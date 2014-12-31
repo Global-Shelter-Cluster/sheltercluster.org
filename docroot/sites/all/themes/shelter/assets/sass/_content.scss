@@ -2,6 +2,8 @@
 
 .main-column,
 .side-column {
+  @include rem(padding, 1rem 0 0 0);
+
   h2 {
     margin-top: 0;
     border-bottom: 2px solid $shelter-grey;
@@ -20,14 +22,25 @@
     }
   }
   h3 {
-    border-bottom: 1px dashed lighten($shelter-grey,30%);
+    border-bottom: 2px solid lighten($shelter-grey,10%);
     text-transform: uppercase;
     color: $shelter-grey;
     @include rem(padding, 0 0 0.4rem 0);
     @include rem(margin,0 0 1rem 0 );
     @include rem(font-size, 1rem);
+    svg {
+      circle,
+      path {
+        fill: darken($shelter-grey,10%);
+      }
+      height: 21px;
+      float: left;
+      @include rem(margin,0 0.25rem 0 0 );
+    }
   }
-  @include rem(padding, 1rem 0 0 0);
+  h4 {
+    @include rem(margin,0 0 0.5rem 0 );
+  }
 }
 
 #contextual-navigation {
@@ -47,7 +60,9 @@
 .collapsed {
   cursor: pointer;
 }
-
+.collapsed {
+  border-bottom: 1px solid lighten($shelter-grey,50%) !important;
+}
 .collapsible:after {
   content: ' -';
   font-weight: bold;

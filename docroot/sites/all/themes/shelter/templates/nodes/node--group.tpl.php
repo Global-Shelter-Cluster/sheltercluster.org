@@ -13,7 +13,10 @@
       <?php print render($content['featured_documents']); ?>
     </section>
 
-    <h3 data-collapsible="operation-information">Overview</h3>
+    <h3 data-collapsible="operation-information">
+      <?php print _svg('icons/overview', array('id' => 'overview-icon', 'alt' => t('An icon representing'))); ?>
+      Overview
+    </h3>
     <section id="operation-information" class="slide-container clearfix">
       <?php if (isset($group_image)): ?>
         <?php print $group_image; ?>
@@ -22,7 +25,10 @@
     </section>
 
     <?php if ($content['key_documents']['docs']): ?>
-      <h3 data-collapsible="key-information">Key Information</h3>
+      <h3 data-collapsible="key-information">
+        <?php print _svg('icons/key-information', array('id' => 'key-information-icon', 'alt' => t('An icon representing a key with the letter "I" in it.'))); ?>
+        Key Information
+      </h3>
       <section id="key-information">
         <?php print render($content['key_documents']); ?>
       </section>
@@ -63,7 +69,7 @@
       <h3 data-collapsible="shelter-calendar">Calendar</h3>
       <section id="shelter-calendar">
         <div id="box-calendar">
-          <?php print _svg('icons/pin', array('id' => 'calendar-pin', 'alt' => 'Pin icon')); ?>
+          <?php print _svg('icons/pin', array('id' => 'calendar-pin-icon', 'alt' => t('An icon representing a calendar with a pin on it.'))); ?>
           <div id="date-calendar">No upcoming event</div>
           <div class="information-card">
             <a class="event" href="#">See past events</a>
@@ -75,7 +81,7 @@
 
    <?php if ($content['recent_discussions']): ?>
       <section id="shelter-discussions">
-        <?php print _svg('icons/discussion', array('id' => 'discussion-icon', 'alt' => 'discussion icon')); ?>
+        <?php print _svg('icons/discussion', array('id' => 'discussion-icon', 'alt' => t('An icon representing discussions.'))); ?>
         <h3>Discussions</h3>
         <ul id="discussions-items">
           <li class="discussions-item">
