@@ -1,3 +1,9 @@
+<?php
+/**
+ * @file
+ * Base group node template.
+ */
+?>
 
 <div id="content">
 
@@ -57,7 +63,7 @@
       <h3 data-collapsible="shelter-calendar">Calendar</h3>
       <section id="shelter-calendar">
         <div id="box-calendar">
-          <?php print _svg('icons/pin', array('id'=>'calendar-pin', 'alt' => 'Pin icon')); ?>
+          <?php print _svg('icons/pin', array('id' => 'calendar-pin', 'alt' => 'Pin icon')); ?>
           <div id="date-calendar">No upcoming event</div>
           <div class="information-card">
             <a class="event" href="#">See past events</a>
@@ -69,7 +75,7 @@
 
    <?php if ($content['recent_discussions']): ?>
       <section id="shelter-discussions">
-        <?php print _svg('icons/discussion', array('id'=>'discussion-icon', 'alt' => 'discussion icon')); ?>
+        <?php print _svg('icons/discussion', array('id' => 'discussion-icon', 'alt' => 'discussion icon')); ?>
         <h3>Discussions</h3>
         <ul id="discussions-items">
           <li class="discussions-item">
