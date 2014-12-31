@@ -1,3 +1,10 @@
+<?php
+/**
+ * @file
+ * Base page template.
+ */
+?>
+
 <div id="page">
 
   <header>
@@ -13,7 +20,7 @@
           </ul>
         </div>
         <div id="bandwidth-selector">
-          <?php print _svg('icons/signal', array('id'=>'bandwidth-selector-icon', 'alt' => 'Bandwidth indication icon')); ?>
+          <?php print _svg('icons/signal', array('id' => 'bandwidth-selector-icon', 'alt' => 'Bandwidth indication icon')); ?>
           <a href="" class="active">Low bandwidth environment</a>
           <span>/</span>
           <a href="">Switch to high</a>
@@ -25,15 +32,13 @@
       <div class="page-margin clearfix">
 
         <a id="logo-shelter-cluster" href="http://sheltercluster.org">
-          <?php print _svg('logo-global-shelter-cluster', array('id'=>'shelter-cluster', 'alt' => 'Global Shelter Cluster - ShelterCluster.org - Coordinating Humanitarian Shelter')); ?>
+          <?php print _svg('logo-global-shelter-cluster', array('id' => 'shelter-cluster', 'alt' => 'Global Shelter Cluster - ShelterCluster.org - Coordinating Humanitarian Shelter')); ?>
         </a>
 
         <div id="user-login-container" class="clearfix">
-          <?php
-          if (isset($user_login)) {
-            print render($user_login);
-          }
-          ?>
+          <?php if (isset($user_login)): ?>
+            <?php print render($user_login); ?>
+          <?php endif; ?>
         </div>
         <div id="user-profile-container" class="clearfix">
           <?php print render($user_menu); ?>
@@ -45,7 +50,9 @@
     </section>
 
     <div class="page-margin clearfix">
-      <?php if ($messages) { print $messages; } ?>
+      <?php if ($messages): ?>
+        <?php print $messages; ?>
+      <?php endif; ?>
     </div>
 
     <div class="page-margin">
