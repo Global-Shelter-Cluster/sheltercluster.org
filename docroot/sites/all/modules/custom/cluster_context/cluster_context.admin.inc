@@ -142,6 +142,7 @@ function _cluster_context_hide($item, &$element) {
   elseif ($item === FALSE) {
     // Add a class to hide with CSS (less elegant but necessary in some cases).
     $element['#attributes']['class'][] = 'cluster_context_hide';
+    return;
   }
 
   foreach ($item as $key => $child) {
