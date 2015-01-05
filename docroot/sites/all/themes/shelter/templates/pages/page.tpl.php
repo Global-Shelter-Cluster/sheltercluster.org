@@ -73,9 +73,9 @@
       </section>
     <?php endif; ?>
 
-    <?php if ($tabs): ?>
+    <?php if ($local_tasks): ?>
       <div class="tabs">
-        <?php print render($tabs); ?>
+        <?php print render($local_tasks); ?>
       </div>
     <?php endif; ?>
 
