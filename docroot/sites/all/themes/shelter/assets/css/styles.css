@@ -1,3 +1,4 @@
+@charset "UTF-8";
 /*! normalize.css v3.0.0 | HTML5 Display Definitions | MIT License | git.io/normalize */
 article,
 aside,
@@ -273,11 +274,13 @@ th {
   border-style: solid;
 }
 
-.underlined-links, #shelter-discussions .see-all, #shelter-calendar .see-all, footer a {
+.underlined-links, #shelter-discussions .see-all, #shelter-calendar .see-all, #add-content a,
+#admin-links a, footer a {
   position: relative;
   text-decoration: none;
 }
-.underlined-links:after, #shelter-discussions .see-all:after, #shelter-calendar .see-all:after, footer a:after {
+.underlined-links:after, #shelter-discussions .see-all:after, #shelter-calendar .see-all:after, #add-content a:after,
+#admin-links a:after, footer a:after {
   content: '';
   width: 100%;
   position: absolute;
@@ -286,10 +289,14 @@ th {
   border-width: 0 0 1px;
   border-style: solid;
 }
-.underlined-links:hover, #shelter-discussions .see-all:hover, #shelter-calendar .see-all:hover, footer a:hover, .underlined-links:active, #shelter-discussions .see-all:active, #shelter-calendar .see-all:active, footer a:active {
+.underlined-links:hover, #shelter-discussions .see-all:hover, #shelter-calendar .see-all:hover, #add-content a:hover,
+#admin-links a:hover, footer a:hover, .underlined-links:active, #shelter-discussions .see-all:active, #shelter-calendar .see-all:active, #add-content a:active,
+#admin-links a:active, footer a:active {
   text-decoration: none;
 }
-.underlined-links:hover:after, #shelter-discussions .see-all:hover:after, #shelter-calendar .see-all:hover:after, footer a:hover:after, .underlined-links:active:after, #shelter-discussions .see-all:active:after, #shelter-calendar .see-all:active:after, footer a:active:after {
+.underlined-links:hover:after, #shelter-discussions .see-all:hover:after, #shelter-calendar .see-all:hover:after, #add-content a:hover:after,
+#admin-links a:hover:after, footer a:hover:after, .underlined-links:active:after, #shelter-discussions .see-all:active:after, #shelter-calendar .see-all:active:after, #add-content a:active:after,
+#admin-links a:active:after, footer a:active:after {
   border-style: none;
 }
 
@@ -1222,7 +1229,7 @@ header a {
 }
 
 .collapsible:after {
-  content: ' -';
+  content: ' –';
   font-weight: bold;
 }
 
@@ -1611,6 +1618,67 @@ header a {
 #join-group #button-join-group a {
   float: right;
   text-decoration: none;
+}
+
+#title-join-group {
+  margin: 24px 0 48px 0;
+  margin: 1.5rem 0 3rem 0;
+}
+
+/* _admin.scss */
+#add-content,
+#admin-links {
+  background: #575757;
+  padding: 16px;
+  padding: 1rem;
+  margin: 0 0 16px 0;
+  margin: 0 0 1rem 0;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+}
+#add-content a,
+#admin-links a {
+  color: white;
+}
+#add-content .editor-menu,
+#admin-links .editor-menu {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  list-style-position: inside;
+  padding: 16px 0 0 0;
+  padding: 1rem 0 0 0;
+}
+#add-content .editor-menu li,
+#admin-links .editor-menu li {
+  padding: 0 0 8px 0;
+  padding: 0 0 0.5rem 0;
+}
+#add-content .collapsible,
+#add-content .collapsed,
+#admin-links .collapsible,
+#admin-links .collapsed {
+  color: #ffb100;
+  border-bottom: none !important;
+  padding: 0;
+  margin: 0;
+}
+#add-content .collapsible:hover:after,
+#add-content .collapsed:hover:after,
+#admin-links .collapsible:hover:after,
+#admin-links .collapsed:hover:after {
+  -moz-transition: color 0.3s ease;
+  -o-transition: color 0.3s ease;
+  -webkit-transition: color 0.3s ease;
+  transition: color 0.3s ease;
+  color: white;
+}
+#add-content .collapsible,
+#admin-links .collapsible {
+  border-bottom: 1px solid #ffb100 !important;
+  padding: 0 0 6.4px 0;
+  padding: 0 0 0.4rem 0;
 }
 
 /* _active_responses.scss */
