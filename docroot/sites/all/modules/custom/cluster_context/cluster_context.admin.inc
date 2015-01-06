@@ -9,7 +9,35 @@ function cluster_context_menu_alter(&$items) {
   foreach (node_type_get_types() as $type) {
     $type_url_str = str_replace('_', '-', $type->type);
     $items['node/add/' . $type_url_str]['page callback'] = 'cluster_context_build_form';
+    $items['node/add/' . $type_url_str]['access callback'] = 'cluster_context_node_add_access';
   }
+}
+
+/**
+ * Determines whether the user is using context.
+ * @param array|null $form_state Optional.
+ * @return bool
+ */
+function _cluster_context_is_being_used(&$form_state = NULL) {
+  foreach (array('group', 'region', 'response') as $key) {
+    if (_cluster_context_get_nid_param($key, $form_state)) {
+      return TRUE;
+    }
+  }
+  return FALSE;
+}
+
+/**
+ * Restricts access to the node/add/% pages based on the custom
+ * "create nodes without cluster context" permission.
+ * @param $op
+ * @param $node
+ * @return bool
+ */
+function cluster_context_node_add_access($op, $node) {
+  return _cluster_context_is_being_used() || user_access('create nodes without cluster context')
+    ? node_access($op, $node)
+    : FALSE;
 }
 
 /**
@@ -52,7 +80,20 @@ function cluster_context_build_form($type) {
     }
   }
 
+  if ($type === 'document' && !_cluster_context_is_being_used($form_state)) {
+    array_unshift($form['actions']['submit']['#submit'], 'cluster_context_redirect_home');
+    dpm($form);
+  }
+
   return $form;
+}
+
+function cluster_context_redirect_home($form, &$form_state) {
+//  if ($form_state['nid']) {
+    $form_state['redirect'] = '<front>';
+//  }
+  dpm($form_state, 'submit fs');
+//  drupal_goto('');
 }
 
 /**
@@ -68,12 +109,15 @@ function cluster_context_form_alter(&$form, &$form_state, $form_id) {
   $type = $matches[1];
 
   // If any of the possible query string keys is present, simplify the form.
-  foreach (array('group', 'region', 'response') as $key) {
-    if (_cluster_context_get_nid_param($key, $form_state)) {
-      _cluster_context_simplify_form($form);
-      break;
-    }
+  if (_cluster_context_is_being_used($form_state)) {
+    _cluster_context_simplify_form($form);
   }
+//  foreach (array('group', 'region', 'response') as $key) {
+//    if (_cluster_context_get_nid_param($key, $form_state)) {
+//      _cluster_context_simplify_form($form);
+//      break;
+//    }
+//  }
 
   _cluster_context_prepopulate($form, $form_state, 'og_group_ref', 'group');
   _cluster_context_prepopulate($form, $form_state, 'field_parent_region', 'region', 'geographic_region');
@@ -253,6 +297,6 @@ function _cluster_context_get_nid_param($name, &$form_state = NULL) {
       // is read directly from here.
       $form_state['cluster_context_params'][$name] = intval($_GET[$name]);
     }
-    return $form_state['cluster_context_params'][$name];
+    return intval($_GET[$name]);
   }
 }
