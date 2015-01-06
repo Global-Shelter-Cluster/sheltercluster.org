@@ -79,29 +79,7 @@
       </section>
     <?php endif; ?>
 
-   <?php if ($content['recent_discussions']): ?>
-      <section id="shelter-discussions">
-        <?php print _svg('icons/discussion', array('id' => 'discussion-icon', 'alt' => t('An icon representing discussions.'))); ?>
-        <h3>Discussions</h3>
-        <ul id="discussions-items">
-          <li class="discussions-item">
-            <div class="replies">24 replies</div>
-            <div class="information">
-              <a href="#" class="topic">Where can I find lumber?</a>
-              <span class="date">2014/10/03 by <a class="author" href="#">Jane Wikionsons</a></span>
-            </div>
-          </li>
-          <li class="discussions-item">
-            <div class="replies">no replies <span class="new">New</span></div>
-            <div class="information">
-              <a href="#" class="topic">Are any special requirements for protection needed when entering the</a>
-              <span class="date">2014/10/15 by <a class="author" href="#">John Tremblay</a></span>
-            </div>
-          </li>
-        </ul>
-        <a class="see-all" href="#">All other discussions</a>
-      </section>
-    <?php endif; ?>
+    <?php if ($content['recent_discussions']) print(render($content['recent_discussions'])); ?>
 
     <section id="shelter-coordination-team">
       <?php print render($content['contact_members']); ?>

@@ -1,10 +1,10 @@
 <?php
 
-  /**
-   * Generates a content manager appropriate to the viewed content.
-   * Provides related entity data, typically node ids, for the viewed content.
-   */
-  class GroupContentManager {
+/**
+ * Generates a content manager appropriate to the viewed content.
+ * Provides related entity data, typically node ids, for the viewed content.
+ */
+class GroupContentManager {
 
   protected $node;
 
@@ -131,20 +131,25 @@
    *  array of discussion node ids, FALSE if none exist.
    */
   public function getRecentDiscussions($range = 2) {
-    $query = new EntityFieldQuery();
-    $result = $query->entityCondition('entity_type', 'node')
-      ->entityCondition('bundle', 'discussion')
-      ->fieldCondition('og_group_ref', 'target_id', $this->node->nid)
-      ->propertyCondition('status', NODE_PUBLISHED)
-      ->propertyOrderBy('changed', 'DESC')
-      ->range(0, $range) // This is a hard limit, not a paginator.
-      ->execute();
+    $query = db_select('node', 'n');
+    $query->join('node_comment_statistics', 'c', 'c.nid = n.nid');
+    $query->join('og_membership', 'g', 'g.etid = n.nid');
+    $query->fields('n', array('nid'));
+    $query->condition('n.status', NODE_PUBLISHED);
+    $query->condition('n.type', 'discussion');
+    $query->condition('g.field_name', 'og_group_ref');
+    $query->condition('g.entity_type', 'node');
+    $query->condition('g.group_type', 'node');
+    $query->condition('g.gid', $this->node->nid);
+    $query->orderBy('c.last_comment_timestamp', 'DESC');
+    $query->range(0, $range);
+    $nids = $query->execute()->fetchCol(0);
 
-    if (!isset($result['node'])) {
+    if (!count($nids)) {
       return FALSE;
     }
 
-    return array_keys($result['node']);
+    return $nids;
   }
 
   /**

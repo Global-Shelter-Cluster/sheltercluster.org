@@ -100,5 +100,88 @@ function cluster_discussions_theme() {
       'file' => 'theme/cluster_discussions.theme.inc',
       'render element' => 'element',
     ),
+    'cluster_discussions_teaser' => array(
+      'file' => 'theme/cluster_discussions.theme.inc',
+      'render element' => 'element',
+    ),
   );
+}
+
+/**
+ * Implements hook_node_view_alter().
+ */
+function cluster_discussions_node_view_alter(&$build) {
+  if ($build['#node']->type != 'discussion') {
+    return;
+  }
+  switch ($build['#view_mode']) {
+    case 'teaser':
+      $build['#theme'] = 'cluster_discussions_teaser';
+
+      if (!$build['#node']->comment_count) {
+        $build['#replies'] = t('no replies');
+      }
+      else {
+        $build['#replies'] = format_plural($build['#node']->comment_count, '1 reply', '@count replies');
+      }
+
+      $build['#is_latest'] = FALSE;
+      $gid = _cluster_discussion_associated_group($build['#node']->nid);
+      if ($gid) {
+        $build['#is_latest'] = $build['#node']->nid == _cluster_discussion_get_latest($gid);
+      }
+
+      // Author
+      $user = user_load($build['#node']->uid);
+      $build['#author'] = array(
+        'name' => $user->name,
+        'path' => 'user/'.$user->uid,
+      );
+      break;
+    default:
+      // Do nothing.
+  }
+}
+
+/**
+ * Gets the associated group ID for the given discussion node ID, if any.
+ * @param $nid
+ * @return int|NULL
+ */
+function _cluster_discussion_associated_group($nid) {
+  return db_select('og_membership', 'g')
+    ->fields('g', array('gid'))
+    ->condition('g.entity_type', 'node')
+    ->condition('g.group_type', 'node')
+    ->condition('g.etid', $nid)
+    ->execute()->fetchField();
+}
+
+/**
+ * Get the latest discussion nid for the given group, if any.
+ * @param $gid
+ * @return int|NULL
+ */
+function _cluster_discussion_get_latest($gid) {
+  if (!og_is_group('node', node_load($gid))) {
+    return;
+  }
+
+  $query = db_select('og_membership', 'g');
+
+  $query->fields('g', array('etid'));
+
+  $query->join('node', 'n', 'n.nid = g.etid');
+  $query->condition('g.entity_type', 'node');
+
+  $query->condition('g.group_type', 'node');
+  $query->condition('g.gid', $gid);
+
+  $query->condition('n.type', 'discussion');
+  $query->condition('n.status', NODE_PUBLISHED);
+
+  $query->orderBy('g.created', 'DESC');
+  $query->range(0, 1);
+
+  return $query->execute()->fetchField();
 }
