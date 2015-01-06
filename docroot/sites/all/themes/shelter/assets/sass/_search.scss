@@ -44,7 +44,6 @@ header {
       display: none;
     }
     .form-type-textfield {
-
       .form-text {
         @include rem(padding, 0.35rem 0.5rem 0.35rem);
         @include border-radius(3px);

@@ -2,8 +2,9 @@
 
 #shelter-discussions {
   position: relative;
+  @include rem(top, 1rem);
   color: $shelter-dark-blue;
-  @include rem(margin, 0 0 1.5rem 0);
+  @include rem(margin, 0 0 2.5rem 0);
   @include border-bottom-radius(0.1875rem);
 
   svg {
