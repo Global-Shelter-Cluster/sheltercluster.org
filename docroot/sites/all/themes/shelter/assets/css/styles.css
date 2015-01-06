@@ -646,10 +646,6 @@ header .search {
   box-shadow: rgba(0, 0, 0, 0.1) 0 0 3px inset;
 }
 
-.form-submit {
-  float: left;
-}
-
 .page-search #search-form {
   background: #cdd6db;
   margin: 16px 0 0 0;
@@ -687,12 +683,18 @@ header .search {
   margin: 1rem 0 0 0;
 }
 .page-search #search-form #edit-advanced .fieldset-title {
+  position: relative;
+  top: -2px;
   text-transform: uppercase;
   font-weight: bold;
   color: #575757;
   text-decoration: none;
   font-size: 12px;
   font-size: 0.75rem;
+}
+.page-search #search-form .collapsible:after,
+.page-search #search-form .collapsed:after {
+  content: '';
 }
 
 /* _header.scss */

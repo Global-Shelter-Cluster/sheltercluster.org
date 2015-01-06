@@ -20,7 +20,6 @@ header {
   @include box-shadow(rgba(0,0,0,0.1) 0 0 3px inset);
 }
 .form-submit {
-  float: left;
   @extend .button;
 }
 
@@ -59,12 +58,18 @@ header {
       @include rem(margin, 1rem 0 0 0);
 
       .fieldset-title {
+        position: relative;
+        top: -2px;
         text-transform: uppercase;
         font-weight: bold;
         color: $shelter-grey;
         text-decoration: none;
         @include rem(font-size, 0.75rem);
       }
+    }
+    .collapsible:after,
+    .collapsed:after {
+      content: '';
     }
   }
 }
