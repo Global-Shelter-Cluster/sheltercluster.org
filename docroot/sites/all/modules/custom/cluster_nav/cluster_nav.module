@@ -72,6 +72,13 @@ function _cluster_nav_paged_teaser_list($bundle) {
  *  Implements hook_preprocess_page().
  */
 function cluster_nav_preprocess_page(&$variables) {
+  // Add local tasks to page template for user/%
+  $variables['local_tasks'] = FALSE;
+  if (arg(0) == 'user') {
+    $local_tasks = menu_local_tasks();
+    $variables['local_tasks'] = $local_tasks['tabs']['output'];
+  }
+
   // Add the main menu to every page.
   $variables['main_nav'] = menu_tree_output(menu_tree_all_data('main-menu'));
   
@@ -113,7 +120,12 @@ function cluster_nav_preprocess_page(&$variables) {
 function cluster_nav_node_view($node, $view_mode) {
   $node->content['local_tasks'] = FALSE;
   if ($view_mode == 'full' && user_access('administer nodes')) {
-    $node->content['local_tasks'] = menu_local_tasks();
+    $local_tasks = menu_local_tasks();
+    $node->content['local_tasks'] = array(
+      '#prefix' => '<ul class="editor-menu">',
+      '#suffix' => '</ul>',
+      'items' => $local_tasks['tabs']['output'],
+    );
   }
 }
 

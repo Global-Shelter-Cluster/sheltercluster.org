@@ -80,6 +80,12 @@
       </section>
     <?php endif; ?>
 
+    <?php if ($local_tasks): ?>
+      <div class="tabs">
+        <?php print render($local_tasks); ?>
+      </div>
+    <?php endif; ?>
+
     <?php if ($dashboard_menu): ?>
     <section id="secondary-nav">
       <div class="page-margin clearfix">

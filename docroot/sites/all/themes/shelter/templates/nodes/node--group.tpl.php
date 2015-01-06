@@ -63,11 +63,15 @@
       </section>
     <?php endif; ?>
 
-    <h3 id="title-join-group" data-collapsible="join-group">Join This Group</h3>
+    <h3 data-collapsible="join-group">Join This Group</h3>
     <section id="join-group" class="clearfix">
       <p>Register and join this group</p>
       <div id="button-join-group"><a href="#">Join</a></div>
     </section>
+
+    <?php if($content['join_links']): ?>
+      <?php print render($content['join_links']); ?>
+    <?php endif; ?>
 
     <?php if (!isset($content['upcoming_event'])): ?>
       <h3 data-collapsible="shelter-calendar">Calendar</h3>

@@ -1,10 +1,11 @@
-/* _admin.scss */
+/* _admin-content.scss */
+
 #add-content,
 #admin-links {
   background: $shelter-grey;
   @include rem(padding, 1rem);
   @include rem(margin, 0 0 1rem 0);
-  @include border-radius(5px);
+  @include border-radius(0.1875rem);
 
   a {
     @extend .underlined-links;
@@ -29,7 +30,6 @@
 
     &:hover {
       &:after {
-        @include transition(color 0.3s ease);
         color: rgb(255,255,255);
       }
     }
@@ -38,7 +38,6 @@
   .collapsible {
     border-bottom: 1px solid $accent-yellow !important;
     @include rem(padding, 0 0 0.4rem 0);
-
   }
 }
 

@@ -1240,15 +1240,21 @@ header a {
 
 .collapsible:hover:after,
 .collapsed:hover:after {
+  -moz-transition: color 0.3s ease;
+  -o-transition: color 0.3s ease;
+  -webkit-transition: color 0.3s ease;
+  transition: color 0.3s ease;
   color: #000;
 }
 
 /* _discussions.scss */
 #shelter-discussions {
   position: relative;
+  top: 16px;
+  top: 1rem;
   color: #688394;
-  margin: 0 0 24px 0;
-  margin: 0 0 1.5rem 0;
+  margin: 0 0 40px 0;
+  margin: 0 0 2.5rem 0;
   -moz-border-radius-bottomleft: 0.1875rem;
   -webkit-border-bottom-left-radius: 0.1875rem;
   border-bottom-left-radius: 0.1875rem;
@@ -1620,12 +1626,7 @@ header a {
   text-decoration: none;
 }
 
-#title-join-group {
-  margin: 24px 0 48px 0;
-  margin: 1.5rem 0 3rem 0;
-}
-
-/* _admin.scss */
+/* _admin-content.scss */
 #add-content,
 #admin-links {
   background: #575757;
@@ -1633,9 +1634,9 @@ header a {
   padding: 1rem;
   margin: 0 0 16px 0;
   margin: 0 0 1rem 0;
-  -moz-border-radius: 5px;
-  -webkit-border-radius: 5px;
-  border-radius: 5px;
+  -moz-border-radius: 0.1875rem;
+  -webkit-border-radius: 0.1875rem;
+  border-radius: 0.1875rem;
 }
 #add-content a,
 #admin-links a {
@@ -1668,10 +1669,6 @@ header a {
 #add-content .collapsed:hover:after,
 #admin-links .collapsible:hover:after,
 #admin-links .collapsed:hover:after {
-  -moz-transition: color 0.3s ease;
-  -o-transition: color 0.3s ease;
-  -webkit-transition: color 0.3s ease;
-  transition: color 0.3s ease;
   color: white;
 }
 #add-content .collapsible,
