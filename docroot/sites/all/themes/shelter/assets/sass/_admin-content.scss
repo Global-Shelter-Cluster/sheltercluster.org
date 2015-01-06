@@ -1,0 +1,43 @@
+/* _admin-content.scss */
+
+#add-content,
+#admin-links {
+  background: $shelter-grey;
+  @include rem(padding, 1rem);
+  @include rem(margin, 0 0 1rem 0);
+  @include border-radius(0.1875rem);
+
+  a {
+    @extend .underlined-links;
+    color: rgb(255,255,255);
+  }
+
+  .editor-menu {
+    @include reset-list;
+    @include rem(padding, 1rem 0 0 0);
+
+    li {
+      @include rem(padding, 0 0 0.5rem 0);
+    }
+  }
+
+  .collapsible,
+  .collapsed {
+    color: $accent-yellow;
+    border-bottom: none !important;
+    padding: 0;
+    margin: 0;
+
+    &:hover {
+      &:after {
+        color: rgb(255,255,255);
+      }
+    }
+  }
+
+  .collapsible {
+    border-bottom: 1px solid $accent-yellow !important;
+    @include rem(padding, 0 0 0.4rem 0);
+  }
+}
+

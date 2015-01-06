@@ -46,16 +46,20 @@
   <div class="side-column">
 
     <?php if ($content['editor_menu']): ?>
-      <h3 data-collapse="operation-group">Add content</h3>
-      <section id="join-group" class="clearfix">
-        <?php print render($content['editor_menu']); ?>
+      <section id="add-content" class="clearfix">
+        <h3 data-collapsible="add-content-container">Add content</h3>
+        <div id="add-content-container">
+          <?php print render($content['editor_menu']); ?>
+        </div>
       </section>
     <?php endif; ?>
 
     <?php if ($content['local_tasks']): ?>
-      <h3 data-collapsible="admin-links">Group Administration</h3>
       <section id="admin-links" class="clearfix">
-        <?php print render($content['local_tasks']); ?>
+        <h3 data-collapsible="admin-links-container">Group Administration</h3>
+        <div id="admin-links-container">
+          <?php print render($content['local_tasks']); ?>
+        </div>
       </section>
     <?php endif; ?>
 

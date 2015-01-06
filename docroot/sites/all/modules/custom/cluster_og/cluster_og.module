@@ -36,7 +36,6 @@ function cluster_og_node_view($node, $view_mode) {
   // Group specific actions.
   if (og_is_group_type('node', $bundle)) {
     $node->content['join_links'] = $view_mode == 'full' ? cluster_og_join_links($node->nid) : FALSE;
-
     // Get a display provider for the current view mode.
     $group_content = GroupDisplayProvider::getDisplayProvider($node, $view_mode);
     $node->content['editor_menu'] = $group_content->getEditorMenu();

@@ -605,6 +605,9 @@ function cluster_og_strongarm() {
         'path' => array(
           'weight' => '5',
         ),
+        'language' => array(
+          'weight' => '6',
+        ),
       ),
       'display' => array(),
     ),
@@ -621,6 +624,9 @@ function cluster_og_strongarm() {
       'form' => array(
         'path' => array(
           'weight' => '30',
+        ),
+        'language' => array(
+          'weight' => '5',
         ),
       ),
       'display' => array(),
