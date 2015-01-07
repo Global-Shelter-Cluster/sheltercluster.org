@@ -144,7 +144,15 @@ function shelter_preprocess_node_partial__related_response(&$variables) {
   $markup = _svg('icons/globe', array('alt' => 'Icon for Related Responses')) . ' ' . $node->title;
   $variables['link'] = l($markup, 'node/' . $node->nid, array('html' => TRUE));
 }
-
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function shelter_form_search_form_alter(&$form, $form_state) {
+  $form['basic']['#attributes']['class'][] = 'clearfix';
+  $form['advanced']['keywords']['#prefix'] = '<div class="criterion clearfix">';
+  $form['advanced']['type']['#prefix'] = '<div class="criterion checkboxlist clearfix">';
+  $form['advanced']['language']['#prefix'] = '<div class="criterion checkboxlist clearfix">';
+}
 /**
  * Redefine menu theme functions.
  */
