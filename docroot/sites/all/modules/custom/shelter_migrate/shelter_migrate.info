@@ -1,0 +1,4 @@
+name = Sheltercluster Migration
+description = Migrates groups and documents from the legacy sheltercluter.org site.
+core = 7.x
+package = Cluster
