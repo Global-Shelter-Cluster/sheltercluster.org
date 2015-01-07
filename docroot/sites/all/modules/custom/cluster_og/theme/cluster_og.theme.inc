@@ -30,10 +30,18 @@ function theme_cluster_og_contact_member($vars) {
  * $vars['element'][UID]: each discussion render array and markup.
  */
 function theme_cluster_og_recent_discussions($vars) {
-  $output = '<div class="field"><div class="field-label">' . t('Discussions') . '</div>';
+  $output = '<section id="shelter-discussions">';
+  $output .= _svg('icons/discussion', array('id' => 'discussion-icon', 'alt' => t('An icon representing discussions.')));
+  $output .= '<h3>' . t('Discussions') . '</h3>';
+  $output .= '<ul id="discussions-items">';
   $output .= $vars['element']['#children'];
-  $output .= l(t('All other discussions'), $vars['element']['#all_discussions_link']);
-  $output .= '</div>';
+  $output .= '</ul>';
+  $output .= l(t('All other discussions'), $vars['element']['#all_discussions_link'], array(
+    'attributes' => array(
+      'class' => 'see-all',
+    ),
+  ));
+  $output .= '</section>';
   return $output;
 }
 

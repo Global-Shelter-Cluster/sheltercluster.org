@@ -15,7 +15,7 @@ function cluster_docs_field_default_field_instances() {
     'bundle' => 'document',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Only first 100 characters of the description will be displayed in the document lists.',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -1079,6 +1079,7 @@ function cluster_docs_field_default_field_instances() {
   t('Issues');
   t('Link');
   t('Non Food Items');
+  t('Only first 100 characters of the description will be displayed in the document lists.');
   t('Preview');
   t('Report / Meeting date');
   t('Response Phase');
