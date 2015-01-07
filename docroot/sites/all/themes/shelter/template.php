@@ -8,7 +8,7 @@ require_once dirname(__FILE__) . '/includes/shelter.helpers.inc';
 function shelter_preprocess_html(&$variables) {
 
   // Adding Roboto Google Font Normal 400 and Bold 700
-  drupal_add_css('http://fonts.googleapis.com/css?family=Roboto:700,400', array('group' => CSS_THEME));
+  drupal_add_css('//fonts.googleapis.com/css?family=Roboto:700,400', array('group' => CSS_THEME));
 }
 
 /**
