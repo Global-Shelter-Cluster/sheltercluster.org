@@ -326,7 +326,12 @@ class GroupFullDisplayProvider extends GroupDisplayProvider {
    * Not shown for this display.
    */
   public function getRelatedResponses() {
-    return FALSE;
+    if ($this->node->type != 'geographic_region') {
+      return FALSE;
+    }
+    if ($responses = $this->manager->getRelatedResponses()) {
+      return $responses;
+    }
   }
 
   /**

@@ -9,6 +9,10 @@
 
   <div class="main-column">
 
+    <?php if($content['related_responses']): ?>
+      <?php print render($content['related_responses']); ?>
+    <?php endif; ?>
+
     <section id="featured-documents">
       <?php print render($content['featured_documents']); ?>
     </section>
