@@ -50,8 +50,6 @@
               secure: false
             });
 
-            console.log($.cookie(current_pathname + '_collapsed_state'));
-
             if (new_collapsed_state[index] == 0) {
               collapsible_target.slideDown(300);
             } else {
