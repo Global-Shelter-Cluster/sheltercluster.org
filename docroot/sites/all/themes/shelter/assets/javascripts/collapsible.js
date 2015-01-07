@@ -7,11 +7,12 @@
 
         // Returns an array of collapsible element states
         var get_collapsed_state = function(count) {
+          var current_pathname = window.location.pathname;
           var default_state = Array.apply(null, new Array(count)).map(function() {return 0;} );
           var collapsible = $('[data-collapsible]');
 
-          if ($.cookie('collapsed_state') != null) {
-            return $.cookie('collapsed_state').split('');
+          if ($.cookie(current_pathname + '_collapsed_state') != null) {
+            return $.cookie(current_pathname + '_collapsed_state').split('');
           }
           collapsible.each( function(index, element) {
             var element = $(element);
@@ -30,7 +31,6 @@
 
           var collapse = function(event) {
             var element = $(event.currentTarget);
-            var current_domain = window.location.host;
             var current_pathname = window.location.pathname;
             var count = event.data.collapsible_elements_count;
             var index =  event.data.collapsible_element_index;
@@ -45,12 +45,12 @@
             }
             new_collapsed_state[index] = parseInt(collapsed_state[index]) ? 0 : 1;
 
-            $.cookie('collapsed_state', new_collapsed_state.toString().replace(/\,/gi,''), {
+            $.cookie(current_pathname + '_collapsed_state', new_collapsed_state.toString().replace(/\,/gi,''), {
               expires: 7,
-              path: current_pathname,
-              domain: current_domain,
               secure: false
             });
+
+            console.log($.cookie(current_pathname + '_collapsed_state'));
 
             if (new_collapsed_state[index] == 0) {
               collapsible_target.slideDown(300);
