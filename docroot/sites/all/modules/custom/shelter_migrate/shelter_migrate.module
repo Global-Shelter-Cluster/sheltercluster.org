@@ -5,11 +5,20 @@
  */
 function shelter_migrate_menu() {
   return array(
-    'admin/content/migrate' => array(
+    'admin/content/shelter-migrate' => array(
       'title' => 'Migrate from sheltercluster.org',
       'page callback' => 'drupal_get_form',
       'page arguments' => array('shelter_migrate_form'),
       'access callback' => TRUE, //TODO: change so only superadmin can run this
+    ),
+    'node/%node/shelter-migrate' => array(
+      'title' => 'Migrate docs from sheltercluster.org',
+      'page callback' => 'drupal_get_form',
+      'page arguments' => array('shelter_migrate_node_form'),
+      'access callback' => TRUE, //TODO: change so only superadmin can run this
+      'type' => MENU_LOCAL_TASK,
+      'file' => 'shelter_migrate.node.inc',
+      'weight' => 10,
     ),
   );
 }

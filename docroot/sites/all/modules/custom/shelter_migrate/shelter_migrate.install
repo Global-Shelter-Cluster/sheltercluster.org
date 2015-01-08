@@ -1,0 +1,25 @@
+<?php
+
+
+/**
+ * Implements hook_schema().
+ */
+function shelter_migrate_schema() {
+  return array(
+    'shelter_migrate_rss' => array(
+      'description' => 'Store RSS urls and execution stats for document import.',
+      'fields' => array(
+        'nid' => array(
+          'type' => 'int',
+          'unsigned' => TRUE,
+          'not null' => TRUE,
+        ),
+        'url' => array(
+          'type' => 'varchar',
+          'length' => 255,
+        ),
+      ),
+      'primary key' => array('nid'),
+    ),
+  );
+}
