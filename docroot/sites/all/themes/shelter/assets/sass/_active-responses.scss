@@ -57,6 +57,13 @@
       width: 30px;
       height: 30px;
     }
+    span {
+      position: relative;
+      top: -10px;
+    }
+    .man-made-disaster-icon {
+      @include rem(margin-right, 0.25rem);
+    }
   }
 }
 

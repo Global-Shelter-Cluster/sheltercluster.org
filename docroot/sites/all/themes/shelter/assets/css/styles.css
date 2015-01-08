@@ -1811,6 +1811,14 @@ header a {
   width: 30px;
   height: 30px;
 }
+#active-responses #legend span {
+  position: relative;
+  top: -10px;
+}
+#active-responses #legend .man-made-disaster-icon {
+  margin-right: 4px;
+  margin-right: 0.25rem;
+}
 
 .page-regions-countries #map {
   position: relative;
