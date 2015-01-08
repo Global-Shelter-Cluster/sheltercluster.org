@@ -66,7 +66,7 @@ header {
 
     a {
       color: #222;
-      text-decoration: underline;
+      @extend .underlined-links;
       @include rem(font-size, 0.85rem);
     }
     &:first-child:after {
