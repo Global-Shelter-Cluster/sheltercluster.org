@@ -18,7 +18,7 @@ function shelter_migrate_node_form($form, &$form_state) {
   );
 
   $form['rss_url'] = array(
-    '#type' => 'textfield',
+    '#type' => 'textarea',
     '#title' => t('RSS Url'),
     '#default_value' => _shelter_migrate_node_rss_url($node->nid),
   );
@@ -44,15 +44,20 @@ function shelter_migrate_node_form_submit($form, &$form_state) {
   }
 
   $node = menu_get_object();
-
   _shelter_migrate_node_rss_url($node->nid, $url);
 
-  dpm(array($node->nid, $url), 'do the import!');
+  require_once 'includes/import_group_documents.inc';
+  drupal_set_message(_shelter_migrate_import_group_documents($node->nid, $url));
 }
 
 /**
+ * Reads/writes the RSS url for the given group nid from/to the database.
  * @param int $nid
- * @param string|null $url If set, stores the URL in the database. Otherwise, retrieves it.
+ *  Node ID for the group.
+ * @param string|null $url
+ *  If set, stores the URL in the database. Otherwise, retrieves it.
+ * @return string|null
+ *  The URL, or NULL if none has been saved for the given nid.
  */
 function _shelter_migrate_node_rss_url($nid, $url = NULL) {
   if ($url) {

@@ -1,5 +1,7 @@
 <?php
 
+require_once 'common.inc';
+
 function _shelter_migrate_import_regions_responses() {
   set_time_limit(300);
 
@@ -21,8 +23,8 @@ function _shelter_migrate_import_regions_responses() {
   // Read regions, then countries, then responses. The menu has this structure.
 
   // Prepare the two terms for the region type
-  $region_type_region = current(taxonomy_get_term_by_name('Region', 'geographic_region_type'))
-  $region_type_country = current(taxonomy_get_term_by_name('Country', 'geographic_region_type'))
+  $region_type_region = current(taxonomy_get_term_by_name('Region', 'geographic_region_type'));
+  $region_type_country = current(taxonomy_get_term_by_name('Country', 'geographic_region_type'));
 
   $regions = _shelter_migrate_dom_children($xpath, null, '//div[@class="menu horizontal menu-horizontal"]/ul/li/ul/li', 'a/span/span[@class="menu-item-text"]');
   if (count($regions) < 4) {
@@ -63,7 +65,7 @@ function _shelter_migrate_import_regions_responses() {
   foreach ($counts as $plural => $data) {
     $counts_text[] = format_plural(
       $data['count'],
-      '@count ' . $data['singular'],
+      '1 ' . $data['singular'],
       '@count ' . $plural
     );
   }
@@ -96,40 +98,4 @@ function _shelter_migrate_create_response($title, $nid_country) {
   $w->field_associated_regions->set(node_load_multiple(array($nid_country)));
   $w->save();
   return $w->nid->value();
-}
-
-/**
- * Looks for children using the provided DOMXPath object and queries.
- * @param DOMXPath $xpath
- * @param DOMNode|null $context
- * @param string $xpath_children
- *  Query to get the children elements (returned as array values)
- * @param string $xpath_label
- *  Query to get the label (returned as array keys)
- * @return array
- */
-function _shelter_migrate_dom_children($xpath, $context, $xpath_children, $xpath_label) {
-  $children = $xpath->query($xpath_children, $context);
-  $ret = array();
-
-  for ($i = 0; $i < $children->length; $i++) {
-    /**
-     * @var DOMElement
-     */
-    $e_child = $children->item($i);
-
-    if ($e_child->nodeType != XML_ELEMENT_NODE) {
-      continue;
-    }
-
-    $labels = $xpath->query($xpath_label, $e_child);
-    if ($labels->length != 1) {
-      throw new Exception('something is wrong!');
-      continue;
-    }
-
-    $ret[trim($labels->item(0)->nodeValue)] = $e_child;
-  }
-
-  return $ret;
 }
