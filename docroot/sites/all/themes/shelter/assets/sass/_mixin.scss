@@ -11,6 +11,7 @@
   padding: 0;
   margin: 0;
   list-style: none;
+  list-style-position: inside;
 }
 
 //Opacity cross-browser
@@ -18,29 +19,6 @@
   opacity: $opacity;
   $opacity-ie: $opacity * 100;
   filter: alpha(opacity=$opacity-ie); //IE8
-}
-
-//Mixin for absolute, fixed or relative position.
-@mixin position($position, $args) {
-  @each $o in top right bottom left {
-    $i: index($args, $o);
-    @if $i and $i + 1 <= length($args) and type-of(nth($args, $i + 1)) == number  {
-          #{$o}: nth($args, $i + 1);
-    }
-  }
-  position: $position;
-}
-
-@mixin absolute($args) {
-  @include position(absolute, $args);
-}
-
-@mixin fixed($args) {
-  @include position(fixed, $args);
-}
-
-@mixin relative($args) {
-  @include position(relative, $args);
 }
 
 //Make a element not selectable
@@ -67,7 +45,7 @@
 
   @each $value in $values {
 
-    @if $value == 0 or $value == auto {
+    @if $value == 0 or type-of($value) != "number" {
       $px : append($px , $value);
       $rem: append($rem, $value);
     }
@@ -78,11 +56,11 @@
 
       @if $unit == "px" {
         $px : append($px,  $value);
-        $rem: append($rem, ($val / $body-font-size + rem));
+        $rem: append($rem, ($val / 16 + rem));
       }
 
       @if $unit == "rem" {
-        $px : append($px,  ($val * $body-font-size + px));
+        $px : append($px,  ($val * 16 + px));
         $rem: append($rem, $value);
       }
     }

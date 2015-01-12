@@ -34,35 +34,32 @@
         </ul>
 
         <form class="search" action="http://www.google.com/search" method="get">
-          <input class="text-field" type="search" placeholder="Search documents" name="q">
-          <input class="submit" type="submit" value="Search">
+          <input class="text-field" type="search" placeholder="Search site" name="q">
+          <input class="submit" type="submit" value="Go">
         </form>
 
       </div>
     </section>
 
-    <nav id="nav-shelter" class="clearfix">
-      <div class="page-margin">
-        <a href="#" id="button-menu-dropdown">Menu</a>
-        <ul class="nav-items">
-          <li class="nav-item"><a href="#">Home</a></li>
-          <li class="nav-item"><a href="#">Current Operations <span class="total">(10)</span></a></li>
-          <li class="nav-item"><a href="#">Documents <span class="total">(8200)</span></a></li>
-          <li class="nav-item"><a href="#">Geographic Aggregators</a></li>
-          <li class="nav-item"><a href="#">Communities of Practice <span class="total">(6)</span></a></li>
-          <li class="nav-item"><a href="#">References <span class="total">(34)</span></a></li>
-          <li class="sub-nav">
-            <ul>
-              <li class="nav-item"><a href="#">Manage your profile</a></li>
-              <li class="nav-item"><a href="#">Disconnect</a></li>
-            </ul>
-          </li>
-        </ul>
+    <div class="page-margin">
+      <div id="nav-master">
+        <nav id="nav-shelter" class="clearfix">
+          <a href="#" id="button-menu-dropdown">Menu</a>
+          <ul class="nav-items">
+            <li class="nav-item"><a href="#">Home</a></li>
+            <li class="nav-item"><a href="#">Current Operations</a></li>
+            <li class="nav-item"><a href="#">Global</a></li>
+            <li class="nav-item"><a href="#">Regions & Countries</a></li>
+            <li class="nav-item"><a href="#">Communities of Practice</a></li>
+            <li class="nav-item"><a href="#">References</a></li>
+          </ul>
+        </nav>
       </div>
-    </nav>
+    </div>
 
     <section id="secondary-nav">
       <div class="page-margin clearfix">
+        <h1>Typhoon Haiyan</h1>
         <ul class="nav-items clearfix">
           <li class="nav-item"><a href="#" class="active">Dashboard</a></li>
           <li class="nav-item"><a href="#">Documents <span class="total">(8200)</span></a></li>
@@ -140,37 +137,12 @@
 
         <div class="main-column">
           <section id="operation-information">
-            <h1>Typhoon Haiyan</h1>
+            <h2><?php print _svg('icons/overview', array('id'=>'bandwidth-selector-icon', 'alt' => 'Bandwidth indication icon')); ?><span>Overview</span></h2>
             <img class="operation-image" src="http://placehold.it/290x150"/>
             <p>Quis enim aut eum diligat quem metuat, aut eum a quo se metui putet? Coluntur tamen simulatione dumtaxat ad tempus. Quod si forte, ut fit plerumque, ceciderunt, tum intellegitur quam fuerint inopes amicorum. Quod Tarquinium dixisse ferunt, tum exsulantem se intellexisse quos fidos amicos habuisset, quos infidos, cum iam neutris gratiam referre posset.</p>
             <p>Orientis vero limes in longum protentus et rectum ab Euphratis fluminis ripis ad usque supercilia porrigitur Nili, laeva Saracenis conterminans gentibus, dextra pelagi fragoribus patens, quam plagam Nicator Seleucus occupatam auxit magnum in modum, cum post Alexandri Macedonis obitum successorio iure teneret regna Persidis, efficaciae inpetrabilis rex, ut indicat cognomentum.</p>
             <p>Tantum autem cuique tribuendum, primum quantum ipse efficere possis, deinde etiam quantum ille quem diligas atque adiuves, sustinere. Non enim neque tu possis, quamvis excellas, omnes tuos ad honores amplissimos perducere, ut Scipio P. Rupilium potuit consulem efficere, fratrem eius L. non potuit. Quod si etiam possis quidvis deferre ad alterum, videndum est tamen, quid ille possit sustinere.</p>
-            <p>Operation started November 8th, 2013, and is on going.</p>
-            <ul id="meta-data">
-              <li class="data-item"><span>Type:</span> Windstorm</li>
-              <li class="data-item"><span>Damage Location:</span> Rural, Peri-Urban, Urban</li>
-              <li class="data-item"><span>Degree of Displacement:</span> Hight</li>
-              <li class="data-item"><span>Emergency Lead Agency</span> IFRC</li>
-            </ul>
           </section>
-        </div>
-
-        <div class="side-column">
-          <section id="operation-group">
-            <h4>Join this Operation Group and</h4>
-            <fieldset id="checkboxgroup">
-              <label><input type="checkbox" selected="selected"/> Receive notifications</label>
-              <label><input type="checkbox" selected="selected"/> Register to this group the mailing list</label>
-              <label><input type="checkbox"/> Register to the "Global Response" mailinglist</label>
-            </fieldset>
-            <div id="button-join-group"><a class="button" href="#">Join</a></div>
-          </section>
-        </div>
-      </div>
-    </div>
-
-    <div class="page-margin clearfix">
-      <div class="main-column">
 
         <section id="featured-documents">
           <ul>
@@ -192,14 +164,14 @@
         </section>
 
         <section id="key-information">
-          <h3>Key Information</h3>
-          <h4>Coordination information</h4>
+          <h2><?php print _svg('icons/key-information', array('class'=>'key-icon', 'alt' => 'Key icon')); ?><span>Key Information</span></h2>
+          <h3>Coordination information</h3>
           <ul class="document-cards clearfix">
             <li class="document-card odd">
-              <div class="image-card"><?php print _svg('icons/book', array('class'=>'document-icon', 'alt' => 'Document icon')); ?></div>
+              <div class="image-card"><?php print _svg('icons/external', array('class'=>'external-link-icon', 'alt' => 'External link icon')); ?></div>
               <div class="information-card">
                 <a href="#">id lobortis leo maximus tristique</a>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc aliquet justo leo, id lobortis leo maximus tristique. Sed non odio eros. Aenean pulvinar sapien quam, a bibendum ante lobortis eu.</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc aliquet justo leo, id lobortis</p>
               </div>
               <div class="information-file">
                 <span class="size-type">[ 250k ] docx</span>
@@ -207,21 +179,21 @@
               </div>
             </li>
             <li class="document-card even">
-              <div class="image-card"><?php print _svg('icons/book', array('class'=>'document-icon', 'alt' => 'Document icon')); ?></div>
+              <div class="image-card"><?php print _svg('icons/external', array('class'=>'external-link-icon', 'alt' => 'External link icon')); ?></div>
               <div class="information-card">
                 <a href="#">id lobortis leo maximus tristique</a>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc aliquet justo leo, id lobortis leo maximus tristique. Sed non odio eros. Aenean pulvinar sapien quam, a bibendum ante lobortis eu.</p>
+                <p>Lorem ipsum dolor sit amet.</p>
               </div>
               <div class="information-file">
                 <span class="size-type">[ 250k ] docx</span>
-                <span class="source">Aenean pulvinar</span>
+                <span class="source">Paul Demers</span>
               </div>
             </li>
             <li class="document-card odd">
-              <div class="image-card"><?php print _svg('icons/book', array('class'=>'document-icon', 'alt' => 'Document icon')); ?></div>
+              <div class="image-card"><?php print _svg('icons/external', array('class'=>'external-link-icon', 'alt' => 'External link icon')); ?></div>
               <div class="information-card">
                 <a href="#">id lobortis leo maximus tristique</a>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc aliquet justo leo, id lobortis leo maximus tristique. Sed non odio eros. Aenean pulvinar sapien quam, a bibendum ante lobortis eu.</p>
+                <p>Consectetur adipiscing elit. Nunc aliquet justo leo, id lobortis leo maximus tristique. Sed non odio eros. A bibendum ante lobortis eu.</p>
               </div>
               <div class="information-file">
                 <span class="size-type">[ 250k ] docx</span>
@@ -229,7 +201,7 @@
               </div>
             </li>
             <li class="document-card even">
-              <div class="image-card"><?php print _svg('icons/book', array('class'=>'document-icon', 'alt' => 'Document icon')); ?></div>
+              <div class="image-card"><?php print _svg('icons/external', array('class'=>'external-link-icon', 'alt' => 'External link icon')); ?></div>
               <div class="information-card">
                 <a href="#">id lobortis leo maximus tristique</a>
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc aliquet justo leo, id lobortis leo maximus tristique. Sed non odio eros. Aenean pulvinar sapien quam, a bibendum ante lobortis eu.</p>
@@ -239,7 +211,7 @@
                 <span class="source">Aenean pulvinar</span>
               </div>
             </li>
-            <li class="document-card odd">
+            <li class="document-card odd local-file">
               <div class="image-card"><?php print _svg('icons/file', array('class'=>'file-icon', 'alt' => 'File icon')); ?></div>
               <div class="information-card">
                 <a href="#">id lobortis leo maximus tristique</a>
@@ -252,10 +224,10 @@
             </li>
           </ul>
 
-          <h4>Cluster Guidance</h4>
+          <h3>Cluster Guidance</h3>
           <ul class="document-cards clearfix">
             <li class="document-card odd">
-              <div class="image-card"><?php print _svg('icons/book', array('class'=>'document-icon', 'alt' => 'Document icon')); ?></div>
+              <div class="image-card"><?php print _svg('icons/external', array('class'=>'external-link-icon', 'alt' => 'External link icon')); ?></div>
               <div class="information-card">
                 <a href="#">id lobortis leo maximus tristique</a>
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc aliquet justo leo, id lobortis leo maximus tristique. Sed non odio eros. Aenean pulvinar sapien quam, a bibendum ante lobortis eu.</p>
@@ -265,7 +237,7 @@
                 <span class="source">Aenean pulvinar</span>
               </div>
             </li>
-            <li class="document-card even">
+            <li class="document-card even local-file">
               <div class="image-card"><?php print _svg('icons/file', array('class'=>'file-icon', 'alt' => 'Document icon')); ?></div>
               <div class="information-card">
                 <a href="#">id lobortis leo maximus tristique</a>
@@ -277,7 +249,7 @@
               </div>
             </li>
             <li class="document-card odd">
-              <div class="image-card"><?php print _svg('icons/book', array('class'=>'document-icon', 'alt' => 'Document icon')); ?></div>
+              <div class="image-card"><?php print _svg('icons/external', array('class'=>'external-link-icon', 'alt' => 'External link icon')); ?></div>
               <div class="information-card">
                 <a href="#">id lobortis leo maximus tristique</a>
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc aliquet justo leo, id lobortis leo maximus tristique. Sed non odio eros. Aenean pulvinar sapien quam, a bibendum ante lobortis eu.</p>
@@ -288,7 +260,7 @@
               </div>
             </li>
             <li class="document-card even">
-              <div class="image-card"><?php print _svg('icons/book', array('class'=>'document-icon', 'alt' => 'Document icon')); ?></div>
+              <div class="image-card"><?php print _svg('icons/external', array('class'=>'external-link-icon', 'alt' => 'External link icon')); ?></div>
               <div class="information-card">
                 <a href="#">id lobortis leo maximus tristique</a>
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc aliquet justo leo, id lobortis leo maximus tristique. Sed non odio eros. Aenean pulvinar sapien quam, a bibendum ante lobortis eu.</p>
@@ -300,10 +272,10 @@
             </li>
           </ul>
 
-          <h4>Other Sources of Information</h4>
+          <h3>Other Sources of Information</h3>
           <ul class="document-cards clearfix">
             <li class="document-card odd">
-              <div class="image-card"><?php print _svg('icons/book', array('class'=>'document-icon', 'alt' => 'Document icon')); ?></div>
+              <div class="image-card"><?php print _svg('icons/external', array('class'=>'external-link-icon', 'alt' => 'External link icon')); ?></div>
               <div class="information-card">
                 <a href="#">id lobortis leo maximus tristique</a>
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc aliquet justo leo, id lobortis leo maximus tristique. Sed non odio eros. Aenean pulvinar sapien quam, a bibendum ante lobortis eu.</p>
@@ -314,7 +286,7 @@
               </div>
             </li>
             <li class="document-card even">
-              <div class="image-card"><?php print _svg('icons/book', array('class'=>'document-icon', 'alt' => 'Document icon')); ?></div>
+              <div class="image-card"><?php print _svg('icons/external', array('class'=>'external-link-icon', 'alt' => 'External link icon')); ?></div>
               <div class="information-card">
                 <a href="#">id lobortis leo maximus tristique</a>
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc aliquet justo leo, id lobortis leo maximus tristique. Sed non odio eros. Aenean pulvinar sapien quam, a bibendum ante lobortis eu.</p>
@@ -326,9 +298,9 @@
             </li>
           </ul>
 
-          <h4>Recent Documents</h4>
+          <h2>Recent Documents</h2>
           <ul class="document-cards clearfix">
-            <li class="document-card odd">
+            <li class="document-card odd local-file">
               <div class="image-card"><?php print _svg('icons/file', array('class'=>'file-icon', 'alt' => 'File icon')); ?></div>
               <div class="information-card">
                 <a href="#">id lobortis leo maximus tristique</a>
@@ -339,7 +311,7 @@
                 <span class="source">Aenean pulvinar</span>
               </div>
             </li>
-            <li class="document-card even">
+            <li class="document-card even local-file">
               <div class="image-card"><?php print _svg('icons/file', array('class'=>'file-icon', 'alt' => 'File icon')); ?></div>
               <div class="information-card">
                 <a href="#">id lobortis leo maximus tristique</a>
@@ -350,7 +322,7 @@
                 <span class="source">Aenean pulvinar</span>
               </div>
             </li>
-            <li class="document-card odd">
+            <li class="document-card odd local-file">
               <div class="image-card"><?php print _svg('icons/file', array('class'=>'file-icon', 'alt' => 'File icon')); ?></div>
               <div class="information-card">
                 <a href="#">id lobortis leo maximus tristique</a>
@@ -365,26 +337,42 @@
 
         </section>
 
-        <div id="content-rendered">
-          <?php print render($page['content']); ?>
-        </div>
-
       </div>
       <div class="side-column">
 
+        <section id="join-group">
+          <h4>Join this Operation Group and</h4>
+          <fieldset>
+            <label>
+              <input type="checkbox"/>
+              <span>Receive notifications</span>
+            </label>
+            <label>
+              <input type="checkbox"/>
+              <span>Register to this group the mailing list</span>
+            </label>
+            <label>
+              <input type="checkbox"/>
+              <span>Register to the "Global Response" mailinglist</span>
+            </label>
+          </fieldset>
+          <div id="button-join-group"><a href="#">Join</a></div>
+        </section>
+
         <section id="shelter-calendar">
-          <div id="calendar-box">
-            <div id="calendar-date">
-              <?php print _svg('icons/pin', array('id'=>'calendar-pin', 'alt' => 'Pin icon')); ?>Nov. 24th 2014
+          <div id="box-calendar">
+            <?php print _svg('icons/pin', array('id'=>'calendar-pin', 'alt' => 'Pin icon')); ?>
+            <div id="date-calendar">Nov. 24<sup>th</sup> 2014</div>
+            <div class="information-card">
+              Upcoming event to the <a href="#">agenda</a>:<br/>
+              <a class="event" href="#">Shelter Technical Meeting 2014</a>
             </div>
-            <div id="calendar-event">
-              <span class="upcoming" href="#">Upcoming event to the <a href="#">agenda</a>:</span>
-              <a class="event" href="#">Shelter Technical Meeting 2014</a></div>
           </div>
           <a class="see-all" href="#">All calendar events</a>
         </section>
 
         <section id="shelter-discussions">
+          <?php print _svg('icons/discussion', array('id'=>'discussion-icon', 'alt' => 'discussion icon')); ?>
           <h3>Discussions</h3>
           <ul id="discussions-items">
             <li class="discussions-item">
@@ -406,7 +394,7 @@
         </section>
 
         <section id="shelter-coordination-team">
-          <h3>Coordination Team</h3>
+          <h3><?php print _svg('icons/coordination-team', array('id'=>'coordination-team-icon', 'alt' => 'Coordination team icon')); ?><span>Coordination team</span></h3>
           <h4>National Team</h4>
           <ul id="coordination-items" class="clearfix">
             <li class="coordination-item">
@@ -519,21 +507,42 @@
           </ul>
         </section>
 
+        <section id="operation-data">
+          <h4>Operation started November 8th, 2013, and is on going.</h4>
+          <ul id="meta-data">
+            <li class="data-item"><span>Type:</span> Windstorm</li>
+            <li class="data-item"><span>Damage Location:</span> Rural, Peri-Urban, Urban</li>
+            <li class="data-item"><span>Degree of Displacement:</span> Hight</li>
+            <li class="data-item"><span>Emergency Lead Agency</span> IFRC</li>
+          </ul>
+        </section>
+
+      </div>
+      </div>
+    </div>
+
+    <div class="page-margin clearfix">
+      <div class="main-column">
+
+        <div id="content-rendered">
+          <?php print render($page['content']); ?>
+        </div>
+
       </div>
     </div>
   </div>
 
   <footer>
-    <div class="page-margin">
+    <div class="page-margin clearfix">
       <form class="search" action="http://www.google.com/search" method="get">
-        <input class="text-field" type="search" placeholder="Search documents" name="q">
-        <input class="submit" type="submit" value="Search">
+        <input class="text-field" type="search" placeholder="Search site" name="q">
+        <input class="submit" type="submit" value="Go">
       </form>
     </div>
 
     <div class="page-margin">
       <section id="active-clusters-list">
-        <h3>With 24 <a href='#'>active shelter clusters</a> and cluster like mechanism</h3>
+        <h3>With 24 <a href='#'>active responses clusters</a> and cluster like mechanism.</h3>
         <ul class="clusters">
           <li class="cluster"><a href="#">Myanmar Rakhine and Kachin Emergency Response</a></li>
           <li class="cluster"><a href="#">Philippines Bohol Earthquake</a></li>
@@ -542,26 +551,8 @@
         <a class="complete-list" href="#">[...] more</a>
 
       </section><section id="regions-list">
-        <h3>Shelter Cluster is present in over <a href="#">34 countries</a></h3>
-        <ul class="regions">
-          <li class="region"><a href="#" class="region-name">Africa</a>
-            <ul class="countries">
-              <li class="country"><a href="#">Central African Republic</a></li>
-              <li class="country"><a href="#">Chad</a></li>
-            </ul>
-          </li><li class="region"><a href="#" class="region-name" >Americas</a>
-            <ul class="countries">
-              <li class="country"><a href="#">Colombia</a></li>
-              <li class="country"><a href="#">Haiti</a></li>
-            </ul>
-          </li><li class="region"><a href="#" class="region-name">MENA</a>
-            <ul class="countries">
-              <li class="country"><a href="#">Iraq</a></li>
-              <li class="country"><a href="#">Palestine</a></li>
-              <li class="country"><a href="#">Yemen</a></li>
-            </ul>
-          </li>
-        </ul>
+        <h3>Shelter Cluster is present in over <a href="#">34 regions</a>.</h3>
+        <?php print render($page['footer']['menu_regions']); ?>
       </section>
 
       <section id="general-information">

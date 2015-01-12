@@ -1,71 +1,102 @@
 /* _document-card.scss */
 
-#key-information {
-
-}
-
 .document-cards {
   @include reset-list;
-  @include rem(margin,0 0 2rem 0);
+  @include rem(margin,1.5rem 0 2rem 0.5rem);
 
   .document-card {
+    position: relative;
     float: left;
     width: 100%;
-    margin: 0 2% 4% 0;
-    background: lighten($shelter-light-blue,10%);
-    color: lighten($shelter-dark-blue,10%);
-    border: 1px solid $shelter-dark-blue;
-    border: 1px solid lighten($shelter-grey,50%);
+    margin: 0 6% 3% 0;
+    color: darken($shelter-grey,10%);
+    background: rgb(208, 205, 206);
     -webkit-background-clip: padding-box; /* for Safari */
     background-clip: padding-box; /* for IE9+, Firefox 4+, Opera, Chrome */
-    @include border-radius(0.1875rem);
-    @include box-shadow(rgba(0,0,0,0.09) 3px 3px 4px);
-    @include rem(padding, 0.5rem 0 0 0);
+    &.local-file {
+      .information-card a {
+        background-color: $shelter-dark-blue;
+      }
+      .image-card {
+        @include rem(padding, 0.4375rem 0.3125rem 0px 0.625rem);
+        height: 42px;
+
+        svg {
+          fill: $shelter-dark-blue;
+          width: 30px;
+          height: 39px;
+        }
+      }
+    }
+
     @include breakpoint(700px) {
-      width: 49%;
+      width: 47%;
     }
 
     &.even {
       margin-right: 0;
     }
     .image-card {
-      float: left;
-      width: 60px;
-      padding: 0 10px 0 10px;
+      position: absolute;
+      top: -16px;
+      left: -16px;
+      background: rgb(255,255,255);
+      pointer-events: none;
+      @include rem(padding, 7px 3px 0px 10px );
+      @include box-sizing(initial);
 
       svg {
-        fill: lighten($shelter-grey,40%);
-        width: 45px;
-        height: 45px;
+        fill: $shelter-grey;
+        width: 32px;
+        height: 39px;
       }
     }
     .information-card {
       display: table; //to make the div height 100%
-      @include rem(padding, 0 0.5rem 0 0.5rem);
+      width: 100%;
 
       a {
-        color: darken($shelter-grey,20%);
+        display: table;
+        width: 100%;
+        background-color: $shelter-grey;
+        color: rgb(255,255,255);
+        text-transform: uppercase;
+        text-align: center;
+        text-decoration: none;
+        font-weight: bold;
+        text-indent: 34px;
+        @include transition(all 0.3s ease);
+        @include rem(padding, 0.375rem 0 0.375rem 0);
+        @include rem(font-size, 0.75rem);
         &:hover,
         &:active {
           text-decoration: none;
+          background-color: $shelter-red;
         }
       }
       p {
-        @include rem(margin, 0.5rem 0);
-        @include rem(font-size, 0.85rem);
+        @include rem(margin, 0.5rem 0.5rem 0.5rem 1.5rem);
+        @include rem(font-size, 0.8125rem);
       }
     }
     .information-file {
       float: left;
       width: 100%;
-      background-color: $shelter-dark-blue;
-      color: rgb(255,255,255);
-      border-top: 1px solid $shelter-red;
-      @include rem(font-size, 0.9rem);
-      @include rem(padding, 0.5rem);
-      @include border-bottom-radius(0.15rem);
+      color: $shelter-grey;
+      border-top: 1px dotted $shelter-grey;
+      @include rem(font-size, 0.75rem);
+      @include rem(padding, 0.3125rem 0.5rem);
       .size-type {
         float: left;
+        a {
+          color: $shelter-grey;
+          text-transform: uppercase;
+          font-weight: bold;
+          &:hover,
+          &:active {
+            text-decoration: none;
+          }
+        }
       }
       .source {
         float: right;
@@ -73,5 +104,22 @@
     }
   }
 }
+
+.browse-all-documents {
+  text-transform: uppercase;
+  font-weight: bold;
+  color: $shelter-grey;
+  display: block;
+  @include rem(margin, 0 0 1rem 0);
+  @include rem(font-size, 0.75rem);
+  @include rem(padding, 0 0 0 0.5rem);
+
+  &:hover,
+  &:active {
+    text-decoration: none;
+  }
+}
+
+
 
 

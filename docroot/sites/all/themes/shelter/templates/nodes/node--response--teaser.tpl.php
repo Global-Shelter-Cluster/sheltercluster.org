@@ -1,0 +1,1 @@
+<?php print l($node->title, 'node/'.$node->nid); ?>

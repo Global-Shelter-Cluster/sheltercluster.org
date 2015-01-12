@@ -14,21 +14,21 @@ function cluster_og_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'additional_settings__active_tab_geographic_region';
-  $strongarm->value = 'edit-menu';
+  $strongarm->value = 'edit-workflow';
   $export['additional_settings__active_tab_geographic_region'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'additional_settings__active_tab_hub';
-  $strongarm->value = 'edit-display';
+  $strongarm->value = 'edit-workflow';
   $export['additional_settings__active_tab_hub'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'additional_settings__active_tab_response';
-  $strongarm->value = 'edit-display';
+  $strongarm->value = 'edit-workflow';
   $export['additional_settings__active_tab_response'] = $strongarm;
 
   $strongarm = new stdClass();
@@ -42,7 +42,7 @@ function cluster_og_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'additional_settings__active_tab_working_group';
-  $strongarm->value = 'edit-display';
+  $strongarm->value = 'edit-workflow';
   $export['additional_settings__active_tab_working_group'] = $strongarm;
 
   $strongarm = new stdClass();
@@ -603,7 +603,10 @@ function cluster_og_strongarm() {
     'extra_fields' => array(
       'form' => array(
         'path' => array(
-          'weight' => '30',
+          'weight' => '5',
+        ),
+        'language' => array(
+          'weight' => '6',
         ),
       ),
       'display' => array(),
@@ -621,6 +624,9 @@ function cluster_og_strongarm() {
       'form' => array(
         'path' => array(
           'weight' => '30',
+        ),
+        'language' => array(
+          'weight' => '5',
         ),
       ),
       'display' => array(),
@@ -675,35 +681,35 @@ function cluster_og_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'language_content_type_geographic_region';
-  $strongarm->value = '0';
+  $strongarm->value = '4';
   $export['language_content_type_geographic_region'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'language_content_type_hub';
-  $strongarm->value = '0';
+  $strongarm->value = '4';
   $export['language_content_type_hub'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'language_content_type_response';
-  $strongarm->value = '0';
+  $strongarm->value = '4';
   $export['language_content_type_response'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'language_content_type_strategic_advisory';
-  $strongarm->value = '0';
+  $strongarm->value = '4';
   $export['language_content_type_strategic_advisory'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'language_content_type_working_group';
-  $strongarm->value = '0';
+  $strongarm->value = '4';
   $export['language_content_type_working_group'] = $strongarm;
 
   $strongarm = new stdClass();

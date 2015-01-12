@@ -1,3 +1,10 @@
+<?php
+/**
+ * @file
+ * Base page template.
+ */
+?>
+
 <div id="page">
 
   <header>
@@ -13,10 +20,10 @@
           </ul>
         </div>
         <div id="bandwidth-selector">
-          <?php print _svg('icons/signal', array('id'=>'bandwidth-selector-icon', 'alt' => 'Bandwidth indication icon')); ?>
+          <?php print _svg('icons/signal', array('id' => 'bandwidth-selector-icon', 'alt' => 'Bandwidth indication icon')); ?>
           <a href="" class="active">Low bandwidth environment</a>
           <span>/</span>
-          <a href="">Swicth to high</a>
+          <a href="">Switch to high</a>
         </div>
       </div>
     </section>
@@ -25,52 +32,61 @@
       <div class="page-margin clearfix">
 
         <a id="logo-shelter-cluster" href="http://sheltercluster.org">
-          <?php print _svg('logo-global-shelter-cluster', array('id'=>'shelter-cluster', 'alt' => 'Global Shelter Cluster - ShelterCluster.org - Coordinating Humanitarian Shelter')); ?>
+          <?php print _svg('logo-global-shelter-cluster', array('id' => 'shelter-cluster', 'alt' => 'Global Shelter Cluster - ShelterCluster.org - Coordinating Humanitarian Shelter')); ?>
         </a>
 
-        <?php print render($user_login); ?>
-        <?php print render($user_menu); ?>
+        <div id="user-login-container" class="clearfix">
+          <?php if (isset($user_login)): ?>
+            <?php print render($user_login); ?>
+          <?php endif; ?>
+        </div>
+        <div id="user-profile-container" class="clearfix">
+          <?php print render($user_menu); ?>
+        </div>
 
-        <form class="search" action="http://www.google.com/search" method="get">
-          <input class="text-field" type="search" placeholder="Search documents" name="q">
-          <input class="submit" type="submit" value="Search">
-        </form>
+        <?php print render($search_form); ?>
 
       </div>
     </section>
 
     <div class="page-margin clearfix">
-      <?php if ($messages) { print $messages; } ?>
+      <?php if ($messages): ?>
+        <?php print $messages; ?>
+      <?php endif; ?>
     </div>
 
-    <nav id="nav-shelter" class="clearfix">
-      <div class="page-margin">
-        <a href="#" id="button-menu-dropdown">Menu</a>
-        <ul class="nav-items">
-          <li class="nav-item"><a href="">Home</a></li>
-          <li class="nav-item"><a href="">Current Operations <span class="total">(10)</span></a></li>
-          <li class="nav-item"><a href="">Documents <span class="total">(8200)</span></a></li>
-          <li class="nav-item"><a href="">Geographic Aggregators</a></li>
-          <li class="nav-item"><a href="">Communities of Practice <span class="total">(6)</span></a></li>
-          <li class="nav-item"><a href="">References <span class="total">(34)</span></a></li>
-          <li class="sub-nav">
-            <ul>
-              <li class="nav-item"><a href="">Manage your profile</a></li>
-              <li class="nav-item"><a href="">Disconnect</a></li>
-            </ul>
-          </li>
-        </ul>
+    <div class="page-margin">
+      <div id="nav-master">
+        <nav id="nav-shelter" class="clearfix">
+          <a href="#" id="button-menu-dropdown">Menu</a>
+          <div class="list-container">
+            <?php print render($main_nav); ?>
+          </div>
+        </nav>
       </div>
-    </nav>
+    </div>
+    <?php if($hot_responses): ?>
+      <div class="page-margin">
+        <?php print render($hot_responses); ?>
+      </div>
+    <?php endif; ?>
 
-    <section id="operation-title">
-      <?php if (isset($contextual_navigation)): ?>
-        <?php print render($contextual_navigation); ?>
-      <?php endif; ?>
-      <h1><?php print $title; ?></h1>
-    </section>
+    <?php if (!$is_front): ?>
+      <section id="operation-title" class="page-margin">
+        <?php if (isset($contextual_navigation)): ?>
+          <?php print render($contextual_navigation); ?>
+        <?php endif; ?>
+        <h1><?php print $title; ?></h1>
+      </section>
+    <?php endif; ?>
 
-    <?php if (isset($dashboard_menu)): ?>
+    <?php if ($local_tasks): ?>
+      <div class="tabs">
+        <?php print render($local_tasks); ?>
+      </div>
+    <?php endif; ?>
+
+    <?php if ($dashboard_menu): ?>
     <section id="secondary-nav">
       <div class="page-margin clearfix">
         <?php print render($dashboard_menu); ?>
@@ -79,53 +95,29 @@
     <?php endif; ?>
   </header>
 
-  <?php print render($page['content']); ?>
+  <div class="page-margin clearfix">
+    <?php print render($page['content']); ?>
+  </div>
 
   <footer>
-    <div class="page-margin clearfix">
-      <form class="search" action="http://www.google.com/search" method="get">
-        <input class="text-field" type="search" placeholder="Search documents" name="q">
-        <input class="submit" type="submit" value="Search">
-      </form>
-    </div>
 
-    <div class="page-margin">
+    <div class="page-margin inside-footer">
+
+      <?php print render($search_form); ?>
+
       <section id="active-clusters-list">
-        <h3>With 24 <a href='#'>active shelter clusters</a> and cluster like mechanism</h3>
-        <ul class="clusters">
-          <li class="cluster"><a href="#">Myanmar Rakhine and Kachin Emergency Response</a></li>
-          <li class="cluster"><a href="#">Philippines Bohol Earthquake</a></li>
-          <li class="cluster"><a href="#">Solomon Islands Floods 2014</a></li>
-        </ul>
-        <a class="complete-list" href="#">[...] more</a>
+        <h3>Hot responses</h3>
+        <?php print render($page['footer']['hot_responses']); ?>
+      </section>
 
-      </section><section id="regions-list">
-        <h3>Shelter Cluster is present in over <a href="#">34 countries</a></h3>
+      <section id="regions-list">
+        <h3>Shelter Cluster is present in many countries</a></h3>
         <?php print render($page['footer']['menu_regions']); ?>
       </section>
 
       <section id="general-information">
         <h3>General Information</h3>
-        <ul class="links">
-          <li class="link"><a href="#">About this site</a></li>
-          <li class="link"><a href="#">Contact information</a></li>
-          <li class="link"><a href="#">Twitter account</a></li>
-        </ul><ul class="links">
-          <li class="link"><a href="#">Support Team</a></li>
-          <li class="link"><a href="#">Partnership</a></li>
-        </ul><ul class="links">
-          <li class="link"><a href="#">Other</a></li>
-          <li class="link"><a href="#">More information</a></li>
-          <li class="link"><a href="#">Twitter account</a></li>
-        </ul>
-      </section>
-
-      <section id="partners-list">
-        <ul class="partners clearfix">
-          <li class="partner"><a href="#">ECHO</a></li>
-          <li class="partner"><a href="#">IFRC</a></li>
-          <li class="partner"><a href="#">UNHCR</a></li>
-        </ul>
+          <?php print render($page['footer']['general_information']); ?>
       </section>
 
     </div>

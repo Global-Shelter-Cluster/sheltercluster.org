@@ -8,7 +8,7 @@ include_once 'cluster_docs.features.inc';
 include_once 'cluster_docs.admin.inc';
 include_once 'cluster_docs.pathauto.inc';
 
-const CLUSTER_DOCS_PER_PAGE = 5;
+const CLUSTER_DOCS_PER_PAGE = 6;
 
 /**
  *  Implements hook_menu().
@@ -20,15 +20,43 @@ function cluster_docs_menu() {
     'page arguments' => array(1),
     'access callback' => 'og_is_group',
     'access arguments' => array(0, 1),
+    'title callback' => '_cluster_docs_title_callback',
+    'title arguments' => array(1),
     'type' => MENU_CALLBACK,
   );
   $items['references'] = array(
     'title' => 'References',
+    'menu_name' => 'main-menu',
     'page callback' => 'cluster_docs_reference',
     'access callback' => TRUE,
-    'type' => MENU_CALLBACK,
   );
   return $items;
+}
+
+/**
+ * Menu title callback.
+ */
+function _cluster_docs_title_callback($nid) {
+  global $language;
+  $title = t('Documents');
+  if (! is_numeric($nid)) {
+    return $title;
+  }
+
+  try {
+    // @TODO manage multilinigual loading of entities.
+    $wrapper = entity_metadata_wrapper('node', node_load($nid), array('langcode' => LANGUAGE_NONE));
+    return $wrapper->label();
+  }
+  catch (EntityMetadataWrapperException $exc) {
+    watchdog(
+      'cluster_docs',
+      'See '  . __FUNCTION__ . '() ' .  $exc->getTraceAsString(),
+       NULL,
+       WATCHDOG_ERROR
+    );
+  }
+  return $title;
 }
 
 /**
@@ -121,12 +149,12 @@ function cluster_docs_get_grouped_key_docs($gid) {
   $categories = array_merge($basic_tag_fields, $advanced_tag_fields);
 
   $grouped_docs = array();
-  // @TODO Expose the category list to an admin form.
   foreach ($categories as $category_field) {
     $query = new EntityFieldQuery();
     $res = $query->entityCondition('entity_type', 'node')
       ->entityCondition('bundle', 'document')
       ->fieldCondition('og_group_ref', 'target_id', $gid)
+      ->fieldCondition('field_featured', 'value', 1, '!=')
       ->fieldCondition('field_key_document', 'value', 1)
       ->fieldCondition($category_field, 'tid', 'NULL', '!=')
       ->propertyCondition('status', NODE_PUBLISHED)
@@ -156,21 +184,30 @@ function cluster_docs_get_grouped_key_docs($gid) {
  */
 function cluster_docs_prepare_card_data($nids) {
   $docs = array();
-  $properties = array('title', 'link', 'is_link', 'is_file', 'description', 'filesize', 'file_extension', 'source',);
-  
+  $properties = array('title', 'link', 'link_url', 'is_link', 'is_file', 'is_file_class', 'description', 'filesize',
+    'file_extension', 'is_image', 'image_uri', 'has_preview', 'preview_uri', 'source',);
+
   // @TODO language negocitation.
   global $language;
   $langcode = $language->language;
-  
   foreach (node_load_multiple($nids) as $node) {
     // Set default values.
     $doc = array_fill_keys($properties, FALSE);
     try {
+      
       // @TODO insert language negociation in info array.
       $wrapper = entity_metadata_wrapper('node', $node);
       $doc['title'] = $wrapper->label();
-      $doc['link'] = l($doc['title'], $wrapper->url->value());
-      
+
+      if ($file = $wrapper->field_file->value()) {
+        $url = file_create_url($file['uri']);
+      }
+      else {
+        $url = $wrapper->field_link->url->value();
+      }
+      $doc['link_url'] = $url;
+      $doc['link'] = l($doc['title'], $url, array('attributes' => array('target' => '_blank')));
+
       // Prepare the description.
       $desc = '';
       if ($body = $wrapper->body->value()) {
@@ -195,8 +232,31 @@ function cluster_docs_prepare_card_data($nids) {
       // Test if this document is a file field.
       if ($file = $wrapper->field_file->value()) {
         $doc['is_file'] = TRUE;
-        $doc['file_extension'] = pathinfo($file['filename'], PATHINFO_EXTENSION);
+        $doc['is_file_class'] = '';
+        if ($doc['is_file']) {
+          $doc['is_file_class'] = 'local-file';
+        }
+
+        $file_extension = pathinfo($file['filename'], PATHINFO_EXTENSION);
+        $doc['file_extension'] = l($file_extension, $url, array('attributes' => array('target' => '_blank')));
+
+        // Test if the attached file is an image.
+        // @TODO the image file will probably not be the actual document file.
+        switch ($file_extension) {
+          case 'png':
+          case 'jpg':
+          case 'gif':
+            $doc['is_image'] = TRUE;
+            $doc['image_uri'] = $file['uri'];
+            break;
+        }
         $doc['filesize'] = number_format($file['filesize'] / 1048576, 2);
+      }
+
+      // Test if this document has a preview image .
+      if ($file = $wrapper->field_preview->value()) {
+        $doc['has_preview'] = TRUE;
+        $doc['preview_uri'] = $file['uri'];
       }
 
       // Test if this document is a link field.
@@ -210,6 +270,7 @@ function cluster_docs_prepare_card_data($nids) {
       }
 
       $docs[] = $doc;
+      
     }
     catch (EntityMetadataWrapperException $exc) {
       watchdog(
@@ -221,6 +282,27 @@ function cluster_docs_prepare_card_data($nids) {
     }
   }
   return $docs;
+}
+
+/**
+ * Implements hook_permission().
+ */
+function cluster_docs_permission() {
+  return array(
+    'view document full node' => array(
+      'title' => t('View documents full view mode.'),
+      'description' => t('Access document nodes in full page view mode.'),
+    ),
+  );
+}
+
+/**
+ * Implements hook_node_view().
+ */
+function cluster_docs_node_view($node, $view_mode) {
+  if ($node->type == 'document' && $view_mode == 'full' && ! user_access('view document full node')) {
+    drupal_access_denied();
+  }
 }
 
 /**
@@ -236,8 +318,24 @@ function cluster_docs_theme() {
       'variables' => array(
         'heading' => FALSE,
         'docs' => array(),
+        'all_documents_link' => FALSE,
       ),
-      'template' => 'theme/cluster_docs_cards_list'
+      'template' => 'theme/cluster-docs-cards-list'
+    ),
+    'cluster_docs_featured_documents' => array(
+      'variables' => array(
+        'docs' => array(),
+      ),
+      'template' => 'theme/cluster-docs-featured-documents'
+    ),
+    // @TODO more general for any link.
+    'cluster_docs_all_docs_link' => array(
+      'variables' => array(
+        'path' => FALSE,
+        'text' => t('Browse all documents'),
+        'class' => 'browse-all-documents',
+      ),
+      'file' => 'theme/cluster_docs.theme.inc',
     ),
   );
 }

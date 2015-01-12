@@ -15,7 +15,7 @@ function cluster_docs_field_default_field_instances() {
     'bundle' => 'document',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Only first 100 characters of the description will be displayed in the document lists.',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -85,7 +85,9 @@ function cluster_docs_field_default_field_instances() {
     'widget' => array(
       'active' => 1,
       'module' => 'options',
-      'settings' => array(),
+      'settings' => array(
+        'apply_chosen' => '',
+      ),
       'type' => 'options_select',
       'weight' => 35,
     ),
@@ -123,7 +125,9 @@ function cluster_docs_field_default_field_instances() {
     'widget' => array(
       'active' => 1,
       'module' => 'options',
-      'settings' => array(),
+      'settings' => array(
+        'apply_chosen' => '',
+      ),
       'type' => 'options_select',
       'weight' => 33,
     ),
@@ -161,9 +165,11 @@ function cluster_docs_field_default_field_instances() {
     'widget' => array(
       'active' => 1,
       'module' => 'options',
-      'settings' => array(),
+      'settings' => array(
+        'apply_chosen' => '',
+      ),
       'type' => 'options_select',
-      'weight' => 13,
+      'weight' => 37,
     ),
   );
 
@@ -221,7 +227,7 @@ function cluster_docs_field_default_field_instances() {
       ),
     ),
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Is this a features document ?',
     'display' => array(
       'default' => array(
         'label' => 'hidden',
@@ -252,7 +258,7 @@ function cluster_docs_field_default_field_instances() {
         'display_label' => 1,
       ),
       'type' => 'options_onoff',
-      'weight' => 7,
+      'weight' => 5,
     ),
   );
 
@@ -295,7 +301,7 @@ function cluster_docs_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'file_generic',
-      'weight' => 5,
+      'weight' => 6,
     ),
   );
 
@@ -331,7 +337,9 @@ function cluster_docs_field_default_field_instances() {
     'widget' => array(
       'active' => 1,
       'module' => 'options',
-      'settings' => array(),
+      'settings' => array(
+        'apply_chosen' => '',
+      ),
       'type' => 'options_select',
       'weight' => 34,
     ),
@@ -369,9 +377,11 @@ function cluster_docs_field_default_field_instances() {
     'widget' => array(
       'active' => 1,
       'module' => 'options',
-      'settings' => array(),
+      'settings' => array(
+        'apply_chosen' => '',
+      ),
       'type' => 'options_select',
-      'weight' => 12,
+      'weight' => 36,
     ),
   );
 
@@ -407,9 +417,11 @@ function cluster_docs_field_default_field_instances() {
     'widget' => array(
       'active' => 1,
       'module' => 'options',
-      'settings' => array(),
+      'settings' => array(
+        'apply_chosen' => '',
+      ),
       'type' => 'options_select',
-      'weight' => 15,
+      'weight' => 39,
     ),
   );
 
@@ -445,9 +457,11 @@ function cluster_docs_field_default_field_instances() {
     'widget' => array(
       'active' => 1,
       'module' => 'options',
-      'settings' => array(),
+      'settings' => array(
+        'apply_chosen' => '',
+      ),
       'type' => 'options_select',
-      'weight' => 16,
+      'weight' => 40,
     ),
   );
 
@@ -527,9 +541,11 @@ function cluster_docs_field_default_field_instances() {
     'widget' => array(
       'active' => 1,
       'module' => 'options',
-      'settings' => array(),
+      'settings' => array(
+        'apply_chosen' => '',
+      ),
       'type' => 'options_select',
-      'weight' => 19,
+      'weight' => 43,
     ),
   );
 
@@ -631,7 +647,7 @@ function cluster_docs_field_default_field_instances() {
       'module' => 'link',
       'settings' => array(),
       'type' => 'link_field',
-      'weight' => 6,
+      'weight' => 7,
     ),
   );
 
@@ -667,9 +683,11 @@ function cluster_docs_field_default_field_instances() {
     'widget' => array(
       'active' => 1,
       'module' => 'options',
-      'settings' => array(),
+      'settings' => array(
+        'apply_chosen' => '',
+      ),
       'type' => 'options_select',
-      'weight' => 18,
+      'weight' => 42,
     ),
   );
 
@@ -810,9 +828,11 @@ function cluster_docs_field_default_field_instances() {
     'widget' => array(
       'active' => 1,
       'module' => 'options',
-      'settings' => array(),
+      'settings' => array(
+        'apply_chosen' => '',
+      ),
       'type' => 'options_select',
-      'weight' => 14,
+      'weight' => 38,
     ),
   );
 
@@ -848,9 +868,11 @@ function cluster_docs_field_default_field_instances() {
     'widget' => array(
       'active' => 1,
       'module' => 'options',
-      'settings' => array(),
+      'settings' => array(
+        'apply_chosen' => '',
+      ),
       'type' => 'options_select',
-      'weight' => 17,
+      'weight' => 41,
     ),
   );
 
@@ -886,7 +908,9 @@ function cluster_docs_field_default_field_instances() {
     'widget' => array(
       'active' => 1,
       'module' => 'options',
-      'settings' => array(),
+      'settings' => array(
+        'apply_chosen' => '',
+      ),
       'type' => 'options_select',
       'weight' => 36,
     ),
@@ -924,9 +948,11 @@ function cluster_docs_field_default_field_instances() {
     'widget' => array(
       'active' => 1,
       'module' => 'options',
-      'settings' => array(),
+      'settings' => array(
+        'apply_chosen' => '',
+      ),
       'type' => 'options_select',
-      'weight' => 20,
+      'weight' => 44,
     ),
   );
 
@@ -1048,10 +1074,12 @@ function cluster_docs_field_default_field_instances() {
   t('Intervention Programming');
   t('Is Key Document');
   t('Is Reference Document');
+  t('Is this a features document ?');
   t('Is this a reference document that needs to appear in the reference section (as well as any groups in which the document belongs) ?');
   t('Issues');
   t('Link');
   t('Non Food Items');
+  t('Only first 100 characters of the description will be displayed in the document lists.');
   t('Preview');
   t('Report / Meeting date');
   t('Response Phase');

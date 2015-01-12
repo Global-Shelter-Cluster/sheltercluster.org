@@ -44,10 +44,10 @@ function _shelter_base_modules_enable($type) {
  * List of required contrib modules.
  */
 function _shelter_base_required_contrib() {
-  return array('addressfield', 'admin_menu', 'backup_migrate', 'ctools', 'date', 'devel', 'email', 'entity', 'entity_translation',
-    'entityreference', 'features', 'field_group', 'flag', 'link', 'name', 'og', 'og_access', 'og_register', 'og_ui', 'pathauto',
-    'restrict_node_page_view', 'search_api', 'search_api_db','strongarm', 'title', 'token', 'transliteration', 'uuid', 'uuid_features', 'url',
-    'views', 'views_ui', 'views_bulk_operations'
+  return array('addressfield', 'admin_menu', 'backup_migrate', 'chosen', 'ctools', 'date', 'devel', 'email', 'entity', 'entity_translation',
+    'entityreference', 'features', 'field_collection', 'field_group', 'flag', 'link',  'libraries', 'name', 'og', 'og_access', 'og_register',
+    'og_ui', 'pathauto', 'respondjs', 'search_api', 'search_api_db','strongarm', 'title', 'token', 'transliteration',  'underscore', 
+    'uuid', 'uuid_features', 'url', 'views', 'views_ui', 'views_bulk_operations',
   );
 }
 
@@ -62,7 +62,9 @@ function _shelter_base_required_core() {
  * List of required custom modules.
  */
 function _shelter_base_required_custom() {
-  return array('cluster_docs', 'cluster_discussions', 'cluster_og', 'cluster_taxonomy', 'cluster_user', 'cluster_search', 'cluster_workflow', 'cluster_nav');
+  return array('cluster_context', 'cluster_discussions', 'cluster_docs','cluster_og',  'cluster_search', 'cluster_taxonomy', 'cluster_user',
+    'cluster_nav', 'cluster_nav_views', 'cluster_workflow',
+  );
 }
 
 /**
@@ -185,4 +187,60 @@ function shelter_base_update_7015() {
 function shelter_base_update_7016() {
   field_delete_field('field_is_resource_document');
   search_api_index_reindex('default_node_index');
+}
+
+/**
+ * Update required module list (respondjs).
+ */
+function shelter_base_update_7017() {
+  _shelter_base_modules_enable('contrib');
+}
+
+/**
+ * Update required module list (underscore, libraries).
+ */
+function shelter_base_update_7018() {
+  _shelter_base_modules_enable('contrib');
+}
+
+/**
+ * Update required module list (cluster_nav_views).
+ */
+function shelter_base_update_7019() {
+  _shelter_base_modules_enable('custom');
+}
+
+/**
+ * Update required module list (chosen).
+ */
+function shelter_base_update_7020() {
+  _shelter_base_modules_enable('contrib');
+}
+
+/**
+ * Delete old document_tag field.
+ */
+function shelter_base_update_7021() {
+  field_delete_field('field_document_tag');
+}
+
+/**
+ * Disable restrict_node_page_view module.
+ */
+function shelter_base_update_7022() {
+  module_disable(array('restrict_node_page_view'));
+}
+
+/**
+ * Update custom required modules list to incude cluster_context.
+ */
+function shelter_base_update_7023() {
+  _shelter_base_modules_enable('custom');
+}
+
+/**
+ * Enable field_collection module.
+ */
+function shelter_base_update_7024() {
+  _shelter_base_modules_enable('contrib');
 }

@@ -1,13 +1,56 @@
 /* _discussions.scss */
 
 #shelter-discussions {
-  @include rem(margin, 0 0 2rem 0);
+  position: relative;
+  @include rem(top, 1rem);
+  color: $shelter-dark-blue;
+  @include rem(margin, 0 0 2.5rem 0);
+  @include border-bottom-radius(0.1875rem);
+
+  svg {
+    position: absolute;
+    top: -19px;
+    left: -11px;
+    background: #fff;
+    fill: $shelter-dark-blue;
+    width: 55px;
+    @include rem(margin, 0.375rem 0px 0.375rem 0px);
+    @include rem(padding, 0 0.3125rem 0.3125rem 0);
+    @include border-radius(11px);
+    @include box-sizing(initial);
+  }
+
+  h3 {
+    background-color: $shelter-dark-blue;
+    color: rgb(255,255,255);
+    text-align: center;
+    border-bottom: none;
+    margin: 0;
+    @include border-top-radius(0.1875rem);
+    @include rem(padding, 0.35rem);
+  }
+
+  a {
+    color: $shelter-dark-blue;
+  }
 
   .see-all {
-    @include rem(font-size, 0.9rem);
+    position: relative;
+    text-transform: uppercase;
+    color: $shelter-dark-blue;
+    font-weight: bold;
+    @extend .underlined-links;
+    @include rem(font-size, 0.75rem);
+    @include rem(margin, 0 0 0 0.9375rem);
+
+    &:before {
+      position: absolute;
+      content: '+';
+      @include rem(font-size, 1.1rem);
+      @include rem(margin, 0 0 0 -0.9375rem);
+    }
   }
   a {
-    color: darken($shelter-grey,20%);
     &:hover,
     &:active {
       text-decoration: none;
@@ -16,18 +59,25 @@
 }
 
 #discussions-items {
+  display: table;
+  background-color: rgb(218,222,228);
   @include reset-list;
+  @include rem(padding, 1rem 2rem 1rem 2rem);
+  @include rem(margin, 0 0 0.5rem 0);
+  @include rem(font-size,0.875rem);
 
   .discussions-item  {
     float: left;
     width: 100%;
     @include rem(margin, 0 0 10px 0);
+    &:last-child {
+      margin: 0;
+    }
   }
 
   .replies {
     float: left;
     width: 25%;
-    @include rem(font-size,0.9rem);
   }
 
   .information {
@@ -37,7 +87,6 @@
 
     .topic {
       display: block;
-      @include rem(font-size, 0.95rem);
       @include rem(padding, 0 0 0.2rem 0);
     }
 
@@ -47,6 +96,6 @@
   }
   .new {
     display: block;
-    color: red;
+    color: $shelter-red;
   }
 }

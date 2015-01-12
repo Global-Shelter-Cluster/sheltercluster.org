@@ -1,7 +1,8 @@
-name = cluster_discussions
+name = Cluster Discussions
 description = Discussions implementation for Shelter Cluster.
 core = 7.x
 package = Cluster
+dependencies[] = cluster_docs
 dependencies[] = ctools
 dependencies[] = entityreference
 dependencies[] = features
@@ -29,4 +30,4 @@ features[variable][] = node_options_discussion
 features[variable][] = node_preview_discussion
 features[variable][] = node_submitted_discussion
 features_exclude[field_base][og_group_ref] = og_group_ref
-mtime = 1417644472
+mtime = 1419357551

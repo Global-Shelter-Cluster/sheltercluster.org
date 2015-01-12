@@ -1,21 +1,147 @@
 /* _search.scss */
 
-.search {
-  float: right;
-  clear: right;
-  display: inline-block;
-  @include rem(padding, 0.8rem 0);
-  color: #000;
-  @include rem(font-size, 0.80rem);
-
-  .text-field {
-    float: left;
-    @include rem(padding, 0.5rem 0.5rem 0.5rem );
-    @include border-radius(3px);
-    border: 1px solid darken(white,12%);
+header {
+  .search {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    display: inline-block;
+    @include rem(padding, 0.8rem 0);
+    color: #000;
+    @include rem(font-size, 0.80rem);
   }
-  .submit {
-    float: left;
-    @extend .button;
+}
+
+.form-text {
+  float: left;
+  @include rem(padding, 0.35rem 0.5rem 0.35rem);
+  @include border-radius(3px);
+  border: 1px solid darken(white,12%);
+  @include box-shadow(rgba(0,0,0,0.1) 0 0 3px inset);
+}
+.form-submit {
+  @extend .button;
+}
+
+.page-search {
+  #search-form {
+    background: $shelter-light-blue;
+    @include rem(margin, 1rem 0 0 0);
+    @include rem(padding, 2rem 2rem 1.5rem);
+
+    label {
+      text-transform: uppercase;
+      font-weight: normal;
+      color: $shelter-grey;
+      @include rem(font-size, 0.75rem);
+    }
+    .form-type-checkbox label {
+      text-transform: none;
+      color: darken($shelter-grey, 20%);
+    }
+    .form-item-keys label {
+      display: none;
+    }
+    .form-type-textfield {
+      .form-text {
+        width: 100%;
+        border: 1px solid darken(white,12%);
+        @include rem(padding, 0.35rem 0.5rem 0.35rem);
+        @include border-radius(3px);
+        @include box-shadow(rgba(0,0,0,0.1) 0 0 3px inset);
+      }
+      #edit-keys {
+        @include breakpoint(480px) {
+          width: 73%;
+          max-width: 350px;
+        }
+      }
+    }
+    .form-submit {
+      float: right;
+      @extend .button;
+      @include rem(margin, 0.25rem 0 0 0);
+      @include breakpoint(480px) {
+        float: none;
+        @include rem(margin, 0 0 0 0.25rem);
+      }
+    }
+    #edit-advanced {
+      @include rem(margin, 1rem 0 0 0);
+      .criterion {
+        float: none;
+        margin-right: 0;
+
+        @include breakpoint(859px) {
+          float: left;
+          margin-right: 2em;
+        }
+      }
+      .checkboxlist {
+        float: left;
+        margin-right: 2em;
+      }
+      .fieldset-title {
+        position: relative;
+        top: -2px;
+        text-transform: uppercase;
+        font-weight: bold;
+        color: $shelter-grey;
+        text-decoration: none;
+        @include rem(font-size, 0.75rem);
+      }
+    }
+    .collapsible:after,
+    .collapsed:after {
+      content: '';
+    }
+  }
+  .search-results {
+    padding: 0;
+    margin: 0;
+
+    .title {
+      @include rem(margin, 0 0 0.25rem 0);
+    }
+
+    .search-snippet-info {
+      padding: 0;
+
+      strong {
+        background-color: lighten($accent-yellow,45%);
+        padding: 0 5px;
+        @include border-radius(5px);
+      }
+    }
+
+    .search-snippet {
+      margin-bottom: 1.5rem;
+    }
+
+    a {
+      white-space: nowrap;
+      color: darken($shelter-dark-blue, 15%);
+      @include rem(font-size, 1rem);
+      @extend .underlined-links;
+    }
+  }
+  .item-list {
+    .pager {
+      color: rgb(0,0,0);
+      @include rem(margin, 3.75rem 0 0.75rem 0);
+
+      a {
+        &:link,
+        &:visited,
+        &:hover,
+        &:active {
+          color: rgb(0,0,0);
+        }
+        &:hover,
+        &:active {
+          text-decoration:none;
+        }
+      }
+    }
   }
 }

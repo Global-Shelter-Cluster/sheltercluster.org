@@ -1,42 +1,138 @@
 <?php
 /**
  * @file
- * Handles all functionality related to navigation.
+ * Handles all functionality related to navigation, such as main navigation elements, dashboard navigation,
+ * contextual navigation and local tasks for nodes.
  */
 
-include_once 'cluster_nav.theme.inc';
+/**
+ * Implements hook_menu().
+ */
+function cluster_nav_menu() {
+  $items = array(
+    'current-operations' => array(
+      'menu_name' => 'main-menu',
+      'title' => 'Current operations',
+      'page callback' => '_cluster_nav_paged_teaser_list',
+      'page arguments' => array('response'),
+      'access arguments' => array('access content'),
+    ),
+    'regions-countries' => array(
+      'menu_name' => 'main-menu',
+      'title' => 'Regions / Countries',
+      'page callback' => '_cluster_nav_paged_teaser_list',
+      'page arguments' => array('geographic_region'),
+      'access arguments' => array('access content'),
+    ),
+    'communities-of-practice' => array(
+      'menu_name' => 'main-menu',
+      'title' => 'Communities of practice',
+      'page callback' => '_cluster_nav_paged_teaser_list',
+      'page arguments' => array('community_of_practice'),
+      'access arguments' => array('access content'),
+    ),
+  );
+
+  return $items;
+}
+
+/**
+ * Page callback for main menu items.
+ * @param $bundle
+ *  An node entity bundle name.
+ * @return
+ *  Paged node teaser render array.
+ */
+function _cluster_nav_paged_teaser_list($bundle) {
+  $query = new EntityFieldQuery();
+  $results = $query->entityCondition('entity_type', 'node')
+    ->entityCondition('bundle', $bundle)
+    ->propertyCondition('status', NODE_PUBLISHED)
+    ->pager(10)
+    ->execute();
+
+  if (! isset($results['node'])) {
+    $content = array(
+      '#markup' => t('No content for the moment.'),
+    ); 
+  }
+  else {
+    $content = node_view_multiple(node_load_multiple(array_keys($results['node'])));
+  }
+  return array(
+    'content' => $content,
+    'pager' => array(
+      '#markup' => theme('pager'),
+      '#weight' => 10
+    )
+  );
+}
 
 /**
  *  Implements hook_preprocess_page().
  */
 function cluster_nav_preprocess_page(&$variables) {
+  // Add local tasks to page template for user/%
+  $variables['local_tasks'] = FALSE;
+  if (arg(0) == 'user') {
+    $local_tasks = menu_local_tasks();
+    $variables['local_tasks'] = $local_tasks['tabs']['output'];
+  }
+
+  // Add the main menu to every page.
+  $variables['main_nav'] = menu_tree_output(menu_tree_all_data('main-menu'));
+  
+  // Provide dashboard and contextual navigation at page level.
+  $display_provider = FALSE;
+  $variables['dashboard_menu'] = FALSE;
+  $variables['contextual_navigation'] = FALSE;
+
   if (arg(0) == 'node' && is_numeric(arg(1))) {
     $node = node_load(arg(1));
   }
   else {
     return;
   }
-//  $node = menu_get_object(); //this doesn't work for node/%/documents pages, for some reason
-//
-//  if (!$node) {
-//    return;
-//  }
 
-  $group_page_content = NULL;
-
+  // If viewing a group node page, use it.
   if (og_is_group('node', $node)) {
-    $group_page_content = GroupContentManager::getInstance($node);
+    $display_provider = GroupDisplayProvider::getDisplayProvider($node);
   }
+
+  // If viewing a discussion node page, use the associated group node.
   elseif ($node->type == 'discussion') {
     $wrapper = entity_metadata_wrapper('node', $node);
     $group = $wrapper->og_group_ref->value();
     if (count($group) > 0) {
-      $group_page_content = GroupContentManager::getInstance($group[0]);
+      $display_provider = GroupDisplayProvider::getDisplayProvider($group[0]);
     }
   }
 
-  if ($group_page_content) {
-    $variables['dashboard_menu'] = $group_page_content->getDashboardMenu();
-    $variables['contextual_navigation'] = $group_page_content->getContextualNavigation();
+  if ($display_provider) {
+    $variables['dashboard_menu'] = $display_provider->getDashboardMenu();
+    $variables['contextual_navigation'] = $display_provider->getContextualNavigation();
   }
+}
+
+/**
+ * Implements hook_node_view().
+ */
+function cluster_nav_node_view($node, $view_mode) {
+  $node->content['local_tasks'] = FALSE;
+  if ($view_mode == 'full' && user_access('administer nodes')) {
+    $local_tasks = menu_local_tasks();
+    $node->content['local_tasks'] = array(
+      '#prefix' => '<ul class="editor-menu">',
+      '#suffix' => '</ul>',
+      'items' => $local_tasks['tabs']['output'],
+    );
+  }
+}
+
+/**
+ *  Implements hook_theme().
+ */
+function cluster_nav_theme($existing, $type, $theme, $path) {
+  module_load_include('inc', 'cluster_nav', 'theme/cluster_nav.theme');
+  return _cluster_nav_theme($existing, $type, $theme, $path);
 }

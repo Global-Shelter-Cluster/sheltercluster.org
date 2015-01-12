@@ -30,16 +30,26 @@ function cluster_og_entity_info_alter(&$entity_info) {
  */
 function cluster_og_node_view($node, $view_mode) {
   $bundle = $node->type;
-
+  // @TODO this hook is called too many times in a single page load for the same node.
+  // All the operations bellow are getting called for nothing.
+  // Consider alternative hooks.
   // Group specific actions.
   if (og_is_group_type('node', $bundle)) {
-    $group_content = new GroupPageContent($node, $view_mode);
+    $node->content['join_links'] = $view_mode == 'full' ? cluster_og_join_links($node->nid) : FALSE;
+    // Get a display provider for the current view mode.
+    $group_content = GroupDisplayProvider::getDisplayProvider($node, $view_mode);
+    $node->content['editor_menu'] = $group_content->getEditorMenu();
     $node->content['contact_members'] = $group_content->getContactMembers();
     $node->content['related_hubs'] = $group_content->getRelatedHubs();
     $node->content['related_responses'] = $group_content->getRelatedResponses();
+    $node->content['related_working_groups'] = $group_content->getRelatedWorkingGroups();
+    $node->content['featured_documents'] = $group_content->getFeaturedDocuments();
     $node->content['key_documents'] = $group_content->getKeyDocuments();
     $node->content['recent_documents'] = $group_content->getRecentDocuments();
     $node->content['recent_discussions'] = $group_content->getRecentDiscussions();
+    $node->content['dashboard_menu'] = $group_content->getDashboardMenu();
+    $node->content['contextual_navigation'] = $group_content->getContextualNavigation();
+    $node->content['upcoming_event'] = FALSE;
   }
 }
 
@@ -78,11 +88,7 @@ function cluster_og_theme() {
       'file' => 'theme/cluster_og.theme.inc',
       'render element' => 'element',
     ),
-    'cluster_og_key_documents' => array(
-      'file' => 'theme/cluster_og.theme.inc',
-      'render element' => 'element',
-    ),
-    'cluster_og_key_documents_by_tag' => array(
+    'cluster_og_featured_documents' => array(
       'file' => 'theme/cluster_og.theme.inc',
       'render element' => 'element',
     ),
@@ -94,7 +100,75 @@ function cluster_og_theme() {
       'file' => 'theme/cluster_og.theme.inc',
       'render element' => 'element',
     ),
+    'cluster_og_join_links' => array(
+      'template' => 'theme/cluster-og-join-links',
+      'variables' => array(
+        'header' => t('Join This Group'),
+        'instructions' => t('Register and join this group'),
+        'link' => FALSE,
+      ),
+    ),
+    'cluster_og_hot_responses' => array(
+      'file' => 'theme/cluster_og.theme.inc',
+      'template' => 'theme/cluster-og-hot-responses',
+      'variables' => array(
+        'icons' => FALSE,
+        'responses' => FALSE,
+      ),
+    ),
   );
+}
+
+/**
+ * Create the join or login link markup for a group that allows members to join.
+ * @return
+ *  Themed join or login link.
+ */
+function cluster_og_join_links($gid) {
+  global $user;
+  $node = node_load($gid);
+
+  // Show leave link.
+  if (og_is_member('node', $gid)) {
+
+    // Test if current user is the manager of the group.
+    if ($user->uid == $node->uid) {
+      return FALSE;
+    }
+
+    $vars = array(
+      'header' => t('Leave this group'),
+      'instructions' => t('Leave this group.'),
+      'link' => l(t('Leave'), 'group/node/' . $gid . '/unsubscribe'),
+    );
+  }
+  else {
+
+    // Test if the group is open for joining or invite only.
+    if (!og_user_access('node', $gid, 'subscribe')) {
+      return FALSE;
+    }
+
+    // Show login link.
+    if (user_is_anonymous()) {
+      $vars = array(
+        'header' => t('Login or register'),
+        'instructions' => t('Login with an existing account or create a new account to be able to join this group.'),
+        'link' => l(t('Login or register'), 'user', array('query' => array('destination' => 'node/'.$gid))),
+      );
+    }
+
+    // Show join link.
+    else {
+      $vars = array(
+        'header' => t('Join this group'),
+        'instructions' => t('Join this group.'),
+        'link' => l(t('Join'), 'group/node/' . $gid . '/subscribe'),
+      );
+    }
+  }
+
+  return theme('cluster_og_join_links', $vars);
 }
 
 /**
@@ -200,4 +274,97 @@ function cluster_og_regenerate_region_aliases($parent_nid = NULL) {
 
     cluster_og_regenerate_region_aliases($child_nid);
   }
+}
+
+/**
+ * Returns themed the hot responses content.
+ */
+function cluster_og_hot_responses() {
+  // Get the response types terms.
+  // @TODO make this more robust to withstand term / vocab changes in the admin interface.
+  $vocab = taxonomy_vocabulary_machine_name_load('disaster_type');
+  $terms = entity_load('taxonomy_term', FALSE, array('vid' => $vocab->vid));
+  foreach ($terms as $term) {
+    $icon = str_replace(' ', '-', strtolower($term->name));
+    $term->icon_name = $icon;
+    $term->icon_class = $icon . '-icon';
+  }
+
+  // Get hot response nodes.
+  if ($res = _cluster_og_get_hot_responses()) {
+    $nodes = node_load_multiple(array_keys($res));
+    $responses = array();
+    foreach ($nodes as $node) {
+      try {
+        // @TODO manage multilingual entity wrapper.
+        $wrapper = entity_metadata_wrapper('node', $node);
+
+        $responses[$node->nid] = array(
+          'link' => l($wrapper->label(), 'node/' . $node->nid),
+          'type' => $terms[$wrapper->field_disaster_type->value()->tid],
+        );
+      }
+      catch (EntityMetadataWrapperException $exc) {
+        watchdog(
+          'cluster_ogs',
+          'See '  . __FUNCTION__ . '() ' .  $exc->getTraceAsString(),
+           NULL,
+           WATCHDOG_ERROR
+        );
+      }
+    }
+    return array(
+      '#theme' => 'cluster_og_hot_responses',
+      '#responses' => $responses,
+      '#icons' => $terms,
+    );
+  }
+  return FALSE;
+}
+
+/**
+ * Provides a render array of a list of all the hot responses, linked to the node.
+ */
+function cluster_og_hot_responses_list() {
+  $items = array();
+  // Get hot response nodes.
+  if ($nodes = _cluster_og_get_hot_responses()) {
+    $nodes = node_load_multiple(array_keys($nodes));
+    $responses = array();
+    foreach ($nodes as $node) {
+      try {
+        // @TODO manage multilingual entity wrapper.
+        $wrapper = entity_metadata_wrapper('node', $node);
+        $items[] = l($wrapper->label(), 'node/' . $node->nid);
+      }
+      catch (EntityMetadataWrapperException $exc) {
+        watchdog(
+          'cluster_ogs',
+          'See '  . __FUNCTION__ . '() ' .  $exc->getTraceAsString(),
+           NULL,
+           WATCHDOG_ERROR
+        );
+      }
+    }
+  }
+  return array(
+    '#theme' => 'item_list',
+    '#items' => $items,
+    '#suffix' => $items[] = l(t('All current operations'), 'current-operations', array('attributes' => array('class' => array('see-all')))),
+  );
+}
+
+/**
+ * EntityFieldQuery wrapper
+ * @return
+ *   All published hot responses node ids or FALSE.
+ */
+function _cluster_og_get_hot_responses() {
+  $query = new EntityFieldQuery();
+  $res = $query->entityCondition('entity_type', 'node')
+    ->entityCondition('bundle', 'response')
+    ->propertyCondition('status', NODE_PUBLISHED)
+    ->fieldCondition('field_is_hot_response', 'value', 1)
+    ->execute();
+  return isset($res['node']) ? $res['node'] : FALSE;
 }

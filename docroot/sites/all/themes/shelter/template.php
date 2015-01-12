@@ -6,21 +6,17 @@ require_once dirname(__FILE__) . '/includes/shelter.helpers.inc';
  * Implements hook_preprocess_page().
  */
 function shelter_preprocess_html(&$variables) {
-  // Provide the path to the IE8 polyfill js so we can use brute force to impose its order of inclusion.
-  $path = drupal_get_path('theme', 'shelter');
-  $path .= '/assets/javascripts/NAME';
-  $variables['polyfill_queries_path'] = $path;
+
+  // Adding Roboto Google Font Normal 400 and Bold 700
+  drupal_add_css('//fonts.googleapis.com/css?family=Roboto:700,400', array('group' => CSS_THEME));
 }
 
 /**
  * Implements hook_preprocess_page().
  */
-function shelter_preprocess_page($variables) {
-  // drupal_add_css();
-  // drupal_add_js();
-
-  // Adding the viewport for mobile view
-    $viewport = array(
+function shelter_preprocess_page(&$variables) {
+  // Adding the viewport for mobile view.
+  $viewport = array(
     '#tag' => 'meta',
     '#attributes' => array(
       'name' => 'viewport',
@@ -28,28 +24,19 @@ function shelter_preprocess_page($variables) {
     ),
   );
   drupal_add_html_head($viewport, 'viewport');
+
+  libraries_load('underscore');
+  drupal_add_library('underscore', 'underscore');
+  drupal_add_library('system', 'jquery.cookie');
+  $variables['hot_responses'] = FALSE;
+  if ($variables['is_front']) {
+    $variables['hot_responses'] = cluster_og_hot_responses();
+  }
 }
 
 /**
- * Available view modes
- *
- * contact_member
- * related_hub
- * related_response
+ * Implements hook_preprocess_user_profile().
  */
-
-/**
- * Implements hook_entity_info_alter().
- * Define available view modes.
- * @param $entity_info
- */
-function shelter_entity_info_alter(&$entity_info) {
-  $entity_info['node']['view modes']['contextual_navigation'] = array(
-    'label' => t('Contextual Navigation'),
-    'custom settings' => TRUE,
-  );
-}
-
 function shelter_preprocess_user_profile(&$variables) {
 
   if (isset($variables['elements']['#view_mode'])) {
@@ -62,9 +49,10 @@ function shelter_preprocess_user_profile(&$variables) {
     $variables['user_profile']['name']['#markup'] = $account->name;
     $variables['user_profile']['name']['#suffix'] = '</span>';
     $variables['user_profile']['email']['#markup'] = l($account->mail, 'mailto:' . $account->mail, array('class' => array('email'), 'absolute' => TRUE));
-    if ( empty($account->picture)) {
-      $variables['user_profile']['user_picture']['#markup'] = _svg('icons/person', array('class'=>'person-avatar', 'alt' => 'Team member\'s people picture missing.'));
-    } else {
+    if (empty($account->picture)) {
+      $variables['user_profile']['user_picture']['#markup'] = _svg('icons/person', array('class' => 'person-avatar', 'alt' => 'Team member\'s people picture missing.'));
+    }
+    else {
       $variables['user_profile']['user_picture']['#markup'] = theme('image_style', array(
         'style_name' => 'thumbnail',
         'path' => $account->picture->uri,
@@ -77,9 +65,7 @@ function shelter_preprocess_user_profile(&$variables) {
 }
 
 /**
- * Implements hook_preprocess().
- * Define view mode based templates and specific preprocesses
- * @param $variables
+ * Implements hook_preprocess_node().
  */
 function shelter_preprocess_node(&$variables) {
   $node = $variables['node'];
@@ -90,20 +76,24 @@ function shelter_preprocess_node(&$variables) {
     $variables['theme_hook_suggestions'][] = 'node__group';
   }
 
-  // Adding view mode based theme suggestions and preprocesses
+  // Adding view mode based theme suggestions and preprocesses.
   $variables['theme_hook_suggestions'][] = 'node__partial__' . $variables['view_mode'];
+  $variables['theme_hook_suggestions'][] = 'node__' . $node->type . '__' . $variables['view_mode'];
+
   $view_mode_based_preprocess = 'shelter_preprocess_node_partial__' . $variables['view_mode'];
   if (function_exists($view_mode_based_preprocess)) {
     $view_mode_based_preprocess($variables);
   }
 
-  if ($is_group && $view_mode == 'full'){
+  if ($is_group && $view_mode == 'full') {
+    if ($variables['content']['featured_documents']) {
 
+    }
     try {
       $group_wrapper = entity_metadata_wrapper('node', $node);
 
-      if ( isset($group_wrapper->field_image)) {
-        $group_image = $group_wrapper->field_image->value();
+      if ($group_image = $group_wrapper->field_image->value()) {
+
         $variables['group_image'] = theme('image_style', array(
           'style_name' => 'large',
           'path' => $group_image['uri'],
@@ -121,13 +111,13 @@ function shelter_preprocess_node(&$variables) {
     }
   }
 
-  if ($view_mode == 'full'){
+  if ($view_mode == 'full') {
     if (og_is_group('node', $node)) {
       $variables['theme_hook_suggestions'][] = 'node__group';
     }
   }
   else {
-    // Adding view mode based theme suggestions and preprocesses
+    // Adding view mode based theme suggestions and preprocesses.
     $variables['theme_hook_suggestions'][] = 'node__partial__' . $variables['view_mode'];
     $view_mode_based_preprocess = 'shelter_preprocess_node_partial__' . $variables['view_mode'];
     if (function_exists($view_mode_based_preprocess)) {
@@ -139,19 +129,49 @@ function shelter_preprocess_node(&$variables) {
 
 /**
  * Implements hook_preprocess_node__[view mode]().
- * Define view mode based specific preprocess
- * @param $variables
  */
 function shelter_preprocess_node_partial__related_hub(&$variables) {
   $node = $variables['node'];
   $markup = _svg('icons/grid-three-up', array('alt' => 'Icon for Hubs')) . ' ' . $node->title;
-  $variables['link'] = l( $markup, 'node/' . $node->nid , array('html'=>true));
+  $variables['link'] = l($markup, 'node/' . $node->nid, array('html' => TRUE));
 }
 
+/**
+ * Implements hook_preprocess_node__[view mode]().
+ */
 function shelter_preprocess_node_partial__related_response(&$variables) {
   $node = $variables['node'];
   $markup = _svg('icons/globe', array('alt' => 'Icon for Related Responses')) . ' ' . $node->title;
-  $variables['link'] = l( $markup, 'node/' . $node->nid , array('html'=>true));
+  $variables['link'] = l($markup, 'node/' . $node->nid, array('html' => TRUE));
+}
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function shelter_form_search_form_alter(&$form, $form_state) {
+  $form['basic']['#attributes']['class'][] = 'clearfix';
+  $form['advanced']['keywords']['#prefix'] = '<div class="criterion clearfix">';
+  $form['advanced']['type']['#prefix'] = '<div class="criterion checkboxlist clearfix">';
+  $form['advanced']['language']['#prefix'] = '<div class="criterion checkboxlist clearfix">';
+}
+/**
+ * Redefine menu theme functions.
+ */
+function shelter_menu_tree($variables) {
+  return '<ul class="nav-items menu">' . $variables['tree'] . '</ul>';
+}
+/**
+ * Redefine menu theme functions.
+ */
+function shelter_menu_link(array $variables) {
+  $element = $variables['element'];
+  $sub_menu = '';
+  $element['#attributes']['class'][] = 'nav-item';
+
+  if ($element['#below']) {
+    $sub_menu = drupal_render($element['#below']);
+  }
+  $output = l($element['#title'], $element['#href'], $element['#localized_options']);
+  return '<li' . drupal_attributes($element['#attributes']) . '>' . $output . $sub_menu . "</li>\n";
 }
 
 function shelter_preprocess_node_partial__contextual_navigation(&$variables) {

@@ -1,75 +1,181 @@
 /* _footer.scss */
 
 footer {
-  background: darken($shelter-dark-blue, 5%);
-  color: #fff;
+  background: rgb(235, 239, 243);
+  color: $shelter-grey;
+  border-top: 1px solid rgb(235, 239, 243);
   @include rem(padding-bottom, 2rem);
 
-  a {
-    color: #fff;
+  .search {
+    display: table-caption;
+    color: #000;
+    background-color: rgb(255,255,255);
+    @include rem(padding, 0.8rem 1.5625rem);
+    @include rem(font-size, 0.80rem);
+    > div {
+      text-align: center;
+
+      .container-inline {
+        display: table;
+        margin: 0 auto;
+      }
+    }
+    @include breakpoint(400px) {
+      > div {
+        float: right;
+
+        .container-inline {
+          display: block;
+          margin: 0;
+        }
+      }
+    }
   }
-  ul {
-    margin: 0 0 0 0;
-    padding: 0 0 0 0;
+
+  .inside-footer {
+    display: table;
+    table-layout: fixed;
+    background-color: $shelter-light-blue;
+    > section {
+      display: table;
+      width: 100%;
+      @include rem(padding, 1rem 0 1rem 1.5625rem);
+      @include breakpoint(700px) {
+        display: table-cell;
+        width: auto;
+      }
+    }
   }
-  li {
-    @include rem(padding, 0 0.5rem 0.5rem);
-  }
-  section {
-    @include rem(margin-bottom, 2rem);
-  }
+
   h3 {
-    @include rem(padding, 0.5rem );
-    @include rem(margin, 0 0 1rem );
+    text-transform: uppercase;
+    @include rem(font-size, 0.85rem);
+    @include rem(margin, 0 0 0.5rem );
+  }
+
+  a {
+    color: $shelter-grey;
+    @extend .underlined-links;
+    white-space: nowrap;
+  }
+
+  .see-all {
+    text-transform: uppercase;
+    font-weight: bold;
+    @include rem(font-size, 0.7rem);
+    @include rem(margin, 0 0 0 0.9375rem);
+    @include rem(text-indent, -0.9375rem);
+
+    &:before {
+      position: absolute;
+      content: '+';
+      @include rem(font-size, 1rem);
+      @include rem(padding, 0 0.3125rem 0 0);
+    }
+    &:hover,
+    &:active {
+      text-decoration: none;
+
+      &:before {
+        border-style: none;
+      }
+    }
+  }
+
+  ul {
+    @include reset-list;
+
+    li {
+      position: relative;
+      @include rem(margin,0 0 0.25em 1em);
+      @include rem(padding, 0 0 0.25rem 0);
+      @include rem(font-size, 0.85rem);
+
+      &:before {
+        position: absolute;
+        top: 7px;
+        left: -11px;
+        content: '';
+        background: url(../images/footer-bullet.png) no-repeat 0 0 transparent;
+        width: 6px;
+        height: 6px;
+      }
+      &.leaf {
+        list-style-image: none;
+        list-style-type: none;
+      }
+    }
   }
 
   #active-clusters-list {
-    display: inline-block;
-    vertical-align: top;
-    @include breakpoint(900px) {
-      width: 50%;
+   .item-list ul li {
+      @include rem(margin, 0 0 0.25rem 0.8125rem);
     }
-
     .complete-list {
       @include rem(padding, 0 0.5rem 0.5rem);
     }
   }
 
   #regions-list {
-    display: inline-block;
-    vertical-align: top;
-    width: 100%;
-    @include breakpoint(900px) {
-      width: 50%;
-    }
+    background-color: darken($shelter-light-blue,3%);
+    @include rem(padding, 1rem 1rem 0 1.5625rem);
 
-    & > .menu > li > a{
-      display: block;
-      font-weight: bold;
-      @include rem(margin-bottom, 0.25rem);
-    }
-    & > .menu > li {
-      display: inline-block;
-      vertical-align: top;
-      width: 100%;
-      @include rem(margin-bottom, 1.25rem);
-      @include breakpoint(500px) {
-        width: 46%;
+    > .menu > li {
+      list-style: none;
+      @include rem(margin, 0 0 20px 0);
+
+      > .menu > li > .menu li {
+        &.expanded, &.collapsed, &.leaf {
+          margin: 0;
+        }
       }
-    }
-    .country {
-      list-style: disc inside;
+
+      &:before {
+        left: 0;
+        top: 9px;
+      }
+
+      > a {
+        font-weight: bold;
+        @include rem(margin, 0 0 0 10px);
+      }
+
+      .nav-items {
+        li {
+          &.expanded {
+            list-style-image: none;
+            list-style-type: none;
+          }
+          &.expanded, &.collapsed, &.leaf {
+            padding-right: 0;
+          }
+          &:before {
+            position: relative;
+            left: 0;
+            top: 0;
+            content: '\2013';
+            background: none;
+            @include rem(margin, 0 0.3125rem 0 0);
+            @include rem(font-size, 0.75rem);
+            @include rem(margin, 0 0.3125rem 0 0);
+            a {
+              text-transform: uppercase;
+            }
+          }
+        }
+      }
     }
   }
 
   #general-information {
-    .links {
-      display: inline-block;
-      vertical-align: top;
-      width: 100%;
-      padding: 0;
-      @include breakpoint(700px) {
-        width: 33%;
+    li {
+      margin: 0;
+
+      &:before {
+        position: relative;
+        background: none;
+        top: 0;
+        left: 0;
       }
     }
   }

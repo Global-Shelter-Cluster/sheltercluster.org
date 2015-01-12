@@ -17,3 +17,10 @@ function theme_cluster_docs_all($vars) {
   $output .= '</div>';
   return $output;
 }
+
+/**
+ *
+ */
+function theme_cluster_docs_all_docs_link($variables) {
+  return l($variables['text'], $variables['path'], array('attributes' => array('class' => array($variables['class']))));
+}

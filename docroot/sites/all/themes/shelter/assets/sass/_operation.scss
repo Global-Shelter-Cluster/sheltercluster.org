@@ -1,93 +1,107 @@
 /* _operation.scss */
 #operation-title {
-   @include rem(padding, 0.5rem 0 0 0);
+   @include rem(padding, 1.25rem 0 0 0);
 
   h1 {
     @include rem(margin, 0 0 0 0);
+    @include rem(font-size, 2.3rem);
+    @include rem(line-height, 1.8rem);
+    color: $shelter-red;
   }
 }
 #operation-information {
   clear: both;
   @include rem(margin, 0 0 2rem 0);
-  position: relative;
-  @include rem(top, -1rem);
 
+  h2 {
+    svg {
+      width: 35px;
+      height: 32px;
+    }
+  }
+  p {
+    margin-top: 0;
+  }
   .operation-image {
     float: left;
     @include rem(margin, 0 1rem 1rem 0);
   }
 }
 
-#operation-group {
-  display: table;
-  width: 100%;
-  background-color: rgb(204,204,204);
-  @include rem(padding, 1.25rem);
-  @include rem(margin, 0 0 2rem 0);
-
-  h3 {
-    display: table-row;
-    margin: 0;
-  }
-
-  #checkboxgroup {
-    display: table-cell;
-    border: none;
-    margin: 0;
-    padding: 0;
-    height: 100%;
-
-    label{
-      @include rem(margin, 0.5rem 0 0 0);
-      @include rem(font-size, 0.9rem);
-      font-weight: normal;
-    }
-  }
-
-  #button-join-group {
-    display: table-cell;
-    vertical-align: bottom;
-    text-align: right;
-
-    a {
-      text-decoration: none;
-    }
-  }
-}
-
 #featured-documents {
   position: relative;
   color: #fff;
-  overflow: hidden;
   @include rem(margin-bottom, 2rem);
 
   ul {
-    @include rem(height, 350px);
     @include reset-list;
   }
   li {
-    display: inline;
+    @include rem(max-height, 10rem);
+    overflow: hidden;
 
     .document-information {
-      @include absolute(bottom 0 left 0);
-      background-color: #000;
-      @include opacity(0.8);
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      @include background-image(linear-gradient(to right, rgba($shelter-grey, 0), rgba($shelter-grey, 0.7) 20%, rgba($shelter-grey, 0.9) 50%, $shelter-grey 80%, $shelter-grey));
       @include rem(padding, 1rem);
+      width: 100%;
 
       h2 {
+        color: #fff;
         margin: 0;
+        border-bottom: 1px solid #fff;
+        a {
+          color: #fff;
+          text-decoration: none;
+          .svg {
+            fill: #fff;
+          }
+        }
       }
       p {
-        @include rem(margin-bottom, 0 );
+        @include rem(margin, 0.25rem 0 0 0);
+        @include rem(font-size, 0.75rem );
+        text-transform: uppercase;
+        color: $shelter-light-blue;
       }
     }
     img {
-      height: 100%;
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      @include transform(scale(1) translateY(-50%) translateX(-50%));
+      width: 100%;
+      float: left;
     }
+  }
+  .image-document {
+    @include rem(max-height, 40rem);
+    overflow: visible;
+  }
+}
+
+#operation-data {
+  background-color: $shelter-light-blue;
+  color: $shelter-grey;
+  @include rem(padding, 1rem 0.8rem);
+  @include rem(font-size, 0.85rem);
+
+  ul {
+    @include reset-list;
+  }
+  li {
+    @include rem(padding, 0 0 0.5rem 0);
+    @include rem(font-size, 0.8rem);
+  }
+  span {
+    text-transform: uppercase;
+    @include rem(padding-right, 0.5rem);
+  }
+  h4 {
+    border: none;
+    text-transform: none;
+    color: $shelter-grey;
+    font-weight: normal;
+    @include rem(margin, 0 0 0.625rem 0);
+    @include rem(font-size, 0.85rem);
   }
 }
 
