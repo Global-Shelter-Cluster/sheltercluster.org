@@ -48,11 +48,12 @@
   position: relative;
   z-index: 10;
 
-  span {
-    @include rem(margin-right, 0.25rem);
-  }
   a {
     color: $shelter-red;
+    &:hover,
+    &:active {
+      @extend .not-underlined-links;
+    }
   }
 }
 

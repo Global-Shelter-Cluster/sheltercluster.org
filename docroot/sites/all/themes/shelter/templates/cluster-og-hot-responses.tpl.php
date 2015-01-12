@@ -16,7 +16,9 @@
   </ul>
   <ul id="legend">
     <?php foreach($icons as $icon): ?>
-      <li><?php print _svg('icons/' . $icon->icon_name, array('class'=> $icon->icon_class, 'alt' => $icon->name . ' icon')); ?><?php print $icon->name?></li>
+      <li><?php print _svg('icons/' . $icon->icon_name, array('class'=> $icon->icon_class, 'alt' => $icon->name . ' icon')); ?>
+        <span><?php print $icon->name?></span>
+      </li>
     <?php endforeach; ?>
   </ul>
 </section>
