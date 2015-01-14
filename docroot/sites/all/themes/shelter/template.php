@@ -8,7 +8,7 @@ require_once dirname(__FILE__) . '/includes/shelter.helpers.inc';
 function shelter_preprocess_html(&$variables) {
 
   // Adding Roboto Google Font Normal 400 and Bold 700
-  drupal_add_css('http://fonts.googleapis.com/css?family=Roboto:700,400', array('group' => CSS_THEME));
+  drupal_add_css('//fonts.googleapis.com/css?family=Roboto:700,400', array('group' => CSS_THEME));
 }
 
 /**
@@ -144,7 +144,15 @@ function shelter_preprocess_node_partial__related_response(&$variables) {
   $markup = _svg('icons/globe', array('alt' => 'Icon for Related Responses')) . ' ' . $node->title;
   $variables['link'] = l($markup, 'node/' . $node->nid, array('html' => TRUE));
 }
-
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function shelter_form_search_form_alter(&$form, $form_state) {
+  $form['basic']['#attributes']['class'][] = 'clearfix';
+  $form['advanced']['keywords']['#prefix'] = '<div class="criterion clearfix">';
+  $form['advanced']['type']['#prefix'] = '<div class="criterion checkboxlist clearfix">';
+  $form['advanced']['language']['#prefix'] = '<div class="criterion checkboxlist clearfix">';
+}
 /**
  * Redefine menu theme functions.
  */
