@@ -9,7 +9,6 @@ function cluster_context_menu_alter(&$items) {
   foreach (node_type_get_types() as $type) {
     $type_url_str = str_replace('_', '-', $type->type);
     $items['node/add/' . $type_url_str]['page callback'] = 'cluster_context_build_form';
-    $items['node/add/' . $type_url_str]['access callback'] = 'cluster_context_node_add_access';
   }
 }
 
@@ -51,6 +50,11 @@ function cluster_context_node_add_access($op, $node) {
  */
 function cluster_context_build_form($type) {
   global $user;
+
+  if (!_cluster_context_is_being_used() && !user_access('create nodes without cluster context')) {
+    return drupal_access_denied();
+  }
+
   $form_id = $type . '_node_form';
   $form_state = array();
   $form_state['build_info']['args'][] = (object) array(
@@ -80,20 +84,14 @@ function cluster_context_build_form($type) {
     }
   }
 
-  if ($type === 'document' && !_cluster_context_is_being_used($form_state)) {
-    array_unshift($form['actions']['submit']['#submit'], 'cluster_context_redirect_home');
-    dpm($form);
-  }
-
   return $form;
 }
 
 function cluster_context_redirect_home($form, &$form_state) {
-//  if ($form_state['nid']) {
+  if ($form_state['nid']) {
+    // The node was created successfully.
     $form_state['redirect'] = '<front>';
-//  }
-  dpm($form_state, 'submit fs');
-//  drupal_goto('');
+  }
 }
 
 /**
@@ -112,12 +110,10 @@ function cluster_context_form_alter(&$form, &$form_state, $form_id) {
   if (_cluster_context_is_being_used($form_state)) {
     _cluster_context_simplify_form($form);
   }
-//  foreach (array('group', 'region', 'response') as $key) {
-//    if (_cluster_context_get_nid_param($key, $form_state)) {
-//      _cluster_context_simplify_form($form);
-//      break;
-//    }
-//  }
+
+  if ($type === 'document' && !_cluster_context_is_being_used($form_state)) {
+    array_push($form['actions']['submit']['#submit'], 'cluster_context_redirect_home');
+  }
 
   _cluster_context_prepopulate($form, $form_state, 'og_group_ref', 'group');
   _cluster_context_prepopulate($form, $form_state, 'field_parent_region', 'region', 'geographic_region');

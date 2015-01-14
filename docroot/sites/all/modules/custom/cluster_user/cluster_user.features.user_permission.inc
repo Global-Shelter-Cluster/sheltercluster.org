@@ -41,6 +41,15 @@ function cluster_user_user_default_permissions() {
     'module' => 'node',
   );
 
+  // Exported permission: 'create nodes without cluster context'.
+  $permissions['create nodes without cluster context'] = array(
+    'name' => 'create nodes without cluster context',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'cluster_context',
+  );
+
   // Exported permission: 'delete revisions'.
   $permissions['delete revisions'] = array(
     'name' => 'delete revisions',
