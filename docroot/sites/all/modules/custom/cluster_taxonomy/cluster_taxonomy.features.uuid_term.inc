@@ -155,6 +155,14 @@ function cluster_taxonomy_uuid_features_default_terms() {
     'vocabulary_machine_name' => 'cross_cutting_issues',
   );
   $terms[] = array(
+    'name' => 'Checklist',
+    'description' => '',
+    'format' => 'filtered_html',
+    'weight' => 0,
+    'uuid' => '2bd09893-bad4-4a87-8e33-280bcee5caf7',
+    'vocabulary_machine_name' => 'toolkit',
+  );
+  $terms[] = array(
     'name' => 'Winterization',
     'description' => '',
     'format' => 'filtered_html',
@@ -449,6 +457,14 @@ function cluster_taxonomy_uuid_features_default_terms() {
     'weight' => 0,
     'uuid' => '70472c91-e109-482d-a0f1-f91de81ad9d0',
     'vocabulary_machine_name' => 'issues',
+  );
+  $terms[] = array(
+    'name' => 'Situation Report',
+    'description' => '',
+    'format' => 'filtered_html',
+    'weight' => 0,
+    'uuid' => '766c6fbe-c3ea-41c0-9180-1b3c5129c218',
+    'vocabulary_machine_name' => 'coordination_management',
   );
   $terms[] = array(
     'name' => 'Maps and GIS',
@@ -777,6 +793,14 @@ function cluster_taxonomy_uuid_features_default_terms() {
     'weight' => 3,
     'uuid' => 'beca793a-cad5-4348-aba4-856d5010f133',
     'vocabulary_machine_name' => 'coordination_management',
+  );
+  $terms[] = array(
+    'name' => 'Reporting Tools and Guidance',
+    'description' => '',
+    'format' => 'filtered_html',
+    'weight' => 0,
+    'uuid' => 'c310630e-6f3b-4b42-b289-84b398f3cdf0',
+    'vocabulary_machine_name' => 'information_management',
   );
   $terms[] = array(
     'name' => 'Complex Crisis',
