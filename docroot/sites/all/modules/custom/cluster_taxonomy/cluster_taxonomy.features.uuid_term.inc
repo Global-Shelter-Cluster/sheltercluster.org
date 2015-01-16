@@ -91,6 +91,14 @@ function cluster_taxonomy_uuid_features_default_terms() {
     'vocabulary_machine_name' => 'disaster_causes',
   );
   $terms[] = array(
+    'name' => 'Inter-Cluster',
+    'description' => '',
+    'format' => 'filtered_html',
+    'weight' => 4,
+    'uuid' => '1d5f2d64-dfb7-4695-a693-db8c232ade2b',
+    'vocabulary_machine_name' => 'document_type',
+  );
+  $terms[] = array(
     'name' => 'Government and regulatory policy',
     'description' => 'Documentation on government policies, legislation, building codes, etc.',
     'format' => 'filtered_html',
@@ -233,6 +241,14 @@ function cluster_taxonomy_uuid_features_default_terms() {
     'weight' => 1,
     'uuid' => '35142595-f137-4547-8b45-d9391c796b35',
     'vocabulary_machine_name' => 'geographic_region_type',
+  );
+  $terms[] = array(
+    'name' => 'Non Food Items',
+    'description' => '',
+    'format' => 'filtered_html',
+    'weight' => 5,
+    'uuid' => '38efa47c-c6ef-4e0c-9747-8858eee7791f',
+    'vocabulary_machine_name' => 'document_type',
   );
   $terms[] = array(
     'name' => 'Owner-occupier',
@@ -417,6 +433,14 @@ function cluster_taxonomy_uuid_features_default_terms() {
     'weight' => 0,
     'uuid' => '64653863-481d-4d77-a304-1180b439889f',
     'vocabulary_machine_name' => 'disaster_causes',
+  );
+  $terms[] = array(
+    'name' => 'Toolkit',
+    'description' => '',
+    'format' => 'filtered_html',
+    'weight' => 6,
+    'uuid' => '655dbcc6-04d8-447f-9c8e-2aed8e14f12a',
+    'vocabulary_machine_name' => 'document_type',
   );
   $terms[] = array(
     'name' => 'Multi-tenant Apartment',
@@ -811,6 +835,22 @@ function cluster_taxonomy_uuid_features_default_terms() {
     'vocabulary_machine_name' => 'disaster_type',
   );
   $terms[] = array(
+    'name' => 'Coordination Management',
+    'description' => '',
+    'format' => 'filtered_html',
+    'weight' => 0,
+    'uuid' => 'c7a0e1d1-5103-4b5b-aae2-27d9d05565c5',
+    'vocabulary_machine_name' => 'document_type',
+  );
+  $terms[] = array(
+    'name' => 'Information Management',
+    'description' => '',
+    'format' => 'filtered_html',
+    'weight' => 1,
+    'uuid' => 'c7f9469a-d1c7-408a-abab-06370828cc10',
+    'vocabulary_machine_name' => 'document_type',
+  );
+  $terms[] = array(
     'name' => 'Infographic',
     'description' => 'Visual image representing information used to communicate a set of messages related to the crisis',
     'format' => 'filtered_html',
@@ -833,6 +873,14 @@ function cluster_taxonomy_uuid_features_default_terms() {
     'weight' => 2,
     'uuid' => 'c94e35b1-95ea-4bc9-b109-c18a5727585c',
     'vocabulary_machine_name' => 'response_phase',
+  );
+  $terms[] = array(
+    'name' => 'Technical Support and Design',
+    'description' => '',
+    'format' => 'filtered_html',
+    'weight' => 2,
+    'uuid' => 'ca658eeb-8879-4d7a-a63a-26836c654086',
+    'vocabulary_machine_name' => 'document_type',
   );
   $terms[] = array(
     'name' => 'Construction Methods',
@@ -1001,6 +1049,14 @@ function cluster_taxonomy_uuid_features_default_terms() {
     'weight' => 2,
     'uuid' => 'e77bdfa0-abed-40cb-ab56-6f6e043f2e8c',
     'vocabulary_machine_name' => 'assessment_monitoring_evaluation',
+  );
+  $terms[] = array(
+    'name' => 'Cross-Cutting Issues',
+    'description' => '',
+    'format' => 'filtered_html',
+    'weight' => 3,
+    'uuid' => 'e7a29467-4d30-4037-8fc2-c86b4e1a0955',
+    'vocabulary_machine_name' => 'document_type',
   );
   $terms[] = array(
     'name' => 'Dataset',

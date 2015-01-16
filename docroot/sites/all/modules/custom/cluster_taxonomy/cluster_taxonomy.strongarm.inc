@@ -32,7 +32,9 @@ function cluster_taxonomy_strongarm() {
     'technical_support_design' => 'technical_support_design',
     'toolkit' => 'toolkit',
     'geographic_region_type' => 'geographic_region_type',
+    'document_type' => 'document_type',
     'tags' => 0,
+    'document_tags' => 0,
   );
   $export['uuid_features_entity_taxonomy_term'] = $strongarm;
 
@@ -42,6 +44,7 @@ function cluster_taxonomy_strongarm() {
   $strongarm->name = 'uuid_features_file_taxonomy_term';
   $strongarm->value = array(
     'tags' => 0,
+    'document_tags' => 0,
     'assessment_monitoring_evaluation' => 0,
     'coordination_management' => 0,
     'cross_cutting_issues' => 0,
@@ -59,6 +62,7 @@ function cluster_taxonomy_strongarm() {
     'technical_support_design' => 0,
     'toolkit' => 0,
     'geographic_region_type' => 0,
+    'document_type' => 0,
   );
   $export['uuid_features_file_taxonomy_term'] = $strongarm;
 

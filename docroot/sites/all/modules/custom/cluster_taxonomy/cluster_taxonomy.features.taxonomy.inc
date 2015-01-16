@@ -147,6 +147,29 @@ function cluster_taxonomy_taxonomy_default_vocabularies() {
         ),
       ),
     ),
+    'document_type' => array(
+      'name' => 'Document Type',
+      'machine_name' => 'document_type',
+      'description' => '',
+      'hierarchy' => 0,
+      'module' => 'taxonomy',
+      'weight' => 0,
+      'rdf_mapping' => array(
+        'rdftype' => array(
+          0 => 'skos:ConceptScheme',
+        ),
+        'name' => array(
+          'predicates' => array(
+            0 => 'dc:title',
+          ),
+        ),
+        'description' => array(
+          'predicates' => array(
+            0 => 'rdfs:comment',
+          ),
+        ),
+      ),
+    ),
     'geographic_region_type' => array(
       'name' => 'Geographic region type',
       'machine_name' => 'geographic_region_type',
