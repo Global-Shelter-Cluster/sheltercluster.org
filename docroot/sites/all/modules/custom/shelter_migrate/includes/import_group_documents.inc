@@ -90,7 +90,9 @@ function _shelter_migrate_create_document($title, $url, $description, $pubDate, 
   $w->field_document_source->set(t('Shelter Cluster'));
 
   // Process $description values
-  $w->body->set(array('value' => strip_tags($description['Document Description']), 'format' => 'plain_text'));
+  if (isset($description['Document Description'])) {
+    $w->body->set(array('value' => strip_tags($description['Document Description']), 'format' => 'plain_text'));
+  }
   if (isset($description['Report Date'])) {
     $w->field_report_meeting_date->set(strtotime(str_replace('/', '-', $description['Report Date'])));
   }
@@ -124,7 +126,7 @@ function _shelter_migrate_create_document($title, $url, $description, $pubDate, 
 
       $term_objects = array();
       foreach (is_array($terms) ? $terms : array($terms) as $term) {
-        $term_objects = array_merge($term_objects, taxonomy_get_term_by_name($term, $vocabulary));
+        $term_objects += taxonomy_get_term_by_name($term, $vocabulary);
       }
       if (count($term_objects)) {
         $w->$field->set(array_keys($term_objects));
