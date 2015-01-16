@@ -5,6 +5,23 @@ require_once 'common.inc';
 function _shelter_migrate_import_regions_responses() {
   set_time_limit(300);
 
+  $both_response_and_country = array(
+    'Central African Republic',
+    'Chad',
+    'Democratic Republic of Congo',
+    'Ethiopia',
+    'Kenya',
+    'Mali',
+    'Somalia',
+    'South Sudan',
+    'Sudan',
+    'Afghanistan',
+    'Ukraine',
+    'Iraq',
+    'Palestine',
+    'Yemen',
+  );
+
   $counts = array(
     'responses' => array('count' => 0, 'singular' => 'response'),
     'regions'   => array('count' => 0, 'singular' => 'region'  ),
@@ -26,7 +43,8 @@ function _shelter_migrate_import_regions_responses() {
   $region_type_region = current(taxonomy_get_term_by_name('Region', 'geographic_region_type'));
   $region_type_country = current(taxonomy_get_term_by_name('Country', 'geographic_region_type'));
 
-  $regions = _shelter_migrate_dom_children($xpath, null, '//div[@class="menu horizontal menu-horizontal"]/ul/li/ul/li', 'a/span/span[@class="menu-item-text"]');
+  $region_links = array();
+  $regions = _shelter_migrate_dom_children($xpath, null, '//div[@class="menu horizontal menu-horizontal"]/ul/li/ul/li', 'a/span/span[@class="menu-item-text"]', 'a', $region_links);
   if (count($regions) < 4) {
     throw new Exception('Could not parse main menu');
   }
@@ -39,22 +57,36 @@ function _shelter_migrate_import_regions_responses() {
     if (!$nid_region) {
       throw new Exception('Error creating region: '.$region);
     }
+    _shelter_migrate_store_path($nid_region, $region, $region_links);
     $counts['regions']['count']++;
 
-    $countries = _shelter_migrate_dom_children($xpath, $e_region, 'ul/li', 'a/span/span[@class="menu-item-text"]');
+    $country_links = array();
+    $countries = _shelter_migrate_dom_children($xpath, $e_region, 'ul/li', 'a/span/span[@class="menu-item-text"]', 'a', $country_links);
     foreach ($countries as $country => $e_country) {
       $nid_country = _shelter_migrate_create_country($country, $nid_region, $region_type_country);
       if (!$nid_country) {
         throw new Exception('Error creating country: '.$country);
       }
+      _shelter_migrate_store_path($nid_country, $country, $country_links);
       $counts['countries']['count']++;
 
-      $responses = _shelter_migrate_dom_children($xpath, $e_country, 'ul/li', 'a/span/span[@class="menu-item-text"]');
+      if (in_array($country, $both_response_and_country)) {
+        $nid_response = _shelter_migrate_create_response($country, $nid_country);
+        if (!$nid_response) {
+          throw new Exception('Error creating response: '.$country);
+        }
+        _shelter_migrate_store_path($nid_response, $country, $country_links);
+        $counts['responses']['count']++;
+      }
+
+      $response_links = array();
+      $responses = _shelter_migrate_dom_children($xpath, $e_country, 'ul/li', 'a/span/span[@class="menu-item-text"]', 'a', $response_links);
       foreach ($responses as $response => $e_response) {
         $nid_response = _shelter_migrate_create_response($response, $nid_country);
         if (!$nid_response) {
           throw new Exception('Error creating response: '.$response);
         }
+        _shelter_migrate_store_path($nid_response, $response, $response_links);
         $counts['responses']['count']++;
       }
     }
@@ -98,4 +130,18 @@ function _shelter_migrate_create_response($title, $nid_country) {
   $w->field_associated_regions->set(node_load_multiple(array($nid_country)));
   $w->save();
   return $w->nid->value();
+}
+
+function _shelter_migrate_store_path($nid, $key, $paths) {
+  if (!is_array($paths))
+    return;
+  if (!array_key_exists($key, $paths))
+    return;
+
+  db_merge('shelter_migrate_groups')
+    ->key(array('nid' => $nid))
+    ->fields(array(
+      'path' => $paths[$key],
+    ))
+    ->execute();
 }

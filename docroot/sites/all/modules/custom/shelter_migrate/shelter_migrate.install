@@ -6,6 +6,22 @@
  */
 function shelter_migrate_schema() {
   return array(
+    'shelter_migrate_groups' => array(
+      'description' => 'Store information about imported groups.',
+      'fields' => array(
+        'nid' => array(
+          'description' => 'Group node ID',
+          'type' => 'int',
+          'unsigned' => TRUE,
+          'not null' => TRUE,
+        ),
+        'path' => array(
+          'description' => 'URL for the group in the original site.',
+          'type' => 'text',
+        ),
+      ),
+      'primary key' => array('nid'),
+    ),
     'shelter_migrate_rss' => array(
       'description' => 'Store RSS urls and execution stats for document import.',
       'fields' => array(

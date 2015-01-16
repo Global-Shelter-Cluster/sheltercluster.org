@@ -34,11 +34,11 @@ function shelter_migrate_form($form, &$form_state) {
     '#attributes' => array('class' => 'messages warning'),
   );
 
-  $form['delete_all_content'] = array(
-    '#type' => 'submit',
-    '#name' => 'delete_all_content',
-    '#value' => t('Delete all content from the site'),
-  );
+//  $form['delete_all_content'] = array(
+//    '#type' => 'submit',
+//    '#name' => 'delete_all_content',
+//    '#value' => t('Delete all content from the site'),
+//  );
 
   $form['import_regions_responses'] = array(
     '#type' => 'submit',
