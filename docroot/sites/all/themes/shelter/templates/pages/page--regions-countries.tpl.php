@@ -114,7 +114,7 @@
       </section>
 
       <section id="regions-list">
-        <h3>Shelter Cluster is present in many countries</a></h3>
+        <h3>Shelter Cluster is present in many countries</h3>
         <?php print render($page['footer']['menu_regions']); ?>
       </section>
 

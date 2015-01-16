@@ -60,6 +60,7 @@ footer {
   }
 
   .see-all {
+    position: relative;
     text-transform: uppercase;
     font-weight: bold;
     @include rem(font-size, 0.7rem);
@@ -68,6 +69,8 @@ footer {
 
     &:before {
       position: absolute;
+      left: 0;
+      top: -4px;
       content: '+';
       @include rem(font-size, 1rem);
       @include rem(padding, 0 0.3125rem 0 0);
