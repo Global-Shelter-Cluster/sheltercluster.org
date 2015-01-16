@@ -7,10 +7,10 @@ core = 7.x
 stylesheets[all][] = assets/css/styles.css
 
 scripts[] = 'assets/javascripts/modernizr.custom.js'
-#scripts[] = 'assets/javascripts/svg-injector.min.js'
-#scripts[] = 'assets/javascripts/svg.js'
-#scripts[] = 'assets/javascripts/nav-shelter.js'
-#scripts[] = 'assets/javascripts/collapsible.js'
+scripts[] = 'assets/javascripts/svg-injector.min.js'
+scripts[] = 'assets/javascripts/svg.js'
+scripts[] = 'assets/javascripts/nav-shelter.js'
+scripts[] = 'assets/javascripts/collapsible.js'
 
 
 
