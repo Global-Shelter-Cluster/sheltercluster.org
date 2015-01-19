@@ -2,8 +2,8 @@
 
 require_once 'common.inc';
 
-function _shelter_migrate_import_group_documents($nid, $url) {
-  set_time_limit(300);
+function _shelter_migrate_import_group_documents($nid, $url, $return_data = FALSE) {
+//  set_time_limit(300);
   $taxonomy_mapping = _shelter_migrate_prepare_taxonomy_mapping();
 
   $successful_count = 0;
@@ -71,10 +71,18 @@ function _shelter_migrate_import_group_documents($nid, $url) {
       }
     }
 
-//    if ($i == 3) break;
+    if ($successful_count == 5) {
+      // Can only import up to 5 documents on a single call.
+      break;
+    }
   }
 
-  return 'Imported '.format_plural($successful_count, '1 document', '@count documents').' successfully (skipped '.$skip_count.').';
+  if ($return_data) {
+    return $successful_count;
+  }
+  else {
+    return 'Imported ' . format_plural($successful_count, '1 document', '@count documents') . ' successfully (skipped ' . $skip_count . ').';
+  }
 }
 
 function _shelter_migrate_create_document($title, $url, $description, $pubDate, $group_nid, &$taxonomy_mapping) {
@@ -166,14 +174,14 @@ function _shelter_migrate_create_document($title, $url, $description, $pubDate, 
 }
 
 function _shelter_migrate_download_file($url) {
-  // Give ourselves enough time to download the files, every time.
-  set_time_limit(300);
+//  // Give ourselves enough time to download the files, every time.
+//  set_time_limit(300);
 
   $ch = curl_init();
 
-  // Windows server needs "%20" character instead of spaces, otherwise it
-  // returns with code 400.
-  curl_setopt($ch, CURLOPT_URL, str_replace(' ', '%20', $url));
+  // Windows server needs the URL properly encoded.
+  $ready_url = str_replace('https%3A', 'https:', drupal_encode_path($url));
+  curl_setopt($ch, CURLOPT_URL, $ready_url);
 
 //  // Turn 'verbose mode' on, to debug the request
 //  curl_setopt($ch, CURLOPT_VERBOSE, 1);

@@ -46,6 +46,12 @@ function shelter_migrate_form($form, &$form_state) {
     '#value' => t('Import all regions and responses'),
   );
 
+  $form['import_all_docs'] = array(
+    '#type' => 'submit',
+    '#name' => 'import_all_docs',
+    '#value' => t('Import documents for all groups (can be called multiple times)'),
+  );
+
   return $form;
 }
 
@@ -58,6 +64,10 @@ function shelter_migrate_form_submit($form, &$form_state) {
       case 'import_regions_responses':
         require_once 'includes/import_regions_responses.inc';
         drupal_set_message(_shelter_migrate_import_regions_responses());
+        break;
+      case 'import_all_docs':
+        require_once 'includes/batch_documents.inc';
+        _shelter_migrate_batch_documents();
         break;
     }
   } catch (Exception $e) {
