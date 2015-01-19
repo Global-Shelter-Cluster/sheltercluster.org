@@ -1,0 +1,69 @@
+<?php
+
+/**
+ * Implements hook_menu().
+ */
+function shelter_migrate_menu() {
+  return array(
+    'admin/content/shelter-migrate' => array(
+      'title' => 'Migrate from sheltercluster.org',
+      'page callback' => 'drupal_get_form',
+      'page arguments' => array('shelter_migrate_form'),
+      'access callback' => TRUE, //TODO: change so only superadmin can run this
+    ),
+    'node/%node/shelter-migrate' => array(
+      'title' => 'Migrate docs from sheltercluster.org',
+      'page callback' => 'drupal_get_form',
+      'page arguments' => array('shelter_migrate_node_form'),
+      'access callback' => TRUE, //TODO: change so only superadmin can run this
+      'type' => MENU_LOCAL_TASK,
+      'file' => 'shelter_migrate.node.inc',
+      'weight' => 10,
+    ),
+  );
+}
+
+/**
+ * Generates the main form for migration operations.
+ */
+function shelter_migrate_form($form, &$form_state) {
+  $form['alert'] = array(
+    '#theme' => 'html_tag',
+    '#tag' => 'div',
+    '#value' => t('This page contains very dangerous operations, be careful!'),
+    '#attributes' => array('class' => 'messages warning'),
+  );
+
+//  $form['delete_all_content'] = array(
+//    '#type' => 'submit',
+//    '#name' => 'delete_all_content',
+//    '#value' => t('Delete all content from the site'),
+//  );
+
+  $form['import_regions_responses'] = array(
+    '#type' => 'submit',
+    '#name' => 'import_regions_responses',
+    '#value' => t('Import all regions and responses'),
+  );
+
+  return $form;
+}
+
+function shelter_migrate_form_submit($form, &$form_state) {
+  try {
+    switch ($form_state['triggering_element']['#name']) {
+      case 'delete_all_content':
+        drupal_set_message('Not implemented yet.', 'error');
+        break;
+      case 'import_regions_responses':
+        require_once 'includes/import_regions_responses.inc';
+        drupal_set_message(_shelter_migrate_import_regions_responses());
+        break;
+    }
+  } catch (Exception $e) {
+    if (function_exists('dpm')) {
+      dpm($e, 'Exception');
+    }
+    drupal_set_message($e->getMessage(), 'error');
+  }
+}
