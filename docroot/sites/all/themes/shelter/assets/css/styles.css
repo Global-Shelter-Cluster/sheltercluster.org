@@ -1034,26 +1034,26 @@ header a {
   padding: 0;
   width: 100%;
 }
+#nav-shelter .nav-items .nav-item:after {
+  content: '|';
+  position: absolute;
+  z-index: 2;
+  font-size: 20.8px;
+  font-size: 1.3rem;
+  top: 1px;
+  top: 0.0625rem;
+  right: -1.5px;
+  right: -0.09375rem;
+  color: #fff;
+}
+#nav-shelter .nav-items .nav-item:last-child:after, #nav-shelter .nav-items .nav-item.last:after {
+  content: '';
+}
 @media (min-width: 460px) {
   #nav-shelter .nav-items .nav-item {
     display: table-cell;
     border-bottom: none;
     width: auto;
-  }
-  #nav-shelter .nav-items .nav-item:after {
-    content: '|';
-    position: absolute;
-    z-index: 2;
-    font-size: 20.8px;
-    font-size: 1.3rem;
-    top: 1px;
-    top: 0.0625rem;
-    right: -1.5px;
-    right: -0.09375rem;
-    color: #fff;
-  }
-  #nav-shelter .nav-items .nav-item:last-child:after, #nav-shelter .nav-items .nav-item.last:after {
-    content: '';
   }
 }
 @media (min-width: 1215px) {
@@ -1918,6 +1918,7 @@ footer a {
   white-space: nowrap;
 }
 footer .see-all {
+  position: relative;
   text-transform: uppercase;
   font-weight: bold;
   font-size: 11.2px;
@@ -1929,6 +1930,8 @@ footer .see-all {
 }
 footer .see-all:before {
   position: absolute;
+  left: 0;
+  top: -4px;
   content: '+';
   font-size: 16px;
   font-size: 1rem;
