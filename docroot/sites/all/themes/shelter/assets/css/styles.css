@@ -349,8 +349,8 @@ body {
 }
 @media (min-width: 980px) {
   .main-column {
-    float: left;
-    width: 65%;
+    float: right;
+    width: 71%;
   }
 }
 
@@ -360,8 +360,8 @@ body {
 }
 @media (min-width: 980px) {
   .side-column {
-    float: right;
-    width: 32%;
+    float: left;
+    width: 27%;
   }
 }
 
@@ -379,19 +379,19 @@ body {
   color: #7f1416;
 }
 
-#operation-information {
+#operation-overview {
   clear: both;
   margin: 0 0 32px 0;
   margin: 0 0 2rem 0;
 }
-#operation-information h2 svg {
+#operation-overview h2 svg {
   width: 35px;
   height: 32px;
 }
-#operation-information p {
+#operation-overview p {
   margin-top: 0;
 }
-#operation-information .operation-image {
+#operation-overview .operation-image {
   float: left;
   margin: 0 16px 16px 0;
   margin: 0 1rem 1rem 0;
@@ -1635,10 +1635,11 @@ header a {
   vertical-align: 0.1rem;
 }
 
-#calendar-pin {
+#calendar-pin-icon {
   position: absolute;
   top: -22px;
   left: -24px;
+  z-index: 10;
   background: #fff;
   fill: #7f1416;
   width: 62px;
@@ -1697,14 +1698,18 @@ header a {
 /* _admin-content.scss */
 #add-content,
 #admin-links {
-  background: #575757;
-  padding: 16px;
-  padding: 1rem;
-  margin: 0 0 16px 0;
-  margin: 0 0 1rem 0;
-  -moz-border-radius: 0.1875rem;
-  -webkit-border-radius: 0.1875rem;
-  border-radius: 0.1875rem;
+  background: black;
+  padding: 8px 13.6px;
+  padding: 0.5rem 0.85rem;
+  margin: 0 0 4px 0;
+  margin: 0 0 0.25rem 0;
+  font-size: 14.4px;
+  font-size: 0.9rem;
+}
+#add-content h3,
+#admin-links h3 {
+  font-size: 14.4px;
+  font-size: 0.9rem;
 }
 #add-content a,
 #admin-links a {
@@ -1716,8 +1721,8 @@ header a {
   margin: 0;
   list-style: none;
   list-style-position: inside;
-  padding: 16px 0 0 0;
-  padding: 1rem 0 0 0;
+  padding: 8px 0 0 0;
+  padding: 0.5rem 0 0 0;
 }
 #add-content .editor-menu li,
 #admin-links .editor-menu li {
@@ -1728,7 +1733,7 @@ header a {
 #add-content .collapsed,
 #admin-links .collapsible,
 #admin-links .collapsed {
-  color: #ffb100;
+  color: white;
   border-bottom: none !important;
   padding: 0;
   margin: 0;
@@ -1741,7 +1746,7 @@ header a {
 }
 #add-content .collapsible,
 #admin-links .collapsible {
-  border-bottom: 1px solid #ffb100 !important;
+  border-bottom: 1px solid #4d4d4d !important;
   padding: 0 0 6.4px 0;
   padding: 0 0 0.4rem 0;
 }

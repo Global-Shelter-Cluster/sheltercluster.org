@@ -19,12 +19,7 @@
             <li class="language"><a href="">ar</a></li>
           </ul>
         </div>
-        <div id="bandwidth-selector">
-          <?php print _svg('icons/signal', array('id' => 'bandwidth-selector-icon', 'alt' => 'Bandwidth indication icon')); ?>
-          <a href="" class="active">Low bandwidth environment</a>
-          <span>/</span>
-          <a href="">Switch to high</a>
-        </div>
+        <?php /* print partial('bandwidth_selector'); */ ?>
       </div>
     </section>
 
@@ -95,32 +90,14 @@
     <?php endif; ?>
   </header>
 
-  <div class="page-margin clearfix">
-    <?php print render($page['content']); ?>
-  </div>
-
-  <footer>
-
-    <div class="page-margin inside-footer">
-
-      <?php print render($search_form_bottom); ?>
-
-      <section id="active-clusters-list">
-        <h3>Hot responses</h3>
-        <?php print render($page['footer']['hot_responses']); ?>
-      </section>
-
-      <section id="regions-list">
-        <h3>Shelter Cluster is present in many countries</a></h3>
-        <?php print render($page['footer']['menu_regions']); ?>
-      </section>
-
-      <section id="general-information">
-        <h3>General Information</h3>
-          <?php print render($page['footer']['general_information']); ?>
-      </section>
-
+  <?php if ($is_regions_and_countries): ?>
+    <?php print partial('world_map', array('page' => $page)); ?>
+  <?php else: ?>
+    <div class="page-margin clearfix">
+      <?php print render($page['content']); ?>
     </div>
-  </footer>
+  <?php endif; ?>
+
+  <?php print partial('footer', array('page' => $page, 'search_form_bottom' => $search_form_bottom)); ?>
 
 </div>

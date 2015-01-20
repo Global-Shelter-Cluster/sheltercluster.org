@@ -15,6 +15,7 @@ function shelter_preprocess_html(&$variables) {
  * Implements hook_preprocess_page().
  */
 function shelter_preprocess_page(&$variables) {
+  $current_path = current_path();
   // Adding the viewport for mobile view.
   $viewport = array(
     '#tag' => 'meta',
@@ -28,9 +29,15 @@ function shelter_preprocess_page(&$variables) {
   libraries_load('underscore');
   drupal_add_library('underscore', 'underscore');
   drupal_add_library('system', 'jquery.cookie');
+
   $variables['hot_responses'] = FALSE;
+  $variables['is_regions_and_countries'] = FALSE;
+
   if ($variables['is_front']) {
     $variables['hot_responses'] = cluster_og_hot_responses();
+  }
+  if ($current_path == 'regions-countries') {
+    $variables['is_regions_and_countries'] = TRUE;
   }
 }
 
