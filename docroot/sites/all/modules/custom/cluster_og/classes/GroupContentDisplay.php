@@ -141,13 +141,13 @@ class GroupDisplayProvider {
 
     $secondary = array();
     if ($hubs = $this->getRelatedHubs()) {
-      $secondary['hubs'] = node_load_multiple($hubs);
+      $secondary['hubs'] = partial('navigation_options', array('id' => 'hubs', 'title' => t('Hubs'), 'nodes' => node_load_multiple($hubs)));
     }
     if ($responses = $this->getRelatedResponses()) {
-      $secondary['responses'] = node_load_multiple($responses);
+      $secondary['responses'] = partial('navigation_options', array('id' => 'responses', 'title' => t('Responses'), 'nodes' => node_load_multiple($responses)));
     }
     if ($working_groups = $this->getRelatedWorkingGroups()) {
-      $secondary['working_groups'] = node_load_multiple($working_groups);
+      $secondary['working_groups'] = partial('navigation_options', array('id' => 'working-groups', 'title' => t('Working groups'), 'nodes' => node_load_multiple($responses)));
     }
     return array(
       '#theme' => 'cluster_nav_dashboard',
