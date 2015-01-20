@@ -144,10 +144,13 @@ class GroupDisplayProvider {
       $secondary['hubs'] = partial('navigation_options', array('navigation_type_id' => 'hubs', 'title' => t('Hubs'), 'nodes' => node_load_multiple($hubs)));
     }
     if ($responses = $this->getRelatedResponses()) {
-      $secondary['responses'] = partial('navigation_options', array('navigation_type_id' => 'responses', 'title' => t('Responses'), 'nodes' => node_load_multiple($responses)));
+      $secondary['responses'] = partial('navigation_options', array('navigation_type_id' => 'related-operations', 'title' => t('Related operations'), 'nodes' => node_load_multiple($responses)));
     }
     if ($working_groups = $this->getRelatedWorkingGroups()) {
       $secondary['working_groups'] = partial('navigation_options', array('navigation_type_id' => 'working-groups', 'title' => t('Working groups'), 'nodes' => node_load_multiple($responses)));
+    }
+    if ($pages = $this->manager->getPages()) {
+      $secondary['pages'] = partial('navigation_options', array('navigation_type_id' => 'pages', 'title' => t('Other pages'), 'nodes' => node_load_multiple($pages)));
     }
     return array(
       '#theme' => 'cluster_nav_dashboard',
@@ -322,7 +325,7 @@ class GroupFullDisplayProvider extends GroupDisplayProvider {
   }
 
   /**
-   * Not shown for this display.
+   * Get related responses.
    */
   public function getRelatedResponses() {
     if ($this->node->type != 'geographic_region') {

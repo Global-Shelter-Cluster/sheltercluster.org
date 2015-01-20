@@ -86,9 +86,9 @@ function cluster_nav_preprocess_page(&$variables) {
   $display_provider = FALSE;
   $variables['dashboard_menu'] = FALSE;
   $variables['contextual_navigation'] = FALSE;
-
   if (arg(0) == 'node' && is_numeric(arg(1))) {
     $node = node_load(arg(1));
+    //kpr(arg(2));
   }
   else {
     return;

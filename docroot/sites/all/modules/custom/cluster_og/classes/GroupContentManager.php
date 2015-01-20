@@ -55,6 +55,22 @@ class GroupContentManager {
   }
 
   /**
+   * Get all the page nodes that are content for the group.
+   */
+  public function getPages() {
+    $query = new EntityFieldQuery();
+    $result = $query->entityCondition('entity_type', 'node')
+      ->entityCondition('bundle', 'page')
+      ->fieldCondition('og_group_ref', 'target_id', $this->node->nid)
+      ->propertyCondition('status', NODE_PUBLISHED)
+      ->execute();
+    if (isset($result['node'])) {
+      return array_keys($result['node']);
+    }
+    return FALSE;
+  }
+
+  /**
    * Finds a strategic advisory node for the current group.
    * If there is more than one, it is not defined which one will be returned.
    *
