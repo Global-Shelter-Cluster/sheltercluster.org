@@ -27,6 +27,14 @@
       </section>
     <?php endif; ?>
 
+    <?php if ($content['dashboard_menu']): ?>
+    <section id="secondary-nav">
+      <div class="page-margin clearfix">
+        <?php print render($content['dashboard_menu']); ?>
+      </div>
+    </section>
+    <?php endif; ?>
+
   </div>
 
   <div class="main-column">
@@ -118,9 +126,7 @@
 <section id="left-over-content" class="clearfix">
 
   <div class="main-column">
-    <?php hide($content['field_parent_region']); ?>
-    <?php hide($content['group_group']); ?>
-    <?php print render($content); ?>
+    <?php //print render($content); ?>
   </div>
 
 </section>

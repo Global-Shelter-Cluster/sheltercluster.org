@@ -344,13 +344,6 @@ class GroupFullDisplayProvider extends GroupDisplayProvider {
   /**
    * Not shown for this display.
    */
-  public function getDashboardMenu() {
-    return FALSE;
-  }
-
-  /**
-   * Not shown for this display.
-   */
   public function getContextualNavigation() {
     return FALSE;
   }
