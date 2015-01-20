@@ -3,7 +3,7 @@
 require_once 'common.inc';
 
 function _shelter_migrate_import_regions_responses() {
-  set_time_limit(300);
+  set_time_limit(300); // Just in case
 
   $both_response_and_country = array(
     'Central African Republic',
