@@ -26,7 +26,7 @@ function shelter_migrate_node_form($form, &$form_state) {
   $form['run'] = array(
     '#type' => 'submit',
     '#name' => 'run',
-    '#value' => t('Run document import for this group'),
+    '#value' => t('Run document import for this group (up to 5 documents)'),
   );
 
   return $form;
