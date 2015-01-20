@@ -12,11 +12,13 @@
  * $vars['element'][UID]: each user account render array and markup.
  */
 function theme_cluster_og_contact_member($vars) {
-  $output = '<h3>' . t('Coordination Team') . '</h3>';
-  $output .= '<h4>National Team</h4>';
-  $output .= '<ul id="coordination-items" class="clearfix">';
+  $output = '<h3 data-collapsible="coordination-items">' . t('Coordination Team') . '</h3>';
+  $output .= '<div id="coordination-items">';
+  //$output .= '<h4>National Team</h4>';
+  $output .= '<ul class="clearfix">';
   $output .= $vars['element']['#children'];
   $output .= '</ul>';
+  $output .= '</div>';
   return $output;
 }
 

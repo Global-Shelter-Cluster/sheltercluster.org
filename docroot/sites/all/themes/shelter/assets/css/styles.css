@@ -1459,18 +1459,16 @@ header a {
 }
 #shelter-coordination-team h4 {
   color: #7f1416;
-  text-align: center;
+  text-align: left;
   text-transform: uppercase;
   border-bottom: 1px dashed #7f1416;
-  margin: 24px 0 16px 0;
-  margin: 1.5rem 0 1rem 0;
   padding: 0 0 4px 0;
   padding: 0 0 0.25rem 0;
   font-size: 13px;
   font-size: 0.8125rem;
 }
 
-#coordination-items {
+#coordination-items ul {
   padding: 0;
   margin: 0;
   list-style: none;
@@ -1481,6 +1479,21 @@ header a {
   width: 100%;
   margin: 0 0 16px 0;
   margin: 0 0 1rem 0;
+}
+@media (min-width: 700px) {
+  #coordination-items .coordination-item {
+    width: 50%;
+  }
+}
+@media (min-width: 1080px) {
+  #coordination-items .coordination-item {
+    width: 33%;
+  }
+}
+@media (min-width: 1300px) {
+  #coordination-items .coordination-item {
+    width: 25%;
+  }
 }
 #coordination-items .avatar {
   float: left;
@@ -1523,10 +1536,10 @@ header a {
   text-decoration: none;
   color: #7f1416;
 }
-#coordination-items .information .email {
+#coordination-items .information a {
   color: #7f1416;
 }
-#coordination-items .information .email:hover, #coordination-items .information .email:active {
+#coordination-items .information a:hover, #coordination-items .information a:active {
   text-decoration: none;
 }
 
