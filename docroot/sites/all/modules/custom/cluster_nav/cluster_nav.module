@@ -96,6 +96,7 @@ function cluster_nav_preprocess_page(&$variables) {
 
   // If viewing a group node page, use it.
   if (og_is_group('node', $node)) {
+    $variables['theme_hook_suggestions'][] = 'page__group';
     $display_provider = GroupDisplayProvider::getDisplayProvider($node);
   }
 
