@@ -28,7 +28,8 @@ function _shelter_migrate_import_group_documents($nid, $url, $return_data = FALS
     foreach (array('title', 'link', 'description', 'pubDate') as $field) {
       $$field = _shelter_migrate_dom_children($xpath, $docs[$i], $field);
       if (!count($$field) || !is_a(current($$field), 'DOMElement')) {
-        throw new Exception('Field not found for document #' . $i . ': ' . $field);
+        // Not a proper document item since it doesn't have one of the fields, skip it.
+        continue 2;
       }
 
       $$field = current($$field);
