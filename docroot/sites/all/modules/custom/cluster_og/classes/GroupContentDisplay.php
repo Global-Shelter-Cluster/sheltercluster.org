@@ -160,6 +160,26 @@ class GroupDisplayProvider {
   }
 
   /**
+   * Provide menu to add related content.
+   * @return render array of links.
+   */
+  public function getEditorMenu() {
+    if (!function_exists('cluster_context_links')) {
+      return FALSE;
+    }
+    $links = cluster_context_links($this->node);
+    if (!$links) {
+      return FALSE;
+    }
+
+    return array(
+      '#theme' => 'links',
+      '#links' => $links,
+      '#attributes' => array('class' => 'editor-menu'),
+    );
+  }
+
+  /**
    * Generates contextual navigation (breadcrumb-like) for groups.
    * Delegates theme implementation to cluster_nav module.
    * @return
@@ -350,25 +370,7 @@ class GroupFullDisplayProvider extends GroupDisplayProvider {
     return FALSE;
   }
 
-  /**
-   * Provide menu to add related content.
-   * @return render array of links.
-   */
-  public function getEditorMenu() {
-    if (!function_exists('cluster_context_links')) {
-      return FALSE;
-    }
-    $links = cluster_context_links($this->node);
-    if (!$links) {
-      return FALSE;
-    }
 
-    return array(
-      '#theme' => 'links',
-      '#links' => $links,
-      '#attributes' => array('class' => 'editor-menu'),
-    );
-  }
 }
 
 // Defensive default for view modes which are not managed.
