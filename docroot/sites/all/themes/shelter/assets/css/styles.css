@@ -257,14 +257,14 @@ th {
   background-image: linear-gradient(#e1e1e1, #e3e3e3 60%, #e1e1e1);
 }
 
-.not-underlined-links, #contextual-navigation a:hover, #contextual-navigation a:active {
+.not-underlined-links, #secondary-nav .nav-items .nav-group li a, #contextual-navigation a:hover, #contextual-navigation a:active {
   position: relative;
   text-decoration: none;
 }
-.not-underlined-links:hover, #contextual-navigation a:hover, .not-underlined-links:active, #contextual-navigation a:active {
+.not-underlined-links:hover, #secondary-nav .nav-items .nav-group li a:hover, #contextual-navigation a:hover, .not-underlined-links:active, #secondary-nav .nav-items .nav-group li a:active, #contextual-navigation a:active {
   text-decoration: none;
 }
-.not-underlined-links:hover:after, #contextual-navigation a:hover:after, .not-underlined-links:active:after, #contextual-navigation a:active:after {
+.not-underlined-links:hover:after, #secondary-nav .nav-items .nav-group li a:hover:after, #contextual-navigation a:hover:after, .not-underlined-links:active:after, #secondary-nav .nav-items .nav-group li a:active:after, #contextual-navigation a:active:after {
   content: '';
   width: 100%;
   position: absolute;
@@ -1145,17 +1145,6 @@ header #search-block-form {
   text-decoration: none;
   display: block;
 }
-#secondary-nav h3 {
-  text-transform: uppercase;
-  font-size: 10.4px;
-  font-size: 0.65rem;
-  margin: 0 0 4px 0;
-  margin: 0 0 0.25rem 0;
-}
-#secondary-nav h3.collapsible {
-  opacity: 0.2;
-  filter: alpha(opacity=20);
-}
 #secondary-nav .svg {
   fill: #242424;
   width: 14px;
@@ -1168,10 +1157,8 @@ header #search-block-form {
   clear: both;
 }
 #secondary-nav .nav-group h3 {
-  font-size: 9.6px;
-  font-size: 0.6rem;
-  margin: 4px 0;
-  margin: 0.25rem 0;
+  margin: 12px 0 4px 0;
+  margin: 0.75rem 0 0.25rem 0;
   color: #313131;
 }
 #secondary-nav .nav-items .sub-nav {
@@ -1195,7 +1182,6 @@ header #search-block-form {
   background: #ebeef0;
   color: #575757;
   font-weight: bold;
-  text-align: center;
   padding: 8px 28.8px 8px;
   padding: 0.5rem 1.8rem 0.5rem;
   font-size: 12.8px;
@@ -1216,6 +1202,13 @@ header #search-block-form {
   float: right;
   font-size: 12px;
   font-size: 0.75rem;
+}
+#secondary-nav .nav-items .nav-group li {
+  list-style-type: disc;
+}
+#secondary-nav .nav-items .nav-group li a {
+  display: inline;
+  color: #242424;
 }
 
 /* _content.scss */

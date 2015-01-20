@@ -15,14 +15,6 @@
     text-decoration: none;
     display: block;
   }
-  h3 {
-    text-transform: uppercase;
-    @include rem(font-size, 0.65rem);
-    @include rem(margin, 0 0 0.25rem 0);
-  }
-  h3.collapsible {
-    @include opacity(0.2);
-  }
 
   .svg {
     fill: darken($shelter-grey,20%);
@@ -36,8 +28,7 @@
     clear: both;
 
     h3 {
-      @include rem(font-size, 0.6rem);
-      @include rem(margin, 0.25rem 0);
+      @include rem(margin, 0.75rem 0 0.25rem 0);
       color: darken($shelter-grey, 15%);
     }
   }
@@ -55,14 +46,12 @@
       position: relative;
       @include rem(margin, 0 0 0.25rem 0);
 
-
       a {
         float: left;
         width: 100%;
         background: lighten($shelter-light-blue, 10%);
         color: $shelter-grey;
         font-weight: bold;
-        text-align: center;
         @include rem(padding, 0.5rem 1.8rem 0.5rem);
         @include rem(font-size, 0.8rem);
 
@@ -82,5 +71,15 @@
         @include rem(font-size, 0.75rem);
       }
     }
+
+    .nav-group li {
+      list-style-type: disc;
+      a {
+        display: inline;
+        color: darken($shelter-grey, 20%);
+        @extend .not-underlined-links;
+      }
+    }
+
   }
 }
