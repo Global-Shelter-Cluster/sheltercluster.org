@@ -88,7 +88,6 @@ function cluster_nav_preprocess_page(&$variables) {
   $variables['contextual_navigation'] = FALSE;
   if (arg(0) == 'node' && is_numeric(arg(1))) {
     $node = node_load(arg(1));
-    //kpr(arg(2));
   }
   else {
     return;
@@ -96,7 +95,6 @@ function cluster_nav_preprocess_page(&$variables) {
 
   // If viewing a group node page, use it.
   if (og_is_group('node', $node)) {
-    $variables['theme_hook_suggestions'][] = 'page__group';
     $display_provider = GroupDisplayProvider::getDisplayProvider($node);
   }
 
@@ -110,7 +108,10 @@ function cluster_nav_preprocess_page(&$variables) {
   }
 
   if ($display_provider) {
-    $variables['dashboard_menu'] = $display_provider->getDashboardMenu();
+    // Add the dashboard menu to the page template for group pages other than the dashboard.
+    if (isset(arg(2))) {
+      $variables['dashboard_menu'] = $display_provider->getDashboardMenu();
+    }
     $variables['contextual_navigation'] = $display_provider->getContextualNavigation();
   }
 }
