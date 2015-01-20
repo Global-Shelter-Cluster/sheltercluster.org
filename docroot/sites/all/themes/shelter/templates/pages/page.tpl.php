@@ -91,7 +91,11 @@
   <?php elseif ($dashboard_menu): ?>
 
     <div class="page-margin clearfix">
-      <?php print partial('non_dashboard_group_page', array('page' => $page, 'dashboard_menu' => $dashboard_menu)); ?>
+      <?php print partial('non_dashboard_group_page', array(
+        'page' => $page,
+        'editor_menu' => $editor_menu,
+        'dashboard_menu' => $dashboard_menu));
+      ?>
     </div>
 
   <?php else: ?>
