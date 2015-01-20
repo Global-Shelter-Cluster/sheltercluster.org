@@ -85,11 +85,21 @@
   </header>
 
   <?php if ($is_regions_and_countries): ?>
+
     <?php print partial('world_map', array('page' => $page)); ?>
+
+  <?php elseif ($dashboard_menu): ?>
+
+    <div class="page-margin clearfix">
+      <?php print partial('non_dashboard_group_page', array('page' => $page, 'dashboard_menu' => $dashboard_menu)); ?>
+    </div>
+
   <?php else: ?>
+
     <div class="page-margin clearfix">
       <?php print render($page['content']); ?>
     </div>
+
   <?php endif; ?>
 
   <?php print partial('footer', array('page' => $page, 'search_form_bottom' => $search_form_bottom)); ?>
