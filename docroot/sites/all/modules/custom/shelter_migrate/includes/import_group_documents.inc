@@ -101,6 +101,9 @@ function _shelter_migrate_create_document($title, $url, $description, $pubDate, 
   if (isset($description['Document Description'])) {
     $w->body->set(array('value' => strip_tags($description['Document Description']), 'format' => 'plain_text'));
   }
+  if (isset($description['Other Keywords'])) {
+    $w->field_other_keywords->set(t($description['Other Keywords']));
+  }
   if (isset($description['Report Date'])) {
     $w->field_report_meeting_date->set(strtotime(str_replace('/', '-', $description['Report Date'])));
   }
