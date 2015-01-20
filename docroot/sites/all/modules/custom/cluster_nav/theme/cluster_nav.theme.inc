@@ -89,6 +89,7 @@ function template_preprocess_cluster_nav_related_links(&$variables) {
  *  Implements hook_preprocess_cluster_nav_dashboard().
  */
 function template_preprocess_cluster_nav_dashboard(&$variables) {
+  dpm($variables);
   foreach ($variables['items'] as &$item) {
     $text = t($item['label']);
 

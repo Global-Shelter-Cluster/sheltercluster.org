@@ -84,6 +84,7 @@ function cluster_nav_preprocess_page(&$variables) {
   
   // Provide dashboard and contextual navigation at page level.
   $display_provider = FALSE;
+  $variables['dashboard_menu'] = FALSE;
   $variables['contextual_navigation'] = FALSE;
 
   if (arg(0) == 'node' && is_numeric(arg(1))) {
@@ -108,6 +109,7 @@ function cluster_nav_preprocess_page(&$variables) {
   }
 
   if ($display_provider) {
+    $variables['dashboard_menu'] = $display_provider->getDashboardMenu();
     $variables['contextual_navigation'] = $display_provider->getContextualNavigation();
   }
 }

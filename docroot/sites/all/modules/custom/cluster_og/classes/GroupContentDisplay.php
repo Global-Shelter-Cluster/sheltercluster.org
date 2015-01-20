@@ -141,15 +141,14 @@ class GroupDisplayProvider {
 
     $secondary = array();
     if ($hubs = $this->getRelatedHubs()) {
-      $secondary['hubs'] = $hubs;
+      $secondary['hubs'] = node_load_multiple($hubs);
     }
     if ($responses = $this->getRelatedResponses()) {
-      $secondary['responses'] = $responses;
+      $secondary['responses'] = node_load_multiple($responses);
     }
     if ($working_groups = $this->getRelatedWorkingGroups()) {
-      $secondary['working_groups'] = $working_groups;
+      $secondary['working_groups'] = node_load_multiple($working_groups);
     }
-
     return array(
       '#theme' => 'cluster_nav_dashboard',
       '#items' => $items,
