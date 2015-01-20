@@ -875,10 +875,16 @@ header a {
 #user-profile-container {
   float: right;
   position: relative;
-  padding: 0 0 64px 0;
-  padding: 0 0 4rem 0;
+  padding: 0 0 60px 0;
+  padding: 0 0 3.75rem 0;
   font-size: 13.6px;
   font-size: 0.85rem;
+}
+@media (min-width: 800px) {
+  #user-profile-container {
+    padding: 16px 0 32px 0;
+    padding: 1rem 0 2rem 0;
+  }
 }
 #user-profile-container .profile-item {
   float: left;
@@ -896,11 +902,16 @@ header a {
   padding: 0 0.5rem 0 0.5rem;
 }
 
+header #search-block-form {
+  padding: 0rem 0 20px;
+  padding: 0rem 0 1.25rem;
+}
+
 #logo-shelter-cluster {
   width: 100%;
   display: block;
-  padding: 32px 0 0 0;
-  padding: 2rem 0 0 0;
+  padding: 16px 0 0 0;
+  padding: 1rem 0 0 0;
 }
 @media (min-width: 700px) {
   #logo-shelter-cluster {
@@ -926,8 +937,8 @@ header a {
   background: #688394;
   font-size: 14.4px;
   font-size: 0.9rem;
-  margin-bottom: 24px;
-  margin-bottom: 1.5rem;
+  margin-bottom: 12px;
+  margin-bottom: 0.75rem;
   color: #536876;
 }
 #site-options-bar span {
@@ -951,8 +962,8 @@ header a {
 }
 
 #site-branding {
-  margin-bottom: 24px;
-  margin-bottom: 1.5rem;
+  margin-bottom: 12px;
+  margin-bottom: 0.75rem;
 }
 
 #bandwidth-selector-icon {
