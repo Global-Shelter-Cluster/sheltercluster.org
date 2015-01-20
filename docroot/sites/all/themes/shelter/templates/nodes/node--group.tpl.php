@@ -28,11 +28,9 @@
     <?php endif; ?>
 
     <?php if ($content['dashboard_menu']): ?>
-    <section id="secondary-nav">
-      <div class="page-margin clearfix">
+      <section id="secondary-nav">
         <?php print render($content['dashboard_menu']); ?>
-      </div>
-    </section>
+      </section>
     <?php endif; ?>
 
   </div>

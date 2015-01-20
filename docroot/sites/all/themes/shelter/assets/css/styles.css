@@ -1127,10 +1127,9 @@ header #search-block-form {
 
 /* _secondary-nav.scss */
 #secondary-nav {
-  margin: 0 0 4px 0;
-  margin: 0 0 0.25rem 0;
-  padding: 12px 0 8px 0;
-  padding: 0.75rem 0 0.5rem 0;
+  margin: 0 0 0 0;
+  padding: 8px 0 8px 0;
+  padding: 0.5rem 0 0.5rem 0;
 }
 #secondary-nav h1 {
   color: #7f1416;
@@ -1185,17 +1184,10 @@ header #search-block-form {
 }
 #secondary-nav .nav-items .nav-item {
   float: left;
-  min-width: 100%;
+  width: 100%;
   position: relative;
-  left: -4px;
-  left: -0.25rem;
-  margin: 0 2px 4px 0;
-  margin: 0 0.125rem 0.25rem 0;
-}
-@media (min-width: 440px) {
-  #secondary-nav .nav-items .nav-item {
-    min-width: 19.5%;
-  }
+  margin: 0 0 4px 0;
+  margin: 0 0 0.25rem 0;
 }
 #secondary-nav .nav-items .nav-item a {
   float: left;
@@ -1204,8 +1196,6 @@ header #search-block-form {
   color: #575757;
   font-weight: bold;
   text-align: center;
-  margin: 0 0 0 4.8px;
-  margin: 0 0 0 0.3rem;
   padding: 8px 28.8px 8px;
   padding: 0.5rem 1.8rem 0.5rem;
   font-size: 12.8px;
