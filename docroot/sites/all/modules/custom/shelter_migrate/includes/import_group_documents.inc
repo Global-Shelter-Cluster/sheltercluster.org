@@ -5,6 +5,7 @@ require_once 'common.inc';
 function _shelter_migrate_import_group_documents($nid, $url, $return_data = FALSE) {
 //  set_time_limit(300);
   $taxonomy_mapping = _shelter_migrate_prepare_taxonomy_mapping();
+  $all_languages = language_list('name');
 
   $successful_count = 0;
   $skip_count = 0;
@@ -55,7 +56,7 @@ function _shelter_migrate_import_group_documents($nid, $url, $return_data = FALS
     }
     else {
       // Document did not exist in the system, download it.
-      $doc_nid = _shelter_migrate_create_document($title, $link, _shelter_migrate_parse_description($description), $pubDate, $nid, $taxonomy_mapping);
+      $doc_nid = _shelter_migrate_create_document($title, $link, _shelter_migrate_parse_description($description), $pubDate, $nid, $taxonomy_mapping, $all_languages);
       if (is_numeric($doc_nid) && $doc_nid > 0) {
         $successful_count++;
 
@@ -86,7 +87,7 @@ function _shelter_migrate_import_group_documents($nid, $url, $return_data = FALS
   }
 }
 
-function _shelter_migrate_create_document($title, $url, $description, $pubDate, $group_nid, &$taxonomy_mapping) {
+function _shelter_migrate_create_document($title, $url, $description, $pubDate, $group_nid, &$taxonomy_mapping, &$all_languages) {
   $e = entity_create('node', array(
     'type' => 'document',
     'created' => strtotime($pubDate),
@@ -99,6 +100,9 @@ function _shelter_migrate_create_document($title, $url, $description, $pubDate, 
   $w->field_document_source->set(t('Shelter Cluster'));
 
   // Process $description values
+  $language_name = isset($description['Document Language']) ? $description['Document Language'] : 'English';
+  // Language values seen in the feeds: English, French, Portuguese, Spanish, Bengali, Bahasa, Burmese, Arabic
+  $w->language = _shelter_migrate_language_name_to_code($language_name, $all_languages);
   if (isset($description['Document Description'])) {
     $w->body->set(array('value' => strip_tags($description['Document Description']), 'format' => 'plain_text'));
   }
@@ -672,4 +676,22 @@ function _shelter_migrate_prepare_taxonomy_mapping() {
   }
 
   return $taxonomy_mapping;
+}
+
+function _shelter_migrate_language_name_to_code($language_name = 'English', &$languages) {
+  $mapping = array(
+    'Portuguese' => 'Portuguese, International',
+    'Bahasa' => 'Indonesian',
+  );
+
+  if (isset($mapping[$language_name])) {
+    if (isset($languages[$mapping[$language_name]])) {
+      return $languages[$mapping[$language_name]]->language;
+    }
+  }
+  elseif (isset($languages[$language_name])) {
+    return $languages[$language_name]->language;
+  }
+
+  return 'en';
 }

@@ -49,9 +49,6 @@ function _shelter_migrate_dom_children($xpath, $context, $xpath_children, $xpath
 
       $links[$key] = $labels->item(0)->getAttribute('href');
     }
-    else {
-      $ret[] = $e_child;
-    }
   }
 
   return $ret;
