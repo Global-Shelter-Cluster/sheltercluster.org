@@ -81,6 +81,15 @@
 
     <?php print partial('world_map', array('page' => $page)); ?>
 
+  <?php elseif ($is_user_profile_pages): ?>
+
+    <div class="page-margin clearfix">
+      <?php print partial('user_profile_pages', array(
+        'page' => $page,
+        'local_tasks' => $local_tasks));
+      ?>
+    </div>
+
   <?php elseif ($dashboard_menu): ?>
 
     <div class="page-margin clearfix">
@@ -94,10 +103,7 @@
   <?php else: ?>
 
     <div class="page-margin clearfix">
-      <?php print partial('user_profile_pages', array(
-        'page' => $page,
-        'local_tasks' => $local_tasks));
-      ?>
+      <?php print render($page['content']); ?>
     </div>
 
   <?php endif; ?>
