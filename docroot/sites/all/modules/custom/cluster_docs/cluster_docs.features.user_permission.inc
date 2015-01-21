@@ -51,7 +51,6 @@ function cluster_docs_user_default_permissions() {
     'name' => 'view field_is_reference_document',
     'roles' => array(
       'administrator' => 'administrator',
-      'authenticated user' => 'authenticated user',
     ),
     'module' => 'field_permissions',
   );
@@ -61,7 +60,6 @@ function cluster_docs_user_default_permissions() {
     'name' => 'view own field_is_reference_document',
     'roles' => array(
       'administrator' => 'administrator',
-      'authenticated user' => 'authenticated user',
     ),
     'module' => 'field_permissions',
   );

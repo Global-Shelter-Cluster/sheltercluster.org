@@ -186,3 +186,10 @@ function shelter_menu_link(array $variables) {
   $output = l($element['#title'], $element['#href'], $element['#localized_options']);
   return '<li' . drupal_attributes($element['#attributes']) . '>' . $output . $sub_menu . "</li>\n";
 }
+
+/**
+ * Implements hook_preprocess_search_result().
+ */
+function shelter_preprocess_search_result(&$variables) {
+  //dpm($variables);
+}
