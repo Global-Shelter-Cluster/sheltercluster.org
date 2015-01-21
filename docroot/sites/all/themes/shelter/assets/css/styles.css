@@ -1810,6 +1810,7 @@ header #search-block-form {
 #active-responses {
   margin: 24px 0 24px 0;
   margin: 1.5rem 0 1.5rem 0;
+  text-align: center;
 }
 #active-responses h1 {
   margin-top: 0;
@@ -1822,44 +1823,59 @@ header #search-block-form {
   margin-bottom: 16px;
   margin-bottom: 1rem;
 }
+#active-responses #major-responses {
+  width: 100%;
+  text-align: center;
+}
 #active-responses #major-responses li {
-  clear: both;
+  display: inline-block;
+  min-width: 65%;
 }
 #active-responses #major-responses a {
+  display: block;
   float: left;
   text-align: center;
   text-decoration: none;
-  color: #000;
-  width: 50%;
+  color: white;
+  font-weight: bold;
+  width: 80%;
   border: 1px solid #7f1416;
-  background-color: #fff;
+  background-color: #7f1416;
   -moz-transition: all 0.3s ease;
   -o-transition: all 0.3s ease;
   -webkit-transition: all 0.3s ease;
   transition: all 0.3s ease;
-  padding: 8px;
-  padding: 0.5rem;
-  margin: 0 12px 12px 0;
-  margin: 0 0.75rem 0.75rem 0;
+  padding: 8px 8px;
+  padding: 0.5rem 0.5rem;
+  margin: 0 0 12px 0;
+  margin: 0 0 0.75rem 0;
   -moz-box-shadow: rgba(0, 0, 0, 0.09) 2px 2px 1px;
   -webkit-box-shadow: rgba(0, 0, 0, 0.09) 2px 2px 1px;
   box-shadow: rgba(0, 0, 0, 0.09) 2px 2px 1px;
 }
 #active-responses #major-responses a:hover, #active-responses #major-responses a:active {
-  background-color: #7f1416;
+  background-color: #ab1b1e;
   color: #fff;
+}
+@media (min-width: 800px) {
+  #active-responses #major-responses a {
+    width: 90%;
+  }
 }
 #active-responses #major-responses div {
   float: left;
 }
 #active-responses #major-responses svg {
-  width: 40px;
-  height: 40px;
+  position: relative;
+  top: 2px;
+  width: 34px;
+  height: 34px;
 }
 #active-responses #legend {
   clear: both;
   font-size: 12px;
   font-size: 0.75rem;
+  display: inline-block;
 }
 #active-responses #legend li {
   float: left;
@@ -1868,12 +1884,12 @@ header #search-block-form {
 }
 #active-responses #legend svg {
   position: relative;
-  width: 30px;
-  height: 30px;
+  width: 24px;
+  height: 24px;
 }
 #active-responses #legend span {
   position: relative;
-  top: -10px;
+  top: -5px;
 }
 #active-responses #legend .man-made-disaster-icon {
   margin-right: 4px;
