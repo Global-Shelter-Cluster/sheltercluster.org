@@ -11,11 +11,11 @@
       </section>
     <?php endif; ?>
 
-    <?php if ($content['local_tasks']): ?>
+    <?php if ($local_tasks): ?>
       <section id="admin-links" class="clearfix">
         <h3 data-collapsible="admin-links-container" data-collapsible-default="collapsed">Group Administration</h3>
         <div id="admin-links-container">
-          <?php print render($content['local_tasks']); ?>
+          <?php print render($local_tasks); ?>
         </div>
       </section>
     <?php endif; ?>
