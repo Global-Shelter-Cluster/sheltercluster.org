@@ -10,6 +10,7 @@ include_once 'cluster_context.admin.inc';
  *  Returns an array usable by theme_links() as "#links".
  */
 function cluster_context_links($node) {
+  kpr('FNORD');
   if (!user_is_logged_in()) {
     // Logged out.
     return FALSE;

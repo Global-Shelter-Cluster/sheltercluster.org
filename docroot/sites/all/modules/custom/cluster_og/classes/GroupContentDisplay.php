@@ -161,6 +161,8 @@ class GroupDisplayProvider {
 
   /**
    * Provide menu to add related content.
+   *
+   * @see cluster_context.module.
    * @return render array of links.
    */
   public function getEditorMenu() {
