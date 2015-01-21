@@ -119,11 +119,11 @@ class GroupDisplayProvider {
     }
 
     $secondary = array();
-    if ($hubs = $this->getRelatedHubs()) {
-      $secondary['hubs'] = partial('navigation_options', array('navigation_type_id' => 'hubs', 'title' => t('Hubs'), 'nodes' => node_load_multiple($hubs)));
-    }
     if ($responses = $this->getRelatedResponses()) {
       $secondary['responses'] = partial('navigation_options', array('navigation_type_id' => 'related-operations', 'title' => t('Related operations'), 'nodes' => node_load_multiple($responses)));
+    }
+    if ($hubs = $this->getRelatedHubs()) {
+      $secondary['hubs'] = partial('navigation_options', array('navigation_type_id' => 'hubs', 'title' => t('Hubs'), 'nodes' => node_load_multiple($hubs)));
     }
     if ($working_groups = $this->getRelatedWorkingGroups()) {
       $secondary['working_groups'] = partial('navigation_options', array('navigation_type_id' => 'working-groups', 'title' => t('Working groups'), 'nodes' => node_load_multiple($responses)));
@@ -326,48 +326,11 @@ class GroupFullDisplayProvider extends GroupDisplayProvider {
   }
 
   /**
-   * Get related responses.
-   */
-  public function getRelatedResponses() {
-/*
-    if ($this->node->type != 'geographic_region') {
-      return FALSE;
-    }
-*/
-    if ($responses = $this->manager->getRelatedResponses()) {
-      return $responses;
-    }
-  }
-
-  /**
-   * Not shown for this display.
-   */
-  public function getRelatedHubs() {
-    if ($nids = $this->manager->getRelatedHubs()) {
-      return $nids;
-    }
-    return FALSE;
-  }
-
-  /**
-   * Get related hub type nodes for the viewed group.
-   * @return
-   *  Render array of nodes.
-   */
-  public function getRelatedWorkingGroups() {
-    if ($nids = $this->manager->getRelatedWorkingGroups()) {
-      return $nids;
-    }
-    return FALSE;
-  }
-
-  /**
    * Not shown for this display.
    */
   public function getContextualNavigation() {
     return FALSE;
   }
-
 
 }
 
