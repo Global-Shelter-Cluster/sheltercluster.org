@@ -21,22 +21,33 @@
   }
   h4 {
     color: $shelter-red;
-    text-align: center;
+    text-align: left;
     text-transform: uppercase;
     border-bottom: 1px dashed $shelter-red;
-    @include rem(margin, 1.5rem 0 1rem 0);
+
     @include rem(padding, 0 0 0.25rem 0);
     @include rem(font-size, 13px);
   }
 }
 
 #coordination-items {
-  @include reset-list;
+  ul {
+    @include reset-list;
+  }
 
   .coordination-item  {
     float: left;
     width: 100%;
     @include rem(margin, 0 0 1rem 0);
+    @include breakpoint(700px) {
+      width: 50%;
+    }
+    @include breakpoint(1080px) {
+      width: 33%;
+    }
+    @include breakpoint(1300px) {
+      width: 25%;
+    }
   }
 
   .avatar {
@@ -76,7 +87,7 @@
       text-decoration: none;
       color: $shelter-red;
     }
-    .email {
+    a {
       color: $shelter-red;
       &:hover,
       &:active {

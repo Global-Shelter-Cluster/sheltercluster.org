@@ -88,7 +88,7 @@ function cluster_docs_field_default_field_instances() {
       'settings' => array(
         'apply_chosen' => '',
       ),
-      'type' => 'options_select',
+      'type' => 'options_buttons',
       'weight' => 35,
     ),
   );
@@ -128,7 +128,7 @@ function cluster_docs_field_default_field_instances() {
       'settings' => array(
         'apply_chosen' => '',
       ),
-      'type' => 'options_select',
+      'type' => 'options_buttons',
       'weight' => 33,
     ),
   );
@@ -168,7 +168,7 @@ function cluster_docs_field_default_field_instances() {
       'settings' => array(
         'apply_chosen' => '',
       ),
-      'type' => 'options_select',
+      'type' => 'options_buttons',
       'weight' => 37,
     ),
   );
@@ -253,7 +253,7 @@ function cluster_docs_field_default_field_instances() {
       'settings' => array(
         'apply_chosen' => '',
       ),
-      'type' => 'options_select',
+      'type' => 'options_buttons',
       'weight' => 13,
     ),
   );
@@ -380,7 +380,7 @@ function cluster_docs_field_default_field_instances() {
       'settings' => array(
         'apply_chosen' => '',
       ),
-      'type' => 'options_select',
+      'type' => 'options_buttons',
       'weight' => 34,
     ),
   );
@@ -420,7 +420,7 @@ function cluster_docs_field_default_field_instances() {
       'settings' => array(
         'apply_chosen' => '',
       ),
-      'type' => 'options_select',
+      'type' => 'options_buttons',
       'weight' => 36,
     ),
   );
@@ -460,7 +460,7 @@ function cluster_docs_field_default_field_instances() {
       'settings' => array(
         'apply_chosen' => '',
       ),
-      'type' => 'options_select',
+      'type' => 'options_buttons',
       'weight' => 39,
     ),
   );
@@ -500,7 +500,7 @@ function cluster_docs_field_default_field_instances() {
       'settings' => array(
         'apply_chosen' => '',
       ),
-      'type' => 'options_select',
+      'type' => 'options_buttons',
       'weight' => 40,
     ),
   );
@@ -584,7 +584,7 @@ function cluster_docs_field_default_field_instances() {
       'settings' => array(
         'apply_chosen' => '',
       ),
-      'type' => 'options_select',
+      'type' => 'options_buttons',
       'weight' => 43,
     ),
   );
@@ -726,7 +726,7 @@ function cluster_docs_field_default_field_instances() {
       'settings' => array(
         'apply_chosen' => '',
       ),
-      'type' => 'options_select',
+      'type' => 'options_buttons',
       'weight' => 42,
     ),
   );
@@ -912,7 +912,7 @@ function cluster_docs_field_default_field_instances() {
       'settings' => array(
         'apply_chosen' => '',
       ),
-      'type' => 'options_select',
+      'type' => 'options_buttons',
       'weight' => 38,
     ),
   );
@@ -952,7 +952,7 @@ function cluster_docs_field_default_field_instances() {
       'settings' => array(
         'apply_chosen' => '',
       ),
-      'type' => 'options_select',
+      'type' => 'options_buttons',
       'weight' => 41,
     ),
   );
@@ -992,7 +992,7 @@ function cluster_docs_field_default_field_instances() {
       'settings' => array(
         'apply_chosen' => '',
       ),
-      'type' => 'options_select',
+      'type' => 'options_buttons',
       'weight' => 36,
     ),
   );
@@ -1032,7 +1032,7 @@ function cluster_docs_field_default_field_instances() {
       'settings' => array(
         'apply_chosen' => '',
       ),
-      'type' => 'options_select',
+      'type' => 'options_buttons',
       'weight' => 45,
     ),
   );

@@ -10,6 +10,9 @@ function cluster_context_menu_alter(&$items) {
     $type_url_str = str_replace('_', '-', $type->type);
     $items['node/add/' . $type_url_str]['page callback'] = 'cluster_context_build_form';
   }
+
+  $items['node/add']['access callback'] = 'user_access';
+  $items['node/add']['access arguments'] = array('cluster_context_node_add_access');
 }
 
 /**
@@ -24,19 +27,6 @@ function _cluster_context_is_being_used(&$form_state = NULL) {
     }
   }
   return FALSE;
-}
-
-/**
- * Restricts access to the node/add/% pages based on the custom
- * "create nodes without cluster context" permission.
- * @param $op
- * @param $node
- * @return bool
- */
-function cluster_context_node_add_access($op, $node) {
-  return _cluster_context_is_being_used() || user_access('create nodes without cluster context')
-    ? node_access($op, $node)
-    : FALSE;
 }
 
 /**

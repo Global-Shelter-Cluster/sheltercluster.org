@@ -15,6 +15,9 @@ function shelter_preprocess_html(&$variables) {
  * Implements hook_preprocess_page().
  */
 function shelter_preprocess_page(&$variables) {
+  global $base_url;
+  $variables['base_url'] = $base_url;
+  $current_path = current_path();
   // Adding the viewport for mobile view.
   $viewport = array(
     '#tag' => 'meta',
@@ -28,9 +31,19 @@ function shelter_preprocess_page(&$variables) {
   libraries_load('underscore');
   drupal_add_library('underscore', 'underscore');
   drupal_add_library('system', 'jquery.cookie');
+
   $variables['hot_responses'] = FALSE;
+  $variables['is_regions_and_countries'] = FALSE;
+  $variables['is_user_profile_pages'] = FALSE;
+
   if ($variables['is_front']) {
     $variables['hot_responses'] = cluster_og_hot_responses();
+  }
+  if ($current_path == 'regions-countries') {
+    $variables['is_regions_and_countries'] = TRUE;
+  }
+  if (arg(0) == 'user') {
+    $variables['is_user_profile_pages'] = TRUE;
   }
 }
 
@@ -144,6 +157,7 @@ function shelter_preprocess_node_partial__related_response(&$variables) {
   $markup = _svg('icons/globe', array('alt' => 'Icon for Related Responses')) . ' ' . $node->title;
   $variables['link'] = l($markup, 'node/' . $node->nid, array('html' => TRUE));
 }
+
 /**
  * Implements hook_form_FORM_ID_alter().
  */
@@ -153,12 +167,14 @@ function shelter_form_search_form_alter(&$form, $form_state) {
   $form['advanced']['type']['#prefix'] = '<div class="criterion checkboxlist clearfix">';
   $form['advanced']['language']['#prefix'] = '<div class="criterion checkboxlist clearfix">';
 }
+
 /**
  * Redefine menu theme functions.
  */
 function shelter_menu_tree($variables) {
   return '<ul class="nav-items menu">' . $variables['tree'] . '</ul>';
 }
+
 /**
  * Redefine menu theme functions.
  */
@@ -194,4 +210,11 @@ function shelter_preprocess_node_partial__contextual_navigation(&$variables) {
   catch (EntityMetadataWrapperException $exception) {
     _log_entity_metadata_wrapper_error($exception, 'po_promoted');
   }
+}
+
+/**
+ * Implements hook_preprocess_search_result().
+ */
+function shelter_preprocess_search_result(&$variables) {
+  //dpm($variables);
 }

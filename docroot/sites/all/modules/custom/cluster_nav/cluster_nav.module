@@ -69,7 +69,11 @@ function _cluster_nav_paged_teaser_list($bundle) {
 }
 
 /**
- *  Implements hook_preprocess_page().
+ * Implements hook_preprocess_page().
+ *
+ * Add contextual navigation.
+ * Certain nav elements are printed at the node temaplate level on group node pages, and at the page
+ * template level at other times.  Add the nav elements at page level when required. 
  */
 function cluster_nav_preprocess_page(&$variables) {
   // Add local tasks to page template for user/%
@@ -84,9 +88,10 @@ function cluster_nav_preprocess_page(&$variables) {
   
   // Provide dashboard and contextual navigation at page level.
   $display_provider = FALSE;
+  $page_level_nav = FALSE;
   $variables['dashboard_menu'] = FALSE;
   $variables['contextual_navigation'] = FALSE;
-
+  $variables['editor_menu'] = FALSE;
   if (arg(0) == 'node' && is_numeric(arg(1))) {
     $node = node_load(arg(1));
   }
@@ -99,17 +104,27 @@ function cluster_nav_preprocess_page(&$variables) {
     $display_provider = GroupDisplayProvider::getDisplayProvider($node);
   }
 
-  // If viewing a discussion node page, use the associated group node.
-  elseif ($node->type == 'discussion') {
+  // If viewing a group content node page, get the associated group node's navigation elements.
+  // @TODO Properly handle the fact that the group reference is a multivalue field.
+  elseif (isset($node->og_group_ref)) {
     $wrapper = entity_metadata_wrapper('node', $node);
     $group = $wrapper->og_group_ref->value();
     if (count($group) > 0) {
+      // Set a flag to indicate we want to include the group nav items at the page level.
+      $page_level_nav = TRUE;
       $display_provider = GroupDisplayProvider::getDisplayProvider($group[0]);
+      // Override the page level title to show the group content title.
+      $variables['title'] = $variables['page_title'] = $wrapper->og_group_ref->label();
     }
   }
 
+  // Add the page level elements.
   if ($display_provider) {
-    $variables['dashboard_menu'] = $display_provider->getDashboardMenu();
+    // Add the dashboard menu to the page template for group pages other than the dashboard.
+    if (arg(2) || $page_level_nav) {
+      $variables['dashboard_menu'] = $display_provider->getDashboardMenu();
+      $variables['editor_menu'] = $display_provider->getEditorMenu();
+    }
     $variables['contextual_navigation'] = $display_provider->getContextualNavigation();
   }
 }
@@ -119,7 +134,7 @@ function cluster_nav_preprocess_page(&$variables) {
  */
 function cluster_nav_node_view($node, $view_mode) {
   $node->content['local_tasks'] = FALSE;
-  if ($view_mode == 'full' && user_access('administer nodes')) {
+  if ($view_mode == 'full' && og_is_group('node', $node) && og_user_access('node', $node->nid, 'administer group')) {
     $local_tasks = menu_local_tasks();
     $node->content['local_tasks'] = array(
       '#prefix' => '<ul class="editor-menu">',

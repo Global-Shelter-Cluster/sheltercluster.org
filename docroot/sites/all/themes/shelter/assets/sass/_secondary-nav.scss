@@ -1,8 +1,8 @@
 /* _secondary-nav.scss */
 
 #secondary-nav {
-  @include rem(margin, 0 0 0.25rem 0);
-  @include rem(padding, 0.75rem 0 0.5rem 0);
+  @include rem(margin, 0 0 0 0);
+  @include rem(padding, 0.5rem 0 0.5rem 0);
 
   h1 {
     color: $shelter-red;
@@ -15,14 +15,6 @@
     text-decoration: none;
     display: block;
   }
-  h3 {
-    text-transform: uppercase;
-    @include rem(font-size, 0.65rem);
-    @include rem(margin, 0 0 0.25rem 0);
-  }
-  h3.collapsible {
-    @include opacity(0.2);
-  }
 
   .svg {
     fill: darken($shelter-grey,20%);
@@ -34,10 +26,11 @@
   }
   .nav-group {
     clear: both;
+    margin-bottom: 10px;
 
     h3 {
-      @include rem(font-size, 0.6rem);
-      @include rem(margin, 0.25rem 0);
+      @include rem(margin, 0.75rem 0 0.25rem 0);
+      @include rem(font-size, 0.85rem);
       color: darken($shelter-grey, 15%);
     }
   }
@@ -51,13 +44,9 @@
     }
     .nav-item {
       float: left;
-      min-width: 100%;
+      width: 100%;
       position: relative;
-      @include rem(left, -0.25rem);
-      @include rem(margin, 0 0.125rem 0.25rem 0);
-      @include breakpoint(440px) {
-        min-width: 19.5%;
-      }
+      @include rem(margin, 0 0 0.25rem 0);
 
       a {
         float: left;
@@ -65,10 +54,8 @@
         background: lighten($shelter-light-blue, 10%);
         color: $shelter-grey;
         font-weight: bold;
-        text-align: center;
-        @include rem(margin, 0 0 0 0.3rem);
-        @include rem(padding, 0.5rem 1.8rem 0.5rem);
-        @include rem(font-size, 0.8rem);
+        @include rem(padding, 0.5rem 1rem 0.5rem);
+        @include rem(font-size, 0.9rem);
 
         &:hover {
           background: $shelter-light-blue;
@@ -86,5 +73,53 @@
         @include rem(font-size, 0.75rem);
       }
     }
+
+    .nav-secondary-items {
+      margin-bottom: 10px;
+
+      li {
+        list-style-type: square;
+        list-style-position: outside;
+        margin-left: 20px;
+      }
+      a {
+        display: inline;
+        color: darken($shelter-grey, 20%);
+        @extend .not-underlined-links;
+        @include rem(font-size, 0.85rem);
+      }
+    }
+
+    #navigation-option-related-operations {
+      .nav-secondary-items {
+        li {
+          list-style-type: none;
+          margin-left: 0;
+        }
+        a {
+          float: left;
+          width: 100%;
+          text-decoration: none;
+          background: darken($shelter-grey, 20%);
+          color: $white;
+          font-weight: bold;
+          @include rem(padding, 0.5rem 1rem 0.5rem);
+          @include rem(margin, 0 0 0.25rem 0);
+          @include rem(font-size, 0.9rem);
+
+          &:hover {
+            background: darken($shelter-grey, 40%);
+            text-decoration: none;
+          }
+          &.active {
+            background: $white;
+          }
+          &:after {
+            border: none;
+          }
+        }
+      }
+    }
+
   }
 }
