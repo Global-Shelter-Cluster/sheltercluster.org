@@ -75,13 +75,6 @@
       </section>
     <?php endif; ?>
 
-    <?php if ($local_tasks): ?>
-      <div class="tabs">
-        <?php print render($local_tasks); ?>
-      </div>
-    <?php endif; ?>
-
-
   </header>
 
   <?php if ($is_regions_and_countries): ?>
@@ -101,7 +94,10 @@
   <?php else: ?>
 
     <div class="page-margin clearfix">
-      <?php print render($page['content']); ?>
+      <?php print partial('user_profile_pages', array(
+        'page' => $page,
+        'local_tasks' => $local_tasks));
+      ?>
     </div>
 
   <?php endif; ?>
