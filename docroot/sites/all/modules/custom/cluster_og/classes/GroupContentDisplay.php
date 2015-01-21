@@ -51,14 +51,7 @@ class GroupDisplayProvider {
    */
   public function getRelatedResponses() {
     if ($nids = $this->manager->getRelatedResponses()) {
-      return array(
-        '#theme' => 'cluster_nav_related_links__response',
-        '#header' => t('Related responses'),
-        '#node' => $this->node,
-        '#type' => $this->node->type,
-        '#related_nodes' => node_load_multiple($nids),
-        '#related_type' => 'response',
-      );
+      return $nids;
     }
     return FALSE;
   }
@@ -70,14 +63,7 @@ class GroupDisplayProvider {
    */
   public function getRelatedWorkingGroups() {
     if ($nids = $this->manager->getRelatedWorkingGroups()) {
-      return array(
-        '#theme' => 'cluster_nav_related_links__working_group',
-        '#header' => t('Working groups'),
-        '#node' => $this->node,
-        '#type' => $this->node->type,
-        '#related_nodes' => node_load_multiple($nids),
-        '#related_type' => 'working_group',
-      );
+      return $nids;
     }
     return FALSE;
   }
@@ -89,14 +75,7 @@ class GroupDisplayProvider {
    */
   public function getRelatedHubs() {
     if ($nids = $this->manager->getRelatedHubs()) {
-      return array(
-        '#theme' => 'cluster_nav_related_links__hubs',
-        '#header' => t('Hubs'),
-        '#node' => $this->node,
-        '#type' => $this->node->type,
-        '#related_nodes' => node_load_multiple($nids),
-        '#related_type' => 'hub',
-      );
+      return $nids;
     }
     return FALSE;
   }
@@ -350,9 +329,11 @@ class GroupFullDisplayProvider extends GroupDisplayProvider {
    * Get related responses.
    */
   public function getRelatedResponses() {
+/*
     if ($this->node->type != 'geographic_region') {
       return FALSE;
     }
+*/
     if ($responses = $this->manager->getRelatedResponses()) {
       return $responses;
     }
@@ -362,6 +343,21 @@ class GroupFullDisplayProvider extends GroupDisplayProvider {
    * Not shown for this display.
    */
   public function getRelatedHubs() {
+    if ($nids = $this->manager->getRelatedHubs()) {
+      return $nids;
+    }
+    return FALSE;
+  }
+
+  /**
+   * Get related hub type nodes for the viewed group.
+   * @return
+   *  Render array of nodes.
+   */
+  public function getRelatedWorkingGroups() {
+    if ($nids = $this->manager->getRelatedWorkingGroups()) {
+      return $nids;
+    }
     return FALSE;
   }
 
