@@ -9,13 +9,13 @@ function shelter_migrate_menu() {
       'title' => 'Migrate from sheltercluster.org',
       'page callback' => 'drupal_get_form',
       'page arguments' => array('shelter_migrate_form'),
-      'access callback' => TRUE, //TODO: change so only superadmin can run this
+      'access arguments' => array('administer site'),
     ),
     'node/%node/shelter-migrate' => array(
       'title' => 'Migrate docs from sheltercluster.org',
       'page callback' => 'drupal_get_form',
       'page arguments' => array('shelter_migrate_node_form'),
-      'access callback' => TRUE, //TODO: change so only superadmin can run this
+      'access arguments' => array('administer site'),
       'type' => MENU_LOCAL_TASK,
       'file' => 'shelter_migrate.node.inc',
       'weight' => 10,

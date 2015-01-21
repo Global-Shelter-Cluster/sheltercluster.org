@@ -131,7 +131,7 @@ function cluster_nav_preprocess_page(&$variables) {
  */
 function cluster_nav_node_view($node, $view_mode) {
   $node->content['local_tasks'] = FALSE;
-  if ($view_mode == 'full' && user_access('administer nodes')) {
+  if ($view_mode == 'full' && og_is_group('node', $node) && og_user_access('node', $node->nid, 'administer group')) {
     $local_tasks = menu_local_tasks();
     $node->content['local_tasks'] = array(
       '#prefix' => '<ul class="editor-menu">',
