@@ -1,6 +1,6 @@
 <?php
 
-function partials_theme() {
+function partial_theme() {
   return array(
     'partial' => array(
       'variables' => array(),

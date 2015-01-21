@@ -47,6 +47,12 @@ function cluster_context_links($node) {
     );
   }
 
+  $links['new-page'] = array(
+    'title' => t('Create page'),
+    'href' => 'node/add/page',
+    'query' => array('group' => $node->nid, 'destination' => 'node/' . $node->nid),
+  );
+
   switch ($node->type) {
     case 'geographic_region':
       if (node_access('create', 'geographic-region')) {

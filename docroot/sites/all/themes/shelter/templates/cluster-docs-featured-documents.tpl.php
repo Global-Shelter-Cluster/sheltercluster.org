@@ -20,7 +20,7 @@
         <?php elseif ($doc['has_preview']): ?>
           <h2><?php print $doc['title']; ?></h2>
         <?php else: ?>
-          <h2><?php print l( _svg('icons/file', array('class'=>'document-external', 'alt' => 'Icon for an external resource')) . ' ' . $doc['title'], $doc['link_url'], array('html' => TRUE, 'attributes' => array('target' => '_blank'))); ?></h2>
+          <h2><?php print l(_svg('icons/file', array('class' => 'document-external', 'alt' => 'Icon for an external resource')) . ' ' . $doc['title'], $doc['link_url'], array('html' => TRUE, 'attributes' => array('target' => '_blank'))); ?></h2>
         <?php endif; ?>
         <?php print $doc['description']; ?>
       </div>

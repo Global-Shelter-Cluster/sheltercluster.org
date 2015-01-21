@@ -19,12 +19,7 @@
             <li class="language"><a href="">ar</a></li>
           </ul>
         </div>
-        <div id="bandwidth-selector">
-          <?php print _svg('icons/signal', array('id' => 'bandwidth-selector-icon', 'alt' => 'Bandwidth indication icon')); ?>
-          <a href="" class="active">Low bandwidth environment</a>
-          <span>/</span>
-          <a href="">Switch to high</a>
-        </div>
+        <?php /* print partial('bandwidth_selector'); */ ?>
       </div>
     </section>
 
@@ -80,47 +75,33 @@
       </section>
     <?php endif; ?>
 
-    <?php if ($local_tasks): ?>
-      <div class="tabs">
-        <?php print render($local_tasks); ?>
-      </div>
-    <?php endif; ?>
-
-    <?php if ($dashboard_menu): ?>
-    <section id="secondary-nav">
-      <div class="page-margin clearfix">
-        <?php print render($dashboard_menu); ?>
-      </div>
-    </section>
-    <?php endif; ?>
   </header>
 
-  <div class="page-margin clearfix">
-    <?php print render($page['content']); ?>
-  </div>
+  <?php if ($is_regions_and_countries): ?>
 
-  <footer>
+    <?php print partial('world_map', array('page' => $page)); ?>
 
-    <div class="page-margin inside-footer">
+  <?php elseif ($dashboard_menu): ?>
 
-      <?php print render($search_form_bottom); ?>
-
-      <section id="active-clusters-list">
-        <h3>Hot responses</h3>
-        <?php print render($page['footer']['hot_responses']); ?>
-      </section>
-
-      <section id="regions-list">
-        <h3>Shelter Cluster is present in many countries</a></h3>
-        <?php print render($page['footer']['menu_regions']); ?>
-      </section>
-
-      <section id="general-information">
-        <h3>General Information</h3>
-          <?php print render($page['footer']['general_information']); ?>
-      </section>
-
+    <div class="page-margin clearfix">
+      <?php print partial('non_dashboard_group_page', array(
+        'page' => $page,
+        'editor_menu' => $editor_menu,
+        'dashboard_menu' => $dashboard_menu));
+      ?>
     </div>
-  </footer>
+
+  <?php else: ?>
+
+    <div class="page-margin clearfix">
+      <?php print partial('user_profile_pages', array(
+        'page' => $page,
+        'local_tasks' => $local_tasks));
+      ?>
+    </div>
+
+  <?php endif; ?>
+
+  <?php print partial('footer', array('page' => $page, 'search_form_bottom' => $search_form_bottom)); ?>
 
 </div>

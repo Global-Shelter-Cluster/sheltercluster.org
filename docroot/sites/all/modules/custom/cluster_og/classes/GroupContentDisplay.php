@@ -51,14 +51,7 @@ class GroupDisplayProvider {
    */
   public function getRelatedResponses() {
     if ($nids = $this->manager->getRelatedResponses()) {
-      return array(
-        '#theme' => 'cluster_nav_related_links__response',
-        '#header' => t('Related responses'),
-        '#node' => $this->node,
-        '#type' => $this->node->type,
-        '#related_nodes' => node_load_multiple($nids),
-        '#related_type' => 'response',
-      );
+      return $nids;
     }
     return FALSE;
   }
@@ -70,14 +63,7 @@ class GroupDisplayProvider {
    */
   public function getRelatedWorkingGroups() {
     if ($nids = $this->manager->getRelatedWorkingGroups()) {
-      return array(
-        '#theme' => 'cluster_nav_related_links__working_group',
-        '#header' => t('Working groups'),
-        '#node' => $this->node,
-        '#type' => $this->node->type,
-        '#related_nodes' => node_load_multiple($nids),
-        '#related_type' => 'working_group',
-      );
+      return $nids;
     }
     return FALSE;
   }
@@ -89,14 +75,7 @@ class GroupDisplayProvider {
    */
   public function getRelatedHubs() {
     if ($nids = $this->manager->getRelatedHubs()) {
-      return array(
-        '#theme' => 'cluster_nav_related_links__hubs',
-        '#header' => t('Hubs'),
-        '#node' => $this->node,
-        '#type' => $this->node->type,
-        '#related_nodes' => node_load_multiple($nids),
-        '#related_type' => 'hub',
-      );
+      return $nids;
     }
     return FALSE;
   }
@@ -140,20 +119,44 @@ class GroupDisplayProvider {
     }
 
     $secondary = array();
-    if ($hubs = $this->getRelatedHubs()) {
-      $secondary['hubs'] = $hubs;
-    }
     if ($responses = $this->getRelatedResponses()) {
-      $secondary['responses'] = $responses;
+      $secondary['responses'] = partial('navigation_options', array('navigation_type_id' => 'related-operations', 'title' => t('Related operations'), 'nodes' => node_load_multiple($responses)));
+    }
+    if ($hubs = $this->getRelatedHubs()) {
+      $secondary['hubs'] = partial('navigation_options', array('navigation_type_id' => 'hubs', 'title' => t('Hubs'), 'nodes' => node_load_multiple($hubs)));
     }
     if ($working_groups = $this->getRelatedWorkingGroups()) {
-      $secondary['working_groups'] = $working_groups;
+      $secondary['working_groups'] = partial('navigation_options', array('navigation_type_id' => 'working-groups', 'title' => t('Working groups'), 'nodes' => node_load_multiple($responses)));
     }
-
+    if ($pages = $this->manager->getPages()) {
+      $secondary['pages'] = partial('navigation_options', array('navigation_type_id' => 'pages', 'title' => t('Other pages'), 'nodes' => node_load_multiple($pages)));
+    }
     return array(
       '#theme' => 'cluster_nav_dashboard',
       '#items' => $items,
       '#secondary' => $secondary,
+    );
+  }
+
+  /**
+   * Provide menu to add related content.
+   *
+   * @see cluster_context.module.
+   * @return render array of links.
+   */
+  public function getEditorMenu() {
+    if (!function_exists('cluster_context_links')) {
+      return FALSE;
+    }
+    $links = cluster_context_links($this->node);
+    if (!$links) {
+      return FALSE;
+    }
+
+    return array(
+      '#theme' => 'links',
+      '#links' => $links,
+      '#attributes' => array('class' => 'editor-menu'),
     );
   }
 
@@ -325,55 +328,10 @@ class GroupFullDisplayProvider extends GroupDisplayProvider {
   /**
    * Not shown for this display.
    */
-  public function getRelatedResponses() {
-    if ($this->node->type != 'geographic_region') {
-      return FALSE;
-    }
-    if ($responses = $this->manager->getRelatedResponses()) {
-      return $responses;
-    }
-  }
-
-  /**
-   * Not shown for this display.
-   */
-  public function getRelatedHubs() {
-    return FALSE;
-  }
-
-  /**
-   * Not shown for this display.
-   */
-  public function getDashboardMenu() {
-    return FALSE;
-  }
-
-  /**
-   * Not shown for this display.
-   */
   public function getContextualNavigation() {
     return FALSE;
   }
 
-  /**
-   * Provide menu to add related content.
-   * @return render array of links.
-   */
-  public function getEditorMenu() {
-    if (!function_exists('cluster_context_links')) {
-      return FALSE;
-    }
-    $links = cluster_context_links($this->node);
-    if (!$links) {
-      return FALSE;
-    }
-
-    return array(
-      '#theme' => 'links',
-      '#links' => $links,
-      '#attributes' => array('class' => 'editor-menu'),
-    );
-  }
 }
 
 // Defensive default for view modes which are not managed.

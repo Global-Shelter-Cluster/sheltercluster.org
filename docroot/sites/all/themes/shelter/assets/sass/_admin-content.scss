@@ -2,10 +2,15 @@
 
 #add-content,
 #admin-links {
-  background: $shelter-grey;
-  @include rem(padding, 1rem);
-  @include rem(margin, 0 0 1rem 0);
-  @include border-radius(0.1875rem);
+
+  background: $black;
+  @include rem(padding, 0.5rem 0.85rem);
+  @include rem(margin, 0 0 0.25rem 0);
+  @include rem(font-size, 0.9rem);
+
+  h3 {
+    @include rem(font-size, 0.9rem);
+  }
 
   a {
     @extend .underlined-links;
@@ -14,7 +19,7 @@
 
   .editor-menu {
     @include reset-list;
-    @include rem(padding, 1rem 0 0 0);
+    @include rem(padding, 0.5rem 0 0 0);
 
     li {
       @include rem(padding, 0 0 0.5rem 0);
@@ -23,7 +28,7 @@
 
   .collapsible,
   .collapsed {
-    color: $accent-yellow;
+    color: $white;
     border-bottom: none !important;
     padding: 0;
     margin: 0;
@@ -36,7 +41,7 @@
   }
 
   .collapsible {
-    border-bottom: 1px solid $accent-yellow !important;
+    border-bottom: 1px solid darken($white,70%) !important;
     @include rem(padding, 0 0 0.4rem 0);
   }
 }
