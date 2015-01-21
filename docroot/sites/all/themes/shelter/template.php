@@ -15,6 +15,8 @@ function shelter_preprocess_html(&$variables) {
  * Implements hook_preprocess_page().
  */
 function shelter_preprocess_page(&$variables) {
+  global $base_url;
+  $variables['base_url'] = $base_url;
   $current_path = current_path();
   // Adding the viewport for mobile view.
   $viewport = array(

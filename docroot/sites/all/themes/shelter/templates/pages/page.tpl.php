@@ -26,7 +26,7 @@
     <section id="site-branding" class="clearfix">
       <div class="page-margin clearfix">
 
-        <a id="logo-shelter-cluster" href="http://sheltercluster.org">
+        <a id="logo-shelter-cluster" href="<?php print $base_url; ?>">
           <?php print _svg('logo-global-shelter-cluster', array('id' => 'shelter-cluster', 'alt' => 'Global Shelter Cluster - ShelterCluster.org - Coordinating Humanitarian Shelter')); ?>
         </a>
 
