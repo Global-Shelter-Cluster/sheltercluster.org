@@ -32,12 +32,16 @@ function shelter_preprocess_page(&$variables) {
 
   $variables['hot_responses'] = FALSE;
   $variables['is_regions_and_countries'] = FALSE;
+  $variables['is_user_profile_pages'] = FALSE;
 
   if ($variables['is_front']) {
     $variables['hot_responses'] = cluster_og_hot_responses();
   }
   if ($current_path == 'regions-countries') {
     $variables['is_regions_and_countries'] = TRUE;
+  }
+  if (arg(0) == 'user') {
+    $variables['is_user_profile_pages'] = TRUE;
   }
 }
 
