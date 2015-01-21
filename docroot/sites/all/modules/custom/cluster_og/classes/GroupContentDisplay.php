@@ -126,7 +126,7 @@ class GroupDisplayProvider {
       $secondary['hubs'] = partial('navigation_options', array('navigation_type_id' => 'hubs', 'title' => t('Hubs'), 'nodes' => node_load_multiple($hubs)));
     }
     if ($working_groups = $this->getRelatedWorkingGroups()) {
-      $secondary['working_groups'] = partial('navigation_options', array('navigation_type_id' => 'working-groups', 'title' => t('Working groups'), 'nodes' => node_load_multiple($responses)));
+      $secondary['working_groups'] = partial('navigation_options', array('navigation_type_id' => 'working-groups', 'title' => t('Working groups'), 'nodes' => node_load_multiple($working_groups)));
     }
     if ($pages = $this->manager->getPages()) {
       $secondary['pages'] = partial('navigation_options', array('navigation_type_id' => 'pages', 'title' => t('Other pages'), 'nodes' => node_load_multiple($pages)));
