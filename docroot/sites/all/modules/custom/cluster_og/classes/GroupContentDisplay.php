@@ -326,48 +326,11 @@ class GroupFullDisplayProvider extends GroupDisplayProvider {
   }
 
   /**
-   * Get related responses.
-   */
-  public function getRelatedResponses() {
-/*
-    if ($this->node->type != 'geographic_region') {
-      return FALSE;
-    }
-*/
-    if ($responses = $this->manager->getRelatedResponses()) {
-      return $responses;
-    }
-  }
-
-  /**
-   * Not shown for this display.
-   */
-  public function getRelatedHubs() {
-    if ($nids = $this->manager->getRelatedHubs()) {
-      return $nids;
-    }
-    return FALSE;
-  }
-
-  /**
-   * Get related hub type nodes for the viewed group.
-   * @return
-   *  Render array of nodes.
-   */
-  public function getRelatedWorkingGroups() {
-    if ($nids = $this->manager->getRelatedWorkingGroups()) {
-      return $nids;
-    }
-    return FALSE;
-  }
-
-  /**
    * Not shown for this display.
    */
   public function getContextualNavigation() {
     return FALSE;
   }
-
 
 }
 
