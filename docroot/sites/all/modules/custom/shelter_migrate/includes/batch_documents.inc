@@ -140,16 +140,14 @@ function _shelter_migrate_batch_documents_finished($success, $results, $operatio
       $total_docs += $data['successful'];
       if ($data['successful']) {
         $total_groups++;
-      }
-      if (!$data['successful']) {
-        $msg[] = check_plain($data['group']) . ': No documents imported for this group';
-      }
-      else {
         $msg[] = check_plain($data['group']) . ': Imported ' . $data['successful'] . ' documents successfully';
       }
     }
     $message = $total_docs .' documents imported for ' . $total_groups . ' groups.';
     $message .= theme('item_list', array('items' => $msg));
+    if ($total_docs) {
+      $message .= '<p>You might want to ' . l('check the search index', 'admin/config/search/search_api/index/default_node_index') . '</p>';
+    }
     drupal_set_message($message);
   }
   else {
