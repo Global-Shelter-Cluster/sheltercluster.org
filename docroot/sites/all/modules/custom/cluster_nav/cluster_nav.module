@@ -105,6 +105,7 @@ function cluster_nav_preprocess_page(&$variables) {
   }
 
   // If viewing a group content node page, get the associated group node's navigation elements.
+  // @TODO Properly handle the fact that the group reference is a multivalue field.
   elseif (isset($node->og_group_ref)) {
     $wrapper = entity_metadata_wrapper('node', $node);
     $group = $wrapper->og_group_ref->value();
@@ -112,6 +113,8 @@ function cluster_nav_preprocess_page(&$variables) {
       // Set a flag to indicate we want to include the group nav items at the page level.
       $page_level_nav = TRUE;
       $display_provider = GroupDisplayProvider::getDisplayProvider($group[0]);
+      // Override the page level title to show the group content title.
+      $variables['title'] = $variables['page_title'] = $wrapper->og_group_ref->label();
     }
   }
 
