@@ -1,0 +1,6 @@
+name = Cluster Languages
+description = Manage multilingual options
+core = 7.x
+package = Cluster
+features[features_api][] = api:2
+project path =  sites/all/modules/custom
