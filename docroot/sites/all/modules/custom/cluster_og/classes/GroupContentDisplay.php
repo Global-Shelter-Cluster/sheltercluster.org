@@ -129,7 +129,7 @@ class GroupDisplayProvider {
       $secondary['working_groups'] = partial('navigation_options', array('navigation_type_id' => 'working-groups', 'title' => t('Working groups'), 'nodes' => node_load_multiple($working_groups)));
     }
     if ($pages = $this->manager->getPages()) {
-      $secondary['pages'] = partial('navigation_options', array('navigation_type_id' => 'pages', 'title' => t('Other pages'), 'nodes' => node_load_multiple($pages)));
+      $secondary['pages'] = partial('navigation_options', array('navigation_type_id' => 'pages', 'title' => t('Pages'), 'nodes' => node_load_multiple($pages)));
     }
     return array(
       '#theme' => 'cluster_nav_dashboard',
