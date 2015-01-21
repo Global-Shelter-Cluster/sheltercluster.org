@@ -47,11 +47,16 @@ function cluster_context_links($node) {
     );
   }
 
-  $links['new-page'] = array(
-    'title' => t('Create page'),
-    'href' => 'node/add/page',
-    'query' => array('group' => $node->nid, 'destination' => 'node/' . $node->nid),
-  );
+  if (node_access('create', 'page')) {
+    $links['new-page'] = array(
+      'title' => t('Create page'),
+      'href' => 'node/add/page',
+      'query' => array(
+        'group' => $node->nid,
+        'destination' => 'node/' . $node->nid
+      ),
+    );
+  }
 
   switch ($node->type) {
     case 'geographic_region':
@@ -126,6 +131,16 @@ function cluster_context_links($node) {
       break;
   }
 
+  if (node_access('create', 'working_group')) {
+    $links['new-working-group'] = array(
+      'title' => t('New working group'),
+      'href' => 'node/add/working-group',
+      'query' => array(
+        'response' => $node->nid,
+        'destination' => 'node/' . $node->nid
+      ),
+    );
+  }
   return $links;
 }
 
