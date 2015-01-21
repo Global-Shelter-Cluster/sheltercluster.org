@@ -4,7 +4,7 @@ footer {
   background: rgb(235, 239, 243);
   color: $shelter-grey;
   border-top: 1px solid rgb(235, 239, 243);
-  @include rem(padding-bottom, 2rem);
+  @include rem(padding-bottom, 5rem);
 
   .search {
     display: table-caption;

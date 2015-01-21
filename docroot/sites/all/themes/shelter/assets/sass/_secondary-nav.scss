@@ -26,9 +26,11 @@
   }
   .nav-group {
     clear: both;
+    margin-bottom: 10px;
 
     h3 {
       @include rem(margin, 0.75rem 0 0.25rem 0);
+      @include rem(font-size, 0.85rem);
       color: darken($shelter-grey, 15%);
     }
   }
@@ -52,8 +54,8 @@
         background: lighten($shelter-light-blue, 10%);
         color: $shelter-grey;
         font-weight: bold;
-        @include rem(padding, 0.5rem 1.8rem 0.5rem);
-        @include rem(font-size, 0.8rem);
+        @include rem(padding, 0.5rem 1rem 0.5rem);
+        @include rem(font-size, 0.9rem);
 
         &:hover {
           background: $shelter-light-blue;
@@ -72,12 +74,19 @@
       }
     }
 
-    .nav-group li {
-      list-style-type: disc;
+    .nav-secondary-items {
+      margin-bottom: 10px;
+
+      li {
+        list-style-type: square;
+        list-style-position: outside;
+        margin-left: 20px;
+      }
       a {
         display: inline;
         color: darken($shelter-grey, 20%);
         @extend .not-underlined-links;
+        @include rem(font-size, 0.85rem);
       }
     }
 

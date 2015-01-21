@@ -3,7 +3,7 @@
    @include rem(padding, 1.25rem 0 0 0);
 
   h1 {
-    @include rem(margin, 0 0 0 0);
+    @include rem(margin, 0 0 1rem 0);
     @include rem(font-size, 2.3rem);
     @include rem(line-height, 1.8rem);
     color: $shelter-red;
