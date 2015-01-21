@@ -1,0 +1,70 @@
+<?php
+
+
+/**
+ * Implements hook_schema().
+ */
+function shelter_migrate_schema() {
+  return array(
+    'shelter_migrate_groups' => array(
+      'description' => 'Store information about imported groups.',
+      'fields' => array(
+        'nid' => array(
+          'description' => 'Group node ID',
+          'type' => 'int',
+          'unsigned' => TRUE,
+          'not null' => TRUE,
+        ),
+        'path' => array(
+          'description' => 'URL for the group in the original site.',
+          'type' => 'text',
+        ),
+      ),
+      'primary key' => array('nid'),
+    ),
+    'shelter_migrate_rss' => array(
+      'description' => 'Store RSS urls and execution stats for document import.',
+      'fields' => array(
+        'nid' => array(
+          'description' => 'Group node ID',
+          'type' => 'int',
+          'unsigned' => TRUE,
+          'not null' => TRUE,
+        ),
+        'url' => array(
+          'description' => 'URL for the RSS feed that corresponds to the group',
+          'type' => 'text',
+        ),
+      ),
+      'primary key' => array('nid'),
+    ),
+    'shelter_migrate_docs' => array(
+      'description' => 'Store information about imported documents.',
+      'fields' => array(
+        'nid' => array(
+          'description' => 'Group node ID to which the document belongs.',
+          'type' => 'int',
+          'unsigned' => TRUE,
+          'not null' => TRUE,
+        ),
+        'url_hash' => array(
+          'description' => 'MD5 hash of the document URL, to make queries faster',
+          'type' => 'char',
+          'length' => 32,
+          'not null' => TRUE,
+        ),
+        'url' => array(
+          'description' => 'URL of the document file',
+          'type' => 'text',
+        ),
+        'doc_nid' => array(
+          'description' => 'Node ID for the document',
+          'type' => 'int',
+          'unsigned' => TRUE,
+          'not null' => TRUE,
+        ),
+      ),
+      'primary key' => array('nid', 'url_hash'),
+    ),
+  );
+}

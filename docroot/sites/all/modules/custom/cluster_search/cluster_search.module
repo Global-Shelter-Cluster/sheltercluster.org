@@ -14,4 +14,10 @@ function cluster_search_preprocess_page(&$variables) {
   $search_form['content']['#attributes']['class'] = 'search';
   $search_form['content']['search_block_form']['#attributes']['placeholder'] = t('Search site');
   $variables['search_form'] = $search_form;
+
+  // We need to load the form again to avoid duplicate IDs.
+  $search_form = module_invoke('search', 'block_view', 'form');
+  $search_form['content']['#attributes']['class'] = 'search';
+  $search_form['content']['search_block_form']['#attributes']['placeholder'] = t('Search site');
+  $variables['search_form_bottom'] = $search_form;
 }

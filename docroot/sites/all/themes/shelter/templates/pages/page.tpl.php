@@ -103,7 +103,7 @@
 
     <div class="page-margin inside-footer">
 
-      <?php print render($search_form); ?>
+      <?php print render($search_form_bottom); ?>
 
       <section id="active-clusters-list">
         <h3>Hot responses</h3>
