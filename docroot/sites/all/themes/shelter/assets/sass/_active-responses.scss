@@ -16,6 +16,7 @@
   #major-responses {
     width: 100%;
     text-align: center;
+
     li {
       display: inline-block;
       min-width: 65%;
@@ -60,7 +61,7 @@
     display: inline-block;
 
     li {
-      float: left;
+      display: inline-block;
       @include rem(margin-right, 1rem);
     }
     svg {

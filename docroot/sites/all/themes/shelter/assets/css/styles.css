@@ -1910,7 +1910,7 @@ header #search-block-form {
   display: inline-block;
 }
 #active-responses #legend li {
-  float: left;
+  display: inline-block;
   margin-right: 16px;
   margin-right: 1rem;
 }
