@@ -11,7 +11,7 @@
       </section>
     <?php endif; ?>
 
-    <?php if ($local_tasks): ?>
+    <?php if (isset($local_tasks)): ?>
       <section id="admin-links" class="clearfix">
         <h3 data-collapsible="admin-links-container" data-collapsible-default="collapsed">Group Administration</h3>
         <div id="admin-links-container">
