@@ -1,4 +1,13 @@
 @charset "UTF-8";
+
+body.page-current-operations div.content a {
+  display: block;
+  margin-bottom: 10px;
+}
+body.page-current-operations div.content ul a {
+  display: inline;
+  margin-bottom: none;
+}
 /*! normalize.css v3.0.0 | HTML5 Display Definitions | MIT License | git.io/normalize */
 article,
 aside,
