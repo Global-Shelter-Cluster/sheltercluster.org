@@ -16,12 +16,14 @@
 @import "compass/css3/transform";
 @import "compass/css3/images";
 @import "compass/css3/flexbox";
+
 @import "vars";
 @import "mixin";
 @import "reusable";
 @import "layout";
 @import "operation";
-@import "document-card.scss";
+@import "document-card";
+@import "document-featured";
 @import "search";
 @import "header";
 @import "secondary-nav";
@@ -30,12 +32,15 @@
 @import "coordination";
 @import "calendar";
 @import "join-group";
-@import "_admin-content";
+@import "admin-content";
 @import "active-responses";
 @import "regions-countries";
 @import "footer";
 
-
+.page-current-operations .content a {
+  display: block;
+  @include rem(margin-bottom, 1rem);
+}
 
 
 
