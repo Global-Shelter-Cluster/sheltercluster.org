@@ -2145,3 +2145,9 @@ footer #partners-list .partner {
   list-style: none;
   display: inline-block;
 }
+
+.page-current-operations .content a {
+  display: block;
+  margin-bottom: 16px;
+  margin-bottom: 1rem;
+}
