@@ -28,56 +28,6 @@
   }
 }
 
-#featured-documents {
-  position: relative;
-  color: #fff;
-  @include rem(margin-bottom, 2rem);
-
-  ul {
-    @include reset-list;
-  }
-  li {
-    @include rem(max-height, 10rem);
-    overflow: hidden;
-
-    .document-information {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      @include background-image(linear-gradient(to right, rgba($shelter-grey, 0), rgba($shelter-grey, 0.7) 20%, rgba($shelter-grey, 0.9) 50%, $shelter-grey 80%, $shelter-grey));
-      @include rem(padding, 1rem);
-      width: 100%;
-
-      h2 {
-        color: #fff;
-        margin: 0;
-        border-bottom: 1px solid #fff;
-        a {
-          color: #fff;
-          text-decoration: none;
-          .svg {
-            fill: #fff;
-          }
-        }
-      }
-      p {
-        @include rem(margin, 0.25rem 0 0 0);
-        @include rem(font-size, 0.75rem );
-        text-transform: uppercase;
-        color: $shelter-light-blue;
-      }
-    }
-    img {
-      width: 100%;
-      float: left;
-    }
-  }
-  .image-document {
-    @include rem(max-height, 40rem);
-    overflow: visible;
-  }
-}
-
 #operation-data {
   background-color: $shelter-light-blue;
   color: $shelter-grey;
