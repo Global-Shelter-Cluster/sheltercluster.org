@@ -60,6 +60,7 @@
 
 #discussions-items {
   display: table;
+  width: 100%;
   background-color: rgb(218,222,228);
   @include reset-list;
   @include rem(padding, 1rem 2rem 1rem 2rem);

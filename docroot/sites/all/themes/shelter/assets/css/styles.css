@@ -1460,6 +1460,7 @@ header #search-block-form {
 
 #discussions-items {
   display: table;
+  width: 100%;
   background-color: #dadee4;
   padding: 0;
   margin: 0;
