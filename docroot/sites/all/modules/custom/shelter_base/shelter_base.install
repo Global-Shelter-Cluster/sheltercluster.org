@@ -251,3 +251,10 @@ function shelter_base_update_7024() {
 function shelter_base_update_7025() {
   _shelter_base_modules_enable('custom');
 }
+
+/**
+ * Re-index site.
+ */
+function shelter_base_update_7026() {
+  search_api_index_reindex('default_node_index');
+}
