@@ -10,6 +10,23 @@ function cluster_context_menu_alter(&$items) {
     $type_url_str = str_replace('_', '-', $type->type);
     $items['node/add/' . $type_url_str]['page callback'] = 'cluster_context_build_form';
   }
+
+  $items['node/add']['access callback'] = 'user_access';
+  $items['node/add']['access arguments'] = array('cluster_context_node_add_access');
+}
+
+/**
+ * Determines whether the user is using context.
+ * @param array|null $form_state Optional.
+ * @return bool
+ */
+function _cluster_context_is_being_used(&$form_state = NULL) {
+  foreach (array('group', 'region', 'response') as $key) {
+    if (_cluster_context_get_nid_param($key, $form_state)) {
+      return TRUE;
+    }
+  }
+  return FALSE;
 }
 
 /**
@@ -23,6 +40,11 @@ function cluster_context_menu_alter(&$items) {
  */
 function cluster_context_build_form($type) {
   global $user;
+
+  if (!_cluster_context_is_being_used() && !user_access('create nodes without cluster context')) {
+    return drupal_access_denied();
+  }
+
   $form_id = $type . '_node_form';
   $form_state = array();
   $form_state['build_info']['args'][] = (object) array(
@@ -55,6 +77,13 @@ function cluster_context_build_form($type) {
   return $form;
 }
 
+function cluster_context_redirect_home($form, &$form_state) {
+  if ($form_state['nid']) {
+    // The node was created successfully.
+    $form_state['redirect'] = '<front>';
+  }
+}
+
 /**
  * Implements hook_form_alter().
  * Prepopulates fields based on query string params.
@@ -68,11 +97,12 @@ function cluster_context_form_alter(&$form, &$form_state, $form_id) {
   $type = $matches[1];
 
   // If any of the possible query string keys is present, simplify the form.
-  foreach (array('group', 'region', 'response') as $key) {
-    if (_cluster_context_get_nid_param($key, $form_state)) {
-      _cluster_context_simplify_form($form);
-      break;
-    }
+  if (_cluster_context_is_being_used($form_state)) {
+    _cluster_context_simplify_form($form);
+  }
+
+  if ($type === 'document' && !_cluster_context_is_being_used($form_state)) {
+    array_push($form['actions']['submit']['#submit'], 'cluster_context_redirect_home');
   }
 
   _cluster_context_prepopulate($form, $form_state, 'og_group_ref', 'group');
@@ -253,6 +283,6 @@ function _cluster_context_get_nid_param($name, &$form_state = NULL) {
       // is read directly from here.
       $form_state['cluster_context_params'][$name] = intval($_GET[$name]);
     }
-    return $form_state['cluster_context_params'][$name];
+    return intval($_GET[$name]);
   }
 }

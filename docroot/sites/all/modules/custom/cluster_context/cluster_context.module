@@ -1,5 +1,6 @@
 <?php
 
+include_once 'cluster_context.permissions.inc';
 include_once 'cluster_context.admin.inc';
 
 /**
@@ -24,65 +25,122 @@ function cluster_context_links($node) {
 
   $links = array();
 
-  $links['new-document'] = array(
-    'title' => t('Create document'),
-    'href' => 'node/add/document',
-    'query' => array('group' => $node->nid, 'destination' => 'node/' . $node->nid),
-  );
+  if (node_access('create', 'document')) {
+    $links['new-document'] = array(
+      'title' => t('Create document'),
+      'href' => 'node/add/document',
+      'query' => array(
+        'group' => $node->nid,
+        'destination' => 'node/' . $node->nid
+      ),
+    );
+  }
 
-  $links['new-discussion'] = array(
-    'title' => t('Create discussion'),
-    'href' => 'node/add/discussion',
-    'query' => array('group' => $node->nid, 'destination' => 'node/' . $node->nid),
-  );
+  if (node_access('create', 'discussion')) {
+    $links['new-discussion'] = array(
+      'title' => t('Create discussion'),
+      'href' => 'node/add/discussion',
+      'query' => array(
+        'group' => $node->nid,
+        'destination' => 'node/' . $node->nid
+      ),
+    );
+  }
+
+  if (node_access('create', 'page')) {
+    $links['new-page'] = array(
+      'title' => t('Create page'),
+      'href' => 'node/add/page',
+      'query' => array(
+        'group' => $node->nid,
+        'destination' => 'node/' . $node->nid
+      ),
+    );
+  }
 
   switch ($node->type) {
     case 'geographic_region':
-      $links['new-child-region'] = array(
-        'title' => t('New child region'),
-        'href' => 'node/add/geographic-region',
-        'query' => array('region' => $node->nid, 'destination' => 'node/' . $node->nid),
-      );
-
-      if (!$manager->getStrategicAdvisory()) {
-        $links['new-strategic-advisory'] = array(
-          'title' => t('New strategic advisory group'),
-          'href' => 'node/add/strategic-advisory',
-          'query' => array('region' => $node->nid, 'destination' => 'node/' . $node->nid),
+      if (node_access('create', 'geographic-region')) {
+        $links['new-child-region'] = array(
+          'title' => t('New child region'),
+          'href' => 'node/add/geographic-region',
+          'query' => array(
+            'region' => $node->nid,
+            'destination' => 'node/' . $node->nid
+          ),
         );
       }
 
-      $links['new-response'] = array(
-        'title' => t('New response'),
-        'href' => 'node/add/response',
-        'query' => array('region' => $node->nid, 'destination' => 'node/' . $node->nid),
-      );
+      if (!$manager->getStrategicAdvisory() && node_access('create', 'strategic-advisory')) {
+        $links['new-strategic-advisory'] = array(
+          'title' => t('New strategic advisory group'),
+          'href' => 'node/add/strategic-advisory',
+          'query' => array(
+            'region' => $node->nid,
+            'destination' => 'node/' . $node->nid
+          ),
+        );
+      }
+
+      if (node_access('create', 'response')) {
+        $links['new-response'] = array(
+          'title' => t('New response'),
+          'href' => 'node/add/response',
+          'query' => array(
+            'region' => $node->nid,
+            'destination' => 'node/' . $node->nid
+          ),
+        );
+      }
 
       break;
     case 'response':
-      if (!$manager->getStrategicAdvisory()) {
+      if (!$manager->getStrategicAdvisory() && node_access('create', 'strategic-advisory')) {
         $links['new-strategic-advisory'] = array(
           'title' => t('New strategic advisory group'),
           'href' => 'node/add/strategic-advisory',
-          'query' => array('response' => $node->nid, 'destination' => 'node/' . $node->nid),
+          'query' => array(
+            'response' => $node->nid,
+            'destination' => 'node/' . $node->nid
+          ),
         );
       }
 
-      $links['new-child-response'] = array(
-        'title' => t('New child response'),
-        'href' => 'node/add/response',
-        'query' => array('response' => $node->nid, 'destination' => 'node/' . $node->nid),
-      );
+      if (node_access('create', 'response')) {
+        $links['new-child-response'] = array(
+          'title' => t('New child response'),
+          'href' => 'node/add/response',
+          'query' => array(
+            'response' => $node->nid,
+            'destination' => 'node/' . $node->nid
+          ),
+        );
+      }
 
-      $links['new-hub'] = array(
-        'title' => t('New hub'),
-        'href' => 'node/add/hub',
-        'query' => array('response' => $node->nid, 'destination' => 'node/' . $node->nid),
-      );
+      if (node_access('create', 'hub')) {
+        $links['new-hub'] = array(
+          'title' => t('New hub'),
+          'href' => 'node/add/hub',
+          'query' => array(
+            'response' => $node->nid,
+            'destination' => 'node/' . $node->nid
+          ),
+        );
+      }
 
       break;
   }
 
+  if (node_access('create', 'working_group')) {
+    $links['new-working-group'] = array(
+      'title' => t('New working group'),
+      'href' => 'node/add/working-group',
+      'query' => array(
+        'response' => $node->nid,
+        'destination' => 'node/' . $node->nid
+      ),
+    );
+  }
   return $links;
 }
 

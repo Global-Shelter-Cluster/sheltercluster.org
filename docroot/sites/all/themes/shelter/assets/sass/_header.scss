@@ -75,12 +75,15 @@ header {
     }
   }
 }
+
 #user-profile-container {
   float: right;
   position: relative;
-  @include rem(padding, 0 0 4rem 0);
+  @include rem(padding, 0 0 3.75rem 0);
   @include rem(font-size, 0.85rem);
-
+  @include breakpoint(800px) {
+    @include rem(padding, 1rem 0 2rem 0);
+  }
   .profile-item {
     float: left;
     margin: 0;
@@ -96,10 +99,17 @@ header {
     }
   }
 }
+
+header {
+  #search-block-form {
+    @include rem(padding, 0rem 0 1.25rem);
+  }
+}
+
 #logo-shelter-cluster {
   width: 100%;
   display: block;
-  @include rem(padding, 2rem 0 0 0);
+  @include rem(padding, 1rem 0 0 0);
 
   @include breakpoint(700px) {
     float:left;
@@ -124,7 +134,7 @@ header {
 #site-options-bar {
   background: $shelter-dark-blue;
   @include rem(font-size, 0.9rem);
-  @include rem(margin-bottom, 1.5rem);
+  @include rem(margin-bottom, 0.75rem);
   color: darken($shelter-dark-blue, 10%);
   span {
     color: #fff;
@@ -147,7 +157,7 @@ header {
   }
 }
 #site-branding {
-  @include rem(margin-bottom,1.5rem);
+  @include rem(margin-bottom,0.75rem);
 }
 #bandwidth-selector-icon {
   height: 13px;

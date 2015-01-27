@@ -1,0 +1,3 @@
+name = Partials
+description = Partial provides a theme layer helper that abstracts template files and provides preprocessor-like functions.
+core = 7.x

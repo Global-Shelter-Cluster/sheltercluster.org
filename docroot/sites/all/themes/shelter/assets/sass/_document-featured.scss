@@ -1,0 +1,87 @@
+#featured-documents {
+  position: relative;
+  color: #fff;
+  @include rem(margin-bottom, 2rem);
+
+  ul {
+    @include reset-list;
+  }
+  li {
+    overflow: hidden;
+
+    .document-title {
+      position: absolute;
+      bottom: 5%;
+      right: 0;
+      width: 100%;
+      background: darken($shelter-grey, 50%);
+      opacity: 1;
+      z-index: 10;
+
+      h2 {
+        color: #fff;
+        margin: 0;
+        @include rem(font-size, 1.6rem);
+        @include rem(padding, 0.7rem 1rem);
+        border: none;
+        a {
+          color: #fff;
+          text-decoration: none;
+          .svg {
+            position: relative;
+            top: 5px;
+            width: 24px;
+            fill: #fff;
+            margin-right: 7px;
+          }
+        }
+        span {
+          top: 0;
+          left: 10px;
+          font-size: 0.85rem;
+          text-transform: lowercase;
+          font-weight: normal;
+          color: darken($white, 20%);
+        }
+      }
+
+    }
+
+    .document-information {
+      background: darken($shelter-grey, 20%);
+
+      .size-type {
+        @include rem(padding-top, 1rem);
+        @include rem(font-size, 0.65rem );
+        text-transform: uppercase;
+
+        a {
+          @extend .not-underlined-links;
+          font-weight: bold;
+          color: $white;
+        }
+      }
+      p {
+        @include rem(padding, 1rem);
+        @include rem(margin, 0.25rem 0 0 0);
+        @include rem(font-size, 0.80rem );
+        text-transform: uppercase;
+        color: darken($white,17%);
+      }
+      img {
+        width: 290px;
+        float: left;
+        @include rem(margin-right, 0.95rem);
+      }
+      .image-container {
+        float: left;
+        background: $white;
+        @include rem(margin-right, 1rem);
+      }
+    }
+  }
+
+  .image-document {
+    @include rem(max-height, 40rem);
+  }
+}
