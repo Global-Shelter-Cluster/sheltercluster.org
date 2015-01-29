@@ -15,6 +15,9 @@ function shelter_preprocess_html(&$variables) {
  * Implements hook_preprocess_page().
  */
 function shelter_preprocess_page(&$variables) {
+  // Put the language switcher in a variable.
+  $block = module_invoke('locale', 'block_view', 'language_content');
+  $variables['language_switcher'] = $block['content'];
   global $base_url;
   $variables['base_url'] = $base_url;
   $current_path = current_path();
