@@ -1,0 +1,26 @@
+.page-node-edit #edit-field-document-type,
+.page-node-add-document #edit-field-document-type {
+  background: #eee;
+  padding: 0.5em 1.25em 0.1em;
+  border: 1px solid #333;
+}
+.page-node-edit #edit-field-document-type .form-type-checkbox,
+.page-node-add-document #edit-field-document-type .form-type-checkbox {
+  display: inline-block;
+  margin-right: 0.25em;
+}
+.page-node-edit .form-type-checkboxes .form-type-checkbox,
+.page-node-add-document .form-type-checkboxes .form-type-checkbox {
+  display: inline-block;
+  margin-right: 0.25em;
+  background: #ccc;
+  padding: 0.5em 1em;
+  margin-bottom: 0.5em;
+  border-radius: 10px;
+  border: 1px solid #aaa;
+}
+.page-node-edit .form-type-checkboxes .form-type-checkbox input,
+.page-node-add-document .form-type-checkboxes .form-type-checkbox input {
+  position: relative;
+  top: -2px;
+}
