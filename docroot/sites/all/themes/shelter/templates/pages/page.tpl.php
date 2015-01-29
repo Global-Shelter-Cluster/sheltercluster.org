@@ -93,10 +93,17 @@
   <?php elseif ($dashboard_menu): ?>
 
     <div class="page-margin clearfix">
-      <?php print partial('non_dashboard_group_page', array(
+      <?php
+      $extra = FALSE;
+      if (isset($page['content']['system_main']['side-column'])) {
+        $extra = $page['content']['system_main']['side-column'];
+        unset($page['content']['system_main']['side-column']);
+      }
+      print partial('non_dashboard_group_page', array(
         'page' => $page,
         'editor_menu' => $editor_menu,
-        'dashboard_menu' => $dashboard_menu));
+        'dashboard_menu' => $dashboard_menu,
+        'extra' => $extra));
       ?>
     </div>
 

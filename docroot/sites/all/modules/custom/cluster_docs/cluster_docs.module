@@ -46,7 +46,7 @@ function _cluster_docs_title_callback($nid) {
   try {
     // @TODO manage multilinigual loading of entities.
     $wrapper = entity_metadata_wrapper('node', node_load($nid), array('langcode' => LANGUAGE_NONE));
-    return $wrapper->label();
+    return $wrapper->label() . ' - ' . $title;
   }
   catch (EntityMetadataWrapperException $exc) {
     watchdog(
@@ -69,8 +69,18 @@ function cluster_docs_all($nid) {
 
   global $language;
   $query = search_api_query('default_node_index', array(
-    'languages' => array($language->language),
+//    'languages' => array($language->language),
   ));
+
+  $title = NULL;
+  // Read the title filter value from the URL, if it exists.
+  if (isset($_GET['f']) && is_array($_GET['f'])) {
+    foreach ($_GET['f'] as $filter) {
+      if (substr($filter, 0, 6) == 'title:') {
+        $title = substr($filter, 6);
+      }
+    }
+  }
 
   $filter = $query->createFilter();
   $filter->condition('og_group_ref', $nid);
@@ -86,13 +96,97 @@ function cluster_docs_all($nid) {
 
   $nids = array_keys($results['results']);
 
+  $reset_link = FALSE;
+  if (isset($_GET['f'])) {
+    //TODO: improve detection
+    $reset_link = array(
+      '#theme' => 'link',
+      '#text' => 'reset filters',
+      '#path' => 'node/' . $nid . '/documents',
+      '#options' => array(
+        'attributes' => array('class' => 'reset-filters'),
+      ),
+    );
+  }
+
+  $facets = array();
+
+  // Define which facets to show and in what order.
+  $facets_to_show = array(
+    'field_document_type',
+
+    // Basic tags
+    'field_coordination_management',
+    'field_information_management',
+    'field_technical_support_design',
+
+    // Advanced tags
+    'field_assess_monitor_eval',
+    'field_inter_cluster',
+    'field_cross_cutting_issues',
+    'field_response_phase',
+    'field_intervention_materials',
+    'field_intervention_programming',
+    'field_settlement_type',
+    'field_non_food_items',
+    'field_issues',
+    'field_toolkit',
+
+    // Disabled facets
+//    'og_group_ref',
+  );
+
+  foreach (facetapi_get_block_info(array('block')) as $delta => $info) {
+    $block_view = module_invoke('facetapi', 'block_view', $delta);
+    if (is_null($block_view)) {
+      continue;
+    }
+    $content = $block_view['content'];
+
+    $facet = $content['#settings']->facet;
+    if (!in_array($facet, $facets_to_show)) {
+      continue;
+    }
+
+    $content['#options'] = $content[$facet];
+//    if (count($content['#options']['#items']) < 2) {
+//      // Don't show facets with only one option.
+//      continue;
+//    }
+
+    $content['#theme'] = 'cluster_docs_facet';
+    $content['#weight'] = array_search($facet, $facets_to_show);
+
+    $facets[$delta] = $content;
+  }
+
+  $facets[] = array(
+    '#weight' => -50,
+    '#theme' => 'cluster_docs_facet',
+    '#title' => 'Title Contains',
+    '#options' => FALSE,
+    '#child' => array(
+      '#type' => 'textfield',
+      '#name' => 'title',
+      '#value' => $title,
+    ),
+  );
+  drupal_add_js(drupal_get_path('module', 'cluster_docs') . '/js/search.js');
+
   $ret = array(
     array(
-      '#theme' => 'cluster_docs_cards_list',
-      '#heading' => $node->title . ' documents',
-      '#docs' => cluster_docs_prepare_card_data($nids),
+      '#theme' => 'cluster_docs_table_list',
+      '#heading' => t('Documents') . ' (' . $results['result count'] . ')',
+      '#docs' => cluster_docs_prepare_row_data($nids),
+      '#reset_link' => $reset_link ? render($copy = $reset_link) : NULL,
     ),
     'pager' => array('#theme' => 'pager'),
+    'side-column' => array(
+      '#prefix' => '<section class="facets">',
+      '#suffix' => '</section>',
+      'facets' => $facets,
+      'reset_link' => $reset_link,
+    ),
   );
 
   return $ret;
@@ -285,6 +379,113 @@ function cluster_docs_prepare_card_data($nids) {
 }
 
 /**
+ * Prepare the data for document table rows.
+ * @param $nids
+ *  Document node ids.
+ * @return
+ *  Array of document data ready to be used in cards lists.
+ */
+function cluster_docs_prepare_row_data($nids) {
+  $docs = array();
+  $properties = array('title', 'link', 'link_url', 'is_link', 'is_file', 'is_file_class', 'description', 'filesize',
+    'file_extension', 'is_image', 'image_uri', 'has_preview', 'preview_uri', 'source',);
+
+  // @TODO language negocitation.
+  global $language;
+  $langcode = $language->language;
+  foreach (node_load_multiple($nids) as $node) {
+    // Set default values.
+    $doc = array_fill_keys($properties, FALSE);
+    try {
+
+      // @TODO insert language negociation in info array.
+      $wrapper = entity_metadata_wrapper('node', $node);
+      $doc['title'] = $wrapper->label();
+
+      if ($file = $wrapper->field_file->value()) {
+        $url = file_create_url($file['uri']);
+      }
+      else {
+        $url = $wrapper->field_link->url->value();
+      }
+      $doc['link_url'] = $url;
+      $doc['link'] = l($doc['title'], $url, array('attributes' => array('target' => '_blank')));
+
+      // Prepare the description.
+      $desc = '';
+      if ($body = $wrapper->body->value()) {
+        // Use user supplied summary if available.
+        if($body['safe_summary']) {
+          $desc = $body['safe_summary'];
+        }
+        // Create summary.
+        elseif ($body['safe_value']) {
+          $alter = array(
+            // @TODO get this value from the body field settings.
+            'max_length' => 100,
+            'ellipsis' => TRUE,
+            'word_boundary' => TRUE,
+            'html' => TRUE,
+          );
+          $desc = views_trim_text($alter, $body['safe_value']);
+        }
+      }
+      $doc['description'] = $desc;
+
+      // Test if this document is a file field.
+      if ($file = $wrapper->field_file->value()) {
+        $doc['is_file'] = TRUE;
+        $doc['is_file_class'] = '';
+        if ($doc['is_file']) {
+          $doc['is_file_class'] = 'local-file';
+        }
+
+        $file_extension = pathinfo($file['filename'], PATHINFO_EXTENSION);
+        $doc['file_extension'] = l($file_extension, $url, array('attributes' => array('target' => '_blank')));
+
+        // Test if the attached file is an image.
+        // @TODO the image file will probably not be the actual document file.
+        switch ($file_extension) {
+          case 'png':
+          case 'jpg':
+          case 'gif':
+            $doc['is_image'] = TRUE;
+            $doc['image_uri'] = $file['uri'];
+            break;
+        }
+        $doc['filesize'] = number_format($file['filesize'] / 1048576, 2);
+      }
+
+      // Test if this document has a preview image.
+      if ($file = $wrapper->field_preview->value()) {
+        $doc['has_preview'] = TRUE;
+        $doc['preview_uri'] = $file['uri'];
+      }
+
+      // Test if this document is a link field.
+      if ($link = $wrapper->field_link->value()) {
+        $doc['is_link'] = TRUE;
+      }
+
+      // Set the publication date.
+      $doc['publication_date'] = format_date($node->created, 'custom', 'Y/m/d');
+
+      $docs[] = $doc;
+
+    }
+    catch (EntityMetadataWrapperException $exc) {
+      watchdog(
+        'cluster_docs',
+        'See '  . __FUNCTION__ . '() ' .  $exc->getTraceAsString(),
+         NULL,
+         WATCHDOG_ERROR
+      );
+    }
+  }
+  return $docs;
+}
+
+/**
  * Implements hook_permission().
  */
 function cluster_docs_permission() {
@@ -322,6 +523,15 @@ function cluster_docs_theme() {
       ),
       'template' => 'theme/cluster-docs-cards-list'
     ),
+    'cluster_docs_table_list' => array(
+      'variables' => array(
+        'heading' => FALSE,
+        'docs' => array(),
+        'all_documents_link' => FALSE,
+        'reset_link' => FALSE,
+      ),
+      'template' => 'theme/cluster-docs-table-list'
+    ),
     'cluster_docs_featured_documents' => array(
       'variables' => array(
         'docs' => array(),
@@ -337,5 +547,13 @@ function cluster_docs_theme() {
       ),
       'file' => 'theme/cluster_docs.theme.inc',
     ),
+    'cluster_docs_facet' => array(
+      'variables' => array(
+        'title' => FALSE,
+        'options' => array(),
+        'child' => array(),
+      ),
+      'file' => 'theme/cluster_docs.theme.inc',
+    )
   );
 }

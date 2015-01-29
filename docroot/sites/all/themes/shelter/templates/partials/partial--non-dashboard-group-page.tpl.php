@@ -26,6 +26,10 @@
       </section>
     <?php endif; ?>
 
+    <?php if ($extra): ?>
+      <?php print render($extra); ?>
+    <?php endif; ?>
+
   </div>
 
   <div class="main-column">
