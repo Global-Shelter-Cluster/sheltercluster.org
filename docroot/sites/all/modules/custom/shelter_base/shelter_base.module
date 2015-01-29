@@ -6,10 +6,16 @@
 
 include_once 'shelter_base.features.inc';
 
-function lcc_log_entity_metadata_wrapper_error($exception, $context) {
+function _log_entity_metadata_wrapper_error($exception, $context) {
   watchdog(
     $context,
     'See '  . __FUNCTION__ . '() <pre>' . $exception->getTraceAsString() . '</pre>',
      NULL, WATCHDOG_ERROR
   );
+}
+
+function shelter_base_preprocess_page(&$variables) {
+  if (path_is_admin(current_path())) {
+    drupal_add_css(drupal_get_path('module', 'shelter_base') . '/css/admin-tweaks.css');
+  }
 }
