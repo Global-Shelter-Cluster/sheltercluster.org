@@ -1,7 +1,6 @@
 <section id="content" class="clearfix">
 
   <div class="side-column">
-
     <?php if ($local_tasks): ?>
       <section id="user-profile-links" class="clearfix">
         <h3>Navigation</h3>

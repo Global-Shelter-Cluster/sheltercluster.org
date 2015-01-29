@@ -229,7 +229,7 @@ th {
 /* _vars.scss */
 /* _mixin.scss */
 /* _reusable.scss */
-.button, .form-submit, .page-search #search-form .form-submit, #user-login-container #user-login-form .form-submit, #join-group #button-join-group a {
+.button, .form-submit, .page-search #search-form .form-submit, #user-login-container #user-login-form .form-submit, #join-group #button-join-group a, .page-group .confirmation #edit-cancel {
   background: gainsboro;
   background-image: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJvYmplY3RCb3VuZGluZ0JveCIgeDE9IjAuNSIgeTE9IjAuMCIgeDI9IjAuNSIgeTI9IjEuMCI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2ZhZmFmYSIvPjxzdG9wIG9mZnNldD0iMTAlIiBzdG9wLWNvbG9yPSIjZmRmZGZkIi8+PHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjZGNkY2RjIi8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNncmFkKSIgLz48L3N2Zz4g');
   background-size: 100%;
@@ -248,7 +248,7 @@ th {
   border: 1px solid #ededed;
   border-bottom: 1px solid #cfcfcf;
 }
-.button:hover, .form-submit:hover, .page-search #search-form .form-submit:hover, #user-login-container #user-login-form .form-submit:hover, #join-group #button-join-group a:hover {
+.button:hover, .form-submit:hover, .page-search #search-form .form-submit:hover, #user-login-container #user-login-form .form-submit:hover, #join-group #button-join-group a:hover, .page-group .confirmation #edit-cancel:hover {
   background-image: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJvYmplY3RCb3VuZGluZ0JveCIgeDE9IjAuNSIgeTE9IjAuMCIgeDI9IjAuNSIgeTI9IjEuMCI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2UxZTFlMSIvPjxzdG9wIG9mZnNldD0iNjAlIiBzdG9wLWNvbG9yPSIjZTNlM2UzIi8+PHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjZTFlMWUxIi8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNncmFkKSIgLz48L3N2Zz4g');
   background-size: 100%;
   background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #e1e1e1), color-stop(60%, #e3e3e3), color-stop(100%, #e1e1e1));
@@ -276,13 +276,13 @@ th {
 
 .underlined-links, .page-search .search-results a, #user-login-container .item-list li a, #shelter-discussions .see-all, .page-node-discussions .discussions-item a, .node-type-discussion .comment .links a, .node-type-discussion .comment_forbidden a,
 .node-type-discussion .comment-add a, #shelter-calendar .see-all, #add-content a,
-#admin-links a, footer a {
+#admin-links a, .page-user .profile a, footer a {
   position: relative;
   text-decoration: none;
 }
 .underlined-links:after, .page-search .search-results a:after, #user-login-container .item-list li a:after, #shelter-discussions .see-all:after, .page-node-discussions .discussions-item a:after, .node-type-discussion .comment .links a:after, .node-type-discussion .comment_forbidden a:after,
 .node-type-discussion .comment-add a:after, #shelter-calendar .see-all:after, #add-content a:after,
-#admin-links a:after, footer a:after {
+#admin-links a:after, .page-user .profile a:after, footer a:after {
   content: '';
   width: 100%;
   position: absolute;
@@ -293,16 +293,16 @@ th {
 }
 .underlined-links:hover, .page-search .search-results a:hover, #user-login-container .item-list li a:hover, #shelter-discussions .see-all:hover, .page-node-discussions .discussions-item a:hover, .node-type-discussion .comment .links a:hover, .node-type-discussion .comment_forbidden a:hover,
 .node-type-discussion .comment-add a:hover, #shelter-calendar .see-all:hover, #add-content a:hover,
-#admin-links a:hover, footer a:hover, .underlined-links:active, .page-search .search-results a:active, #user-login-container .item-list li a:active, #shelter-discussions .see-all:active, .page-node-discussions .discussions-item a:active, .node-type-discussion .comment .links a:active, .node-type-discussion .comment_forbidden a:active,
+#admin-links a:hover, .page-user .profile a:hover, footer a:hover, .underlined-links:active, .page-search .search-results a:active, #user-login-container .item-list li a:active, #shelter-discussions .see-all:active, .page-node-discussions .discussions-item a:active, .node-type-discussion .comment .links a:active, .node-type-discussion .comment_forbidden a:active,
 .node-type-discussion .comment-add a:active, #shelter-calendar .see-all:active, #add-content a:active,
-#admin-links a:active, footer a:active {
+#admin-links a:active, .page-user .profile a:active, footer a:active {
   text-decoration: none;
 }
 .underlined-links:hover:after, .page-search .search-results a:hover:after, #user-login-container .item-list li a:hover:after, #shelter-discussions .see-all:hover:after, .page-node-discussions .discussions-item a:hover:after, .node-type-discussion .comment .links a:hover:after, .node-type-discussion .comment_forbidden a:hover:after,
 .node-type-discussion .comment-add a:hover:after, #shelter-calendar .see-all:hover:after, #add-content a:hover:after,
-#admin-links a:hover:after, footer a:hover:after, .underlined-links:active:after, .page-search .search-results a:active:after, #user-login-container .item-list li a:active:after, #shelter-discussions .see-all:active:after, .page-node-discussions .discussions-item a:active:after, .node-type-discussion .comment .links a:active:after, .node-type-discussion .comment_forbidden a:active:after,
+#admin-links a:hover:after, .page-user .profile a:hover:after, footer a:hover:after, .underlined-links:active:after, .page-search .search-results a:active:after, #user-login-container .item-list li a:active:after, #shelter-discussions .see-all:active:after, .page-node-discussions .discussions-item a:active:after, .node-type-discussion .comment .links a:active:after, .node-type-discussion .comment_forbidden a:active:after,
 .node-type-discussion .comment-add a:active:after, #shelter-calendar .see-all:active:after, #add-content a:active:after,
-#admin-links a:active:after, footer a:active:after {
+#admin-links a:active:after, .page-user .profile a:active:after, footer a:active:after {
   border-style: none;
 }
 
@@ -536,6 +536,8 @@ body {
   margin: 0.5rem 0.5rem 0.5rem 1.5rem;
   font-size: 13px;
   font-size: 0.8125rem;
+  min-height: 32px;
+  min-height: 2rem;
 }
 .document-cards .document-card .information-file {
   float: left;
@@ -1872,6 +1874,11 @@ header #search-block-form {
   text-decoration: none;
 }
 
+.page-group .confirmation #edit-cancel {
+  text-decoration: none;
+  background: #cdd6db;
+}
+
 /* _admin-content.scss */
 #add-content,
 #admin-links {
@@ -2077,6 +2084,30 @@ header #search-block-form {
 }
 .page-user #user-profile-links-container .active a {
   font-weight: bold;
+}
+.page-user .profile .history {
+  background: #ebeef0;
+  padding: 16px 16px 1.6px;
+  padding: 1rem 1rem 0.1rem;
+  margin-bottom: 16px;
+  margin-bottom: 1rem;
+}
+.page-user .profile a {
+  color: #688394;
+}
+.page-user .profile .avatar {
+  width: 120px;
+  height: 120px;
+  float: left;
+}
+.page-user .profile .avatar .svg {
+  width: 100px;
+  height: 100px;
+}
+.page-user .profile .name {
+  font-size: 48px;
+  font-size: 3rem;
+  display: block;
 }
 
 /* _footer.scss */

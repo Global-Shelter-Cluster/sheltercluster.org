@@ -22,4 +22,30 @@
       font-weight: bold;
     }
   }
+
+  .profile {
+    .history {
+      background: lighten($shelter-light-blue, 10%);
+      @include rem(padding, 1rem 1rem 0.1rem);
+      @include rem(margin-bottom, 1rem);
+    }
+    a {
+      color: $shelter-dark-blue;
+      @extend .underlined-links;
+    }
+    .avatar {
+      width: 120px;
+      height: 120px;
+      float: left;
+
+      .svg {
+        width: 100px;
+        height: 100px;
+      }
+    }
+    .name {
+      @include rem(font-size, 3rem);
+      display: block;
+    }
+  }
 }
