@@ -5,6 +5,15 @@
  */
 
 /**
+ * Implements hook_ctools_plugin_api().
+ */
+function cluster_search_ctools_plugin_api($module = NULL, $api = NULL) {
+  if ($module == "facetapi" && $api == "facetapi_defaults") {
+    return array("version" => "1");
+  }
+}
+
+/**
  * Implements hook_default_search_api_index().
  */
 function cluster_search_default_search_api_index() {
@@ -53,7 +62,7 @@ function cluster_search_default_search_api_index() {
           }
         },
         "search_api_transliteration" : {
-          "status" : 0,
+          "status" : 1,
           "weight" : "15",
           "settings" : { "fields" : { "title" : true, "body:value" : true } }
         },
@@ -94,7 +103,21 @@ function cluster_search_default_search_api_index() {
         "changed" : { "type" : "date" },
         "comment_count" : { "type" : "integer" },
         "created" : { "type" : "date" },
+        "field_assess_monitor_eval" : { "type" : "list\\u003Cinteger\\u003E", "entity_type" : "taxonomy_term" },
+        "field_coordination_management" : { "type" : "list\\u003Cinteger\\u003E", "entity_type" : "taxonomy_term" },
+        "field_cross_cutting_issues" : { "type" : "list\\u003Cinteger\\u003E", "entity_type" : "taxonomy_term" },
+        "field_document_type" : { "type" : "list\\u003Cinteger\\u003E", "entity_type" : "taxonomy_term" },
+        "field_information_management" : { "type" : "list\\u003Cinteger\\u003E", "entity_type" : "taxonomy_term" },
+        "field_inter_cluster" : { "type" : "list\\u003Cinteger\\u003E", "entity_type" : "taxonomy_term" },
+        "field_intervention_materials" : { "type" : "list\\u003Cinteger\\u003E", "entity_type" : "taxonomy_term" },
+        "field_intervention_programming" : { "type" : "list\\u003Cinteger\\u003E", "entity_type" : "taxonomy_term" },
         "field_is_reference_document" : { "type" : "boolean" },
+        "field_issues" : { "type" : "list\\u003Cinteger\\u003E", "entity_type" : "taxonomy_term" },
+        "field_non_food_items" : { "type" : "list\\u003Cinteger\\u003E", "entity_type" : "taxonomy_term" },
+        "field_response_phase" : { "type" : "list\\u003Cinteger\\u003E", "entity_type" : "taxonomy_term" },
+        "field_settlement_type" : { "type" : "list\\u003Cinteger\\u003E", "entity_type" : "taxonomy_term" },
+        "field_technical_support_design" : { "type" : "list\\u003Cinteger\\u003E", "entity_type" : "taxonomy_term" },
+        "field_toolkit" : { "type" : "list\\u003Cinteger\\u003E", "entity_type" : "taxonomy_term" },
         "og_group_ref" : { "type" : "list\\u003Cinteger\\u003E", "entity_type" : "node" },
         "promote" : { "type" : "boolean" },
         "search_api_language" : { "type" : "string" },
@@ -193,6 +216,90 @@ function cluster_search_default_search_api_server() {
             "table" : "search_api_db_default_node_index",
             "column" : "field_is_reference_document",
             "type" : "boolean",
+            "boost" : "1.0"
+          },
+          "field_assess_monitor_eval" : {
+            "table" : "search_api_db_default_node_index_field_assess_monitor_eval",
+            "column" : "value",
+            "type" : "list\\u003Cinteger\\u003E",
+            "boost" : "1.0"
+          },
+          "field_coordination_management" : {
+            "table" : "search_api_db_default_node_index_field_coordination_management",
+            "column" : "value",
+            "type" : "list\\u003Cinteger\\u003E",
+            "boost" : "1.0"
+          },
+          "field_cross_cutting_issues" : {
+            "table" : "search_api_db_default_node_index_field_cross_cutting_issues",
+            "column" : "value",
+            "type" : "list\\u003Cinteger\\u003E",
+            "boost" : "1.0"
+          },
+          "field_information_management" : {
+            "table" : "search_api_db_default_node_index_field_information_management",
+            "column" : "value",
+            "type" : "list\\u003Cinteger\\u003E",
+            "boost" : "1.0"
+          },
+          "field_inter_cluster" : {
+            "table" : "search_api_db_default_node_index_field_inter_cluster",
+            "column" : "value",
+            "type" : "list\\u003Cinteger\\u003E",
+            "boost" : "1.0"
+          },
+          "field_intervention_materials" : {
+            "table" : "search_api_db_default_node_index_field_intervention_materials",
+            "column" : "value",
+            "type" : "list\\u003Cinteger\\u003E",
+            "boost" : "1.0"
+          },
+          "field_intervention_programming" : {
+            "table" : "search_api_db_default_node_index_field_intervention_programmin",
+            "column" : "value",
+            "type" : "list\\u003Cinteger\\u003E",
+            "boost" : "1.0"
+          },
+          "field_issues" : {
+            "table" : "search_api_db_default_node_index_field_issues",
+            "column" : "value",
+            "type" : "list\\u003Cinteger\\u003E",
+            "boost" : "1.0"
+          },
+          "field_non_food_items" : {
+            "table" : "search_api_db_default_node_index_field_non_food_items",
+            "column" : "value",
+            "type" : "list\\u003Cinteger\\u003E",
+            "boost" : "1.0"
+          },
+          "field_response_phase" : {
+            "table" : "search_api_db_default_node_index_field_response_phase",
+            "column" : "value",
+            "type" : "list\\u003Cinteger\\u003E",
+            "boost" : "1.0"
+          },
+          "field_settlement_type" : {
+            "table" : "search_api_db_default_node_index_field_settlement_type",
+            "column" : "value",
+            "type" : "list\\u003Cinteger\\u003E",
+            "boost" : "1.0"
+          },
+          "field_technical_support_design" : {
+            "table" : "search_api_db_default_node_index_field_technical_support_desig",
+            "column" : "value",
+            "type" : "list\\u003Cinteger\\u003E",
+            "boost" : "1.0"
+          },
+          "field_toolkit" : {
+            "table" : "search_api_db_default_node_index_field_toolkit",
+            "column" : "value",
+            "type" : "list\\u003Cinteger\\u003E",
+            "boost" : "1.0"
+          },
+          "field_document_type" : {
+            "table" : "search_api_db_default_node_index_field_document_type",
+            "column" : "value",
+            "type" : "list\\u003Cinteger\\u003E",
             "boost" : "1.0"
           }
         }
