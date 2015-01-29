@@ -1,0 +1,25 @@
+.page-user {
+  .form-text {
+    float: none;
+    @include rem(margin-bottom, 0.5rem);
+    max-width: 100%;
+  }
+  .form-item .description {
+    width: 100%;
+    @include breakpoint(700px) {
+      width: 70%;
+    }
+  }
+  #user-profile-links-container {
+    ul {
+      list-style: none;
+      padding-left: 0;
+    }
+    a {
+      color: $shelter-grey;
+    }
+    .active a {
+      font-weight: bold;
+    }
+  }
+}
