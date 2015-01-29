@@ -2054,6 +2054,31 @@ header #search-block-form {
   background-color: #575757;
 }
 
+.page-user .form-text {
+  float: none;
+  margin-bottom: 8px;
+  margin-bottom: 0.5rem;
+  max-width: 100%;
+}
+.page-user .form-item .description {
+  width: 100%;
+}
+@media (min-width: 700px) {
+  .page-user .form-item .description {
+    width: 70%;
+  }
+}
+.page-user #user-profile-links-container ul {
+  list-style: none;
+  padding-left: 0;
+}
+.page-user #user-profile-links-container a {
+  color: #575757;
+}
+.page-user #user-profile-links-container .active a {
+  font-weight: bold;
+}
+
 /* _footer.scss */
 footer {
   background: #ebeff3;
