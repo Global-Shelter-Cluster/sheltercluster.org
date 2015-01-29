@@ -7,7 +7,7 @@
         var href = window.location.href;
 
         // Remove title parameter from current URL, if any
-        href = href.replace(/\?f\[\]=title%3A[^&]*&/, '?').replace(/&f\[\]=title%3A[^&]*/, '').replace(/\?f\[\]=title%3A[^&]*$/, '');
+        href = href.replace(/\?f\[\d*\]=title%3A[^&]*&/, '?').replace(/&f\[\d*\]=title%3A[^&]*/, '').replace(/\?f\[\d*\]=title%3A[^&]*$/, '');
 
         if (value) {
           var connector = href.indexOf('?') == -1 ? '?' : '&';
