@@ -247,7 +247,7 @@ function shelter_base_strongarm() {
   $strongarm->name = 'entity_translation_entity_types';
   $strongarm->value = array(
     'node' => 'node',
-    'taxonomy_term' => 0,
+    'taxonomy_term' => 'taxonomy_term',
     'comment' => 0,
     'user' => 0,
   );
@@ -835,6 +835,52 @@ function shelter_base_strongarm() {
   $strongarm->name = 'pathauto_user_pattern';
   $strongarm->value = 'users/[user:name]';
   $export['pathauto_user_pattern'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'title_comment';
+  $strongarm->value = array(
+    'auto_attach' => array(
+      'subject' => 0,
+    ),
+    'hide_label' => array(
+      'page' => 0,
+      'entity' => 0,
+    ),
+  );
+  $export['title_comment'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'title_node';
+  $strongarm->value = array(
+    'auto_attach' => array(
+      'title' => 'title',
+    ),
+    'hide_label' => array(
+      'page' => 0,
+      'entity' => 0,
+    ),
+  );
+  $export['title_node'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'title_taxonomy_term';
+  $strongarm->value = array(
+    'auto_attach' => array(
+      'name' => 'name',
+      'description' => 'description',
+    ),
+    'hide_label' => array(
+      'page' => 0,
+      'entity' => 0,
+    ),
+  );
+  $export['title_taxonomy_term'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
