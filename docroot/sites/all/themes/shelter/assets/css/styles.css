@@ -1505,6 +1505,21 @@ header #search-block-form {
   color: #7f1416;
 }
 
+.page-node-discussions .discussions-item {
+  clear: both;
+}
+.page-node-discussions .replies {
+  display: block;
+  width: 100px;
+  float: left;
+}
+.page-node-discussions .new {
+  color: #f00;
+  display: block;
+  font-size: 12.8px;
+  font-size: 0.8rem;
+}
+
 /* _coordination.scss */
 #shelter-coordination-team {
   margin: 0 0 32px 0;

@@ -78,12 +78,12 @@ function cluster_discussions_all($nid) {
   if ($result['results'] === 0) {
     $content = array(
       '#markup' => t('No content for the moment.'),
-    ); 
+    );
   }
   else {
     $content = node_view_multiple(node_load_multiple(array_keys($result['results'])));
   }
-  $ret['content'] = $content;
+  $ret['content'] = array( '#theme' => 'item_list', array('#items' => $content['nodes']) );
   $ret['pager'] = array(
     '#theme' => 'pager',
   );

@@ -100,3 +100,22 @@
     color: $shelter-red;
   }
 }
+
+.page-node-discussions {
+  .discussions-item {
+    clear: both;
+  }
+  .replies {
+    display: block;
+    width: 100px;
+    float: left;
+  }
+  .information {
+
+  }
+  .new {
+    color: #f00;
+    display: block;
+    @include rem(font-size, 0.8rem);
+  }
+}
