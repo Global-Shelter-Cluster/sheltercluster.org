@@ -22,7 +22,7 @@ function theme_cluster_discussions_all($vars) {
  * Render a single discussion teaser to be shown in a group's page.
  */
 function theme_cluster_discussions_teaser($vars) {
-  $output = '<div class="discussions-item">';
+  $output = '<li class="discussions-item clearfix">';
 
   $output .= '<div class="replies">' . $vars['element']['#replies'];
   if ($vars['element']['#is_latest']) {
@@ -38,12 +38,12 @@ function theme_cluster_discussions_teaser($vars) {
   ));
   $output .= '<span class="date">';
   $output .= format_date($vars['element']['#node']->created, 'short');
-  $output .= t(' by ');
-  $output .= l($vars['element']['#author']['name'], $vars['element']['#author']['path']);
+  //$output .= t(' by ');
+  //$output .= l($vars['element']['#author']['name'], $vars['element']['#author']['path']);
   $output .= '</span>';
   $output .= '</div>';
 
-  $output .= '</div>';
+  $output .= '</li>';
 
   return $output;
 }

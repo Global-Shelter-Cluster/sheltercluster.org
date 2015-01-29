@@ -83,7 +83,7 @@ function cluster_discussions_all($nid) {
   else {
     $content = node_view_multiple(node_load_multiple(array_keys($result['results'])));
   }
-  $ret['content'] = array( '#theme' => 'item_list', array('#items' => $content['nodes']) );
+  $ret['content'] = $content;
   $ret['pager'] = array(
     '#theme' => 'pager',
   );

@@ -274,12 +274,12 @@ th {
   border-style: solid;
 }
 
-.underlined-links, .page-search .search-results a, #user-login-container .item-list li a, #shelter-discussions .see-all, #shelter-calendar .see-all, #add-content a,
+.underlined-links, .page-search .search-results a, #user-login-container .item-list li a, #shelter-discussions .see-all, .page-node-discussions .discussions-item a, #shelter-calendar .see-all, #add-content a,
 #admin-links a, footer a {
   position: relative;
   text-decoration: none;
 }
-.underlined-links:after, .page-search .search-results a:after, #user-login-container .item-list li a:after, #shelter-discussions .see-all:after, #shelter-calendar .see-all:after, #add-content a:after,
+.underlined-links:after, .page-search .search-results a:after, #user-login-container .item-list li a:after, #shelter-discussions .see-all:after, .page-node-discussions .discussions-item a:after, #shelter-calendar .see-all:after, #add-content a:after,
 #admin-links a:after, footer a:after {
   content: '';
   width: 100%;
@@ -289,13 +289,13 @@ th {
   border-width: 0 0 1px;
   border-style: solid;
 }
-.underlined-links:hover, .page-search .search-results a:hover, #user-login-container .item-list li a:hover, #shelter-discussions .see-all:hover, #shelter-calendar .see-all:hover, #add-content a:hover,
-#admin-links a:hover, footer a:hover, .underlined-links:active, .page-search .search-results a:active, #user-login-container .item-list li a:active, #shelter-discussions .see-all:active, #shelter-calendar .see-all:active, #add-content a:active,
+.underlined-links:hover, .page-search .search-results a:hover, #user-login-container .item-list li a:hover, #shelter-discussions .see-all:hover, .page-node-discussions .discussions-item a:hover, #shelter-calendar .see-all:hover, #add-content a:hover,
+#admin-links a:hover, footer a:hover, .underlined-links:active, .page-search .search-results a:active, #user-login-container .item-list li a:active, #shelter-discussions .see-all:active, .page-node-discussions .discussions-item a:active, #shelter-calendar .see-all:active, #add-content a:active,
 #admin-links a:active, footer a:active {
   text-decoration: none;
 }
-.underlined-links:hover:after, .page-search .search-results a:hover:after, #user-login-container .item-list li a:hover:after, #shelter-discussions .see-all:hover:after, #shelter-calendar .see-all:hover:after, #add-content a:hover:after,
-#admin-links a:hover:after, footer a:hover:after, .underlined-links:active:after, .page-search .search-results a:active:after, #user-login-container .item-list li a:active:after, #shelter-discussions .see-all:active:after, #shelter-calendar .see-all:active:after, #add-content a:active:after,
+.underlined-links:hover:after, .page-search .search-results a:hover:after, #user-login-container .item-list li a:hover:after, #shelter-discussions .see-all:hover:after, .page-node-discussions .discussions-item a:hover:after, #shelter-calendar .see-all:hover:after, #add-content a:hover:after,
+#admin-links a:hover:after, footer a:hover:after, .underlined-links:active:after, .page-search .search-results a:active:after, #user-login-container .item-list li a:active:after, #shelter-discussions .see-all:active:after, .page-node-discussions .discussions-item a:active:after, #shelter-calendar .see-all:active:after, #add-content a:active:after,
 #admin-links a:active:after, footer a:active:after {
   border-style: none;
 }
@@ -1483,6 +1483,7 @@ header #search-block-form {
   margin: 0;
 }
 #discussions-items .replies {
+  color: #3e4e58;
   float: left;
   width: 25%;
 }
@@ -1502,16 +1503,33 @@ header #search-block-form {
 }
 #discussions-items .new {
   display: block;
-  color: #7f1416;
+  color: #f00;
 }
 
 .page-node-discussions .discussions-item {
-  clear: both;
+  background: #dadee4;
+  margin-bottom: 4px;
+  margin-bottom: 0.25rem;
+  padding: 12.8px;
+  padding: 0.8rem;
+}
+.page-node-discussions .discussions-item a {
+  color: #688394;
 }
 .page-node-discussions .replies {
+  color: #3e4e58;
   display: block;
   width: 100px;
   float: left;
+}
+.page-node-discussions .date {
+  font-size: 12.8px;
+  font-size: 0.8rem;
+  color: #688394;
+  float: right;
+  display: inline-block;
+  margin-top: 4px;
+  margin-top: 0.25rem;
 }
 .page-node-discussions .new {
   color: #f00;

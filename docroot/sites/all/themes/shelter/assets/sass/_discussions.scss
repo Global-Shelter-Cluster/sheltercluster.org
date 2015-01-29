@@ -77,6 +77,7 @@
   }
 
   .replies {
+    color: darken($shelter-dark-blue, 20%);
     float: left;
     width: 25%;
   }
@@ -97,21 +98,35 @@
   }
   .new {
     display: block;
-    color: $shelter-red;
+    color: #f00;
   }
 }
 
 .page-node-discussions {
+
   .discussions-item {
-    clear: both;
+    background: rgb(218,222,228);
+    @include rem(margin-bottom, 0.25rem);
+    @include rem(padding, 0.8rem);
+
+    a {
+      @extend .underlined-links;
+      color: $shelter-dark-blue;
+    }
+
   }
   .replies {
+    color: darken($shelter-dark-blue, 20%);
     display: block;
     width: 100px;
     float: left;
   }
-  .information {
-
+  .date {
+    @include rem(font-size, 0.8rem);
+    color: $shelter-dark-blue;
+    float: right;
+    display: inline-block;
+    @include rem(margin-top, 0.25rem);
   }
   .new {
     color: #f00;
