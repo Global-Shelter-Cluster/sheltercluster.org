@@ -6,7 +6,7 @@
 
 include_once 'shelter_base.features.inc';
 
-function _log_entity_metadata_wrapper_error($exception, $context) {
+function lcc_log_entity_metadata_wrapper_error($exception, $context) {
   watchdog(
     $context,
     'See '  . __FUNCTION__ . '() <pre>' . $exception->getTraceAsString() . '</pre>',

@@ -157,6 +157,7 @@ function shelter_preprocess_node_partial__related_response(&$variables) {
   $markup = _svg('icons/globe', array('alt' => 'Icon for Related Responses')) . ' ' . $node->title;
   $variables['link'] = l($markup, 'node/' . $node->nid, array('html' => TRUE));
 }
+
 /**
  * Implements hook_form_FORM_ID_alter().
  */
@@ -166,12 +167,14 @@ function shelter_form_search_form_alter(&$form, $form_state) {
   $form['advanced']['type']['#prefix'] = '<div class="criterion checkboxlist clearfix">';
   $form['advanced']['language']['#prefix'] = '<div class="criterion checkboxlist clearfix">';
 }
+
 /**
  * Redefine menu theme functions.
  */
 function shelter_menu_tree($variables) {
   return '<ul class="nav-items menu">' . $variables['tree'] . '</ul>';
 }
+
 /**
  * Redefine menu theme functions.
  */
@@ -185,6 +188,28 @@ function shelter_menu_link(array $variables) {
   }
   $output = l($element['#title'], $element['#href'], $element['#localized_options']);
   return '<li' . drupal_attributes($element['#attributes']) . '>' . $output . $sub_menu . "</li>\n";
+}
+
+function shelter_preprocess_node_partial__contextual_navigation(&$variables) {
+  $node = $variables['node'];
+  try {
+    $node_wrapper = entity_metadata_wrapper('node', $node);
+
+    if (isset($node_wrapper->field_parent_response)) {
+      //dpm('response');
+    }
+    if (isset($node_wrapper->field_parent_region)) {
+      //dpm('region');
+    }
+    if (isset($node_wrapper->field_associated_regions )) {
+      //dpm('associated regions');
+    }
+
+    //dpm($node_wrapper->getPropertyInfo());
+  }
+  catch (EntityMetadataWrapperException $exception) {
+    _log_entity_metadata_wrapper_error($exception, 'po_promoted');
+  }
 }
 
 /**
