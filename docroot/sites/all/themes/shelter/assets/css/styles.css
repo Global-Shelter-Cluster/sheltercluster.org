@@ -1,13 +1,4 @@
 @charset "UTF-8";
-
-body.page-current-operations div.content a {
-  display: block;
-  margin-bottom: 10px;
-}
-body.page-current-operations div.content ul a {
-  display: inline;
-  margin-bottom: none;
-}
 /*! normalize.css v3.0.0 | HTML5 Display Definitions | MIT License | git.io/normalize */
 article,
 aside,
@@ -266,14 +257,14 @@ th {
   background-image: linear-gradient(#e1e1e1, #e3e3e3 60%, #e1e1e1);
 }
 
-.not-underlined-links, #featured-documents li .document-information .size-type a, #secondary-nav .nav-items .nav-secondary-items a, #contextual-navigation a:hover, #contextual-navigation a:active {
+.not-underlined-links, #featured-documents li .document-information .size-type a, #secondary-nav .nav-items .nav-secondary-items a, #contextual-navigation a:hover, #contextual-navigation a:active, .node-type-discussion .comment a {
   position: relative;
   text-decoration: none;
 }
-.not-underlined-links:hover, #featured-documents li .document-information .size-type a:hover, #secondary-nav .nav-items .nav-secondary-items a:hover, #contextual-navigation a:hover, .not-underlined-links:active, #featured-documents li .document-information .size-type a:active, #secondary-nav .nav-items .nav-secondary-items a:active, #contextual-navigation a:active {
+.not-underlined-links:hover, #featured-documents li .document-information .size-type a:hover, #secondary-nav .nav-items .nav-secondary-items a:hover, #contextual-navigation a:hover, .node-type-discussion .comment a:hover, .not-underlined-links:active, #featured-documents li .document-information .size-type a:active, #secondary-nav .nav-items .nav-secondary-items a:active, #contextual-navigation a:active, .node-type-discussion .comment a:active {
   text-decoration: none;
 }
-.not-underlined-links:hover:after, #featured-documents li .document-information .size-type a:hover:after, #secondary-nav .nav-items .nav-secondary-items a:hover:after, #contextual-navigation a:hover:after, .not-underlined-links:active:after, #featured-documents li .document-information .size-type a:active:after, #secondary-nav .nav-items .nav-secondary-items a:active:after, #contextual-navigation a:active:after {
+.not-underlined-links:hover:after, #featured-documents li .document-information .size-type a:hover:after, #secondary-nav .nav-items .nav-secondary-items a:hover:after, #contextual-navigation a:hover:after, .node-type-discussion .comment a:hover:after, .not-underlined-links:active:after, #featured-documents li .document-information .size-type a:active:after, #secondary-nav .nav-items .nav-secondary-items a:active:after, #contextual-navigation a:active:after, .node-type-discussion .comment a:active:after {
   content: '';
   width: 100%;
   position: absolute;
@@ -283,12 +274,12 @@ th {
   border-style: solid;
 }
 
-.underlined-links, .page-search .search-results a, #user-login-container .item-list li a, #shelter-discussions .see-all, .page-node-discussions .discussions-item a, #shelter-calendar .see-all, #add-content a,
+.underlined-links, .page-search .search-results a, #user-login-container .item-list li a, #shelter-discussions .see-all, .page-node-discussions .discussions-item a, .node-type-discussion .comment .links a, .node-type-discussion .comment-add a, #shelter-calendar .see-all, #add-content a,
 #admin-links a, footer a {
   position: relative;
   text-decoration: none;
 }
-.underlined-links:after, .page-search .search-results a:after, #user-login-container .item-list li a:after, #shelter-discussions .see-all:after, .page-node-discussions .discussions-item a:after, #shelter-calendar .see-all:after, #add-content a:after,
+.underlined-links:after, .page-search .search-results a:after, #user-login-container .item-list li a:after, #shelter-discussions .see-all:after, .page-node-discussions .discussions-item a:after, .node-type-discussion .comment .links a:after, .node-type-discussion .comment-add a:after, #shelter-calendar .see-all:after, #add-content a:after,
 #admin-links a:after, footer a:after {
   content: '';
   width: 100%;
@@ -298,13 +289,13 @@ th {
   border-width: 0 0 1px;
   border-style: solid;
 }
-.underlined-links:hover, .page-search .search-results a:hover, #user-login-container .item-list li a:hover, #shelter-discussions .see-all:hover, .page-node-discussions .discussions-item a:hover, #shelter-calendar .see-all:hover, #add-content a:hover,
-#admin-links a:hover, footer a:hover, .underlined-links:active, .page-search .search-results a:active, #user-login-container .item-list li a:active, #shelter-discussions .see-all:active, .page-node-discussions .discussions-item a:active, #shelter-calendar .see-all:active, #add-content a:active,
+.underlined-links:hover, .page-search .search-results a:hover, #user-login-container .item-list li a:hover, #shelter-discussions .see-all:hover, .page-node-discussions .discussions-item a:hover, .node-type-discussion .comment .links a:hover, .node-type-discussion .comment-add a:hover, #shelter-calendar .see-all:hover, #add-content a:hover,
+#admin-links a:hover, footer a:hover, .underlined-links:active, .page-search .search-results a:active, #user-login-container .item-list li a:active, #shelter-discussions .see-all:active, .page-node-discussions .discussions-item a:active, .node-type-discussion .comment .links a:active, .node-type-discussion .comment-add a:active, #shelter-calendar .see-all:active, #add-content a:active,
 #admin-links a:active, footer a:active {
   text-decoration: none;
 }
-.underlined-links:hover:after, .page-search .search-results a:hover:after, #user-login-container .item-list li a:hover:after, #shelter-discussions .see-all:hover:after, .page-node-discussions .discussions-item a:hover:after, #shelter-calendar .see-all:hover:after, #add-content a:hover:after,
-#admin-links a:hover:after, footer a:hover:after, .underlined-links:active:after, .page-search .search-results a:active:after, #user-login-container .item-list li a:active:after, #shelter-discussions .see-all:active:after, .page-node-discussions .discussions-item a:active:after, #shelter-calendar .see-all:active:after, #add-content a:active:after,
+.underlined-links:hover:after, .page-search .search-results a:hover:after, #user-login-container .item-list li a:hover:after, #shelter-discussions .see-all:hover:after, .page-node-discussions .discussions-item a:hover:after, .node-type-discussion .comment .links a:hover:after, .node-type-discussion .comment-add a:hover:after, #shelter-calendar .see-all:hover:after, #add-content a:hover:after,
+#admin-links a:hover:after, footer a:hover:after, .underlined-links:active:after, .page-search .search-results a:active:after, #user-login-container .item-list li a:active:after, #shelter-discussions .see-all:active:after, .page-node-discussions .discussions-item a:active:after, .node-type-discussion .comment .links a:active:after, .node-type-discussion .comment-add a:active:after, #shelter-calendar .see-all:active:after, #add-content a:active:after,
 #admin-links a:active:after, footer a:active:after {
   border-style: none;
 }
@@ -1545,6 +1536,49 @@ header #search-block-form {
   display: block;
   font-size: 12.8px;
   font-size: 0.8rem;
+}
+
+.node-type-discussion #comment-body-add-more-wrapper .form-textarea {
+  min-height: 224px;
+  min-height: 14rem;
+}
+.node-type-discussion #comment-body-add-more-wrapper fieldset {
+  display: none;
+}
+.node-type-discussion #comments {
+  margin-top: 50px;
+}
+.node-type-discussion .comment a {
+  color: black;
+  text-transform: capitalize;
+  font-weight: bold;
+}
+.node-type-discussion .comment .content {
+  min-height: 32px;
+  min-height: 2rem;
+}
+.node-type-discussion .comment .links {
+  display: block;
+  background: #eee;
+  padding: 4px;
+  padding: 0.25rem;
+}
+.node-type-discussion .comment .links a {
+  color: #688394;
+  font-weight: normal;
+}
+.node-type-discussion .comment .submitted {
+  font-size: 12.8px;
+  font-size: 0.8rem;
+}
+.node-type-discussion .comment-add {
+  display: block;
+  background: #eee;
+  padding: 4px 8px;
+  padding: 0.25rem 0.5rem;
+}
+.node-type-discussion .comment-add a {
+  color: #688394;
 }
 
 /* _coordination.scss */

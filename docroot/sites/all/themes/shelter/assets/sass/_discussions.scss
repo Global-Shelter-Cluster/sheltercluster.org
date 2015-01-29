@@ -134,3 +134,53 @@
     @include rem(font-size, 0.8rem);
   }
 }
+
+.node-type-discussion {
+  #comment-body-add-more-wrapper {
+    .form-textarea {
+      @include rem(min-height, 14rem);
+    }
+    fieldset {
+      display: none;
+    }
+  }
+  #comments {
+    margin-top: 50px;
+  }
+  .comment {
+    a {
+      @extend .not-underlined-links;
+      color: black;
+      text-transform: capitalize;
+      font-weight: bold;
+    }
+    .content {
+      @include rem(min-height, 2rem);
+    }
+    .links {
+      display: block;
+      background: #eee;
+      @include rem(padding, 0.25rem);
+
+      a {
+        @extend .underlined-links;
+        color: $shelter-dark-blue;
+        font-weight: normal;
+      }
+    }
+    .submitted {
+      @include rem(font-size, 0.8rem);
+    }
+  }
+
+  .comment-add {
+    display: block;
+    background: #eee;
+    @include rem(padding, 0.25rem 0.5rem);
+
+    a {
+      @extend .underlined-links;
+      color: $shelter-dark-blue;
+    }
+  }
+}
