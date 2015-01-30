@@ -12,12 +12,7 @@
     <section id="site-options-bar" class="clearfix">
       <div class="page-margin">
         <div id="language-selector" class="clearfix">
-          <ul class="languages">
-            <li class="language"><a href="" class="active">en</a></li>
-            <li class="language"><a href="">fr</a></li>
-            <li class="language"><a href="">es</a></li>
-            <li class="language"><a href="">ar</a></li>
-          </ul>
+          <?php print $language_switcher; ?>
         </div>
         <?php /* print partial('bandwidth_selector'); */ ?>
       </div>

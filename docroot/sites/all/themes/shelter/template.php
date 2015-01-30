@@ -15,6 +15,9 @@ function shelter_preprocess_html(&$variables) {
  * Implements hook_preprocess_page().
  */
 function shelter_preprocess_page(&$variables) {
+  // Put the language switcher in a variable.
+  $block = module_invoke('locale', 'block_view', 'language_content');
+  $variables['language_switcher'] = $block['content'];
   global $base_url;
   $variables['base_url'] = $base_url;
   $current_path = current_path();
@@ -157,6 +160,7 @@ function shelter_preprocess_node_partial__related_response(&$variables) {
   $markup = _svg('icons/globe', array('alt' => 'Icon for Related Responses')) . ' ' . $node->title;
   $variables['link'] = l($markup, 'node/' . $node->nid, array('html' => TRUE));
 }
+
 /**
  * Implements hook_form_FORM_ID_alter().
  */
@@ -166,12 +170,14 @@ function shelter_form_search_form_alter(&$form, $form_state) {
   $form['advanced']['type']['#prefix'] = '<div class="criterion checkboxlist clearfix">';
   $form['advanced']['language']['#prefix'] = '<div class="criterion checkboxlist clearfix">';
 }
+
 /**
  * Redefine menu theme functions.
  */
 function shelter_menu_tree($variables) {
   return '<ul class="nav-items menu">' . $variables['tree'] . '</ul>';
 }
+
 /**
  * Redefine menu theme functions.
  */
@@ -187,9 +193,109 @@ function shelter_menu_link(array $variables) {
   return '<li' . drupal_attributes($element['#attributes']) . '>' . $output . $sub_menu . "</li>\n";
 }
 
+function shelter_preprocess_node_partial__contextual_navigation(&$variables) {
+  $node = $variables['node'];
+  try {
+    $node_wrapper = entity_metadata_wrapper('node', $node);
+
+    if (isset($node_wrapper->field_parent_response)) {
+      //dpm('response');
+    }
+    if (isset($node_wrapper->field_parent_region)) {
+      //dpm('region');
+    }
+    if (isset($node_wrapper->field_associated_regions )) {
+      //dpm('associated regions');
+    }
+
+    //dpm($node_wrapper->getPropertyInfo());
+  }
+  catch (EntityMetadataWrapperException $exception) {
+    _log_entity_metadata_wrapper_error($exception, 'po_promoted');
+  }
+}
+
 /**
  * Implements hook_preprocess_search_result().
  */
 function shelter_preprocess_search_result(&$variables) {
   //dpm($variables);
+}
+
+/**
+ * Implements hook suggestion for local block links.
+ * Replace full language name with abreviation.
+ */
+function shelter_links__locale_block(&$variables) {
+  $links = $variables['links'];
+  $attributes = $variables['attributes'];
+  $heading = $variables['heading'];
+  global $language_url;
+  $output = '';
+
+  if (count($links) > 0) {
+    // Treat the heading first if it is present to prepend it to the
+    // list of links.
+    if (!empty($heading)) {
+      if (is_string($heading)) {
+        // Prepare the array that will be used when the passed heading
+        // is a string.
+        $heading = array(
+          'text' => $heading,
+          
+          // Set the default level of the heading.
+          'level' => 'h2',
+        );
+      }
+      $output .= '<' . $heading['level'];
+      if (!empty($heading['class'])) {
+        $output .= drupal_attributes(array('class' => $heading['class']));
+      }
+      $output .= '>' . check_plain($heading['text']) . '</' . $heading['level'] . '>';
+    }
+    $attributes['class'][] = 'language';
+    $output .= '<ul' . drupal_attributes($attributes) . '>';
+
+    $num_links = count($links);
+    $i = 1;
+
+    foreach ($links as $key => $link) {
+      $class = array($key);
+      $class[] = 'language';
+      // Add first, last and active classes to the list of links to help out themers.
+      if ($i == 1) {
+        $class[] = 'first';
+      }
+      if ($i == $num_links) {
+        $class[] = 'last';
+      }
+      if (isset($link['href']) && ($link['href'] == $_GET['q'] || ($link['href'] == '<front>' && drupal_is_front_page())) && (empty($link['language']) || $link['language']->language == $language_url->language)) {
+        $class[] = 'active';
+      }
+      $output .= '<li' . drupal_attributes(array('class' => $class)) . '>';
+
+      if (isset($link['href'])) {
+        // Pass in $link as $options, they share the same keys.
+        $output .= l($link['language']->language, $link['href'], $link);
+      }
+      elseif (!empty($link['title'])) {
+        // Some links are actually not links, but we wrap these in <span> for adding title and class attributes.
+        if (empty($link['html'])) {
+          $link['title'] = check_plain($link['title']);
+        }
+        $span_attributes = '';
+        if (isset($link['attributes'])) {
+          $span_attributes = drupal_attributes($link['attributes']);
+        }
+        $output .= '<span' . $span_attributes . '>' . $link['title'] . '</span>';
+      }
+
+      $i++;
+      $output .= "</li>";
+    }
+
+    $output .= '</ul>';
+  }
+
+  return $output;
 }

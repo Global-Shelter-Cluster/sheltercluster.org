@@ -27,3 +27,11 @@
   }
 
 }
+
+.page-group .confirmation {
+  #edit-cancel {
+    @extend .button;
+    text-decoration: none;
+    background: $shelter-light-blue;
+  }
+}
