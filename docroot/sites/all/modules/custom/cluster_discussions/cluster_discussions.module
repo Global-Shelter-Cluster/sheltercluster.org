@@ -116,7 +116,6 @@ function cluster_discussions_node_view_alter(&$build) {
   switch ($build['#view_mode']) {
     case 'teaser':
       $build['#theme'] = 'cluster_discussions_teaser';
-
       if (!$build['#node']->comment_count) {
         $build['#replies'] = t('no replies');
       }
