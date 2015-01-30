@@ -277,7 +277,9 @@ function shelter_base_update_7028() {
  * Revert features for multilingual settings.
  */
 function shelter_base_update_7029() {
-  features_revert(array('shelter_base', 'cluster_discussions', 'cluster_og'));
+  features_revert_module('shelter_base');
+  features_revert_module('cluster_discussions');
+  features_revert_module('cluster_og');
 }
 
 /**
@@ -291,14 +293,17 @@ function shelter_base_update_7030() {
  * Revert features for menu multilingual settings.
  */
 function shelter_base_update_7031() {
-  features_revert(array('shelter_base'));
+  features_revert_module('shelter_base');
 }
 
 /**
  * Revert features for taxonomy fields.
  */
 function shelter_base_update_7032() {
-  features_revert(array('shelter_base', 'cluster_taxonomy', 'cluster_docs', 'cluster_og'));
+  features_revert_module('shelter_base');
+  features_revert_module('cluster_taxonomy');
+  features_revert_module('cluster_docs');
+  features_revert_module('cluster_og');
 }
 
 /**
@@ -306,15 +311,32 @@ function shelter_base_update_7032() {
  * This should be updated in the import script.
  */
 function shelter_base_update_7033() {
+  // Don't update the db.  Use the API. See update_7035().
+/*
   db_update('node')
   ->fields(array('language' => 'en'))
   ->condition('type', 'document', '!=')
   ->execute();
+*/
 }
 
 /**
  * Revert base feature for transliteration settings.
  */
 function shelter_base_update_7034() {
-  features_revert(array('shelter_base'));
+  features_revert_module('shelter_base');
+}
+
+/**
+ * Save all nodes to force setting the en language on all nodes.
+ */
+function shelter_base_update_7035() {
+  $q = new EntityFieldQuery();
+  $res = $q->entityCondition('entity_type', 'node')->entityCondition('bundle', 'document', '!=')->execute();
+  $nodes = node_load_multiple(array_keys($res['node']));
+  foreach($nodes as $node) {
+    echo $node->nid . "\n";
+    $node->language = 'en';
+    node_save($node);
+  }
 }
