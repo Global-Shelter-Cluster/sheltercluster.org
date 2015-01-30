@@ -168,7 +168,6 @@ class GroupDisplayProvider {
    */
   public function getContextualNavigation() {
     $wrapper = entity_metadata_wrapper('node', $this->node);
-
     $output = array(
       '#theme' => 'cluster_nav_contextual',
     );
