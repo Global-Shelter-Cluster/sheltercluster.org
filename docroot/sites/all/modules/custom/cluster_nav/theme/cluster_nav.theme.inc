@@ -76,7 +76,7 @@ function template_preprocess_cluster_nav_related_links(&$variables) {
   // Prepare the individual links render arrays.
   foreach ($variables['related_nodes'] as $node) {
     global $language;
-    $wrapper = entity_metadata_wrapper('node', $node, array('langcode' => $language->language));
+    $wrapper = entity_metadata_wrapper('node', $node);
     $variables['links'][] = array(
       '#theme' => 'cluster_nav_related_link__' . $variables['related_type'],
       '#node' => $node,

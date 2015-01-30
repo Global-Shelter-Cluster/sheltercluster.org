@@ -108,6 +108,7 @@ function _shelter_migrate_create_region($title, $region_type) {
   $e = entity_create('node', array('type' => 'geographic_region'));
   $w = entity_metadata_wrapper('node', $e);
   $w->title = $title;
+  $w->language->set('en');
   $w->field_geographic_region_type->set($region_type);
   $w->save();
   return $w->nid->value();
@@ -117,6 +118,7 @@ function _shelter_migrate_create_country($title, $nid_region, $region_type) {
   $e = entity_create('node', array('type' => 'geographic_region'));
   $w = entity_metadata_wrapper('node', $e);
   $w->title = $title;
+  $w->language->set('en');
   $w->field_geographic_region_type->set($region_type);
   $w->field_parent_region->set(node_load($nid_region));
   $w->save();

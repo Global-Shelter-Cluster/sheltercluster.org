@@ -72,10 +72,9 @@ function cluster_discussions_all($nid) {
   $query->range($offset, CLUSTER_DISCUSSIONS_PER_PAGE);
 
   $result = $query->execute();
-
   pager_default_initialize($result['result count'], CLUSTER_DISCUSSIONS_PER_PAGE);
 
-  if ($result['results'] === 0) {
+  if (! $result['results']) {
     $content = array(
       '#markup' => t('No content for the moment.'),
     );
