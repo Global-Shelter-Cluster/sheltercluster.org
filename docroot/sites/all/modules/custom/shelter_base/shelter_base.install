@@ -45,8 +45,8 @@ function _shelter_base_modules_enable($type) {
  */
 function _shelter_base_required_contrib() {
   return array('addressfield', 'admin_menu', 'backup_migrate', 'chosen', 'ctools', 'date', 'devel', 'email', 'entity', 'entity_translation',
-    'entityreference', 'features', 'field_collection', 'field_group', 'flag', 'link',  'libraries', 'name', 'og', 'og_access', 'og_register',
-    'og_ui', 'pathauto', 'respondjs', 'search_api', 'search_api_db','strongarm', 'title', 'token', 'transliteration',  'underscore',
+    'entityreference', 'facetapi', 'features', 'field_collection', 'field_group', 'flag', 'link',  'libraries', 'name', 'og', 'og_access', 'og_register',
+    'og_ui', 'pathauto', 'respondjs', 'search_api', 'search_api_db', 'search_api_facetapi', 'strongarm', 'title', 'token', 'transliteration',  'underscore',
     'uuid', 'uuid_features', 'url', 'views', 'views_ui', 'views_bulk_operations',
   );
 }
