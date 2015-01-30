@@ -15,6 +15,7 @@
 
   <div class="content"<?php print $content_attributes; ?>>
     <h2><?php print $title; ?></h2>
+    <?php if ($edit_link) {print $edit_link;} ?>
     <?php print render($content); ?>
   </div>
 
