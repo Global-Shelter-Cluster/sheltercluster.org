@@ -335,7 +335,6 @@ function shelter_base_update_7035() {
   $res = $q->entityCondition('entity_type', 'node')->entityCondition('bundle', 'document', '!=')->execute();
   $nodes = node_load_multiple(array_keys($res['node']));
   foreach($nodes as $node) {
-    echo $node->nid . "\n";
     $node->language = 'en';
     node_save($node);
   }
