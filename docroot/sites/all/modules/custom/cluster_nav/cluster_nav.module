@@ -50,7 +50,6 @@ function _cluster_nav_paged_teaser_list($bundle) {
     ->propertyCondition('status', NODE_PUBLISHED)
     ->pager(10)
     ->execute();
-
   if (! isset($results['node'])) {
     $content = array(
       '#markup' => t('No content for the moment.'),
