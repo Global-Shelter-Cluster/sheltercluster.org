@@ -24,3 +24,7 @@
   position: relative;
   top: -2px;
 }
+.page-node-edit .form-text,
+.page-node-add-document .form-text {
+  float: none;
+}
