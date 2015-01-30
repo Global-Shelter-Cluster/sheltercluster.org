@@ -45,7 +45,7 @@ function _cluster_docs_title_callback($nid) {
 
   try {
     // @TODO manage multilinigual loading of entities.
-    $wrapper = entity_metadata_wrapper('node', node_load($nid), array('langcode' => LANGUAGE_NONE));
+    $wrapper = entity_metadata_wrapper('node', node_load($nid));
     return $wrapper->label() . ' - ' . $title;
   }
   catch (EntityMetadataWrapperException $exc) {
