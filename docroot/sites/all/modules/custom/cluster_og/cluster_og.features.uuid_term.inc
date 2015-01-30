@@ -25,9 +25,25 @@ function cluster_og_uuid_features_default_terms() {
           'safe_value' => 'Severe Local Storm',
         ),
       ),
+      'und' => array(
+        0 => array(
+          'value' => 'Severe Local Storm',
+          'format' => NULL,
+          'safe_value' => 'Severe Local Storm',
+        ),
+      ),
     ),
     'description_field' => array(
       'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'filtered_html',
+          'safe_value' => '',
+          'safe_summary' => '',
+        ),
+      ),
+      'und' => array(
         0 => array(
           'value' => '',
           'summary' => NULL,
@@ -54,7 +70,7 @@ function cluster_og_uuid_features_default_terms() {
         ),
       ),
     ),
-    'description_original' => '',
+    'description_original' => NULL,
   );
   $terms[] = array(
     'name' => 'Natural Disaster',
@@ -71,9 +87,25 @@ function cluster_og_uuid_features_default_terms() {
           'safe_value' => 'Natural Disaster',
         ),
       ),
+      'und' => array(
+        0 => array(
+          'value' => 'Natural Disaster',
+          'format' => NULL,
+          'safe_value' => 'Natural Disaster',
+        ),
+      ),
     ),
     'description_field' => array(
       'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'filtered_html',
+          'safe_value' => '',
+          'safe_summary' => '',
+        ),
+      ),
+      'und' => array(
         0 => array(
           'value' => '',
           'summary' => NULL,
@@ -100,7 +132,7 @@ function cluster_og_uuid_features_default_terms() {
         ),
       ),
     ),
-    'description_original' => '',
+    'description_original' => NULL,
   );
   $terms[] = array(
     'name' => 'Earthquake',
@@ -117,9 +149,25 @@ function cluster_og_uuid_features_default_terms() {
           'safe_value' => 'Earthquake',
         ),
       ),
+      'und' => array(
+        0 => array(
+          'value' => 'Earthquake',
+          'format' => NULL,
+          'safe_value' => 'Earthquake',
+        ),
+      ),
     ),
     'description_field' => array(
       'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'filtered_html',
+          'safe_value' => '',
+          'safe_summary' => '',
+        ),
+      ),
+      'und' => array(
         0 => array(
           'value' => '',
           'summary' => NULL,
@@ -146,7 +194,7 @@ function cluster_og_uuid_features_default_terms() {
         ),
       ),
     ),
-    'description_original' => '',
+    'description_original' => NULL,
   );
   $terms[] = array(
     'name' => 'Country',
@@ -163,9 +211,25 @@ function cluster_og_uuid_features_default_terms() {
           'safe_value' => 'Country',
         ),
       ),
+      'und' => array(
+        0 => array(
+          'value' => 'Country',
+          'format' => NULL,
+          'safe_value' => 'Country',
+        ),
+      ),
     ),
     'description_field' => array(
       'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'filtered_html',
+          'safe_value' => '',
+          'safe_summary' => '',
+        ),
+      ),
+      'und' => array(
         0 => array(
           'value' => '',
           'summary' => NULL,
@@ -192,7 +256,7 @@ function cluster_og_uuid_features_default_terms() {
         ),
       ),
     ),
-    'description_original' => '',
+    'description_original' => NULL,
   );
   $terms[] = array(
     'name' => 'Technical Disaster',
@@ -209,9 +273,25 @@ function cluster_og_uuid_features_default_terms() {
           'safe_value' => 'Technical Disaster',
         ),
       ),
+      'und' => array(
+        0 => array(
+          'value' => 'Technical Disaster',
+          'format' => NULL,
+          'safe_value' => 'Technical Disaster',
+        ),
+      ),
     ),
     'description_field' => array(
       'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'filtered_html',
+          'safe_value' => '',
+          'safe_summary' => '',
+        ),
+      ),
+      'und' => array(
         0 => array(
           'value' => '',
           'summary' => NULL,
@@ -238,7 +318,7 @@ function cluster_og_uuid_features_default_terms() {
         ),
       ),
     ),
-    'description_original' => '',
+    'description_original' => NULL,
   );
   $terms[] = array(
     'name' => 'Cold wave',
@@ -255,9 +335,25 @@ function cluster_og_uuid_features_default_terms() {
           'safe_value' => 'Cold wave',
         ),
       ),
+      'und' => array(
+        0 => array(
+          'value' => 'Cold wave',
+          'format' => NULL,
+          'safe_value' => 'Cold wave',
+        ),
+      ),
     ),
     'description_field' => array(
       'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'filtered_html',
+          'safe_value' => '',
+          'safe_summary' => '',
+        ),
+      ),
+      'und' => array(
         0 => array(
           'value' => '',
           'summary' => NULL,
@@ -284,7 +380,7 @@ function cluster_og_uuid_features_default_terms() {
         ),
       ),
     ),
-    'description_original' => '',
+    'description_original' => NULL,
   );
   $terms[] = array(
     'name' => 'Tropical Cyclone',
@@ -301,9 +397,25 @@ function cluster_og_uuid_features_default_terms() {
           'safe_value' => 'Tropical Cyclone',
         ),
       ),
+      'und' => array(
+        0 => array(
+          'value' => 'Tropical Cyclone',
+          'format' => NULL,
+          'safe_value' => 'Tropical Cyclone',
+        ),
+      ),
     ),
     'description_field' => array(
       'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'filtered_html',
+          'safe_value' => '',
+          'safe_summary' => '',
+        ),
+      ),
+      'und' => array(
         0 => array(
           'value' => '',
           'summary' => NULL,
@@ -330,7 +442,7 @@ function cluster_og_uuid_features_default_terms() {
         ),
       ),
     ),
-    'description_original' => '',
+    'description_original' => NULL,
   );
   $terms[] = array(
     'name' => 'Land Slide',
@@ -347,9 +459,25 @@ function cluster_og_uuid_features_default_terms() {
           'safe_value' => 'Land Slide',
         ),
       ),
+      'und' => array(
+        0 => array(
+          'value' => 'Land Slide',
+          'format' => NULL,
+          'safe_value' => 'Land Slide',
+        ),
+      ),
     ),
     'description_field' => array(
       'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'filtered_html',
+          'safe_value' => '',
+          'safe_summary' => '',
+        ),
+      ),
+      'und' => array(
         0 => array(
           'value' => '',
           'summary' => NULL,
@@ -376,7 +504,7 @@ function cluster_og_uuid_features_default_terms() {
         ),
       ),
     ),
-    'description_original' => '',
+    'description_original' => NULL,
   );
   $terms[] = array(
     'name' => 'Snow Avalanche',
@@ -393,9 +521,25 @@ function cluster_og_uuid_features_default_terms() {
           'safe_value' => 'Snow Avalanche',
         ),
       ),
+      'und' => array(
+        0 => array(
+          'value' => 'Snow Avalanche',
+          'format' => NULL,
+          'safe_value' => 'Snow Avalanche',
+        ),
+      ),
     ),
     'description_field' => array(
       'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'filtered_html',
+          'safe_value' => '',
+          'safe_summary' => '',
+        ),
+      ),
+      'und' => array(
         0 => array(
           'value' => '',
           'summary' => NULL,
@@ -422,7 +566,7 @@ function cluster_og_uuid_features_default_terms() {
         ),
       ),
     ),
-    'description_original' => '',
+    'description_original' => NULL,
   );
   $terms[] = array(
     'name' => 'Extratropical Cyclone',
@@ -439,9 +583,25 @@ function cluster_og_uuid_features_default_terms() {
           'safe_value' => 'Extratropical Cyclone',
         ),
       ),
+      'und' => array(
+        0 => array(
+          'value' => 'Extratropical Cyclone',
+          'format' => NULL,
+          'safe_value' => 'Extratropical Cyclone',
+        ),
+      ),
     ),
     'description_field' => array(
       'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'filtered_html',
+          'safe_value' => '',
+          'safe_summary' => '',
+        ),
+      ),
+      'und' => array(
         0 => array(
           'value' => '',
           'summary' => NULL,
@@ -468,7 +628,7 @@ function cluster_og_uuid_features_default_terms() {
         ),
       ),
     ),
-    'description_original' => '',
+    'description_original' => NULL,
   );
   $terms[] = array(
     'name' => 'Region',
@@ -485,9 +645,25 @@ function cluster_og_uuid_features_default_terms() {
           'safe_value' => 'Region',
         ),
       ),
+      'und' => array(
+        0 => array(
+          'value' => 'Region',
+          'format' => NULL,
+          'safe_value' => 'Region',
+        ),
+      ),
     ),
     'description_field' => array(
       'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'filtered_html',
+          'safe_value' => '',
+          'safe_summary' => '',
+        ),
+      ),
+      'und' => array(
         0 => array(
           'value' => '',
           'summary' => NULL,
@@ -514,7 +690,7 @@ function cluster_og_uuid_features_default_terms() {
         ),
       ),
     ),
-    'description_original' => '',
+    'description_original' => NULL,
   );
   $terms[] = array(
     'name' => 'Flood',
@@ -531,9 +707,25 @@ function cluster_og_uuid_features_default_terms() {
           'safe_value' => 'Flood',
         ),
       ),
+      'und' => array(
+        0 => array(
+          'value' => 'Flood',
+          'format' => NULL,
+          'safe_value' => 'Flood',
+        ),
+      ),
     ),
     'description_field' => array(
       'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'filtered_html',
+          'safe_value' => '',
+          'safe_summary' => '',
+        ),
+      ),
+      'und' => array(
         0 => array(
           'value' => '',
           'summary' => NULL,
@@ -560,7 +752,7 @@ function cluster_og_uuid_features_default_terms() {
         ),
       ),
     ),
-    'description_original' => '',
+    'description_original' => NULL,
   );
   $terms[] = array(
     'name' => 'Heat Wave',
@@ -577,9 +769,25 @@ function cluster_og_uuid_features_default_terms() {
           'safe_value' => 'Heat Wave',
         ),
       ),
+      'und' => array(
+        0 => array(
+          'value' => 'Heat Wave',
+          'format' => NULL,
+          'safe_value' => 'Heat Wave',
+        ),
+      ),
     ),
     'description_field' => array(
       'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'filtered_html',
+          'safe_value' => '',
+          'safe_summary' => '',
+        ),
+      ),
+      'und' => array(
         0 => array(
           'value' => '',
           'summary' => NULL,
@@ -606,7 +814,7 @@ function cluster_og_uuid_features_default_terms() {
         ),
       ),
     ),
-    'description_original' => '',
+    'description_original' => NULL,
   );
   $terms[] = array(
     'name' => 'Volcano',
@@ -623,9 +831,25 @@ function cluster_og_uuid_features_default_terms() {
           'safe_value' => 'Volcano',
         ),
       ),
+      'und' => array(
+        0 => array(
+          'value' => 'Volcano',
+          'format' => NULL,
+          'safe_value' => 'Volcano',
+        ),
+      ),
     ),
     'description_field' => array(
       'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'filtered_html',
+          'safe_value' => '',
+          'safe_summary' => '',
+        ),
+      ),
+      'und' => array(
         0 => array(
           'value' => '',
           'summary' => NULL,
@@ -652,7 +876,7 @@ function cluster_og_uuid_features_default_terms() {
         ),
       ),
     ),
-    'description_original' => '',
+    'description_original' => NULL,
   );
   $terms[] = array(
     'name' => 'Storm Surge',
@@ -669,9 +893,25 @@ function cluster_og_uuid_features_default_terms() {
           'safe_value' => 'Storm Surge',
         ),
       ),
+      'und' => array(
+        0 => array(
+          'value' => 'Storm Surge',
+          'format' => NULL,
+          'safe_value' => 'Storm Surge',
+        ),
+      ),
     ),
     'description_field' => array(
       'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'filtered_html',
+          'safe_value' => '',
+          'safe_summary' => '',
+        ),
+      ),
+      'und' => array(
         0 => array(
           'value' => '',
           'summary' => NULL,
@@ -698,7 +938,7 @@ function cluster_og_uuid_features_default_terms() {
         ),
       ),
     ),
-    'description_original' => '',
+    'description_original' => NULL,
   );
   $terms[] = array(
     'name' => 'Complex Crisis',
@@ -715,9 +955,25 @@ function cluster_og_uuid_features_default_terms() {
           'safe_value' => 'Complex Crisis',
         ),
       ),
+      'und' => array(
+        0 => array(
+          'value' => 'Complex Crisis',
+          'format' => NULL,
+          'safe_value' => 'Complex Crisis',
+        ),
+      ),
     ),
     'description_field' => array(
       'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'filtered_html',
+          'safe_value' => '',
+          'safe_summary' => '',
+        ),
+      ),
+      'und' => array(
         0 => array(
           'value' => '',
           'summary' => NULL,
@@ -744,7 +1000,7 @@ function cluster_og_uuid_features_default_terms() {
         ),
       ),
     ),
-    'description_original' => '',
+    'description_original' => NULL,
   );
   $terms[] = array(
     'name' => 'Mudslide',
@@ -761,9 +1017,25 @@ function cluster_og_uuid_features_default_terms() {
           'safe_value' => 'Mudslide',
         ),
       ),
+      'und' => array(
+        0 => array(
+          'value' => 'Mudslide',
+          'format' => NULL,
+          'safe_value' => 'Mudslide',
+        ),
+      ),
     ),
     'description_field' => array(
       'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'filtered_html',
+          'safe_value' => '',
+          'safe_summary' => '',
+        ),
+      ),
+      'und' => array(
         0 => array(
           'value' => '',
           'summary' => NULL,
@@ -790,7 +1062,7 @@ function cluster_og_uuid_features_default_terms() {
         ),
       ),
     ),
-    'description_original' => '',
+    'description_original' => NULL,
   );
   $terms[] = array(
     'name' => 'Tsunami',
@@ -807,9 +1079,25 @@ function cluster_og_uuid_features_default_terms() {
           'safe_value' => 'Tsunami',
         ),
       ),
+      'und' => array(
+        0 => array(
+          'value' => 'Tsunami',
+          'format' => NULL,
+          'safe_value' => 'Tsunami',
+        ),
+      ),
     ),
     'description_field' => array(
       'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'filtered_html',
+          'safe_value' => '',
+          'safe_summary' => '',
+        ),
+      ),
+      'und' => array(
         0 => array(
           'value' => '',
           'summary' => NULL,
@@ -836,7 +1124,7 @@ function cluster_og_uuid_features_default_terms() {
         ),
       ),
     ),
-    'description_original' => '',
+    'description_original' => NULL,
   );
   $terms[] = array(
     'name' => 'Tornadoes',
@@ -853,9 +1141,25 @@ function cluster_og_uuid_features_default_terms() {
           'safe_value' => 'Tornadoes',
         ),
       ),
+      'und' => array(
+        0 => array(
+          'value' => 'Tornadoes',
+          'format' => NULL,
+          'safe_value' => 'Tornadoes',
+        ),
+      ),
     ),
     'description_field' => array(
       'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'filtered_html',
+          'safe_value' => '',
+          'safe_summary' => '',
+        ),
+      ),
+      'und' => array(
         0 => array(
           'value' => '',
           'summary' => NULL,
@@ -882,7 +1186,7 @@ function cluster_og_uuid_features_default_terms() {
         ),
       ),
     ),
-    'description_original' => '',
+    'description_original' => NULL,
   );
   $terms[] = array(
     'name' => 'Epidemic',
@@ -899,9 +1203,25 @@ function cluster_og_uuid_features_default_terms() {
           'safe_value' => 'Epidemic',
         ),
       ),
+      'und' => array(
+        0 => array(
+          'value' => 'Epidemic',
+          'format' => NULL,
+          'safe_value' => 'Epidemic',
+        ),
+      ),
     ),
     'description_field' => array(
       'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'filtered_html',
+          'safe_value' => '',
+          'safe_summary' => '',
+        ),
+      ),
+      'und' => array(
         0 => array(
           'value' => '',
           'summary' => NULL,
@@ -928,7 +1248,7 @@ function cluster_og_uuid_features_default_terms() {
         ),
       ),
     ),
-    'description_original' => '',
+    'description_original' => NULL,
   );
   $terms[] = array(
     'name' => 'Fire',
@@ -945,9 +1265,25 @@ function cluster_og_uuid_features_default_terms() {
           'safe_value' => 'Fire',
         ),
       ),
+      'und' => array(
+        0 => array(
+          'value' => 'Fire',
+          'format' => NULL,
+          'safe_value' => 'Fire',
+        ),
+      ),
     ),
     'description_field' => array(
       'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'filtered_html',
+          'safe_value' => '',
+          'safe_summary' => '',
+        ),
+      ),
+      'und' => array(
         0 => array(
           'value' => '',
           'summary' => NULL,
@@ -974,7 +1310,7 @@ function cluster_og_uuid_features_default_terms() {
         ),
       ),
     ),
-    'description_original' => '',
+    'description_original' => NULL,
   );
   $terms[] = array(
     'name' => 'Drought',
@@ -991,9 +1327,25 @@ function cluster_og_uuid_features_default_terms() {
           'safe_value' => 'Drought',
         ),
       ),
+      'und' => array(
+        0 => array(
+          'value' => 'Drought',
+          'format' => NULL,
+          'safe_value' => 'Drought',
+        ),
+      ),
     ),
     'description_field' => array(
       'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'filtered_html',
+          'safe_value' => '',
+          'safe_summary' => '',
+        ),
+      ),
+      'und' => array(
         0 => array(
           'value' => '',
           'summary' => NULL,
@@ -1020,7 +1372,7 @@ function cluster_og_uuid_features_default_terms() {
         ),
       ),
     ),
-    'description_original' => '',
+    'description_original' => NULL,
   );
   $terms[] = array(
     'name' => 'Conflict',
@@ -1037,9 +1389,25 @@ function cluster_og_uuid_features_default_terms() {
           'safe_value' => 'Conflict',
         ),
       ),
+      'und' => array(
+        0 => array(
+          'value' => 'Conflict',
+          'format' => NULL,
+          'safe_value' => 'Conflict',
+        ),
+      ),
     ),
     'description_field' => array(
       'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'filtered_html',
+          'safe_value' => '',
+          'safe_summary' => '',
+        ),
+      ),
+      'und' => array(
         0 => array(
           'value' => '',
           'summary' => NULL,
@@ -1066,7 +1434,7 @@ function cluster_og_uuid_features_default_terms() {
         ),
       ),
     ),
-    'description_original' => '',
+    'description_original' => NULL,
   );
   $terms[] = array(
     'name' => 'Flash Flood',
@@ -1083,9 +1451,25 @@ function cluster_og_uuid_features_default_terms() {
           'safe_value' => 'Flash Flood',
         ),
       ),
+      'und' => array(
+        0 => array(
+          'value' => 'Flash Flood',
+          'format' => NULL,
+          'safe_value' => 'Flash Flood',
+        ),
+      ),
     ),
     'description_field' => array(
       'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'filtered_html',
+          'safe_value' => '',
+          'safe_summary' => '',
+        ),
+      ),
+      'und' => array(
         0 => array(
           'value' => '',
           'summary' => NULL,
@@ -1112,7 +1496,7 @@ function cluster_og_uuid_features_default_terms() {
         ),
       ),
     ),
-    'description_original' => '',
+    'description_original' => NULL,
   );
   $terms[] = array(
     'name' => 'Man-made disaster',
@@ -1129,9 +1513,25 @@ function cluster_og_uuid_features_default_terms() {
           'safe_value' => 'Man-made disaster',
         ),
       ),
+      'und' => array(
+        0 => array(
+          'value' => 'Man-made disaster',
+          'format' => NULL,
+          'safe_value' => 'Man-made disaster',
+        ),
+      ),
     ),
     'description_field' => array(
       'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'filtered_html',
+          'safe_value' => '',
+          'safe_summary' => '',
+        ),
+      ),
+      'und' => array(
         0 => array(
           'value' => '',
           'summary' => NULL,
@@ -1158,7 +1558,7 @@ function cluster_og_uuid_features_default_terms() {
         ),
       ),
     ),
-    'description_original' => '',
+    'description_original' => NULL,
   );
   $terms[] = array(
     'name' => 'Insect Infestation',
@@ -1175,9 +1575,25 @@ function cluster_og_uuid_features_default_terms() {
           'safe_value' => 'Insect Infestation',
         ),
       ),
+      'und' => array(
+        0 => array(
+          'value' => 'Insect Infestation',
+          'format' => NULL,
+          'safe_value' => 'Insect Infestation',
+        ),
+      ),
     ),
     'description_field' => array(
       'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'filtered_html',
+          'safe_value' => '',
+          'safe_summary' => '',
+        ),
+      ),
+      'und' => array(
         0 => array(
           'value' => '',
           'summary' => NULL,
@@ -1204,7 +1620,7 @@ function cluster_og_uuid_features_default_terms() {
         ),
       ),
     ),
-    'description_original' => '',
+    'description_original' => NULL,
   );
   $terms[] = array(
     'name' => 'Conflict',
@@ -1221,9 +1637,25 @@ function cluster_og_uuid_features_default_terms() {
           'safe_value' => 'Conflict',
         ),
       ),
+      'und' => array(
+        0 => array(
+          'value' => 'Conflict',
+          'format' => NULL,
+          'safe_value' => 'Conflict',
+        ),
+      ),
     ),
     'description_field' => array(
       'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'filtered_html',
+          'safe_value' => '',
+          'safe_summary' => '',
+        ),
+      ),
+      'und' => array(
         0 => array(
           'value' => '',
           'summary' => NULL,
@@ -1250,7 +1682,7 @@ function cluster_og_uuid_features_default_terms() {
         ),
       ),
     ),
-    'description_original' => '',
+    'description_original' => NULL,
   );
   return $terms;
 }

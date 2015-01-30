@@ -25,9 +25,25 @@ function cluster_taxonomy_uuid_features_default_terms() {
           'safe_value' => 'Recovery',
         ),
       ),
+      'und' => array(
+        0 => array(
+          'value' => 'Recovery',
+          'format' => NULL,
+          'safe_value' => 'Recovery',
+        ),
+      ),
     ),
     'description_field' => array(
       'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'filtered_html',
+          'safe_value' => '',
+          'safe_summary' => '',
+        ),
+      ),
+      'und' => array(
         0 => array(
           'value' => '',
           'summary' => NULL,
@@ -54,7 +70,7 @@ function cluster_taxonomy_uuid_features_default_terms() {
         ),
       ),
     ),
-    'description_original' => '',
+    'description_original' => NULL,
   );
   $terms[] = array(
     'name' => 'Cluster Evaluation',
@@ -71,9 +87,26 @@ function cluster_taxonomy_uuid_features_default_terms() {
           'safe_value' => 'Cluster Evaluation',
         ),
       ),
+      'und' => array(
+        0 => array(
+          'value' => 'Cluster Evaluation',
+          'format' => NULL,
+          'safe_value' => 'Cluster Evaluation',
+        ),
+      ),
     ),
     'description_field' => array(
       'en' => array(
+        0 => array(
+          'value' => 'An evaluative review of the work done by the cluster and the coordination teams',
+          'summary' => NULL,
+          'format' => 'filtered_html',
+          'safe_value' => '<p>An evaluative review of the work done by the cluster and the coordination teams</p>
+',
+          'safe_summary' => '',
+        ),
+      ),
+      'und' => array(
         0 => array(
           'value' => 'An evaluative review of the work done by the cluster and the coordination teams',
           'summary' => NULL,
@@ -118,9 +151,25 @@ function cluster_taxonomy_uuid_features_default_terms() {
           'safe_value' => 'Community Participation',
         ),
       ),
+      'und' => array(
+        0 => array(
+          'value' => 'Community Participation',
+          'format' => NULL,
+          'safe_value' => 'Community Participation',
+        ),
+      ),
     ),
     'description_field' => array(
       'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'filtered_html',
+          'safe_value' => '',
+          'safe_summary' => '',
+        ),
+      ),
+      'und' => array(
         0 => array(
           'value' => '',
           'summary' => NULL,
@@ -147,7 +196,7 @@ function cluster_taxonomy_uuid_features_default_terms() {
         ),
       ),
     ),
-    'description_original' => '',
+    'description_original' => NULL,
   );
   $terms[] = array(
     'name' => 'Technical Training',
@@ -164,9 +213,25 @@ function cluster_taxonomy_uuid_features_default_terms() {
           'safe_value' => 'Technical Training',
         ),
       ),
+      'und' => array(
+        0 => array(
+          'value' => 'Technical Training',
+          'format' => NULL,
+          'safe_value' => 'Technical Training',
+        ),
+      ),
     ),
     'description_field' => array(
       'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'filtered_html',
+          'safe_value' => '',
+          'safe_summary' => '',
+        ),
+      ),
+      'und' => array(
         0 => array(
           'value' => '',
           'summary' => NULL,
@@ -193,7 +258,7 @@ function cluster_taxonomy_uuid_features_default_terms() {
         ),
       ),
     ),
-    'description_original' => '',
+    'description_original' => NULL,
   );
   $terms[] = array(
     'name' => 'Risk Reduction',
@@ -210,9 +275,25 @@ function cluster_taxonomy_uuid_features_default_terms() {
           'safe_value' => 'Risk Reduction',
         ),
       ),
+      'und' => array(
+        0 => array(
+          'value' => 'Risk Reduction',
+          'format' => NULL,
+          'safe_value' => 'Risk Reduction',
+        ),
+      ),
     ),
     'description_field' => array(
       'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'filtered_html',
+          'safe_value' => '',
+          'safe_summary' => '',
+        ),
+      ),
+      'und' => array(
         0 => array(
           'value' => '',
           'summary' => NULL,
@@ -239,7 +320,7 @@ function cluster_taxonomy_uuid_features_default_terms() {
         ),
       ),
     ),
-    'description_original' => '',
+    'description_original' => NULL,
   );
   $terms[] = array(
     'name' => 'Human Rights',
@@ -256,9 +337,25 @@ function cluster_taxonomy_uuid_features_default_terms() {
           'safe_value' => 'Human Rights',
         ),
       ),
+      'und' => array(
+        0 => array(
+          'value' => 'Human Rights',
+          'format' => NULL,
+          'safe_value' => 'Human Rights',
+        ),
+      ),
     ),
     'description_field' => array(
       'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'filtered_html',
+          'safe_value' => '',
+          'safe_summary' => '',
+        ),
+      ),
+      'und' => array(
         0 => array(
           'value' => '',
           'summary' => NULL,
@@ -285,7 +382,7 @@ function cluster_taxonomy_uuid_features_default_terms() {
         ),
       ),
     ),
-    'description_original' => '',
+    'description_original' => NULL,
   );
   $terms[] = array(
     'name' => 'Livestock',
@@ -302,9 +399,25 @@ function cluster_taxonomy_uuid_features_default_terms() {
           'safe_value' => 'Livestock',
         ),
       ),
+      'und' => array(
+        0 => array(
+          'value' => 'Livestock',
+          'format' => NULL,
+          'safe_value' => 'Livestock',
+        ),
+      ),
     ),
     'description_field' => array(
       'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'filtered_html',
+          'safe_value' => '',
+          'safe_summary' => '',
+        ),
+      ),
+      'und' => array(
         0 => array(
           'value' => '',
           'summary' => NULL,
@@ -331,7 +444,7 @@ function cluster_taxonomy_uuid_features_default_terms() {
         ),
       ),
     ),
-    'description_original' => '',
+    'description_original' => NULL,
   );
   $terms[] = array(
     'name' => 'Template',
@@ -348,9 +461,25 @@ function cluster_taxonomy_uuid_features_default_terms() {
           'safe_value' => 'Template',
         ),
       ),
+      'und' => array(
+        0 => array(
+          'value' => 'Template',
+          'format' => NULL,
+          'safe_value' => 'Template',
+        ),
+      ),
     ),
     'description_field' => array(
       'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'filtered_html',
+          'safe_value' => '',
+          'safe_summary' => '',
+        ),
+      ),
+      'und' => array(
         0 => array(
           'value' => '',
           'summary' => NULL,
@@ -377,7 +506,7 @@ function cluster_taxonomy_uuid_features_default_terms() {
         ),
       ),
     ),
-    'description_original' => '',
+    'description_original' => NULL,
   );
   $terms[] = array(
     'name' => 'Tools and Fixing',
@@ -394,9 +523,25 @@ function cluster_taxonomy_uuid_features_default_terms() {
           'safe_value' => 'Tools and Fixing',
         ),
       ),
+      'und' => array(
+        0 => array(
+          'value' => 'Tools and Fixing',
+          'format' => NULL,
+          'safe_value' => 'Tools and Fixing',
+        ),
+      ),
     ),
     'description_field' => array(
       'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'filtered_html',
+          'safe_value' => '',
+          'safe_summary' => '',
+        ),
+      ),
+      'und' => array(
         0 => array(
           'value' => '',
           'summary' => NULL,
@@ -423,7 +568,7 @@ function cluster_taxonomy_uuid_features_default_terms() {
         ),
       ),
     ),
-    'description_original' => '',
+    'description_original' => NULL,
   );
   $terms[] = array(
     'name' => 'Severe Local Storm',
@@ -440,9 +585,25 @@ function cluster_taxonomy_uuid_features_default_terms() {
           'safe_value' => 'Severe Local Storm',
         ),
       ),
+      'und' => array(
+        0 => array(
+          'value' => 'Severe Local Storm',
+          'format' => NULL,
+          'safe_value' => 'Severe Local Storm',
+        ),
+      ),
     ),
     'description_field' => array(
       'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'filtered_html',
+          'safe_value' => '',
+          'safe_summary' => '',
+        ),
+      ),
+      'und' => array(
         0 => array(
           'value' => '',
           'summary' => NULL,
@@ -469,7 +630,7 @@ function cluster_taxonomy_uuid_features_default_terms() {
         ),
       ),
     ),
-    'description_original' => '',
+    'description_original' => NULL,
   );
   $terms[] = array(
     'name' => 'Inter-Cluster',
@@ -486,9 +647,25 @@ function cluster_taxonomy_uuid_features_default_terms() {
           'safe_value' => 'Inter-Cluster',
         ),
       ),
+      'und' => array(
+        0 => array(
+          'value' => 'Inter-Cluster',
+          'format' => NULL,
+          'safe_value' => 'Inter-Cluster',
+        ),
+      ),
     ),
     'description_field' => array(
       'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'filtered_html',
+          'safe_value' => '',
+          'safe_summary' => '',
+        ),
+      ),
+      'und' => array(
         0 => array(
           'value' => '',
           'summary' => NULL,
@@ -515,7 +692,7 @@ function cluster_taxonomy_uuid_features_default_terms() {
         ),
       ),
     ),
-    'description_original' => '',
+    'description_original' => NULL,
   );
   $terms[] = array(
     'name' => 'Government and regulatory policy',
@@ -532,9 +709,26 @@ function cluster_taxonomy_uuid_features_default_terms() {
           'safe_value' => 'Government and regulatory policy',
         ),
       ),
+      'und' => array(
+        0 => array(
+          'value' => 'Government and regulatory policy',
+          'format' => NULL,
+          'safe_value' => 'Government and regulatory policy',
+        ),
+      ),
     ),
     'description_field' => array(
       'en' => array(
+        0 => array(
+          'value' => 'Documentation on government policies, legislation, building codes, etc.',
+          'summary' => NULL,
+          'format' => 'filtered_html',
+          'safe_value' => '<p>Documentation on government policies, legislation, building codes, etc.</p>
+',
+          'safe_summary' => '',
+        ),
+      ),
+      'und' => array(
         0 => array(
           'value' => 'Documentation on government policies, legislation, building codes, etc.',
           'summary' => NULL,
@@ -579,9 +773,25 @@ function cluster_taxonomy_uuid_features_default_terms() {
           'safe_value' => 'HIV/AIDS',
         ),
       ),
+      'und' => array(
+        0 => array(
+          'value' => 'HIV/AIDS',
+          'format' => NULL,
+          'safe_value' => 'HIV/AIDS',
+        ),
+      ),
     ),
     'description_field' => array(
       'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'filtered_html',
+          'safe_value' => '',
+          'safe_summary' => '',
+        ),
+      ),
+      'und' => array(
         0 => array(
           'value' => '',
           'summary' => NULL,
@@ -608,7 +818,7 @@ function cluster_taxonomy_uuid_features_default_terms() {
         ),
       ),
     ),
-    'description_original' => '',
+    'description_original' => NULL,
   );
   $terms[] = array(
     'name' => 'No-build Zones',
@@ -625,9 +835,25 @@ function cluster_taxonomy_uuid_features_default_terms() {
           'safe_value' => 'No-build Zones',
         ),
       ),
+      'und' => array(
+        0 => array(
+          'value' => 'No-build Zones',
+          'format' => NULL,
+          'safe_value' => 'No-build Zones',
+        ),
+      ),
     ),
     'description_field' => array(
       'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'filtered_html',
+          'safe_value' => '',
+          'safe_summary' => '',
+        ),
+      ),
+      'und' => array(
         0 => array(
           'value' => '',
           'summary' => NULL,
@@ -654,7 +880,7 @@ function cluster_taxonomy_uuid_features_default_terms() {
         ),
       ),
     ),
-    'description_original' => '',
+    'description_original' => NULL,
   );
   $terms[] = array(
     'name' => 'Assessment, Monitoring, and Evaluation',
@@ -671,9 +897,25 @@ function cluster_taxonomy_uuid_features_default_terms() {
           'safe_value' => 'Assessment, Monitoring, and Evaluation',
         ),
       ),
+      'und' => array(
+        0 => array(
+          'value' => 'Assessment, Monitoring, and Evaluation',
+          'format' => NULL,
+          'safe_value' => 'Assessment, Monitoring, and Evaluation',
+        ),
+      ),
     ),
     'description_field' => array(
       'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'filtered_html',
+          'safe_value' => '',
+          'safe_summary' => '',
+        ),
+      ),
+      'und' => array(
         0 => array(
           'value' => '',
           'summary' => NULL,
@@ -700,7 +942,7 @@ function cluster_taxonomy_uuid_features_default_terms() {
         ),
       ),
     ),
-    'description_original' => '',
+    'description_original' => NULL,
   );
   $terms[] = array(
     'name' => 'Protracted Crisis',
@@ -717,9 +959,25 @@ function cluster_taxonomy_uuid_features_default_terms() {
           'safe_value' => 'Protracted Crisis',
         ),
       ),
+      'und' => array(
+        0 => array(
+          'value' => 'Protracted Crisis',
+          'format' => NULL,
+          'safe_value' => 'Protracted Crisis',
+        ),
+      ),
     ),
     'description_field' => array(
       'en' => array(
+        0 => array(
+          'value' => NULL,
+          'summary' => NULL,
+          'format' => 'filtered_html',
+          'safe_value' => '',
+          'safe_summary' => '',
+        ),
+      ),
+      'und' => array(
         0 => array(
           'value' => '',
           'summary' => NULL,
@@ -746,7 +1004,7 @@ function cluster_taxonomy_uuid_features_default_terms() {
         ),
       ),
     ),
-    'description_original' => '',
+    'description_original' => NULL,
   );
   $terms[] = array(
     'name' => 'Cash and Vouchers',
@@ -763,9 +1021,25 @@ function cluster_taxonomy_uuid_features_default_terms() {
           'safe_value' => 'Cash and Vouchers',
         ),
       ),
+      'und' => array(
+        0 => array(
+          'value' => 'Cash and Vouchers',
+          'format' => NULL,
+          'safe_value' => 'Cash and Vouchers',
+        ),
+      ),
     ),
     'description_field' => array(
       'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'filtered_html',
+          'safe_value' => '',
+          'safe_summary' => '',
+        ),
+      ),
+      'und' => array(
         0 => array(
           'value' => '',
           'summary' => NULL,
@@ -792,7 +1066,7 @@ function cluster_taxonomy_uuid_features_default_terms() {
         ),
       ),
     ),
-    'description_original' => '',
+    'description_original' => NULL,
   );
   $terms[] = array(
     'name' => 'Natural Disaster',
@@ -809,9 +1083,25 @@ function cluster_taxonomy_uuid_features_default_terms() {
           'safe_value' => 'Natural Disaster',
         ),
       ),
+      'und' => array(
+        0 => array(
+          'value' => 'Natural Disaster',
+          'format' => NULL,
+          'safe_value' => 'Natural Disaster',
+        ),
+      ),
     ),
     'description_field' => array(
       'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'filtered_html',
+          'safe_value' => '',
+          'safe_summary' => '',
+        ),
+      ),
+      'und' => array(
         0 => array(
           'value' => '',
           'summary' => NULL,
@@ -838,7 +1128,7 @@ function cluster_taxonomy_uuid_features_default_terms() {
         ),
       ),
     ),
-    'description_original' => '',
+    'description_original' => NULL,
   );
   $terms[] = array(
     'name' => 'Age',
@@ -855,9 +1145,25 @@ function cluster_taxonomy_uuid_features_default_terms() {
           'safe_value' => 'Age',
         ),
       ),
+      'und' => array(
+        0 => array(
+          'value' => 'Age',
+          'format' => NULL,
+          'safe_value' => 'Age',
+        ),
+      ),
     ),
     'description_field' => array(
       'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'filtered_html',
+          'safe_value' => '',
+          'safe_summary' => '',
+        ),
+      ),
+      'und' => array(
         0 => array(
           'value' => '',
           'summary' => NULL,
@@ -884,7 +1190,7 @@ function cluster_taxonomy_uuid_features_default_terms() {
         ),
       ),
     ),
-    'description_original' => '',
+    'description_original' => NULL,
   );
   $terms[] = array(
     'name' => 'Checklist',
@@ -901,9 +1207,25 @@ function cluster_taxonomy_uuid_features_default_terms() {
           'safe_value' => 'Checklist',
         ),
       ),
+      'und' => array(
+        0 => array(
+          'value' => 'Checklist',
+          'format' => NULL,
+          'safe_value' => 'Checklist',
+        ),
+      ),
     ),
     'description_field' => array(
       'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'filtered_html',
+          'safe_value' => '',
+          'safe_summary' => '',
+        ),
+      ),
+      'und' => array(
         0 => array(
           'value' => '',
           'summary' => NULL,
@@ -930,7 +1252,7 @@ function cluster_taxonomy_uuid_features_default_terms() {
         ),
       ),
     ),
-    'description_original' => '',
+    'description_original' => NULL,
   );
   $terms[] = array(
     'name' => 'Winterization',
@@ -947,9 +1269,25 @@ function cluster_taxonomy_uuid_features_default_terms() {
           'safe_value' => 'Winterization',
         ),
       ),
+      'und' => array(
+        0 => array(
+          'value' => 'Winterization',
+          'format' => NULL,
+          'safe_value' => 'Winterization',
+        ),
+      ),
     ),
     'description_field' => array(
       'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'filtered_html',
+          'safe_value' => '',
+          'safe_summary' => '',
+        ),
+      ),
+      'und' => array(
         0 => array(
           'value' => '',
           'summary' => NULL,
@@ -976,7 +1314,7 @@ function cluster_taxonomy_uuid_features_default_terms() {
         ),
       ),
     ),
-    'description_original' => '',
+    'description_original' => NULL,
   );
   $terms[] = array(
     'name' => 'Early Recovery',
@@ -993,9 +1331,25 @@ function cluster_taxonomy_uuid_features_default_terms() {
           'safe_value' => 'Early Recovery',
         ),
       ),
+      'und' => array(
+        0 => array(
+          'value' => 'Early Recovery',
+          'format' => NULL,
+          'safe_value' => 'Early Recovery',
+        ),
+      ),
     ),
     'description_field' => array(
       'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'filtered_html',
+          'safe_value' => '',
+          'safe_summary' => '',
+        ),
+      ),
+      'und' => array(
         0 => array(
           'value' => '',
           'summary' => NULL,
@@ -1022,7 +1376,7 @@ function cluster_taxonomy_uuid_features_default_terms() {
         ),
       ),
     ),
-    'description_original' => '',
+    'description_original' => NULL,
   );
   $terms[] = array(
     'name' => 'Earthquake',
@@ -1039,9 +1393,25 @@ function cluster_taxonomy_uuid_features_default_terms() {
           'safe_value' => 'Earthquake',
         ),
       ),
+      'und' => array(
+        0 => array(
+          'value' => 'Earthquake',
+          'format' => NULL,
+          'safe_value' => 'Earthquake',
+        ),
+      ),
     ),
     'description_field' => array(
       'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'filtered_html',
+          'safe_value' => '',
+          'safe_summary' => '',
+        ),
+      ),
+      'und' => array(
         0 => array(
           'value' => '',
           'summary' => NULL,
@@ -1068,7 +1438,7 @@ function cluster_taxonomy_uuid_features_default_terms() {
         ),
       ),
     ),
-    'description_original' => '',
+    'description_original' => NULL,
   );
   $terms[] = array(
     'name' => 'Masonry',
@@ -1085,9 +1455,25 @@ function cluster_taxonomy_uuid_features_default_terms() {
           'safe_value' => 'Masonry',
         ),
       ),
+      'und' => array(
+        0 => array(
+          'value' => 'Masonry',
+          'format' => NULL,
+          'safe_value' => 'Masonry',
+        ),
+      ),
     ),
     'description_field' => array(
       'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'filtered_html',
+          'safe_value' => '',
+          'safe_summary' => '',
+        ),
+      ),
+      'und' => array(
         0 => array(
           'value' => '',
           'summary' => NULL,
@@ -1114,7 +1500,7 @@ function cluster_taxonomy_uuid_features_default_terms() {
         ),
       ),
     ),
-    'description_original' => '',
+    'description_original' => NULL,
   );
   $terms[] = array(
     'name' => 'Example',
@@ -1131,9 +1517,25 @@ function cluster_taxonomy_uuid_features_default_terms() {
           'safe_value' => 'Example',
         ),
       ),
+      'und' => array(
+        0 => array(
+          'value' => 'Example',
+          'format' => NULL,
+          'safe_value' => 'Example',
+        ),
+      ),
     ),
     'description_field' => array(
       'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'filtered_html',
+          'safe_value' => '',
+          'safe_summary' => '',
+        ),
+      ),
+      'und' => array(
         0 => array(
           'value' => '',
           'summary' => NULL,
@@ -1160,7 +1562,7 @@ function cluster_taxonomy_uuid_features_default_terms() {
         ),
       ),
     ),
-    'description_original' => '',
+    'description_original' => NULL,
   );
   $terms[] = array(
     'name' => 'Host Families',
@@ -1177,9 +1579,25 @@ function cluster_taxonomy_uuid_features_default_terms() {
           'safe_value' => 'Host Families',
         ),
       ),
+      'und' => array(
+        0 => array(
+          'value' => 'Host Families',
+          'format' => NULL,
+          'safe_value' => 'Host Families',
+        ),
+      ),
     ),
     'description_field' => array(
       'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'filtered_html',
+          'safe_value' => '',
+          'safe_summary' => '',
+        ),
+      ),
+      'und' => array(
         0 => array(
           'value' => '',
           'summary' => NULL,
@@ -1206,7 +1624,7 @@ function cluster_taxonomy_uuid_features_default_terms() {
         ),
       ),
     ),
-    'description_original' => '',
+    'description_original' => NULL,
   );
   $terms[] = array(
     'name' => 'Disabilities',
@@ -1223,9 +1641,25 @@ function cluster_taxonomy_uuid_features_default_terms() {
           'safe_value' => 'Disabilities',
         ),
       ),
+      'und' => array(
+        0 => array(
+          'value' => 'Disabilities',
+          'format' => NULL,
+          'safe_value' => 'Disabilities',
+        ),
+      ),
     ),
     'description_field' => array(
       'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'filtered_html',
+          'safe_value' => '',
+          'safe_summary' => '',
+        ),
+      ),
+      'und' => array(
         0 => array(
           'value' => '',
           'summary' => NULL,
@@ -1252,7 +1686,7 @@ function cluster_taxonomy_uuid_features_default_terms() {
         ),
       ),
     ),
-    'description_original' => '',
+    'description_original' => NULL,
   );
   $terms[] = array(
     'name' => 'Environment',
@@ -1269,9 +1703,25 @@ function cluster_taxonomy_uuid_features_default_terms() {
           'safe_value' => 'Environment',
         ),
       ),
+      'und' => array(
+        0 => array(
+          'value' => 'Environment',
+          'format' => NULL,
+          'safe_value' => 'Environment',
+        ),
+      ),
     ),
     'description_field' => array(
       'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'filtered_html',
+          'safe_value' => '',
+          'safe_summary' => '',
+        ),
+      ),
+      'und' => array(
         0 => array(
           'value' => '',
           'summary' => NULL,
@@ -1298,7 +1748,7 @@ function cluster_taxonomy_uuid_features_default_terms() {
         ),
       ),
     ),
-    'description_original' => '',
+    'description_original' => NULL,
   );
   $terms[] = array(
     'name' => 'Country',
@@ -1315,9 +1765,25 @@ function cluster_taxonomy_uuid_features_default_terms() {
           'safe_value' => 'Country',
         ),
       ),
+      'und' => array(
+        0 => array(
+          'value' => 'Country',
+          'format' => NULL,
+          'safe_value' => 'Country',
+        ),
+      ),
     ),
     'description_field' => array(
       'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'filtered_html',
+          'safe_value' => '',
+          'safe_summary' => '',
+        ),
+      ),
+      'und' => array(
         0 => array(
           'value' => '',
           'summary' => NULL,
@@ -1344,7 +1810,7 @@ function cluster_taxonomy_uuid_features_default_terms() {
         ),
       ),
     ),
-    'description_original' => '',
+    'description_original' => NULL,
   );
   $terms[] = array(
     'name' => 'Non Food Items',
@@ -1361,9 +1827,25 @@ function cluster_taxonomy_uuid_features_default_terms() {
           'safe_value' => 'Non Food Items',
         ),
       ),
+      'und' => array(
+        0 => array(
+          'value' => 'Non Food Items',
+          'format' => NULL,
+          'safe_value' => 'Non Food Items',
+        ),
+      ),
     ),
     'description_field' => array(
       'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'filtered_html',
+          'safe_value' => '',
+          'safe_summary' => '',
+        ),
+      ),
+      'und' => array(
         0 => array(
           'value' => '',
           'summary' => NULL,
@@ -1390,7 +1872,7 @@ function cluster_taxonomy_uuid_features_default_terms() {
         ),
       ),
     ),
-    'description_original' => '',
+    'description_original' => NULL,
   );
   $terms[] = array(
     'name' => 'Owner-occupier',
@@ -1407,9 +1889,25 @@ function cluster_taxonomy_uuid_features_default_terms() {
           'safe_value' => 'Owner-occupier',
         ),
       ),
+      'und' => array(
+        0 => array(
+          'value' => 'Owner-occupier',
+          'format' => NULL,
+          'safe_value' => 'Owner-occupier',
+        ),
+      ),
     ),
     'description_field' => array(
       'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'filtered_html',
+          'safe_value' => '',
+          'safe_summary' => '',
+        ),
+      ),
+      'und' => array(
         0 => array(
           'value' => '',
           'summary' => NULL,
@@ -1436,7 +1934,7 @@ function cluster_taxonomy_uuid_features_default_terms() {
         ),
       ),
     ),
-    'description_original' => '',
+    'description_original' => NULL,
   );
   $terms[] = array(
     'name' => 'Agency Assessment',
@@ -1453,9 +1951,26 @@ function cluster_taxonomy_uuid_features_default_terms() {
           'safe_value' => 'Agency Assessment',
         ),
       ),
+      'und' => array(
+        0 => array(
+          'value' => 'Agency Assessment',
+          'format' => NULL,
+          'safe_value' => 'Agency Assessment',
+        ),
+      ),
     ),
     'description_field' => array(
       'en' => array(
+        0 => array(
+          'value' => 'A report from an independent assessment conducted by an agency in the cluster',
+          'summary' => NULL,
+          'format' => 'filtered_html',
+          'safe_value' => '<p>A report from an independent assessment conducted by an agency in the cluster</p>
+',
+          'safe_summary' => '',
+        ),
+      ),
+      'und' => array(
         0 => array(
           'value' => 'A report from an independent assessment conducted by an agency in the cluster',
           'summary' => NULL,
@@ -1500,9 +2015,26 @@ function cluster_taxonomy_uuid_features_default_terms() {
           'safe_value' => 'Shelter Programming',
         ),
       ),
+      'und' => array(
+        0 => array(
+          'value' => 'Shelter Programming',
+          'format' => NULL,
+          'safe_value' => 'Shelter Programming',
+        ),
+      ),
     ),
     'description_field' => array(
       'en' => array(
+        0 => array(
+          'value' => 'Guidance related to the modalities of shelter interventions such as cash, support to host famililies, distributions, etc.',
+          'summary' => NULL,
+          'format' => 'filtered_html',
+          'safe_value' => '<p>Guidance related to the modalities of shelter interventions such as cash, support to host famililies, distributions, etc.</p>
+',
+          'safe_summary' => '',
+        ),
+      ),
+      'und' => array(
         0 => array(
           'value' => 'Guidance related to the modalities of shelter interventions such as cash, support to host famililies, distributions, etc.',
           'summary' => NULL,
@@ -1547,9 +2079,26 @@ function cluster_taxonomy_uuid_features_default_terms() {
           'safe_value' => 'Secondary Data Review',
         ),
       ),
+      'und' => array(
+        0 => array(
+          'value' => 'Secondary Data Review',
+          'format' => NULL,
+          'safe_value' => 'Secondary Data Review',
+        ),
+      ),
     ),
     'description_field' => array(
       'en' => array(
+        0 => array(
+          'value' => 'An assessment report resulting from the analysis of available secondary data',
+          'summary' => NULL,
+          'format' => 'filtered_html',
+          'safe_value' => '<p>An assessment report resulting from the analysis of available secondary data</p>
+',
+          'safe_summary' => '',
+        ),
+      ),
+      'und' => array(
         0 => array(
           'value' => 'An assessment report resulting from the analysis of available secondary data',
           'summary' => NULL,
@@ -1594,9 +2143,26 @@ function cluster_taxonomy_uuid_features_default_terms() {
           'safe_value' => 'Technical Guidance',
         ),
       ),
+      'und' => array(
+        0 => array(
+          'value' => 'Technical Guidance',
+          'format' => NULL,
+          'safe_value' => 'Technical Guidance',
+        ),
+      ),
     ),
     'description_field' => array(
       'en' => array(
+        0 => array(
+          'value' => 'Documentation of suggested technical standards and program modalities',
+          'summary' => NULL,
+          'format' => 'filtered_html',
+          'safe_value' => '<p>Documentation of suggested technical standards and program modalities</p>
+',
+          'safe_summary' => '',
+        ),
+      ),
+      'und' => array(
         0 => array(
           'value' => 'Documentation of suggested technical standards and program modalities',
           'summary' => NULL,
@@ -1641,9 +2207,25 @@ function cluster_taxonomy_uuid_features_default_terms() {
           'safe_value' => 'Repairs and Retrofitting',
         ),
       ),
+      'und' => array(
+        0 => array(
+          'value' => 'Repairs and Retrofitting',
+          'format' => NULL,
+          'safe_value' => 'Repairs and Retrofitting',
+        ),
+      ),
     ),
     'description_field' => array(
       'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'filtered_html',
+          'safe_value' => '',
+          'safe_summary' => '',
+        ),
+      ),
+      'und' => array(
         0 => array(
           'value' => '',
           'summary' => NULL,
@@ -1670,7 +2252,7 @@ function cluster_taxonomy_uuid_features_default_terms() {
         ),
       ),
     ),
-    'description_original' => '',
+    'description_original' => NULL,
   );
   $terms[] = array(
     'name' => 'Core Shelters',
@@ -1687,9 +2269,25 @@ function cluster_taxonomy_uuid_features_default_terms() {
           'safe_value' => 'Core Shelters',
         ),
       ),
+      'und' => array(
+        0 => array(
+          'value' => 'Core Shelters',
+          'format' => NULL,
+          'safe_value' => 'Core Shelters',
+        ),
+      ),
     ),
     'description_field' => array(
       'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'filtered_html',
+          'safe_value' => '',
+          'safe_summary' => '',
+        ),
+      ),
+      'und' => array(
         0 => array(
           'value' => '',
           'summary' => NULL,
@@ -1716,7 +2314,7 @@ function cluster_taxonomy_uuid_features_default_terms() {
         ),
       ),
     ),
-    'description_original' => '',
+    'description_original' => NULL,
   );
   $terms[] = array(
     'name' => 'Distribution',
@@ -1733,9 +2331,25 @@ function cluster_taxonomy_uuid_features_default_terms() {
           'safe_value' => 'Distribution',
         ),
       ),
+      'und' => array(
+        0 => array(
+          'value' => 'Distribution',
+          'format' => NULL,
+          'safe_value' => 'Distribution',
+        ),
+      ),
     ),
     'description_field' => array(
       'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'filtered_html',
+          'safe_value' => '',
+          'safe_summary' => '',
+        ),
+      ),
+      'und' => array(
         0 => array(
           'value' => '',
           'summary' => NULL,
@@ -1762,7 +2376,7 @@ function cluster_taxonomy_uuid_features_default_terms() {
         ),
       ),
     ),
-    'description_original' => '',
+    'description_original' => NULL,
   );
   $terms[] = array(
     'name' => 'Beneficiary Communications',
@@ -1779,9 +2393,26 @@ function cluster_taxonomy_uuid_features_default_terms() {
           'safe_value' => 'Beneficiary Communications',
         ),
       ),
+      'und' => array(
+        0 => array(
+          'value' => 'Beneficiary Communications',
+          'format' => NULL,
+          'safe_value' => 'Beneficiary Communications',
+        ),
+      ),
     ),
     'description_field' => array(
       'en' => array(
+        0 => array(
+          'value' => 'Documents related to messaging that is specifically targetted towards affected populations',
+          'summary' => NULL,
+          'format' => 'filtered_html',
+          'safe_value' => '<p>Documents related to messaging that is specifically targetted towards affected populations</p>
+',
+          'safe_summary' => '',
+        ),
+      ),
+      'und' => array(
         0 => array(
           'value' => 'Documents related to messaging that is specifically targetted towards affected populations',
           'summary' => NULL,
@@ -1826,9 +2457,26 @@ function cluster_taxonomy_uuid_features_default_terms() {
           'safe_value' => 'WASH',
         ),
       ),
+      'und' => array(
+        0 => array(
+          'value' => 'WASH',
+          'format' => NULL,
+          'safe_value' => 'WASH',
+        ),
+      ),
     ),
     'description_field' => array(
       'en' => array(
+        0 => array(
+          'value' => 'Water, Sanitation, and Hygiene Promotion',
+          'summary' => NULL,
+          'format' => 'filtered_html',
+          'safe_value' => '<p>Water, Sanitation, and Hygiene Promotion</p>
+',
+          'safe_summary' => '',
+        ),
+      ),
+      'und' => array(
         0 => array(
           'value' => 'Water, Sanitation, and Hygiene Promotion',
           'summary' => NULL,
@@ -1873,9 +2521,25 @@ function cluster_taxonomy_uuid_features_default_terms() {
           'safe_value' => 'Procurement and Logistics',
         ),
       ),
+      'und' => array(
+        0 => array(
+          'value' => 'Procurement and Logistics',
+          'format' => NULL,
+          'safe_value' => 'Procurement and Logistics',
+        ),
+      ),
     ),
     'description_field' => array(
       'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'filtered_html',
+          'safe_value' => '',
+          'safe_summary' => '',
+        ),
+      ),
+      'und' => array(
         0 => array(
           'value' => '',
           'summary' => NULL,
@@ -1902,7 +2566,7 @@ function cluster_taxonomy_uuid_features_default_terms() {
         ),
       ),
     ),
-    'description_original' => '',
+    'description_original' => NULL,
   );
   $terms[] = array(
     'name' => 'Meeting Management',
@@ -1919,9 +2583,25 @@ function cluster_taxonomy_uuid_features_default_terms() {
           'safe_value' => 'Meeting Management',
         ),
       ),
+      'und' => array(
+        0 => array(
+          'value' => 'Meeting Management',
+          'format' => NULL,
+          'safe_value' => 'Meeting Management',
+        ),
+      ),
     ),
     'description_field' => array(
       'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'filtered_html',
+          'safe_value' => '',
+          'safe_summary' => '',
+        ),
+      ),
+      'und' => array(
         0 => array(
           'value' => '',
           'summary' => NULL,
@@ -1948,7 +2628,7 @@ function cluster_taxonomy_uuid_features_default_terms() {
         ),
       ),
     ),
-    'description_original' => '',
+    'description_original' => NULL,
   );
   $terms[] = array(
     'name' => 'Technical Disaster',
@@ -1965,9 +2645,25 @@ function cluster_taxonomy_uuid_features_default_terms() {
           'safe_value' => 'Technical Disaster',
         ),
       ),
+      'und' => array(
+        0 => array(
+          'value' => 'Technical Disaster',
+          'format' => NULL,
+          'safe_value' => 'Technical Disaster',
+        ),
+      ),
     ),
     'description_field' => array(
       'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'filtered_html',
+          'safe_value' => '',
+          'safe_summary' => '',
+        ),
+      ),
+      'und' => array(
         0 => array(
           'value' => '',
           'summary' => NULL,
@@ -1994,7 +2690,7 @@ function cluster_taxonomy_uuid_features_default_terms() {
         ),
       ),
     ),
-    'description_original' => '',
+    'description_original' => NULL,
   );
   $terms[] = array(
     'name' => 'Cold wave',
@@ -2011,9 +2707,25 @@ function cluster_taxonomy_uuid_features_default_terms() {
           'safe_value' => 'Cold wave',
         ),
       ),
+      'und' => array(
+        0 => array(
+          'value' => 'Cold wave',
+          'format' => NULL,
+          'safe_value' => 'Cold wave',
+        ),
+      ),
     ),
     'description_field' => array(
       'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'filtered_html',
+          'safe_value' => '',
+          'safe_summary' => '',
+        ),
+      ),
+      'und' => array(
         0 => array(
           'value' => '',
           'summary' => NULL,
@@ -2040,7 +2752,7 @@ function cluster_taxonomy_uuid_features_default_terms() {
         ),
       ),
     ),
-    'description_original' => '',
+    'description_original' => NULL,
   );
   $terms[] = array(
     'name' => 'Displacement Tracking',
@@ -2057,9 +2769,26 @@ function cluster_taxonomy_uuid_features_default_terms() {
           'safe_value' => 'Displacement Tracking',
         ),
       ),
+      'und' => array(
+        0 => array(
+          'value' => 'Displacement Tracking',
+          'format' => NULL,
+          'safe_value' => 'Displacement Tracking',
+        ),
+      ),
     ),
     'description_field' => array(
       'en' => array(
+        0 => array(
+          'value' => 'Reporting on the movement and settlement conditions of displaced populations',
+          'summary' => NULL,
+          'format' => 'filtered_html',
+          'safe_value' => '<p>Reporting on the movement and settlement conditions of displaced populations</p>
+',
+          'safe_summary' => '',
+        ),
+      ),
+      'und' => array(
         0 => array(
           'value' => 'Reporting on the movement and settlement conditions of displaced populations',
           'summary' => NULL,
@@ -2104,9 +2833,25 @@ function cluster_taxonomy_uuid_features_default_terms() {
           'safe_value' => 'Informal Settlements',
         ),
       ),
+      'und' => array(
+        0 => array(
+          'value' => 'Informal Settlements',
+          'format' => NULL,
+          'safe_value' => 'Informal Settlements',
+        ),
+      ),
     ),
     'description_field' => array(
       'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'filtered_html',
+          'safe_value' => '',
+          'safe_summary' => '',
+        ),
+      ),
+      'und' => array(
         0 => array(
           'value' => '',
           'summary' => NULL,
@@ -2133,7 +2878,7 @@ function cluster_taxonomy_uuid_features_default_terms() {
         ),
       ),
     ),
-    'description_original' => '',
+    'description_original' => NULL,
   );
   $terms[] = array(
     'name' => 'Organic Enclosures',
@@ -2150,9 +2895,26 @@ function cluster_taxonomy_uuid_features_default_terms() {
           'safe_value' => 'Organic Enclosures',
         ),
       ),
+      'und' => array(
+        0 => array(
+          'value' => 'Organic Enclosures',
+          'format' => NULL,
+          'safe_value' => 'Organic Enclosures',
+        ),
+      ),
     ),
     'description_field' => array(
       'en' => array(
+        0 => array(
+          'value' => 'woven grass, etc.',
+          'summary' => NULL,
+          'format' => 'filtered_html',
+          'safe_value' => '<p>woven grass, etc.</p>
+',
+          'safe_summary' => '',
+        ),
+      ),
+      'und' => array(
         0 => array(
           'value' => 'woven grass, etc.',
           'summary' => NULL,
@@ -2197,9 +2959,25 @@ function cluster_taxonomy_uuid_features_default_terms() {
           'safe_value' => 'Relocations',
         ),
       ),
+      'und' => array(
+        0 => array(
+          'value' => 'Relocations',
+          'format' => NULL,
+          'safe_value' => 'Relocations',
+        ),
+      ),
     ),
     'description_field' => array(
       'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'filtered_html',
+          'safe_value' => '',
+          'safe_summary' => '',
+        ),
+      ),
+      'und' => array(
         0 => array(
           'value' => '',
           'summary' => NULL,
@@ -2226,7 +3004,7 @@ function cluster_taxonomy_uuid_features_default_terms() {
         ),
       ),
     ),
-    'description_original' => '',
+    'description_original' => NULL,
   );
   $terms[] = array(
     'name' => 'Market Assessment',
@@ -2243,9 +3021,26 @@ function cluster_taxonomy_uuid_features_default_terms() {
           'safe_value' => 'Market Assessment',
         ),
       ),
+      'und' => array(
+        0 => array(
+          'value' => 'Market Assessment',
+          'format' => NULL,
+          'safe_value' => 'Market Assessment',
+        ),
+      ),
     ),
     'description_field' => array(
       'en' => array(
+        0 => array(
+          'value' => 'A report from an assessment that examines the economic or market functions for a particular area',
+          'summary' => NULL,
+          'format' => 'filtered_html',
+          'safe_value' => '<p>A report from an assessment that examines the economic or market functions for a particular area</p>
+',
+          'safe_summary' => '',
+        ),
+      ),
+      'und' => array(
         0 => array(
           'value' => 'A report from an assessment that examines the economic or market functions for a particular area',
           'summary' => NULL,
@@ -2290,9 +3085,25 @@ function cluster_taxonomy_uuid_features_default_terms() {
           'safe_value' => 'Aggregates',
         ),
       ),
+      'und' => array(
+        0 => array(
+          'value' => 'Aggregates',
+          'format' => NULL,
+          'safe_value' => 'Aggregates',
+        ),
+      ),
     ),
     'description_field' => array(
       'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'filtered_html',
+          'safe_value' => '',
+          'safe_summary' => '',
+        ),
+      ),
+      'und' => array(
         0 => array(
           'value' => '',
           'summary' => NULL,
@@ -2319,7 +3130,7 @@ function cluster_taxonomy_uuid_features_default_terms() {
         ),
       ),
     ),
-    'description_original' => '',
+    'description_original' => NULL,
   );
   $terms[] = array(
     'name' => 'Slow Onset',
@@ -2336,9 +3147,25 @@ function cluster_taxonomy_uuid_features_default_terms() {
           'safe_value' => 'Slow Onset',
         ),
       ),
+      'und' => array(
+        0 => array(
+          'value' => 'Slow Onset',
+          'format' => NULL,
+          'safe_value' => 'Slow Onset',
+        ),
+      ),
     ),
     'description_field' => array(
       'en' => array(
+        0 => array(
+          'value' => NULL,
+          'summary' => NULL,
+          'format' => 'filtered_html',
+          'safe_value' => '',
+          'safe_summary' => '',
+        ),
+      ),
+      'und' => array(
         0 => array(
           'value' => '',
           'summary' => NULL,
@@ -2365,7 +3192,7 @@ function cluster_taxonomy_uuid_features_default_terms() {
         ),
       ),
     ),
-    'description_original' => '',
+    'description_original' => NULL,
   );
   $terms[] = array(
     'name' => 'Reconstruction',
@@ -2382,9 +3209,25 @@ function cluster_taxonomy_uuid_features_default_terms() {
           'safe_value' => 'Reconstruction',
         ),
       ),
+      'und' => array(
+        0 => array(
+          'value' => 'Reconstruction',
+          'format' => NULL,
+          'safe_value' => 'Reconstruction',
+        ),
+      ),
     ),
     'description_field' => array(
       'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'filtered_html',
+          'safe_value' => '',
+          'safe_summary' => '',
+        ),
+      ),
+      'und' => array(
         0 => array(
           'value' => '',
           'summary' => NULL,
@@ -2411,7 +3254,7 @@ function cluster_taxonomy_uuid_features_default_terms() {
         ),
       ),
     ),
-    'description_original' => '',
+    'description_original' => NULL,
   );
   $terms[] = array(
     'name' => 'Tropical Cyclone',
@@ -2428,9 +3271,25 @@ function cluster_taxonomy_uuid_features_default_terms() {
           'safe_value' => 'Tropical Cyclone',
         ),
       ),
+      'und' => array(
+        0 => array(
+          'value' => 'Tropical Cyclone',
+          'format' => NULL,
+          'safe_value' => 'Tropical Cyclone',
+        ),
+      ),
     ),
     'description_field' => array(
       'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'filtered_html',
+          'safe_value' => '',
+          'safe_summary' => '',
+        ),
+      ),
+      'und' => array(
         0 => array(
           'value' => '',
           'summary' => NULL,
@@ -2457,7 +3316,7 @@ function cluster_taxonomy_uuid_features_default_terms() {
         ),
       ),
     ),
-    'description_original' => '',
+    'description_original' => NULL,
   );
   $terms[] = array(
     'name' => 'Toolkit',
@@ -2474,9 +3333,25 @@ function cluster_taxonomy_uuid_features_default_terms() {
           'safe_value' => 'Toolkit',
         ),
       ),
+      'und' => array(
+        0 => array(
+          'value' => 'Toolkit',
+          'format' => NULL,
+          'safe_value' => 'Toolkit',
+        ),
+      ),
     ),
     'description_field' => array(
       'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'filtered_html',
+          'safe_value' => '',
+          'safe_summary' => '',
+        ),
+      ),
+      'und' => array(
         0 => array(
           'value' => '',
           'summary' => NULL,
@@ -2503,7 +3378,7 @@ function cluster_taxonomy_uuid_features_default_terms() {
         ),
       ),
     ),
-    'description_original' => '',
+    'description_original' => NULL,
   );
   $terms[] = array(
     'name' => 'Multi-tenant Apartment',
@@ -2520,9 +3395,25 @@ function cluster_taxonomy_uuid_features_default_terms() {
           'safe_value' => 'Multi-tenant Apartment',
         ),
       ),
+      'und' => array(
+        0 => array(
+          'value' => 'Multi-tenant Apartment',
+          'format' => NULL,
+          'safe_value' => 'Multi-tenant Apartment',
+        ),
+      ),
     ),
     'description_field' => array(
       'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'filtered_html',
+          'safe_value' => '',
+          'safe_summary' => '',
+        ),
+      ),
+      'und' => array(
         0 => array(
           'value' => '',
           'summary' => NULL,
@@ -2549,7 +3440,7 @@ function cluster_taxonomy_uuid_features_default_terms() {
         ),
       ),
     ),
-    'description_original' => '',
+    'description_original' => NULL,
   );
   $terms[] = array(
     'name' => 'Cooking and Eating Utensils',
@@ -2566,9 +3457,25 @@ function cluster_taxonomy_uuid_features_default_terms() {
           'safe_value' => 'Cooking and Eating Utensils',
         ),
       ),
+      'und' => array(
+        0 => array(
+          'value' => 'Cooking and Eating Utensils',
+          'format' => NULL,
+          'safe_value' => 'Cooking and Eating Utensils',
+        ),
+      ),
     ),
     'description_field' => array(
       'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'filtered_html',
+          'safe_value' => '',
+          'safe_summary' => '',
+        ),
+      ),
+      'und' => array(
         0 => array(
           'value' => '',
           'summary' => NULL,
@@ -2595,7 +3502,7 @@ function cluster_taxonomy_uuid_features_default_terms() {
         ),
       ),
     ),
-    'description_original' => '',
+    'description_original' => NULL,
   );
   $terms[] = array(
     'name' => 'Health',
@@ -2612,9 +3519,25 @@ function cluster_taxonomy_uuid_features_default_terms() {
           'safe_value' => 'Health',
         ),
       ),
+      'und' => array(
+        0 => array(
+          'value' => 'Health',
+          'format' => NULL,
+          'safe_value' => 'Health',
+        ),
+      ),
     ),
     'description_field' => array(
       'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'filtered_html',
+          'safe_value' => '',
+          'safe_summary' => '',
+        ),
+      ),
+      'und' => array(
         0 => array(
           'value' => '',
           'summary' => NULL,
@@ -2641,7 +3564,7 @@ function cluster_taxonomy_uuid_features_default_terms() {
         ),
       ),
     ),
-    'description_original' => '',
+    'description_original' => NULL,
   );
   $terms[] = array(
     'name' => 'Mines and other explosives',
@@ -2658,9 +3581,25 @@ function cluster_taxonomy_uuid_features_default_terms() {
           'safe_value' => 'Mines and other explosives',
         ),
       ),
+      'und' => array(
+        0 => array(
+          'value' => 'Mines and other explosives',
+          'format' => NULL,
+          'safe_value' => 'Mines and other explosives',
+        ),
+      ),
     ),
     'description_field' => array(
       'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'filtered_html',
+          'safe_value' => '',
+          'safe_summary' => '',
+        ),
+      ),
+      'und' => array(
         0 => array(
           'value' => '',
           'summary' => NULL,
@@ -2687,7 +3626,7 @@ function cluster_taxonomy_uuid_features_default_terms() {
         ),
       ),
     ),
-    'description_original' => '',
+    'description_original' => NULL,
   );
   $terms[] = array(
     'name' => 'Returns to Area of Origin',
@@ -2704,9 +3643,25 @@ function cluster_taxonomy_uuid_features_default_terms() {
           'safe_value' => 'Returns to Area of Origin',
         ),
       ),
+      'und' => array(
+        0 => array(
+          'value' => 'Returns to Area of Origin',
+          'format' => NULL,
+          'safe_value' => 'Returns to Area of Origin',
+        ),
+      ),
     ),
     'description_field' => array(
       'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'filtered_html',
+          'safe_value' => '',
+          'safe_summary' => '',
+        ),
+      ),
+      'und' => array(
         0 => array(
           'value' => '',
           'summary' => NULL,
@@ -2733,7 +3688,7 @@ function cluster_taxonomy_uuid_features_default_terms() {
         ),
       ),
     ),
-    'description_original' => '',
+    'description_original' => NULL,
   );
   $terms[] = array(
     'name' => 'Situation Report',
@@ -2750,9 +3705,25 @@ function cluster_taxonomy_uuid_features_default_terms() {
           'safe_value' => 'Situation Report',
         ),
       ),
+      'und' => array(
+        0 => array(
+          'value' => 'Situation Report',
+          'format' => NULL,
+          'safe_value' => 'Situation Report',
+        ),
+      ),
     ),
     'description_field' => array(
       'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'filtered_html',
+          'safe_value' => '',
+          'safe_summary' => '',
+        ),
+      ),
+      'und' => array(
         0 => array(
           'value' => '',
           'summary' => NULL,
@@ -2779,7 +3750,7 @@ function cluster_taxonomy_uuid_features_default_terms() {
         ),
       ),
     ),
-    'description_original' => '',
+    'description_original' => NULL,
   );
   $terms[] = array(
     'name' => 'Maps and GIS',
@@ -2796,9 +3767,26 @@ function cluster_taxonomy_uuid_features_default_terms() {
           'safe_value' => 'Maps and GIS',
         ),
       ),
+      'und' => array(
+        0 => array(
+          'value' => 'Maps and GIS',
+          'format' => NULL,
+          'safe_value' => 'Maps and GIS',
+        ),
+      ),
     ),
     'description_field' => array(
       'en' => array(
+        0 => array(
+          'value' => 'Graphic mapping products',
+          'summary' => NULL,
+          'format' => 'filtered_html',
+          'safe_value' => '<p>Graphic mapping products</p>
+',
+          'safe_summary' => '',
+        ),
+      ),
+      'und' => array(
         0 => array(
           'value' => 'Graphic mapping products',
           'summary' => NULL,
@@ -2843,9 +3831,25 @@ function cluster_taxonomy_uuid_features_default_terms() {
           'safe_value' => 'Logistics',
         ),
       ),
+      'und' => array(
+        0 => array(
+          'value' => 'Logistics',
+          'format' => NULL,
+          'safe_value' => 'Logistics',
+        ),
+      ),
     ),
     'description_field' => array(
       'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'filtered_html',
+          'safe_value' => '',
+          'safe_summary' => '',
+        ),
+      ),
+      'und' => array(
         0 => array(
           'value' => '',
           'summary' => NULL,
@@ -2872,7 +3876,7 @@ function cluster_taxonomy_uuid_features_default_terms() {
         ),
       ),
     ),
-    'description_original' => '',
+    'description_original' => NULL,
   );
   $terms[] = array(
     'name' => 'Communications Messaging',
@@ -2889,9 +3893,26 @@ function cluster_taxonomy_uuid_features_default_terms() {
           'safe_value' => 'Communications Messaging',
         ),
       ),
+      'und' => array(
+        0 => array(
+          'value' => 'Communications Messaging',
+          'format' => NULL,
+          'safe_value' => 'Communications Messaging',
+        ),
+      ),
     ),
     'description_field' => array(
       'en' => array(
+        0 => array(
+          'value' => 'Documentation that illustrate key messaging of advocacy messages targeted to stakeholders of the cluster and media',
+          'summary' => NULL,
+          'format' => 'filtered_html',
+          'safe_value' => '<p>Documentation that illustrate key messaging of advocacy messages targeted to stakeholders of the cluster and media</p>
+',
+          'safe_summary' => '',
+        ),
+      ),
+      'und' => array(
         0 => array(
           'value' => 'Documentation that illustrate key messaging of advocacy messages targeted to stakeholders of the cluster and media',
           'summary' => NULL,
@@ -2936,9 +3957,25 @@ function cluster_taxonomy_uuid_features_default_terms() {
           'safe_value' => 'Rentals and tenants',
         ),
       ),
+      'und' => array(
+        0 => array(
+          'value' => 'Rentals and tenants',
+          'format' => NULL,
+          'safe_value' => 'Rentals and tenants',
+        ),
+      ),
     ),
     'description_field' => array(
       'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'filtered_html',
+          'safe_value' => '',
+          'safe_summary' => '',
+        ),
+      ),
+      'und' => array(
         0 => array(
           'value' => '',
           'summary' => NULL,
@@ -2965,7 +4002,7 @@ function cluster_taxonomy_uuid_features_default_terms() {
         ),
       ),
     ),
-    'description_original' => '',
+    'description_original' => NULL,
   );
   $terms[] = array(
     'name' => 'Rubble Removal',
@@ -2982,9 +4019,25 @@ function cluster_taxonomy_uuid_features_default_terms() {
           'safe_value' => 'Rubble Removal',
         ),
       ),
+      'und' => array(
+        0 => array(
+          'value' => 'Rubble Removal',
+          'format' => NULL,
+          'safe_value' => 'Rubble Removal',
+        ),
+      ),
     ),
     'description_field' => array(
       'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'filtered_html',
+          'safe_value' => '',
+          'safe_summary' => '',
+        ),
+      ),
+      'und' => array(
         0 => array(
           'value' => '',
           'summary' => NULL,
@@ -3011,7 +4064,7 @@ function cluster_taxonomy_uuid_features_default_terms() {
         ),
       ),
     ),
-    'description_original' => '',
+    'description_original' => NULL,
   );
   $terms[] = array(
     'name' => 'Urban Planning',
@@ -3028,9 +4081,25 @@ function cluster_taxonomy_uuid_features_default_terms() {
           'safe_value' => 'Urban Planning',
         ),
       ),
+      'und' => array(
+        0 => array(
+          'value' => 'Urban Planning',
+          'format' => NULL,
+          'safe_value' => 'Urban Planning',
+        ),
+      ),
     ),
     'description_field' => array(
       'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'filtered_html',
+          'safe_value' => '',
+          'safe_summary' => '',
+        ),
+      ),
+      'und' => array(
         0 => array(
           'value' => '',
           'summary' => NULL,
@@ -3057,7 +4126,7 @@ function cluster_taxonomy_uuid_features_default_terms() {
         ),
       ),
     ),
-    'description_original' => '',
+    'description_original' => NULL,
   );
   $terms[] = array(
     'name' => 'Guidance',
@@ -3074,9 +4143,25 @@ function cluster_taxonomy_uuid_features_default_terms() {
           'safe_value' => 'Guidance',
         ),
       ),
+      'und' => array(
+        0 => array(
+          'value' => 'Guidance',
+          'format' => NULL,
+          'safe_value' => 'Guidance',
+        ),
+      ),
     ),
     'description_field' => array(
       'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'filtered_html',
+          'safe_value' => '',
+          'safe_summary' => '',
+        ),
+      ),
+      'und' => array(
         0 => array(
           'value' => '',
           'summary' => NULL,
@@ -3103,7 +4188,7 @@ function cluster_taxonomy_uuid_features_default_terms() {
         ),
       ),
     ),
-    'description_original' => '',
+    'description_original' => NULL,
   );
   $terms[] = array(
     'name' => 'Protection',
@@ -3120,9 +4205,25 @@ function cluster_taxonomy_uuid_features_default_terms() {
           'safe_value' => 'Protection',
         ),
       ),
+      'und' => array(
+        0 => array(
+          'value' => 'Protection',
+          'format' => NULL,
+          'safe_value' => 'Protection',
+        ),
+      ),
     ),
     'description_field' => array(
       'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'filtered_html',
+          'safe_value' => '',
+          'safe_summary' => '',
+        ),
+      ),
+      'und' => array(
         0 => array(
           'value' => '',
           'summary' => NULL,
@@ -3149,7 +4250,7 @@ function cluster_taxonomy_uuid_features_default_terms() {
         ),
       ),
     ),
-    'description_original' => '',
+    'description_original' => NULL,
   );
   $terms[] = array(
     'name' => 'Stoves, Fuel, and Lighting',
@@ -3166,9 +4267,25 @@ function cluster_taxonomy_uuid_features_default_terms() {
           'safe_value' => 'Stoves, Fuel, and Lighting',
         ),
       ),
+      'und' => array(
+        0 => array(
+          'value' => 'Stoves, Fuel, and Lighting',
+          'format' => NULL,
+          'safe_value' => 'Stoves, Fuel, and Lighting',
+        ),
+      ),
     ),
     'description_field' => array(
       'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'filtered_html',
+          'safe_value' => '',
+          'safe_summary' => '',
+        ),
+      ),
+      'und' => array(
         0 => array(
           'value' => '',
           'summary' => NULL,
@@ -3195,7 +4312,7 @@ function cluster_taxonomy_uuid_features_default_terms() {
         ),
       ),
     ),
-    'description_original' => '',
+    'description_original' => NULL,
   );
   $terms[] = array(
     'name' => 'Resource Mobilization',
@@ -3212,9 +4329,26 @@ function cluster_taxonomy_uuid_features_default_terms() {
           'safe_value' => 'Resource Mobilization',
         ),
       ),
+      'und' => array(
+        0 => array(
+          'value' => 'Resource Mobilization',
+          'format' => NULL,
+          'safe_value' => 'Resource Mobilization',
+        ),
+      ),
     ),
     'description_field' => array(
       'en' => array(
+        0 => array(
+          'value' => 'Appeals, Strategic response plan, CERF, CAP documents',
+          'summary' => NULL,
+          'format' => 'filtered_html',
+          'safe_value' => '<p>Appeals, Strategic response plan, CERF, CAP documents</p>
+',
+          'safe_summary' => '',
+        ),
+      ),
+      'und' => array(
         0 => array(
           'value' => 'Appeals, Strategic response plan, CERF, CAP documents',
           'summary' => NULL,
@@ -3259,9 +4393,26 @@ function cluster_taxonomy_uuid_features_default_terms() {
           'safe_value' => 'Design Specifications',
         ),
       ),
+      'und' => array(
+        0 => array(
+          'value' => 'Design Specifications',
+          'format' => NULL,
+          'safe_value' => 'Design Specifications',
+        ),
+      ),
     ),
     'description_field' => array(
       'en' => array(
+        0 => array(
+          'value' => 'Detailed information on construction design, bills of quantity, costing, etc.',
+          'summary' => NULL,
+          'format' => 'filtered_html',
+          'safe_value' => '<p>Detailed information on construction design, bills of quantity, costing, etc.</p>
+',
+          'safe_summary' => '',
+        ),
+      ),
+      'und' => array(
         0 => array(
           'value' => 'Detailed information on construction design, bills of quantity, costing, etc.',
           'summary' => NULL,
@@ -3306,9 +4457,25 @@ function cluster_taxonomy_uuid_features_default_terms() {
           'safe_value' => 'Land Slide',
         ),
       ),
+      'und' => array(
+        0 => array(
+          'value' => 'Land Slide',
+          'format' => NULL,
+          'safe_value' => 'Land Slide',
+        ),
+      ),
     ),
     'description_field' => array(
       'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'filtered_html',
+          'safe_value' => '',
+          'safe_summary' => '',
+        ),
+      ),
+      'und' => array(
         0 => array(
           'value' => '',
           'summary' => NULL,
@@ -3335,7 +4502,7 @@ function cluster_taxonomy_uuid_features_default_terms() {
         ),
       ),
     ),
-    'description_original' => '',
+    'description_original' => NULL,
   );
   $terms[] = array(
     'name' => 'Children',
@@ -3352,9 +4519,25 @@ function cluster_taxonomy_uuid_features_default_terms() {
           'safe_value' => 'Children',
         ),
       ),
+      'und' => array(
+        0 => array(
+          'value' => 'Children',
+          'format' => NULL,
+          'safe_value' => 'Children',
+        ),
+      ),
     ),
     'description_field' => array(
       'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'filtered_html',
+          'safe_value' => '',
+          'safe_summary' => '',
+        ),
+      ),
+      'und' => array(
         0 => array(
           'value' => '',
           'summary' => NULL,
@@ -3381,7 +4564,7 @@ function cluster_taxonomy_uuid_features_default_terms() {
         ),
       ),
     ),
-    'description_original' => '',
+    'description_original' => NULL,
   );
   $terms[] = array(
     'name' => 'Housing, Land, and Property Rights',
@@ -3398,9 +4581,26 @@ function cluster_taxonomy_uuid_features_default_terms() {
           'safe_value' => 'Housing, Land, and Property Rights',
         ),
       ),
+      'und' => array(
+        0 => array(
+          'value' => 'Housing, Land, and Property Rights',
+          'format' => NULL,
+          'safe_value' => 'Housing, Land, and Property Rights',
+        ),
+      ),
     ),
     'description_field' => array(
       'en' => array(
+        0 => array(
+          'value' => 'Housing, Land, and Property Rights',
+          'summary' => NULL,
+          'format' => 'filtered_html',
+          'safe_value' => '<p>Housing, Land, and Property Rights</p>
+',
+          'safe_summary' => '',
+        ),
+      ),
+      'und' => array(
         0 => array(
           'value' => 'Housing, Land, and Property Rights',
           'summary' => NULL,
@@ -3445,9 +4645,25 @@ function cluster_taxonomy_uuid_features_default_terms() {
           'safe_value' => 'Emergency Shelter',
         ),
       ),
+      'und' => array(
+        0 => array(
+          'value' => 'Emergency Shelter',
+          'format' => NULL,
+          'safe_value' => 'Emergency Shelter',
+        ),
+      ),
     ),
     'description_field' => array(
       'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'filtered_html',
+          'safe_value' => '',
+          'safe_summary' => '',
+        ),
+      ),
+      'und' => array(
         0 => array(
           'value' => '',
           'summary' => NULL,
@@ -3474,7 +4690,7 @@ function cluster_taxonomy_uuid_features_default_terms() {
         ),
       ),
     ),
-    'description_original' => '',
+    'description_original' => NULL,
   );
   $terms[] = array(
     'name' => 'Snow Avalanche',
@@ -3491,9 +4707,25 @@ function cluster_taxonomy_uuid_features_default_terms() {
           'safe_value' => 'Snow Avalanche',
         ),
       ),
+      'und' => array(
+        0 => array(
+          'value' => 'Snow Avalanche',
+          'format' => NULL,
+          'safe_value' => 'Snow Avalanche',
+        ),
+      ),
     ),
     'description_field' => array(
       'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'filtered_html',
+          'safe_value' => '',
+          'safe_summary' => '',
+        ),
+      ),
+      'und' => array(
         0 => array(
           'value' => '',
           'summary' => NULL,
@@ -3520,7 +4752,7 @@ function cluster_taxonomy_uuid_features_default_terms() {
         ),
       ),
     ),
-    'description_original' => '',
+    'description_original' => NULL,
   );
   $terms[] = array(
     'name' => 'Extratropical Cyclone',
@@ -3537,9 +4769,25 @@ function cluster_taxonomy_uuid_features_default_terms() {
           'safe_value' => 'Extratropical Cyclone',
         ),
       ),
+      'und' => array(
+        0 => array(
+          'value' => 'Extratropical Cyclone',
+          'format' => NULL,
+          'safe_value' => 'Extratropical Cyclone',
+        ),
+      ),
     ),
     'description_field' => array(
       'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'filtered_html',
+          'safe_value' => '',
+          'safe_summary' => '',
+        ),
+      ),
+      'und' => array(
         0 => array(
           'value' => '',
           'summary' => NULL,
@@ -3566,7 +4814,7 @@ function cluster_taxonomy_uuid_features_default_terms() {
         ),
       ),
     ),
-    'description_original' => '',
+    'description_original' => NULL,
   );
   $terms[] = array(
     'name' => 'Tools and Shelter Kits',
@@ -3583,9 +4831,25 @@ function cluster_taxonomy_uuid_features_default_terms() {
           'safe_value' => 'Tools and Shelter Kits',
         ),
       ),
+      'und' => array(
+        0 => array(
+          'value' => 'Tools and Shelter Kits',
+          'format' => NULL,
+          'safe_value' => 'Tools and Shelter Kits',
+        ),
+      ),
     ),
     'description_field' => array(
       'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'filtered_html',
+          'safe_value' => '',
+          'safe_summary' => '',
+        ),
+      ),
+      'und' => array(
         0 => array(
           'value' => '',
           'summary' => NULL,
@@ -3612,7 +4876,7 @@ function cluster_taxonomy_uuid_features_default_terms() {
         ),
       ),
     ),
-    'description_original' => '',
+    'description_original' => NULL,
   );
   $terms[] = array(
     'name' => 'Timber',
@@ -3629,9 +4893,25 @@ function cluster_taxonomy_uuid_features_default_terms() {
           'safe_value' => 'Timber',
         ),
       ),
+      'und' => array(
+        0 => array(
+          'value' => 'Timber',
+          'format' => NULL,
+          'safe_value' => 'Timber',
+        ),
+      ),
     ),
     'description_field' => array(
       'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'filtered_html',
+          'safe_value' => '',
+          'safe_summary' => '',
+        ),
+      ),
+      'und' => array(
         0 => array(
           'value' => '',
           'summary' => NULL,
@@ -3658,7 +4938,7 @@ function cluster_taxonomy_uuid_features_default_terms() {
         ),
       ),
     ),
-    'description_original' => '',
+    'description_original' => NULL,
   );
   $terms[] = array(
     'name' => 'CCCM',
@@ -3675,9 +4955,26 @@ function cluster_taxonomy_uuid_features_default_terms() {
           'safe_value' => 'CCCM',
         ),
       ),
+      'und' => array(
+        0 => array(
+          'value' => 'CCCM',
+          'format' => NULL,
+          'safe_value' => 'CCCM',
+        ),
+      ),
     ),
     'description_field' => array(
       'en' => array(
+        0 => array(
+          'value' => 'Camp Coordination and Camp Management',
+          'summary' => NULL,
+          'format' => 'filtered_html',
+          'safe_value' => '<p>Camp Coordination and Camp Management</p>
+',
+          'safe_summary' => '',
+        ),
+      ),
+      'und' => array(
         0 => array(
           'value' => 'Camp Coordination and Camp Management',
           'summary' => NULL,
@@ -3722,9 +5019,25 @@ function cluster_taxonomy_uuid_features_default_terms() {
           'safe_value' => 'Non-displaced',
         ),
       ),
+      'und' => array(
+        0 => array(
+          'value' => 'Non-displaced',
+          'format' => NULL,
+          'safe_value' => 'Non-displaced',
+        ),
+      ),
     ),
     'description_field' => array(
       'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'filtered_html',
+          'safe_value' => '',
+          'safe_summary' => '',
+        ),
+      ),
+      'und' => array(
         0 => array(
           'value' => '',
           'summary' => NULL,
@@ -3751,7 +5064,7 @@ function cluster_taxonomy_uuid_features_default_terms() {
         ),
       ),
     ),
-    'description_original' => '',
+    'description_original' => NULL,
   );
   $terms[] = array(
     'name' => 'Host Family Support',
@@ -3768,9 +5081,25 @@ function cluster_taxonomy_uuid_features_default_terms() {
           'safe_value' => 'Host Family Support',
         ),
       ),
+      'und' => array(
+        0 => array(
+          'value' => 'Host Family Support',
+          'format' => NULL,
+          'safe_value' => 'Host Family Support',
+        ),
+      ),
     ),
     'description_field' => array(
       'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'filtered_html',
+          'safe_value' => '',
+          'safe_summary' => '',
+        ),
+      ),
+      'und' => array(
         0 => array(
           'value' => '',
           'summary' => NULL,
@@ -3797,7 +5126,7 @@ function cluster_taxonomy_uuid_features_default_terms() {
         ),
       ),
     ),
-    'description_original' => '',
+    'description_original' => NULL,
   );
   $terms[] = array(
     'name' => 'Region',
@@ -3814,9 +5143,25 @@ function cluster_taxonomy_uuid_features_default_terms() {
           'safe_value' => 'Region',
         ),
       ),
+      'und' => array(
+        0 => array(
+          'value' => 'Region',
+          'format' => NULL,
+          'safe_value' => 'Region',
+        ),
+      ),
     ),
     'description_field' => array(
       'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'filtered_html',
+          'safe_value' => '',
+          'safe_summary' => '',
+        ),
+      ),
+      'und' => array(
         0 => array(
           'value' => '',
           'summary' => NULL,
@@ -3843,7 +5188,7 @@ function cluster_taxonomy_uuid_features_default_terms() {
         ),
       ),
     ),
-    'description_original' => '',
+    'description_original' => NULL,
   );
   $terms[] = array(
     'name' => 'Formal Camps',
@@ -3860,9 +5205,25 @@ function cluster_taxonomy_uuid_features_default_terms() {
           'safe_value' => 'Formal Camps',
         ),
       ),
+      'und' => array(
+        0 => array(
+          'value' => 'Formal Camps',
+          'format' => NULL,
+          'safe_value' => 'Formal Camps',
+        ),
+      ),
     ),
     'description_field' => array(
       'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'filtered_html',
+          'safe_value' => '',
+          'safe_summary' => '',
+        ),
+      ),
+      'und' => array(
         0 => array(
           'value' => '',
           'summary' => NULL,
@@ -3889,7 +5250,7 @@ function cluster_taxonomy_uuid_features_default_terms() {
         ),
       ),
     ),
-    'description_original' => '',
+    'description_original' => NULL,
   );
   $terms[] = array(
     'name' => 'Built Environment Professionals',
@@ -3906,9 +5267,26 @@ function cluster_taxonomy_uuid_features_default_terms() {
           'safe_value' => 'Built Environment Professionals',
         ),
       ),
+      'und' => array(
+        0 => array(
+          'value' => 'Built Environment Professionals',
+          'format' => NULL,
+          'safe_value' => 'Built Environment Professionals',
+        ),
+      ),
     ),
     'description_field' => array(
       'en' => array(
+        0 => array(
+          'value' => 'engagement of engineers, architects, planners, etc',
+          'summary' => NULL,
+          'format' => 'filtered_html',
+          'safe_value' => '<p>engagement of engineers, architects, planners, etc</p>
+',
+          'safe_summary' => '',
+        ),
+      ),
+      'und' => array(
         0 => array(
           'value' => 'engagement of engineers, architects, planners, etc',
           'summary' => NULL,
@@ -3953,9 +5331,25 @@ function cluster_taxonomy_uuid_features_default_terms() {
           'safe_value' => 'Permanent Housing',
         ),
       ),
+      'und' => array(
+        0 => array(
+          'value' => 'Permanent Housing',
+          'format' => NULL,
+          'safe_value' => 'Permanent Housing',
+        ),
+      ),
     ),
     'description_field' => array(
       'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'filtered_html',
+          'safe_value' => '',
+          'safe_summary' => '',
+        ),
+      ),
+      'und' => array(
         0 => array(
           'value' => '',
           'summary' => NULL,
@@ -3982,7 +5376,7 @@ function cluster_taxonomy_uuid_features_default_terms() {
         ),
       ),
     ),
-    'description_original' => '',
+    'description_original' => NULL,
   );
   $terms[] = array(
     'name' => 'Emergency',
@@ -3999,9 +5393,26 @@ function cluster_taxonomy_uuid_features_default_terms() {
           'safe_value' => 'Emergency',
         ),
       ),
+      'und' => array(
+        0 => array(
+          'value' => 'Emergency',
+          'format' => NULL,
+          'safe_value' => 'Emergency',
+        ),
+      ),
     ),
     'description_field' => array(
       'en' => array(
+        0 => array(
+          'value' => 'Typically associated with life-saving activities',
+          'summary' => NULL,
+          'format' => 'filtered_html',
+          'safe_value' => '<p>Typically associated with life-saving activities</p>
+',
+          'safe_summary' => '',
+        ),
+      ),
+      'und' => array(
         0 => array(
           'value' => 'Typically associated with life-saving activities',
           'summary' => NULL,
@@ -4046,9 +5457,25 @@ function cluster_taxonomy_uuid_features_default_terms() {
           'safe_value' => 'Demolition',
         ),
       ),
+      'und' => array(
+        0 => array(
+          'value' => 'Demolition',
+          'format' => NULL,
+          'safe_value' => 'Demolition',
+        ),
+      ),
     ),
     'description_field' => array(
       'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'filtered_html',
+          'safe_value' => '',
+          'safe_summary' => '',
+        ),
+      ),
+      'und' => array(
         0 => array(
           'value' => '',
           'summary' => NULL,
@@ -4075,7 +5502,7 @@ function cluster_taxonomy_uuid_features_default_terms() {
         ),
       ),
     ),
-    'description_original' => '',
+    'description_original' => NULL,
   );
   $terms[] = array(
     'name' => 'Multi-sectoral Assessment',
@@ -4092,9 +5519,26 @@ function cluster_taxonomy_uuid_features_default_terms() {
           'safe_value' => 'Multi-sectoral Assessment',
         ),
       ),
+      'und' => array(
+        0 => array(
+          'value' => 'Multi-sectoral Assessment',
+          'format' => NULL,
+          'safe_value' => 'Multi-sectoral Assessment',
+        ),
+      ),
     ),
     'description_field' => array(
       'en' => array(
+        0 => array(
+          'value' => 'A report for an assessment that involves several cluster such as a MIRA',
+          'summary' => NULL,
+          'format' => 'filtered_html',
+          'safe_value' => '<p>A report for an assessment that involves several cluster such as a MIRA</p>
+',
+          'safe_summary' => '',
+        ),
+      ),
+      'und' => array(
         0 => array(
           'value' => 'A report for an assessment that involves several cluster such as a MIRA',
           'summary' => NULL,
@@ -4139,9 +5583,25 @@ function cluster_taxonomy_uuid_features_default_terms() {
           'safe_value' => 'Flood',
         ),
       ),
+      'und' => array(
+        0 => array(
+          'value' => 'Flood',
+          'format' => NULL,
+          'safe_value' => 'Flood',
+        ),
+      ),
     ),
     'description_field' => array(
       'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'filtered_html',
+          'safe_value' => '',
+          'safe_summary' => '',
+        ),
+      ),
+      'und' => array(
         0 => array(
           'value' => '',
           'summary' => NULL,
@@ -4168,7 +5628,7 @@ function cluster_taxonomy_uuid_features_default_terms() {
         ),
       ),
     ),
-    'description_original' => '',
+    'description_original' => NULL,
   );
   $terms[] = array(
     'name' => 'Heat Wave',
@@ -4185,9 +5645,25 @@ function cluster_taxonomy_uuid_features_default_terms() {
           'safe_value' => 'Heat Wave',
         ),
       ),
+      'und' => array(
+        0 => array(
+          'value' => 'Heat Wave',
+          'format' => NULL,
+          'safe_value' => 'Heat Wave',
+        ),
+      ),
     ),
     'description_field' => array(
       'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'filtered_html',
+          'safe_value' => '',
+          'safe_summary' => '',
+        ),
+      ),
+      'und' => array(
         0 => array(
           'value' => '',
           'summary' => NULL,
@@ -4214,7 +5690,7 @@ function cluster_taxonomy_uuid_features_default_terms() {
         ),
       ),
     ),
-    'description_original' => '',
+    'description_original' => NULL,
   );
   $terms[] = array(
     'name' => 'General Household Support',
@@ -4231,9 +5707,25 @@ function cluster_taxonomy_uuid_features_default_terms() {
           'safe_value' => 'General Household Support',
         ),
       ),
+      'und' => array(
+        0 => array(
+          'value' => 'General Household Support',
+          'format' => NULL,
+          'safe_value' => 'General Household Support',
+        ),
+      ),
     ),
     'description_field' => array(
       'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'filtered_html',
+          'safe_value' => '',
+          'safe_summary' => '',
+        ),
+      ),
+      'und' => array(
         0 => array(
           'value' => '',
           'summary' => NULL,
@@ -4260,7 +5752,7 @@ function cluster_taxonomy_uuid_features_default_terms() {
         ),
       ),
     ),
-    'description_original' => '',
+    'description_original' => NULL,
   );
   $terms[] = array(
     'name' => 'Volcano',
@@ -4277,9 +5769,25 @@ function cluster_taxonomy_uuid_features_default_terms() {
           'safe_value' => 'Volcano',
         ),
       ),
+      'und' => array(
+        0 => array(
+          'value' => 'Volcano',
+          'format' => NULL,
+          'safe_value' => 'Volcano',
+        ),
+      ),
     ),
     'description_field' => array(
       'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'filtered_html',
+          'safe_value' => '',
+          'safe_summary' => '',
+        ),
+      ),
+      'und' => array(
         0 => array(
           'value' => '',
           'summary' => NULL,
@@ -4306,7 +5814,7 @@ function cluster_taxonomy_uuid_features_default_terms() {
         ),
       ),
     ),
-    'description_original' => '',
+    'description_original' => NULL,
   );
   $terms[] = array(
     'name' => 'Storm Surge',
@@ -4323,9 +5831,25 @@ function cluster_taxonomy_uuid_features_default_terms() {
           'safe_value' => 'Storm Surge',
         ),
       ),
+      'und' => array(
+        0 => array(
+          'value' => 'Storm Surge',
+          'format' => NULL,
+          'safe_value' => 'Storm Surge',
+        ),
+      ),
     ),
     'description_field' => array(
       'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'filtered_html',
+          'safe_value' => '',
+          'safe_summary' => '',
+        ),
+      ),
+      'und' => array(
         0 => array(
           'value' => '',
           'summary' => NULL,
@@ -4352,7 +5876,7 @@ function cluster_taxonomy_uuid_features_default_terms() {
         ),
       ),
     ),
-    'description_original' => '',
+    'description_original' => NULL,
   );
   $terms[] = array(
     'name' => 'Bamboo',
@@ -4369,9 +5893,25 @@ function cluster_taxonomy_uuid_features_default_terms() {
           'safe_value' => 'Bamboo',
         ),
       ),
+      'und' => array(
+        0 => array(
+          'value' => 'Bamboo',
+          'format' => NULL,
+          'safe_value' => 'Bamboo',
+        ),
+      ),
     ),
     'description_field' => array(
       'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'filtered_html',
+          'safe_value' => '',
+          'safe_summary' => '',
+        ),
+      ),
+      'und' => array(
         0 => array(
           'value' => '',
           'summary' => NULL,
@@ -4398,7 +5938,7 @@ function cluster_taxonomy_uuid_features_default_terms() {
         ),
       ),
     ),
-    'description_original' => '',
+    'description_original' => NULL,
   );
   $terms[] = array(
     'name' => 'Bunkhouses',
@@ -4415,9 +5955,25 @@ function cluster_taxonomy_uuid_features_default_terms() {
           'safe_value' => 'Bunkhouses',
         ),
       ),
+      'und' => array(
+        0 => array(
+          'value' => 'Bunkhouses',
+          'format' => NULL,
+          'safe_value' => 'Bunkhouses',
+        ),
+      ),
     ),
     'description_field' => array(
       'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'filtered_html',
+          'safe_value' => '',
+          'safe_summary' => '',
+        ),
+      ),
+      'und' => array(
         0 => array(
           'value' => '',
           'summary' => NULL,
@@ -4444,7 +6000,7 @@ function cluster_taxonomy_uuid_features_default_terms() {
         ),
       ),
     ),
-    'description_original' => '',
+    'description_original' => NULL,
   );
   $terms[] = array(
     'name' => 'Metal Sheeting',
@@ -4461,9 +6017,25 @@ function cluster_taxonomy_uuid_features_default_terms() {
           'safe_value' => 'Metal Sheeting',
         ),
       ),
+      'und' => array(
+        0 => array(
+          'value' => 'Metal Sheeting',
+          'format' => NULL,
+          'safe_value' => 'Metal Sheeting',
+        ),
+      ),
     ),
     'description_field' => array(
       'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'filtered_html',
+          'safe_value' => '',
+          'safe_summary' => '',
+        ),
+      ),
+      'und' => array(
         0 => array(
           'value' => '',
           'summary' => NULL,
@@ -4490,7 +6062,7 @@ function cluster_taxonomy_uuid_features_default_terms() {
         ),
       ),
     ),
-    'description_original' => '',
+    'description_original' => NULL,
   );
   $terms[] = array(
     'name' => 'Steel',
@@ -4507,9 +6079,25 @@ function cluster_taxonomy_uuid_features_default_terms() {
           'safe_value' => 'Steel',
         ),
       ),
+      'und' => array(
+        0 => array(
+          'value' => 'Steel',
+          'format' => NULL,
+          'safe_value' => 'Steel',
+        ),
+      ),
     ),
     'description_field' => array(
       'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'filtered_html',
+          'safe_value' => '',
+          'safe_summary' => '',
+        ),
+      ),
+      'und' => array(
         0 => array(
           'value' => '',
           'summary' => NULL,
@@ -4536,7 +6124,7 @@ function cluster_taxonomy_uuid_features_default_terms() {
         ),
       ),
     ),
-    'description_original' => '',
+    'description_original' => NULL,
   );
   $terms[] = array(
     'name' => 'Concrete',
@@ -4553,9 +6141,25 @@ function cluster_taxonomy_uuid_features_default_terms() {
           'safe_value' => 'Concrete',
         ),
       ),
+      'und' => array(
+        0 => array(
+          'value' => 'Concrete',
+          'format' => NULL,
+          'safe_value' => 'Concrete',
+        ),
+      ),
     ),
     'description_field' => array(
       'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'filtered_html',
+          'safe_value' => '',
+          'safe_summary' => '',
+        ),
+      ),
+      'und' => array(
         0 => array(
           'value' => '',
           'summary' => NULL,
@@ -4582,7 +6186,7 @@ function cluster_taxonomy_uuid_features_default_terms() {
         ),
       ),
     ),
-    'description_original' => '',
+    'description_original' => NULL,
   );
   $terms[] = array(
     'name' => 'Plastic Sheeting',
@@ -4599,9 +6203,26 @@ function cluster_taxonomy_uuid_features_default_terms() {
           'safe_value' => 'Plastic Sheeting',
         ),
       ),
+      'und' => array(
+        0 => array(
+          'value' => 'Plastic Sheeting',
+          'format' => NULL,
+          'safe_value' => 'Plastic Sheeting',
+        ),
+      ),
     ),
     'description_field' => array(
       'en' => array(
+        0 => array(
+          'value' => 'Tarpaulines, rolls, sheets',
+          'summary' => NULL,
+          'format' => 'filtered_html',
+          'safe_value' => '<p>Tarpaulines, rolls, sheets</p>
+',
+          'safe_summary' => '',
+        ),
+      ),
+      'und' => array(
         0 => array(
           'value' => 'Tarpaulines, rolls, sheets',
           'summary' => NULL,
@@ -4646,9 +6267,26 @@ function cluster_taxonomy_uuid_features_default_terms() {
           'safe_value' => 'Advisory Note',
         ),
       ),
+      'und' => array(
+        0 => array(
+          'value' => 'Advisory Note',
+          'format' => NULL,
+          'safe_value' => 'Advisory Note',
+        ),
+      ),
     ),
     'description_field' => array(
       'en' => array(
+        0 => array(
+          'value' => 'Documents to clarify cluster positions on various thematic topics',
+          'summary' => NULL,
+          'format' => 'filtered_html',
+          'safe_value' => '<p>Documents to clarify cluster positions on various thematic topics</p>
+',
+          'safe_summary' => '',
+        ),
+      ),
+      'und' => array(
         0 => array(
           'value' => 'Documents to clarify cluster positions on various thematic topics',
           'summary' => NULL,
@@ -4693,9 +6331,25 @@ function cluster_taxonomy_uuid_features_default_terms() {
           'safe_value' => 'Reporting Tools and Guidance',
         ),
       ),
+      'und' => array(
+        0 => array(
+          'value' => 'Reporting Tools and Guidance',
+          'format' => NULL,
+          'safe_value' => 'Reporting Tools and Guidance',
+        ),
+      ),
     ),
     'description_field' => array(
       'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'filtered_html',
+          'safe_value' => '',
+          'safe_summary' => '',
+        ),
+      ),
+      'und' => array(
         0 => array(
           'value' => '',
           'summary' => NULL,
@@ -4722,7 +6376,7 @@ function cluster_taxonomy_uuid_features_default_terms() {
         ),
       ),
     ),
-    'description_original' => '',
+    'description_original' => NULL,
   );
   $terms[] = array(
     'name' => 'Complex Crisis',
@@ -4739,9 +6393,25 @@ function cluster_taxonomy_uuid_features_default_terms() {
           'safe_value' => 'Complex Crisis',
         ),
       ),
+      'und' => array(
+        0 => array(
+          'value' => 'Complex Crisis',
+          'format' => NULL,
+          'safe_value' => 'Complex Crisis',
+        ),
+      ),
     ),
     'description_field' => array(
       'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'filtered_html',
+          'safe_value' => '',
+          'safe_summary' => '',
+        ),
+      ),
+      'und' => array(
         0 => array(
           'value' => '',
           'summary' => NULL,
@@ -4768,7 +6438,7 @@ function cluster_taxonomy_uuid_features_default_terms() {
         ),
       ),
     ),
-    'description_original' => '',
+    'description_original' => NULL,
   );
   $terms[] = array(
     'name' => 'Coordination Management',
@@ -4785,9 +6455,25 @@ function cluster_taxonomy_uuid_features_default_terms() {
           'safe_value' => 'Coordination Management',
         ),
       ),
+      'und' => array(
+        0 => array(
+          'value' => 'Coordination Management',
+          'format' => NULL,
+          'safe_value' => 'Coordination Management',
+        ),
+      ),
     ),
     'description_field' => array(
       'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'filtered_html',
+          'safe_value' => '',
+          'safe_summary' => '',
+        ),
+      ),
+      'und' => array(
         0 => array(
           'value' => '',
           'summary' => NULL,
@@ -4814,7 +6500,7 @@ function cluster_taxonomy_uuid_features_default_terms() {
         ),
       ),
     ),
-    'description_original' => '',
+    'description_original' => NULL,
   );
   $terms[] = array(
     'name' => 'Information Management',
@@ -4831,9 +6517,25 @@ function cluster_taxonomy_uuid_features_default_terms() {
           'safe_value' => 'Information Management',
         ),
       ),
+      'und' => array(
+        0 => array(
+          'value' => 'Information Management',
+          'format' => NULL,
+          'safe_value' => 'Information Management',
+        ),
+      ),
     ),
     'description_field' => array(
       'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'filtered_html',
+          'safe_value' => '',
+          'safe_summary' => '',
+        ),
+      ),
+      'und' => array(
         0 => array(
           'value' => '',
           'summary' => NULL,
@@ -4860,7 +6562,7 @@ function cluster_taxonomy_uuid_features_default_terms() {
         ),
       ),
     ),
-    'description_original' => '',
+    'description_original' => NULL,
   );
   $terms[] = array(
     'name' => 'Infographic',
@@ -4877,9 +6579,26 @@ function cluster_taxonomy_uuid_features_default_terms() {
           'safe_value' => 'Infographic',
         ),
       ),
+      'und' => array(
+        0 => array(
+          'value' => 'Infographic',
+          'format' => NULL,
+          'safe_value' => 'Infographic',
+        ),
+      ),
     ),
     'description_field' => array(
       'en' => array(
+        0 => array(
+          'value' => 'Visual image representing information used to communicate a set of messages related to the crisis',
+          'summary' => NULL,
+          'format' => 'filtered_html',
+          'safe_value' => '<p>Visual image representing information used to communicate a set of messages related to the crisis</p>
+',
+          'safe_summary' => '',
+        ),
+      ),
+      'und' => array(
         0 => array(
           'value' => 'Visual image representing information used to communicate a set of messages related to the crisis',
           'summary' => NULL,
@@ -4924,9 +6643,25 @@ function cluster_taxonomy_uuid_features_default_terms() {
           'safe_value' => 'Sudden Onset',
         ),
       ),
+      'und' => array(
+        0 => array(
+          'value' => 'Sudden Onset',
+          'format' => NULL,
+          'safe_value' => 'Sudden Onset',
+        ),
+      ),
     ),
     'description_field' => array(
       'en' => array(
+        0 => array(
+          'value' => NULL,
+          'summary' => NULL,
+          'format' => 'filtered_html',
+          'safe_value' => '',
+          'safe_summary' => '',
+        ),
+      ),
+      'und' => array(
         0 => array(
           'value' => '',
           'summary' => NULL,
@@ -4953,7 +6688,7 @@ function cluster_taxonomy_uuid_features_default_terms() {
         ),
       ),
     ),
-    'description_original' => '',
+    'description_original' => NULL,
   );
   $terms[] = array(
     'name' => 'Early Recovery',
@@ -4970,9 +6705,25 @@ function cluster_taxonomy_uuid_features_default_terms() {
           'safe_value' => 'Early Recovery',
         ),
       ),
+      'und' => array(
+        0 => array(
+          'value' => 'Early Recovery',
+          'format' => NULL,
+          'safe_value' => 'Early Recovery',
+        ),
+      ),
     ),
     'description_field' => array(
       'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'filtered_html',
+          'safe_value' => '',
+          'safe_summary' => '',
+        ),
+      ),
+      'und' => array(
         0 => array(
           'value' => '',
           'summary' => NULL,
@@ -4999,7 +6750,7 @@ function cluster_taxonomy_uuid_features_default_terms() {
         ),
       ),
     ),
-    'description_original' => '',
+    'description_original' => NULL,
   );
   $terms[] = array(
     'name' => 'Technical Support and Design',
@@ -5016,9 +6767,25 @@ function cluster_taxonomy_uuid_features_default_terms() {
           'safe_value' => 'Technical Support and Design',
         ),
       ),
+      'und' => array(
+        0 => array(
+          'value' => 'Technical Support and Design',
+          'format' => NULL,
+          'safe_value' => 'Technical Support and Design',
+        ),
+      ),
     ),
     'description_field' => array(
       'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'filtered_html',
+          'safe_value' => '',
+          'safe_summary' => '',
+        ),
+      ),
+      'und' => array(
         0 => array(
           'value' => '',
           'summary' => NULL,
@@ -5045,7 +6812,7 @@ function cluster_taxonomy_uuid_features_default_terms() {
         ),
       ),
     ),
-    'description_original' => '',
+    'description_original' => NULL,
   );
   $terms[] = array(
     'name' => 'Construction Methods',
@@ -5062,9 +6829,25 @@ function cluster_taxonomy_uuid_features_default_terms() {
           'safe_value' => 'Construction Methods',
         ),
       ),
+      'und' => array(
+        0 => array(
+          'value' => 'Construction Methods',
+          'format' => NULL,
+          'safe_value' => 'Construction Methods',
+        ),
+      ),
     ),
     'description_field' => array(
       'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'filtered_html',
+          'safe_value' => '',
+          'safe_summary' => '',
+        ),
+      ),
+      'und' => array(
         0 => array(
           'value' => '',
           'summary' => NULL,
@@ -5091,7 +6874,7 @@ function cluster_taxonomy_uuid_features_default_terms() {
         ),
       ),
     ),
-    'description_original' => '',
+    'description_original' => NULL,
   );
   $terms[] = array(
     'name' => 'Mudslide',
@@ -5108,9 +6891,25 @@ function cluster_taxonomy_uuid_features_default_terms() {
           'safe_value' => 'Mudslide',
         ),
       ),
+      'und' => array(
+        0 => array(
+          'value' => 'Mudslide',
+          'format' => NULL,
+          'safe_value' => 'Mudslide',
+        ),
+      ),
     ),
     'description_field' => array(
       'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'filtered_html',
+          'safe_value' => '',
+          'safe_summary' => '',
+        ),
+      ),
+      'und' => array(
         0 => array(
           'value' => '',
           'summary' => NULL,
@@ -5137,7 +6936,7 @@ function cluster_taxonomy_uuid_features_default_terms() {
         ),
       ),
     ),
-    'description_original' => '',
+    'description_original' => NULL,
   );
   $terms[] = array(
     'name' => 'Collective Centres',
@@ -5154,9 +6953,25 @@ function cluster_taxonomy_uuid_features_default_terms() {
           'safe_value' => 'Collective Centres',
         ),
       ),
+      'und' => array(
+        0 => array(
+          'value' => 'Collective Centres',
+          'format' => NULL,
+          'safe_value' => 'Collective Centres',
+        ),
+      ),
     ),
     'description_field' => array(
       'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'filtered_html',
+          'safe_value' => '',
+          'safe_summary' => '',
+        ),
+      ),
+      'und' => array(
         0 => array(
           'value' => '',
           'summary' => NULL,
@@ -5183,7 +6998,7 @@ function cluster_taxonomy_uuid_features_default_terms() {
         ),
       ),
     ),
-    'description_original' => '',
+    'description_original' => NULL,
   );
   $terms[] = array(
     'name' => 'Beneficiary Communications',
@@ -5200,9 +7015,25 @@ function cluster_taxonomy_uuid_features_default_terms() {
           'safe_value' => 'Beneficiary Communications',
         ),
       ),
+      'und' => array(
+        0 => array(
+          'value' => 'Beneficiary Communications',
+          'format' => NULL,
+          'safe_value' => 'Beneficiary Communications',
+        ),
+      ),
     ),
     'description_field' => array(
       'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'filtered_html',
+          'safe_value' => '',
+          'safe_summary' => '',
+        ),
+      ),
+      'und' => array(
         0 => array(
           'value' => '',
           'summary' => NULL,
@@ -5229,7 +7060,7 @@ function cluster_taxonomy_uuid_features_default_terms() {
         ),
       ),
     ),
-    'description_original' => '',
+    'description_original' => NULL,
   );
   $terms[] = array(
     'name' => 'Training materials',
@@ -5246,9 +7077,26 @@ function cluster_taxonomy_uuid_features_default_terms() {
           'safe_value' => 'Training materials',
         ),
       ),
+      'und' => array(
+        0 => array(
+          'value' => 'Training materials',
+          'format' => NULL,
+          'safe_value' => 'Training materials',
+        ),
+      ),
     ),
     'description_field' => array(
       'en' => array(
+        0 => array(
+          'value' => 'Products related to technical training for affected populations, workshops, etc.',
+          'summary' => NULL,
+          'format' => 'filtered_html',
+          'safe_value' => '<p>Products related to technical training for affected populations, workshops, etc.</p>
+',
+          'safe_summary' => '',
+        ),
+      ),
+      'und' => array(
         0 => array(
           'value' => 'Products related to technical training for affected populations, workshops, etc.',
           'summary' => NULL,
@@ -5293,9 +7141,25 @@ function cluster_taxonomy_uuid_features_default_terms() {
           'safe_value' => 'Tsunami',
         ),
       ),
+      'und' => array(
+        0 => array(
+          'value' => 'Tsunami',
+          'format' => NULL,
+          'safe_value' => 'Tsunami',
+        ),
+      ),
     ),
     'description_field' => array(
       'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'filtered_html',
+          'safe_value' => '',
+          'safe_summary' => '',
+        ),
+      ),
+      'und' => array(
         0 => array(
           'value' => '',
           'summary' => NULL,
@@ -5322,7 +7186,7 @@ function cluster_taxonomy_uuid_features_default_terms() {
         ),
       ),
     ),
-    'description_original' => '',
+    'description_original' => NULL,
   );
   $terms[] = array(
     'name' => 'Beneficiary Selection',
@@ -5339,9 +7203,26 @@ function cluster_taxonomy_uuid_features_default_terms() {
           'safe_value' => 'Beneficiary Selection',
         ),
       ),
+      'und' => array(
+        0 => array(
+          'value' => 'Beneficiary Selection',
+          'format' => NULL,
+          'safe_value' => 'Beneficiary Selection',
+        ),
+      ),
     ),
     'description_field' => array(
       'en' => array(
+        0 => array(
+          'value' => 'Documentation of selection criteria for assistance prioritization of affected population',
+          'summary' => NULL,
+          'format' => 'filtered_html',
+          'safe_value' => '<p>Documentation of selection criteria for assistance prioritization of affected population</p>
+',
+          'safe_summary' => '',
+        ),
+      ),
+      'und' => array(
         0 => array(
           'value' => 'Documentation of selection criteria for assistance prioritization of affected population',
           'summary' => NULL,
@@ -5386,9 +7267,25 @@ function cluster_taxonomy_uuid_features_default_terms() {
           'safe_value' => 'Camp Management',
         ),
       ),
+      'und' => array(
+        0 => array(
+          'value' => 'Camp Management',
+          'format' => NULL,
+          'safe_value' => 'Camp Management',
+        ),
+      ),
     ),
     'description_field' => array(
       'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'filtered_html',
+          'safe_value' => '',
+          'safe_summary' => '',
+        ),
+      ),
+      'und' => array(
         0 => array(
           'value' => '',
           'summary' => NULL,
@@ -5415,7 +7312,7 @@ function cluster_taxonomy_uuid_features_default_terms() {
         ),
       ),
     ),
-    'description_original' => '',
+    'description_original' => NULL,
   );
   $terms[] = array(
     'name' => 'Mental Health',
@@ -5432,9 +7329,25 @@ function cluster_taxonomy_uuid_features_default_terms() {
           'safe_value' => 'Mental Health',
         ),
       ),
+      'und' => array(
+        0 => array(
+          'value' => 'Mental Health',
+          'format' => NULL,
+          'safe_value' => 'Mental Health',
+        ),
+      ),
     ),
     'description_field' => array(
       'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'filtered_html',
+          'safe_value' => '',
+          'safe_summary' => '',
+        ),
+      ),
+      'und' => array(
         0 => array(
           'value' => '',
           'summary' => NULL,
@@ -5461,7 +7374,7 @@ function cluster_taxonomy_uuid_features_default_terms() {
         ),
       ),
     ),
-    'description_original' => '',
+    'description_original' => NULL,
   );
   $terms[] = array(
     'name' => 'Settlement Planning',
@@ -5478,9 +7391,25 @@ function cluster_taxonomy_uuid_features_default_terms() {
           'safe_value' => 'Settlement Planning',
         ),
       ),
+      'und' => array(
+        0 => array(
+          'value' => 'Settlement Planning',
+          'format' => NULL,
+          'safe_value' => 'Settlement Planning',
+        ),
+      ),
     ),
     'description_field' => array(
       'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'filtered_html',
+          'safe_value' => '',
+          'safe_summary' => '',
+        ),
+      ),
+      'und' => array(
         0 => array(
           'value' => '',
           'summary' => NULL,
@@ -5507,7 +7436,7 @@ function cluster_taxonomy_uuid_features_default_terms() {
         ),
       ),
     ),
-    'description_original' => '',
+    'description_original' => NULL,
   );
   $terms[] = array(
     'name' => 'Strategy',
@@ -5524,9 +7453,26 @@ function cluster_taxonomy_uuid_features_default_terms() {
           'safe_value' => 'Strategy',
         ),
       ),
+      'und' => array(
+        0 => array(
+          'value' => 'Strategy',
+          'format' => NULL,
+          'safe_value' => 'Strategy',
+        ),
+      ),
     ),
     'description_field' => array(
       'en' => array(
+        0 => array(
+          'value' => 'Documentation of cluster defined approaches and strategic goals',
+          'summary' => NULL,
+          'format' => 'filtered_html',
+          'safe_value' => '<p>Documentation of cluster defined approaches and strategic goals</p>
+',
+          'safe_summary' => '',
+        ),
+      ),
+      'und' => array(
         0 => array(
           'value' => 'Documentation of cluster defined approaches and strategic goals',
           'summary' => NULL,
@@ -5571,9 +7517,25 @@ function cluster_taxonomy_uuid_features_default_terms() {
           'safe_value' => 'Tornadoes',
         ),
       ),
+      'und' => array(
+        0 => array(
+          'value' => 'Tornadoes',
+          'format' => NULL,
+          'safe_value' => 'Tornadoes',
+        ),
+      ),
     ),
     'description_field' => array(
       'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'filtered_html',
+          'safe_value' => '',
+          'safe_summary' => '',
+        ),
+      ),
+      'und' => array(
         0 => array(
           'value' => '',
           'summary' => NULL,
@@ -5600,7 +7562,7 @@ function cluster_taxonomy_uuid_features_default_terms() {
         ),
       ),
     ),
-    'description_original' => '',
+    'description_original' => NULL,
   );
   $terms[] = array(
     'name' => 'IM reports and analysis',
@@ -5617,9 +7579,26 @@ function cluster_taxonomy_uuid_features_default_terms() {
           'safe_value' => 'IM reports and analysis',
         ),
       ),
+      'und' => array(
+        0 => array(
+          'value' => 'IM reports and analysis',
+          'format' => NULL,
+          'safe_value' => 'IM reports and analysis',
+        ),
+      ),
     ),
     'description_field' => array(
       'en' => array(
+        0 => array(
+          'value' => 'Reporting related to needs, gap, or 3W analyses usually as a table or dashboard document',
+          'summary' => NULL,
+          'format' => 'filtered_html',
+          'safe_value' => '<p>Reporting related to needs, gap, or 3W analyses usually as a table or dashboard document</p>
+',
+          'safe_summary' => '',
+        ),
+      ),
+      'und' => array(
         0 => array(
           'value' => 'Reporting related to needs, gap, or 3W analyses usually as a table or dashboard document',
           'summary' => NULL,
@@ -5664,9 +7643,26 @@ function cluster_taxonomy_uuid_features_default_terms() {
           'safe_value' => 'IEC materials',
         ),
       ),
+      'und' => array(
+        0 => array(
+          'value' => 'IEC materials',
+          'format' => NULL,
+          'safe_value' => 'IEC materials',
+        ),
+      ),
     ),
     'description_field' => array(
       'en' => array(
+        0 => array(
+          'value' => 'Information, Education, and Communication materials that are usually distributed as part of interventions or to affected populations',
+          'summary' => NULL,
+          'format' => 'filtered_html',
+          'safe_value' => '<p>Information, Education, and Communication materials that are usually distributed as part of interventions or to affected populations</p>
+',
+          'safe_summary' => '',
+        ),
+      ),
+      'und' => array(
         0 => array(
           'value' => 'Information, Education, and Communication materials that are usually distributed as part of interventions or to affected populations',
           'summary' => NULL,
@@ -5711,9 +7707,25 @@ function cluster_taxonomy_uuid_features_default_terms() {
           'safe_value' => 'Development',
         ),
       ),
+      'und' => array(
+        0 => array(
+          'value' => 'Development',
+          'format' => NULL,
+          'safe_value' => 'Development',
+        ),
+      ),
     ),
     'description_field' => array(
       'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'filtered_html',
+          'safe_value' => '',
+          'safe_summary' => '',
+        ),
+      ),
+      'und' => array(
         0 => array(
           'value' => '',
           'summary' => NULL,
@@ -5740,7 +7752,7 @@ function cluster_taxonomy_uuid_features_default_terms() {
         ),
       ),
     ),
-    'description_original' => '',
+    'description_original' => NULL,
   );
   $terms[] = array(
     'name' => 'Epidemic',
@@ -5757,9 +7769,25 @@ function cluster_taxonomy_uuid_features_default_terms() {
           'safe_value' => 'Epidemic',
         ),
       ),
+      'und' => array(
+        0 => array(
+          'value' => 'Epidemic',
+          'format' => NULL,
+          'safe_value' => 'Epidemic',
+        ),
+      ),
     ),
     'description_field' => array(
       'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'filtered_html',
+          'safe_value' => '',
+          'safe_summary' => '',
+        ),
+      ),
+      'und' => array(
         0 => array(
           'value' => '',
           'summary' => NULL,
@@ -5786,7 +7814,7 @@ function cluster_taxonomy_uuid_features_default_terms() {
         ),
       ),
     ),
-    'description_original' => '',
+    'description_original' => NULL,
   );
   $terms[] = array(
     'name' => 'Fire',
@@ -5803,9 +7831,25 @@ function cluster_taxonomy_uuid_features_default_terms() {
           'safe_value' => 'Fire',
         ),
       ),
+      'und' => array(
+        0 => array(
+          'value' => 'Fire',
+          'format' => NULL,
+          'safe_value' => 'Fire',
+        ),
+      ),
     ),
     'description_field' => array(
       'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'filtered_html',
+          'safe_value' => '',
+          'safe_summary' => '',
+        ),
+      ),
+      'und' => array(
         0 => array(
           'value' => '',
           'summary' => NULL,
@@ -5832,7 +7876,7 @@ function cluster_taxonomy_uuid_features_default_terms() {
         ),
       ),
     ),
-    'description_original' => '',
+    'description_original' => NULL,
   );
   $terms[] = array(
     'name' => 'Clothing and Bedding',
@@ -5849,9 +7893,25 @@ function cluster_taxonomy_uuid_features_default_terms() {
           'safe_value' => 'Clothing and Bedding',
         ),
       ),
+      'und' => array(
+        0 => array(
+          'value' => 'Clothing and Bedding',
+          'format' => NULL,
+          'safe_value' => 'Clothing and Bedding',
+        ),
+      ),
     ),
     'description_field' => array(
       'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'filtered_html',
+          'safe_value' => '',
+          'safe_summary' => '',
+        ),
+      ),
+      'und' => array(
         0 => array(
           'value' => '',
           'summary' => NULL,
@@ -5878,7 +7938,7 @@ function cluster_taxonomy_uuid_features_default_terms() {
         ),
       ),
     ),
-    'description_original' => '',
+    'description_original' => NULL,
   );
   $terms[] = array(
     'name' => 'Inter-Cluster Coordination',
@@ -5895,9 +7955,25 @@ function cluster_taxonomy_uuid_features_default_terms() {
           'safe_value' => 'Inter-Cluster Coordination',
         ),
       ),
+      'und' => array(
+        0 => array(
+          'value' => 'Inter-Cluster Coordination',
+          'format' => NULL,
+          'safe_value' => 'Inter-Cluster Coordination',
+        ),
+      ),
     ),
     'description_field' => array(
       'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'filtered_html',
+          'safe_value' => '',
+          'safe_summary' => '',
+        ),
+      ),
+      'und' => array(
         0 => array(
           'value' => '',
           'summary' => NULL,
@@ -5924,7 +8000,7 @@ function cluster_taxonomy_uuid_features_default_terms() {
         ),
       ),
     ),
-    'description_original' => '',
+    'description_original' => NULL,
   );
   $terms[] = array(
     'name' => 'Drought',
@@ -5941,9 +8017,25 @@ function cluster_taxonomy_uuid_features_default_terms() {
           'safe_value' => 'Drought',
         ),
       ),
+      'und' => array(
+        0 => array(
+          'value' => 'Drought',
+          'format' => NULL,
+          'safe_value' => 'Drought',
+        ),
+      ),
     ),
     'description_field' => array(
       'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'filtered_html',
+          'safe_value' => '',
+          'safe_summary' => '',
+        ),
+      ),
+      'und' => array(
         0 => array(
           'value' => '',
           'summary' => NULL,
@@ -5970,7 +8062,7 @@ function cluster_taxonomy_uuid_features_default_terms() {
         ),
       ),
     ),
-    'description_original' => '',
+    'description_original' => NULL,
   );
   $terms[] = array(
     'name' => 'Shelter Cluster Assessment',
@@ -5987,9 +8079,26 @@ function cluster_taxonomy_uuid_features_default_terms() {
           'safe_value' => 'Shelter Cluster Assessment',
         ),
       ),
+      'und' => array(
+        0 => array(
+          'value' => 'Shelter Cluster Assessment',
+          'format' => NULL,
+          'safe_value' => 'Shelter Cluster Assessment',
+        ),
+      ),
     ),
     'description_field' => array(
       'en' => array(
+        0 => array(
+          'value' => 'A report of an assessment conducted on behalf of shelter cluster partners',
+          'summary' => NULL,
+          'format' => 'filtered_html',
+          'safe_value' => '<p>A report of an assessment conducted on behalf of shelter cluster partners</p>
+',
+          'safe_summary' => '',
+        ),
+      ),
+      'und' => array(
         0 => array(
           'value' => 'A report of an assessment conducted on behalf of shelter cluster partners',
           'summary' => NULL,
@@ -6034,9 +8143,25 @@ function cluster_taxonomy_uuid_features_default_terms() {
           'safe_value' => 'Cross-Cutting Issues',
         ),
       ),
+      'und' => array(
+        0 => array(
+          'value' => 'Cross-Cutting Issues',
+          'format' => NULL,
+          'safe_value' => 'Cross-Cutting Issues',
+        ),
+      ),
     ),
     'description_field' => array(
       'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'filtered_html',
+          'safe_value' => '',
+          'safe_summary' => '',
+        ),
+      ),
+      'und' => array(
         0 => array(
           'value' => '',
           'summary' => NULL,
@@ -6063,7 +8188,7 @@ function cluster_taxonomy_uuid_features_default_terms() {
         ),
       ),
     ),
-    'description_original' => '',
+    'description_original' => NULL,
   );
   $terms[] = array(
     'name' => 'Dataset',
@@ -6080,9 +8205,26 @@ function cluster_taxonomy_uuid_features_default_terms() {
           'safe_value' => 'Dataset',
         ),
       ),
+      'und' => array(
+        0 => array(
+          'value' => 'Dataset',
+          'format' => NULL,
+          'safe_value' => 'Dataset',
+        ),
+      ),
     ),
     'description_field' => array(
       'en' => array(
+        0 => array(
+          'value' => 'Structured data made available for sharing',
+          'summary' => NULL,
+          'format' => 'filtered_html',
+          'safe_value' => '<p>Structured data made available for sharing</p>
+',
+          'safe_summary' => '',
+        ),
+      ),
+      'und' => array(
         0 => array(
           'value' => 'Structured data made available for sharing',
           'summary' => NULL,
@@ -6127,9 +8269,25 @@ function cluster_taxonomy_uuid_features_default_terms() {
           'safe_value' => 'Conflict',
         ),
       ),
+      'und' => array(
+        0 => array(
+          'value' => 'Conflict',
+          'format' => NULL,
+          'safe_value' => 'Conflict',
+        ),
+      ),
     ),
     'description_field' => array(
       'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'filtered_html',
+          'safe_value' => '',
+          'safe_summary' => '',
+        ),
+      ),
+      'und' => array(
         0 => array(
           'value' => '',
           'summary' => NULL,
@@ -6156,7 +8314,7 @@ function cluster_taxonomy_uuid_features_default_terms() {
         ),
       ),
     ),
-    'description_original' => '',
+    'description_original' => NULL,
   );
   $terms[] = array(
     'name' => 'Flash Flood',
@@ -6173,9 +8331,25 @@ function cluster_taxonomy_uuid_features_default_terms() {
           'safe_value' => 'Flash Flood',
         ),
       ),
+      'und' => array(
+        0 => array(
+          'value' => 'Flash Flood',
+          'format' => NULL,
+          'safe_value' => 'Flash Flood',
+        ),
+      ),
     ),
     'description_field' => array(
       'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'filtered_html',
+          'safe_value' => '',
+          'safe_summary' => '',
+        ),
+      ),
+      'und' => array(
         0 => array(
           'value' => '',
           'summary' => NULL,
@@ -6202,7 +8376,7 @@ function cluster_taxonomy_uuid_features_default_terms() {
         ),
       ),
     ),
-    'description_original' => '',
+    'description_original' => NULL,
   );
   $terms[] = array(
     'name' => 'Education',
@@ -6219,9 +8393,25 @@ function cluster_taxonomy_uuid_features_default_terms() {
           'safe_value' => 'Education',
         ),
       ),
+      'und' => array(
+        0 => array(
+          'value' => 'Education',
+          'format' => NULL,
+          'safe_value' => 'Education',
+        ),
+      ),
     ),
     'description_field' => array(
       'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'filtered_html',
+          'safe_value' => '',
+          'safe_summary' => '',
+        ),
+      ),
+      'und' => array(
         0 => array(
           'value' => '',
           'summary' => NULL,
@@ -6248,7 +8438,7 @@ function cluster_taxonomy_uuid_features_default_terms() {
         ),
       ),
     ),
-    'description_original' => '',
+    'description_original' => NULL,
   );
   $terms[] = array(
     'name' => 'Gender',
@@ -6265,9 +8455,25 @@ function cluster_taxonomy_uuid_features_default_terms() {
           'safe_value' => 'Gender',
         ),
       ),
+      'und' => array(
+        0 => array(
+          'value' => 'Gender',
+          'format' => NULL,
+          'safe_value' => 'Gender',
+        ),
+      ),
     ),
     'description_field' => array(
       'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'filtered_html',
+          'safe_value' => '',
+          'safe_summary' => '',
+        ),
+      ),
+      'und' => array(
         0 => array(
           'value' => '',
           'summary' => NULL,
@@ -6294,7 +8500,7 @@ function cluster_taxonomy_uuid_features_default_terms() {
         ),
       ),
     ),
-    'description_original' => '',
+    'description_original' => NULL,
   );
   $terms[] = array(
     'name' => 'Man-made disaster',
@@ -6311,9 +8517,25 @@ function cluster_taxonomy_uuid_features_default_terms() {
           'safe_value' => 'Man-made disaster',
         ),
       ),
+      'und' => array(
+        0 => array(
+          'value' => 'Man-made disaster',
+          'format' => NULL,
+          'safe_value' => 'Man-made disaster',
+        ),
+      ),
     ),
     'description_field' => array(
       'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'filtered_html',
+          'safe_value' => '',
+          'safe_summary' => '',
+        ),
+      ),
+      'und' => array(
         0 => array(
           'value' => '',
           'summary' => NULL,
@@ -6340,7 +8562,7 @@ function cluster_taxonomy_uuid_features_default_terms() {
         ),
       ),
     ),
-    'description_original' => '',
+    'description_original' => NULL,
   );
   $terms[] = array(
     'name' => 'Tents',
@@ -6357,9 +8579,25 @@ function cluster_taxonomy_uuid_features_default_terms() {
           'safe_value' => 'Tents',
         ),
       ),
+      'und' => array(
+        0 => array(
+          'value' => 'Tents',
+          'format' => NULL,
+          'safe_value' => 'Tents',
+        ),
+      ),
     ),
     'description_field' => array(
       'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'filtered_html',
+          'safe_value' => '',
+          'safe_summary' => '',
+        ),
+      ),
+      'und' => array(
         0 => array(
           'value' => '',
           'summary' => NULL,
@@ -6386,7 +8624,7 @@ function cluster_taxonomy_uuid_features_default_terms() {
         ),
       ),
     ),
-    'description_original' => '',
+    'description_original' => NULL,
   );
   $terms[] = array(
     'name' => 'Insect Infestation',
@@ -6403,9 +8641,25 @@ function cluster_taxonomy_uuid_features_default_terms() {
           'safe_value' => 'Insect Infestation',
         ),
       ),
+      'und' => array(
+        0 => array(
+          'value' => 'Insect Infestation',
+          'format' => NULL,
+          'safe_value' => 'Insect Infestation',
+        ),
+      ),
     ),
     'description_field' => array(
       'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'filtered_html',
+          'safe_value' => '',
+          'safe_summary' => '',
+        ),
+      ),
+      'und' => array(
         0 => array(
           'value' => '',
           'summary' => NULL,
@@ -6432,7 +8686,7 @@ function cluster_taxonomy_uuid_features_default_terms() {
         ),
       ),
     ),
-    'description_original' => '',
+    'description_original' => NULL,
   );
   $terms[] = array(
     'name' => 'Transitional Shelter',
@@ -6449,9 +8703,25 @@ function cluster_taxonomy_uuid_features_default_terms() {
           'safe_value' => 'Transitional Shelter',
         ),
       ),
+      'und' => array(
+        0 => array(
+          'value' => 'Transitional Shelter',
+          'format' => NULL,
+          'safe_value' => 'Transitional Shelter',
+        ),
+      ),
     ),
     'description_field' => array(
       'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'filtered_html',
+          'safe_value' => '',
+          'safe_summary' => '',
+        ),
+      ),
+      'und' => array(
         0 => array(
           'value' => '',
           'summary' => NULL,
@@ -6478,7 +8748,7 @@ function cluster_taxonomy_uuid_features_default_terms() {
         ),
       ),
     ),
-    'description_original' => '',
+    'description_original' => NULL,
   );
   $terms[] = array(
     'name' => 'No legal status',
@@ -6495,9 +8765,25 @@ function cluster_taxonomy_uuid_features_default_terms() {
           'safe_value' => 'No legal status',
         ),
       ),
+      'und' => array(
+        0 => array(
+          'value' => 'No legal status',
+          'format' => NULL,
+          'safe_value' => 'No legal status',
+        ),
+      ),
     ),
     'description_field' => array(
       'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'filtered_html',
+          'safe_value' => '',
+          'safe_summary' => '',
+        ),
+      ),
+      'und' => array(
         0 => array(
           'value' => '',
           'summary' => NULL,
@@ -6524,7 +8810,7 @@ function cluster_taxonomy_uuid_features_default_terms() {
         ),
       ),
     ),
-    'description_original' => '',
+    'description_original' => NULL,
   );
   $terms[] = array(
     'name' => 'Camp Planning',
@@ -6541,9 +8827,25 @@ function cluster_taxonomy_uuid_features_default_terms() {
           'safe_value' => 'Camp Planning',
         ),
       ),
+      'und' => array(
+        0 => array(
+          'value' => 'Camp Planning',
+          'format' => NULL,
+          'safe_value' => 'Camp Planning',
+        ),
+      ),
     ),
     'description_field' => array(
       'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'filtered_html',
+          'safe_value' => '',
+          'safe_summary' => '',
+        ),
+      ),
+      'und' => array(
         0 => array(
           'value' => '',
           'summary' => NULL,
@@ -6570,7 +8872,7 @@ function cluster_taxonomy_uuid_features_default_terms() {
         ),
       ),
     ),
-    'description_original' => '',
+    'description_original' => NULL,
   );
   $terms[] = array(
     'name' => 'Conflict',
@@ -6587,9 +8889,25 @@ function cluster_taxonomy_uuid_features_default_terms() {
           'safe_value' => 'Conflict',
         ),
       ),
+      'und' => array(
+        0 => array(
+          'value' => 'Conflict',
+          'format' => NULL,
+          'safe_value' => 'Conflict',
+        ),
+      ),
     ),
     'description_field' => array(
       'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'filtered_html',
+          'safe_value' => '',
+          'safe_summary' => '',
+        ),
+      ),
+      'und' => array(
         0 => array(
           'value' => '',
           'summary' => NULL,
@@ -6616,7 +8934,7 @@ function cluster_taxonomy_uuid_features_default_terms() {
         ),
       ),
     ),
-    'description_original' => '',
+    'description_original' => NULL,
   );
   $terms[] = array(
     'name' => 'Preparedness',
@@ -6633,9 +8951,25 @@ function cluster_taxonomy_uuid_features_default_terms() {
           'safe_value' => 'Preparedness',
         ),
       ),
+      'und' => array(
+        0 => array(
+          'value' => 'Preparedness',
+          'format' => NULL,
+          'safe_value' => 'Preparedness',
+        ),
+      ),
     ),
     'description_field' => array(
       'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'filtered_html',
+          'safe_value' => '',
+          'safe_summary' => '',
+        ),
+      ),
+      'und' => array(
         0 => array(
           'value' => '',
           'summary' => NULL,
@@ -6662,7 +8996,7 @@ function cluster_taxonomy_uuid_features_default_terms() {
         ),
       ),
     ),
-    'description_original' => '',
+    'description_original' => NULL,
   );
   $terms[] = array(
     'name' => 'Owner Driven',
@@ -6679,9 +9013,25 @@ function cluster_taxonomy_uuid_features_default_terms() {
           'safe_value' => 'Owner Driven',
         ),
       ),
+      'und' => array(
+        0 => array(
+          'value' => 'Owner Driven',
+          'format' => NULL,
+          'safe_value' => 'Owner Driven',
+        ),
+      ),
     ),
     'description_field' => array(
       'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'filtered_html',
+          'safe_value' => '',
+          'safe_summary' => '',
+        ),
+      ),
+      'und' => array(
         0 => array(
           'value' => '',
           'summary' => NULL,
@@ -6708,7 +9058,7 @@ function cluster_taxonomy_uuid_features_default_terms() {
         ),
       ),
     ),
-    'description_original' => '',
+    'description_original' => NULL,
   );
   return $terms;
 }

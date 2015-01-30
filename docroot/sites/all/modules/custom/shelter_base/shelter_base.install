@@ -340,3 +340,12 @@ function shelter_base_update_7035() {
     node_save($node);
   }
 }
+
+/**
+ * Revert features for taxonomy fields.
+ */
+function shelter_base_update_7036() {
+  features_revert_module('cluster_taxonomy');
+  features_revert_module('cluster_docs');
+  features_revert_module('cluster_og');
+}
