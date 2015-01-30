@@ -19,10 +19,21 @@
   border-radius: 10px;
   border: 1px solid #aaa;
 }
+.page-node-edit .form-type-checkboxes .form-type-checkbox.selected,
+.page-node-add-document .form-type-checkboxes .form-type-checkbox.selected {
+  background: #7f1416;
+  color: #fff;
+  border: 1px solid #9c0104;
+}
 .page-node-edit .form-type-checkboxes .form-type-checkbox input,
 .page-node-add-document .form-type-checkboxes .form-type-checkbox input {
   position: relative;
   top: -2px;
+  cursor: pointer;
+}
+.page-node-edit .form-type-checkboxes .form-type-checkbox label,
+.page-node-add-document .form-type-checkboxes .form-type-checkbox label {
+  cursor: pointer;
 }
 .page-node-edit .form-text,
 .page-node-add-document .form-text {
