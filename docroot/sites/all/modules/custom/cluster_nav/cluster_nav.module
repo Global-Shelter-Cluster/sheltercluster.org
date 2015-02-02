@@ -48,18 +48,20 @@ function _cluster_nav_paged_teaser_list($bundle) {
   $results = $query->entityCondition('entity_type', 'node')
     ->entityCondition('bundle', $bundle)
     ->propertyCondition('status', NODE_PUBLISHED)
-    ->pager(10)
+    ->pager(50)
     ->execute();
   if (! isset($results['node'])) {
     $content = array(
       '#markup' => t('No content for the moment.'),
-    ); 
+    );
   }
   else {
     $content = node_view_multiple(node_load_multiple(array_keys($results['node'])));
   }
   return array(
+    '#prefix' => '<ul class="current-operations-list">',
     'content' => $content,
+    '#suffix' => '</ul>',
     'pager' => array(
       '#markup' => theme('pager'),
       '#weight' => 10
@@ -72,7 +74,7 @@ function _cluster_nav_paged_teaser_list($bundle) {
  *
  * Add contextual navigation.
  * Certain nav elements are printed at the node temaplate level on group node pages, and at the page
- * template level at other times.  Add the nav elements at page level when required. 
+ * template level at other times.  Add the nav elements at page level when required.
  */
 function cluster_nav_preprocess_page(&$variables) {
   // Add local tasks to page template for user/%
@@ -84,7 +86,7 @@ function cluster_nav_preprocess_page(&$variables) {
 
   // Add the main menu to every page.
   $variables['main_nav'] = menu_tree_output(menu_tree_all_data('main-menu'));
-  
+
   // Provide dashboard and contextual navigation at page level.
   $display_provider = FALSE;
   $page_level_nav = FALSE;
