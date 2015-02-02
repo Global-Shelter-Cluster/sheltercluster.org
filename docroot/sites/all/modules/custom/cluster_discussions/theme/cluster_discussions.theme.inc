@@ -22,7 +22,7 @@ function theme_cluster_discussions_all($vars) {
  * Render a single discussion teaser to be shown in a group's page.
  */
 function theme_cluster_discussions_teaser($vars) {
-  $output = '<li class="discussions-item clearfix">';
+  $output = '<div class="discussions-item clearfix">';
 
   $output .= '<div class="replies">' . $vars['element']['#replies'];
   if ($vars['element']['#is_latest']) {
@@ -43,7 +43,7 @@ function theme_cluster_discussions_teaser($vars) {
   $output .= '</span>';
   $output .= '</div>';
 
-  $output .= '</li>';
+  $output .= '</div>';
 
   return $output;
 }

@@ -731,47 +731,6 @@ function cluster_docs_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-document-field_other_keywords'
-  $field_instances['node-document-field_other_keywords'] = array(
-    'bundle' => 'document',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'text',
-        'settings' => array(),
-        'type' => 'text_default',
-        'weight' => 28,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'field_name' => 'field_other_keywords',
-    'label' => 'Other Keywords',
-    'required' => 0,
-    'settings' => array(
-      'entity_translation_sync' => FALSE,
-      'text_processing' => 0,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'text',
-      'settings' => array(
-        'size' => 60,
-      ),
-      'type' => 'text_textfield',
-      'weight' => 46,
-    ),
-  );
-
   // Exported field_instance: 'node-document-field_preview'
   $field_instances['node-document-field_preview'] = array(
     'bundle' => 'document',
@@ -1162,7 +1121,6 @@ function cluster_docs_field_default_field_instances() {
   t('Link');
   t('Non Food Items');
   t('Only first 100 characters of the description will be displayed in the document lists.');
-  t('Other Keywords');
   t('Preview');
   t('Report / Meeting date');
   t('Response Phase');

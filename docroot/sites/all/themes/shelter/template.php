@@ -85,6 +85,11 @@ function shelter_preprocess_user_profile(&$variables) {
  */
 function shelter_preprocess_node(&$variables) {
   $node = $variables['node'];
+  $variables['edit_link'] = FALSE;
+  // Add an edit link users having the appropriate permission.
+  if (node_access('update', $node)) {
+    $variables['edit_link'] = l('Edit', 'node/' . $node->nid . '/edit');
+  }
   $view_mode = $variables['view_mode'];
   $is_group = og_is_group('node', $node);
 

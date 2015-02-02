@@ -145,3 +145,89 @@ header {
     }
   }
 }
+
+.facets {
+  @include rem(margin, 0 0 1.5rem 0);
+
+  ul li {
+    list-style: none;
+    margin: 0;
+  }
+  .facet {
+    vertical-align: top;
+    width: 100%;
+    display: inline-block;
+    .item-list {
+    }
+    a {
+      color: #2d62f9;
+      @include rem(font-size, 0.85rem);
+    }
+
+    h4 {
+      padding: 0 0 0 0;
+      @include breakpoint(600px) {
+        padding: 0 10px 0 0;
+      }
+    }
+
+    @include breakpoint(600px) {
+      width: 50%;
+    }
+    @include breakpoint(980px) {
+      width: 100%;
+    }
+  }
+  .facet:first-child {
+    width: 100%;
+    float: none;
+  }
+  .form-type-textfield .form-text {
+    width: 100%;
+    float: none;
+  }
+}
+
+.reset-filters {
+  color: #2d62f9;
+  font-weight: normal;
+}
+
+.document-table {
+  width: 100%;
+  @include rem(margin, 0 0 1.5rem 0);
+  @include rem(font-size, 0.9rem);
+  @include breakpoint(600px) {
+    @include rem(font-size, 1rem);
+  }
+  a {
+    color: darken(#2d62f9, 40%);
+  }
+  td {
+    @include rem(padding, 0.5rem 0);
+  }
+  .even {
+    background: lighten($shelter-light-blue,11%);
+  }
+  .odd {
+    background: lighten($shelter-light-blue,14%);
+  }
+  .information-card {
+    @include rem(padding, 0 0.5rem 0 0.5rem);
+  }
+  .size-type {
+    @include rem(font-size, 0.85rem);
+    color: #black;
+    a {
+      font-weight: bold;
+      color: $black;
+    }
+  }
+  .publication-date {
+    display: block;
+    width: 100%;
+    text-align: center;
+    @include rem(font-size, 0.85rem);
+    color: $shelter-dark-blue;
+  }
+}

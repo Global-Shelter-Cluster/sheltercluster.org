@@ -36,7 +36,7 @@ function cluster_og_uuid_features_default_terms() {
     'description_field' => array(
       'en' => array(
         0 => array(
-          'value' => '',
+          'value' => NULL,
           'summary' => NULL,
           'format' => 'filtered_html',
           'safe_value' => '',
@@ -98,7 +98,7 @@ function cluster_og_uuid_features_default_terms() {
     'description_field' => array(
       'en' => array(
         0 => array(
-          'value' => '',
+          'value' => NULL,
           'summary' => NULL,
           'format' => 'filtered_html',
           'safe_value' => '',
@@ -160,7 +160,7 @@ function cluster_og_uuid_features_default_terms() {
     'description_field' => array(
       'en' => array(
         0 => array(
-          'value' => '',
+          'value' => NULL,
           'summary' => NULL,
           'format' => 'filtered_html',
           'safe_value' => '',
@@ -222,7 +222,7 @@ function cluster_og_uuid_features_default_terms() {
     'description_field' => array(
       'en' => array(
         0 => array(
-          'value' => '',
+          'value' => NULL,
           'summary' => NULL,
           'format' => 'filtered_html',
           'safe_value' => '',
@@ -284,7 +284,7 @@ function cluster_og_uuid_features_default_terms() {
     'description_field' => array(
       'en' => array(
         0 => array(
-          'value' => '',
+          'value' => NULL,
           'summary' => NULL,
           'format' => 'filtered_html',
           'safe_value' => '',
@@ -346,7 +346,7 @@ function cluster_og_uuid_features_default_terms() {
     'description_field' => array(
       'en' => array(
         0 => array(
-          'value' => '',
+          'value' => NULL,
           'summary' => NULL,
           'format' => 'filtered_html',
           'safe_value' => '',
@@ -408,7 +408,7 @@ function cluster_og_uuid_features_default_terms() {
     'description_field' => array(
       'en' => array(
         0 => array(
-          'value' => '',
+          'value' => NULL,
           'summary' => NULL,
           'format' => 'filtered_html',
           'safe_value' => '',
@@ -470,7 +470,7 @@ function cluster_og_uuid_features_default_terms() {
     'description_field' => array(
       'en' => array(
         0 => array(
-          'value' => '',
+          'value' => NULL,
           'summary' => NULL,
           'format' => 'filtered_html',
           'safe_value' => '',
@@ -532,7 +532,7 @@ function cluster_og_uuid_features_default_terms() {
     'description_field' => array(
       'en' => array(
         0 => array(
-          'value' => '',
+          'value' => NULL,
           'summary' => NULL,
           'format' => 'filtered_html',
           'safe_value' => '',
@@ -594,7 +594,7 @@ function cluster_og_uuid_features_default_terms() {
     'description_field' => array(
       'en' => array(
         0 => array(
-          'value' => '',
+          'value' => NULL,
           'summary' => NULL,
           'format' => 'filtered_html',
           'safe_value' => '',
@@ -656,7 +656,7 @@ function cluster_og_uuid_features_default_terms() {
     'description_field' => array(
       'en' => array(
         0 => array(
-          'value' => '',
+          'value' => NULL,
           'summary' => NULL,
           'format' => 'filtered_html',
           'safe_value' => '',
@@ -718,7 +718,7 @@ function cluster_og_uuid_features_default_terms() {
     'description_field' => array(
       'en' => array(
         0 => array(
-          'value' => '',
+          'value' => NULL,
           'summary' => NULL,
           'format' => 'filtered_html',
           'safe_value' => '',
@@ -780,7 +780,7 @@ function cluster_og_uuid_features_default_terms() {
     'description_field' => array(
       'en' => array(
         0 => array(
-          'value' => '',
+          'value' => NULL,
           'summary' => NULL,
           'format' => 'filtered_html',
           'safe_value' => '',
@@ -842,7 +842,7 @@ function cluster_og_uuid_features_default_terms() {
     'description_field' => array(
       'en' => array(
         0 => array(
-          'value' => '',
+          'value' => NULL,
           'summary' => NULL,
           'format' => 'filtered_html',
           'safe_value' => '',
@@ -904,7 +904,7 @@ function cluster_og_uuid_features_default_terms() {
     'description_field' => array(
       'en' => array(
         0 => array(
-          'value' => '',
+          'value' => NULL,
           'summary' => NULL,
           'format' => 'filtered_html',
           'safe_value' => '',
@@ -966,7 +966,7 @@ function cluster_og_uuid_features_default_terms() {
     'description_field' => array(
       'en' => array(
         0 => array(
-          'value' => '',
+          'value' => NULL,
           'summary' => NULL,
           'format' => 'filtered_html',
           'safe_value' => '',
@@ -1028,7 +1028,7 @@ function cluster_og_uuid_features_default_terms() {
     'description_field' => array(
       'en' => array(
         0 => array(
-          'value' => '',
+          'value' => NULL,
           'summary' => NULL,
           'format' => 'filtered_html',
           'safe_value' => '',
@@ -1090,7 +1090,7 @@ function cluster_og_uuid_features_default_terms() {
     'description_field' => array(
       'en' => array(
         0 => array(
-          'value' => '',
+          'value' => NULL,
           'summary' => NULL,
           'format' => 'filtered_html',
           'safe_value' => '',
@@ -1152,7 +1152,7 @@ function cluster_og_uuid_features_default_terms() {
     'description_field' => array(
       'en' => array(
         0 => array(
-          'value' => '',
+          'value' => NULL,
           'summary' => NULL,
           'format' => 'filtered_html',
           'safe_value' => '',
@@ -1214,7 +1214,7 @@ function cluster_og_uuid_features_default_terms() {
     'description_field' => array(
       'en' => array(
         0 => array(
-          'value' => '',
+          'value' => NULL,
           'summary' => NULL,
           'format' => 'filtered_html',
           'safe_value' => '',
@@ -1276,7 +1276,7 @@ function cluster_og_uuid_features_default_terms() {
     'description_field' => array(
       'en' => array(
         0 => array(
-          'value' => '',
+          'value' => NULL,
           'summary' => NULL,
           'format' => 'filtered_html',
           'safe_value' => '',
@@ -1338,7 +1338,7 @@ function cluster_og_uuid_features_default_terms() {
     'description_field' => array(
       'en' => array(
         0 => array(
-          'value' => '',
+          'value' => NULL,
           'summary' => NULL,
           'format' => 'filtered_html',
           'safe_value' => '',
@@ -1400,7 +1400,7 @@ function cluster_og_uuid_features_default_terms() {
     'description_field' => array(
       'en' => array(
         0 => array(
-          'value' => '',
+          'value' => NULL,
           'summary' => NULL,
           'format' => 'filtered_html',
           'safe_value' => '',
@@ -1462,7 +1462,7 @@ function cluster_og_uuid_features_default_terms() {
     'description_field' => array(
       'en' => array(
         0 => array(
-          'value' => '',
+          'value' => NULL,
           'summary' => NULL,
           'format' => 'filtered_html',
           'safe_value' => '',
@@ -1524,7 +1524,7 @@ function cluster_og_uuid_features_default_terms() {
     'description_field' => array(
       'en' => array(
         0 => array(
-          'value' => '',
+          'value' => NULL,
           'summary' => NULL,
           'format' => 'filtered_html',
           'safe_value' => '',
@@ -1586,7 +1586,7 @@ function cluster_og_uuid_features_default_terms() {
     'description_field' => array(
       'en' => array(
         0 => array(
-          'value' => '',
+          'value' => NULL,
           'summary' => NULL,
           'format' => 'filtered_html',
           'safe_value' => '',
@@ -1648,7 +1648,7 @@ function cluster_og_uuid_features_default_terms() {
     'description_field' => array(
       'en' => array(
         0 => array(
-          'value' => '',
+          'value' => NULL,
           'summary' => NULL,
           'format' => 'filtered_html',
           'safe_value' => '',

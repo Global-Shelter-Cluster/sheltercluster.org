@@ -146,7 +146,13 @@ function shelter_base_views_default_views() {
 
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page');
-  $handler->display->display_options['path'] = 'admin/content';
+  $handler->display->display_options['path'] = 'admin/content/filters';
+  $handler->display->display_options['menu']['type'] = 'tab';
+  $handler->display->display_options['menu']['title'] = 'Filters';
+  $handler->display->display_options['menu']['description'] = 'Other set of filters, provided by Views module.';
+  $handler->display->display_options['menu']['weight'] = '0';
+  $handler->display->display_options['menu']['context'] = 0;
+  $handler->display->display_options['menu']['context_only_inline'] = 0;
   $translatables['content_administration'] = array(
     t('Master'),
     t('Content administration'),

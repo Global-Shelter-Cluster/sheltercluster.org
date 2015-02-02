@@ -10,6 +10,33 @@
 function cluster_workflow_user_default_permissions() {
   $permissions = array();
 
+  // Exported permission: 'access content overview'.
+  $permissions['access content overview'] = array(
+    'name' => 'access content overview',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'node',
+  );
+
+  // Exported permission: 'administer content types'.
+  $permissions['administer content types'] = array(
+    'name' => 'administer content types',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'node',
+  );
+
+  // Exported permission: 'administer nodes'.
+  $permissions['administer nodes'] = array(
+    'name' => 'administer nodes',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'node',
+  );
+
   // Exported permission: 'administer workbench moderation'.
   $permissions['administer workbench moderation'] = array(
     'name' => 'administer workbench moderation',
@@ -17,6 +44,15 @@ function cluster_workflow_user_default_permissions() {
       'administrator' => 'administrator',
     ),
     'module' => 'workbench_moderation',
+  );
+
+  // Exported permission: 'bypass node access'.
+  $permissions['bypass node access'] = array(
+    'name' => 'bypass node access',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'node',
   );
 
   // Exported permission: 'bypass workbench moderation'.
@@ -27,6 +63,15 @@ function cluster_workflow_user_default_permissions() {
       'trusted user' => 'trusted user',
     ),
     'module' => 'workbench_moderation',
+  );
+
+  // Exported permission: 'create article content'.
+  $permissions['create article content'] = array(
+    'name' => 'create article content',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'node',
   );
 
   // Exported permission: 'create discussion content'.
@@ -47,17 +92,57 @@ function cluster_workflow_user_default_permissions() {
     'module' => 'node',
   );
 
+  // Exported permission: 'create page content'.
+  $permissions['create page content'] = array(
+    'name' => 'create page content',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'node',
+  );
+
+  // Exported permission: 'delete any article content'.
+  $permissions['delete any article content'] = array(
+    'name' => 'delete any article content',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'node',
+  );
+
   // Exported permission: 'delete any discussion content'.
   $permissions['delete any discussion content'] = array(
     'name' => 'delete any discussion content',
-    'roles' => array(),
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
     'module' => 'node',
   );
 
   // Exported permission: 'delete any document content'.
   $permissions['delete any document content'] = array(
     'name' => 'delete any document content',
-    'roles' => array(),
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'node',
+  );
+
+  // Exported permission: 'delete any page content'.
+  $permissions['delete any page content'] = array(
+    'name' => 'delete any page content',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'node',
+  );
+
+  // Exported permission: 'delete own article content'.
+  $permissions['delete own article content'] = array(
+    'name' => 'delete own article content',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
     'module' => 'node',
   );
 
@@ -79,17 +164,57 @@ function cluster_workflow_user_default_permissions() {
     'module' => 'node',
   );
 
+  // Exported permission: 'delete own page content'.
+  $permissions['delete own page content'] = array(
+    'name' => 'delete own page content',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'node',
+  );
+
+  // Exported permission: 'edit any article content'.
+  $permissions['edit any article content'] = array(
+    'name' => 'edit any article content',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'node',
+  );
+
   // Exported permission: 'edit any discussion content'.
   $permissions['edit any discussion content'] = array(
     'name' => 'edit any discussion content',
-    'roles' => array(),
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
     'module' => 'node',
   );
 
   // Exported permission: 'edit any document content'.
   $permissions['edit any document content'] = array(
     'name' => 'edit any document content',
-    'roles' => array(),
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'node',
+  );
+
+  // Exported permission: 'edit any page content'.
+  $permissions['edit any page content'] = array(
+    'name' => 'edit any page content',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'node',
+  );
+
+  // Exported permission: 'edit own article content'.
+  $permissions['edit own article content'] = array(
+    'name' => 'edit own article content',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
     'module' => 'node',
   );
 
@@ -111,12 +236,20 @@ function cluster_workflow_user_default_permissions() {
     'module' => 'node',
   );
 
+  // Exported permission: 'edit own page content'.
+  $permissions['edit own page content'] = array(
+    'name' => 'edit own page content',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'node',
+  );
+
   // Exported permission: 'moderate content from draft to needs_review'.
   $permissions['moderate content from draft to needs_review'] = array(
     'name' => 'moderate content from draft to needs_review',
     'roles' => array(
       'administrator' => 'administrator',
-      'authenticated user' => 'authenticated user',
     ),
     'module' => 'workbench_moderation',
   );
@@ -126,7 +259,6 @@ function cluster_workflow_user_default_permissions() {
     'name' => 'moderate content from needs_review to draft',
     'roles' => array(
       'administrator' => 'administrator',
-      'authenticated user' => 'authenticated user',
     ),
     'module' => 'workbench_moderation',
   );
@@ -145,7 +277,6 @@ function cluster_workflow_user_default_permissions() {
     'name' => 'use workbench_moderation my drafts tab',
     'roles' => array(
       'administrator' => 'administrator',
-      'authenticated user' => 'authenticated user',
     ),
     'module' => 'workbench_moderation',
   );

@@ -225,7 +225,7 @@ function cluster_og_field_default_field_bases() {
         'day' => 'day',
         'hour' => 0,
         'minute' => 0,
-        'month' => 0,
+        'month' => 'month',
         'second' => 0,
         'year' => 'year',
       ),
