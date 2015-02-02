@@ -353,6 +353,6 @@ function shelter_base_update_7036() {
 /**
  * Revert shelter_base 
  */
-function shelter_base_update_7036() {
+function shelter_base_update_7037() {
   features_revert_module('shelter_base');
 }
