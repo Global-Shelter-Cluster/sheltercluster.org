@@ -13,3 +13,10 @@ function _log_entity_metadata_wrapper_error($exception, $context) {
      NULL, WATCHDOG_ERROR
   );
 }
+
+function shelter_base_preprocess_page(&$variables) {
+  if (path_is_admin(current_path())) {
+    drupal_add_css(drupal_get_path('module', 'shelter_base') . '/css/admin-tweaks.css');
+    drupal_add_js(drupal_get_path('module', 'shelter_base') . '/javascripts/admin-tweaks.js');
+  }
+}
