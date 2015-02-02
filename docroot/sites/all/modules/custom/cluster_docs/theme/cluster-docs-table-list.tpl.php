@@ -25,9 +25,37 @@
 <table class="document-table">
   <thead>
     <th></th>
-    <th><?php print t('Document title') ?></th>
-    <th><?php print t('Size') ?></th>
-    <th><?php print t('Publication date') ?></th>
+    <?php
+    $headers = array(
+      'title' => 'Document title',
+      'size' => 'Size',
+      'date' => 'Publication date',
+    );
+
+    foreach ($headers as $column => $header):
+    ?>
+      <th>
+        <?php
+        if (array_key_exists($column, $sort_link_params)) {
+          print l($header, current_path(), array('query' => $sort_link_params[$column]));
+        }
+        else {
+          print t($header);
+        }
+        ?>
+
+        <?php
+        // Arrows to indicate sort direction
+        if ($sort_column == $column) {
+          if ($sort_direction == 'DESC'):
+            ?>&#9660;<?php
+          else:
+            ?>&#9650;<?php
+          endif;
+        }
+        ?>
+      </th>
+    <?php endforeach ?>
   </thead>
   <tbody>
   <?php foreach($docs as $delta => $doc): ?>

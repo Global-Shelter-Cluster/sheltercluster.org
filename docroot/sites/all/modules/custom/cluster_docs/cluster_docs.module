@@ -44,7 +44,7 @@ function _cluster_docs_title_callback($nid) {
   }
 
   try {
-    // @TODO manage multilinigual loading of entities.
+    // @TODO manage multilingual loading of entities.
     $wrapper = entity_metadata_wrapper('node', node_load($nid));
     return $wrapper->label() . ' - ' . $title;
   }
@@ -67,10 +67,7 @@ function _cluster_docs_title_callback($nid) {
 function cluster_docs_all($nid) {
   $node = node_load($nid);
 
-  global $language;
-  $query = search_api_query('default_node_index', array(
-//    'languages' => array($language->language),
-  ));
+  $query = search_api_query('default_node_index', array());
 
   $title = NULL;
   // Read the title filter value from the URL, if it exists.
@@ -82,23 +79,62 @@ function cluster_docs_all($nid) {
     }
   }
 
+  // Common query filters (by group and content type)
   $filter = $query->createFilter();
-  $filter->condition('og_group_ref', $nid);
+  $filter->condition('og_group_ref', $node->nid);
   $filter->condition('type', 'document');
   $query->filter($filter);
 
+  // Figure out the sort column and direction from $_GET (store in $sort_key and $sort_direction).
+  $sort_options = array(
+    'title' => 'title_field',
+    'size' => 'field_file:file:size',
+    'date' => 'created',
+  );
+  $sort_key = NULL;
+  $sort_direction = isset($_GET['sort_direction']) && $_GET['sort_direction'] == 'DESC' ? 'DESC' : 'ASC';
+  if (isset($_GET['sort']) && array_key_exists($sort_key = strtolower($_GET['sort']), $sort_options)) {
+    $sort_field = $sort_options[$sort_key];
+
+    // Tell the actual query the sort criteria
+    $query->sort($sort_field, $sort_direction);
+  }
+
+  // Build "query" params for the header links.
+  $sort_link_params = array();
+  foreach ($sort_options as $key => $data) {
+    $params = array(
+      'sort' => $key,
+    );
+    if (isset($_GET['f'])) {
+      $params['f'] = $_GET['f'];
+    }
+
+    if ($sort_key == $key && $sort_direction == 'ASC') {
+      // Already sorting in ASC, next click turns it into DESC
+      $params['sort_direction'] = 'DESC';
+    }
+    elseif ($sort_key == $key && $sort_direction == 'DESC') {
+      // Sorting in DESC, next click disables sorting altogether
+      unset($params['sort']);
+    }
+
+    $sort_link_params[$key] = $params;
+  }
+
+  // Pagination
   $offset = pager_find_page() * CLUSTER_DOCS_PER_PAGE;
   $query->range($offset, CLUSTER_DOCS_PER_PAGE);
 
+  // Execute the actual query using Search API
   $results = $query->execute();
 
+  // This is necessary for the pager to work
   pager_default_initialize($results['result count'], CLUSTER_DOCS_PER_PAGE);
 
-  $nids = array_keys($results['results']);
-
+  // "Reset filters" link (shown in two places)
   $reset_link = FALSE;
   if (isset($_GET['f'])) {
-    //TODO: improve detection
     $reset_link = array(
       '#theme' => 'link',
       '#text' => 'reset filters',
@@ -110,9 +146,10 @@ function cluster_docs_all($nid) {
     );
   }
 
+  // Facets
   $facets = array();
 
-  // Define which facets to show and in what order.
+  // This array defines which facets to show and in what order.
   $facets_to_show = array(
     'field_document_type',
 
@@ -132,9 +169,6 @@ function cluster_docs_all($nid) {
     'field_non_food_items',
     'field_issues',
     'field_toolkit',
-
-    // Disabled facets
-//    'og_group_ref',
   );
 
   foreach (facetapi_get_block_info(array('block')) as $delta => $info) {
@@ -150,10 +184,6 @@ function cluster_docs_all($nid) {
     }
 
     $content['#options'] = $content[$facet];
-//    if (count($content['#options']['#items']) < 2) {
-//      // Don't show facets with only one option.
-//      continue;
-//    }
 
     $content['#theme'] = 'cluster_docs_facet';
     $content['#weight'] = array_search($facet, $facets_to_show);
@@ -167,19 +197,29 @@ function cluster_docs_all($nid) {
     '#title' => 'Title Contains',
     '#options' => FALSE,
     '#child' => array(
-      '#type' => 'textfield',
-      '#name' => 'title',
-      '#value' => $title,
+      array(
+        '#type' => 'textfield',
+        '#name' => 'title',
+        '#value' => $title,
+      ),
+      array(
+        '#type' => 'button',
+        '#name' => 'title_search',
+        '#value' => 'Search',
+      ),
     ),
   );
   drupal_add_js(drupal_get_path('module', 'cluster_docs') . '/js/search.js');
 
-  $ret = array(
+  return array(
     array(
       '#theme' => 'cluster_docs_table_list',
       '#heading' => t('Documents') . ' (' . $results['result count'] . ')',
-      '#docs' => cluster_docs_prepare_row_data($nids),
-      '#reset_link' => $reset_link ? render($reset_link) : NULL,
+      '#docs' => cluster_docs_prepare_row_data(array_keys($results['results'])),
+      '#reset_link' => $reset_link ? render($reset_link_clone = $reset_link) : NULL, // Duplicate the array so the link can be shown in two places
+      '#sort_link_params' => $sort_link_params,
+      '#sort_column' => $sort_key,
+      '#sort_direction' => $sort_direction,
     ),
     'pager' => array('#theme' => 'pager'),
     'side-column' => array(
@@ -189,8 +229,6 @@ function cluster_docs_all($nid) {
       'reset_link' => $reset_link,
     ),
   );
-
-  return $ret;
 }
 
 /**
@@ -530,6 +568,9 @@ function cluster_docs_theme() {
         'docs' => array(),
         'all_documents_link' => FALSE,
         'reset_link' => FALSE,
+        'sort_link_params' => array(),
+        'sort_column' => array(),
+        'sort_direction' => array(),
       ),
       'template' => 'theme/cluster-docs-table-list'
     ),
