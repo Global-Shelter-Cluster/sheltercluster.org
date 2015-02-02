@@ -107,6 +107,7 @@ function cluster_search_default_search_api_index() {
         "field_coordination_management" : { "type" : "list\\u003Cinteger\\u003E", "entity_type" : "taxonomy_term" },
         "field_cross_cutting_issues" : { "type" : "list\\u003Cinteger\\u003E", "entity_type" : "taxonomy_term" },
         "field_document_type" : { "type" : "list\\u003Cinteger\\u003E", "entity_type" : "taxonomy_term" },
+        "field_file:file:size" : { "type" : "integer" },
         "field_information_management" : { "type" : "list\\u003Cinteger\\u003E", "entity_type" : "taxonomy_term" },
         "field_inter_cluster" : { "type" : "list\\u003Cinteger\\u003E", "entity_type" : "taxonomy_term" },
         "field_intervention_materials" : { "type" : "list\\u003Cinteger\\u003E", "entity_type" : "taxonomy_term" },
@@ -123,6 +124,7 @@ function cluster_search_default_search_api_index() {
         "search_api_language" : { "type" : "string" },
         "sticky" : { "type" : "boolean" },
         "title" : { "type" : "text", "boost" : "5.0" },
+        "title_field" : { "type" : "string" },
         "type" : { "type" : "string" }
       }
     },
@@ -146,7 +148,7 @@ function cluster_search_default_search_api_server() {
     "options" : {
       "database" : "default:default",
       "min_chars" : "3",
-      "partial_matches" : 0,
+      "partial_matches" : 1,
       "indexes" : { "default_node_index" : {
           "type" : {
             "table" : "search_api_db_default_node_index",
@@ -300,6 +302,18 @@ function cluster_search_default_search_api_server() {
             "table" : "search_api_db_default_node_index_field_document_type",
             "column" : "value",
             "type" : "list\\u003Cinteger\\u003E",
+            "boost" : "1.0"
+          },
+          "field_file:file:size" : {
+            "table" : "search_api_db_default_node_index",
+            "column" : "field_file_file_size",
+            "type" : "integer",
+            "boost" : "1.0"
+          },
+          "title_field" : {
+            "table" : "search_api_db_default_node_index",
+            "column" : "title_field",
+            "type" : "string",
             "boost" : "1.0"
           }
         }
