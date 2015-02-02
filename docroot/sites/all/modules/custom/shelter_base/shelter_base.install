@@ -349,3 +349,10 @@ function shelter_base_update_7036() {
   features_revert_module('cluster_docs');
   features_revert_module('cluster_og');
 }
+
+/**
+ * Revert shelter_base 
+ */
+function shelter_base_update_7036() {
+  features_revert_module('shelter_base');
+}
