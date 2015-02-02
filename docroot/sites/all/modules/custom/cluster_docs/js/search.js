@@ -3,7 +3,10 @@
   Drupal.behaviors.cluster_docs_search = {
     attach: function (context, settings) {
       $('.facet input[name=title]').once('cluster_docs_search').change(function() {
-        var value = $(this).val();
+        $(this).closest('.facet').find('input[name=title_search]').click();
+      });
+      $('.facet input[name=title_search]').once('cluster_docs_search').click(function() {
+        var value = $(this).closest('.facet').find('input[name=title]').val();
         var href = window.location.href;
 
         // Remove title parameter from current URL, if any
