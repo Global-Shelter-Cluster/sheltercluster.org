@@ -821,6 +821,104 @@ header .search {
   text-decoration: none;
 }
 
+.facets {
+  margin: 0 0 24px 0;
+  margin: 0 0 1.5rem 0;
+}
+.facets ul li {
+  list-style: none;
+  margin: 0;
+}
+.facets .facet {
+  vertical-align: top;
+  width: 100%;
+  display: inline-block;
+}
+.facets .facet a {
+  color: #2d62f9;
+  font-size: 13.6px;
+  font-size: 0.85rem;
+}
+.facets .facet h4 {
+  padding: 0 0 0 0;
+}
+@media (min-width: 600px) {
+  .facets .facet h4 {
+    padding: 0 10px 0 0;
+  }
+}
+@media (min-width: 600px) {
+  .facets .facet {
+    width: 50%;
+  }
+}
+@media (min-width: 980px) {
+  .facets .facet {
+    width: 100%;
+  }
+}
+.facets .facet:first-child {
+  width: 100%;
+  float: none;
+}
+.facets .form-type-textfield .form-text {
+  width: 100%;
+  float: none;
+}
+
+.reset-filters {
+  color: #2d62f9;
+  font-weight: normal;
+}
+
+.document-table {
+  width: 100%;
+  margin: 0 0 24px 0;
+  margin: 0 0 1.5rem 0;
+  font-size: 14.4px;
+  font-size: 0.9rem;
+}
+@media (min-width: 600px) {
+  .document-table {
+    font-size: 16px;
+    font-size: 1rem;
+  }
+}
+.document-table a {
+  color: #031957;
+}
+.document-table td {
+  padding: 8px 0;
+  padding: 0.5rem 0;
+}
+.document-table .even {
+  background: #eef1f2;
+}
+.document-table .odd {
+  background: #f7f8f9;
+}
+.document-table .information-card {
+  padding: 0 8px 0 8px;
+  padding: 0 0.5rem 0 0.5rem;
+}
+.document-table .size-type {
+  font-size: 13.6px;
+  font-size: 0.85rem;
+  color: #black;
+}
+.document-table .size-type a {
+  font-weight: bold;
+  color: black;
+}
+.document-table .publication-date {
+  display: block;
+  width: 100%;
+  text-align: center;
+  font-size: 13.6px;
+  font-size: 0.85rem;
+  color: #688394;
+}
+
 /* _header.scss */
 header ul {
   padding: 0;
