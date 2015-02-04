@@ -834,6 +834,9 @@ header .search {
   width: 100%;
   display: inline-block;
 }
+.facets .facet .clearfix {
+  margin-bottom: 14px;
+}
 .facets .facet a {
   color: #2d62f9;
   font-size: 13.6px;
@@ -862,8 +865,14 @@ header .search {
   float: none;
 }
 .facets .form-type-textfield .form-text {
-  width: 100%;
-  float: none;
+  width: 65%;
+  float: left;
+}
+.facets .form-submit {
+  width: 30%;
+  text-align: center;
+  padding-left: 0;
+  padding-right: 0;
 }
 
 .reset-filters {

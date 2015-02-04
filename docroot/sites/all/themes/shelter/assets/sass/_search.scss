@@ -157,7 +157,9 @@ header {
     vertical-align: top;
     width: 100%;
     display: inline-block;
-    .item-list {
+
+    .clearfix {
+      margin-bottom: 14px;
     }
     a {
       color: #2d62f9;
@@ -183,8 +185,14 @@ header {
     float: none;
   }
   .form-type-textfield .form-text {
-    width: 100%;
-    float: none;
+    width: 65%;
+    float: left;
+  }
+  .form-submit {
+    width: 30%;
+    text-align: center;
+    padding-left: 0;
+    padding-right: 0;
   }
 }
 
