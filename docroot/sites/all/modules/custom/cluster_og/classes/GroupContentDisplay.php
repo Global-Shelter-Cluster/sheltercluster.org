@@ -108,7 +108,8 @@ class GroupDisplayProvider {
 
     $items[] = array(
       'label' => t('Events'),
-      'path' => '/', //TODO: change this to actual events calendar link
+      'path' => 'node/'.$this->node->nid.'/events',
+      'total' => $this->manager->getEventCount(),
     );
 
     if ($strategic_advisory = $this->manager->getStrategicAdvisory()) {
@@ -320,6 +321,46 @@ class GroupFullDisplayProvider extends GroupDisplayProvider {
       $content = $this->getList($nodes, 'teaser', 'cluster_og_recent_discussions');
       $content['#all_discussions_link'] = 'node/' . $this->node->nid . '/discussions';
       return $content;
+    }
+    return FALSE;
+  }
+
+  /**
+   * Provide the next upcoming event for the group, if any.
+   * @return render array of discussions.
+   */
+  public function getUpcomingEvent() {
+    if ($nid = $this->manager->getUpcomingEvent()) {
+      $node = node_load($nid);
+      $wrapper = entity_metadata_wrapper('node', $node);
+
+      $value = $wrapper->field_event_date->value();
+      $from = strtotime($value['value']);
+      $to   = strtotime($value['value2']);
+      $format      = 'M. j' . '\<\s\u\p\>' . 'S' . '\<\/\s\u\p\>' . ' Y';
+      $format_from = 'M. j' . '\<\s\u\p\>' . 'S' . '\<\/\s\u\p\>';
+      $format_to   = 'M. j' . '\<\s\u\p\>' . 'S' . '\<\/\s\u\p\>' . ' Y';
+      if ($to > $from) {
+        $date = date($format_from, $from);
+        $date .= ' to ' . date($format_to, $to);
+      }
+      else {
+        $date = date($format, $from);
+      }
+
+      return array(
+        '#theme' => 'cluster_og_upcoming_event',
+        '#all_events_link' => 'node/' . $this->node->nid . '/events',
+        '#event_title' => $wrapper->title->value(),
+        '#event_link' => 'node/' . $node->nid,
+        '#event_date' => $date,
+      );
+    }
+    elseif ($this->manager->getEventCount()) {
+      return array(
+        '#theme' => 'cluster_og_no_upcoming_event',
+        '#all_events_link' => url('node/' . $this->node->nid . '/events'),
+      );
     }
     return FALSE;
   }

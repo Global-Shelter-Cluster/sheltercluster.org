@@ -91,17 +91,8 @@
 
   <div class="side-column">
 
-    <?php if (!isset($content['upcoming_event'])): ?>
-      <section id="shelter-calendar">
-        <div id="box-calendar">
-          <?php print _svg('icons/pin', array('id' => 'calendar-pin-icon', 'alt' => t('An icon representing a calendar with a pin on it.'))); ?>
-          <div id="date-calendar">No upcoming event</div>
-          <div class="information-card">
-            <a class="event" href="#">See past events</a>
-          </div>
-        </div>
-        <a class="see-all" href="#">All calendar events</a>
-      </section>
+    <?php if ($content['upcoming_event']): ?>
+      <?php print render($content['upcoming_event']); ?>
     <?php endif; ?>
 
     <?php if ($content['recent_discussions']): ?>
