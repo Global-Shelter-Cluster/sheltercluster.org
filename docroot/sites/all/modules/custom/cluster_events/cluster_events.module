@@ -1,0 +1,121 @@
+<?php
+/**
+ * @file
+ * Code for the Cluster Events feature.
+ */
+
+include_once 'cluster_events.features.inc';
+include_once 'cluster_events.pathauto.inc';
+
+const CLUSTER_EVENTS_PER_PAGE = 10;
+
+/**
+ *  Implements hook_menu().
+ */
+function cluster_events_menu() {
+  $items['node/%/events'] = array(
+    'title' => 'events',
+    'title callback' => '_cluster_events_title_callback',
+    'title arguments' => array(1),
+    'page callback' => 'cluster_events_all',
+    'page arguments' => array(1),
+    'access callback' => 'og_is_group',
+    'access arguments' => array(0, 1),
+    'type' => MENU_CALLBACK,
+  );
+  return $items;
+}
+
+/**
+ * Menu title callback.
+ */
+function _cluster_events_title_callback($nid) {
+  global $language;
+  $title = t('Events');
+  if (! is_numeric($nid)) {
+    return $title;
+  }
+
+  try {
+    // @TODO manage multilinigual loading of entities.
+    $wrapper = entity_metadata_wrapper('node', node_load($nid), array('langcode' => LANGUAGE_NONE));
+    return $wrapper->label();
+  }
+  catch (EntityMetadataWrapperException $exc) {
+    watchdog(
+      'cluster_events',
+      'See '  . __FUNCTION__ . '() ' .  $exc->getTraceAsString(),
+      NULL,
+      WATCHDOG_ERROR
+    );
+  }
+  return $title;
+}
+
+/**
+ * Page callback, shows a group's events using Search API.
+ * @param $nid
+ * @return Render array
+ */
+function cluster_events_all($nid) {
+  $query = search_api_query('default_node_index');
+
+  $filter = $query->createFilter();
+  $filter->condition('og_group_ref', $nid);
+  $filter->condition('type', 'event');
+  $query->filter($filter);
+
+  $offset = pager_find_page() * CLUSTER_EVENTS_PER_PAGE;
+  $query->range($offset, CLUSTER_EVENTS_PER_PAGE);
+
+  $result = $query->execute();
+  pager_default_initialize($result['result count'], CLUSTER_EVENTS_PER_PAGE);
+
+  if (! $result['results']) {
+    $content = array(
+      '#markup' => t('No content for the moment.'),
+    );
+  }
+  else {
+    $content = node_view_multiple(node_load_multiple(array_keys($result['results'])));
+  }
+  $ret['content'] = $content;
+  $ret['pager'] = array(
+    '#theme' => 'pager',
+  );
+
+  return $ret;
+}
+
+/**
+ * Implements hook_theme().
+ */
+function cluster_events_theme() {
+  return array(
+    'cluster_events_all' => array(
+      'file' => 'theme/cluster_events.theme.inc',
+      'render element' => 'element',
+    ),
+    'cluster_events_teaser' => array(
+      'file' => 'theme/cluster_events.theme.inc',
+      'render element' => 'element',
+    ),
+  );
+}
+
+/**
+ * Implements hook_node_view_alter().
+ */
+function cluster_events_node_view_alter(&$build) {
+  if ($build['#node']->type != 'event') {
+    return;
+  }
+  switch ($build['#view_mode']) {
+    case 'teaser':
+      $build['#theme'] = 'cluster_events_teaser';
+
+      break;
+    default:
+      // Do nothing.
+  }
+}

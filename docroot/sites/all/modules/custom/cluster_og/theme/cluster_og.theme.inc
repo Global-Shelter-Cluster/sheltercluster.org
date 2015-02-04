@@ -47,6 +47,28 @@ function theme_cluster_og_recent_discussions($vars) {
   return $output;
 }
 
+function theme_cluster_og_upcoming_event($vars) {
+  $output = '<section id="shelter-calendar">';
+  $output .= '<div id="box-calendar">';
+  $output .= _svg('icons/pin', array('id' => 'calendar-pin-icon', 'alt' => t('An icon representing a calendar with a pin on it.')));
+  $output .= '<div id="date-calendar">' . $vars['event_date'] . '</div>';
+  $output .= '<div class="information-card">';
+  $output .= l($vars['event_title'], $vars['event_link'], array(
+    'attributes' => array(
+      'class' => 'event',
+    ),
+  ));
+  $output .= '</div>';
+  $output .= '</div>';
+  $output .= l(t('All calendar events'), $vars['all_events_link'], array(
+    'attributes' => array(
+      'class' => 'see-all',
+    ),
+  ));
+  $output .= '</section>';
+  return $output;
+}
+
 /**
  * Theme wrapper for featured documents.
  * @TODO delegate to cluster_docs module.
