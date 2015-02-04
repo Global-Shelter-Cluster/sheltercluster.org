@@ -58,7 +58,7 @@
     <?php endforeach ?>
   </thead>
   <tbody>
-  <?php foreach($docs as $delta => $doc): ?>
+  <?php if ($docs) foreach($docs as $delta => $doc): ?>
     <?php $zebra = (($delta + 1) % 2) ? 'odd' : 'even'; ?>
 
     <tr class="document-row <?php print $zebra; ?>">

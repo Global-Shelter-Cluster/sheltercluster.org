@@ -133,9 +133,9 @@ function cluster_docs_all($nid) {
   pager_default_initialize($results['result count'], CLUSTER_DOCS_PER_PAGE);
 
   // "Reset filters" link (shown in two places)
-  $reset_link = FALSE;
+  $reset_link_bottom = $reset_link = FALSE;
   if (isset($_GET['f'])) {
-    $reset_link = array(
+    $reset_link_bottom = $reset_link = array(
       '#theme' => 'link',
       '#text' => 'reset filters',
       '#path' => 'node/' . $nid . '/documents',
@@ -144,6 +144,8 @@ function cluster_docs_all($nid) {
         'attributes' => array('class' => 'reset-filters'),
       ),
     );
+    $reset_link_bottom['#prefix'] = '<small>';
+    $reset_link_bottom['#suffix'] = '</small>';
   }
 
   // Facets
@@ -207,16 +209,23 @@ function cluster_docs_all($nid) {
         '#name' => 'title_search',
         '#value' => 'Search',
       ),
+      '#prefix' => '<div class="clearfix">',
+      '#suffix' => '</div>',
     ),
   );
   drupal_add_js(drupal_get_path('module', 'cluster_docs') . '/js/search.js');
+
+  $result_nids = FALSE;
+  if (isset($results['results'])) {
+    $result_nids = array_keys($results['results']);
+  }
 
   return array(
     array(
       '#theme' => 'cluster_docs_table_list',
       '#heading' => t('Documents') . ' (' . $results['result count'] . ')',
-      '#docs' => cluster_docs_prepare_row_data(array_keys($results['results'])),
-      '#reset_link' => $reset_link ? render($reset_link_clone = $reset_link) : NULL, // Duplicate the array so the link can be shown in two places
+      '#docs' => $result_nids ? cluster_docs_prepare_row_data($result_nids) : FALSE,
+      '#reset_link' => $reset_link ? render($reset_link) : NULL,
       '#sort_link_params' => $sort_link_params,
       '#sort_column' => $sort_key,
       '#sort_direction' => $sort_direction,
@@ -226,7 +235,7 @@ function cluster_docs_all($nid) {
       '#prefix' => '<section class="facets">',
       '#suffix' => '</section>',
       'facets' => $facets,
-      'reset_link' => $reset_link,
+      'reset_link' => $reset_link_bottom,
     ),
   );
 }
