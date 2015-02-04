@@ -362,3 +362,43 @@ function _cluster_og_get_hot_responses() {
     ->execute();
   return isset($res['node']) ? $res['node'] : FALSE;
 }
+
+/**
+ * Implements hook_url_outbound_alter().
+ * Changes region URL to response URL when field_response_auto_redirect is set.
+ */
+function cluster_og_url_outbound_alter(&$path, &$options, $original_path) {
+  if (!preg_match('/^node\/(\d+)$/', $path, $matches)) {
+    // Not a "node view" path.
+    return;
+  }
+  $nid = $matches[1];
+
+  $node = node_load($nid);
+
+  if ($node->type != 'geographic_region') {
+    return;
+  }
+
+  $wrapper = entity_metadata_wrapper('node', $node);
+  if ($response = $wrapper->field_response_auto_redirect->value()) {
+    $path = drupal_get_path_alias('node/' . $response->nid);
+  }
+}
+
+/**
+ * Implements hook_init().
+ * Redirects to response page if the current is a region with field_response_auto_redirect set.
+ */
+function cluster_og_init() {
+  $node = menu_get_object();
+  if (!$node || $node->type != 'geographic_region' || arg(2)) {
+    // If arg(2) is set, then this is not the "node view" page.
+    return;
+  }
+
+  $wrapper = entity_metadata_wrapper('node', $node);
+  if ($response = $wrapper->field_response_auto_redirect->value()) {
+    drupal_goto('node/' . $response->nid);
+  }
+}
