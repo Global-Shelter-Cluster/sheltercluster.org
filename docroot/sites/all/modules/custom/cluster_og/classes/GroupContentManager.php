@@ -103,7 +103,7 @@ class GroupContentManager {
   }
 
   /**
-   * Provide a count value for all pubished document nodes added to the group.
+   * Provide a count value for all published document nodes added to the group.
    * @return
    *  Count query result.
    */
@@ -118,7 +118,7 @@ class GroupContentManager {
   }
 
   /**
-   * Provide a count value for all pubished discussion nodes added to the group.
+   * Provide a count value for all published discussion nodes added to the group.
    * @return
    *  Count query result.
    */
@@ -132,6 +132,20 @@ class GroupContentManager {
       ->execute();
   }
 
+  /**
+   * Provide a count value for all published event nodes added to the group.
+   * @return
+   *  Count query result.
+   */
+  public function getEventCount() {
+    $query = new EntityFieldQuery();
+    return $query->entityCondition('entity_type', 'node')
+      ->entityCondition('bundle', 'event')
+      ->fieldCondition('og_group_ref', 'target_id', $this->node->nid)
+      ->propertyCondition('status', NODE_PUBLISHED)
+      ->count()
+      ->execute();
+  }
 
   /**
    * Get users with the contact member role for the group.
@@ -166,6 +180,29 @@ class GroupContentManager {
     }
 
     return $nids;
+  }
+
+  /**
+   * Get the next upcoming event for the group, if any.
+   * @return
+   *  nid, FALSE if none exist.
+   */
+  public function getUpcomingEvent() {
+    $query = new EntityFieldQuery();
+    $res = $query->entityCondition('entity_type', 'node')
+      ->entityCondition('bundle', 'event')
+      ->fieldCondition('og_group_ref', 'target_id', $this->node->nid)
+      ->fieldCondition('field_event_date', 'value', date('Y-m-d'), '>')
+      ->propertyCondition('status', NODE_PUBLISHED)
+      ->fieldOrderBy('field_event_date', 'value')
+      ->range(0, 1)
+      ->execute();
+
+    if (!isset($res['node'])) {
+      return FALSE;
+    }
+
+    return key($res['node']);
   }
 
   /**

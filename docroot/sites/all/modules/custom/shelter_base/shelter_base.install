@@ -63,7 +63,7 @@ function _shelter_base_required_core() {
  * List of required custom modules.
  */
 function _shelter_base_required_custom() {
-  return array('cluster_context', 'cluster_discussions', 'cluster_docs','cluster_og',  'cluster_search', 'cluster_taxonomy', 'cluster_user',
+  return array('cluster_context', 'cluster_discussions', 'cluster_docs', 'cluster_events', 'cluster_og', 'cluster_search', 'cluster_taxonomy', 'cluster_user',
     'cluster_nav', 'cluster_nav_views', 'cluster_workflow', 'partial',
   );
 }
@@ -363,3 +363,19 @@ function shelter_base_update_7037() {
 function shelter_base_update_7038() {
   _shelter_base_modules_enable('contrib');
 }
+
+/**
+ * Enable events feature module.
+ */
+function shelter_base_update_7039() {
+  _shelter_base_modules_enable('custom');
+}
+
+/**
+ * Refresh pathauto paths for node/%/events.
+ */
+function shelter_base_update_7040() {
+  variable_set('pathauto_cluster_events_pattern', '[node:content-type]/[node:title]/events');
+  cluster_events_pathauto_bulkupdate();
+}
+>>>>>>> fadacc8ebbd86c3fdab0dbd9f140dbcc169bbfc8

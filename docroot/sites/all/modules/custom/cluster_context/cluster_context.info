@@ -5,3 +5,4 @@ package = Cluster
 dependencies[] = cluster_og
 dependencies[] = cluster_docs
 dependencies[] = cluster_discussions
+dependencies[] = cluster_events
