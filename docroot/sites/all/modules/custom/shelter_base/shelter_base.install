@@ -46,7 +46,7 @@ function _shelter_base_modules_enable($type) {
 function _shelter_base_required_contrib() {
   return array('addressfield', 'admin_menu', 'backup_migrate', 'chosen', 'ctools', 'date', 'devel', 'email', 'entity', 'entity_translation',
     'uuid', 'uuid_features', 'url', 'views', 'views_ui', 'views_bulk_operations',
-    'entityreference', 'facetapi', 'features', 'field_collection', 'field_group', 'flag', 'i18n', 'i18n_menu', 'i18n_string', 'link',  'libraries', 'name',
+    'entityreference', 'facetapi', 'features', 'field_collection', 'field_group', 'flag', 'i18n', 'i18n_menu', 'i18n_string', 'i18n_variable', 'link',  'libraries', 'name',
     'og', 'og_access', 'og_register', 'og_ui', 'pathauto', 'respondjs', 'search_api', 'search_api_db', 'search_api_facetapi', 'strongarm', 'title', 'token',
     'transliteration',  'underscore', 'uuid', 'uuid_features', 'url', 'variable', 'views', 'views_ui', 'views_bulk_operations', 'wysiwyg',
   );
@@ -355,4 +355,11 @@ function shelter_base_update_7036() {
  */
 function shelter_base_update_7037() {
   features_revert_module('shelter_base');
+}
+
+/**
+ * Enable variable translation.
+ */
+function shelter_base_update_7038() {
+  _shelter_base_modules_enable('contrib');
 }
