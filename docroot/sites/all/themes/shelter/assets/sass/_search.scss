@@ -214,24 +214,48 @@ header {
   td {
     @include rem(padding, 0.5rem 0);
   }
+  thead {
+    background: lighten($shelter-grey,43%);
+
+    th {
+      @include rem(padding-top, 0.5rem);
+      @include rem(padding-bottom, 0.5rem);
+
+      a {
+        color: darken($shelter-grey,21%);
+      }
+    }
+    th:nth-child(2) {
+      @include rem(padding, 0.5rem 0.5rem);
+    }
+    th:last-child {
+      text-align: center;
+    }
+  }
   .even {
     background: lighten($shelter-light-blue,11%);
   }
   .odd {
     background: lighten($shelter-light-blue,14%);
   }
-  .information-card {
+  .information-title {
     @include rem(padding, 0 0.5rem 0 0.5rem);
+  }
+  .information-file {
+    width: 90px;
   }
   .size-type {
     @include rem(font-size, 0.85rem);
     color: #black;
     a {
+      @include rem(font-size, 0.60rem);
       font-weight: bold;
       color: $black;
+      text-transform: uppercase
     }
   }
   .publication-date {
+    width: 100px;
     span {
       display: block;
       width: 100%;

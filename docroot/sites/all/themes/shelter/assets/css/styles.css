@@ -900,15 +900,37 @@ header .search {
   padding: 8px 0;
   padding: 0.5rem 0;
 }
+.document-table thead {
+  background: #c5c5c5;
+}
+.document-table thead th {
+  padding-top: 8px;
+  padding-top: 0.5rem;
+  padding-bottom: 8px;
+  padding-bottom: 0.5rem;
+}
+.document-table thead th a {
+  color: #212121;
+}
+.document-table thead th:nth-child(2) {
+  padding: 8px 8px;
+  padding: 0.5rem 0.5rem;
+}
+.document-table thead th:last-child {
+  text-align: center;
+}
 .document-table .even {
   background: #eef1f2;
 }
 .document-table .odd {
   background: #f7f8f9;
 }
-.document-table .information-card {
+.document-table .information-title {
   padding: 0 8px 0 8px;
   padding: 0 0.5rem 0 0.5rem;
+}
+.document-table .information-file {
+  width: 90px;
 }
 .document-table .size-type {
   font-size: 13.6px;
@@ -916,8 +938,14 @@ header .search {
   color: #black;
 }
 .document-table .size-type a {
+  font-size: 9.6px;
+  font-size: 0.6rem;
   font-weight: bold;
   color: black;
+  text-transform: uppercase;
+}
+.document-table .publication-date {
+  width: 100px;
 }
 .document-table .publication-date span {
   display: block;
