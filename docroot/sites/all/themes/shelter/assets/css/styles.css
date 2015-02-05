@@ -901,16 +901,17 @@ header .search {
   padding: 0.5rem 0;
 }
 .document-table thead {
-  background: #c5c5c5;
+  background: #7f1416;
 }
 .document-table thead th {
   padding-top: 8px;
   padding-top: 0.5rem;
   padding-bottom: 8px;
   padding-bottom: 0.5rem;
+  color: white;
 }
 .document-table thead th a {
-  color: #212121;
+  color: white;
 }
 .document-table thead th:nth-child(2) {
   padding: 8px 8px;

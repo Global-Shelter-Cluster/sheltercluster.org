@@ -215,14 +215,14 @@ header {
     @include rem(padding, 0.5rem 0);
   }
   thead {
-    background: lighten($shelter-grey,43%);
+    background: $shelter-red;
 
     th {
       @include rem(padding-top, 0.5rem);
       @include rem(padding-bottom, 0.5rem);
-
+      color: $white;
       a {
-        color: darken($shelter-grey,21%);
+        color: $white;
       }
     }
     th:nth-child(2) {
