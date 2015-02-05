@@ -277,6 +277,7 @@ function cluster_workflow_user_default_permissions() {
     'name' => 'use workbench_moderation my drafts tab',
     'roles' => array(
       'administrator' => 'administrator',
+      'authenticated user' => 'authenticated user',
     ),
     'module' => 'workbench_moderation',
   );
@@ -314,6 +315,7 @@ function cluster_workflow_user_default_permissions() {
     'name' => 'view moderation messages',
     'roles' => array(
       'administrator' => 'administrator',
+      'authenticated user' => 'authenticated user',
     ),
     'module' => 'workbench_moderation',
   );
