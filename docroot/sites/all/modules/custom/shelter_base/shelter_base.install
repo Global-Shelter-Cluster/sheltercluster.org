@@ -378,4 +378,3 @@ function shelter_base_update_7040() {
   variable_set('pathauto_cluster_events_pattern', '[node:content-type]/[node:title]/events');
   cluster_events_pathauto_bulkupdate();
 }
->>>>>>> fadacc8ebbd86c3fdab0dbd9f140dbcc169bbfc8
