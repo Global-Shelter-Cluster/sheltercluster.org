@@ -74,6 +74,7 @@ function cluster_events_all($nid) {
   else {
     $content = node_view_multiple(node_load_multiple(array_keys($result['results'])));
   }
+
   $ret['content'] = $content;
   $ret['pager'] = array(
     '#theme' => 'pager',

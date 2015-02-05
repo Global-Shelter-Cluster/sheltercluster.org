@@ -275,13 +275,13 @@ th {
 }
 
 .underlined-links, .page-search .search-results a, #user-login-container .item-list li a, #shelter-discussions .see-all, .page-node-discussions .discussions-item a, .node-type-discussion .comment .links a, .node-type-discussion .comment_forbidden a,
-.node-type-discussion .comment-add a, #shelter-calendar .see-all, #add-content a,
+.node-type-discussion .comment-add a, .event-item a, #shelter-calendar .see-all, #add-content a,
 #admin-links a, .page-user .profile a, footer a {
   position: relative;
   text-decoration: none;
 }
 .underlined-links:after, .page-search .search-results a:after, #user-login-container .item-list li a:after, #shelter-discussions .see-all:after, .page-node-discussions .discussions-item a:after, .node-type-discussion .comment .links a:after, .node-type-discussion .comment_forbidden a:after,
-.node-type-discussion .comment-add a:after, #shelter-calendar .see-all:after, #add-content a:after,
+.node-type-discussion .comment-add a:after, .event-item a:after, #shelter-calendar .see-all:after, #add-content a:after,
 #admin-links a:after, .page-user .profile a:after, footer a:after {
   content: '';
   width: 100%;
@@ -292,16 +292,16 @@ th {
   border-style: solid;
 }
 .underlined-links:hover, .page-search .search-results a:hover, #user-login-container .item-list li a:hover, #shelter-discussions .see-all:hover, .page-node-discussions .discussions-item a:hover, .node-type-discussion .comment .links a:hover, .node-type-discussion .comment_forbidden a:hover,
-.node-type-discussion .comment-add a:hover, #shelter-calendar .see-all:hover, #add-content a:hover,
+.node-type-discussion .comment-add a:hover, .event-item a:hover, #shelter-calendar .see-all:hover, #add-content a:hover,
 #admin-links a:hover, .page-user .profile a:hover, footer a:hover, .underlined-links:active, .page-search .search-results a:active, #user-login-container .item-list li a:active, #shelter-discussions .see-all:active, .page-node-discussions .discussions-item a:active, .node-type-discussion .comment .links a:active, .node-type-discussion .comment_forbidden a:active,
-.node-type-discussion .comment-add a:active, #shelter-calendar .see-all:active, #add-content a:active,
+.node-type-discussion .comment-add a:active, .event-item a:active, #shelter-calendar .see-all:active, #add-content a:active,
 #admin-links a:active, .page-user .profile a:active, footer a:active {
   text-decoration: none;
 }
 .underlined-links:hover:after, .page-search .search-results a:hover:after, #user-login-container .item-list li a:hover:after, #shelter-discussions .see-all:hover:after, .page-node-discussions .discussions-item a:hover:after, .node-type-discussion .comment .links a:hover:after, .node-type-discussion .comment_forbidden a:hover:after,
-.node-type-discussion .comment-add a:hover:after, #shelter-calendar .see-all:hover:after, #add-content a:hover:after,
+.node-type-discussion .comment-add a:hover:after, .event-item a:hover:after, #shelter-calendar .see-all:hover:after, #add-content a:hover:after,
 #admin-links a:hover:after, .page-user .profile a:hover:after, footer a:hover:after, .underlined-links:active:after, .page-search .search-results a:active:after, #user-login-container .item-list li a:active:after, #shelter-discussions .see-all:active:after, .page-node-discussions .discussions-item a:active:after, .node-type-discussion .comment .links a:active:after, .node-type-discussion .comment_forbidden a:active:after,
-.node-type-discussion .comment-add a:active:after, #shelter-calendar .see-all:active:after, #add-content a:active:after,
+.node-type-discussion .comment-add a:active:after, .event-item a:active:after, #shelter-calendar .see-all:active:after, #add-content a:active:after,
 #admin-links a:active:after, .page-user .profile a:active:after, footer a:active:after {
   border-style: none;
 }
@@ -1502,6 +1502,12 @@ header #search-block-form {
   color: #7f1416;
 }
 
+.edit-link {
+  float: right;
+  text-transform: none;
+  font-weight: normal;
+}
+
 .collapsible,
 .collapsed {
   cursor: pointer;
@@ -1725,6 +1731,17 @@ header #search-block-form {
 }
 .node-type-discussion .comment_forbidden a,
 .node-type-discussion .comment-add a {
+  color: #688394;
+}
+
+.event-item {
+  background: #dadee4;
+  margin-bottom: 4px;
+  margin-bottom: 0.25rem;
+  padding: 12.8px;
+  padding: 0.8rem;
+}
+.event-item a {
   color: #688394;
 }
 

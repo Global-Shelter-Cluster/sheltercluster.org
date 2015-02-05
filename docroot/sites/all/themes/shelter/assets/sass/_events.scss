@@ -1,0 +1,10 @@
+.event-item {
+  background: rgb(218,222,228);
+  @include rem(margin-bottom, 0.25rem);
+  @include rem(padding, 0.8rem);
+
+  a {
+    @extend .underlined-links;
+    color: $shelter-dark-blue;
+  }
+}
