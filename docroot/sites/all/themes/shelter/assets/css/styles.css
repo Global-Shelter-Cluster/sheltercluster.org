@@ -895,6 +895,7 @@ header .search {
 }
 .document-table a {
   color: #031957;
+  font-weight: normal;
 }
 .document-table td {
   padding: 8px 0;

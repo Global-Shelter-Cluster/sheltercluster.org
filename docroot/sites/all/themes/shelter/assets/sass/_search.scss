@@ -210,6 +210,7 @@ header {
   }
   a {
     color: darken(#2d62f9, 40%);
+    font-weight: normal;
   }
   td {
     @include rem(padding, 0.5rem 0);
