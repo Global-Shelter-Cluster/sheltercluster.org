@@ -431,4 +431,4 @@ features_exclude[dependencies][strongarm] = strongarm
 features_exclude[field_base][body] = body
 files[] = classes/GroupContentDisplay.php
 files[] = classes/GroupContentManager.php
-mtime = 1422910480
+mtime = 1423063059

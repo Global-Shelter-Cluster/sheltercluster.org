@@ -385,3 +385,10 @@ function shelter_base_update_7040() {
 function shelter_base_update_7041() {
   features_revert_module('cluster_events');
 }
+
+/**
+ * Revert og feature - add multilibgual features to COP. 
+ */
+function shelter_base_update_7042() {
+  features_revert_module('cluster_og');
+}
