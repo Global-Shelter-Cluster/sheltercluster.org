@@ -10,7 +10,7 @@
  *    Array of document nodes prepared for this template.
  *    @see cluster_docs_prepare_card_data().
  *  Each document has the following elements:
- *  array('title', 'link', 'is_link', 'is_file', 'description', 'filesize', 'file_extension', 'source',); 
+ *  array('title', 'link', 'is_link', 'is_file', 'description', 'filesize', 'file_extension', 'source',);
  */
 ?>
 <?php if ($heading): ?>
@@ -70,7 +70,7 @@
         <?php endif; ?>
       </td>
 
-      <td class="information-card">
+      <td class="information-title">
         <?php print $doc['link']; ?>
         <?php //print $doc['description']; ?>
       </td>
@@ -81,9 +81,9 @@
         <?php endif; ?>
       </td>
 
-      <td>
+      <td class="publication-date">
         <?php if ($doc['publication_date']): ?>
-          <span class="publication-date"><?php print $doc['publication_date']; ?></span>
+          <span><?php print $doc['publication_date']; ?></span>
         <?php endif; ?>
       </td>
     </tr>

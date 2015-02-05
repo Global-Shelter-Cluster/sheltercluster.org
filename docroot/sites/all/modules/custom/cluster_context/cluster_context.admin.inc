@@ -62,14 +62,19 @@ function cluster_context_build_form($type) {
   if ($type === 'response' && isset($_GET['response']) && isset($form['field_associated_regions'])) {
     $response = node_load(intval($_GET['response']));
     if ($response && $response->type === 'response') {
-      $response_wrapper = entity_metadata_wrapper('node', $response);
-      $regions = $response_wrapper->field_associated_regions->value();
-      if (count($regions) > 1) {
-        // Creating a child response, and the parent response has more than one associated region.
-        $form_state['field']['field_associated_regions'][LANGUAGE_NONE]['items_count'] = count($regions);
-        $form_state['cluster_context_prepopulate'] = TRUE;
-        drupal_static_reset('drupal_html_id');
-        return drupal_rebuild_form($form_id, $form_state, $form);
+      try {
+        $response_wrapper = entity_metadata_wrapper('node', $response);
+        $regions = $response_wrapper->field_associated_regions->value();
+        if (count($regions) > 1) {
+          // Creating a child response, and the parent response has more than one associated region.
+          $form_state['field']['field_associated_regions'][LANGUAGE_NONE]['items_count'] = count($regions);
+          $form_state['cluster_context_prepopulate'] = TRUE;
+          drupal_static_reset('drupal_html_id');
+          return drupal_rebuild_form($form_id, $form_state, $form);
+        }
+      }
+      catch (EntityMetadataWrapperException $exc) {
+         _log_entity_metadata_wrapper_error($exc, 'cluster_context');
       }
     }
   }
@@ -115,9 +120,14 @@ function cluster_context_form_alter(&$form, &$form_state, $form_id) {
     // but don't disable the field.
     $response = node_load(intval($_GET['response']));
     if ($response && $response->type == 'response') {
-      $response_wrapper = entity_metadata_wrapper('node', $response);
-      $regions = $response_wrapper->field_associated_regions->value();
-      _cluster_context_prepopulate($form, $form_state, 'field_associated_regions', $regions, 'geographic_region', FALSE);
+      try {
+        $response_wrapper = entity_metadata_wrapper('node', $response);
+        $regions = $response_wrapper->field_associated_regions->value();
+        _cluster_context_prepopulate($form, $form_state, 'field_associated_regions', $regions, 'geographic_region', FALSE);
+      }
+      catch (EntityMetadataWrapperException $exc) {
+         _log_entity_metadata_wrapper_error($exc, 'cluster_context');
+      }
     }
   }
 }

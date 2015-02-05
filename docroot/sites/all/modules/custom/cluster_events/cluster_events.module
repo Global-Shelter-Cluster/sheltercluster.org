@@ -42,12 +42,7 @@ function _cluster_events_title_callback($nid) {
     return $wrapper->label();
   }
   catch (EntityMetadataWrapperException $exc) {
-    watchdog(
-      'cluster_events',
-      'See '  . __FUNCTION__ . '() ' .  $exc->getTraceAsString(),
-      NULL,
-      WATCHDOG_ERROR
-    );
+    _log_entity_metadata_wrapper_error($exc, 'cluster_context');
   }
   return $title;
 }
@@ -73,7 +68,7 @@ function cluster_events_all($nid) {
 
   if (! $result['results']) {
     $content = array(
-      '#markup' => t('No content for the moment.'),
+      '#markup' => t('No events scheduled at the moment.'),
     );
   }
   else {

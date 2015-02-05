@@ -919,7 +919,7 @@ header .search {
   font-weight: bold;
   color: black;
 }
-.document-table .publication-date {
+.document-table .publication-date span {
   display: block;
   width: 100%;
   text-align: center;
