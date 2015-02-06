@@ -173,7 +173,7 @@ class GroupDisplayProvider {
       '#theme' => 'cluster_nav_contextual',
     );
 
-    // The the group parent region.
+    // The group parent region.
     if (isset($wrapper->field_parent_region)) {
       $region = $wrapper->field_parent_region->value();
       if ($region) {
@@ -191,10 +191,12 @@ class GroupDisplayProvider {
       $output['#regions'] = array();
 
       foreach ($wrapper->field_associated_regions->value() as $region) {
-        $output['#regions'][] = array(
-          'title' => $region->title,
-          'path' => 'node/' . $region->nid,
-        );
+        if ($this->getRedirectParent() != $region->nid) {
+          $output['#regions'][] = array(
+            'title' => $region->title,
+            'path' => 'node/' . $region->nid,
+          );
+        }
       }
     }
 
@@ -245,6 +247,29 @@ class GroupDisplayProvider {
     }
     return $ret;
   }
+
+  /**
+   * Gets the node ID from the "redirect parent" (geographic region with the
+   * field_response_auto_redirect field set to the current response).
+   * Only works if the current page is a response.
+   * @return
+   *  nid, FALSE if none exist.
+   */
+  public function getRedirectParent() {
+    $query = new EntityFieldQuery();
+    $res = $query->entityCondition('entity_type', 'node')
+      ->entityCondition('bundle', 'geographic_region')
+      ->fieldCondition('field_response_auto_redirect', 'target_id', $this->node->nid)
+      ->propertyCondition('status', NODE_PUBLISHED)
+      ->execute();
+
+    if (!isset($res['node'])) {
+      return FALSE;
+    }
+
+    return key($res['node']);
+  }
+
 }
 
 /**
