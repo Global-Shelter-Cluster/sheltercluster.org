@@ -9,6 +9,10 @@
 
   <div class="side-column">
 
+    <?php if ($content['join_links']): ?>
+      <?php print render($content['join_links']); ?>
+    <?php endif; ?>
+
     <?php if ($content['editor_menu']): ?>
       <section id="add-content" class="clearfix">
         <h3 data-collapsible="add-content-container" data-collapsible-default="collapsed">Add content</h3>
@@ -42,10 +46,6 @@
       <section id="featured-documents">
         <?php print render($content['featured_documents']); ?>
       </section>
-    <?php endif; ?>
-
-    <?php if ($content['join_links']): ?>
-      <?php print render($content['join_links']); ?>
     <?php endif; ?>
 
     <?php if (!empty($content['body'])): ?>
