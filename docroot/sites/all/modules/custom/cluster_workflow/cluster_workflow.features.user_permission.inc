@@ -287,6 +287,7 @@ function cluster_workflow_user_default_permissions() {
     'name' => 'use workbench_moderation needs review tab',
     'roles' => array(
       'administrator' => 'administrator',
+      'trusted user' => 'trusted user',
     ),
     'module' => 'workbench_moderation',
   );
