@@ -12,7 +12,7 @@ function cluster_context_menu_alter(&$items) {
   }
 
   $items['node/add']['access callback'] = 'user_access';
-  $items['node/add']['access arguments'] = array('cluster_context_node_add_access');
+  $items['node/add']['access arguments'] = array('create nodes without cluster context');
 }
 
 /**
