@@ -441,8 +441,16 @@ function shelter_base_update_7044() {
 }
 
 /**
- * Revert workflow feature. 
+ * Revert workflow feature.
  */
 function shelter_base_update_7045() {
   features_revert_module('cluster_workflow');
+}
+
+
+/**
+ * Revert discussions feature.
+ */
+function shelter_base_update_7046() {
+  features_revert_module('cluster_discussions');
 }
