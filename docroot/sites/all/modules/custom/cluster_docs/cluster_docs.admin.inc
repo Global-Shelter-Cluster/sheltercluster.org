@@ -69,3 +69,14 @@ function cluster_docs_validate($form, &$form_state) {
     form_set_error('field_link');
   }
 }
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function cluster_docs_form_views_exposed_form_alter(&$form, &$form_state) {
+  if ($form_state['view']->name != 'documents' || $form_state['display']->id != 'page') {
+    return;
+  }
+
+  $form['group']['#autocomplete_path'] = 'cluster_og/groups/autocomplete';
+}

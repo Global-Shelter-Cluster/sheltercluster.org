@@ -417,3 +417,17 @@ function cluster_og_init() {
     drupal_goto('node/' . $response->nid);
   }
 }
+
+/**
+ * Implements hook_menu().
+ */
+function cluster_og_menu() {
+  $items['cluster_og/groups/autocomplete'] = array(
+    'page callback' => 'cluster_og_groups_autocomplete',
+    'file' => 'cluster_og.ajax.inc',
+    'type' => MENU_CALLBACK,
+    'access arguments' => array('administer nodes'),
+  );
+
+  return $items;
+}
