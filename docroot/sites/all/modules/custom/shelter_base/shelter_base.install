@@ -439,3 +439,10 @@ function shelter_base_update_7044() {
 
   $function($menu);
 }
+
+/**
+ * Revert workflow feature. 
+ */
+function shelter_base_update_7045() {
+  features_revert_module('cluster_workflow');
+}
