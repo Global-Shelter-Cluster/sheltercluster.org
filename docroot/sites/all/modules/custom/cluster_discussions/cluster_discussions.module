@@ -68,6 +68,8 @@ function cluster_discussions_all($nid) {
   $filter->condition('type', 'discussion');
   $query->filter($filter);
 
+  $query->sort('changed', 'DESC');
+
   $offset = pager_find_page() * CLUSTER_DISCUSSIONS_PER_PAGE;
   $query->range($offset, CLUSTER_DISCUSSIONS_PER_PAGE);
 
@@ -181,4 +183,14 @@ function _cluster_discussion_get_latest($gid) {
   $query->range(0, 1);
 
   return $query->execute()->fetchField();
+}
+
+/**
+ * Implements hook_comment_insert().
+ * Save the node to make its "changed" value update, so that we're able to sort
+ * by "last activity".
+ */
+function cluster_discussions_comment_insert($comment) {
+  $node = node_load($comment->nid);
+  node_save($node);
 }

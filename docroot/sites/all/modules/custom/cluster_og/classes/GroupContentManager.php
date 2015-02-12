@@ -162,7 +162,6 @@ class GroupContentManager {
    */
   public function getRecentDiscussions($range = 2) {
     $query = db_select('node', 'n');
-    $query->join('node_comment_statistics', 'c', 'c.nid = n.nid');
     $query->join('og_membership', 'g', 'g.etid = n.nid');
     $query->fields('n', array('nid'));
     $query->condition('n.status', NODE_PUBLISHED);
@@ -171,7 +170,7 @@ class GroupContentManager {
     $query->condition('g.entity_type', 'node');
     $query->condition('g.group_type', 'node');
     $query->condition('g.gid', $this->node->nid);
-    $query->orderBy('c.last_comment_timestamp', 'DESC');
+    $query->orderBy('n.changed', 'DESC');
     $query->range(0, $range);
     $nids = $query->execute()->fetchCol(0);
 
