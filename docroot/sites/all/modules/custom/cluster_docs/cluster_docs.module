@@ -65,26 +65,55 @@ function _cluster_docs_title_callback($nid) {
  * @return Render array
  */
 function cluster_docs_all($nid) {
-  $node = node_load($nid);
+  $query = cluster_docs_query();
 
+  $filter = $query->createFilter();
+  $filter->condition('og_group_ref', $nid);
+  $query->filter($filter);
+
+  return cluster_docs_page($query);
+}
+
+/**
+ * Returns a basic query for searching documents.
+ * @return SearchApiQueryInterface
+ */
+function cluster_docs_query() {
   $query = search_api_query('default_node_index', array());
 
-  $title = NULL;
-  // Read the title filter value from the URL, if it exists.
-  if (isset($_GET['f']) && is_array($_GET['f'])) {
-    foreach ($_GET['f'] as $filter) {
-      if (substr($filter, 0, 6) == 'title:') {
-        $title = substr($filter, 6);
-      }
-    }
-  }
-
-  // Common query filters (by group and content type)
   $filter = $query->createFilter();
-  $filter->condition('og_group_ref', $node->nid);
   $filter->condition('type', 'document');
   $query->filter($filter);
 
+  return $query;
+}
+
+/**
+ * Returns a list of taxonomy term fields used as facets in document list pages.
+ * @return array
+ */
+function cluster_docs_taxonomies() {
+  return array(
+    'field_document_type',
+    // Basic tags
+    'field_coordination_management',
+    'field_information_management',
+    'field_technical_support_design',
+    // Advanced tags
+    'field_assess_monitor_eval',
+    'field_inter_cluster',
+    'field_cross_cutting_issues',
+    'field_response_phase',
+    'field_intervention_materials',
+    'field_intervention_programming',
+    'field_settlement_type',
+    'field_non_food_items',
+    'field_issues',
+    'field_toolkit',
+  );
+}
+
+function cluster_docs_page($query, $show_facets = TRUE) {
   // Figure out the sort column and direction from $_GET (store in $sort_key and $sort_direction).
   $sort_options = array(
     'title' => 'title_field',
@@ -138,7 +167,7 @@ function cluster_docs_all($nid) {
     $reset_link_bottom = $reset_link = array(
       '#theme' => 'link',
       '#text' => 'reset filters',
-      '#path' => 'node/' . $nid . '/documents',
+      '#path' => current_path(),
       '#options' => array(
         'html' => FALSE,
         'attributes' => array('class' => 'reset-filters'),
@@ -151,68 +180,62 @@ function cluster_docs_all($nid) {
   // Facets
   $facets = array();
 
-  // This array defines which facets to show and in what order.
-  $facets_to_show = array(
-    'field_document_type',
+  if ($show_facets) {
+    // This array defines which facets to show and in what order.
+    $facets_to_show = cluster_docs_taxonomies();
 
-    // Basic tags
-    'field_coordination_management',
-    'field_information_management',
-    'field_technical_support_design',
+    foreach (facetapi_get_block_info(array('block')) as $delta => $info) {
+      $block_view = module_invoke('facetapi', 'block_view', $delta);
+      if (is_null($block_view)) {
+        continue;
+      }
+      $content = $block_view['content'];
 
-    // Advanced tags
-    'field_assess_monitor_eval',
-    'field_inter_cluster',
-    'field_cross_cutting_issues',
-    'field_response_phase',
-    'field_intervention_materials',
-    'field_intervention_programming',
-    'field_settlement_type',
-    'field_non_food_items',
-    'field_issues',
-    'field_toolkit',
-  );
+      $facet = $content['#settings']->facet;
+      if (!in_array($facet, $facets_to_show)) {
+        continue;
+      }
 
-  foreach (facetapi_get_block_info(array('block')) as $delta => $info) {
-    $block_view = module_invoke('facetapi', 'block_view', $delta);
-    if (is_null($block_view)) {
-      continue;
-    }
-    $content = $block_view['content'];
+      $content['#options'] = $content[$facet];
 
-    $facet = $content['#settings']->facet;
-    if (!in_array($facet, $facets_to_show)) {
-      continue;
+      $content['#theme'] = 'cluster_docs_facet';
+      $content['#weight'] = array_search($facet, $facets_to_show);
+
+      $facets[$delta] = $content;
     }
 
-    $content['#options'] = $content[$facet];
+    $title = NULL;
+    // Read the title filter value from the URL, if it exists.
+    if (isset($_GET['f']) && is_array($_GET['f'])) {
+      foreach ($_GET['f'] as $filter) {
+        if (substr($filter, 0, 6) == 'title:') {
+          $title = substr($filter, 6);
+        }
+      }
+    }
 
-    $content['#theme'] = 'cluster_docs_facet';
-    $content['#weight'] = array_search($facet, $facets_to_show);
-
-    $facets[$delta] = $content;
+    $facets[] = array(
+      '#weight' => -50,
+      '#theme' => 'cluster_docs_facet',
+      '#title' => 'Title Contains',
+      '#options' => FALSE,
+      '#child' => array(
+        array(
+          '#type' => 'textfield',
+          '#name' => 'title',
+          '#value' => $title,
+        ),
+        array(
+          '#type' => 'button',
+          '#name' => 'title_search',
+          '#value' => 'Search',
+        ),
+        '#prefix' => '<div class="clearfix">',
+        '#suffix' => '</div>',
+      ),
+    );
   }
 
-  $facets[] = array(
-    '#weight' => -50,
-    '#theme' => 'cluster_docs_facet',
-    '#title' => 'Title Contains',
-    '#options' => FALSE,
-    '#child' => array(
-      array(
-        '#type' => 'textfield',
-        '#name' => 'title',
-        '#value' => $title,
-      ),
-      array(
-        '#type' => 'button',
-        '#name' => 'title_search',
-        '#value' => 'Search',
-      ),
-      '#prefix' => '<div class="clearfix">',
-      '#suffix' => '</div>',
-    ),
-  );
   drupal_add_js(drupal_get_path('module', 'cluster_docs') . '/js/search.js');
 
   $result_nids = FALSE;
@@ -220,7 +243,7 @@ function cluster_docs_all($nid) {
     $result_nids = array_keys($results['results']);
   }
 
-  return array(
+  $ret = array(
     array(
       '#theme' => 'cluster_docs_table_list',
       '#heading' => t('Documents') . ' (' . $results['result count'] . ')',
@@ -231,13 +254,18 @@ function cluster_docs_all($nid) {
       '#sort_direction' => $sort_direction,
     ),
     'pager' => array('#theme' => 'pager'),
-    'side-column' => array(
+  );
+
+  if ($show_facets) {
+    $ret['side-column'] = array(
       '#prefix' => '<section class="facets">',
       '#suffix' => '</section>',
       'facets' => $facets,
       'reset_link' => $reset_link_bottom,
-    ),
-  );
+    );
+  };
+
+  return $ret;
 }
 
 /**
