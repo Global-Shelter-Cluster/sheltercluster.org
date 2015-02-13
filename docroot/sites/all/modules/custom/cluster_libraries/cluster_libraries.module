@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the cluster_libraries feature.
+ */
+
+include_once 'cluster_libraries.features.inc';
