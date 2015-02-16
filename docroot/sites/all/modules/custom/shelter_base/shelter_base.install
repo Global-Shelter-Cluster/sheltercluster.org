@@ -482,6 +482,7 @@ function shelter_base_update_7048() {
  */
 function shelter_base_update_7049() {
   features_revert_module('cluster_docs');
+}
 
 /**
  * Enable libraries feature module.
