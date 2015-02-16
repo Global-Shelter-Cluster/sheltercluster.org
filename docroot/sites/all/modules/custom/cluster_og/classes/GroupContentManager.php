@@ -250,6 +250,27 @@ class GroupContentManager {
   }
 
   /**
+   * Get document libraries related to the current group.
+   *  @return
+   *   Return a list of library nids.
+   */
+  public function getLibraries() {
+    $query = new EntityFieldQuery();
+    $res = $query->entityCondition('entity_type', 'node')
+      ->entityCondition('bundle', 'library')
+      ->fieldCondition('og_group_ref', 'target_id', $this->node->nid)
+      ->propertyCondition('status', NODE_PUBLISHED)
+      ->propertyOrderBy('title')
+      ->execute();
+
+    if (!isset($res['node'])) {
+      return FALSE;
+    }
+
+    return array_keys($res['node']);
+  }
+
+  /**
    * Delegates key documents management to the cluster_docs module.
    * @return render array of documents.
    */
