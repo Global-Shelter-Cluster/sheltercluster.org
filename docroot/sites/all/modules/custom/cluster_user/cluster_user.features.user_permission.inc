@@ -1134,15 +1134,6 @@ function cluster_user_user_default_permissions() {
     'module' => 'flag',
   );
 
-  // Exported permission: 'use text format advanced_html'.
-  $permissions['use text format advanced_html'] = array(
-    'name' => 'use text format advanced_html',
-    'roles' => array(
-      'administrator' => 'administrator',
-    ),
-    'module' => 'filter',
-  );
-
   // Exported permission: 'use text format filtered_html'.
   $permissions['use text format filtered_html'] = array(
     'name' => 'use text format filtered_html',

@@ -1,5 +1,5 @@
 name = Sheltercluster Base
-description = Settings deployments, especially strongarm exposed variables such as multilingual, WYSIWYG, IMCE profiles, etc
+description = Settings deployments, especially strongarm exposed variables such as multilingual
 core = 7.x
 package = Cluster
 dependencies[] = cluster_docs
@@ -215,4 +215,4 @@ features[variable][] = transliteration_file_uploads
 features[variable][] = transliteration_file_uploads_display_name
 features[views_view][] = content_administration
 features_exclude[taxonomy][tags] = tags
-mtime = 1422908374
+mtime = 1424274571

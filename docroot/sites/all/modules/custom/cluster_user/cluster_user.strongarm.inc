@@ -106,7 +106,7 @@ function cluster_user_strongarm() {
         ),
         1 => array(
           'name' => 'content',
-          'subnav' => 1,
+          'subnav' => 0,
           'browse' => 1,
           'upload' => 1,
           'thumb' => 1,
