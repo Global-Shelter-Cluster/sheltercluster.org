@@ -80,3 +80,15 @@ function cluster_docs_form_views_exposed_form_alter(&$form, &$form_state) {
 
   $form['group']['#autocomplete_path'] = 'cluster_og/groups/autocomplete';
 }
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ * Make all "add new value" checkboxes in the VBO page checked by default.
+ */
+function cluster_docs_form_views_form_documents_page_alter(&$form, &$form_state) {
+  foreach ($form['bundle_document'] as $key => &$field) {
+    if (substr($key, 0, 9) == '_append::' && $field['#type'] == 'checkbox') {
+      $field['#default_value'] = TRUE;
+    }
+  }
+}
