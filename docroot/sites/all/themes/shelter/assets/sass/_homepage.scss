@@ -1,0 +1,17 @@
+.tableauPlaceholder {
+  margin: 0 auto;
+}
+
+#tableau-mobile { display: block !important; }
+#tableau-tablet { display: none !important; }
+#tableau-desktop { display: none !important; }
+
+@include breakpoint (768px) {
+  #tableau-mobile { display: none !important; }
+  #tableau-tablet { display: block !important; }
+}
+@include breakpoint (1024px) {
+  #tableau-mobile { display: none !important; }
+  #tableau-tablet { display: none !important; }
+  #tableau-desktop { display: block !important; }
+}
