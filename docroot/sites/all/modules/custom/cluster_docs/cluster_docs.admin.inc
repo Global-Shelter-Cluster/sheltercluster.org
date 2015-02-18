@@ -86,6 +86,10 @@ function cluster_docs_form_views_exposed_form_alter(&$form, &$form_state) {
  * Make all "add new value" checkboxes in the VBO page checked by default.
  */
 function cluster_docs_form_views_form_documents_page_alter(&$form, &$form_state) {
+  if (!isset($form['bundle_document'])) {
+    return;
+  }
+  
   foreach ($form['bundle_document'] as $key => &$field) {
     if (substr($key, 0, 9) == '_append::' && $field['#type'] == 'checkbox') {
       $field['#default_value'] = TRUE;
