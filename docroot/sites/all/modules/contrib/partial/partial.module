@@ -52,8 +52,7 @@ function template_preprocess_partial(&$variables) {
 /**
  * Wraps theme().
  */
-function partial($name, $variables) {
+function partial($name, $variables = array()) {
   $variables['name'] = $name;
   return theme('partial', $variables);
 }
-
