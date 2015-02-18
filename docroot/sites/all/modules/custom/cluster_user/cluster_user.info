@@ -205,5 +205,5 @@ features[variable][] = user_email_verification
 features[variable][] = user_register
 features[wysiwyg][] = filtered_html
 features[wysiwyg][] = full_html
-mtime = 1424275002
+mtime = 1424282901
 project path = sites/all/modules/custom
