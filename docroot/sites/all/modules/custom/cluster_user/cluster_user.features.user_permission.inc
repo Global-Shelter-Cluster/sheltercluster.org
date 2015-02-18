@@ -259,6 +259,15 @@ function cluster_user_user_default_permissions() {
     'module' => 'image',
   );
 
+  // Exported permission: 'administer imce'.
+  $permissions['administer imce'] = array(
+    'name' => 'administer imce',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'imce',
+  );
+
   // Exported permission: 'administer languages'.
   $permissions['administer languages'] = array(
     'name' => 'administer languages',
@@ -451,6 +460,13 @@ function cluster_user_user_default_permissions() {
   // Exported permission: 'create field_featured'.
   $permissions['create field_featured'] = array(
     'name' => 'create field_featured',
+    'roles' => array(),
+    'module' => 'field_permissions',
+  );
+
+  // Exported permission: 'create field_key_document'.
+  $permissions['create field_key_document'] = array(
+    'name' => 'create field_key_document',
     'roles' => array(),
     'module' => 'field_permissions',
   );
@@ -721,6 +737,13 @@ function cluster_user_user_default_permissions() {
     'module' => 'field_permissions',
   );
 
+  // Exported permission: 'edit field_key_document'.
+  $permissions['edit field_key_document'] = array(
+    'name' => 'edit field_key_document',
+    'roles' => array(),
+    'module' => 'field_permissions',
+  );
+
   // Exported permission: 'edit own comments'.
   $permissions['edit own comments'] = array(
     'name' => 'edit own comments',
@@ -742,6 +765,13 @@ function cluster_user_user_default_permissions() {
   // Exported permission: 'edit own field_featured'.
   $permissions['edit own field_featured'] = array(
     'name' => 'edit own field_featured',
+    'roles' => array(),
+    'module' => 'field_permissions',
+  );
+
+  // Exported permission: 'edit own field_key_document'.
+  $permissions['edit own field_key_document'] = array(
+    'name' => 'edit own field_key_document',
     'roles' => array(),
     'module' => 'field_permissions',
   );
@@ -1140,9 +1170,23 @@ function cluster_user_user_default_permissions() {
     'module' => 'field_permissions',
   );
 
+  // Exported permission: 'view field_key_document'.
+  $permissions['view field_key_document'] = array(
+    'name' => 'view field_key_document',
+    'roles' => array(),
+    'module' => 'field_permissions',
+  );
+
   // Exported permission: 'view own field_featured'.
   $permissions['view own field_featured'] = array(
     'name' => 'view own field_featured',
+    'roles' => array(),
+    'module' => 'field_permissions',
+  );
+
+  // Exported permission: 'view own field_key_document'.
+  $permissions['view own field_key_document'] = array(
+    'name' => 'view own field_key_document',
     'roles' => array(),
     'module' => 'field_permissions',
   );
