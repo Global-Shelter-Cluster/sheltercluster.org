@@ -104,6 +104,12 @@ function cluster_libraries_strongarm() {
       'token' => array(
         'custom_settings' => FALSE,
       ),
+      'related_response' => array(
+        'custom_settings' => FALSE,
+      ),
+      'related_hub' => array(
+        'custom_settings' => FALSE,
+      ),
     ),
     'extra_fields' => array(
       'form' => array(

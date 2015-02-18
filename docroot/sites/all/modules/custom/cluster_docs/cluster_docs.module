@@ -113,16 +113,23 @@ function cluster_docs_taxonomies() {
   );
 }
 
-function cluster_docs_page($query, $show_facets = TRUE) {
+function cluster_docs_page($query, $show_facets = TRUE, $default_sort = NULL, $default_sort_direction = NULL) {
   // Figure out the sort column and direction from $_GET (store in $sort_key and $sort_direction).
   $sort_options = array(
     'title' => 'title_field',
     'size' => 'field_file:file:size',
     'date' => 'created',
   );
-  $sort_key = NULL;
-  $sort_direction = isset($_GET['sort_direction']) && $_GET['sort_direction'] == 'DESC' ? 'DESC' : 'ASC';
-  if (isset($_GET['sort']) && array_key_exists($sort_key = strtolower($_GET['sort']), $sort_options)) {
+  $sort_key = $default_sort;
+  $sort_direction = isset($_GET['sort_direction'])
+    ? ($_GET['sort_direction'] == 'DESC' ? 'DESC' : 'ASC')
+    : ($default_sort_direction ? $default_sort_direction : 'ASC');
+
+  if (isset($_GET['sort']) && array_key_exists(strtolower($_GET['sort']), $sort_options)) {
+    $sort_key = strtolower($_GET['sort']);
+  }
+
+  if ($sort_key) {
     $sort_field = $sort_options[$sort_key];
 
     // Tell the actual query the sort criteria
