@@ -455,6 +455,15 @@ function cluster_user_user_default_permissions() {
     'module' => 'field_permissions',
   );
 
+  // Exported permission: 'create library content'.
+  $permissions['create library content'] = array(
+    'name' => 'create library content',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'node',
+  );
+
   // Exported permission: 'create nodes without cluster context'.
   $permissions['create nodes without cluster context'] = array(
     'name' => 'create nodes without cluster context',
@@ -491,6 +500,15 @@ function cluster_user_user_default_permissions() {
     'module' => 'node',
   );
 
+  // Exported permission: 'delete any library content'.
+  $permissions['delete any library content'] = array(
+    'name' => 'delete any library content',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'node',
+  );
+
   // Exported permission: 'delete backup files'.
   $permissions['delete backup files'] = array(
     'name' => 'delete backup files',
@@ -503,6 +521,15 @@ function cluster_user_user_default_permissions() {
   // Exported permission: 'delete own event content'.
   $permissions['delete own event content'] = array(
     'name' => 'delete own event content',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'node',
+  );
+
+  // Exported permission: 'delete own library content'.
+  $permissions['delete own library content'] = array(
+    'name' => 'delete own library content',
     'roles' => array(
       'administrator' => 'administrator',
     ),
@@ -609,6 +636,13 @@ function cluster_user_user_default_permissions() {
     'module' => 'taxonomy',
   );
 
+  // Exported permission: 'delete terms in meeting_management'.
+  $permissions['delete terms in meeting_management'] = array(
+    'name' => 'delete terms in meeting_management',
+    'roles' => array(),
+    'module' => 'taxonomy',
+  );
+
   // Exported permission: 'delete terms in non_food_items'.
   $permissions['delete terms in non_food_items'] = array(
     'name' => 'delete terms in non_food_items',
@@ -671,6 +705,15 @@ function cluster_user_user_default_permissions() {
     'module' => 'node',
   );
 
+  // Exported permission: 'edit any library content'.
+  $permissions['edit any library content'] = array(
+    'name' => 'edit any library content',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'node',
+  );
+
   // Exported permission: 'edit field_featured'.
   $permissions['edit field_featured'] = array(
     'name' => 'edit field_featured',
@@ -701,6 +744,15 @@ function cluster_user_user_default_permissions() {
     'name' => 'edit own field_featured',
     'roles' => array(),
     'module' => 'field_permissions',
+  );
+
+  // Exported permission: 'edit own library content'.
+  $permissions['edit own library content'] = array(
+    'name' => 'edit own library content',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'node',
   );
 
   // Exported permission: 'edit terms in assessment_monitoring_evaluation'.
@@ -790,6 +842,13 @@ function cluster_user_user_default_permissions() {
   // Exported permission: 'edit terms in issues'.
   $permissions['edit terms in issues'] = array(
     'name' => 'edit terms in issues',
+    'roles' => array(),
+    'module' => 'taxonomy',
+  );
+
+  // Exported permission: 'edit terms in meeting_management'.
+  $permissions['edit terms in meeting_management'] = array(
+    'name' => 'edit terms in meeting_management',
     'roles' => array(),
     'module' => 'taxonomy',
   );
@@ -1045,6 +1104,15 @@ function cluster_user_user_default_permissions() {
     'module' => 'flag',
   );
 
+  // Exported permission: 'use text format advanced_html'.
+  $permissions['use text format advanced_html'] = array(
+    'name' => 'use text format advanced_html',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'filter',
+  );
+
   // Exported permission: 'use text format filtered_html'.
   $permissions['use text format filtered_html'] = array(
     'name' => 'use text format filtered_html',
@@ -1061,7 +1129,6 @@ function cluster_user_user_default_permissions() {
     'name' => 'use text format full_html',
     'roles' => array(
       'administrator' => 'administrator',
-      'trusted user' => 'trusted user',
     ),
     'module' => 'filter',
   );

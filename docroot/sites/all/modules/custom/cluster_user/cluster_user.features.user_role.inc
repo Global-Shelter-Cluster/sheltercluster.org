@@ -16,6 +16,12 @@ function cluster_user_user_default_roles() {
     'weight' => 2,
   );
 
+  // Exported role: editor.
+  $roles['editor'] = array(
+    'name' => 'editor',
+    'weight' => 4,
+  );
+
   // Exported role: trusted user.
   $roles['trusted user'] = array(
     'name' => 'trusted user',
