@@ -53,6 +53,19 @@ function shelter_preprocess_page(&$variables) {
   if (arg(0) == 'user') {
     $variables['is_user_profile_pages'] = TRUE;
   }
+
+  $variables['extra'] = FALSE;
+  if (isset($variables['page']['content']['system_main']['side-column'])) {
+    $extra = $variables['page']['content']['system_main']['side-column'];
+    unset($variables['page']['content']['system_main']['side-column']);
+  }
+}
+
+/**
+ * Implements partial__{name}_preprocess().
+ */
+function partial__homepage_preprocess(&$variables) {
+  drupal_add_js('https://public.tableau.com/javascripts/api/viz_v1.js', 'external');
 }
 
 /**

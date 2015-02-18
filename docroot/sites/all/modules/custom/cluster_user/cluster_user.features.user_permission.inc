@@ -259,6 +259,15 @@ function cluster_user_user_default_permissions() {
     'module' => 'image',
   );
 
+  // Exported permission: 'administer imce'.
+  $permissions['administer imce'] = array(
+    'name' => 'administer imce',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'imce',
+  );
+
   // Exported permission: 'administer languages'.
   $permissions['administer languages'] = array(
     'name' => 'administer languages',
@@ -455,6 +464,22 @@ function cluster_user_user_default_permissions() {
     'module' => 'field_permissions',
   );
 
+  // Exported permission: 'create field_key_document'.
+  $permissions['create field_key_document'] = array(
+    'name' => 'create field_key_document',
+    'roles' => array(),
+    'module' => 'field_permissions',
+  );
+
+  // Exported permission: 'create library content'.
+  $permissions['create library content'] = array(
+    'name' => 'create library content',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'node',
+  );
+
   // Exported permission: 'create nodes without cluster context'.
   $permissions['create nodes without cluster context'] = array(
     'name' => 'create nodes without cluster context',
@@ -491,6 +516,15 @@ function cluster_user_user_default_permissions() {
     'module' => 'node',
   );
 
+  // Exported permission: 'delete any library content'.
+  $permissions['delete any library content'] = array(
+    'name' => 'delete any library content',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'node',
+  );
+
   // Exported permission: 'delete backup files'.
   $permissions['delete backup files'] = array(
     'name' => 'delete backup files',
@@ -503,6 +537,15 @@ function cluster_user_user_default_permissions() {
   // Exported permission: 'delete own event content'.
   $permissions['delete own event content'] = array(
     'name' => 'delete own event content',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'node',
+  );
+
+  // Exported permission: 'delete own library content'.
+  $permissions['delete own library content'] = array(
+    'name' => 'delete own library content',
     'roles' => array(
       'administrator' => 'administrator',
     ),
@@ -609,6 +652,13 @@ function cluster_user_user_default_permissions() {
     'module' => 'taxonomy',
   );
 
+  // Exported permission: 'delete terms in meeting_management'.
+  $permissions['delete terms in meeting_management'] = array(
+    'name' => 'delete terms in meeting_management',
+    'roles' => array(),
+    'module' => 'taxonomy',
+  );
+
   // Exported permission: 'delete terms in non_food_items'.
   $permissions['delete terms in non_food_items'] = array(
     'name' => 'delete terms in non_food_items',
@@ -671,9 +721,25 @@ function cluster_user_user_default_permissions() {
     'module' => 'node',
   );
 
+  // Exported permission: 'edit any library content'.
+  $permissions['edit any library content'] = array(
+    'name' => 'edit any library content',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'node',
+  );
+
   // Exported permission: 'edit field_featured'.
   $permissions['edit field_featured'] = array(
     'name' => 'edit field_featured',
+    'roles' => array(),
+    'module' => 'field_permissions',
+  );
+
+  // Exported permission: 'edit field_key_document'.
+  $permissions['edit field_key_document'] = array(
+    'name' => 'edit field_key_document',
     'roles' => array(),
     'module' => 'field_permissions',
   );
@@ -701,6 +767,22 @@ function cluster_user_user_default_permissions() {
     'name' => 'edit own field_featured',
     'roles' => array(),
     'module' => 'field_permissions',
+  );
+
+  // Exported permission: 'edit own field_key_document'.
+  $permissions['edit own field_key_document'] = array(
+    'name' => 'edit own field_key_document',
+    'roles' => array(),
+    'module' => 'field_permissions',
+  );
+
+  // Exported permission: 'edit own library content'.
+  $permissions['edit own library content'] = array(
+    'name' => 'edit own library content',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'node',
   );
 
   // Exported permission: 'edit terms in assessment_monitoring_evaluation'.
@@ -790,6 +872,13 @@ function cluster_user_user_default_permissions() {
   // Exported permission: 'edit terms in issues'.
   $permissions['edit terms in issues'] = array(
     'name' => 'edit terms in issues',
+    'roles' => array(),
+    'module' => 'taxonomy',
+  );
+
+  // Exported permission: 'edit terms in meeting_management'.
+  $permissions['edit terms in meeting_management'] = array(
+    'name' => 'edit terms in meeting_management',
     'roles' => array(),
     'module' => 'taxonomy',
   );
@@ -1061,7 +1150,6 @@ function cluster_user_user_default_permissions() {
     'name' => 'use text format full_html',
     'roles' => array(
       'administrator' => 'administrator',
-      'trusted user' => 'trusted user',
     ),
     'module' => 'filter',
   );
@@ -1073,9 +1161,23 @@ function cluster_user_user_default_permissions() {
     'module' => 'field_permissions',
   );
 
+  // Exported permission: 'view field_key_document'.
+  $permissions['view field_key_document'] = array(
+    'name' => 'view field_key_document',
+    'roles' => array(),
+    'module' => 'field_permissions',
+  );
+
   // Exported permission: 'view own field_featured'.
   $permissions['view own field_featured'] = array(
     'name' => 'view own field_featured',
+    'roles' => array(),
+    'module' => 'field_permissions',
+  );
+
+  // Exported permission: 'view own field_key_document'.
+  $permissions['view own field_key_document'] = array(
+    'name' => 'view own field_key_document',
     'roles' => array(),
     'module' => 'field_permissions',
   );

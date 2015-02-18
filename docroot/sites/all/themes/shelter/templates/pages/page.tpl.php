@@ -55,11 +55,6 @@
         </nav>
       </div>
     </div>
-    <?php if($hot_responses): ?>
-      <div class="page-margin">
-        <?php print render($hot_responses); ?>
-      </div>
-    <?php endif; ?>
 
     <?php if (!$is_front): ?>
       <section id="operation-title" class="page-margin">
@@ -72,9 +67,11 @@
 
   </header>
 
-  <?php if ($is_regions_and_countries): ?>
+  <?php if ($is_front): ?>
+    <?php print partial('homepage', array('page' => $page, 'hot_responses' => $hot_responses)); ?>
 
-    <?php print partial('world_map', array('page' => $page)); ?>
+  <?php elseif ($is_regions_and_countries): ?>
+    <?php print partial('regions', array('page' => $page)); ?>
 
   <?php elseif ($is_user_profile_pages): ?>
 
@@ -88,13 +85,7 @@
   <?php elseif ($dashboard_menu): ?>
 
     <div class="page-margin clearfix">
-      <?php
-      $extra = FALSE;
-      if (isset($page['content']['system_main']['side-column'])) {
-        $extra = $page['content']['system_main']['side-column'];
-        unset($page['content']['system_main']['side-column']);
-      }
-      print partial('non_dashboard_group_page', array(
+      <?php print partial('non_dashboard_group_page', array(
         'page' => $page,
         'editor_menu' => $editor_menu,
         'dashboard_menu' => $dashboard_menu,
