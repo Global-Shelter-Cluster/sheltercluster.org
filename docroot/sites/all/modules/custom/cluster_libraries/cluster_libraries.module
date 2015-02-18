@@ -49,5 +49,5 @@ function cluster_libraries_node_view_alter(&$build) {
     $query->filter($filter);
   }
 
-  $build[] = cluster_docs_page($query, FALSE);
+  $build[] = cluster_docs_page($query, FALSE, 'title', 'ASC');
 }
