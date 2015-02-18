@@ -691,6 +691,44 @@ function cluster_docs_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-document-field_meeting_management'
+  $field_instances['node-document-field_meeting_management'] = array(
+    'bundle' => 'document',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => 'Select meeting management tag.',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'taxonomy',
+        'settings' => array(),
+        'type' => 'taxonomy_term_reference_link',
+        'weight' => 29,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_meeting_management',
+    'label' => 'Meeting Management',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_buttons',
+      'weight' => 41,
+    ),
+  );
+
   // Exported field_instance: 'node-document-field_non_food_items'
   $field_instances['node-document-field_non_food_items'] = array(
     'bundle' => 'document',
@@ -1140,6 +1178,82 @@ function cluster_docs_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'taxonomy_term-meeting_management-description_field'
+  $field_instances['taxonomy_term-meeting_management-description_field'] = array(
+    'bundle' => 'meeting_management',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 1,
+      ),
+    ),
+    'entity_type' => 'taxonomy_term',
+    'field_name' => 'description_field',
+    'label' => 'Description',
+    'required' => FALSE,
+    'settings' => array(
+      'display_summary' => 0,
+      'entity_translation_sync' => FALSE,
+      'hide_label' => array(
+        'entity' => 0,
+        'page' => 0,
+      ),
+      'text_processing' => 1,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'module' => 'text',
+      'settings' => array(
+        'rows' => 20,
+        'summary_rows' => 5,
+      ),
+      'type' => 'text_textarea_with_summary',
+      'weight' => -5,
+    ),
+  );
+
+  // Exported field_instance: 'taxonomy_term-meeting_management-name_field'
+  $field_instances['taxonomy_term-meeting_management-name_field'] = array(
+    'bundle' => 'meeting_management',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'taxonomy_term',
+    'field_name' => 'name_field',
+    'label' => 'Name',
+    'required' => TRUE,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'hide_label' => array(
+        'entity' => 0,
+        'page' => 0,
+      ),
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => -5,
+    ),
+  );
+
   // Translatables
   // Included for use with string extractors like potx.
   t('Assessment, Monitoring and Evaluation');
@@ -1160,12 +1274,15 @@ function cluster_docs_field_default_field_instances() {
   t('Is this a reference document that needs to appear in the reference section (as well as any groups in which the document belongs) ?');
   t('Issues');
   t('Link');
+  t('Meeting Management');
+  t('Name');
   t('Non Food Items');
   t('Only first 100 characters of the description will be displayed in the document lists.');
   t('Other Keywords');
   t('Preview');
   t('Report / Meeting date');
   t('Response Phase');
+  t('Select meeting management tag.');
   t('Settlement Type');
   t('Source');
   t('Technical Support and Design');

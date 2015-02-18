@@ -1,0 +1,53 @@
+<?php
+/**
+ * @file
+ * Code for the cluster_libraries feature.
+ */
+
+include_once 'cluster_libraries.features.inc';
+
+/**
+ * Implements hook_node_view_alter().
+ * Creates a document table list and appends it to the page content.
+ * Most of the logic of this function has to do with applying filters to the
+ * Search API query based on the library's configuration.
+ */
+function cluster_libraries_node_view_alter(&$build) {
+  $node = $build['#node'];
+  if ($node->type != 'library' || $build['#view_mode'] != 'full') {
+    return;
+  }
+
+  $query = cluster_docs_query();
+
+  $wrapper = entity_metadata_wrapper('node', $node);
+
+  if ($groups = $wrapper->og_group_ref->value()) {
+    $filter = $query->createFilter();
+    foreach ($groups as $group) {
+      $filter->condition('og_group_ref', $group->nid);
+    }
+    $query->filter($filter);
+  }
+
+  $fields = cluster_docs_taxonomies();
+  foreach ($fields as $field) {
+    if (!isset($node->$field)) {
+      continue;
+    }
+
+    $value = $wrapper->$field->value();
+
+    if (!$value) {
+      continue;
+    }
+
+    $filter = $query->createFilter();
+    foreach ($value as $term) {
+      $filter->condition($field, $term->tid);
+    }
+    $query->filter($filter);
+  }
+
+  $build[] = cluster_docs_page($query, FALSE);
+}

@@ -132,6 +132,9 @@ class GroupDisplayProvider {
     if ($pages = $this->manager->getPages()) {
       $secondary['pages'] = partial('navigation_options', array('navigation_type_id' => 'pages', 'title' => t('Pages'), 'nodes' => node_load_multiple($pages)));
     }
+    if ($libraries = $this->manager->getLibraries()) {
+      $secondary['pages'] = partial('navigation_options', array('navigation_type_id' => 'libraries', 'title' => t('Libraries'), 'nodes' => node_load_multiple($libraries)));
+    }
     return array(
       '#theme' => 'cluster_nav_dashboard',
       '#items' => $items,

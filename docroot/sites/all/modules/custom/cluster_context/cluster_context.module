@@ -36,6 +36,17 @@ function cluster_context_links($node) {
     );
   }
 
+  if (node_access('create', 'library')) {
+    $links['new-library'] = array(
+      'title' => t('Create library'),
+      'href' => 'node/add/library',
+      'query' => array(
+        'group' => $node->nid,
+        'destination' => 'node/' . $node->nid
+      ),
+    );
+  }
+
   if (node_access('create', 'discussion')) {
     $links['new-discussion'] = array(
       'title' => t('Create discussion'),

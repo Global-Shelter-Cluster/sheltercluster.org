@@ -63,8 +63,8 @@ function _shelter_base_required_core() {
  * List of required custom modules.
  */
 function _shelter_base_required_custom() {
-  return array('cluster_context', 'cluster_discussions', 'cluster_docs', 'cluster_events', 'cluster_og', 'cluster_search', 'cluster_taxonomy', 'cluster_user',
-    'cluster_nav', 'cluster_nav_views', 'cluster_workflow', 'partial',
+  return array('cluster_context', 'cluster_discussions', 'cluster_docs', 'cluster_events', 'cluster_libraries', 'cluster_og', 'cluster_search',
+    'cluster_taxonomy', 'cluster_user', 'cluster_nav', 'cluster_nav_views', 'cluster_workflow', 'partial',
   );
 }
 
@@ -447,10 +447,46 @@ function shelter_base_update_7045() {
   features_revert_module('cluster_workflow');
 }
 
-
 /**
  * Revert discussions feature.
  */
 function shelter_base_update_7046() {
   features_revert_module('cluster_discussions');
+}
+
+/**
+ * Revert discussions feature.
+ */
+function shelter_base_update_7047() {
+  features_revert_module('cluster_user');
+}
+
+/**
+ * Revert all features to avoid collisions from local environments.
+ */
+function shelter_base_update_7048() {
+  features_revert_module('cluster_discussions');
+  features_revert_module('cluster_docs');
+  features_revert_module('cluster_events');
+  features_revert_module('cluster_og');
+  features_revert_module('cluster_search');
+  features_revert_module('cluster_taxonomy');
+  features_revert_module('cluster_user');
+  features_revert_module('cluster_workflow');
+  features_revert_module('cluster_user');
+  features_revert_module('shelter_base');
+}
+
+/**
+ * Revert feature cluster_docs.
+ */
+function shelter_base_update_7049() {
+  features_revert_module('cluster_docs');
+}
+
+/**
+ * Enable libraries feature module.
+ */
+function shelter_base_update_7050() {
+  _shelter_base_modules_enable('custom');
 }
