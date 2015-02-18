@@ -1,0 +1,1 @@
+This module provides the contact content type, an entity used to store contact data about people that have important roles for a group.
