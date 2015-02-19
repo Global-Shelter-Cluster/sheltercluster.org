@@ -1,5 +1,5 @@
 name = Cluster Libraries
-description = Libraries implementation for Shelter Cluster.
+description = Libraries implementations for Cluster site.
 core = 7.x
 package = Cluster
 dependencies[] = cluster_docs

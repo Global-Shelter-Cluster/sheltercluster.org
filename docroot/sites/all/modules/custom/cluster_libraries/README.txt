@@ -1,1 +1,1 @@
-Provides the Library content type implementation.
+Provides the Library and Arbitrary Library content type implementation.
