@@ -1,11 +1,12 @@
 <?php
 /**
+ * @file
  * Template file for hot responses list.
  */
 ?>
 
 <section id="active-responses" class="clearfix">
-  <h1><?php print t('Active Responses'); ?></h1>
+  <h1><?php print t('Hot Responses'); ?></h1>
   <ul id="major-responses">
     <?php foreach($responses as $id => $response): ?>
       <li>
@@ -16,7 +17,7 @@
   </ul>
   <ul id="legend">
     <?php foreach($icons as $icon): ?>
-      <li><?php print _svg('icons/' . $icon->icon_name, array('class'=> $icon->icon_class, 'alt' => $icon->name . ' icon')); ?>
+      <li><?php print _svg('icons/' . $icon->icon_name, array('class' => $icon->icon_class, 'alt' => $icon->name . ' icon')); ?>
         <span><?php print $icon->name?></span>
       </li>
     <?php endforeach; ?>
