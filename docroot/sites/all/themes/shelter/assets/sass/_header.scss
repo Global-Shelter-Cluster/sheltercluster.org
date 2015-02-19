@@ -33,21 +33,32 @@ header {
   position: relative;
   top: -20px;
   @include rem(font-size, 0.85rem);
-  @include rem(padding, 0 0 3rem 0);
+  @include breakpoint (400px) {
+    @include rem(padding, 0 0 3rem 0);
+  }
 
   #user-login-form {
     @include rem(padding, 0 80px 0 0);
 
     .form-submit {
       position: absolute;
-      top: 30px;
+      top: 27px;
       right: 0;
       @extend .button;
     }
     .form-item {
       float: left;
+      width: 96%;
       @include rem(margin, 0 0.25rem 0 0);
-
+      @include breakpoint (400px) {
+        width: auto;
+      }
+      input {
+        width: 100%;
+        @include breakpoint (400px) {
+          width: auto;
+        }
+      }
       label {
         @include rem(font-size, 0.7rem);
       }
@@ -67,7 +78,7 @@ header {
     a {
       color: #222;
       @extend .underlined-links;
-      @include rem(font-size, 0.85rem);
+      @include rem(font-size, 0.7rem);
     }
     &:first-child:after {
       content: '/';
