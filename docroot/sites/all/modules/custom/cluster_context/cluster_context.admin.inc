@@ -132,6 +132,9 @@ function cluster_context_form_alter(&$form, &$form_state, $form_id) {
   }
 }
 
+/**
+ * Remove some form elements from the context aware creation form.
+ */
 function _cluster_context_simplify_form(&$form) {
   $to_hide = array(
     'comment_settings' => TRUE,       // "Comment settings" tab.
@@ -161,8 +164,10 @@ function _cluster_context_simplify_form(&$form) {
     $form['language']['#default_value'] = $language->language;
   }
 
-  // Attach a CSS to hide things like the text format tips.
-  $form['#attached']['css'][] = drupal_get_path('module', 'cluster_context').'/simplify.css';
+  // Attach a CSS to hide things like the text format tips depending on user role.
+  if (! user_access('select text formats on context aware forms')) {
+    $form['#attached']['css'][] = drupal_get_path('module', 'cluster_context').'/simplify.css';
+  }
 }
 
 /**

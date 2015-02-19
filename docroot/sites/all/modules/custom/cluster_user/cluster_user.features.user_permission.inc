@@ -1027,6 +1027,16 @@ function cluster_user_user_default_permissions() {
     'module' => 'user',
   );
 
+  // Exported permission: 'select text formats on context aware forms'.
+  $permissions['select text formats on context aware forms'] = array(
+    'name' => 'select text formats on context aware forms',
+    'roles' => array(
+      'administrator' => 'administrator',
+      'editor' => 'editor',
+    ),
+    'module' => 'cluster_context',
+  );
+
   // Exported permission: 'skip comment approval'.
   $permissions['skip comment approval'] = array(
     'name' => 'skip comment approval',
