@@ -523,3 +523,10 @@ function shelter_base_update_7053() {
 function shelter_base_update_7054() {
   features_revert_module('cluster_user');
 }
+
+/**
+ * Revert library feature, adding arbitrary doc library.
+ */
+function shelter_base_update_7055() {
+  features_revert_module('cluster_library');
+}
