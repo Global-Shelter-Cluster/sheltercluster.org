@@ -22,7 +22,7 @@ $button-color: lighten($shelter-grey,52%);
 
   &:hover,
   &:active {
-  text-decoration: none;
+    text-decoration: none;
     &:after {
       content: '';
       width: 100%;

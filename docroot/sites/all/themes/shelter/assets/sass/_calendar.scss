@@ -7,21 +7,25 @@
     text-transform: uppercase;
     color: $shelter-red;
     font-weight: bold;
-    @extend .underlined-links;
-    @include rem(font-size, 0.75rem);
+    @include rem(font-size, 0.7rem);
     @include rem(margin, 0 0 0 0.9375rem);
+    @include rem(text-indent, -0.9375rem);
+    @extend .underlined-links;
 
     &:before {
       position: absolute;
+      left: 0;
+      top: -4px;
       content: '+';
       @include rem(font-size, 1.1rem);
-      @include rem(margin, 0 0 0 -0.9375rem);
     }
-  }
-  a {
     &:hover,
     &:active {
       text-decoration: none;
+
+      &:before {
+        border-style: none;
+      }
     }
   }
 }
