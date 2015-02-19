@@ -67,7 +67,7 @@ class GroupContentManager {
     if (isset($result['node'])) {
       return array_keys($result['node']);
     }
-    return FALSE;
+    return array();
   }
 
   /**
@@ -250,21 +250,21 @@ class GroupContentManager {
   }
 
   /**
-   * Get document libraries related to the current group.
+   * Get document libraries, including arbitrary content libraries, related to the current group.
    *  @return
    *   Return a list of library nids.
    */
   public function getLibraries() {
     $query = new EntityFieldQuery();
     $res = $query->entityCondition('entity_type', 'node')
-      ->entityCondition('bundle', 'library')
+      ->entityCondition('bundle', array('library', 'arbitrary_library'), 'IN')
       ->fieldCondition('og_group_ref', 'target_id', $this->node->nid)
       ->propertyCondition('status', NODE_PUBLISHED)
       ->propertyOrderBy('title')
       ->execute();
 
     if (!isset($res['node'])) {
-      return FALSE;
+      return array();
     }
 
     return array_keys($res['node']);

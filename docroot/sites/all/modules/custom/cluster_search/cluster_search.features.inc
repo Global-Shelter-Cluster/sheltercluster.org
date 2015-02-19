@@ -119,6 +119,7 @@ function cluster_search_default_search_api_index() {
         "field_settlement_type" : { "type" : "list\\u003Cinteger\\u003E", "entity_type" : "taxonomy_term" },
         "field_technical_support_design" : { "type" : "list\\u003Cinteger\\u003E", "entity_type" : "taxonomy_term" },
         "field_toolkit" : { "type" : "list\\u003Cinteger\\u003E", "entity_type" : "taxonomy_term" },
+        "nid" : { "type" : "integer" },
         "og_group_ref" : { "type" : "list\\u003Cinteger\\u003E", "entity_type" : "node" },
         "promote" : { "type" : "boolean" },
         "search_api_language" : { "type" : "string" },
@@ -314,6 +315,12 @@ function cluster_search_default_search_api_server() {
             "table" : "search_api_db_default_node_index",
             "column" : "title_field",
             "type" : "string",
+            "boost" : "1.0"
+          },
+          "nid" : {
+            "table" : "search_api_db_default_node_index",
+            "column" : "nid",
+            "type" : "integer",
             "boost" : "1.0"
           }
         }

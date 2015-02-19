@@ -28,6 +28,14 @@ function cluster_libraries_views_api($module = NULL, $api = NULL) {
  */
 function cluster_libraries_node_info() {
   $items = array(
+    'arbitrary_library' => array(
+      'name' => t('Arbitrary library'),
+      'base' => 'node_content',
+      'description' => '',
+      'has_title' => '1',
+      'title_label' => t('Title'),
+      'help' => '',
+    ),
     'library' => array(
       'name' => t('Library'),
       'base' => 'node_content',

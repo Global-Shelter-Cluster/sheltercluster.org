@@ -47,6 +47,17 @@ function cluster_context_links($node) {
     );
   }
 
+  if (node_access('create', 'arbitrary_library')) {
+    $links['new-arbitrary-library'] = array(
+      'title' => t('Create abritrary library'),
+      'href' => 'node/add/arbitrary-library',
+      'query' => array(
+        'group' => $node->nid,
+        'destination' => 'node/' . $node->nid
+      ),
+    );
+  }
+
   if (node_access('create', 'discussion')) {
     $links['new-discussion'] = array(
       'title' => t('Create discussion'),
