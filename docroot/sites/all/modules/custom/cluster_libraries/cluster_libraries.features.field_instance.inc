@@ -60,7 +60,7 @@ function cluster_libraries_field_default_field_instances() {
     'bundle' => 'arbitrary_library',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Add all the document titles to this library.',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -889,6 +889,7 @@ function cluster_libraries_field_default_field_instances() {
 
   // Translatables
   // Included for use with string extractors like potx.
+  t('Add all the document titles to this library.');
   t('Arbitrary document reference');
   t('Assessment, Monitoring and Evaluation');
   t('Body');
