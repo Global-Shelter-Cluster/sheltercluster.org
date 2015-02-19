@@ -502,11 +502,17 @@ function shelter_base_update_7051() {
   _shelter_base_modules_enable('contrib');
 }
 
-
 /**
  * Revert features for wysiwyg and IMCE permissions and settings.
  */
 function shelter_base_update_7052() {
   features_revert_module('cluster_user');
+  features_revert_module('shelter_base');
+}
+
+/**
+ * Revert base features. 
+ */
+function shelter_base_update_7053() {
   features_revert_module('shelter_base');
 }
