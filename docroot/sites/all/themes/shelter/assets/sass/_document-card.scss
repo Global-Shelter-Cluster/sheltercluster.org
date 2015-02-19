@@ -19,12 +19,9 @@
       .image-card {
         @include rem(padding, 0.4375rem 0.3125rem 0px 0.625rem);
 
-        svg {
-          fill: $shelter-dark-blue;
-          width: 30px;
-          height: 39px;
-        }
+        svg,
         img {
+          fill: $shelter-dark-blue;
           width: 30px;
           height: 39px;
         }
@@ -55,13 +52,10 @@
       @include rem(padding, 7px 3px 0px 10px );
       @include box-sizing(initial);
 
-      svg {
+      svg,
+      img {
         fill: $shelter-grey;
         width: 32px;
-        height: 39px;
-      }
-      img {
-        width: 30px;
         height: 39px;
       }
     }
