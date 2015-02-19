@@ -516,3 +516,10 @@ function shelter_base_update_7052() {
 function shelter_base_update_7053() {
   features_revert_module('shelter_base');
 }
+
+/**
+ * Revert user feature.
+ */
+function shelter_base_update_7054() {
+  features_revert_module('cluster_user');
+}
