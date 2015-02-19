@@ -8,7 +8,6 @@
     position: relative;
     float: left;
     width: 100%;
-    margin: 0 6% 3% 0;
     color: darken($shelter-grey,10%);
     background: rgb(208, 205, 206);
     -webkit-background-clip: padding-box; /* for Safari */
@@ -19,14 +18,25 @@
       }
       .image-card {
         @include rem(padding, 0.4375rem 0.3125rem 0px 0.625rem);
-        height: 42px;
 
         svg {
           fill: $shelter-dark-blue;
           width: 30px;
           height: 39px;
         }
+        img {
+          width: 30px;
+          height: 39px;
+        }
       }
+    }
+
+    @include breakpoint(310px) {
+      margin: 0 6% 6% 0;
+    }
+
+    @include breakpoint(550px) {
+      margin: 0 6% 4% 0;
     }
 
     @include breakpoint(700px) {
@@ -48,6 +58,10 @@
       svg {
         fill: $shelter-grey;
         width: 32px;
+        height: 39px;
+      }
+      img {
+        width: 30px;
         height: 39px;
       }
     }
