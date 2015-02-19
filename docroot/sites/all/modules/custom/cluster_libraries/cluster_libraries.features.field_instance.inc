@@ -53,6 +53,50 @@ function cluster_libraries_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-library-field_arbitrary_document_ref'
+  $field_instances['node-library-field_arbitrary_document_ref'] = array(
+    'bundle' => 'library',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'entityreference',
+        'settings' => array(
+          'link' => FALSE,
+        ),
+        'type' => 'entityreference_label',
+        'weight' => 17,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_arbitrary_document_ref',
+    'label' => 'Arbitrary document reference',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'entityreference',
+      'settings' => array(
+        'match_operator' => 'CONTAINS',
+        'path' => '',
+        'size' => 60,
+      ),
+      'type' => 'entityreference_autocomplete',
+      'weight' => 46,
+    ),
+  );
+
   // Exported field_instance: 'node-library-field_assess_monitor_eval'
   $field_instances['node-library-field_assess_monitor_eval'] = array(
     'bundle' => 'library',
@@ -701,6 +745,7 @@ function cluster_libraries_field_default_field_instances() {
 
   // Translatables
   // Included for use with string extractors like potx.
+  t('Arbitrary document reference');
   t('Assessment, Monitoring and Evaluation');
   t('Coordination Management');
   t('Cross-Cutting Issues');
