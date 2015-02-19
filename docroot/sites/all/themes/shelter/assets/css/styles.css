@@ -458,7 +458,6 @@ body {
   position: relative;
   float: left;
   width: 100%;
-  margin: 0 6% 3% 0;
   color: #3e3e3e;
   background: #d0cdce;
   -webkit-background-clip: padding-box;
@@ -472,12 +471,25 @@ body {
 .document-cards .document-card.local-file .image-card {
   padding: 7px 5px 0px 10px;
   padding: 0.4375rem 0.3125rem 0px 0.625rem;
-  height: 42px;
 }
 .document-cards .document-card.local-file .image-card svg {
   fill: #688394;
   width: 30px;
   height: 39px;
+}
+.document-cards .document-card.local-file .image-card img {
+  width: 30px;
+  height: 39px;
+}
+@media (min-width: 310px) {
+  .document-cards .document-card {
+    margin: 0 6% 6% 0;
+  }
+}
+@media (min-width: 550px) {
+  .document-cards .document-card {
+    margin: 0 6% 4% 0;
+  }
 }
 @media (min-width: 700px) {
   .document-cards .document-card {
@@ -502,6 +514,10 @@ body {
 .document-cards .document-card .image-card svg {
   fill: #575757;
   width: 32px;
+  height: 39px;
+}
+.document-cards .document-card .image-card img {
+  width: 30px;
   height: 39px;
 }
 .document-cards .document-card .information-card {
@@ -1487,6 +1503,11 @@ header #search-block-form {
 .side-column h3 svg circle,
 .side-column h3 svg path {
   fill: #3e3e3e;
+}
+.main-column h3 img,
+.side-column h3 img {
+  float: left;
+  height: 21px;
 }
 .main-column h4,
 .side-column h4 {
