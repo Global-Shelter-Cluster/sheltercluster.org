@@ -9,7 +9,8 @@
 
   <div class="side-column">
 
-    <?php if ($content['join_links']): ?>
+    <?php /* Not displaying group join link for launch */ ?>
+    <?php if (FALSE && $content['join_links']): ?>
       <?php print render($content['join_links']); ?>
     <?php endif; ?>
 
@@ -115,7 +116,7 @@
 <section id="left-over-content" class="clearfix">
 
   <div class="main-column">
-    <?php //print render($content); ?>
+    <?php /* print render($content); */ ?>
   </div>
 
 </section>
