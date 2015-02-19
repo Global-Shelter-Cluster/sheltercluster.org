@@ -56,7 +56,7 @@ function shelter_preprocess_page(&$variables) {
 
   $variables['extra'] = FALSE;
   if (isset($variables['page']['content']['system_main']['side-column'])) {
-    $extra = $variables['page']['content']['system_main']['side-column'];
+    $variables['extra'] = $variables['page']['content']['system_main']['side-column'];
     unset($variables['page']['content']['system_main']['side-column']);
   }
 }
