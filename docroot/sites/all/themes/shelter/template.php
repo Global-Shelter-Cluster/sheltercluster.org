@@ -59,6 +59,12 @@ function shelter_preprocess_page(&$variables) {
     $variables['extra'] = $variables['page']['content']['system_main']['side-column'];
     unset($variables['page']['content']['system_main']['side-column']);
   }
+  elseif ($node = menu_get_object()) {
+    if (isset($variables['page']['content']['system_main']['nodes'][$node->nid][0]['side-column'])) {
+      $variables['extra'] = $variables['page']['content']['system_main']['nodes'][$node->nid][0]['side-column'];
+      unset($variables['page']['content']['system_main']['nodes'][$node->nid][0]['side-column']);
+    }
+  }
 }
 
 /**

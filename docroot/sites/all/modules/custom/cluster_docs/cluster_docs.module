@@ -113,7 +113,17 @@ function cluster_docs_taxonomies() {
   );
 }
 
-function cluster_docs_page($query, $show_facets = TRUE, $default_sort = NULL, $default_sort_direction = NULL) {
+/**
+ * Build a document list page. Returns a render array with the table, pager and
+ * facets.
+ * @param SearchApiQueryInterface $query
+ * @param bool $show_facets
+ * @param string|null $default_sort
+ * @param string|null $default_sort_direction
+ * @param array $excluded_facets
+ * @return array
+ */
+function cluster_docs_page($query, $show_facets = TRUE, $default_sort = NULL, $default_sort_direction = NULL, $excluded_facets = array()) {
   // Figure out the sort column and direction from $_GET (store in $sort_key and $sort_direction).
   $sort_options = array(
     'title' => 'title_field',
@@ -189,7 +199,7 @@ function cluster_docs_page($query, $show_facets = TRUE, $default_sort = NULL, $d
 
   if ($show_facets) {
     // This array defines which facets to show and in what order.
-    $facets_to_show = cluster_docs_taxonomies();
+    $facets_to_show = array_diff(cluster_docs_taxonomies(), $excluded_facets);
 
     foreach (facetapi_get_block_info(array('block')) as $delta => $info) {
       $block_view = module_invoke('facetapi', 'block_view', $delta);

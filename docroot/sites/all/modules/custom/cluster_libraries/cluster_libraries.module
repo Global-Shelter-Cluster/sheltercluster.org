@@ -25,6 +25,10 @@ function cluster_libraries_node_view_alter(&$build) {
 
   $wrapper = entity_metadata_wrapper('node', $node);
 
+  // Facets are excluded from view if (and only if) there is exactly ONE value
+  // selected in the corresponding field.
+  $excluded_facets = array();
+
   switch ($node->type) {
     case 'library' :
       if ($groups = $wrapper->og_group_ref->value()) {
@@ -52,6 +56,10 @@ function cluster_libraries_node_view_alter(&$build) {
           $filter->condition($field, $term->tid);
         }
         $query->filter($filter);
+
+        if (count($value) == 1) {
+          $excluded_facets[] = $field;
+        }
       }
     break;
     case 'arbitrary_library':
@@ -61,5 +69,5 @@ function cluster_libraries_node_view_alter(&$build) {
     break;
   }
 
-  $build[] = cluster_docs_page($query, FALSE, 'title', 'ASC');
+  $build[] = cluster_docs_page($query, TRUE, 'title', 'ASC', $excluded_facets);
 }
