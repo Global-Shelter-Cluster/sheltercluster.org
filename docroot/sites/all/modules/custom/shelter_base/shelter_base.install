@@ -537,3 +537,11 @@ function shelter_base_update_7055() {
 function shelter_base_update_7056() {
   module_enable(array('cluster_contact'));
 }
+
+/**
+ * Revert doc and user features.
+ */
+function shelter_base_update_7057() {
+  features_revert_module('cluster_docs');
+  features_revert_module('cluster_user');
+}

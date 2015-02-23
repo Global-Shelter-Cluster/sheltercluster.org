@@ -10,33 +10,6 @@
 function cluster_docs_user_default_permissions() {
   $permissions = array();
 
-  // Exported permission: 'create field_is_reference_document'.
-  $permissions['create field_is_reference_document'] = array(
-    'name' => 'create field_is_reference_document',
-    'roles' => array(
-      'administrator' => 'administrator',
-    ),
-    'module' => 'field_permissions',
-  );
-
-  // Exported permission: 'edit field_is_reference_document'.
-  $permissions['edit field_is_reference_document'] = array(
-    'name' => 'edit field_is_reference_document',
-    'roles' => array(
-      'administrator' => 'administrator',
-    ),
-    'module' => 'field_permissions',
-  );
-
-  // Exported permission: 'edit own field_is_reference_document'.
-  $permissions['edit own field_is_reference_document'] = array(
-    'name' => 'edit own field_is_reference_document',
-    'roles' => array(
-      'administrator' => 'administrator',
-    ),
-    'module' => 'field_permissions',
-  );
-
   // Exported permission: 'view document full node'.
   $permissions['view document full node'] = array(
     'name' => 'view document full node',
@@ -44,24 +17,6 @@ function cluster_docs_user_default_permissions() {
       'administrator' => 'administrator',
     ),
     'module' => 'cluster_docs',
-  );
-
-  // Exported permission: 'view field_is_reference_document'.
-  $permissions['view field_is_reference_document'] = array(
-    'name' => 'view field_is_reference_document',
-    'roles' => array(
-      'administrator' => 'administrator',
-    ),
-    'module' => 'field_permissions',
-  );
-
-  // Exported permission: 'view own field_is_reference_document'.
-  $permissions['view own field_is_reference_document'] = array(
-    'name' => 'view own field_is_reference_document',
-    'roles' => array(
-      'administrator' => 'administrator',
-    ),
-    'module' => 'field_permissions',
   );
 
   return $permissions;

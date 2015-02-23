@@ -398,7 +398,7 @@ function cluster_docs_field_default_field_bases() {
     'entity_types' => array(),
     'field_name' => 'field_is_reference_document',
     'field_permissions' => array(
-      'type' => 2,
+      'type' => 0,
     ),
     'foreign keys' => array(),
     'indexes' => array(
@@ -463,7 +463,7 @@ function cluster_docs_field_default_field_bases() {
     'entity_types' => array(),
     'field_name' => 'field_key_document',
     'field_permissions' => array(
-      'type' => 2,
+      'type' => 0,
     ),
     'foreign keys' => array(),
     'indexes' => array(

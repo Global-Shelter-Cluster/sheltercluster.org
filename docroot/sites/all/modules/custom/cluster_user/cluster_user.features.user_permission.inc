@@ -482,13 +482,6 @@ function cluster_user_user_default_permissions() {
     'module' => 'field_permissions',
   );
 
-  // Exported permission: 'create field_key_document'.
-  $permissions['create field_key_document'] = array(
-    'name' => 'create field_key_document',
-    'roles' => array(),
-    'module' => 'field_permissions',
-  );
-
   // Exported permission: 'create library content'.
   $permissions['create library content'] = array(
     'name' => 'create library content',
@@ -809,13 +802,6 @@ function cluster_user_user_default_permissions() {
     'module' => 'field_permissions',
   );
 
-  // Exported permission: 'edit field_key_document'.
-  $permissions['edit field_key_document'] = array(
-    'name' => 'edit field_key_document',
-    'roles' => array(),
-    'module' => 'field_permissions',
-  );
-
   // Exported permission: 'edit own arbitrary_library content'.
   $permissions['edit own arbitrary_library content'] = array(
     'name' => 'edit own arbitrary_library content',
@@ -855,13 +841,6 @@ function cluster_user_user_default_permissions() {
   // Exported permission: 'edit own field_featured'.
   $permissions['edit own field_featured'] = array(
     'name' => 'edit own field_featured',
-    'roles' => array(),
-    'module' => 'field_permissions',
-  );
-
-  // Exported permission: 'edit own field_key_document'.
-  $permissions['edit own field_key_document'] = array(
-    'name' => 'edit own field_key_document',
     'roles' => array(),
     'module' => 'field_permissions',
   );
@@ -1261,23 +1240,9 @@ function cluster_user_user_default_permissions() {
     'module' => 'field_permissions',
   );
 
-  // Exported permission: 'view field_key_document'.
-  $permissions['view field_key_document'] = array(
-    'name' => 'view field_key_document',
-    'roles' => array(),
-    'module' => 'field_permissions',
-  );
-
   // Exported permission: 'view own field_featured'.
   $permissions['view own field_featured'] = array(
     'name' => 'view own field_featured',
-    'roles' => array(),
-    'module' => 'field_permissions',
-  );
-
-  // Exported permission: 'view own field_key_document'.
-  $permissions['view own field_key_document'] = array(
-    'name' => 'view own field_key_document',
     'roles' => array(),
     'module' => 'field_permissions',
   );
