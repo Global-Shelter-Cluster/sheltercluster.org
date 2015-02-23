@@ -274,3 +274,53 @@ function shelter_links__locale_block(&$variables) {
 
   return $output;
 }
+
+/**
+ * Partial preprocessor.
+ */
+function shelter_partial__contact_members_preprocess(&$variables) {
+  $variables['contacts'] = FALSE;
+  foreach ($variables['nodes'] as $node) {
+    $variables['contacts'][$node->nid] = node_view($node);
+  }
+}
+
+/**
+ * Theme override.
+ */
+function shelter_field__field_role_or_title(&$variables) {
+  $output = '';
+
+  // Render the label, if it's not hidden.
+  if (!$variables['label_hidden']) {
+    $output .= '<div class="field-label"' . $variables['title_attributes'] . '>' . $variables['label'] . ':&nbsp;</div>';
+  }
+
+  // Render the items.
+  foreach ($variables['items'] as $delta => $item) {
+    $classes = ($delta % 2 ? 'odd' : 'even');
+    $output .= '<span class="job-title ' . $classes . '"' . $variables['item_attributes'][$delta] . '">' . drupal_render($item) . '</span>';
+  }
+
+  return $output;
+}
+
+/**
+ * Theme override.
+ */
+function shelter_field__field_phone_number(&$variables) {
+  $output = '';
+
+  // Render the label, if it's not hidden.
+  if (!$variables['label_hidden']) {
+    $output .= '<div class="field-label"' . $variables['title_attributes'] . '>' . $variables['label'] . ':&nbsp;</div>';
+  }
+  // Render the items.
+  foreach ($variables['items'] as $delta => $item) {
+    $value = drupal_render($item);
+    $classes = ($delta % 2 ? 'odd' : 'even');
+    $output .= '<a class="telephone ' . $classes . '"' . $variables['item_attributes'][$delta] . ' href="tel:+' . $value . '">' . $value . '</a>';
+  }
+
+  return $output;
+}

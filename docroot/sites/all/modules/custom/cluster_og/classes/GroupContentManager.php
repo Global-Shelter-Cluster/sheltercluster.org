@@ -148,11 +148,22 @@ class GroupContentManager {
   }
 
   /**
-   * Get users with the contact member role for the group.
+   * Get contact content for the group.
    *  @return 
    */
   public function getContactMembers() {
-    return $this->getUsersByRole('contact member', $this->node);
+    $query = new EntityFieldQuery();
+    $res = $query->entityCondition('entity_type', 'node')
+      ->entityCondition('bundle', 'contact')
+      ->fieldCondition('og_group_ref', 'target_id', $this->node->nid)
+      ->propertyCondition('status', NODE_PUBLISHED)
+      ->execute();
+
+    if (!isset($res['node'])) {
+      return FALSE;
+    }
+
+    return array_keys($res['node']);
   }
 
   /**

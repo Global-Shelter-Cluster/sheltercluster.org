@@ -448,6 +448,24 @@ function cluster_user_user_default_permissions() {
     'module' => 'user',
   );
 
+  // Exported permission: 'create arbitrary_library content'.
+  $permissions['create arbitrary_library content'] = array(
+    'name' => 'create arbitrary_library content',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'node',
+  );
+
+  // Exported permission: 'create contact content'.
+  $permissions['create contact content'] = array(
+    'name' => 'create contact content',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'node',
+  );
+
   // Exported permission: 'create event content'.
   $permissions['create event content'] = array(
     'name' => 'create event content',
@@ -507,6 +525,24 @@ function cluster_user_user_default_permissions() {
     'module' => 'shortcut',
   );
 
+  // Exported permission: 'delete any arbitrary_library content'.
+  $permissions['delete any arbitrary_library content'] = array(
+    'name' => 'delete any arbitrary_library content',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'node',
+  );
+
+  // Exported permission: 'delete any contact content'.
+  $permissions['delete any contact content'] = array(
+    'name' => 'delete any contact content',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'node',
+  );
+
   // Exported permission: 'delete any event content'.
   $permissions['delete any event content'] = array(
     'name' => 'delete any event content',
@@ -532,6 +568,24 @@ function cluster_user_user_default_permissions() {
       'administrator' => 'administrator',
     ),
     'module' => 'backup_migrate',
+  );
+
+  // Exported permission: 'delete own arbitrary_library content'.
+  $permissions['delete own arbitrary_library content'] = array(
+    'name' => 'delete own arbitrary_library content',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'node',
+  );
+
+  // Exported permission: 'delete own contact content'.
+  $permissions['delete own contact content'] = array(
+    'name' => 'delete own contact content',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'node',
   );
 
   // Exported permission: 'delete own event content'.
@@ -712,6 +766,24 @@ function cluster_user_user_default_permissions() {
     'module' => 'admin_menu',
   );
 
+  // Exported permission: 'edit any arbitrary_library content'.
+  $permissions['edit any arbitrary_library content'] = array(
+    'name' => 'edit any arbitrary_library content',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'node',
+  );
+
+  // Exported permission: 'edit any contact content'.
+  $permissions['edit any contact content'] = array(
+    'name' => 'edit any contact content',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'node',
+  );
+
   // Exported permission: 'edit any event content'.
   $permissions['edit any event content'] = array(
     'name' => 'edit any event content',
@@ -744,6 +816,15 @@ function cluster_user_user_default_permissions() {
     'module' => 'field_permissions',
   );
 
+  // Exported permission: 'edit own arbitrary_library content'.
+  $permissions['edit own arbitrary_library content'] = array(
+    'name' => 'edit own arbitrary_library content',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'node',
+  );
+
   // Exported permission: 'edit own comments'.
   $permissions['edit own comments'] = array(
     'name' => 'edit own comments',
@@ -751,6 +832,15 @@ function cluster_user_user_default_permissions() {
       'administrator' => 'administrator',
     ),
     'module' => 'comment',
+  );
+
+  // Exported permission: 'edit own contact content'.
+  $permissions['edit own contact content'] = array(
+    'name' => 'edit own contact content',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'node',
   );
 
   // Exported permission: 'edit own event content'.

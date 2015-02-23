@@ -530,3 +530,10 @@ function shelter_base_update_7054() {
 function shelter_base_update_7055() {
   features_revert_module('cluster_library');
 }
+
+/**
+ * Enable cluster_contact.
+ */
+function shelter_base_update_7056() {
+  module_enable(array('cluster_contact'));
+}

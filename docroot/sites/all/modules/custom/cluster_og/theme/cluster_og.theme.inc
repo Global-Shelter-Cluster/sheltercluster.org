@@ -6,7 +6,7 @@
  */
 
 /**
- * TRender the group contact members.
+ * Render the group contact members.
  * $vars['element']['#total']: the contact members total count.
  * $vars['element']['#children']: markup for all contact member accounts.
  * $vars['element'][UID]: each user account render array and markup.

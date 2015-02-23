@@ -286,11 +286,11 @@ class GroupFullDisplayProvider extends GroupDisplayProvider {
   /**
    * Get the contact members for the group.
    * @return
-   *  Render array of contact members or FALSE if none exist.
+   *  Themed list of contact members or FALSE if none exist.
    */
   public function getContactMembers() {
     if ($contact_members_ids = $this->manager->getContactMembers()) {
-      return $this->getList($contact_members_ids, 'contact_member', 'cluster_og_contact_member', 'user');
+      return partial('contact_members', array('nodes' => node_load_multiple($contact_members_ids))); 
     }
     return FALSE;
   }
