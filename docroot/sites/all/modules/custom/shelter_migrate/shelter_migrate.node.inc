@@ -26,7 +26,7 @@ function shelter_migrate_node_form($form, &$form_state) {
   $form['run'] = array(
     '#type' => 'submit',
     '#name' => 'run',
-    '#value' => t('Run document import for this group (up to 5 documents)'),
+    '#value' => t('Run document import for this group'),
   );
 
   return $form;
@@ -46,8 +46,8 @@ function shelter_migrate_node_form_submit($form, &$form_state) {
   $node = menu_get_object();
   _shelter_migrate_node_rss_url($node->nid, $url);
 
-  require_once 'includes/import_group_documents.inc';
-  drupal_set_message(_shelter_migrate_import_group_documents($node->nid, $url));
+  require_once 'includes/batch_group_documents.inc';
+  _shelter_migrate_batch_group_documents($node->nid);
 }
 
 /**
