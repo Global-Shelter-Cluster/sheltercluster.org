@@ -199,7 +199,7 @@ function cluster_docs_page($query, $show_facets = TRUE, $default_sort = NULL, $d
 
   if ($show_facets) {
     // This array defines which facets to show and in what order.
-    $facets_to_show = cluster_docs_taxonomies();
+    $facets_to_show = array_diff(cluster_docs_taxonomies(), $excluded_facets);
 
     foreach (facetapi_get_block_info(array('block')) as $delta => $info) {
       $block_view = module_invoke('facetapi', 'block_view', $delta);
