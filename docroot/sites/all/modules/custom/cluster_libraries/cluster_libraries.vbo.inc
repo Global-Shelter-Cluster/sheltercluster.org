@@ -21,8 +21,16 @@ function cluster_libraries_create_form($settings, &$form_state) {
 
   $form['title'] = array(
     '#type' => 'textfield',
-    '#title' => t('Enter a name for the new library'),
+    '#title' => t('Name'),
+    '#description' => t('Enter a name for the new library'),
     '#required' => TRUE,
+  );
+
+  $form['group'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Group'),
+    '#description' => t('Optional'),
+    '#autocomplete_path' => 'cluster_og/groups/autocomplete',
   );
 
   return $form;
@@ -37,6 +45,15 @@ function cluster_libraries_create_submit($form, &$form_state) {
   node_object_prepare($node);
   $node->uid = $user->uid;
   $node->status = NODE_NOT_PUBLISHED;
+
+  if ($group_nid = intval($form_state['values']['group'])) {
+    $group = node_load($group_nid);
+    if ($group && og_is_group('node', $group)) {
+      $node->og_group_ref = array(LANGUAGE_NONE => array(array('target_id' => $group_nid)));
+    }
+  }
+
+
   $node = node_submit($node);
   node_save($node);
 
