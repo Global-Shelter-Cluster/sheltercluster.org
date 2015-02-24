@@ -2,8 +2,7 @@
 
 require_once 'common.inc';
 
-function _shelter_migrate_import_group_documents($nid, $url, $return_data = FALSE) {
-//  set_time_limit(300);
+function _shelter_migrate_import_group_documents($nid, $url, $return_data = FALSE, $limit = 5) {
   $taxonomy_mapping = _shelter_migrate_prepare_taxonomy_mapping();
   $all_languages = language_list('name');
 
@@ -73,8 +72,8 @@ function _shelter_migrate_import_group_documents($nid, $url, $return_data = FALS
       }
     }
 
-    if ($successful_count == 5) {
-      // Can only import up to 5 documents on a single call.
+    if ($successful_count == $limit) {
+      // Can only import up to X documents on a single call.
       break;
     }
   }
