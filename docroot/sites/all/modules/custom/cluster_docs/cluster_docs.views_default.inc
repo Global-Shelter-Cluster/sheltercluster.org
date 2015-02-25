@@ -202,10 +202,12 @@ function cluster_docs_views_default_views() {
       'settings' => array(
         'show_all_tokens' => 1,
         'display_values' => array(
+          'document::field_key_document' => 'document::field_key_document',
           'document::og_group_ref' => 'document::og_group_ref',
           'document::field_assess_monitor_eval' => 'document::field_assess_monitor_eval',
           'document::field_coordination_management' => 'document::field_coordination_management',
           'document::field_cross_cutting_issues' => 'document::field_cross_cutting_issues',
+          'document::field_featured' => 'document::field_featured',
           'document::field_information_management' => 'document::field_information_management',
           'document::field_inter_cluster' => 'document::field_inter_cluster',
           'document::field_intervention_materials' => 'document::field_intervention_materials',
