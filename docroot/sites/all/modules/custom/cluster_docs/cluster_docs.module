@@ -504,6 +504,7 @@ function cluster_docs_prepare_row_data($nids) {
       }
       $doc['link_url'] = $url;
       $doc['link'] = l($doc['title'], $url, array('attributes' => array('target' => '_blank')));
+      $doc['edit_link'] = node_access('update', $node) ? l('edit', 'node/'.$node->nid.'/edit') : '';
 
       // Prepare the description.
       $desc = '';

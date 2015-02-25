@@ -68,11 +68,12 @@
         <?php elseif($doc['is_file']): ?>
           <?php //print _svg('icons/file', array('class'=>'file-icon', 'alt' => 'Icon for a file')); ?>
         <?php endif; ?>
+        <?php print $doc['edit_link']; ?>
       </td>
 
       <td class="information-title">
         <?php print $doc['link']; ?>
-        <?php //print $doc['description']; ?>
+        <?php print $doc['description']; ?>
       </td>
 
       <td class="information-file">
