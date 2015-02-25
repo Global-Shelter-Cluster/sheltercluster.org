@@ -34,3 +34,22 @@ function theme_cluster_events_teaser($vars) {
 
   return $output;
 }
+
+/**
+ * Render a list of upcoming events.
+ * $vars['element']['#total']: the number of events shown.
+ * $vars['element']['#children']: markup for all events shown.
+ * $vars['element'][NID]: each event render array and markup.
+ */
+function theme_cluster_events_upcoming($vars) {
+  $output = '<section id="shelter-calendar">';
+  $output .= '<div id="box-calendar">';
+  $output .= _svg('icons/pin', array('id' => 'calendar-pin-icon', 'alt' => t('An icon representing a calendar with a pin on it.')));
+  $output .= '<div id="date-calendar">' . t('Upcoming events') . '</div>';
+  $output .= '<div class="information-card">';
+  $output .= $vars['element']['#children'];
+  $output .= '</div>';
+  $output .= '</div>';
+  $output .= '</section>';
+  return $output;
+}

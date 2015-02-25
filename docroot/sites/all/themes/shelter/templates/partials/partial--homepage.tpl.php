@@ -22,4 +22,8 @@
 
 <div class="page-margin">
   <?php print partial('twitter_timeline', array('widget_id' => '569895346130534400')); ?>
+
+  <?php if($upcoming_events): ?>
+    <?php print render($upcoming_events); ?>
+  <?php endif; ?>
 </div>

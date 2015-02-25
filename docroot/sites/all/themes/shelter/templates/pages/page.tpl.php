@@ -68,7 +68,7 @@
   </header>
 
   <?php if ($is_front): ?>
-    <?php print partial('homepage', array('page' => $page, 'hot_responses' => $hot_responses)); ?>
+    <?php print partial('homepage', array('page' => $page, 'hot_responses' => $hot_responses, 'upcoming_events' => $upcoming_events)); ?>
 
   <?php elseif ($is_regions_and_countries): ?>
     <?php print partial('regions', array('page' => $page)); ?>
