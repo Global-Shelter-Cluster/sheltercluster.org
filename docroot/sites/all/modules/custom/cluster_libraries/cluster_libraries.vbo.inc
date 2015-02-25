@@ -15,8 +15,6 @@ function cluster_libraries_action_info() {
 }
 
 function cluster_libraries_create_form($settings, &$form_state) {
-  dpm(func_get_args(), 'formmm');
-
   $form = array();
 
   $form['title'] = array(
