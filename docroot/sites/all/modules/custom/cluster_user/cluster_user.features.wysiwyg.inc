@@ -65,6 +65,7 @@ function cluster_user_wysiwyg_default_profiles() {
           'JustifyCenter' => 1,
           'BulletedList' => 1,
           'NumberedList' => 1,
+          'Undo' => 1,
           'Link' => 1,
           'Anchor' => 1,
           'Image' => 1,

@@ -545,3 +545,10 @@ function shelter_base_update_7057() {
   features_revert_module('cluster_docs');
   features_revert_module('cluster_user');
 }
+
+/**
+ * Revert user features (wysiwyg profile).
+ */
+function shelter_base_update_7058() {
+  features_revert_module('cluster_user');
+}
