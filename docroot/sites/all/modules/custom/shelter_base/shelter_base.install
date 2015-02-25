@@ -557,5 +557,14 @@ function shelter_base_update_7058() {
  * Revert docs feature (VBO for mass assignement of reference).
  */
 function shelter_base_update_7059() {
-  features_revert_module('cluster_user');
+  features_revert_module('cluster_docs');
+}
+
+/**
+ * Revert docs f).
+ */
+function shelter_base_update_7060() {
+  features_revert_module('cluster_docs');
+  features_revert_module('cluster_taxonomy');
+  features_revert_module('cluster_libraries');
 }
