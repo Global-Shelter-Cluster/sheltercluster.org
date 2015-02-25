@@ -7,7 +7,7 @@
 
 <section id="active-responses" class="clearfix">
   <h1><?php print t('Hot Responses'); ?></h1>
-  <ul id="major-responses">
+  <ul class="hot-responses">
     <?php foreach($responses as $id => $response): ?>
       <li>
         <?php print $response['link']; ?>

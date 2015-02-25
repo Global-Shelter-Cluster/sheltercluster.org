@@ -1,17 +1,23 @@
-.tableauPlaceholder {
-  margin: 0 auto;
-}
+.front {
+  .page-margin {
+    margin-bottom: 20px;
+  }
+  .video {
+    width: 100%;
+    display: inline-block;
+    vertical-align: top;
 
-#tableau-mobile { display: block !important; }
-#tableau-tablet { display: none !important; }
-#tableau-desktop { display: none !important; }
+    @include breakpoint(800px) {
+      width: 60%;
+    }
+  }
+  #active-responses{
+    width: 100%;
+    display: inline-block;
+    vertical-align: center;
 
-@include breakpoint (768px) {
-  #tableau-mobile { display: none !important; }
-  #tableau-tablet { display: block !important; }
-}
-@include breakpoint (1024px) {
-  #tableau-mobile { display: none !important; }
-  #tableau-tablet { display: none !important; }
-  #tableau-desktop { display: block !important; }
+    @include breakpoint(800px) {
+      width: 39%;
+    }
+  }
 }

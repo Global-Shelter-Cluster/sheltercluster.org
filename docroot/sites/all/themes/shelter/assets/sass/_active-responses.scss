@@ -13,13 +13,13 @@
     @include rem(margin-bottom, 1rem);
   }
 
-  #major-responses {
+  .hot-responses {
     width: 100%;
     text-align: center;
 
     li {
       display: inline-block;
-      min-width: 65%;
+      min-width: 90%;
     }
     a {
       display: block;
@@ -29,15 +29,15 @@
       color: $white;
       font-weight: bold;
       width: 80%;
-      border: 1px solid $shelter-red;
-      background-color: $shelter-red;
+      border: 1px solid $accent-dark-blue;
+      background-color: $accent-dark-blue;
       @include transition(all 0.3s ease);
       @include rem(padding, 0.5rem 0.5rem);
       @include rem(margin, 0 0 0.75rem 0);
       @include box-shadow(rgba(0,0,0,0.09) 2px 2px 1px);
       &:hover,
       &:active {
-        background-color: lighten($shelter-red, 10%);
+        background-color: lighten($accent-dark-blue, 10%);
         color: #fff;
       }
       @include breakpoint(800px) {
