@@ -696,7 +696,7 @@ function cluster_docs_field_default_field_instances() {
     'bundle' => 'document',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'Select meeting management tag.',
+    'description' => '',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -725,7 +725,7 @@ function cluster_docs_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 41,
+      'weight' => 45,
     ),
   );
 
@@ -806,7 +806,7 @@ function cluster_docs_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 46,
+      'weight' => 17,
     ),
   );
 
@@ -1071,7 +1071,7 @@ function cluster_docs_field_default_field_instances() {
         'apply_chosen' => '',
       ),
       'type' => 'options_buttons',
-      'weight' => 45,
+      'weight' => 44,
     ),
   );
 
@@ -1282,7 +1282,6 @@ function cluster_docs_field_default_field_instances() {
   t('Preview');
   t('Report / Meeting date');
   t('Response Phase');
-  t('Select meeting management tag.');
   t('Settlement Type');
   t('Source');
   t('Technical Support and Design');

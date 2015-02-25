@@ -33,6 +33,7 @@ function cluster_docs_field_group_info() {
       7 => 'field_response_phase',
       8 => 'field_settlement_type',
       9 => 'field_toolkit',
+      10 => 'field_meeting_management',
     ),
     'format_type' => 'fieldset',
     'format_settings' => array(

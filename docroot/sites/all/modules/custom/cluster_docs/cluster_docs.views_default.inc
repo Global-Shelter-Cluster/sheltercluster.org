@@ -217,6 +217,7 @@ function cluster_docs_views_default_views() {
           'document::field_technical_support_design' => 'document::field_technical_support_design',
           'document::field_toolkit' => 'document::field_toolkit',
           'document::field_document_type' => 'document::field_document_type',
+          'document::field_meeting_management' => 'document::field_meeting_management',
         ),
       ),
     ),

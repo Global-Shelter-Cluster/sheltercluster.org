@@ -110,6 +110,7 @@ function cluster_docs_taxonomies() {
     'field_non_food_items',
     'field_issues',
     'field_toolkit',
+    'field_meeting_management',
   );
 }
 

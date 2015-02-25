@@ -590,6 +590,44 @@ function cluster_libraries_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-library-field_meeting_management'
+  $field_instances['node-library-field_meeting_management'] = array(
+    'bundle' => 'library',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'taxonomy',
+        'settings' => array(),
+        'type' => 'taxonomy_term_reference_link',
+        'weight' => 17,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_meeting_management',
+    'label' => 'Meeting Management',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_buttons',
+      'weight' => 45,
+    ),
+  );
+
   // Exported field_instance: 'node-library-field_non_food_items'
   $field_instances['node-library-field_non_food_items'] = array(
     'bundle' => 'library',
@@ -781,7 +819,7 @@ function cluster_libraries_field_default_field_instances() {
         'apply_chosen' => '',
       ),
       'type' => 'options_buttons',
-      'weight' => 45,
+      'weight' => 44,
     ),
   );
 
@@ -903,6 +941,7 @@ function cluster_libraries_field_default_field_instances() {
   t('Intervention Materials');
   t('Intervention Programming');
   t('Issues');
+  t('Meeting Management');
   t('Non Food Items');
   t('Only first 100 characters of the description will be displayed in the library lists.');
   t('Response Phase');
