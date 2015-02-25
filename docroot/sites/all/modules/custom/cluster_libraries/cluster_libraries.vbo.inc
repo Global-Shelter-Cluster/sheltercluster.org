@@ -9,7 +9,7 @@ function cluster_libraries_action_info() {
       'type' => 'node',
       'label' => t('Create an arbitrary library'),
       'configurable' => TRUE,
-      'permissions' => array('administer content'),
+      'permissions' => array('administer nodes'),
     ),
   );
 }
