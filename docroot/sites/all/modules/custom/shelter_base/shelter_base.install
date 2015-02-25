@@ -561,10 +561,10 @@ function shelter_base_update_7059() {
 }
 
 /**
- * Revert docs f).
+ * Revert just libraries - update seems ot be chocking on taxonomy.
  */
 function shelter_base_update_7060() {
-  features_revert_module('cluster_docs');
-  features_revert_module('cluster_taxonomy');
+  //features_revert_module('cluster_docs');
+  //features_revert_module('cluster_taxonomy');
   features_revert_module('cluster_libraries');
 }
