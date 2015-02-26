@@ -2310,10 +2310,13 @@ header #search-block-form {
   right: 45px;
 }
 .front #site-branding #shelter-cluster polygon {
-  fill: #fff;
+  fill: white;
 }
 .front #site-branding #shelter-cluster path {
-  fill: #fff;
+  fill: white;
+}
+.front #site-branding #shelter-cluster .second-color {
+  fill: #cfd0d2;
 }
 .front .top-section {
   padding-top: 30px;

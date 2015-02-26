@@ -23,10 +23,13 @@
     }
     #shelter-cluster {
       polygon {
-        fill: #fff;
+        fill: $white;
       }
       path {
-        fill: #fff;
+        fill: $white;
+      }
+      .second-color {
+        fill: #cfd0d2;
       }
     }
   }
