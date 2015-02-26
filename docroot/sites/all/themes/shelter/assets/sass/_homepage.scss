@@ -1,17 +1,106 @@
-.tableauPlaceholder {
-  margin: 0 auto;
-}
+.front {
+  #site-options-bar {
+    margin-bottom: 0;
+  }
+  #nav-shelter .nav-items .nav-item a {
+    background: darken($shelter-grey, 30%);
+  }
+  #site-branding {
+    height: 160px;
+    margin: 0;
 
-#tableau-mobile { display: block !important; }
-#tableau-tablet { display: none !important; }
-#tableau-desktop { display: none !important; }
+    .page-margin {
+      background: url(../images/homepage-header.jpg) no-repeat top center;
+      height: 160px;
+    }
+    #logo-shelter-cluster .svg{
+      top: 30px;
+      left: 45px;
+    }
+    .search {
+      bottom: 45px;
+      right: 45px;
+    }
+    #shelter-cluster {
+      polygon {
+        fill: #fff;
+      }
+      path {
+        fill: #fff;
+      }
+    }
+  }
+  .top-section {
+    padding-top: 30px;
+    margin-bottom: 30px;
+  }
+  .main-content,
+  .video {
+    width: 100%;
+    display: inline-block;
+    vertical-align: top;
 
-@include breakpoint (768px) {
-  #tableau-mobile { display: none !important; }
-  #tableau-tablet { display: block !important; }
-}
-@include breakpoint (1024px) {
-  #tableau-mobile { display: none !important; }
-  #tableau-tablet { display: none !important; }
-  #tableau-desktop { display: block !important; }
+    h2 {
+      font-weight: normal;
+    }
+
+    @include breakpoint(900px) {
+      width: 53%;
+    }
+    @include breakpoint(1100px) {
+      width: 60%;
+    }
+  }
+  .sidebar,
+  #active-responses {
+    width: 100%;
+    display: inline-block;
+    vertical-align: top;
+
+    @include breakpoint(900px) {
+      width: 46%;
+    }
+    @include breakpoint(1100px) {
+      width: 39%;
+    }
+  }
+  #shelter-calendar {
+    #box-calendar {
+      width: 97%;
+      margin: 0 auto;
+      margin-left: 3%;
+    }
+  }
+  #twitter-timeline {
+    margin: 0 auto;
+    width: 100%;
+    margin-bottom: 60px;
+    display: inline-block;
+    text-align: center;
+
+    @include breakpoint(900px) {
+      margin-left: 3%;
+      width: 97%;
+    }
+  }
+  .posters {
+    list-style: none;
+    padding: 0;
+    @include rem(margin, 0 0 2rem 0);
+
+    .poster {
+      width: 100%;
+      float: right;
+      @include rem(margin, 0 1rem 1rem 0);
+
+      img {
+        width: 100%;
+        height: auto;
+        float: left;
+      }
+      @include breakpoint(500px) {
+        width: 46%;
+      }
+    }
+  }
 }

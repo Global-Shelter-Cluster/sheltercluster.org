@@ -79,6 +79,14 @@
     .event {
       font-weight: bold;
     }
+    a {
+      display: block;
+      text-decoration: none;
+      border: 1px solid darken($shelter-red, 1%);
+      background: lighten($shelter-red, 2%);
+      padding: 5px 0;
+      margin-bottom: 5px;
+    }
   }
 
 }
