@@ -170,7 +170,7 @@ function cluster_contact_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'field_name' => 'field_organisation_name',
-    'label' => 'Organisation name',
+    'label' => 'Organization name',
     'required' => 0,
     'settings' => array(
       'entity_translation_sync' => FALSE,
@@ -387,7 +387,7 @@ function cluster_contact_field_default_field_instances() {
   t('First and Last Name');
   t('Groups audience');
   t('Optional biography field.  Use only if needed.');
-  t('Organisation name');
+  t('Organization name');
   t('Phone number');
   t('Public email address for the contact.  Add as many as required.');
   t('Public phone number for the contact.  Add as many as required.');
