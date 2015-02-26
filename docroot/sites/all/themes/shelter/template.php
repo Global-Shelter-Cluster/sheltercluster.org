@@ -72,7 +72,11 @@ function shelter_preprocess_page(&$variables) {
  * Implements partial__{name}_preprocess().
  */
 function partial__homepage_preprocess(&$variables) {
-  drupal_add_js('https://public.tableau.com/javascripts/api/viz_v1.js', 'external');
+  // Not using Tableau for now
+  // drupal_add_js('https://public.tableau.com/javascripts/api/viz_v1.js', 'external');
+
+  $homepage_menu = menu_tree('menu-homepage');
+  $variables['homepage_menu'] = render($homepage_menu);
 }
 
 /**

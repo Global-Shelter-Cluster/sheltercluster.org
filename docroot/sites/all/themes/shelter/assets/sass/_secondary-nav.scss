@@ -11,6 +11,10 @@
   ul {
     @include reset-list;
   }
+  ul li.leaf {
+    list-style: none;
+    padding: 0;
+  }
   a {
     text-decoration: none;
     display: block;
