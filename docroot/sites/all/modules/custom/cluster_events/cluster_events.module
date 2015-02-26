@@ -96,6 +96,10 @@ function cluster_events_theme() {
       'file' => 'theme/cluster_events.theme.inc',
       'render element' => 'element',
     ),
+    'cluster_events_upcoming' => array(
+      'file' => 'theme/cluster_events.theme.inc',
+      'render element' => 'element',
+    ),
   );
 }
 
@@ -113,5 +117,77 @@ function cluster_events_node_view_alter(&$build) {
       break;
     default:
       // Do nothing.
+  }
+}
+
+function cluster_events_upcoming() {
+  $query = new EntityFieldQuery();
+  $results = $query->entityCondition('entity_type', 'node')
+    ->entityCondition('bundle', 'event')
+    ->fieldCondition('field_event_date', 'value', date('Y-m-d'), '>')
+    ->propertyCondition('status', NODE_PUBLISHED)
+    ->fieldOrderBy('field_event_date', 'value')
+    ->range(0, 5)
+    ->execute();
+
+  if (!isset($results['node'])) {
+    return FALSE;
+  }
+
+  $nids = array_keys($results['node']);
+
+  $entities = entity_load('node', $nids);
+  $ret = array(
+    '#theme_wrappers' => array('cluster_events_upcoming'),
+    '#total' => count($nids),
+  );
+  foreach ($entities as $entity) {
+    $ret[$entity->nid] = cluster_events_format_upcoming($entity->nid, FALSE);
+  }
+
+  return $ret;
+}
+
+function cluster_events_format_upcoming($nid, $single_display = TRUE) {
+  $node = node_load($nid);
+  if (!$node || $node->type != 'event') {
+    return FALSE;
+  }
+
+  $wrapper = entity_metadata_wrapper('node', $node);
+
+  $value = $wrapper->field_event_date->value();
+  $from = strtotime($value['value']);
+  $to   = strtotime($value['value2']);
+  $format      = 'M. j' . '\<\s\u\p\>' . 'S' . '\<\/\s\u\p\>' . ' Y';
+  $format_from = 'M. j' . '\<\s\u\p\>' . 'S' . '\<\/\s\u\p\>';
+  $format_to   = 'M. j' . '\<\s\u\p\>' . 'S' . '\<\/\s\u\p\>' . ' Y';
+  if ($to > $from) {
+    $date = date($format_from, $from);
+    $date .= ' to ' . date($format_to, $to);
+  }
+  else {
+    $date = date($format, $from);
+  }
+
+  if ($single_display) {
+    return array(
+      '#theme' => 'cluster_og_upcoming_event',
+      '#all_events_link' => 'node/' . $node->nid . '/events',
+      '#event_title' => $wrapper->title->value(),
+      '#event_link' => 'node/' . $node->nid,
+      '#event_date' => $date,
+    );
+  }
+  else {
+    return array(
+      '#theme' => 'link',
+      '#text' => $date . ': ' . t($wrapper->title->value()),
+      '#path' => 'node/' . $node->nid,
+      '#options' => array(
+        'attributes' => array(),
+        'html' => TRUE,
+      ),
+    );
   }
 }
