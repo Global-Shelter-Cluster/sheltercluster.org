@@ -45,10 +45,13 @@ function cluster_nav_menu() {
  */
 function _cluster_nav_paged_teaser_list($bundle) {
   $query = new EntityFieldQuery();
-  $results = $query->entityCondition('entity_type', 'node')
+  $query->entityCondition('entity_type', 'node')
     ->entityCondition('bundle', $bundle)
-    ->propertyCondition('status', NODE_PUBLISHED)
-    ->pager(50)
+    ->propertyCondition('status', NODE_PUBLISHED);
+  if ($bundle == 'response') {
+    $query->fieldCondition('field_response_status', 'value', 'active');
+  }
+  $results = $query->pager(50)
     ->execute();
   if (! isset($results['node'])) {
     $content = array(
