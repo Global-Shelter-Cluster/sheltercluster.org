@@ -75,5 +75,6 @@ features[variable][] = node_preview_arbitrary_library
 features[variable][] = node_preview_library
 features[variable][] = node_submitted_arbitrary_library
 features[variable][] = node_submitted_library
+features[variable][] = pathauto_node_arbitrary_library_pattern
 features[variable][] = pathauto_node_library_pattern
-mtime = 1424707474
+mtime = 1424964906
