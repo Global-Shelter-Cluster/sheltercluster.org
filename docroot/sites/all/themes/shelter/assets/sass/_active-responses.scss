@@ -1,11 +1,17 @@
 /* _active_responses.scss */
 
 #active-responses {
-  @include rem(margin, 1.5rem 0 1.5rem 0);
+  @include rem(margin, 1rem 0 1.5rem 0);
   text-align: center;
 
+  @include breakpoint(900px) {
+    @include rem(margin, 0 0 1.5rem 0);
+  }
+
   h1 {
-    margin-top: 0;
+    @include rem(font-size, 1.8rem);
+    @include rem(margin, 0 0 0.5rem 0);
+    font-weight: normal;
   }
 
   ul {
@@ -19,7 +25,7 @@
 
     li {
       display: inline-block;
-      min-width: 90%;
+      min-width: 95%;
     }
     a {
       display: block;

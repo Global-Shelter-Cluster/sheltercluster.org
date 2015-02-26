@@ -2167,12 +2167,22 @@ header #search-block-form {
 
 /* _active_responses.scss */
 #active-responses {
-  margin: 24px 0 24px 0;
-  margin: 1.5rem 0 1.5rem 0;
+  margin: 16px 0 24px 0;
+  margin: 1rem 0 1.5rem 0;
   text-align: center;
 }
+@media (min-width: 900px) {
+  #active-responses {
+    margin: 0 0 24px 0;
+    margin: 0 0 1.5rem 0;
+  }
+}
 #active-responses h1 {
-  margin-top: 0;
+  font-size: 28.8px;
+  font-size: 1.8rem;
+  margin: 0 0 8px 0;
+  margin: 0 0 0.5rem 0;
+  font-weight: normal;
 }
 #active-responses ul {
   padding: 0;
@@ -2188,7 +2198,7 @@ header #search-block-form {
 }
 #active-responses .hot-responses li {
   display: inline-block;
-  min-width: 90%;
+  min-width: 95%;
 }
 #active-responses .hot-responses a {
   display: block;
@@ -2255,15 +2265,21 @@ header #search-block-form {
   margin-right: 0.25rem;
 }
 
-.front .page-margin {
-  margin-bottom: 20px;
+.front .top-section {
+  padding-top: 30px;
+  margin-bottom: 30px;
 }
 .front .video {
   width: 100%;
   display: inline-block;
   vertical-align: top;
 }
-@media (min-width: 800px) {
+@media (min-width: 900px) {
+  .front .video {
+    width: 53%;
+  }
+}
+@media (min-width: 1100px) {
   .front .video {
     width: 60%;
   }
@@ -2273,7 +2289,12 @@ header #search-block-form {
   display: inline-block;
   vertical-align: center;
 }
-@media (min-width: 800px) {
+@media (min-width: 900px) {
+  .front #active-responses {
+    width: 46%;
+  }
+}
+@media (min-width: 1100px) {
   .front #active-responses {
     width: 39%;
   }

@@ -5,7 +5,7 @@
  */
 ?>
 
-<div class="page-margin">
+<div class="page-margin top-section">
   <div class="video">
     <div class="video-container">
       <iframe src="http://www.youtube.com/embed/nzGuN0Cpzks?controls=0&loop=1" frameborder="0" width="460" height="315"></iframe>

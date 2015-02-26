@@ -1,13 +1,17 @@
 .front {
-  .page-margin {
-    margin-bottom: 20px;
+  .top-section {
+    padding-top: 30px;
+    margin-bottom: 30px;
   }
   .video {
     width: 100%;
     display: inline-block;
     vertical-align: top;
 
-    @include breakpoint(800px) {
+    @include breakpoint(900px) {
+      width: 53%;
+    }
+    @include breakpoint(1100px) {
       width: 60%;
     }
   }
@@ -16,7 +20,10 @@
     display: inline-block;
     vertical-align: center;
 
-    @include breakpoint(800px) {
+    @include breakpoint(900px) {
+      width: 46%;
+    }
+    @include breakpoint(1100px) {
       width: 39%;
     }
   }
