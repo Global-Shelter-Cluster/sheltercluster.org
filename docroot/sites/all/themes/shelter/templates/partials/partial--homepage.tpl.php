@@ -8,7 +8,7 @@
 <div class="page-margin top-section">
   <div class="video">
     <div class="video-container">
-      <iframe src="http://www.youtube.com/embed/nzGuN0Cpzks?controls=0&loop=1" frameborder="0" width="460" height="315"></iframe>
+      <iframe src="http://www.youtube.com/embed/nzGuN0Cpzks?controls=0&loop=1&autoplay=1" frameborder="0" width="460" height="315"></iframe>
     </div>
   </div>
   <?php if($hot_responses): ?>
@@ -17,7 +17,9 @@
 </div>
 
 <div class="page-margin">
-  <?php print render($page['content']); ?>
+  <div class="main-content">
+    <?php print render($page['content']); ?>
+  </div>
 </div>
 
 <div class="page-margin">
