@@ -92,6 +92,7 @@ header {
   position: relative;
   @include rem(padding, 0 0 3.75rem 0);
   @include rem(font-size, 0.85rem);
+
   @include breakpoint(800px) {
     @include rem(padding, 1rem 0 2rem 0);
   }

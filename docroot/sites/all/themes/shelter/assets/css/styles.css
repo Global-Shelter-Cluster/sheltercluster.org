@@ -237,6 +237,23 @@ th {
   margin: 0 0 8px 0;
   margin: 0 0 0.5rem 0;
 }
+@media (max-width: 400px) {
+  .wysiwyg {
+    /* Hide table headers (but not display: none;, for accessibility) */
+  }
+  .wysiwyg table, .wysiwyg thead, .wysiwyg tbody, .wysiwyg th, .wysiwyg td, .wysiwyg tr {
+    display: block;
+  }
+  .wysiwyg thead tr {
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+  }
+  .wysiwyg td {
+    border: none;
+    position: relative;
+  }
+}
 
 /* _reusable.scss */
 .button, .form-submit, .page-search #search-form .form-submit, #user-login-container #user-login-form .form-submit, #join-group #button-join-group a, .page-group .confirmation #edit-cancel {
@@ -920,6 +937,7 @@ header .search {
 .document-table td {
   padding: 8px 0;
   padding: 0.5rem 0;
+  border: none !important;
 }
 .document-table thead {
   background: #7f1416;
@@ -948,8 +966,15 @@ header .search {
   background: #f7f8f9;
 }
 .document-table .information-title {
-  padding: 0 8px 0 8px;
-  padding: 0 0.5rem 0 0.5rem;
+  padding: 7.2px 8px;
+  padding: 0.45rem 0.5rem;
+}
+.document-table .information-title p {
+  margin: 4px 0 0 0;
+  text-transform: uppercase;
+  font-size: 12px;
+  font-size: 0.75rem;
+  color: #575757;
 }
 .document-table .information-file {
   width: 90px;
@@ -1493,6 +1518,7 @@ header #search-block-form {
   padding-top: 30px;
   height: 0;
   overflow: hidden;
+  background: black;
 }
 
 .video-container iframe,
@@ -2290,6 +2316,22 @@ header #search-block-form {
 .front #site-options-bar {
   margin-bottom: 0;
 }
+.front #user-profile-container {
+  position: absolute;
+  right: 5%;
+  top: 85px;
+  color: white;
+  padding: 0;
+}
+.front #user-profile-container a {
+  color: white;
+}
+@media (min-width: 800px) {
+  .front #user-profile-container {
+    right: 45px;
+    top: 40px;
+  }
+}
 .front #nav-shelter .nav-items .nav-item a {
   background: #0a0a0a;
 }
@@ -2298,16 +2340,34 @@ header #search-block-form {
   margin: 0;
 }
 .front #site-branding .page-margin {
-  background: url(../images/homepage-header.jpg) no-repeat top center;
+  background: url(../images/homepage-header.jpg) no-repeat 0% top;
   height: 160px;
 }
+@media (min-width: 800px) {
+  .front #site-branding .page-margin {
+    background-position: top center;
+  }
+}
 .front #site-branding #logo-shelter-cluster .svg {
-  top: 30px;
-  left: 45px;
+  top: -5px;
+  left: 5%;
+  max-width: 92%;
+}
+@media (min-width: 800px) {
+  .front #site-branding #logo-shelter-cluster .svg {
+    top: 20px;
+    left: 35px;
+  }
 }
 .front #site-branding .search {
-  bottom: 45px;
-  right: 45px;
+  bottom: 0px;
+  right: 5%;
+}
+@media (min-width: 800px) {
+  .front #site-branding .search {
+    bottom: 45px;
+    right: 45px;
+  }
 }
 .front #site-branding #shelter-cluster polygon {
   fill: white;
@@ -2389,8 +2449,8 @@ header #search-block-form {
 .front .posters .poster {
   width: 100%;
   float: right;
-  margin: 0 16px 16px 0;
-  margin: 0 1rem 1rem 0;
+  margin: 0 0 16px 0;
+  margin: 0 0 1rem 0;
 }
 .front .posters .poster img {
   width: 100%;
@@ -2399,6 +2459,8 @@ header #search-block-form {
 }
 @media (min-width: 500px) {
   .front .posters .poster {
+    margin: 0 16px 16px 0;
+    margin: 0 1rem 1rem 0;
     width: 46%;
   }
 }
@@ -2496,7 +2558,7 @@ footer .inside-footer > section {
   padding: 16px 0 16px 25px;
   padding: 1rem 0 1rem 1.5625rem;
 }
-@media (min-width: 700px) {
+@media (min-width: 900px) {
   footer .inside-footer > section {
     display: table-cell;
     width: auto;
@@ -2540,6 +2602,9 @@ footer .see-all:hover, footer .see-all:active {
 footer .see-all:hover:before, footer .see-all:active:before {
   border-style: none;
 }
+footer .general-information {
+  padding-top: 30px;
+}
 footer ul {
   padding: 0;
   margin: 0;
@@ -2579,11 +2644,26 @@ footer #regions-list {
   background-color: #c4cfd5;
   padding: 16px 16px 0 25px;
   padding: 1rem 1rem 0 1.5625rem;
+  width: 100%;
+}
+@media (min-width: 900px) {
+  footer #regions-list {
+    width: 71%;
+  }
 }
 footer #regions-list > .menu > li {
   list-style: none;
   margin: 0 0 20px 0;
   margin: 0 0 1.25rem 0;
+  display: block;
+  width: 100%;
+}
+@media (min-width: 600px) {
+  footer #regions-list > .menu > li {
+    display: inline-block;
+    width: 49%;
+    vertical-align: top;
+  }
 }
 footer #regions-list > .menu > li > .menu > li > .menu li.expanded, footer #regions-list > .menu > li > .menu > li > .menu li.collapsed, footer #regions-list > .menu > li > .menu > li > .menu li.leaf {
   margin: 0;

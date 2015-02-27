@@ -2,6 +2,21 @@
   #site-options-bar {
     margin-bottom: 0;
   }
+  #user-profile-container {
+    position: absolute;
+    right: 5%;
+    top: 85px;
+    color: $white;
+    padding: 0;
+
+    a {
+      color: $white;
+    }
+    @include breakpoint(800px) {
+      right: 45px;
+      top: 40px;
+    }
+  }
   #nav-shelter .nav-items .nav-item a {
     background: darken($shelter-grey, 30%);
   }
@@ -10,16 +25,31 @@
     margin: 0;
 
     .page-margin {
-      background: url(../images/homepage-header.jpg) no-repeat top center;
+      background: url(../images/homepage-header.jpg) no-repeat 0% top;
       height: 160px;
+
+      @include breakpoint(800px) {
+        background-position: top center;
+      }
     }
     #logo-shelter-cluster .svg{
-      top: 30px;
-      left: 45px;
+      top: -5px;
+      left: 5%;
+      max-width: 92%;
+
+      @include breakpoint(800px) {
+        top: 20px;
+        left: 35px;
+      }
     }
     .search {
-      bottom: 45px;
-      right: 45px;
+      bottom: 0px;
+      right: 5%;
+
+      @include breakpoint(800px) {
+        bottom: 45px;
+        right: 45px;
+      }
     }
     #shelter-cluster {
       polygon {
@@ -94,7 +124,7 @@
     .poster {
       width: 100%;
       float: right;
-      @include rem(margin, 0 1rem 1rem 0);
+      @include rem(margin, 0 0 1rem 0);
 
       img {
         width: 100%;
@@ -102,6 +132,7 @@
         float: left;
       }
       @include breakpoint(500px) {
+        @include rem(margin, 0 1rem 1rem 0);
         width: 46%;
       }
     }

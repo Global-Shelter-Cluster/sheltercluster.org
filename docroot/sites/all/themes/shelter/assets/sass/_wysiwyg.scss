@@ -8,4 +8,23 @@
       @include rem(margin, 0 0 0.5rem 0);
     }
   }
+
+  @media (max-width: 400px) {
+    table, thead, tbody, th, td, tr {
+      display: block;
+    }
+
+    /* Hide table headers (but not display: none;, for accessibility) */
+    thead tr {
+      position: absolute;
+      top: -9999px;
+      left: -9999px;
+    }
+
+    td {
+      border: none;
+      position: relative;
+
+    }
+  }
 }
