@@ -14,7 +14,7 @@
     }
     @include breakpoint(800px) {
       right: 45px;
-      top: 40px;
+      top: 48px;
     }
   }
   #nav-shelter .nav-items .nav-item a {
@@ -38,7 +38,7 @@
       max-width: 92%;
 
       @include breakpoint(800px) {
-        top: 20px;
+        top: 28px;
         left: 35px;
       }
     }
@@ -47,7 +47,7 @@
       right: 5%;
 
       @include breakpoint(800px) {
-        bottom: 45px;
+        bottom: 38px;
         right: 45px;
       }
     }

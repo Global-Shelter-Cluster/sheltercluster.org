@@ -2329,7 +2329,7 @@ header #search-block-form {
 @media (min-width: 800px) {
   .front #user-profile-container {
     right: 45px;
-    top: 40px;
+    top: 48px;
   }
 }
 .front #nav-shelter .nav-items .nav-item a {
@@ -2355,7 +2355,7 @@ header #search-block-form {
 }
 @media (min-width: 800px) {
   .front #site-branding #logo-shelter-cluster .svg {
-    top: 20px;
+    top: 28px;
     left: 35px;
   }
 }
@@ -2365,7 +2365,7 @@ header #search-block-form {
 }
 @media (min-width: 800px) {
   .front #site-branding .search {
-    bottom: 45px;
+    bottom: 38px;
     right: 45px;
   }
 }
