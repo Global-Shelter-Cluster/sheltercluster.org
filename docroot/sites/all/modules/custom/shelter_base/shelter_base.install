@@ -582,3 +582,11 @@ function shelter_base_update_7061() {
 function shelter_base_update_7062() {
   features_revert_module('cluster_docs');
 }
+
+/**
+ * Revert docs feature.
+ */
+function shelter_base_update_7063() {
+  features_revert_module('cluster_docs');
+  features_revert_module('cluster_libraries');
+}
