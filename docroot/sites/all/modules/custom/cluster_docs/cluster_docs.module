@@ -24,12 +24,6 @@ function cluster_docs_menu() {
     'title arguments' => array(1),
     'type' => MENU_CALLBACK,
   );
-  $items['references'] = array(
-    'title' => 'References',
-    'menu_name' => 'main-menu',
-    'page callback' => 'cluster_docs_reference',
-    'access callback' => TRUE,
-  );
   return $items;
 }
 
@@ -282,42 +276,6 @@ function cluster_docs_page($query, $show_facets = TRUE, $default_sort = NULL, $d
       'reset_link' => $reset_link_bottom,
     );
   };
-
-  return $ret;
-}
-
-/**
- * Page callback, shows all reference documents using Search API.
- * @return Render array
- */
-function cluster_docs_reference() {
-  global $language;
-  $query = search_api_query('default_node_index', array(
-    'languages' => array($language->language),
-  ));
-
-  $filter = $query->createFilter();
-  $filter->condition('field_is_reference_document', TRUE);
-  $filter->condition('type', 'document');
-  $query->filter($filter);
-
-  $offset = pager_find_page() * CLUSTER_DOCS_PER_PAGE;
-  $query->range($offset, CLUSTER_DOCS_PER_PAGE);
-
-  $results = $query->execute();
-
-  pager_default_initialize($results['result count'], CLUSTER_DOCS_PER_PAGE);
-
-  $nids = array_keys($results['results']);
-
-  $ret = array(
-    array(
-      '#theme' => 'cluster_docs_cards_list',
-      '#heading' => t('Reference documents'),
-      '#docs' => cluster_docs_prepare_card_data($nids),
-    ),
-    'pager' => array('#theme' => 'pager'),
-  );
 
   return $ret;
 }
