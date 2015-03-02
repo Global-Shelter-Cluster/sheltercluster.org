@@ -40,7 +40,7 @@ footer {
       display: table;
       width: 100%;
       @include rem(padding, 1rem 0 1rem 1.5625rem);
-      @include breakpoint(700px) {
+      @include breakpoint(900px) {
         display: table-cell;
         width: auto;
       }
@@ -84,6 +84,9 @@ footer {
       }
     }
   }
+  .general-information {
+    padding-top: 30px;
+  }
 
   ul {
     @include reset-list;
@@ -122,10 +125,22 @@ footer {
   #regions-list {
     background-color: darken($shelter-light-blue,3%);
     @include rem(padding, 1rem 1rem 0 1.5625rem);
+    width: 100%;
+    @include breakpoint(900px) {
+      width: 71%;
+    }
 
     > .menu > li {
       list-style: none;
       @include rem(margin, 0 0 20px 0);
+      display: block;
+      width: 100%;
+
+      @include breakpoint(600px) {
+        display: inline-block;
+        width: 49%;
+        vertical-align: top;
+      }
 
       > .menu > li > .menu li {
         &.expanded, &.collapsed, &.leaf {
@@ -145,6 +160,7 @@ footer {
 
       .nav-items {
         li {
+
           &.expanded {
             list-style-image: none;
             list-style-type: none;

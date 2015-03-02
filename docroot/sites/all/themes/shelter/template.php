@@ -46,6 +46,7 @@ function shelter_preprocess_page(&$variables) {
 
   if ($variables['is_front']) {
     $variables['hot_responses'] = cluster_og_hot_responses();
+    $variables['upcoming_events'] = cluster_events_upcoming();
   }
   if ($current_path == 'regions-countries') {
     $variables['is_regions_and_countries'] = TRUE;
@@ -71,7 +72,11 @@ function shelter_preprocess_page(&$variables) {
  * Implements partial__{name}_preprocess().
  */
 function partial__homepage_preprocess(&$variables) {
-  drupal_add_js('https://public.tableau.com/javascripts/api/viz_v1.js', 'external');
+  // Not using Tableau for now
+  // drupal_add_js('https://public.tableau.com/javascripts/api/viz_v1.js', 'external');
+
+  $homepage_menu = menu_tree('menu-homepage');
+  $variables['homepage_menu'] = render($homepage_menu);
 }
 
 /**

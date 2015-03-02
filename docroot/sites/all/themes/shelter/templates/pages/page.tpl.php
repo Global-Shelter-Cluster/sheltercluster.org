@@ -25,11 +25,10 @@
           <?php print _svg('logo-global-shelter-cluster', array('id' => 'shelter-cluster', 'alt' => 'Global Shelter Cluster - ShelterCluster.org - Coordinating Humanitarian Shelter')); ?>
         </a>
 
-        <div id="user-login-container" class="clearfix">
-          <?php if (isset($user_login)): ?>
-            <?php print render($user_login); ?>
-          <?php endif; ?>
-        </div>
+        <?php if (isset($user_login) && FALSE): /* Do not use login block for now */ ?>
+          <?php print partial('compact_user_login', array('user_login' => $user_login)); ?>
+        <?php endif; ?>
+
         <div id="user-profile-container" class="clearfix">
           <?php print render($user_menu); ?>
         </div>
@@ -68,7 +67,7 @@
   </header>
 
   <?php if ($is_front): ?>
-    <?php print partial('homepage', array('page' => $page, 'hot_responses' => $hot_responses)); ?>
+    <?php print partial('homepage', array('page' => $page, 'hot_responses' => $hot_responses, 'upcoming_events' => $upcoming_events)); ?>
 
   <?php elseif ($is_regions_and_countries): ?>
     <?php print partial('regions', array('page' => $page)); ?>

@@ -214,7 +214,9 @@ header {
   }
   td {
     @include rem(padding, 0.5rem 0);
+    border: none !important;
   }
+  .image-card {}
   thead {
     background: $shelter-red;
 
@@ -240,7 +242,13 @@ header {
     background: lighten($shelter-light-blue,14%);
   }
   .information-title {
-    @include rem(padding, 0 0.5rem 0 0.5rem);
+    @include rem(padding, 0.45rem 0.5rem);
+    p {
+      margin: 4px 0 0 0;
+      text-transform: uppercase;
+      @include rem(font-size, 0.75rem);
+      color: $shelter-grey;
+    }
   }
   .information-file {
     width: 90px;
