@@ -3226,6 +3226,44 @@ function cluster_og_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-working_group-field_group_modules'
+  $field_instances['node-working_group-field_group_modules'] = array(
+    'bundle' => 'working_group',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 8,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_group_modules',
+    'label' => 'Disabled modules',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_buttons',
+      'weight' => 39,
+    ),
+  );
+
   // Exported field_instance: 'node-working_group-field_image'
   $field_instances['node-working_group-field_image'] = array(
     'bundle' => 'working_group',
@@ -3589,6 +3627,7 @@ function cluster_og_field_default_field_instances() {
   t('Crisis date: day');
   t('Current SC Lead Agency');
   t('Determine if this is an OG group.');
+  t('Disabled modules');
   t('Disaster Causes');
   t('Disaster Type');
   t('Emergency SC Lead');

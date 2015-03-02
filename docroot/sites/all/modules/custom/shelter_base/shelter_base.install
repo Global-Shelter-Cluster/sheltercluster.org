@@ -604,3 +604,61 @@ function shelter_base_update_7064() {
 function shelter_base_update_7065() {
   features_revert_module('cluster_contact');
 }
+
+/**
+ * Create Resources group and move documents to it.
+ */
+function shelter_base_update_7065() {
+  // Revert cluster_og module to get the field_group_module field.
+  features_revert_module('cluster_og');
+
+  // Create the new Resources group
+  $group = entity_create('node', array(
+    'type' => 'working_group',
+    'created' => time(),
+    'status' => NODE_PUBLISHED,
+    'uid' => 1,
+    'language' => 'en',
+    'path' => array('alias' => 'resources', 'pathauto' => FALSE),
+  ));
+  $group_wrapper = entity_metadata_wrapper('node', $group);
+  $group_wrapper->title = 'Resources';
+
+  // Hide discussions and events from this group
+  $group_wrapper->field_group_modules->set(array('discussions', 'events'));
+
+  $group_wrapper->save();
+  $group_nid = $group_wrapper->nid->value();
+
+  // Set this group as the site's "resources" group (used for future content import)
+  variable_set('shelter_resources_nid', $group_nid);
+
+  // Add item to main menu
+  $main_menu_item = array(
+    'link_title' => 'Resources',
+    'link_path' => 'node/' . $group_nid,
+    'menu_name' => 'main-menu',
+    'weight' => 50,
+    'plid' => 0,
+  );
+  menu_link_save($main_menu_item);
+
+  // Load all documents with the "is reference" flag and add them to the group.
+  $doc_query = new EntityFieldQuery();
+  $doc_results = $doc_query->entityCondition('entity_type', 'node')
+    ->entityCondition('bundle', 'document')
+    ->fieldCondition('field_is_reference_document', 'value', 1)
+    ->execute();
+  if (isset($doc_results['node'])) {
+    foreach ($doc_results['node'] as $doc_nid => $dummy) {
+      og_group('node', $group_nid, array(
+        'entity_type' => 'node',
+        'entity' => node_load($doc_nid),
+        'field_name' => 'og_group_ref',
+        'state' => 1,
+      ));
+    }
+  }
+
+  search_api_index_reindex('default_node_index');
+}
