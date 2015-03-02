@@ -608,7 +608,7 @@ function shelter_base_update_7065() {
 /**
  * Create Resources group and move documents to it.
  */
-function shelter_base_update_7065() {
+function shelter_base_update_7066() {
   // Revert cluster_og module to get the field_group_module field.
   features_revert_module('cluster_og');
 
