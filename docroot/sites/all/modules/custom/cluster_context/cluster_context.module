@@ -61,7 +61,6 @@ function cluster_context_links($node) {
   }
 
   if ($manager->isEnabled('discussions') && node_access('create', 'discussion')) {
-    dpm($manager, 'is enabled disc!');
     $links['new-discussion'] = array(
       'title' => t('Create discussion'),
       'href' => 'node/add/discussion',
