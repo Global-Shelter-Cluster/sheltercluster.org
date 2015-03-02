@@ -483,6 +483,37 @@ function cluster_og_field_default_field_bases() {
     'type' => 'text',
   );
 
+  // Exported field_base: 'field_group_modules'
+  $field_bases['field_group_modules'] = array(
+    'active' => 1,
+    'cardinality' => -1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_group_modules',
+    'field_permissions' => array(
+      'type' => 0,
+    ),
+    'foreign keys' => array(),
+    'indexes' => array(
+      'value' => array(
+        0 => 'value',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'list',
+    'settings' => array(
+      'allowed_values' => array(
+        'documents' => 'Documents',
+        'discussions' => 'Discussions',
+        'events' => 'Events',
+      ),
+      'allowed_values_function' => '',
+      'entity_translation_sync' => FALSE,
+    ),
+    'translatable' => 0,
+    'type' => 'list_text',
+  );
+
   // Exported field_base: 'field_handover_date'
   $field_bases['field_handover_date'] = array(
     'active' => 1,

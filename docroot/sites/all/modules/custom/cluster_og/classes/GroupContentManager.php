@@ -417,6 +417,22 @@ class GroupContentManager {
     }
   }
 
+  /**
+   * Returns TRUE if the specified module (documents, discussions, events) is enabled.
+   * @param string $module
+   * @return bool
+   */
+  public function isEnabled($module) {
+    if (!isset($this->node->field_group_modules)) {
+      return TRUE;
+    }
+
+    $wrapper = entity_metadata_wrapper('node', $this->node);
+    $disabled = $wrapper->field_group_modules->value();
+
+    return !in_array($module, $disabled);
+  }
+
 }
 
 /**
