@@ -94,23 +94,29 @@ class GroupDisplayProvider {
       'path' => 'node/'.$this->node->nid,
     );
 
-    $items[] = array(
-      'label' => t('Documents'),
-      'path' => 'node/'.$this->node->nid.'/documents',
-      'total' => $this->manager->getDocumentCount(),
-    );
+    if ($this->manager->isEnabled('documents')) {
+      $items[] = array(
+        'label' => t('Documents'),
+        'path' => 'node/' . $this->node->nid . '/documents',
+        'total' => $this->manager->getDocumentCount(),
+      );
+    }
 
-    $items[] = array(
-      'label' => t('Discussions'),
-      'path' => 'node/'.$this->node->nid.'/discussions',
-      'total' => $this->manager->getDiscussionCount(),
-    );
+    if ($this->manager->isEnabled('discussions')) {
+      $items[] = array(
+        'label' => t('Discussions'),
+        'path' => 'node/' . $this->node->nid . '/discussions',
+        'total' => $this->manager->getDiscussionCount(),
+      );
+    }
 
-    $items[] = array(
-      'label' => t('Events'),
-      'path' => 'node/'.$this->node->nid.'/events',
-      'total' => $this->manager->getEventCount(),
-    );
+    if ($this->manager->isEnabled('events')) {
+      $items[] = array(
+        'label' => t('Events'),
+        'path' => 'node/' . $this->node->nid . '/events',
+        'total' => $this->manager->getEventCount(),
+      );
+    }
 
     if ($strategic_advisory = $this->manager->getStrategicAdvisory()) {
       $items[] = array(

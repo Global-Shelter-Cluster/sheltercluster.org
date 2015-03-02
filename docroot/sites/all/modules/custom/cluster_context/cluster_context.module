@@ -25,40 +25,43 @@ function cluster_context_links($node) {
 
   $links = array();
 
-  if (node_access('create', 'document')) {
-    $links['new-document'] = array(
-      'title' => t('Create document'),
-      'href' => 'node/add/document',
-      'query' => array(
-        'group' => $node->nid,
-        'destination' => 'node/' . $node->nid
-      ),
-    );
+  if ($manager->isEnabled('documents')) {
+    if (node_access('create', 'document')) {
+      $links['new-document'] = array(
+        'title' => t('Create document'),
+        'href' => 'node/add/document',
+        'query' => array(
+          'group' => $node->nid,
+          'destination' => 'node/' . $node->nid
+        ),
+      );
+    }
+
+    if (node_access('create', 'library')) {
+      $links['new-library'] = array(
+        'title' => t('Create library'),
+        'href' => 'node/add/library',
+        'query' => array(
+          'group' => $node->nid,
+          'destination' => 'node/' . $node->nid
+        ),
+      );
+    }
+
+    if (node_access('create', 'arbitrary_library')) {
+      $links['new-arbitrary-library'] = array(
+        'title' => t('Create arbitrary library'),
+        'href' => 'node/add/arbitrary-library',
+        'query' => array(
+          'group' => $node->nid,
+          'destination' => 'node/' . $node->nid
+        ),
+      );
+    }
   }
 
-  if (node_access('create', 'library')) {
-    $links['new-library'] = array(
-      'title' => t('Create library'),
-      'href' => 'node/add/library',
-      'query' => array(
-        'group' => $node->nid,
-        'destination' => 'node/' . $node->nid
-      ),
-    );
-  }
-
-  if (node_access('create', 'arbitrary_library')) {
-    $links['new-arbitrary-library'] = array(
-      'title' => t('Create abritrary library'),
-      'href' => 'node/add/arbitrary-library',
-      'query' => array(
-        'group' => $node->nid,
-        'destination' => 'node/' . $node->nid
-      ),
-    );
-  }
-
-  if (node_access('create', 'discussion')) {
+  if ($manager->isEnabled('discussions') && node_access('create', 'discussion')) {
+    dpm($manager, 'is enabled disc!');
     $links['new-discussion'] = array(
       'title' => t('Create discussion'),
       'href' => 'node/add/discussion',
@@ -69,7 +72,7 @@ function cluster_context_links($node) {
     );
   }
 
-  if (node_access('create', 'event')) {
+  if ($manager->isEnabled('events') && node_access('create', 'event')) {
     $links['new-event'] = array(
       'title' => t('Create event'),
       'href' => 'node/add/event',
