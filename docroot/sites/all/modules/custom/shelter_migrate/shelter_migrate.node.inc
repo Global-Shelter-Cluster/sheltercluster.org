@@ -4,6 +4,13 @@
  * Generates the form for the document migration pages (one for each group node).
  */
 function shelter_migrate_node_form($form, &$form_state) {
+  if (!shelter_migrate_get_resources_nid()) {
+    drupal_set_message('Resources group not defined yet.', 'error');
+    drupal_goto('admin/config/content/shelter-migrate', array(
+      'query' => array('destination' => current_path()),
+    ));
+  }
+
   $node = menu_get_object();
   if (!og_is_group('node', $node)) {
     drupal_set_message('Not a group', 'error');

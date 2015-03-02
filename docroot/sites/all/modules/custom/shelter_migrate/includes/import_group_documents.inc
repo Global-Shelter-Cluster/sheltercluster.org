@@ -120,8 +120,10 @@ function _shelter_migrate_create_document($title, $url, $description, $pubDate, 
   if (isset($description['Is Key Document?']) && $description['Is Key Document?'] == 'Yes') {
     $w->field_key_document->set(TRUE);
   }
+  $put_in_resource_group = FALSE;
   if (isset($description['Is Reference Doc?']) && $description['Is Reference Doc?'] == 'Yes') {
     $w->field_is_reference_document->set(TRUE);
+    $put_in_resource_group = TRUE;
   }
   // Taxonomies
   foreach ($taxonomy_mapping as $key => $data) {
@@ -176,6 +178,15 @@ function _shelter_migrate_create_document($title, $url, $description, $pubDate, 
     'field_name' => 'og_group_ref',
     'state' => 1,
   ));
+
+  if ($put_in_resource_group && $resources_nid = shelter_migrate_get_resources_nid()) {
+    og_group('node', $resources_nid, array(
+      'entity_type' => 'node',
+      'entity' => node_load($w->nid->value()),
+      'field_name' => 'og_group_ref',
+      'state' => 1,
+    ));
+  }
 
   return $w->nid->value();
 }
