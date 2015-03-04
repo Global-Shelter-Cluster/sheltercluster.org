@@ -666,6 +666,6 @@ function shelter_base_update_7066() {
 /**
  * Delete field: 'field_is_reference_document'.
  */
-function shelter_base_update_7066() {
+function shelter_base_update_7067() {
   field_delete_field('field_is_reference_document');
 }
