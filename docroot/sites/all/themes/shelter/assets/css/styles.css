@@ -1589,6 +1589,14 @@ header #search-block-form {
   float: left;
   height: 21px;
 }
+.main-column h3 #overview-icon,
+.side-column h3 #overview-icon {
+  width: 22px;
+}
+.main-column h3 #key-information-icon,
+.side-column h3 #key-information-icon {
+  width: 38px;
+}
 .main-column h4,
 .side-column h4 {
   margin: 0 0 8px 0;
