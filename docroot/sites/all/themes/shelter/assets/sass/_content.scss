@@ -8,6 +8,10 @@
   li {
     @include rem(margin-bottom, 0.5rem);
   }
+
+  .field-type-file {
+    @include rem(padding-top, 1rem);
+  }
 }
 
 .video-container {
