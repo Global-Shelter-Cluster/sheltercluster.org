@@ -897,6 +897,11 @@ header .search {
     width: 100%;
   }
 }
+.facets .facet .facetapi-limit-link {
+  display: block;
+  margin-bottom: 24px;
+  margin-bottom: 1.5rem;
+}
 .facets .facet:first-child {
   width: 100%;
   float: none;
