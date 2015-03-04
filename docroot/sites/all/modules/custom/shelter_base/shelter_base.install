@@ -654,3 +654,10 @@ function shelter_base_update_7065() {
 
   search_api_index_reindex('default_node_index');
 }
+
+/**
+ * Delete field: 'field_is_reference_document'.
+ */
+function shelter_base_update_7066() {
+  field_delete_field('field_is_reference_document');
+}
