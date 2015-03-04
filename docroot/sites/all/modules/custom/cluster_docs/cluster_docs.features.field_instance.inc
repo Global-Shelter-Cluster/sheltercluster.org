@@ -34,7 +34,7 @@ function cluster_docs_field_default_field_instances() {
     'entity_type' => 'node',
     'field_name' => 'body',
     'label' => 'Description',
-    'required' => 1,
+    'required' => 0,
     'settings' => array(
       'display_summary' => 1,
       'entity_translation_sync' => FALSE,
@@ -201,7 +201,7 @@ function cluster_docs_field_default_field_instances() {
     'entity_type' => 'node',
     'field_name' => 'field_document_source',
     'label' => 'Source',
-    'required' => 1,
+    'required' => 0,
     'settings' => array(
       'entity_translation_sync' => FALSE,
       'text_processing' => 0,
