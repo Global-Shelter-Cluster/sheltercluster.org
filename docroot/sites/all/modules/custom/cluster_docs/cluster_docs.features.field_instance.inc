@@ -505,50 +505,6 @@ function cluster_docs_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-document-field_is_reference_document'
-  $field_instances['node-document-field_is_reference_document'] = array(
-    'bundle' => 'document',
-    'default_value' => array(
-      0 => array(
-        'value' => 0,
-      ),
-    ),
-    'deleted' => 0,
-    'description' => 'Is this a reference document that needs to appear in the reference section (as well as any groups in which the document belongs) ?',
-    'display' => array(
-      'default' => array(
-        'label' => 'hidden',
-        'module' => 'list',
-        'settings' => array(),
-        'type' => 'list_default',
-        'weight' => 21,
-      ),
-      'teaser' => array(
-        'label' => 'hidden',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'field_name' => 'field_is_reference_document',
-    'label' => 'Is Reference Document',
-    'required' => 0,
-    'settings' => array(
-      'entity_translation_sync' => FALSE,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'options',
-      'settings' => array(
-        'display_label' => 1,
-      ),
-      'type' => 'options_onoff',
-      'weight' => 4,
-    ),
-  );
-
   // Exported field_instance: 'node-document-field_issues'
   $field_instances['node-document-field_issues'] = array(
     'bundle' => 'document',
@@ -1269,9 +1225,7 @@ function cluster_docs_field_default_field_instances() {
   t('Intervention Materials');
   t('Intervention Programming');
   t('Is Key Document');
-  t('Is Reference Document');
   t('Is this a features document ?');
-  t('Is this a reference document that needs to appear in the reference section (as well as any groups in which the document belongs) ?');
   t('Issues');
   t('Link');
   t('Meeting Management');

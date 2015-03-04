@@ -122,7 +122,6 @@ function _shelter_migrate_create_document($title, $url, $description, $pubDate, 
   }
   $put_in_resource_group = FALSE;
   if (isset($description['Is Reference Doc?']) && $description['Is Reference Doc?'] == 'Yes') {
-    $w->field_is_reference_document->set(TRUE);
     $put_in_resource_group = TRUE;
   }
   // Taxonomies

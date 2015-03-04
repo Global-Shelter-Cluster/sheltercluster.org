@@ -112,7 +112,6 @@ function cluster_search_default_search_api_index() {
         "field_inter_cluster" : { "type" : "list\\u003Cinteger\\u003E", "entity_type" : "taxonomy_term" },
         "field_intervention_materials" : { "type" : "list\\u003Cinteger\\u003E", "entity_type" : "taxonomy_term" },
         "field_intervention_programming" : { "type" : "list\\u003Cinteger\\u003E", "entity_type" : "taxonomy_term" },
-        "field_is_reference_document" : { "type" : "boolean" },
         "field_issues" : { "type" : "list\\u003Cinteger\\u003E", "entity_type" : "taxonomy_term" },
         "field_non_food_items" : { "type" : "list\\u003Cinteger\\u003E", "entity_type" : "taxonomy_term" },
         "field_response_phase" : { "type" : "list\\u003Cinteger\\u003E", "entity_type" : "taxonomy_term" },
@@ -213,12 +212,6 @@ function cluster_search_default_search_api_server() {
             "table" : "search_api_db_default_node_index_og_group_ref",
             "column" : "value",
             "type" : "list\\u003Cinteger\\u003E",
-            "boost" : "1.0"
-          },
-          "field_is_reference_document" : {
-            "table" : "search_api_db_default_node_index",
-            "column" : "field_is_reference_document",
-            "type" : "boolean",
             "boost" : "1.0"
           },
           "field_assess_monitor_eval" : {
