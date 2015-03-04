@@ -38,6 +38,11 @@
   .coordination-item  {
     float: left;
     width: 100%;
+
+    .field-name-title-field {
+      font-weight: bold;
+    }
+
     @include rem(margin, 0 0 1rem 0);
     @include breakpoint(700px) {
       width: 50%;
