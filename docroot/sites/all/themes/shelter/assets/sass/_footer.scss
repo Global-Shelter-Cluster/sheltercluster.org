@@ -186,6 +186,33 @@ footer {
     }
   }
 
+  #contributions {
+    display: table-cell;
+    width: auto;
+    text-align: center;
+    background: #fff;
+    @include rem(padding, 0.8rem 1.5625rem);
+
+    h4 {
+      @include rem(margin,0 0 2rem 0);
+    }
+
+    .contributors {
+      .contributor {
+        display: inline-block;
+        vertical-align: middle;
+        padding: 0;
+        @include rem(margin,0 5rem 2rem 5rem);
+        &:before {
+          background: none;
+        }
+        img {
+          width: 75%;
+        }
+      }
+    }
+  }
+
   #general-information {
     li {
       margin: 0;
@@ -204,6 +231,14 @@ footer {
       list-style: none;
       display: inline-block;
     }
+  }
+
+  .table-group {
+    display: table-row-group;
+  }
+
+  .table-row {
+    display:table-row;
   }
 
 }
