@@ -74,6 +74,12 @@
       float: left;
       height: 21px;
     }
+    #overview-icon {
+      width: 22px;
+    }
+    #key-information-icon {
+      width: 38px;
+    }
   }
   h4 {
     @include rem(margin,0 0 0.5rem 0 );
