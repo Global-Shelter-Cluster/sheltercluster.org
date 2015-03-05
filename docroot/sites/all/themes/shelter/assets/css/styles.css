@@ -551,10 +551,8 @@ body {
   background-color: #575757;
   color: white;
   text-transform: uppercase;
-  text-align: center;
   text-decoration: none;
   font-weight: bold;
-  text-indent: 34px;
   -moz-transition: all 0.3s ease;
   -o-transition: all 0.3s ease;
   -webkit-transition: all 0.3s ease;
@@ -568,9 +566,15 @@ body {
   text-decoration: none;
   background-color: #7f1416;
 }
+.document-cards .document-card .information-card a span {
+  position: relative;
+  left: 35px;
+  display: block;
+  margin: 0 38px 0 0;
+}
 .document-cards .document-card .information-card p {
-  margin: 8px 8px 8px 24px;
-  margin: 0.5rem 0.5rem 0.5rem 1.5rem;
+  margin: 12.8px 8px 8px 24px;
+  margin: 0.8rem 0.5rem 0.5rem 1.5rem;
   font-size: 13px;
   font-size: 0.8125rem;
   min-height: 32px;

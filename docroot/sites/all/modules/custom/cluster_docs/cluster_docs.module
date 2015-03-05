@@ -352,7 +352,7 @@ function cluster_docs_prepare_card_data($nids) {
         $url = $wrapper->field_link->url->value();
       }
       $doc['link_url'] = $url;
-      $doc['link'] = l($doc['title'], $url, array('attributes' => array('target' => '_blank')));
+      $doc['link'] = l('<span>' . $doc['title'] . '</span>', $url, array('attributes' => array('target' => '_blank'),'html' => TRUE));
 
       // Prepare the description.
       $desc = '';
