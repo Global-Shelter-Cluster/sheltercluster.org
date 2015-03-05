@@ -307,9 +307,8 @@ function cluster_og_hot_responses() {
       try {
         // @TODO manage multilingual entity wrapper.
         $wrapper = entity_metadata_wrapper('node', $node);
-
         $responses[$node->nid] = array(
-          'link' => l($wrapper->label(), 'node/' . $node->nid),
+          'link' => l($wrapper->label(), 'node/' . $node->nid, array('attributes' => array('title' => $wrapper->field_disaster_type->name->value()))),
           'type' => $terms[$wrapper->field_disaster_type->value()->tid],
         );
       }
