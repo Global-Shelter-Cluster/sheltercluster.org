@@ -94,11 +94,6 @@
     margin-bottom: 60px;
     display: inline-block;
     text-align: center;
-
-    @include breakpoint(900px) {
-      margin-left: 3%;
-      width: 97%;
-    }
   }
   .posters {
     list-style: none;
