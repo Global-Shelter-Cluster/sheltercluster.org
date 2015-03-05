@@ -113,6 +113,7 @@ function cluster_search_default_search_api_index() {
         "field_intervention_materials" : { "type" : "list\\u003Cinteger\\u003E", "entity_type" : "taxonomy_term" },
         "field_intervention_programming" : { "type" : "list\\u003Cinteger\\u003E", "entity_type" : "taxonomy_term" },
         "field_issues" : { "type" : "list\\u003Cinteger\\u003E", "entity_type" : "taxonomy_term" },
+        "field_meeting_management" : { "type" : "list\\u003Cinteger\\u003E", "entity_type" : "taxonomy_term" },
         "field_non_food_items" : { "type" : "list\\u003Cinteger\\u003E", "entity_type" : "taxonomy_term" },
         "field_response_phase" : { "type" : "list\\u003Cinteger\\u003E", "entity_type" : "taxonomy_term" },
         "field_settlement_type" : { "type" : "list\\u003Cinteger\\u003E", "entity_type" : "taxonomy_term" },
@@ -314,6 +315,12 @@ function cluster_search_default_search_api_server() {
             "table" : "search_api_db_default_node_index",
             "column" : "nid",
             "type" : "integer",
+            "boost" : "1.0"
+          },
+          "field_meeting_management" : {
+            "table" : "search_api_db_default_node_index_field_meeting_management",
+            "column" : "value",
+            "type" : "list\\u003Cinteger\\u003E",
             "boost" : "1.0"
           }
         }
