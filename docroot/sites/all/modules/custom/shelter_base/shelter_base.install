@@ -676,3 +676,10 @@ function shelter_base_update_7067() {
 function shelter_base_update_7068() {
   features_revert_module('cluster_search');
 }
+
+/**
+ * Revert docs feature - remove featured field custom permission.
+ */
+function shelter_base_update_7069() {
+  features_revert_module('cluster_docs');
+}
