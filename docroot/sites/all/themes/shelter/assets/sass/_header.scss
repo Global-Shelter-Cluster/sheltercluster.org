@@ -271,7 +271,7 @@ header {
       a {
         position: relative;
         display: block;
-        background-color: $shelter-red;
+        background-color: darken($shelter-grey, 30%);
         text-transform: uppercase;
         white-space: nowrap;
         color: rgb(255,255,255);
@@ -279,11 +279,7 @@ header {
         @include rem(padding, 0.5rem 0 0.5rem 0);
         @include rem(min-width, 8.125rem);
         @include transition(all 0.3s ease);
-        @include breakpoint(460px) {
 
-
-
-        }
         &:hover,
         &:active,
         .active {
