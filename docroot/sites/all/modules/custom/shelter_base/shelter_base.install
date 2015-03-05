@@ -690,4 +690,3 @@ function shelter_base_update_7069() {
 function shelter_base_update_7070() {
   features_revert_module('cluster_contact');
 }
-
