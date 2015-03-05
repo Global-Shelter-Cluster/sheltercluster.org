@@ -863,9 +863,13 @@ header .search {
   margin: 0 0 1.5rem 0;
 }
 .facets ul li {
-  list-style-image: none;
   list-style: none;
   margin: 0;
+}
+.facets .leaf {
+  list-style: none;
+  list-style-image: none;
+  margin: 0px 0px 0.25em 0;
 }
 .facets .facet {
   vertical-align: top;
