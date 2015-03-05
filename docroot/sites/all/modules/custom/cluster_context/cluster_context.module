@@ -95,7 +95,7 @@ function cluster_context_links($node) {
 
   if (node_access('create', 'contact')) {
     $links['new-page'] = array(
-      'title' => t('Create Coordination Team Member'),
+      'title' => t('Create coordination team member'),
       'href' => 'node/add/contact',
       'query' => array(
         'group' => $node->nid,
