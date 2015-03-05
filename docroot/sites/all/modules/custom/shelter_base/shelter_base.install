@@ -669,3 +669,10 @@ function shelter_base_update_7066() {
 function shelter_base_update_7067() {
   field_delete_field('field_is_reference_document');
 }
+
+/**
+ * Revert search feature.
+ */
+function shelter_base_update_7068() {
+  features_revert_module('cluster_search');
+}

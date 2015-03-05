@@ -352,7 +352,7 @@ function cluster_docs_prepare_card_data($nids) {
         $url = $wrapper->field_link->url->value();
       }
       $doc['link_url'] = $url;
-      $doc['link'] = l($doc['title'], $url, array('attributes' => array('target' => '_blank')));
+      $doc['link'] = l('<span>' . $doc['title'] . '</span>', $url, array('attributes' => array('target' => '_blank'),'html' => TRUE));
 
       // Prepare the description.
       $desc = '';
@@ -442,7 +442,6 @@ function cluster_docs_prepare_row_data($nids) {
   $properties = array('title', 'link', 'link_url', 'is_link', 'is_file', 'is_file_class', 'description', 'filesize',
     'file_extension', 'is_image', 'image_uri', 'has_preview', 'preview_uri', 'source',);
 
-  // @TODO language negocitation.
   global $language;
   $langcode = $language->language;
   foreach (node_load_multiple($nids) as $node) {
@@ -452,6 +451,7 @@ function cluster_docs_prepare_row_data($nids) {
 
       // @TODO insert language negociation in info array.
       $wrapper = entity_metadata_wrapper('node', $node);
+      $wrapper->language($language->language);
       $doc['title'] = $wrapper->label();
 
       if ($file = $wrapper->field_file->value()) {
