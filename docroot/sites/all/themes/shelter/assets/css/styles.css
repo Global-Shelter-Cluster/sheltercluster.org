@@ -863,6 +863,7 @@ header .search {
   margin: 0 0 1.5rem 0;
 }
 .facets ul li {
+  list-style-image: none;
   list-style: none;
   margin: 0;
 }
