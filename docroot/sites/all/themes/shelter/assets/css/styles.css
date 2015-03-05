@@ -1615,6 +1615,8 @@ header #search-block-form {
 #contextual-navigation {
   font-size: 12.8px;
   font-size: 0.8rem;
+  margin-bottom: 6.4px;
+  margin-bottom: 0.4rem;
   position: relative;
   z-index: 10;
 }
