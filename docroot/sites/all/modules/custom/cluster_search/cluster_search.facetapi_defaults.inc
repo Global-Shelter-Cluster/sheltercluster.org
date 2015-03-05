@@ -24,6 +24,7 @@ function cluster_search_facetapi_default_facet_settings() {
     'dependencies' => array(
       'bundle' => 'none',
       'bundle_selected' => array(),
+      'roles' => array(),
     ),
     'facet_mincount' => '1',
     'facet_missing' => '0',
@@ -51,6 +52,7 @@ function cluster_search_facetapi_default_facet_settings() {
     'dependencies' => array(
       'bundle' => 'none',
       'bundle_selected' => array(),
+      'roles' => array(),
     ),
     'facet_mincount' => '1',
     'facet_missing' => '0',
@@ -78,6 +80,7 @@ function cluster_search_facetapi_default_facet_settings() {
     'dependencies' => array(
       'bundle' => 'none',
       'bundle_selected' => array(),
+      'roles' => array(),
     ),
     'facet_mincount' => '1',
     'facet_missing' => '0',
@@ -105,6 +108,7 @@ function cluster_search_facetapi_default_facet_settings() {
     'dependencies' => array(
       'bundle' => 'none',
       'bundle_selected' => array(),
+      'roles' => array(),
     ),
     'facet_mincount' => '1',
     'facet_missing' => '0',
@@ -132,6 +136,7 @@ function cluster_search_facetapi_default_facet_settings() {
     'dependencies' => array(
       'bundle' => 'none',
       'bundle_selected' => array(),
+      'roles' => array(),
     ),
     'facet_mincount' => '1',
     'facet_missing' => '0',
@@ -159,6 +164,7 @@ function cluster_search_facetapi_default_facet_settings() {
     'dependencies' => array(
       'bundle' => 'none',
       'bundle_selected' => array(),
+      'roles' => array(),
     ),
     'facet_mincount' => '1',
     'facet_missing' => '0',
@@ -186,6 +192,7 @@ function cluster_search_facetapi_default_facet_settings() {
     'dependencies' => array(
       'bundle' => 'none',
       'bundle_selected' => array(),
+      'roles' => array(),
     ),
     'facet_mincount' => '1',
     'facet_missing' => '0',
@@ -213,6 +220,7 @@ function cluster_search_facetapi_default_facet_settings() {
     'dependencies' => array(
       'bundle' => 'none',
       'bundle_selected' => array(),
+      'roles' => array(),
     ),
     'facet_mincount' => '1',
     'facet_missing' => '0',
@@ -240,6 +248,7 @@ function cluster_search_facetapi_default_facet_settings() {
     'dependencies' => array(
       'bundle' => 'none',
       'bundle_selected' => array(),
+      'roles' => array(),
     ),
     'facet_mincount' => '1',
     'facet_missing' => '0',
@@ -267,6 +276,7 @@ function cluster_search_facetapi_default_facet_settings() {
     'dependencies' => array(
       'bundle' => 'none',
       'bundle_selected' => array(),
+      'roles' => array(),
     ),
     'facet_mincount' => '1',
     'facet_missing' => '0',
@@ -294,6 +304,7 @@ function cluster_search_facetapi_default_facet_settings() {
     'dependencies' => array(
       'bundle' => 'none',
       'bundle_selected' => array(),
+      'roles' => array(),
     ),
     'facet_mincount' => '1',
     'facet_missing' => '0',
@@ -321,6 +332,7 @@ function cluster_search_facetapi_default_facet_settings() {
     'dependencies' => array(
       'bundle' => 'none',
       'bundle_selected' => array(),
+      'roles' => array(),
     ),
     'facet_mincount' => '1',
     'facet_missing' => '0',
@@ -348,6 +360,7 @@ function cluster_search_facetapi_default_facet_settings() {
     'dependencies' => array(
       'bundle' => 'none',
       'bundle_selected' => array(),
+      'roles' => array(),
     ),
     'facet_mincount' => '1',
     'facet_missing' => '0',
@@ -375,6 +388,7 @@ function cluster_search_facetapi_default_facet_settings() {
     'dependencies' => array(
       'bundle' => 'none',
       'bundle_selected' => array(),
+      'roles' => array(),
     ),
     'facet_mincount' => '1',
     'facet_missing' => '0',
@@ -581,9 +595,9 @@ function cluster_search_facetapi_default_facet_settings() {
     'widget' => 'facetapi_checkbox_links',
     'filters' => array(),
     'active_sorts' => array(
-      'active' => 'active',
-      'count' => 'count',
       'display' => 'display',
+      'active' => 0,
+      'count' => 0,
       'indexed' => 0,
     ),
     'sort_weight' => array(
@@ -624,9 +638,9 @@ function cluster_search_facetapi_default_facet_settings() {
     'widget' => 'facetapi_checkbox_links',
     'filters' => array(),
     'active_sorts' => array(
-      'active' => 'active',
-      'count' => 'count',
       'display' => 'display',
+      'active' => 0,
+      'count' => 0,
       'indexed' => 0,
     ),
     'sort_weight' => array(
@@ -667,9 +681,9 @@ function cluster_search_facetapi_default_facet_settings() {
     'widget' => 'facetapi_checkbox_links',
     'filters' => array(),
     'active_sorts' => array(
-      'active' => 'active',
-      'count' => 'count',
       'display' => 'display',
+      'active' => 0,
+      'count' => 0,
       'indexed' => 0,
     ),
     'sort_weight' => array(
@@ -710,9 +724,9 @@ function cluster_search_facetapi_default_facet_settings() {
     'widget' => 'facetapi_checkbox_links',
     'filters' => array(),
     'active_sorts' => array(
-      'active' => 'active',
-      'count' => 'count',
       'display' => 'display',
+      'active' => 0,
+      'count' => 0,
       'indexed' => 0,
     ),
     'sort_weight' => array(
@@ -753,9 +767,9 @@ function cluster_search_facetapi_default_facet_settings() {
     'widget' => 'facetapi_checkbox_links',
     'filters' => array(),
     'active_sorts' => array(
-      'active' => 'active',
-      'count' => 'count',
       'display' => 'display',
+      'active' => 0,
+      'count' => 0,
       'indexed' => 0,
     ),
     'sort_weight' => array(
@@ -796,9 +810,9 @@ function cluster_search_facetapi_default_facet_settings() {
     'widget' => 'facetapi_checkbox_links',
     'filters' => array(),
     'active_sorts' => array(
-      'active' => 'active',
-      'count' => 'count',
       'display' => 'display',
+      'active' => 0,
+      'count' => 0,
       'indexed' => 0,
     ),
     'sort_weight' => array(
@@ -839,9 +853,9 @@ function cluster_search_facetapi_default_facet_settings() {
     'widget' => 'facetapi_checkbox_links',
     'filters' => array(),
     'active_sorts' => array(
-      'active' => 'active',
-      'count' => 'count',
       'display' => 'display',
+      'active' => 0,
+      'count' => 0,
       'indexed' => 0,
     ),
     'sort_weight' => array(
@@ -882,9 +896,9 @@ function cluster_search_facetapi_default_facet_settings() {
     'widget' => 'facetapi_checkbox_links',
     'filters' => array(),
     'active_sorts' => array(
-      'active' => 'active',
-      'count' => 'count',
       'display' => 'display',
+      'active' => 0,
+      'count' => 0,
       'indexed' => 0,
     ),
     'sort_weight' => array(
@@ -925,9 +939,9 @@ function cluster_search_facetapi_default_facet_settings() {
     'widget' => 'facetapi_checkbox_links',
     'filters' => array(),
     'active_sorts' => array(
-      'active' => 'active',
-      'count' => 'count',
       'display' => 'display',
+      'active' => 0,
+      'count' => 0,
       'indexed' => 0,
     ),
     'sort_weight' => array(
@@ -968,9 +982,9 @@ function cluster_search_facetapi_default_facet_settings() {
     'widget' => 'facetapi_checkbox_links',
     'filters' => array(),
     'active_sorts' => array(
-      'active' => 'active',
-      'count' => 'count',
       'display' => 'display',
+      'active' => 0,
+      'count' => 0,
       'indexed' => 0,
     ),
     'sort_weight' => array(
@@ -1011,9 +1025,9 @@ function cluster_search_facetapi_default_facet_settings() {
     'widget' => 'facetapi_checkbox_links',
     'filters' => array(),
     'active_sorts' => array(
-      'active' => 'active',
-      'count' => 'count',
       'display' => 'display',
+      'active' => 0,
+      'count' => 0,
       'indexed' => 0,
     ),
     'sort_weight' => array(
@@ -1054,9 +1068,9 @@ function cluster_search_facetapi_default_facet_settings() {
     'widget' => 'facetapi_checkbox_links',
     'filters' => array(),
     'active_sorts' => array(
-      'active' => 'active',
-      'count' => 'count',
       'display' => 'display',
+      'active' => 0,
+      'count' => 0,
       'indexed' => 0,
     ),
     'sort_weight' => array(
@@ -1097,9 +1111,9 @@ function cluster_search_facetapi_default_facet_settings() {
     'widget' => 'facetapi_checkbox_links',
     'filters' => array(),
     'active_sorts' => array(
-      'active' => 'active',
-      'count' => 'count',
       'display' => 'display',
+      'active' => 0,
+      'count' => 0,
       'indexed' => 0,
     ),
     'sort_weight' => array(
@@ -1140,9 +1154,9 @@ function cluster_search_facetapi_default_facet_settings() {
     'widget' => 'facetapi_checkbox_links',
     'filters' => array(),
     'active_sorts' => array(
-      'active' => 'active',
-      'count' => 'count',
       'display' => 'display',
+      'active' => 0,
+      'count' => 0,
       'indexed' => 0,
     ),
     'sort_weight' => array(
