@@ -32,7 +32,7 @@ function cluster_libraries_node_view_alter(&$build) {
 
   switch ($node->type) {
     case 'library' :
-      if ($groups = $wrapper->og_group_ref->value()) {
+      if (!$wrapper->field_is_global_library->value() && $groups = $wrapper->og_group_ref->value()) {
         $filter = $query->createFilter();
         foreach ($groups as $group) {
           $filter->condition('og_group_ref', $group->nid);

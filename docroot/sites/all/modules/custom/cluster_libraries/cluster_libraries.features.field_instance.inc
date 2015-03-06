@@ -391,7 +391,7 @@ function cluster_libraries_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 5,
+      'weight' => 6,
     ),
   );
 
@@ -548,6 +548,50 @@ function cluster_libraries_field_default_field_instances() {
       ),
       'type' => 'options_buttons',
       'weight' => 40,
+    ),
+  );
+
+  // Exported field_instance: 'node-library-field_is_global_library'
+  $field_instances['node-library-field_is_global_library'] = array(
+    'bundle' => 'library',
+    'default_value' => array(
+      0 => array(
+        'value' => 0,
+      ),
+    ),
+    'deleted' => 0,
+    'description' => 'A global library is not limited to the group it belongs to.',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 18,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_is_global_library',
+    'label' => 'Global Library',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(
+        'display_label' => 1,
+      ),
+      'type' => 'options_onoff',
+      'weight' => 5,
     ),
   );
 
@@ -926,6 +970,7 @@ function cluster_libraries_field_default_field_instances() {
 
   // Translatables
   // Included for use with string extractors like potx.
+  t('A global library is not limited to the group it belongs to.');
   t('Add all the document titles to this library.');
   t('Arbitrary document reference');
   t('Assessment, Monitoring and Evaluation');
@@ -934,6 +979,7 @@ function cluster_libraries_field_default_field_instances() {
   t('Cross-Cutting Issues');
   t('Description');
   t('Document Type');
+  t('Global Library');
   t('Groups audience');
   t('Information Management');
   t('Inter-Cluster');
