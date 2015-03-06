@@ -676,3 +676,10 @@ function shelter_base_update_7067() {
 function shelter_base_update_7068() {
   features_revert_module('cluster_search');
 }
+
+/**
+ * Revert search feature.
+ */
+function shelter_base_update_7069() {
+  features_revert_module('cluster_search');
+}
