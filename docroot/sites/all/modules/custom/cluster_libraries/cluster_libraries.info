@@ -77,8 +77,4 @@ features[variable][] = node_submitted_arbitrary_library
 features[variable][] = node_submitted_library
 features[variable][] = pathauto_node_arbitrary_library_pattern
 features[variable][] = pathauto_node_library_pattern
-<<<<<<< HEAD
-mtime = 1424879834
-=======
-mtime = 1424964906
->>>>>>> 239ef42b593731736a271822bc2948c65bde6eb9
+mtime = 1425482926
