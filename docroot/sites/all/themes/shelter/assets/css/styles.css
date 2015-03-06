@@ -551,10 +551,8 @@ body {
   background-color: #575757;
   color: white;
   text-transform: uppercase;
-  text-align: center;
   text-decoration: none;
   font-weight: bold;
-  text-indent: 34px;
   -moz-transition: all 0.3s ease;
   -o-transition: all 0.3s ease;
   -webkit-transition: all 0.3s ease;
@@ -568,9 +566,15 @@ body {
   text-decoration: none;
   background-color: #7f1416;
 }
+.document-cards .document-card .information-card a span {
+  position: relative;
+  left: 35px;
+  display: block;
+  margin: 0 38px 0 0;
+}
 .document-cards .document-card .information-card p {
-  margin: 8px 8px 8px 24px;
-  margin: 0.5rem 0.5rem 0.5rem 1.5rem;
+  margin: 12.8px 8px 8px 24px;
+  margin: 0.8rem 0.5rem 0.5rem 1.5rem;
   font-size: 13px;
   font-size: 0.8125rem;
   min-height: 32px;
@@ -865,6 +869,11 @@ header .search {
 .facets ul li {
   list-style: none;
   margin: 0;
+}
+.facets .leaf {
+  list-style: none;
+  list-style-image: none;
+  margin: 0px 0px 0.25em 0;
 }
 .facets .facet {
   vertical-align: top;
@@ -1328,7 +1337,7 @@ header #search-block-form {
 #nav-shelter .nav-items .nav-item a {
   position: relative;
   display: block;
-  background-color: #7f1416;
+  background-color: #0a0a0a;
   text-transform: uppercase;
   white-space: nowrap;
   color: white;
@@ -1523,8 +1532,7 @@ header #search-block-form {
 
 .video-container {
   position: relative;
-  padding-bottom: 56.25%;
-  padding-top: 30px;
+  padding-bottom: 75%;
   height: 0;
   overflow: hidden;
   background: black;
@@ -1615,6 +1623,8 @@ header #search-block-form {
 #contextual-navigation {
   font-size: 12.8px;
   font-size: 0.8rem;
+  margin-bottom: 6.4px;
+  margin-bottom: 0.4rem;
   position: relative;
   z-index: 10;
 }
@@ -2266,28 +2276,27 @@ header #search-block-form {
   width: 100%;
   text-align: center;
 }
-#active-responses .hot-responses li {
-  display: inline-block;
-  min-width: 95%;
+#active-responses .hot-responses .hot-responses-link {
+  position: relative;
+  display: block;
 }
 #active-responses .hot-responses a {
   display: block;
-  float: left;
-  text-align: center;
+  text-align: left;
   text-decoration: none;
   color: white;
   font-weight: bold;
-  width: 80%;
+  width: 100%;
   border: 1px solid #04314c;
   background-color: #04314c;
   -moz-transition: all 0.3s ease;
   -o-transition: all 0.3s ease;
   -webkit-transition: all 0.3s ease;
   transition: all 0.3s ease;
-  padding: 8px 8px;
-  padding: 0.5rem 0.5rem;
-  margin: 0 0 12px 0;
-  margin: 0 0 0.75rem 0;
+  padding: 8px 40px 8px 8px;
+  padding: 0.5rem 2.5rem 0.5rem 0.5rem;
+  margin: 0 0 4px 0;
+  margin: 0 0 0.25rem 0;
   -moz-box-shadow: rgba(0, 0, 0, 0.09) 2px 2px 1px;
   -webkit-box-shadow: rgba(0, 0, 0, 0.09) 2px 2px 1px;
   box-shadow: rgba(0, 0, 0, 0.09) 2px 2px 1px;
@@ -2298,41 +2307,22 @@ header #search-block-form {
 }
 @media (min-width: 800px) {
   #active-responses .hot-responses a {
-    width: 90%;
+    width: 100%;
   }
 }
 #active-responses .hot-responses div {
   float: left;
 }
 #active-responses .hot-responses svg {
-  position: relative;
-  top: 2px;
-  width: 34px;
-  height: 34px;
-}
-#active-responses #legend {
-  clear: both;
-  font-size: 12px;
-  font-size: 0.75rem;
-  display: inline-block;
-}
-#active-responses #legend li {
-  display: inline-block;
-  margin-right: 16px;
-  margin-right: 1rem;
-}
-#active-responses #legend svg {
-  position: relative;
+  position: absolute;
+  top: 5px;
+  right: 10px;
   width: 24px;
-  height: 24px;
 }
-#active-responses #legend span {
-  position: relative;
-  top: -5px;
-}
-#active-responses #legend .man-made-disaster-icon {
-  margin-right: 4px;
-  margin-right: 0.25rem;
+#active-responses .hot-responses svg path,
+#active-responses .hot-responses svg circle,
+#active-responses .hot-responses svg polygon {
+  fill: white;
 }
 
 .front #site-options-bar {
@@ -2354,8 +2344,9 @@ header #search-block-form {
     top: 48px;
   }
 }
-.front #nav-shelter .nav-items .nav-item a {
-  background: #0a0a0a;
+.front .video-container {
+  margin: 8px 0 24px 0;
+  margin: 0.5rem 0 1.5rem 0;
 }
 .front #site-branding {
   height: 160px;
@@ -2400,67 +2391,37 @@ header #search-block-form {
 .front #site-branding #shelter-cluster .second-color {
   fill: #cfd0d2;
 }
-.front .top-section {
-  padding-top: 30px;
-  margin-bottom: 30px;
+.front #secondary-nav {
+  margin-bottom: 20px;
 }
-.front .main-content,
-.front .video {
+.front .main-content {
   width: 100%;
   display: inline-block;
   vertical-align: top;
 }
-.front .main-content h2,
-.front .video h2 {
+.front .main-content h2 {
   font-weight: normal;
 }
 @media (min-width: 900px) {
-  .front .main-content,
-  .front .video {
+  .front .main-content {
     width: 53%;
   }
 }
 @media (min-width: 1100px) {
-  .front .main-content,
-  .front .video {
+  .front .main-content {
     width: 60%;
   }
 }
-.front .sidebar,
-.front #active-responses {
-  width: 100%;
-  display: inline-block;
-  vertical-align: top;
-}
-@media (min-width: 900px) {
-  .front .sidebar,
-  .front #active-responses {
-    width: 46%;
-  }
-}
-@media (min-width: 1100px) {
-  .front .sidebar,
-  .front #active-responses {
-    width: 39%;
-  }
-}
 .front #shelter-calendar #box-calendar {
-  width: 97%;
+  width: 100%;
   margin: 0 auto;
-  margin-left: 3%;
 }
 .front #twitter-timeline {
   margin: 0 auto;
   width: 100%;
-  margin-bottom: 60px;
+  margin-bottom: 20px;
   display: inline-block;
   text-align: center;
-}
-@media (min-width: 900px) {
-  .front #twitter-timeline {
-    margin-left: 3%;
-    width: 97%;
-  }
 }
 .front .posters {
   list-style: none;
@@ -2470,7 +2431,7 @@ header #search-block-form {
 }
 .front .posters .poster {
   width: 100%;
-  float: right;
+  float: left;
   margin: 0 0 16px 0;
   margin: 0 0 1rem 0;
 }
@@ -2481,8 +2442,8 @@ header #search-block-form {
 }
 @media (min-width: 500px) {
   .front .posters .poster {
-    margin: 0 16px 16px 0;
-    margin: 0 1rem 1rem 0;
+    margin: 0 0 16px 16px;
+    margin: 0 0 1rem 1rem;
     width: 46%;
   }
 }
@@ -2755,6 +2716,9 @@ footer #general-information li:before {
   background: none;
   top: 0;
   left: 0;
+}
+footer #contributions h3 {
+  font-weight: normal;
 }
 footer #partners-list .partner {
   list-style: none;

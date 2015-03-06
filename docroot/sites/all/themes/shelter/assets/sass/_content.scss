@@ -16,8 +16,7 @@
 
 .video-container {
   position: relative;
-  padding-bottom: 56.25%;
-  padding-top: 30px;
+  padding-bottom: 75%;
   height: 0;
   overflow: hidden;
   background: $black;
@@ -88,6 +87,7 @@
 
 #contextual-navigation {
   @include rem(font-size, 0.8rem);
+  @include rem(margin-bottom, 0.4rem);
   position: relative;
   z-index: 10;
 

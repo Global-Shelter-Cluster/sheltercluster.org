@@ -23,23 +23,23 @@
     width: 100%;
     text-align: center;
 
-    li {
-      display: inline-block;
-      min-width: 95%;
+    .hot-responses-link {
+      position: relative;
+      display: block;
     }
+
     a {
       display: block;
-      float: left;
-      text-align: center;
+      text-align: left;
       text-decoration: none;
       color: $white;
       font-weight: bold;
-      width: 80%;
+      width: 100%;
       border: 1px solid $accent-dark-blue;
       background-color: $accent-dark-blue;
       @include transition(all 0.3s ease);
-      @include rem(padding, 0.5rem 0.5rem);
-      @include rem(margin, 0 0 0.75rem 0);
+      @include rem(padding, 0.5rem 2.5rem 0.5rem 0.5rem);
+      @include rem(margin, 0 0 0.25rem 0);
       @include box-shadow(rgba(0,0,0,0.09) 2px 2px 1px);
       &:hover,
       &:active {
@@ -47,40 +47,22 @@
         color: #fff;
       }
       @include breakpoint(800px) {
-        width: 90%;
+        width: 100%;
       }
     }
     div {
       float: left;
     }
     svg {
-      position: relative;
-      top: 2px;
-      width: 34px;
-      height: 34px;
-    }
-  }
-
-  #legend {
-    clear: both;
-    @include rem(font-size, 0.75rem);
-    display: inline-block;
-
-    li {
-      display: inline-block;
-      @include rem(margin-right, 1rem);
-    }
-    svg {
-      position: relative;
+      position: absolute;
+      top: 5px;
+      right: 10px;
       width: 24px;
-      height: 24px;
-    }
-    span {
-      position: relative;
-      top: -5px;
-    }
-    .man-made-disaster-icon {
-      @include rem(margin-right, 0.25rem);
+      path,
+      circle,
+      polygon {
+        fill: $white;
+      }
     }
   }
 }
