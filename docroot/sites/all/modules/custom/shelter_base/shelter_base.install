@@ -678,8 +678,9 @@ function shelter_base_update_7068() {
 }
 
 /**
- * Revert search feature.
+ * Revert search and libraries feature.
  */
 function shelter_base_update_7069() {
   features_revert_module('cluster_search');
+  features_revert_module('cluster_libraries');
 }
