@@ -923,6 +923,9 @@ header .search {
 }
 
 .document-table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  border: 1px solid #bbb;
   width: 100%;
   margin: 0 0 24px 0;
   margin: 0 0 1.5rem 0;
@@ -982,7 +985,7 @@ header .search {
   color: #575757;
 }
 .document-table .information-file {
-  width: 90px;
+  min-width: 90px;
 }
 .document-table .size-type {
   font-size: 13.6px;
@@ -997,7 +1000,7 @@ header .search {
   text-transform: uppercase;
 }
 .document-table .publication-date {
-  width: 100px;
+  min-width: 100px;
 }
 .document-table .publication-date span {
   display: block;
@@ -1006,6 +1009,26 @@ header .search {
   font-size: 13.6px;
   font-size: 0.85rem;
   color: #688394;
+}
+@media (max-width: 600px) {
+  .document-table {
+    display: block;
+  }
+  .document-table thead, .document-table tbody, .document-table th, .document-table td, .document-table tr {
+    display: block;
+  }
+  .document-table thead tr {
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+  }
+  .document-table td {
+    border: none;
+    position: relative;
+  }
+  .document-table .publication-date span {
+    text-align: left;
+  }
 }
 
 /* _header.scss */

@@ -206,6 +206,9 @@ header {
 }
 
 .document-table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  border: 1px solid #bbb;
   width: 100%;
   @include rem(margin, 0 0 1.5rem 0);
   @include rem(font-size, 0.9rem);
@@ -255,7 +258,7 @@ header {
     }
   }
   .information-file {
-    width: 90px;
+    min-width: 90px;
   }
   .size-type {
     @include rem(font-size, 0.85rem);
@@ -268,13 +271,34 @@ header {
     }
   }
   .publication-date {
-    width: 100px;
+    min-width: 100px;
     span {
       display: block;
       width: 100%;
       text-align: center;
       @include rem(font-size, 0.85rem);
       color: $shelter-dark-blue;
+    }
+  }
+
+  @include breakpoint(max-width 600px) {
+    display: block;
+    thead, tbody, th, td, tr {
+      display: block;
+    }
+    thead tr {
+      position: absolute;
+      top: -9999px;
+      left: -9999px;
+    }
+    td {
+      border: none;
+      position: relative;
+    }
+    .publication-date {
+      span {
+        text-align: left;
+      }
     }
   }
 }
