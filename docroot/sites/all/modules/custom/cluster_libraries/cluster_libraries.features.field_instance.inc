@@ -252,7 +252,7 @@ function cluster_libraries_field_default_field_instances() {
         'label' => 'hidden',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 6,
+        'weight' => 7,
       ),
       'teaser' => array(
         'label' => 'hidden',
@@ -291,7 +291,7 @@ function cluster_libraries_field_default_field_instances() {
         'label' => 'hidden',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 13,
+        'weight' => 14,
       ),
       'teaser' => array(
         'label' => 'hidden',
@@ -330,7 +330,7 @@ function cluster_libraries_field_default_field_instances() {
         'label' => 'hidden',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 8,
+        'weight' => 9,
       ),
       'teaser' => array(
         'label' => 'hidden',
@@ -369,7 +369,7 @@ function cluster_libraries_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 15,
+        'weight' => 16,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -391,7 +391,7 @@ function cluster_libraries_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 5,
+      'weight' => 6,
     ),
   );
 
@@ -406,7 +406,7 @@ function cluster_libraries_field_default_field_instances() {
         'label' => 'hidden',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 4,
+        'weight' => 5,
       ),
       'teaser' => array(
         'label' => 'hidden',
@@ -445,7 +445,7 @@ function cluster_libraries_field_default_field_instances() {
         'label' => 'hidden',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 3,
+        'weight' => 4,
       ),
       'teaser' => array(
         'label' => 'hidden',
@@ -484,7 +484,7 @@ function cluster_libraries_field_default_field_instances() {
         'label' => 'hidden',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 10,
+        'weight' => 11,
       ),
       'teaser' => array(
         'label' => 'hidden',
@@ -523,7 +523,7 @@ function cluster_libraries_field_default_field_instances() {
         'label' => 'hidden',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 7,
+        'weight' => 8,
       ),
       'teaser' => array(
         'label' => 'hidden',
@@ -551,6 +551,50 @@ function cluster_libraries_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-library-field_is_global_library'
+  $field_instances['node-library-field_is_global_library'] = array(
+    'bundle' => 'library',
+    'default_value' => array(
+      0 => array(
+        'value' => 0,
+      ),
+    ),
+    'deleted' => 0,
+    'description' => 'A global library is not limited to the group it belongs to.',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 18,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_is_global_library',
+    'label' => 'Global Library',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(
+        'display_label' => 1,
+      ),
+      'type' => 'options_onoff',
+      'weight' => 5,
+    ),
+  );
+
   // Exported field_instance: 'node-library-field_issues'
   $field_instances['node-library-field_issues'] = array(
     'bundle' => 'library',
@@ -562,7 +606,7 @@ function cluster_libraries_field_default_field_instances() {
         'label' => 'hidden',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 1,
+        'weight' => 2,
       ),
       'teaser' => array(
         'label' => 'hidden',
@@ -598,11 +642,10 @@ function cluster_libraries_field_default_field_instances() {
     'description' => '',
     'display' => array(
       'default' => array(
-        'label' => 'above',
-        'module' => 'taxonomy',
+        'label' => 'hidden',
         'settings' => array(),
-        'type' => 'taxonomy_term_reference_link',
-        'weight' => 17,
+        'type' => 'hidden',
+        'weight' => 1,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -639,7 +682,7 @@ function cluster_libraries_field_default_field_instances() {
         'label' => 'hidden',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 12,
+        'weight' => 13,
       ),
       'teaser' => array(
         'label' => 'hidden',
@@ -678,7 +721,7 @@ function cluster_libraries_field_default_field_instances() {
         'label' => 'hidden',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 9,
+        'weight' => 10,
       ),
       'teaser' => array(
         'label' => 'hidden',
@@ -717,7 +760,7 @@ function cluster_libraries_field_default_field_instances() {
         'label' => 'hidden',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 11,
+        'weight' => 12,
       ),
       'teaser' => array(
         'label' => 'hidden',
@@ -756,7 +799,7 @@ function cluster_libraries_field_default_field_instances() {
         'label' => 'hidden',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 5,
+        'weight' => 6,
       ),
       'teaser' => array(
         'label' => 'hidden',
@@ -795,7 +838,7 @@ function cluster_libraries_field_default_field_instances() {
         'label' => 'hidden',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 14,
+        'weight' => 15,
       ),
       'teaser' => array(
         'label' => 'hidden',
@@ -834,7 +877,7 @@ function cluster_libraries_field_default_field_instances() {
         'label' => 'hidden',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 2,
+        'weight' => 3,
       ),
       'teaser' => array(
         'label' => 'hidden',
@@ -893,7 +936,7 @@ function cluster_libraries_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 16,
+        'weight' => 17,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -927,6 +970,7 @@ function cluster_libraries_field_default_field_instances() {
 
   // Translatables
   // Included for use with string extractors like potx.
+  t('A global library is not limited to the group it belongs to.');
   t('Add all the document titles to this library.');
   t('Arbitrary document reference');
   t('Assessment, Monitoring and Evaluation');
@@ -935,6 +979,7 @@ function cluster_libraries_field_default_field_instances() {
   t('Cross-Cutting Issues');
   t('Description');
   t('Document Type');
+  t('Global Library');
   t('Groups audience');
   t('Information Management');
   t('Inter-Cluster');

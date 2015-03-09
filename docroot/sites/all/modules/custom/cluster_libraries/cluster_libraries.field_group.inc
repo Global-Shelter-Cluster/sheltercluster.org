@@ -21,7 +21,7 @@ function cluster_libraries_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Advanced tags',
-    'weight' => '7',
+    'weight' => '8',
     'children' => array(
       0 => 'field_assess_monitor_eval',
       1 => 'field_cross_cutting_issues',
@@ -58,7 +58,7 @@ function cluster_libraries_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Basic tags',
-    'weight' => '6',
+    'weight' => '7',
     'children' => array(
       0 => 'field_coordination_management',
       1 => 'field_information_management',

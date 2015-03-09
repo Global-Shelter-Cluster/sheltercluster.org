@@ -697,3 +697,18 @@ function shelter_base_update_7070() {
 function shelter_base_update_7071() {
   features_revert_module('cluster_og');
 }
+
+/**
+ * Revert search and libraries feature.
+ */
+function shelter_base_update_7072() {
+  features_revert_module('cluster_search');
+  features_revert_module('cluster_libraries');
+}
+
+/**
+ * Revert libraries feature.
+ */
+function shelter_base_update_7073() {
+  features_revert_module('cluster_libraries');
+}

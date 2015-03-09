@@ -18,6 +18,7 @@ features[ctools][] = strongarm:strongarm:1
 features[ctools][] = views:views_default:3.0
 features[features_api][] = api:2
 features[field_base][] = field_arbitrary_document_ref
+features[field_base][] = field_is_global_library
 features[field_group][] = group_advanced_tags|node|library|form
 features[field_group][] = group_basic_tags|node|library|form
 features[field_instance][] = node-arbitrary_library-body
@@ -33,6 +34,7 @@ features[field_instance][] = node-library-field_information_management
 features[field_instance][] = node-library-field_inter_cluster
 features[field_instance][] = node-library-field_intervention_materials
 features[field_instance][] = node-library-field_intervention_programming
+features[field_instance][] = node-library-field_is_global_library
 features[field_instance][] = node-library-field_issues
 features[field_instance][] = node-library-field_meeting_management
 features[field_instance][] = node-library-field_non_food_items
@@ -77,8 +79,4 @@ features[variable][] = node_submitted_arbitrary_library
 features[variable][] = node_submitted_library
 features[variable][] = pathauto_node_arbitrary_library_pattern
 features[variable][] = pathauto_node_library_pattern
-<<<<<<< HEAD
-mtime = 1424879834
-=======
-mtime = 1424964906
->>>>>>> 239ef42b593731736a271822bc2948c65bde6eb9
+mtime = 1425677366
