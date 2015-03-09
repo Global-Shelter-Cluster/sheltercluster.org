@@ -124,22 +124,21 @@ footer {
 
   #regions-list {
     background-color: darken($shelter-light-blue,3%);
-    @include rem(padding, 1rem 1rem 0 1.5625rem);
+    @include rem(padding, 1rem 1rem 0.9rem 1.5625rem);
     width: 100%;
     @include breakpoint(900px) {
-      width: 71%;
+      width: 67%;
     }
 
     > .menu > li {
       list-style: none;
-      @include rem(margin, 0 0 20px 0);
+      @include rem(margin, 0 0 7px 0);
       display: block;
-      width: 100%;
+      width: auto;
 
-      @include breakpoint(600px) {
+      > .menu li {
         display: inline-block;
-        width: 49%;
-        vertical-align: top;
+        margin-left: 0;
       }
 
       > .menu > li > .menu li {
@@ -172,14 +171,13 @@ footer {
             position: relative;
             left: 0;
             top: 0;
-            content: '\2013';
+            content: '';
             background: none;
-            @include rem(margin, 0 0.3125rem 0 0);
             @include rem(font-size, 0.75rem);
             @include rem(margin, 0 0.3125rem 0 0);
-            a {
-              text-transform: uppercase;
-            }
+          }
+          &:after {
+            content: ',';
           }
         }
       }
@@ -193,8 +191,8 @@ footer {
     background: #fff;
     @include rem(padding, 0.8rem 1.5625rem);
 
-    h4 {
-      @include rem(margin,0 0 2rem 0);
+    h3 {
+      @include rem(margin,1rem 0 1.75rem 0);
     }
 
     .contributors {

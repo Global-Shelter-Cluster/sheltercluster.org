@@ -2625,28 +2625,25 @@ footer #active-clusters-list .complete-list {
 }
 footer #regions-list {
   background-color: #c4cfd5;
-  padding: 16px 16px 0 25px;
-  padding: 1rem 1rem 0 1.5625rem;
+  padding: 16px 16px 14.4px 25px;
+  padding: 1rem 1rem 0.9rem 1.5625rem;
   width: 100%;
 }
 @media (min-width: 900px) {
   footer #regions-list {
-    width: 71%;
+    width: 67%;
   }
 }
 footer #regions-list > .menu > li {
   list-style: none;
-  margin: 0 0 20px 0;
-  margin: 0 0 1.25rem 0;
+  margin: 0 0 7px 0;
+  margin: 0 0 0.4375rem 0;
   display: block;
-  width: 100%;
+  width: auto;
 }
-@media (min-width: 600px) {
-  footer #regions-list > .menu > li {
-    display: inline-block;
-    width: 49%;
-    vertical-align: top;
-  }
+footer #regions-list > .menu > li > .menu li {
+  display: inline-block;
+  margin-left: 0;
 }
 footer #regions-list > .menu > li > .menu > li > .menu li.expanded, footer #regions-list > .menu > li > .menu > li > .menu li.collapsed, footer #regions-list > .menu > li > .menu > li > .menu li.leaf {
   margin: 0;
@@ -2671,17 +2668,15 @@ footer #regions-list > .menu > li .nav-items li:before {
   position: relative;
   left: 0;
   top: 0;
-  content: '\2013';
+  content: '';
   background: none;
-  margin: 0 5px 0 0;
-  margin: 0 0.3125rem 0 0;
   font-size: 12px;
   font-size: 0.75rem;
   margin: 0 5px 0 0;
   margin: 0 0.3125rem 0 0;
 }
-footer #regions-list > .menu > li .nav-items li:before a {
-  text-transform: uppercase;
+footer #regions-list > .menu > li .nav-items li:after {
+  content: ',';
 }
 footer #contributions {
   display: table-cell;
@@ -2691,9 +2686,9 @@ footer #contributions {
   padding: 12.8px 25px;
   padding: 0.8rem 1.5625rem;
 }
-footer #contributions h4 {
-  margin: 0 0 32px 0;
-  margin: 0 0 2rem 0;
+footer #contributions h3 {
+  margin: 16px 0 28px 0;
+  margin: 1rem 0 1.75rem 0;
 }
 footer #contributions .contributors .contributor {
   display: inline-block;
