@@ -213,7 +213,7 @@ header {
 .document-table {
   border-collapse: collapse;
   border-spacing: 0;
-  border: 1px solid #bbb;
+  //border: 1px solid #bbb;
   width: 100%;
   @include rem(margin, 0 0 1.5rem 0);
   @include rem(font-size, 0.9rem);
@@ -291,10 +291,14 @@ header {
     thead, tbody, th, td, tr {
       display: block;
     }
-    thead tr {
-      position: absolute;
-      top: -9999px;
-      left: -9999px;
+    thead th {
+      text-align: left !important;
+      border: none;
+      @include rem(padding, 0.20rem 0.5rem !important);
+
+      &:last-child {
+        @include rem(padding-bottom, 0.75rem !important);
+      }
     }
     td {
       border: none;

@@ -934,7 +934,6 @@ header .search {
 .document-table {
   border-collapse: collapse;
   border-spacing: 0;
-  border: 1px solid #bbb;
   width: 100%;
   margin: 0 0 24px 0;
   margin: 0 0 1.5rem 0;
@@ -1026,10 +1025,15 @@ header .search {
   .document-table thead, .document-table tbody, .document-table th, .document-table td, .document-table tr {
     display: block;
   }
-  .document-table thead tr {
-    position: absolute;
-    top: -9999px;
-    left: -9999px;
+  .document-table thead th {
+    text-align: left !important;
+    border: none;
+    padding: 3.2px 8px !important;
+    padding: 0.2rem 0.5rem !important;
+  }
+  .document-table thead th:last-child {
+    padding-bottom: 12px !important;
+    padding-bottom: 0.75rem !important;
   }
   .document-table td {
     border: none;
