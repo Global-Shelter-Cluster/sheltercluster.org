@@ -2721,8 +2721,8 @@ footer #contributions .contributors .contributor {
   display: inline-block;
   vertical-align: middle;
   padding: 0;
-  margin: 0 80px 32px 80px;
-  margin: 0 5rem 2rem 5rem;
+  margin: 0 32px 32px 32px;
+  margin: 0 2rem 2rem 2rem;
 }
 footer #contributions .contributors .contributor:before {
   background: none;

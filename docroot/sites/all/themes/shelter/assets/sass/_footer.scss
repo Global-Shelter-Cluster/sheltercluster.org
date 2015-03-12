@@ -200,7 +200,7 @@ footer {
         display: inline-block;
         vertical-align: middle;
         padding: 0;
-        @include rem(margin,0 5rem 2rem 5rem);
+        @include rem(margin,0 2rem 2rem 2rem);
         &:before {
           background: none;
         }

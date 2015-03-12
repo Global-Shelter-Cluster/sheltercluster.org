@@ -37,6 +37,20 @@
           )); ?>
         </li>
       </ul>
+      <ul class="contributors clearfix">
+        <li class="contributor">
+          <?php print theme('image', array(
+            'path' => drupal_get_path('theme', 'shelter') . '/assets/images/unhcr.png',
+            'alt' => t('UNHCR The UN Refugee Agency'),
+          )); ?>
+        </li>
+        <li class="contributor">
+          <?php print theme('image', array(
+            'path' => drupal_get_path('theme', 'shelter') . '/assets/images/international-federation-of-redcross.png',
+            'alt' => t('International Federation of Red Cross and Red Crescent Societies'),
+          )); ?>
+        </li>
+      </ul>
     </section>
   </div>
 </footer>
