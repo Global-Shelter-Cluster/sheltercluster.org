@@ -712,3 +712,11 @@ function shelter_base_update_7072() {
 function shelter_base_update_7073() {
   features_revert_module('cluster_libraries');
 }
+
+/**
+ * Revert shelter base and shelter taxonomy modules feature; updates following changes made in the prod database.
+ */
+function shelter_base_update_7074() {
+  features_revert_module('cluster_taxonomy');
+  features_revert_module('shelter_base');
+}

@@ -2575,6 +2575,15 @@ function cluster_taxonomy_uuid_features_default_terms() {
     'weight' => 0,
     'uuid' => '4e7d9587-6210-44db-8db6-9e72749d6c40',
     'vocabulary_machine_name' => 'meeting_management',
+    'name_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => 'Contact List',
+          'format' => NULL,
+          'safe_value' => 'Contact List',
+        ),
+      ),
+    ),
     'description_field' => array(
       'en' => array(
         0 => array(
@@ -2587,22 +2596,13 @@ function cluster_taxonomy_uuid_features_default_terms() {
         ),
       ),
     ),
-    'name_field' => array(
-      'en' => array(
-        0 => array(
-          'value' => 'Contact List',
-          'format' => NULL,
-          'safe_value' => 'Contact List',
-        ),
-      ),
-    ),
     'name_original' => 'Contact List',
     'translations' => array(
       'original' => 'en',
       'data' => array(
         'en' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 149,
+          'entity_id' => 151,
           'language' => 'en',
           'source' => '',
           'uid' => 70,
@@ -2622,6 +2622,15 @@ function cluster_taxonomy_uuid_features_default_terms() {
     'weight' => 0,
     'uuid' => '50c07689-7803-457e-a6bc-20585d3b95bb',
     'vocabulary_machine_name' => 'meeting_management',
+    'name_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => 'Meeting Minutes',
+          'format' => NULL,
+          'safe_value' => 'Meeting Minutes',
+        ),
+      ),
+    ),
     'description_field' => array(
       'en' => array(
         0 => array(
@@ -2634,22 +2643,13 @@ function cluster_taxonomy_uuid_features_default_terms() {
         ),
       ),
     ),
-    'name_field' => array(
-      'en' => array(
-        0 => array(
-          'value' => 'Meeting Minutes',
-          'format' => NULL,
-          'safe_value' => 'Meeting Minutes',
-        ),
-      ),
-    ),
     'name_original' => 'Meeting Minutes',
     'translations' => array(
       'original' => 'en',
       'data' => array(
         'en' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 150,
+          'entity_id' => 148,
           'language' => 'en',
           'source' => '',
           'uid' => 70,
@@ -3351,6 +3351,52 @@ function cluster_taxonomy_uuid_features_default_terms() {
     'description_original' => NULL,
   );
   $terms[] = array(
+    'name' => 'Displacement',
+    'description' => NULL,
+    'format' => 'filtered_html',
+    'weight' => 0,
+    'uuid' => '635f4506-7b30-4876-a587-3b751cb88ef9',
+    'vocabulary_machine_name' => 'issues',
+    'name_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => 'Displacement',
+          'format' => NULL,
+          'safe_value' => 'Displacement',
+        ),
+      ),
+    ),
+    'description_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'filtered_html',
+          'safe_value' => '',
+          'safe_summary' => '',
+        ),
+      ),
+    ),
+    'name_original' => 'Displacement',
+    'translations' => array(
+      'original' => 'en',
+      'data' => array(
+        'en' => array(
+          'entity_type' => 'taxonomy_term',
+          'entity_id' => 155,
+          'language' => 'en',
+          'source' => '',
+          'uid' => 70,
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1425489620,
+          'changed' => 1425489620,
+        ),
+      ),
+    ),
+    'description_original' => '',
+  );
+  $terms[] = array(
     'name' => 'Tropical Cyclone',
     'description' => NULL,
     'format' => 'filtered_html',
@@ -3721,6 +3767,52 @@ function cluster_taxonomy_uuid_features_default_terms() {
       ),
     ),
     'description_original' => NULL,
+  );
+  $terms[] = array(
+    'name' => 'Case study',
+    'description' => NULL,
+    'format' => 'filtered_html',
+    'weight' => 0,
+    'uuid' => '6dadc354-33ff-477a-861b-3f4e8173d0e7',
+    'vocabulary_machine_name' => 'document_type',
+    'name_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => 'Case study',
+          'format' => NULL,
+          'safe_value' => 'Case study',
+        ),
+      ),
+    ),
+    'description_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'filtered_html',
+          'safe_value' => '',
+          'safe_summary' => '',
+        ),
+      ),
+    ),
+    'name_original' => 'Case study',
+    'translations' => array(
+      'original' => 'en',
+      'data' => array(
+        'en' => array(
+          'entity_type' => 'taxonomy_term',
+          'entity_id' => 157,
+          'language' => 'en',
+          'source' => '',
+          'uid' => 70,
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1425553477,
+          'changed' => 1425553477,
+        ),
+      ),
+    ),
+    'description_original' => '',
   );
   $terms[] = array(
     'name' => 'Returns to Area of Origin',
@@ -4505,7 +4597,7 @@ function cluster_taxonomy_uuid_features_default_terms() {
       'data' => array(
         'en' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 148,
+          'entity_id' => 152,
           'language' => 'en',
           'source' => '',
           'uid' => 1,
@@ -4777,6 +4869,15 @@ function cluster_taxonomy_uuid_features_default_terms() {
     'weight' => 0,
     'uuid' => 'a02c7a19-a1b8-4f81-be89-e892355f7a42',
     'vocabulary_machine_name' => 'meeting_management',
+    'name_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => 'Attendance List',
+          'format' => NULL,
+          'safe_value' => 'Attendance List',
+        ),
+      ),
+    ),
     'description_field' => array(
       'en' => array(
         0 => array(
@@ -4789,22 +4890,13 @@ function cluster_taxonomy_uuid_features_default_terms() {
         ),
       ),
     ),
-    'name_field' => array(
-      'en' => array(
-        0 => array(
-          'value' => 'Attendance List',
-          'format' => NULL,
-          'safe_value' => 'Attendance List',
-        ),
-      ),
-    ),
     'name_original' => 'Attendance List',
     'translations' => array(
       'original' => 'en',
       'data' => array(
         'en' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 151,
+          'entity_id' => 150,
           'language' => 'en',
           'source' => '',
           'uid' => 70,
@@ -6502,6 +6594,99 @@ function cluster_taxonomy_uuid_features_default_terms() {
       ),
     ),
     'description_original' => 'Documents to clarify cluster positions on various thematic topics',
+  );
+  $terms[] = array(
+    'name' => 'Collective Centers',
+    'description' => NULL,
+    'format' => 'filtered_html',
+    'weight' => 0,
+    'uuid' => 'c05058da-47dc-466b-bc36-306b5806ad62',
+    'vocabulary_machine_name' => 'intervention_programming',
+    'name_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => 'Collective Centers',
+          'format' => NULL,
+          'safe_value' => 'Collective Centers',
+        ),
+      ),
+    ),
+    'description_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'filtered_html',
+          'safe_value' => '',
+          'safe_summary' => '',
+        ),
+      ),
+    ),
+    'name_original' => 'Collective Centers',
+    'translations' => array(
+      'original' => 'en',
+      'data' => array(
+        'en' => array(
+          'entity_type' => 'taxonomy_term',
+          'entity_id' => 154,
+          'language' => 'en',
+          'source' => '',
+          'uid' => 70,
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1425487635,
+          'changed' => 1425487635,
+        ),
+      ),
+    ),
+    'description_original' => '',
+  );
+  $terms[] = array(
+    'name' => 'IASC Documents',
+    'description' => '<p>IASC</p>',
+    'format' => 'filtered_html',
+    'weight' => 0,
+    'uuid' => 'c0e2c12a-6265-41a6-a0d5-ef23544d4db3',
+    'vocabulary_machine_name' => 'inter_cluster',
+    'name_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => 'IASC Documents',
+          'format' => NULL,
+          'safe_value' => 'IASC Documents',
+        ),
+      ),
+    ),
+    'description_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => '<p>IASC</p>',
+          'summary' => '',
+          'format' => 'filtered_html',
+          'safe_value' => '<p>IASC</p>
+',
+          'safe_summary' => '',
+        ),
+      ),
+    ),
+    'name_original' => 'IASC Documents',
+    'translations' => array(
+      'original' => 'en',
+      'data' => array(
+        'en' => array(
+          'entity_type' => 'taxonomy_term',
+          'entity_id' => 153,
+          'language' => 'en',
+          'source' => '',
+          'uid' => 70,
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1425487177,
+          'changed' => 1425487177,
+        ),
+      ),
+    ),
+    'description_original' => '<p>IASC</p>',
   );
   $terms[] = array(
     'name' => 'Reporting Tools and Guidance',
@@ -8384,6 +8569,15 @@ function cluster_taxonomy_uuid_features_default_terms() {
     'weight' => 0,
     'uuid' => 'ea79b9d7-e510-4143-a630-fcf66f532647',
     'vocabulary_machine_name' => 'meeting_management',
+    'name_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => 'Meeting Agenda',
+          'format' => NULL,
+          'safe_value' => 'Meeting Agenda',
+        ),
+      ),
+    ),
     'description_field' => array(
       'en' => array(
         0 => array(
@@ -8396,22 +8590,13 @@ function cluster_taxonomy_uuid_features_default_terms() {
         ),
       ),
     ),
-    'name_field' => array(
-      'en' => array(
-        0 => array(
-          'value' => 'Meeting Agenda',
-          'format' => NULL,
-          'safe_value' => 'Meeting Agenda',
-        ),
-      ),
-    ),
     'name_original' => 'Meeting Agenda',
     'translations' => array(
       'original' => 'en',
       'data' => array(
         'en' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 152,
+          'entity_id' => 149,
           'language' => 'en',
           'source' => '',
           'uid' => 70,
