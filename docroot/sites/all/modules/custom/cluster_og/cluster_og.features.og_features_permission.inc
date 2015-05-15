@@ -31,9 +31,26 @@ function cluster_og_og_features_default_permissions() {
     ),
   );
 
+  // Exported og permission: 'node:community_of_practice:create arbitrary_library content'
+  $permissions['node:community_of_practice:create arbitrary_library content'] = array(
+    'roles' => array(
+      'administrator member' => 'administrator member',
+      'content editor' => 'content editor',
+    ),
+  );
+
+  // Exported og permission: 'node:community_of_practice:create contact content'
+  $permissions['node:community_of_practice:create contact content'] = array(
+    'roles' => array(
+      'administrator member' => 'administrator member',
+      'content editor' => 'content editor',
+    ),
+  );
+
   // Exported og permission: 'node:community_of_practice:create discussion content'
   $permissions['node:community_of_practice:create discussion content'] = array(
     'roles' => array(
+      'administrator member' => 'administrator member',
       'member' => 'member',
     ),
   );
@@ -41,7 +58,45 @@ function cluster_og_og_features_default_permissions() {
   // Exported og permission: 'node:community_of_practice:create document content'
   $permissions['node:community_of_practice:create document content'] = array(
     'roles' => array(
+      'administrator member' => 'administrator member',
       'member' => 'member',
+    ),
+  );
+
+  // Exported og permission: 'node:community_of_practice:create event content'
+  $permissions['node:community_of_practice:create event content'] = array(
+    'roles' => array(
+      'administrator member' => 'administrator member',
+      'content editor' => 'content editor',
+    ),
+  );
+
+  // Exported og permission: 'node:community_of_practice:create library content'
+  $permissions['node:community_of_practice:create library content'] = array(
+    'roles' => array(
+      'administrator member' => 'administrator member',
+      'content editor' => 'content editor',
+    ),
+  );
+
+  // Exported og permission: 'node:community_of_practice:create page content'
+  $permissions['node:community_of_practice:create page content'] = array(
+    'roles' => array(
+      'administrator member' => 'administrator member',
+    ),
+  );
+
+  // Exported og permission: 'node:community_of_practice:delete any arbitrary_library content'
+  $permissions['node:community_of_practice:delete any arbitrary_library content'] = array(
+    'roles' => array(
+      'administrator member' => 'administrator member',
+    ),
+  );
+
+  // Exported og permission: 'node:community_of_practice:delete any contact content'
+  $permissions['node:community_of_practice:delete any contact content'] = array(
+    'roles' => array(
+      'administrator member' => 'administrator member',
     ),
   );
 
@@ -59,9 +114,47 @@ function cluster_og_og_features_default_permissions() {
     ),
   );
 
+  // Exported og permission: 'node:community_of_practice:delete any event content'
+  $permissions['node:community_of_practice:delete any event content'] = array(
+    'roles' => array(
+      'administrator member' => 'administrator member',
+    ),
+  );
+
+  // Exported og permission: 'node:community_of_practice:delete any library content'
+  $permissions['node:community_of_practice:delete any library content'] = array(
+    'roles' => array(
+      'administrator member' => 'administrator member',
+    ),
+  );
+
+  // Exported og permission: 'node:community_of_practice:delete any page content'
+  $permissions['node:community_of_practice:delete any page content'] = array(
+    'roles' => array(
+      'administrator member' => 'administrator member',
+    ),
+  );
+
+  // Exported og permission: 'node:community_of_practice:delete own arbitrary_library content'
+  $permissions['node:community_of_practice:delete own arbitrary_library content'] = array(
+    'roles' => array(
+      'administrator member' => 'administrator member',
+      'content editor' => 'content editor',
+    ),
+  );
+
+  // Exported og permission: 'node:community_of_practice:delete own contact content'
+  $permissions['node:community_of_practice:delete own contact content'] = array(
+    'roles' => array(
+      'administrator member' => 'administrator member',
+      'content editor' => 'content editor',
+    ),
+  );
+
   // Exported og permission: 'node:community_of_practice:delete own discussion content'
   $permissions['node:community_of_practice:delete own discussion content'] = array(
     'roles' => array(
+      'administrator member' => 'administrator member',
       'member' => 'member',
     ),
   );
@@ -69,7 +162,31 @@ function cluster_og_og_features_default_permissions() {
   // Exported og permission: 'node:community_of_practice:delete own document content'
   $permissions['node:community_of_practice:delete own document content'] = array(
     'roles' => array(
+      'administrator member' => 'administrator member',
       'member' => 'member',
+    ),
+  );
+
+  // Exported og permission: 'node:community_of_practice:delete own event content'
+  $permissions['node:community_of_practice:delete own event content'] = array(
+    'roles' => array(
+      'administrator member' => 'administrator member',
+      'content editor' => 'content editor',
+    ),
+  );
+
+  // Exported og permission: 'node:community_of_practice:delete own library content'
+  $permissions['node:community_of_practice:delete own library content'] = array(
+    'roles' => array(
+      'administrator member' => 'administrator member',
+      'content editor' => 'content editor',
+    ),
+  );
+
+  // Exported og permission: 'node:community_of_practice:delete own page content'
+  $permissions['node:community_of_practice:delete own page content'] = array(
+    'roles' => array(
+      'administrator member' => 'administrator member',
     ),
   );
 
@@ -111,6 +228,20 @@ function cluster_og_og_features_default_permissions() {
     ),
   );
 
+  // Exported og permission: 'node:community_of_practice:update any arbitrary_library content'
+  $permissions['node:community_of_practice:update any arbitrary_library content'] = array(
+    'roles' => array(
+      'administrator member' => 'administrator member',
+    ),
+  );
+
+  // Exported og permission: 'node:community_of_practice:update any contact content'
+  $permissions['node:community_of_practice:update any contact content'] = array(
+    'roles' => array(
+      'administrator member' => 'administrator member',
+    ),
+  );
+
   // Exported og permission: 'node:community_of_practice:update any discussion content'
   $permissions['node:community_of_practice:update any discussion content'] = array(
     'roles' => array(
@@ -125,6 +256,27 @@ function cluster_og_og_features_default_permissions() {
     ),
   );
 
+  // Exported og permission: 'node:community_of_practice:update any event content'
+  $permissions['node:community_of_practice:update any event content'] = array(
+    'roles' => array(
+      'administrator member' => 'administrator member',
+    ),
+  );
+
+  // Exported og permission: 'node:community_of_practice:update any library content'
+  $permissions['node:community_of_practice:update any library content'] = array(
+    'roles' => array(
+      'administrator member' => 'administrator member',
+    ),
+  );
+
+  // Exported og permission: 'node:community_of_practice:update any page content'
+  $permissions['node:community_of_practice:update any page content'] = array(
+    'roles' => array(
+      'administrator member' => 'administrator member',
+    ),
+  );
+
   // Exported og permission: 'node:community_of_practice:update group'
   $permissions['node:community_of_practice:update group'] = array(
     'roles' => array(
@@ -132,9 +284,26 @@ function cluster_og_og_features_default_permissions() {
     ),
   );
 
+  // Exported og permission: 'node:community_of_practice:update own arbitrary_library content'
+  $permissions['node:community_of_practice:update own arbitrary_library content'] = array(
+    'roles' => array(
+      'administrator member' => 'administrator member',
+      'content editor' => 'content editor',
+    ),
+  );
+
+  // Exported og permission: 'node:community_of_practice:update own contact content'
+  $permissions['node:community_of_practice:update own contact content'] = array(
+    'roles' => array(
+      'administrator member' => 'administrator member',
+      'content editor' => 'content editor',
+    ),
+  );
+
   // Exported og permission: 'node:community_of_practice:update own discussion content'
   $permissions['node:community_of_practice:update own discussion content'] = array(
     'roles' => array(
+      'administrator member' => 'administrator member',
       'member' => 'member',
     ),
   );
@@ -142,7 +311,31 @@ function cluster_og_og_features_default_permissions() {
   // Exported og permission: 'node:community_of_practice:update own document content'
   $permissions['node:community_of_practice:update own document content'] = array(
     'roles' => array(
+      'administrator member' => 'administrator member',
       'member' => 'member',
+    ),
+  );
+
+  // Exported og permission: 'node:community_of_practice:update own event content'
+  $permissions['node:community_of_practice:update own event content'] = array(
+    'roles' => array(
+      'administrator member' => 'administrator member',
+      'content editor' => 'content editor',
+    ),
+  );
+
+  // Exported og permission: 'node:community_of_practice:update own library content'
+  $permissions['node:community_of_practice:update own library content'] = array(
+    'roles' => array(
+      'administrator member' => 'administrator member',
+      'content editor' => 'content editor',
+    ),
+  );
+
+  // Exported og permission: 'node:community_of_practice:update own page content'
+  $permissions['node:community_of_practice:update own page content'] = array(
+    'roles' => array(
+      'administrator member' => 'administrator member',
     ),
   );
 
@@ -167,9 +360,26 @@ function cluster_og_og_features_default_permissions() {
     ),
   );
 
+  // Exported og permission: 'node:geographic_region:create arbitrary_library content'
+  $permissions['node:geographic_region:create arbitrary_library content'] = array(
+    'roles' => array(
+      'administrator member' => 'administrator member',
+      'content editor' => 'content editor',
+    ),
+  );
+
+  // Exported og permission: 'node:geographic_region:create contact content'
+  $permissions['node:geographic_region:create contact content'] = array(
+    'roles' => array(
+      'administrator member' => 'administrator member',
+      'content editor' => 'content editor',
+    ),
+  );
+
   // Exported og permission: 'node:geographic_region:create discussion content'
   $permissions['node:geographic_region:create discussion content'] = array(
     'roles' => array(
+      'administrator member' => 'administrator member',
       'member' => 'member',
     ),
   );
@@ -177,7 +387,45 @@ function cluster_og_og_features_default_permissions() {
   // Exported og permission: 'node:geographic_region:create document content'
   $permissions['node:geographic_region:create document content'] = array(
     'roles' => array(
+      'administrator member' => 'administrator member',
       'member' => 'member',
+    ),
+  );
+
+  // Exported og permission: 'node:geographic_region:create event content'
+  $permissions['node:geographic_region:create event content'] = array(
+    'roles' => array(
+      'administrator member' => 'administrator member',
+      'content editor' => 'content editor',
+    ),
+  );
+
+  // Exported og permission: 'node:geographic_region:create library content'
+  $permissions['node:geographic_region:create library content'] = array(
+    'roles' => array(
+      'administrator member' => 'administrator member',
+      'content editor' => 'content editor',
+    ),
+  );
+
+  // Exported og permission: 'node:geographic_region:create page content'
+  $permissions['node:geographic_region:create page content'] = array(
+    'roles' => array(
+      'administrator member' => 'administrator member',
+    ),
+  );
+
+  // Exported og permission: 'node:geographic_region:delete any arbitrary_library content'
+  $permissions['node:geographic_region:delete any arbitrary_library content'] = array(
+    'roles' => array(
+      'administrator member' => 'administrator member',
+    ),
+  );
+
+  // Exported og permission: 'node:geographic_region:delete any contact content'
+  $permissions['node:geographic_region:delete any contact content'] = array(
+    'roles' => array(
+      'administrator member' => 'administrator member',
     ),
   );
 
@@ -195,9 +443,47 @@ function cluster_og_og_features_default_permissions() {
     ),
   );
 
+  // Exported og permission: 'node:geographic_region:delete any event content'
+  $permissions['node:geographic_region:delete any event content'] = array(
+    'roles' => array(
+      'administrator member' => 'administrator member',
+    ),
+  );
+
+  // Exported og permission: 'node:geographic_region:delete any library content'
+  $permissions['node:geographic_region:delete any library content'] = array(
+    'roles' => array(
+      'administrator member' => 'administrator member',
+    ),
+  );
+
+  // Exported og permission: 'node:geographic_region:delete any page content'
+  $permissions['node:geographic_region:delete any page content'] = array(
+    'roles' => array(
+      'administrator member' => 'administrator member',
+    ),
+  );
+
+  // Exported og permission: 'node:geographic_region:delete own arbitrary_library content'
+  $permissions['node:geographic_region:delete own arbitrary_library content'] = array(
+    'roles' => array(
+      'administrator member' => 'administrator member',
+      'content editor' => 'content editor',
+    ),
+  );
+
+  // Exported og permission: 'node:geographic_region:delete own contact content'
+  $permissions['node:geographic_region:delete own contact content'] = array(
+    'roles' => array(
+      'administrator member' => 'administrator member',
+      'content editor' => 'content editor',
+    ),
+  );
+
   // Exported og permission: 'node:geographic_region:delete own discussion content'
   $permissions['node:geographic_region:delete own discussion content'] = array(
     'roles' => array(
+      'administrator member' => 'administrator member',
       'member' => 'member',
     ),
   );
@@ -205,7 +491,31 @@ function cluster_og_og_features_default_permissions() {
   // Exported og permission: 'node:geographic_region:delete own document content'
   $permissions['node:geographic_region:delete own document content'] = array(
     'roles' => array(
+      'administrator member' => 'administrator member',
       'member' => 'member',
+    ),
+  );
+
+  // Exported og permission: 'node:geographic_region:delete own event content'
+  $permissions['node:geographic_region:delete own event content'] = array(
+    'roles' => array(
+      'administrator member' => 'administrator member',
+      'content editor' => 'content editor',
+    ),
+  );
+
+  // Exported og permission: 'node:geographic_region:delete own library content'
+  $permissions['node:geographic_region:delete own library content'] = array(
+    'roles' => array(
+      'administrator member' => 'administrator member',
+      'content editor' => 'content editor',
+    ),
+  );
+
+  // Exported og permission: 'node:geographic_region:delete own page content'
+  $permissions['node:geographic_region:delete own page content'] = array(
+    'roles' => array(
+      'administrator member' => 'administrator member',
     ),
   );
 
@@ -251,6 +561,20 @@ function cluster_og_og_features_default_permissions() {
     ),
   );
 
+  // Exported og permission: 'node:geographic_region:update any arbitrary_library content'
+  $permissions['node:geographic_region:update any arbitrary_library content'] = array(
+    'roles' => array(
+      'administrator member' => 'administrator member',
+    ),
+  );
+
+  // Exported og permission: 'node:geographic_region:update any contact content'
+  $permissions['node:geographic_region:update any contact content'] = array(
+    'roles' => array(
+      'administrator member' => 'administrator member',
+    ),
+  );
+
   // Exported og permission: 'node:geographic_region:update any discussion content'
   $permissions['node:geographic_region:update any discussion content'] = array(
     'roles' => array(
@@ -265,6 +589,27 @@ function cluster_og_og_features_default_permissions() {
     ),
   );
 
+  // Exported og permission: 'node:geographic_region:update any event content'
+  $permissions['node:geographic_region:update any event content'] = array(
+    'roles' => array(
+      'administrator member' => 'administrator member',
+    ),
+  );
+
+  // Exported og permission: 'node:geographic_region:update any library content'
+  $permissions['node:geographic_region:update any library content'] = array(
+    'roles' => array(
+      'administrator member' => 'administrator member',
+    ),
+  );
+
+  // Exported og permission: 'node:geographic_region:update any page content'
+  $permissions['node:geographic_region:update any page content'] = array(
+    'roles' => array(
+      'administrator member' => 'administrator member',
+    ),
+  );
+
   // Exported og permission: 'node:geographic_region:update group'
   $permissions['node:geographic_region:update group'] = array(
     'roles' => array(
@@ -272,9 +617,26 @@ function cluster_og_og_features_default_permissions() {
     ),
   );
 
+  // Exported og permission: 'node:geographic_region:update own arbitrary_library content'
+  $permissions['node:geographic_region:update own arbitrary_library content'] = array(
+    'roles' => array(
+      'administrator member' => 'administrator member',
+      'content editor' => 'content editor',
+    ),
+  );
+
+  // Exported og permission: 'node:geographic_region:update own contact content'
+  $permissions['node:geographic_region:update own contact content'] = array(
+    'roles' => array(
+      'administrator member' => 'administrator member',
+      'content editor' => 'content editor',
+    ),
+  );
+
   // Exported og permission: 'node:geographic_region:update own discussion content'
   $permissions['node:geographic_region:update own discussion content'] = array(
     'roles' => array(
+      'administrator member' => 'administrator member',
       'member' => 'member',
     ),
   );
@@ -282,7 +644,31 @@ function cluster_og_og_features_default_permissions() {
   // Exported og permission: 'node:geographic_region:update own document content'
   $permissions['node:geographic_region:update own document content'] = array(
     'roles' => array(
+      'administrator member' => 'administrator member',
       'member' => 'member',
+    ),
+  );
+
+  // Exported og permission: 'node:geographic_region:update own event content'
+  $permissions['node:geographic_region:update own event content'] = array(
+    'roles' => array(
+      'administrator member' => 'administrator member',
+      'content editor' => 'content editor',
+    ),
+  );
+
+  // Exported og permission: 'node:geographic_region:update own library content'
+  $permissions['node:geographic_region:update own library content'] = array(
+    'roles' => array(
+      'administrator member' => 'administrator member',
+      'content editor' => 'content editor',
+    ),
+  );
+
+  // Exported og permission: 'node:geographic_region:update own page content'
+  $permissions['node:geographic_region:update own page content'] = array(
+    'roles' => array(
+      'administrator member' => 'administrator member',
     ),
   );
 
@@ -307,9 +693,26 @@ function cluster_og_og_features_default_permissions() {
     ),
   );
 
+  // Exported og permission: 'node:hub:create arbitrary_library content'
+  $permissions['node:hub:create arbitrary_library content'] = array(
+    'roles' => array(
+      'administrator member' => 'administrator member',
+      'content editor' => 'content editor',
+    ),
+  );
+
+  // Exported og permission: 'node:hub:create contact content'
+  $permissions['node:hub:create contact content'] = array(
+    'roles' => array(
+      'administrator member' => 'administrator member',
+      'content editor' => 'content editor',
+    ),
+  );
+
   // Exported og permission: 'node:hub:create discussion content'
   $permissions['node:hub:create discussion content'] = array(
     'roles' => array(
+      'administrator member' => 'administrator member',
       'member' => 'member',
     ),
   );
@@ -317,7 +720,45 @@ function cluster_og_og_features_default_permissions() {
   // Exported og permission: 'node:hub:create document content'
   $permissions['node:hub:create document content'] = array(
     'roles' => array(
+      'administrator member' => 'administrator member',
       'member' => 'member',
+    ),
+  );
+
+  // Exported og permission: 'node:hub:create event content'
+  $permissions['node:hub:create event content'] = array(
+    'roles' => array(
+      'administrator member' => 'administrator member',
+      'content editor' => 'content editor',
+    ),
+  );
+
+  // Exported og permission: 'node:hub:create library content'
+  $permissions['node:hub:create library content'] = array(
+    'roles' => array(
+      'administrator member' => 'administrator member',
+      'content editor' => 'content editor',
+    ),
+  );
+
+  // Exported og permission: 'node:hub:create page content'
+  $permissions['node:hub:create page content'] = array(
+    'roles' => array(
+      'administrator member' => 'administrator member',
+    ),
+  );
+
+  // Exported og permission: 'node:hub:delete any arbitrary_library content'
+  $permissions['node:hub:delete any arbitrary_library content'] = array(
+    'roles' => array(
+      'administrator member' => 'administrator member',
+    ),
+  );
+
+  // Exported og permission: 'node:hub:delete any contact content'
+  $permissions['node:hub:delete any contact content'] = array(
+    'roles' => array(
+      'administrator member' => 'administrator member',
     ),
   );
 
@@ -335,9 +776,47 @@ function cluster_og_og_features_default_permissions() {
     ),
   );
 
+  // Exported og permission: 'node:hub:delete any event content'
+  $permissions['node:hub:delete any event content'] = array(
+    'roles' => array(
+      'administrator member' => 'administrator member',
+    ),
+  );
+
+  // Exported og permission: 'node:hub:delete any library content'
+  $permissions['node:hub:delete any library content'] = array(
+    'roles' => array(
+      'administrator member' => 'administrator member',
+    ),
+  );
+
+  // Exported og permission: 'node:hub:delete any page content'
+  $permissions['node:hub:delete any page content'] = array(
+    'roles' => array(
+      'administrator member' => 'administrator member',
+    ),
+  );
+
+  // Exported og permission: 'node:hub:delete own arbitrary_library content'
+  $permissions['node:hub:delete own arbitrary_library content'] = array(
+    'roles' => array(
+      'administrator member' => 'administrator member',
+      'content editor' => 'content editor',
+    ),
+  );
+
+  // Exported og permission: 'node:hub:delete own contact content'
+  $permissions['node:hub:delete own contact content'] = array(
+    'roles' => array(
+      'administrator member' => 'administrator member',
+      'content editor' => 'content editor',
+    ),
+  );
+
   // Exported og permission: 'node:hub:delete own discussion content'
   $permissions['node:hub:delete own discussion content'] = array(
     'roles' => array(
+      'administrator member' => 'administrator member',
       'member' => 'member',
     ),
   );
@@ -345,7 +824,31 @@ function cluster_og_og_features_default_permissions() {
   // Exported og permission: 'node:hub:delete own document content'
   $permissions['node:hub:delete own document content'] = array(
     'roles' => array(
+      'administrator member' => 'administrator member',
       'member' => 'member',
+    ),
+  );
+
+  // Exported og permission: 'node:hub:delete own event content'
+  $permissions['node:hub:delete own event content'] = array(
+    'roles' => array(
+      'administrator member' => 'administrator member',
+      'content editor' => 'content editor',
+    ),
+  );
+
+  // Exported og permission: 'node:hub:delete own library content'
+  $permissions['node:hub:delete own library content'] = array(
+    'roles' => array(
+      'administrator member' => 'administrator member',
+      'content editor' => 'content editor',
+    ),
+  );
+
+  // Exported og permission: 'node:hub:delete own page content'
+  $permissions['node:hub:delete own page content'] = array(
+    'roles' => array(
+      'administrator member' => 'administrator member',
     ),
   );
 
@@ -391,6 +894,20 @@ function cluster_og_og_features_default_permissions() {
     ),
   );
 
+  // Exported og permission: 'node:hub:update any arbitrary_library content'
+  $permissions['node:hub:update any arbitrary_library content'] = array(
+    'roles' => array(
+      'administrator member' => 'administrator member',
+    ),
+  );
+
+  // Exported og permission: 'node:hub:update any contact content'
+  $permissions['node:hub:update any contact content'] = array(
+    'roles' => array(
+      'administrator member' => 'administrator member',
+    ),
+  );
+
   // Exported og permission: 'node:hub:update any discussion content'
   $permissions['node:hub:update any discussion content'] = array(
     'roles' => array(
@@ -405,6 +922,27 @@ function cluster_og_og_features_default_permissions() {
     ),
   );
 
+  // Exported og permission: 'node:hub:update any event content'
+  $permissions['node:hub:update any event content'] = array(
+    'roles' => array(
+      'administrator member' => 'administrator member',
+    ),
+  );
+
+  // Exported og permission: 'node:hub:update any library content'
+  $permissions['node:hub:update any library content'] = array(
+    'roles' => array(
+      'administrator member' => 'administrator member',
+    ),
+  );
+
+  // Exported og permission: 'node:hub:update any page content'
+  $permissions['node:hub:update any page content'] = array(
+    'roles' => array(
+      'administrator member' => 'administrator member',
+    ),
+  );
+
   // Exported og permission: 'node:hub:update group'
   $permissions['node:hub:update group'] = array(
     'roles' => array(
@@ -412,9 +950,26 @@ function cluster_og_og_features_default_permissions() {
     ),
   );
 
+  // Exported og permission: 'node:hub:update own arbitrary_library content'
+  $permissions['node:hub:update own arbitrary_library content'] = array(
+    'roles' => array(
+      'administrator member' => 'administrator member',
+      'content editor' => 'content editor',
+    ),
+  );
+
+  // Exported og permission: 'node:hub:update own contact content'
+  $permissions['node:hub:update own contact content'] = array(
+    'roles' => array(
+      'administrator member' => 'administrator member',
+      'content editor' => 'content editor',
+    ),
+  );
+
   // Exported og permission: 'node:hub:update own discussion content'
   $permissions['node:hub:update own discussion content'] = array(
     'roles' => array(
+      'administrator member' => 'administrator member',
       'member' => 'member',
     ),
   );
@@ -422,7 +977,31 @@ function cluster_og_og_features_default_permissions() {
   // Exported og permission: 'node:hub:update own document content'
   $permissions['node:hub:update own document content'] = array(
     'roles' => array(
+      'administrator member' => 'administrator member',
       'member' => 'member',
+    ),
+  );
+
+  // Exported og permission: 'node:hub:update own event content'
+  $permissions['node:hub:update own event content'] = array(
+    'roles' => array(
+      'administrator member' => 'administrator member',
+      'content editor' => 'content editor',
+    ),
+  );
+
+  // Exported og permission: 'node:hub:update own library content'
+  $permissions['node:hub:update own library content'] = array(
+    'roles' => array(
+      'administrator member' => 'administrator member',
+      'content editor' => 'content editor',
+    ),
+  );
+
+  // Exported og permission: 'node:hub:update own page content'
+  $permissions['node:hub:update own page content'] = array(
+    'roles' => array(
+      'administrator member' => 'administrator member',
     ),
   );
 
@@ -447,9 +1026,26 @@ function cluster_og_og_features_default_permissions() {
     ),
   );
 
+  // Exported og permission: 'node:response:create arbitrary_library content'
+  $permissions['node:response:create arbitrary_library content'] = array(
+    'roles' => array(
+      'administrator member' => 'administrator member',
+      'content editor' => 'content editor',
+    ),
+  );
+
+  // Exported og permission: 'node:response:create contact content'
+  $permissions['node:response:create contact content'] = array(
+    'roles' => array(
+      'administrator member' => 'administrator member',
+      'content editor' => 'content editor',
+    ),
+  );
+
   // Exported og permission: 'node:response:create discussion content'
   $permissions['node:response:create discussion content'] = array(
     'roles' => array(
+      'administrator member' => 'administrator member',
       'member' => 'member',
     ),
   );
@@ -457,7 +1053,45 @@ function cluster_og_og_features_default_permissions() {
   // Exported og permission: 'node:response:create document content'
   $permissions['node:response:create document content'] = array(
     'roles' => array(
+      'administrator member' => 'administrator member',
       'member' => 'member',
+    ),
+  );
+
+  // Exported og permission: 'node:response:create event content'
+  $permissions['node:response:create event content'] = array(
+    'roles' => array(
+      'administrator member' => 'administrator member',
+      'content editor' => 'content editor',
+    ),
+  );
+
+  // Exported og permission: 'node:response:create library content'
+  $permissions['node:response:create library content'] = array(
+    'roles' => array(
+      'administrator member' => 'administrator member',
+      'content editor' => 'content editor',
+    ),
+  );
+
+  // Exported og permission: 'node:response:create page content'
+  $permissions['node:response:create page content'] = array(
+    'roles' => array(
+      'administrator member' => 'administrator member',
+    ),
+  );
+
+  // Exported og permission: 'node:response:delete any arbitrary_library content'
+  $permissions['node:response:delete any arbitrary_library content'] = array(
+    'roles' => array(
+      'administrator member' => 'administrator member',
+    ),
+  );
+
+  // Exported og permission: 'node:response:delete any contact content'
+  $permissions['node:response:delete any contact content'] = array(
+    'roles' => array(
+      'administrator member' => 'administrator member',
     ),
   );
 
@@ -475,9 +1109,47 @@ function cluster_og_og_features_default_permissions() {
     ),
   );
 
+  // Exported og permission: 'node:response:delete any event content'
+  $permissions['node:response:delete any event content'] = array(
+    'roles' => array(
+      'administrator member' => 'administrator member',
+    ),
+  );
+
+  // Exported og permission: 'node:response:delete any library content'
+  $permissions['node:response:delete any library content'] = array(
+    'roles' => array(
+      'administrator member' => 'administrator member',
+    ),
+  );
+
+  // Exported og permission: 'node:response:delete any page content'
+  $permissions['node:response:delete any page content'] = array(
+    'roles' => array(
+      'administrator member' => 'administrator member',
+    ),
+  );
+
+  // Exported og permission: 'node:response:delete own arbitrary_library content'
+  $permissions['node:response:delete own arbitrary_library content'] = array(
+    'roles' => array(
+      'administrator member' => 'administrator member',
+      'content editor' => 'content editor',
+    ),
+  );
+
+  // Exported og permission: 'node:response:delete own contact content'
+  $permissions['node:response:delete own contact content'] = array(
+    'roles' => array(
+      'administrator member' => 'administrator member',
+      'content editor' => 'content editor',
+    ),
+  );
+
   // Exported og permission: 'node:response:delete own discussion content'
   $permissions['node:response:delete own discussion content'] = array(
     'roles' => array(
+      'administrator member' => 'administrator member',
       'member' => 'member',
     ),
   );
@@ -485,7 +1157,31 @@ function cluster_og_og_features_default_permissions() {
   // Exported og permission: 'node:response:delete own document content'
   $permissions['node:response:delete own document content'] = array(
     'roles' => array(
+      'administrator member' => 'administrator member',
       'member' => 'member',
+    ),
+  );
+
+  // Exported og permission: 'node:response:delete own event content'
+  $permissions['node:response:delete own event content'] = array(
+    'roles' => array(
+      'administrator member' => 'administrator member',
+      'content editor' => 'content editor',
+    ),
+  );
+
+  // Exported og permission: 'node:response:delete own library content'
+  $permissions['node:response:delete own library content'] = array(
+    'roles' => array(
+      'administrator member' => 'administrator member',
+      'content editor' => 'content editor',
+    ),
+  );
+
+  // Exported og permission: 'node:response:delete own page content'
+  $permissions['node:response:delete own page content'] = array(
+    'roles' => array(
+      'administrator member' => 'administrator member',
     ),
   );
 
@@ -531,6 +1227,20 @@ function cluster_og_og_features_default_permissions() {
     ),
   );
 
+  // Exported og permission: 'node:response:update any arbitrary_library content'
+  $permissions['node:response:update any arbitrary_library content'] = array(
+    'roles' => array(
+      'administrator member' => 'administrator member',
+    ),
+  );
+
+  // Exported og permission: 'node:response:update any contact content'
+  $permissions['node:response:update any contact content'] = array(
+    'roles' => array(
+      'administrator member' => 'administrator member',
+    ),
+  );
+
   // Exported og permission: 'node:response:update any discussion content'
   $permissions['node:response:update any discussion content'] = array(
     'roles' => array(
@@ -545,6 +1255,27 @@ function cluster_og_og_features_default_permissions() {
     ),
   );
 
+  // Exported og permission: 'node:response:update any event content'
+  $permissions['node:response:update any event content'] = array(
+    'roles' => array(
+      'administrator member' => 'administrator member',
+    ),
+  );
+
+  // Exported og permission: 'node:response:update any library content'
+  $permissions['node:response:update any library content'] = array(
+    'roles' => array(
+      'administrator member' => 'administrator member',
+    ),
+  );
+
+  // Exported og permission: 'node:response:update any page content'
+  $permissions['node:response:update any page content'] = array(
+    'roles' => array(
+      'administrator member' => 'administrator member',
+    ),
+  );
+
   // Exported og permission: 'node:response:update group'
   $permissions['node:response:update group'] = array(
     'roles' => array(
@@ -552,9 +1283,26 @@ function cluster_og_og_features_default_permissions() {
     ),
   );
 
+  // Exported og permission: 'node:response:update own arbitrary_library content'
+  $permissions['node:response:update own arbitrary_library content'] = array(
+    'roles' => array(
+      'administrator member' => 'administrator member',
+      'content editor' => 'content editor',
+    ),
+  );
+
+  // Exported og permission: 'node:response:update own contact content'
+  $permissions['node:response:update own contact content'] = array(
+    'roles' => array(
+      'administrator member' => 'administrator member',
+      'content editor' => 'content editor',
+    ),
+  );
+
   // Exported og permission: 'node:response:update own discussion content'
   $permissions['node:response:update own discussion content'] = array(
     'roles' => array(
+      'administrator member' => 'administrator member',
       'member' => 'member',
     ),
   );
@@ -562,7 +1310,31 @@ function cluster_og_og_features_default_permissions() {
   // Exported og permission: 'node:response:update own document content'
   $permissions['node:response:update own document content'] = array(
     'roles' => array(
+      'administrator member' => 'administrator member',
       'member' => 'member',
+    ),
+  );
+
+  // Exported og permission: 'node:response:update own event content'
+  $permissions['node:response:update own event content'] = array(
+    'roles' => array(
+      'administrator member' => 'administrator member',
+      'content editor' => 'content editor',
+    ),
+  );
+
+  // Exported og permission: 'node:response:update own library content'
+  $permissions['node:response:update own library content'] = array(
+    'roles' => array(
+      'administrator member' => 'administrator member',
+      'content editor' => 'content editor',
+    ),
+  );
+
+  // Exported og permission: 'node:response:update own page content'
+  $permissions['node:response:update own page content'] = array(
+    'roles' => array(
+      'administrator member' => 'administrator member',
     ),
   );
 
@@ -587,9 +1359,26 @@ function cluster_og_og_features_default_permissions() {
     ),
   );
 
+  // Exported og permission: 'node:strategic_advisory:create arbitrary_library content'
+  $permissions['node:strategic_advisory:create arbitrary_library content'] = array(
+    'roles' => array(
+      'administrator member' => 'administrator member',
+      'content editor' => 'content editor',
+    ),
+  );
+
+  // Exported og permission: 'node:strategic_advisory:create contact content'
+  $permissions['node:strategic_advisory:create contact content'] = array(
+    'roles' => array(
+      'administrator member' => 'administrator member',
+      'content editor' => 'content editor',
+    ),
+  );
+
   // Exported og permission: 'node:strategic_advisory:create discussion content'
   $permissions['node:strategic_advisory:create discussion content'] = array(
     'roles' => array(
+      'administrator member' => 'administrator member',
       'member' => 'member',
     ),
   );
@@ -597,7 +1386,45 @@ function cluster_og_og_features_default_permissions() {
   // Exported og permission: 'node:strategic_advisory:create document content'
   $permissions['node:strategic_advisory:create document content'] = array(
     'roles' => array(
+      'administrator member' => 'administrator member',
       'member' => 'member',
+    ),
+  );
+
+  // Exported og permission: 'node:strategic_advisory:create event content'
+  $permissions['node:strategic_advisory:create event content'] = array(
+    'roles' => array(
+      'administrator member' => 'administrator member',
+      'content editor' => 'content editor',
+    ),
+  );
+
+  // Exported og permission: 'node:strategic_advisory:create library content'
+  $permissions['node:strategic_advisory:create library content'] = array(
+    'roles' => array(
+      'administrator member' => 'administrator member',
+      'content editor' => 'content editor',
+    ),
+  );
+
+  // Exported og permission: 'node:strategic_advisory:create page content'
+  $permissions['node:strategic_advisory:create page content'] = array(
+    'roles' => array(
+      'administrator member' => 'administrator member',
+    ),
+  );
+
+  // Exported og permission: 'node:strategic_advisory:delete any arbitrary_library content'
+  $permissions['node:strategic_advisory:delete any arbitrary_library content'] = array(
+    'roles' => array(
+      'administrator member' => 'administrator member',
+    ),
+  );
+
+  // Exported og permission: 'node:strategic_advisory:delete any contact content'
+  $permissions['node:strategic_advisory:delete any contact content'] = array(
+    'roles' => array(
+      'administrator member' => 'administrator member',
     ),
   );
 
@@ -615,9 +1442,47 @@ function cluster_og_og_features_default_permissions() {
     ),
   );
 
+  // Exported og permission: 'node:strategic_advisory:delete any event content'
+  $permissions['node:strategic_advisory:delete any event content'] = array(
+    'roles' => array(
+      'administrator member' => 'administrator member',
+    ),
+  );
+
+  // Exported og permission: 'node:strategic_advisory:delete any library content'
+  $permissions['node:strategic_advisory:delete any library content'] = array(
+    'roles' => array(
+      'administrator member' => 'administrator member',
+    ),
+  );
+
+  // Exported og permission: 'node:strategic_advisory:delete any page content'
+  $permissions['node:strategic_advisory:delete any page content'] = array(
+    'roles' => array(
+      'administrator member' => 'administrator member',
+    ),
+  );
+
+  // Exported og permission: 'node:strategic_advisory:delete own arbitrary_library content'
+  $permissions['node:strategic_advisory:delete own arbitrary_library content'] = array(
+    'roles' => array(
+      'administrator member' => 'administrator member',
+      'content editor' => 'content editor',
+    ),
+  );
+
+  // Exported og permission: 'node:strategic_advisory:delete own contact content'
+  $permissions['node:strategic_advisory:delete own contact content'] = array(
+    'roles' => array(
+      'administrator member' => 'administrator member',
+      'content editor' => 'content editor',
+    ),
+  );
+
   // Exported og permission: 'node:strategic_advisory:delete own discussion content'
   $permissions['node:strategic_advisory:delete own discussion content'] = array(
     'roles' => array(
+      'administrator member' => 'administrator member',
       'member' => 'member',
     ),
   );
@@ -625,7 +1490,31 @@ function cluster_og_og_features_default_permissions() {
   // Exported og permission: 'node:strategic_advisory:delete own document content'
   $permissions['node:strategic_advisory:delete own document content'] = array(
     'roles' => array(
+      'administrator member' => 'administrator member',
       'member' => 'member',
+    ),
+  );
+
+  // Exported og permission: 'node:strategic_advisory:delete own event content'
+  $permissions['node:strategic_advisory:delete own event content'] = array(
+    'roles' => array(
+      'administrator member' => 'administrator member',
+      'content editor' => 'content editor',
+    ),
+  );
+
+  // Exported og permission: 'node:strategic_advisory:delete own library content'
+  $permissions['node:strategic_advisory:delete own library content'] = array(
+    'roles' => array(
+      'administrator member' => 'administrator member',
+      'content editor' => 'content editor',
+    ),
+  );
+
+  // Exported og permission: 'node:strategic_advisory:delete own page content'
+  $permissions['node:strategic_advisory:delete own page content'] = array(
+    'roles' => array(
+      'administrator member' => 'administrator member',
     ),
   );
 
@@ -667,6 +1556,20 @@ function cluster_og_og_features_default_permissions() {
     ),
   );
 
+  // Exported og permission: 'node:strategic_advisory:update any arbitrary_library content'
+  $permissions['node:strategic_advisory:update any arbitrary_library content'] = array(
+    'roles' => array(
+      'administrator member' => 'administrator member',
+    ),
+  );
+
+  // Exported og permission: 'node:strategic_advisory:update any contact content'
+  $permissions['node:strategic_advisory:update any contact content'] = array(
+    'roles' => array(
+      'administrator member' => 'administrator member',
+    ),
+  );
+
   // Exported og permission: 'node:strategic_advisory:update any discussion content'
   $permissions['node:strategic_advisory:update any discussion content'] = array(
     'roles' => array(
@@ -681,6 +1584,27 @@ function cluster_og_og_features_default_permissions() {
     ),
   );
 
+  // Exported og permission: 'node:strategic_advisory:update any event content'
+  $permissions['node:strategic_advisory:update any event content'] = array(
+    'roles' => array(
+      'administrator member' => 'administrator member',
+    ),
+  );
+
+  // Exported og permission: 'node:strategic_advisory:update any library content'
+  $permissions['node:strategic_advisory:update any library content'] = array(
+    'roles' => array(
+      'administrator member' => 'administrator member',
+    ),
+  );
+
+  // Exported og permission: 'node:strategic_advisory:update any page content'
+  $permissions['node:strategic_advisory:update any page content'] = array(
+    'roles' => array(
+      'administrator member' => 'administrator member',
+    ),
+  );
+
   // Exported og permission: 'node:strategic_advisory:update group'
   $permissions['node:strategic_advisory:update group'] = array(
     'roles' => array(
@@ -688,9 +1612,26 @@ function cluster_og_og_features_default_permissions() {
     ),
   );
 
+  // Exported og permission: 'node:strategic_advisory:update own arbitrary_library content'
+  $permissions['node:strategic_advisory:update own arbitrary_library content'] = array(
+    'roles' => array(
+      'administrator member' => 'administrator member',
+      'content editor' => 'content editor',
+    ),
+  );
+
+  // Exported og permission: 'node:strategic_advisory:update own contact content'
+  $permissions['node:strategic_advisory:update own contact content'] = array(
+    'roles' => array(
+      'administrator member' => 'administrator member',
+      'content editor' => 'content editor',
+    ),
+  );
+
   // Exported og permission: 'node:strategic_advisory:update own discussion content'
   $permissions['node:strategic_advisory:update own discussion content'] = array(
     'roles' => array(
+      'administrator member' => 'administrator member',
       'member' => 'member',
     ),
   );
@@ -698,7 +1639,31 @@ function cluster_og_og_features_default_permissions() {
   // Exported og permission: 'node:strategic_advisory:update own document content'
   $permissions['node:strategic_advisory:update own document content'] = array(
     'roles' => array(
+      'administrator member' => 'administrator member',
       'member' => 'member',
+    ),
+  );
+
+  // Exported og permission: 'node:strategic_advisory:update own event content'
+  $permissions['node:strategic_advisory:update own event content'] = array(
+    'roles' => array(
+      'administrator member' => 'administrator member',
+      'content editor' => 'content editor',
+    ),
+  );
+
+  // Exported og permission: 'node:strategic_advisory:update own library content'
+  $permissions['node:strategic_advisory:update own library content'] = array(
+    'roles' => array(
+      'administrator member' => 'administrator member',
+      'content editor' => 'content editor',
+    ),
+  );
+
+  // Exported og permission: 'node:strategic_advisory:update own page content'
+  $permissions['node:strategic_advisory:update own page content'] = array(
+    'roles' => array(
+      'administrator member' => 'administrator member',
     ),
   );
 
@@ -723,9 +1688,26 @@ function cluster_og_og_features_default_permissions() {
     ),
   );
 
+  // Exported og permission: 'node:working_group:create arbitrary_library content'
+  $permissions['node:working_group:create arbitrary_library content'] = array(
+    'roles' => array(
+      'administrator member' => 'administrator member',
+      'content editor' => 'content editor',
+    ),
+  );
+
+  // Exported og permission: 'node:working_group:create contact content'
+  $permissions['node:working_group:create contact content'] = array(
+    'roles' => array(
+      'administrator member' => 'administrator member',
+      'content editor' => 'content editor',
+    ),
+  );
+
   // Exported og permission: 'node:working_group:create discussion content'
   $permissions['node:working_group:create discussion content'] = array(
     'roles' => array(
+      'administrator member' => 'administrator member',
       'member' => 'member',
     ),
   );
@@ -733,7 +1715,45 @@ function cluster_og_og_features_default_permissions() {
   // Exported og permission: 'node:working_group:create document content'
   $permissions['node:working_group:create document content'] = array(
     'roles' => array(
+      'administrator member' => 'administrator member',
       'member' => 'member',
+    ),
+  );
+
+  // Exported og permission: 'node:working_group:create event content'
+  $permissions['node:working_group:create event content'] = array(
+    'roles' => array(
+      'administrator member' => 'administrator member',
+      'content editor' => 'content editor',
+    ),
+  );
+
+  // Exported og permission: 'node:working_group:create library content'
+  $permissions['node:working_group:create library content'] = array(
+    'roles' => array(
+      'administrator member' => 'administrator member',
+      'content editor' => 'content editor',
+    ),
+  );
+
+  // Exported og permission: 'node:working_group:create page content'
+  $permissions['node:working_group:create page content'] = array(
+    'roles' => array(
+      'administrator member' => 'administrator member',
+    ),
+  );
+
+  // Exported og permission: 'node:working_group:delete any arbitrary_library content'
+  $permissions['node:working_group:delete any arbitrary_library content'] = array(
+    'roles' => array(
+      'administrator member' => 'administrator member',
+    ),
+  );
+
+  // Exported og permission: 'node:working_group:delete any contact content'
+  $permissions['node:working_group:delete any contact content'] = array(
+    'roles' => array(
+      'administrator member' => 'administrator member',
     ),
   );
 
@@ -751,9 +1771,47 @@ function cluster_og_og_features_default_permissions() {
     ),
   );
 
+  // Exported og permission: 'node:working_group:delete any event content'
+  $permissions['node:working_group:delete any event content'] = array(
+    'roles' => array(
+      'administrator member' => 'administrator member',
+    ),
+  );
+
+  // Exported og permission: 'node:working_group:delete any library content'
+  $permissions['node:working_group:delete any library content'] = array(
+    'roles' => array(
+      'administrator member' => 'administrator member',
+    ),
+  );
+
+  // Exported og permission: 'node:working_group:delete any page content'
+  $permissions['node:working_group:delete any page content'] = array(
+    'roles' => array(
+      'administrator member' => 'administrator member',
+    ),
+  );
+
+  // Exported og permission: 'node:working_group:delete own arbitrary_library content'
+  $permissions['node:working_group:delete own arbitrary_library content'] = array(
+    'roles' => array(
+      'administrator member' => 'administrator member',
+      'content editor' => 'content editor',
+    ),
+  );
+
+  // Exported og permission: 'node:working_group:delete own contact content'
+  $permissions['node:working_group:delete own contact content'] = array(
+    'roles' => array(
+      'administrator member' => 'administrator member',
+      'content editor' => 'content editor',
+    ),
+  );
+
   // Exported og permission: 'node:working_group:delete own discussion content'
   $permissions['node:working_group:delete own discussion content'] = array(
     'roles' => array(
+      'administrator member' => 'administrator member',
       'member' => 'member',
     ),
   );
@@ -761,7 +1819,31 @@ function cluster_og_og_features_default_permissions() {
   // Exported og permission: 'node:working_group:delete own document content'
   $permissions['node:working_group:delete own document content'] = array(
     'roles' => array(
+      'administrator member' => 'administrator member',
       'member' => 'member',
+    ),
+  );
+
+  // Exported og permission: 'node:working_group:delete own event content'
+  $permissions['node:working_group:delete own event content'] = array(
+    'roles' => array(
+      'administrator member' => 'administrator member',
+      'content editor' => 'content editor',
+    ),
+  );
+
+  // Exported og permission: 'node:working_group:delete own library content'
+  $permissions['node:working_group:delete own library content'] = array(
+    'roles' => array(
+      'administrator member' => 'administrator member',
+      'content editor' => 'content editor',
+    ),
+  );
+
+  // Exported og permission: 'node:working_group:delete own page content'
+  $permissions['node:working_group:delete own page content'] = array(
+    'roles' => array(
+      'administrator member' => 'administrator member',
     ),
   );
 
@@ -803,6 +1885,20 @@ function cluster_og_og_features_default_permissions() {
     ),
   );
 
+  // Exported og permission: 'node:working_group:update any arbitrary_library content'
+  $permissions['node:working_group:update any arbitrary_library content'] = array(
+    'roles' => array(
+      'administrator member' => 'administrator member',
+    ),
+  );
+
+  // Exported og permission: 'node:working_group:update any contact content'
+  $permissions['node:working_group:update any contact content'] = array(
+    'roles' => array(
+      'administrator member' => 'administrator member',
+    ),
+  );
+
   // Exported og permission: 'node:working_group:update any discussion content'
   $permissions['node:working_group:update any discussion content'] = array(
     'roles' => array(
@@ -817,6 +1913,27 @@ function cluster_og_og_features_default_permissions() {
     ),
   );
 
+  // Exported og permission: 'node:working_group:update any event content'
+  $permissions['node:working_group:update any event content'] = array(
+    'roles' => array(
+      'administrator member' => 'administrator member',
+    ),
+  );
+
+  // Exported og permission: 'node:working_group:update any library content'
+  $permissions['node:working_group:update any library content'] = array(
+    'roles' => array(
+      'administrator member' => 'administrator member',
+    ),
+  );
+
+  // Exported og permission: 'node:working_group:update any page content'
+  $permissions['node:working_group:update any page content'] = array(
+    'roles' => array(
+      'administrator member' => 'administrator member',
+    ),
+  );
+
   // Exported og permission: 'node:working_group:update group'
   $permissions['node:working_group:update group'] = array(
     'roles' => array(
@@ -824,9 +1941,26 @@ function cluster_og_og_features_default_permissions() {
     ),
   );
 
+  // Exported og permission: 'node:working_group:update own arbitrary_library content'
+  $permissions['node:working_group:update own arbitrary_library content'] = array(
+    'roles' => array(
+      'administrator member' => 'administrator member',
+      'content editor' => 'content editor',
+    ),
+  );
+
+  // Exported og permission: 'node:working_group:update own contact content'
+  $permissions['node:working_group:update own contact content'] = array(
+    'roles' => array(
+      'administrator member' => 'administrator member',
+      'content editor' => 'content editor',
+    ),
+  );
+
   // Exported og permission: 'node:working_group:update own discussion content'
   $permissions['node:working_group:update own discussion content'] = array(
     'roles' => array(
+      'administrator member' => 'administrator member',
       'member' => 'member',
     ),
   );
@@ -834,7 +1968,31 @@ function cluster_og_og_features_default_permissions() {
   // Exported og permission: 'node:working_group:update own document content'
   $permissions['node:working_group:update own document content'] = array(
     'roles' => array(
+      'administrator member' => 'administrator member',
       'member' => 'member',
+    ),
+  );
+
+  // Exported og permission: 'node:working_group:update own event content'
+  $permissions['node:working_group:update own event content'] = array(
+    'roles' => array(
+      'administrator member' => 'administrator member',
+      'content editor' => 'content editor',
+    ),
+  );
+
+  // Exported og permission: 'node:working_group:update own library content'
+  $permissions['node:working_group:update own library content'] = array(
+    'roles' => array(
+      'administrator member' => 'administrator member',
+      'content editor' => 'content editor',
+    ),
+  );
+
+  // Exported og permission: 'node:working_group:update own page content'
+  $permissions['node:working_group:update own page content'] = array(
+    'roles' => array(
+      'administrator member' => 'administrator member',
     ),
   );
 

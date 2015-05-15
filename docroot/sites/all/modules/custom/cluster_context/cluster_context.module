@@ -22,7 +22,7 @@ function cluster_context_links($node) {
   }
 
   $manager = GroupContentManager::getInstance($node);
-
+  //dpm($node);
   $links = array();
 
   if ($manager->isEnabled('documents')) {
@@ -94,7 +94,7 @@ function cluster_context_links($node) {
   }
 
   if (node_access('create', 'contact')) {
-    $links['new-page'] = array(
+    $links['new-contact'] = array(
       'title' => t('Create coordination team member'),
       'href' => 'node/add/contact',
       'query' => array(
