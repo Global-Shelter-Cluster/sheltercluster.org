@@ -51,7 +51,7 @@ function _shelter_base_required_contrib() {
     'flag', 'i18n', 'i18n_menu', 'i18n_string', 'i18n_variable', 'imce', 'imce_wysiwyg', 'link',
     'libraries', 'name', 'og', 'og_access', 'og_register', 'og_ui', 'pathauto', 'respondjs', 'search_api',
     'search_api_db', 'search_api_facetapi', 'strongarm', 'title', 'token',
-    'transliteration',  'underscore', 'uuid', 'uuid_features', 'url', 'variable',
+    'transliteration',  'underscore', 'url', 'variable',
     'views', 'views_ui', 'views_bulk_operations', 'wysiwyg',
   );
 }
@@ -733,4 +733,20 @@ function shelter_base_update_7075() {
  */
 function shelter_base_update_7076() {
   features_revert_module('cluster_docs');
+}
+
+/**
+ * Make it so that taxonomy terms are no longer exported in feature.
+ */
+function shelter_base_update_7077() {
+  features_revert_module('cluster_taxonomy');
+  features_revert_module('cluster_docs');
+  features_revert_module('cluster_og');
+}
+
+/**
+ * Disable UUID.
+ */
+function shelter_base_update_7078() {
+  module_disable('uuid');
 }
