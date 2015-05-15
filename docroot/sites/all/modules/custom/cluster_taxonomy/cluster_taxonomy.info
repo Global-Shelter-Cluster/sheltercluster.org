@@ -1,5 +1,5 @@
 name = Cluster Taxonomy
-description = Feature module which exports vocabularies and uses uuid to export terms
+description = Feature module which exports vocabularies.
 core = 7.x
 package = Cluster
 dependencies[] = cluster_docs
@@ -71,5 +71,5 @@ features[taxonomy][] = toolkit
 features[variable][] = uuid_features_entity_taxonomy_term
 features[variable][] = uuid_features_file_taxonomy_term
 features[variable][] = uuid_features_vocabulary_terms
-mtime = 1431721672
+mtime = 1431723042
 project path = sites/all/modules/custom
