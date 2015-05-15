@@ -105,6 +105,52 @@ function cluster_docs_uuid_features_default_terms() {
     'description_original' => 'Minutes of meetings',
   );
   $terms[] = array(
+    'name' => 'Case study',
+    'description' => NULL,
+    'format' => 'filtered_html',
+    'weight' => 0,
+    'uuid' => '6dadc354-33ff-477a-861b-3f4e8173d0e7',
+    'vocabulary_machine_name' => 'document_type',
+    'name_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => 'Case study',
+          'format' => NULL,
+          'safe_value' => 'Case study',
+        ),
+      ),
+    ),
+    'description_field' => array(
+      'en' => array(
+        0 => array(
+          'value' => '',
+          'summary' => NULL,
+          'format' => 'filtered_html',
+          'safe_value' => '',
+          'safe_summary' => '',
+        ),
+      ),
+    ),
+    'name_original' => 'Case study',
+    'translations' => array(
+      'original' => 'en',
+      'data' => array(
+        'en' => array(
+          'entity_type' => 'taxonomy_term',
+          'entity_id' => 157,
+          'language' => 'en',
+          'source' => '',
+          'uid' => 70,
+          'status' => 1,
+          'translate' => 0,
+          'created' => 1425553477,
+          'changed' => 1425553477,
+        ),
+      ),
+    ),
+    'description_original' => '',
+  );
+  $terms[] = array(
     'name' => 'Attendance List',
     'description' => 'Attendance list',
     'format' => 'filtered_html',

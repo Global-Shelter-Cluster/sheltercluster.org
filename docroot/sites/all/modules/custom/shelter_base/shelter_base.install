@@ -727,3 +727,10 @@ function shelter_base_update_7074() {
 function shelter_base_update_7075() {
   features_revert_module('cluster_og');
 }
+
+/**
+ * Revert cluster og feature for group type specific roles and permissions.
+ */
+function shelter_base_update_7076() {
+  features_revert_module('cluster_docs');
+}
