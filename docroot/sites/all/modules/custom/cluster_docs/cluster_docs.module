@@ -613,3 +613,41 @@ function cluster_docs_theme() {
     )
   );
 }
+
+/**
+ * Implements hook_node_presave().
+ */
+function cluster_docs_node_presave($node) {
+  if ($node->type != 'document') {
+    return;
+  }
+
+  if ($node->nid) {
+    //Only do this for new nodes.
+    return;
+  }
+
+  $wrapper = entity_metadata_wrapper('node', $node);
+
+  $groups = $wrapper->og_group_ref->value();
+  $responses = array();
+  $new_groups = array();
+  foreach ($groups as $group) {
+    if ($group->type == 'response') {
+      $responses[] = $group->nid;
+    }
+    if (!in_array($group->type, array('working_group', 'hub', 'strategic_advisory'))) {
+      continue;
+    }
+    $group_wrapper = entity_metadata_wrapper('node', $group);
+    $parent_response = $group_wrapper->field_parent_response->value();
+    if ($parent_response && !in_array($parent_response->nid, $responses)) {
+      $new_groups[] = $parent_response;
+      $responses[] = $parent_response->nid;
+    }
+  }
+
+  if ($new_groups) {
+    $wrapper->og_group_ref->set(array_merge($groups, $new_groups));
+  }
+}
