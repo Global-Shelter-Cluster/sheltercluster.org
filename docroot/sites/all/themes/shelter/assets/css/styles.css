@@ -284,14 +284,14 @@ th {
   background-image: linear-gradient(#e1e1e1, #e3e3e3 60%, #e1e1e1);
 }
 
-.not-underlined-links, #featured-documents li .document-information .size-type a, #secondary-nav .nav-items .nav-secondary-items a, #contextual-navigation a:hover, #contextual-navigation a:active, .node-type-discussion .comment a {
+.not-underlined-links, #featured-documents li .document-title a, #secondary-nav .nav-items .nav-secondary-items a, #contextual-navigation a:hover, #contextual-navigation a:active, .node-type-discussion .comment a {
   position: relative;
   text-decoration: none;
 }
-.not-underlined-links:hover, #featured-documents li .document-information .size-type a:hover, #secondary-nav .nav-items .nav-secondary-items a:hover, #contextual-navigation a:hover, .node-type-discussion .comment a:hover, .not-underlined-links:active, #featured-documents li .document-information .size-type a:active, #secondary-nav .nav-items .nav-secondary-items a:active, #contextual-navigation a:active, .node-type-discussion .comment a:active {
+.not-underlined-links:hover, #featured-documents li .document-title a:hover, #secondary-nav .nav-items .nav-secondary-items a:hover, #contextual-navigation a:hover, .node-type-discussion .comment a:hover, .not-underlined-links:active, #featured-documents li .document-title a:active, #secondary-nav .nav-items .nav-secondary-items a:active, #contextual-navigation a:active, .node-type-discussion .comment a:active {
   text-decoration: none;
 }
-.not-underlined-links:hover:after, #featured-documents li .document-information .size-type a:hover:after, #secondary-nav .nav-items .nav-secondary-items a:hover:after, #contextual-navigation a:hover:after, .node-type-discussion .comment a:hover:after, .not-underlined-links:active:after, #featured-documents li .document-information .size-type a:active:after, #secondary-nav .nav-items .nav-secondary-items a:active:after, #contextual-navigation a:active:after, .node-type-discussion .comment a:active:after {
+.not-underlined-links:hover:after, #featured-documents li .document-title a:hover:after, #secondary-nav .nav-items .nav-secondary-items a:hover:after, #contextual-navigation a:hover:after, .node-type-discussion .comment a:hover:after, .not-underlined-links:active:after, #featured-documents li .document-title a:active:after, #secondary-nav .nav-items .nav-secondary-items a:active:after, #contextual-navigation a:active:after, .node-type-discussion .comment a:active:after {
   content: '';
   width: 100%;
   position: absolute;
@@ -637,77 +637,50 @@ body {
   overflow: hidden;
 }
 #featured-documents li .document-title {
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  width: 100%;
-  background: black;
-  opacity: 1;
-  z-index: 10;
+  padding: 16px 0 0 0;
+  padding: 1rem 0 0 0;
 }
 #featured-documents li .document-title h2 {
   color: #fff;
   margin: 0;
-  font-size: 25.6px;
-  font-size: 1.6rem;
-  padding: 11.2px 16px;
-  padding: 0.7rem 1rem;
+  font-size: 17.6px;
+  font-size: 1.1rem;
   border: none;
+  display: inline-block;
 }
-#featured-documents li .document-title h2 a {
-  color: #fff;
-  text-decoration: none;
+#featured-documents li .document-title .size-type {
+  font-size: 10.4px;
+  font-size: 0.65rem;
+  margin: 0 0 0 10.4px;
+  margin: 0 0 0 0.65rem;
+  text-transform: uppercase;
+  display: inline-block;
 }
-#featured-documents li .document-title h2 a .svg {
-  position: relative;
-  top: 5px;
-  width: 24px;
-  fill: #fff;
-  margin-right: 7px;
-}
-#featured-documents li .document-title h2 span {
-  top: 0;
-  left: 10px;
-  font-size: 0.85rem;
-  text-transform: lowercase;
-  font-weight: normal;
-  color: #cccccc;
+#featured-documents li .document-title a {
+  font-weight: bold;
+  color: white;
 }
 #featured-documents li .document-information {
   background: #242424;
 }
-#featured-documents li .document-information .size-type {
-  padding-top: 16px;
-  padding-top: 1rem;
-  font-size: 10.4px;
-  font-size: 0.65rem;
-  text-transform: uppercase;
-}
-#featured-documents li .document-information .size-type a {
-  font-weight: bold;
-  color: white;
-}
 #featured-documents li .document-information p {
-  padding: 16px;
-  padding: 1rem;
-  margin: 4px 0 0 0;
-  margin: 0.25rem 0 0 0;
+  padding: 10.4px;
+  padding: 0.65rem;
   font-size: 12.8px;
   font-size: 0.8rem;
-  text-transform: uppercase;
+  margin: 0;
   color: #d4d4d4;
 }
 #featured-documents li .document-information img {
-  width: 290px;
+  width: 185px;
   float: left;
-  margin-right: 15.2px;
-  margin-right: 0.95rem;
 }
 #featured-documents li .document-information .image-container {
   float: left;
   background: white;
   margin-right: 16px;
   margin-right: 1rem;
+  border-right: 3px solid #000;
 }
 #featured-documents .image-document {
   max-height: 640px;
