@@ -765,3 +765,10 @@ function shelter_base_update_7079() {
 function shelter_base_update_7080() {
   module_enable(array('cluster_content'));
 }
+
+/**
+ * Text format and wysiwyg config.
+ */
+function shelter_base_update_7081() {
+  features_revert_module('shelter_base');
+}
