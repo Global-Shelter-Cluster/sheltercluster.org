@@ -300,8 +300,7 @@ function cluster_og_hot_responses() {
   }
 
   // Get hot response nodes.
-  if ($res = _cluster_og_get_hot_responses()) {
-    $nodes = node_load_multiple(array_keys($res));
+  if ($nodes = _cluster_og_get_hot_responses()) {
     $responses = array();
     foreach ($nodes as $node) {
       try {
@@ -337,7 +336,6 @@ function cluster_og_hot_responses_list() {
   $items = array();
   // Get hot response nodes.
   if ($nodes = _cluster_og_get_hot_responses()) {
-    $nodes = node_load_multiple(array_keys($nodes));
     $responses = array();
     foreach ($nodes as $node) {
       try {
@@ -365,16 +363,17 @@ function cluster_og_hot_responses_list() {
 /**
  * EntityFieldQuery wrapper
  * @return
- *   All published hot responses node ids or FALSE.
+ *   All featured responses node in the nodequeue.
  */
 function _cluster_og_get_hot_responses() {
-  $query = new EntityFieldQuery();
-  $res = $query->entityCondition('entity_type', 'node')
-    ->entityCondition('bundle', 'response')
-    ->propertyCondition('status', NODE_PUBLISHED)
-    ->fieldCondition('field_is_hot_response', 'value', 1)
-    ->execute();
-  return isset($res['node']) ? $res['node'] : FALSE;
+  $featured_responses_queue = nodequeue_load_queue_by_name('featured_responses');
+  $nodes = nodequeue_load_nodes($featured_responses_queue->qid);
+
+  if (count($nodes) == 0) {
+    return FALSE;
+  }
+
+  return $nodes;
 }
 
 /**
