@@ -800,3 +800,11 @@ function shelter_base_update_7084() {
 function shelter_base_update_7085() {
   module_enable(array('nodequeue'));
 }
+
+/**
+ * Re-index site.
+ */
+function shelter_base_update_7086() {
+  features_revert(array('cluster_search'));
+  search_api_index_reindex('default_node_index');
+}
