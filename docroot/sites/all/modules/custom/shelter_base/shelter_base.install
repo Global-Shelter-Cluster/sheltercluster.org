@@ -355,7 +355,7 @@ function shelter_base_update_7036() {
 }
 
 /**
- * Revert shelter_base 
+ * Revert shelter_base
  */
 function shelter_base_update_7037() {
   features_revert_module('shelter_base');
@@ -384,21 +384,21 @@ function shelter_base_update_7040() {
 }
 
 /**
- * Revert event feature. 
+ * Revert event feature.
  */
 function shelter_base_update_7041() {
   features_revert_module('cluster_events');
 }
 
 /**
- * Revert og feature - add multilibgual features to COP. 
+ * Revert og feature - add multilibgual features to COP.
  */
 function shelter_base_update_7042() {
   features_revert_module('cluster_og');
 }
 
 /**
- * Revert workflow feature. 
+ * Revert workflow feature.
  */
 function shelter_base_update_7043() {
   features_revert_module('cluster_workflow');
@@ -511,7 +511,7 @@ function shelter_base_update_7052() {
 }
 
 /**
- * Revert base features. 
+ * Revert base features.
  */
 function shelter_base_update_7053() {
   features_revert_module('shelter_base');
@@ -774,8 +774,15 @@ function shelter_base_update_7081() {
 }
 
 /**
- * Text format FULL HTML permission for dedicated role.
+ * Hide is_global_library field.
  */
 function shelter_base_update_7082() {
+  features_revert_module('cluster_libraries');
+}
+
+/**
+ * Text format FULL HTML permission for dedicated role.
+ */
+function shelter_base_update_7083() {
   features_revert_module('shelter_base');
 }
