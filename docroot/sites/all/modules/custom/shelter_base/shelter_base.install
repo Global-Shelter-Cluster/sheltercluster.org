@@ -815,3 +815,10 @@ function shelter_base_update_7086() {
 function shelter_base_update_7087() {
   module_enable(array('fe_nodequeue'));
 }
+
+/**
+ * Revert cluster_og
+ */
+function shelter_base_update_7088() {
+  features_revert_module('cluster_og');
+}
