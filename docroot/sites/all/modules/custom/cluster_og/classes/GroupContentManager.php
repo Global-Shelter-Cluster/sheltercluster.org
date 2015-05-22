@@ -149,7 +149,7 @@ class GroupContentManager {
 
   /**
    * Get contact content for the group.
-   *  @return 
+   *  @return
    */
   public function getContactMembers() {
     $query = new EntityFieldQuery();
@@ -221,7 +221,7 @@ class GroupContentManager {
    *  @return
    *    Document node ids for group or FALSE if none exist.
    */
-  public function getRecentDocuments($range = 5) {
+  public function getRecentDocuments($range = 6) {
     $query = new EntityFieldQuery();
     $res = $query->entityCondition('entity_type', 'node')
       ->entityCondition('bundle', 'document')
@@ -233,6 +233,14 @@ class GroupContentManager {
 
     if (!isset($res['node'])) {
       return FALSE;
+    }
+
+    // Insure an even number of recent documents.
+    if ((count($res['node']) % 2) == 1) {
+      array_pop($res['node']);
+      if (count($res['node']) == 0) {
+        return FALSE;
+      }
     }
 
     return array_keys($res['node']);
@@ -480,7 +488,7 @@ class GroupContentManagerStategicAdvisory extends GroupContentManager {
   //protected $parent_field = 'field_parent_region';
 
   /**
-   * Get the node to which a Strategic Advisory Group is associated. 
+   * Get the node to which a Strategic Advisory Group is associated.
    * @return
    *   The parent node for Strategic Advisory group or FALSE if none exist.
    */
