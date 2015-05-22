@@ -786,3 +786,10 @@ function shelter_base_update_7082() {
 function shelter_base_update_7083() {
   features_revert_module('shelter_base');
 }
+
+/**
+ * Export full html filter permission.
+ */
+function shelter_base_update_7084() {
+  features_revert_module('shelter_base');
+}
