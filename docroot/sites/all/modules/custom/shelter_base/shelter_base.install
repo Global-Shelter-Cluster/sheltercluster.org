@@ -793,3 +793,10 @@ function shelter_base_update_7083() {
 function shelter_base_update_7084() {
   features_revert_module('shelter_base');
 }
+
+/**
+ * Enable nodequeue
+ */
+function shelter_base_update_7085() {
+  module_enable(array('nodequeue'));
+}
