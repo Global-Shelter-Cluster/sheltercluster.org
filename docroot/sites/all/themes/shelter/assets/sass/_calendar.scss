@@ -51,17 +51,6 @@
   }
 
 
-  @include breakpoint(500px 979px) {
-    display: table;
-
-    > div {
-      display: table-cell;
-      vertical-align: middle;
-      text-align: center;
-      @include rem(padding-left, 2rem);
-    }
-  }
-
   @include breakpoint(980px) {
     display: block;
     width: auto;
@@ -96,12 +85,6 @@
   @include rem(text-indent, -2.25rem);
   @include rem(margin, 0 0.625rem 0 3.125rem);
   @include rem(padding, 0.5rem 0 0.5rem 0);
-  @include breakpoint(500px 979px) {
-    border-bottom: none;
-    border-right: 1px dashed rgb(255,255,255);
-    width: 200px;
-    @include rem(text-indent, 1.5rem);
-  }
   sup {
     position: relative;
     vertical-align: top;

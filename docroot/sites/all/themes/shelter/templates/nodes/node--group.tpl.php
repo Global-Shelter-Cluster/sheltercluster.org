@@ -38,6 +38,14 @@
       </section>
     <?php endif; ?>
 
+    <?php if ($content['upcoming_event']): ?>
+      <?php print render($content['upcoming_event']); ?>
+    <?php endif; ?>
+
+    <?php if ($content['recent_discussions']): ?>
+      <?php print render($content['recent_discussions']); ?>
+    <?php endif; ?>
+
   </div>
 
   <div class="main-column">
@@ -72,32 +80,11 @@
       </section>
     <?php endif; ?>
 
-  </div>
-
-</section>
-
-
-<section id="mid-content" class="clearfix">
-
-  <div class="main-column">
-
     <?php if ($content['recent_documents']): ?>
       <h3 data-collapsible="recent-documents">Recent Documents</h3>
       <section id="recent-documents">
         <?php print render($content['recent_documents']); ?>
       </section>
-    <?php endif; ?>
-
-  </div>
-
-  <div class="side-column">
-
-    <?php if ($content['upcoming_event']): ?>
-      <?php print render($content['upcoming_event']); ?>
-    <?php endif; ?>
-
-    <?php if ($content['recent_discussions']): ?>
-      <?php print render($content['recent_discussions']); ?>
     <?php endif; ?>
 
   </div>
