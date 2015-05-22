@@ -123,7 +123,7 @@ function cluster_docs_page($query, $show_facets = TRUE, $default_sort = NULL, $d
   $sort_options = array(
     'title' => 'title_field',
     'size' => 'field_file:file:size',
-    'date' => 'created',
+    'date' => 'field_report_meeting_date',
   );
   $sort_key = $default_sort;
   $sort_direction = isset($_GET['sort_direction'])
@@ -519,6 +519,10 @@ function cluster_docs_prepare_row_data($nids) {
       if ($link = $wrapper->field_link->value()) {
         $doc['is_link'] = TRUE;
       }
+
+      // Set the report/meeting date.
+      $report_meeting_date = $wrapper->field_report_meeting_date->value();
+      $doc['date'] = $report_meeting_date ? format_date($report_meeting_date, 'custom', 'Y/m/d') : NULL;
 
       // Set the publication date.
       $doc['publication_date'] = format_date($node->created, 'custom', 'Y/m/d');

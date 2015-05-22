@@ -429,3 +429,19 @@ function cluster_og_menu() {
 
   return $items;
 }
+
+/**
+ * Implements hook_og_permission().
+ */
+function cluster_og_og_permission() {
+  return array(
+    'create_child_hub' => array(
+      'title' => t('Create child hub'), 
+      'description' => t("Allow user to create child hubs."),
+    ),
+    'create_child_sag' => array(
+      'title' => t('Create child strategic working group'), 
+      'description' => t("Allow user to create child strategic working group."),
+    ),
+  );
+}
