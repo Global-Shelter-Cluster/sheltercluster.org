@@ -772,3 +772,10 @@ function shelter_base_update_7080() {
 function shelter_base_update_7081() {
   features_revert_module('shelter_base');
 }
+
+/**
+ * Text format FULL HTML permission for dedicated role.
+ */
+function shelter_base_update_7082() {
+  features_revert_module('shelter_base');
+}
