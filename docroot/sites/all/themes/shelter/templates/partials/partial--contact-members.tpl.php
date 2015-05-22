@@ -1,4 +1,4 @@
-<h3 data-collapsible="coordination-items"><?php print t('Coordination Team Member'); ?></h3>
+<h3 data-collapsible="coordination-items"><?php print t('Coordination Team'); ?></h3>
 <div id="coordination-items">
   <ul class="clearfix">
     <?php foreach($contacts as $nid => $contact): ?>
