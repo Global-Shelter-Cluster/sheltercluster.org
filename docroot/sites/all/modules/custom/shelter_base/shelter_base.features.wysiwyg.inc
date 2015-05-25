@@ -70,6 +70,7 @@ function shelter_base_wysiwyg_default_profiles() {
           'Link' => 1,
           'Anchor' => 1,
           'Image' => 1,
+          'TextColor' => 1,
           'Superscript' => 1,
           'Subscript' => 1,
           'Blockquote' => 1,
