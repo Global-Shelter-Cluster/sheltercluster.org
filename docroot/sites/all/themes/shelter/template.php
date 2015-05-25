@@ -48,9 +48,11 @@ function shelter_preprocess_page(&$variables) {
     $variables['hot_responses'] = cluster_og_hot_responses();
     $variables['upcoming_events'] = cluster_events_upcoming();
   }
+
   if ($current_path == 'regions-countries') {
     $variables['is_regions_and_countries'] = TRUE;
   }
+
   if (arg(0) == 'user') {
     $variables['is_user_profile_pages'] = TRUE;
   }
