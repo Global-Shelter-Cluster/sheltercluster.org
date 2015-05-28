@@ -330,7 +330,7 @@ function cluster_docs_field_default_field_instances() {
       'description_field' => 0,
       'entity_translation_sync' => FALSE,
       'file_directory' => 'docs',
-      'file_extensions' => 'txt rtf pdf doc docx dotx xls xlsx ppt pptx png jpg jpeg gif zip',
+      'file_extensions' => 'txt rtf pdf doc docx dotx xls xlsx ppt pptx png jpg jpeg gif zip odf',
       'max_filesize' => '20 MB',
       'user_register_form' => FALSE,
     ),
