@@ -135,11 +135,16 @@ class GroupDisplayProvider {
     if ($working_groups = $this->getRelatedWorkingGroups()) {
       $secondary['working_groups'] = partial('navigation_options', array('navigation_type_id' => 'working-groups', 'title' => t('Working groups'), 'nodes' => node_load_multiple($working_groups)));
     }
-    // Combine libraries, pages and other required entites under the same listing.
+    // Combine libraries, pages and other required entities under the same listing.
     $pages = array_merge($this->manager->getPages(), $this->manager->getLibraries());
     if ($pages) {
       $secondary['pages'] = partial('navigation_options', array('navigation_type_id' => 'pages', 'title' => t('Pages'), 'nodes' => node_load_multiple($pages)));
     }
+    $useful_links = $this->manager->getUsefulLinks();
+    if ($useful_links) {
+      $secondary['useful_links'] = partial('navigation_options', array('navigation_type_id' => 'useful-links', 'title' => t('Useful links'), 'links' => $useful_links));
+    }
+
     return array(
       '#theme' => 'cluster_nav_dashboard',
       '#items' => $items,

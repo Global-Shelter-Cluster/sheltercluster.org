@@ -71,6 +71,27 @@ class GroupContentManager {
   }
 
   /**
+   * Get useful links, if any.
+   */
+  public function getUsefulLinks() {
+    if (!isset($this->node->field_useful_links)) {
+      return array();
+    }
+
+    $wrapper = entity_metadata_wrapper('node', $this->node);
+    $links = array();
+    foreach ($wrapper->field_useful_links->value() as $link) {
+
+      $new_link = new stdClass;
+      $new_link->title = $link['title'] ? $link['title'] : $link['display_url'];
+      $new_link->url = $link['url'];
+      $links[] = $new_link;
+    }
+
+    return $links;
+  }
+
+  /**
    * Finds a strategic advisory node for the current group.
    * If there is more than one, it is not defined which one will be returned.
    *

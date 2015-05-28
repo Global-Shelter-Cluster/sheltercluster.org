@@ -829,3 +829,10 @@ function shelter_base_update_7088() {
 function shelter_base_update_7089() {
   features_revert_module('cluster_docs');
 }
+
+/**
+ * Revert cluster_og to add Useful Links field
+ */
+function shelter_base_update_7090() {
+  features_revert_module('cluster_og');
+}
