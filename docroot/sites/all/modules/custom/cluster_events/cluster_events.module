@@ -171,9 +171,10 @@ function cluster_events_format_upcoming($nid, $single_display = TRUE) {
   }
 
   if ($single_display) {
+    $group_ref = $wrapper->og_group_ref->value();
     return array(
       '#theme' => 'cluster_og_upcoming_event',
-      '#all_events_link' => 'node/' . $node->nid . '/events',
+      '#all_events_link' => 'node/' . $group_ref[0]->nid . '/events',
       '#event_title' => $wrapper->title->value(),
       '#event_link' => 'node/' . $node->nid,
       '#event_date' => $date,
