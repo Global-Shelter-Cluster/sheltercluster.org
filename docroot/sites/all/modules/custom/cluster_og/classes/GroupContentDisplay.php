@@ -101,21 +101,23 @@ class GroupDisplayProvider {
         'total' => $this->manager->getDocumentCount(),
       );
     }
-
-    if ($this->manager->isEnabled('discussions')) {
-      $items[] = array(
-        'label' => t('Discussions'),
-        'path' => 'node/' . $this->node->nid . '/discussions',
-        'total' => $this->manager->getDiscussionCount(),
-      );
+    if ($discussions_count = $this->manager->getDiscussionCount() > 0) {
+      if ($this->manager->isEnabled('discussions')) {
+        $items[] = array(
+          'label' => t('Discussions'),
+          'path' => 'node/' . $this->node->nid . '/discussions',
+          'total' => $discussions_count,
+        );
+      }
     }
-
-    if ($this->manager->isEnabled('events')) {
-      $items[] = array(
-        'label' => t('Events'),
-        'path' => 'node/' . $this->node->nid . '/events',
-        'total' => $this->manager->getEventCount(),
-      );
+    if ($events_count = $this->manager->getEventCount() > 0) {
+      if ($this->manager->isEnabled('events')) {
+        $items[] = array(
+          'label' => t('Events'),
+          'path' => 'node/' . $this->node->nid . '/events',
+          'total' => $events_count,
+        );
+      }
     }
 
     if ($strategic_advisory = $this->manager->getStrategicAdvisory()) {
@@ -286,7 +288,7 @@ class GroupDisplayProvider {
 }
 
 /**
- * Provide renderable content for full page view mode. 
+ * Provide renderable content for full page view mode.
  */
 class GroupFullDisplayProvider extends GroupDisplayProvider {
 
@@ -301,14 +303,14 @@ class GroupFullDisplayProvider extends GroupDisplayProvider {
    */
   public function getContactMembers() {
     if ($contact_members_ids = $this->manager->getContactMembers()) {
-      return partial('contact_members', array('nodes' => node_load_multiple($contact_members_ids))); 
+      return partial('contact_members', array('nodes' => node_load_multiple($contact_members_ids)));
     }
     return FALSE;
   }
 
   /**
    * Returns the Key Documents for this group, grouped by Vocabularies.
-   * @return render array of key documents. 
+   * @return render array of key documents.
    */
   public function getKeyDocuments() {
     if ($docs = $this->manager->getKeyDocuments()) {
@@ -318,7 +320,7 @@ class GroupFullDisplayProvider extends GroupDisplayProvider {
   }
 
   /**
-   * @TODO delegate theming completely to cluster_docs. 
+   * @TODO delegate theming completely to cluster_docs.
    */
   public function getFeaturedDocuments() {
     if ($nids = $this->manager->getFeaturedDocuments()) {
@@ -352,7 +354,7 @@ class GroupFullDisplayProvider extends GroupDisplayProvider {
 
   /**
    * Provide recent discussion nodes for the group.
-   * @return render array of discussions. 
+   * @return render array of discussions.
    */
   public function getRecentDiscussions() {
     if ($nodes = $this->manager->getRecentDiscussions()) {
