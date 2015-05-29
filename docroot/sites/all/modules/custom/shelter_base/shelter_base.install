@@ -824,8 +824,22 @@ function shelter_base_update_7088() {
 }
 
 /**
- * Revert cluster_docs
+ * Revert cluster_docs to allow ODF files to be uploaded as documents.
  */
 function shelter_base_update_7089() {
+  features_revert_module('cluster_docs');
+}
+
+/**
+ * Revert cluster_og to add Useful Links field
+ */
+function shelter_base_update_7090() {
+  features_revert_module('cluster_og');
+}
+
+/**
+ * Revert cluster_docs
+ */
+function shelter_base_update_7091() {
   features_revert_module('cluster_docs');
 }
