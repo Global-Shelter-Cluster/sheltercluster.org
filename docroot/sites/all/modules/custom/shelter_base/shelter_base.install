@@ -822,3 +822,10 @@ function shelter_base_update_7087() {
 function shelter_base_update_7088() {
   features_revert_module('cluster_og');
 }
+
+/**
+ * Revert cluster_docs
+ */
+function shelter_base_update_7089() {
+  features_revert_module('cluster_docs');
+}
