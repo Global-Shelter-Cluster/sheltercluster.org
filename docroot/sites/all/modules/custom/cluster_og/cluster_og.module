@@ -440,8 +440,12 @@ function cluster_og_og_permission() {
       'description' => t("Allow user to create child hubs."),
     ),
     'create_child_sag' => array(
-      'title' => t('Create child strategic working group'), 
-      'description' => t("Allow user to create child strategic working group."),
+      'title' => t('Create child strategic advisory group'), 
+      'description' => t("Allow user to create child strategic advisory group."),
+    ),
+    'create_child_working_group' => array(
+      'title' => t('Create child working group'), 
+      'description' => t("Allow user to create child technical working group."),
     ),
   );
 }

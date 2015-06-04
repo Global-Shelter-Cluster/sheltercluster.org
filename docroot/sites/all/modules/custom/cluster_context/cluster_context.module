@@ -181,7 +181,7 @@ function cluster_context_links($node) {
       break;
   }
 
-  if (node_access('create', 'working_group')) {
+  if (node_access('create', 'working_group')  || og_user_access('node', $node->nid, 'create_child_working_group')) {
     $links['new-working-group'] = array(
       'title' => t('New working group'),
       'href' => 'node/add/working-group',
