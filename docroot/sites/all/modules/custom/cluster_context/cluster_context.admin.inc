@@ -22,7 +22,7 @@ function cluster_context_menu_alter(&$items) {
  */
 function _cluster_context_is_being_used(&$form_state = NULL) {
   foreach (array('group', 'region', 'response') as $key) {
-    if ($key = _cluster_context_get_nid_param($key, $form_state)) {
+    if (_cluster_context_get_nid_param($key, $form_state)) {
       return $key;
     }
   }
