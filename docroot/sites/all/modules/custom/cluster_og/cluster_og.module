@@ -367,7 +367,7 @@ function cluster_og_hot_responses_list() {
  */
 function _cluster_og_get_hot_responses() {
   $featured_responses_queue = nodequeue_load_queue_by_name('featured_responses');
-  $nodes = nodequeue_load_nodes($featured_responses_queue->qid);
+  $nodes = nodequeue_load_nodes($featured_responses_queue->qid, FALSE, 0, 0);
 
   if (count($nodes) == 0) {
     return FALSE;
