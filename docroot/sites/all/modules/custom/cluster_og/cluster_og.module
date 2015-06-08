@@ -431,18 +431,22 @@ function cluster_og_menu() {
 }
 
 /**
- * Implements hook_node_grants().
+ * Implements hook_node_access().
  *
  * Test if the user is allowed to manage a specific content type within the context 
  * of the currently viewed organic group.  Managed means all operations except 'delete'.
  */
 function cluster_og_node_access($node, $account, $op) {
   // Test if we are creating content in the context of a group.
-  if (_cluster_context_is_being_used()) {
-    // Test the og specifc permission about that content type for the current group.
-    $node_type = is_object($node) ? $node->type : $node;
+  if ($key = _cluster_context_is_being_used()) {
     $q = drupal_get_query_parameters();
-    $gid = $q['response'];
+    if (! isset($q[$key])) {
+      return NODE_ACCESS_IGNORE;
+    }
+    $gid = $q[$key];
+    $node_type = is_object($node) ? $node->type : $node;
+
+    // Test if the current user has specific permissions for the current node type being managed.
     if (og_user_access('node', $gid, 'manage_child_' . $node_type)) {
       // For safety, make it so that users need the global delete rights, not just og rights.
       if ($op != 'delete') {
