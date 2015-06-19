@@ -18,12 +18,12 @@ function cluster_context_menu_alter(&$items) {
 /**
  * Determines whether the user is using context.
  * @param array|null $form_state Optional.
- * @return bool
+ * @return the value of the currently used key.
  */
 function _cluster_context_is_being_used(&$form_state = NULL) {
   foreach (array('group', 'region', 'response') as $key) {
     if (_cluster_context_get_nid_param($key, $form_state)) {
-      return TRUE;
+      return $key;
     }
   }
   return FALSE;

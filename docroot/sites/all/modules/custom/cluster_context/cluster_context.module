@@ -118,7 +118,7 @@ function cluster_context_links($node) {
       }
 
       if (!$manager->getStrategicAdvisory()) {
-        if (node_access('create', 'strategic-advisory') || og_user_access('node', $node->nid, 'create_child_sag')) {
+        if (node_access('create', 'strategic-advisory') || og_user_access('node', $node->nid, 'manage_child_sag')) {
           $links['new-strategic-advisory'] = array(
             'title' => t('New strategic advisory group'),
             'href' => 'node/add/strategic-advisory',
@@ -144,7 +144,7 @@ function cluster_context_links($node) {
       break;
     case 'response':
       if (!$manager->getStrategicAdvisory()) {
-        if (node_access('create', 'strategic-advisory') || og_user_access('node', $node->nid, 'create_child_sag')) {
+        if (node_access('create', 'strategic-advisory') || og_user_access('node', $node->nid, 'manage_child_sag')) {
           $links['new-strategic-advisory'] = array(
             'title' => t('New strategic advisory group'),
             'href' => 'node/add/strategic-advisory',
@@ -167,7 +167,7 @@ function cluster_context_links($node) {
         );
       }
 
-      if (node_access('create', 'hub') || og_user_access('node', $node->nid, 'create_child_hub')) {
+      if (node_access('create', 'hub') || og_user_access('node', $node->nid, 'manage_child_hub')) {
         $links['new-hub'] = array(
           'title' => t('New hub'),
           'href' => 'node/add/hub',
@@ -181,7 +181,7 @@ function cluster_context_links($node) {
       break;
   }
 
-  if (node_access('create', 'working_group')) {
+  if (node_access('create', 'working_group')  || og_user_access('node', $node->nid, 'manage_child_working_group')) {
     $links['new-working-group'] = array(
       'title' => t('New working group'),
       'href' => 'node/add/working-group',
