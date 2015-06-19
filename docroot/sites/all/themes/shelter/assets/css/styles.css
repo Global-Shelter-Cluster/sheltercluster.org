@@ -649,6 +649,7 @@ body {
   margin: 0 0.65rem 0 0;
   border: none;
   display: inline-block;
+  word-wrap: break-word;
 }
 #featured-documents li .document-title .size-type {
   font-size: 10.4px;
