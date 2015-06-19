@@ -50,7 +50,9 @@
         background: $white;
         border-right: none;
         width: 100%;
-        @include breakpoint(640px) {
+        display: none;
+        @include breakpoint(660px) {
+          display: block;
           width: 23%;
           border-right: 3px solid #000;
         }
@@ -59,7 +61,7 @@
         float: right;
         width: 100%;
         @include rem(padding, 0 0.45rem);
-        @include breakpoint(640px) {
+        @include breakpoint(660px) {
           width: 75%;
         }
       }
