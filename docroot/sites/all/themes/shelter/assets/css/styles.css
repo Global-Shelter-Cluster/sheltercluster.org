@@ -645,14 +645,14 @@ body {
   margin: 0;
   font-size: 17.6px;
   font-size: 1.1rem;
+  margin: 0 10.4px 0 0;
+  margin: 0 0.65rem 0 0;
   border: none;
   display: inline-block;
 }
 #featured-documents li .document-title .size-type {
   font-size: 10.4px;
   font-size: 0.65rem;
-  margin: 0 0 0 10.4px;
-  margin: 0 0 0 0.65rem;
   text-transform: uppercase;
   display: inline-block;
 }

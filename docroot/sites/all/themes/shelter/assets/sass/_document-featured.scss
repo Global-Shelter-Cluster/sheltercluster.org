@@ -15,14 +15,15 @@
         color: #fff;
         margin: 0;
         @include rem(font-size, 1.1rem);
+        @include rem(margin, 0 0.65rem 0 0);
         border: none;
         display: inline-block;
       }
       .size-type {
         @include rem(font-size, 0.65rem);
-        @include rem(margin, 0 0 0 0.65rem);
         text-transform: uppercase;
         display: inline-block;
+
       }
       a {
         @extend .not-underlined-links;
