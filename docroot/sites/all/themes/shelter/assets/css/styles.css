@@ -663,12 +663,10 @@ body {
 }
 #featured-documents li .document-information {
   background: #242424;
-  padding: 0 0 16px 0;
-  padding: 0 0 1rem 0;
 }
 #featured-documents li .document-information p {
-  padding: 10.4px 0 0 0;
-  padding: 0.65rem 0 0 0;
+  padding: 10.4px 0;
+  padding: 0.65rem 0;
   font-size: 12.8px;
   font-size: 0.8rem;
   margin: 0;
