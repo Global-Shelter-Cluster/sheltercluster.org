@@ -15,19 +15,21 @@
             <img src="<?php print '/' . drupal_get_path('theme', 'shelter') . '/assets/images/featured-document-texture.jpg'; ?>" />
           <?php endif; ?>
         </div>
-        <div class="document-title">
-          <?php if ($doc['is_image']): ?>
-            <h2><?php print $doc['title']; ?></h2>
-          <?php elseif ($doc['has_preview']): ?>
-            <h2><?php print l($doc['title'], $doc['link_url'], array('attributes' => array('target' => '_blank'))); ?></h2>
-          <?php else: ?>
-            <h2><?php print l($doc['title'], $doc['link_url'], array('attributes' => array('target' => '_blank'))); ?></h2>
-          <?php endif; ?>
-          <?php if ($doc['filesize'] && $doc['file_extension']): ?>
-            <div class="size-type">[ <?php print $doc['filesize']; ?>M ] <?php print $doc['file_extension']; ?></div>
-          <?php endif; ?>
+        <div class="information-container">
+          <div class="document-title">
+            <?php if ($doc['is_image']): ?>
+              <h2><?php print $doc['title']; ?></h2>
+            <?php elseif ($doc['has_preview']): ?>
+              <h2><?php print l($doc['title'], $doc['link_url'], array('attributes' => array('target' => '_blank'))); ?></h2>
+            <?php else: ?>
+              <h2><?php print l($doc['title'], $doc['link_url'], array('attributes' => array('target' => '_blank'))); ?></h2>
+            <?php endif; ?>
+            <?php if ($doc['filesize'] && $doc['file_extension']): ?>
+              <div class="size-type">[ <?php print $doc['filesize']; ?>M ] <?php print $doc['file_extension']; ?></div>
+            <?php endif; ?>
+          </div>
+          <?php print $doc['description']; ?>
         </div>
-        <?php print $doc['description']; ?>
 
       </div>
     </li>

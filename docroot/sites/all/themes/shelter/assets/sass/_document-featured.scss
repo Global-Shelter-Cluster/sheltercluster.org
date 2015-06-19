@@ -36,21 +36,34 @@
       background: darken($shelter-grey, 20%);
 
       p {
-        @include rem(padding, 0.65rem);
+        @include rem(padding, 0.65rem 0);
         @include rem(font-size, 0.80rem );
         @include rem(margin, 0);
         color: darken($white,17%);
       }
       img {
-        width: 185px;
+        width: 100%;
         float: left;
       }
       .image-container {
         float: left;
         background: $white;
-        @include rem(margin-right, 1rem);
-        border-right: 3px solid #000;
+        border-right: none;
+        width: 100%;
+        @include breakpoint(640px) {
+          width: 23%;
+          border-right: 3px solid #000;
+        }
       }
+      .information-container {
+        float: right;
+        width: 100%;
+        @include rem(padding, 0 0.45rem);
+        @include breakpoint(640px) {
+          width: 75%;
+        }
+      }
+
     }
   }
 

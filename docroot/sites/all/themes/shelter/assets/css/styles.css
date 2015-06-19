@@ -664,23 +664,39 @@ body {
   background: #242424;
 }
 #featured-documents li .document-information p {
-  padding: 10.4px;
-  padding: 0.65rem;
+  padding: 10.4px 0;
+  padding: 0.65rem 0;
   font-size: 12.8px;
   font-size: 0.8rem;
   margin: 0;
   color: #d4d4d4;
 }
 #featured-documents li .document-information img {
-  width: 185px;
+  width: 100%;
   float: left;
 }
 #featured-documents li .document-information .image-container {
   float: left;
   background: white;
-  margin-right: 16px;
-  margin-right: 1rem;
-  border-right: 3px solid #000;
+  border-right: none;
+  width: 100%;
+}
+@media (min-width: 640px) {
+  #featured-documents li .document-information .image-container {
+    width: 23%;
+    border-right: 3px solid #000;
+  }
+}
+#featured-documents li .document-information .information-container {
+  float: right;
+  width: 100%;
+  padding: 0 7.2px;
+  padding: 0 0.45rem;
+}
+@media (min-width: 640px) {
+  #featured-documents li .document-information .information-container {
+    width: 75%;
+  }
 }
 #featured-documents .image-document {
   max-height: 640px;
