@@ -63,6 +63,7 @@ class GroupContentManager {
       ->entityCondition('bundle', 'page')
       ->fieldCondition('og_group_ref', 'target_id', $this->node->nid)
       ->propertyCondition('status', NODE_PUBLISHED)
+      ->fieldOrderBy('field_sorting_weight', 'value', 'ASC')
       ->execute();
     if (isset($result['node'])) {
       return array_keys($result['node']);
@@ -104,6 +105,7 @@ class GroupContentManager {
       ->entityCondition('bundle', 'strategic_advisory')
       ->fieldCondition('field_parent_response', 'target_id', $this->node->nid)
       ->propertyCondition('status', NODE_PUBLISHED)
+      ->fieldOrderBy('field_sorting_weight', 'value', 'ASC')
       ->execute();
 
     if (isset($result['node'])) {
@@ -178,6 +180,7 @@ class GroupContentManager {
       ->entityCondition('bundle', 'contact')
       ->fieldCondition('og_group_ref', 'target_id', $this->node->nid)
       ->propertyCondition('status', NODE_PUBLISHED)
+      ->fieldOrderBy('field_sorting_weight', 'value', 'ASC')
       ->execute();
 
     if (!isset($res['node'])) {
@@ -415,6 +418,7 @@ class GroupContentManager {
       ->entityCondition('bundle', $bundle)
       ->propertyCondition('status', NODE_PUBLISHED)
       ->fieldCondition($field, 'target_id', $parent_nids, 'IN')
+      ->fieldOrderBy('field_sorting_weight', 'value', 'ASC')
       ->execute();
 
     if (isset($res['node'])) {
