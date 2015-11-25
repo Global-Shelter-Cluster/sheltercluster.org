@@ -300,7 +300,7 @@ class GroupContentManager {
       ->entityCondition('bundle', array('library', 'arbitrary_library'), 'IN')
       ->fieldCondition('og_group_ref', 'target_id', $this->node->nid)
       ->propertyCondition('status', NODE_PUBLISHED)
-      ->propertyOrderBy('title')
+      ->propertyOrderBy('created')
       ->execute();
 
     if (!isset($res['node'])) {
