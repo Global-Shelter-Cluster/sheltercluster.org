@@ -871,3 +871,24 @@ function shelter_base_update_7094() {
 function shelter_base_update_7095() {
   features_revert_module('cluster_discussions');
 }
+
+/**
+ * Add the help text to field bases.
+ */
+function shelter_base_update_7096() {
+  features_revert_module('shelter_base');
+}
+
+/**
+ * Add the help text to doc content type.
+ */
+function shelter_base_update_7097() {
+  features_revert_module('cluster_docs');
+}
+
+/**
+ * Add the help text to discussion content type.
+ */
+function shelter_base_update_7098() {
+  features_revert_module('cluster_discussions');
+}
