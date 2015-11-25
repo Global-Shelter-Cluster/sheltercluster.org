@@ -892,3 +892,17 @@ function shelter_base_update_7097() {
 function shelter_base_update_7098() {
   features_revert_module('cluster_discussions');
 }
+
+/**
+ * Add the field weight sort to arbitrary library type.
+ */
+function shelter_base_update_7099() {
+  features_revert_module('cluster_libraries');
+}
+
+/**
+ * Put library field weight instance in library feature.
+ */
+function shelter_base_update_7100() {
+  features_revert_module('shelter_base');
+}

@@ -511,57 +511,6 @@ function shelter_base_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-library-field_sorting_weight'
-  $field_instances['node-library-field_sorting_weight'] = array(
-    'bundle' => 'library',
-    'default_value' => array(
-      0 => array(
-        'value' => 0,
-      ),
-    ),
-    'deleted' => 0,
-    'description' => 'When displayed in sortable lists within group pages, the content will be ordered using this weight field. Smaller values will show up first, bigger values last.',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'number',
-        'settings' => array(
-          'decimal_separator' => '.',
-          'prefix_suffix' => TRUE,
-          'scale' => 0,
-          'thousand_separator' => ' ',
-        ),
-        'type' => 'number_integer',
-        'weight' => 19,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'field_name' => 'field_sorting_weight',
-    'label' => 'Sorting weight',
-    'required' => 0,
-    'settings' => array(
-      'entity_translation_sync' => FALSE,
-      'max' => '',
-      'min' => '',
-      'prefix' => '',
-      'suffix' => '',
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 0,
-      'module' => 'number',
-      'settings' => array(),
-      'type' => 'number',
-      'weight' => 9,
-    ),
-  );
-
   // Exported field_instance: 'node-page-body'
   $field_instances['node-page-body'] = array(
     'bundle' => 'page',

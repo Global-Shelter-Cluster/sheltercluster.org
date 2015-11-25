@@ -141,6 +141,14 @@ function cluster_docs_page($query, $show_facets = TRUE, $default_sort = NULL, $d
     $query->sort($sort_field, $sort_direction);
   }
 
+  // If there is no sort key by default make the search by date on the DESC order.
+  if (!$sort_key) {
+    $sort_field = $sort_options['date'];
+
+    // Tell the actual query the sort criteria
+    $query->sort($sort_field, 'DESC');
+  }
+
   // Build "query" params for the header links.
   $sort_link_params = array();
   foreach ($sort_options as $key => $data) {

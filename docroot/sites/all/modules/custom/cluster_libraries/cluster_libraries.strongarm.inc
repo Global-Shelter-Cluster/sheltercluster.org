@@ -163,10 +163,10 @@ function cluster_libraries_strongarm() {
     'extra_fields' => array(
       'form' => array(
         'path' => array(
-          'weight' => '30',
+          'weight' => '3',
         ),
         'language' => array(
-          'weight' => '5',
+          'weight' => '2',
         ),
       ),
       'display' => array(),
