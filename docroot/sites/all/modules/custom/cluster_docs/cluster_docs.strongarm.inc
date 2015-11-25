@@ -114,7 +114,7 @@ function cluster_docs_strongarm() {
           'weight' => '2',
         ),
         'language' => array(
-          'weight' => '5',
+          'weight' => '4',
         ),
       ),
       'display' => array(),
