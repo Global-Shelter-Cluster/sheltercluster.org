@@ -118,7 +118,7 @@ function shelter_base_field_default_field_instances() {
       ),
     ),
     'deleted' => 0,
-    'description' => '',
+    'description' => 'When displayed in sortable lists within group pages, the content will be ordered using this weight field. Smaller values will show up first, bigger values last.',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -253,7 +253,7 @@ function shelter_base_field_default_field_instances() {
       ),
     ),
     'deleted' => 0,
-    'description' => '',
+    'description' => 'When displayed in sortable lists within group pages, the content will be ordered using this weight field. Smaller values will show up first, bigger values last.',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -304,7 +304,7 @@ function shelter_base_field_default_field_instances() {
       ),
     ),
     'deleted' => 0,
-    'description' => '',
+    'description' => 'When displayed in sortable lists within group pages, the content will be ordered using this weight field. Smaller values will show up first, bigger values last.',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -355,7 +355,7 @@ function shelter_base_field_default_field_instances() {
       ),
     ),
     'deleted' => 0,
-    'description' => '',
+    'description' => 'When displayed in sortable lists within group pages, the content will be ordered using this weight field. Smaller values will show up first, bigger values last.',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -406,7 +406,7 @@ function shelter_base_field_default_field_instances() {
       ),
     ),
     'deleted' => 0,
-    'description' => '',
+    'description' => 'When displayed in sortable lists within group pages, the content will be ordered using this weight field. Smaller values will show up first, bigger values last.',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -463,7 +463,7 @@ function shelter_base_field_default_field_instances() {
       ),
     ),
     'deleted' => 0,
-    'description' => '',
+    'description' => 'When displayed in sortable lists within group pages, the content will be ordered using this weight field. Smaller values will show up first, bigger values last.',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -520,7 +520,7 @@ function shelter_base_field_default_field_instances() {
       ),
     ),
     'deleted' => 0,
-    'description' => '',
+    'description' => 'When displayed in sortable lists within group pages, the content will be ordered using this weight field. Smaller values will show up first, bigger values last.',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -616,7 +616,7 @@ function shelter_base_field_default_field_instances() {
       ),
     ),
     'deleted' => 0,
-    'description' => '',
+    'description' => 'When displayed in sortable lists within group pages, the content will be ordered using this weight field. Smaller values will show up first, bigger values last.',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -769,7 +769,7 @@ function shelter_base_field_default_field_instances() {
       ),
     ),
     'deleted' => 0,
-    'description' => '',
+    'description' => 'When displayed in sortable lists within group pages, the content will be ordered using this weight field. Smaller values will show up first, bigger values last.',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -826,7 +826,7 @@ function shelter_base_field_default_field_instances() {
       ),
     ),
     'deleted' => 0,
-    'description' => '',
+    'description' => 'When displayed in sortable lists within group pages, the content will be ordered using this weight field. Smaller values will show up first, bigger values last.',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -877,7 +877,7 @@ function shelter_base_field_default_field_instances() {
       ),
     ),
     'deleted' => 0,
-    'description' => '',
+    'description' => 'When displayed in sortable lists within group pages, the content will be ordered using this weight field. Smaller values will show up first, bigger values last.',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -1007,6 +1007,7 @@ function shelter_base_field_default_field_instances() {
   t('Tags');
   t('Title');
   t('Upload an image to go with this article.');
+  t('When displayed in sortable lists within group pages, the content will be ordered using this weight field. Smaller values will show up first, bigger values last.');
 
   return $field_instances;
 }

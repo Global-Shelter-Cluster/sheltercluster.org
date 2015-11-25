@@ -65,7 +65,7 @@ function cluster_discussions_field_default_field_instances() {
       ),
     ),
     'deleted' => 0,
-    'description' => '',
+    'description' => 'When displayed in sortable lists within group pages, the content will be ordered using this weight field. Smaller values will show up first, bigger values last.',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -216,6 +216,7 @@ function cluster_discussions_field_default_field_instances() {
   t('Groups audience');
   t('Sorting weight');
   t('Title');
+  t('When displayed in sortable lists within group pages, the content will be ordered using this weight field. Smaller values will show up first, bigger values last.');
 
   return $field_instances;
 }
