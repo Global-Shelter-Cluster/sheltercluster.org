@@ -479,6 +479,9 @@ function cluster_og_strongarm() {
         'path' => array(
           'weight' => '3',
         ),
+        'language' => array(
+          'weight' => '5',
+        ),
       ),
       'display' => array(),
     ),
@@ -513,7 +516,10 @@ function cluster_og_strongarm() {
     'extra_fields' => array(
       'form' => array(
         'path' => array(
-          'weight' => '30',
+          'weight' => '10',
+        ),
+        'language' => array(
+          'weight' => '5',
         ),
       ),
       'display' => array(),
@@ -558,7 +564,10 @@ function cluster_og_strongarm() {
     'extra_fields' => array(
       'form' => array(
         'path' => array(
-          'weight' => '30',
+          'weight' => '6',
+        ),
+        'language' => array(
+          'weight' => '3',
         ),
       ),
       'display' => array(),
@@ -623,10 +632,10 @@ function cluster_og_strongarm() {
     'extra_fields' => array(
       'form' => array(
         'path' => array(
-          'weight' => '30',
+          'weight' => '17',
         ),
         'language' => array(
-          'weight' => '5',
+          'weight' => '3',
         ),
       ),
       'display' => array(),
@@ -662,10 +671,10 @@ function cluster_og_strongarm() {
     'extra_fields' => array(
       'form' => array(
         'path' => array(
-          'weight' => '30',
+          'weight' => '4',
         ),
         'language' => array(
-          'weight' => '5',
+          'weight' => '3',
         ),
       ),
       'display' => array(),
