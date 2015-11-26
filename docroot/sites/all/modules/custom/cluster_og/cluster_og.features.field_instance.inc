@@ -662,7 +662,7 @@ function cluster_og_field_default_field_instances() {
     'bundle' => 'geographic_region',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'If set, this Geographic Region automatically redirects to the specified Response page.',
+    'description' => 'If the response and the region need to be one and the same, use this field to identify the response that will be loaded instead of this region. In the future, if more responses need to be associated with the region, simply remove the Auto-forwarding and associate the response with the region.',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -4001,7 +4001,7 @@ function cluster_og_field_default_field_instances() {
   t('Handover Date');
   t('Hot response');
   t('Hub region');
-  t('If set, this Geographic Region automatically redirects to the specified Response page.');
+  t('If the response and the region need to be one and the same, use this field to identify the response that will be loaded instead of this region. In the future, if more responses need to be associated with the region, simply remove the Auto-forwarding and associate the response with the region.');
   t('Image');
   t('Link to HumanitarianResponse.info site');
   t('Link to ReliefWeb.int');
