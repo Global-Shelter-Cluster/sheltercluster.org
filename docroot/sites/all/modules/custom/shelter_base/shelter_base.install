@@ -906,3 +906,86 @@ function shelter_base_update_7099() {
 function shelter_base_update_7100() {
   features_revert_module('shelter_base');
 }
+
+/**
+ * Populate field_sorting_weight and make it a required field.
+ */
+function shelter_base_update_7101() {
+  features_revert_module('shelter_base', 'shelter_libraries');
+}
+
+/**
+ * Set field_sorting_weight to be a required field on all content types except
+ * for documents, events and discussions.
+ */
+function shelter_base_update_7102() {
+  features_revert_module('shelter_base');
+}
+
+/**
+ * Populate all necessary field_sorting_weight content types with a default value
+ */
+function shelter_base_update_7103(&$sandbox) {
+
+// Build the list of entities to update.
+  if (empty($sandbox['entity_list'])) {
+    $batch_size = 10;
+    // All entity types that need to be updated contain this field
+    $field_info = field_info_field('field_sorting_weight');
+    $omit_types = array('document', 'event', 'discussion');
+
+    // Return an array of desired content types to perform update on.
+    $accepted_bundles['node'] = array_values(array_diff($field_info['bundles']['node'], $omit_types));
+
+    $entity_list = array();
+    foreach ($accepted_bundles as $entity_type => $bundles) {
+      $query = new EntityFieldQuery();
+      $results = $query
+        ->entityCondition('entity_type', $entity_type)
+        ->entityCondition('bundle', $bundles, 'IN')
+        ->execute();
+      if (empty($results[$entity_type])) {
+        continue;
+      }
+
+      // Add ids with entity type to $entity_list for processing.
+      $ids = array_keys($results[$entity_type]);
+      $entity_list += array_map(function ($id) use ($entity_type) {
+        return array(
+          'entity_type' => $entity_type,
+          'entity_id' => $id,
+        );
+      }, $ids);
+    }
+    $sandbox['total'] = count($entity_list);
+    $sandbox['entity_list'] = array_chunk($entity_list, $batch_size);
+    $sandbox['succeeded'] = $sandbox['errored'] = $sandbox['processed_chunks'] = 0;
+    print_r($sandbox['total'] . ' chunks to be processed. This will take time. ');
+  }
+  // Processing.
+  $current_chunk = $sandbox['entity_list'][$sandbox['processed_chunks']];
+  foreach ($current_chunk as $entity_item) {
+    $success = _batch_process_sort_weight_task($entity_item['entity_id']);
+    $success ? $sandbox['succeeded']++ : $sandbox['errored']++;
+  }
+
+  // Increment number of processed chunks.
+  $sandbox['processed_chunks']++;
+
+  // When finished, display results.
+  $sandbox['#finished'] = $sandbox['processed_chunks'] / count($sandbox['entity_list']);
+
+  return t('@succeeded entities were processed correctly. @errored entities failed', array(
+    '@succeeded' => $sandbox['succeeded'],
+    '@errored' => $sandbox['errored'],
+  ));
+
+}
+
+function _batch_process_sort_weight_task($entity_id) {
+  $node = node_load($entity_id);
+  $node_wrapper = entity_metadata_wrapper('node', $node);
+  $node_wrapper->field_sorting_weight->set(0);
+  $node_wrapper->save();
+  return TRUE;
+}
