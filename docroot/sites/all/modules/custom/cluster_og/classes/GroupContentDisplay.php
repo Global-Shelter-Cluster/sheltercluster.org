@@ -129,22 +129,42 @@ class GroupDisplayProvider {
 
     $secondary = array();
     if ($responses = $this->getRelatedResponses()) {
-      $secondary['responses'] = partial('navigation_options', array('navigation_type_id' => 'related-operations', 'title' => t('Related operations'), 'nodes' => node_load_multiple($responses)));
+      $secondary['responses'] = partial('navigation_options', array(
+        'navigation_type_id' => 'related-operations',
+        'title' => t('Related operations'),
+        'nodes' => node_load_multiple($responses)
+      ));
     }
     if ($hubs = $this->getRelatedHubs()) {
-      $secondary['hubs'] = partial('navigation_options', array('navigation_type_id' => 'hubs', 'title' => t('Hubs'), 'nodes' => node_load_multiple($hubs)));
+      $secondary['hubs'] = partial('navigation_options', array(
+        'navigation_type_id' => 'hubs',
+        'title' => t('Hubs'),
+        'nodes' => node_load_multiple($hubs)
+      ));
     }
     if ($working_groups = $this->getRelatedWorkingGroups()) {
-      $secondary['working_groups'] = partial('navigation_options', array('navigation_type_id' => 'working-groups', 'title' => t('Working groups'), 'nodes' => node_load_multiple($working_groups)));
+      $secondary['working_groups'] = partial('navigation_options', array(
+        'navigation_type_id' => 'working-groups',
+        'title' => t('Working groups'),
+        'nodes' => node_load_multiple($working_groups)
+      ));
     }
     // Combine libraries, pages and other required entities under the same listing.
     $pages = array_merge($this->manager->getPages(), $this->manager->getLibraries());
     if ($pages) {
-      $secondary['pages'] = partial('navigation_options', array('navigation_type_id' => 'pages', 'title' => t('Pages'), 'nodes' => node_load_multiple($pages)));
+      $secondary['pages'] = partial('navigation_options', array(
+        'navigation_type_id' => 'pages',
+        'title' => t('Pages'),
+        'nodes' => node_load_multiple($pages)
+      ));
     }
     $useful_links = $this->manager->getUsefulLinks();
     if ($useful_links) {
-      $secondary['useful_links'] = partial('navigation_options', array('navigation_type_id' => 'useful-links', 'title' => t('Useful links'), 'links' => $useful_links));
+      $secondary['useful_links'] = partial('navigation_options', array(
+        'navigation_type_id' => 'useful-links',
+        'title' => t('Useful links'),
+        'links' => $useful_links
+      ));
     }
 
     return array(

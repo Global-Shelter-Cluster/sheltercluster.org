@@ -356,9 +356,6 @@ class GroupContentManager {
       ->execute()->fetchCol();
   }
 
-  /**
-   * @TODO write doc for this method.
-   */
   public function getDescendantIds($include_self = FALSE, &$collected_nids = array()) {
     if (!$this->parent_field) {
       return NULL;
@@ -436,7 +433,7 @@ class GroupContentManager {
         $return_nids = array_merge($return_nids, $parent_nids);
       }
 
-      // We call array_unique just in case there are duplicates. There shouldn't be any.
+      dpm(array_unique($return_nids));
       return array_unique($return_nids);
 
     }
@@ -468,9 +465,6 @@ class GroupContentManager {
 
 }
 
-/**
- * @TODO describe class.
- */
 class GroupContentManagerResponse extends GroupContentManager {
   protected $parent_field = 'field_parent_response';
 
@@ -487,9 +481,6 @@ class GroupContentManagerResponse extends GroupContentManager {
   }
 }
 
-/**
- * @TODO describe class.
- */
 class GroupContentManagerGeographicRegion extends GroupContentManager {
   protected $parent_field = 'field_parent_region';
 
@@ -506,9 +497,6 @@ class GroupContentManagerGeographicRegion extends GroupContentManager {
   }
 }
 
-/**
- * @TODO describe class.
- */
 class GroupContentManagerStategicAdvisory extends GroupContentManager {
   //protected $parent_field = 'field_parent_region';
 
