@@ -989,3 +989,10 @@ function _batch_process_sort_weight_task($entity_id) {
   $node_wrapper->save();
   return TRUE;
 }
+
+/**
+ * Revert cluster search feature to its initial state.
+ */
+function shelter_base_update_7104() {
+  features_revert_module('cluster_search');
+}

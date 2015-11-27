@@ -53,6 +53,15 @@ function _cluster_events_title_callback($nid) {
  * @return Render array
  */
 function cluster_events_all($nid) {
+
+  // Filter by event date with entity field query.
+  $filter_by_date = new EntityFieldQuery();
+  $filter_by_date->entityCondition('entity_type', 'node')
+      ->entityCondition('bundle', 'event')
+      ->fieldCondition('og_group_ref', 'target_id', $nid)
+      ->propertyCondition('status', NODE_PUBLISHED)
+      ->fieldOrderBy('field_event_date', 'value', 'DESC');
+
   $query = search_api_query('default_node_index');
 
   $filter = $query->createFilter();
@@ -64,15 +73,19 @@ function cluster_events_all($nid) {
   $query->range($offset, CLUSTER_EVENTS_PER_PAGE);
 
   $result = $query->execute();
+
+  // Execute query to filter by event date.
+  $query_date_filter_results = $filter_by_date->execute();
+
   pager_default_initialize($result['result count'], CLUSTER_EVENTS_PER_PAGE);
 
-  if (! $result['results']) {
+  if (! $query_date_filter_results['node']) {
     $content = array(
       '#markup' => t('No events scheduled at the moment.'),
     );
   }
   else {
-    $content = node_view_multiple(node_load_multiple(array_keys($result['results'])));
+    $content = node_view_multiple(node_load_multiple(array_keys($query_date_filter_results['node'])));
   }
 
   $ret['content'] = $content;

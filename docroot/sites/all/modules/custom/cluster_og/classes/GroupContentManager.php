@@ -433,7 +433,6 @@ class GroupContentManager {
         $return_nids = array_merge($return_nids, $parent_nids);
       }
 
-      dpm(array_unique($return_nids));
       return array_unique($return_nids);
 
     }
