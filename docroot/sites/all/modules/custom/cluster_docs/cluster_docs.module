@@ -24,6 +24,14 @@ function cluster_docs_menu() {
     'title arguments' => array(1),
     'type' => MENU_CALLBACK,
   );
+
+  $items['search-documents'] = array(
+    'title' => 'Search documents',
+    'access arguments' => array('access content'),
+    'page callback' => 'cluster_docs_get_all',
+    'type' => MENU_CALLBACK,
+  );
+
   return $items;
 }
 
@@ -63,6 +71,20 @@ function cluster_docs_all($nid) {
 
   $filter = $query->createFilter();
   $filter->condition('og_group_ref', $nid);
+  $query->filter($filter);
+
+  return cluster_docs_page($query);
+}
+
+/**
+ * Page callback to show all documents of the website.
+ *
+ * @return Render array
+ */
+function cluster_docs_get_all() {
+  $query = cluster_docs_query();
+
+  $filter = $query->createFilter();
   $query->filter($filter);
 
   return cluster_docs_page($query);

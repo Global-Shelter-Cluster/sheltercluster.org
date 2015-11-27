@@ -81,7 +81,7 @@
       ?>
     </div>
 
-  <?php elseif ($dashboard_menu): ?>
+  <?php elseif ($dashboard_menu || $is_search_documents): ?>
 
     <div class="page-margin clearfix">
       <?php print partial('non_dashboard_group_page', array(
