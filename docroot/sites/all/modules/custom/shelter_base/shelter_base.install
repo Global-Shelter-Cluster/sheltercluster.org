@@ -906,3 +906,10 @@ function shelter_base_update_7099() {
 function shelter_base_update_7100() {
   features_revert_module('shelter_base');
 }
+
+/**
+ * Revert cluster search feature to its initial state.
+ */
+function shelter_base_update_7101() {
+  features_revert_module('cluster_search');
+}
