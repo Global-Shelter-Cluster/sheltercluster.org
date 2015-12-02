@@ -80,14 +80,11 @@
       <td class="information-title">
         <?php print $doc['link']; ?>
         <?php print $doc['description']; ?>
+        <?php print $doc['group']; ?>
       </td>
 
       <?php if (arg(0) == 'search-documents'): ?>
-      <td class="group-name">
-        <?php if ($doc['group']): ?>
-          <span><?php print $doc['group']; ?></span>
-        <?php endif; ?>
-      </td>
+        <td class="group-name">&nbsp;</td>
       <?php endif; ?>
 
       <td class="information-file">

@@ -32,12 +32,6 @@ function cluster_docs_menu() {
     'type' => MENU_CALLBACK,
   );
 
-  $items['search-documents/autocomplete'] = array(
-    'page callback' => 'cluster_docs_search_autocomplete',
-    'access arguments' => array('access content'),
-    'type' => MENU_CALLBACK
-  );
-
   return $items;
 }
 
@@ -150,7 +144,7 @@ function cluster_docs_page($query, $show_facets = TRUE, $default_sort = NULL, $d
   // Figure out the sort column and direction from $_GET (store in $sort_key and $sort_direction).
   $sort_options = array(
     'title' => 'title_field',
-    'group' => 'og_group_ref',
+    'group' => 'og_group_ref:name',
     'size' => 'field_file:file:size',
     'date' => 'field_report_meeting_date',
   );
@@ -273,11 +267,6 @@ function cluster_docs_page($query, $show_facets = TRUE, $default_sort = NULL, $d
           '#type' => 'textfield',
           '#name' => 'title',
           '#value' => $title,
-          '#attached' => array(
-            'library' => array(
-              array('system', 'ui.autocomplete'),
-            ),
-          ),
         ),
         array(
           '#type' => 'button',
@@ -291,14 +280,6 @@ function cluster_docs_page($query, $show_facets = TRUE, $default_sort = NULL, $d
   }
 
   drupal_add_js(drupal_get_path('module', 'cluster_docs') . '/js/search.js');
-  drupal_add_js(
-    array(
-      'cluster_docs' => array(
-        'node_id' => '555',
-      )
-    ),
-    'setting'
-  );
 
   $result_nids = FALSE;
   if (isset($results['results'])) {
@@ -514,10 +495,16 @@ function cluster_docs_prepare_row_data($nids) {
       $doc['title'] = $wrapper->label();
 
       // Insert the group on the table
-      // $group_wrapper = $wrapper->og_membership->value();
-      // foreach ($group_wrapper as $group => $value) {
-        $doc['group'] = $wrapper->label();
-      // }
+      // Group logic
+      $group_title = '';
+      $group_wrapper = $wrapper->og_membership->value();
+      foreach ($group_wrapper as $group => $value) {
+        $group_id = $value->gid;
+        $group_node = node_load($group_id);
+        $group_title = $group_node->title;
+      }
+      $doc['group'] = $group_title;
+
 
       $url = cluster_docs_get_download_url($node);
       $doc['link_url'] = $url;
