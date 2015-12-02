@@ -26,7 +26,13 @@
   <thead>
     <th></th>
     <?php
-    $headers = array(
+
+    $headers = (arg(0) == 'search-documents') ? array(
+      'title' => 'Document title',
+      'group' => 'Group(s)',
+      'size' => 'Size',
+      'date' => 'Date',
+    ) : array(
       'title' => 'Document title',
       'size' => 'Size',
       'date' => 'Date',
@@ -75,6 +81,14 @@
         <?php print $doc['link']; ?>
         <?php print $doc['description']; ?>
       </td>
+
+      <?php if (arg(0) == 'search-documents'): ?>
+      <td class="group-name">
+        <?php if ($doc['group']): ?>
+          <span><?php print $doc['group']; ?></span>
+        <?php endif; ?>
+      </td>
+      <?php endif; ?>
 
       <td class="information-file">
         <?php if ($doc['filesize'] && $doc['file_extension']): ?>
