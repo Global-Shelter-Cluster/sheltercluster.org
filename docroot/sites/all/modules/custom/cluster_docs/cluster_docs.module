@@ -358,7 +358,7 @@ function cluster_docs_get_grouped_key_docs($gid) {
  * @return
  *  Array of document data ready to be used in cards lists.
  */
-function cluster_docs_prepare_card_data($nids, $is_global_search = FALSE) {
+function cluster_docs_prepare_card_data($nids) {
   $docs = array();
   $properties = array('title', 'link', 'link_url', 'is_link', 'is_file', 'is_file_class', 'description', 'filesize',
     'file_extension', 'is_image', 'image_uri', 'has_preview', 'preview_uri', 'source',);
@@ -476,13 +476,14 @@ function cluster_docs_get_download_url($node) {
  * @return
  *  Array of document data ready to be used in cards lists.
  */
-function cluster_docs_prepare_row_data($nids) {
+function cluster_docs_prepare_row_data($nids, $is_global_search = FALSE) {
   $docs = array();
   $properties = array('title', 'link', 'link_url', 'is_link', 'is_file', 'is_file_class', 'description', 'filesize',
     'file_extension', 'is_image', 'image_uri', 'has_preview', 'preview_uri', 'source',);
 
   global $language;
   $langcode = $language->language;
+
   foreach (node_load_multiple($nids) as $node) {
     // Set default values.
     $doc = array_fill_keys($properties, FALSE);
@@ -497,14 +498,19 @@ function cluster_docs_prepare_row_data($nids) {
       // Group logic
       $group_title = '';
       $group_wrapper = $wrapper->og_membership->value();
+
       foreach ($group_wrapper as $group => $value) {
         $group_id = $value->gid;
         $group_node = node_load($group_id);
         $group_title = $group_node->title;
         $group_alias = drupal_get_path_alias('node/' . $group_id . '/documents');
-        $group_link = l(t($group_title), '/' . $group_alias, array('attributes' => array('class' => array('documents-link'))));
       }
-      $doc['group'] = '<div>' . $group_link . '</div>';
+
+      if($is_global_search) {
+        $group_link = l(t($group_title), '/' . $group_alias, array('attributes' => array('class' => array('documents-link'))));
+        $doc['group'] = '<div>' . $group_link . '</div>';
+      }
+
 
 
       $url = cluster_docs_get_download_url($node);
