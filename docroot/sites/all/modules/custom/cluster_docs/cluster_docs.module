@@ -86,8 +86,7 @@ function cluster_docs_global_search() {
 
   $filter = $query->createFilter();
   $query->filter($filter);
-
-  return cluster_docs_page($query);
+  return cluster_docs_page($query, TRUE, NULL, NULL, array(), TRUE);
 }
 
 /**
@@ -138,9 +137,10 @@ function cluster_docs_taxonomies() {
  * @param string|null $default_sort
  * @param string|null $default_sort_direction
  * @param array $excluded_facets
+ * @param $is_global_search: indicates that the function is meant to show the global docs search page.
  * @return array
  */
-function cluster_docs_page($query, $show_facets = TRUE, $default_sort = NULL, $default_sort_direction = NULL, $excluded_facets = array()) {
+function cluster_docs_page($query, $show_facets = TRUE, $default_sort = NULL, $default_sort_direction = NULL, $excluded_facets = array(), $is_global_search = FALSE) {
   // Figure out the sort column and direction from $_GET (store in $sort_key and $sort_direction).
   $sort_options = array(
     'title' => 'title_field',
@@ -289,7 +289,7 @@ function cluster_docs_page($query, $show_facets = TRUE, $default_sort = NULL, $d
     array(
       '#theme' => 'cluster_docs_table_list',
       '#heading' => t('Documents') . ' (' . $results['result count'] . ')',
-      '#docs' => $result_nids ? cluster_docs_prepare_row_data($result_nids) : FALSE,
+      '#docs' => $result_nids ? cluster_docs_prepare_row_data($result_nids, $is_global_search) : FALSE,
       '#reset_link' => $reset_link ? render($reset_link) : NULL,
       '#sort_link_params' => $sort_link_params,
       '#sort_column' => $sort_key,
@@ -358,7 +358,7 @@ function cluster_docs_get_grouped_key_docs($gid) {
  * @return
  *  Array of document data ready to be used in cards lists.
  */
-function cluster_docs_prepare_card_data($nids) {
+function cluster_docs_prepare_card_data($nids, $is_global_search = FALSE) {
   $docs = array();
   $properties = array('title', 'link', 'link_url', 'is_link', 'is_file', 'is_file_class', 'description', 'filesize',
     'file_extension', 'is_image', 'image_uri', 'has_preview', 'preview_uri', 'source',);
