@@ -78,10 +78,6 @@
         <?php print $doc['group']; ?>
       </td>
 
-      <?php if (arg(0) == 'search-documents'): ?>
-        <td class="group-name">&nbsp;</td>
-      <?php endif; ?>
-
       <td class="information-file">
         <?php if ($doc['filesize'] && $doc['file_extension']): ?>
           <span class="size-type">[ <?php print $doc['filesize']; ?>M ] <?php print $doc['file_extension']; ?></span>
