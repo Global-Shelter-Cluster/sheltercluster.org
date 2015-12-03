@@ -506,9 +506,10 @@ function cluster_docs_prepare_row_data($nids, $is_global_search = FALSE) {
         $group_alias = drupal_get_path_alias('node/' . $group_id . '/documents');
       }
 
+      $doc['group'] = '';
       if($is_global_search) {
         $group_link = l(t($group_title), '/' . $group_alias, array('attributes' => array('class' => array('documents-link'))));
-        $doc['group'] = '<div>' . $group_link . '</div>';
+        $doc['group'] = '<div class="document-groups">' . t('Part of ') . $group_link . '</div>';
       }
 
 

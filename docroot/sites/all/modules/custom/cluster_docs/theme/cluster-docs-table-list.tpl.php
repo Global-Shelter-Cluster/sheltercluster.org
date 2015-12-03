@@ -75,9 +75,7 @@
       <td class="information-title">
         <?php print $doc['link']; ?>
         <?php print $doc['description']; ?>
-        <?php if (isset($doc['group'])): ?>
-          <?php print $doc['group']; ?>
-        <?php endif; ?>
+        <?php print $doc['group']; ?>
       </td>
 
       <td class="information-file">
