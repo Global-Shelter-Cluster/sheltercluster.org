@@ -415,7 +415,6 @@ class GroupContentManager {
       ->entityCondition('bundle', $bundle)
       ->propertyCondition('status', NODE_PUBLISHED)
       ->fieldCondition($field, 'target_id', $parent_nids, 'IN')
-      ->fieldOrderBy('field_sorting_weight', 'value', 'ASC')
       ->execute();
 
     if (isset($res['node'])) {
@@ -433,7 +432,15 @@ class GroupContentManager {
         $return_nids = array_merge($return_nids, $parent_nids);
       }
 
-      return array_unique($return_nids);
+      $sorting_query = new EntityFieldQuery();
+      $result_sorted = $sorting_query->entityCondition('entity_type', 'node')
+      ->propertyCondition('nid', $return_nids, 'IN')
+      ->fieldOrderBy('field_sorting_weight', 'value', 'ASC')
+      ->execute();
+
+      $return_sorted_nids = array_keys($result_sorted['node']);
+
+      return array_unique($return_sorted_nids);
 
     }
     elseif ($include_self) {
