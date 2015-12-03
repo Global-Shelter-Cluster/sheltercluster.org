@@ -502,8 +502,10 @@ function cluster_docs_prepare_row_data($nids) {
         $group_id = $value->gid;
         $group_node = node_load($group_id);
         $group_title = $group_node->title;
+        $group_alias = drupal_get_path_alias('node/' . $group_id . '/documents');
+        $group_link = l(t($group_title), '/' . $group_alias, array('attributes' => array('class' => array('documents-link'))));
       }
-      $doc['group'] = $group_title;
+      $doc['group'] = '<div>' . $group_link . '</div>';
 
 
       $url = cluster_docs_get_download_url($node);
