@@ -75,7 +75,7 @@
       <td class="information-title">
         <?php print $doc['link']; ?>
         <?php print $doc['description']; ?>
-        <?php if ($doc['group']): ?>
+        <?php if (isset($doc['group'])): ?>
           <?php print $doc['group']; ?>
         <?php endif; ?>
       </td>
