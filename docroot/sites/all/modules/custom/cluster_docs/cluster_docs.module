@@ -144,7 +144,6 @@ function cluster_docs_page($query, $show_facets = TRUE, $default_sort = NULL, $d
   // Figure out the sort column and direction from $_GET (store in $sort_key and $sort_direction).
   $sort_options = array(
     'title' => 'title_field',
-    'group' => 'og_group_ref:name',
     'size' => 'field_file:file:size',
     'date' => 'field_report_meeting_date',
   );

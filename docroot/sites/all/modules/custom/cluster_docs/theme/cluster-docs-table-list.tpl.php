@@ -27,12 +27,7 @@
     <th></th>
     <?php
 
-    $headers = (arg(0) == 'search-documents') ? array(
-      'title' => 'Document title',
-      'group' => 'Group(s)',
-      'size' => 'Size',
-      'date' => 'Date',
-    ) : array(
+    $headers = array(
       'title' => 'Document title',
       'size' => 'Size',
       'date' => 'Date',
