@@ -43,6 +43,8 @@ function shelter_preprocess_page(&$variables) {
   $variables['hot_responses'] = FALSE;
   $variables['is_regions_and_countries'] = FALSE;
   $variables['is_user_profile_pages'] = FALSE;
+  $variables['is_search_documents'] = FALSE;
+  $variables['global_docs_search_page_link'] = l(t('Search all documents'), 'search-documents', array('attributes' => array('class' => array('search-documents-link'))));
 
   if ($variables['is_front']) {
     $variables['hot_responses'] = cluster_og_hot_responses();
@@ -51,6 +53,10 @@ function shelter_preprocess_page(&$variables) {
 
   if ($current_path == 'regions-countries') {
     $variables['is_regions_and_countries'] = TRUE;
+  }
+
+  if ($current_path == 'search-documents') {
+    $variables['is_search_documents'] = TRUE;
   }
 
   if (arg(0) == 'user') {

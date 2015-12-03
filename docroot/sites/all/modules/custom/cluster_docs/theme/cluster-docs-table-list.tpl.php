@@ -26,6 +26,7 @@
   <thead>
     <th></th>
     <?php
+
     $headers = array(
       'title' => 'Document title',
       'size' => 'Size',
@@ -74,6 +75,9 @@
       <td class="information-title">
         <?php print $doc['link']; ?>
         <?php print $doc['description']; ?>
+        <?php if ($doc['group']): ?>
+          <?php print $doc['group']; ?>
+        <?php endif; ?>
       </td>
 
       <td class="information-file">

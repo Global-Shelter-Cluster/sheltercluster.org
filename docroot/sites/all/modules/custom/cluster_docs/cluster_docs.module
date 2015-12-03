@@ -24,6 +24,14 @@ function cluster_docs_menu() {
     'title arguments' => array(1),
     'type' => MENU_CALLBACK,
   );
+
+  $items['search-documents'] = array(
+    'title' => 'Search documents',
+    'access arguments' => array('access content'),
+    'page callback' => 'cluster_docs_global_search',
+    'type' => MENU_CALLBACK,
+  );
+
   return $items;
 }
 
@@ -66,6 +74,19 @@ function cluster_docs_all($nid) {
   $query->filter($filter);
 
   return cluster_docs_page($query);
+}
+
+/**
+ * Page callback to show all documents of the website.
+ *
+ * @return Render array
+ */
+function cluster_docs_global_search() {
+  $query = cluster_docs_query();
+
+  $filter = $query->createFilter();
+  $query->filter($filter);
+  return cluster_docs_page($query, TRUE, NULL, NULL, array(), TRUE);
 }
 
 /**
@@ -116,9 +137,10 @@ function cluster_docs_taxonomies() {
  * @param string|null $default_sort
  * @param string|null $default_sort_direction
  * @param array $excluded_facets
+ * @param $is_global_search: indicates that the function is meant to show the global docs search page.
  * @return array
  */
-function cluster_docs_page($query, $show_facets = TRUE, $default_sort = NULL, $default_sort_direction = NULL, $excluded_facets = array()) {
+function cluster_docs_page($query, $show_facets = TRUE, $default_sort = NULL, $default_sort_direction = NULL, $excluded_facets = array(), $is_global_search = FALSE) {
   // Figure out the sort column and direction from $_GET (store in $sort_key and $sort_direction).
   $sort_options = array(
     'title' => 'title_field',
@@ -267,7 +289,7 @@ function cluster_docs_page($query, $show_facets = TRUE, $default_sort = NULL, $d
     array(
       '#theme' => 'cluster_docs_table_list',
       '#heading' => t('Documents') . ' (' . $results['result count'] . ')',
-      '#docs' => $result_nids ? cluster_docs_prepare_row_data($result_nids) : FALSE,
+      '#docs' => $result_nids ? cluster_docs_prepare_row_data($result_nids, $is_global_search) : FALSE,
       '#reset_link' => $reset_link ? render($reset_link) : NULL,
       '#sort_link_params' => $sort_link_params,
       '#sort_column' => $sort_key,
@@ -454,13 +476,14 @@ function cluster_docs_get_download_url($node) {
  * @return
  *  Array of document data ready to be used in cards lists.
  */
-function cluster_docs_prepare_row_data($nids) {
+function cluster_docs_prepare_row_data($nids, $is_global_search = FALSE) {
   $docs = array();
   $properties = array('title', 'link', 'link_url', 'is_link', 'is_file', 'is_file_class', 'description', 'filesize',
     'file_extension', 'is_image', 'image_uri', 'has_preview', 'preview_uri', 'source',);
 
   global $language;
   $langcode = $language->language;
+
   foreach (node_load_multiple($nids) as $node) {
     // Set default values.
     $doc = array_fill_keys($properties, FALSE);
@@ -470,6 +493,25 @@ function cluster_docs_prepare_row_data($nids) {
       $wrapper = entity_metadata_wrapper('node', $node);
       $wrapper->language($language->language);
       $doc['title'] = $wrapper->label();
+
+      // Insert the group on the table
+      // Group logic
+      $group_title = '';
+      $group_wrapper = $wrapper->og_membership->value();
+
+      foreach ($group_wrapper as $group => $value) {
+        $group_id = $value->gid;
+        $group_node = node_load($group_id);
+        $group_title = $group_node->title;
+        $group_alias = drupal_get_path_alias('node/' . $group_id . '/documents');
+      }
+
+      if($is_global_search) {
+        $group_link = l(t($group_title), '/' . $group_alias, array('attributes' => array('class' => array('documents-link'))));
+        $doc['group'] = '<div>' . $group_link . '</div>';
+      }
+
+
 
       $url = cluster_docs_get_download_url($node);
       $doc['link_url'] = $url;
@@ -686,4 +728,32 @@ function cluster_docs_node_presave($node) {
   if ($new_groups) {
     $wrapper->og_group_ref->set(array_merge($groups, $new_groups));
   }
+}
+
+/**
+ * [cluster_docs_search_autocomplete description]
+ * @param  [string] $string [String that user entered]
+ * @return [array]         [The results of the query]
+ */
+function cluster_docs_search_autocomplete($string, $nid = NULL) {
+  $matches = array();
+  $query = db_select('node', 'dni');
+  $query->fields('dni', array('title'));
+  $query->condition('title', '%' . db_like($string) . '%', 'LIKE');
+  $query->range(0, 20);
+
+  if ($nid) {
+    $query->condition('nid', $nid);
+  }
+
+  $results = $query->execute();
+
+  // add matches to $matches
+  foreach ($results as $row) {
+    $matches[$row->title] = check_plain($row->title);
+  }
+
+  // return for JS
+  drupal_json_output($matches);
+  exit();
 }
