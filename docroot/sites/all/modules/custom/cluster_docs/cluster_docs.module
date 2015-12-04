@@ -507,7 +507,23 @@ function cluster_docs_prepare_row_data($nids, $is_global_search = FALSE) {
       }
 
       if($is_global_search) {
-        $group_link = l(t($group_title), '/' . $group_alias, array('attributes' => array('class' => array('documents-link'))));
+
+        $facet_params = '';
+        $group_link = '';
+        if (isset($_GET['f'])) {
+          foreach ($_GET['f'] as $key => $facet_value) {
+            $facet_params = $facet_params . 'f[' . $key . ']' . '=' . $facet_value;
+            dpm($key);
+            if ($key != count($_GET['f']) -1) {
+              $facet_params = $facet_params . '&';
+              $group_link = l(t($group_title), '/' . $group_alias, array('query' => array('f[' . $key . ']' => $facet_value)) ,array('attributes' => array('class' => array('documents-link'))));
+            }
+          }
+        }
+        else {
+          $group_link = l(t($group_title), '/' . $group_alias, array('attributes' => array('class' => array('documents-link'))));
+        }
+
         $doc['group'] = '<div>' . $group_link . '</div>';
       }
 
