@@ -499,12 +499,12 @@ function cluster_docs_prepare_row_data($nids, $is_global_search = FALSE) {
       $group_title = '';
       $group_wrapper = $wrapper->og_membership->value();
 
-      // Create group links
+      // Create group links.
       $doc['group'] = '';
       if($is_global_search) {
         $doc['group'] = t('Part of ');
         $last_group = count($group_wrapper) - 1;
-        // Get all the groups ids for a document
+        // Get all the groups ids for a document.
         foreach ($group_wrapper as $index => $value) {
           $separator = ", ";
           if ($index == $last_group) {
@@ -516,16 +516,15 @@ function cluster_docs_prepare_row_data($nids, $is_global_search = FALSE) {
           $group_alias = drupal_get_path_alias('node/' . $group_id . '/documents');
 
           $group_link = '';
+          $options = array();
           if (isset($_GET['f'])) {
             foreach ($_GET['f'] as $key => $facet_value) {
-              // Add the f[] string to each array key
+              // Add the f[] string to each array key.
               $facets['f[' . $key . ']'] = $facet_value;
             }
-            $group_link = l(t($group_title), '/' . $group_alias, array('query' => array($facets)) ,array('attributes' => array('class' => array('documents-link'))));
+            $options['query'] = array($facets);
           }
-          else {
-            $group_link = l(t($group_title), '/' . $group_alias, array('attributes' => array('class' => array('documents-link'))));
-          }
+          $group_link = l(t($group_title), '/' . $group_alias, $options, array('attributes' => array('class' => array('documents-link'))));
 
           $doc['group'] .= $group_link . $separator;
         }
