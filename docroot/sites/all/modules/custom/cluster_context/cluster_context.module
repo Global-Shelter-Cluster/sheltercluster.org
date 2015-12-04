@@ -117,6 +117,7 @@ function cluster_context_links($node) {
         );
       }
 
+      // Don't show if there alreay exists a strategic advisory group for this context.
       if (!$manager->getStrategicAdvisory()) {
         if (node_access('create', 'strategic-advisory') || og_user_access('node', $node->nid, 'manage_child_sag')) {
           $links['new-strategic-advisory'] = array(
@@ -140,9 +141,20 @@ function cluster_context_links($node) {
           ),
         );
       }
+      if (node_access('create', 'working_group')  || og_user_access('node', $node->nid, 'manage_child_working_group')) {
+        $links['new-working-group'] = array(
+          'title' => t('New working group'),
+          'href' => 'node/add/working-group',
+          'query' => array(
+            'response' => $node->nid,
+            'destination' => 'node/' . $node->nid
+          ),
+        );
+      }
 
       break;
     case 'response':
+      // Don't show if there alreay exists a strategic advisory group for this context.
       if (!$manager->getStrategicAdvisory()) {
         if (node_access('create', 'strategic-advisory') || og_user_access('node', $node->nid, 'manage_child_sag')) {
           $links['new-strategic-advisory'] = array(
@@ -177,20 +189,20 @@ function cluster_context_links($node) {
           ),
         );
       }
-
+      if (node_access('create', 'working_group')  || og_user_access('node', $node->nid, 'manage_child_working_group')) {
+        $links['new-working-group'] = array(
+          'title' => t('New working group'),
+          'href' => 'node/add/working-group',
+          'query' => array(
+            'response' => $node->nid,
+            'destination' => 'node/' . $node->nid
+          ),
+        );
+      }
       break;
   }
 
-  if (node_access('create', 'working_group')  || og_user_access('node', $node->nid, 'manage_child_working_group')) {
-    $links['new-working-group'] = array(
-      'title' => t('New working group'),
-      'href' => 'node/add/working-group',
-      'query' => array(
-        'response' => $node->nid,
-        'destination' => 'node/' . $node->nid
-      ),
-    );
-  }
+
   return $links;
 }
 
