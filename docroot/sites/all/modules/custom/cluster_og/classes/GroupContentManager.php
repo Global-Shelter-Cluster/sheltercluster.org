@@ -431,13 +431,7 @@ class GroupContentManager {
         $return_nids = array_merge($return_nids, $parent_nids);
       }
 
-      $sorting_query = new EntityFieldQuery();
-      $result_sorted = $sorting_query->entityCondition('entity_type', 'node')
-      ->propertyCondition('nid', $return_nids, 'IN')
-      ->fieldOrderBy('field_sorting_weight', 'value', 'ASC')
-      ->execute();
-
-      $return_sorted_nids = array_keys($result_sorted['node']);
+      $return_sorted_nids = shelter_base_sort_nids_by_weight($return_nids);
 
       return array_unique($return_sorted_nids);
 

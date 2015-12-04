@@ -20,3 +20,20 @@ function shelter_base_preprocess_page(&$variables) {
     drupal_add_js(drupal_get_path('module', 'shelter_base') . '/javascripts/admin-tweaks.js');
   }
 }
+
+/**
+ * Gets a set of node ids and returns them sorted by the field_sorting_weight.
+ */
+function shelter_base_sort_nids_by_weight($nids, $sort_order = 'ASC') {
+  if (!$nids) {
+    return array();
+  }
+
+  $sorting_query = new EntityFieldQuery();
+  $result_sorted = $sorting_query->entityCondition('entity_type', 'node')
+    ->propertyCondition('nid', $nids, 'IN')
+    ->fieldOrderBy('field_sorting_weight', 'value', $sort_order)
+    ->execute();
+
+  return array_keys($result_sorted['node']);
+}

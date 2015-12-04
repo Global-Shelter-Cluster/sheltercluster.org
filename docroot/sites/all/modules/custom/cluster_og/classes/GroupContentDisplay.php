@@ -1,3 +1,4 @@
+
 <?php
 
 /**
@@ -150,7 +151,8 @@ class GroupDisplayProvider {
       ));
     }
     // Combine libraries, pages and other required entities under the same listing.
-    $pages = array_merge($this->manager->getPages(), $this->manager->getLibraries());
+    $page_ids = array_merge($this->manager->getPages(), $this->manager->getLibraries());
+    $pages = shelter_base_sort_nids_by_weight($page_ids);
     if ($pages) {
       $secondary['pages'] = partial('navigation_options', array(
         'navigation_type_id' => 'pages',
