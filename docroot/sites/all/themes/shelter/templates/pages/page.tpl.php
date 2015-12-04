@@ -39,8 +39,6 @@
           </div>
         <?php endif; ?>
 
-        <?php print render($search_form); ?>
-
       </div>
     </section>
 

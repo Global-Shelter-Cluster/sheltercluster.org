@@ -499,35 +499,37 @@ function cluster_docs_prepare_row_data($nids, $is_global_search = FALSE) {
       $group_title = '';
       $group_wrapper = $wrapper->og_membership->value();
 
-      foreach ($group_wrapper as $group => $value) {
-        $group_id = $value->gid;
-        $group_node = node_load($group_id);
-        $group_title = $group_node->title;
-        $group_alias = drupal_get_path_alias('node/' . $group_id . '/documents');
-      }
-
+      // Create group links
+      $doc['group'] = '';
       if($is_global_search) {
-
-        $facet_params = '';
-        $group_link = '';
-        if (isset($_GET['f'])) {
-          foreach ($_GET['f'] as $key => $facet_value) {
-            $facet_params = $facet_params . 'f[' . $key . ']' . '=' . $facet_value;
-            dpm($key);
-            if ($key != count($_GET['f']) -1) {
-              $facet_params = $facet_params . '&';
-              $group_link = l(t($group_title), '/' . $group_alias, array('query' => array('f[' . $key . ']' => $facet_value)) ,array('attributes' => array('class' => array('documents-link'))));
-            }
+        $doc['group'] = t('Part of ');
+        $last_group = count($group_wrapper) - 1;
+        // Get all the groups ids for a document
+        foreach ($group_wrapper as $index => $value) {
+          $separator = ", ";
+          if ($index == $last_group) {
+            $separator = '';
           }
-        }
-        else {
-          $group_link = l(t($group_title), '/' . $group_alias, array('attributes' => array('class' => array('documents-link'))));
-        }
+          $group_id = $value->gid;
+          $group_node = node_load($group_id);
+          $group_title = $group_node->title;
+          $group_alias = drupal_get_path_alias('node/' . $group_id . '/documents');
 
-        $doc['group'] = '<div>' . $group_link . '</div>';
+          $group_link = '';
+          if (isset($_GET['f'])) {
+            foreach ($_GET['f'] as $key => $facet_value) {
+              // Add the f[] string to each array key
+              $facets['f[' . $key . ']'] = $facet_value;
+            }
+            $group_link = l(t($group_title), '/' . $group_alias, array('query' => array($facets)) ,array('attributes' => array('class' => array('documents-link'))));
+          }
+          else {
+            $group_link = l(t($group_title), '/' . $group_alias, array('attributes' => array('class' => array('documents-link'))));
+          }
+
+          $doc['group'] .= $group_link . $separator;
+        }
       }
-
-
 
       $url = cluster_docs_get_download_url($node);
       $doc['link_url'] = $url;

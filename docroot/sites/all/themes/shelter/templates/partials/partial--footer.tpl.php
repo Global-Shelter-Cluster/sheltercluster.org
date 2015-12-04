@@ -1,6 +1,5 @@
 <footer>
   <div class="page-margin inside-footer">
-    <?php print render($search_form_bottom); ?>
     <section id="active-clusters-list">
       <h3><?php print t('Featured Responses'); ?></h3>
       <?php print render($page['footer']['hot_responses']); ?>
