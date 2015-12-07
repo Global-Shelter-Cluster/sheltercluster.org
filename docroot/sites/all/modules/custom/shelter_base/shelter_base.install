@@ -996,3 +996,45 @@ function _batch_process_sort_weight_task($entity_id) {
 function shelter_base_update_7104() {
   features_revert_module('cluster_search');
 }
+
+/**
+ * Revert shelter base feature to hide field sorting weight from display.
+ */
+function shelter_base_update_7105() {
+  features_revert_module('shelter_base');
+}
+
+/**
+ * Revert cluster events feature to hide field sorting weight from display.
+ */
+function shelter_base_update_7106() {
+  features_revert_module('cluster_events');
+}
+
+/**
+ * Revert cluster discussions feature to hide field sorting weight from display.
+ */
+function shelter_base_update_7107() {
+  features_revert_module('cluster_discussions');
+}
+
+/**
+ * Revert cluster docs feature to hide field sorting weight from display.
+ */
+function shelter_base_update_7108() {
+  features_revert_module('cluster_docs');
+}
+
+/**
+ * Revert cluster og feature reoder field display.
+ */
+function shelter_base_update_7109() {
+  features_revert_module('cluster_og');
+}
+
+/**
+ * Revert cluster libraries feature reoder field display.
+ */
+function shelter_base_update_7110() {
+  features_revert_module('cluster_libraries');
+}
