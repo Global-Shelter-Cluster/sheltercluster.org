@@ -37,7 +37,6 @@ function shelter_preprocess_page(&$variables) {
   drupal_add_html_head($viewport, 'viewport');
 
   libraries_load('underscore');
-  drupal_add_library('underscore', 'underscore');
   drupal_add_library('system', 'jquery.cookie');
 
   $variables['hot_responses'] = FALSE;
@@ -85,6 +84,14 @@ function partial__homepage_preprocess(&$variables) {
 
   $homepage_menu = menu_tree('menu-homepage');
   $variables['homepage_menu'] = render($homepage_menu);
+}
+
+/**
+ * Implements partial__{name}_preprocess().
+ */
+function shelter_preprocess_cluster_docs_featured_documents(&$variables) {
+  libraries_load('jcarousel');
+  drupal_add_js(drupal_get_path('theme', 'shelter') . '/assets/javascripts/featured-docs.js');
 }
 
 /**

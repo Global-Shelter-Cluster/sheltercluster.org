@@ -1,4 +1,4 @@
-<ul>
+<ul class="featured-document-slider">
   <?php foreach ($docs as $doc): ?>
     <?php if ($doc['is_image'] || $doc['has_preview']): ?>
       <li class="image-document">
