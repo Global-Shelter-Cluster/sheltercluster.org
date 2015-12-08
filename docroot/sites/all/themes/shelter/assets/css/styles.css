@@ -625,9 +625,71 @@ body {
 
 #featured-documents {
   position: relative;
-  color: #fff;
   margin-bottom: 32px;
   margin-bottom: 2rem;
+}
+#featured-documents .featured-document-slider {
+  background: #eee;
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+}
+#featured-documents .featured-document-slider ul {
+  width: 90000em;
+  position: relative;
+}
+#featured-documents .featured-document-slider li {
+  width: 400px;
+  float: left;
+  min-height: 80px;
+}
+#featured-documents .jcarousel-pagination {
+  position: relative;
+  top: 10px;
+  text-align: center;
+}
+#featured-documents .jcarousel-pagination a {
+  color: white;
+  text-decoration: none;
+  display: inline-block;
+  background: #ddd;
+  -moz-border-radius: 20px;
+  -webkit-border-radius: 20px;
+  border-radius: 20px;
+  height: 10px;
+  width: 10px;
+  text-indent: -999em;
+  margin-right: 3px;
+  border: 1px solid #555;
+}
+#featured-documents .jcarousel-pagination a.active {
+  background: black;
+}
+#featured-documents .jcarousel-control-prev {
+  background: #ddd;
+  font-size: 28.8px;
+  font-size: 1.8rem;
+  color: black;
+  font-weight: bold;
+  text-decoration: none;
+  display: block;
+  padding: 5px 10px;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+#featured-documents .jcarousel-control-next {
+  background: #ddd;
+  font-size: 28.8px;
+  font-size: 1.8rem;
+  color: black;
+  font-weight: bold;
+  text-decoration: none;
+  display: block;
+  padding: 5px 10px;
+  position: absolute;
+  top: 0;
+  right: 0;
 }
 #featured-documents ul {
   padding: 0;
@@ -661,10 +723,10 @@ body {
 }
 #featured-documents li .document-title a {
   font-weight: bold;
-  color: white;
+  color: black;
 }
 #featured-documents li .document-information {
-  background: #242424;
+  margin: 0 30px;
 }
 #featured-documents li .document-information p {
   padding: 10.4px 0;
@@ -672,7 +734,7 @@ body {
   font-size: 12.8px;
   font-size: 0.8rem;
   margin: 0;
-  color: #d4d4d4;
+  color: black;
 }
 #featured-documents li .document-information img {
   width: 100%;
@@ -688,8 +750,7 @@ body {
 @media (min-width: 660px) {
   #featured-documents li .document-information .image-container {
     display: block;
-    width: 23%;
-    border-right: 3px solid #000;
+    width: 35%;
   }
 }
 #featured-documents li .document-information .information-container {
@@ -700,7 +761,7 @@ body {
 }
 @media (min-width: 660px) {
   #featured-documents li .document-information .information-container {
-    width: 75%;
+    width: 60%;
   }
 }
 #featured-documents .image-document {
