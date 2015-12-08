@@ -7,7 +7,7 @@ var plumber = require('gulp-plumber');
 var autoprefixer = require('gulp-autoprefixer');
 var watch = require('gulp-watch');
 
-gulp.task('sass', ['sass-watch']);
+gulp.task('sass', ['sass-compile', 'sass-watch']);
 
 gulp.task('sass-watch', function() {
   gulp.watch(config.assets.sass, ['sass-compile']);
