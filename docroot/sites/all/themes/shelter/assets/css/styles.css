@@ -625,9 +625,9 @@ body {
 
 #featured-documents {
   position: relative;
-  -moz-box-shadow: rgba(100, 100, 100, 0.5) 0px 7px 15px;
-  -webkit-box-shadow: rgba(100, 100, 100, 0.5) 0px 7px 15px;
-  box-shadow: rgba(100, 100, 100, 0.5) 0px 7px 15px;
+  -moz-box-shadow: rgba(0, 0, 0, 0.33) 0px 3px 10px;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.33) 0px 3px 10px;
+  box-shadow: rgba(0, 0, 0, 0.33) 0px 3px 10px;
   -moz-border-radius: 5px;
   -webkit-border-radius: 5px;
   border-radius: 5px;
@@ -694,7 +694,8 @@ body {
   border-radius: 5px 0 0 5px;
 }
 #featured-documents .jcarousel-control-prev.inactive {
-  opacity: 0.2;
+  color: #ccc;
+  background: #e9e9e9;
 }
 #featured-documents .jcarousel-control-next {
   background: #ddd;
@@ -716,7 +717,8 @@ body {
   border-radius: 0 5px 5px 0;
 }
 #featured-documents .jcarousel-control-next.inactive {
-  opacity: 0.2;
+  color: #ccc;
+  background: #e9e9e9;
 }
 #featured-documents ul {
   padding: 0;
