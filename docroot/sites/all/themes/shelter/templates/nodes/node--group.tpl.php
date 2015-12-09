@@ -38,10 +38,6 @@
       </section>
     <?php endif; ?>
 
-    <?php if ($content['upcoming_event']): ?>
-      <?php print render($content['upcoming_event']); ?>
-    <?php endif; ?>
-
     <?php if ($content['recent_discussions']): ?>
       <?php print render($content['recent_discussions']); ?>
     <?php endif; ?>
@@ -55,6 +51,10 @@
       <section id="featured-documents">
         <?php print render($content['featured_documents']); ?>
       </section>
+    <?php endif; ?>
+
+    <?php if ($content['upcoming_event']): ?>
+      <?php print render($content['upcoming_event']); ?>
     <?php endif; ?>
 
     <?php if (!empty($content['body'])): ?>

@@ -104,7 +104,7 @@ function cluster_og_theme() {
       ),
     ),
     'cluster_og_no_upcoming_event' => array(
-      'template' => 'theme/cluster-og-no-upcoming-event',
+      'file' => 'theme/cluster_og.theme.inc',
       'variables' => array(
         'all_events_link' => NULL,
       ),
@@ -433,7 +433,7 @@ function cluster_og_menu() {
 /**
  * Implements hook_node_access().
  *
- * Test if the user is allowed to manage a specific content type within the context 
+ * Test if the user is allowed to manage a specific content type within the context
  * of the currently viewed organic group.  Managed means all operations except 'view', 'delete'.
  */
 function cluster_og_node_access($node, $account, $op) {
@@ -469,15 +469,15 @@ function cluster_og_node_access($node, $account, $op) {
 function cluster_og_og_permission() {
   return array(
     'manage_child_hub' => array(
-      'title' => t('Manage child hub'), 
+      'title' => t('Manage child hub'),
       'description' => t("Allow user to manage child hubs."),
     ),
     'manage_child_strategic_advisory' => array(
-      'title' => t('Manage child strategic advisory group'), 
+      'title' => t('Manage child strategic advisory group'),
       'description' => t("Allow user to manage child strategic advisory group."),
     ),
     'manage_child_working_group' => array(
-      'title' => t('Manage child working group'), 
+      'title' => t('Manage child working group'),
       'description' => t("Allow user to manage child technical working group."),
     ),
   );

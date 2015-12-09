@@ -17,15 +17,14 @@
       <?php print $homepage_menu; ?>
     </section>
 
-    <?php if($upcoming_events): ?>
-      <?php print render($upcoming_events); ?>
-    <?php endif; ?>
-
     <?php print partial('twitter_timeline', array('widget_id' => '569895346130534400')); ?>
 
   </div>
 
   <div class="main-column clearfix">
+    <?php if($upcoming_events): ?>
+      <?php print render($upcoming_events); ?>
+    <?php endif; ?>
     <div class="wysiwyg">
       <?php print render($page['content']); ?>
     </div>

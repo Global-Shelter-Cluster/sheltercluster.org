@@ -69,6 +69,13 @@ function theme_cluster_og_upcoming_event($vars) {
   return $output;
 }
 
+function theme_cluster_og_no_upcoming_event($vars) {
+  return partial('upcoming_events', array(
+    'title' => t('No Upcoming Events'),
+    'all_events_link' => l(t('All calendar event'), $vars['all_events_link'], array('attributes' => array('class' => array('see-all'))))
+  ));
+}
+
 /**
  * Theme wrapper for featured documents.
  * @TODO delegate to cluster_docs module.
