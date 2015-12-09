@@ -12,6 +12,9 @@ function cluster_events_pathauto($op) {
   $settings->patterndefault = '[node:content-type]/[node:title]/events';
   $settings->token_type = 'node';
   $settings->patternitems = array('events' => 'Group events');
+  if (module_exists('cluster_rss')) {
+    $settings->patternitems += array('rssevents' => 'Group RSS events');
+  }
   $settings->batch_update_callback = 'cluster_events_pathauto_bulkupdate';
   return $settings;
 }
@@ -22,6 +25,9 @@ function cluster_events_pathauto($op) {
 function cluster_events_create_alias($node, $op) {
   module_load_include('inc', 'pathauto');
   pathauto_create_alias('cluster_events', $op, 'node/'.$node->nid.'/events', array('node' => $node), 'events');
+  if (module_exists('cluster_rss')) {
+    pathauto_create_alias('cluster_events', $op, 'node/'.$node->nid.'/rss/events', array('node' => $node), 'rssevents');
+  }
 }
 
 /**

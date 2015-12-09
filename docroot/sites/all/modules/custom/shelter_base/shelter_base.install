@@ -15,6 +15,8 @@ function shelter_base_install() {
   _shelter_base_modules_enable('custom');
   // Set default theme.
   shelter_base_update_7003();
+  // Set default patterns for RSS.
+  shelter_base_update_7112();
 }
 
 function _shelter_base_module_enable_all() {
@@ -68,7 +70,7 @@ function _shelter_base_required_core() {
  */
 function _shelter_base_required_custom() {
   return array('cluster_context', 'cluster_discussions', 'cluster_docs', 'cluster_events', 'cluster_libraries', 'cluster_og', 'cluster_search',
-    'cluster_taxonomy', 'cluster_user', 'cluster_nav', 'cluster_nav_views', 'cluster_workflow', 'partial',
+    'cluster_taxonomy', 'cluster_user', 'cluster_nav', 'cluster_nav_views', 'cluster_workflow', 'partial', 'cluster_rss',
   );
 }
 
@@ -1038,3 +1040,20 @@ function shelter_base_update_7109() {
 function shelter_base_update_7110() {
   features_revert_module('cluster_libraries');
 }
+
+/**
+ * Enabling cluster_rss.
+ */
+function shelter_base_update_7111() {
+  module_enable(array('cluster_rss'));
+}
+
+/**
+ * Setting RSS base patterns.
+ */
+function shelter_base_update_7112() {
+  variable_set('pathauto_cluster_discussions_rssdiscussions_pattern', '[node:content-type]/[node:title]/rss/discussions');
+  variable_set('pathauto_cluster_docs_rssdocs_pattern', '[node:content-type]/[node:title]/rss/documents');
+  variable_set('pathauto_cluster_events_rssevents_pattern', '[node:content-type]/[node:title]/rss/events');
+}
+
