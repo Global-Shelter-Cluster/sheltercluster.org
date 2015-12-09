@@ -1057,3 +1057,9 @@ function shelter_base_update_7112() {
   variable_set('pathauto_cluster_events_rssevents_pattern', '[node:content-type]/[node:title]/rss/events');
 }
 
+/**
+ * Revert cluster events to add contact field.
+ */
+function shelter_base_update_7113() {
+  features_revert_module('cluster_events');
+}
