@@ -286,14 +286,14 @@ th {
   background-image: linear-gradient(#e1e1e1, #e3e3e3 60%, #e1e1e1);
 }
 
-.not-underlined-links, #featured-documents li .document-title a, #secondary-nav .nav-items .nav-secondary-items a, #contextual-navigation a:hover, #contextual-navigation a:active, .node-type-discussion .comment a {
+.not-underlined-links, #secondary-nav .nav-items .nav-secondary-items a, #contextual-navigation a:hover, #contextual-navigation a:active, .node-type-discussion .comment a {
   position: relative;
   text-decoration: none;
 }
-.not-underlined-links:hover, #featured-documents li .document-title a:hover, #secondary-nav .nav-items .nav-secondary-items a:hover, #contextual-navigation a:hover, .node-type-discussion .comment a:hover, .not-underlined-links:active, #featured-documents li .document-title a:active, #secondary-nav .nav-items .nav-secondary-items a:active, #contextual-navigation a:active, .node-type-discussion .comment a:active {
+.not-underlined-links:hover, #secondary-nav .nav-items .nav-secondary-items a:hover, #contextual-navigation a:hover, .node-type-discussion .comment a:hover, .not-underlined-links:active, #secondary-nav .nav-items .nav-secondary-items a:active, #contextual-navigation a:active, .node-type-discussion .comment a:active {
   text-decoration: none;
 }
-.not-underlined-links:hover:after, #featured-documents li .document-title a:hover:after, #secondary-nav .nav-items .nav-secondary-items a:hover:after, #contextual-navigation a:hover:after, .node-type-discussion .comment a:hover:after, .not-underlined-links:active:after, #featured-documents li .document-title a:active:after, #secondary-nav .nav-items .nav-secondary-items a:active:after, #contextual-navigation a:active:after, .node-type-discussion .comment a:active:after {
+.not-underlined-links:hover:after, #secondary-nav .nav-items .nav-secondary-items a:hover:after, #contextual-navigation a:hover:after, .node-type-discussion .comment a:hover:after, .not-underlined-links:active:after, #secondary-nav .nav-items .nav-secondary-items a:active:after, #contextual-navigation a:active:after, .node-type-discussion .comment a:active:after {
   content: '';
   width: 100%;
   position: absolute;
@@ -742,7 +742,6 @@ body {
   margin: 0 0.65rem 0 0;
   border: none;
   display: inline-block;
-  word-break: break-all;
 }
 #featured-documents li .document-title .size-type {
   font-size: 10.4px;

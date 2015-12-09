@@ -104,7 +104,6 @@
         @include rem(margin, 0 0.65rem 0 0);
         border: none;
         display: inline-block;
-        word-break: break-all;
       }
       .size-type {
         @include rem(font-size, 0.65rem);
@@ -112,7 +111,6 @@
         display: inline-block;
       }
       a {
-        @extend .not-underlined-links;
         font-weight: bold;
         color: black;
       }
