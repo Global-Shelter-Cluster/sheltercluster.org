@@ -625,11 +625,20 @@ body {
 
 #featured-documents {
   position: relative;
+  -moz-box-shadow: rgba(100, 100, 100, 0.5) 0px 7px 15px;
+  -webkit-box-shadow: rgba(100, 100, 100, 0.5) 0px 7px 15px;
+  box-shadow: rgba(100, 100, 100, 0.5) 0px 7px 15px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
   margin-bottom: 32px;
   margin-bottom: 2rem;
 }
 #featured-documents .featured-document-slider {
   background: #eee;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
   position: relative;
   overflow: hidden;
   width: 100%;
@@ -660,7 +669,7 @@ body {
   width: 10px;
   text-indent: -999em;
   margin-right: 3px;
-  border: 1px solid #555;
+  border: 1px solid #7f7f7f;
 }
 #featured-documents .jcarousel-pagination a.active {
   background: black;
@@ -677,6 +686,15 @@ body {
   position: absolute;
   top: 0;
   left: 0;
+  height: 100%;
+  line-height: 100%;
+  z-index: 100;
+  -moz-border-radius: 5px 0 0 5px;
+  -webkit-border-radius: 5px;
+  border-radius: 5px 0 0 5px;
+}
+#featured-documents .jcarousel-control-prev.inactive {
+  opacity: 0.2;
 }
 #featured-documents .jcarousel-control-next {
   background: #ddd;
@@ -690,6 +708,15 @@ body {
   position: absolute;
   top: 0;
   right: 0;
+  height: 100%;
+  line-height: 100%;
+  z-index: 100;
+  -moz-border-radius: 0 5px 5px 0;
+  -webkit-border-radius: 0;
+  border-radius: 0 5px 5px 0;
+}
+#featured-documents .jcarousel-control-next.inactive {
+  opacity: 0.2;
 }
 #featured-documents ul {
   padding: 0;
@@ -726,7 +753,7 @@ body {
   color: black;
 }
 #featured-documents li .document-information {
-  margin: 0 30px;
+  margin: 0 30px 0 45px;
 }
 #featured-documents li .document-information p {
   padding: 10.4px 0;
@@ -746,6 +773,7 @@ body {
   border-right: none;
   width: 100%;
   display: none;
+  margin-top: 15px;
 }
 @media (min-width: 660px) {
   #featured-documents li .document-information .image-container {
@@ -761,7 +789,7 @@ body {
 }
 @media (min-width: 660px) {
   #featured-documents li .document-information .information-container {
-    width: 60%;
+    width: 64%;
   }
 }
 #featured-documents .image-document {
