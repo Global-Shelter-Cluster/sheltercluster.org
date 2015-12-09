@@ -646,6 +646,7 @@ body {
 #featured-documents .featured-document-slider ul {
   width: 90000em;
   position: relative;
+  z-index: 150;
 }
 #featured-documents .featured-document-slider li {
   width: 400px;
