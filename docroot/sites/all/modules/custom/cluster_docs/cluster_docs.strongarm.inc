@@ -104,6 +104,12 @@ function cluster_docs_strongarm() {
       'token' => array(
         'custom_settings' => FALSE,
       ),
+      'related_response' => array(
+        'custom_settings' => FALSE,
+      ),
+      'related_hub' => array(
+        'custom_settings' => FALSE,
+      ),
     ),
     'extra_fields' => array(
       'form' => array(
@@ -114,7 +120,7 @@ function cluster_docs_strongarm() {
           'weight' => '2',
         ),
         'language' => array(
-          'weight' => '5',
+          'weight' => '4',
         ),
       ),
       'display' => array(),

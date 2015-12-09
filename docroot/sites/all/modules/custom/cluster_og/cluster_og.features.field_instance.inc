@@ -235,7 +235,7 @@ function cluster_og_field_default_field_instances() {
       'module' => 'link',
       'settings' => array(),
       'type' => 'link_field',
-      'weight' => 43,
+      'weight' => 8,
     ),
   );
 
@@ -401,7 +401,7 @@ function cluster_og_field_default_field_instances() {
         'apply_chosen' => '',
       ),
       'type' => 'options_select',
-      'weight' => 5,
+      'weight' => 6,
     ),
   );
 
@@ -444,7 +444,7 @@ function cluster_og_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => -5,
+      'weight' => 0,
     ),
   );
 
@@ -543,7 +543,7 @@ function cluster_og_field_default_field_instances() {
         'apply_chosen' => '',
       ),
       'type' => 'options_select',
-      'weight' => 10,
+      'weight' => 9,
     ),
   );
 
@@ -600,7 +600,7 @@ function cluster_og_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'image_image',
-      'weight' => 9,
+      'weight' => 8,
     ),
   );
 
@@ -662,7 +662,7 @@ function cluster_og_field_default_field_instances() {
     'bundle' => 'geographic_region',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'If set, this Geographic Region automatically redirects to the specified Response page.',
+    'description' => 'If the response and the region need to be one and the same, use this field to identify the response that will be loaded instead of this region. In the future, if more responses need to be associated with the region, simply remove the Auto-forwarding and associate the response with the region.',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -766,7 +766,7 @@ function cluster_og_field_default_field_instances() {
       'module' => 'link',
       'settings' => array(),
       'type' => 'link_field',
-      'weight' => 43,
+      'weight' => 11,
     ),
   );
 
@@ -890,7 +890,7 @@ function cluster_og_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 7,
+      'weight' => 6,
     ),
     'widget_type' => 'options_select',
   );
@@ -951,7 +951,7 @@ function cluster_og_field_default_field_instances() {
         'apply_chosen' => '',
       ),
       'type' => 'options_select',
-      'weight' => 8,
+      'weight' => 7,
     ),
   );
 
@@ -1054,7 +1054,7 @@ function cluster_og_field_default_field_instances() {
         'summary_rows' => 5,
       ),
       'type' => 'text_textarea_with_summary',
-      'weight' => 7,
+      'weight' => 5,
     ),
   );
 
@@ -1111,7 +1111,7 @@ function cluster_og_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'image_image',
-      'weight' => 34,
+      'weight' => 9,
     ),
   );
 
@@ -1161,7 +1161,7 @@ function cluster_og_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'entityreference_autocomplete',
-      'weight' => 3,
+      'weight' => 2,
     ),
   );
 
@@ -1211,7 +1211,7 @@ function cluster_og_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'entityreference_autocomplete',
-      'weight' => 5,
+      'weight' => 4,
     ),
   );
 
@@ -1274,7 +1274,7 @@ function cluster_og_field_default_field_instances() {
       'module' => 'link',
       'settings' => array(),
       'type' => 'link_field',
-      'weight' => 43,
+      'weight' => 10,
     ),
   );
 
@@ -1339,7 +1339,7 @@ function cluster_og_field_default_field_instances() {
         'og_hide' => TRUE,
       ),
       'type' => 'options_onoff',
-      'weight' => 0,
+      'weight' => 1,
     ),
   );
 
@@ -1396,7 +1396,7 @@ function cluster_og_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 31,
+      'weight' => 7,
     ),
     'widget_type' => 'options_select',
   );
@@ -1458,7 +1458,7 @@ function cluster_og_field_default_field_instances() {
         'apply_chosen' => '',
       ),
       'type' => 'options_select',
-      'weight' => 32,
+      'weight' => 8,
     ),
   );
 
@@ -1507,7 +1507,7 @@ function cluster_og_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => -5,
+      'weight' => 0,
     ),
   );
 
@@ -2440,7 +2440,7 @@ function cluster_og_field_default_field_instances() {
       'module' => 'link',
       'settings' => array(),
       'type' => 'link_field',
-      'weight' => 43,
+      'weight' => 23,
     ),
   );
 
@@ -2760,7 +2760,7 @@ function cluster_og_field_default_field_instances() {
       'module' => 'field_collection',
       'settings' => array(),
       'type' => 'field_collection_embed',
-      'weight' => 16,
+      'weight' => 15,
     ),
   );
 
@@ -2814,7 +2814,7 @@ function cluster_og_field_default_field_instances() {
         'year_range' => '-3:+3',
       ),
       'type' => 'date_text',
-      'weight' => 12,
+      'weight' => 11,
     ),
   );
 
@@ -2868,7 +2868,7 @@ function cluster_og_field_default_field_instances() {
         'year_range' => '-3:+3',
       ),
       'type' => 'date_text',
-      'weight' => 13,
+      'weight' => 12,
     ),
   );
 
@@ -2926,7 +2926,7 @@ function cluster_og_field_default_field_instances() {
       'module' => 'link',
       'settings' => array(),
       'type' => 'link_field',
-      'weight' => 14,
+      'weight' => 13,
     ),
   );
 
@@ -2977,7 +2977,7 @@ function cluster_og_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'image_image',
-      'weight' => 7,
+      'weight' => 6,
     ),
   );
 
@@ -3021,7 +3021,7 @@ function cluster_og_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'entityreference_autocomplete',
-      'weight' => 8,
+      'weight' => 7,
     ),
   );
 
@@ -3065,7 +3065,7 @@ function cluster_og_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'entityreference_autocomplete',
-      'weight' => 9,
+      'weight' => 8,
     ),
   );
 
@@ -3123,7 +3123,7 @@ function cluster_og_field_default_field_instances() {
       'module' => 'link',
       'settings' => array(),
       'type' => 'link_field',
-      'weight' => 15,
+      'weight' => 14,
     ),
   );
 
@@ -3164,7 +3164,7 @@ function cluster_og_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 11,
+      'weight' => 10,
     ),
   );
 
@@ -3221,7 +3221,7 @@ function cluster_og_field_default_field_instances() {
       'module' => 'link',
       'settings' => array(),
       'type' => 'link_field',
-      'weight' => 17,
+      'weight' => 16,
     ),
   );
 
@@ -3272,7 +3272,7 @@ function cluster_og_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 10,
+      'weight' => 9,
     ),
     'widget_type' => 'options_select',
   );
@@ -3383,7 +3383,7 @@ function cluster_og_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 6,
+      'weight' => 5,
     ),
     'widget_type' => 'options_select',
   );
@@ -3439,7 +3439,7 @@ function cluster_og_field_default_field_instances() {
         'apply_chosen' => '',
       ),
       'type' => 'options_select',
-      'weight' => 5,
+      'weight' => 4,
     ),
   );
 
@@ -3525,7 +3525,7 @@ function cluster_og_field_default_field_instances() {
         'summary_rows' => 5,
       ),
       'type' => 'text_textarea_with_summary',
-      'weight' => -3,
+      'weight' => 1,
     ),
   );
 
@@ -3563,7 +3563,7 @@ function cluster_og_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 39,
+      'weight' => 10,
     ),
   );
 
@@ -3614,7 +3614,7 @@ function cluster_og_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'image_image',
-      'weight' => 34,
+      'weight' => 7,
     ),
   );
 
@@ -3658,7 +3658,7 @@ function cluster_og_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'entityreference_autocomplete',
-      'weight' => 36,
+      'weight' => 8,
     ),
   );
 
@@ -3702,7 +3702,7 @@ function cluster_og_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'entityreference_autocomplete',
-      'weight' => 38,
+      'weight' => 9,
     ),
   );
 
@@ -3759,7 +3759,7 @@ function cluster_og_field_default_field_instances() {
       'module' => 'link',
       'settings' => array(),
       'type' => 'link_field',
-      'weight' => 43,
+      'weight' => 11,
     ),
   );
 
@@ -3818,7 +3818,7 @@ function cluster_og_field_default_field_instances() {
         'og_hide' => TRUE,
       ),
       'type' => 'options_onoff',
-      'weight' => 0,
+      'weight' => 2,
     ),
   );
 
@@ -3869,7 +3869,7 @@ function cluster_og_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 32,
+      'weight' => 6,
     ),
     'widget_type' => 'options_select',
   );
@@ -3925,7 +3925,7 @@ function cluster_og_field_default_field_instances() {
         'apply_chosen' => '',
       ),
       'type' => 'options_select',
-      'weight' => 31,
+      'weight' => 5,
     ),
   );
 
@@ -3968,7 +3968,7 @@ function cluster_og_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => -5,
+      'weight' => 0,
     ),
   );
 
@@ -4001,7 +4001,7 @@ function cluster_og_field_default_field_instances() {
   t('Handover Date');
   t('Hot response');
   t('Hub region');
-  t('If set, this Geographic Region automatically redirects to the specified Response page.');
+  t('If the response and the region need to be one and the same, use this field to identify the response that will be loaded instead of this region. In the future, if more responses need to be associated with the region, simply remove the Auto-forwarding and associate the response with the region.');
   t('Image');
   t('Link to HumanitarianResponse.info site');
   t('Link to ReliefWeb.int');

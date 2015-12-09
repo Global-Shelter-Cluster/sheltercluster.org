@@ -15,6 +15,8 @@ function shelter_base_install() {
   _shelter_base_modules_enable('custom');
   // Set default theme.
   shelter_base_update_7003();
+  // Set default patterns for RSS.
+  shelter_base_update_7112();
 }
 
 function _shelter_base_module_enable_all() {
@@ -68,7 +70,7 @@ function _shelter_base_required_core() {
  */
 function _shelter_base_required_custom() {
   return array('cluster_context', 'cluster_discussions', 'cluster_docs', 'cluster_events', 'cluster_libraries', 'cluster_og', 'cluster_search',
-    'cluster_taxonomy', 'cluster_user', 'cluster_nav', 'cluster_nav_views', 'cluster_workflow', 'partial',
+    'cluster_taxonomy', 'cluster_user', 'cluster_nav', 'cluster_nav_views', 'cluster_workflow', 'partial', 'cluster_rss',
   );
 }
 
@@ -843,3 +845,215 @@ function shelter_base_update_7090() {
 function shelter_base_update_7091() {
   features_revert_module('cluster_docs');
 }
+
+/**
+ * Add field base field sorting weight and instances to the shelter base feature.
+ */
+function shelter_base_update_7092() {
+  features_revert_module('shelter_base');
+}
+
+/**
+ * Add the field sorting weight instance.
+ */
+function shelter_base_update_7093() {
+  features_revert_module('cluster_og');
+}
+
+/**
+ * Add the field instance field_sorting_weight for doc content type.
+ */
+function shelter_base_update_7094() {
+  features_revert_module('cluster_docs');
+}
+
+/**
+ * Add the field instance field_sorting_weight for discussion content type.
+ */
+function shelter_base_update_7095() {
+  features_revert_module('cluster_discussions');
+}
+
+/**
+ * Add the help text to field bases.
+ */
+function shelter_base_update_7096() {
+  features_revert_module('shelter_base');
+}
+
+/**
+ * Add the help text to doc content type.
+ */
+function shelter_base_update_7097() {
+  features_revert_module('cluster_docs');
+}
+
+/**
+ * Add the help text to discussion content type.
+ */
+function shelter_base_update_7098() {
+  features_revert_module('cluster_discussions');
+}
+
+/**
+ * Add the field weight sort to arbitrary library type.
+ */
+function shelter_base_update_7099() {
+  features_revert_module('cluster_libraries');
+}
+
+/**
+ * Put library field weight instance in library feature.
+ */
+function shelter_base_update_7100() {
+  features_revert_module('shelter_base');
+}
+
+/**
+ * Populate field_sorting_weight and make it a required field.
+ */
+function shelter_base_update_7101() {
+  features_revert_module('shelter_base', 'shelter_libraries');
+}
+
+/**
+ * Set field_sorting_weight to be a required field on all content types except
+ * for documents, events and discussions.
+ */
+function shelter_base_update_7102() {
+  features_revert_module('shelter_base');
+}
+
+/**
+ * Populate all necessary field_sorting_weight content types with a default value
+ */
+function shelter_base_update_7103(&$sandbox) {
+
+// Build the list of entities to update.
+  if (empty($sandbox['entity_list'])) {
+    $batch_size = 10;
+    // All entity types that need to be updated contain this field
+    $field_info = field_info_field('field_sorting_weight');
+    $omit_types = array('document', 'event', 'discussion');
+
+    // Return an array of desired content types to perform update on.
+    $accepted_bundles['node'] = array_values(array_diff($field_info['bundles']['node'], $omit_types));
+
+    $entity_list = array();
+    foreach ($accepted_bundles as $entity_type => $bundles) {
+      $query = new EntityFieldQuery();
+      $results = $query
+        ->entityCondition('entity_type', $entity_type)
+        ->entityCondition('bundle', $bundles, 'IN')
+        ->execute();
+      if (empty($results[$entity_type])) {
+        continue;
+      }
+
+      // Add ids with entity type to $entity_list for processing.
+      $ids = array_keys($results[$entity_type]);
+      $entity_list += array_map(function ($id) use ($entity_type) {
+        return array(
+          'entity_type' => $entity_type,
+          'entity_id' => $id,
+        );
+      }, $ids);
+    }
+    $sandbox['total'] = count($entity_list);
+    $sandbox['entity_list'] = array_chunk($entity_list, $batch_size);
+    $sandbox['succeeded'] = $sandbox['errored'] = $sandbox['processed_chunks'] = 0;
+    print_r($sandbox['total'] . ' chunks to be processed. This will take time. ');
+  }
+  // Processing.
+  $current_chunk = $sandbox['entity_list'][$sandbox['processed_chunks']];
+  foreach ($current_chunk as $entity_item) {
+    $success = _batch_process_sort_weight_task($entity_item['entity_id']);
+    $success ? $sandbox['succeeded']++ : $sandbox['errored']++;
+  }
+
+  // Increment number of processed chunks.
+  $sandbox['processed_chunks']++;
+
+  // When finished, display results.
+  $sandbox['#finished'] = $sandbox['processed_chunks'] / count($sandbox['entity_list']);
+
+  return t('@succeeded entities were processed correctly. @errored entities failed', array(
+    '@succeeded' => $sandbox['succeeded'],
+    '@errored' => $sandbox['errored'],
+  ));
+
+}
+
+function _batch_process_sort_weight_task($entity_id) {
+  $node = node_load($entity_id);
+  $node_wrapper = entity_metadata_wrapper('node', $node);
+  $node_wrapper->field_sorting_weight->set(0);
+  $node_wrapper->save();
+  return TRUE;
+}
+
+/**
+ * Revert cluster search feature to its initial state.
+ */
+function shelter_base_update_7104() {
+  features_revert_module('cluster_search');
+}
+
+/**
+ * Revert shelter base feature to hide field sorting weight from display.
+ */
+function shelter_base_update_7105() {
+  features_revert_module('shelter_base');
+}
+
+/**
+ * Revert cluster events feature to hide field sorting weight from display.
+ */
+function shelter_base_update_7106() {
+  features_revert_module('cluster_events');
+}
+
+/**
+ * Revert cluster discussions feature to hide field sorting weight from display.
+ */
+function shelter_base_update_7107() {
+  features_revert_module('cluster_discussions');
+}
+
+/**
+ * Revert cluster docs feature to hide field sorting weight from display.
+ */
+function shelter_base_update_7108() {
+  features_revert_module('cluster_docs');
+}
+
+/**
+ * Revert cluster og feature reoder field display.
+ */
+function shelter_base_update_7109() {
+  features_revert_module('cluster_og');
+}
+
+/**
+ * Revert cluster libraries feature reoder field display.
+ */
+function shelter_base_update_7110() {
+  features_revert_module('cluster_libraries');
+}
+
+/**
+ * Enabling cluster_rss.
+ */
+function shelter_base_update_7111() {
+  module_enable(array('cluster_rss'));
+}
+
+/**
+ * Setting RSS base patterns.
+ */
+function shelter_base_update_7112() {
+  variable_set('pathauto_cluster_discussions_rssdiscussions_pattern', '[node:content-type]/[node:title]/rss/discussions');
+  variable_set('pathauto_cluster_docs_rssdocs_pattern', '[node:content-type]/[node:title]/rss/documents');
+  variable_set('pathauto_cluster_events_rssevents_pattern', '[node:content-type]/[node:title]/rss/events');
+}
+
