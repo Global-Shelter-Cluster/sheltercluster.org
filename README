@@ -1,1 +1,9 @@
-redc-001-drupal
+# Task Runner Setup
+
+Make sure you have node.js and ruby installed, this site has dependencies on Compass, ruby Sass and some other libraries.
+
+- run "bundle install"
+- run "npm install"
+
+- run "gulp" to see a list of avalable tasks
+- run "gulp sass" to start sass compiling on file changes

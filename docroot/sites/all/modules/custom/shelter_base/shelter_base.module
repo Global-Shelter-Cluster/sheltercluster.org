@@ -6,14 +6,44 @@
 
 include_once 'shelter_base.features.inc';
 
+/**
+ * Small error handling wrapper for entity_metadata_wrapper.
+ */
 function _log_entity_metadata_wrapper_error($exception, $context) {
   watchdog(
     $context,
-    'See '  . __FUNCTION__ . '() <pre>' . $exception->getTraceAsString() . '</pre>',
+    'See ' . __FUNCTION__ . '() <pre>' . $exception->getTraceAsString() . '</pre>',
      NULL, WATCHDOG_ERROR
   );
 }
 
+/**
+ * Implements hook_libraries_info().
+ */
+function shelter_base_libraries_info() {
+  $libraries['jcarousel'] = array(
+    'name' => 'jQuery Carousel',
+    'vendor url' => 'http://sorgalla.com/jcarousel/',
+    'download url' => 'https://github.com/jsor/jcarousel',
+    'version arguments' => array(
+      'file' => 'jcarousel-min.js',
+      'pattern' => '/jCarousel - v(\d+\.+\d.+\d+)/',
+      'lines' => 4,
+      'cols' => 100,
+    ),
+    'files' => array(
+      'js' => array(
+        'jcarousel-min.js',
+      ),
+    ),
+  );
+
+  return $libraries;
+}
+
+/**
+ * Implements hook_preprocess_page().
+ */
 function shelter_base_preprocess_page(&$variables) {
   if (path_is_admin(current_path())) {
     drupal_add_css(drupal_get_path('module', 'shelter_base') . '/css/admin-tweaks.css');
