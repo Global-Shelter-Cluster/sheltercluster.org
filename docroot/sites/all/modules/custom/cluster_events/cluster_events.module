@@ -171,6 +171,9 @@ function cluster_events_format_upcoming($nid, $single_display = TRUE) {
 
   $wrapper = entity_metadata_wrapper('node', $node);
 
+  if (! isset($value['value'])) {
+    return;
+  }
   $value = $wrapper->field_event_date->value();
   if (!isset($value['value'])) {
     return "";
