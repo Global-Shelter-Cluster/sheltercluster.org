@@ -58,4 +58,8 @@ features[variable][] = pathauto_node_event_pattern
 mtime = 1449761577
 =======
 mtime = 1449778269
+<<<<<<< HEAD
 >>>>>>> 1b505e89d1857e01f72988e7b3416f25c0b08ba2
+=======
+>>>>>>> dev
+>>>>>>> feature/48-recurring-events-new-field

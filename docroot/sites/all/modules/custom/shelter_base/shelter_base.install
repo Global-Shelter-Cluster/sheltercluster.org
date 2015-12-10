@@ -1081,7 +1081,10 @@ function shelter_base_update_7112() {
 }
 
 /**
+<<<<<<< HEAD
  * Enabling maps modules.
+=======
+>>>>>>> feature/48-recurring-events-new-field
  * Revert cluster events to add contact field.
  */
 function shelter_base_update_7113() {
@@ -1142,5 +1145,35 @@ function shelter_base_update_7116(&$sandbox) {
   if ($sandbox['#finished'] === 1) {
     drupal_set_message(t('We processed @nodes nodes. DONE!!!', array('@nodes' => $sandbox['total'])));
   }
+}
 
+/**
+ * Revert cluster events and copy field data.
+ */
+function shelter_base_update_7117() {
+  module_enable(array(
+    'date_repeat',
+    'date_repeat_entity',
+    'uuid',
+    'replicate',
+  ));
+
+  features_revert_module('cluster_events');
+
+  $items = db_select('field_data_field_event_date', 'f')->fields('f')->execute()->fetchAll();
+  foreach ($items as $item) {
+    $data = array(
+      'entity_type' => $item->entity_type,
+      'bundle' => $item->bundle,
+      'deleted' => $item->deleted,
+      'entity_id' => $item->entity_id,
+      'revision_id' => $item->revision_id,
+      'language' => $item->language,
+      'delta' => $item->delta,
+      'field_recurring_event_date_value' => $item->field_event_date_value,
+      'field_recurring_event_date_rrule' => NULL,
+    );
+    db_insert('field_data_field_recurring_event_date')->fields($data)->execute();
+    db_insert('field_revision_field_recurring_event_date')->fields($data)->execute();
+  }
 }
