@@ -2131,7 +2131,6 @@ header #search-block-form {
   width: 100%;
   background-color: #eee;
   color: #000;
-  text-align: center;
   margin: 0 0 8px 0;
   margin: 0 0 0.5rem 0;
   -moz-border-radius: 0.1875rem;
@@ -2139,50 +2138,50 @@ header #search-block-form {
   border-radius: 0.1875rem;
 }
 #box-calendar a {
-  color: #222;
+  color: #000;
   width: 100%;
-  text-align: center;
 }
 #box-calendar a:hover, #box-calendar a:active {
   text-decoration: none;
 }
-@media (min-width: 980px) {
-  #box-calendar {
-    display: block;
-    width: auto;
-    height: auto;
-  }
-  #box-calendar > div {
-    display: block;
-    vertical-align: initial;
-  }
-}
-#box-calendar .information-card {
+#box-calendar .event-card {
   padding: 12px;
   padding: 0.75rem;
   line-height: 24px;
   line-height: 1.5rem;
+  background: #eaeaea;
+  margin-bottom: 10px;
 }
-#box-calendar .information-card .event {
+#box-calendar .event-card .event-title {
   font-weight: bold;
 }
-#box-calendar .information-card a {
+#box-calendar .event-card .label {
+  display: block;
+  font-weight: bold;
+  font-size: 12.8px;
+  font-size: 0.8rem;
+}
+#box-calendar .event-card a {
   display: block;
   text-decoration: none;
   border: 1px solid #7b1315;
-  background: #881518;
-  padding: 5px 0;
+  padding: 5px 10px;
   margin-bottom: 5px;
+}
+#box-calendar .all-events {
+  text-align: center;
+  padding: 0 0 10px;
 }
 
 #date-calendar {
-  border-bottom: 1px dashed white;
   text-indent: -36px;
   text-indent: -2.25rem;
   margin: 0 10px 0 50px;
   margin: 0 0.625rem 0 3.125rem;
   padding: 8px 0 8px 0;
   padding: 0.5rem 0 0.5rem 0;
+  text-align: center;
+  font-weight: bold;
 }
 #date-calendar sup {
   position: relative;
@@ -2212,28 +2211,6 @@ header #search-block-form {
 }
 #calendar-pin-icon path {
   fill: #222;
-}
-
-#calendar-event {
-  color: #fff;
-  padding: 16px;
-  padding: 1rem;
-  line-height: 22.4px;
-  line-height: 1.4rem;
-}
-#calendar-event a {
-  color: #fff;
-}
-#calendar-event .upcoming {
-  font-size: 14.4px;
-  font-size: 0.9rem;
-}
-#calendar-event .event {
-  display: block;
-  font-size: 16px;
-  font-size: 1rem;
-  padding: 4px 0 0 0;
-  padding: 0.25rem 0 0 0;
 }
 
 /* _join_group.scss */

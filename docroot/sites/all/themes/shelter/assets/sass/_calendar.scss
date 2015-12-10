@@ -10,14 +10,12 @@
   width: 100%;
   background-color: #eee;
   color: #000;
-  text-align: center;
   @include rem(margin, 0 0 0.5rem 0);
   @include border-radius(0.1875rem);
 
   a {
-    color: #222;
+    color: #000;
     width: 100%;
-    text-align: center;
 
     &:hover,
     &:active {
@@ -25,41 +23,43 @@
     }
   }
 
-
-  @include breakpoint(980px) {
-    display: block;
-    width: auto;
-    height: auto;
-
-    > div {
-      display: block;
-      vertical-align: initial;
-    }
-  }
-
-  .information-card {
+  .event-card {
     @include rem(padding, 0.75rem);
     @include rem(line-height, 1.5rem);
-    .event {
+    background: #eaeaea;
+    margin-bottom: 10px;
+
+    .event-title {
       font-weight: bold;
+    }
+    .label {
+      display: block;
+      font-weight: bold;
+      @include rem(font-size, 0.80rem);
     }
     a {
       display: block;
       text-decoration: none;
       border: 1px solid darken($shelter-red, 1%);
-      background: lighten($shelter-red, 2%);
-      padding: 5px 0;
+      padding: 5px 10px;
       margin-bottom: 5px;
     }
+  }
+
+  .all-events {
+    text-align: center;
+    padding: 0 0 10px;
   }
 
 }
 
 #date-calendar {
-  border-bottom: 1px dashed rgb(255,255,255);
   @include rem(text-indent, -2.25rem);
   @include rem(margin, 0 0.625rem 0 3.125rem);
   @include rem(padding, 0.5rem 0 0.5rem 0);
+  text-align: center;
+  font-weight: bold;
+
   sup {
     position: relative;
     vertical-align: top;
@@ -82,24 +82,6 @@
 
   path {
     fill: #222;
-  }
-}
-
-#calendar-event {
-  color: #fff;
-  @include rem(padding, 1rem);
-  @include rem(line-height, 1.4rem);
-
-  a {
-    color: #fff;
-  }
-  .upcoming {
-    @include rem(font-size, 0.9rem);
-  }
-  .event {
-    display: block;
-    @include rem(font-size, 1rem);
-    @include rem(padding, 0.25rem 0 0 0);
   }
 }
 

@@ -189,8 +189,8 @@ function cluster_events_format_upcoming($nid) {
     dpm($wrapper->getPropertyInfo());
     return array(
       'date' => $date,
-      'event_title' => t($wrapper->title->value()),
-      'event_link' => l($wrapper->title->value(), 'node/' . $node->nid),
+      'title' => t($wrapper->title->value()),
+      'link' => l($wrapper->title->value(), 'node/' . $node->nid),
       'location' => 'bidon',
       'contact' => 'bidon'
     );
