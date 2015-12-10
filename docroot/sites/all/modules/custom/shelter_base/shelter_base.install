@@ -1060,8 +1060,9 @@ function shelter_base_update_7112() {
 
 /**
  * Enabling maps modules.
+ * Revert cluster events to add contact field.
  */
-function shelter_base_update_7114() {
+function shelter_base_update_7113() {
   module_enable(array(
     'gmap',
     'geophp',
@@ -1075,11 +1076,18 @@ function shelter_base_update_7114() {
 /**
  * Implements hook_update().
  */
+function shelter_base_update_7114() {
+  // Do nothing.
+}
+
+/**
+ * Implements hook_update().
+ */
 function shelter_base_update_7115(&$sandbox) {
   $type = array('hub', 'response', 'community_of_practice', 'geographic_region', 'response', 'strategic_advisory', 'working_group');
    // If this is the first pass through this update function then set some variables.
   if (!isset($sandbox['total'])) {
-    $result = db_query('SELECT nid FROM {node} WHERE type IN :type', array(':type' => $type));
+    $result = db_query('SELECT nid FROM {node} WHERE type IN (:type)', array(':type' => $type));
     $sandbox['total'] = $result->rowCount();
     $sandbox['current'] = 0;
   }
@@ -1089,14 +1097,11 @@ function shelter_base_update_7115(&$sandbox) {
   $nodes_per_pass = 10;
 
   // Get the nodes to process during this pass.
-  $result = db_query_range('SELECT nid FROM {node} WHERE type IN :type', array(':type' => $type), $sandbox['current'], $nodes_per_pass);
+  $result = db_query_range('SELECT nid FROM {node} WHERE type IN (:type)', $sandbox['current'], $nodes_per_pass,  array(':type' => $type));
   while ($row = $result->fetchAssoc()) {
     // Load the node, edit its title, and save the node.
     $node = node_load($row['nid']);
     node_save($node);
-
-    // Lets tell the site admin what we are doing. You could write to a log here, or a watchdog message or whatever...
-    drupal_set_message(t('We processed node @nid', array('@nid' => $node->nid)));
 
     // Increment "current" by 1.
     $sandbox['current']++;
@@ -1107,36 +1112,5 @@ function shelter_base_update_7115(&$sandbox) {
 
   if ($sandbox['#finished'] === 1) {
     drupal_set_message(t('We processed @nodes nodes. DONE!!!', array('@nodes' => $sandbox['total'])));
-  }
-}
-
-/**
- * Revert cluster events and copy field data.
- */
-function shelter_base_update_7116() {
-  module_enable(array(
-    'date_repeat',
-    'date_repeat_entity',
-    'uuid',
-    'replicate',
-  ));
-
-  features_revert_module('cluster_events');
-
-  $items = db_select('field_data_field_event_date', 'f')->fields('f')->execute()->fetchAll();
-  foreach ($items as $item) {
-    $data = array(
-      'entity_type' => $item->entity_type,
-      'bundle' => $item->bundle,
-      'deleted' => $item->deleted,
-      'entity_id' => $item->entity_id,
-      'revision_id' => $item->revision_id,
-      'language' => $item->language,
-      'delta' => $item->delta,
-      'field_recurring_event_date_value' => $item->field_event_date_value,
-      'field_recurring_event_date_rrule' => NULL,
-    );
-    db_insert('field_data_field_recurring_event_date')->fields($data)->execute();
-    db_insert('field_revision_field_recurring_event_date')->fields($data)->execute();
   }
 }
