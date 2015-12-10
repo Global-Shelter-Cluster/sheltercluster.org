@@ -55,6 +55,7 @@ function _shelter_base_required_contrib() {
     'search_api_db', 'search_api_facetapi', 'strongarm', 'title', 'token',
     'transliteration',  'underscore', 'url', 'variable',
     'views', 'views_ui', 'views_bulk_operations', 'wysiwyg',
+    'gmap', 'geophp', 'geocoder', 'geofield', 'addressfield_autocomplete',
   );
 }
 
@@ -1061,5 +1062,19 @@ function shelter_base_update_7112() {
  * Revert cluster events to add contact field.
  */
 function shelter_base_update_7113() {
+  features_revert_module('cluster_events');
+}
+
+/**
+ * Enabling maps modules.
+ */
+function shelter_base_update_7114() {
+  module_enable(array(
+    'gmap',
+    'geophp',
+    'geocoder',
+    'geofield',
+    'addressfield_autocomplete',
+  ));
   features_revert_module('cluster_events');
 }
