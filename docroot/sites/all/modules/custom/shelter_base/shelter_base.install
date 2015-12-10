@@ -1062,13 +1062,6 @@ function shelter_base_update_7112() {
  * Revert cluster events to add contact field.
  */
 function shelter_base_update_7113() {
-  features_revert_module('cluster_events');
-}
-
-/**
- * Enabling maps modules.
- */
-function shelter_base_update_7114() {
   module_enable(array(
     'gmap',
     'geophp',
@@ -1077,4 +1070,9 @@ function shelter_base_update_7114() {
     'addressfield_autocomplete',
   ));
   features_revert_module('cluster_events');
+}
+
+  // Do nothing.
+function shelter_base_update_7114() {
+  // Do nothing.
 }
