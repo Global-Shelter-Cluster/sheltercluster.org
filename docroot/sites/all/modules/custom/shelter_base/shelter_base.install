@@ -1061,13 +1061,6 @@ function shelter_base_update_7110() {
  * Enabling cluster_rss.
  */
 function shelter_base_update_7111() {
-  module_enable(array('cluster_rss'));
-}
-
-/**
- * Setting RSS base patterns.
- */
-function shelter_base_update_7112() {
   module_enable(array(
     'gmap',
     'geophp',
@@ -1075,16 +1068,19 @@ function shelter_base_update_7112() {
     'geofield',
     'addressfield_autocomplete',
   ));
+  module_enable(array('cluster_rss'));
+}
+
+/**
+ * Setting RSS base patterns.
+ */
+function shelter_base_update_7112() {
   variable_set('pathauto_cluster_discussions_rssdiscussions_pattern', '[node:content-type]/[node:title]/rss/discussions');
   variable_set('pathauto_cluster_docs_rssdocs_pattern', '[node:content-type]/[node:title]/rss/documents');
   variable_set('pathauto_cluster_events_rssevents_pattern', '[node:content-type]/[node:title]/rss/events');
 }
 
 /**
-<<<<<<< HEAD
- * Enabling maps modules.
-=======
->>>>>>> feature/48-recurring-events-new-field
  * Revert cluster events to add contact field.
  */
 function shelter_base_update_7113() {
@@ -1108,7 +1104,7 @@ function shelter_base_update_7114() {
 /**
  * Revert event module to make date field unique value.
  */
-function shleter_base_update_7115() {
+function shelter_base_update_7115() {
   features_revert_module('cluster_events');
 }
 
