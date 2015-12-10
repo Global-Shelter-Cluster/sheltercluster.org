@@ -157,53 +157,45 @@ function cluster_events_upcoming() {
     '#total' => count($nids),
   );
   foreach ($entities as $entity) {
-    $ret[$entity->nid] = cluster_events_format_upcoming($entity->nid, FALSE);
+    $ret[$entity->nid] = cluster_events_format_upcoming($entity->nid);
   }
 
   return $ret;
 }
 
-function cluster_events_format_upcoming($nid, $single_display = TRUE) {
+function cluster_events_format_upcoming($nid) {
   $node = node_load($nid);
   if (!$node || $node->type != 'event') {
     return FALSE;
   }
 
-  $wrapper = entity_metadata_wrapper('node', $node);
+  try {
+    $wrapper = entity_metadata_wrapper('node', $node);
 
-  $value = $wrapper->field_event_date->value();
-  $from = strtotime($value['value']);
-  $to   = strtotime($value['value2']);
-  $format      = 'M. j' . '\<\s\u\p\>' . 'S' . '\<\/\s\u\p\>' . ' Y';
-  $format_from = 'M. j' . '\<\s\u\p\>' . 'S' . '\<\/\s\u\p\>';
-  $format_to   = 'M. j' . '\<\s\u\p\>' . 'S' . '\<\/\s\u\p\>' . ' Y';
-  if ($to > $from) {
-    $date = date($format_from, $from);
-    $date .= ' to ' . date($format_to, $to);
-  }
-  else {
-    $date = date($format, $from);
-  }
+    $value = $wrapper->field_event_date->value();
+    $from = strtotime($value['value']);
+    $to   = strtotime($value['value2']);
+    $format      = 'M. j' . '\<\s\u\p\>' . 'S' . '\<\/\s\u\p\>' . ' Y';
+    $format_from = 'M. j' . '\<\s\u\p\>' . 'S' . '\<\/\s\u\p\>';
+    $format_to   = 'M. j' . '\<\s\u\p\>' . 'S' . '\<\/\s\u\p\>' . ' Y';
+    if ($to > $from) {
+      $date = date($format_from, $from);
+      $date .= ' to ' . date($format_to, $to);
+    }
+    else {
+      $date = date($format, $from);
+    }
 
-  if ($single_display) {
-    $group_ref = $wrapper->og_group_ref->value();
+    dpm($wrapper->getPropertyInfo());
     return array(
-      '#theme' => 'cluster_og_upcoming_event',
-      '#all_events_link' => 'node/' . $group_ref[0]->nid . '/events',
-      '#event_title' => $wrapper->title->value(),
-      '#event_link' => 'node/' . $node->nid,
-      '#event_date' => $date,
+      'date' => $date,
+      'event_title' => t($wrapper->title->value()),
+      'event_link' => l($wrapper->title->value(), 'node/' . $node->nid),
+      'location' => 'bidon',
+      'contact' => 'bidon'
     );
   }
-  else {
-    return array(
-      '#theme' => 'link',
-      '#text' => $date . ': ' . t($wrapper->title->value()),
-      '#path' => 'node/' . $node->nid,
-      '#options' => array(
-        'attributes' => array(),
-        'html' => TRUE,
-      ),
-    );
+  catch (EntityMetadataWrapperException $exception) {
+    _log_entity_metadata_wrapper_error($exception, 'cluster_events');
   }
 }

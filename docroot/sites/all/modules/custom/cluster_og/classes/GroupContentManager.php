@@ -220,7 +220,7 @@ class GroupContentManager {
    * @return
    *  nid, FALSE if none exist.
    */
-  public function getUpcomingEvent() {
+  public function getUpcomingEvents($range = 3) {
     $query = new EntityFieldQuery();
     $res = $query->entityCondition('entity_type', 'node')
       ->entityCondition('bundle', 'event')
@@ -228,14 +228,14 @@ class GroupContentManager {
       ->fieldCondition('field_event_date', 'value', date('Y-m-d'), '>')
       ->propertyCondition('status', NODE_PUBLISHED)
       ->fieldOrderBy('field_event_date', 'value')
-      ->range(0, 1)
+      ->range(0, $range)
       ->execute();
 
     if (!isset($res['node'])) {
       return FALSE;
     }
 
-    return key($res['node']);
+    return array_keys($res['node']);
   }
 
   /**

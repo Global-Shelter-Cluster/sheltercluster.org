@@ -53,8 +53,8 @@
       </section>
     <?php endif; ?>
 
-    <?php if ($content['upcoming_event']): ?>
-      <?php print render($content['upcoming_event']); ?>
+    <?php if ($content['upcoming_events']): ?>
+      <?php print render($content['upcoming_events']); ?>
     <?php endif; ?>
 
     <?php if (!empty($content['body'])): ?>

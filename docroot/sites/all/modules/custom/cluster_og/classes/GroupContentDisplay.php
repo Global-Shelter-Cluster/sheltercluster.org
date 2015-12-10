@@ -391,9 +391,17 @@ class GroupFullDisplayProvider extends GroupDisplayProvider {
    * Provide the next upcoming event for the group, if any.
    * @return render array of discussions.
    */
-  public function getUpcomingEvent() {
-    if ($nid = $this->manager->getUpcomingEvent()) {
-      return cluster_events_format_upcoming($nid);
+  public function getUpcomingEvents($max = 3) {
+    if ($nids = $this->manager->getUpcomingEvents($max)) {
+      $events = array();
+      foreach ($nids as $nid) {
+        $events[] = cluster_events_format_upcoming($nid);
+      }
+      return array(
+        '#theme' => 'cluster_og_upcoming_events',
+        '#all_events_link' => url('node/' . $this->node->nid . '/events'),
+        '#events' => $events
+      );
     }
     elseif ($this->manager->getEventCount()) {
       return array(
