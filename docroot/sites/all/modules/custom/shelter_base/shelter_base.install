@@ -1076,6 +1076,11 @@ function shelter_base_update_7114() {
  * Revert cluster events.
  */
 function shelter_base_update_7115() {
+  module_enable(array(
+    'date_repeat',
+    'date_repeat_entity',
+  ));
+
   features_revert_module('cluster_events');
 
   $items = db_select('field_data_field_event_date', 'f')->fields('f')->execute()->fetchAll();
