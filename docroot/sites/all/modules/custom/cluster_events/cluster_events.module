@@ -152,15 +152,15 @@ function cluster_events_upcoming() {
   $nids = array_keys($results['node']);
 
   $entities = entity_load('node', $nids);
-  $ret = array(
-    '#theme_wrappers' => array('cluster_events_upcoming'),
-    '#total' => count($nids),
-  );
+  $events = array();
   foreach ($entities as $entity) {
-    $ret[$entity->nid] = cluster_events_format_upcoming($entity->nid);
+    $events[] = cluster_events_format_upcoming($entity->nid);
   }
 
-  return $ret;
+  return theme('cluster_og_upcoming_events', array(
+    'events' => $events,
+    'all_events_link' => '/events',
+  ));
 }
 
 function cluster_events_format_upcoming($nid) {
@@ -186,7 +186,6 @@ function cluster_events_format_upcoming($nid) {
       $date = date($format, $from);
     }
 
-    dpm($wrapper->getPropertyInfo());
     return array(
       'date' => $date,
       'title' => t($wrapper->title->value()),

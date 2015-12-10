@@ -1,4 +1,3 @@
-<?php //kpr($variables); ?>
 <section id="shelter-calendar">
   <div id="box-calendar">
     <?php print _svg('icons/pin', array('id' => 'calendar-pin-icon', 'alt' => t('An icon representing a calendar with a pin on it.'))); ?>
