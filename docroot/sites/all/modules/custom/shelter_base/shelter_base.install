@@ -1059,13 +1059,6 @@ function shelter_base_update_7112() {
 }
 
 /**
- * Revert cluster events to add contact field.
- */
-function shelter_base_update_7113() {
-  features_revert_module('cluster_events');
-}
-
-/**
  * Enabling maps modules.
  */
 function shelter_base_update_7114() {
@@ -1077,4 +1070,28 @@ function shelter_base_update_7114() {
     'addressfield_autocomplete',
   ));
   features_revert_module('cluster_events');
+}
+
+/**
+ * Revert cluster events.
+ */
+function shelter_base_update_7115() {
+  features_revert_module('cluster_events');
+
+  $items = db_select('field_data_field_event_date', 'f')->fields('f')->execute()->fetchAll();
+  foreach ($items as $item) {
+    $data = array(
+      'entity_type' => $item->entity_type,
+      'bundle' => $item->bundle,
+      'deleted' => $item->deleted,
+      'entity_id' => $item->entity_id,
+      'revision_id' => $item->revision_id,
+      'language' => $item->language,
+      'delta' => $item->delta,
+      'field_recurring_event_date_value' => $item->field_event_date_value,
+      'field_recurring_event_date_rrule' => NULL,
+    );
+    db_insert('field_data_field_recurring_event_date')->fields($data)->execute();
+    db_insert('field_revision_field_recurring_event_date')->fields($data)->execute();
+  }
 }
