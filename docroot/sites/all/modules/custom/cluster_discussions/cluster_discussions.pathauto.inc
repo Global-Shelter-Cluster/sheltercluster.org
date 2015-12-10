@@ -12,6 +12,9 @@ function cluster_discussions_pathauto($op) {
   $settings->patterndefault = '[node:content-type]/[node:title]/discussions';
   $settings->token_type = 'node';
   $settings->patternitems = array('discussions' => 'Group discussions');
+  if (module_exists('cluster_rss')) {
+    $settings->patternitems += array('rssdiscussions' => 'Group RSS discussions');
+  }
   $settings->batch_update_callback = 'cluster_discussions_pathauto_bulkupdate';
   return $settings;
 }
@@ -22,6 +25,9 @@ function cluster_discussions_pathauto($op) {
 function cluster_discussions_create_alias($node, $op) {
   module_load_include('inc', 'pathauto');
   pathauto_create_alias('cluster_discussions', $op, 'node/'.$node->nid.'/discussions', array('node' => $node), 'discussions');
+  if (module_exists('cluster_rss')) {
+    pathauto_create_alias('cluster_discussions', $op, 'node/'.$node->nid.'/rss/discussions', array('node' => $node), 'rssdiscussions');
+  }
 }
 
 /**

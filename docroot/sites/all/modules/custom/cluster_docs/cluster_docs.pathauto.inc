@@ -12,6 +12,9 @@ function cluster_docs_pathauto($op) {
   $settings->patterndefault = '[node:content-type]/[node:title]/documents';
   $settings->token_type = 'node';
   $settings->patternitems = array('docs' => 'Group documents');
+  if (module_exists('cluster_rss')) {
+    $settings->patternitems += array('rssdocs' => 'Group RSS documents');
+  }
   $settings->batch_update_callback = 'cluster_docs_pathauto_bulkupdate';
   return $settings;
 }
@@ -22,6 +25,9 @@ function cluster_docs_pathauto($op) {
 function cluster_docs_create_alias($node, $op) {
   module_load_include('inc', 'pathauto');
   pathauto_create_alias('cluster_docs', $op, 'node/'.$node->nid.'/documents', array('node' => $node), 'docs');
+  if (module_exists('cluster_rss')) {
+    pathauto_create_alias('cluster_docs', $op, 'node/'.$node->nid.'/rss/documents', array('node' => $node), 'rssdocs');
+  }
 }
 
 /**
