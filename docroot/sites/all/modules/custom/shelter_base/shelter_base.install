@@ -920,8 +920,16 @@ function shelter_base_update_7101() {
 /**
  * Set field_sorting_weight to be a required field on all content types except
  * for documents, events and discussions.
+ * Enable geo fields required by future feature reverts.
  */
 function shelter_base_update_7102() {
+  module_enable(array(
+    'gmap',
+    'geophp',
+    'geocoder',
+    'geofield',
+    'addressfield_autocomplete',
+  ));
   features_revert_module('shelter_base');
 }
 
@@ -1011,6 +1019,13 @@ function shelter_base_update_7105() {
  * Revert cluster events feature to hide field sorting weight from display.
  */
 function shelter_base_update_7106() {
+  module_enable(array(
+    'gmap',
+    'geophp',
+    'geocoder',
+    'geofield',
+    'addressfield_autocomplete',
+  ));
   features_revert_module('cluster_events');
 }
 
@@ -1075,15 +1090,24 @@ function shelter_base_update_7113() {
 
 /**
  * Implements hook_update().
+ *
+ * Do nothing.
  */
 function shelter_base_update_7114() {
   // Do nothing.
 }
 
 /**
+ * Revert event module to make date field unique value.
+ */
+function shleter_base_update_7115() {
+  features_revert_module('cluster_events');
+}
+
+/**
  * Implements hook_update().
  */
-function shelter_base_update_7115(&$sandbox) {
+function shelter_base_update_7116(&$sandbox) {
   $type = array('hub', 'response', 'community_of_practice', 'geographic_region', 'response', 'strategic_advisory', 'working_group');
    // If this is the first pass through this update function then set some variables.
   if (!isset($sandbox['total'])) {
@@ -1113,4 +1137,5 @@ function shelter_base_update_7115(&$sandbox) {
   if ($sandbox['#finished'] === 1) {
     drupal_set_message(t('We processed @nodes nodes. DONE!!!', array('@nodes' => $sandbox['total'])));
   }
+
 }
