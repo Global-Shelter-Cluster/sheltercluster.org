@@ -46,15 +46,15 @@
 
   <div class="main-column">
 
+    <?php if ($content['upcoming_events']): ?>
+      <?php print render($content['upcoming_events']); ?>
+    <?php endif; ?>
+
     <?php if ($content['featured_documents']): ?>
       <h3 data-collapsible="featured-documents">Featured Documents</h3>
       <section id="featured-documents">
         <?php print render($content['featured_documents']); ?>
       </section>
-    <?php endif; ?>
-
-    <?php if ($content['upcoming_events']): ?>
-      <?php print render($content['upcoming_events']); ?>
     <?php endif; ?>
 
     <?php if (!empty($content['body'])): ?>

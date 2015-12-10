@@ -1,6 +1,6 @@
 /* _calendar.scss */
 #shelter-calendar {
-  @include rem(margin, 2.5rem 0 2rem 0);
+  @include rem(margin, 0 0 2rem 0);
   @include box-shadow(rgba(0,0,0,0.33) 0px 3px 10px);
   @include border-radius(5px);
 }
