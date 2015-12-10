@@ -920,8 +920,16 @@ function shelter_base_update_7101() {
 /**
  * Set field_sorting_weight to be a required field on all content types except
  * for documents, events and discussions.
+ * Enable geo fields required by future feature reverts.
  */
 function shelter_base_update_7102() {
+  module_enable(array(
+    'gmap',
+    'geophp',
+    'geocoder',
+    'geofield',
+    'addressfield_autocomplete',
+  ));
   features_revert_module('shelter_base');
 }
 
@@ -1011,6 +1019,13 @@ function shelter_base_update_7105() {
  * Revert cluster events feature to hide field sorting weight from display.
  */
 function shelter_base_update_7106() {
+  module_enable(array(
+    'gmap',
+    'geophp',
+    'geocoder',
+    'geofield',
+    'addressfield_autocomplete',
+  ));
   features_revert_module('cluster_events');
 }
 
@@ -1059,9 +1074,9 @@ function shelter_base_update_7112() {
 }
 
 /**
- * Enabling maps modules.
+ * Revert cluster events to add contact field.
  */
-function shelter_base_update_7114() {
+function shelter_base_update_7113() {
   module_enable(array(
     'gmap',
     'geophp',
@@ -1073,9 +1088,17 @@ function shelter_base_update_7114() {
 }
 
 /**
+ * Do nothing.
+ */
+function shelter_base_update_7114() {
+  // Do nothing.
+}
+
+/**
  * Implements hook_update().
  */
 function shelter_base_update_7115(&$sandbox) {
+/*
   $type = array('hub', 'response', 'community_of_practice', 'geographic_region', 'response', 'strategic_advisory', 'working_group');
    // If this is the first pass through this update function then set some variables.
   if (!isset($sandbox['total'])) {
@@ -1108,12 +1131,13 @@ function shelter_base_update_7115(&$sandbox) {
   if ($sandbox['#finished'] === 1) {
     drupal_set_message(t('We processed @nodes nodes. DONE!!!', array('@nodes' => $sandbox['total'])));
   }
+*/
 }
 
 /**
  * Revert cluster events and copy field data.
  */
-function shelter_base_update_7116() {
+function shelter_base_update_7117() {
   module_enable(array(
     'date_repeat',
     'date_repeat_entity',

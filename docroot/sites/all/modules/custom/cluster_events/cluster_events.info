@@ -54,4 +54,8 @@ features[variable][] = node_preview_event
 features[variable][] = node_submitted_event
 features[variable][] = pathauto_cluster_events_pattern
 features[variable][] = pathauto_node_event_pattern
+<<<<<<< HEAD
 mtime = 1449761577
+=======
+mtime = 1449778269
+>>>>>>> dev
