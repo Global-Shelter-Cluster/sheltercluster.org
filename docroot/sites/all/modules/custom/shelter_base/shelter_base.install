@@ -1011,6 +1011,13 @@ function shelter_base_update_7105() {
  * Revert cluster events feature to hide field sorting weight from display.
  */
 function shelter_base_update_7106() {
+  module_enable(array(
+    'gmap',
+    'geophp',
+    'geocoder',
+    'geofield',
+    'addressfield_autocomplete',
+  ));
   features_revert_module('cluster_events');
 }
 
@@ -1072,7 +1079,9 @@ function shelter_base_update_7113() {
   features_revert_module('cluster_events');
 }
 
-  // Do nothing.
+/**
+ * Do nothing.
+ */
 function shelter_base_update_7114() {
   // Do nothing.
 }
