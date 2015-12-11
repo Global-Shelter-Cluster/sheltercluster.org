@@ -98,12 +98,11 @@ function cluster_events_all($nid) {
   }
   else {
     $content = array(
-      "#theme" => 'cluster_og_upcoming_events',
+      "#theme" => 'cluster_og_all_events',
       '#events' => array(),
     );
-    foreach (array_keys($query_date_filter_results['node']) as $nid) {
-      $content['#events'][] = cluster_events_format_upcoming($nid);
-    }
+    $nids = array_keys($query_date_filter_results['node']);
+    $content['#events'] = cluster_events_format_list($nids);
   }
 
   $ret['content'] = $content;
@@ -173,7 +172,7 @@ function cluster_events_upcoming() {
     $events[] = cluster_events_format_upcoming($entity->nid);
   }
 
-  return theme('cluster_og_upcoming_events', array(
+  return theme('cluster_og_all_events', array(
     'events' => $events,
     'all_events_link' => '/events',
   ));
@@ -243,4 +242,57 @@ function cluster_events_format_upcoming($nid) {
   catch (EntityMetadataWrapperException $exception) {
     _log_entity_metadata_wrapper_error($exception, 'cluster_events');
   }
+}
+
+function cluster_events_format_list($nids) {
+  $events = array();
+  foreach ($nids as $nid) {
+    $node = node_load($nid);
+    if (!$node || $node->type != 'event') {
+      return FALSE;
+    }
+
+    try {
+      $wrapper = entity_metadata_wrapper('node', $node);
+      $value = $wrapper->field_event_date->value();
+      $event_date = new DateTime($value['value']);
+      $current_date = new DateTime();
+      $is_future = $event_date > $current_date ? TRUE : FALSE;
+      $is_past = !$is_future;
+      $from = strtotime($value['value']);
+      $to   = strtotime($value['value2']);
+      $format      = 'M. j' . '\<\s\u\p\>' . 'S' . '\<\/\s\u\p\>' . ' Y';
+      $format_from = 'M. j' . '\<\s\u\p\>' . 'S' . '\<\/\s\u\p\>';
+      $format_to   = 'M. j' . '\<\s\u\p\>' . 'S' . '\<\/\s\u\p\>' . ' Y';
+      if ($to > $from) {
+        $date = date($format_from, $from);
+        $date .= ' to ' . date($format_to, $to);
+      }
+      else {
+        $date = date($format, $from);
+      }
+
+      $geo = $wrapper->field_coordinates->value();
+      $map_link = l(t('map'), 'https://www.google.ca/maps/place/' . $geo['lat'] . ',' . $geo['lon'] . '/@' . $geo['lat'] . ',' . $geo['lon'] . ',15z', array(
+        'attributes' => array(
+          'target' => '_blank',
+        )
+      ));
+
+      $events[] = array(
+        'is_future' => $is_future,
+        'is_past' => $is_past,
+        'date' => $date,
+        'title' => t($wrapper->title->value()),
+        'link' => l($wrapper->title->value(), 'node/' . $node->nid),
+        'location' => field_view_field('node', $node, 'field_postal_address', 'teaser'),
+        'map_link' => $map_link,
+        'contact' => 'bidon'
+      );
+    }
+    catch (EntityMetadataWrapperException $exception) {
+      _log_entity_metadata_wrapper_error($exception, 'cluster_events');
+    }
+  }
+  return $events;
 }

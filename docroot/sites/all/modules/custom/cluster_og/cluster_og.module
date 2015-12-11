@@ -101,6 +101,13 @@ function cluster_og_theme() {
         'events' => NULL
       ),
     ),
+    'cluster_og_all_events' => array(
+      'file' => 'theme/cluster_og.theme.inc',
+      'variables' => array(
+        'all_events_link' => NULL,
+        'events' => NULL
+      ),
+    ),
     'cluster_og_no_upcoming_event' => array(
       'file' => 'theme/cluster_og.theme.inc',
       'variables' => array(
