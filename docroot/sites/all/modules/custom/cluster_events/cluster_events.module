@@ -208,12 +208,24 @@ function cluster_events_format_upcoming($nid) {
       )
     ));
 
+    $static_map = FALSE;
+    if (!empty($geo)) {
+      $static_map_url = 'http://maps.googleapis.com/maps/api/staticmap?center=' . $geo['lat'] . ',' . $geo['lon'] . '&zoom=15&scale=1&size=300x200&maptype=roadmap&format=png&visual_refresh=true&markers=size:small|color:0x000000|label:1|' . $geo['lat'] . ',' . $geo['lon'];
+      $static_map_description = 'Map to ' . $wrapper->title->value();
+      $static_map = theme('image', array(
+        'path' => $static_map_url,
+        'alt' => t($static_map_description),
+        'title' => t($static_map_description),
+      ));
+    }
+
     return array(
       'date' => $date,
-      'title' => t($wrapper->title->value()),
+      'title' => $wrapper->title->value(),
       'link' => l($wrapper->title->value(), 'node/' . $node->nid),
       'location' => field_view_field('node', $node, 'field_postal_address', 'teaser'),
       'map_link' => $map_link,
+      'static_map' => $static_map,
       'contact' => 'bidon'
     );
   }
