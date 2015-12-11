@@ -13,7 +13,7 @@
         </div>
         <div class="event-location">
           <span class="label"><?php print t('Location: '); ?></span>
-          <span><?php print $event['location']; ?></span>
+          <span><?php print render($event['location']); ?></span>
         </div>
         <div class="event-contact">
           <span class="label"><?php print t('Contact: '); ?></span>
