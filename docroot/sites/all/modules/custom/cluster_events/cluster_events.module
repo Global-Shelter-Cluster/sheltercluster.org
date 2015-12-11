@@ -97,8 +97,13 @@ function cluster_events_all($nid) {
     );
   }
   else {
-    $nodes = node_load_multiple(array_keys($query_date_filter_results['node']));
-    $content = node_view_multiple($nodes);
+    $content = array(
+      "#theme" => 'cluster_og_upcoming_events',
+      '#events' => array(),
+    );
+    foreach (array_keys($query_date_filter_results['node']) as $nid) {
+      $content['#events'][] = cluster_events_format_upcoming($nid);
+    }
   }
 
   $ret['content'] = $content;
