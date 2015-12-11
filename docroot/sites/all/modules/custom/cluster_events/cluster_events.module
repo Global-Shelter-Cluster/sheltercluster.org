@@ -184,7 +184,7 @@ function cluster_events_format_upcoming($nid) {
 
   try {
     $wrapper = entity_metadata_wrapper('node', $node);
-    dpm(field_view_field('node', $node, 'field_postal_address'));
+    // dpm(field_view_field('node', $node, 'field_event_contact'));
     $value = $wrapper->field_event_date->value();
     $from = strtotime($value['value']);
     $to   = strtotime($value['value2']);
@@ -208,12 +208,34 @@ function cluster_events_format_upcoming($nid) {
 
     $full_location = $map_link;
 
+    // Get contact(s).
+    $contact = $wrapper->field_event_contact->value();
+
+    $contact_name = '';
+    $contact_email = '';
+    $last_group = count($contact) - 1;
+    // Get all the contacts and email address.
+    foreach ($contact as $index => $value) {
+      $separator = ", ";
+      if ($index == $last_group) {
+        $separator = '';
+      }
+      $contacts = $value->title;
+      $contact_email = $value->field_email['und']['0']['email'];
+
+      $contact_link = '';
+      $options = array();
+      $contact_link = l(t($contacts), 'mailto:' . $contact_email, $options, array('attributes' => array('class' => array('contact-link'))));
+
+      $contact_name .= $contact_link . $separator;
+    }
+
     return array(
       'date' => $date,
       'title' => t($wrapper->title->value()),
       'link' => l($wrapper->title->value(), 'node/' . $node->nid),
       'location' => $full_location,
-      'contact' => 'bidon'
+      'contact' => $contact_name,
     );
   }
   catch (EntityMetadataWrapperException $exception) {
