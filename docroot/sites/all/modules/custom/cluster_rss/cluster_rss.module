@@ -49,5 +49,12 @@ function cluster_rss_theme($existing, $type, $theme, $path) {
  * List of RSS links.
  */
 function cluster_rss_links_page_callback($node) {
-  return 'FNORD';
+  return array(
+    '#theme' => 'item_list',
+    '#items' => array(
+      l('Documents RSS feed', drupal_get_path_alias('node/' . $node->nid . '/rss/documents')),
+      l('Events RSS feed', drupal_get_path_alias('node/' . $node->nid . '/rss/events')),
+      l('Discussions RSS feed', drupal_get_path_alias('node/' . $node->nid . '/rss/discussions')),
+    ),
+  );
 }

@@ -6,11 +6,11 @@
 function cluster_rss_pathauto($op) {
   $settings = new stdClass();
   $settings->module = 'cluster_rss';
-  $settings->groupheader = t('Group RSS paths');
+  $settings->groupheader = t('Group rss links page');
   $settings->patterndescr = t('Default path pattern');
   $settings->patterndefault = '[node:content-type]/[node:title]/rss';
   $settings->token_type = 'node';
-  $settings->patternitems = array('rss' => 'Group rss path');
+  $settings->patternitems = array('rss' => 'Group rss links page');
   $settings->batch_update_callback = 'cluster_rss_pathauto_bulkupdate';
   return $settings;
 }
@@ -20,7 +20,8 @@ function cluster_rss_pathauto($op) {
  */
 function cluster_rss_create_alias($node, $op) {
   module_load_include('inc', 'pathauto');
-  pathauto_create_alias('cluster_rss', $op, 'node/'.$node->nid.'/rss', array('node' => $node), 'ssssssssss');
+  //dpm($node);
+  pathauto_create_alias('cluster_rss', $op, 'node/'.$node->nid.'/rss', array('node' => $node), 'rss');
 }
 
 /**
