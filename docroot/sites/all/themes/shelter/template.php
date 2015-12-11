@@ -62,6 +62,7 @@ function shelter_preprocess_page(&$variables) {
   }
 
   if ($current_path == 'events') {
+    $variables['hot_responses'] = cluster_og_hot_responses();
     $variables['global_events_page'] = TRUE;
   }
 
