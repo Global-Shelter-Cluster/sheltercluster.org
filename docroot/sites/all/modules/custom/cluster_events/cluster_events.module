@@ -186,11 +186,17 @@ function cluster_events_format_upcoming($nid) {
       $date = date($format, $from);
     }
 
+    $geo = $wrapper->field_coordinates->value();
+    $address = $wrapper->field_postal_address->value();
+    $map_link = l(t('map'), 'https://www.google.ca/maps/@' . $geo['lat'] . ',' . $geo['lon']);
+
+    $full_location = '';
+
     return array(
       'date' => $date,
       'title' => t($wrapper->title->value()),
       'link' => l($wrapper->title->value(), 'node/' . $node->nid),
-      'location' => 'bidon',
+      'location' => $full_location,
       'contact' => 'bidon'
     );
   }
