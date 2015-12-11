@@ -3,55 +3,48 @@
 /**
  *  Implements hook_pathauto().
  */
-function cluster_docs_pathauto($op) {
+function cluster_rss_pathauto($op) {
   $settings = new stdClass();
-  $settings->module = 'cluster_docs';
-  $settings->groupheader = t('Group documents paths');
+  $settings->module = 'cluster_rss';
+  $settings->groupheader = t('Group RSS paths');
   $settings->patterndescr = t('Default path pattern');
-//  $settings->patterndefault = '[node:url:path]/documents';
-  $settings->patterndefault = '[node:content-type]/[node:title]/documents';
+  $settings->patterndefault = '[node:content-type]/[node:title]/rss';
   $settings->token_type = 'node';
-  $settings->patternitems = array('docs' => 'Group documents');
-  if (module_exists('cluster_rss')) {
-    $settings->patternitems += array('rssdocs' => 'Group RSS documents');
-  }
-  $settings->batch_update_callback = 'cluster_docs_pathauto_bulkupdate';
+  $settings->patternitems = array('rss' => 'Group rss path');
+  $settings->batch_update_callback = 'cluster_rss_pathauto_bulkupdate';
   return $settings;
 }
 
 /**
- * Helper function to create aliases for group document list pages.
+ * Helper function to create aliases for group discussion list pages.
  */
-function cluster_docs_create_alias($node, $op) {
+function cluster_rss_create_alias($node, $op) {
   module_load_include('inc', 'pathauto');
-  pathauto_create_alias('cluster_docs', $op, 'node/'.$node->nid.'/documents', array('node' => $node), 'docs');
-  if (module_exists('cluster_rss')) {
-    pathauto_create_alias('cluster_docs', $op, 'node/'.$node->nid.'/rss/documents', array('node' => $node), 'rssdocs');
-  }
+  pathauto_create_alias('cluster_rss', $op, 'node/'.$node->nid.'/rss', array('node' => $node), 'ssssssssss');
 }
 
 /**
  *  Implements hook_node_insert().
  */
-function cluster_docs_node_insert($node) {
+function cluster_rss_node_insert($node) {
   if (og_is_group('node', $node)) {
-    cluster_docs_create_alias($node, 'insert');
+    cluster_rss_create_alias($node, 'insert');
   }
 }
 
 /**
  *  Implements hook_node_update().
  */
-function cluster_docs_node_update($node) {
+function cluster_rss_node_update($node) {
   if (og_is_group('node', $node)) {
-    cluster_docs_create_alias($node, 'update');
+    cluster_rss_create_alias($node, 'update');
   }
 }
 
 /**
  * Refreshes all aliases.
  */
-function cluster_docs_pathauto_bulkupdate(&$context) {
+function cluster_rss_pathauto_bulkupdate(&$context) {
   if (!isset($context['sandbox']['current'])) {
     $context['sandbox']['count'] = 0;
     $context['sandbox']['current'] = 0;
@@ -79,7 +72,7 @@ function cluster_docs_pathauto_bulkupdate(&$context) {
   foreach ($nids as $nid) {
     $node = node_load($nid);
     if (og_is_group('node', $node)) {
-      cluster_docs_create_alias($node, 'bulkupdate');
+      cluster_rss_create_alias($node, 'bulkupdate');
     }
   }
 
@@ -90,5 +83,4 @@ function cluster_docs_pathauto_bulkupdate(&$context) {
   if ($context['sandbox']['count'] != $context['sandbox']['total']) {
     $context['finished'] = $context['sandbox']['count'] / $context['sandbox']['total'];
   }
-
 }

@@ -851,6 +851,17 @@ function shelter_base_update_7091() {
  * Add field base field sorting weight and instances to the shelter base feature.
  */
 function shelter_base_update_7092() {
+  module_enable(array(
+    'gmap',
+    'geophp',
+    'geocoder',
+    'geofield',
+    'addressfield_autocomplete',
+    'date_repeat',
+    'date_repeat_entity',
+    'uuid',
+    'replicate',
+  ));
   features_revert_module('shelter_base');
 }
 
@@ -879,6 +890,8 @@ function shelter_base_update_7095() {
  * Add the help text to field bases.
  */
 function shelter_base_update_7096() {
+
+
   features_revert_module('shelter_base');
 }
 
