@@ -29,6 +29,10 @@
           <span class="label"><?php print t('Contact: '); ?></span>
           <span><?php print $event['contact']; ?></span>
         </div>
+
+        <div class="event-map">
+          <?php print $event['static_map']; ?>
+        </div>
       </div>
     <?php endforeach; ?>
 
