@@ -25,7 +25,7 @@ function cluster_events_menu() {
   );
 
   $items['events'] = array(
-    'title' => 'Events',
+    'title' => 'All events',
     'page callback' => 'cluster_events_all',
     'page arguments' => array(1),
     'access arguments' => array('access content'),
