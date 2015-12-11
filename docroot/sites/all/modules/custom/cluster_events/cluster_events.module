@@ -23,6 +23,14 @@ function cluster_events_menu() {
     'access arguments' => array(0, 1),
     'type' => MENU_CALLBACK,
   );
+
+  $items['events'] = array(
+    'title' => 'Events',
+    'page callback' => 'cluster_events_all',
+    'page arguments' => array(1),
+    'access arguments' => array('access content'),
+    'type' => MENU_CALLBACK,
+  );
   return $items;
 }
 
@@ -58,18 +66,22 @@ function cluster_events_all($nid) {
   $filter_by_date = new EntityFieldQuery();
   $filter_by_date->entityCondition('entity_type', 'node')
     ->entityCondition('bundle', 'event')
-    ->fieldCondition('og_group_ref', 'target_id', $nid)
     ->propertyCondition('status', NODE_PUBLISHED)
     ->fieldOrderBy('field_event_date', 'value', 'DESC');
+
+
 
   $filter_by_date_count = new EntityFieldQuery();
   $filter_by_date_count->entityCondition('entity_type', 'node')
     ->entityCondition('bundle', 'event')
-    ->fieldCondition('og_group_ref', 'target_id', $nid)
     ->propertyCondition('status', NODE_PUBLISHED)
     ->fieldOrderBy('field_event_date', 'value', 'DESC')
-    ->count()
-    ->execute();
+    ->count();
+
+  if($nid) {
+    $filter_by_date->fieldCondition('og_group_ref', 'target_id', $nid);
+    $filter_by_date_count->fieldCondition('og_group_ref', 'target_id', $nid);
+  }
 
   $number_of_results = $filter_by_date_count->execute();
 
@@ -87,7 +99,8 @@ function cluster_events_all($nid) {
     );
   }
   else {
-    $content = node_view_multiple(node_load_multiple(array_keys($query_date_filter_results['node'])));
+    //$nodes = node_load_multiple(array_keys($query_date_filter_results['node']);
+    //$content = node_view_multiple($nodes, '');
   }
 
   $ret['content'] = $content;
@@ -171,7 +184,7 @@ function cluster_events_format_upcoming($nid) {
 
   try {
     $wrapper = entity_metadata_wrapper('node', $node);
-
+    dpm(field_view_field('node', $node, 'field_postal_address'));
     $value = $wrapper->field_event_date->value();
     $from = strtotime($value['value']);
     $to   = strtotime($value['value2']);
