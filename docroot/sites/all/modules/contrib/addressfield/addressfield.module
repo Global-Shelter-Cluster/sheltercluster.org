@@ -294,7 +294,6 @@ function addressfield_theme() {
  */
 function theme_addressfield_container($variables) {
   $element = $variables['element'];
-
   $element['#children'] = trim($element['#children']);
   if (strlen($element['#children']) > 0) {
     $output = '<' . $element['#tag'] . drupal_attributes($element['#attributes']) . '>';

@@ -98,12 +98,11 @@ function cluster_events_all($nid) {
   }
   else {
     $content = array(
-      "#theme" => 'cluster_og_upcoming_events',
+      "#theme" => 'cluster_og_all_events',
       '#events' => array(),
     );
-    foreach (array_keys($query_date_filter_results['node']) as $nid) {
-      $content['#events'][] = cluster_events_format_upcoming($nid);
-    }
+    $nids = array_keys($query_date_filter_results['node']);
+    $content['#events'] = cluster_events_format_list($nids);
   }
 
   $ret['content'] = $content;
@@ -158,7 +157,7 @@ function cluster_events_upcoming() {
     ->fieldCondition('field_event_date', 'value', date('Y-m-d'), '>')
     ->propertyCondition('status', NODE_PUBLISHED)
     ->fieldOrderBy('field_event_date', 'value')
-    ->range(0, 5)
+    ->range(0, 3)
     ->execute();
 
   if (!isset($results['node'])) {
@@ -187,6 +186,7 @@ function cluster_events_format_upcoming($nid) {
 
   try {
     $wrapper = entity_metadata_wrapper('node', $node);
+
     $value = $wrapper->field_event_date->value();
     $from = strtotime($value['value']);
     $to   = strtotime($value['value2']);
@@ -208,6 +208,28 @@ function cluster_events_format_upcoming($nid) {
       )
     ));
 
+    // Get contact(s).
+    $contact = $wrapper->field_event_contact->value();
+
+    $contact_name = '';
+    $contact_email = '';
+    $last_group = count($contact) - 1;
+    // Get all the contacts and email address.
+    foreach ($contact as $index => $value) {
+      $separator = ", ";
+      if ($index == $last_group) {
+        $separator = '';
+      }
+      $contacts = $value->title;
+      $contact_email = $value->field_email['und']['0']['email'];
+
+      $contact_link = '';
+      $options = array();
+      $contact_link = l(t($contacts), 'mailto:' . $contact_email, $options, array('attributes' => array('class' => array('contact-link'))));
+
+      $contact_name .= $contact_link . $separator;
+    }
+
     $static_map = FALSE;
     if (!empty($geo)) {
       $static_map_url = 'http://maps.googleapis.com/maps/api/staticmap?center=' . $geo['lat'] . ',' . $geo['lon'] . '&zoom=15&scale=1&size=300x200&maptype=roadmap&format=png&visual_refresh=true&markers=size:small|color:0x000000|label:1|' . $geo['lat'] . ',' . $geo['lon'];
@@ -226,10 +248,63 @@ function cluster_events_format_upcoming($nid) {
       'location' => field_view_field('node', $node, 'field_postal_address', 'teaser'),
       'map_link' => $map_link,
       'static_map' => $static_map,
-      'contact' => 'bidon'
+      'contact' => $contact_name,
     );
   }
   catch (EntityMetadataWrapperException $exception) {
     _log_entity_metadata_wrapper_error($exception, 'cluster_events');
   }
+}
+
+function cluster_events_format_list($nids) {
+  $events = array();
+  foreach ($nids as $nid) {
+    $node = node_load($nid);
+    if (!$node || $node->type != 'event') {
+      return FALSE;
+    }
+
+    try {
+      $wrapper = entity_metadata_wrapper('node', $node);
+      $value = $wrapper->field_event_date->value();
+      $event_date = new DateTime($value['value']);
+      $current_date = new DateTime();
+      $is_future = $event_date > $current_date ? TRUE : FALSE;
+      $is_past = !$is_future;
+      $from = strtotime($value['value']);
+      $to   = strtotime($value['value2']);
+      $format      = 'M. j' . '\<\s\u\p\>' . 'S' . '\<\/\s\u\p\>' . ' Y';
+      $format_from = 'M. j' . '\<\s\u\p\>' . 'S' . '\<\/\s\u\p\>';
+      $format_to   = 'M. j' . '\<\s\u\p\>' . 'S' . '\<\/\s\u\p\>' . ' Y';
+      if ($to > $from) {
+        $date = date($format_from, $from);
+        $date .= ' to ' . date($format_to, $to);
+      }
+      else {
+        $date = date($format, $from);
+      }
+
+      $geo = $wrapper->field_coordinates->value();
+      $map_link = l(t('map'), 'https://www.google.ca/maps/place/' . $geo['lat'] . ',' . $geo['lon'] . '/@' . $geo['lat'] . ',' . $geo['lon'] . ',15z', array(
+        'attributes' => array(
+          'target' => '_blank',
+        )
+      ));
+
+      $events[] = array(
+        'is_future' => $is_future,
+        'is_past' => $is_past,
+        'date' => $date,
+        'title' => t($wrapper->title->value()),
+        'link' => l($wrapper->title->value(), 'node/' . $node->nid),
+        'location' => field_view_field('node', $node, 'field_postal_address', 'teaser'),
+        'map_link' => $map_link,
+        'contact' => 'bidon'
+      );
+    }
+    catch (EntityMetadataWrapperException $exception) {
+      _log_entity_metadata_wrapper_error($exception, 'cluster_events');
+    }
+  }
+  return $events;
 }

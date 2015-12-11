@@ -54,6 +54,13 @@ function theme_cluster_og_upcoming_events($vars) {
   ));
 }
 
+function theme_cluster_og_all_events($vars) {
+  return partial('all_events', array(
+    'title' => t('All events'),
+    'events' => $vars['events'],
+  ));
+}
+
 function theme_cluster_og_no_upcoming_event($vars) {
   return partial('upcoming_events', array(
     'title' => t('No Upcoming Events'),
