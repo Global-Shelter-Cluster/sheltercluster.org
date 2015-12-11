@@ -157,7 +157,7 @@ function cluster_events_upcoming() {
     ->fieldCondition('field_event_date', 'value', date('Y-m-d'), '>')
     ->propertyCondition('status', NODE_PUBLISHED)
     ->fieldOrderBy('field_event_date', 'value')
-    ->range(0, 5)
+    ->range(0, 3)
     ->execute();
 
   if (!isset($results['node'])) {
@@ -172,7 +172,7 @@ function cluster_events_upcoming() {
     $events[] = cluster_events_format_upcoming($entity->nid);
   }
 
-  return theme('cluster_og_all_events', array(
+  return theme('cluster_og_upcoming_events', array(
     'events' => $events,
     'all_events_link' => '/events',
   ));
