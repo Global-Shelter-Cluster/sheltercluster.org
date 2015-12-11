@@ -67,13 +67,13 @@ function cluster_events_all($nid) {
   $filter_by_date->entityCondition('entity_type', 'node')
     ->entityCondition('bundle', 'event')
     ->propertyCondition('status', NODE_PUBLISHED)
-    ->fieldOrderBy('field_event_date', 'value', 'DESC');
+    ->fieldOrderBy('field_recurring_event_date', 'value', 'DESC');
 
   $filter_by_date_count = new EntityFieldQuery();
   $filter_by_date_count->entityCondition('entity_type', 'node')
     ->entityCondition('bundle', 'event')
     ->propertyCondition('status', NODE_PUBLISHED)
-    ->fieldOrderBy('field_event_date', 'value', 'DESC')
+    ->fieldOrderBy('field_recurring_event_date', 'value', 'DESC')
     ->count();
 
   if($nid) {
@@ -154,9 +154,9 @@ function cluster_events_upcoming() {
   $query = new EntityFieldQuery();
   $results = $query->entityCondition('entity_type', 'node')
     ->entityCondition('bundle', 'event')
-    ->fieldCondition('field_event_date', 'value', date('Y-m-d'), '>')
+    ->fieldCondition('field_recurring_event_date', 'value', date('Y-m-d'), '>')
     ->propertyCondition('status', NODE_PUBLISHED)
-    ->fieldOrderBy('field_event_date', 'value')
+    ->fieldOrderBy('field_recurring_event_date', 'value')
     ->range(0, 5)
     ->execute();
 
@@ -187,19 +187,19 @@ function cluster_events_format_upcoming($nid) {
   try {
     $wrapper = entity_metadata_wrapper('node', $node);
 
-    $value = $wrapper->field_event_date->value();
-    $from = strtotime($value['value']);
-    $to   = strtotime($value['value2']);
+    $value = $wrapper->field_recurring_event_date->value();
+    $from = $value[0];
+    // $to   = strtotime($value['value2']);
     $format      = 'M. j' . '\<\s\u\p\>' . 'S' . '\<\/\s\u\p\>' . ' Y';
-    $format_from = 'M. j' . '\<\s\u\p\>' . 'S' . '\<\/\s\u\p\>';
-    $format_to   = 'M. j' . '\<\s\u\p\>' . 'S' . '\<\/\s\u\p\>' . ' Y';
-    if ($to > $from) {
-      $date = date($format_from, $from);
-      $date .= ' to ' . date($format_to, $to);
-    }
-    else {
+    // $format_from = 'M. j' . '\<\s\u\p\>' . 'S' . '\<\/\s\u\p\>';
+    // $format_to   = 'M. j' . '\<\s\u\p\>' . 'S' . '\<\/\s\u\p\>' . ' Y';
+    // if ($to > $from) {
+    //   $date = date($format_from, $from);
+    //   $date .= ' to ' . date($format_to, $to);
+    // }
+    // else {
       $date = date($format, $from);
-    }
+    // }
 
     $geo = $wrapper->field_coordinates->value();
     $map_link = l(t('map'), 'https://www.google.ca/maps/place/' . $geo['lat'] . ',' . $geo['lon'] . '/@' . $geo['lat'] . ',' . $geo['lon'] . ',15z', array(
@@ -254,23 +254,23 @@ function cluster_events_format_list($nids) {
 
     try {
       $wrapper = entity_metadata_wrapper('node', $node);
-      $value = $wrapper->field_event_date->value();
-      $event_date = new DateTime($value['value']);
-      $current_date = new DateTime();
+      $value = $wrapper->field_recurring_event_date->value();
+      $event_date = $value[0];
+      $current_date = time();
       $is_future = $event_date > $current_date ? TRUE : FALSE;
       $is_past = !$is_future;
-      $from = strtotime($value['value']);
-      $to   = strtotime($value['value2']);
+      $from = $event_date;
+      // $to   = strtotime($value['value2']);
       $format      = 'M. j' . '\<\s\u\p\>' . 'S' . '\<\/\s\u\p\>' . ' Y';
-      $format_from = 'M. j' . '\<\s\u\p\>' . 'S' . '\<\/\s\u\p\>';
-      $format_to   = 'M. j' . '\<\s\u\p\>' . 'S' . '\<\/\s\u\p\>' . ' Y';
-      if ($to > $from) {
-        $date = date($format_from, $from);
-        $date .= ' to ' . date($format_to, $to);
-      }
-      else {
+      // $format_from = 'M. j' . '\<\s\u\p\>' . 'S' . '\<\/\s\u\p\>';
+      // $format_to   = 'M. j' . '\<\s\u\p\>' . 'S' . '\<\/\s\u\p\>' . ' Y';
+      // if ($to > $from) {
+      //   $date = date($format_from, $from);
+      //   $date .= ' to ' . date($format_to, $to);
+      // }
+      // else {
         $date = date($format, $from);
-      }
+      // }
 
       $geo = $wrapper->field_coordinates->value();
       $map_link = l(t('map'), 'https://www.google.ca/maps/place/' . $geo['lat'] . ',' . $geo['lon'] . '/@' . $geo['lat'] . ',' . $geo['lon'] . ',15z', array(
@@ -278,6 +278,29 @@ function cluster_events_format_list($nids) {
           'target' => '_blank',
         )
       ));
+
+      // Get contact(s).
+      $contact = $wrapper->field_event_contact->value();
+
+      $contact_name = '';
+      $contact_email = '';
+      $last_group = count($contact) - 1;
+      // Get all the contacts and email address.
+      foreach ($contact as $index => $value) {
+        $separator = ", ";
+        if ($index == $last_group) {
+          $separator = '';
+        }
+        $contacts = $value->title;
+        $contact_email = $value->field_email['und']['0']['email'];
+
+        $contact_link = '';
+        $options = array();
+        $contact_link = l(t($contacts), 'mailto:' . $contact_email, $options, array('attributes' => array('class' => array('contact-link'))));
+
+        $contact_name .= $contact_link . $separator;
+      }
+
 
       $events[] = array(
         'is_future' => $is_future,
@@ -287,7 +310,7 @@ function cluster_events_format_list($nids) {
         'link' => l($wrapper->title->value(), 'node/' . $node->nid),
         'location' => field_view_field('node', $node, 'field_postal_address', 'teaser'),
         'map_link' => $map_link,
-        'contact' => 'bidon'
+        'contact' => $contact_name,
       );
     }
     catch (EntityMetadataWrapperException $exception) {
