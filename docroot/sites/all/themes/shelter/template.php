@@ -44,6 +44,7 @@ function shelter_preprocess_page(&$variables) {
   $variables['is_user_profile_pages'] = FALSE;
   $variables['is_search_documents'] = FALSE;
   $variables['global_docs_search_page_link'] = l(t('Search all documents'), 'search-documents', array('attributes' => array('class' => array('search-documents-link'))));
+  $variables['global_events_page'] = FALSE;
 
   if ($variables['is_front']) {
     $variables['hot_responses'] = cluster_og_hot_responses();
@@ -56,6 +57,12 @@ function shelter_preprocess_page(&$variables) {
 
   if ($current_path == 'search-documents') {
     $variables['is_search_documents'] = TRUE;
+    $variables['hot_responses'] = cluster_og_hot_responses();
+    $variables['upcoming_events'] = NULL;
+  }
+
+  if ($current_path == 'events') {
+    $variables['global_events_page'] = TRUE;
   }
 
   if (arg(0) == 'user') {
