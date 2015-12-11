@@ -15,13 +15,21 @@ dependencies[] = features
 dependencies[] = file
 dependencies[] = geocoder
 dependencies[] = geofield
+dependencies[] = list
 dependencies[] = og
 dependencies[] = og_ui
+dependencies[] = options
 dependencies[] = shelter_base
 dependencies[] = strongarm
 dependencies[] = text
+<<<<<<< HEAD
+>>>>>>> 1b505e89d1857e01f72988e7b3416f25c0b08ba2 = ======
+<<<<<<< HEAD
+mtime = 1449761577
 features[ctools][] = strongarm:strongarm:1
 features[features_api][] = api:2
+features[field_base][] = date_repeat_entity_clone_state
+features[field_base][] = date_repeat_entity_master_uuid
 features[field_base][] = field_coordinates
 features[field_base][] = field_event_contact
 features[field_base][] = field_event_date
@@ -29,6 +37,8 @@ features[field_base][] = field_event_files
 features[field_base][] = field_postal_address
 features[field_base][] = field_recurring_event_date
 features[field_instance][] = node-event-body
+features[field_instance][] = node-event-date_repeat_entity_clone_state
+features[field_instance][] = node-event-date_repeat_entity_master_uuid
 features[field_instance][] = node-event-field_coordinates
 features[field_instance][] = node-event-field_event_contact
 features[field_instance][] = node-event-field_event_date
@@ -54,8 +64,4 @@ features[variable][] = node_preview_event
 features[variable][] = node_submitted_event
 features[variable][] = pathauto_cluster_events_pattern
 features[variable][] = pathauto_node_event_pattern
-<<<<<<< HEAD
-mtime = 1449761577
-=======
-mtime = 1449778269
->>>>>>> 1b505e89d1857e01f72988e7b3416f25c0b08ba2
+mtime = 1449803761
