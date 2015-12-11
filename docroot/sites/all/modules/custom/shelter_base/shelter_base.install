@@ -1144,7 +1144,7 @@ function shelter_base_update_7116(&$sandbox) {
 }
 
 /**
- * Revert cluster events and copy field data.
+ * Revert cluster events and copy field data. Set the event content type to use date repeat entity.
  */
 function shelter_base_update_7117() {
   module_enable(array(
@@ -1172,6 +1172,7 @@ function shelter_base_update_7117() {
     db_insert('field_data_field_recurring_event_date')->fields($data)->execute();
     db_insert('field_revision_field_recurring_event_date')->fields($data)->execute();
   }
+  variable_set('date_repeat_entity_bundles_available', array('event' => 'event'));
 }
 
 /**
