@@ -1,3 +1,5 @@
+<?php // dpm($variables); ?>
+
 <section id="shelter-calendar">
   <div id="box-calendar">
     <?php print _svg('icons/pin', array('id' => 'calendar-pin-icon', 'alt' => t('An icon representing a calendar with a pin on it.'))); ?>
@@ -22,6 +24,10 @@
         <div class="information-item event-contact">
           <span class="label"><?php print t('Contact: '); ?></span>
           <span><?php print $event['contact']; ?></span>
+        </div>
+
+        <div class="event-map">
+          <?php print $event['static_map']; ?>
         </div>
       </div>
     <?php endforeach; ?>
