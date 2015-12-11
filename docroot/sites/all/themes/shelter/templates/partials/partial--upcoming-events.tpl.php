@@ -14,7 +14,10 @@
         </div>
         <div class="information-item event-location">
           <span class="label"><?php print t('Location: '); ?></span>
-          <span><?php print $event['location']; ?></span>
+          <span>
+            <?php print render($event['location']); ?>
+            &nbsp;[<?php print $event['map_link']; ?>]
+          </span>
         </div>
         <div class="information-item event-contact">
           <span class="label"><?php print t('Contact: '); ?></span>

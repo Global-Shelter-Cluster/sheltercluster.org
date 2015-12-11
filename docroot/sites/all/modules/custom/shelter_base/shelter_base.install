@@ -1181,3 +1181,10 @@ function shelter_base_update_7117() {
 function shelter_base_update_7118() {
   features_revert_module('cluster_events');
 }
+
+/**
+ * Revert cluster events.
+ */
+function shelter_base_update_7119() {
+  features_revert_module('cluster_events');
+}

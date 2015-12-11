@@ -69,8 +69,6 @@ function cluster_events_all($nid) {
     ->propertyCondition('status', NODE_PUBLISHED)
     ->fieldOrderBy('field_event_date', 'value', 'DESC');
 
-
-
   $filter_by_date_count = new EntityFieldQuery();
   $filter_by_date_count->entityCondition('entity_type', 'node')
     ->entityCondition('bundle', 'event')
@@ -99,8 +97,13 @@ function cluster_events_all($nid) {
     );
   }
   else {
-    //$nodes = node_load_multiple(array_keys($query_date_filter_results['node']);
-    //$content = node_view_multiple($nodes, '');
+    $content = array(
+      "#theme" => 'cluster_og_upcoming_events',
+      '#events' => array(),
+    );
+    foreach (array_keys($query_date_filter_results['node']) as $nid) {
+      $content['#events'][] = cluster_events_format_upcoming($nid);
+    }
   }
 
   $ret['content'] = $content;
@@ -184,7 +187,7 @@ function cluster_events_format_upcoming($nid) {
 
   try {
     $wrapper = entity_metadata_wrapper('node', $node);
-    // dpm(field_view_field('node', $node, 'field_event_contact'));
+
     $value = $wrapper->field_event_date->value();
     $from = strtotime($value['value']);
     $to   = strtotime($value['value2']);
@@ -205,8 +208,6 @@ function cluster_events_format_upcoming($nid) {
         'target' => '_blank',
       )
     ));
-
-    $full_location = $map_link;
 
     // Get contact(s).
     $contact = $wrapper->field_event_contact->value();
@@ -234,7 +235,8 @@ function cluster_events_format_upcoming($nid) {
       'date' => $date,
       'title' => t($wrapper->title->value()),
       'link' => l($wrapper->title->value(), 'node/' . $node->nid),
-      'location' => $full_location,
+      'location' => field_view_field('node', $node, 'field_postal_address', 'teaser'),
+      'map_link' => $map_link,
       'contact' => $contact_name,
     );
   }
