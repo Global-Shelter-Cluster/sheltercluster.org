@@ -227,7 +227,7 @@ class GroupContentManager {
       ->fieldCondition('og_group_ref', 'target_id', $this->node->nid)
       ->fieldCondition('field_recurring_event_date', 'value', date('Y-m-d'), '>')
       ->propertyCondition('status', NODE_PUBLISHED)
-      ->fieldOrderBy('field_recurring_event_date', 'value')
+      ->fieldOrderBy('field_recurring_event_date', 'value', 'DESC')
       ->range(0, $range)
       ->execute();
 
