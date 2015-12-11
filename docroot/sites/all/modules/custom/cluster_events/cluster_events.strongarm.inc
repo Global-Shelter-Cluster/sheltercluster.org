@@ -62,6 +62,28 @@ function cluster_events_strongarm() {
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
+  $strongarm->name = 'date_repeat_entity_bundles_available';
+  $strongarm->value = array(
+    'event' => 'event',
+    'arbitrary_library' => 0,
+    'article' => 0,
+    'page' => 0,
+    'community_of_practice' => 0,
+    'contact' => 0,
+    'discussion' => 0,
+    'document' => 0,
+    'geographic_region' => 0,
+    'hub' => 0,
+    'library' => 0,
+    'response' => 0,
+    'strategic_advisory' => 0,
+    'working_group' => 0,
+  );
+  $export['date_repeat_entity_bundles_available'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
   $strongarm->name = 'field_bundle_settings_node__event';
   $strongarm->value = array(
     'view_modes' => array(

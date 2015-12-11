@@ -55,6 +55,93 @@ function cluster_events_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-event-date_repeat_entity_clone_state'
+  $field_instances['node-event-date_repeat_entity_clone_state'] = array(
+    'bundle' => 'event',
+    'default_value' => array(
+      0 => array(
+        'value' => 0,
+      ),
+    ),
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'hidden',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 10,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'date_repeat_entity_clone_state',
+    'label' => 'Clone state (do not change)',
+    'required' => FALSE,
+    'settings' => array(
+      'allowed_values' => array(
+        0 => '',
+        1 => '',
+      ),
+      'allowed_values_function' => '',
+      'entity_translation_sync' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(
+        'display_label' => 0,
+      ),
+      'type' => 'options_onoff',
+      'weight' => 11,
+    ),
+  );
+
+  // Exported field_instance: 'node-event-date_repeat_entity_master_uuid'
+  $field_instances['node-event-date_repeat_entity_master_uuid'] = array(
+    'bundle' => 'event',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'hidden',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 9,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'date_repeat_entity_master_uuid',
+    'label' => 'Master UUID (do not change)',
+    'required' => FALSE,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 10,
+    ),
+  );
+
   // Exported field_instance: 'node-event-field_coordinates'
   $field_instances['node-event-field_coordinates'] = array(
     'bundle' => 'event',
@@ -479,12 +566,14 @@ function cluster_events_field_default_field_instances() {
   // Included for use with string extractors like potx.
   t('Address');
   t('Body');
+  t('Clone state (do not change)');
   t('Contact');
   t('Contacts to reach for this event.');
   t('Coordinates');
   t('Event Date');
   t('Files');
   t('Groups audience');
+  t('Master UUID (do not change)');
   t('Title');
 
   return $field_instances;

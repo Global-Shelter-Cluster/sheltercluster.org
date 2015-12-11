@@ -1173,3 +1173,10 @@ function shelter_base_update_7117() {
     db_insert('field_revision_field_recurring_event_date')->fields($data)->execute();
   }
 }
+
+/**
+ * Revert cluster events.
+ */
+function shelter_base_update_7118() {
+  features_revert_module('cluster_events');
+}
