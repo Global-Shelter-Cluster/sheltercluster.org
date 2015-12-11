@@ -87,7 +87,8 @@ function cluster_events_all($nid) {
     );
   }
   else {
-    $content = node_view_multiple(node_load_multiple(array_keys($query_date_filter_results['node'])));
+    //$nodes = node_load_multiple(array_keys($query_date_filter_results['node']);
+    //$content = node_view_multiple($nodes, '');
   }
 
   $ret['content'] = $content;
@@ -171,7 +172,7 @@ function cluster_events_format_upcoming($nid) {
 
   try {
     $wrapper = entity_metadata_wrapper('node', $node);
-
+    dpm(field_view_field('node', $node, 'field_postal_address'));
     $value = $wrapper->field_event_date->value();
     $from = strtotime($value['value']);
     $to   = strtotime($value['value2']);
