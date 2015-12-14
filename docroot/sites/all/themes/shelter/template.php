@@ -45,10 +45,12 @@ function shelter_preprocess_page(&$variables) {
   $variables['is_search_documents'] = FALSE;
   $variables['global_docs_search_page_link'] = l(t('Search all documents'), 'search-documents', array('attributes' => array('class' => array('search-documents-link'))));
   $variables['global_events_page'] = FALSE;
+  $variables['recent_documents'] = FALSE;
 
   if ($variables['is_front']) {
     $variables['hot_responses'] = cluster_og_hot_responses();
     $variables['upcoming_events'] = cluster_events_upcoming();
+    $variables['recent_documents'] = cluster_docs_recent();
   }
 
   if ($current_path == 'regions-countries') {

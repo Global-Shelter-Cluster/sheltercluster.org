@@ -58,7 +58,7 @@ function theme_cluster_og_recent_documents($vars) {
   return partial('recent_documents', array(
     'title' => t('Latest documents'),
     'documents' => $vars['documents'],
-    'all_events_link' => l(t('All documents'), $vars['all_events_link'], array('attributes' => array('class' => array('see-all'))))
+    'all_documents_link' => l(t('All documents'), $vars['all_documents_link'], array('attributes' => array('class' => array('see-all'))))
   ));
 }
 
