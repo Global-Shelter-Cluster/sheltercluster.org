@@ -2127,6 +2127,11 @@ header #search-block-form {
   border-radius: 5px;
 }
 
+.addressfield-container-inline span {
+  display: inline;
+}
+
+#all-events,
 #box-calendar {
   position: relative;
   width: 100%;
@@ -2138,6 +2143,7 @@ header #search-block-form {
   -webkit-border-radius: 0.1875rem;
   border-radius: 0.1875rem;
 }
+#all-events .event-card,
 #box-calendar .event-card {
   padding: 0 0 4px 0;
   padding: 0 0 0.25rem 0;
@@ -2147,6 +2153,7 @@ header #search-block-form {
   padding-top: 7px;
   margin-bottom: 15px;
 }
+#all-events .event-card .event-title,
 #box-calendar .event-card .event-title {
   background: #ddd;
   position: relative;
@@ -2157,6 +2164,7 @@ header #search-block-form {
   -webkit-box-shadow: rgba(100, 100, 100, 0.23) 0px -7px 5px;
   box-shadow: rgba(100, 100, 100, 0.23) 0px -7px 5px;
 }
+#all-events .event-card .event-title .arrow,
 #box-calendar .event-card .event-title .arrow {
   font-size: 28.8px;
   font-size: 1.8rem;
@@ -2166,6 +2174,7 @@ header #search-block-form {
   top: 10px;
   left: 10px;
 }
+#all-events .event-card .event-title a,
 #box-calendar .event-card .event-title a {
   color: #000;
   width: 100%;
@@ -2176,27 +2185,39 @@ header #search-block-form {
   text-transform: capitalize;
   border-bottom: 1px solid #ccc;
 }
-#box-calendar .event-card .event-title a:hover, #box-calendar .event-card .event-title a:active {
+#all-events .event-card .event-title a:hover, #all-events .event-card .event-title a:active,
+#box-calendar .event-card .event-title a:hover,
+#box-calendar .event-card .event-title a:active {
   text-decoration: none;
 }
+#all-events .event-card .information-item,
 #box-calendar .event-card .information-item {
   margin-bottom: 7px;
   padding: 0 12px;
   padding: 0 0.75rem;
 }
+#all-events .event-card .label,
 #box-calendar .event-card .label {
+  position: relative;
   display: block;
   text-transform: uppercase;
   color: #888;
-  font-size: 9.6px;
-  font-size: 0.6rem;
+  font-size: 11.2px;
+  font-size: 0.7rem;
 }
+#all-events .event-card .label .map-link,
+#box-calendar .event-card .label .map-link {
+  position: absolute;
+  right: 0;
+}
+#all-events .all-events,
 #box-calendar .all-events {
   text-align: center;
   font-size: 13.6px;
   font-size: 0.85rem;
   padding: 0 0 10px;
 }
+#all-events .all-events a,
 #box-calendar .all-events a {
   color: #000;
 }
@@ -2236,6 +2257,58 @@ header #search-block-form {
   -moz-box-sizing: initial;
   -webkit-box-sizing: initial;
   box-sizing: initial;
+}
+
+#all-events {
+  position: relative;
+  background-color: #fff;
+}
+#all-events .future-event-card {
+  position: relative;
+  background-color: #eee;
+}
+#all-events .future-event-card .table-wrapper {
+  display: table;
+  height: 100px;
+  width: 100%;
+  table-layout: fixed;
+}
+#all-events .future-event-card .event-information {
+  display: table-cell;
+  width: auto;
+  vertical-align: top;
+}
+#all-events .future-event-card .event-map {
+  display: table-cell;
+  width: 300px;
+}
+#all-events .future-event-card .event-map div {
+  width: 100%;
+  padding: 3px 7px 1px 0;
+}
+#all-events .future-event-card .event-map img {
+  width: 100%;
+  height: auto;
+  border: 1px solid #888;
+}
+#all-events .past-event-card {
+  opacity: 0.7;
+}
+#all-events .past-event-card:hover {
+  opacity: 1;
+}
+#all-events .past-event-card .event-title {
+  background: #444;
+}
+
+div.street-block,
+div.addressfield-container-inline {
+  display: inline;
+}
+
+div.addressfield-container-inline::after {
+  clear: none;
+  display: inline;
 }
 
 /* _join_group.scss */

@@ -6,6 +6,12 @@
   @include border-radius(5px);
 }
 
+.addressfield-container-inline {
+  span {
+    display: inline;
+  }
+}
+#all-events,
 #box-calendar {
   position: relative;
   width: 100%;
@@ -56,10 +62,15 @@
       @include rem(padding, 0 0.75rem);
     }
     .label {
+      position: relative;
       display: block;
       text-transform: uppercase;
       color: #888;
-      @include rem(font-size, 0.60rem);
+      @include rem(font-size, 0.70rem);
+      .map-link {
+        position: absolute;
+        right: 0;
+      }
     }
   }
 
@@ -101,4 +112,60 @@
   @include border-radius(15px);
   @include box-sizing(initial);
 }
+
+#all-events {
+  position: relative;
+  background-color: #fff;
+
+  .future-event-card {
+    position: relative;
+    background-color: #eee;
+
+    .table-wrapper {
+      display: table;
+      height: 100px;
+      width: 100%;
+      table-layout: fixed;
+    }
+    .event-information {
+      display: table-cell;
+      width: auto;
+      vertical-align: top;
+    }
+    .event-map {
+      display: table-cell;
+      width: 300px;
+
+      div {
+        width: 100%;
+        padding: 3px 7px 1px 0;
+      }
+
+      img {
+        width: 100%;
+        height: auto;
+        border: 1px solid #888;
+      }
+    }
+  }
+  .past-event-card {
+    opacity: 0.7;
+    &:hover {
+      opacity: 1;
+    }
+    .event-title {
+      background: #444;
+    }
+  }
+}
+
+div.street-block,
+div.addressfield-container-inline {
+  display: inline;
+}
+div.addressfield-container-inline::after {
+  clear: none;
+  display: inline;
+}
+
 
