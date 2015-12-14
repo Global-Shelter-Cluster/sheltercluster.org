@@ -254,9 +254,6 @@ header {
   }
   .information-title {
     @include rem(padding, 0.45rem 0.5rem);
-    a {
-      font-weight: bold;
-    }
     p {
       margin: 4px 0 0 0;
       text-transform: uppercase;
