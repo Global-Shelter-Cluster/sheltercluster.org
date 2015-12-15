@@ -325,7 +325,6 @@ function cluster_events_format_list($nids) {
         ));
         $static_map = l($static_map, $map_url, array('html' => TRUE, 'attributes' => array('target' => '_blank')));
       }
-
       $events[] = array(
         'is_future' => $is_future,
         'is_past' => $is_past,
@@ -336,6 +335,7 @@ function cluster_events_format_list($nids) {
         'map_link' => $map_link,
         'static_map' => $static_map,
         'contact' => $contact_name,
+        'description' => field_view_field('node', $node, 'body', 'teaser'),
       );
     }
     catch (EntityMetadataWrapperException $exception) {

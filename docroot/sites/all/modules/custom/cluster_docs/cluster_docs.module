@@ -78,13 +78,11 @@ function cluster_docs_recent() {
   if (!isset($results['node'])) {
     return FALSE;
   }
-
   $nids = array_keys($results['node']);
-
-  $entities = entity_load('node', $nids);
+  $docs = cluster_docs_prepare_row_data($nids);
 
   return theme('cluster_og_recent_documents', array(
-    'documents' => $entities,
+    'docs' => $docs,
     'all_documents_link' => '/search-documents',
   ));
 }

@@ -39,6 +39,13 @@
           </div>
         <?php endif; ?>
 
+        <?php if($event['description']): ?>
+          <div class="information-item event-description">
+            <span class="label"><?php print t('Description: '); ?></span>
+            <span><?php print drupal_render($event['description']); ?></span>
+          </div>
+        <?php endif; ?>
+        
         <?php if($event['is_future']): ?>
             </div>
             <div class="event-map">
