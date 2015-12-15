@@ -297,11 +297,11 @@ function cluster_events_format_list($nids) {
       $static_map = FALSE;
       if (!empty($geo)) {
         $static_map_url = 'http://maps.googleapis.com/maps/api/staticmap?center=' . $geo['lat'] . ',' . $geo['lon'] . '&zoom=15&scale=1&size=300x200&maptype=roadmap&format=png&visual_refresh=true&markers=size:small|color:0x000000|label:1|' . $geo['lat'] . ',' . $geo['lon'];
-        $static_map_description = 'Map to ' . $wrapper->title->value();
+        $static_map_description = t('Map to ') . $wrapper->title->value();
         $static_map = theme('image', array(
           'path' => $static_map_url,
-          'alt' => t($static_map_description),
-          'title' => t($static_map_description),
+          'alt' => $static_map_description,
+          'title' => $static_map_description,
         ));
         $static_map = l($static_map, $map_url, array('html' => TRUE, 'attributes' => array('target' => '_blank')));
       }
@@ -323,4 +323,37 @@ function cluster_events_format_list($nids) {
     }
   }
   return $events;
+}
+
+/**
+ * Implements hook_preprocess_node().
+ */
+function cluster_events_preprocess_node(&$variables) {
+  if ($variables['type'] == 'event') {
+    $variables['static_map'] = FALSE;
+    $variables['map_link'] = FALSE;
+    try {
+      $wrapper = entity_metadata_wrapper('node', $variables['node']);
+      $geo = $wrapper->field_coordinates->value();
+      // Static map image.
+      if (!empty($geo)) {
+        $static_map_url = 'http://maps.googleapis.com/maps/api/staticmap?center=' . $geo['lat'] . ',' . $geo['lon'] . '&zoom=15&scale=1&size=300x200&maptype=roadmap&format=png&visual_refresh=true&markers=size:small|color:0x000000|label:1|' . $geo['lat'] . ',' . $geo['lon'];
+        $static_map_description = t('Map to ') . $wrapper->title->value();
+        $variables['static_map'] = theme('image', array(
+          'path' => $static_map_url,
+          'alt' => $static_map_description,
+          'title' => $static_map_description,
+        ));
+        // Link to the map.
+        $variables['map_link'] = l(t('map'), 'https://www.google.ca/maps/place/' . $geo['lat'] . ',' . $geo['lon'] . '/@' . $geo['lat'] . ',' . $geo['lon'] . ',15z', array(
+          'attributes' => array(
+            'target' => '_blank',
+          ),
+        ));
+      }
+    }
+    catch (EntityMetadataWrapperException $exception) {
+      _log_entity_metadata_wrapper_error($exception, 'cluster_events');
+    }
+  }
 }
