@@ -86,9 +86,7 @@ function cluster_workflow_user_default_permissions() {
   // Exported permission: 'create document content'.
   $permissions['create document content'] = array(
     'name' => 'create document content',
-    'roles' => array(
-      'authenticated user' => 'authenticated user',
-    ),
+    'roles' => array(),
     'module' => 'node',
   );
 
@@ -158,9 +156,7 @@ function cluster_workflow_user_default_permissions() {
   // Exported permission: 'delete own document content'.
   $permissions['delete own document content'] = array(
     'name' => 'delete own document content',
-    'roles' => array(
-      'authenticated user' => 'authenticated user',
-    ),
+    'roles' => array(),
     'module' => 'node',
   );
 
@@ -230,9 +226,7 @@ function cluster_workflow_user_default_permissions() {
   // Exported permission: 'edit own document content'.
   $permissions['edit own document content'] = array(
     'name' => 'edit own document content',
-    'roles' => array(
-      'authenticated user' => 'authenticated user',
-    ),
+    'roles' => array(),
     'module' => 'node',
   );
 
