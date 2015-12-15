@@ -76,7 +76,7 @@ function cluster_events_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 6,
+        'weight' => 7,
       ),
     ),
     'entity_type' => 'node',
@@ -120,7 +120,7 @@ function cluster_events_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 5,
+        'weight' => 6,
       ),
     ),
     'entity_type' => 'node',
@@ -158,7 +158,7 @@ function cluster_events_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 2,
+        'weight' => 4,
       ),
     ),
     'entity_type' => 'node',
@@ -214,7 +214,7 @@ function cluster_events_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 3,
+        'weight' => 5,
       ),
     ),
     'entity_type' => 'node',
@@ -238,62 +238,6 @@ function cluster_events_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-event-field_event_date'
-  $field_instances['node-event-field_event_date'] = array(
-    'bundle' => 'event',
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'date',
-        'settings' => array(
-          'format_type' => 'long',
-          'fromto' => 'both',
-          'multiple_from' => '',
-          'multiple_number' => '',
-          'multiple_to' => '',
-          'show_repeat_rule' => 'show',
-        ),
-        'type' => 'date_default',
-        'weight' => 2,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 11,
-      ),
-    ),
-    'entity_type' => 'node',
-    'field_name' => 'field_event_date',
-    'label' => 'Event Date (OLD)',
-    'required' => 0,
-    'settings' => array(
-      'default_value' => 'now',
-      'default_value2' => 'same',
-      'default_value_code' => '',
-      'default_value_code2' => '',
-      'entity_translation_sync' => FALSE,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'date',
-      'settings' => array(
-        'increment' => 15,
-        'input_format' => 'm/d/Y - H:i:s',
-        'input_format_custom' => '',
-        'label_position' => 'above',
-        'repeat_collapsed' => 0,
-        'text_parts' => array(),
-        'year_range' => '-3:+3',
-      ),
-      'type' => 'date_text',
-      'weight' => 1,
-    ),
-  );
-
   // Exported field_instance: 'node-event-field_event_files'
   $field_instances['node-event-field_event_files'] = array(
     'bundle' => 'event',
@@ -311,7 +255,7 @@ function cluster_events_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 7,
+        'weight' => 8,
       ),
     ),
     'entity_type' => 'node',
@@ -427,10 +371,18 @@ function cluster_events_field_default_field_instances() {
         'weight' => 3,
       ),
       'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 4,
+        'label' => 'hidden',
+        'module' => 'date',
+        'settings' => array(
+          'format_type' => 'event_list',
+          'fromto' => 'both',
+          'multiple_from' => '',
+          'multiple_number' => '',
+          'multiple_to' => '',
+          'show_repeat_rule' => 'hide',
+        ),
+        'type' => 'date_default',
+        'weight' => 2,
       ),
     ),
     'entity_type' => 'node',
@@ -480,7 +432,7 @@ function cluster_events_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 8,
+        'weight' => 9,
       ),
     ),
     'entity_type' => 'node',
@@ -539,7 +491,7 @@ function cluster_events_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 9,
+        'weight' => 10,
       ),
     ),
     'entity_type' => 'node',
@@ -574,7 +526,6 @@ function cluster_events_field_default_field_instances() {
   t('Contacts to reach for this event.');
   t('Coordinates');
   t('Event Date');
-  t('Event Date (OLD)');
   t('Files');
   t('Groups audience');
   t('Master UUID (do not change)');

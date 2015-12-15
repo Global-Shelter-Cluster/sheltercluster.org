@@ -475,13 +475,6 @@ function cluster_user_user_default_permissions() {
     'module' => 'node',
   );
 
-  // Exported permission: 'create field_featured'.
-  $permissions['create field_featured'] = array(
-    'name' => 'create field_featured',
-    'roles' => array(),
-    'module' => 'field_permissions',
-  );
-
   // Exported permission: 'create library content'.
   $permissions['create library content'] = array(
     'name' => 'create library content',
@@ -795,13 +788,6 @@ function cluster_user_user_default_permissions() {
     'module' => 'node',
   );
 
-  // Exported permission: 'edit field_featured'.
-  $permissions['edit field_featured'] = array(
-    'name' => 'edit field_featured',
-    'roles' => array(),
-    'module' => 'field_permissions',
-  );
-
   // Exported permission: 'edit own arbitrary_library content'.
   $permissions['edit own arbitrary_library content'] = array(
     'name' => 'edit own arbitrary_library content',
@@ -836,13 +822,6 @@ function cluster_user_user_default_permissions() {
       'administrator' => 'administrator',
     ),
     'module' => 'node',
-  );
-
-  // Exported permission: 'edit own field_featured'.
-  $permissions['edit own field_featured'] = array(
-    'name' => 'edit own field_featured',
-    'roles' => array(),
-    'module' => 'field_permissions',
   );
 
   // Exported permission: 'edit own library content'.
@@ -1218,33 +1197,9 @@ function cluster_user_user_default_permissions() {
     'name' => 'use text format filtered_html',
     'roles' => array(
       'administrator' => 'administrator',
-      'anonymous user' => 'anonymous user',
-      'authenticated user' => 'authenticated user',
+      'editor' => 'editor',
     ),
     'module' => 'filter',
-  );
-
-  // Exported permission: 'use text format full_html'.
-  $permissions['use text format full_html'] = array(
-    'name' => 'use text format full_html',
-    'roles' => array(
-      'administrator' => 'administrator',
-    ),
-    'module' => 'filter',
-  );
-
-  // Exported permission: 'view field_featured'.
-  $permissions['view field_featured'] = array(
-    'name' => 'view field_featured',
-    'roles' => array(),
-    'module' => 'field_permissions',
-  );
-
-  // Exported permission: 'view own field_featured'.
-  $permissions['view own field_featured'] = array(
-    'name' => 'view own field_featured',
-    'roles' => array(),
-    'module' => 'field_permissions',
   );
 
   // Exported permission: 'view own unpublished content'.
