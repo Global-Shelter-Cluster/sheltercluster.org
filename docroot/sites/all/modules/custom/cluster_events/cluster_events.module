@@ -187,19 +187,8 @@ function cluster_events_format_upcoming($nid) {
   try {
     $wrapper = entity_metadata_wrapper('node', $node);
 
-    $value = $wrapper->field_recurring_event_date->value();
-    $from = $value[0];
-    // $to   = strtotime($value['value2']);
-    $format      = 'M. j' . '\<\s\u\p\>' . 'S' . '\<\/\s\u\p\>' . ' Y';
-    // $format_from = 'M. j' . '\<\s\u\p\>' . 'S' . '\<\/\s\u\p\>';
-    // $format_to   = 'M. j' . '\<\s\u\p\>' . 'S' . '\<\/\s\u\p\>' . ' Y';
-    // if ($to > $from) {
-    //   $date = date($format_from, $from);
-    //   $date .= ' to ' . date($format_to, $to);
-    // }
-    // else {
-      $date = date($format, $from);
-    // }
+    // Render the date as per the teaser field display setting.
+    $date = field_view_field('node', $node, 'field_recurring_event_date', 'teaser');
 
     $geo = $wrapper->field_coordinates->value();
     $map_link = l(t('map'), 'https://www.google.ca/maps/place/' . $geo['lat'] . ',' . $geo['lon'] . '/@' . $geo['lat'] . ',' . $geo['lon'] . ',15z', array(
@@ -271,18 +260,9 @@ function cluster_events_format_list($nids) {
       $current_date = time();
       $is_future = $event_date > $current_date ? TRUE : FALSE;
       $is_past = !$is_future;
-      $from = $event_date;
-      // $to   = strtotime($value['value2']);
-      $format      = 'M. j' . '\<\s\u\p\>' . 'S' . '\<\/\s\u\p\>' . ' Y';
-      // $format_from = 'M. j' . '\<\s\u\p\>' . 'S' . '\<\/\s\u\p\>';
-      // $format_to   = 'M. j' . '\<\s\u\p\>' . 'S' . '\<\/\s\u\p\>' . ' Y';
-      // if ($to > $from) {
-      //   $date = date($format_from, $from);
-      //   $date .= ' to ' . date($format_to, $to);
-      // }
-      // else {
-        $date = date($format, $from);
-      // }
+
+      // Render the date as per the teaser field display setting.
+      $date = field_view_field('node', $node, 'field_recurring_event_date', 'teaser');
 
       $geo = $wrapper->field_coordinates->value();
       $map_url = 'https://www.google.ca/maps/place/' . $geo['lat'] . ',' . $geo['lon'] . '/@' . $geo['lat'] . ',' . $geo['lon'] . ',15z';

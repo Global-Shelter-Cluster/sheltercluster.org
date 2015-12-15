@@ -20,7 +20,7 @@
 
         <div class="information-item event-date">
           <span class="label"><?php print t('Event date: '); ?></span>
-          <span><?php print $event['date']; ?></span>
+          <span><?php print render($event['date']); ?></span>
         </div>
 
         <?php if($event['location']): ?>
