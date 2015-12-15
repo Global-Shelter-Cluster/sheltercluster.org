@@ -1,7 +1,11 @@
 <?php
+/**
+ * @file
+ * Pathauto implementation.
+ */
 
 /**
- *  Implements hook_pathauto().
+ * Implements hook_pathauto().
  */
 function cluster_rss_pathauto($op) {
   $settings = new stdClass();
@@ -10,7 +14,7 @@ function cluster_rss_pathauto($op) {
   $settings->patterndescr = t('Default path pattern');
   $settings->patterndefault = '[node:content-type]/[node:title]/rss';
   $settings->token_type = 'node';
-  $settings->patternitems = array('rss' => 'Group rss links page');
+  $settings->patternitems = array('clusterrss' => 'Group rss links page');
   $settings->batch_update_callback = 'cluster_rss_pathauto_bulkupdate';
   return $settings;
 }
@@ -20,12 +24,11 @@ function cluster_rss_pathauto($op) {
  */
 function cluster_rss_create_alias($node, $op) {
   module_load_include('inc', 'pathauto');
-  //dpm($node);
-  pathauto_create_alias('cluster_rss', $op, 'node/'.$node->nid.'/rss', array('node' => $node), 'rss');
+  pathauto_create_alias('cluster_rss', $op, 'node/' . $node->nid . '/rss', array('node' => $node), 'clusterrss');
 }
 
 /**
- *  Implements hook_node_insert().
+ * Implements hook_node_insert().
  */
 function cluster_rss_node_insert($node) {
   if (og_is_group('node', $node)) {
@@ -34,7 +37,7 @@ function cluster_rss_node_insert($node) {
 }
 
 /**
- *  Implements hook_node_update().
+ * Implements hook_node_update().
  */
 function cluster_rss_node_update($node) {
   if (og_is_group('node', $node)) {

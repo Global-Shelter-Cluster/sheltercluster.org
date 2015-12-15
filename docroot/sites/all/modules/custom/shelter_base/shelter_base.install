@@ -17,6 +17,7 @@ function shelter_base_install() {
   shelter_base_update_7003();
   // Set default patterns for RSS.
   shelter_base_update_7112();
+  shelter_base_update_7121();
 }
 
 function _shelter_base_module_enable_all() {
@@ -1191,21 +1192,13 @@ function shelter_base_update_7117() {
 /**
  * Revert cluster events.
  */
-function shelter_base_update_7118() {
-  features_revert_module('cluster_events');
-}
-
-/**
- * Revert cluster events.
- */
-function shelter_base_update_7119() {
-  features_revert_module('cluster_events');
-}
-
-/**
- * Revert cluster events.
- */
 function shelter_base_update_7120() {
   features_revert_module('cluster_events');
 }
 
+/**
+ * Setting RSS pattern.
+ */
+function shelter_base_update_7121() {
+  variable_set('pathauto_cluster_rss_clusterrss_pattern', '[node:content-type]/[node:title]/rss');
+}
