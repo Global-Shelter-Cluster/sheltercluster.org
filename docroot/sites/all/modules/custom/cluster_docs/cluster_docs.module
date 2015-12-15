@@ -49,7 +49,7 @@ function _cluster_docs_title_callback($nid) {
     // @TODO manage multilingual loading of entities.
     $wrapper = entity_metadata_wrapper('node', node_load($nid));
     return $wrapper->label() . ' - ' . $title;
-  }
+  } 
   catch (EntityMetadataWrapperException $exc) {
     watchdog(
       'cluster_docs',
@@ -68,13 +68,12 @@ function _cluster_docs_title_callback($nid) {
  */
 function cluster_docs_recent() {
   $query = new EntityFieldQuery();
-  $results = $query->entityCondition('entity_type', 'node')
+  $query->entityCondition('entity_type', 'node')
     ->entityCondition('bundle', 'document')
     ->propertyCondition('status', NODE_PUBLISHED)
     ->propertyOrderBy('created', 'value', 'DESC')
-    ->range(0, 5)
-    ->execute();
-
+    ->range(0, 5);
+  $results = $query->execute();
   if (!isset($results['node'])) {
     return FALSE;
   }
@@ -623,6 +622,9 @@ function cluster_docs_prepare_row_data($nids, $is_global_search = FALSE) {
 
       // Set the publication date.
       $doc['publication_date'] = format_date($node->created, 'custom', 'Y/m/d');
+
+      // Set the group referencing this
+      $doc['group_references'] = $wrapper->og_group_ref->value();
 
       $docs[] = $doc;
 

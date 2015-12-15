@@ -244,7 +244,7 @@ class GroupContentManager {
    *  @return
    *    Document node ids for group or FALSE if none exist.
    */
-  public function getRecentDocuments($range = 6) {
+  public function getRecentDocuments($range = 6, $even = TRUE) {
     $query = new EntityFieldQuery();
     $res = $query->entityCondition('entity_type', 'node')
       ->entityCondition('bundle', 'document')
@@ -259,13 +259,14 @@ class GroupContentManager {
     }
 
     // Insure an even number of recent documents.
-    if ((count($res['node']) % 2) == 1) {
-      array_pop($res['node']);
-      if (count($res['node']) == 0) {
-        return FALSE;
+    if ($even) {
+      if ((count($res['node']) % 2) == 1) {
+        array_pop($res['node']);
+        if (count($res['node']) == 0) {
+          return FALSE;
+        }
       }
     }
-
     return array_keys($res['node']);
   }
 

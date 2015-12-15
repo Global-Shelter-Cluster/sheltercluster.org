@@ -50,6 +50,13 @@
       <?php print render($content['upcoming_events']); ?>
     <?php endif; ?>
 
+    <?php if ($content['recent_documents']): ?>
+      <h3 data-collapsible="recent-documents">Recent Documents</h3>
+      <section id="recent-documents">
+        <?php print render($content['recent_documents']); ?>
+      </section>
+    <?php endif; ?>
+    
     <?php if ($content['featured_documents']): ?>
       <h3 data-collapsible="featured-documents">Featured Documents</h3>
       <section id="featured-documents">
@@ -77,13 +84,6 @@
       </h3>
       <section id="key-information">
         <?php print render($content['key_documents']); ?>
-      </section>
-    <?php endif; ?>
-
-    <?php if ($content['recent_documents']): ?>
-      <h3 data-collapsible="recent-documents">Recent Documents</h3>
-      <section id="recent-documents">
-        <?php print render($content['recent_documents']); ?>
       </section>
     <?php endif; ?>
 

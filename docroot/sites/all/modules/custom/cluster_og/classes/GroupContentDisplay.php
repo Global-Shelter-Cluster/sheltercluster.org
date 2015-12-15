@@ -361,15 +361,20 @@ class GroupFullDisplayProvider extends GroupDisplayProvider {
    *  Render array of recent documents.
    */
   public function getRecentDocuments() {
-    if ($nids = $this->manager->getRecentDocuments()) {
-      return array(
-        '#theme' => 'cluster_docs_cards_list',
-        '#docs' => cluster_docs_prepare_card_data($nids),
+    if ($nids = $this->manager->getRecentDocuments(5, FALSE)) {
+      return theme('cluster_og_recent_documents', array(
+        'docs' => cluster_docs_prepare_row_data($nids),
+        'all_documents_link' => '/search-documents',
+      ));
+      // Changed to match the frontpage recent documents.
+      /*return array(
+        '#theme' => 'cluster_og_recent_documents',
+        '#docs' => cluster_docs_prepare_row_data($nids),
         '#all_documents_link' => array(
           '#theme' => 'cluster_docs_all_docs_link',
           '#path' => 'node/' . $this->node->nid . '/documents',
         ),
-      );
+      );*/
     }
     return FALSE;
   }
