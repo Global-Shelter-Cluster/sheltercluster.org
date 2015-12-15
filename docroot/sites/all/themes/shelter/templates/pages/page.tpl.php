@@ -71,7 +71,7 @@
   </header>
 
   <?php if ($is_front): ?>
-    <?php print partial('homepage', array('page' => $page, 'hot_responses' => $hot_responses, 'upcoming_events' => $upcoming_events)); ?>
+    <?php print partial('homepage', array('page' => $page, 'hot_responses' => $hot_responses, 'upcoming_events' => $upcoming_events, 'recent_documents' => $recent_documents)); ?>
 
   <?php elseif ($global_events_page): ?>
     <?php print partial('homepage', array('page' => $page, 'hot_responses' => $hot_responses, 'upcoming_events' => FALSE)); ?>

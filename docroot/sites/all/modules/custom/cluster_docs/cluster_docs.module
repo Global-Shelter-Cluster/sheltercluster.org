@@ -62,6 +62,32 @@ function _cluster_docs_title_callback($nid) {
 }
 
 /**
+ * Return the 5 most recent documents.
+ *
+ * @return [type] [description]
+ */
+function cluster_docs_recent() {
+  $query = new EntityFieldQuery();
+  $results = $query->entityCondition('entity_type', 'node')
+    ->entityCondition('bundle', 'document')
+    ->propertyCondition('status', NODE_PUBLISHED)
+    ->propertyOrderBy('created', 'value', 'DESC')
+    ->range(0, 5)
+    ->execute();
+
+  if (!isset($results['node'])) {
+    return FALSE;
+  }
+  $nids = array_keys($results['node']);
+  $docs = cluster_docs_prepare_row_data($nids);
+
+  return theme('cluster_og_recent_documents', array(
+    'docs' => $docs,
+    'all_documents_link' => '/search-documents',
+  ));
+}
+
+/**
  * Page callback, shows a group's documents using Search API.
  * @param $nid
  * @return Render array
@@ -697,6 +723,10 @@ function cluster_docs_theme() {
         'class' => 'browse-all-documents',
       ),
       'file' => 'theme/cluster_docs.theme.inc',
+    ),
+    'cluster_docs_recent' => array(
+      'file' => 'theme/cluster_docs.theme.inc',
+      'render element' => 'element',
     ),
     'cluster_docs_facet' => array(
       'variables' => array(
