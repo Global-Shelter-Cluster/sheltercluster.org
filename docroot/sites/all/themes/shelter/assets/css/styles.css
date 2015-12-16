@@ -2027,6 +2027,9 @@ header #search-block-form {
   color: #688394;
 }
 
+.node-event a {
+  color: #031957;
+}
 .node-event .field-items {
   margin-bottom: 16px;
   margin-bottom: 1rem;

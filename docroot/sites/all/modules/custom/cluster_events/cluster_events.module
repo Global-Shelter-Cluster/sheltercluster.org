@@ -161,26 +161,8 @@ function cluster_events_format_upcoming($nid) {
     ));
 
     // Get contact(s).
-    $contact = $wrapper->field_event_contact->value();
-
-    $contact_name = '';
-    $contact_email = '';
-    $last_group = count($contact) - 1;
-    // Get all the contacts and email address.
-    foreach ($contact as $index => $value) {
-      $separator = ", ";
-      if ($index == $last_group) {
-        $separator = '';
-      }
-      $contacts = $value->title;
-      $contact_email = $value->field_email['und']['0']['email'];
-
-      $contact_link = '';
-      $options = array();
-      $contact_link = l(t($contacts), 'mailto:' . $contact_email, $options, array('attributes' => array('class' => array('contact-link'))));
-
-      $contact_name .= $contact_link . $separator;
-    }
+    $contacts = $wrapper->field_event_contact->value();
+    $contact_list = cluster_events_get_contact_list($contacts);
 
     $static_map = FALSE;
     if (!empty($geo)) {
@@ -200,7 +182,7 @@ function cluster_events_format_upcoming($nid) {
       'location' => field_view_field('node', $node, 'field_postal_address', 'teaser'),
       'map_link' => $map_link,
       'static_map' => FALSE,
-      'contact' => $contact_name,
+      'contact' => $contact_list,
     );
   }
   catch (EntityMetadataWrapperException $exception) {
@@ -236,26 +218,8 @@ function cluster_events_format_list($nids) {
       ));
 
       // Get contact(s).
-      $contact = $wrapper->field_event_contact->value();
-
-      $contact_name = '';
-      $contact_email = '';
-      $last_group = count($contact) - 1;
-      // Get all the contacts and email address.
-      foreach ($contact as $index => $value) {
-        $separator = ", ";
-        if ($index == $last_group) {
-          $separator = '';
-        }
-        $contacts = $value->title;
-        $contact_email = $value->field_email['und']['0']['email'];
-
-        $contact_link = '';
-        $options = array();
-        $contact_link = l(t($contacts), 'mailto:' . $contact_email, $options, array('attributes' => array('class' => array('contact-link'))));
-
-        $contact_name .= $contact_link . $separator;
-      }
+      $contacts = $wrapper->field_event_contact->value();
+      $contact_list = cluster_events_get_contact_list($contacts);
 
       $static_map = cluster_events_create_map_with_link($geo, $wrapper->title->value());
 
@@ -268,7 +232,7 @@ function cluster_events_format_list($nids) {
         'location' => field_view_field('node', $node, 'field_postal_address', 'teaser'),
         'map_link' => $map_link,
         'static_map' => $static_map,
-        'contact' => $contact_name,
+        'contact' => $contact_list,
         'description' => field_view_field('node', $node, 'body', 'teaser'),
       );
     }
@@ -289,6 +253,20 @@ function cluster_events_preprocess_node(&$variables) {
     try {
       $wrapper = entity_metadata_wrapper('node', $variables['node']);
       $geo = $wrapper->field_coordinates->value();
+
+      // Get contact(s).
+      $contacts = $wrapper->field_event_contact->value();
+      $contact_list = cluster_events_get_contact_list($contacts);
+
+      // Replace the field with our custom contact list.
+      if ($contact_list) {
+        $variables['content']['field_event_contact'] = array(
+          '#weight' => 2,
+          '#markup' => $contact_list,
+          '#prefix' => '<div class="field"><div class="field-label">Contact:&nbsp;</div>',
+          '#suffix' => '</div></div>'
+        );
+      }
 
       // Static map image.
       $variables['static_map'] = cluster_events_create_map_with_link($geo, $wrapper->title->value());
@@ -316,4 +294,32 @@ function cluster_events_create_map_with_link($geo = NULL, $map_title = '') {
     $static_map = l($static_map, $map_url, array('html' => TRUE, 'attributes' => array('target' => '_blank')));
   }
   return $static_map;
+}
+
+/**
+ * Returns a list of contact links.
+ */
+function cluster_events_get_contact_list($contacts = FALSE) {
+  $contact_list = FALSE;
+
+  if (!empty($contacts)) {
+    $contact_email = '';
+    $last_contact = count($contacts) - 1;
+    // Get all the contacts and email address.
+    foreach ($contacts as $index => $contact) {
+      $separator = ", ";
+      if ($index == $last_contact) {
+        $separator = '';
+      }
+      $contact_name = $contact->title;
+      $contact_email = $contact->field_email['und']['0']['email'];
+
+      $contact_link = '';
+      $options = array();
+      $contact_link = l(t($contact_name), 'mailto:' . $contact_email, $options, array('attributes' => array('class' => array('contact-link'))));
+
+      $contact_list .= $contact_link . $separator;
+    }
+  }
+  return $contact_list;
 }

@@ -23,7 +23,4 @@
   <?php if ($static_map): ?>
     <?php print $static_map; ?>
   <?php endif; ?>
-  <?php if ($map_link): ?>
-    <?php print $map_link; ?>
-  <?php endif; ?>
 </div>

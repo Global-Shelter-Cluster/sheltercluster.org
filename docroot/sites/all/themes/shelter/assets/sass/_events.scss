@@ -10,6 +10,9 @@
 }
 
 .node-event {
+  a {
+    color: #031957;
+  }
   .field-items {
     @include rem(margin-bottom, 1rem);
   }
