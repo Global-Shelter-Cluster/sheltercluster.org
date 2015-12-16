@@ -40,21 +40,3 @@ function theme_cluster_docs_facet($variables) {
   $output .= '</div>';
   return $output;
 }
-
-/**
- * Render a list of upcoming events.
- * $vars['element']['#total']: the number of events shown.
- * $vars['element']['#children']: markup for all events shown.
- * $vars['element'][NID]: each event render array and markup.
- */
-function theme_cluster_docs_recent($vars) {
-  $output = '<section id="shelter-documents">';
-  $output .= '<div id="recents">';
-  $output .= '<div id="latest-documents">' . t('Latest documents') . '</div>';
-  $output .= '<div class="information-card">';
-  $output .= $vars['element']['#children'];
-  $output .= '</div>';
-  $output .= '</div>';
-  $output .= '</section>';
-  return $output;
-}

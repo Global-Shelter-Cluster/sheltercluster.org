@@ -1,9 +1,15 @@
 /* _calendar.scss */
 #shelter-calendar {
-  width: 50%;
+  float: none;
+  width: 100%;
   @include rem(margin, 2.5rem 0 2rem 0);
   @include box-shadow(rgba(0,0,0,0.33) 0px 3px 10px);
   @include border-radius(5px);
+
+  @include breakpoint(980px) {
+    float: left;
+    width: 49%;
+  }
 }
 
 .addressfield-container-inline {
@@ -17,15 +23,18 @@
   width: 100%;
   background-color: #eee;
   color: #000;
-  @include rem(margin, 0 0 0.5rem 0);
   @include border-radius(0.1875rem);
+
+  a {
+    color: #031957;
+  }
 
   .event-card {
     @include rem(padding, 0 0 0.25rem 0);
     @include rem(line-height, 1rem);
     border-bottom: 1px solid #ddd;
     padding-top: 7px;
-    margin-bottom: 15px;
+    margin-bottom: 9px;
 
     .event-title {
       background: #ddd;
@@ -149,12 +158,14 @@
     }
   }
   .past-event-card {
-    opacity: 0.7;
+    opacity: 0.5;
+    background: #fcfcfc;
+
     &:hover {
       opacity: 1;
     }
     .event-title {
-      background: #444;
+      background: #999;
     }
   }
 }

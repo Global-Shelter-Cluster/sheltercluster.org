@@ -22,12 +22,14 @@
   </div>
 
   <div class="main-column clearfix">
-    <?php if($upcoming_events): ?>
-      <?php print render($upcoming_events); ?>
-    <?php endif; ?>
-    <?php if($recent_documents): ?>
-      <?php print render($recent_documents); ?>
-    <?php endif; ?>
+    <div class="clearfix">
+      <?php if($upcoming_events): ?>
+        <?php print render($upcoming_events); ?>
+      <?php endif; ?>
+      <?php if($recent_documents): ?>
+        <?php print render($recent_documents); ?>
+      <?php endif; ?>
+    </div>
     <div class="wysiwyg">
       <?php print render($page['content']); ?>
     </div>

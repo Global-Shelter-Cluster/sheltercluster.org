@@ -1009,6 +1009,18 @@ header .search-documents-link-wrapper {
   font-weight: normal;
 }
 
+#shelter-documents {
+  width: 100%;
+  float: none;
+  padding-top: 39px;
+}
+@media (min-width: 980px) {
+  #shelter-documents {
+    width: 49%;
+    float: right;
+  }
+}
+
 .document-table {
   border-collapse: collapse;
   border-spacing: 0;
@@ -1130,6 +1142,22 @@ header .search-documents-link-wrapper {
   .document-table .publication-date span {
     text-align: left;
   }
+}
+.document-table .recent-document-date {
+  color: #688394;
+  font-size: 13.6px;
+  font-size: 0.85rem;
+  float: right;
+}
+
+.all-documents {
+  text-align: center;
+  font-size: 13.6px;
+  font-size: 0.85rem;
+  padding: 0 0 22px;
+}
+.all-documents a {
+  color: #000;
 }
 
 /* _header.scss */
@@ -2113,7 +2141,8 @@ header #search-block-form {
 
 /* _calendar.scss */
 #shelter-calendar {
-  width: 50%;
+  float: none;
+  width: 100%;
   margin: 40px 0 32px 0;
   margin: 2.5rem 0 2rem 0;
   -moz-box-shadow: rgba(0, 0, 0, 0.33) 0px 3px 10px;
@@ -2122,6 +2151,12 @@ header #search-block-form {
   -moz-border-radius: 5px;
   -webkit-border-radius: 5px;
   border-radius: 5px;
+}
+@media (min-width: 980px) {
+  #shelter-calendar {
+    float: left;
+    width: 49%;
+  }
 }
 
 .addressfield-container-inline span {
@@ -2134,11 +2169,13 @@ header #search-block-form {
   width: 100%;
   background-color: #eee;
   color: #000;
-  margin: 0 0 8px 0;
-  margin: 0 0 0.5rem 0;
   -moz-border-radius: 0.1875rem;
   -webkit-border-radius: 0.1875rem;
   border-radius: 0.1875rem;
+}
+#all-events a,
+#box-calendar a {
+  color: #031957;
 }
 #all-events .event-card,
 #box-calendar .event-card {
@@ -2148,7 +2185,7 @@ header #search-block-form {
   line-height: 1rem;
   border-bottom: 1px solid #ddd;
   padding-top: 7px;
-  margin-bottom: 15px;
+  margin-bottom: 9px;
 }
 #all-events .event-card .event-title,
 #box-calendar .event-card .event-title {
@@ -2289,13 +2326,14 @@ header #search-block-form {
   border: 1px solid #888;
 }
 #all-events .past-event-card {
-  opacity: 0.7;
+  opacity: 0.5;
+  background: #fcfcfc;
 }
 #all-events .past-event-card:hover {
   opacity: 1;
 }
 #all-events .past-event-card .event-title {
-  background: #444;
+  background: #999;
 }
 
 div.street-block,
@@ -2562,10 +2600,6 @@ div.addressfield-container-inline::after {
   .front .main-content {
     width: 60%;
   }
-}
-.front #shelter-calendar #box-calendar {
-  width: 100%;
-  margin: 0 auto;
 }
 .front #twitter-timeline {
   margin: 0 auto;

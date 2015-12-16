@@ -209,10 +209,20 @@ header {
   font-weight: normal;
 }
 
+#shelter-documents {
+  width: 100%;
+  float: none;
+  padding-top: 39px;
+
+  @include breakpoint(980px) {
+    width: 49%;
+    float: right;
+  }
+}
+
 .document-table {
   border-collapse: collapse;
   border-spacing: 0;
-  //border: 1px solid #bbb;
   width: 100%;
   @include rem(margin, 0 0 1.5rem 0);
   @include rem(font-size, 0.9rem);
@@ -318,5 +328,19 @@ header {
         text-align: left;
       }
     }
+  }
+  .recent-document-date {
+    color: #688394;
+    @include rem(font-size, 0.85rem);
+    float: right;
+  }
+}
+
+.all-documents {
+  text-align: center;
+  @include rem(font-size, 0.85rem);
+  padding: 0 0 22px;
+  a {
+    color: #000;
   }
 }
