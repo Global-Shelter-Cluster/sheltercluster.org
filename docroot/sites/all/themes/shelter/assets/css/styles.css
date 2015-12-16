@@ -2027,6 +2027,27 @@ header #search-block-form {
   color: #688394;
 }
 
+.node-event .field-items {
+  margin-bottom: 16px;
+  margin-bottom: 1rem;
+}
+.node-event .field-label {
+  text-transform: uppercase;
+  color: #888;
+  font-size: 11.2px;
+  font-size: 0.7rem;
+}
+.node-event .field-name-field-postal-address {
+  background: #ddd;
+  padding: 12px;
+  padding: 0.75rem;
+  margin-bottom: 16px;
+  margin-bottom: 1rem;
+}
+.node-event .field-name-field-postal-address .field-items {
+  margin: 0;
+}
+
 /* _coordination.scss */
 #shelter-coordination-team {
   margin: 0 0 32px 0;

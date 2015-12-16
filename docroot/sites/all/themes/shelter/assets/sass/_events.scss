@@ -8,3 +8,22 @@
     color: $shelter-dark-blue;
   }
 }
+
+.node-event {
+  .field-items {
+    @include rem(margin-bottom, 1rem);
+  }
+  .field-label {
+    text-transform: uppercase;
+    color: #888;
+    @include rem(font-size, 0.7rem);
+  }
+  .field-name-field-postal-address {
+    background: #ddd;
+    @include rem(padding, 0.75rem);
+    @include rem(margin-bottom, 1rem);
+    .field-items {
+      margin: 0;
+    }
+  }
+}
