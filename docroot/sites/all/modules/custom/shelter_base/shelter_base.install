@@ -1203,3 +1203,10 @@ function shelter_base_update_7122() {
   field_delete_field('field_event_date');
   features_revert_module('cluster_events');
 }
+
+/**
+ * Revert cluster_events.
+ */
+function shelter_base_update_7123() {
+  features_revert_module('cluster_events');
+}
