@@ -408,13 +408,11 @@ class GroupFullDisplayProvider extends GroupDisplayProvider {
         '#events' => $events
       );
     }
-    elseif ($this->manager->getEventCount()) {
-      return array(
-        '#theme' => 'cluster_og_no_upcoming_event',
-        '#all_events_link' => url('node/' . $this->node->nid . '/events'),
-      );
-    }
-    return array();
+
+    return array(
+      '#theme' => 'cluster_og_no_upcoming_event',
+      '#all_events_link' => url('node/' . $this->node->nid . '/events'),
+    );
   }
 
   /**

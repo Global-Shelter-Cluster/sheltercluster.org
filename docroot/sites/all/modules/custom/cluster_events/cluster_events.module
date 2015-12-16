@@ -113,43 +113,6 @@ function cluster_events_all($nid) {
   return $ret;
 }
 
-/**
- * Implements hook_theme().
- */
-function cluster_events_theme() {
-  return array(
-    'cluster_events_all' => array(
-      'file' => 'theme/cluster_events.theme.inc',
-      'render element' => 'element',
-    ),
-    'cluster_events_teaser' => array(
-      'file' => 'theme/cluster_events.theme.inc',
-      'render element' => 'element',
-    ),
-    'cluster_events_upcoming' => array(
-      'file' => 'theme/cluster_events.theme.inc',
-      'render element' => 'element',
-    ),
-  );
-}
-
-/**
- * Implements hook_node_view_alter().
- */
-function cluster_events_node_view_alter(&$build) {
-  if ($build['#node']->type != 'event') {
-    return;
-  }
-  switch ($build['#view_mode']) {
-    case 'teaser':
-      $build['#theme'] = 'cluster_events_teaser';
-
-      break;
-    default:
-      // Do nothing.
-  }
-}
-
 function cluster_events_upcoming() {
   $query = new EntityFieldQuery();
   $results = $query->entityCondition('entity_type', 'node')
