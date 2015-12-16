@@ -32,6 +32,7 @@
   .event-card {
     @include rem(padding, 0 0 0.25rem 0);
     @include rem(line-height, 1rem);
+    @include border-radius(7px);
     border-bottom: 1px solid #ddd;
     padding-top: 7px;
     margin-bottom: 9px;
@@ -137,13 +138,21 @@
       table-layout: fixed;
     }
     .event-information {
-      display: table-cell;
+      display: block;
       width: auto;
-      vertical-align: top;
+
+      @include breakpoint(640px) {
+        display: table-cell;
+        vertical-align: top;
+      }
     }
     .event-map {
-      display: table-cell;
-      width: 300px;
+      display: block;
+      width: 100%;
+      @include breakpoint(640px) {
+        display: table-cell;
+        width: 300px;
+      }
 
       div {
         width: 100%;
