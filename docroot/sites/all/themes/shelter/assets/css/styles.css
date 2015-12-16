@@ -2183,6 +2183,9 @@ header #search-block-form {
   padding: 0 0 0.25rem 0;
   line-height: 16px;
   line-height: 1rem;
+  -moz-border-radius: 7px;
+  -webkit-border-radius: 7px;
+  border-radius: 7px;
   border-bottom: 1px solid #ddd;
   padding-top: 7px;
   margin-bottom: 9px;
@@ -2308,13 +2311,24 @@ header #search-block-form {
   table-layout: fixed;
 }
 #all-events .future-event-card .event-information {
-  display: table-cell;
+  display: block;
   width: auto;
-  vertical-align: top;
+}
+@media (min-width: 640px) {
+  #all-events .future-event-card .event-information {
+    display: table-cell;
+    vertical-align: top;
+  }
 }
 #all-events .future-event-card .event-map {
-  display: table-cell;
-  width: 300px;
+  display: block;
+  width: 100%;
+}
+@media (min-width: 640px) {
+  #all-events .future-event-card .event-map {
+    display: table-cell;
+    width: 300px;
+  }
 }
 #all-events .future-event-card .event-map div {
   width: 100%;
