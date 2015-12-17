@@ -1017,7 +1017,7 @@ header .search-documents-link-wrapper {
 @media (min-width: 980px) {
   #shelter-documents {
     width: 49%;
-    float: right;
+    float: left;
   }
 }
 
@@ -2178,7 +2178,7 @@ header #search-block-form {
 }
 @media (min-width: 980px) {
   #shelter-calendar {
-    float: left;
+    float: right;
     width: 49%;
   }
 }

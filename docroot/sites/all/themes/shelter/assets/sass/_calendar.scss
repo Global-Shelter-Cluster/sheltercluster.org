@@ -7,7 +7,7 @@
   @include border-radius(5px);
 
   @include breakpoint(980px) {
-    float: left;
+    float: right;
     width: 49%;
   }
 }

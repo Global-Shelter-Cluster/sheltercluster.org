@@ -46,16 +46,6 @@
 
   <div class="main-column">
 
-    <div class="clearfix">
-      <?php if ($content['upcoming_events']): ?>
-        <?php print render($content['upcoming_events']); ?>
-      <?php endif; ?>
-
-      <?php if ($content['recent_documents']): ?>
-        <?php print render($content['recent_documents']); ?>
-      <?php endif; ?>
-    </div>
-
     <?php if ($content['featured_documents']): ?>
       <h3 data-collapsible="featured-documents">Featured Documents</h3>
       <section id="featured-documents">
@@ -75,6 +65,16 @@
         <?php print render($content['body']); ?>
       </section>
     <?php endif; ?>
+
+    <div class="clearfix">
+      <?php if ($content['recent_documents']): ?>
+        <?php print render($content['recent_documents']); ?>
+      <?php endif; ?>
+
+      <?php if ($content['upcoming_events']): ?>
+        <?php print render($content['upcoming_events']); ?>
+      <?php endif; ?>
+    </div>
 
     <?php if ($content['key_documents']['docs']): ?>
       <h3 data-collapsible="key-information">
