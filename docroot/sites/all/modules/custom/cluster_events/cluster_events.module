@@ -138,6 +138,11 @@ function cluster_events_upcoming() {
   return theme('cluster_og_upcoming_events', array(
     'events' => $events,
     'all_events_link' => '/events',
+    'global_events_link' => array(
+      '#type' => 'link',
+      '#href' => 'geographic-region/global/events',
+      '#title' => 'See Global Events',
+    ),
   ));
 }
 
