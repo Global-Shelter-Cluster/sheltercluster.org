@@ -1210,3 +1210,10 @@ function shelter_base_update_7122() {
 function shelter_base_update_7123() {
   features_revert_module('cluster_events');
 }
+
+/**
+ * Disable shelter_migrate.
+ */
+function shelter_base_update_7124() {
+  module_disable(array('shelter_migrate'));
+}

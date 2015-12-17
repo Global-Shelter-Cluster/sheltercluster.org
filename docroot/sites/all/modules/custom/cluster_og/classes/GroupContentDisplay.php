@@ -92,7 +92,10 @@ class GroupDisplayProvider {
 
     $items[] = array(
       'label' => t('Dashboard'),
-      'path' => 'node/'.$this->node->nid,
+      'path' => 'node/' . $this->node->nid,
+      'options' => array(
+        'html' => TRUE,
+      ),
     );
 
     if ($this->manager->isEnabled('documents')) {
@@ -100,6 +103,13 @@ class GroupDisplayProvider {
         'label' => t('Documents'),
         'path' => 'node/' . $this->node->nid . '/documents',
         'total' => $this->manager->getDocumentCount(),
+        'options' => array(
+          'html' => TRUE,
+          'query' => array(
+            'sort' => 'date',
+            'sort_direction' => 'DESC',
+          ),
+        ),
       );
     }
     if ($discussions_count = $this->manager->getDiscussionCount() > 0) {
@@ -108,6 +118,9 @@ class GroupDisplayProvider {
           'label' => t('Discussions'),
           'path' => 'node/' . $this->node->nid . '/discussions',
           'total' => $discussions_count,
+          'options' => array(
+            'html' => TRUE,
+          ),
         );
       }
     }
@@ -117,6 +130,9 @@ class GroupDisplayProvider {
           'label' => t('Events'),
           'path' => 'node/' . $this->node->nid . '/events',
           'total' => $events_count,
+          'options' => array(
+            'html' => TRUE,
+          ),
         );
       }
     }
@@ -125,6 +141,9 @@ class GroupDisplayProvider {
       $items[] = array(
         'label' => t('Strategic Advisory Group'),
         'path' => 'node/' . $strategic_advisory->nid,
+        'options' => array(
+          'html' => TRUE,
+        ),
       );
     }
 
@@ -362,19 +381,11 @@ class GroupFullDisplayProvider extends GroupDisplayProvider {
    */
   public function getRecentDocuments() {
     if ($nids = $this->manager->getRecentDocuments(5, FALSE)) {
+      $path = drupal_get_path_alias('node/' . $this->node->nid);
       return theme('cluster_og_recent_documents', array(
         'docs' => cluster_docs_prepare_row_data($nids),
-        'all_documents_link' => '/search-documents',
+        'all_documents_link' => url($path . '/documents'),
       ));
-      // Changed to match the frontpage recent documents.
-      /*return array(
-        '#theme' => 'cluster_og_recent_documents',
-        '#docs' => cluster_docs_prepare_row_data($nids),
-        '#all_documents_link' => array(
-          '#theme' => 'cluster_docs_all_docs_link',
-          '#path' => 'node/' . $this->node->nid . '/documents',
-        ),
-      );*/
     }
     return FALSE;
   }

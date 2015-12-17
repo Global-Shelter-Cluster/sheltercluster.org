@@ -55,10 +55,20 @@ function theme_cluster_og_upcoming_events($vars) {
 }
 
 function theme_cluster_og_recent_documents($vars) {
+  $link_attributes = array(
+    'attributes' => array(
+      'class' => array(
+        'see-all')
+      ),
+    'query' => array(
+        'sort' => 'date',
+        'sort_direction' => 'DESC',
+      ),
+    );
   return partial('recent_documents', array(
     'title' => t('Latest documents'),
     'docs' => $vars['docs'],
-    'all_documents_link' => l(t('All documents'), $vars['all_documents_link'], array('attributes' => array('class' => array('see-all'))))
+    'all_documents_link' => l(t('All documents'), $vars['all_documents_link'], $link_attributes)
   ));
 }
 
@@ -70,10 +80,20 @@ function theme_cluster_og_all_events($vars) {
 }
 
 function theme_cluster_og_no_upcoming_event($vars) {
+  $link_attributes = array(
+    'attributes' => array(
+      'class' => array(
+        'see-all')
+      ),
+    'query' => array(
+        'sort' => 'date',
+        'sort_direction' => 'DESC',
+      ),
+    );
   return partial('upcoming_events', array(
     'title' => t('No Upcoming Events'),
     'events' => $vars['events'],
-    'all_events_link' => l(t('All calendar event'), $vars['all_events_link'], array('attributes' => array('class' => array('see-all'))))
+    'all_events_link' => l(t('All calendar event'), $vars['all_events_link'], $link_attributes),
   ));
 }
 

@@ -95,8 +95,12 @@ function template_preprocess_cluster_nav_dashboard(&$variables) {
     if (isset($item['total'])) {
       $text .= ' <span class="total">(' . $item['total'] . ')</span>';
     }
-
-    $item = l($text, $item['path'], array('html' => TRUE));
+    $item['link'] = array(
+      '#type' => 'link',
+      '#title' => $text,
+      '#href' => $item['path'],
+      '#options' => $item['options'],
+    );
   }
 }
 
