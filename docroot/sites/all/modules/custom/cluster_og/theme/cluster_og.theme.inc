@@ -14,7 +14,6 @@
 function theme_cluster_og_contact_member($vars) {
   $output = '<h3 data-collapsible="coordination-items">' . t('Coordination Team') . '</h3>';
   $output .= '<div id="coordination-items">';
-  //$output .= '<h4>National Team</h4>';
   $output .= '<ul class="clearfix">';
   $output .= $vars['element']['#children'];
   $output .= '</ul>';
@@ -47,26 +46,57 @@ function theme_cluster_og_recent_discussions($vars) {
   return $output;
 }
 
-function theme_cluster_og_upcoming_event($vars) {
-  $output = '<section id="shelter-calendar">';
-  $output .= '<div id="box-calendar">';
-  $output .= _svg('icons/pin', array('id' => 'calendar-pin-icon', 'alt' => t('An icon representing a calendar with a pin on it.')));
-  $output .= '<div id="date-calendar">' . $vars['event_date'] . '</div>';
-  $output .= '<div class="information-card">';
-  $output .= l($vars['event_title'], $vars['event_link'], array(
-    'attributes' => array(
-      'class' => 'event',
-    ),
+function theme_cluster_og_upcoming_events($vars) {
+  return partial('upcoming_events', array(
+    'title' => t('Upcoming events'),
+    'events' => $vars['events'],
+    'all_events_link' => l(t('All calendar event'), $vars['all_events_link'], array('attributes' => array('class' => array('see-all')))),
+    'global_events_link' => $vars['global_events_link'],
   ));
-  $output .= '</div>';
-  $output .= '</div>';
-  $output .= l(t('All calendar events'), $vars['all_events_link'], array(
+}
+
+function theme_cluster_og_recent_documents($vars) {
+  $link_attributes = array(
     'attributes' => array(
-      'class' => 'see-all',
-    ),
+      'class' => array(
+        'see-all')
+      ),
+    'query' => array(
+        'sort' => 'date',
+        'sort_direction' => 'DESC',
+      ),
+    );
+  return partial('recent_documents', array(
+    'title' => t('Latest documents'),
+    'docs' => $vars['docs'],
+    'all_documents_link' => l(t('All documents'), $vars['all_documents_link'], $link_attributes)
   ));
-  $output .= '</section>';
-  return $output;
+}
+
+function theme_cluster_og_all_events($vars) {
+  return partial('all_events', array(
+    'title' => t('All events'),
+    'events' => $vars['events'],
+  ));
+}
+
+function theme_cluster_og_no_upcoming_event($vars) {
+  $link_attributes = array(
+    'attributes' => array(
+      'class' => array(
+        'see-all')
+      ),
+    'query' => array(
+        'sort' => 'date',
+        'sort_direction' => 'DESC',
+      ),
+    );
+  return partial('upcoming_events', array(
+    'title' => t('No Upcoming Events'),
+    'events' => $vars['events'],
+    'all_events_link' => l(t('All calendar event'), $vars['all_events_link'], $link_attributes),
+    'global_events_link' => FALSE,
+  ));
 }
 
 /**

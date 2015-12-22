@@ -62,6 +62,31 @@ function _cluster_docs_title_callback($nid) {
 }
 
 /**
+ * Return the 5 most recent documents.
+ *
+ * @return [type] [description]
+ */
+function cluster_docs_recent() {
+  $query = new EntityFieldQuery();
+  $query->entityCondition('entity_type', 'node')
+    ->entityCondition('bundle', 'document')
+    ->propertyCondition('status', NODE_PUBLISHED)
+    ->propertyOrderBy('created', 'value', 'DESC')
+    ->range(0, 5);
+  $results = $query->execute();
+  if (!isset($results['node'])) {
+    return FALSE;
+  }
+  $nids = array_keys($results['node']);
+  $docs = cluster_docs_prepare_row_data($nids, TRUE);
+
+  return theme('cluster_og_recent_documents', array(
+    'docs' => $docs,
+    'all_documents_link' => '/search-documents',
+  ));
+}
+
+/**
  * Page callback, shows a group's documents using Search API.
  * @param $nid
  * @return Render array
@@ -137,10 +162,10 @@ function cluster_docs_taxonomies() {
  * @param string|null $default_sort
  * @param string|null $default_sort_direction
  * @param array $excluded_facets
- * @param $is_global_search: indicates that the function is meant to show the global docs search page.
+ * @param $show_related_groups: indicates that the function is meant to show the global docs search page.
  * @return array
  */
-function cluster_docs_page($query, $show_facets = TRUE, $default_sort = NULL, $default_sort_direction = NULL, $excluded_facets = array(), $is_global_search = FALSE) {
+function cluster_docs_page($query, $show_facets = TRUE, $default_sort = NULL, $default_sort_direction = NULL, $excluded_facets = array(), $show_related_groups = FALSE) {
   // Figure out the sort column and direction from $_GET (store in $sort_key and $sort_direction).
   $sort_options = array(
     'title' => 'title_field',
@@ -158,16 +183,12 @@ function cluster_docs_page($query, $show_facets = TRUE, $default_sort = NULL, $d
 
   if ($sort_key) {
     $sort_field = $sort_options[$sort_key];
-
-    // Tell the actual query the sort criteria
     $query->sort($sort_field, $sort_direction);
   }
 
   // If there is no sort key by default make the search by date on the DESC order.
   if (!$sort_key) {
     $sort_field = $sort_options['date'];
-
-    // Tell the actual query the sort criteria
     $query->sort($sort_field, 'DESC');
   }
 
@@ -182,25 +203,25 @@ function cluster_docs_page($query, $show_facets = TRUE, $default_sort = NULL, $d
     }
 
     if ($sort_key == $key && $sort_direction == 'ASC') {
-      // Already sorting in ASC, next click turns it into DESC
+      // Already sorting in ASC, next click turns it into DESC.
       $params['sort_direction'] = 'DESC';
     }
     elseif ($sort_key == $key && $sort_direction == 'DESC') {
-      // Sorting in DESC, next click disables sorting altogether
+      // Sorting in DESC, next click disables sorting altogether.
       unset($params['sort']);
     }
 
     $sort_link_params[$key] = $params;
   }
 
-  // Pagination
+  // Pagination.
   $offset = pager_find_page() * CLUSTER_DOCS_PER_PAGE;
   $query->range($offset, CLUSTER_DOCS_PER_PAGE);
 
-  // Execute the actual query using Search API
+  // Execute the actual query using Search API.
   $results = $query->execute();
 
-  // This is necessary for the pager to work
+  // This is necessary for the pager to work.
   pager_default_initialize($results['result count'], CLUSTER_DOCS_PER_PAGE);
 
   // "Reset filters" link (shown in two places)
@@ -289,7 +310,7 @@ function cluster_docs_page($query, $show_facets = TRUE, $default_sort = NULL, $d
     array(
       '#theme' => 'cluster_docs_table_list',
       '#heading' => t('Documents') . ' (' . $results['result count'] . ')',
-      '#docs' => $result_nids ? cluster_docs_prepare_row_data($result_nids, $is_global_search) : FALSE,
+      '#docs' => $result_nids ? cluster_docs_prepare_row_data($result_nids, $show_related_groups) : FALSE,
       '#reset_link' => $reset_link ? render($reset_link) : NULL,
       '#sort_link_params' => $sort_link_params,
       '#sort_column' => $sort_key,
@@ -476,7 +497,7 @@ function cluster_docs_get_download_url($node) {
  * @return
  *  Array of document data ready to be used in cards lists.
  */
-function cluster_docs_prepare_row_data($nids, $is_global_search = FALSE) {
+function cluster_docs_prepare_row_data($nids, $show_related_groups = FALSE) {
   $docs = array();
   $properties = array('title', 'link', 'link_url', 'is_link', 'is_file', 'is_file_class', 'description', 'filesize',
     'file_extension', 'is_image', 'image_uri', 'has_preview', 'preview_uri', 'source',);
@@ -501,7 +522,7 @@ function cluster_docs_prepare_row_data($nids, $is_global_search = FALSE) {
 
       // Create group links.
       $doc['group'] = '';
-      if($is_global_search) {
+      if ($show_related_groups) {
         $doc['group'] = t('Part of ');
         $last_group = count($group_wrapper) - 1;
         // Get all the groups ids for a document.
@@ -597,6 +618,9 @@ function cluster_docs_prepare_row_data($nids, $is_global_search = FALSE) {
 
       // Set the publication date.
       $doc['publication_date'] = format_date($node->created, 'custom', 'Y/m/d');
+
+      // Set the group referencing this
+      $doc['group_references'] = $wrapper->og_group_ref->value();
 
       $docs[] = $doc;
 

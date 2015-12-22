@@ -17,6 +17,7 @@ function shelter_base_install() {
   shelter_base_update_7003();
   // Set default patterns for RSS.
   shelter_base_update_7112();
+  shelter_base_update_7121();
 }
 
 function _shelter_base_module_enable_all() {
@@ -55,6 +56,7 @@ function _shelter_base_required_contrib() {
     'search_api_db', 'search_api_facetapi', 'strongarm', 'title', 'token',
     'transliteration',  'underscore', 'url', 'variable',
     'views', 'views_ui', 'views_bulk_operations', 'wysiwyg',
+    'gmap', 'geophp', 'geocoder', 'geofield', 'addressfield_autocomplete',
   );
 }
 
@@ -850,6 +852,17 @@ function shelter_base_update_7091() {
  * Add field base field sorting weight and instances to the shelter base feature.
  */
 function shelter_base_update_7092() {
+  module_enable(array(
+    'gmap',
+    'geophp',
+    'geocoder',
+    'geofield',
+    'addressfield_autocomplete',
+    'date_repeat',
+    'date_repeat_entity',
+    'uuid',
+    'replicate',
+  ));
   features_revert_module('shelter_base');
 }
 
@@ -878,6 +891,8 @@ function shelter_base_update_7095() {
  * Add the help text to field bases.
  */
 function shelter_base_update_7096() {
+
+
   features_revert_module('shelter_base');
 }
 
@@ -919,8 +934,16 @@ function shelter_base_update_7101() {
 /**
  * Set field_sorting_weight to be a required field on all content types except
  * for documents, events and discussions.
+ * Enable geo fields required by future feature reverts.
  */
 function shelter_base_update_7102() {
+  module_enable(array(
+    'gmap',
+    'geophp',
+    'geocoder',
+    'geofield',
+    'addressfield_autocomplete',
+  ));
   features_revert_module('shelter_base');
 }
 
@@ -1010,6 +1033,13 @@ function shelter_base_update_7105() {
  * Revert cluster events feature to hide field sorting weight from display.
  */
 function shelter_base_update_7106() {
+  module_enable(array(
+    'gmap',
+    'geophp',
+    'geocoder',
+    'geofield',
+    'addressfield_autocomplete',
+  ));
   features_revert_module('cluster_events');
 }
 
@@ -1045,6 +1075,13 @@ function shelter_base_update_7110() {
  * Enabling cluster_rss.
  */
 function shelter_base_update_7111() {
+  module_enable(array(
+    'gmap',
+    'geophp',
+    'geocoder',
+    'geofield',
+    'addressfield_autocomplete',
+  ));
   module_enable(array('cluster_rss'));
 }
 
@@ -1057,3 +1094,126 @@ function shelter_base_update_7112() {
   variable_set('pathauto_cluster_events_rssevents_pattern', '[node:content-type]/[node:title]/rss/events');
 }
 
+/**
+ * Revert cluster events to add contact field.
+ */
+function shelter_base_update_7113() {
+  module_enable(array(
+    'gmap',
+    'geophp',
+    'geocoder',
+    'geofield',
+    'addressfield_autocomplete',
+  ));
+  features_revert_module('cluster_events');
+}
+
+/**
+ * Do nothing.
+ */
+function shelter_base_update_7114() {
+  // Do nothing.
+}
+
+/**
+ * Revert event module to make date field unique value.
+ */
+function shelter_base_update_7115() {
+  features_revert_module('cluster_events');
+}
+
+/**
+ * Load and save all group nodes to update path aliases.
+ */
+function shelter_base_update_7116(&$sandbox) {
+  $type = array('hub', 'response', 'community_of_practice', 'geographic_region', 'response', 'strategic_advisory', 'working_group');
+   // If this is the first pass through this update function then set some variables.
+  if (!isset($sandbox['total'])) {
+    $result = db_query('SELECT nid FROM {node} WHERE type IN (:type)', array(':type' => $type));
+    $sandbox['total'] = $result->rowCount();
+    $sandbox['current'] = 0;
+  }
+
+  // How many nodes should be processed per pass. The higher this number is, the faster your update will
+  // complete, but the more likely your server will run out of memory or timeout.
+  $nodes_per_pass = 10;
+
+  // Get the nodes to process during this pass.
+  $result = db_query_range('SELECT nid FROM {node} WHERE type IN (:type)', $sandbox['current'], $nodes_per_pass,  array(':type' => $type));
+  while ($row = $result->fetchAssoc()) {
+    // Load the node, edit its title, and save the node.
+    $node = node_load($row['nid']);
+    node_save($node);
+
+    // Increment "current" by 1.
+    $sandbox['current']++;
+  }
+
+  // Set the value for finished. If current == total then finished will be 1, signifying we are done.
+  $sandbox['#finished'] = ($sandbox['current'] / $sandbox['total']);
+
+  if ($sandbox['#finished'] === 1) {
+    drupal_set_message(t('We processed @nodes nodes. DONE!!!', array('@nodes' => $sandbox['total'])));
+  }
+}
+
+/**
+ * Revert cluster events and copy field data. Set the event content type to use date repeat entity.
+ */
+function shelter_base_update_7117() {
+  module_enable(array(
+    'date_repeat',
+    'date_repeat_entity',
+    'uuid',
+    'replicate',
+  ));
+
+  features_revert_module('cluster_events');
+
+  $items = db_select('field_data_field_event_date', 'f')->fields('f')->execute()->fetchAll();
+  foreach ($items as $item) {
+    $data = array(
+      'entity_type' => $item->entity_type,
+      'bundle' => $item->bundle,
+      'deleted' => $item->deleted,
+      'entity_id' => $item->entity_id,
+      'revision_id' => $item->revision_id,
+      'language' => $item->language,
+      'delta' => $item->delta,
+      'field_recurring_event_date_value' => $item->field_event_date_value,
+      'field_recurring_event_date_rrule' => NULL,
+    );
+    db_insert('field_data_field_recurring_event_date')->fields($data)->execute();
+    db_insert('field_revision_field_recurring_event_date')->fields($data)->execute();
+  }
+  variable_set('date_repeat_entity_bundles_available', array('event' => 'event'));
+}
+
+/**
+ * Setting RSS pattern.
+ */
+function shelter_base_update_7121() {
+  variable_set('pathauto_cluster_rss_clusterrss_pattern', '[node:content-type]/[node:title]/rss');
+}
+
+/**
+ * Deleting the old unused Date field on events and revert cluster events.
+ */
+function shelter_base_update_7122() {
+  field_delete_field('field_event_date');
+  features_revert_module('cluster_events');
+}
+
+/**
+ * Revert cluster_events.
+ */
+function shelter_base_update_7123() {
+  features_revert_module('cluster_events');
+}
+
+/**
+ * Disable shelter_migrate.
+ */
+function shelter_base_update_7124() {
+  module_disable(array('shelter_migrate'));
+}

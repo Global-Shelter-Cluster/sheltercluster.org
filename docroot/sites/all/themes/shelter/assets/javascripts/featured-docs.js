@@ -11,6 +11,10 @@
           element.jcarousel('items').css('width', width + 'px');
         });
 
+        carousel.jcarouselAutoscroll({
+          interval: 5000
+        });
+
         $('.jcarousel-control-prev')
           .on('jcarouselcontrol:active', function() {
               $(this).removeClass('inactive');

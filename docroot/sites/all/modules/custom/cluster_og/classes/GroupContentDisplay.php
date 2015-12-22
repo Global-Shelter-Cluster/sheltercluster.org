@@ -92,7 +92,10 @@ class GroupDisplayProvider {
 
     $items[] = array(
       'label' => t('Dashboard'),
-      'path' => 'node/'.$this->node->nid,
+      'path' => 'node/' . $this->node->nid,
+      'options' => array(
+        'html' => TRUE,
+      ),
     );
 
     if ($this->manager->isEnabled('documents')) {
@@ -100,6 +103,13 @@ class GroupDisplayProvider {
         'label' => t('Documents'),
         'path' => 'node/' . $this->node->nid . '/documents',
         'total' => $this->manager->getDocumentCount(),
+        'options' => array(
+          'html' => TRUE,
+          'query' => array(
+            'sort' => 'date',
+            'sort_direction' => 'DESC',
+          ),
+        ),
       );
     }
     if ($discussions_count = $this->manager->getDiscussionCount() > 0) {
@@ -108,6 +118,9 @@ class GroupDisplayProvider {
           'label' => t('Discussions'),
           'path' => 'node/' . $this->node->nid . '/discussions',
           'total' => $discussions_count,
+          'options' => array(
+            'html' => TRUE,
+          ),
         );
       }
     }
@@ -117,6 +130,9 @@ class GroupDisplayProvider {
           'label' => t('Events'),
           'path' => 'node/' . $this->node->nid . '/events',
           'total' => $events_count,
+          'options' => array(
+            'html' => TRUE,
+          ),
         );
       }
     }
@@ -125,6 +141,9 @@ class GroupDisplayProvider {
       $items[] = array(
         'label' => t('Strategic Advisory Group'),
         'path' => 'node/' . $strategic_advisory->nid,
+        'options' => array(
+          'html' => TRUE,
+        ),
       );
     }
 
@@ -361,15 +380,12 @@ class GroupFullDisplayProvider extends GroupDisplayProvider {
    *  Render array of recent documents.
    */
   public function getRecentDocuments() {
-    if ($nids = $this->manager->getRecentDocuments()) {
-      return array(
-        '#theme' => 'cluster_docs_cards_list',
-        '#docs' => cluster_docs_prepare_card_data($nids),
-        '#all_documents_link' => array(
-          '#theme' => 'cluster_docs_all_docs_link',
-          '#path' => 'node/' . $this->node->nid . '/documents',
-        ),
-      );
+    if ($nids = $this->manager->getRecentDocuments(5, FALSE)) {
+      $path = drupal_get_path_alias('node/' . $this->node->nid);
+      return theme('cluster_og_recent_documents', array(
+        'docs' => cluster_docs_prepare_row_data($nids),
+        'all_documents_link' => url($path . '/documents'),
+      ));
     }
     return FALSE;
   }
@@ -391,17 +407,23 @@ class GroupFullDisplayProvider extends GroupDisplayProvider {
    * Provide the next upcoming event for the group, if any.
    * @return render array of discussions.
    */
-  public function getUpcomingEvent() {
-    if ($nid = $this->manager->getUpcomingEvent()) {
-      return cluster_events_format_upcoming($nid);
-    }
-    elseif ($this->manager->getEventCount()) {
+  public function getUpcomingEvents($max = 3) {
+    if ($nids = $this->manager->getUpcomingEvents($max)) {
+      $events = array();
+      foreach ($nids as $nid) {
+        $events[] = cluster_events_format_upcoming($nid);
+      }
       return array(
-        '#theme' => 'cluster_og_no_upcoming_event',
+        '#theme' => 'cluster_og_upcoming_events',
         '#all_events_link' => url('node/' . $this->node->nid . '/events'),
+        '#events' => $events
       );
     }
-    return FALSE;
+
+    return array(
+      '#theme' => 'cluster_og_no_upcoming_event',
+      '#all_events_link' => url('node/' . $this->node->nid . '/events'),
+    );
   }
 
   /**

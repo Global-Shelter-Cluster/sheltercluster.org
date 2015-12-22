@@ -38,10 +38,6 @@
       </section>
     <?php endif; ?>
 
-    <?php if ($content['upcoming_event']): ?>
-      <?php print render($content['upcoming_event']); ?>
-    <?php endif; ?>
-
     <?php if ($content['recent_discussions']): ?>
       <?php print render($content['recent_discussions']); ?>
     <?php endif; ?>
@@ -70,6 +66,16 @@
       </section>
     <?php endif; ?>
 
+    <div class="clearfix">
+      <?php if ($content['recent_documents']): ?>
+        <?php print render($content['recent_documents']); ?>
+      <?php endif; ?>
+
+      <?php if ($content['upcoming_events']): ?>
+        <?php print render($content['upcoming_events']); ?>
+      <?php endif; ?>
+    </div>
+
     <?php if ($content['key_documents']['docs']): ?>
       <h3 data-collapsible="key-information">
         <?php print _svg('icons/key-information', array('id' => 'key-information-icon', 'alt' => t('An icon representing a key with the letter "I" in it.'))); ?>
@@ -77,13 +83,6 @@
       </h3>
       <section id="key-information">
         <?php print render($content['key_documents']); ?>
-      </section>
-    <?php endif; ?>
-
-    <?php if ($content['recent_documents']): ?>
-      <h3 data-collapsible="recent-documents">Recent Documents</h3>
-      <section id="recent-documents">
-        <?php print render($content['recent_documents']); ?>
       </section>
     <?php endif; ?>
 
