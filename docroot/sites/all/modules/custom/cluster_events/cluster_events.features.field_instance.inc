@@ -359,16 +359,27 @@ function cluster_events_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'date',
+        'module' => 'addtocal',
         'settings' => array(
+          'description' => array(
+            'field' => 'body',
+            'tokenized' => '',
+          ),
+          'description_tokenized' => '',
           'format_type' => 'long',
           'fromto' => 'both',
+          'location' => array(
+            'field' => 'field_postal_address',
+            'tokenized' => '',
+          ),
           'multiple_from' => '',
           'multiple_number' => '',
           'multiple_to' => '',
-          'show_repeat_rule' => 'show',
+          'past_events' => 0,
+          'show_repeat_rule' => 'hide',
+          'view_mode' => 'default',
         ),
-        'type' => 'date_default',
+        'type' => 'addtocal_view',
         'weight' => 0,
       ),
       'teaser' => array(
