@@ -1217,3 +1217,10 @@ function shelter_base_update_7123() {
 function shelter_base_update_7124() {
   module_disable(array('shelter_migrate'));
 }
+
+/**
+ * Disable user configurable timezones so timezones dont screw with event times
+ */
+function shelter_base_update_7124() {
+  features_revert_module('shelter_events');
+}
