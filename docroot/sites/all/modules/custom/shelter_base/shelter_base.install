@@ -1217,3 +1217,10 @@ function shelter_base_update_7123() {
 function shelter_base_update_7124() {
   module_disable(array('shelter_migrate'));
 }
+
+/**
+ * Update doc description field to show 400 characters for the featured docs list
+ */
+function shelter_base_update_7125() {
+  module_disable(array('shelter_docs'));
+}

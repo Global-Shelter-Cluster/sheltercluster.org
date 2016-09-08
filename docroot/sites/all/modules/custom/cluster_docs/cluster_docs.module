@@ -411,7 +411,7 @@ function cluster_docs_prepare_card_data($nids) {
         elseif ($body['safe_value']) {
           $alter = array(
             // @TODO get this value from the body field settings.
-            'max_length' => 100,
+            'max_length' => 400,
             'ellipsis' => TRUE,
             'word_boundary' => TRUE,
             'html' => TRUE,
