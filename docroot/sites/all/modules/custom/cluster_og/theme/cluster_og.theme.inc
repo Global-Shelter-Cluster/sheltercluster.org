@@ -54,6 +54,7 @@ function theme_cluster_og_upcoming_events($vars) {
     'events' => $vars['events'],
     'all_events_link' => l(t('All Calendar Events'), $vars['all_events_link'], array('attributes' => array('class' => array('see-all')))),
     'global_events_link' => $vars['global_events_link'],
+    'previous_events_link' => $vars['previous_events_link'],
   ));
 }
 

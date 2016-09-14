@@ -168,15 +168,18 @@ function cluster_events_get_events($operator = '>', $order = 'ASC') {
     $events[] = cluster_events_format_upcoming($entity->nid);
   }
 
+  $is_previous = $operator === '<';
+
   return theme('cluster_og_upcoming_events', array(
     'events' => $events,
-    'is_previous_events' => $operator === '<',
+    'is_previous_events' => $is_previous,
     'all_events_link' => '/events',
     'global_events_link' => array(
       '#type' => 'link',
       '#href' => 'geographic-region/global/events',
       '#title' => 'See Global Events',
     ),
+    'previous_events_link' => !$is_previous ? '/event/other-past-events' : FALSE,
   ));
 }
 
