@@ -61,19 +61,23 @@ function _cluster_events_title_callback($nid) {
  * @return Render array
  */
 function cluster_events_all($nid) {
+  $order = 'ASC';
+  $today = (new DateTime('12am today'))->format('Y-m-d 00:00:00');
 
   // Filter by event date with entity field query.
   $filter_by_date = new EntityFieldQuery();
   $filter_by_date->entityCondition('entity_type', 'node')
     ->entityCondition('bundle', 'event')
     ->propertyCondition('status', NODE_PUBLISHED)
-    ->fieldOrderBy('field_recurring_event_date', 'value', 'DESC');
+    ->fieldCondition('field_recurring_event_date', 'value', $today, '>=')
+    ->fieldOrderBy('field_recurring_event_date', 'value', $order);
 
   $filter_by_date_count = new EntityFieldQuery();
   $filter_by_date_count->entityCondition('entity_type', 'node')
     ->entityCondition('bundle', 'event')
     ->propertyCondition('status', NODE_PUBLISHED)
-    ->fieldOrderBy('field_recurring_event_date', 'value', 'DESC')
+    ->fieldCondition('field_recurring_event_date', 'value', $today, '>=')
+    ->fieldOrderBy('field_recurring_event_date', 'value', $order)
     ->count();
 
   if ($nid) {
@@ -91,7 +95,7 @@ function cluster_events_all($nid) {
 
   pager_default_initialize($number_of_results, CLUSTER_EVENTS_PER_PAGE);
 
-  if (! $query_date_filter_results['node']) {
+  if (empty($query_date_filter_results['node'])) {
     $content = array(
       '#markup' => t('No events scheduled at the moment.'),
     );
