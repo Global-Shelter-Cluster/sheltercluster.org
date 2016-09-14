@@ -117,13 +117,42 @@ function cluster_events_all($nid) {
   return $ret;
 }
 
+/**
+ * Get upcoming events.
+ *
+ * @return bool|string
+ */
 function cluster_events_upcoming() {
+  return cluster_events_get_events('>', 'ASC');
+}
+
+/**
+ * Get previous events.
+ *
+ * @return bool|string
+ */
+function cluster_events_previous() {
+  return cluster_events_get_events('<', 'DESC');
+}
+
+/**
+ * Get event nodes.
+ *
+ * @param string $operator
+ *   The operator to use within the date field condition (i.e. less or greater
+ *   than the specified date.
+ * @param string $order
+ *   The order to sort the results - e.g. 'ASC' or 'DESC'.
+ *
+ * @return bool|string
+ */
+function cluster_events_get_events($operator = '>', $order = 'ASC') {
   $query = new EntityFieldQuery();
   $results = $query->entityCondition('entity_type', 'node')
     ->entityCondition('bundle', 'event')
-    ->fieldCondition('field_recurring_event_date', 'value', date('Y-m-d'), '>')
+    ->fieldCondition('field_recurring_event_date', 'value', date('Y-m-d'), $operator)
     ->propertyCondition('status', NODE_PUBLISHED)
-    ->fieldOrderBy('field_recurring_event_date', 'value', 'ASC')
+    ->fieldOrderBy('field_recurring_event_date', 'value', $order)
     ->range(0, 3)
     ->execute();
 
