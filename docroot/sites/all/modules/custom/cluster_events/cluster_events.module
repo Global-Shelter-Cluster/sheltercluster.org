@@ -117,13 +117,42 @@ function cluster_events_all($nid) {
   return $ret;
 }
 
+/**
+ * Get upcoming events.
+ *
+ * @return bool|string
+ */
 function cluster_events_upcoming() {
+  return cluster_events_get_events('>', 'ASC');
+}
+
+/**
+ * Get previous events.
+ *
+ * @return bool|string
+ */
+function cluster_events_previous() {
+  return cluster_events_get_events('<', 'DESC');
+}
+
+/**
+ * Get event nodes.
+ *
+ * @param string $operator
+ *   The operator to use within the date field condition (i.e. less or greater
+ *   than the specified date.
+ * @param string $order
+ *   The order to sort the results - e.g. 'ASC' or 'DESC'.
+ *
+ * @return bool|string
+ */
+function cluster_events_get_events($operator = '>', $order = 'ASC') {
   $query = new EntityFieldQuery();
   $results = $query->entityCondition('entity_type', 'node')
     ->entityCondition('bundle', 'event')
-    ->fieldCondition('field_recurring_event_date', 'value', date('Y-m-d'), '>')
+    ->fieldCondition('field_recurring_event_date', 'value', date('Y-m-d'), $operator)
     ->propertyCondition('status', NODE_PUBLISHED)
-    ->fieldOrderBy('field_recurring_event_date', 'value', 'ASC')
+    ->fieldOrderBy('field_recurring_event_date', 'value', $order)
     ->range(0, 3)
     ->execute();
 
@@ -139,14 +168,18 @@ function cluster_events_upcoming() {
     $events[] = cluster_events_format_upcoming($entity->nid);
   }
 
+  $is_previous = $operator === '<';
+
   return theme('cluster_og_upcoming_events', array(
     'events' => $events,
+    'is_previous_events' => $is_previous,
     'all_events_link' => '/events',
     'global_events_link' => array(
       '#type' => 'link',
       '#href' => 'geographic-region/global/events',
       '#title' => 'See Global Events',
     ),
+    'previous_events_link' => !$is_previous ? '/event/other-past-events' : FALSE,
   ));
 }
 

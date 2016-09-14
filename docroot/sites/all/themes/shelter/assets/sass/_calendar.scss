@@ -84,7 +84,8 @@
     }
   }
 
-  .all-events {
+  .all-events,
+  .previous-events {
     text-align: center;
     @include rem(font-size, 0.85rem);
     padding: 0 0 10px;
