@@ -61,19 +61,20 @@ function _cluster_events_title_callback($nid) {
  * @return Render array
  */
 function cluster_events_all($nid) {
+  $order = 'ASC';
 
   // Filter by event date with entity field query.
   $filter_by_date = new EntityFieldQuery();
   $filter_by_date->entityCondition('entity_type', 'node')
     ->entityCondition('bundle', 'event')
     ->propertyCondition('status', NODE_PUBLISHED)
-    ->fieldOrderBy('field_recurring_event_date', 'value', 'DESC');
+    ->fieldOrderBy('field_recurring_event_date', 'value', $order);
 
   $filter_by_date_count = new EntityFieldQuery();
   $filter_by_date_count->entityCondition('entity_type', 'node')
     ->entityCondition('bundle', 'event')
     ->propertyCondition('status', NODE_PUBLISHED)
-    ->fieldOrderBy('field_recurring_event_date', 'value', 'DESC')
+    ->fieldOrderBy('field_recurring_event_date', 'value', $order)
     ->count();
 
   if ($nid) {
