@@ -170,6 +170,7 @@ function cluster_events_get_events($operator = '>', $order = 'ASC') {
 
   return theme('cluster_og_upcoming_events', array(
     'events' => $events,
+    'is_previous_events' => $operator === '<',
     'all_events_link' => '/events',
     'global_events_link' => array(
       '#type' => 'link',
