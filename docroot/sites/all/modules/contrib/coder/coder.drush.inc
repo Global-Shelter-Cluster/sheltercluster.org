@@ -28,7 +28,7 @@ function coder_drush_command() {
 }
 
 /**
- * Implements hook_drush_help().
+ * Implementation of hook_drush_help().
  */
 function coder_drush_help($section) {
   switch ($section) {
@@ -38,8 +38,6 @@ function coder_drush_help($section) {
 }
 
 /**
- * Performs the desired coder-format command for drush.
- *
  * Drush command callback for coder-format.
  */
 function drush_coder_format() {
