@@ -70,5 +70,5 @@ function cluster_libraries_node_view_alter(&$build) {
     break;
   }
 
-  $build[] = cluster_docs_page($query, TRUE, 'title', 'ASC', $excluded_facets);
+  $build[] = cluster_docs_page($query, TRUE, 'date', 'DESC', $excluded_facets);
 }
