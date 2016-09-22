@@ -1221,6 +1221,13 @@ function shelter_base_update_7124() {
 /**
  * Disable user configurable timezones so timezones dont screw with event times
  */
-function shelter_base_update_7124() {
+function shelter_base_update_7125() {
   features_revert_module('shelter_events');
+}
+
+/**
+ * Add addtoical module and set configuration for display
+ */
+function shelter_base_update_7126() {
+  features_revert_module('cluster_events');
 }
