@@ -44,5 +44,13 @@
         <?php print render($global_events_link); ?>
       </div>
     <?php endif; ?>
+
+    <?php if ($previous_events_link): ?>
+      <div class="previous-events">
+        <a href="<?php print $previous_events_link; ?>">
+          <?php print t('View Previous Events'); ?>
+        </a>
+      </div>
+    <?php endif; ?>
   </div>
 </section>
