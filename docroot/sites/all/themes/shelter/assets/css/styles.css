@@ -2279,14 +2279,18 @@ ul.addtocal_menu {
   right: 0;
 }
 #all-events .all-events,
-#box-calendar .all-events {
+#all-events .previous-events,
+#box-calendar .all-events,
+#box-calendar .previous-events {
   text-align: center;
   font-size: 13.6px;
   font-size: 0.85rem;
   padding: 0 0 10px;
 }
 #all-events .all-events a,
-#box-calendar .all-events a {
+#all-events .previous-events a,
+#box-calendar .all-events a,
+#box-calendar .previous-events a {
   color: #000;
 }
 

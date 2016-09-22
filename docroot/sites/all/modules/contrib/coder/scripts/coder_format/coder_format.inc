@@ -685,7 +685,6 @@ function coder_format_string($code = '') {
         case T_INCLUDE:
         case T_INCLUDE_ONCE:
         case T_VAR:
-        case T_THROW:
           coder_add_space($result);
           // Append a space.
           $result .= trim($text) . ' ';
