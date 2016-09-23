@@ -76,6 +76,7 @@
         <?php print $doc['link']; ?>
         <?php print $doc['description']; ?>
         <?php print $doc['group']; ?>
+        <?php print $doc['tags']; ?>
       </td>
 
       <td class="information-file">
