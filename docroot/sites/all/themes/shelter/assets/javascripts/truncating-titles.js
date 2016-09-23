@@ -1,7 +1,6 @@
 (function ($) {
   Drupal.behaviors.truncatingtitles = {
     attach: function (context, settings) {
-       console.log('hello truncation');
 
         $('.document-row .information-title a').each(function() {
             var title = $.trim($(this).text());
