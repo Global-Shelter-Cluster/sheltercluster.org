@@ -37,20 +37,45 @@ function shelter_preprocess_page(&$variables) {
   drupal_add_html_head($viewport, 'viewport');
 
   libraries_load('underscore');
-  drupal_add_library('underscore', 'underscore');
   drupal_add_library('system', 'jquery.cookie');
 
   $variables['hot_responses'] = FALSE;
   $variables['is_regions_and_countries'] = FALSE;
   $variables['is_user_profile_pages'] = FALSE;
+  $variables['is_search_documents'] = FALSE;
+  $variables['global_docs_search_page_link'] = l(t('Search all documents'), 'search-documents', array(
+    'attributes' => array(
+      'class' => array('search-documents-link')
+    ),
+    'query' => array(
+      'sort' => 'date',
+      'sort_direction' => 'DESC',
+    ),
+  ));
+  $variables['global_events_page'] = FALSE;
+  $variables['recent_documents'] = FALSE;
 
   if ($variables['is_front']) {
     $variables['hot_responses'] = cluster_og_hot_responses();
-    $variables['upcoming_events'] = cluster_events_upcoming();
+    $variables['upcoming_events'] = cluster_events_upcoming() ?: cluster_events_previous();
+    $variables['recent_documents'] = cluster_docs_recent();
   }
+
   if ($current_path == 'regions-countries') {
     $variables['is_regions_and_countries'] = TRUE;
   }
+
+  if ($current_path == 'search-documents') {
+    $variables['is_search_documents'] = TRUE;
+    $variables['hot_responses'] = cluster_og_hot_responses();
+    $variables['upcoming_events'] = NULL;
+  }
+
+  if ($current_path == 'events') {
+    $variables['hot_responses'] = cluster_og_hot_responses();
+    $variables['global_events_page'] = TRUE;
+  }
+
   if (arg(0) == 'user') {
     $variables['is_user_profile_pages'] = TRUE;
   }
@@ -77,6 +102,14 @@ function partial__homepage_preprocess(&$variables) {
 
   $homepage_menu = menu_tree('menu-homepage');
   $variables['homepage_menu'] = render($homepage_menu);
+}
+
+/**
+ * Implements partial__{name}_preprocess().
+ */
+function shelter_preprocess_cluster_docs_featured_documents(&$variables) {
+  libraries_load('jcarousel');
+  drupal_add_js(drupal_get_path('theme', 'shelter') . '/assets/javascripts/featured-docs.js');
 }
 
 /**

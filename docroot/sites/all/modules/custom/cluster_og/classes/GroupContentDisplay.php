@@ -1,3 +1,4 @@
+
 <?php
 
 /**
@@ -91,7 +92,10 @@ class GroupDisplayProvider {
 
     $items[] = array(
       'label' => t('Dashboard'),
-      'path' => 'node/'.$this->node->nid,
+      'path' => 'node/' . $this->node->nid,
+      'options' => array(
+        'html' => TRUE,
+      ),
     );
 
     if ($this->manager->isEnabled('documents')) {
@@ -99,47 +103,91 @@ class GroupDisplayProvider {
         'label' => t('Documents'),
         'path' => 'node/' . $this->node->nid . '/documents',
         'total' => $this->manager->getDocumentCount(),
+        'options' => array(
+          'html' => TRUE,
+          'query' => array(
+            'sort' => 'date',
+            'sort_direction' => 'DESC',
+          ),
+        ),
       );
     }
-
-    if ($this->manager->isEnabled('discussions')) {
-      $items[] = array(
-        'label' => t('Discussions'),
-        'path' => 'node/' . $this->node->nid . '/discussions',
-        'total' => $this->manager->getDiscussionCount(),
-      );
+    if ($discussions_count = $this->manager->getDiscussionCount() > 0) {
+      if ($this->manager->isEnabled('discussions')) {
+        $items[] = array(
+          'label' => t('Discussions'),
+          'path' => 'node/' . $this->node->nid . '/discussions',
+          'total' => $discussions_count,
+          'options' => array(
+            'html' => TRUE,
+          ),
+        );
+      }
     }
-
-    if ($this->manager->isEnabled('events')) {
-      $items[] = array(
-        'label' => t('Events'),
-        'path' => 'node/' . $this->node->nid . '/events',
-        'total' => $this->manager->getEventCount(),
-      );
+    if ($events_count = $this->manager->getEventCount() > 0) {
+      if ($this->manager->isEnabled('events')) {
+        $items[] = array(
+          'label' => t('Events'),
+          'path' => 'node/' . $this->node->nid . '/events',
+          'total' => $events_count,
+          'options' => array(
+            'html' => TRUE,
+          ),
+        );
+      }
     }
 
     if ($strategic_advisory = $this->manager->getStrategicAdvisory()) {
       $items[] = array(
         'label' => t('Strategic Advisory Group'),
         'path' => 'node/' . $strategic_advisory->nid,
+        'options' => array(
+          'html' => TRUE,
+        ),
       );
     }
 
     $secondary = array();
     if ($responses = $this->getRelatedResponses()) {
-      $secondary['responses'] = partial('navigation_options', array('navigation_type_id' => 'related-operations', 'title' => t('Related operations'), 'nodes' => node_load_multiple($responses)));
+      $secondary['responses'] = partial('navigation_options', array(
+        'navigation_type_id' => 'related-operations',
+        'title' => t('Related operations'),
+        'nodes' => node_load_multiple($responses)
+      ));
     }
     if ($hubs = $this->getRelatedHubs()) {
-      $secondary['hubs'] = partial('navigation_options', array('navigation_type_id' => 'hubs', 'title' => t('Hubs'), 'nodes' => node_load_multiple($hubs)));
+      $secondary['hubs'] = partial('navigation_options', array(
+        'navigation_type_id' => 'hubs',
+        'title' => t('Hubs'),
+        'nodes' => node_load_multiple($hubs)
+      ));
     }
     if ($working_groups = $this->getRelatedWorkingGroups()) {
-      $secondary['working_groups'] = partial('navigation_options', array('navigation_type_id' => 'working-groups', 'title' => t('Working groups'), 'nodes' => node_load_multiple($working_groups)));
+      $secondary['working_groups'] = partial('navigation_options', array(
+        'navigation_type_id' => 'working-groups',
+        'title' => t('Working groups'),
+        'nodes' => node_load_multiple($working_groups)
+      ));
     }
-    // Combine libraries, pages and other required entites under the same listing.
-    $pages = array_merge($this->manager->getPages(), $this->manager->getLibraries());
+    // Combine libraries, pages and other required entities under the same listing.
+    $page_ids = array_merge($this->manager->getPages(), $this->manager->getLibraries());
+    $pages = shelter_base_sort_nids_by_weight($page_ids);
     if ($pages) {
-      $secondary['pages'] = partial('navigation_options', array('navigation_type_id' => 'pages', 'title' => t('Pages'), 'nodes' => node_load_multiple($pages)));
+      $secondary['pages'] = partial('navigation_options', array(
+        'navigation_type_id' => 'pages',
+        'title' => t('Pages'),
+        'nodes' => node_load_multiple($pages)
+      ));
     }
+    $useful_links = $this->manager->getUsefulLinks();
+    if ($useful_links) {
+      $secondary['useful_links'] = partial('navigation_options', array(
+        'navigation_type_id' => 'useful-links',
+        'title' => t('Useful links'),
+        'links' => $useful_links
+      ));
+    }
+
     return array(
       '#theme' => 'cluster_nav_dashboard',
       '#items' => $items,
@@ -281,7 +329,7 @@ class GroupDisplayProvider {
 }
 
 /**
- * Provide renderable content for full page view mode. 
+ * Provide renderable content for full page view mode.
  */
 class GroupFullDisplayProvider extends GroupDisplayProvider {
 
@@ -296,14 +344,14 @@ class GroupFullDisplayProvider extends GroupDisplayProvider {
    */
   public function getContactMembers() {
     if ($contact_members_ids = $this->manager->getContactMembers()) {
-      return partial('contact_members', array('nodes' => node_load_multiple($contact_members_ids))); 
+      return partial('contact_members', array('nodes' => node_load_multiple($contact_members_ids)));
     }
     return FALSE;
   }
 
   /**
    * Returns the Key Documents for this group, grouped by Vocabularies.
-   * @return render array of key documents. 
+   * @return render array of key documents.
    */
   public function getKeyDocuments() {
     if ($docs = $this->manager->getKeyDocuments()) {
@@ -313,7 +361,7 @@ class GroupFullDisplayProvider extends GroupDisplayProvider {
   }
 
   /**
-   * @TODO delegate theming completely to cluster_docs. 
+   * @TODO delegate theming completely to cluster_docs.
    */
   public function getFeaturedDocuments() {
     if ($nids = $this->manager->getFeaturedDocuments()) {
@@ -332,22 +380,19 @@ class GroupFullDisplayProvider extends GroupDisplayProvider {
    *  Render array of recent documents.
    */
   public function getRecentDocuments() {
-    if ($nids = $this->manager->getRecentDocuments()) {
-      return array(
-        '#theme' => 'cluster_docs_cards_list',
-        '#docs' => cluster_docs_prepare_card_data($nids),
-        '#all_documents_link' => array(
-          '#theme' => 'cluster_docs_all_docs_link',
-          '#path' => 'node/' . $this->node->nid . '/documents',
-        ),
-      );
+    if ($nids = $this->manager->getRecentDocuments(5, FALSE)) {
+      $path = drupal_get_path_alias('node/' . $this->node->nid);
+      return theme('cluster_og_recent_documents', array(
+        'docs' => cluster_docs_prepare_row_data($nids),
+        'all_documents_link' => url($path . '/documents'),
+      ));
     }
     return FALSE;
   }
 
   /**
    * Provide recent discussion nodes for the group.
-   * @return render array of discussions. 
+   * @return render array of discussions.
    */
   public function getRecentDiscussions() {
     if ($nodes = $this->manager->getRecentDiscussions()) {
@@ -362,17 +407,23 @@ class GroupFullDisplayProvider extends GroupDisplayProvider {
    * Provide the next upcoming event for the group, if any.
    * @return render array of discussions.
    */
-  public function getUpcomingEvent() {
-    if ($nid = $this->manager->getUpcomingEvent()) {
-      return cluster_events_format_upcoming($nid);
-    }
-    elseif ($this->manager->getEventCount()) {
+  public function getUpcomingEvents($max = 3) {
+    if ($nids = $this->manager->getUpcomingEvents($max)) {
+      $events = array();
+      foreach ($nids as $nid) {
+        $events[] = cluster_events_format_upcoming($nid);
+      }
       return array(
-        '#theme' => 'cluster_og_no_upcoming_event',
+        '#theme' => 'cluster_og_upcoming_events',
         '#all_events_link' => url('node/' . $this->node->nid . '/events'),
+        '#events' => $events
       );
     }
-    return FALSE;
+
+    return array(
+      '#theme' => 'cluster_og_no_upcoming_event',
+      '#all_events_link' => url('node/' . $this->node->nid . '/events'),
+    );
   }
 
   /**

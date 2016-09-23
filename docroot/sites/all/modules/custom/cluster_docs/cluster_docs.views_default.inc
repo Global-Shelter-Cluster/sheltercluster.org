@@ -305,7 +305,8 @@ function cluster_docs_views_default_views() {
   $handler->display->display_options['fields']['edit_node']['id'] = 'edit_node';
   $handler->display->display_options['fields']['edit_node']['table'] = 'views_entity_node';
   $handler->display->display_options['fields']['edit_node']['field'] = 'edit_node';
-  $handler->display->display_options['fields']['edit_node']['label'] = 'edit';
+  $handler->display->display_options['fields']['edit_node']['label'] = '';
+  $handler->display->display_options['fields']['edit_node']['element_label_colon'] = FALSE;
   /* Field: Content: Title */
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'node';
@@ -314,6 +315,12 @@ function cluster_docs_views_default_views() {
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
   $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
+  /* Field: Content: Other Keywords */
+  $handler->display->display_options['fields']['field_other_keywords']['id'] = 'field_other_keywords';
+  $handler->display->display_options['fields']['field_other_keywords']['table'] = 'field_data_field_other_keywords';
+  $handler->display->display_options['fields']['field_other_keywords']['field'] = 'field_other_keywords';
+  $handler->display->display_options['fields']['field_other_keywords']['label'] = 'Keywords';
+  $handler->display->display_options['fields']['field_other_keywords']['element_label_colon'] = FALSE;
   /* Field: Content: Groups audience */
   $handler->display->display_options['fields']['og_group_ref']['id'] = 'og_group_ref';
   $handler->display->display_options['fields']['og_group_ref']['table'] = 'og_membership';
@@ -435,7 +442,7 @@ function cluster_docs_views_default_views() {
   $handler->display->display_options['filters']['title_field_value']['operator'] = 'contains';
   $handler->display->display_options['filters']['title_field_value']['exposed'] = TRUE;
   $handler->display->display_options['filters']['title_field_value']['expose']['operator_id'] = 'title_field_value_op';
-  $handler->display->display_options['filters']['title_field_value']['expose']['label'] = 'Title (title_field)';
+  $handler->display->display_options['filters']['title_field_value']['expose']['label'] = 'Title';
   $handler->display->display_options['filters']['title_field_value']['expose']['operator'] = 'title_field_value_op';
   $handler->display->display_options['filters']['title_field_value']['expose']['identifier'] = 'title_field_value';
   $handler->display->display_options['filters']['title_field_value']['expose']['remember_roles'] = array(
@@ -444,6 +451,43 @@ function cluster_docs_views_default_views() {
     3 => 0,
     4 => 0,
     5 => 0,
+  );
+  /* Filter criterion: Content: Other Keywords (field_other_keywords) */
+  $handler->display->display_options['filters']['field_other_keywords_value']['id'] = 'field_other_keywords_value';
+  $handler->display->display_options['filters']['field_other_keywords_value']['table'] = 'field_data_field_other_keywords';
+  $handler->display->display_options['filters']['field_other_keywords_value']['field'] = 'field_other_keywords_value';
+  $handler->display->display_options['filters']['field_other_keywords_value']['operator'] = 'contains';
+  $handler->display->display_options['filters']['field_other_keywords_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_other_keywords_value']['expose']['operator_id'] = 'field_other_keywords_value_op';
+  $handler->display->display_options['filters']['field_other_keywords_value']['expose']['label'] = 'Other Keywords';
+  $handler->display->display_options['filters']['field_other_keywords_value']['expose']['operator'] = 'field_other_keywords_value_op';
+  $handler->display->display_options['filters']['field_other_keywords_value']['expose']['identifier'] = 'field_other_keywords_value';
+  $handler->display->display_options['filters']['field_other_keywords_value']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    5 => 0,
+    6 => 0,
+  );
+  $handler->display->display_options['filters']['field_other_keywords_value']['group_info']['label'] = 'Other Keywords';
+  $handler->display->display_options['filters']['field_other_keywords_value']['group_info']['identifier'] = 'field_other_keywords_value';
+  $handler->display->display_options['filters']['field_other_keywords_value']['group_info']['group_items'] = array(
+    1 => array(
+      'title' => '',
+      'operator' => '=',
+      'value' => '',
+    ),
+    2 => array(
+      'title' => '',
+      'operator' => '=',
+      'value' => '',
+    ),
+    3 => array(
+      'title' => '',
+      'operator' => '=',
+      'value' => '',
+    ),
   );
 
   /* Display: Page */
@@ -476,8 +520,8 @@ function cluster_docs_views_default_views() {
     t('Content'),
     t('- Choose an operation -'),
     t('Nid'),
-    t('edit'),
     t('Title'),
+    t('Keywords'),
     t('Groups'),
     t('Size'),
     t('[ [filesize] ]'),
@@ -488,7 +532,7 @@ function cluster_docs_views_default_views() {
     t('Published'),
     t('Publication date'),
     t('Group'),
-    t('Title (title_field)'),
+    t('Other Keywords'),
     t('Page'),
   );
   $export['documents'] = $view;

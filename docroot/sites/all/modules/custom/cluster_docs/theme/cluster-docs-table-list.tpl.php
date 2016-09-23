@@ -26,10 +26,11 @@
   <thead>
     <th></th>
     <?php
+
     $headers = array(
       'title' => 'Document title',
       'size' => 'Size',
-      'date' => 'Publication date',
+      'date' => 'Date',
     );
 
     foreach ($headers as $column => $header):
@@ -74,6 +75,7 @@
       <td class="information-title">
         <?php print $doc['link']; ?>
         <?php print $doc['description']; ?>
+        <?php print $doc['group']; ?>
       </td>
 
       <td class="information-file">
@@ -83,8 +85,8 @@
       </td>
 
       <td class="publication-date">
-        <?php if ($doc['publication_date']): ?>
-          <span><?php print $doc['publication_date']; ?></span>
+        <?php if ($doc['date']): ?>
+          <span><?php print $doc['date']; ?></span>
         <?php endif; ?>
       </td>
     </tr>

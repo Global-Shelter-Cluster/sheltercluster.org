@@ -10,15 +10,14 @@ header {
     color: #000;
     @include rem(font-size, 0.80rem);
   }
+  .search-documents-link-wrapper {
+    position: absolute;
+    bottom: 30px;
+    right: 15px;
+    display: inline-block;
+  }
 }
-
-.form-text {
-  float: left;
-  @include rem(padding, 0.35rem 0.5rem 0.35rem);
-  @include border-radius(3px);
-  border: 1px solid darken(white,12%);
-  @include box-shadow(rgba(0,0,0,0.1) 0 0 3px inset);
-}
+.search-documents-link,
 .form-submit {
   @extend .button;
 }
@@ -210,10 +209,20 @@ header {
   font-weight: normal;
 }
 
+#shelter-documents {
+  width: 100%;
+  float: none;
+  padding-top: 39px;
+
+  @include breakpoint(980px) {
+    width: 49%;
+    float: left;
+  }
+}
+
 .document-table {
   border-collapse: collapse;
   border-spacing: 0;
-  //border: 1px solid #bbb;
   width: 100%;
   @include rem(margin, 0 0 1.5rem 0);
   @include rem(font-size, 0.9rem);
@@ -265,9 +274,19 @@ header {
   .information-file {
     min-width: 90px;
   }
+  .document-groups {
+    margin: 0.75em 0;
+    text-transform: uppercase;
+    @include rem(font-size, 0.75rem);
+
+    a {
+      color: $black;
+      text-transform: uppercase;
+    }
+  }
   .size-type {
     @include rem(font-size, 0.85rem);
-    color: #black;
+    color: $black;
     a {
       @include rem(font-size, 0.60rem);
       font-weight: bold;
@@ -309,5 +328,19 @@ header {
         text-align: left;
       }
     }
+  }
+  .recent-document-date {
+    color: #688394;
+    @include rem(font-size, 0.85rem);
+    float: right;
+  }
+}
+
+.all-documents {
+  text-align: center;
+  @include rem(font-size, 0.85rem);
+  padding: 0 0 22px;
+  a {
+    color: #000;
   }
 }

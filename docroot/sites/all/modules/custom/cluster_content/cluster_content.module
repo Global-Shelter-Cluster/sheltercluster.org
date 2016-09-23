@@ -1,0 +1,16 @@
+<?php
+/**
+ * @file
+ * Code for the Cluster Content feature.
+ */
+
+include_once 'cluster_content.features.inc';
+
+/**
+ * Implements hook_admin_paths().
+ */
+function cluster_content_admin_paths() {
+  return array(
+    'node/*/content' => TRUE,
+  );
+}

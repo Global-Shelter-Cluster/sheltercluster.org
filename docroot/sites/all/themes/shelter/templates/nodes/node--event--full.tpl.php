@@ -20,5 +20,7 @@
 
   <?php print render($content['links']); ?>
   <?php print render($content['comments']); ?>
-
+  <?php if ($static_map): ?>
+    <?php print $static_map; ?>
+  <?php endif; ?>
 </div>

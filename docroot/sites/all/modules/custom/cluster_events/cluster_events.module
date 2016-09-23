@@ -23,6 +23,14 @@ function cluster_events_menu() {
     'access arguments' => array(0, 1),
     'type' => MENU_CALLBACK,
   );
+
+  $items['events'] = array(
+    'title' => 'All events',
+    'page callback' => 'cluster_events_all',
+    'page arguments' => array(1),
+    'access arguments' => array('access content'),
+    'type' => MENU_CALLBACK,
+  );
   return $items;
 }
 
@@ -48,31 +56,57 @@ function _cluster_events_title_callback($nid) {
 }
 
 /**
- * Page callback, shows a group's events using Search API.
- * @param $nid
+ * Page callback, lists of events using Search API.
+ * @param $nid, if present, limit events that are part of group id audience.
  * @return Render array
  */
 function cluster_events_all($nid) {
-  $query = search_api_query('default_node_index');
+  $order = 'ASC';
+  $today = (new DateTime('12am today'))->format('Y-m-d 00:00:00');
 
-  $filter = $query->createFilter();
-  $filter->condition('og_group_ref', $nid);
-  $filter->condition('type', 'event');
-  $query->filter($filter);
+  // Filter by event date with entity field query.
+  $filter_by_date = new EntityFieldQuery();
+  $filter_by_date->entityCondition('entity_type', 'node')
+    ->entityCondition('bundle', 'event')
+    ->propertyCondition('status', NODE_PUBLISHED)
+    ->fieldCondition('field_recurring_event_date', 'value', $today, '>=')
+    ->fieldOrderBy('field_recurring_event_date', 'value', $order);
+
+  $filter_by_date_count = new EntityFieldQuery();
+  $filter_by_date_count->entityCondition('entity_type', 'node')
+    ->entityCondition('bundle', 'event')
+    ->propertyCondition('status', NODE_PUBLISHED)
+    ->fieldCondition('field_recurring_event_date', 'value', $today, '>=')
+    ->fieldOrderBy('field_recurring_event_date', 'value', $order)
+    ->count();
+
+  if ($nid) {
+    $filter_by_date->fieldCondition('og_group_ref', 'target_id', $nid);
+    $filter_by_date_count->fieldCondition('og_group_ref', 'target_id', $nid);
+  }
+
+  $number_of_results = $filter_by_date_count->execute();
 
   $offset = pager_find_page() * CLUSTER_EVENTS_PER_PAGE;
-  $query->range($offset, CLUSTER_EVENTS_PER_PAGE);
+  $filter_by_date->range($offset, CLUSTER_EVENTS_PER_PAGE);
 
-  $result = $query->execute();
-  pager_default_initialize($result['result count'], CLUSTER_EVENTS_PER_PAGE);
+  // Execute query to filter by event date.
+  $query_date_filter_results = $filter_by_date->execute();
 
-  if (! $result['results']) {
+  pager_default_initialize($number_of_results, CLUSTER_EVENTS_PER_PAGE);
+
+  if (empty($query_date_filter_results['node'])) {
     $content = array(
       '#markup' => t('No events scheduled at the moment.'),
     );
   }
   else {
-    $content = node_view_multiple(node_load_multiple(array_keys($result['results'])));
+    $content = array(
+      "#theme" => 'cluster_og_all_events',
+      '#events' => array(),
+    );
+    $nids = array_keys($query_date_filter_results['node']);
+    $content['#events'] = cluster_events_format_list($nids);
   }
 
   $ret['content'] = $content;
@@ -84,50 +118,42 @@ function cluster_events_all($nid) {
 }
 
 /**
- * Implements hook_theme().
+ * Get upcoming events.
+ *
+ * @return bool|string
  */
-function cluster_events_theme() {
-  return array(
-    'cluster_events_all' => array(
-      'file' => 'theme/cluster_events.theme.inc',
-      'render element' => 'element',
-    ),
-    'cluster_events_teaser' => array(
-      'file' => 'theme/cluster_events.theme.inc',
-      'render element' => 'element',
-    ),
-    'cluster_events_upcoming' => array(
-      'file' => 'theme/cluster_events.theme.inc',
-      'render element' => 'element',
-    ),
-  );
+function cluster_events_upcoming() {
+  return cluster_events_get_events('>', 'ASC');
 }
 
 /**
- * Implements hook_node_view_alter().
+ * Get previous events.
+ *
+ * @return bool|string
  */
-function cluster_events_node_view_alter(&$build) {
-  if ($build['#node']->type != 'event') {
-    return;
-  }
-  switch ($build['#view_mode']) {
-    case 'teaser':
-      $build['#theme'] = 'cluster_events_teaser';
-
-      break;
-    default:
-      // Do nothing.
-  }
+function cluster_events_previous() {
+  return cluster_events_get_events('<', 'DESC');
 }
 
-function cluster_events_upcoming() {
+/**
+ * Get event nodes.
+ *
+ * @param string $operator
+ *   The operator to use within the date field condition (i.e. less or greater
+ *   than the specified date.
+ * @param string $order
+ *   The order to sort the results - e.g. 'ASC' or 'DESC'.
+ *
+ * @return bool|string
+ */
+function cluster_events_get_events($operator = '>', $order = 'ASC') {
   $query = new EntityFieldQuery();
   $results = $query->entityCondition('entity_type', 'node')
     ->entityCondition('bundle', 'event')
-    ->fieldCondition('field_event_date', 'value', date('Y-m-d'), '>')
+    ->fieldCondition('field_recurring_event_date', 'value', date('Y-m-d'), $operator)
     ->propertyCondition('status', NODE_PUBLISHED)
-    ->fieldOrderBy('field_event_date', 'value')
-    ->range(0, 5)
+    ->fieldOrderBy('field_recurring_event_date', 'value', $order)
+    ->range(0, 3)
     ->execute();
 
   if (!isset($results['node'])) {
@@ -137,57 +163,205 @@ function cluster_events_upcoming() {
   $nids = array_keys($results['node']);
 
   $entities = entity_load('node', $nids);
-  $ret = array(
-    '#theme_wrappers' => array('cluster_events_upcoming'),
-    '#total' => count($nids),
-  );
+  $events = array();
   foreach ($entities as $entity) {
-    $ret[$entity->nid] = cluster_events_format_upcoming($entity->nid, FALSE);
+    $events[] = cluster_events_format_upcoming($entity->nid);
   }
 
-  return $ret;
+  $is_previous = $operator === '<';
+
+  return theme('cluster_og_upcoming_events', array(
+    'events' => $events,
+    'is_previous_events' => $is_previous,
+    'all_events_link' => '/events',
+    'global_events_link' => array(
+      '#type' => 'link',
+      '#href' => 'geographic-region/global/events',
+      '#title' => 'See Global Events',
+    ),
+    'previous_events_link' => !$is_previous ? '/event/other-past-events' : FALSE,
+  ));
 }
 
-function cluster_events_format_upcoming($nid, $single_display = TRUE) {
+function cluster_events_format_upcoming($nid) {
   $node = node_load($nid);
   if (!$node || $node->type != 'event') {
     return FALSE;
   }
 
-  $wrapper = entity_metadata_wrapper('node', $node);
+  try {
+    $wrapper = entity_metadata_wrapper('node', $node);
 
-  $value = $wrapper->field_event_date->value();
-  $from = strtotime($value['value']);
-  $to   = strtotime($value['value2']);
-  $format      = 'M. j' . '\<\s\u\p\>' . 'S' . '\<\/\s\u\p\>' . ' Y';
-  $format_from = 'M. j' . '\<\s\u\p\>' . 'S' . '\<\/\s\u\p\>';
-  $format_to   = 'M. j' . '\<\s\u\p\>' . 'S' . '\<\/\s\u\p\>' . ' Y';
-  if ($to > $from) {
-    $date = date($format_from, $from);
-    $date .= ' to ' . date($format_to, $to);
-  }
-  else {
-    $date = date($format, $from);
-  }
+    // Render the date as per the teaser field display setting.
+    $date = field_view_field('node', $node, 'field_recurring_event_date', 'teaser');
 
-  if ($single_display) {
+    $geo = $wrapper->field_coordinates->value();
+    $map_link = l(t('map'), 'https://www.google.ca/maps/place/' . $geo['lat'] . ',' . $geo['lon'] . '/@' . $geo['lat'] . ',' . $geo['lon'] . ',15z', array(
+      'attributes' => array(
+        'target' => '_blank',
+      )
+    ));
+
+    // Get contact(s).
+    $contacts = $wrapper->field_event_contact->value();
+    $contact_list = cluster_events_get_contact_list($contacts);
+
+    $static_map = FALSE;
+    if (!empty($geo)) {
+      $static_map_url = 'http://maps.googleapis.com/maps/api/staticmap?center=' . $geo['lat'] . ',' . $geo['lon'] . '&zoom=15&scale=1&size=300x200&maptype=roadmap&format=png&visual_refresh=true&markers=size:small|color:0x000000|label:1|' . $geo['lat'] . ',' . $geo['lon'];
+      $static_map_description = 'Map to ' . $wrapper->title->value();
+      $static_map = theme('image', array(
+        'path' => $static_map_url,
+        'alt' => t($static_map_description),
+        'title' => t($static_map_description),
+      ));
+    }
+
     return array(
-      '#theme' => 'cluster_og_upcoming_event',
-      '#all_events_link' => 'node/' . $node->nid . '/events',
-      '#event_title' => $wrapper->title->value(),
-      '#event_link' => 'node/' . $node->nid,
-      '#event_date' => $date,
+      'date' => $date,
+      'title' => $wrapper->title->value(),
+      'link' => l($wrapper->title->value(), 'node/' . $node->nid),
+      'location' => field_view_field('node', $node, 'field_postal_address', 'teaser'),
+      'map_link' => $map_link,
+      'static_map' => FALSE,
+      'contact' => $contact_list,
     );
   }
-  else {
-    return array(
-      '#theme' => 'link',
-      '#text' => $date . ': ' . t($wrapper->title->value()),
-      '#path' => 'node/' . $node->nid,
-      '#options' => array(
-        'attributes' => array(),
-        'html' => TRUE,
-      ),
-    );
+  catch (EntityMetadataWrapperException $exception) {
+    _log_entity_metadata_wrapper_error($exception, 'cluster_events');
   }
+}
+
+function cluster_events_format_list($nids) {
+  $events = array();
+  foreach ($nids as $nid) {
+    $node = node_load($nid);
+    if (!$node || $node->type != 'event') {
+      return FALSE;
+    }
+
+    try {
+      $wrapper = entity_metadata_wrapper('node', $node);
+      $value = $wrapper->field_recurring_event_date->value();
+      $event_date = $value[0];
+      $current_date = time();
+      $is_future = $event_date > $current_date ? TRUE : FALSE;
+      $is_past = !$is_future;
+
+      // Render the date as per the teaser field display setting.
+      $date = field_view_field('node', $node, 'field_recurring_event_date', 'teaser');
+
+      $geo = $wrapper->field_coordinates->value();
+      $map_url = 'https://www.google.ca/maps/place/' . $geo['lat'] . ',' . $geo['lon'] . '/@' . $geo['lat'] . ',' . $geo['lon'] . ',15z';
+      $map_link = l(t('map'), $map_url, array(
+        'attributes' => array(
+          'target' => '_blank',
+        )
+      ));
+
+      // Get contact(s).
+      $contacts = $wrapper->field_event_contact->value();
+      $contact_list = cluster_events_get_contact_list($contacts);
+
+      $static_map = cluster_events_create_map_with_link($geo, $wrapper->title->value());
+
+      $events[] = array(
+        'is_future' => $is_future,
+        'is_past' => $is_past,
+        'date' => $date,
+        'title' => t($wrapper->title->value()),
+        'link' => l($wrapper->title->value(), 'node/' . $node->nid),
+        'location' => field_view_field('node', $node, 'field_postal_address', 'teaser'),
+        'map_link' => $map_link,
+        'static_map' => $static_map,
+        'contact' => $contact_list,
+        'description' => field_view_field('node', $node, 'body', 'teaser'),
+      );
+    }
+    catch (EntityMetadataWrapperException $exception) {
+      _log_entity_metadata_wrapper_error($exception, 'cluster_events');
+    }
+  }
+  return $events;
+}
+
+/**
+ * Implements hook_preprocess_node().
+ */
+function cluster_events_preprocess_node(&$variables) {
+  if ($variables['type'] == 'event') {
+    $variables['static_map'] = FALSE;
+    $variables['map_link'] = FALSE;
+    try {
+      $wrapper = entity_metadata_wrapper('node', $variables['node']);
+      $geo = $wrapper->field_coordinates->value();
+
+      // Get contact(s).
+      $contacts = $wrapper->field_event_contact->value();
+      $contact_list = cluster_events_get_contact_list($contacts);
+
+      // Replace the field with our custom contact list.
+      if ($contact_list) {
+        $variables['content']['field_event_contact'] = array(
+          '#weight' => 2,
+          '#markup' => $contact_list,
+          '#prefix' => '<div class="field"><div class="field-label">Contact:&nbsp;</div>',
+          '#suffix' => '</div></div>'
+        );
+      }
+
+      // Static map image.
+      $variables['static_map'] = cluster_events_create_map_with_link($geo, $wrapper->title->value());
+    }
+    catch (EntityMetadataWrapperException $exception) {
+      _log_entity_metadata_wrapper_error($exception, 'cluster_events');
+    }
+  }
+}
+
+/**
+ * Returns a map linking back to the Google maps.
+ */
+function cluster_events_create_map_with_link($geo = NULL, $map_title = '') {
+  $static_map = FALSE;
+  if (!empty($geo)) {
+    $map_url = 'https://www.google.ca/maps/place/' . $geo['lat'] . ',' . $geo['lon'] . '/@' . $geo['lat'] . ',' . $geo['lon'] . ',15z';
+    $static_map_url = 'http://maps.googleapis.com/maps/api/staticmap?center=' . $geo['lat'] . ',' . $geo['lon'] . '&zoom=15&scale=1&size=300x200&maptype=roadmap&format=png&visual_refresh=true&markers=size:small|color:0x000000|label:1|' . $geo['lat'] . ',' . $geo['lon'];
+    $static_map_description = t('Map to ') . $map_title;
+    $static_map = theme('image', array(
+      'path' => $static_map_url,
+      'alt' => $static_map_description,
+      'title' => $static_map_description,
+    ));
+    $static_map = l($static_map, $map_url, array('html' => TRUE, 'attributes' => array('target' => '_blank')));
+  }
+  return $static_map;
+}
+
+/**
+ * Returns a list of contact links.
+ */
+function cluster_events_get_contact_list($contacts = FALSE) {
+  $contact_list = FALSE;
+
+  if (!empty($contacts)) {
+    $contact_email = '';
+    $last_contact = count($contacts) - 1;
+    // Get all the contacts and email address.
+    foreach ($contacts as $index => $contact) {
+      $separator = ", ";
+      if ($index == $last_contact) {
+        $separator = '';
+      }
+      $contact_name = $contact->title;
+      $contact_email = $contact->field_email['und']['0']['email'];
+
+      $contact_link = '';
+      $options = array();
+      $contact_link = l(t($contact_name), 'mailto:' . $contact_email, $options, array('attributes' => array('class' => array('contact-link'))));
+
+      $contact_list .= $contact_link . $separator;
+    }
+  }
+  return $contact_list;
 }

@@ -1,7 +1,7 @@
 <ul class="nav-items clearfix">
   <?php foreach ($items as $item): ?>
   <li class="nav-item">
-    <?php print $item; ?>
+    <?php print render($item['link']); ?>
   </li>
   <?php endforeach; ?>
 </ul>

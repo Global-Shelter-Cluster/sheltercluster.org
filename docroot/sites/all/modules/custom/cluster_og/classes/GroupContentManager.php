@@ -63,6 +63,7 @@ class GroupContentManager {
       ->entityCondition('bundle', 'page')
       ->fieldCondition('og_group_ref', 'target_id', $this->node->nid)
       ->propertyCondition('status', NODE_PUBLISHED)
+      ->fieldOrderBy('field_sorting_weight', 'value', 'ASC')
       ->execute();
     if (isset($result['node'])) {
       return array_keys($result['node']);
@@ -71,8 +72,28 @@ class GroupContentManager {
   }
 
   /**
-   * Finds a strategic advisory node for the current group.
-   * If there is more than one, it is not defined which one will be returned.
+   * Get useful links, if any.
+   */
+  public function getUsefulLinks() {
+    if (!isset($this->node->field_useful_links)) {
+      return array();
+    }
+
+    $wrapper = entity_metadata_wrapper('node', $this->node);
+    $links = array();
+    foreach ($wrapper->field_useful_links->value() as $link) {
+
+      $new_link = new stdClass;
+      $new_link->title = $link['title'] ? $link['title'] : $link['display_url'];
+      $new_link->url = $link['url'];
+      $links[] = $new_link;
+    }
+
+    return $links;
+  }
+
+  /**
+   * Get one strategic advisory node for the current group.
    *
    * @return
    *   Loaded node object of bundle type strategic_advisory, or FALSE if none exist.
@@ -83,6 +104,7 @@ class GroupContentManager {
       ->entityCondition('bundle', 'strategic_advisory')
       ->fieldCondition('field_parent_response', 'target_id', $this->node->nid)
       ->propertyCondition('status', NODE_PUBLISHED)
+      ->fieldOrderBy('field_sorting_weight', 'value', 'ASC')
       ->execute();
 
     if (isset($result['node'])) {
@@ -149,7 +171,7 @@ class GroupContentManager {
 
   /**
    * Get contact content for the group.
-   *  @return 
+   *  @return
    */
   public function getContactMembers() {
     $query = new EntityFieldQuery();
@@ -157,6 +179,7 @@ class GroupContentManager {
       ->entityCondition('bundle', 'contact')
       ->fieldCondition('og_group_ref', 'target_id', $this->node->nid)
       ->propertyCondition('status', NODE_PUBLISHED)
+      ->fieldOrderBy('field_sorting_weight', 'value', 'ASC')
       ->execute();
 
     if (!isset($res['node'])) {
@@ -197,22 +220,22 @@ class GroupContentManager {
    * @return
    *  nid, FALSE if none exist.
    */
-  public function getUpcomingEvent() {
+  public function getUpcomingEvents($range = 3) {
     $query = new EntityFieldQuery();
     $res = $query->entityCondition('entity_type', 'node')
       ->entityCondition('bundle', 'event')
       ->fieldCondition('og_group_ref', 'target_id', $this->node->nid)
-      ->fieldCondition('field_event_date', 'value', date('Y-m-d'), '>')
+      ->fieldCondition('field_recurring_event_date', 'value', date('Y-m-d'), '>')
       ->propertyCondition('status', NODE_PUBLISHED)
-      ->fieldOrderBy('field_event_date', 'value')
-      ->range(0, 1)
+      ->fieldOrderBy('field_recurring_event_date', 'value', 'ASC')
+      ->range(0, $range)
       ->execute();
 
     if (!isset($res['node'])) {
       return FALSE;
     }
 
-    return key($res['node']);
+    return array_keys($res['node']);
   }
 
   /**
@@ -221,7 +244,7 @@ class GroupContentManager {
    *  @return
    *    Document node ids for group or FALSE if none exist.
    */
-  public function getRecentDocuments($range = 5) {
+  public function getRecentDocuments($range = 6, $even = TRUE) {
     $query = new EntityFieldQuery();
     $res = $query->entityCondition('entity_type', 'node')
       ->entityCondition('bundle', 'document')
@@ -235,6 +258,15 @@ class GroupContentManager {
       return FALSE;
     }
 
+    // Insure an even number of recent documents.
+    if ($even) {
+      if ((count($res['node']) % 2) == 1) {
+        array_pop($res['node']);
+        if (count($res['node']) == 0) {
+          return FALSE;
+        }
+      }
+    }
     return array_keys($res['node']);
   }
 
@@ -271,7 +303,7 @@ class GroupContentManager {
       ->entityCondition('bundle', array('library', 'arbitrary_library'), 'IN')
       ->fieldCondition('og_group_ref', 'target_id', $this->node->nid)
       ->propertyCondition('status', NODE_PUBLISHED)
-      ->propertyOrderBy('title')
+      ->fieldOrderBy('field_sorting_weight', 'value', 'ASC')
       ->execute();
 
     if (!isset($res['node'])) {
@@ -324,9 +356,6 @@ class GroupContentManager {
       ->execute()->fetchCol();
   }
 
-  /**
-   * @TODO write doc for this method.
-   */
   public function getDescendantIds($include_self = FALSE, &$collected_nids = array()) {
     if (!$this->parent_field) {
       return NULL;
@@ -403,8 +432,9 @@ class GroupContentManager {
         $return_nids = array_merge($return_nids, $parent_nids);
       }
 
-      // We call array_unique just in case there are duplicates. There shouldn't be any.
-      return array_unique($return_nids);
+      $return_sorted_nids = shelter_base_sort_nids_by_weight($return_nids);
+
+      return array_unique($return_sorted_nids);
 
     }
     elseif ($include_self) {
@@ -429,15 +459,11 @@ class GroupContentManager {
 
     $wrapper = entity_metadata_wrapper('node', $this->node);
     $disabled = $wrapper->field_group_modules->value();
-
     return !in_array($module, $disabled);
   }
 
 }
 
-/**
- * @TODO describe class.
- */
 class GroupContentManagerResponse extends GroupContentManager {
   protected $parent_field = 'field_parent_response';
 
@@ -454,9 +480,6 @@ class GroupContentManagerResponse extends GroupContentManager {
   }
 }
 
-/**
- * @TODO describe class.
- */
 class GroupContentManagerGeographicRegion extends GroupContentManager {
   protected $parent_field = 'field_parent_region';
 
@@ -473,14 +496,11 @@ class GroupContentManagerGeographicRegion extends GroupContentManager {
   }
 }
 
-/**
- * @TODO describe class.
- */
 class GroupContentManagerStategicAdvisory extends GroupContentManager {
   //protected $parent_field = 'field_parent_region';
 
   /**
-   * Get the node to which a Strategic Advisory Group is associated. 
+   * Get the node to which a Strategic Advisory Group is associated.
    * @return
    *   The parent node for Strategic Advisory group or FALSE if none exist.
    */
@@ -494,4 +514,178 @@ class GroupContentManagerStategicAdvisory extends GroupContentManager {
       return $wrapper->field_parent_region->value();
     }
   }
+}
+
+class GroupContentManagerRSS extends GroupContentManager {
+
+  /**
+   * Return the summary or the trimmed body.
+   */
+  private function rssSummaryOrTrimmed($body, $summary) {
+    if (!empty($summary)) {
+      return drupal_html_to_text($summary);
+    }
+    return text_summary($body, 'plain_text');
+  }
+
+  /**
+   * Basic query to select common fields.
+   *
+   * @return object
+   *   Returns a SelectQuery.
+   */
+  private function getRSSBasicQuery($nids) {
+    $query = db_select('node', 'n');
+    $query->condition('n.nid', $nids, 'IN');
+    $query->join('field_data_body', 'b', 'b.entity_id = n.nid');
+    $query->fields('n', array('nid', 'title', 'created'));
+    $query->fields('b', array('body_value', 'body_summary'));
+    return $query;
+  }
+
+  /**
+   * Returns RSS data for discussions.
+   */
+  public function getDiscussionsRSSData() {
+    $cache_name = implode(':', array(__FUNCTION__, $this->node->nid));
+    $cache = cache_get($cache_name);
+    if ($cache && time() < $cache->expire) {
+      $results = $cache->data;
+    }
+    else {
+      global $language;
+
+      $build_date = time();
+
+      $nids_query = search_api_query('default_node_index', array(
+        'languages' => array($language->language),
+      ));
+      $filter = $nids_query->createFilter();
+      $filter->condition('og_group_ref', $this->node->nid);
+      $filter->condition('type', 'discussion');
+      $nids_query->filter($filter);
+      $nids_query->sort('changed', 'DESC');
+
+      $nids_results = $nids_query->execute();
+
+      if (!isset($nids_results['results'])
+      || !count($nids_results['results'])) {
+        return array(array(), REQUEST_TIME);
+      }
+
+      $nids = array_keys($nids_results['results']);
+      $query = $this->getRSSBasicQuery($nids);
+      $results = $query->execute()->fetchAllAssoc('nid');
+
+      global $base_root;
+
+      // Using the items selected in the query, we compute some other fields
+      // that should be exported to the templates.
+      foreach ($results as $nid => &$result) {
+        $result->url = $base_root . '/' . drupal_get_path_alias('node/' . $nid);
+        $result->guid = $base_root . '/node/' . $nid;
+        $result->pubDate = format_date($result->created, 'custom', 'D, d M Y H:i:s O');
+        $result->description = $this->rssSummaryOrTrimmed($result->body_value, $result->body_summary);
+      }
+      cache_set($cache_name, $results, 'cache', time() + 60);
+    }
+    return array(
+      $results,
+      isset($cache->created) ? $cache->created : REQUEST_TIME,
+    );
+  }
+
+  /**
+   * Returns RSS data for documents.
+   */
+  public function getDocsRSSData() {
+    $cache_name = implode(':', array(__FUNCTION__, $this->node->nid));
+    $cache = cache_get($cache_name);
+    if ($cache && time() < $cache->expire) {
+      $results = $cache->data;
+    }
+    else {
+      $nids_query = cluster_docs_query();
+      $filter = $nids_query->createFilter();
+      $filter->condition('og_group_ref', $this->node->nid);
+      $nids_query->filter($filter);
+      $nids_results = $nids_query->execute();
+
+      if (!isset($nids_results['results'])
+      || !count($nids_results['results'])) {
+        return array(array(), REQUEST_TIME);
+      }
+
+      $nids = array_keys($nids_results['results']);
+      $query = $this->getRSSBasicQuery($nids);
+      $results = $query->execute()->fetchAllAssoc('nid');
+
+      global $base_root;
+
+      // Using the items selected in the query, we compute some other fields
+      // that should be exported to the templates.
+      foreach ($results as $nid => &$result) {
+        $result->url = $base_root . '/' . drupal_get_path_alias('node/' . $nid);
+        $result->guid = $base_root . '/node/' . $nid;
+        $result->pubDate = format_date($result->created, 'custom', 'D, d M Y H:i:s O');
+        $result->description = $this->rssSummaryOrTrimmed($result->body_value, $result->body_summary);
+      }
+      cache_set($cache_name, $results, 'cache', time() + 60);
+    }
+    return array(
+      $results,
+      isset($cache->created) ? $cache->created : REQUEST_TIME,
+    );
+  }
+
+  /**
+   * Returns RSS data for Events.
+   */
+  public function getEventsRSSData() {
+    $cache_name = implode(':', array(__FUNCTION__, $this->node->nid));
+    $cache = cache_get($cache_name);
+    if ($cache && time() < $cache->expire) {
+      $results = $cache->data;
+    }
+    else {
+      $nids_query = new EntityFieldQuery();
+      $nids_query->entityCondition('entity_type', 'node')
+        ->entityCondition('bundle', 'event')
+        ->fieldCondition('og_group_ref', 'target_id', $this->node->nid)
+        ->propertyCondition('status', NODE_PUBLISHED)
+        ->fieldOrderBy('field_recurring_event_date', 'value', 'DESC');
+
+      $nids_results = $nids_query->execute();
+      if (!isset($nids_results['node'])
+      || !count($nids_results['node'])) {
+        return array(array(), REQUEST_TIME);
+      }
+
+      $nids = array_keys($nids_results['node']);
+      $query = $this->getRSSBasicQuery($nids);
+      $query->join('field_data_field_recurring_event_date', 'e', 'e.entity_id = n.nid');
+      $query->fields('e', array('field_recurring_event_date_value'));
+      $results = $query->execute()->fetchAllAssoc('nid');
+
+      global $base_root;
+
+      // Using the items selected in the query, we compute some other fields
+      // that should be exported to the templates.
+      foreach ($results as $nid => &$result) {
+        $result->url = $base_root . '/' . drupal_get_path_alias('node/' . $nid);
+        $result->guid = $base_root . '/node/' . $nid;
+        $result->pubDate = format_date($result->created, 'custom', 'D, d M Y H:i:s O');
+        $time = new DateTime($result->field_recurring_event_date_value);
+        $unixdate = $time->getTimestamp();
+        $result->eventDate = format_date($unixdate, 'custom', 'D, d M Y H:i:s O');
+        $result->description = $this->rssSummaryOrTrimmed($result->body_value, $result->body_summary);
+      }
+      cache_set($cache_name, $results, 'cache', time() + 60);
+    }
+    return array(
+      $results,
+      isset($cache->created) ? $cache->created : REQUEST_TIME,
+    );
+  }
+
 }

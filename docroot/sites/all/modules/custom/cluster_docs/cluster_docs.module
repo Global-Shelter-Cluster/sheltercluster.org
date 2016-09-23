@@ -24,6 +24,14 @@ function cluster_docs_menu() {
     'title arguments' => array(1),
     'type' => MENU_CALLBACK,
   );
+
+  $items['search-documents'] = array(
+    'title' => 'Search documents',
+    'access arguments' => array('access content'),
+    'page callback' => 'cluster_docs_global_search',
+    'type' => MENU_CALLBACK,
+  );
+
   return $items;
 }
 
@@ -54,6 +62,31 @@ function _cluster_docs_title_callback($nid) {
 }
 
 /**
+ * Return the 5 most recent documents.
+ *
+ * @return [type] [description]
+ */
+function cluster_docs_recent() {
+  $query = new EntityFieldQuery();
+  $query->entityCondition('entity_type', 'node')
+    ->entityCondition('bundle', 'document')
+    ->propertyCondition('status', NODE_PUBLISHED)
+    ->propertyOrderBy('created', 'DESC')
+    ->range(0, 5);
+  $results = $query->execute();
+  if (!isset($results['node'])) {
+    return FALSE;
+  }
+  $nids = array_keys($results['node']);
+  $docs = cluster_docs_prepare_row_data($nids, TRUE);
+
+  return theme('cluster_og_recent_documents', array(
+    'docs' => $docs,
+    'all_documents_link' => '/search-documents',
+  ));
+}
+
+/**
  * Page callback, shows a group's documents using Search API.
  * @param $nid
  * @return Render array
@@ -66,6 +99,19 @@ function cluster_docs_all($nid) {
   $query->filter($filter);
 
   return cluster_docs_page($query);
+}
+
+/**
+ * Page callback to show all documents of the website.
+ *
+ * @return Render array
+ */
+function cluster_docs_global_search() {
+  $query = cluster_docs_query();
+
+  $filter = $query->createFilter();
+  $query->filter($filter);
+  return cluster_docs_page($query, TRUE, NULL, NULL, array(), TRUE);
 }
 
 /**
@@ -116,14 +162,15 @@ function cluster_docs_taxonomies() {
  * @param string|null $default_sort
  * @param string|null $default_sort_direction
  * @param array $excluded_facets
+ * @param $show_related_groups: indicates that the function is meant to show the global docs search page.
  * @return array
  */
-function cluster_docs_page($query, $show_facets = TRUE, $default_sort = NULL, $default_sort_direction = NULL, $excluded_facets = array()) {
+function cluster_docs_page($query, $show_facets = TRUE, $default_sort = NULL, $default_sort_direction = NULL, $excluded_facets = array(), $show_related_groups = FALSE) {
   // Figure out the sort column and direction from $_GET (store in $sort_key and $sort_direction).
   $sort_options = array(
     'title' => 'title_field',
     'size' => 'field_file:file:size',
-    'date' => 'created',
+    'date' => 'field_report_meeting_date',
   );
   $sort_key = $default_sort;
   $sort_direction = isset($_GET['sort_direction'])
@@ -136,9 +183,13 @@ function cluster_docs_page($query, $show_facets = TRUE, $default_sort = NULL, $d
 
   if ($sort_key) {
     $sort_field = $sort_options[$sort_key];
-
-    // Tell the actual query the sort criteria
     $query->sort($sort_field, $sort_direction);
+  }
+
+  // If there is no sort key by default make the search by date on the DESC order.
+  if (!$sort_key) {
+    $sort_field = $sort_options['date'];
+    $query->sort($sort_field, 'DESC');
   }
 
   // Build "query" params for the header links.
@@ -152,25 +203,25 @@ function cluster_docs_page($query, $show_facets = TRUE, $default_sort = NULL, $d
     }
 
     if ($sort_key == $key && $sort_direction == 'ASC') {
-      // Already sorting in ASC, next click turns it into DESC
+      // Already sorting in ASC, next click turns it into DESC.
       $params['sort_direction'] = 'DESC';
     }
     elseif ($sort_key == $key && $sort_direction == 'DESC') {
-      // Sorting in DESC, next click disables sorting altogether
+      // Sorting in DESC, next click disables sorting altogether.
       unset($params['sort']);
     }
 
     $sort_link_params[$key] = $params;
   }
 
-  // Pagination
+  // Pagination.
   $offset = pager_find_page() * CLUSTER_DOCS_PER_PAGE;
   $query->range($offset, CLUSTER_DOCS_PER_PAGE);
 
-  // Execute the actual query using Search API
+  // Execute the actual query using Search API.
   $results = $query->execute();
 
-  // This is necessary for the pager to work
+  // This is necessary for the pager to work.
   pager_default_initialize($results['result count'], CLUSTER_DOCS_PER_PAGE);
 
   // "Reset filters" link (shown in two places)
@@ -259,7 +310,7 @@ function cluster_docs_page($query, $show_facets = TRUE, $default_sort = NULL, $d
     array(
       '#theme' => 'cluster_docs_table_list',
       '#heading' => t('Documents') . ' (' . $results['result count'] . ')',
-      '#docs' => $result_nids ? cluster_docs_prepare_row_data($result_nids) : FALSE,
+      '#docs' => $result_nids ? cluster_docs_prepare_row_data($result_nids, $show_related_groups) : FALSE,
       '#reset_link' => $reset_link ? render($reset_link) : NULL,
       '#sort_link_params' => $sort_link_params,
       '#sort_column' => $sort_key,
@@ -345,12 +396,7 @@ function cluster_docs_prepare_card_data($nids) {
       $wrapper = entity_metadata_wrapper('node', $node);
       $doc['title'] = $wrapper->label();
 
-      if ($file = $wrapper->field_file->value()) {
-        $url = file_create_url($file['uri']);
-      }
-      else {
-        $url = $wrapper->field_link->url->value();
-      }
+      $url = cluster_docs_get_download_url($node);
       $doc['link_url'] = $url;
       $doc['link'] = l('<span>' . $doc['title'] . '</span>', $url, array('attributes' => array('target' => '_blank'),'html' => TRUE));
 
@@ -430,6 +476,20 @@ function cluster_docs_prepare_card_data($nids) {
   return $docs;
 }
 
+function cluster_docs_get_download_url($node) {
+  if ($node->type != 'document') {
+    return;
+  }
+
+  $wrapper = entity_metadata_wrapper('node', $node);
+  if ($file = $wrapper->field_file->value()) {
+    return file_create_url($file['uri']);
+  }
+  else {
+    return $wrapper->field_link->url->value();
+  }
+}
+
 /**
  * Prepare the data for document table rows.
  * @param $nids
@@ -437,13 +497,14 @@ function cluster_docs_prepare_card_data($nids) {
  * @return
  *  Array of document data ready to be used in cards lists.
  */
-function cluster_docs_prepare_row_data($nids) {
+function cluster_docs_prepare_row_data($nids, $show_related_groups = FALSE) {
   $docs = array();
   $properties = array('title', 'link', 'link_url', 'is_link', 'is_file', 'is_file_class', 'description', 'filesize',
     'file_extension', 'is_image', 'image_uri', 'has_preview', 'preview_uri', 'source',);
 
   global $language;
   $langcode = $language->language;
+
   foreach (node_load_multiple($nids) as $node) {
     // Set default values.
     $doc = array_fill_keys($properties, FALSE);
@@ -454,12 +515,43 @@ function cluster_docs_prepare_row_data($nids) {
       $wrapper->language($language->language);
       $doc['title'] = $wrapper->label();
 
-      if ($file = $wrapper->field_file->value()) {
-        $url = file_create_url($file['uri']);
+      // Insert the group on the table
+      // Group logic
+      $group_title = '';
+      $group_wrapper = $wrapper->og_membership->value();
+
+      // Create group links.
+      $doc['group'] = '';
+      if ($show_related_groups) {
+        $doc['group'] = t('Part of ');
+        $last_group = count($group_wrapper) - 1;
+        // Get all the groups ids for a document.
+        foreach ($group_wrapper as $index => $value) {
+          $separator = ", ";
+          if ($index == $last_group) {
+            $separator = '';
+          }
+          $group_id = $value->gid;
+          $group_node = node_load($group_id);
+          $group_title = $group_node->title;
+          $group_alias = drupal_get_path_alias('node/' . $group_id . '/documents');
+
+          $group_link = '';
+          $options = array();
+          if (isset($_GET['f'])) {
+            foreach ($_GET['f'] as $key => $facet_value) {
+              // Add the f[] string to each array key.
+              $facets['f[' . $key . ']'] = $facet_value;
+            }
+            $options['query'] = array($facets);
+          }
+          $group_link = l(t($group_title), '/' . $group_alias, $options, array('attributes' => array('class' => array('documents-link'))));
+
+          $doc['group'] .= $group_link . $separator;
+        }
       }
-      else {
-        $url = $wrapper->field_link->url->value();
-      }
+
+      $url = cluster_docs_get_download_url($node);
       $doc['link_url'] = $url;
       $doc['link'] = l($doc['title'], $url, array('attributes' => array('target' => '_blank')));
       $doc['edit_link'] = node_access('update', $node) ? l('edit', 'node/'.$node->nid.'/edit') : '';
@@ -520,8 +612,15 @@ function cluster_docs_prepare_row_data($nids) {
         $doc['is_link'] = TRUE;
       }
 
+      // Set the report/meeting date.
+      $report_meeting_date = $wrapper->field_report_meeting_date->value();
+      $doc['date'] = $report_meeting_date ? format_date($report_meeting_date, 'custom', 'Y/m/d') : NULL;
+
       // Set the publication date.
       $doc['publication_date'] = format_date($node->created, 'custom', 'Y/m/d');
+
+      // Set the group referencing this
+      $doc['group_references'] = $wrapper->og_group_ref->value();
 
       $docs[] = $doc;
 
@@ -557,6 +656,26 @@ function cluster_docs_node_view($node, $view_mode) {
   if ($node->type == 'document' && $view_mode == 'full' && ! user_access('view document full node')) {
     drupal_access_denied();
   }
+}
+
+/**
+ * Implements hook_preprocess_search_result().
+ */
+function cluster_docs_preprocess_search_result(&$vars) {
+  if (!isset($vars['result']['node'])) {
+    return;
+  }
+
+  $node = $vars['result']['node'];
+  if ($node->type != 'document') {
+    return;
+  }
+
+  if (user_access('view document full node')) {
+    return;
+  }
+
+  $vars['url'] = cluster_docs_get_download_url($node);
 }
 
 /**
@@ -612,4 +731,70 @@ function cluster_docs_theme() {
       'file' => 'theme/cluster_docs.theme.inc',
     )
   );
+}
+
+/**
+ * Implements hook_node_presave().
+ */
+function cluster_docs_node_presave($node) {
+  if ($node->type != 'document') {
+    return;
+  }
+
+  if ($node->nid) {
+    //Only do this for new nodes.
+    return;
+  }
+
+  $wrapper = entity_metadata_wrapper('node', $node);
+
+  $groups = $wrapper->og_group_ref->value();
+  $responses = array();
+  $new_groups = array();
+  foreach ($groups as $group) {
+    if ($group->type == 'response') {
+      $responses[] = $group->nid;
+    }
+    if (!in_array($group->type, array('working_group', 'hub', 'strategic_advisory'))) {
+      continue;
+    }
+    $group_wrapper = entity_metadata_wrapper('node', $group);
+    $parent_response = $group_wrapper->field_parent_response->value();
+    if ($parent_response && !in_array($parent_response->nid, $responses)) {
+      $new_groups[] = $parent_response;
+      $responses[] = $parent_response->nid;
+    }
+  }
+
+  if ($new_groups) {
+    $wrapper->og_group_ref->set(array_merge($groups, $new_groups));
+  }
+}
+
+/**
+ * [cluster_docs_search_autocomplete description]
+ * @param  [string] $string [String that user entered]
+ * @return [array]         [The results of the query]
+ */
+function cluster_docs_search_autocomplete($string, $nid = NULL) {
+  $matches = array();
+  $query = db_select('node', 'dni');
+  $query->fields('dni', array('title'));
+  $query->condition('title', '%' . db_like($string) . '%', 'LIKE');
+  $query->range(0, 20);
+
+  if ($nid) {
+    $query->condition('nid', $nid);
+  }
+
+  $results = $query->execute();
+
+  // add matches to $matches
+  foreach ($results as $row) {
+    $matches[$row->title] = check_plain($row->title);
+  }
+
+  // return for JS
+  drupal_json_output($matches);
+  exit();
 }

@@ -33,7 +33,11 @@
           <?php print render($user_menu); ?>
         </div>
 
-        <?php print render($search_form); ?>
+        <?php if ($global_docs_search_page_link): ?>
+          <div class="search-documents-link-wrapper">
+            <?php print render($global_docs_search_page_link); ?>
+          </div>
+        <?php endif; ?>
 
       </div>
     </section>
@@ -67,7 +71,10 @@
   </header>
 
   <?php if ($is_front): ?>
-    <?php print partial('homepage', array('page' => $page, 'hot_responses' => $hot_responses, 'upcoming_events' => $upcoming_events)); ?>
+    <?php print partial('homepage', array('page' => $page, 'hot_responses' => $hot_responses, 'upcoming_events' => $upcoming_events, 'recent_documents' => $recent_documents)); ?>
+
+  <?php elseif ($global_events_page): ?>
+    <?php print partial('homepage', array('page' => $page, 'hot_responses' => $hot_responses, 'upcoming_events' => FALSE, 'recent_documents' => FALSE)); ?>
 
   <?php elseif ($is_regions_and_countries): ?>
     <?php print partial('regions', array('page' => $page)); ?>
@@ -81,7 +88,7 @@
       ?>
     </div>
 
-  <?php elseif ($dashboard_menu): ?>
+  <?php elseif ($dashboard_menu || $is_search_documents): ?>
 
     <div class="page-margin clearfix">
       <?php print partial('non_dashboard_group_page', array(
@@ -100,6 +107,6 @@
 
   <?php endif; ?>
 
-  <?php print partial('footer', array('page' => $page, 'search_form_bottom' => $search_form_bottom)); ?>
+  <?php print partial('footer', array('page' => $page, 'search_form_bottom' => $search_form_bottom, 'search_documents_link' => $global_docs_search_page_link)); ?>
 
 </div>

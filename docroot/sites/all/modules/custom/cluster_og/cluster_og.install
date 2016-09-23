@@ -4,3 +4,10 @@
  * @file
  *  Install file.
  */
+
+/**
+ * Update help text.
+ */
+function cluster_og_update_7000() {
+  features_revert_module('cluster_og');
+}

@@ -15,6 +15,9 @@ function shelter_base_install() {
   _shelter_base_modules_enable('custom');
   // Set default theme.
   shelter_base_update_7003();
+  // Set default patterns for RSS.
+  shelter_base_update_7112();
+  shelter_base_update_7121();
 }
 
 function _shelter_base_module_enable_all() {
@@ -51,8 +54,9 @@ function _shelter_base_required_contrib() {
     'flag', 'i18n', 'i18n_menu', 'i18n_string', 'i18n_variable', 'imce', 'imce_wysiwyg', 'link',
     'libraries', 'name', 'og', 'og_access', 'og_register', 'og_ui', 'pathauto', 'respondjs', 'search_api',
     'search_api_db', 'search_api_facetapi', 'strongarm', 'title', 'token',
-    'transliteration',  'underscore', 'uuid', 'uuid_features', 'url', 'variable',
+    'transliteration',  'underscore', 'url', 'variable',
     'views', 'views_ui', 'views_bulk_operations', 'wysiwyg',
+    'gmap', 'geophp', 'geocoder', 'geofield', 'addressfield_autocomplete',
   );
 }
 
@@ -68,7 +72,7 @@ function _shelter_base_required_core() {
  */
 function _shelter_base_required_custom() {
   return array('cluster_context', 'cluster_discussions', 'cluster_docs', 'cluster_events', 'cluster_libraries', 'cluster_og', 'cluster_search',
-    'cluster_taxonomy', 'cluster_user', 'cluster_nav', 'cluster_nav_views', 'cluster_workflow', 'partial',
+    'cluster_taxonomy', 'cluster_user', 'cluster_nav', 'cluster_nav_views', 'cluster_workflow', 'partial', 'cluster_rss',
   );
 }
 
@@ -355,7 +359,7 @@ function shelter_base_update_7036() {
 }
 
 /**
- * Revert shelter_base 
+ * Revert shelter_base
  */
 function shelter_base_update_7037() {
   features_revert_module('shelter_base');
@@ -384,21 +388,21 @@ function shelter_base_update_7040() {
 }
 
 /**
- * Revert event feature. 
+ * Revert event feature.
  */
 function shelter_base_update_7041() {
   features_revert_module('cluster_events');
 }
 
 /**
- * Revert og feature - add multilibgual features to COP. 
+ * Revert og feature - add multilibgual features to COP.
  */
 function shelter_base_update_7042() {
   features_revert_module('cluster_og');
 }
 
 /**
- * Revert workflow feature. 
+ * Revert workflow feature.
  */
 function shelter_base_update_7043() {
   features_revert_module('cluster_workflow');
@@ -511,7 +515,7 @@ function shelter_base_update_7052() {
 }
 
 /**
- * Revert base features. 
+ * Revert base features.
  */
 function shelter_base_update_7053() {
   features_revert_module('shelter_base');
@@ -711,4 +715,519 @@ function shelter_base_update_7072() {
  */
 function shelter_base_update_7073() {
   features_revert_module('cluster_libraries');
+}
+
+/**
+ * Revert shelter base and shelter taxonomy modules feature; updates following changes made in the prod database.
+ */
+function shelter_base_update_7074() {
+  features_revert_module('cluster_taxonomy');
+  features_revert_module('shelter_base');
+}
+
+/**
+ * Revert cluster og feature for group type specific roles and permissions.
+ */
+function shelter_base_update_7075() {
+  features_revert_module('cluster_og');
+}
+
+/**
+ * Revert cluster og feature for group type specific roles and permissions.
+ */
+function shelter_base_update_7076() {
+  features_revert_module('cluster_docs');
+}
+
+/**
+ * Make it so that taxonomy terms are no longer exported in feature.
+ */
+function shelter_base_update_7077() {
+  features_revert_module('cluster_taxonomy');
+  features_revert_module('cluster_docs');
+  features_revert_module('cluster_og');
+}
+
+/**
+ * Try to disable UUID, but do something stupid instead, commit it and push it,
+ * so that it runs and now it's too late to take it back.  I'm sure this never happens to you.
+ */
+function shelter_base_update_7078() {
+  //module_disable('uuid');
+}
+
+/**
+ * Disable UUID - for real this time.
+ */
+function shelter_base_update_7079() {
+  module_disable(array('uuid'));
+}
+
+/**
+ * Enable Content feature.
+ */
+function shelter_base_update_7080() {
+  module_enable(array('cluster_content'));
+}
+
+/**
+ * Text format and wysiwyg config.
+ */
+function shelter_base_update_7081() {
+  features_revert_module('shelter_base');
+}
+
+/**
+ * Hide is_global_library field.
+ */
+function shelter_base_update_7082() {
+  features_revert_module('cluster_libraries');
+}
+
+/**
+ * Text format FULL HTML permission for dedicated role.
+ */
+function shelter_base_update_7083() {
+  features_revert_module('shelter_base');
+}
+
+/**
+ * Export full html filter permission.
+ */
+function shelter_base_update_7084() {
+  features_revert_module('shelter_base');
+}
+
+/**
+ * Enable nodequeue
+ */
+function shelter_base_update_7085() {
+  module_enable(array('nodequeue'));
+}
+
+/**
+ * Re-index site.
+ */
+function shelter_base_update_7086() {
+  features_revert(array('cluster_search'));
+  search_api_index_reindex('default_node_index');
+}
+
+/**
+ * Enable nodequeue feature extra
+ */
+function shelter_base_update_7087() {
+  module_enable(array('fe_nodequeue'));
+}
+
+/**
+ * Revert cluster_og
+ */
+function shelter_base_update_7088() {
+  features_revert_module('cluster_og');
+}
+
+/**
+ * Revert cluster_docs to allow ODF files to be uploaded as documents.
+ */
+function shelter_base_update_7089() {
+  features_revert_module('cluster_docs');
+}
+
+/**
+ * Revert cluster_og to add Useful Links field
+ */
+function shelter_base_update_7090() {
+  features_revert_module('cluster_og');
+}
+
+/**
+ * Revert cluster_docs
+ */
+function shelter_base_update_7091() {
+  features_revert_module('cluster_docs');
+}
+
+/**
+ * Add field base field sorting weight and instances to the shelter base feature.
+ */
+function shelter_base_update_7092() {
+  module_enable(array(
+    'gmap',
+    'geophp',
+    'geocoder',
+    'geofield',
+    'addressfield_autocomplete',
+    'date_repeat',
+    'date_repeat_entity',
+    'uuid',
+    'replicate',
+  ));
+  features_revert_module('shelter_base');
+}
+
+/**
+ * Add the field sorting weight instance.
+ */
+function shelter_base_update_7093() {
+  features_revert_module('cluster_og');
+}
+
+/**
+ * Add the field instance field_sorting_weight for doc content type.
+ */
+function shelter_base_update_7094() {
+  features_revert_module('cluster_docs');
+}
+
+/**
+ * Add the field instance field_sorting_weight for discussion content type.
+ */
+function shelter_base_update_7095() {
+  features_revert_module('cluster_discussions');
+}
+
+/**
+ * Add the help text to field bases.
+ */
+function shelter_base_update_7096() {
+
+
+  features_revert_module('shelter_base');
+}
+
+/**
+ * Add the help text to doc content type.
+ */
+function shelter_base_update_7097() {
+  features_revert_module('cluster_docs');
+}
+
+/**
+ * Add the help text to discussion content type.
+ */
+function shelter_base_update_7098() {
+  features_revert_module('cluster_discussions');
+}
+
+/**
+ * Add the field weight sort to arbitrary library type.
+ */
+function shelter_base_update_7099() {
+  features_revert_module('cluster_libraries');
+}
+
+/**
+ * Put library field weight instance in library feature.
+ */
+function shelter_base_update_7100() {
+  features_revert_module('shelter_base');
+}
+
+/**
+ * Populate field_sorting_weight and make it a required field.
+ */
+function shelter_base_update_7101() {
+  features_revert_module('shelter_base', 'shelter_libraries');
+}
+
+/**
+ * Set field_sorting_weight to be a required field on all content types except
+ * for documents, events and discussions.
+ * Enable geo fields required by future feature reverts.
+ */
+function shelter_base_update_7102() {
+  module_enable(array(
+    'gmap',
+    'geophp',
+    'geocoder',
+    'geofield',
+    'addressfield_autocomplete',
+  ));
+  features_revert_module('shelter_base');
+}
+
+/**
+ * Populate all necessary field_sorting_weight content types with a default value
+ */
+function shelter_base_update_7103(&$sandbox) {
+
+// Build the list of entities to update.
+  if (empty($sandbox['entity_list'])) {
+    $batch_size = 10;
+    // All entity types that need to be updated contain this field
+    $field_info = field_info_field('field_sorting_weight');
+    $omit_types = array('document', 'event', 'discussion');
+
+    // Return an array of desired content types to perform update on.
+    $accepted_bundles['node'] = array_values(array_diff($field_info['bundles']['node'], $omit_types));
+
+    $entity_list = array();
+    foreach ($accepted_bundles as $entity_type => $bundles) {
+      $query = new EntityFieldQuery();
+      $results = $query
+        ->entityCondition('entity_type', $entity_type)
+        ->entityCondition('bundle', $bundles, 'IN')
+        ->execute();
+      if (empty($results[$entity_type])) {
+        continue;
+      }
+
+      // Add ids with entity type to $entity_list for processing.
+      $ids = array_keys($results[$entity_type]);
+      $entity_list += array_map(function ($id) use ($entity_type) {
+        return array(
+          'entity_type' => $entity_type,
+          'entity_id' => $id,
+        );
+      }, $ids);
+    }
+    $sandbox['total'] = count($entity_list);
+    $sandbox['entity_list'] = array_chunk($entity_list, $batch_size);
+    $sandbox['succeeded'] = $sandbox['errored'] = $sandbox['processed_chunks'] = 0;
+    print_r($sandbox['total'] . ' chunks to be processed. This will take time. ');
+  }
+  // Processing.
+  $current_chunk = $sandbox['entity_list'][$sandbox['processed_chunks']];
+  foreach ($current_chunk as $entity_item) {
+    $success = _batch_process_sort_weight_task($entity_item['entity_id']);
+    $success ? $sandbox['succeeded']++ : $sandbox['errored']++;
+  }
+
+  // Increment number of processed chunks.
+  $sandbox['processed_chunks']++;
+
+  // When finished, display results.
+  $sandbox['#finished'] = $sandbox['processed_chunks'] / count($sandbox['entity_list']);
+
+  return t('@succeeded entities were processed correctly. @errored entities failed', array(
+    '@succeeded' => $sandbox['succeeded'],
+    '@errored' => $sandbox['errored'],
+  ));
+
+}
+
+function _batch_process_sort_weight_task($entity_id) {
+  $node = node_load($entity_id);
+  $node_wrapper = entity_metadata_wrapper('node', $node);
+  $node_wrapper->field_sorting_weight->set(0);
+  $node_wrapper->save();
+  return TRUE;
+}
+
+/**
+ * Revert cluster search feature to its initial state.
+ */
+function shelter_base_update_7104() {
+  features_revert_module('cluster_search');
+}
+
+/**
+ * Revert shelter base feature to hide field sorting weight from display.
+ */
+function shelter_base_update_7105() {
+  features_revert_module('shelter_base');
+}
+
+/**
+ * Revert cluster events feature to hide field sorting weight from display.
+ */
+function shelter_base_update_7106() {
+  module_enable(array(
+    'gmap',
+    'geophp',
+    'geocoder',
+    'geofield',
+    'addressfield_autocomplete',
+  ));
+  features_revert_module('cluster_events');
+}
+
+/**
+ * Revert cluster discussions feature to hide field sorting weight from display.
+ */
+function shelter_base_update_7107() {
+  features_revert_module('cluster_discussions');
+}
+
+/**
+ * Revert cluster docs feature to hide field sorting weight from display.
+ */
+function shelter_base_update_7108() {
+  features_revert_module('cluster_docs');
+}
+
+/**
+ * Revert cluster og feature reoder field display.
+ */
+function shelter_base_update_7109() {
+  features_revert_module('cluster_og');
+}
+
+/**
+ * Revert cluster libraries feature reoder field display.
+ */
+function shelter_base_update_7110() {
+  features_revert_module('cluster_libraries');
+}
+
+/**
+ * Enabling cluster_rss.
+ */
+function shelter_base_update_7111() {
+  module_enable(array(
+    'gmap',
+    'geophp',
+    'geocoder',
+    'geofield',
+    'addressfield_autocomplete',
+  ));
+  module_enable(array('cluster_rss'));
+}
+
+/**
+ * Setting RSS base patterns.
+ */
+function shelter_base_update_7112() {
+  variable_set('pathauto_cluster_discussions_rssdiscussions_pattern', '[node:content-type]/[node:title]/rss/discussions');
+  variable_set('pathauto_cluster_docs_rssdocs_pattern', '[node:content-type]/[node:title]/rss/documents');
+  variable_set('pathauto_cluster_events_rssevents_pattern', '[node:content-type]/[node:title]/rss/events');
+}
+
+/**
+ * Revert cluster events to add contact field.
+ */
+function shelter_base_update_7113() {
+  module_enable(array(
+    'gmap',
+    'geophp',
+    'geocoder',
+    'geofield',
+    'addressfield_autocomplete',
+  ));
+  features_revert_module('cluster_events');
+}
+
+/**
+ * Do nothing.
+ */
+function shelter_base_update_7114() {
+  // Do nothing.
+}
+
+/**
+ * Revert event module to make date field unique value.
+ */
+function shelter_base_update_7115() {
+  features_revert_module('cluster_events');
+}
+
+/**
+ * Load and save all group nodes to update path aliases.
+ */
+function shelter_base_update_7116(&$sandbox) {
+  $type = array('hub', 'response', 'community_of_practice', 'geographic_region', 'response', 'strategic_advisory', 'working_group');
+   // If this is the first pass through this update function then set some variables.
+  if (!isset($sandbox['total'])) {
+    $result = db_query('SELECT nid FROM {node} WHERE type IN (:type)', array(':type' => $type));
+    $sandbox['total'] = $result->rowCount();
+    $sandbox['current'] = 0;
+  }
+
+  // How many nodes should be processed per pass. The higher this number is, the faster your update will
+  // complete, but the more likely your server will run out of memory or timeout.
+  $nodes_per_pass = 10;
+
+  // Get the nodes to process during this pass.
+  $result = db_query_range('SELECT nid FROM {node} WHERE type IN (:type)', $sandbox['current'], $nodes_per_pass,  array(':type' => $type));
+  while ($row = $result->fetchAssoc()) {
+    // Load the node, edit its title, and save the node.
+    $node = node_load($row['nid']);
+    node_save($node);
+
+    // Increment "current" by 1.
+    $sandbox['current']++;
+  }
+
+  // Set the value for finished. If current == total then finished will be 1, signifying we are done.
+  $sandbox['#finished'] = ($sandbox['current'] / $sandbox['total']);
+
+  if ($sandbox['#finished'] === 1) {
+    drupal_set_message(t('We processed @nodes nodes. DONE!!!', array('@nodes' => $sandbox['total'])));
+  }
+}
+
+/**
+ * Revert cluster events and copy field data. Set the event content type to use date repeat entity.
+ */
+function shelter_base_update_7117() {
+  module_enable(array(
+    'date_repeat',
+    'date_repeat_entity',
+    'uuid',
+    'replicate',
+  ));
+
+  features_revert_module('cluster_events');
+
+  $items = db_select('field_data_field_event_date', 'f')->fields('f')->execute()->fetchAll();
+  foreach ($items as $item) {
+    $data = array(
+      'entity_type' => $item->entity_type,
+      'bundle' => $item->bundle,
+      'deleted' => $item->deleted,
+      'entity_id' => $item->entity_id,
+      'revision_id' => $item->revision_id,
+      'language' => $item->language,
+      'delta' => $item->delta,
+      'field_recurring_event_date_value' => $item->field_event_date_value,
+      'field_recurring_event_date_rrule' => NULL,
+    );
+    db_insert('field_data_field_recurring_event_date')->fields($data)->execute();
+    db_insert('field_revision_field_recurring_event_date')->fields($data)->execute();
+  }
+  variable_set('date_repeat_entity_bundles_available', array('event' => 'event'));
+}
+
+/**
+ * Setting RSS pattern.
+ */
+function shelter_base_update_7121() {
+  variable_set('pathauto_cluster_rss_clusterrss_pattern', '[node:content-type]/[node:title]/rss');
+}
+
+/**
+ * Deleting the old unused Date field on events and revert cluster events.
+ */
+function shelter_base_update_7122() {
+  field_delete_field('field_event_date');
+  features_revert_module('cluster_events');
+}
+
+/**
+ * Revert cluster_events.
+ */
+function shelter_base_update_7123() {
+  features_revert_module('cluster_events');
+}
+
+/**
+ * Disable shelter_migrate.
+ */
+function shelter_base_update_7124() {
+  module_disable(array('shelter_migrate'));
+}
+
+/**
+ * Disable user configurable timezones so timezones dont screw with event times
+ */
+function shelter_base_update_7125() {
+  features_revert_module('shelter_events');
+}
+
+/**
+ * Add addtoical module and set configuration for display
+ */
+function shelter_base_update_7126() {
+  features_revert_module('cluster_events');
 }

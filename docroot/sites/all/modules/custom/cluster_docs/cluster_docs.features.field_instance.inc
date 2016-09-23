@@ -214,7 +214,7 @@ function cluster_docs_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 12,
+      'weight' => 11,
     ),
   );
 
@@ -254,7 +254,7 @@ function cluster_docs_field_default_field_instances() {
         'apply_chosen' => '',
       ),
       'type' => 'options_buttons',
-      'weight' => 13,
+      'weight' => 12,
     ),
   );
 
@@ -298,7 +298,7 @@ function cluster_docs_field_default_field_instances() {
         'display_label' => 1,
       ),
       'type' => 'options_onoff',
-      'weight' => 6,
+      'weight' => 5,
     ),
   );
 
@@ -330,7 +330,7 @@ function cluster_docs_field_default_field_instances() {
       'description_field' => 0,
       'entity_translation_sync' => FALSE,
       'file_directory' => 'docs',
-      'file_extensions' => 'txt rtf pdf doc docx dotx xls xlsx ppt pptx png jpg jpeg gif',
+      'file_extensions' => 'txt rtf pdf doc docx dotx xls xlsx ppt pptx png jpg jpeg gif zip odf',
       'max_filesize' => '20 MB',
       'user_register_form' => FALSE,
     ),
@@ -341,7 +341,7 @@ function cluster_docs_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'file_generic',
-      'weight' => 7,
+      'weight' => 6,
     ),
   );
 
@@ -643,7 +643,7 @@ function cluster_docs_field_default_field_instances() {
       'module' => 'link',
       'settings' => array(),
       'type' => 'link_field',
-      'weight' => 8,
+      'weight' => 7,
     ),
   );
 
@@ -762,7 +762,7 @@ function cluster_docs_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 17,
+      'weight' => 15,
     ),
   );
 
@@ -813,7 +813,7 @@ function cluster_docs_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'image_image',
-      'weight' => 10,
+      'weight' => 9,
     ),
   );
 
@@ -832,6 +832,7 @@ function cluster_docs_field_default_field_instances() {
           'multiple_from' => '',
           'multiple_number' => '',
           'multiple_to' => '',
+          'show_repeat_rule' => 'show',
         ),
         'type' => 'date_default',
         'weight' => 22,
@@ -863,11 +864,12 @@ function cluster_docs_field_default_field_instances() {
         'input_format' => 'm/d/Y - H:i:s',
         'input_format_custom' => '',
         'label_position' => 'above',
+        'repeat_collapsed' => 0,
         'text_parts' => array(),
         'year_range' => '-3:+3',
       ),
       'type' => 'date_text',
-      'weight' => 11,
+      'weight' => 10,
     ),
   );
 
@@ -948,6 +950,51 @@ function cluster_docs_field_default_field_instances() {
       ),
       'type' => 'options_buttons',
       'weight' => 41,
+    ),
+  );
+
+  // Exported field_instance: 'node-document-field_sorting_weight'
+  $field_instances['node-document-field_sorting_weight'] = array(
+    'bundle' => 'document',
+    'default_value' => array(
+      0 => array(
+        'value' => 0,
+      ),
+    ),
+    'deleted' => 0,
+    'description' => 'When displayed in sortable lists within group pages, the content will be ordered using this weight field. Smaller values will show up first, bigger values last.',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 30,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_sorting_weight',
+    'label' => 'Sorting weight',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'max' => '',
+      'min' => '',
+      'prefix' => '',
+      'suffix' => '',
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 0,
+      'module' => 'number',
+      'settings' => array(),
+      'type' => 'number',
+      'weight' => 16,
     ),
   );
 
@@ -1087,7 +1134,7 @@ function cluster_docs_field_default_field_instances() {
       'module' => 'og',
       'settings' => array(),
       'type' => 'og_complex',
-      'weight' => 9,
+      'weight' => 8,
     ),
   );
 
@@ -1237,10 +1284,12 @@ function cluster_docs_field_default_field_instances() {
   t('Report / Meeting date');
   t('Response Phase');
   t('Settlement Type');
+  t('Sorting weight');
   t('Source');
   t('Technical Support and Design');
   t('Title');
   t('Toolkit');
+  t('When displayed in sortable lists within group pages, the content will be ordered using this weight field. Smaller values will show up first, bigger values last.');
 
   return $field_instances;
 }

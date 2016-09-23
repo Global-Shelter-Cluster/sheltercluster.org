@@ -1,0 +1,60 @@
+<?php
+/**
+ * @file
+ * Drupal needs this blank file.
+ */
+
+include_once 'cluster_rss.pathauto.inc';
+
+/**
+ * Implements hook_menu().
+ */
+function cluster_rss_menu() {
+  $items['node/%node/rss/%'] = array(
+    'page callback' => 'cluster_rss',
+    'page arguments' => array(1, 3),
+    'delivery callback' => 'cluster_rss_deliver',
+    'file' => 'cluster_rss.inc',
+    'type' => MENU_CALLBACK,
+    'access callback' => TRUE,
+  );
+  $items['node/%node/rss'] = array(
+    'page callback' => 'cluster_rss_links_page_callback',
+    'page arguments' => array(1),
+    'type' => MENU_CALLBACK,
+    'access callback' => TRUE,
+  );
+  return $items;
+}
+
+/**
+ * Implements hook_theme().
+ */
+function cluster_rss_theme($existing, $type, $theme, $path) {
+  return array(
+    'cluster_rss' => array(
+      'variables' => array(
+        'items' => NULL,
+        'date' => NULL,
+        'title' => NULL,
+        'path' => NULL,
+        'type' => NULL,
+      ),
+      'template' => '/templates/response_rss',
+    ),
+  );
+}
+
+/**
+ * List of RSS links.
+ */
+function cluster_rss_links_page_callback($node) {
+  return array(
+    '#theme' => 'item_list',
+    '#items' => array(
+      l('Documents RSS feed', drupal_get_path_alias('node/' . $node->nid . '/rss/documents')),
+      l('Events RSS feed', drupal_get_path_alias('node/' . $node->nid . '/rss/events')),
+      l('Discussions RSS feed', drupal_get_path_alias('node/' . $node->nid . '/rss/discussions')),
+    ),
+  );
+}
