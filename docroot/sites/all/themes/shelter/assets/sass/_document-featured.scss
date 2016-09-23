@@ -141,7 +141,7 @@
 
         @include breakpoint(660px) {
           display: block;
-          width: 35%;
+          width: 25%;
         }
       }
       .information-container {
@@ -150,7 +150,7 @@
         @include rem(padding, 0 0.45rem);
 
         @include breakpoint(660px) {
-          width: 64%;
+          width: 75%;
         }
       }
 

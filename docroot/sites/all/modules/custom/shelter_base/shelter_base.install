@@ -1231,3 +1231,10 @@ function shelter_base_update_7125() {
 function shelter_base_update_7126() {
   features_revert_module('cluster_events');
 }
+
+/**
+ * Update doc description field to show 400 characters for the featured docs list
+ */
+function shelter_base_update_7127() {
+  features_revert_module(array('shelter_docs'));
+}

@@ -782,7 +782,7 @@ body {
 @media (min-width: 660px) {
   #featured-documents li .document-information .image-container {
     display: block;
-    width: 35%;
+    width: 25%;
   }
 }
 #featured-documents li .document-information .information-container {
@@ -793,7 +793,7 @@ body {
 }
 @media (min-width: 660px) {
   #featured-documents li .document-information .information-container {
-    width: 64%;
+    width: 75%;
   }
 }
 #featured-documents .image-document {
