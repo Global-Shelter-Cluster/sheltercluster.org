@@ -1235,6 +1235,6 @@ function shelter_base_update_7126() {
 /**
  * Update doc description field to show 400 characters for the featured docs list
  */
-function shelter_base_update_7127() {
+function shelter_base_update_7128() {
   features_revert_module('shelter_docs');
 }
