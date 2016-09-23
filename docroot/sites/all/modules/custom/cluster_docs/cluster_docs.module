@@ -500,16 +500,17 @@ function cluster_docs_get_download_url($node) {
 function cluster_docs_prepare_row_data($nids, $show_related_groups = FALSE) {
   $docs = array();
   $properties = array('title', 'link', 'link_url', 'is_link', 'is_file', 'is_file_class', 'description', 'filesize',
-    'file_extension', 'is_image', 'image_uri', 'has_preview', 'preview_uri', 'source',);
+    'file_extension', 'is_image', 'image_uri', 'has_preview', 'preview_uri', 'source', 'tags');
 
   global $language;
   $langcode = $language->language;
+
+  module_load_include('inc', 'cluster_docs', 'cluster_docs.helpers');
 
   foreach (node_load_multiple($nids) as $node) {
     // Set default values.
     $doc = array_fill_keys($properties, FALSE);
     try {
-
       // @TODO insert language negociation in info array.
       $wrapper = entity_metadata_wrapper('node', $node);
       $wrapper->language($language->language);
@@ -621,6 +622,25 @@ function cluster_docs_prepare_row_data($nids, $show_related_groups = FALSE) {
 
       // Set the group referencing this
       $doc['group_references'] = $wrapper->og_group_ref->value();
+
+      if ($tags = cluster_docs_get_tags_for_document($wrapper)) {
+        // Display the tags as a list.
+        $output = array();
+        $output['#prefix'] = '<div class="tags">';
+        $output['#suffix'] = '</div>';
+        $output['#theme'] = 'item_list';
+        $output['#title'] = t('Tags');
+
+        // Create the items using only the term name.
+        $output['#items'] = array_map(function(stdClass $tag) {
+          return check_plain($tag->name);
+        }, $tags);
+
+        $doc['tags'] = render($output);
+      }
+      else {
+        $doc['tags'] = '';
+      }
 
       $docs[] = $doc;
 
