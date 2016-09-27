@@ -12,7 +12,8 @@ scripts[] = 'assets/javascripts/svg.js'
 scripts[] = 'assets/javascripts/nav-shelter.js'
 scripts[] = 'assets/javascripts/truncating-titles.js'
 scripts[] = 'assets/javascripts/collapsible.js'
-
+scripts[] = 'assets/javascripts/jquery.matchHeight-min.js'
+scripts[] = 'assets/javascripts/matchHeight-shelter.js'
 
 
 regions[header] = Header
