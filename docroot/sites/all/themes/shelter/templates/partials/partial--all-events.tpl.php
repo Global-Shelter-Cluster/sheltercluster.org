@@ -2,11 +2,7 @@
 
     <div id="date-calendar"><?php print $title ?></div>
 
-    <p class="past-events-link">
-      <a href="/event/other-past-events">
-        <?php print t('View past events'); ?>
-      </a>
-    </p>
+    <?php print $events_toggle_button; ?>
 
     <?php foreach($events as $event): ?>
       <?php if($event['is_future']): ?>
