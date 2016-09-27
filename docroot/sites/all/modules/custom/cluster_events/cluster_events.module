@@ -357,14 +357,16 @@ function cluster_events_get_contact_list($contacts = FALSE) {
 
     // Get all the contacts and email address.
     foreach ($contacts as $index => $contact) {
-      if (empty($contact->field_email)) {
-        continue;
-      }
-
       $separator = ", ";
       if ($index == $last_contact) {
         $separator = '';
       }
+
+      if (empty($contact->field_email)) {
+        $contact_list .= $contact->title;
+        continue;
+      }
+
       $contact_name = $contact->title;
       $contact_email = $contact->field_email['und']['0']['email'];
 
