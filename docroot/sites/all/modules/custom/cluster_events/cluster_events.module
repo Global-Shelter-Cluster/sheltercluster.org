@@ -363,7 +363,7 @@ function cluster_events_get_contact_list($contacts = FALSE) {
       }
 
       if (empty($contact->field_email)) {
-        $contact_list .= $contact->title;
+        $contact_list .= $contact->title . $separator;
         continue;
       }
 
