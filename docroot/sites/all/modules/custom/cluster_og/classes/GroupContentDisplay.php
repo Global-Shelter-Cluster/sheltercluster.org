@@ -148,6 +148,7 @@ class GroupDisplayProvider {
     }
 
     $secondary = array();
+
     if ($responses = $this->getRelatedResponses()) {
       $secondary['responses'] = partial('navigation_options', array(
         'navigation_type_id' => 'related-operations',
@@ -155,6 +156,7 @@ class GroupDisplayProvider {
         'nodes' => node_load_multiple($responses)
       ));
     }
+
     if ($hubs = $this->getRelatedHubs()) {
       $secondary['hubs'] = partial('navigation_options', array(
         'navigation_type_id' => 'hubs',
@@ -162,6 +164,7 @@ class GroupDisplayProvider {
         'nodes' => node_load_multiple($hubs)
       ));
     }
+
     if ($working_groups = $this->getRelatedWorkingGroups()) {
       $secondary['working_groups'] = partial('navigation_options', array(
         'navigation_type_id' => 'working-groups',
@@ -169,6 +172,7 @@ class GroupDisplayProvider {
         'nodes' => node_load_multiple($working_groups)
       ));
     }
+
     // Combine libraries, pages and other required entities under the same listing.
     $page_ids = array_merge($this->manager->getPages(), $this->manager->getLibraries());
     $pages = shelter_base_sort_nids_by_weight($page_ids);
@@ -179,6 +183,17 @@ class GroupDisplayProvider {
         'nodes' => node_load_multiple($pages)
       ));
     }
+
+    $communities_of_practice = $this->manager->getCommunitiesOfPractice();
+    if ($communities_of_practice) {
+      $secondary['communities_of_practice'] = partial('navigation_options',
+        array(
+          'navigation_type_id' => 'communities-of-practice',
+          'title' => t('Communities of practice'),
+          'nodes' => node_load_multiple($communities_of_practice),
+        ));
+    }
+
     $useful_links = $this->manager->getUsefulLinks();
     if ($useful_links) {
       $secondary['useful_links'] = partial('navigation_options', array(
