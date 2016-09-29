@@ -462,6 +462,31 @@ class GroupContentManager {
     return !in_array($module, $disabled);
   }
 
+  /**
+   * Retrieve all community_of_practice nodes associated with the current
+   * group.
+   *
+   * @return array
+   */
+  public function getCommunitiesOfPractice() {
+    $query = new EntityFieldQuery();
+
+    $result = $query
+      ->entityCondition('entity_type', 'node')
+      ->entityCondition('bundle', 'community_of_practice')
+      ->fieldCondition('og_group_ref', 'target_id', $this->node->nid)
+      ->propertyCondition('status', NODE_PUBLISHED)
+      ->fieldOrderBy('field_sorting_weight', 'value', 'ASC')
+      ->addTag('node_access')
+      ->execute();
+
+    if (!isset($result['node'])) {
+      return array();
+    }
+
+    return array_keys($result['node']);
+  }
+
 }
 
 class GroupContentManagerResponse extends GroupContentManager {
