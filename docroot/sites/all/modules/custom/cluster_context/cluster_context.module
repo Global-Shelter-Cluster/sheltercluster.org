@@ -104,6 +104,17 @@ function cluster_context_links($node) {
     );
   }
 
+  if (node_access('create', 'community_of_practice')) {
+    $links['community-of-practice'] = array(
+      'title' => t('Create community of practice'),
+      'href' => 'node/add/community-of-practice',
+      'query' => array(
+        'group' => $node->nid,
+        'destination' => 'node/' . $node->nid
+      ),
+    );
+  }
+
   switch ($node->type) {
     case 'geographic_region':
       if (node_access('create', 'geographic-region')) {
