@@ -124,6 +124,10 @@
   @include box-sizing(initial);
 }
 
+.past-events-link a {
+  @extend .button;
+}
+
 #all-events {
   position: relative;
   background-color: #fff;
