@@ -414,7 +414,13 @@ body {
   font-size: 2.3rem;
   line-height: 28.8px;
   line-height: 1.8rem;
+}
+#operation-title h1,
+#operation-title h1 a {
   color: #7f1416;
+}
+#operation-title h1 a:hover {
+  text-decoration: underline;
 }
 
 #operation-overview {
