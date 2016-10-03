@@ -73,18 +73,18 @@ function cluster_events_all($nid) {
   $filter_by_date->entityCondition('entity_type', 'node')
     ->entityCondition('bundle', 'event')
     ->propertyCondition('status', NODE_PUBLISHED)
-    ->fieldOrderBy('field_recurring_event_date', 'value', $order);
+    ->fieldOrderBy('field_recurring_event_date2', 'value', $order);
 
   $filter_by_date_count = new EntityFieldQuery();
   $filter_by_date_count->entityCondition('entity_type', 'node')
     ->entityCondition('bundle', 'event')
     ->propertyCondition('status', NODE_PUBLISHED)
-    ->fieldOrderBy('field_recurring_event_date', 'value', $order)
+    ->fieldOrderBy('field_recurring_event_date2', 'value', $order)
     ->count();
 
   if (!$all_events) {
-    $filter_by_date->fieldCondition('field_recurring_event_date', 'value', $today, '>=');
-    $filter_by_date_count->fieldCondition('field_recurring_event_date', 'value', $today, '>=');
+    $filter_by_date->fieldCondition('field_recurring_event_date2', 'value', $today, '>=');
+    $filter_by_date_count->fieldCondition('field_recurring_event_date2', 'value', $today, '>=');
   }
 
   if ($nid) {
@@ -157,9 +157,9 @@ function cluster_events_get_events($operator = '>', $order = 'ASC') {
   $query = new EntityFieldQuery();
   $results = $query->entityCondition('entity_type', 'node')
     ->entityCondition('bundle', 'event')
-    ->fieldCondition('field_recurring_event_date', 'value', date('Y-m-d'), $operator)
+    ->fieldCondition('field_recurring_event_date2', 'value', date('Y-m-d'), $operator)
     ->propertyCondition('status', NODE_PUBLISHED)
-    ->fieldOrderBy('field_recurring_event_date', 'value', $order)
+    ->fieldOrderBy('field_recurring_event_date2', 'value', $order)
     ->range(0, 3)
     ->execute();
 
@@ -200,7 +200,7 @@ function cluster_events_format_upcoming($nid) {
     $wrapper = entity_metadata_wrapper('node', $node);
 
     // Render the date as per the teaser field display setting.
-    $date = field_view_field('node', $node, 'field_recurring_event_date', 'teaser');
+    $date = field_view_field('node', $node, 'field_recurring_event_date2', 'teaser');
 
     $geo = $wrapper->field_coordinates->value();
     $map_link = l(t('map'), 'https://www.google.ca/maps/place/' . $geo['lat'] . ',' . $geo['lon'] . '/@' . $geo['lat'] . ',' . $geo['lon'] . ',15z', array(
@@ -249,14 +249,14 @@ function cluster_events_format_list($nids) {
 
     try {
       $wrapper = entity_metadata_wrapper('node', $node);
-      $value = $wrapper->field_recurring_event_date->value();
+      $value = $wrapper->field_recurring_event_date2->value();
       $event_date = $value[0];
       $current_date = time();
       $is_future = $event_date > $current_date ? TRUE : FALSE;
       $is_past = !$is_future;
 
       // Render the date as per the teaser field display setting.
-      $date = field_view_field('node', $node, 'field_recurring_event_date', 'teaser');
+      $date = field_view_field('node', $node, 'field_recurring_event_date2', 'teaser');
 
       $geo = $wrapper->field_coordinates->value();
       $map_url = 'https://www.google.ca/maps/place/' . $geo['lat'] . ',' . $geo['lon'] . '/@' . $geo['lat'] . ',' . $geo['lon'] . ',15z';
@@ -413,7 +413,7 @@ function cluster_events_preprocess_partial(&$variables) {
  * Implements hook_field_access().
  */
 function cluster_events_field_access($op, $field, $entity_type, $entity, $account) {
-  if ($op != 'view' && $field['field_name'] == 'field_recurring_event_date') {
+  if ($op != 'view' && $field['field_name'] == 'field_recurring_event_date2') {
     return FALSE;
   }
 }
