@@ -413,7 +413,7 @@ function cluster_events_preprocess_partial(&$variables) {
  * Implements hook_field_access().
  */
 function cluster_events_field_access($op, $field, $entity_type, $entity, $account) {
-  if ($op != 'view' && $field['field_name'] == 'field_recurring_event_date2') {
+  if ($op != 'view' && $field['field_name'] == 'field_recurring_event_date') {
     return FALSE;
   }
 }
