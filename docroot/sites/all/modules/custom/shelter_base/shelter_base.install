@@ -1238,3 +1238,10 @@ function shelter_base_update_7126() {
 function shelter_base_update_7128() {
   features_revert_module('shelter_docs');
 }
+
+/**
+ * Install cluster_home.
+ */
+function shelter_base_update_7129() {
+  features_install_modules(array('cluster_home'));
+}
