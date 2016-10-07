@@ -39,7 +39,7 @@ function cluster_home_field_default_field_instances() {
       'file_extensions' => 'png gif jpg jpeg',
       'max_filesize' => '',
       'max_resolution' => '',
-      'min_resolution' => '250x250',
+      'min_resolution' => '880x440',
       'title_field' => 1,
       'user_register_form' => FALSE,
     ),
