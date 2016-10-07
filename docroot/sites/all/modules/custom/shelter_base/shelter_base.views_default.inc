@@ -206,13 +206,21 @@ function shelter_base_views_default_views() {
   $handler->display->display_options['row_options']['inline'] = array(
     'body' => 'body',
   );
-  /* Field: Content: Body */
-  $handler->display->display_options['fields']['body']['id'] = 'body';
-  $handler->display->display_options['fields']['body']['table'] = 'field_data_body';
-  $handler->display->display_options['fields']['body']['field'] = 'body';
-  $handler->display->display_options['fields']['body']['label'] = '';
-  $handler->display->display_options['fields']['body']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['body']['element_default_classes'] = FALSE;
+  /* Field: Content: Highlights */
+  $handler->display->display_options['fields']['field_highlights']['id'] = 'field_highlights';
+  $handler->display->display_options['fields']['field_highlights']['table'] = 'field_data_field_highlights';
+  $handler->display->display_options['fields']['field_highlights']['field'] = 'field_highlights';
+  $handler->display->display_options['fields']['field_highlights']['label'] = '';
+  $handler->display->display_options['fields']['field_highlights']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_highlights']['settings'] = array(
+    'edit' => '',
+    'delete' => '',
+    'add' => '',
+    'description' => 0,
+    'view_mode' => 'full',
+  );
+  $handler->display->display_options['fields']['field_highlights']['delta_offset'] = '0';
+  $handler->display->display_options['fields']['field_highlights']['multi_type'] = 'ul';
   /* Sort criterion: Content: Post date */
   $handler->display->display_options['sorts']['created']['id'] = 'created';
   $handler->display->display_options['sorts']['created']['table'] = 'node';
@@ -230,13 +238,8 @@ function shelter_base_views_default_views() {
   $handler->display->display_options['filters']['type']['table'] = 'node';
   $handler->display->display_options['filters']['type']['field'] = 'type';
   $handler->display->display_options['filters']['type']['value'] = array(
-    'page' => 'page',
+    'homepage' => 'homepage',
   );
-  /* Filter criterion: Content: Promoted to front page */
-  $handler->display->display_options['filters']['promote']['id'] = 'promote';
-  $handler->display->display_options['filters']['promote']['table'] = 'node';
-  $handler->display->display_options['filters']['promote']['field'] = 'promote';
-  $handler->display->display_options['filters']['promote']['value'] = '1';
 
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page');
