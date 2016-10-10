@@ -32,6 +32,12 @@
           </div>
         <?php endif; ?>
 
+        <div class="ical">
+          <?php print $event['ical']; ?>
+        </div>
+
+        <?php print $event['response']; ?>
+
       </div>
     <?php endforeach; ?>
 
