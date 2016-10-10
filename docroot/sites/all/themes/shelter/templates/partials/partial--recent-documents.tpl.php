@@ -10,9 +10,10 @@
         <td class="information-title">
 
           <div>
-            <?php print $doc['link']; ?>
+            <?php print $doc['title']; ?>
             <?php print $doc['description']; ?>
             <?php print $doc['group']; ?>
+            <?php print $doc['source']; ?>
           </div>
 
           <?php if ($doc['filesize'] && $doc['file_extension']): ?>

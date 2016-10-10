@@ -514,7 +514,10 @@ function cluster_docs_prepare_row_data($nids, $show_related_groups = FALSE) {
       // @TODO insert language negociation in info array.
       $wrapper = entity_metadata_wrapper('node', $node);
       $wrapper->language($language->language);
-      $doc['title'] = $wrapper->label();
+
+      $doc['title'] = t('Description: !description', array(
+        '!description' => $wrapper->label(),
+      ));
 
       // Insert the group on the table
       // Group logic
@@ -524,7 +527,7 @@ function cluster_docs_prepare_row_data($nids, $show_related_groups = FALSE) {
       // Create group links.
       $doc['group'] = '';
       if ($show_related_groups) {
-        $doc['group'] = t('Part of ');
+        $doc['group'] = t('Response: ');
         $last_group = count($group_wrapper) - 1;
         // Get all the groups ids for a document.
         foreach ($group_wrapper as $index => $value) {
@@ -640,6 +643,10 @@ function cluster_docs_prepare_row_data($nids, $show_related_groups = FALSE) {
       }
       else {
         $doc['tags'] = '';
+      }
+
+      if ($source = $wrapper->get('field_document_source')->value()) {
+        $doc['source'] = $source;
       }
 
       $docs[] = $doc;

@@ -69,6 +69,7 @@ function theme_cluster_og_recent_documents($vars) {
         'sort_direction' => 'DESC',
       ),
     );
+
   return partial('recent_documents', array(
     'title' => t('Latest documents'),
     'docs' => $vars['docs'],
