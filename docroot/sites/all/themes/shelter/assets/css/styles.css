@@ -2078,6 +2078,19 @@ ul.addtocal_menu {
   margin-left: 8px !important;
 }
 
+.ical {
+  border: 1px solid #575757;
+  color: #575757;
+  padding: 3px;
+  float: right;
+  margin: 0 5px 0 0;
+  font-size: 11px;
+  display: inline-block;
+}
+.ical a {
+  color: #575757;
+}
+
 /* _coordination.scss */
 #shelter-coordination-team {
   margin: 0 0 32px 0;
@@ -2240,6 +2253,9 @@ ul.addtocal_menu {
   border-bottom: 1px solid #ddd;
   padding-top: 7px;
   margin-bottom: 9px;
+  clear: right;
+  display: table;
+  width: 100%;
 }
 #all-events .event-card .event-title,
 #box-calendar .event-card .event-title {
@@ -2283,6 +2299,10 @@ ul.addtocal_menu {
   margin-bottom: 7px;
   padding: 0 12px;
   padding: 0 0.75rem;
+}
+#all-events .event-card .response,
+#box-calendar .event-card .response {
+  padding: 0 5px;
 }
 #all-events .event-card .label,
 #box-calendar .event-card .label {

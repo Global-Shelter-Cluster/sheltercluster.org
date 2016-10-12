@@ -41,3 +41,16 @@ ul.addtocal_menu {
   margin-left: 8px !important;
 }
 
+.ical {
+  border: 1px solid #575757;
+  color: #575757;
+  padding: 3px;
+  float: right;
+  margin: 0 5px 0 0;
+  font-size: 11px;
+  display: inline-block;
+    a {
+      color: #575757;
+    }
+}
+

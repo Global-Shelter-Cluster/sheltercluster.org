@@ -36,6 +36,9 @@
     border-bottom: 1px solid #ddd;
     padding-top: 7px;
     margin-bottom: 9px;
+    clear: right;
+    display: table;
+    width: 100%;
 
     .event-title {
       background: #ddd;
@@ -71,6 +74,9 @@
       margin-bottom: 7px;
       @include rem(padding, 0 0.75rem);
     }
+    .response {
+       padding: 0 5px;
+    }    
     .label {
       position: relative;
       display: block;

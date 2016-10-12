@@ -31,12 +31,14 @@
             <span><?php print $event['contact']; ?></span>
           </div>
         <?php endif; ?>
-
+        
+        <div class="response">
+          <?php print $event['response']; ?>
+        </div>
+        
         <div class="ical">
           <?php print $event['ical']; ?>
-        </div>
-
-        <?php print $event['response']; ?>
+        </div>        
 
       </div>
     <?php endforeach; ?>
