@@ -200,27 +200,41 @@ function shelter_base_views_default_views() {
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
   $handler->display->display_options['exposed_form']['type'] = 'basic';
-  $handler->display->display_options['pager']['type'] = 'none';
+  $handler->display->display_options['pager']['type'] = 'some';
+  $handler->display->display_options['pager']['options']['items_per_page'] = '2';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
   $handler->display->display_options['style_plugin'] = 'default';
+  $handler->display->display_options['style_options']['row_class_special'] = FALSE;
   $handler->display->display_options['row_plugin'] = 'fields';
-  $handler->display->display_options['row_options']['inline'] = array(
-    'body' => 'body',
+  /* Field: Content: Title */
+  $handler->display->display_options['fields']['title']['id'] = 'title';
+  $handler->display->display_options['fields']['title']['table'] = 'node';
+  $handler->display->display_options['fields']['title']['field'] = 'title';
+  $handler->display->display_options['fields']['title']['label'] = '';
+  $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
+  /* Field: Content: Link */
+  $handler->display->display_options['fields']['field_homelink']['id'] = 'field_homelink';
+  $handler->display->display_options['fields']['field_homelink']['table'] = 'field_data_field_homelink';
+  $handler->display->display_options['fields']['field_homelink']['field'] = 'field_homelink';
+  $handler->display->display_options['fields']['field_homelink']['label'] = '';
+  $handler->display->display_options['fields']['field_homelink']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_homelink']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_homelink']['click_sort_column'] = 'url';
+  $handler->display->display_options['fields']['field_homelink']['type'] = 'link_plain';
+  /* Field: Content: Image */
+  $handler->display->display_options['fields']['field_homeimage']['id'] = 'field_homeimage';
+  $handler->display->display_options['fields']['field_homeimage']['table'] = 'field_data_field_homeimage';
+  $handler->display->display_options['fields']['field_homeimage']['field'] = 'field_homeimage';
+  $handler->display->display_options['fields']['field_homeimage']['label'] = '';
+  $handler->display->display_options['fields']['field_homeimage']['alter']['make_link'] = TRUE;
+  $handler->display->display_options['fields']['field_homeimage']['alter']['path'] = '[field_homelink]';
+  $handler->display->display_options['fields']['field_homeimage']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_homeimage']['click_sort_column'] = 'fid';
+  $handler->display->display_options['fields']['field_homeimage']['settings'] = array(
+    'image_style' => 'highlight',
+    'image_link' => '',
   );
-  /* Field: Content: Highlights */
-  $handler->display->display_options['fields']['field_highlights']['id'] = 'field_highlights';
-  $handler->display->display_options['fields']['field_highlights']['table'] = 'field_data_field_highlights';
-  $handler->display->display_options['fields']['field_highlights']['field'] = 'field_highlights';
-  $handler->display->display_options['fields']['field_highlights']['label'] = '';
-  $handler->display->display_options['fields']['field_highlights']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['field_highlights']['settings'] = array(
-    'edit' => '',
-    'delete' => '',
-    'add' => '',
-    'description' => 0,
-    'view_mode' => 'full',
-  );
-  $handler->display->display_options['fields']['field_highlights']['delta_offset'] = '0';
-  $handler->display->display_options['fields']['field_highlights']['multi_type'] = 'ul';
   /* Sort criterion: Content: Post date */
   $handler->display->display_options['sorts']['created']['id'] = 'created';
   $handler->display->display_options['sorts']['created']['table'] = 'node';
@@ -241,9 +255,8 @@ function shelter_base_views_default_views() {
     'homepage' => 'homepage',
   );
 
-  /* Display: Page */
-  $handler = $view->new_display('page', 'Page', 'page');
-  $handler->display->display_options['path'] = 'node';
+  /* Display: Block */
+  $handler = $view->new_display('block', 'Block', 'block_1');
   $translatables['homepage'] = array(
     t('Master'),
     t('Shelter Cluster - Coordinating Humanitarian Shelter'),
@@ -253,7 +266,7 @@ function shelter_base_views_default_views() {
     t('Sort by'),
     t('Asc'),
     t('Desc'),
-    t('Page'),
+    t('Block'),
   );
   $export['homepage'] = $view;
 

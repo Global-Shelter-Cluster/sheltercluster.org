@@ -10,9 +10,9 @@
 function cluster_home_field_default_field_instances() {
   $field_instances = array();
 
-  // Exported field_instance: 'field_collection_item-field_highlights-field_image'
-  $field_instances['field_collection_item-field_highlights-field_image'] = array(
-    'bundle' => 'field_highlights',
+  // Exported field_instance: 'node-homepage-field_homeimage'
+  $field_instances['node-homepage-field_homeimage'] = array(
+    'bundle' => 'homepage',
     'deleted' => 0,
     'description' => '',
     'display' => array(
@@ -24,23 +24,33 @@ function cluster_home_field_default_field_instances() {
           'image_style' => 'highlight',
         ),
         'type' => 'image',
-        'weight' => 1,
+        'weight' => 2,
+      ),
+      'teaser' => array(
+        'label' => 'hidden',
+        'module' => 'image',
+        'settings' => array(
+          'image_link' => '',
+          'image_style' => 'highlight',
+        ),
+        'type' => 'image',
+        'weight' => 2,
       ),
     ),
-    'entity_type' => 'field_collection_item',
-    'field_name' => 'field_image',
+    'entity_type' => 'node',
+    'field_name' => 'field_homeimage',
     'label' => 'Image',
-    'required' => 1,
+    'required' => 0,
     'settings' => array(
-      'alt_field' => 1,
+      'alt_field' => 0,
       'default_image' => 0,
       'entity_translation_sync' => FALSE,
-      'file_directory' => 'field/highlights',
+      'file_directory' => '',
       'file_extensions' => 'png gif jpg jpeg',
       'max_filesize' => '',
       'max_resolution' => '',
-      'min_resolution' => '880x440',
-      'title_field' => 1,
+      'min_resolution' => '',
+      'title_field' => 0,
       'user_register_form' => FALSE,
     ),
     'widget' => array(
@@ -51,13 +61,13 @@ function cluster_home_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'image_image',
-      'weight' => 4,
+      'weight' => 3,
     ),
   );
 
-  // Exported field_instance: 'field_collection_item-field_highlights-field_link'
-  $field_instances['field_collection_item-field_highlights-field_link'] = array(
-    'bundle' => 'field_highlights',
+  // Exported field_instance: 'node-homepage-field_homelink'
+  $field_instances['node-homepage-field_homelink'] = array(
+    'bundle' => 'homepage',
     'default_value' => NULL,
     'deleted' => 0,
     'description' => '',
@@ -67,13 +77,20 @@ function cluster_home_field_default_field_instances() {
         'module' => 'link',
         'settings' => array(),
         'type' => 'link_plain',
-        'weight' => 0,
+        'weight' => 3,
+      ),
+      'teaser' => array(
+        'label' => 'hidden',
+        'module' => 'link',
+        'settings' => array(),
+        'type' => 'link_plain',
+        'weight' => 1,
       ),
     ),
-    'entity_type' => 'field_collection_item',
-    'field_name' => 'field_link',
+    'entity_type' => 'node',
+    'field_name' => 'field_homelink',
     'label' => 'Link',
-    'required' => 1,
+    'required' => 0,
     'settings' => array(
       'absolute_url' => 1,
       'attributes' => array(
@@ -103,51 +120,7 @@ function cluster_home_field_default_field_instances() {
       'module' => 'link',
       'settings' => array(),
       'type' => 'link_field',
-      'weight' => 2,
-    ),
-  );
-
-  // Exported field_instance: 'node-homepage-field_highlights'
-  $field_instances['node-homepage-field_highlights'] = array(
-    'bundle' => 'homepage',
-    'default_value' => array(),
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'hidden',
-        'module' => 'field_collection',
-        'settings' => array(
-          'add' => '',
-          'delete' => '',
-          'description' => 0,
-          'edit' => '',
-          'view_mode' => 'full',
-        ),
-        'type' => 'field_collection_view',
-        'weight' => 0,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'field_name' => 'field_highlights',
-    'label' => 'Highlights',
-    'required' => 0,
-    'settings' => array(
-      'entity_translation_sync' => FALSE,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 0,
-      'module' => 'field_collection',
-      'settings' => array(),
-      'type' => 'field_collection_embed',
-      'weight' => 1,
+      'weight' => 4,
     ),
   );
 
@@ -165,9 +138,10 @@ function cluster_home_field_default_field_instances() {
         'weight' => 1,
       ),
       'teaser' => array(
-        'label' => 'above',
+        'label' => 'hidden',
+        'module' => 'text',
         'settings' => array(),
-        'type' => 'hidden',
+        'type' => 'text_plain',
         'weight' => 0,
       ),
     ),
@@ -196,7 +170,6 @@ function cluster_home_field_default_field_instances() {
 
   // Translatables
   // Included for use with string extractors like potx.
-  t('Highlights');
   t('Image');
   t('Link');
   t('Title');

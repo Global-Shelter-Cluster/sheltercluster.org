@@ -23,6 +23,9 @@
 
   <div class="main-column clearfix">
     <div class="clearfix">
+      
+      <?php print render($page['homepage']); ?>
+      
       <?php if($upcoming_events): ?>
         <?php print render($upcoming_events); ?>
       <?php endif; ?>

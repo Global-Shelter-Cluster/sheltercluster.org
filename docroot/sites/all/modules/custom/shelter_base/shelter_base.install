@@ -1245,3 +1245,15 @@ function shelter_base_update_7128() {
 function shelter_base_update_7129() {
   features_install_modules(array('cluster_home'));
 }
+
+/**
+ * Tweak layout of homepage to include new blocks
+ */
+function shelter_base_update_7130() {
+    module_enable(array(
+    'features_extra',
+    'fe_block',
+  ));
+  features_revert_module('shelter_base');
+  features_revert_module('cluster_home');
+}
