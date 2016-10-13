@@ -428,6 +428,7 @@ class GroupFullDisplayProvider extends GroupDisplayProvider {
       foreach ($nids as $nid) {
         $events[] = cluster_events_format_upcoming($nid);
       }
+
       return array(
         '#theme' => 'cluster_og_upcoming_events',
         '#all_events_link' => url('node/' . $this->node->nid . '/events'),

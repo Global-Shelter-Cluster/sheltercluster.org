@@ -17,4 +17,5 @@ scripts[] = 'assets/javascripts/matchheight-shelter.js'
 
 regions[header] = Header
 regions[content] = Content
+regions[homepage] = Homepage
 regions[footer] = Footer

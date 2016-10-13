@@ -2078,6 +2078,19 @@ ul.addtocal_menu {
   margin-left: 8px !important;
 }
 
+.ical {
+  border: 1px solid #575757;
+  color: #575757;
+  padding: 3px;
+  float: right;
+  margin: 0 5px 0 0;
+  font-size: 11px;
+  display: inline-block;
+}
+.ical a {
+  color: #575757;
+}
+
 /* _coordination.scss */
 #shelter-coordination-team {
   margin: 0 0 32px 0;
@@ -2240,6 +2253,9 @@ ul.addtocal_menu {
   border-bottom: 1px solid #ddd;
   padding-top: 7px;
   margin-bottom: 9px;
+  clear: right;
+  display: table;
+  width: 100%;
 }
 #all-events .event-card .event-title,
 #box-calendar .event-card .event-title {
@@ -2283,6 +2299,10 @@ ul.addtocal_menu {
   margin-bottom: 7px;
   padding: 0 12px;
   padding: 0 0.75rem;
+}
+#all-events .event-card .response,
+#box-calendar .event-card .response {
+  padding: 0 5px;
 }
 #all-events .event-card .label,
 #box-calendar .event-card .label {
@@ -2700,6 +2720,37 @@ div.addressfield-container-inline::after {
     margin: 0 0 1rem 1rem;
     width: 46%;
   }
+}
+.front .view-homepage {
+  margin-top: 41px;
+}
+.front .view-homepage .views-row {
+  width: 49%;
+  float: right;
+  position: relative;
+}
+.front .view-homepage .views-row:first-child {
+  float: left;
+}
+.front .view-homepage .views-row img {
+  width: 100%;
+  height: auto;
+}
+.front .view-homepage .views-field-title {
+  position: absolute;
+  bottom: 5px;
+  z-index: 10;
+  color: #fff;
+  padding: 30px 10px 10px;
+  display: block;
+  width: 100%;
+  background: -moz-linear-gradient(top, rgba(0, 0, 0, 0.01) 0%, rgba(0, 0, 0, 0.68) 50%, black 74%, black 100%);
+  background: -webkit-linear-gradient(top, rgba(0, 0, 0, 0.01) 0%, rgba(0, 0, 0, 0.68) 50%, black 74%, black 100%);
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.01) 0%, rgba(0, 0, 0, 0.68) 50%, #000000 74%, #000000 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#03000000', endColorstr='#000000',GradientType=0 );
+}
+.front .view-homepage .views-field-field-homeimage {
+  position: relative;
 }
 
 .page-user .form-text {

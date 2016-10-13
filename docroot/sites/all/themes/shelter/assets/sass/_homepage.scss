@@ -110,4 +110,36 @@
       }
     }
   }
+  .view-homepage {
+    margin-top: 41px;
+    .views-row {
+      width: 49%;
+      float: right;
+      position: relative;
+        &:first-child { float: left; }
+        img {
+          width: 100%;
+          height: auto;
+        }
+    }
+    
+    .views-field-title {
+      position: absolute;
+      bottom: 5px;
+      z-index: 10;
+      color: #fff;
+      padding: 30px 10px 10px;
+      display: block;
+      width: 100%;
+      background: -moz-linear-gradient(top,  rgba(0,0,0,0.01) 0%, rgba(0,0,0,0.68) 50%, rgba(0,0,0,1) 74%, rgba(0,0,0,1) 100%);
+      background: -webkit-linear-gradient(top,  rgba(0,0,0,0.01) 0%,rgba(0,0,0,0.68) 50%,rgba(0,0,0,1) 74%,rgba(0,0,0,1) 100%);
+      background: linear-gradient(to bottom,  rgba(0,0,0,0.01) 0%,rgba(0,0,0,0.68) 50%,rgba(0,0,0,1) 74%,rgba(0,0,0,1) 100%);
+      filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#03000000', endColorstr='#000000',GradientType=0 );
+      
+    }
+    
+    .views-field-field-homeimage {
+      position: relative;
+    }
+  }
 }
