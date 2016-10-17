@@ -1,0 +1,24 @@
+diff --git a/docroot/sites/all/modules/contrib/search_api_db/service.inc b/docroot/sites/all/modules/contrib/search_api_db/service.inc
+index 362bf9b..943e091 100644
+--- a/docroot/sites/all/modules/contrib/search_api_db/service.inc
++++ b/docroot/sites/all/modules/contrib/search_api_db/service.inc
+@@ -1178,7 +1178,7 @@ class SearchApiDbService extends SearchApiAbstractService {
+ 
+     if ($skip_count || $results['result count']) {
+       if ($query->getOption('search_api_facets')) {
+-        $results['search_api_facets'] = $this->getFacets($query, clone $db_query);
++        $results['search_api_facets'] = $this->getFacets($query, $db_query);
+       }
+ 
+       $query_options = $query->getOptions();
+@@ -1194,6 +1194,10 @@ class SearchApiDbService extends SearchApiAbstractService {
+       $time_queries_done = microtime(TRUE);
+ 
+       foreach ($result as $row) {
++        if (!isset($row->score)) {
++          $row->score = 0;
++        }
++
+         $results['results'][$row->item_id] = array(
+           'id' => $row->item_id,
+           'score' => $row->score / self::SCORE_MULTIPLIER,
