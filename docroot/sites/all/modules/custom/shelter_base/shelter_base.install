@@ -1257,3 +1257,19 @@ function shelter_base_update_7130() {
   features_revert_module('shelter_base');
   features_revert_module('cluster_home');
 }
+
+/**
+ * Enable restws.
+ */
+function shelter_base_update_7131() {
+  module_enable(array('restws'));
+}
+
+/**
+ * Enable xautoload and clear cache.
+ */
+function shelter_base_update_7132() {
+  module_enable(array('xautoload'));
+
+  cache_clear_all();
+}
