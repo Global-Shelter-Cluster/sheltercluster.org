@@ -1259,6 +1259,7 @@ function shelter_base_update_7130() {
 }
 
 /**
+<<<<<<< Updated upstream
  * Enable restws.
  */
 function shelter_base_update_7131() {
@@ -1272,4 +1273,11 @@ function shelter_base_update_7132() {
   module_enable(array('xautoload'));
 
   cache_clear_all();
+}
+
+/**
+ * Remove duplicate region links.
+ */
+function shelter_base_update_7133() {
+  shelter_base_remove_duplicate_region_links();
 }
