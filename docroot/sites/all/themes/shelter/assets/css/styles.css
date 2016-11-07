@@ -807,6 +807,11 @@ body {
   max-height: 40rem;
 }
 
+#shelter-documents .document-table .information-title {
+  max-width: 420px;
+  word-wrap: break-word;
+}
+
 /* _search.scss */
 header .search {
   position: absolute;
