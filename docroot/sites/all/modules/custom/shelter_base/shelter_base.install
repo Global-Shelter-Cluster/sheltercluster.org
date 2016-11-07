@@ -1281,3 +1281,12 @@ function shelter_base_update_7132() {
 function shelter_base_update_7133() {
   shelter_base_remove_duplicate_region_links();
 }
+
+/**
+ * Enable modernizr.
+ */
+function shelter_base_update_7134() {
+  module_enable(array('modernizr'));
+
+  cache_clear_all();
+}

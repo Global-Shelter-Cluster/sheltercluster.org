@@ -5,7 +5,7 @@
  */
 ?>
 
-<div class="page-margin clearfix">
+<div class="page-margin clearfix home-main">
 
   <div class="side-column clearfix">
     <?php if($hot_responses): ?>
