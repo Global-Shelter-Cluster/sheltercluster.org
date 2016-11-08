@@ -41,30 +41,3 @@
 @import "user-pages";
 @import "footer";
 
-html.flexbox {
-  .front .home-main {
-    display: flex;
-    justify-content: space-between;
-  }
-
-  .front .side-column {
-    display: flex;
-    flex-direction: column;
-  }
-
-  .front #twitter-timeline {
-    flex: 1;
-  }
-
-  .front #twitter-timeline iframe {
-    height: 100% !important;
-  }
-
-  .front .main-column {
-    background: pink;
-  }
-
-  .front .main-column:after {
-    content: '' !important;
-  }
-}

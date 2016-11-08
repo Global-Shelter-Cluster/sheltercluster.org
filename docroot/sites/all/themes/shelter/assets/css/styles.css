@@ -2758,6 +2758,24 @@ div.addressfield-container-inline::after {
   position: relative;
 }
 
+html.flexbox .front .home-main {
+  display: flex;
+  justify-content: space-between;
+}
+html.flexbox .front .side-column {
+  display: flex;
+  flex-direction: column;
+}
+html.flexbox .front #twitter-timeline {
+  flex: 1;
+}
+html.flexbox .front #twitter-timeline iframe {
+  height: 100% !important;
+}
+html.flexbox .front .main-column:after {
+  content: '' !important;
+}
+
 .page-user .form-text {
   float: none;
   margin-bottom: 8px;
@@ -3034,25 +3052,4 @@ footer .table-group {
 }
 footer .table-row {
   display: table-row;
-}
-
-html.flexbox .front .home-main {
-  display: flex;
-  justify-content: space-between;
-}
-html.flexbox .front .side-column {
-  display: flex;
-  flex-direction: column;
-}
-html.flexbox .front #twitter-timeline {
-  flex: 1;
-}
-html.flexbox .front #twitter-timeline iframe {
-  height: 100% !important;
-}
-html.flexbox .front .main-column {
-  background: pink;
-}
-html.flexbox .front .main-column:after {
-  content: '' !important;
 }
