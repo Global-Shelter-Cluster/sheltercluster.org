@@ -160,7 +160,7 @@ function cluster_events_get_events($operator = '>', $order = 'ASC') {
     ->fieldCondition('field_recurring_event_date2', 'value', date('Y-m-d'), $operator)
     ->propertyCondition('status', NODE_PUBLISHED)
     ->fieldOrderBy('field_recurring_event_date2', 'value', $order)
-    ->range(0, 3)
+    ->range(0, 2)
     ->execute();
 
   if (!isset($results['node'])) {
@@ -181,12 +181,8 @@ function cluster_events_get_events($operator = '>', $order = 'ASC') {
     'events' => $events,
     'is_previous_events' => $is_previous,
     'all_events_link' => '/events',
-    'global_events_link' => array(
-      '#type' => 'link',
-      '#href' => 'geographic-region/global/events',
-      '#title' => 'See Global Events',
-    ),
-    'previous_events_link' => !$is_previous ? '/event/other-past-events' : FALSE,
+    'global_events_link' => '',
+    'previous_events_link' => '',
   ));
 }
 
@@ -201,7 +197,9 @@ function cluster_events_format_upcoming($nid) {
     $wrapper = entity_metadata_wrapper('node', $node);
 
     // Render the date as per the teaser field display setting.
-    $date = field_view_field('node', $node, 'field_recurring_event_date2', 'teaser');
+    $date = $wrapper->get('field_recurring_event_date2')->value();
+    $date = strtotime($date[0]['value']);
+    $date = format_date($date, 'custom', 'H:i - Y m d');
 
     $geo = $wrapper->field_coordinates->value();
     $map_link = l(t('map'), 'https://www.google.ca/maps/place/' . $geo['lat'] . ',' . $geo['lon'] . '/@' . $geo['lat'] . ',' . $geo['lon'] . ',15z', array(

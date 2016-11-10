@@ -807,11 +807,6 @@ body {
   max-height: 40rem;
 }
 
-#shelter-documents .document-table .information-title {
-  max-width: 420px;
-  word-wrap: break-word;
-}
-
 /* _search.scss */
 header .search {
   position: absolute;
@@ -2313,10 +2308,6 @@ ul.addtocal_menu {
 #box-calendar .event-card .label {
   position: relative;
   display: block;
-  text-transform: uppercase;
-  color: #888;
-  font-size: 11.2px;
-  font-size: 0.7rem;
 }
 #all-events .event-card .label .map-link,
 #box-calendar .event-card .label .map-link {
@@ -3052,4 +3043,178 @@ footer .table-group {
 }
 footer .table-row {
   display: table-row;
+}
+
+.document-table {
+  margin-bottom: 1rem;
+}
+.document-table thead th {
+  border-bottom: 0;
+  padding: .5rem;
+}
+.document-table thead th:last-child {
+  text-align: left;
+}
+
+.recent-documents thead {
+  background: #7f1416 url("../images/document-white.png") 1rem 50% no-repeat;
+  color: white;
+  margin: 0;
+  text-indent: 0;
+  text-transform: uppercase;
+}
+.recent-documents thead th {
+  padding-left: 40px;
+}
+.recent-documents tr.document-row {
+  background: white;
+  border-bottom: 1px dotted #CCC;
+}
+.recent-documents .document-row a {
+  color: #7f1416;
+}
+.recent-documents .information-title {
+  max-width: 420px;
+  position: relative;
+  word-wrap: break-word;
+}
+.recent-documents .information-title p {
+  text-transform: none;
+}
+.recent-documents .document-title {
+  margin-bottom: 8px;
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+}
+.recent-documents .document-title a {
+  text-decoration: none;
+}
+.recent-documents .document-description,
+.recent-documents .document-response,
+.recent-documents .document-source {
+  margin-bottom: 5px;
+}
+.recent-documents .document-link,
+.recent-documents .document-link a {
+  height: 17px;
+}
+.recent-documents .document-link a {
+  background: url("../images/document-download.png") 0 0 no-repeat;
+  display: inline-block;
+  overflow: hidden;
+  text-indent: 20px;
+  width: 14px;
+}
+.recent-documents .is-small {
+  font-size: 13.6px;
+  font-size: 0.85rem;
+}
+.recent-documents .all-documents a {
+  background: url("../images/plus-red.png") 0 50% no-repeat;
+  padding-left: 12px;
+  text-transform: uppercase;
+}
+.recent-documents .file-info {
+  bottom: 8px;
+  bottom: 0.5rem;
+  display: flex;
+  position: absolute;
+  right: 0;
+}
+.recent-documents .file-info .file-extension {
+  font-size: 12px;
+  font-size: 0.75rem;
+  background: #CCC;
+  padding: 1px 3px;
+}
+.recent-documents .file-info .document-link {
+  margin-left: 10px;
+}
+
+#shelter-calendar.upcoming-events {
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.upcoming-events #date-calendar {
+  background: #7f1416 url("../images/clock-white.png") 1rem 50% no-repeat;
+  color: white;
+  margin: 0;
+  padding: .5rem;
+  padding-left: 40px;
+  text-align: left;
+  text-indent: 0;
+  text-transform: uppercase;
+}
+.upcoming-events #box-calendar {
+  background: transparent;
+  border-radius: 0;
+}
+.upcoming-events #box-calendar .event-card {
+  background: transparent;
+  border-bottom: 1px dotted #CCC;
+  border-radius: 0;
+  position: relative;
+}
+.upcoming-events #box-calendar .event-card a {
+  color: #7f1416;
+}
+.upcoming-events #box-calendar .event-card .event-title {
+  background: transparent;
+  border-radius: 0;
+  box-shadow: none;
+}
+.upcoming-events #box-calendar .event-card .event-title a {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding: 0 0 .5rem;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+.upcoming-events #box-calendar .event-card.is-first .event-title a {
+  padding-top: .5rem;
+}
+.upcoming-events #box-calendar .event-card .response {
+  margin-bottom: 7px;
+  padding: 0;
+}
+.upcoming-events #box-calendar .event-card .response a {
+  color: inherit;
+  text-decoration: none;
+}
+.upcoming-events #box-calendar .event-card .ical {
+  border-radius: 3px;
+  border-width: 2px;
+  bottom: .5rem;
+  float: none;
+  line-height: 1;
+  padding: 1px 3px;
+  position: absolute;
+  right: 0;
+}
+.upcoming-events #box-calendar .event-card .ical a {
+  color: #575757;
+  text-decoration: none;
+}
+.upcoming-events #box-calendar .event-card .information-item,
+.upcoming-events #box-calendar .event-card .event-location {
+  padding: 0;
+}
+.upcoming-events #box-calendar .event-card .event-location * {
+  display: inline;
+}
+.upcoming-events #box-calendar .event-card .event-date {
+  background: url("../images/clock-grey.png") 0 0 no-repeat;
+  margin-top: 10px;
+  padding-left: 20px;
+}
+.upcoming-events #box-calendar .event-card .is-small {
+  font-size: 13.6px;
+  font-size: 0.85rem;
+}
+.upcoming-events .all-events a {
+  background: url("../images/plus-red.png") 0 50% no-repeat;
+  margin-top: 15px;
+  padding-left: 12px;
+  text-transform: uppercase;
 }
