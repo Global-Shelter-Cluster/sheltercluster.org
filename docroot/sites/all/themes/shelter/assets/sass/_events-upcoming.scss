@@ -1,0 +1,109 @@
+#shelter-calendar.upcoming-events {
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.upcoming-events {
+  #date-calendar {
+    background: $shelter-red url('../images/clock-white.png') 1rem 50% no-repeat;
+    color: white;
+    margin: 0;
+    padding: .5rem;
+    padding-left: 40px;
+    text: {
+      align: left;
+      indent: 0;
+      transform: uppercase;
+    }
+  }
+
+  #box-calendar {
+    background: transparent;
+    border-radius: 0;
+  }
+
+  #box-calendar .event-card {
+    background: transparent;
+    border-bottom: 1px dotted #CCC;
+    border-radius: 0;
+    position: relative;
+
+    a {
+      color: $shelter-red;
+    }
+
+    .event-title {
+      background: transparent;
+      border-radius: 0;
+      box-shadow: none;
+    }
+
+    .event-title a {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding: 0 0 .5rem;
+      text: {
+        decoration: none;
+        transform: uppercase;
+      }
+    }
+
+    &.is-first .event-title a {
+      padding-top: .5rem;
+    }
+
+    .response {
+      margin-bottom: 7px;
+      padding: 0;
+    }
+
+    .response a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .ical {
+      border: {
+        radius: 3px;
+        width: 2px;
+      }
+      bottom: .5rem;
+      float: none;
+      line-height: 1;
+      padding: 1px 3px;
+      position: absolute;
+      right: 0;
+    }
+
+    .ical a {
+      color: #575757;
+      text-decoration: none;
+    }
+
+    .information-item,
+    .event-location {
+      padding: 0;
+    }
+
+    .event-location * {
+      display: inline;
+    }
+
+    .event-date {
+      background: url('../images/clock-grey.png') 0 0 no-repeat;
+      margin-top: 10px;
+      padding-left: 20px;
+    }
+
+    .is-small {
+      @include rem(font-size, 0.85rem);
+    }
+  }
+
+  .all-events a {
+    background: url('../images/plus-red.png') 0 50% no-repeat;
+    margin-top: 15px;
+    padding-left: 12px;
+    text-transform: uppercase;
+  }
+}
