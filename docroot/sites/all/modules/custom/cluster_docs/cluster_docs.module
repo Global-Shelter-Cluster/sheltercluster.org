@@ -62,7 +62,7 @@ function _cluster_docs_title_callback($nid) {
 }
 
 /**
- * Return the 5 most recent documents.
+ * Return the 2 most recent documents.
  *
  * @return [type] [description]
  */
@@ -72,7 +72,7 @@ function cluster_docs_recent() {
     ->entityCondition('bundle', 'document')
     ->propertyCondition('status', NODE_PUBLISHED)
     ->propertyOrderBy('created', 'DESC')
-    ->range(0, 5);
+    ->range(0, 2);
   $results = $query->execute();
   if (!isset($results['node'])) {
     return FALSE;
@@ -512,12 +512,13 @@ function cluster_docs_prepare_row_data($nids, $show_related_groups = FALSE) {
     $doc = array_fill_keys($properties, FALSE);
     try {
       // @TODO insert language negociation in info array.
+      /** @var EntityDrupalWrapper $wrapper */
       $wrapper = entity_metadata_wrapper('node', $node);
       $wrapper->language($language->language);
 
-      $doc['title'] = t('Description: !description', array(
-        '!description' => $wrapper->label(),
-      ));
+      $doc['title'] = $wrapper->label();
+
+      $doc['node_url'] = $wrapper->get('url')->value();
 
       // Insert the group on the table
       // Group logic
@@ -560,12 +561,18 @@ function cluster_docs_prepare_row_data($nids, $show_related_groups = FALSE) {
       $doc['link'] = l($doc['title'], $url, array('attributes' => array('target' => '_blank')));
       $doc['edit_link'] = node_access('update', $node) ? l('edit', 'node/'.$node->nid.'/edit') : '';
 
+      $doc['download_link'] = array(
+        '#markup' => l(t('Download'), $url),
+        '#prefix' => '<span class="document-link">',
+        '#suffix' => '</span>',
+      );
+
       // Prepare the description.
       $desc = '';
       if ($body = $wrapper->body->value()) {
         // Use user supplied summary if available.
         if($body['safe_summary']) {
-          $desc = $body['safe_summary'];
+          $desc = strip_tags($body['safe_summary']);
         }
         // Create summary.
         elseif ($body['safe_value']) {
@@ -576,10 +583,18 @@ function cluster_docs_prepare_row_data($nids, $show_related_groups = FALSE) {
             'word_boundary' => TRUE,
             'html' => TRUE,
           );
-          $desc = views_trim_text($alter, $body['safe_value']);
+          $desc = views_trim_text($alter, strip_tags($body['safe_value']));
         }
       }
-      $doc['description'] = $desc;
+
+      if ($desc) {
+        $doc['description'] = t('Description: !description', array(
+          '!description' => $desc
+        ));
+      }
+      else {
+        $doc['description'] = '';
+      }
 
       // Test if this document is a file field.
       if ($file = $wrapper->field_file->value()) {
@@ -590,7 +605,12 @@ function cluster_docs_prepare_row_data($nids, $show_related_groups = FALSE) {
         }
 
         $file_extension = pathinfo($file['filename'], PATHINFO_EXTENSION);
-        $doc['file_extension'] = l($file_extension, $url, array('attributes' => array('target' => '_blank')));
+        $file_extension = strtoupper($file_extension);
+        $doc['file_extension'] = array(
+          '#markup' => $file_extension,
+          '#prefix' => '<span class="file-extension is-small">',
+          '#suffix' => '</span>'
+        );
 
         // Test if the attached file is an image.
         // @TODO the image file will probably not be the actual document file.
@@ -615,10 +635,9 @@ function cluster_docs_prepare_row_data($nids, $show_related_groups = FALSE) {
       if ($link = $wrapper->field_link->value()) {
         $doc['is_link'] = TRUE;
       }
-
       // Set the report/meeting date.
       $report_meeting_date = $wrapper->field_report_meeting_date->value();
-      $doc['date'] = $report_meeting_date ? format_date($report_meeting_date, 'custom', 'Y/m/d') : NULL;
+      $doc['date'] = $report_meeting_date ? format_date($report_meeting_date, 'custom', 'Y m d') : NULL;
 
       // Set the publication date.
       $doc['publication_date'] = format_date($node->created, 'custom', 'Y/m/d');
@@ -646,11 +665,10 @@ function cluster_docs_prepare_row_data($nids, $show_related_groups = FALSE) {
       }
 
       if ($source = $wrapper->get('field_document_source')->value()) {
-        $doc['source'] = $source;
+        $doc['source'] = t('Source: !source', array('!source' => $source));
       }
 
       $docs[] = $doc;
-
     }
     catch (EntityMetadataWrapperException $exc) {
       watchdog(

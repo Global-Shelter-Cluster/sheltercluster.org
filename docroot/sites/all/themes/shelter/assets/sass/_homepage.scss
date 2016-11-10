@@ -110,7 +110,7 @@
       }
     }
   }
-  .view-homepage {
+  .view-homepage2 {
     margin-top: 41px;
     .views-row {
       width: 49%;
@@ -141,5 +141,29 @@
     .views-field-field-homeimage {
       position: relative;
     }
+  }
+}
+
+html.flexbox {
+  .front .home-main {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .front .side-column {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .front #twitter-timeline {
+    flex: 1;
+  }
+
+  .front #twitter-timeline iframe {
+    height: 100% !important;
+  }
+
+  .front .main-column:after {
+    content: '' !important;
   }
 }

@@ -80,9 +80,6 @@
     .label {
       position: relative;
       display: block;
-      text-transform: uppercase;
-      color: #888;
-      @include rem(font-size, 0.70rem);
       .map-link {
         position: absolute;
         right: 0;
