@@ -1290,3 +1290,10 @@ function shelter_base_update_7134() {
 
   cache_clear_all();
 }
+
+/**
+ * Update cluster_home block settings.
+ */
+function shelter_base_update_7135() {
+  features_revert(array('cluster_home' => array('fe_block_settings')));
+}

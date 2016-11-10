@@ -12,13 +12,13 @@ function cluster_home_default_fe_block_settings() {
 
   $export['version'] = '2.0';
 
-  $export['views-homepage-block_1'] = array(
+  $export['views-homepage2-block_1'] = array(
     'cache' => -1,
     'custom' => 0,
-    'delta' => 'homepage-block_1',
+    'delta' => 'homepage2-block_1',
     'module' => 'views',
     'node_types' => array(),
-    'pages' => '',
+    'pages' => '<front>',
     'roles' => array(),
     'themes' => array(
       'bartik' => array(
@@ -41,7 +41,7 @@ function cluster_home_default_fe_block_settings() {
       ),
     ),
     'title' => '<none>',
-    'visibility' => 0,
+    'visibility' => 1,
   );
 
   return $export;
