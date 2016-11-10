@@ -1294,6 +1294,6 @@ function shelter_base_update_7134() {
 /**
  * Update cluster_home block settings.
  */
-function shelter_base_update_7135() {
-  features_revert(array('cluster_home' => array('fe_block_settings')));
+function shelter_base_update_7136() {
+  features_revert_module('cluster_home');
 }
