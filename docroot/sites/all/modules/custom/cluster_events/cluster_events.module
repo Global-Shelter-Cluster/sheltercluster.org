@@ -399,7 +399,8 @@ function cluster_events_preprocess_partial(&$variables) {
       module_load_include('inc', 'cluster_events', 'cluster_events.helpers');
 
       $all_events = !_cluster_events_all_events_only_upcoming_events();
-      $variables['events_toggle_button'] = render(_cluster_events_add_toggle_button(FALSE));
+      $button = _cluster_events_add_toggle_button(FALSE);
+      $variables['events_toggle_button'] = render($button);
       break;
   }
 }
