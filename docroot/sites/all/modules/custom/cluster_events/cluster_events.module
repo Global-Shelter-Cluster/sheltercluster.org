@@ -103,9 +103,8 @@ function cluster_events_all($nid) {
   pager_default_initialize($number_of_results, CLUSTER_EVENTS_PER_PAGE);
 
   if (empty($query_date_filter_results['node'])) {
-    $content = array(
-      '#markup' => t('No events scheduled at the moment.'),
-    );
+    $content['events_toggle_button'] = _cluster_events_add_toggle_button(TRUE);
+    $content['events']['#markup'] = t('No events scheduled at the moment.');
   }
   else {
     $content = array(
@@ -400,22 +399,8 @@ function cluster_events_preprocess_partial(&$variables) {
       module_load_include('inc', 'cluster_events', 'cluster_events.helpers');
 
       $all_events = !_cluster_events_all_events_only_upcoming_events();
-
-      $options = [];
-      if (!$all_events) {
-        $options['query']['all'] = NULL;
-      }
-
-      $path = url(current_path(), $options);
-      $title = t('@', array('@' => $all_events ? 'View only upcoming events' : 'View all events'));
-
-      $button = array(
-        '#markup' => sprintf('<a href="%s">%s</a>', $path, $title),
-        '#prefix' => '<p class="past-events-link">',
-        '#suffix' => '</p>'
-      );
-
-      $variables['events_toggle_button'] = drupal_render($button);
+      $button = _cluster_events_add_toggle_button(FALSE);
+      $variables['events_toggle_button'] = render($button);
       break;
   }
 }
@@ -427,4 +412,28 @@ function cluster_events_field_access($op, $field, $entity_type, $entity, $accoun
   if ($op != 'view' && $field['field_name'] == 'field_recurring_event_date') {
     return FALSE;
   }
+}
+
+/**
+ * Add a button to toggle between all events and only upcoming events.
+ *
+ * @var boolean $all_events
+ *   (optional) Whether to show all events. Defaults to FALSE.
+ */
+function _cluster_events_add_toggle_button($all_events = FALSE) {
+  $options = array();
+
+  if ($all_events) {
+    $options['query']['all'] = NULL;
+  }
+
+  $path = url(current_path(), $options);
+  $title = t('@', array('@' => $all_events ? 'View all events' : 'View only upcoming events'));
+
+  return array(
+    '#markup' => sprintf('<a href="%s">%s</a>', $path, $title),
+    '#prefix' => '<p class="past-events-link">',
+    '#suffix' => '</p>',
+    '#weight' => -1,
+  );
 }
