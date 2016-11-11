@@ -81,7 +81,7 @@
 
       <td class="information-file">
         <?php if ($doc['filesize'] && $doc['file_extension']): ?>
-          <span class="size-type">[ <?php print $doc['filesize']; ?>M ] <?php print $doc['file_extension']; ?></span>
+          <span class="size-type">[ <?php print $doc['filesize']; ?>M ] <?php print render($doc['file_extension']); ?></span>
         <?php endif; ?>
       </td>
 
