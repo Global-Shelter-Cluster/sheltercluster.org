@@ -142,6 +142,21 @@ function cluster_nav_preprocess_page(&$variables) {
     }
   }
 
+  $args = arg();
+  $is_response = $args[0] == 'node' && $node->type == 'response';
+  $is_subpage = !empty($args[2]) && in_array($args[2], array('documents', 'events'));
+
+  if ($is_response && $is_subpage) {
+    try {
+      $wrapper = entity_metadata_wrapper('node', $node);
+
+      $variables['title'] = $variables['page_title'] = l($wrapper->label(), $wrapper->get('url')->value());
+    }
+    catch (Exception $e) {
+      watchdog_exception('cluster_nav', $e);
+    }
+  }
+
   // Add the page level elements.
   if ($display_provider) {
     // Add the dashboard menu to the page template for group pages other than the dashboard.
