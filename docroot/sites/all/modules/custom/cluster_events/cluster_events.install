@@ -31,3 +31,10 @@ function cluster_events_update_7001() {
     field_cache_clear();
   }
 }
+
+/**
+ * Revert cluster_events.
+ */
+function cluster_events_update_7002() {
+  features_revert_module('cluster_events');
+}

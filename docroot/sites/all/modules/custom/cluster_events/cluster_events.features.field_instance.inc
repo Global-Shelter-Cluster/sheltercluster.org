@@ -341,7 +341,7 @@ function cluster_events_field_default_field_instances() {
         'manual_text' => 'Enter one manually',
         'map' => 1,
         'restrict_country' => array(),
-        'reveal' => 0,
+        'reveal' => 1,
         'reverse_geocode' => 0,
         'types' => 'geocode',
         'visible_markers' => 1,
