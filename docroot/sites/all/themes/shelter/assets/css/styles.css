@@ -3218,3 +3218,85 @@ footer .table-row {
   padding-left: 12px;
   text-transform: uppercase;
 }
+
+@media (min-width: 768px) {
+  .doc-details {
+    float: left;
+    width: 70%;
+  }
+
+  .doc-download {
+    float: right;
+    width: 30%;
+  }
+}
+.doc-details {
+  margin-bottom: 1em;
+  color: #575757;
+}
+.doc-details > div {
+  margin-bottom: 0.5em;
+}
+.doc-details a {
+  color: #7f1416;
+  text-decoration: none;
+}
+.doc-details a:hover {
+  text-decoration: underline;
+}
+.doc-details .doc-attr-label {
+  display: inline-block;
+  width: 20%;
+  min-width: 80px;
+  max-width: 100px;
+  vertical-align: top;
+}
+.doc-details .doc-attr-value {
+  display: inline-block;
+  width: 65%;
+}
+
+.doc-details .field-name-og-group-ref,
+.doc-details .field-name-og-group-ref div {
+  display: inline-block;
+}
+
+.doc-tags a {
+  display: inline-block;
+  margin: 0 0.33em 0.5em;
+  font-size: 0.9em;
+}
+
+.doc-download {
+  text-align: center;
+}
+
+.doc-preview {
+  width: 100%;
+  padding: 0.25em;
+  min-height: 200px;
+  text-align: center;
+  background: #cdd6db url(../svg/icons/file.svg) center center no-repeat;
+  background-size: 50px;
+  border: 1px solid #688394;
+}
+.doc-preview img {
+  max-width: 200px;
+  height: auto;
+}
+
+.doc-button a {
+  display: block;
+  margin: 0.5em 0 0;
+  padding: 0.5em;
+  width: 100%;
+  text-decoration: none;
+}
+.doc-button a:hover {
+  text-decoration: underline;
+}
+
+.doc-description {
+  clear: both;
+  margin-top: 1em;
+}
