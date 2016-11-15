@@ -76,6 +76,7 @@
   <div class="content"<?php print $content_attributes; ?>>
     
     <div class="doc-details">
+
       <div class="doc-publisher">
         <div class="doc-attr-label">Publisher </div>
         <div class="doc-attr-value">
@@ -84,19 +85,24 @@
           </a>
         </div>
       </div>
+
+      <?php if (render($content['field_report_meeting_date'])):?>
       <div class="doc-date">
         <div class="doc-attr-label">Date </div>
         <div class="doc-attr-value">
           <strong><?php $value = fieldValue('field_report_meeting_date', $node); print render($value); ?></strong>
         </div>
       </div>
+      <?php endif; ?>
 
+      <?php if (render($content['field_document_type'])):?>
       <div class="doc-type">
         <div class="doc-attr-label">Type </div>
         <div class="doc-attr-value">
           <?php $value = fieldValue('field_document_type', $node); print render($value); ?>
         </div>
       </div>
+      <?php endif; ?>
 
       <?php if (render($content['field_file'])): ?>
         <div class="doc-filename">
@@ -118,12 +124,15 @@
         </div>
       <?php endif; ?>
 
+      <?php if (render($content['field_document_source'])):?>
       <div class="doc-source">
         <div class="doc-attr-label">Source </div>
         <div class="doc-attr-value">
           <strong><?php $value = fieldValue('field_document_source', $node); print render($value); ?></strong>
         </div>
       </div>
+      <?php endif; ?>
+
       <?php if (render($content['og_group_ref'])):?>
         <div class="doc-group">
           <div class="doc-attr-label">Group </div>
@@ -132,6 +141,7 @@
           </div>
         </div>
       <?php endif; ?>
+
       <div class="doc-language">
         <div class="doc-attr-label">Language </div>
         <div class="doc-attr-value">
@@ -139,6 +149,7 @@
         </div>
       </div>
       
+      <?php if ($tag_groups && !empty($tag_groups)):?>
       <div class="doc-tags">
         <div class="doc-attr-label">Tags </div>
         <div class="doc-attr-value"><?php
@@ -150,6 +161,8 @@
           }
         ?></div>
       </div>
+      <?php endif; ?>
+
     </div>
     
     <div class="doc-download">
