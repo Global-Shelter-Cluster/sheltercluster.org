@@ -7,7 +7,6 @@ var compass = require('gulp-compass');
 var plumber = require('gulp-plumber');
 var autoprefixer = require('gulp-autoprefixer');
 var watch = require('gulp-watch');
-var plugins = require('gulp-load-plugins')();
 
 gulp.task('sass', ['sass-compile', 'sass-watch']);
 
