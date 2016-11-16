@@ -113,10 +113,13 @@
   .view-homepage2 {
     margin-top: 41px;
     .views-row {
-      width: 49%;
-      float: right;
       position: relative;
-        &:first-child { float: left; }
+      @include desktop() {
+        float: right;
+        width: 49%;
+      }
+
+      &:first-child { float: left; }
         img {
           width: 100%;
           height: auto;
@@ -170,11 +173,12 @@
   }
 }
 
-  .front #twitter-timeline iframe {
-    height: 100% !important;
+@include mobile() {
+  .front .main-column {
+    padding-top: 0;
   }
 
-  .front .main-column:after {
-    content: '' !important;
+  #block-views-homepage2-block-1 > .content {
+    padding-bottom: 0;
   }
 }

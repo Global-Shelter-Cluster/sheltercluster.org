@@ -2721,9 +2721,13 @@ div.addressfield-container-inline::after {
   margin-top: 41px;
 }
 .front .view-homepage2 .views-row {
-  width: 49%;
-  float: right;
   position: relative;
+}
+@media screen and (min-width: 769px) {
+  .front .view-homepage2 .views-row {
+    float: right;
+    width: 49%;
+  }
 }
 .front .view-homepage2 .views-row:first-child {
   float: left;
