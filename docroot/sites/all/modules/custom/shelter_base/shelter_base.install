@@ -1297,3 +1297,12 @@ function shelter_base_update_7134() {
 function shelter_base_update_7136() {
   features_revert_module('cluster_home');
 }
+
+/**
+ * Enable and configure redirect module.
+ */
+function shelter_base_update_7137() {
+  module_enable(array('redirect'));
+
+  variable_set('redirect_auto_redirect', TRUE);
+}
