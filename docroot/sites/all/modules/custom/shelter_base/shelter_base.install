@@ -1315,3 +1315,10 @@ function shelter_base_update_7140() {
 
   variable_set('node_toggle_optional_fields_node_types', array('document', 'event'));
 }
+
+/**
+ * Enable cluster_tokens module.
+ */
+function shelter_base_update_7139() {
+  module_enable(array('cluster_tokens'));
+}
