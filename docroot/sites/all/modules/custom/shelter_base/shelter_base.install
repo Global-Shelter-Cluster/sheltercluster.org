@@ -1306,12 +1306,3 @@ function shelter_base_update_7137() {
 
   variable_set('redirect_auto_redirect', TRUE);
 }
-
-/**
- * Enable advanced search for all users.
- */
-function shelter_base_update_7138() {
-  foreach (array(DRUPAL_ANONYMOUS_RID, DRUPAL_AUTHENTICATED_RID) as $rid) {
-    user_role_grant_permissions($rid, array('use advanced search'));
-  }
-}
