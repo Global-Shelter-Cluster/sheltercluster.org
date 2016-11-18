@@ -29,7 +29,7 @@ function _node_toggle_optional_fields_prepare_form(&$form, &$form_state) {
 function _node_toggle_optional_fields_alter_form(&$form, $form_state) {
   array_map(function($element_name) use (&$form) {
     // Only affect fields.
-    if (substr($element_name, 0, 6) !== 'field_') {
+    if (!node_toggle_optional_fields_element_is_field($element_name)) {
       return;
     }
 
@@ -38,4 +38,17 @@ function _node_toggle_optional_fields_alter_form(&$form, $form_state) {
       $form[$element_name]['#access'] = FALSE;
     }
   }, element_children($form));
+}
+
+/**
+ * Determines if the element name is a field.
+ *
+ * @param string $element_name
+ *   The name of the element.
+ *
+ * @return bool
+ *   TRUE if is a field, or FALSE.
+ */
+function node_toggle_optional_fields_element_is_field($element_name) {
+  return substr($element_name, 0, 6) !== 'field_';
 }
