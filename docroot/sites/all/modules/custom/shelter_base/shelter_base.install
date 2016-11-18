@@ -1306,3 +1306,12 @@ function shelter_base_update_7137() {
 
   variable_set('redirect_auto_redirect', TRUE);
 }
+
+/**
+ * Enable node_toggle_optional_fields.
+ */
+function shelter_base_update_7140() {
+  module_enable(array('node_toggle_optional_fields'));
+
+  variable_set('node_toggle_optional_fields_node_types', array('document', 'event'));
+}
