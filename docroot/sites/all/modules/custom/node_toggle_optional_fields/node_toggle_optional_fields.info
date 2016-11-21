@@ -1,0 +1,3 @@
+name = Node Toggle Optional Fields
+core = 7.x
+description = Toggle optional fields on node forms.

@@ -1,17 +1,17 @@
 var gulp = require('gulp');
 var tasks = require('gulp-task-listing');
 var config = require('./gulpfile.config')();
+var shell = require('gulp-shell');
 
 var compass = require('gulp-compass');
 var plumber = require('gulp-plumber');
 var autoprefixer = require('gulp-autoprefixer');
 var watch = require('gulp-watch');
-var plugins = require('gulp-load-plugins')();
 
 gulp.task('sass', ['sass-compile', 'sass-watch']);
 
 gulp.task('sass-watch', function() {
-  gulp.watch(config.assets.sass, ['sass-compile']);
+  gulp.watch(config.assets.sass, ['sass-compile', 'clearstyles']);
 });
 
 gulp.task('sass-compile', function() {
@@ -34,3 +34,8 @@ gulp.task('default', function() {
   return tasks.withFilters(null, 'default')();
 });
 
+gulp.task('clearstyles', function() {
+  return shell.task([
+  'drush cc css-js'
+  ]);
+});

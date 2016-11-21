@@ -45,4 +45,10 @@
       });
     }
   };
+
+  Drupal.behaviors.twitterTimeline = {
+    attach: function (context, settings) {
+      $('.front #twitter-timeline', context).appendAround();
+    }
+  };
 })(jQuery);
