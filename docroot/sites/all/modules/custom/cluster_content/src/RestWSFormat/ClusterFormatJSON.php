@@ -15,6 +15,9 @@ class ClusterFormatJSON extends RestWSFormatJSON {
     if ($resource == 'taxonomy_term') {
       unset($return['resource']);
       unset($return['uuid']);
+
+      // Add the term name.
+      $return['name'] = taxonomy_term_load($id)->name;
     }
 
     return $return;
