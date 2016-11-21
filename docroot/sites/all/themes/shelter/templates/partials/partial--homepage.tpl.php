@@ -36,6 +36,8 @@
     <div class="wysiwyg">
       <?php print render($page['content']); ?>
     </div>
+
+    <div class="twitter-timeline-main" data-set="twitter-timeline"></div>
   </div>
 
 </div>

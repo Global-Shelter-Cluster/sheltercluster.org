@@ -159,7 +159,7 @@
       flex-direction: column;
     }
 
-    .front #twitter-timeline {
+    .front .side-column [data-set="twitter-timeline"] {
       flex: 1;
     }
 
@@ -180,5 +180,24 @@
 
   #block-views-homepage2-block-1 > .content {
     padding-bottom: 0;
+  }
+}
+
+.front .twitter-timeline-sidebar {
+  display: none;
+}
+
+.front .twitter-timeline-main {
+  display: block;
+}
+
+@include desktop() {
+  .front .twitter-timeline-sidebar {
+    display: flex;
+    flex: 1;
+  }
+
+  .front .twitter-timeline-main {
+    display: none;
   }
 }

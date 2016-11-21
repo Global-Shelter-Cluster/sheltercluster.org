@@ -14,6 +14,7 @@ scripts[] = 'assets/javascripts/truncating-titles.js'
 scripts[] = 'assets/javascripts/collapsible.js'
 scripts[] = 'assets/javascripts/jquery.matchHeight-min.js'
 scripts[] = 'assets/javascripts/matchheight-shelter.js'
+scripts[] = 'assets/javascripts/appendAround.js'
 
 regions[header] = Header
 regions[content] = Content

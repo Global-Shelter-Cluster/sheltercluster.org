@@ -77,6 +77,12 @@
 $tablet: 401px !default;
 $desktop: 769px !default;
 
+@mixin until($width) {
+  @media screen and (max-width: $width - 1px) {
+    @content;
+  }
+}
+
 @mixin mobile() {
   @media screen and (max-width: $tablet - 1px) {
     @content;
