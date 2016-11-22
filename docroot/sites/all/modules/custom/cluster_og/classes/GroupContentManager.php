@@ -225,9 +225,9 @@ class GroupContentManager {
     $res = $query->entityCondition('entity_type', 'node')
       ->entityCondition('bundle', 'event')
       ->fieldCondition('og_group_ref', 'target_id', $this->node->nid)
-      ->fieldCondition('field_recurring_event_date', 'value', date('Y-m-d'), '>')
+      ->fieldCondition('field_recurring_event_date2', 'value', date('Y-m-d'), '>')
       ->propertyCondition('status', NODE_PUBLISHED)
-      ->fieldOrderBy('field_recurring_event_date', 'value', 'ASC')
+      ->fieldOrderBy('field_recurring_event_date2', 'value', 'ASC')
       ->range(0, $range)
       ->execute();
 
@@ -462,6 +462,31 @@ class GroupContentManager {
     return !in_array($module, $disabled);
   }
 
+  /**
+   * Retrieve all community_of_practice nodes associated with the current
+   * group.
+   *
+   * @return array
+   */
+  public function getCommunitiesOfPractice() {
+    $query = new EntityFieldQuery();
+
+    $result = $query
+      ->entityCondition('entity_type', 'node')
+      ->entityCondition('bundle', 'community_of_practice')
+      ->fieldCondition('og_group_ref', 'target_id', $this->node->nid)
+      ->propertyCondition('status', NODE_PUBLISHED)
+      ->fieldOrderBy('field_sorting_weight', 'value', 'ASC')
+      ->addTag('node_access')
+      ->execute();
+
+    if (!isset($result['node'])) {
+      return array();
+    }
+
+    return array_keys($result['node']);
+  }
+
 }
 
 class GroupContentManagerResponse extends GroupContentManager {
@@ -653,7 +678,7 @@ class GroupContentManagerRSS extends GroupContentManager {
         ->entityCondition('bundle', 'event')
         ->fieldCondition('og_group_ref', 'target_id', $this->node->nid)
         ->propertyCondition('status', NODE_PUBLISHED)
-        ->fieldOrderBy('field_recurring_event_date', 'value', 'DESC');
+        ->fieldOrderBy('field_recurring_event_date2', 'value', 'DESC');
 
       $nids_results = $nids_query->execute();
       if (!isset($nids_results['node'])
@@ -663,8 +688,8 @@ class GroupContentManagerRSS extends GroupContentManager {
 
       $nids = array_keys($nids_results['node']);
       $query = $this->getRSSBasicQuery($nids);
-      $query->join('field_data_field_recurring_event_date', 'e', 'e.entity_id = n.nid');
-      $query->fields('e', array('field_recurring_event_date_value'));
+      $query->join('field_data_field_recurring_event_date2', 'e', 'e.entity_id = n.nid');
+      $query->fields('e', array('field_recurring_event_date2_value'));
       $results = $query->execute()->fetchAllAssoc('nid');
 
       global $base_root;
@@ -675,7 +700,7 @@ class GroupContentManagerRSS extends GroupContentManager {
         $result->url = $base_root . '/' . drupal_get_path_alias('node/' . $nid);
         $result->guid = $base_root . '/node/' . $nid;
         $result->pubDate = format_date($result->created, 'custom', 'D, d M Y H:i:s O');
-        $time = new DateTime($result->field_recurring_event_date_value);
+        $time = new DateTime($result->field_recurring_event_date2_value);
         $unixdate = $time->getTimestamp();
         $result->eventDate = format_date($unixdate, 'custom', 'D, d M Y H:i:s O');
         $result->description = $this->rssSummaryOrTrimmed($result->body_value, $result->body_summary);

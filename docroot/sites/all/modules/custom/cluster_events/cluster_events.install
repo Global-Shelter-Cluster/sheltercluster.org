@@ -1,0 +1,54 @@
+<?php
+
+function cluster_events_update_7001() {
+  $items = db_select('field_data_field_recurring_event_date', 'date')
+    ->fields('date')
+    ->execute()
+    ->fetchAll();
+
+  foreach ($items as $item) {
+    $data = array(
+      'entity_type' => $item->entity_type,
+      'bundle' => $item->bundle,
+      'deleted' => $item->deleted,
+      'entity_id' => $item->entity_id,
+      'revision_id' => $item->revision_id,
+      'language' => $item->language,
+      'delta' => $item->delta,
+      'field_recurring_event_date2_value' => $item->field_recurring_event_date_value,
+      'field_recurring_event_date2_value2' => NULL,
+      'field_recurring_event_date2_rrule' => $item->field_recurring_event_date_rrule,
+    );
+
+    db_insert('field_data_field_recurring_event_date2')
+      ->fields($data)
+      ->execute();
+
+    db_insert('field_revision_field_recurring_event_date2')
+      ->fields($data)
+      ->execute();
+
+    field_cache_clear();
+  }
+}
+
+/**
+ * Revert cluster_events.
+ */
+function cluster_events_update_7002() {
+  features_revert_module('cluster_events');
+}
+
+/**
+ * Delete field_recurring_event_date.
+ */
+function cluster_events_update_7003() {
+  field_delete_field('field_recurring_event_date');
+}
+
+/**
+ * Revert cluster_events field instances.
+ */
+function cluster_events_update_7004() {
+  features_revert(array('cluster_events' => array('field_instance')));
+}

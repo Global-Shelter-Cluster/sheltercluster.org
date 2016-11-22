@@ -105,6 +105,7 @@ function cluster_nav_preprocess_page(&$variables) {
 
   // If viewing a group node page, use it.
   if (og_is_group('node', $node)) {
+    /** @var GroupDisplayProvider $display_provider */
     $display_provider = GroupDisplayProvider::getDisplayProvider($node);
   }
 
@@ -116,9 +117,43 @@ function cluster_nav_preprocess_page(&$variables) {
     if (count($group) > 0) {
       // Set a flag to indicate we want to include the group nav items at the page level.
       $page_level_nav = TRUE;
+
+      /** @var GroupFullDisplayProvider $display_provider */
       $display_provider = GroupDisplayProvider::getDisplayProvider($group[0]);
-      // Override the page level title to show the group content title.
-      $variables['title'] = $variables['page_title'] = $wrapper->og_group_ref->label();
+
+      switch ($node->type) {
+        case 'event':
+        case 'library':
+          $response = $wrapper->og_group_ref->value();
+          $response = reset($response);
+
+          // Override the page title and link it back to the response.
+          $variables['title'] = $variables['page_title'] = l(
+            $response->title,
+            'node/' . $response->nid
+          );
+          break;
+
+        default:
+          // Override the page level title to show the group content title.
+          $variables['title'] = $variables['page_title'] = $wrapper->og_group_ref->label();
+          break;
+      }
+    }
+  }
+
+  $args = arg();
+  $is_response = $args[0] == 'node' && $node->type == 'response';
+  $is_subpage = !empty($args[2]) && in_array($args[2], array('documents', 'events'));
+
+  if ($is_response && $is_subpage) {
+    try {
+      $wrapper = entity_metadata_wrapper('node', $node);
+
+      $variables['title'] = $variables['page_title'] = l($wrapper->label(), $wrapper->get('url')->value());
+    }
+    catch (Exception $e) {
+      watchdog_exception('cluster_nav', $e);
     }
   }
 

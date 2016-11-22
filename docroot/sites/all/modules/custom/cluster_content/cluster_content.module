@@ -14,3 +14,10 @@ function cluster_content_admin_paths() {
     'node/*/content' => TRUE,
   );
 }
+
+/**
+ * Implements hook_restws_format_info_alter().
+ */
+function cluster_content_restws_format_info_alter(&$format_info) {
+  $format_info['json']['class'] = 'Drupal\cluster_content\RestWSFormat\ClusterFormatJSON';
+}

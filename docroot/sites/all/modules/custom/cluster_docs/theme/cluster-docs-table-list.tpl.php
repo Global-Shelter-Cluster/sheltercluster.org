@@ -76,11 +76,12 @@
         <?php print $doc['link']; ?>
         <?php print $doc['description']; ?>
         <?php print $doc['group']; ?>
+        <?php print $doc['tags']; ?>
       </td>
 
       <td class="information-file">
         <?php if ($doc['filesize'] && $doc['file_extension']): ?>
-          <span class="size-type">[ <?php print $doc['filesize']; ?>M ] <?php print $doc['file_extension']; ?></span>
+          <span class="size-type">[ <?php print $doc['filesize']; ?>M ] <?php print render($doc['file_extension']); ?></span>
         <?php endif; ?>
       </td>
 

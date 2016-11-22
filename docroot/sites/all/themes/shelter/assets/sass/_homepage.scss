@@ -110,4 +110,94 @@
       }
     }
   }
+  .view-homepage2 {
+    margin-top: 41px;
+    .views-row {
+      position: relative;
+      @include desktop() {
+        float: right;
+        width: 49%;
+      }
+
+      &:first-child { float: left; }
+        img {
+          width: 100%;
+          height: auto;
+        }
+    }
+    
+    .views-field-title {
+      position: absolute;
+      bottom: 5px;
+      z-index: 10;
+      color: #fff;
+      padding: 30px 10px 10px;
+      display: block;
+      width: 100%;
+      background: -moz-linear-gradient(top,  rgba(0,0,0,0.01) 0%, rgba(0,0,0,0.68) 50%, rgba(0,0,0,1) 74%, rgba(0,0,0,1) 100%);
+      background: -webkit-linear-gradient(top,  rgba(0,0,0,0.01) 0%,rgba(0,0,0,0.68) 50%,rgba(0,0,0,1) 74%,rgba(0,0,0,1) 100%);
+      background: linear-gradient(to bottom,  rgba(0,0,0,0.01) 0%,rgba(0,0,0,0.68) 50%,rgba(0,0,0,1) 74%,rgba(0,0,0,1) 100%);
+      filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#03000000', endColorstr='#000000',GradientType=0 );
+      
+    }
+    
+    .views-field-field-homeimage {
+      position: relative;
+    }
+  }
+}
+
+@include desktop() {
+  html.flexbox {
+    .front .home-main {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .front .side-column {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .front .side-column [data-set="twitter-timeline"] {
+      flex: 1;
+    }
+
+    .front #twitter-timeline iframe {
+      height: 100% !important;
+    }
+
+    .front .main-column:after {
+      content: '' !important;
+    }
+  }
+}
+
+@include mobile() {
+  .front .main-column {
+    padding-top: 0;
+  }
+
+  #block-views-homepage2-block-1 > .content {
+    padding-bottom: 0;
+  }
+}
+
+.front .twitter-timeline-sidebar {
+  display: none;
+}
+
+.front .twitter-timeline-main {
+  display: block;
+}
+
+@include desktop() {
+  .front .twitter-timeline-sidebar {
+    display: flex;
+    flex: 1;
+  }
+
+  .front .twitter-timeline-main {
+    display: none;
+  }
 }

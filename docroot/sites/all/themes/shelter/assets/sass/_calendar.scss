@@ -36,6 +36,9 @@
     border-bottom: 1px solid #ddd;
     padding-top: 7px;
     margin-bottom: 9px;
+    clear: right;
+    display: table;
+    width: 100%;
 
     .event-title {
       background: #ddd;
@@ -71,12 +74,12 @@
       margin-bottom: 7px;
       @include rem(padding, 0 0.75rem);
     }
+    .response {
+       padding: 0 5px;
+    }    
     .label {
       position: relative;
       display: block;
-      text-transform: uppercase;
-      color: #888;
-      @include rem(font-size, 0.70rem);
       .map-link {
         position: absolute;
         right: 0;
@@ -84,7 +87,8 @@
     }
   }
 
-  .all-events {
+  .all-events,
+  .previous-events {
     text-align: center;
     @include rem(font-size, 0.85rem);
     padding: 0 0 10px;
@@ -121,6 +125,10 @@
   @include rem(padding, 0 0.3125rem 0.3125rem 0);
   @include border-radius(15px);
   @include box-sizing(initial);
+}
+
+.past-events-link a {
+  @extend .button;
 }
 
 #all-events {

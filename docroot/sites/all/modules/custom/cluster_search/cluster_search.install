@@ -1,0 +1,8 @@
+<?php
+
+/**
+ * Revert cluster_search index settings.
+ */
+function cluster_search_update_7100() {
+  features_revert(array('cluster_search' => array('search_api_index')));
+}

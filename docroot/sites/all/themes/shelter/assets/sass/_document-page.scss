@@ -1,0 +1,89 @@
+@media (min-width: 768px) {
+  .doc-details {
+    float: left;
+    width: 70%;
+  }
+
+  .doc-download {
+    float: right;
+    width: 30%;
+  }
+}
+
+.doc-details {
+  margin-bottom: 1em;
+  color: $shelter-grey;
+
+  > div {
+    margin-bottom: 0.5em;
+  }
+
+  a {
+    color: $shelter-red;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  .doc-attr-label {
+    display: inline-block;
+    width: 20%;
+    min-width: 80px;
+    max-width: 100px;
+    vertical-align: top;
+  }
+
+  .doc-attr-value {
+    display: inline-block;
+    width: 65%;
+  }
+}
+
+.doc-details .field-name-og-group-ref,
+.doc-details .field-name-og-group-ref div {
+  display: inline-block;
+}
+
+.doc-tags a {
+  display: inline-block;
+  margin: 0 0.67em 0.5em 0;
+  font-size: 0.9em;
+}
+
+.doc-download {
+  text-align: center;
+}
+
+.doc-preview {
+  width: 100%;
+  padding: 0.25em;
+  min-height: 200px;
+  text-align: center;
+  background: $shelter-light-blue url(../svg/icons/file.svg) center center no-repeat;
+  background-size: 50px;
+  border: 1px solid $shelter-dark-blue;
+
+  img {
+    max-width: 200px;
+    height: auto;
+  }
+}
+
+.doc-button a {
+  display: block;
+  margin: 0.5em 0 0;
+  padding: 0.5em;
+  width: 100%;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.doc-description {
+  clear: both;
+  margin-top: 1em;
+}

@@ -4,3 +4,10 @@
  * @file
  *  Install file.
  */
+
+/**
+ * Revert cluster_docs field instances.
+ */
+function cluster_docs_7100() {
+  features_revert(array('cluster_docs' => array('field_instance')));
+}

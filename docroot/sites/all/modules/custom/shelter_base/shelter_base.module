@@ -67,3 +67,40 @@ function shelter_base_sort_nids_by_weight($nids, $sort_order = 'ASC') {
 
   return array_keys($result_sorted['node']);
 }
+
+function shelter_base_remove_duplicate_region_links() {
+  $menu = menu_tree_all_data('menu-regions');
+
+  // Recursive function to delete duplicates.
+  $function = function(&$items) use (&$function) {
+    $temp = array();
+    $to_delete = array();
+    foreach ($items as $key => $item) {
+      $path = $item['link']['link_path'];
+      $has_children = $item['link']['has_children'];
+      $mlid = $item['link']['mlid'];
+      if (!isset($temp[$path])) {
+        $temp[$path] = array($mlid, $has_children);
+      }
+      elseif ($temp[$path][1] && !$has_children) {
+        $to_delete[] = $mlid;
+      }
+      elseif (!$temp[$path][1] && $has_children) {
+        $to_delete[] = $temp[$path][0];
+        $temp[$path] = array($mlid, $has_children);
+      }
+      elseif (!$temp[$path][1] && !$has_children) {
+        $to_delete[] = $mlid;
+      }
+
+      if ($has_children) {
+        $function($item['below']);
+      }
+    }
+    foreach ($to_delete as $mlid) {
+      menu_link_delete($mlid);
+    }
+  };
+
+  $function($menu);
+}

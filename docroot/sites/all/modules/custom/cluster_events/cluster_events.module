@@ -61,20 +61,31 @@ function _cluster_events_title_callback($nid) {
  * @return Render array
  */
 function cluster_events_all($nid) {
+  module_load_include('inc', 'cluster_events', 'cluster_events.helpers');
+  $all_events = !_cluster_events_all_events_only_upcoming_events();
+
+  $order = 'ASC';
+
+  $today = (new DateTime('12am today'))->format('Y-m-d 00:00:00');
 
   // Filter by event date with entity field query.
   $filter_by_date = new EntityFieldQuery();
   $filter_by_date->entityCondition('entity_type', 'node')
     ->entityCondition('bundle', 'event')
     ->propertyCondition('status', NODE_PUBLISHED)
-    ->fieldOrderBy('field_recurring_event_date', 'value', 'DESC');
+    ->fieldOrderBy('field_recurring_event_date2', 'value', $order);
 
   $filter_by_date_count = new EntityFieldQuery();
   $filter_by_date_count->entityCondition('entity_type', 'node')
     ->entityCondition('bundle', 'event')
     ->propertyCondition('status', NODE_PUBLISHED)
-    ->fieldOrderBy('field_recurring_event_date', 'value', 'DESC')
+    ->fieldOrderBy('field_recurring_event_date2', 'value', $order)
     ->count();
+
+  if (!$all_events) {
+    $filter_by_date->fieldCondition('field_recurring_event_date2', 'value', $today, '>=');
+    $filter_by_date_count->fieldCondition('field_recurring_event_date2', 'value', $today, '>=');
+  }
 
   if ($nid) {
     $filter_by_date->fieldCondition('og_group_ref', 'target_id', $nid);
@@ -91,10 +102,9 @@ function cluster_events_all($nid) {
 
   pager_default_initialize($number_of_results, CLUSTER_EVENTS_PER_PAGE);
 
-  if (! $query_date_filter_results['node']) {
-    $content = array(
-      '#markup' => t('No events scheduled at the moment.'),
-    );
+  if (empty($query_date_filter_results['node'])) {
+    $content['events_toggle_button'] = _cluster_events_add_toggle_button(TRUE);
+    $content['events']['#markup'] = t('No events scheduled at the moment.');
   }
   else {
     $content = array(
@@ -113,14 +123,43 @@ function cluster_events_all($nid) {
   return $ret;
 }
 
+/**
+ * Get upcoming events.
+ *
+ * @return bool|string
+ */
 function cluster_events_upcoming() {
+  return cluster_events_get_events('>', 'ASC');
+}
+
+/**
+ * Get previous events.
+ *
+ * @return bool|string
+ */
+function cluster_events_previous() {
+  return cluster_events_get_events('<', 'DESC');
+}
+
+/**
+ * Get event nodes.
+ *
+ * @param string $operator
+ *   The operator to use within the date field condition (i.e. less or greater
+ *   than the specified date.
+ * @param string $order
+ *   The order to sort the results - e.g. 'ASC' or 'DESC'.
+ *
+ * @return bool|string
+ */
+function cluster_events_get_events($operator = '>', $order = 'ASC') {
   $query = new EntityFieldQuery();
   $results = $query->entityCondition('entity_type', 'node')
     ->entityCondition('bundle', 'event')
-    ->fieldCondition('field_recurring_event_date', 'value', date('Y-m-d'), '>')
+    ->fieldCondition('field_recurring_event_date2', 'value', date('Y-m-d'), $operator)
     ->propertyCondition('status', NODE_PUBLISHED)
-    ->fieldOrderBy('field_recurring_event_date', 'value', 'ASC')
-    ->range(0, 3)
+    ->fieldOrderBy('field_recurring_event_date2', 'value', $order)
+    ->range(0, 2)
     ->execute();
 
   if (!isset($results['node'])) {
@@ -135,14 +174,18 @@ function cluster_events_upcoming() {
     $events[] = cluster_events_format_upcoming($entity->nid);
   }
 
+  $is_previous = $operator === '<';
+
   return theme('cluster_og_upcoming_events', array(
     'events' => $events,
+    'is_previous_events' => $is_previous,
     'all_events_link' => '/events',
     'global_events_link' => array(
       '#type' => 'link',
       '#href' => 'geographic-region/global/events',
       '#title' => 'See Global Events',
     ),
+    'previous_events_link' => '',
   ));
 }
 
@@ -153,10 +196,13 @@ function cluster_events_format_upcoming($nid) {
   }
 
   try {
+    /** @var EntityDrupalWrapper $wrapper */
     $wrapper = entity_metadata_wrapper('node', $node);
 
     // Render the date as per the teaser field display setting.
-    $date = field_view_field('node', $node, 'field_recurring_event_date', 'teaser');
+    $date = $wrapper->get('field_recurring_event_date2')->value();
+    $date = strtotime($date[0]['value']);
+    $date = format_date($date, 'custom', 'H:i - Y m d');
 
     $geo = $wrapper->field_coordinates->value();
     $map_link = l(t('map'), 'https://www.google.ca/maps/place/' . $geo['lat'] . ',' . $geo['lon'] . '/@' . $geo['lat'] . ',' . $geo['lon'] . ',15z', array(
@@ -180,6 +226,16 @@ function cluster_events_format_upcoming($nid) {
       ));
     }
 
+    // Add a link to the response.
+    $response_link = l(
+      $wrapper->og_membership->label(),
+      'node/' . $wrapper->getIdentifier()
+    );
+
+    $response = t('Response: !response_link', array(
+      '!response_link' => $response_link
+    ));
+
     return array(
       'date' => $date,
       'title' => $wrapper->title->value(),
@@ -188,6 +244,8 @@ function cluster_events_format_upcoming($nid) {
       'map_link' => $map_link,
       'static_map' => FALSE,
       'contact' => $contact_list,
+      'ical' => l('iCal', sprintf('node/%d/%s/default/addtocal.ics', $node->nid, 'field_recurring_event_date2')),
+      'response' => $response,
     );
   }
   catch (EntityMetadataWrapperException $exception) {
@@ -205,14 +263,14 @@ function cluster_events_format_list($nids) {
 
     try {
       $wrapper = entity_metadata_wrapper('node', $node);
-      $value = $wrapper->field_recurring_event_date->value();
+      $value = $wrapper->field_recurring_event_date2->value();
       $event_date = $value[0];
       $current_date = time();
       $is_future = $event_date > $current_date ? TRUE : FALSE;
       $is_past = !$is_future;
 
       // Render the date as per the teaser field display setting.
-      $date = field_view_field('node', $node, 'field_recurring_event_date', 'teaser');
+      $date = field_view_field('node', $node, 'field_recurring_event_date2', 'teaser');
 
       $geo = $wrapper->field_coordinates->value();
       $map_url = 'https://www.google.ca/maps/place/' . $geo['lat'] . ',' . $geo['lon'] . '/@' . $geo['lat'] . ',' . $geo['lon'] . ',15z';
@@ -310,12 +368,19 @@ function cluster_events_get_contact_list($contacts = FALSE) {
   if (!empty($contacts)) {
     $contact_email = '';
     $last_contact = count($contacts) - 1;
+
     // Get all the contacts and email address.
     foreach ($contacts as $index => $contact) {
       $separator = ", ";
       if ($index == $last_contact) {
         $separator = '';
       }
+
+      if (empty($contact->field_email)) {
+        $contact_list .= $contact->title . $separator;
+        continue;
+      }
+
       $contact_name = $contact->title;
       $contact_email = $contact->field_email['und']['0']['email'];
 
@@ -327,4 +392,52 @@ function cluster_events_get_contact_list($contacts = FALSE) {
     }
   }
   return $contact_list;
+}
+
+/**
+ * Implements hook_preprocess_HOOK().
+ */
+function cluster_events_preprocess_partial(&$variables) {
+  switch ($variables['name']) {
+    case 'all_events':
+      module_load_include('inc', 'cluster_events', 'cluster_events.helpers');
+
+      $all_events = !_cluster_events_all_events_only_upcoming_events();
+      $button = _cluster_events_add_toggle_button(FALSE);
+      $variables['events_toggle_button'] = render($button);
+      break;
+  }
+}
+
+/**
+ * Implements hook_field_access().
+ */
+function cluster_events_field_access($op, $field, $entity_type, $entity, $account) {
+  if ($op != 'view' && $field['field_name'] == 'field_recurring_event_date') {
+    return FALSE;
+  }
+}
+
+/**
+ * Add a button to toggle between all events and only upcoming events.
+ *
+ * @var boolean $all_events
+ *   (optional) Whether to show all events. Defaults to FALSE.
+ */
+function _cluster_events_add_toggle_button($all_events = FALSE) {
+  $options = array();
+
+  if ($all_events) {
+    $options['query']['all'] = NULL;
+  }
+
+  $path = url(current_path(), $options);
+  $title = t('@', array('@' => $all_events ? 'View all events' : 'View only upcoming events'));
+
+  return array(
+    '#markup' => sprintf('<a href="%s">%s</a>', $path, $title),
+    '#prefix' => '<p class="past-events-link">',
+    '#suffix' => '</p>',
+    '#weight' => -1,
+  );
 }

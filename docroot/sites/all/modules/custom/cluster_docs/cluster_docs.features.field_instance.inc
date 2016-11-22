@@ -15,7 +15,7 @@ function cluster_docs_field_default_field_instances() {
     'bundle' => 'document',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'Only first 100 characters of the description will be displayed in the document lists.',
+    'description' => 'Only first 400 characters of the description will be displayed in the document lists.',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -45,7 +45,7 @@ function cluster_docs_field_default_field_instances() {
       'active' => 1,
       'module' => 'text',
       'settings' => array(
-        'rows' => 20,
+        'rows' => 5,
         'summary_rows' => 5,
       ),
       'type' => 'text_textarea_with_summary',
@@ -1278,7 +1278,7 @@ function cluster_docs_field_default_field_instances() {
   t('Meeting Management');
   t('Name');
   t('Non Food Items');
-  t('Only first 100 characters of the description will be displayed in the document lists.');
+  t('Only first 400 characters of the description will be displayed in the document lists.');
   t('Other Keywords');
   t('Preview');
   t('Report / Meeting date');

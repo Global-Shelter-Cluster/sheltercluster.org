@@ -1,0 +1,23 @@
+<?php
+
+/**
+ * Implements hook_install().
+ */
+function cluster_home_install() {
+  cluster_home_update_7000();
+}
+
+/**
+ * Create the homepage node.
+ */
+function cluster_home_update_7000() {
+  $node = entity_create('node', array(
+    'type' => 'homepage',
+    'title' => 'Homepage',
+    'status' => NODE_PUBLISHED,
+    'uid' => 1,
+    'language' => 'en',
+  ));
+
+  entity_save('node', $node);
+}

@@ -473,7 +473,7 @@ function date_repeat_entity_get_referenced_entities($form, $form_state) {
         // Other widgets store referenced field entities in the form_state
         // values array.
         foreach ($form_state['values'][$field_name][LANGUAGE_NONE] as $target_entity) {
-          if (!is_null($target_entity['target_id'])) {
+          if (!empty($target_entity['target_id'])) {
             $number_of_referenced_entities++;
           }
         }

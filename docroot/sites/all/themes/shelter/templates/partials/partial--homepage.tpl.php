@@ -5,7 +5,7 @@
  */
 ?>
 
-<div class="page-margin clearfix">
+<div class="page-margin clearfix home-main">
 
   <div class="side-column clearfix">
     <?php if($hot_responses): ?>
@@ -23,6 +23,9 @@
 
   <div class="main-column clearfix">
     <div class="clearfix">
+      
+      <?php print render($page['homepage']); ?>
+      
       <?php if($upcoming_events): ?>
         <?php print render($upcoming_events); ?>
       <?php endif; ?>
@@ -33,6 +36,8 @@
     <div class="wysiwyg">
       <?php print render($page['content']); ?>
     </div>
+
+    <div class="twitter-timeline-main" data-set="twitter-timeline"></div>
   </div>
 
 </div>

@@ -2,6 +2,8 @@
 
     <div id="date-calendar"><?php print $title ?></div>
 
+    <?php print $events_toggle_button; ?>
+
     <?php foreach($events as $event): ?>
       <?php if($event['is_future']): ?>
         <div class="event-card future-event-card">

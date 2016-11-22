@@ -1217,3 +1217,101 @@ function shelter_base_update_7123() {
 function shelter_base_update_7124() {
   module_disable(array('shelter_migrate'));
 }
+
+/**
+ * Disable user configurable timezones so timezones dont screw with event times
+ */
+function shelter_base_update_7125() {
+  features_revert_module('shelter_events');
+}
+
+/**
+ * Add addtoical module and set configuration for display
+ */
+function shelter_base_update_7126() {
+  features_revert_module('cluster_events');
+}
+
+/**
+ * Update doc description field to show 400 characters for the featured docs list
+ */
+function shelter_base_update_7128() {
+  features_revert_module('shelter_docs');
+}
+
+/**
+ * Install cluster_home.
+ */
+function shelter_base_update_7129() {
+  features_install_modules(array('cluster_home'));
+}
+
+/**
+ * Tweak layout of homepage to include new blocks
+ */
+function shelter_base_update_7130() {
+    module_enable(array(
+    'features_extra',
+    'fe_block',
+  ));
+  features_revert_module('shelter_base');
+  features_revert_module('cluster_home');
+}
+
+/**
+<<<<<<< Updated upstream
+ * Enable restws.
+ */
+function shelter_base_update_7131() {
+  module_enable(array('restws'));
+}
+
+/**
+ * Enable xautoload and clear cache.
+ */
+function shelter_base_update_7132() {
+  module_enable(array('xautoload'));
+
+  cache_clear_all();
+}
+
+/**
+ * Remove duplicate region links.
+ */
+function shelter_base_update_7133() {
+  shelter_base_remove_duplicate_region_links();
+}
+
+/**
+ * Enable modernizr.
+ */
+function shelter_base_update_7134() {
+  module_enable(array('modernizr'));
+
+  cache_clear_all();
+}
+
+/**
+ * Update cluster_home block settings.
+ */
+function shelter_base_update_7136() {
+  features_revert_module('cluster_home');
+}
+
+/**
+ * Enable and configure redirect module.
+ */
+function shelter_base_update_7137() {
+  module_enable(array('redirect'));
+
+  variable_set('redirect_auto_redirect', TRUE);
+}
+
+/**
+ * Enable node_toggle_optional_fields.
+ */
+function shelter_base_update_7140() {
+  module_enable(array('node_toggle_optional_fields'));
+
+  variable_set('node_toggle_optional_fields_node_types', array('document', 'event'));
+}
