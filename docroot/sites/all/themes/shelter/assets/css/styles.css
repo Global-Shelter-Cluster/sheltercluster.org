@@ -3095,8 +3095,10 @@ footer .table-row {
   text-indent: 0;
   text-transform: uppercase;
 }
-.recent-documents thead th {
-  padding-left: 40px;
+.recent-documents thead th:last-child {
+  padding: .5rem !important;
+  padding-bottom: .5rem !important;
+  padding-left: 40px !important;
 }
 .recent-documents tr.document-row {
   background: white;

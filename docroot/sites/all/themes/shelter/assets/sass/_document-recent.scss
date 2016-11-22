@@ -22,8 +22,10 @@
     }
   }
 
-  thead th {
-    padding-left: 40px;
+  thead th:last-child {
+    padding: .5rem !important;
+    padding-bottom: .5rem !important;
+    padding-left: 40px !important;
   }
 
   tr.document-row {
