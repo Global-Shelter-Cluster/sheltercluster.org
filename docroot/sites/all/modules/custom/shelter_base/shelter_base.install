@@ -1319,6 +1319,15 @@ function shelter_base_update_7140() {
 /**
  * Enable cluster_tokens module.
  */
-function shelter_base_update_7139() {
+function shelter_base_update_7141() {
   module_enable(array('cluster_tokens'));
+}
+
+/**
+ * Update pathauto patterns.
+ */
+function shelter_base_update_7142() {
+  variable_set('pathauto_node_discussion_pattern', '[node:cluster-response-title]/discussions/[node:title]');
+  variable_set('pathauto_node_document_pattern', '[node:cluster-response-title]/documents/[node:title]');
+  variable_set('pathauto_node_event_pattern', '[node:cluster-response-title]/events/[node:title]');
 }
