@@ -1331,3 +1331,36 @@ function shelter_base_update_7142() {
   variable_set('pathauto_node_document_pattern', '[node:cluster-response-title]/documents/[node:title]');
   variable_set('pathauto_node_event_pattern', '[node:cluster-response-title]/events/[node:title]');
 }
+
+/**
+ * Update existing document, discussion and event paths.
+ */
+function shelter_base_update_7145(&$sandbox) {
+  if (!isset($sandbox['progress'])) {
+    $sandbox['progress'] = 0;
+    $sandbox['max'] = db_query("SELECT COUNT(nid) FROM {node} WHERE type IN ('document', 'discussion', 'event') AND status = 1")->fetchField();
+    $sandbox['messages'] = array();
+    $sandbox['current_node'] = -1;
+  }
+
+  $limit = 10;
+
+  $result = db_select('node', 'n')
+    ->fields('n', array('nid'))
+    ->orderBy('n.nid', 'ASC')
+    ->where('n.nid > :nid', array(':nid' => $sandbox['current_node']))
+    ->condition('type', array('document', 'discussion', 'event'))
+    ->condition('status', NODE_PUBLISHED)
+    ->extend('PagerDefault')
+    ->limit($limit)
+    ->execute();
+
+  foreach ($result as $row) {
+    pathauto_node_update_alias(node_load($row->nid), 'update');
+
+    $sandbox['progress']++;
+    $sandbox['current_node'] = $row->nid;
+  }
+
+  $sandbox['#finished'] = ($sandbox['progress'] >= $sandbox['max']) ? TRUE : ($sandbox['progress'] / $sandbox['max']);
+}
