@@ -1380,3 +1380,10 @@ function shelter_base_update_7147() {
     'cluster_docs' => array('field_base', 'field_instance')
   ));
 }
+
+/**
+ * Delete additional field.
+ */
+function shelter_base_update_7148() {
+  field_delete_field('field_document');
+}

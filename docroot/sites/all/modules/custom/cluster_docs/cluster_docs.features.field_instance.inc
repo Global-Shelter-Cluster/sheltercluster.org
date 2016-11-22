@@ -175,55 +175,6 @@ function cluster_docs_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-document-field_document'
-  $field_instances['node-document-field_document'] = array(
-    'bundle' => 'document',
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'file',
-        'settings' => array(),
-        'type' => 'file_default',
-        'weight' => 2,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'field_name' => 'field_document',
-    'label' => 'Document',
-    'required' => 0,
-    'settings' => array(
-      'description_field' => 0,
-      'entity_translation_sync' => FALSE,
-      'file_directory' => 'documents',
-      'file_extensions' => 'pdf',
-      'max_filesize' => '',
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'pdf_to_image',
-      'settings' => array(
-        'pdf_to_image' => array(
-          'density' => '25x25',
-          'extra_args' => '',
-          'hide_imagefield' => 0,
-          'target_field' => 'field_image',
-        ),
-        'progress_indicator' => NULL,
-      ),
-      'type' => 'pdf_to_image',
-      'weight' => 2,
-    ),
-  );
-
   // Exported field_instance: 'node-document-field_document_source'
   $field_instances['node-document-field_document_source'] = array(
     'bundle' => 'document',
@@ -1415,7 +1366,6 @@ function cluster_docs_field_default_field_instances() {
   t('Coordination Management');
   t('Cross-Cutting Issues');
   t('Description');
-  t('Document');
   t('Document Type');
   t('Featured');
   t('File');
