@@ -180,7 +180,11 @@ function cluster_events_get_events($operator = '>', $order = 'ASC') {
     'events' => $events,
     'is_previous_events' => $is_previous,
     'all_events_link' => '/events',
-    'global_events_link' => '',
+    'global_events_link' => array(
+      '#type' => 'link',
+      '#href' => 'geographic-region/global/events',
+      '#title' => 'See Global Events',
+    ),
     'previous_events_link' => '',
   ));
 }
