@@ -1371,3 +1371,12 @@ function shelter_base_update_7145(&$sandbox) {
 function shelter_base_update_7146() {
   module_enable(array('pdf_to_image', 'pdf_document'));
 }
+
+/**
+ * Revert field bases and instances.
+ */
+function shelter_base_update_7147() {
+  features_revert(array(
+    'cluster_docs' => array('field_base', 'field_instance')
+  ));
+}
