@@ -22,21 +22,3 @@ function cluster_docs_ctools_plugin_api($module = NULL, $api = NULL) {
 function cluster_docs_views_api($module = NULL, $api = NULL) {
   return array("api" => "3.0");
 }
-
-/**
- * Implements hook_node_info().
- */
-function cluster_docs_node_info() {
-  $items = array(
-    'document' => array(
-      'name' => t('Document'),
-      'base' => 'node_content',
-      'description' => '',
-      'has_title' => '1',
-      'title_label' => t('Title'),
-      'help' => '',
-    ),
-  );
-  drupal_alter('node_info', $items);
-  return $items;
-}
