@@ -1364,3 +1364,10 @@ function shelter_base_update_7145(&$sandbox) {
 
   $sandbox['#finished'] = ($sandbox['progress'] >= $sandbox['max']) ? TRUE : ($sandbox['progress'] / $sandbox['max']);
 }
+
+/**
+ * Enable pdf_to_image module.
+ */
+function shelter_base_update_7146() {
+  module_enable(array('pdf_to_image', 'pdf_document'));
+}
