@@ -3188,6 +3188,7 @@ footer .table-row {
   background: transparent;
   border-bottom: 1px dotted #CCC;
   border-radius: 0;
+  padding: 0.45rem 0.5rem;
   position: relative;
 }
 .upcoming-events #box-calendar .event-card a {
@@ -3206,7 +3207,7 @@ footer .table-row {
   text-transform: uppercase;
 }
 .upcoming-events #box-calendar .event-card.is-first .event-title a {
-  padding-top: .5rem;
+  padding-top: 1px;
 }
 .upcoming-events #box-calendar .event-card .response {
   margin-bottom: 7px;
