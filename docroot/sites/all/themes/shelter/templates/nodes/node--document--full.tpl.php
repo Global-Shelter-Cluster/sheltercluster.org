@@ -55,7 +55,14 @@
                       'field_toolkit',
                       'field_meeting_management');
 
-  if (render($content['field_file'])) {
+  if (render($content['field_pdf_document'])) {
+    $file_field = field_get_items('node', $node, 'field_pdf_document');
+    $file_field_name = $file_field[0]["filename"];
+    $document_url = file_create_url($file_field[0]["uri"]);
+    $document_link_title = "Download " . $file_field_name;
+    $document_button_text = "Download";
+  }
+  elseif (render($content['field_file'])) {
     $file_field = field_get_items('node', $node, 'field_file');
     $file_field_name = $file_field[0]["filename"];
     $document_url = file_create_url($file_field[0]["uri"]);
