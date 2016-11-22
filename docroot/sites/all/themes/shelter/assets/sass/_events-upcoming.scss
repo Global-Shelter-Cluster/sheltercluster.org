@@ -26,6 +26,7 @@
     background: transparent;
     border-bottom: 1px dotted #CCC;
     border-radius: 0;
+    padding: 0.45rem 0.5rem;
     position: relative;
 
     a {
@@ -49,7 +50,7 @@
     }
 
     &.is-first .event-title a {
-      padding-top: .5rem;
+      padding-top: 1px;
     }
 
     .response {

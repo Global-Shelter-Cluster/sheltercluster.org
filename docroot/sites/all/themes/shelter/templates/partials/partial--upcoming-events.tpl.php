@@ -39,5 +39,12 @@
     <div class="all-events">
       <?php print $all_events_link; ?>
     </div><!-- /.all-events -->
+
+    <?php if ($global_events_link): ?>
+      <div class="all-events">
+        <?php print render($global_events_link); ?>
+      </div>
+    <?php endif; ?>
+
   </div>
 </section>
