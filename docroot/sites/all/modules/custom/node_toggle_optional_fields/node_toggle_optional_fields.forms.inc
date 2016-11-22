@@ -1,5 +1,17 @@
 <?php
 
+
+/**
+ * Custom submit handler for the node form.
+ *
+ * @see node_toggle_optional_fields_form_node_form_alter()
+ */
+function node_toggle_optional_fields_submit($form, &$form_state) {
+  $form_state['storage']['hide_optional_fields'] = empty($form_state['storage']['hide_optional_fields']);
+
+  $form_state['rebuild'] = TRUE;
+}
+
 /**
  * Prepare the form and add the toggle button.
  *
