@@ -307,6 +307,7 @@ function cluster_docs_field_default_field_instances() {
   // Exported field_instance: 'node-document-field_file'
   $field_instances['node-document-field_file'] = array(
     'bundle' => 'document',
+    'default_value' => array(),
     'deleted' => 0,
     'description' => '',
     'display' => array(
@@ -338,11 +339,17 @@ function cluster_docs_field_default_field_instances() {
     ),
     'widget' => array(
       'active' => 1,
-      'module' => 'file',
+      'module' => 'pdf_to_image',
       'settings' => array(
+        'pdf_to_image' => array(
+          'density' => '25x25',
+          'extra_args' => '',
+          'hide_imagefield' => 0,
+          'target_field' => 'field_preview',
+        ),
         'progress_indicator' => 'throbber',
       ),
-      'type' => 'file_generic',
+      'type' => 'pdf_to_image',
       'weight' => 6,
     ),
   );
@@ -816,55 +823,6 @@ function cluster_docs_field_default_field_instances() {
       ),
       'type' => 'text_textfield',
       'weight' => 15,
-    ),
-  );
-
-  // Exported field_instance: 'node-document-field_pdf_document'
-  $field_instances['node-document-field_pdf_document'] = array(
-    'bundle' => 'document',
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'file',
-        'settings' => array(),
-        'type' => 'file_default',
-        'weight' => 31,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'field_name' => 'field_pdf_document',
-    'label' => 'PDF document',
-    'required' => 0,
-    'settings' => array(
-      'description_field' => 0,
-      'entity_translation_sync' => FALSE,
-      'file_directory' => 'documents/pdf',
-      'file_extensions' => 'pdf',
-      'max_filesize' => '',
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'pdf_to_image',
-      'settings' => array(
-        'pdf_to_image' => array(
-          'density' => '25x25',
-          'extra_args' => '',
-          'hide_imagefield' => 0,
-          'target_field' => 'field_preview',
-        ),
-        'progress_indicator' => NULL,
-      ),
-      'type' => 'pdf_to_image',
-      'weight' => 46,
     ),
   );
 
@@ -1383,7 +1341,6 @@ function cluster_docs_field_default_field_instances() {
   t('Name');
   t('Non Food Items');
   t('Other Keywords');
-  t('PDF document');
   t('Preview');
   t('Report / Meeting date');
   t('Response Phase');
