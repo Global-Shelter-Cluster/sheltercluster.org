@@ -62,9 +62,8 @@ function cluster_docs_validate($form, &$form_state) {
   }
 
   $file = $wrapper->field_file->value();
-  $pdf = $wrapper->field_pdf_document->value();
 
-  if ((bool) $link['url'] == ((bool) $file['fid'] || !!$pdf)) {
+  if ((bool) $link['url'] == (bool) $file['fid']) {
     // If none of the two fields have values, or if they both do.
     form_set_error('field_file', t('Document must contain either a file or a link (but not both).'));
     form_set_error('field_link');
