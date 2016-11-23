@@ -104,7 +104,7 @@ function cluster_events_all($nid) {
   pager_default_initialize($number_of_results, CLUSTER_EVENTS_PER_PAGE);
 
   if (empty($query_date_filter_results['node'])) {
-    $content['events_toggle_button'] = _cluster_events_add_toggle_button(FALSE);
+    $content['events_toggle_button'] = _cluster_events_add_toggle_button(TRUE);
     $content['events']['#markup'] = t('No events scheduled at the moment.');
   }
   else {
