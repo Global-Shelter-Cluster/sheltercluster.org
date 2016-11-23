@@ -483,12 +483,20 @@ function cluster_docs_get_download_url($node) {
   }
 
   $wrapper = entity_metadata_wrapper('node', $node);
-  if ($file = $wrapper->field_file->value()) {
+
+  if (!$file = $wrapper->get('field_pdf_document')->value()) {
+    $file = $wrapper->get('field_file')->value();
+  }
+
+  if ($file) {
     return file_create_url($file['uri']);
   }
-  else {
-    return $wrapper->field_link->url->value();
+
+  if (!$url = $wrapper->field_pdf_document->url->value()) {
+    $url = $wrapper->field_file->url->value();
   }
+
+  return $url;
 }
 
 /**
@@ -598,7 +606,11 @@ function cluster_docs_prepare_row_data($nids, $show_related_groups = FALSE) {
       }
 
       // Test if this document is a file field.
-      if ($file = $wrapper->field_file->value()) {
+      if (!$file = $wrapper->get('field_pdf_document')->value()) {
+        $file = $wrapper->get('field_file')->value();
+      }
+
+      if ($file) {
         $doc['is_file'] = TRUE;
         $doc['is_file_class'] = '';
         if ($doc['is_file']) {
