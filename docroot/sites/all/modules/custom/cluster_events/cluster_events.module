@@ -402,8 +402,9 @@ function cluster_events_preprocess_partial(&$variables) {
     case 'all_events':
       module_load_include('inc', 'cluster_events', 'cluster_events.helpers');
 
-      $all_events = !_cluster_events_all_events_only_upcoming_events();
-      $button = _cluster_events_add_toggle_button(FALSE);
+      $all_events = _cluster_events_all_events_only_upcoming_events();
+      $button = _cluster_events_add_toggle_button($all_events);
+
       $variables['events_toggle_button'] = render($button);
       break;
   }
@@ -423,6 +424,8 @@ function cluster_events_field_access($op, $field, $entity_type, $entity, $accoun
  *
  * @var boolean $all_events
  *   (optional) Whether to show all events. Defaults to FALSE.
+ *
+ * @return array
  */
 function _cluster_events_add_toggle_button($all_events = FALSE) {
   $options = array();

@@ -15,37 +15,39 @@ function cluster_docs_field_default_field_instances() {
     'bundle' => 'document',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'Only first 400 characters of the description will be displayed in the document lists.',
+    'description' => '',
     'display' => array(
       'default' => array(
-        'label' => 'above',
+        'label' => 'hidden',
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 26,
+        'weight' => 0,
       ),
       'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
+        'label' => 'hidden',
+        'module' => 'text',
+        'settings' => array(
+          'trim_length' => 600,
+        ),
+        'type' => 'text_summary_or_trimmed',
         'weight' => 0,
       ),
     ),
     'entity_type' => 'node',
     'field_name' => 'body',
-    'label' => 'Description',
-    'required' => 0,
+    'label' => 'Body',
+    'required' => FALSE,
     'settings' => array(
-      'display_summary' => 1,
+      'display_summary' => TRUE,
       'entity_translation_sync' => FALSE,
       'text_processing' => 1,
       'user_register_form' => FALSE,
     ),
     'widget' => array(
-      'active' => 1,
       'module' => 'text',
       'settings' => array(
-        'rows' => 5,
+        'rows' => 20,
         'summary_rows' => 5,
       ),
       'type' => 'text_textarea_with_summary',
@@ -305,6 +307,7 @@ function cluster_docs_field_default_field_instances() {
   // Exported field_instance: 'node-document-field_file'
   $field_instances['node-document-field_file'] = array(
     'bundle' => 'document',
+    'default_value' => array(),
     'deleted' => 0,
     'description' => '',
     'display' => array(
@@ -336,12 +339,69 @@ function cluster_docs_field_default_field_instances() {
     ),
     'widget' => array(
       'active' => 1,
-      'module' => 'file',
+      'module' => 'pdf_to_image',
       'settings' => array(
+        'pdf_to_image' => array(
+          'density' => '25x25',
+          'extra_args' => '',
+          'hide_imagefield' => 0,
+          'target_field' => 'field_preview',
+        ),
         'progress_indicator' => 'throbber',
       ),
-      'type' => 'file_generic',
+      'type' => 'pdf_to_image',
       'weight' => 6,
+    ),
+  );
+
+  // Exported field_instance: 'node-document-field_image'
+  $field_instances['node-document-field_image'] = array(
+    'bundle' => 'document',
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'image',
+        'settings' => array(
+          'image_link' => '',
+          'image_style' => '',
+        ),
+        'type' => 'image',
+        'weight' => 1,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_image',
+    'label' => 'Image',
+    'required' => 0,
+    'settings' => array(
+      'alt_field' => 0,
+      'default_image' => 0,
+      'entity_translation_sync' => FALSE,
+      'file_directory' => 'document_images',
+      'file_extensions' => 'png gif jpg jpeg',
+      'max_filesize' => '',
+      'max_resolution' => '',
+      'min_resolution' => '',
+      'title_field' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'image',
+      'settings' => array(
+        'preview_image_style' => 'thumbnail',
+        'progress_indicator' => 'throbber',
+      ),
+      'type' => 'image_image',
+      'weight' => 3,
     ),
   );
 
@@ -1260,6 +1320,7 @@ function cluster_docs_field_default_field_instances() {
   // Translatables
   // Included for use with string extractors like potx.
   t('Assessment, Monitoring and Evaluation');
+  t('Body');
   t('Coordination Management');
   t('Cross-Cutting Issues');
   t('Description');
@@ -1267,6 +1328,7 @@ function cluster_docs_field_default_field_instances() {
   t('Featured');
   t('File');
   t('Groups audience');
+  t('Image');
   t('Information Management');
   t('Inter-Cluster');
   t('Intervention Materials');
@@ -1278,7 +1340,6 @@ function cluster_docs_field_default_field_instances() {
   t('Meeting Management');
   t('Name');
   t('Non Food Items');
-  t('Only first 400 characters of the description will be displayed in the document lists.');
   t('Other Keywords');
   t('Preview');
   t('Report / Meeting date');
