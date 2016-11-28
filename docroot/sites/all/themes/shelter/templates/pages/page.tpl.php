@@ -52,8 +52,17 @@
       <div id="nav-master">
         <nav id="nav-shelter" class="clearfix">
           <a href="#" id="button-menu-dropdown">Menu</a>
+          <input type="checkbox" id="mobile_menu_toggle">
+          <label for="mobile_menu_toggle">
+            <span class="sr-only">Toggle Mobile Menu</span>
+            <span class="hamburger-icon"></span>
+          </label>
           <div class="list-container">
-            <?php print render($main_nav); ?>
+            <?php
+              $menu_tree = menu_tree_all_data('menu-mega-menu');
+              $menu_output = menu_tree_output($menu_tree);
+              print render($menu_output);
+            ?>
           </div>
         </nav>
       </div>
