@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Cluster Menu feature.
+ */
+
+include_once 'cluster_menu.features.inc';
