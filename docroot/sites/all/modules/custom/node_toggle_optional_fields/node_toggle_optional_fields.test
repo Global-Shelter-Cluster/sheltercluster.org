@@ -28,6 +28,7 @@ class NodeToggleOptionalFieldsTestCase extends DrupalWebTestCase {
 
     // Enable toggling on article node forms.
     variable_set('node_toggle_optional_fields_node_types', array('article'));
+    $this->refreshVariables();
   }
 
   public function testFieldsHiddenByDefault() {
