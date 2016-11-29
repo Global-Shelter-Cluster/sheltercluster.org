@@ -684,27 +684,6 @@ function cluster_docs_prepare_row_data($nids, $show_related_groups = FALSE) {
 }
 
 /**
- * Implements hook_permission().
- */
-function cluster_docs_permission() {
-  return array(
-    'view document full node' => array(
-      'title' => t('View documents full view mode.'),
-      'description' => t('Access document nodes in full page view mode.'),
-    ),
-  );
-}
-
-/**
- * Implements hook_node_view().
- */
-function cluster_docs_node_view($node, $view_mode) {
-  if ($node->type == 'document' && $view_mode == 'full' && ! user_access('view document full node')) {
-    drupal_access_denied();
-  }
-}
-
-/**
  * Implements hook_preprocess_search_result().
  */
 function cluster_docs_preprocess_search_result(&$vars) {
