@@ -1,0 +1,132 @@
+<?php
+
+class NodeToggleOptionalFieldsTest extends DrupalWebTestCase {
+
+  /**
+   * {@inheritdoc}
+   */
+  public static function getInfo() {
+    return array(
+      'name' => 'Node Toggle Optional Fields',
+      'description' => 'Test the showing and hiding of optional fields on node forms.',
+      'group' => 'Node Toggle Optional Fields',
+    );
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function setUp() {
+    parent::setUp('node_toggle_optional_fields');
+
+    $this->drupalLogin(
+      $this->drupalCreateUser(array(
+        'create article content',
+        'create page content'
+      ))
+    );
+
+    // Enable toggling on article node forms.
+    variable_set('node_toggle_optional_fields_node_types', array('article'));
+    $this->refreshVariables();
+  }
+
+  public function testFieldsHiddenByDefault() {
+    variable_set('node_toggle_optional_fields_hide_by_default', TRUE);
+    $this->refreshVariables();
+
+    $this->drupalGet('node/add/article');
+
+    $this->assertShowOptionalFieldsButtonFound();
+    $this->assertHideOptionalFieldsButtonNotFound();
+    $this->assertTagsFieldHidden();
+
+    $this->drupalPost('node/add/article', array(), t('Show optional fields'));
+
+    $this->assertHideOptionalFieldsButtonFound();
+    $this->assertShowOptionalFieldsButtonNotFound();
+    $this->assertTagsFieldNotHidden();
+  }
+
+  public function testFieldsVisibleByDefault() {
+    variable_set('node_toggle_optional_fields_hide_by_default', FALSE);
+    $this->refreshVariables();
+
+    $this->drupalGet('node/add/article');
+
+    $this->assertHideOptionalFieldsButtonFound();
+    $this->assertShowOptionalFieldsButtonNotFound();
+    $this->assertTagsFieldNotHidden();
+
+    $this->drupalPost('node/add/article', array(), t('Hide optional fields'));
+
+    $this->assertShowOptionalFieldsButtonFound();
+    $this->assertHideOptionalFieldsButtonNotFound();
+    $this->assertTagsFieldHidden();
+  }
+
+  public function testDisabledContentType() {
+    // Ensure that "page" is not a node type to toggle fields on.
+    $this->assertFalse(
+      in_array('page', variable_get('node_toggle_optional_fields_node_types', array())),
+      t('Toggling is not enabled for the %type content type.', array('%type' => 'page'))
+    );
+
+    $this->drupalGet('node/add/page');
+
+    // Ensure that neither toggle button is shown.
+    $this->assertHideOptionalFieldsButtonNotFound();
+    $this->assertShowOptionalFieldsButtonNotFound();
+  }
+
+  private function assertHideOptionalFieldsButtonFound() {
+    $this->assertRaw(t('Hide optional fields'), t('Hide optional fields button found.'));
+  }
+
+  private function assertHideOptionalFieldsButtonNotFound() {
+    $this->assertNoRaw(t('Hide optional fields'), t('Hide optional fields button not found.'));
+  }
+
+  private function assertShowOptionalFieldsButtonFound() {
+    $this->assertRaw(t('Show optional fields'), t('Show optional fields button found.'));
+  }
+
+  private function assertShowOptionalFieldsButtonNotFound() {
+    $this->assertNoRaw(t('Show optional fields'), t('Show optional fields button not found.'));
+  }
+
+  private function assertTagsFieldHidden() {
+    $this->assertNoFieldByName('field_tags[und]', NULL, t('Tags field hidden.'));
+  }
+
+  private function assertTagsFieldNotHidden() {
+    $this->assertFieldByName('field_tags[und]', NULL, t('Tags field visible.'));
+  }
+
+}
+
+class NodeToggleOptionalFieldsUnitTest extends DrupalUnitTestCase {
+
+  /**
+   * {@inheritdoc}
+   */
+  public static function getInfo() {
+    return array(
+      'name' => 'Node Toggle Optional Fields unit tests',
+      'description' => 'Test the showing and hiding of optional fields on node forms.',
+      'group' => 'Node Toggle Optional Fields',
+    );
+  }
+
+  public function testElementNameIsField() {
+    module_load_include('inc', 'node_toggle_optional_fields', 'node_toggle_optional_fields.forms');
+
+    // Test standard element names.
+    $this->assertTrue(node_toggle_optional_fields_element_is_field('field_tags'));
+    $this->assertFalse(node_toggle_optional_fields_element_is_field('title'));
+
+    // Test additional elements,
+    $this->assertTrue(node_toggle_optional_fields_element_is_field('body'));
+  }
+
+}

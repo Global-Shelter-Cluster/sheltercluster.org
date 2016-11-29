@@ -33,9 +33,15 @@ function _node_toggle_optional_fields_alter_form(&$form, $form_state) {
       return;
     }
 
+    $element = &$form[$element_name];
+
     // If the field is not required, disallow access to hide it.
-    if (empty($form[$element_name][LANGUAGE_NONE][0]['#required'])) {
-      $form[$element_name]['#access'] = FALSE;
+    if (isset($element[LANGUAGE_NONE][0]['#required'])) {
+      return $element['#access'] = !empty($element[LANGUAGE_NONE][0]['#required']);
+    }
+
+    if (isset($element[LANGUAGE_NONE]['#required'])) {
+      return $element['#access'] = !empty($element[LANGUAGE_NONE]['#required']);
     }
   }, element_children($form));
 }
