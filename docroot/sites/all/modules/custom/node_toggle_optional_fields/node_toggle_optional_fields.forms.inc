@@ -27,13 +27,24 @@ function _node_toggle_optional_fields_prepare_form(&$form, &$form_state) {
  * @see node_toggle_optional_fields_form_node_form_alter()
  */
 function _node_toggle_optional_fields_alter_form(&$form, $form_state) {
-  array_map(function($element_name) use (&$form) {
+  $type = $form['#entity_type'];
+  $bundle = $form['#bundle'];
+
+  array_map(function($element_name) use (&$form, $type, $bundle) {
     // Only affect fields.
     if (!node_toggle_optional_fields_element_is_field($element_name)) {
       return;
     }
 
     $element = &$form[$element_name];
+
+    // Find any optional fields that need to be displayed.
+    $overridden_fields = array();
+    drupal_alter('node_toggle_optional_fields_overridden_fields', $overridden_fields);
+
+    if (!empty($overridden_fields[$type][$bundle]) && in_array($element_name, $overridden_fields[$type][$bundle])) {
+      return TRUE;
+    }
 
     // If the field is not required, disallow access to hide it.
     if (isset($element[LANGUAGE_NONE][0]['#required'])) {

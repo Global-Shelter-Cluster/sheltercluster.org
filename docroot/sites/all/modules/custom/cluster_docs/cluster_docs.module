@@ -844,3 +844,16 @@ function cluster_docs_search_autocomplete($string, $nid = NULL) {
   drupal_json_output($matches);
   exit();
 }
+
+/**
+ * Implements hook_TYPE_alter().
+ */
+function cluster_docs_node_toggle_optional_fields_overridden_fields_alter(array &$fields) {
+  $fields['node']['document'] = array(
+    'field_coordination_management',
+    'field_document_type',
+    'field_file',
+    'field_information_management',
+    'field_technical_support_design',
+  );
+}
