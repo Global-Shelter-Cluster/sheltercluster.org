@@ -11,3 +11,10 @@
 function cluster_docs_update_7100() {
   features_revert(array('cluster_docs' => array('field_instance')));
 }
+
+/**
+ * Revert cluster_docs field instances.
+ */
+function cluster_docs_update_7102() {
+  features_revert(array('cluster_docs' => array('field_instance')));
+}

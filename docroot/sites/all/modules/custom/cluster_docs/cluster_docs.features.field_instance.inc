@@ -119,7 +119,7 @@ function cluster_docs_field_default_field_instances() {
     'entity_type' => 'node',
     'field_name' => 'field_coordination_management',
     'label' => 'Coordination Management',
-    'required' => 1,
+    'required' => 0,
     'settings' => array(
       'entity_translation_sync' => FALSE,
       'user_register_form' => FALSE,
@@ -244,7 +244,7 @@ function cluster_docs_field_default_field_instances() {
     'entity_type' => 'node',
     'field_name' => 'field_document_type',
     'label' => 'Document Type',
-    'required' => 1,
+    'required' => 0,
     'settings' => array(
       'entity_translation_sync' => FALSE,
       'user_register_form' => FALSE,
@@ -328,7 +328,7 @@ function cluster_docs_field_default_field_instances() {
     'entity_type' => 'node',
     'field_name' => 'field_file',
     'label' => 'File',
-    'required' => 1,
+    'required' => 0,
     'settings' => array(
       'description_field' => 0,
       'entity_translation_sync' => FALSE,
@@ -429,7 +429,7 @@ function cluster_docs_field_default_field_instances() {
     'entity_type' => 'node',
     'field_name' => 'field_information_management',
     'label' => 'Information Management',
-    'required' => 1,
+    'required' => 0,
     'settings' => array(
       'entity_translation_sync' => FALSE,
       'user_register_form' => FALSE,
@@ -1082,7 +1082,7 @@ function cluster_docs_field_default_field_instances() {
     'entity_type' => 'node',
     'field_name' => 'field_technical_support_design',
     'label' => 'Technical Support and Design',
-    'required' => 1,
+    'required' => 0,
     'settings' => array(
       'entity_translation_sync' => FALSE,
       'user_register_form' => FALSE,
