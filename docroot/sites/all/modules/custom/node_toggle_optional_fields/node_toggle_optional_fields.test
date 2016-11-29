@@ -32,6 +32,7 @@ class NodeToggleOptionalFieldsTestCase extends DrupalWebTestCase {
 
   public function testFieldsHiddenByDefault() {
     variable_set('node_toggle_optional_fields_hide_by_default', TRUE);
+    $this->refreshVariables();
 
     $this->drupalGet('node/add/article');
 
@@ -48,6 +49,7 @@ class NodeToggleOptionalFieldsTestCase extends DrupalWebTestCase {
 
   public function testFieldsVisibleByDefault() {
     variable_set('node_toggle_optional_fields_hide_by_default', FALSE);
+    $this->refreshVariables();
 
     $this->drupalGet('node/add/article');
 
