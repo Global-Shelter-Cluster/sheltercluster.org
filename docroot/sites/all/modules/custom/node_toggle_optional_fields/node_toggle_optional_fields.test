@@ -64,7 +64,10 @@ class NodeToggleOptionalFieldsTestCase extends DrupalWebTestCase {
 
   public function testDisabledContentType() {
     // Ensure that "page" is not a node type to toggle fields on.
-    $this->assertFalse(in_array('page', variable_get('node_toggle_optional_fields_node_types', array())));
+    $this->assertFalse(
+      in_array('page', variable_get('node_toggle_optional_fields_node_types', array())),
+      t('Toggling is not enabled for the %type content type.', array('%type' => 'page'))
+    );
 
     $this->drupalGet('node/add/page');
 
