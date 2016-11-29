@@ -1,6 +1,6 @@
 <?php
 
-class NodeToggleOptionalFieldsTestCase extends DrupalWebTestCase {
+class NodeToggleOptionalFieldsTest extends DrupalWebTestCase {
 
   /**
    * {@inheritdoc}
@@ -105,3 +105,28 @@ class NodeToggleOptionalFieldsTestCase extends DrupalWebTestCase {
 
 }
 
+class NodeToggleOptionalFieldsUnitTest extends DrupalUnitTestCase {
+
+  /**
+   * {@inheritdoc}
+   */
+  public static function getInfo() {
+    return array(
+      'name' => 'Node Toggle Optional Fields unit tests',
+      'description' => 'Test the showing and hiding of optional fields on node forms.',
+      'group' => 'Node Toggle Optional Fields',
+    );
+  }
+
+  public function testElementNameIsField() {
+    module_load_include('inc', 'node_toggle_optional_fields', 'node_toggle_optional_fields.forms');
+
+    // Test standard element names.
+    $this->assertTrue(node_toggle_optional_fields_element_is_field('field_tags'));
+    $this->assertFalse(node_toggle_optional_fields_element_is_field('title'));
+
+    // Test additional elements,
+    $this->assertTrue(node_toggle_optional_fields_element_is_field('body'));
+  }
+
+}
