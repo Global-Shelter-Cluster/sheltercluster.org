@@ -1,15 +1,15 @@
 <?php
 
-class NodeToggleOptionalFieldsTest extends DrupalWebTestCase {
+class ToggleOptionalFieldsTest extends DrupalWebTestCase {
 
   /**
    * {@inheritdoc}
    */
   public static function getInfo() {
     return array(
-      'name' => 'Node Toggle Optional Fields',
+      'name' => 'Toggle Optional Fields',
       'description' => 'Test the showing and hiding of optional fields on node forms.',
-      'group' => 'Node Toggle Optional Fields',
+      'group' => 'Toggle Optional Fields',
     );
   }
 
@@ -17,7 +17,7 @@ class NodeToggleOptionalFieldsTest extends DrupalWebTestCase {
    * {@inheritdoc}
    */
   public function setUp() {
-    parent::setUp('node_toggle_optional_fields');
+    parent::setUp('toggle_optional_fields');
 
     $this->drupalLogin(
       $this->drupalCreateUser(array(
@@ -27,12 +27,12 @@ class NodeToggleOptionalFieldsTest extends DrupalWebTestCase {
     );
 
     // Enable toggling on article node forms.
-    variable_set('node_toggle_optional_fields_node_types', array('article'));
+    variable_set('toggle_optional_fields_node_types', array('article'));
     $this->refreshVariables();
   }
 
   public function testFieldsHiddenByDefault() {
-    variable_set('node_toggle_optional_fields_hide_by_default', TRUE);
+    variable_set('toggle_optional_fields_hide_by_default', TRUE);
     $this->refreshVariables();
 
     $this->drupalGet('node/add/article');
@@ -49,7 +49,7 @@ class NodeToggleOptionalFieldsTest extends DrupalWebTestCase {
   }
 
   public function testFieldsVisibleByDefault() {
-    variable_set('node_toggle_optional_fields_hide_by_default', FALSE);
+    variable_set('toggle_optional_fields_hide_by_default', FALSE);
     $this->refreshVariables();
 
     $this->drupalGet('node/add/article');
@@ -68,7 +68,7 @@ class NodeToggleOptionalFieldsTest extends DrupalWebTestCase {
   public function testDisabledContentType() {
     // Ensure that "page" is not a node type to toggle fields on.
     $this->assertFalse(
-      in_array('page', variable_get('node_toggle_optional_fields_node_types', array())),
+      in_array('page', variable_get('toggle_optional_fields_types', array())),
       t('Toggling is not enabled for the %type content type.', array('%type' => 'page'))
     );
 
@@ -105,7 +105,7 @@ class NodeToggleOptionalFieldsTest extends DrupalWebTestCase {
 
 }
 
-class NodeToggleOptionalFieldsUnitTest extends DrupalUnitTestCase {
+class ToggleOptionalFieldsUnitTest extends DrupalUnitTestCase {
 
   /**
    * {@inheritdoc}
@@ -119,14 +119,14 @@ class NodeToggleOptionalFieldsUnitTest extends DrupalUnitTestCase {
   }
 
   public function testElementNameIsField() {
-    module_load_include('inc', 'node_toggle_optional_fields', 'node_toggle_optional_fields.forms');
+    module_load_include('inc', 'toggle_optional_fields', 'toggle_optional_fields.forms');
 
     // Test standard element names.
-    $this->assertTrue(node_toggle_optional_fields_element_is_field('field_tags'));
-    $this->assertFalse(node_toggle_optional_fields_element_is_field('title'));
+    $this->assertTrue(toggle_optional_fields_element_is_field('field_tags'));
+    $this->assertFalse(toggle_optional_fields_element_is_field('title'));
 
     // Test additional elements,
-    $this->assertTrue(node_toggle_optional_fields_element_is_field('body'));
+    $this->assertTrue(toggle_optional_fields_element_is_field('body'));
   }
 
 }

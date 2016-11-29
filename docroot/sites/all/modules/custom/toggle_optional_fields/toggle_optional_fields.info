@@ -1,0 +1,4 @@
+name = Toggle Optional Fields
+core = 7.x
+description = Toggle optional fields on node forms.
+files[] = toggle_optional_fields.test
