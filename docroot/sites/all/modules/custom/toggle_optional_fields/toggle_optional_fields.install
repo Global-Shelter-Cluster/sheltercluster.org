@@ -1,0 +1,9 @@
+<?php
+
+/**
+ * Implements hook_uninstall().
+ */
+function toggle_optional_fields_uninstall() {
+  variable_del('toggle_optional_fields_hide_by_default');
+  variable_del('toggle_optional_fields_node_types');
+}
