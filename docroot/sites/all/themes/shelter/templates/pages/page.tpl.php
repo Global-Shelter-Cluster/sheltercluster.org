@@ -42,12 +42,6 @@
       </div>
     </section>
 
-    <div class="page-margin clearfix">
-      <?php if ($messages): ?>
-        <?php print $messages; ?>
-      <?php endif; ?>
-    </div>
-
     <div class="page-margin">
       <div id="nav-master">
         <nav id="nav-shelter" class="clearfix">
@@ -66,6 +60,12 @@
           </div>
         </nav>
       </div>
+    </div>
+
+    <div class="page-margin clearfix">
+      <?php if ($messages): ?>
+        <?php print $messages; ?>
+      <?php endif; ?>
     </div>
 
     <?php if (!$is_front): ?>

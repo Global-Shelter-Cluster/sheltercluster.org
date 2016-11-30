@@ -1695,6 +1695,7 @@ label[for="mobile_menu_toggle"] span:after {
   #nav-shelter .list-container > .nav-items > li:hover > ul {
     display: block;
     display: flex;
+    box-shadow: 0 3px 2px rgba(0, 0, 0, 0.1);
   }
 
   #nav-shelter > .list-container > .nav-items > .expanded > ul > li ul {
