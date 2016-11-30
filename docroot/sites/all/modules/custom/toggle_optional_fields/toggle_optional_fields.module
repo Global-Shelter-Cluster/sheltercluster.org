@@ -1,0 +1,33 @@
+<?php
+
+/**
+ * Implements hook_form_alter().
+ */
+function toggle_optional_fields_form_node_form_alter(&$form, &$form_state, $form_id) {
+  $node_types = variable_get('toggle_optional_fields_node_types', array());
+
+  if (!in_array($form['#bundle'], $node_types)) {
+    return;
+  }
+
+  module_load_include('inc', 'toggle_optional_fields', 'toggle_optional_fields.forms');
+
+  _toggle_optional_fields_prepare_form($form, $form_state);
+
+  if (empty($form_state['storage']['hide_optional_fields'])) {
+    return;
+  }
+
+  _toggle_optional_fields_alter_form($form, $form_state);
+}
+
+/**
+ * Custom submit handler for the node form.
+ *
+ * @see toggle_optional_fields_form_node_form_alter()
+ */
+function toggle_optional_fields_submit($form, &$form_state) {
+  $form_state['storage']['hide_optional_fields'] = empty($form_state['storage']['hide_optional_fields']);
+
+  $form_state['rebuild'] = TRUE;
+}
