@@ -142,7 +142,7 @@
 
       <?php if (render($content['og_group_ref'])):?>
         <div class="doc-group">
-          <div class="doc-attr-label">Group </div>
+          <div class="doc-attr-label">Response </div>
           <div class="doc-attr-value">
             <?php print render($content['og_group_ref']); ?>
           </div>
