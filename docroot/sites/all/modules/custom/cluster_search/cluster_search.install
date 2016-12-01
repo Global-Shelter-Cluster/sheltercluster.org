@@ -6,3 +6,12 @@
 function cluster_search_update_7100() {
   features_revert(array('cluster_search' => array('search_api_index')));
 }
+
+/**
+ * Enable search_api_attachments, revert search API index settings.
+ */
+function cluster_search_update_7101() {
+  module_enable(array('search_api_attachments'));
+
+  features_revert(array('cluster_search' => array('search_api_index')));
+}
