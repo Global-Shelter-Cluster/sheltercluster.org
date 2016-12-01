@@ -15,3 +15,10 @@ function cluster_search_update_7101() {
 
   features_revert(array('cluster_search' => array('search_api_index')));
 }
+
+/**
+ * Update facetapi configuration.
+ */
+function cluster_search_update_7102() {
+  features_revert(array('cluster_search' => array('facetapi')));
+}
