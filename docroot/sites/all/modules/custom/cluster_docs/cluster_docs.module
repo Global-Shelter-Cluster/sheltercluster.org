@@ -134,6 +134,7 @@ function cluster_docs_query() {
  */
 function cluster_docs_taxonomies() {
   return array(
+    'attachments_field_file',
     'search_api_language',
     'field_document_type',
     // Basic tags
@@ -258,6 +259,16 @@ function cluster_docs_page($query, $show_facets = TRUE, $default_sort = NULL, $d
       $facet = $content['#settings']->facet;
       if (!in_array($facet, $facets_to_show)) {
         continue;
+      }
+
+      switch ($facet) {
+        case 'attachments_field_file':
+          $content['#title'] = t('File Contains');
+          break;
+
+        case 'search_api_language':
+          $content['#title'] = t('Language');
+          break;
       }
 
       $content['#options'] = $content[$facet];
