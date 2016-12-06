@@ -444,3 +444,15 @@ function _cluster_events_add_toggle_button($all_events = FALSE) {
     '#weight' => -1,
   );
 }
+
+/**
+ * Implements hook_TYPE_alter().
+ */
+function cluster_events_toggle_optional_fields_overridden_fields_alter(array &$fields) {
+  $fields['node']['event'] = array(
+    'field_event_contact' => TRUE,
+    'field_postal_address' => TRUE,
+    'field_recurring_event_date2' => TRUE,
+    'language' => FALSE,
+  );
+}
