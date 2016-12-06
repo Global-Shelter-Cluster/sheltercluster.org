@@ -122,6 +122,7 @@ function cluster_nav_preprocess_page(&$variables) {
       $display_provider = GroupDisplayProvider::getDisplayProvider($group[0]);
 
       switch ($node->type) {
+        case 'document':
         case 'event':
         case 'library':
           $response = $wrapper->og_group_ref->value();
