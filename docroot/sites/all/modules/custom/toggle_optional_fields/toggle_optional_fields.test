@@ -112,9 +112,9 @@ class ToggleOptionalFieldsUnitTest extends DrupalUnitTestCase {
    */
   public static function getInfo() {
     return array(
-      'name' => 'Node Toggle Optional Fields unit tests',
+      'name' => 'Toggle Optional Fields unit tests',
       'description' => 'Test the showing and hiding of optional fields on node forms.',
-      'group' => 'Node Toggle Optional Fields',
+      'group' => 'Toggle Optional Fields',
     );
   }
 

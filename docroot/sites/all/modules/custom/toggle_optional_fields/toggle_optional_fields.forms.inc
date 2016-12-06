@@ -26,11 +26,19 @@ function _toggle_optional_fields_prepare_form(&$form, &$form_state) {
  *
  * @see toggle_optional_fields_form_form_alter()
  */
-function _toggle_optional_fields_alter_form(&$form, $form_state) {
+function _toggle_optional_fields_alter_form(&$form, &$form_state) {
   $type = $form['#entity_type'];
   $bundle = $form['#bundle'];
 
-  array_map(function($element_name) use (&$form, $type, $bundle) {
+  // Find any optional fields that need to be displayed.
+  $overridden_fields = array();
+  drupal_alter('toggle_optional_fields_overridden_fields', $overridden_fields);
+  if (!empty($overridden_fields[$type][$bundle])) {
+    $overridden_fields = $overridden_fields[$type][$bundle];
+  }
+  $form_state['storage']['toggle_optional_fields_overridden_fields'] = $overridden_fields;
+
+  array_map(function($element_name) use (&$form, $type, $bundle, $overridden_fields) {
     // Only affect fields.
     if (!toggle_optional_fields_element_is_field($element_name)) {
       return;
@@ -38,12 +46,8 @@ function _toggle_optional_fields_alter_form(&$form, $form_state) {
 
     $element = &$form[$element_name];
 
-    // Find any optional fields that need to be displayed.
-    $overridden_fields = array();
-    drupal_alter('toggle_optional_fields_overridden_fields', $overridden_fields);
-
-    if (!empty($overridden_fields[$type][$bundle]) && in_array($element_name, $overridden_fields[$type][$bundle])) {
-      return TRUE;
+    if (isset($overridden_fields[$element_name])) {
+      return $element['#access'] = $overridden_fields[$element_name];
     }
 
     // If the field is not required, disallow access to hide it.
@@ -55,6 +59,20 @@ function _toggle_optional_fields_alter_form(&$form, $form_state) {
       return $element['#access'] = !empty($element[LANGUAGE_NONE]['#required']);
     }
   }, element_children($form));
+
+  $form['#after_build'][] = 'toggle_optional_fields_after_build';
+}
+
+function toggle_optional_fields_after_build(&$form, &$form_state) {
+  if (empty($form_state['storage']['toggle_optional_fields_overridden_fields'])) {
+    return $form;
+  }
+
+  foreach ($form_state['storage']['toggle_optional_fields_overridden_fields'] as $field => $value) {
+    $form[$field]['#access'] = $value;
+  }
+
+  return $form;
 }
 
 /**
@@ -67,7 +85,7 @@ function _toggle_optional_fields_alter_form(&$form, $form_state) {
  *   TRUE if is a field, or FALSE.
  */
 function toggle_optional_fields_element_is_field($element_name) {
-  if ($element_name == 'body') {
+  if (in_array($element_name, array('body', 'language'))) {
     return TRUE;
   }
 

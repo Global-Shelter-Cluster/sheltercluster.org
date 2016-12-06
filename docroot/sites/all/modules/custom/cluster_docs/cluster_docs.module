@@ -134,6 +134,7 @@ function cluster_docs_query() {
  */
 function cluster_docs_taxonomies() {
   return array(
+    'attachments_field_file',
     'search_api_language',
     'field_document_type',
     // Basic tags
@@ -258,6 +259,16 @@ function cluster_docs_page($query, $show_facets = TRUE, $default_sort = NULL, $d
       $facet = $content['#settings']->facet;
       if (!in_array($facet, $facets_to_show)) {
         continue;
+      }
+
+      switch ($facet) {
+        case 'attachments_field_file':
+          $content['#title'] = t('File Contains');
+          break;
+
+        case 'search_api_language':
+          $content['#title'] = t('Language');
+          break;
       }
 
       $content['#options'] = $content[$facet];
@@ -829,10 +840,10 @@ function cluster_docs_search_autocomplete($string, $nid = NULL) {
  */
 function cluster_docs_toggle_optional_fields_overridden_fields_alter(array &$fields) {
   $fields['node']['document'] = array(
-    'field_coordination_management',
-    'field_document_type',
-    'field_file',
-    'field_information_management',
-    'field_technical_support_design',
+    'field_coordination_management' => TRUE,
+    'field_document_type' => TRUE,
+    'field_file' => TRUE,
+    'field_information_management' => TRUE,
+    'field_technical_support_design' => TRUE,
   );
 }

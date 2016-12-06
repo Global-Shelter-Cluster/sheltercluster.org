@@ -35,11 +35,12 @@
     #logo-shelter-cluster .svg{
       top: -5px;
       left: 5%;
-      max-width: 92%;
+      max-width: 75%;
 
       @include breakpoint(800px) {
         top: 28px;
         left: 35px;
+        max-width: 92%;
       }
     }
     .search {
