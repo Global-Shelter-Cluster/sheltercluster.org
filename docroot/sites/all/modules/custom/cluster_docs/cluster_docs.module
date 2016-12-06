@@ -568,7 +568,7 @@ function cluster_docs_prepare_row_data($nids, $show_related_groups = FALSE) {
         }
       }
 
-      $url = cluster_docs_get_download_url($node);
+      $url = $wrapper->url->value();
       $doc['link_url'] = $url;
       $doc['link'] = l($doc['title'], $url, array('attributes' => array('target' => '_blank')));
       $doc['edit_link'] = node_access('update', $node) ? l('edit', 'node/'.$node->nid.'/edit') : '';
