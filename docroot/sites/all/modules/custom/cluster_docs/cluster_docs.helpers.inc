@@ -40,7 +40,9 @@ function cluster_docs_get_tags_for_document(EntityDrupalWrapper $wrapper, array 
     $terms = $wrapper->get($field)->value();
     $ids = array_map(function($term) { return $term->tid; }, $terms);
 
-    $tags = array_merge($tags, array_combine($ids, $terms));
+    if (!empty($ids) && !empty($terms)) {
+      $tags = array_merge($tags, array_combine($ids, $terms));
+    }
   }
 
   if ($sort && count($tags) > 1) {
