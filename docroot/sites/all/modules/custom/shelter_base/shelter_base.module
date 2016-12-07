@@ -104,3 +104,22 @@ function shelter_base_remove_duplicate_region_links() {
 
   $function($menu);
 }
+
+
+/**
+ * Find the number of groups that a user is a member of.
+ *
+ * @param string $uid
+ *   The uid of the user.
+ *
+ * @return string|bool
+ *   The number of groups, or FALSE if there was an error.
+ */
+function shelter_base_get_group_count_for_user($uid) {
+  $count = &drupal_static(__FUNCTION__);
+
+  if (!isset($count)) {
+    $count = db_query("SELECT COUNT(gid) FROM {og_membership} WHERE entity_type = 'user' AND group_type = 'node' AND etid = :uid", array(':uid' => $uid))->fetchField();
+  }
+  return $count;
+}
