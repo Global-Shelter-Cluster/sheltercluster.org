@@ -71,7 +71,7 @@ function cluster_docs_recent() {
   $query->entityCondition('entity_type', 'node')
     ->entityCondition('bundle', 'document')
     ->propertyCondition('status', NODE_PUBLISHED)
-    ->propertyOrderBy('created', 'DESC')
+    ->fieldOrderBy('field_report_meeting_date', 'value', 'DESC')
     ->range(0, 2);
   $results = $query->execute();
   if (!isset($results['node'])) {
