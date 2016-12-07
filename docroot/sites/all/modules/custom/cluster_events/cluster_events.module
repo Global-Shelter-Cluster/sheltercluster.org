@@ -66,7 +66,8 @@ function cluster_events_all($nid) {
 
   $order = 'ASC';
 
-  $today = (new DateTime('12am today'))->format('Y-m-d 00:00:00');
+  $date = new DateTime('12am today');
+  $today = $date->format('Y-m-d 00:00:00');
 
   // Filter by event date with entity field query.
   $filter_by_date = new EntityFieldQuery();
