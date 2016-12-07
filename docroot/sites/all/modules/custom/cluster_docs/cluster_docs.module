@@ -846,4 +846,7 @@ function cluster_docs_toggle_optional_fields_overridden_fields_alter(array &$fie
     'field_information_management' => TRUE,
     'field_technical_support_design' => TRUE,
   );
+
+  global $user;
+  $fields['node']['document']['og_group_ref'] = shelter_base_get_group_count_for_user($user->uid) != 1;
 }
