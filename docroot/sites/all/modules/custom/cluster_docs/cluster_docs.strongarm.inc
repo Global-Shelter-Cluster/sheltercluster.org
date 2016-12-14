@@ -122,6 +122,9 @@ function cluster_docs_strongarm() {
         'language' => array(
           'weight' => '4',
         ),
+        'redirect' => array(
+          'weight' => '30',
+        ),
       ),
       'display' => array(),
     ),

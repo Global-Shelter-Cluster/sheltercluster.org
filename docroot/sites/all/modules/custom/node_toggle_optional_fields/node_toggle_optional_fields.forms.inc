@@ -50,5 +50,9 @@ function _node_toggle_optional_fields_alter_form(&$form, $form_state) {
  *   TRUE if is a field, or FALSE.
  */
 function node_toggle_optional_fields_element_is_field($element_name) {
-  return substr($element_name, 0, 6) !== 'field_';
+  if ($element_name == 'body') {
+    return TRUE;
+  }
+
+  return substr($element_name, 0, 6) == 'field_';
 }
