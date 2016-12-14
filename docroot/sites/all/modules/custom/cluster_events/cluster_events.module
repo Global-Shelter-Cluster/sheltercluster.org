@@ -445,3 +445,36 @@ function _cluster_events_add_toggle_button($all_events = FALSE) {
     '#weight' => -1,
   );
 }
+
+/**
+ * Implements hook_TYPE_alter().
+ */
+function cluster_events_toggle_optional_fields_overridden_fields_alter(array &$fields) {
+  $fields['node']['event'] = array(
+    'field_event_contact' => TRUE,
+    'field_postal_address' => TRUE,
+    'field_recurring_event_date2' => TRUE,
+    'language' => FALSE,
+  );
+
+  global $user;
+  $fields['node']['event']['og_group_ref'] = _cluster_events_get_group_count_for_user($user->uid) != 1;
+}
+
+/**
+ * Find the number of groups that a user is a member of.
+ *
+ * @param string $uid
+ *   The uid of the user.
+ *
+ * @return string|bool
+ *   The number of groups, or FALSE if there was an error.
+ */
+function _cluster_events_get_group_count_for_user($uid) {
+  $count = &drupal_static(__FUNCTION__);
+
+  if (!isset($count)) {
+    $count = db_query("SELECT COUNT(gid) FROM {og_membership} WHERE entity_type = 'user' AND group_type = 'node' AND etid = :uid", array(':uid' => $uid))->fetchField();
+  }
+  return $count;
+}

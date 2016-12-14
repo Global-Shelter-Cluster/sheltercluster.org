@@ -1405,3 +1405,20 @@ function shelter_base_update_7149() {
 function shelter_base_update_7150() {
   field_delete_field('field_document');
 }
+
+/**
+ * Enable and configure toggle_optional_fields.
+ */
+function shelter_base_update_7151() {
+  module_enable(array('toggle_optional_fields'));
+
+  variable_set('toggle_optional_fields_node_types', array('document', 'event'));
+}
+
+/**
+ * Revert pathauto_node_document_pattern.
+ */
+function shelter_base_update_7152() {
+  variable_set('pathauto_node_event_pattern', '[node:cluster-response-title]/events/[node:title]');
+  variable_set('pathauto_node_document_pattern', '[node:cluster-response-title]/documents/[node:title]');
+}

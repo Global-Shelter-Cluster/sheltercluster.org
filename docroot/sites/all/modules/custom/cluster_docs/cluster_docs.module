@@ -134,6 +134,7 @@ function cluster_docs_query() {
  */
 function cluster_docs_taxonomies() {
   return array(
+    'attachments_field_file',
     'search_api_language',
     'field_document_type',
     // Basic tags
@@ -258,6 +259,16 @@ function cluster_docs_page($query, $show_facets = TRUE, $default_sort = NULL, $d
       $facet = $content['#settings']->facet;
       if (!in_array($facet, $facets_to_show)) {
         continue;
+      }
+
+      switch ($facet) {
+        case 'attachments_field_file':
+          $content['#title'] = t('File Contains');
+          break;
+
+        case 'search_api_language':
+          $content['#title'] = t('Language');
+          break;
       }
 
       $content['#options'] = $content[$facet];
@@ -557,7 +568,7 @@ function cluster_docs_prepare_row_data($nids, $show_related_groups = FALSE) {
         }
       }
 
-      $url = cluster_docs_get_download_url($node);
+      $url = $wrapper->url->value();
       $doc['link_url'] = $url;
       $doc['link'] = l($doc['title'], $url, array('attributes' => array('target' => '_blank')));
       $doc['edit_link'] = node_access('update', $node) ? l('edit', 'node/'.$node->nid.'/edit') : '';
@@ -681,27 +692,6 @@ function cluster_docs_prepare_row_data($nids, $show_related_groups = FALSE) {
     }
   }
   return $docs;
-}
-
-/**
- * Implements hook_permission().
- */
-function cluster_docs_permission() {
-  return array(
-    'view document full node' => array(
-      'title' => t('View documents full view mode.'),
-      'description' => t('Access document nodes in full page view mode.'),
-    ),
-  );
-}
-
-/**
- * Implements hook_node_view().
- */
-function cluster_docs_node_view($node, $view_mode) {
-  if ($node->type == 'document' && $view_mode == 'full' && ! user_access('view document full node')) {
-    drupal_access_denied();
-  }
 }
 
 /**
@@ -843,4 +833,17 @@ function cluster_docs_search_autocomplete($string, $nid = NULL) {
   // return for JS
   drupal_json_output($matches);
   exit();
+}
+
+/**
+ * Implements hook_TYPE_alter().
+ */
+function cluster_docs_toggle_optional_fields_overridden_fields_alter(array &$fields) {
+  $fields['node']['document'] = array(
+    'field_coordination_management' => TRUE,
+    'field_document_type' => TRUE,
+    'field_file' => TRUE,
+    'field_information_management' => TRUE,
+    'field_technical_support_design' => TRUE,
+  );
 }
