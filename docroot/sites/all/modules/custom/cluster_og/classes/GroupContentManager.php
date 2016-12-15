@@ -250,7 +250,7 @@ class GroupContentManager {
       ->entityCondition('bundle', 'document')
       ->fieldCondition('og_group_ref', 'target_id', $this->node->nid)
       ->propertyCondition('status', NODE_PUBLISHED)
-      ->propertyOrderBy('changed', 'DESC')
+      ->fieldOrderBy('field_report_meeting_date', 'value', 'DESC')
       ->range(0, $range) // This is a hard limit, not a paginator.
       ->execute();
 
