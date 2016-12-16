@@ -1499,8 +1499,10 @@ function shelter_base_update_7154(&$sandbox) {
   $sandbox['#finished'] = ($sandbox['progress'] >= $sandbox['max']) ? TRUE : ($sandbox['progress'] / $sandbox['max']);
 }
 
+/**
+ * Add duplicate body data for English nodes.
+ */
 function shelter_base_update_7156() {
-  // $result = db_query("SELECT * FROM {field_data_body} WHERE bundle NOT IN ('page', 'library', 'arbitrary_library') AND language = 'und' AND entity_id NOT IN (59, 5962, 6073, 6129, 6183, 6213, 6366, 6502)")->fetchAll();
   $result = db_query("SELECT * FROM {field_data_body} WHERE bundle NOT IN ('page', 'library', 'arbitrary_library') AND language = 'en' AND entity_id NOT IN (35, 36, 38, 42, 50, 51, 57, 59)")->fetchAll();
 
   foreach ($result as $row) {
@@ -1512,5 +1514,31 @@ function shelter_base_update_7156() {
 
     db_insert('field_data_body')->fields($row)->execute();
     db_insert('field_revision_body')->fields($row)->execute();
+  }
+}
+
+/**
+ * Add duplicate body data for non-English nodes.
+ */
+function shelter_base_update_7157() {
+  $non_english_ids = db_query("SELECT DISTINCT entity_id FROM {field_data_body} WHERE bundle NOT IN ('page', 'library', 'arbitrary_library') AND language NOT IN ('en', 'und') ORDER BY entity_id ASC")->fetchCol();
+
+  db_delete('field_data_body')
+    ->condition('entity_id', $non_english_ids, 'IN')
+    ->condition('language', LANGUAGE_NONE)
+    ->execute();
+
+  db_delete('field_revision_body')
+    ->condition('entity_id', $non_english_ids, 'IN')
+    ->condition('language', LANGUAGE_NONE)
+    ->execute();
+
+  $result = db_query("SELECT * FROM {field_data_body} WHERE bundle NOT IN ('page', 'library', 'arbitrary_library') AND language NOT IN ('en', 'und') AND entity_id NOT IN (9565) ORDER BY entity_id ASC")->fetchAll();
+
+  foreach ($result as $row) {
+    $row->language = LANGUAGE_NONE;
+
+    db_insert('field_data_body')->fields((array) $row)->execute();
+    db_insert('field_revision_body')->fields((array) $row)->execute();
   }
 }
