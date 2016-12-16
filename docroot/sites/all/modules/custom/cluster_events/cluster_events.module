@@ -64,7 +64,7 @@ function cluster_events_all($nid) {
   module_load_include('inc', 'cluster_events', 'cluster_events.helpers');
   $all_events = !_cluster_events_all_events_only_upcoming_events();
 
-  $order = 'ASC';
+  $order = $all_events ? 'DESC' : 'ASC';
 
   $date = new DateTime('12am today');
   $today = $date->format('Y-m-d 00:00:00');
