@@ -1498,3 +1498,19 @@ function shelter_base_update_7154(&$sandbox) {
 
   $sandbox['#finished'] = ($sandbox['progress'] >= $sandbox['max']) ? TRUE : ($sandbox['progress'] / $sandbox['max']);
 }
+
+function shelter_base_update_7156() {
+  // $result = db_query("SELECT * FROM {field_data_body} WHERE bundle NOT IN ('page', 'library', 'arbitrary_library') AND language = 'und' AND entity_id NOT IN (59, 5962, 6073, 6129, 6183, 6213, 6366, 6502)")->fetchAll();
+  $result = db_query("SELECT * FROM {field_data_body} WHERE bundle NOT IN ('page', 'library', 'arbitrary_library') AND language = 'en' AND entity_id NOT IN (35, 36, 38, 42, 50, 51, 57, 59)")->fetchAll();
+
+  foreach ($result as $row) {
+    // Update the language.
+    $row->language = LANGUAGE_NONE;
+
+    // This needs to be an array.
+    $row = (array) $row;
+
+    db_insert('field_data_body')->fields($row)->execute();
+    db_insert('field_revision_body')->fields($row)->execute();
+  }
+}
