@@ -3365,10 +3365,6 @@ footer .table-row {
   margin-bottom: 7px;
   padding: 0;
 }
-.upcoming-events #box-calendar .event-card .response a {
-  color: inherit;
-  text-decoration: none;
-}
 .upcoming-events #box-calendar .event-card .ical {
   border-radius: 3px;
   border-width: 2px;
