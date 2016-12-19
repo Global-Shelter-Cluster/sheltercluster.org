@@ -37,11 +37,12 @@ function cluster_tokens_tokens($type, $tokens, array $data = array(), array $opt
             /** @var EntityDrupalWrapper $wrapper */
             $wrapper = entity_metadata_wrapper('node', $node);
 
-            if (empty($wrapper->og_group_ref)) {
+            if (empty($wrapper->get('og_group_ref')->value())) {
               return;
             }
 
-            $label = $wrapper->og_group_ref[0]->label();
+            $groups = $wrapper->get('og_group_ref')->value();
+            $label = reset($groups)->title;
 
             $replacements[$original] = pathauto_cleanstring($label);
           }
