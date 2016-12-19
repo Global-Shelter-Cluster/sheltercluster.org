@@ -21,6 +21,7 @@
   a {
     color: $shelter-red;
     text-decoration: none;
+    word-wrap: break-word;
 
     &:hover {
       text-decoration: underline;
