@@ -3423,6 +3423,7 @@ footer .table-row {
 .doc-details a {
   color: #7f1416;
   text-decoration: none;
+  word-wrap: break-word;
 }
 .doc-details a:hover {
   text-decoration: underline;

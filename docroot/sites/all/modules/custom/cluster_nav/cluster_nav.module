@@ -112,6 +112,10 @@ function cluster_nav_preprocess_page(&$variables) {
   // If viewing a group content node page, get the associated group node's navigation elements.
   // @TODO Properly handle the fact that the group reference is a multivalue field.
   elseif (isset($node->og_group_ref)) {
+    if (path_is_admin(current_path())) {
+      return;
+    }
+
     $wrapper = entity_metadata_wrapper('node', $node);
     $group = $wrapper->og_group_ref->value();
     if (count($group) > 0) {
