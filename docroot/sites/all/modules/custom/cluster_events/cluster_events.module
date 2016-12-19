@@ -229,7 +229,7 @@ function cluster_events_format_upcoming($nid) {
 
     // Add a link to the response.
     $response_link = l(
-      $wrapper->og_membership->label(),
+      $wrapper->get('og_group_ref')->label(),
       'node/' . $wrapper->getIdentifier()
     );
 
