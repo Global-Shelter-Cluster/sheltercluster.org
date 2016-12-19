@@ -52,3 +52,10 @@ function cluster_events_update_7003() {
 function cluster_events_update_7004() {
   features_revert(array('cluster_events' => array('field_instance')));
 }
+
+/**
+ * Revert cluster_events field bases.
+ */
+function cluster_events_update_7005() {
+  features_revert(array('cluster_events' => array('field_base')));
+}

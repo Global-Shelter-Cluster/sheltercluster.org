@@ -258,7 +258,7 @@ function cluster_events_field_default_field_bases() {
       'repeat' => 1,
       'timezone_db' => 'UTC',
       'todate' => 'optional',
-      'tz_handling' => 'site',
+      'tz_handling' => 'utc',
     ),
     'translatable' => 0,
     'type' => 'datetime',
