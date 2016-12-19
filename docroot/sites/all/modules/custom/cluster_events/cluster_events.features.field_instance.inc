@@ -24,6 +24,12 @@ function cluster_events_field_default_field_instances() {
         'type' => 'text_default',
         'weight' => 3,
       ),
+      'ical' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 10,
+      ),
       'teaser' => array(
         'label' => 'hidden',
         'module' => 'text',
@@ -73,6 +79,12 @@ function cluster_events_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 10,
       ),
+      'ical' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 5,
+      ),
       'teaser' => array(
         'label' => 'above',
         'settings' => array(),
@@ -117,6 +129,12 @@ function cluster_events_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 9,
       ),
+      'ical' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 4,
+      ),
       'teaser' => array(
         'label' => 'above',
         'settings' => array(),
@@ -154,6 +172,12 @@ function cluster_events_field_default_field_instances() {
         'settings' => array(),
         'type' => 'hidden',
         'weight' => 8,
+      ),
+      'ical' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 1,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -211,6 +235,12 @@ function cluster_events_field_default_field_instances() {
         'type' => 'entityreference_label',
         'weight' => 2,
       ),
+      'ical' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 2,
+      ),
       'teaser' => array(
         'label' => 'above',
         'settings' => array(),
@@ -251,6 +281,12 @@ function cluster_events_field_default_field_instances() {
         'settings' => array(),
         'type' => 'file_default',
         'weight' => 5,
+      ),
+      'ical' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 6,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -300,6 +336,12 @@ function cluster_events_field_default_field_instances() {
         ),
         'type' => 'addressfield_default',
         'weight' => 1,
+      ),
+      'ical' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 3,
       ),
       'teaser' => array(
         'label' => 'hidden',
@@ -351,73 +393,6 @@ function cluster_events_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-event-field_recurring_event_date'
-  $field_instances['node-event-field_recurring_event_date'] = array(
-    'bundle' => 'event',
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'addtocal',
-        'settings' => array(
-          'description' => array(
-            'field' => 'body',
-            'tokenized' => '',
-          ),
-          'description_tokenized' => '',
-          'format_type' => 'long',
-          'fromto' => 'both',
-          'location' => array(
-            'field' => 'field_postal_address',
-            'tokenized' => '',
-          ),
-          'multiple_from' => '',
-          'multiple_number' => '',
-          'multiple_to' => '',
-          'past_events' => 0,
-          'show_repeat_rule' => 'hide',
-          'view_mode' => 'default',
-        ),
-        'type' => 'addtocal_view',
-        'weight' => 0,
-      ),
-      'teaser' => array(
-        'label' => 'hidden',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 11,
-      ),
-    ),
-    'entity_type' => 'node',
-    'field_name' => 'field_recurring_event_date',
-    'label' => 'Event Date',
-    'required' => 0,
-    'settings' => array(
-      'default_value' => 'now',
-      'default_value2' => 'same',
-      'default_value_code' => '',
-      'default_value_code2' => '',
-      'entity_translation_sync' => FALSE,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'date',
-      'settings' => array(
-        'increment' => 15,
-        'input_format' => 'm/d/Y - H:i:s',
-        'input_format_custom' => '',
-        'label_position' => 'above',
-        'repeat_collapsed' => 1,
-        'text_parts' => array(),
-        'year_range' => '-3:+3',
-      ),
-      'type' => 'date_text',
-      'weight' => 1,
-    ),
-  );
-
   // Exported field_instance: 'node-event-field_recurring_event_date2'
   $field_instances['node-event-field_recurring_event_date2'] = array(
     'bundle' => 'event',
@@ -438,18 +413,54 @@ function cluster_events_field_default_field_instances() {
         'type' => 'date_default',
         'weight' => 11,
       ),
-      'teaser' => array(
+      'ical' => array(
         'label' => 'hidden',
-        'module' => 'date',
+        'module' => 'addtocal',
         'settings' => array(
+          'description' => array(
+            'field' => 'body',
+            'tokenized' => '',
+          ),
+          'description_tokenized' => '',
           'format_type' => 'long',
           'fromto' => 'both',
+          'location' => array(
+            'field' => 'field_postal_address',
+            'tokenized' => '',
+          ),
           'multiple_from' => '',
           'multiple_number' => '',
           'multiple_to' => '',
+          'past_events' => 0,
           'show_repeat_rule' => 'hide',
+          'view_mode' => 'ical',
         ),
-        'type' => 'date_default',
+        'type' => 'addtocal_view',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'hidden',
+        'module' => 'addtocal',
+        'settings' => array(
+          'description' => array(
+            'field' => 'body',
+            'tokenized' => '',
+          ),
+          'description_tokenized' => '',
+          'format_type' => 'long',
+          'fromto' => 'both',
+          'location' => array(
+            'field' => 'field_postal_address',
+            'tokenized' => '',
+          ),
+          'multiple_from' => '',
+          'multiple_number' => '',
+          'multiple_to' => '',
+          'past_events' => 0,
+          'show_repeat_rule' => 'hide',
+          'view_mode' => 'teaser',
+        ),
+        'type' => 'addtocal_view',
         'weight' => 2,
       ),
     ),
@@ -495,6 +506,12 @@ function cluster_events_field_default_field_instances() {
         'settings' => array(),
         'type' => 'og_list_default',
         'weight' => 4,
+      ),
+      'ical' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 7,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -554,6 +571,12 @@ function cluster_events_field_default_field_instances() {
         'settings' => array(),
         'type' => 'hidden',
         'weight' => 7,
+      ),
+      'ical' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 8,
       ),
       'teaser' => array(
         'label' => 'above',

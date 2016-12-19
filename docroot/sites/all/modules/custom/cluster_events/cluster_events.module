@@ -245,7 +245,7 @@ function cluster_events_format_upcoming($nid) {
       'map_link' => $map_link,
       'static_map' => FALSE,
       'contact' => $contact_list,
-      'ical' => l('iCal', sprintf('node/%d/%s/default/addtocal.ics', $node->nid, 'field_recurring_event_date2')),
+      'ical' => l('iCal', sprintf('node/%d/%s/ical/addtocal.ics', $node->nid, 'field_recurring_event_date2')),
       'response' => $response,
     );
   }
@@ -461,3 +461,12 @@ function cluster_events_toggle_optional_fields_overridden_fields_alter(array &$f
   $fields['node']['event']['og_group_ref'] = shelter_base_get_group_count_for_user($user->uid) != 1;
 }
 
+/**
+ * Implements hook_entity_info_alter().
+ */
+function cluster_events_entity_info_alter(&$entity_info) {
+  $entity_info['node']['view modes']['ical'] = array(
+    'label' => t('iCal'),
+    'custom settings' => TRUE,
+  );
+}
