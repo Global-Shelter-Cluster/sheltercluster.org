@@ -59,3 +59,71 @@ function cluster_events_update_7004() {
 function cluster_events_update_7005() {
   features_revert(array('cluster_events' => array('field_base')));
 }
+
+/**
+ * Update dates in field_data_field_recurring_event_date2.
+ */
+function cluster_events_update_7006() {
+  $rows = db_query("SELECT * FROM {field_data_field_recurring_event_date2}");
+
+  foreach ($rows as $row) {
+    $fields = array();
+
+    if (!is_null($row->field_recurring_event_date2_value)) {
+      $timestamp = strtotime($row->field_recurring_event_date2_value);
+      $timestamp = $timestamp - (60 * 60 * 5);
+
+      $fields['field_recurring_event_date2_value'] = date('Y-m-d H:i:s', $timestamp);
+    }
+
+    if (!is_null($row->field_recurring_event_date2_value2)) {
+      $timestamp = strtotime($row->field_recurring_event_date2_value2);
+      $timestamp = $timestamp - (60 * 60 * 5);
+
+      $fields['field_recurring_event_date2_value2'] = date('Y-m-d H:i:s', $timestamp);
+    }
+
+    if (empty($fields)) {
+      continue;
+    }
+
+    db_update('field_data_field_recurring_event_date2')
+      ->fields($fields)
+      ->condition('entity_id', $row->entity_id)
+      ->execute();
+  }
+}
+
+/**
+ * Update dates in field_revision_field_recurring_event_date2.
+ */
+function cluster_events_update_7007() {
+  $rows = db_query("SELECT * FROM {field_revision_field_recurring_event_date2}");
+
+  foreach ($rows as $row) {
+    $fields = array();
+
+    if (!is_null($row->field_recurring_event_date2_value)) {
+      $timestamp = strtotime($row->field_recurring_event_date2_value);
+      $timestamp = $timestamp - (60 * 60 * 5);
+
+      $fields['field_recurring_event_date2_value'] = date('Y-m-d H:i:s', $timestamp);
+    }
+
+    if (!is_null($row->field_recurring_event_date2_value2)) {
+      $timestamp = strtotime($row->field_recurring_event_date2_value2);
+      $timestamp = $timestamp - (60 * 60 * 5);
+
+      $fields['field_recurring_event_date2_value2'] = date('Y-m-d H:i:s', $timestamp);
+    }
+
+    if (empty($fields)) {
+      continue;
+    }
+
+    db_update('field_revision_field_recurring_event_date2')
+      ->fields($fields)
+      ->condition('revision_id', $row->revision_id)
+      ->execute();
+  }
+}
