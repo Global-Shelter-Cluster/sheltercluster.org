@@ -1,0 +1,36 @@
+<?php
+
+class ClusterEventUnitTestCase extends DrupalUnitTestCase {
+  public static function getInfo() {
+    return array(
+      'name' => 'Cluster Event unit tests',
+      'description' => '',
+      'group' => 'Cluster Events'
+    );
+  }
+
+  public function testDateChange() {
+    $date = '2015-02-24 12:45:00';
+    $date = $this->removeTimezoneDifference($date);
+    $this->assertEqual($date, '2015-02-24 07:45:00');
+
+    $date = '2015-02-24 21:00:00';
+    $date = $this->removeTimezoneDifference($date);
+    $this->assertEqual($date, '2015-02-24 16:00:00');
+
+    $date = '2015-02-24 14:00:00';
+    $date = $this->removeTimezoneDifference($date);
+    $this->assertEqual($date, '2015-02-24 09:00:00');
+
+    $date = '2015-02-24 02:00:00';
+    $date = $this->removeTimezoneDifference($date);
+    $this->assertEqual($date, '2015-02-23 21:00:00');
+  }
+
+  private function removeTimezoneDifference($date) {
+    $timestamp = strtotime($date);
+    $timestamp = $timestamp - (60 * 60 * 5);
+
+    return date('Y-m-d H:i:s', $timestamp);
+  }
+}
