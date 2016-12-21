@@ -229,41 +229,6 @@ function cluster_events_field_default_field_bases() {
     'type' => 'addressfield',
   );
 
-  // Exported field_base: 'field_recurring_event_date'
-  $field_bases['field_recurring_event_date'] = array(
-    'active' => 1,
-    'cardinality' => -1,
-    'deleted' => 0,
-    'entity_types' => array(),
-    'field_name' => 'field_recurring_event_date',
-    'field_permissions' => array(
-      'type' => 0,
-    ),
-    'foreign keys' => array(),
-    'indexes' => array(),
-    'locked' => 0,
-    'module' => 'date',
-    'settings' => array(
-      'cache_count' => 4,
-      'cache_enabled' => 0,
-      'entity_translation_sync' => FALSE,
-      'granularity' => array(
-        'day' => 'day',
-        'hour' => 'hour',
-        'minute' => 'minute',
-        'month' => 'month',
-        'second' => 0,
-        'year' => 'year',
-      ),
-      'repeat' => 1,
-      'timezone_db' => 'UTC',
-      'todate' => '',
-      'tz_handling' => 'site',
-    ),
-    'translatable' => 0,
-    'type' => 'datetime',
-  );
-
   // Exported field_base: 'field_recurring_event_date2'
   $field_bases['field_recurring_event_date2'] = array(
     'active' => 1,
@@ -293,7 +258,7 @@ function cluster_events_field_default_field_bases() {
       'repeat' => 1,
       'timezone_db' => 'UTC',
       'todate' => 'optional',
-      'tz_handling' => 'site',
+      'tz_handling' => 'utc',
     ),
     'translatable' => 0,
     'type' => 'datetime',

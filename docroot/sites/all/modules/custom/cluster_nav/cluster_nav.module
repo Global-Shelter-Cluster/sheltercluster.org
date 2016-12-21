@@ -112,6 +112,10 @@ function cluster_nav_preprocess_page(&$variables) {
   // If viewing a group content node page, get the associated group node's navigation elements.
   // @TODO Properly handle the fact that the group reference is a multivalue field.
   elseif (isset($node->og_group_ref)) {
+    if (path_is_admin(current_path())) {
+      return;
+    }
+
     $wrapper = entity_metadata_wrapper('node', $node);
     $group = $wrapper->og_group_ref->value();
     if (count($group) > 0) {
@@ -121,25 +125,14 @@ function cluster_nav_preprocess_page(&$variables) {
       /** @var GroupFullDisplayProvider $display_provider */
       $display_provider = GroupDisplayProvider::getDisplayProvider($group[0]);
 
-      switch ($node->type) {
-        case 'document':
-        case 'event':
-        case 'library':
-          $response = $wrapper->og_group_ref->value();
-          $response = reset($response);
+      $response = $wrapper->og_group_ref->value();
+      $response = reset($response);
 
-          // Override the page title and link it back to the response.
-          $variables['title'] = $variables['page_title'] = l(
-            $response->title,
-            'node/' . $response->nid
-          );
-          break;
-
-        default:
-          // Override the page level title to show the group content title.
-          $variables['title'] = $variables['page_title'] = $wrapper->og_group_ref->label();
-          break;
-      }
+      // Override the page title and link it back to the response.
+      $variables['title'] = $variables['page_title'] = l(
+        $response->title,
+        'node/' . $response->nid
+      );
     }
   }
 

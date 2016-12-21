@@ -64,7 +64,7 @@ function cluster_events_all($nid) {
   module_load_include('inc', 'cluster_events', 'cluster_events.helpers');
   $all_events = !_cluster_events_all_events_only_upcoming_events();
 
-  $order = 'ASC';
+  $order = $all_events ? 'DESC' : 'ASC';
 
   $date = new DateTime('12am today');
   $today = $date->format('Y-m-d 00:00:00');
@@ -229,7 +229,7 @@ function cluster_events_format_upcoming($nid) {
 
     // Add a link to the response.
     $response_link = l(
-      $wrapper->og_membership->label(),
+      $wrapper->get('og_group_ref')->label(),
       'node/' . $wrapper->getIdentifier()
     );
 
@@ -245,7 +245,7 @@ function cluster_events_format_upcoming($nid) {
       'map_link' => $map_link,
       'static_map' => FALSE,
       'contact' => $contact_list,
-      'ical' => l('iCal', sprintf('node/%d/%s/default/addtocal.ics', $node->nid, 'field_recurring_event_date2')),
+      'ical' => l('iCal', sprintf('node/%d/%s/ical/addtocal.ics', $node->nid, 'field_recurring_event_date2')),
       'response' => $response,
     );
   }
@@ -461,3 +461,12 @@ function cluster_events_toggle_optional_fields_overridden_fields_alter(array &$f
   $fields['node']['event']['og_group_ref'] = shelter_base_get_group_count_for_user($user->uid) != 1;
 }
 
+/**
+ * Implements hook_entity_info_alter().
+ */
+function cluster_events_entity_info_alter(&$entity_info) {
+  $entity_info['node']['view modes']['ical'] = array(
+    'label' => t('iCal'),
+    'custom settings' => TRUE,
+  );
+}

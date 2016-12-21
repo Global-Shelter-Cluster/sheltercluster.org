@@ -14,12 +14,6 @@
             </a>
           </div><!-- /.document-title -->
 
-          <?php if ($doc['description']): ?>
-            <div class="document-description is-small">
-              <?php print $doc['description']; ?>
-            </div>
-          <?php endif; ?>
-
           <?php if ($doc['group']): ?>
             <div class="document-response is-small">
               <?php print $doc['group']; ?>
