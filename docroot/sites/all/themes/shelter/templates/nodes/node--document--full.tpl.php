@@ -84,6 +84,11 @@
     
     <div class="doc-details">
 
+      <div class="doc-title">
+        <div class="doc-attr-label">Title </div>
+        <div class="doc-attr-value"><?php print $node->title; ?></div>
+      </div>
+
       <div class="doc-publisher">
         <div class="doc-attr-label">Publisher </div>
         <div class="doc-attr-value">
@@ -170,6 +175,12 @@
       </div>
       <?php endif; ?>
 
+      <div class="doc-description">
+        <div class="doc-attr-label">Description </div>
+        <div class="doc-attr-value">
+          <?php print render($content['body']); ?>
+        </div>
+      </div><!-- /.doc-description -->
     </div>
     
     <div class="doc-download">
@@ -187,10 +198,6 @@
            title="<?php print $document_link_title; ?>"
            target="_blank" class="button"><?php print $document_button_text; ?></a>
       </div>
-    </div>
-
-    <div class="doc-description">
-      <?php print render($content['body']); ?>
     </div>
   </div>
 

@@ -49,7 +49,7 @@
 
 .doc-tags a {
   display: inline-block;
-  margin: 0 0.67em 0.5em 0;
+  margin: 0 0.67em 0 0;
   font-size: 0.9em;
 }
 
@@ -86,5 +86,8 @@
 
 .doc-description {
   clear: both;
-  margin-top: 1em;
+}
+
+.doc-description p:first-child {
+  margin-top: 0;
 }
