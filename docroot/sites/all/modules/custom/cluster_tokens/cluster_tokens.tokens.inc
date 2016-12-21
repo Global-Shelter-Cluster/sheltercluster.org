@@ -37,7 +37,8 @@ function cluster_tokens_tokens($type, $tokens, array $data = array(), array $opt
             /** @var EntityDrupalWrapper $wrapper */
             $wrapper = entity_metadata_wrapper('node', $node);
 
-            if (empty($wrapper->get('og_group_ref')->value())) {
+            $group = $wrapper->get('og_group_ref')->value();
+            if (empty($group)) {
               return;
             }
 
