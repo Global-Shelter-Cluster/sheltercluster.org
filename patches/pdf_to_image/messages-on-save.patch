@@ -1,0 +1,24 @@
+diff --git a/pdf_to_image.module b/pdf_to_image.module
+index cfab8c9..3f040ca 100644
+--- a/pdf_to_image.module
++++ b/pdf_to_image.module
+@@ -770,7 +770,18 @@ function pdf_to_image_tokens($type, $tokens, array $data = array(), array $optio
+       if (isset($entity->{$field_id})) {
+         $source_field_values = $entity->{$field_id};
+         $field_lang = field_language($data['entity_type'], $entity, $field_id);
+-        $source_values = $source_field_values[$field_lang];
++
++        if (!isset($source_field_values[$field_lang])) {
++          $source_values = $source_field_values[LANGUAGE_NONE];
++        }
++        else {
++          $source_values = $source_field_values[$field_lang];
++        }
++
++        if (empty($source_values)) {
++          return;
++        }
++
+         // Assumed to be multiple.
+         foreach ($source_values as $delta => $file_info) {
+           // Fall-through. We've found $file_info now. 
