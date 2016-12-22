@@ -134,7 +134,6 @@ function cluster_docs_query() {
  */
 function cluster_docs_taxonomies() {
   return array(
-    'attachments_field_file',
     'search_api_language',
     'field_document_type',
     // Basic tags
