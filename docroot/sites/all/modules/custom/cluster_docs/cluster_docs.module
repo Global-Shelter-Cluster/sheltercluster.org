@@ -280,11 +280,17 @@ function cluster_docs_page($query, $show_facets = TRUE, $default_sort = NULL, $d
     }
 
     $title = NULL;
+    $document_contains = NULL;
+
     // Read the title filter value from the URL, if it exists.
     if (isset($_GET['f']) && is_array($_GET['f'])) {
       foreach ($_GET['f'] as $filter) {
         if (substr($filter, 0, 6) == 'title:') {
           $title = substr($filter, 6);
+        }
+
+        if (substr($filter, 0, 23) == 'attachments_field_file:') {
+          $document_contains = substr($filter, 23);
         }
       }
     }
@@ -303,6 +309,27 @@ function cluster_docs_page($query, $show_facets = TRUE, $default_sort = NULL, $d
         array(
           '#type' => 'button',
           '#name' => 'title_search',
+          '#value' => 'Search',
+        ),
+        '#prefix' => '<div class="clearfix">',
+        '#suffix' => '</div>',
+      ),
+    );
+
+    $facets[] = array(
+      '#weight' => -49,
+      '#theme' => 'cluster_docs_facet',
+      '#title' => 'Document Contains',
+      '#options' => FALSE,
+      '#child' => array(
+        array(
+          '#type' => 'textfield',
+          '#name' => 'document',
+          '#value' => $document_contains,
+        ),
+        array(
+          '#type' => 'button',
+          '#name' => 'document_search',
           '#value' => 'Search',
         ),
         '#prefix' => '<div class="clearfix">',
