@@ -314,7 +314,10 @@ function pdf_to_image_field_widget_form(&$form, &$form_state, $field, $instance,
 
   foreach (element_children($elements) as $delta) {
     // If not using custom extension validation, ensure this is a pdf.
-    $elements[$delta]['#upload_validators']['file_validate_extensions'][0] = 'pdf';
+    if (empty($elements[$delta]['#upload_validators']['file_validate_extensions'])) {
+       $elements[$delta]['#upload_validators']['file_validate_extensions'][0] = 'pdf';
+    }
+
     // File fields need extra processing. Our one even more so.
     #$elements[$delta]['#process'][] = 'pdf_to_image_field_widget_process';
   }
