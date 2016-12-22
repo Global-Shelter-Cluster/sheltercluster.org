@@ -5,6 +5,9 @@
  * Shelter Cluster - Document node template.
  */
 
+  /** @var EntityDrupalWrapper $wrapper */
+  $wrapper = entity_metadata_wrapper('node', $node);
+
   // We hide the comments and links now so that we can render them later.
   hide($content['comments']);
   hide($content['links']);
@@ -162,17 +165,26 @@
       </div>
       
       <?php if ($tag_groups && !empty($tag_groups)):?>
-      <div class="doc-tags">
-        <div class="doc-attr-label">Tags </div>
-        <div class="doc-attr-value"><?php
-          foreach ($tag_groups as $tag_group) {
-            if (array_key_exists($tag_group, $content)) {
-              $value = fieldValue($tag_group, $node);
-              print render($value);
+        <div class="doc-tags">
+          <div class="doc-attr-label">Tags </div>
+          <div class="doc-attr-value"><?php
+            foreach ($tag_groups as $tag_group) {
+              foreach ($wrapper->get($tag_group) as $tag) {
+                print l(
+                  $tag->label(),
+                  'search-documents',
+                  array(
+                    'query' => array(
+                      'sort' => 'date',
+                      'sort_direction' => 'DESC',
+                      'f' => array("$tag_group:" . $tag->getIdentifier()),
+                    )
+                  )
+                );
+              }
             }
-          }
-        ?></div>
-      </div>
+          ?></div>
+        </div>
       <?php endif; ?>
 
       <div class="doc-description">
