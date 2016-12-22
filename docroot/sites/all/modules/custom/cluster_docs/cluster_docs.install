@@ -18,3 +18,10 @@ function cluster_docs_update_7100() {
 function cluster_docs_update_7102() {
   features_revert(array('cluster_docs' => array('field_instance')));
 }
+
+/**
+ * Revert search index and server settings again.
+ */
+function cluster_docs_update_7103() {
+  features_revert(array('cluster_docs' => array('search_api_index', 'search_api_server')));
+}
