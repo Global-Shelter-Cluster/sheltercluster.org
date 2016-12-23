@@ -314,7 +314,10 @@ function pdf_to_image_field_widget_form(&$form, &$form_state, $field, $instance,
 
   foreach (element_children($elements) as $delta) {
     // If not using custom extension validation, ensure this is a pdf.
-    $elements[$delta]['#upload_validators']['file_validate_extensions'][0] = 'pdf';
+    if (empty($elements[$delta]['#upload_validators']['file_validate_extensions'])) {
+       $elements[$delta]['#upload_validators']['file_validate_extensions'][0] = 'pdf';
+    }
+
     // File fields need extra processing. Our one even more so.
     #$elements[$delta]['#process'][] = 'pdf_to_image_field_widget_process';
   }
@@ -770,7 +773,18 @@ function pdf_to_image_tokens($type, $tokens, array $data = array(), array $optio
       if (isset($entity->{$field_id})) {
         $source_field_values = $entity->{$field_id};
         $field_lang = field_language($data['entity_type'], $entity, $field_id);
-        $source_values = $source_field_values[$field_lang];
+
+        if (!isset($source_field_values[$field_lang])) {
+          $source_values = $source_field_values[LANGUAGE_NONE];
+        }
+        else {
+          $source_values = $source_field_values[$field_lang];
+        }
+
+        if (empty($source_values)) {
+          return;
+        }
+
         // Assumed to be multiple.
         foreach ($source_values as $delta => $file_info) {
           // Fall-through. We've found $file_info now. 

@@ -5,6 +5,9 @@
  * Shelter Cluster - Document node template.
  */
 
+  /** @var EntityDrupalWrapper $wrapper */
+  $wrapper = entity_metadata_wrapper('node', $node);
+
   // We hide the comments and links now so that we can render them later.
   hide($content['comments']);
   hide($content['links']);
@@ -84,6 +87,11 @@
     
     <div class="doc-details">
 
+      <div class="doc-title">
+        <div class="doc-attr-label">Title </div>
+        <div class="doc-attr-value"><?php print $node->title; ?></div>
+      </div>
+
       <div class="doc-publisher">
         <div class="doc-attr-label">Publisher </div>
         <div class="doc-attr-value">
@@ -157,19 +165,34 @@
       </div>
       
       <?php if ($tag_groups && !empty($tag_groups)):?>
-      <div class="doc-tags">
-        <div class="doc-attr-label">Tags </div>
-        <div class="doc-attr-value"><?php
-          foreach ($tag_groups as $tag_group) {
-            if (array_key_exists($tag_group, $content)) {
-              $value = fieldValue($tag_group, $node);
-              print render($value);
+        <div class="doc-tags">
+          <div class="doc-attr-label">Tags </div>
+          <div class="doc-attr-value"><?php
+            foreach ($tag_groups as $tag_group) {
+              foreach ($wrapper->get($tag_group) as $tag) {
+                print l(
+                  $tag->label(),
+                  'search-documents',
+                  array(
+                    'query' => array(
+                      'sort' => 'date',
+                      'sort_direction' => 'DESC',
+                      'f' => array("$tag_group:" . $tag->getIdentifier()),
+                    )
+                  )
+                );
+              }
             }
-          }
-        ?></div>
-      </div>
+          ?></div>
+        </div>
       <?php endif; ?>
 
+      <div class="doc-description">
+        <div class="doc-attr-label">Description </div>
+        <div class="doc-attr-value">
+          <?php print render($content['body']); ?>
+        </div>
+      </div><!-- /.doc-description -->
     </div>
     
     <div class="doc-download">
@@ -187,10 +210,6 @@
            title="<?php print $document_link_title; ?>"
            target="_blank" class="button"><?php print $document_button_text; ?></a>
       </div>
-    </div>
-
-    <div class="doc-description">
-      <?php print render($content['body']); ?>
     </div>
   </div>
 
