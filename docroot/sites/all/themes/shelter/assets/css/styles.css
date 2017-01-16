@@ -2242,6 +2242,11 @@ ul.addtocal_menu {
   color: #575757;
 }
 
+.event-card .event-description img {
+  height: auto !important;
+  max-width: 100%;
+}
+
 /* _coordination.scss */
 #shelter-coordination-team {
   margin: 0 0 32px 0;
