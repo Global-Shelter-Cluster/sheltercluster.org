@@ -1542,3 +1542,10 @@ function shelter_base_update_7157() {
     db_insert('field_revision_body')->fields((array) $row)->execute();
   }
 }
+
+/**
+ * Revert shelter_base variables.
+ */
+function shelter_base_update_7158() {
+  features_revert(array('shelter_base' => array('variable')));
+}
