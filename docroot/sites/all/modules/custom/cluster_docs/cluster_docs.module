@@ -877,3 +877,21 @@ function cluster_docs_toggle_optional_fields_overridden_fields_alter(array &$fie
   global $user;
   $fields['node']['document']['og_group_ref'] = shelter_base_get_group_count_for_user($user->uid) != 1;
 }
+
+/**
+ * Implements hook_field_access().
+ */
+function cluster_docs_field_access($op, $field, $entity_type, $entity, $account) {
+  switch ($entity_type) {
+    case 'node':
+      switch ($entity->type) {
+        case 'document':
+          switch ($field['field_name']) {
+            case 'field_image':
+              return FALSE;
+          }
+          break;
+      }
+      break;
+  }
+}
