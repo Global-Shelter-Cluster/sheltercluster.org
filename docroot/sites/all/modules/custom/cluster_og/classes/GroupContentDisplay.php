@@ -124,8 +124,9 @@ class GroupDisplayProvider {
         );
       }
     }
-    if ($events_count = $this->manager->getEventCount() > 0) {
-      if ($this->manager->isEnabled('events')) {
+
+    if ($events_count = $this->manager->getEventCount()) {
+      if ($this->manager->isEnabled('events') && $events_count > 0) {
         $items[] = array(
           'label' => t('Events'),
           'path' => 'node/' . $this->node->nid . '/events',
