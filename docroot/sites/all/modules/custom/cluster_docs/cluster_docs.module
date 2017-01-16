@@ -871,6 +871,7 @@ function cluster_docs_toggle_optional_fields_overridden_fields_alter(array &$fie
     'field_file' => TRUE,
     'field_information_management' => TRUE,
     'field_technical_support_design' => TRUE,
+    'language' => FALSE,
   );
 
   global $user;
