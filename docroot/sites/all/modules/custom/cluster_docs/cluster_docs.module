@@ -434,7 +434,7 @@ function cluster_docs_prepare_card_data($nids) {
       $wrapper = entity_metadata_wrapper('node', $node);
       $doc['title'] = $wrapper->label();
 
-      $url = cluster_docs_get_download_url($node);
+      $url = url("node/{$node->nid}");
       $doc['link_url'] = $url;
       $doc['link'] = l('<span>' . $doc['title'] . '</span>', $url, array('attributes' => array('target' => '_blank'),'html' => TRUE));
 
