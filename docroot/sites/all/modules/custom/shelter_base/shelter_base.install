@@ -1589,3 +1589,17 @@ function shelter_base_update_7160(&$sandbox) {
 
   $sandbox['#finished'] = ($sandbox['progress'] >= $sandbox['max']) ? TRUE : ($sandbox['progress'] / $sandbox['max']);
 }
+
+/**
+ * Fix incorrect alias languages.
+ */
+function shelter_base_update_7161() {
+  // Find aliases where the language doesn't match the node language.
+  $aliases = db_query("SELECT CONCAT('node/', n.nid) FROM {node} n JOIN {url_alias} a ON a.source = CONCAT('node/', n.nid) WHERE n.language = 'en' AND a.language = 'und'")->fetchCol();
+
+  // Fix the incorrect languages.
+  db_update('url_alias')
+    ->fields(array('language' => 'en'))
+    ->condition('source', $aliases, 'IN')
+    ->execute();
+}
