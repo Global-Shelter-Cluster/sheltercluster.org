@@ -1603,3 +1603,10 @@ function shelter_base_update_7161() {
     ->condition('source', $aliases, 'IN')
     ->execute();
 }
+
+/**
+ * Re-run shelter_base_update_7159().
+ */
+function shelter_base_update_7162() {
+  shelter_base_update_7159();
+}
