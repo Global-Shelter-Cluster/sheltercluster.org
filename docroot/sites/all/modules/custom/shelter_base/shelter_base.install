@@ -1610,3 +1610,10 @@ function shelter_base_update_7161() {
 function shelter_base_update_7163() {
   features_revert(array('shelter_base' => array('variable')));
 }
+
+/**
+ * Update pathauto_node_page_pattern variable.
+ */
+function shelter_base_update_7164() {
+  features_revert(array('shelter_base' => array('variable')));
+}
