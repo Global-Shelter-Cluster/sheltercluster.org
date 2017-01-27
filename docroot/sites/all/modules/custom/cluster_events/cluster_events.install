@@ -127,3 +127,10 @@ function cluster_events_update_7007() {
       ->execute();
   }
 }
+
+/**
+ * Make og_group_ref required for events.
+ */
+function cluster_events_update_7009() {
+  features_revert(array('cluster_events' => array('field_instance')));
+}
