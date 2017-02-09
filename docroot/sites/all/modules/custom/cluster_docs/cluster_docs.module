@@ -315,26 +315,26 @@ function cluster_docs_page($query, $show_facets = TRUE, $default_sort = NULL, $d
       ),
     );
 
-    $facets[] = array(
-      '#weight' => -49,
-      '#theme' => 'cluster_docs_facet',
-      '#title' => 'Document Contains',
-      '#options' => FALSE,
-      '#child' => array(
-        array(
-          '#type' => 'textfield',
-          '#name' => 'document',
-          '#value' => $document_contains,
-        ),
-        array(
-          '#type' => 'button',
-          '#name' => 'document_search',
-          '#value' => 'Search',
-        ),
-        '#prefix' => '<div class="clearfix">',
-        '#suffix' => '</div>',
-      ),
-    );
+    // $facets[] = array(
+    //   '#weight' => -49,
+    //   '#theme' => 'cluster_docs_facet',
+    //   '#title' => 'Document Contains',
+    //   '#options' => FALSE,
+    //   '#child' => array(
+    //     array(
+    //       '#type' => 'textfield',
+    //       '#name' => 'document',
+    //       '#value' => $document_contains,
+    //     ),
+    //     array(
+    //       '#type' => 'button',
+    //       '#name' => 'document_search',
+    //       '#value' => 'Search',
+    //     ),
+    //     '#prefix' => '<div class="clearfix">',
+    //     '#suffix' => '</div>',
+    //   ),
+    // );
   }
 
   drupal_add_js(drupal_get_path('module', 'cluster_docs') . '/js/search.js');
