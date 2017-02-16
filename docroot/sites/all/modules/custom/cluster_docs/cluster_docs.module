@@ -134,7 +134,8 @@ function cluster_docs_query() {
  */
 function cluster_docs_taxonomies() {
   return array(
-    'search_api_language',
+//    'search_api_language',
+    'field_language',
     'field_document_type',
     // Basic tags
     'field_coordination_management',
@@ -263,10 +264,6 @@ function cluster_docs_page($query, $show_facets = TRUE, $default_sort = NULL, $d
       switch ($facet) {
         case 'attachments_field_file':
           $content['#title'] = t('File Contains');
-          break;
-
-        case 'search_api_language':
-          $content['#title'] = t('Language');
           break;
       }
 
