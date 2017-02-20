@@ -21,3 +21,27 @@ function cluster_search_preprocess_page(&$variables) {
   $search_form['content']['search_block_form']['#attributes']['placeholder'] = t('Search site');
   $variables['search_form_bottom'] = $search_form;
 }
+
+/**
+ * Implements hook_facetapi_facet_info_alter().
+ */
+function cluster_search_facetapi_facet_info_alter(array &$facet_info, array $searcher_info) {
+  if (!empty($facet_info['field_language'])) {
+    $facet_info['field_language']['map callback'] = '_cluster_search_field_language_facet_map_callback';
+  }
+}
+
+function _cluster_search_field_language_facet_map_callback(array $values, array $options = array()) {
+  $map = array();
+  $languages = language_list();
+
+  foreach ($values as $value) {
+    if (empty($languages[$value])) {
+      continue;
+    }
+
+    $map[$value] = $languages[$value]->name;
+  }
+
+  return $map;
+}
