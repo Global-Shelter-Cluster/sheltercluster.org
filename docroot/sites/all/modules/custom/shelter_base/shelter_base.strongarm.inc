@@ -203,7 +203,7 @@ function shelter_base_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'date_default_timezone';
-  $strongarm->value = 'America/New_York';
+  $strongarm->value = 'UTC';
   $export['date_default_timezone'] = $strongarm;
 
   $strongarm = new stdClass();
@@ -1165,7 +1165,7 @@ function shelter_base_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'pathauto_node_page_pattern';
-  $strongarm->value = '';
+  $strongarm->value = '[node:cluster-response-title]/[node:title]';
   $export['pathauto_node_page_pattern'] = $strongarm;
 
   $strongarm = new stdClass();

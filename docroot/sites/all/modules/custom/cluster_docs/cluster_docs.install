@@ -25,3 +25,85 @@ function cluster_docs_update_7102() {
 function cluster_docs_update_7103() {
   features_revert(array('cluster_docs' => array('search_api_index', 'search_api_server')));
 }
+
+/**
+ * Revert cluster_docs and shelter_base.
+ */
+function cluster_docs_update_7105() {
+  module_enable(array('languagefield'));
+
+  features_revert(array(
+    'shelter_base' => array('field_base', 'variable'),
+    'cluster_docs' => array('field_instance'),
+  ));
+}
+
+function cluster_docs_update_7106(&$sandbox) {
+  if (!isset($sandbox['progress'])) {
+    $sandbox['progress'] = 0;
+    $sandbox['max'] = db_query("SELECT COUNT(nid) FROM {node} WHERE type = 'document'")->fetchField();
+    $sandbox['current_node'] = -1;
+  }
+
+  $limit = 10;
+
+  $result = db_select('node', 'n')
+    ->fields('n', array('nid'))
+    ->orderBy('n.nid', 'ASC')
+    ->where('n.nid > :nid', array(':nid' => $sandbox['current_node']))
+    ->condition('type', 'document')
+    ->extend('PagerDefault')
+    ->limit($limit)
+    ->execute();
+
+  foreach ($result as $row) {
+    $node = node_load($row->nid);
+
+    // Populate field_language tables.
+    $record = array(
+      'entity_type' => 'node',
+      'bundle' => 'document',
+      'deleted' => 0,
+      'entity_id' => $node->nid,
+      'revision_id' => $node->vid,
+      'language' => LANGUAGE_NONE,
+      'delta' => 0,
+      'field_language_value' => $node->language,
+    );
+    db_insert('field_data_field_language')->fields($record)->execute();
+    db_insert('field_revision_field_language')->fields($record)->execute();
+
+    // Update the node language.
+    db_update('node')
+      ->fields(array('language' => LANGUAGE_NONE))
+      ->condition('nid', $node->nid)
+      ->condition('vid', $node->vid)
+      ->execute();
+
+    // Update the path alias language.
+    db_update('url_alias')
+      ->fields(array('language' => LANGUAGE_NONE))
+      ->condition('source', "node/{$node->nid}")
+      ->execute();
+
+    $tables = array(
+      'entity_translation',
+      'field_data_title_field',
+      'field_revision_title_field',
+    );
+
+    foreach ($tables as $table) {
+      db_update($table)
+        ->fields(array('language' => LANGUAGE_NONE))
+        ->condition('entity_type', 'node')
+        ->condition('entity_id', $node->nid)
+//        ->condition('revision_id', $node->vid)
+        ->execute();
+    }
+
+    $sandbox['progress']++;
+    $sandbox['current_node'] = $row->nid;
+  }
+
+  $sandbox['#finished'] = ($sandbox['progress'] >= $sandbox['max']) ? TRUE : ($sandbox['progress'] / $sandbox['max']);
+}

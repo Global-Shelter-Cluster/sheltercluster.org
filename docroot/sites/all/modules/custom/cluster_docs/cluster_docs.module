@@ -134,7 +134,8 @@ function cluster_docs_query() {
  */
 function cluster_docs_taxonomies() {
   return array(
-    'search_api_language',
+//    'search_api_language',
+    'field_language',
     'field_document_type',
     // Basic tags
     'field_coordination_management',
@@ -263,10 +264,6 @@ function cluster_docs_page($query, $show_facets = TRUE, $default_sort = NULL, $d
       switch ($facet) {
         case 'attachments_field_file':
           $content['#title'] = t('File Contains');
-          break;
-
-        case 'search_api_language':
-          $content['#title'] = t('Language');
           break;
       }
 
@@ -434,7 +431,7 @@ function cluster_docs_prepare_card_data($nids) {
       $wrapper = entity_metadata_wrapper('node', $node);
       $doc['title'] = $wrapper->label();
 
-      $url = cluster_docs_get_download_url($node);
+      $url = url("node/{$node->nid}");
       $doc['link_url'] = $url;
       $doc['link'] = l('<span>' . $doc['title'] . '</span>', $url, array('attributes' => array('target' => '_blank'),'html' => TRUE));
 
@@ -871,8 +868,27 @@ function cluster_docs_toggle_optional_fields_overridden_fields_alter(array &$fie
     'field_file' => TRUE,
     'field_information_management' => TRUE,
     'field_technical_support_design' => TRUE,
+    'language' => FALSE,
   );
 
   global $user;
   $fields['node']['document']['og_group_ref'] = shelter_base_get_group_count_for_user($user->uid) != 1;
+}
+
+/**
+ * Implements hook_field_access().
+ */
+function cluster_docs_field_access($op, $field, $entity_type, $entity, $account) {
+  switch ($entity_type) {
+    case 'node':
+      switch ($entity->type) {
+        case 'document':
+          switch ($field['field_name']) {
+            case 'field_image':
+              return FALSE;
+          }
+          break;
+      }
+      break;
+  }
 }

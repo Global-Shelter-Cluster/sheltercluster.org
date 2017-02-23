@@ -1542,3 +1542,85 @@ function shelter_base_update_7157() {
     db_insert('field_revision_body')->fields((array) $row)->execute();
   }
 }
+
+/**
+ * Revert shelter_base variables.
+ */
+function shelter_base_update_7158() {
+  features_revert(array('shelter_base' => array('variable')));
+}
+
+/**
+ * Update other content type pathauto patterns.
+ */
+function shelter_base_update_7159() {
+  // Revert library pathauto patterns.
+  features_revert(array('cluster_libraries' => array('variable')));
+
+  variable_set('pathauto_node_page_pattern', '[node:cluster-response-title]/page/[node:title]');
+}
+
+function shelter_base_update_7160(&$sandbox) {
+  if (!isset($sandbox['progress'])) {
+    $sandbox['progress'] = 0;
+    $sandbox['max'] = db_query("SELECT COUNT(nid) FROM {node} WHERE type IN ('arbitrary_library', 'page', 'library') AND status = 1")->fetchField();
+    $sandbox['messages'] = array();
+    $sandbox['current_node'] = -1;
+  }
+
+  $limit = 10;
+
+  $result = db_select('node', 'n')
+    ->fields('n', array('nid'))
+    ->orderBy('n.nid', 'ASC')
+    ->where('n.nid > :nid', array(':nid' => $sandbox['current_node']))
+    ->condition('type', array('arbitrary_library', 'page', 'library'))
+    ->condition('status', NODE_PUBLISHED)
+    ->extend('PagerDefault')
+    ->limit($limit)
+    ->execute();
+
+  foreach ($result as $row) {
+    pathauto_node_update_alias(node_load($row->nid), 'update');
+
+    $sandbox['progress']++;
+    $sandbox['current_node'] = $row->nid;
+  }
+
+  $sandbox['#finished'] = ($sandbox['progress'] >= $sandbox['max']) ? TRUE : ($sandbox['progress'] / $sandbox['max']);
+}
+
+/**
+ * Fix incorrect alias languages.
+ */
+function shelter_base_update_7161() {
+  // Find aliases where the language doesn't match the node language.
+  $aliases = db_query("SELECT CONCAT('node/', n.nid) FROM {node} n JOIN {url_alias} a ON a.source = CONCAT('node/', n.nid) WHERE n.language = 'en' AND a.language = 'und'")->fetchCol();
+
+  // Fix the incorrect languages.
+  db_update('url_alias')
+    ->fields(array('language' => 'en'))
+    ->condition('source', $aliases, 'IN')
+    ->execute();
+}
+
+/**
+ * Update pathauto_node_page_pattern variable.
+ */
+function shelter_base_update_7163() {
+  features_revert(array('shelter_base' => array('variable')));
+}
+
+/**
+ * Update pathauto_node_page_pattern variable.
+ */
+function shelter_base_update_7164() {
+  features_revert(array('shelter_base' => array('variable')));
+}
+
+/**
+ * Revert search settings.
+ */
+function shelter_base_update_7165() {
+  features_revert_module('cluster_search');
+}

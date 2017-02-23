@@ -523,7 +523,7 @@ function cluster_events_field_default_field_instances() {
     'entity_type' => 'node',
     'field_name' => 'og_group_ref',
     'label' => 'Groups audience',
-    'required' => FALSE,
+    'required' => TRUE,
     'settings' => array(
       'behaviors' => array(
         'og_widget' => array(

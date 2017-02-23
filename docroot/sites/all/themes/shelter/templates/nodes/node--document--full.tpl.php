@@ -160,7 +160,7 @@
       <div class="doc-language">
         <div class="doc-attr-label">Language </div>
         <div class="doc-attr-value">
-          <strong><?php print locale_language_name($node->language); ?></strong>
+          <strong><?php print render($content['field_language']); ?></strong>
         </div>
       </div>
       
