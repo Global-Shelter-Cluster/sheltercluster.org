@@ -8,8 +8,6 @@
   /** @var EntityDrupalWrapper $wrapper */
   $wrapper = entity_metadata_wrapper('node', $node);
 
-  $igor = node_load(11005);
-
   // We hide the comments and links now so that we can render them later.
   hide($content['comments']);
   hide($content['links']);
