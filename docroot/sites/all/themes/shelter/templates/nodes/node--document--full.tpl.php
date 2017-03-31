@@ -8,6 +8,8 @@
   /** @var EntityDrupalWrapper $wrapper */
   $wrapper = entity_metadata_wrapper('node', $node);
 
+  $igor = node_load(11005);
+
   // We hide the comments and links now so that we can render them later.
   hide($content['comments']);
   hide($content['links']);
@@ -73,7 +75,7 @@
     $document_button_text = "Download";
   } else {
     $file_link = field_get_items('node', $node, 'field_link');
-    $document_url = render($file_link[0]['url']);
+    $document_url = render($file_link[0]['display_url']);
     $document_url_parts = parse_url($document_url);
     $document_link_title = "View document on " . $document_url_parts['host'];
     $document_button_text = "Open document";
