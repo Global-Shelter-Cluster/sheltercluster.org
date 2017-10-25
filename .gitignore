@@ -1,2 +1,6 @@
 node_modules/
 .sass-cache
+.idea
+certs/
+logs/
+.DS_Store
