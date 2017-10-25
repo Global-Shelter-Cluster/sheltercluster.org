@@ -1,4 +1,4 @@
-@charset "UTF-8";
+﻿@charset "UTF-8";
 /*! normalize.css v3.0.0 | HTML5 Display Definitions | MIT License | git.io/normalize */
 article,
 aside,
@@ -3498,4 +3498,7 @@ footer .table-row {
 
 .doc-description p:first-child {
   margin-top: 0;
+}
+.mycustomtable tbody {
+    border-top:none;
 }
