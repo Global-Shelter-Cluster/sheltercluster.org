@@ -400,7 +400,7 @@ class GroupFullDisplayProvider extends GroupDisplayProvider {
       $path = drupal_get_path_alias('node/' . $this->node->nid);
       return theme('cluster_og_recent_documents', array(
         'docs' => cluster_docs_prepare_row_data($nids),
-        'all_documents_link' => url($path . '/documents'),
+        'all_documents_link' => url('node/' . $this->node->nid . '/documents'),
       ));
     }
     return FALSE;
@@ -413,7 +413,7 @@ class GroupFullDisplayProvider extends GroupDisplayProvider {
   public function getRecentDiscussions() {
     if ($nodes = $this->manager->getRecentDiscussions()) {
       $content = $this->getList($nodes, 'teaser', 'cluster_og_recent_discussions');
-      $content['#all_discussions_link'] = 'node/' . $this->node->nid . '/discussions';
+      $content['#all_discussions_link'] = url('node/' . $this->node->nid . '/discussions');
       return $content;
     }
     return FALSE;
