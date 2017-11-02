@@ -62,7 +62,7 @@ function _cluster_docs_title_callback($nid) {
 }
 
 /**
- * Return the 2 most recent documents.
+ * Return the 3 most recent documents.
  *
  * @return [type] [description]
  */
@@ -71,8 +71,9 @@ function cluster_docs_recent() {
   $query->entityCondition('entity_type', 'node')
     ->entityCondition('bundle', 'document')
     ->propertyCondition('status', NODE_PUBLISHED)
+    ->fieldCondition('field_key_document', 'value', 1)
     ->fieldOrderBy('field_report_meeting_date', 'value', 'DESC')
-    ->range(0, 2);
+    ->range(0, 3);
   $results = $query->execute();
   if (!isset($results['node'])) {
     return FALSE;
