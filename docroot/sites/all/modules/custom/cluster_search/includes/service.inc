@@ -104,6 +104,7 @@ class SearchApiClusterAlgoliaService extends SearchApiAlgoliaService {
                     | \xF4[\x80-\x8F][\x80-\xBF]{2}      # plane 16
                 )*$%xs', $property_value))
                   $property_value = iconv('CP1252', 'UTF-8', $property_value);
+                $property_value = transliteration_get($property_value);
               }
               $item_to_index[$key] = is_string($property_value)
                 ? substr($property_value, 0, 5000) // Truncate at 5kb (Algolia has a 10kb limit for docs)
