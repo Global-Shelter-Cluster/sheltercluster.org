@@ -4,3 +4,6 @@ node_modules/
 certs/
 logs/
 .DS_Store
+config/
+npm-debug.log
+dev_settings.inc
