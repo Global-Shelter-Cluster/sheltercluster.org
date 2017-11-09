@@ -360,3 +360,32 @@ header {
     color: #000;
   }
 }
+
+#nav-shelter .nav-items.search-input-row {
+  height: 50px;
+  line-height: 50px;
+  + .nav-items {
+    margin-top: 50px;
+  }
+
+  .search-input {
+    width: 100% !important;
+    input {
+      width: 100%;
+      padding: 4px;
+      font-size: 18px;
+      border: 1px solid $shelter-light-blue;
+      color: $black;
+    }
+  }
+  .algolia-logo {
+    text-align: right;
+    img {width: 130px;}
+  }
+}
+
+#nav-shelter .search-result-title {
+  white-space: nowrap !important;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

@@ -18,6 +18,103 @@ function cluster_search_ctools_plugin_api($module = NULL, $api = NULL) {
  */
 function cluster_search_default_search_api_index() {
   $items = array();
+  $items['contacts'] = entity_import('search_api_index', '{
+    "name" : "Contacts",
+    "machine_name" : "contacts",
+    "description" : null,
+    "server" : "algolia",
+    "item_type" : "node",
+    "options" : {
+      "datasource" : { "bundles" : [ "contact" ] },
+      "index_directly" : 1,
+      "cron_limit" : "0",
+      "data_alter_callbacks" : {
+        "search_api_alter_bundle_filter" : {
+          "status" : 0,
+          "weight" : "-10",
+          "settings" : { "default" : "1", "bundles" : [] }
+        },
+        "search_api_alter_node_access" : { "status" : 0, "weight" : "0", "settings" : [] },
+        "search_api_alter_node_status" : { "status" : 1, "weight" : "0", "settings" : [] },
+        "search_api_attachments_alter_settings" : {
+          "status" : 0,
+          "weight" : "0",
+          "settings" : {
+            "excluded_extensions" : "aif art avi bmp gif ico mov oga ogv png psd ra ram rgb flv",
+            "number_indexed" : "0",
+            "max_file_size" : "0",
+            "excluded_private" : 1
+          }
+        },
+        "search_api_alter_language_control" : {
+          "status" : 0,
+          "weight" : "0",
+          "settings" : { "lang_field" : "", "languages" : [] }
+        },
+        "search_api_alter_add_hierarchy" : { "status" : 0, "weight" : "0", "settings" : { "fields" : [] } },
+        "search_api_alter_add_url" : { "status" : 0, "weight" : "0", "settings" : [] },
+        "search_api_alter_add_aggregation" : { "status" : 0, "weight" : "0", "settings" : [] },
+        "search_api_alter_add_viewed_entity" : { "status" : 0, "weight" : "0", "settings" : { "mode" : "full" } }
+      },
+      "processors" : {
+        "search_api_case_ignore" : { "status" : 0, "weight" : "0", "settings" : { "fields" : [] } },
+        "search_api_html_filter" : {
+          "status" : 1,
+          "weight" : "10",
+          "settings" : {
+            "fields" : { "body:value" : true },
+            "title" : 0,
+            "alt" : 1,
+            "tags" : ""
+          }
+        },
+        "search_api_transliteration" : { "status" : 0, "weight" : "15", "settings" : { "fields" : [] } },
+        "search_api_tokenizer" : {
+          "status" : 0,
+          "weight" : "20",
+          "settings" : { "fields" : [], "spaces" : "[^[:alnum:]]", "ignorable" : "[\\u0027]" }
+        },
+        "search_api_stopwords" : {
+          "status" : 0,
+          "weight" : "30",
+          "settings" : {
+            "fields" : [],
+            "file" : "",
+            "stopwords" : "but\\r\\ndid\\r\\nthe this that those\\r\\netc"
+          }
+        },
+        "search_api_highlighting" : {
+          "status" : 0,
+          "weight" : "35",
+          "settings" : {
+            "prefix" : "\\u003Cstrong\\u003E",
+            "suffix" : "\\u003C\\/strong\\u003E",
+            "excerpt" : 1,
+            "excerpt_length" : "256",
+            "exclude_fields" : [],
+            "highlight" : "always"
+          }
+        }
+      },
+      "fields" : {
+        "body:value" : { "type" : "text" },
+        "field_email" : { "type" : "list\\u003Ctext\\u003E" },
+        "field_image:file:url" : { "type" : "text" },
+        "field_organisation_name" : { "type" : "list\\u003Ctext\\u003E" },
+        "field_phone_number" : { "type" : "list\\u003Ctext\\u003E" },
+        "field_role_or_title" : { "type" : "list\\u003Ctext\\u003E" },
+        "nid" : { "type" : "integer" },
+        "og_group_ref" : { "type" : "list\\u003Cinteger\\u003E", "entity_type" : "node" },
+        "og_group_ref:nid" : { "type" : "list\\u003Cinteger\\u003E" },
+        "search_api_language" : { "type" : "string" },
+        "title" : { "type" : "text", "boost" : "5.0" },
+        "url" : { "type" : "uri" }
+      }
+    },
+    "enabled" : "1",
+    "read_only" : "0",
+    "rdf_mapping" : []
+  }');
   $items['default_node_index'] = entity_import('search_api_index', '{
     "name" : "Default node index",
     "machine_name" : "default_node_index",
@@ -145,6 +242,490 @@ function cluster_search_default_search_api_index() {
     "read_only" : "0",
     "rdf_mapping" : []
   }');
+  $items['documents'] = entity_import('search_api_index', '{
+    "name" : "Documents",
+    "machine_name" : "documents",
+    "description" : null,
+    "server" : "algolia",
+    "item_type" : "node",
+    "options" : {
+      "datasource" : { "bundles" : [ "document" ] },
+      "index_directly" : 1,
+      "cron_limit" : "0",
+      "fields" : {
+        "attachments_field_event_files" : { "type" : "text" },
+        "attachments_field_file" : { "type" : "text" },
+        "body:value" : { "type" : "text" },
+        "field_assess_monitor_eval" : { "type" : "list\\u003Cinteger\\u003E", "entity_type" : "taxonomy_term" },
+        "field_coordination_management" : { "type" : "list\\u003Cinteger\\u003E", "entity_type" : "taxonomy_term" },
+        "field_cross_cutting_issues" : { "type" : "list\\u003Cinteger\\u003E", "entity_type" : "taxonomy_term" },
+        "field_document_source" : { "type" : "text", "boost" : "3.0" },
+        "field_document_type" : { "type" : "list\\u003Cinteger\\u003E", "entity_type" : "taxonomy_term" },
+        "field_featured" : { "type" : "boolean" },
+        "field_information_management" : { "type" : "list\\u003Cinteger\\u003E", "entity_type" : "taxonomy_term" },
+        "field_inter_cluster" : { "type" : "list\\u003Cinteger\\u003E", "entity_type" : "taxonomy_term" },
+        "field_intervention_materials" : { "type" : "list\\u003Cinteger\\u003E", "entity_type" : "taxonomy_term" },
+        "field_intervention_programming" : { "type" : "list\\u003Cinteger\\u003E", "entity_type" : "taxonomy_term" },
+        "field_issues" : { "type" : "list\\u003Cinteger\\u003E", "entity_type" : "taxonomy_term" },
+        "field_key_document" : { "type" : "boolean" },
+        "field_language" : { "type" : "string" },
+        "field_meeting_management" : { "type" : "list\\u003Cinteger\\u003E", "entity_type" : "taxonomy_term" },
+        "field_non_food_items" : { "type" : "list\\u003Cinteger\\u003E", "entity_type" : "taxonomy_term" },
+        "field_other_keywords" : { "type" : "text", "boost" : "2.0" },
+        "field_preview:file" : { "type" : "integer", "entity_type" : "file" },
+        "field_preview:file:url" : { "type" : "uri" },
+        "field_report_meeting_date" : { "type" : "date" },
+        "field_response_phase" : { "type" : "list\\u003Cinteger\\u003E", "entity_type" : "taxonomy_term" },
+        "field_settlement_type" : { "type" : "list\\u003Cinteger\\u003E", "entity_type" : "taxonomy_term" },
+        "field_technical_support_design" : { "type" : "list\\u003Cinteger\\u003E", "entity_type" : "taxonomy_term" },
+        "field_toolkit" : { "type" : "list\\u003Cinteger\\u003E", "entity_type" : "taxonomy_term" },
+        "nid" : { "type" : "integer" },
+        "og_group_ref" : { "type" : "list\\u003Cinteger\\u003E", "entity_type" : "node" },
+        "og_group_ref:nid" : { "type" : "list\\u003Cinteger\\u003E" },
+        "search_api_language" : { "type" : "string" },
+        "title" : { "type" : "text", "boost" : "5.0" },
+        "url" : { "type" : "uri" }
+      },
+      "data_alter_callbacks" : {
+        "search_api_alter_bundle_filter" : {
+          "status" : 0,
+          "weight" : "-10",
+          "settings" : { "default" : "1", "bundles" : { "document" : "document" } }
+        },
+        "search_api_alter_node_access" : { "status" : 0, "weight" : "0", "settings" : [] },
+        "search_api_alter_node_status" : { "status" : 1, "weight" : "0", "settings" : [] },
+        "search_api_attachments_alter_settings" : {
+          "status" : 1,
+          "weight" : "0",
+          "settings" : {
+            "excluded_extensions" : "aif art avi bmp gif ico mov oga ogv png psd ra ram rgb flv",
+            "number_indexed" : "0",
+            "max_file_size" : "0",
+            "excluded_private" : 1
+          }
+        },
+        "search_api_alter_language_control" : {
+          "status" : 0,
+          "weight" : "0",
+          "settings" : { "lang_field" : "", "languages" : [] }
+        },
+        "search_api_alter_add_hierarchy" : { "status" : 0, "weight" : "0", "settings" : { "fields" : [] } },
+        "search_api_alter_add_url" : { "status" : 0, "weight" : "0", "settings" : [] },
+        "search_api_alter_add_aggregation" : { "status" : 0, "weight" : "0", "settings" : [] },
+        "search_api_alter_add_viewed_entity" : { "status" : 0, "weight" : "0", "settings" : { "mode" : "full" } }
+      },
+      "processors" : {
+        "search_api_case_ignore" : {
+          "status" : 0,
+          "weight" : "0",
+          "settings" : { "fields" : {
+              "title" : true,
+              "field_document_source" : true,
+              "field_other_keywords" : true
+            }
+          }
+        },
+        "search_api_html_filter" : {
+          "status" : 1,
+          "weight" : "10",
+          "settings" : {
+            "fields" : { "body:value" : true },
+            "title" : 0,
+            "alt" : 1,
+            "tags" : ""
+          }
+        },
+        "search_api_transliteration" : {
+          "status" : 0,
+          "weight" : "15",
+          "settings" : { "fields" : {
+              "title" : true,
+              "field_document_source" : true,
+              "field_other_keywords" : true
+            }
+          }
+        },
+        "search_api_tokenizer" : {
+          "status" : 0,
+          "weight" : "20",
+          "settings" : {
+            "fields" : {
+              "title" : true,
+              "field_document_source" : true,
+              "field_other_keywords" : true
+            },
+            "spaces" : "[^[:alnum:]]",
+            "ignorable" : "[\\u0027]"
+          }
+        },
+        "search_api_stopwords" : {
+          "status" : 0,
+          "weight" : "30",
+          "settings" : {
+            "fields" : {
+              "title" : true,
+              "field_document_source" : true,
+              "field_other_keywords" : true
+            },
+            "file" : "",
+            "stopwords" : "but\\r\\ndid\\r\\nthe this that those\\r\\netc"
+          }
+        },
+        "search_api_highlighting" : {
+          "status" : 0,
+          "weight" : "35",
+          "settings" : {
+            "prefix" : "\\u003Cstrong\\u003E",
+            "suffix" : "\\u003C\\/strong\\u003E",
+            "excerpt" : 1,
+            "excerpt_length" : "256",
+            "exclude_fields" : [],
+            "highlight" : "always"
+          }
+        }
+      }
+    },
+    "enabled" : "1",
+    "read_only" : "0",
+    "rdf_mapping" : []
+  }');
+  $items['events'] = entity_import('search_api_index', '{
+    "name" : "Events",
+    "machine_name" : "events",
+    "description" : null,
+    "server" : "algolia",
+    "item_type" : "node",
+    "options" : {
+      "datasource" : { "bundles" : [ "event" ] },
+      "index_directly" : 1,
+      "cron_limit" : "0",
+      "fields" : {
+        "body:value" : { "type" : "text", "boost" : "3.0" },
+        "field_event_contact" : { "type" : "list\\u003Cinteger\\u003E", "entity_type" : "node" },
+        "field_postal_address:administrative_area" : { "type" : "text" },
+        "field_postal_address:country" : { "type" : "string" },
+        "field_postal_address:dependent_locality" : { "type" : "text" },
+        "field_postal_address:first_name" : { "type" : "text" },
+        "field_postal_address:last_name" : { "type" : "text" },
+        "field_postal_address:locality" : { "type" : "text" },
+        "field_postal_address:name_line" : { "type" : "text" },
+        "field_postal_address:organisation_name" : { "type" : "text" },
+        "field_postal_address:postal_code" : { "type" : "text" },
+        "field_postal_address:premise" : { "type" : "text" },
+        "field_postal_address:sub_administrative_area" : { "type" : "text" },
+        "field_postal_address:thoroughfare" : { "type" : "text" },
+        "field_recurring_event_date2:value" : { "type" : "list\\u003Cdate\\u003E" },
+        "nid" : { "type" : "integer" },
+        "og_group_ref" : { "type" : "list\\u003Cinteger\\u003E", "entity_type" : "node" },
+        "og_group_ref:nid" : { "type" : "list\\u003Cinteger\\u003E" },
+        "search_api_language" : { "type" : "string" },
+        "title" : { "type" : "text", "boost" : "5.0" },
+        "url" : { "type" : "uri" }
+      },
+      "data_alter_callbacks" : {
+        "search_api_alter_bundle_filter" : {
+          "status" : 0,
+          "weight" : "-10",
+          "settings" : { "default" : "1", "bundles" : [] }
+        },
+        "search_api_alter_node_access" : { "status" : 0, "weight" : "0", "settings" : [] },
+        "search_api_alter_node_status" : { "status" : 1, "weight" : "0", "settings" : [] },
+        "search_api_attachments_alter_settings" : {
+          "status" : 0,
+          "weight" : "0",
+          "settings" : {
+            "excluded_extensions" : "aif art avi bmp gif ico mov oga ogv png psd ra ram rgb flv",
+            "number_indexed" : "0",
+            "max_file_size" : "0",
+            "excluded_private" : 1
+          }
+        },
+        "search_api_alter_language_control" : {
+          "status" : 0,
+          "weight" : "0",
+          "settings" : { "lang_field" : "", "languages" : [] }
+        },
+        "search_api_alter_add_hierarchy" : { "status" : 0, "weight" : "0", "settings" : { "fields" : [] } },
+        "search_api_alter_add_url" : { "status" : 0, "weight" : "0", "settings" : [] },
+        "search_api_alter_add_aggregation" : { "status" : 0, "weight" : "0", "settings" : [] },
+        "search_api_alter_add_viewed_entity" : { "status" : 0, "weight" : "0", "settings" : { "mode" : "full" } }
+      },
+      "processors" : {
+        "search_api_case_ignore" : {
+          "status" : 0,
+          "weight" : "0",
+          "settings" : { "fields" : { "title" : true, "body:value" : true } }
+        },
+        "search_api_html_filter" : {
+          "status" : 1,
+          "weight" : "10",
+          "settings" : {
+            "fields" : { "body:value" : true },
+            "title" : 0,
+            "alt" : 1,
+            "tags" : ""
+          }
+        },
+        "search_api_transliteration" : {
+          "status" : 0,
+          "weight" : "15",
+          "settings" : { "fields" : { "title" : true, "body:value" : true } }
+        },
+        "search_api_tokenizer" : {
+          "status" : 0,
+          "weight" : "20",
+          "settings" : {
+            "fields" : { "title" : true, "body:value" : true },
+            "spaces" : "[^[:alnum:]]",
+            "ignorable" : "[\\u0027]"
+          }
+        },
+        "search_api_stopwords" : {
+          "status" : 0,
+          "weight" : "30",
+          "settings" : {
+            "fields" : { "title" : true, "body:value" : true },
+            "file" : "",
+            "stopwords" : "but\\r\\ndid\\r\\nthe this that those\\r\\netc"
+          }
+        },
+        "search_api_highlighting" : {
+          "status" : 0,
+          "weight" : "35",
+          "settings" : {
+            "prefix" : "\\u003Cstrong\\u003E",
+            "suffix" : "\\u003C\\/strong\\u003E",
+            "excerpt" : 1,
+            "excerpt_length" : "256",
+            "exclude_fields" : [],
+            "highlight" : "always"
+          }
+        }
+      }
+    },
+    "enabled" : "1",
+    "read_only" : "0",
+    "rdf_mapping" : []
+  }');
+  $items['groups'] = entity_import('search_api_index', '{
+    "name" : "Groups",
+    "machine_name" : "groups",
+    "description" : null,
+    "server" : "algolia",
+    "item_type" : "node",
+    "options" : {
+      "datasource" : { "bundles" : [
+          "community_of_practice",
+          "geographic_region",
+          "hub",
+          "response",
+          "strategic_advisory",
+          "working_group"
+        ]
+      },
+      "index_directly" : 1,
+      "cron_limit" : "0",
+      "fields" : {
+        "body:value" : { "type" : "text", "boost" : "2.0" },
+        "field_associated_regions" : { "type" : "list\\u003Cinteger\\u003E", "entity_type" : "node" },
+        "field_disaster_causes" : { "type" : "list\\u003Cinteger\\u003E", "entity_type" : "taxonomy_term" },
+        "field_disaster_type" : { "type" : "integer", "entity_type" : "taxonomy_term" },
+        "field_is_hot_response" : { "type" : "boolean" },
+        "field_parent_region" : { "type" : "integer", "entity_type" : "node" },
+        "field_parent_response" : { "type" : "integer", "entity_type" : "node" },
+        "field_response_status" : { "type" : "string" },
+        "nid" : { "type" : "integer" },
+        "search_api_language" : { "type" : "string" },
+        "title" : { "type" : "text", "boost" : "5.0" },
+        "type" : { "type" : "string" },
+        "url" : { "type" : "uri" }
+      },
+      "data_alter_callbacks" : {
+        "search_api_alter_bundle_filter" : {
+          "status" : 0,
+          "weight" : "-10",
+          "settings" : { "default" : "1", "bundles" : [] }
+        },
+        "search_api_alter_node_access" : { "status" : 0, "weight" : "0", "settings" : [] },
+        "search_api_alter_node_status" : { "status" : 1, "weight" : "0", "settings" : [] },
+        "search_api_attachments_alter_settings" : {
+          "status" : 0,
+          "weight" : "0",
+          "settings" : {
+            "excluded_extensions" : "aif art avi bmp gif ico mov oga ogv png psd ra ram rgb flv",
+            "number_indexed" : "0",
+            "max_file_size" : "0",
+            "excluded_private" : 1
+          }
+        },
+        "search_api_alter_language_control" : {
+          "status" : 0,
+          "weight" : "0",
+          "settings" : { "lang_field" : "", "languages" : [] }
+        },
+        "search_api_alter_add_hierarchy" : { "status" : 0, "weight" : "0", "settings" : { "fields" : [] } },
+        "search_api_alter_add_url" : { "status" : 0, "weight" : "0", "settings" : [] },
+        "search_api_alter_add_aggregation" : { "status" : 0, "weight" : "0", "settings" : [] },
+        "search_api_alter_add_viewed_entity" : { "status" : 0, "weight" : "0", "settings" : { "mode" : "full" } }
+      },
+      "processors" : {
+        "search_api_case_ignore" : {
+          "status" : 0,
+          "weight" : "0",
+          "settings" : { "fields" : { "title" : true, "body:value" : true } }
+        },
+        "search_api_html_filter" : {
+          "status" : 1,
+          "weight" : "10",
+          "settings" : {
+            "fields" : { "body:value" : true },
+            "title" : 0,
+            "alt" : 1,
+            "tags" : ""
+          }
+        },
+        "search_api_transliteration" : {
+          "status" : 0,
+          "weight" : "15",
+          "settings" : { "fields" : { "title" : true, "body:value" : true } }
+        },
+        "search_api_tokenizer" : {
+          "status" : 0,
+          "weight" : "20",
+          "settings" : {
+            "fields" : { "title" : true, "body:value" : true },
+            "spaces" : "[^[:alnum:]]",
+            "ignorable" : "[\\u0027]"
+          }
+        },
+        "search_api_stopwords" : {
+          "status" : 0,
+          "weight" : "30",
+          "settings" : {
+            "fields" : { "title" : true, "body:value" : true },
+            "file" : "",
+            "stopwords" : "but\\r\\ndid\\r\\nthe this that those\\r\\netc"
+          }
+        },
+        "search_api_highlighting" : {
+          "status" : 0,
+          "weight" : "35",
+          "settings" : {
+            "prefix" : "\\u003Cstrong\\u003E",
+            "suffix" : "\\u003C\\/strong\\u003E",
+            "excerpt" : 1,
+            "excerpt_length" : "256",
+            "exclude_fields" : [],
+            "highlight" : "always"
+          }
+        }
+      }
+    },
+    "enabled" : "1",
+    "read_only" : "0",
+    "rdf_mapping" : []
+  }');
+  $items['pages'] = entity_import('search_api_index', '{
+    "name" : "Pages",
+    "machine_name" : "pages",
+    "description" : null,
+    "server" : "algolia",
+    "item_type" : "node",
+    "options" : {
+      "datasource" : { "bundles" : [
+          "arbitrary_library",
+          "article",
+          "page",
+          "discussion",
+          "homepage",
+          "library"
+        ]
+      },
+      "index_directly" : 1,
+      "cron_limit" : "0",
+      "data_alter_callbacks" : {
+        "search_api_alter_bundle_filter" : {
+          "status" : 0,
+          "weight" : "-10",
+          "settings" : { "default" : "1", "bundles" : [] }
+        },
+        "search_api_alter_node_access" : { "status" : 0, "weight" : "0", "settings" : [] },
+        "search_api_alter_node_status" : { "status" : 1, "weight" : "0", "settings" : [] },
+        "search_api_attachments_alter_settings" : {
+          "status" : 0,
+          "weight" : "0",
+          "settings" : {
+            "excluded_extensions" : "aif art avi bmp gif ico mov oga ogv png psd ra ram rgb flv",
+            "number_indexed" : "0",
+            "max_file_size" : "0",
+            "excluded_private" : 1
+          }
+        },
+        "search_api_alter_language_control" : {
+          "status" : 0,
+          "weight" : "0",
+          "settings" : { "lang_field" : "", "languages" : [] }
+        },
+        "search_api_alter_add_hierarchy" : { "status" : 0, "weight" : "0", "settings" : { "fields" : [] } },
+        "search_api_alter_add_url" : { "status" : 0, "weight" : "0", "settings" : [] },
+        "search_api_alter_add_aggregation" : { "status" : 0, "weight" : "0", "settings" : [] },
+        "search_api_alter_add_viewed_entity" : { "status" : 0, "weight" : "0", "settings" : { "mode" : "full" } }
+      },
+      "processors" : {
+        "search_api_case_ignore" : { "status" : 0, "weight" : "0", "settings" : { "fields" : [] } },
+        "search_api_html_filter" : {
+          "status" : 1,
+          "weight" : "10",
+          "settings" : {
+            "fields" : { "body:value" : true },
+            "title" : 0,
+            "alt" : 1,
+            "tags" : ""
+          }
+        },
+        "search_api_transliteration" : { "status" : 0, "weight" : "15", "settings" : { "fields" : [] } },
+        "search_api_tokenizer" : {
+          "status" : 0,
+          "weight" : "20",
+          "settings" : { "fields" : [], "spaces" : "[^[:alnum:]]", "ignorable" : "[\\u0027]" }
+        },
+        "search_api_stopwords" : {
+          "status" : 0,
+          "weight" : "30",
+          "settings" : {
+            "fields" : [],
+            "file" : "",
+            "stopwords" : "but\\r\\ndid\\r\\nthe this that those\\r\\netc"
+          }
+        },
+        "search_api_highlighting" : {
+          "status" : 0,
+          "weight" : "35",
+          "settings" : {
+            "prefix" : "\\u003Cstrong\\u003E",
+            "suffix" : "\\u003C\\/strong\\u003E",
+            "excerpt" : 1,
+            "excerpt_length" : "256",
+            "exclude_fields" : [],
+            "highlight" : "always"
+          }
+        }
+      },
+      "fields" : {
+        "body:value" : { "type" : "text" },
+        "nid" : { "type" : "integer" },
+        "og_group_ref" : { "type" : "list\\u003Cinteger\\u003E", "entity_type" : "node" },
+        "og_group_ref:nid" : { "type" : "list\\u003Cinteger\\u003E" },
+        "search_api_language" : { "type" : "string" },
+        "title" : { "type" : "text" },
+        "type" : { "type" : "string" },
+        "url" : { "type" : "uri" }
+      }
+    },
+    "enabled" : "1",
+    "read_only" : "0",
+    "rdf_mapping" : []
+  }');
   return $items;
 }
 
@@ -153,6 +734,18 @@ function cluster_search_default_search_api_index() {
  */
 function cluster_search_default_search_api_server() {
   $items = array();
+  $items['algolia'] = entity_import('search_api_server', '{
+    "name" : "Algolia",
+    "machine_name" : "algolia",
+    "description" : "",
+    "class" : "cluster_algolia",
+    "options" : {
+      "application_id" : "VX06P5FGHP",
+      "api_key" : "ce9750c96862fbaf3237b88d64f50349"
+    },
+    "enabled" : "1",
+    "rdf_mapping" : []
+  }');
   $items['local'] = entity_import('search_api_server', '{
     "name" : "local",
     "machine_name" : "local",

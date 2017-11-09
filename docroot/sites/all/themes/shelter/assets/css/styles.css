@@ -1,4 +1,4 @@
-﻿@charset "UTF-8";
+@charset "UTF-8";
 /*! normalize.css v3.0.0 | HTML5 Display Definitions | MIT License | git.io/normalize */
 article,
 aside,
@@ -1182,6 +1182,36 @@ header .search-documents-link-wrapper {
   color: #000;
 }
 
+#nav-shelter .nav-items.search-input-row {
+  height: 50px;
+  line-height: 50px;
+}
+#nav-shelter .nav-items.search-input-row + .nav-items {
+  margin-top: 50px;
+}
+#nav-shelter .nav-items.search-input-row .search-input {
+  width: 100% !important;
+}
+#nav-shelter .nav-items.search-input-row .search-input input {
+  width: 100%;
+  padding: 4px;
+  font-size: 18px;
+  border: 1px solid #cdd6db;
+  color: black;
+}
+#nav-shelter .nav-items.search-input-row .algolia-logo {
+  text-align: right;
+}
+#nav-shelter .nav-items.search-input-row .algolia-logo img {
+  width: 130px;
+}
+
+#nav-shelter .search-result-title {
+  white-space: nowrap !important;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 /* _header.scss */
 header ul {
   padding: 0;
@@ -1557,6 +1587,10 @@ label[for="mobile_menu_toggle"] span:after {
   padding: 9.6px;
   padding: 0.6rem;
 }
+#nav-shelter .list-container > .nav-items > .nav-item a small {
+  display: block;
+  opacity: .5;
+}
 @media screen and (min-width: 980px) {
   #nav-shelter .list-container > .nav-items > .nav-item {
     font-size: 12.8px;
@@ -1652,7 +1686,6 @@ label[for="mobile_menu_toggle"] span:after {
 
   #nav-shelter .list-container > .nav-items > .nav-item {
     display: table-cell;
-    width: 20%;
   }
   #nav-shelter .list-container > .nav-items > .nav-item > a {
     position: relative;
@@ -1699,7 +1732,8 @@ label[for="mobile_menu_toggle"] span:after {
     padding: 1rem 0.5rem;
   }
 
-  #nav-shelter .list-container > .nav-items > li:hover > ul {
+  #nav-shelter .list-container > .nav-items > li:hover > ul,
+  #nav-shelter .list-container > .nav-items > li.force-visible > ul {
     display: block;
     display: flex;
     box-shadow: 0 3px 2px rgba(0, 0, 0, 0.1);
@@ -3498,7 +3532,4 @@ footer .table-row {
 
 .doc-description p:first-child {
   margin-top: 0;
-}
-.mycustomtable tbody {
-    border-top:none;
 }

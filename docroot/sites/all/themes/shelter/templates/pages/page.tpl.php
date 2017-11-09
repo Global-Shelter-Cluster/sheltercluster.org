@@ -55,6 +55,7 @@
             <?php
               $menu_tree = menu_tree_all_data('menu-mega-menu');
               $menu_output = menu_tree_output($menu_tree);
+              drupal_alter('cluster_mega_menu', $menu_output);
               print render($menu_output);
             ?>
           </div>
