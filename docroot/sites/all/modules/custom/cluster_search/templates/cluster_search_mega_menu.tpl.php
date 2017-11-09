@@ -86,7 +86,7 @@
       <a>Contacts</a>
       <ul class="nav-items menu">
         <li class="leaf" v-for="contact in results.contacts">
-          <a :href="contact.url">
+          <a :href="contact.url" target="_blank">
               {{ contact.title }}
               <small v-if="contact.group" class="search-result-title" :title="contact.group">{{ contact.group }}</small>
               <small v-if="contact.role || contact.org">
@@ -100,6 +100,8 @@
                       {{ contact.role }}
                   </template>
               </small>
+              <small v-if="contact.email">{{ contact.email }}</small>
+              <small v-if="contact.phone">{{ contact.phone }}</small>
           </a>
         </li>
       </ul>

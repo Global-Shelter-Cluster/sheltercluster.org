@@ -104,13 +104,21 @@
           var role = typeof result.field_role_or_title !== 'undefined' && result.field_role_or_title.length > 0
             ? result.field_role_or_title[0]
             : null;
+          var phone = typeof result.field_phone_number !== 'undefined' && result.field_phone_number.length > 0
+            ? result.field_phone_number[0]
+            : null;
+          var email = typeof result.field_email !== 'undefined' && result.field_email.length > 0
+            ? result.field_email[0]
+            : null;
 
           return {
-            url: result.url,
+            url: email ? 'mailto:' + email : null,
             title: result.title,
             group: group,
             org: org,
-            role: role
+            role: role,
+            phone: phone,
+            email: email
           };
         };
 
@@ -205,7 +213,7 @@
                 indexName: algolia_prefix + 'Contacts',
                 query: vue.query,
                 params: {
-                  hitsPerPage: 10
+                  hitsPerPage: 6
                 }
               });
 
@@ -237,9 +245,9 @@
                 if (content.results[4].hits.length > 0)
                   ret.contacts = content.results[4].hits.map(processContact);
 
-                // Limit "pages + groups" to a maximum of 10 results
-                ret.pages = ret.pages.slice(0, 10 - Math.min(ret.groups.length, 5));
-                ret.groups = ret.groups.slice(0, 10 - Math.min(ret.pages.length, 5));
+                // Limit "pages + groups" to a maximum of 8 results
+                ret.pages = ret.pages.slice(0, 8 - Math.min(ret.groups.length, 4));
+                ret.groups = ret.groups.slice(0, 8 - Math.min(ret.pages.length, 4));
 
                 vue.results = ret;
                 vue.searching = false;
