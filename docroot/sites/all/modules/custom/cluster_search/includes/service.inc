@@ -90,6 +90,21 @@ class SearchApiClusterAlgoliaService extends SearchApiAlgoliaService {
                   $property_value = $property['value'];
                 }
               }
+              if ($key === 'attachments_field_file' && is_string($property_value)) {
+                // Ensure UTF8 encoding (otherwise Algolia throws an error)
+                // Code from https://stackoverflow.com/a/1523574/368864
+                if (!preg_match('%^(?:
+                      [\x09\x0A\x0D\x20-\x7E]            # ASCII
+                    | [\xC2-\xDF][\x80-\xBF]             # non-overlong 2-byte
+                    | \xE0[\xA0-\xBF][\x80-\xBF]         # excluding overlongs
+                    | [\xE1-\xEC\xEE\xEF][\x80-\xBF]{2}  # straight 3-byte
+                    | \xED[\x80-\x9F][\x80-\xBF]         # excluding surrogates
+                    | \xF0[\x90-\xBF][\x80-\xBF]{2}      # planes 1-3
+                    | [\xF1-\xF3][\x80-\xBF]{3}          # planes 4-15
+                    | \xF4[\x80-\x8F][\x80-\xBF]{2}      # plane 16
+                )*$%xs', $property_value))
+                  $property_value = iconv('CP1252', 'UTF-8', $property_value);
+              }
               $item_to_index[$key] = is_string($property_value)
                 ? substr($property_value, 0, 5000) // Truncate at 5kb (Algolia has a 10kb limit for docs)
                 : $property_value;
