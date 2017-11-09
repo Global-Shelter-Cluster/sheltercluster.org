@@ -147,10 +147,10 @@
           },
           methods: {
             focusHandler: function() {
-              $('#cluster-search-mega-menu').addClass('force-visible');
+              $('#cluster-search-mega-menu').addClass('force-visible').parent().addClass('disable-hover');
             },
             blurHandler: function() {
-              $('#cluster-search-mega-menu').removeClass('force-visible');
+              $('#cluster-search-mega-menu').removeClass('force-visible').parent().removeClass('disable-hover');
             },
             focus: function() {
               $('#cluster-search-mega-menu input').focus();
