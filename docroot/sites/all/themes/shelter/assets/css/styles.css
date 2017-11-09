@@ -1590,6 +1590,7 @@ label[for="mobile_menu_toggle"] span:after {
 #nav-shelter .list-container > .nav-items > .nav-item a small {
   display: block;
   opacity: .5;
+  text-transform: none;
 }
 @media screen and (min-width: 980px) {
   #nav-shelter .list-container > .nav-items > .nav-item {
