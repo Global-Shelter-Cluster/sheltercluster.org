@@ -1215,6 +1215,12 @@ header .search-documents-link-wrapper {
   text-overflow: ellipsis;
 }
 
+#nav-shelter .search-no-results li {
+  width: 100% !important;
+  text-align: center;
+  padding: 60px 10px;
+}
+
 /* _header.scss */
 header ul {
   padding: 0;
@@ -1636,7 +1642,7 @@ label[for="mobile_menu_toggle"] span:after {
   background: #ebeef0;
 }
 
-#nav-shelter > .list-container > .nav-items > .expanded > ul > li a {
+#nav-shelter > .list-container > .nav-items > .expanded > ul > li a, #nav-shelter > .list-container > .nav-items > .expanded > ul > li div {
   display: block;
   background: transparent;
   color: black;
@@ -1650,7 +1656,7 @@ label[for="mobile_menu_toggle"] span:after {
   transition: all 0.3s ease;
 }
 @media screen and (min-width: 980px) {
-  #nav-shelter > .list-container > .nav-items > .expanded > ul > li a {
+  #nav-shelter > .list-container > .nav-items > .expanded > ul > li a, #nav-shelter > .list-container > .nav-items > .expanded > ul > li div {
     font-size: 12.8px;
     font-size: 0.8rem;
     padding: 16px 8px;
@@ -1663,7 +1669,7 @@ label[for="mobile_menu_toggle"] span:after {
   color: white;
 }
 @media screen and (min-width: 980px) {
-  #nav-shelter > .list-container > .nav-items > .expanded > ul > li > a {
+  #nav-shelter > .list-container > .nav-items > .expanded > ul > li > a, #nav-shelter > .list-container > .nav-items > .expanded > ul > li > div {
     padding: 16px 8px;
     padding: 1rem 0.5rem;
   }
@@ -1729,7 +1735,7 @@ label[for="mobile_menu_toggle"] span:after {
     background: transparent;
     margin-bottom: 1em;
   }
-  #nav-shelter > .list-container > .nav-items > .expanded > ul > li > a {
+  #nav-shelter > .list-container > .nav-items > .expanded > ul > li > a, #nav-shelter > .list-container > .nav-items > .expanded > ul > li > div {
     font-size: 16px;
     font-size: 1rem;
     padding: 16px 8px;

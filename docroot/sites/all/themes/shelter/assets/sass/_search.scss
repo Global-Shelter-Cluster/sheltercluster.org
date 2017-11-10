@@ -394,3 +394,9 @@ header {
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
+#nav-shelter .search-no-results li {
+  width: 100% !important;
+  text-align: center;
+  padding: 60px 10px;
+}
