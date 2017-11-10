@@ -376,11 +376,16 @@ header {
       font-size: 18px;
       border: 1px solid $shelter-light-blue;
       color: $black;
+      box-sizing: border-box;
     }
   }
   .algolia-logo {
+    width: auto !important;
     text-align: right;
-    img {width: 130px;}
+    margin-left: 10px;
+    img {
+      width: 130px;
+    }
   }
 }
 
