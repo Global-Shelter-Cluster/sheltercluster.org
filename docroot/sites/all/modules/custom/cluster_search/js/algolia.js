@@ -128,11 +128,12 @@
             query: '',
             timeout: null,
             results: null,
-            searching: false
+            searching: false,
+            shouldScrollOnResults: true
           },
           computed: {
             hasResults: function() {
-              return this.results && (
+              var ret = this.results && (
                 this.results.documents.length > 0 ||
                 this.results.documents2.length > 0 ||
                 this.results.events.length > 0 ||
@@ -140,6 +141,11 @@
                 this.results.groups.length > 0 ||
                 this.results.contacts.length > 0
               );
+
+              if (!ret)
+                this.shouldScrollOnResults = true;
+
+              return ret;
             },
             showNoResultsMessage: function() {
               return !this.searching && $.trim(this.query) !== '' && !this.hasResults;
@@ -251,6 +257,10 @@
 
                 vue.results = ret;
                 vue.searching = false;
+                if (vue.shouldScrollOnResults && vue.hasResults) {
+                  $('html, body').animate({scrollTop: $('#cluster-search-mega-menu').offset().top}, 400);
+                  vue.shouldScrollOnResults = false;
+                }
               });
             }
           }
