@@ -132,7 +132,12 @@ class SearchApiClusterAlgoliaService extends SearchApiAlgoliaService {
       $items_indexed = $this->getAlgoliaIndex()->saveObjects($items_to_index);
     }
     catch (Exception $e) {
-      watchdog('cluster_search_index_exception', print_r($items_to_index, TRUE), [], WATCHDOG_DEBUG);
+      watchdog(
+        'cluster_search',
+        'See '  . __FUNCTION__ . '() ' .  $e->getTraceAsString(),
+        NULL,
+        WATCHDOG_ERROR
+      );
       throw new SearchApiException($e->getMessage());
     }
 
