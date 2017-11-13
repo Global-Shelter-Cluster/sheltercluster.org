@@ -131,7 +131,7 @@
       </ul>
     </li>
   </ul>
-  <ul class="nav-items menu" v-if="hasResults && indexFilter == 'documents'">
+  <ul class="nav-items menu search-filtered-by-index" v-if="hasResults && indexFilter == 'documents'">
     <template v-for="page in 5">
       <li v-if="results.documents.length > (page-1) * 10">
         <a v-if="page === 1" href="#" @click.prevent="indexFilter = null" title="Click here to search everything">* Documents</a>
@@ -156,7 +156,7 @@
       </li>
     </template>
   </ul>
-  <ul class="nav-items menu" v-if="hasResults && indexFilter == 'events'">
+  <ul class="nav-items menu search-filtered-by-index" v-if="hasResults && indexFilter == 'events'">
     <template v-for="page in 5">
       <li v-if="results.events.length > (page-1) * 10">
         <a v-if="page === 1" href="#" @click.prevent="indexFilter = null" title="Click here to search everything">* Events</a>
@@ -179,7 +179,7 @@
       </li>
     </template>
   </ul>
-  <ul class="nav-items menu" v-if="hasResults && indexFilter == 'pages'">
+  <ul class="nav-items menu search-filtered-by-index" v-if="hasResults && indexFilter == 'pages'">
     <template v-for="page in 5">
       <li v-if="results.pages.length > (page-1) * 8">
         <a v-if="page === 1" href="#" @click.prevent="indexFilter = null" title="Click here to search everything">* Pages</a>
@@ -199,7 +199,7 @@
       </li>
     </template>
   </ul>
-  <ul class="nav-items menu" v-if="hasResults && indexFilter == 'groups'">
+  <ul class="nav-items menu search-filtered-by-index" v-if="hasResults && indexFilter == 'groups'">
     <template v-for="page in 5">
       <li v-if="results.groups.length > (page-1) * 8">
         <a v-if="page === 1" href="#" @click.prevent="indexFilter = null" title="Click here to search everything">* Groups</a>
@@ -216,7 +216,7 @@
       </li>
     </template>
   </ul>
-  <ul class="nav-items menu" v-if="hasResults && indexFilter == 'contacts'">
+  <ul class="nav-items menu search-filtered-by-index" v-if="hasResults && indexFilter == 'contacts'">
     <template v-for="page in 5">
       <li v-if="results.contacts.length > (page-1) * 6">
         <a v-if="page === 1" href="#" @click.prevent="indexFilter = null" title="Click here to search everything">* Contacts</a>
