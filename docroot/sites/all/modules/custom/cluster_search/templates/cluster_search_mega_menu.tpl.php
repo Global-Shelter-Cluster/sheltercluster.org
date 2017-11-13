@@ -40,7 +40,7 @@
       </ul>
     </li>
     <li v-if="results.documents.length > 10">
-      <span>&nbsp;</span>
+      <span class="mobile-hide">&nbsp;</span>
       <ul class="nav-items menu">
         <li class="leaf" v-for="document in getPage(results.documents, 1, 10)">
           <a :href="document.url" class="search-result-title"
@@ -91,7 +91,7 @@
           </li>
         </ul>
       </template>
-      <br v-if="results.pages.length > 0 && results.groups.length > 0">
+      <br class="mobile-hide" v-if="results.pages.length > 0 && results.groups.length > 0">
       <template v-if="results.groups.length > 0">
         <a href="#" @click.prevent="indexFilter = 'groups'" title="Click here to search groups only">Groups</a>
         <ul class="nav-items menu">

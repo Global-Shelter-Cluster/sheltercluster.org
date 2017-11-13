@@ -388,11 +388,12 @@ header {
     width: 100% !important;
     input {
       width: 100%;
-      padding: 4px;
+      padding: 4px 10px;
       font-size: 18px;
       border: 1px solid $shelter-light-blue;
       color: $black;
       box-sizing: border-box;
+      border-radius: 17px;
     }
   }
   .algolia-logo img {
@@ -414,10 +415,11 @@ header {
 
 // Search results in mobile
 @media screen and (max-width: 979px) {
-  #cluster-search-mega-menu > ul:last-child > li {
-    > span, > br {
-      display: none !important;
-    }
+  .search-input {
+    padding: 10px !important;
+  }
+  .mobile-hide {
+    display: none !important;
   }
   #cluster-search-mega-menu > ul.search-filtered-by-index {
     > li:first-child > ul {
