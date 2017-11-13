@@ -71,8 +71,8 @@ function cluster_docs_recent() {
   $query->entityCondition('entity_type', 'node')
     ->entityCondition('bundle', 'document')
     ->propertyCondition('status', NODE_PUBLISHED)
-    ->fieldCondition('field_key_document', 'value', 1)
     ->fieldOrderBy('field_report_meeting_date', 'value', 'DESC')
+    ->addTag('cluster_docs_key_or_featured')
     ->range(0, 3);
   $results = $query->execute();
   if (!isset($results['node'])) {
@@ -85,6 +85,20 @@ function cluster_docs_recent() {
     'docs' => $docs,
     'all_documents_link' => '/search-documents',
   ));
+}
+
+/**
+ * Filter documents by those that are marked as either "key docs" or "featured".
+ *
+ * Implements hook_query_TAG_alter().
+ */
+function cluster_docs_query_cluster_docs_key_or_featured_alter(SelectQuery $query) {
+  $query->join('field_data_field_key_document', 'fk', 'fk.entity_type = :entity_type AND fk.entity_id = node.nid', [':entity_type' => 'node']);
+  $query->join('field_data_field_featured', 'ff', 'ff.entity_type = :entity_type AND ff.entity_id = node.nid', [':entity_type' => 'node']);
+  $query->condition(db_or()
+    ->condition('fk.field_key_document_value', 1)
+    ->condition('ff.field_featured_value', 1)
+  );
 }
 
 /**
