@@ -92,6 +92,7 @@ class SearchApiClusterAlgoliaService extends SearchApiAlgoliaService {
               }
               $fields_to_transliterate = [
                 'attachments_field_file',
+                'body:value',
               ];
               foreach ($fields_to_transliterate as $field) {
                 if ($key === $field && is_string($property_value)) {
