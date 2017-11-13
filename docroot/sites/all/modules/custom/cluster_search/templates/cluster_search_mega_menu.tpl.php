@@ -25,7 +25,7 @@
             <small>
               {{ document.date }}
               <template v-if="document.featured">&middot; Featured</template>
-              <template v-if="document.key">&middot; Key</template>
+              <template v-if="document.key && !document.featured">&middot; Key document</template>
             </small>
           </a>
         </li>
