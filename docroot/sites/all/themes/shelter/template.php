@@ -43,15 +43,6 @@ function shelter_preprocess_page(&$variables) {
   $variables['is_regions_and_countries'] = FALSE;
   $variables['is_user_profile_pages'] = FALSE;
   $variables['is_search_documents'] = FALSE;
-  $variables['global_docs_search_page_link'] = l(t('Search all documents'), 'search-documents', array(
-    'attributes' => array(
-      'class' => array('search-documents-link')
-    ),
-    'query' => array(
-      'sort' => 'date',
-      'sort_direction' => 'DESC',
-    ),
-  ));
   $variables['global_events_page'] = FALSE;
   $variables['recent_documents'] = FALSE;
 

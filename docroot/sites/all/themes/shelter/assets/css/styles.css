@@ -819,12 +819,6 @@ header .search {
   font-size: 12.8px;
   font-size: 0.8rem;
 }
-header .search-documents-link-wrapper {
-  position: absolute;
-  bottom: 30px;
-  right: 15px;
-  display: inline-block;
-}
 
 .page-search #search-form {
   background: #cdd6db;
@@ -1189,6 +1183,11 @@ header .search-documents-link-wrapper {
 #nav-shelter .nav-items.search-input-row + .nav-items {
   margin-top: 50px;
 }
+#nav-shelter .nav-items.search-input-row li {
+  width: auto !important;
+  text-align: right;
+  margin-left: 10px;
+}
 #nav-shelter .nav-items.search-input-row .search-input {
   width: 100% !important;
 }
@@ -1199,11 +1198,6 @@ header .search-documents-link-wrapper {
   border: 1px solid #cdd6db;
   color: black;
   box-sizing: border-box;
-}
-#nav-shelter .nav-items.search-input-row .algolia-logo {
-  width: auto !important;
-  text-align: right;
-  margin-left: 10px;
 }
 #nav-shelter .nav-items.search-input-row .algolia-logo img {
   width: 130px;

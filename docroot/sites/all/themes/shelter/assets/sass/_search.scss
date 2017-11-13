@@ -10,12 +10,6 @@ header {
     color: #000;
     @include rem(font-size, 0.80rem);
   }
-  .search-documents-link-wrapper {
-    position: absolute;
-    bottom: 30px;
-    right: 15px;
-    display: inline-block;
-  }
 }
 .search-documents-link,
 .form-submit {
@@ -368,6 +362,11 @@ header {
     margin-top: 50px;
   }
 
+  li {
+    width: auto !important;
+    text-align: right;
+    margin-left: 10px;
+  }
   .search-input {
     width: 100% !important;
     input {
@@ -379,13 +378,8 @@ header {
       box-sizing: border-box;
     }
   }
-  .algolia-logo {
-    width: auto !important;
-    text-align: right;
-    margin-left: 10px;
-    img {
-      width: 130px;
-    }
+  .algolia-logo img {
+    width: 130px;
   }
 }
 

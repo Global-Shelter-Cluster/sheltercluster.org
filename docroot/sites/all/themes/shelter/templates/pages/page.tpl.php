@@ -33,12 +33,6 @@
           <?php print render($user_menu); ?>
         </div>
 
-        <?php if ($global_docs_search_page_link): ?>
-          <div class="search-documents-link-wrapper">
-            <?php print render($global_docs_search_page_link); ?>
-          </div>
-        <?php endif; ?>
-
       </div>
     </section>
 
@@ -118,6 +112,6 @@
 
   <?php endif; ?>
 
-  <?php print partial('footer', array('page' => $page, 'search_form_bottom' => $search_form_bottom, 'search_documents_link' => $global_docs_search_page_link)); ?>
+  <?php print partial('footer', array('page' => $page)); ?>
 
 </div>
