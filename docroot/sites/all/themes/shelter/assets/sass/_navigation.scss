@@ -178,7 +178,7 @@ label[for="mobile_menu_toggle"] span:after {
 #nav-shelter > .list-container > .nav-items > .expanded > ul > li {
 
   // Links 2nd Tier and below
-  a, div {
+  a, span {
     display: block;
     background: transparent;
     color: black;
@@ -204,7 +204,7 @@ label[for="mobile_menu_toggle"] span:after {
 
   // 2nd Tier Links only, on desktop
   @media screen and (min-width: 980px) {
-    > a, > div {
+    > a, > span {
       @include rem(padding, 1rem 0.5rem);
     }
   }
@@ -285,7 +285,7 @@ label[for="mobile_menu_toggle"] span:after {
 
     // 2nd Tier Links only
 
-    > a, > div {
+    > a, > span {
       @include rem(font-size, 1rem);
       @include rem(padding, 1rem 0.5rem);
     }

@@ -32,7 +32,7 @@
       </ul>
     </li>
     <li v-if="results.documents.length > 10">
-      <div>&nbsp;</div>
+      <span>&nbsp;</span>
       <ul class="nav-items menu">
         <li class="leaf" v-for="document in getPage(results.documents, 1, 10)">
           <a :href="document.url" class="search-result-title"
@@ -127,7 +127,7 @@
     <template v-for="page in 5">
       <li v-if="results.documents.length > (page-1) * 10">
         <a v-if="page === 1" href="#" @click.prevent="indexFilter = null" title="Click here to search everything">* Documents</a>
-        <div v-if="page > 1">&nbsp;</div>
+        <span v-if="page > 1">&nbsp;</span>
         <ul class="nav-items menu">
           <li class="leaf"
               v-for="document in getPage(results.documents, page-1, 10)">
@@ -152,7 +152,7 @@
     <template v-for="page in 5">
       <li v-if="results.events.length > (page-1) * 10">
         <a v-if="page === 1" href="#" @click.prevent="indexFilter = null" title="Click here to search everything">* Events</a>
-        <div v-if="page > 1">&nbsp;</div>
+        <span v-if="page > 1">&nbsp;</span>
         <ul class="nav-items menu">
           <li class="leaf" v-for="event in getPage(results.events, page-1, 10)">
             <a :href="event.url" class="search-result-title" :title="event.title">
@@ -175,7 +175,7 @@
     <template v-for="page in 5">
       <li v-if="results.pages.length > (page-1) * 8">
         <a v-if="page === 1" href="#" @click.prevent="indexFilter = null" title="Click here to search everything">* Pages</a>
-        <div v-if="page > 1">&nbsp;</div>
+        <span v-if="page > 1">&nbsp;</span>
         <ul class="nav-items menu">
           <li class="leaf"
               v-for="page in getPage(results.pages, page-1, 8)">
@@ -195,7 +195,7 @@
     <template v-for="page in 5">
       <li v-if="results.groups.length > (page-1) * 8">
         <a v-if="page === 1" href="#" @click.prevent="indexFilter = null" title="Click here to search everything">* Groups</a>
-        <div v-if="page > 1">&nbsp;</div>
+        <span v-if="page > 1">&nbsp;</span>
         <ul class="nav-items menu">
           <li class="leaf"
               v-for="group in getPage(results.groups, page-1, 8)">
@@ -212,7 +212,7 @@
     <template v-for="page in 5">
       <li v-if="results.contacts.length > (page-1) * 6">
         <a v-if="page === 1" href="#" @click.prevent="indexFilter = null" title="Click here to search everything">* Contacts</a>
-        <div v-if="page > 1">&nbsp;</div>
+        <span v-if="page > 1">&nbsp;</span>
         <ul class="nav-items menu">
           <li class="leaf"
               v-for="contact in getPage(results.contacts, page-1, 6)">
@@ -242,7 +242,7 @@
   </ul>
   <ul class="nav-items menu search-no-results" v-if="showNoResultsMessage">
     <li>
-      <div>No results found for "{{ query }}"</div>
+      <span>No results found for "{{ query }}"</span>
       <a v-if="indexFilter" href="#" @click.prevent="indexFilter = null">Search everything</a>
     </li>
   </ul>

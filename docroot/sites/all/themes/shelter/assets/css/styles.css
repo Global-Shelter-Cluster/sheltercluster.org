@@ -1642,7 +1642,7 @@ label[for="mobile_menu_toggle"] span:after {
   background: #ebeef0;
 }
 
-#nav-shelter > .list-container > .nav-items > .expanded > ul > li a, #nav-shelter > .list-container > .nav-items > .expanded > ul > li div {
+#nav-shelter > .list-container > .nav-items > .expanded > ul > li a, #nav-shelter > .list-container > .nav-items > .expanded > ul > li span {
   display: block;
   background: transparent;
   color: black;
@@ -1656,7 +1656,7 @@ label[for="mobile_menu_toggle"] span:after {
   transition: all 0.3s ease;
 }
 @media screen and (min-width: 980px) {
-  #nav-shelter > .list-container > .nav-items > .expanded > ul > li a, #nav-shelter > .list-container > .nav-items > .expanded > ul > li div {
+  #nav-shelter > .list-container > .nav-items > .expanded > ul > li a, #nav-shelter > .list-container > .nav-items > .expanded > ul > li span {
     font-size: 12.8px;
     font-size: 0.8rem;
     padding: 16px 8px;
@@ -1669,7 +1669,7 @@ label[for="mobile_menu_toggle"] span:after {
   color: white;
 }
 @media screen and (min-width: 980px) {
-  #nav-shelter > .list-container > .nav-items > .expanded > ul > li > a, #nav-shelter > .list-container > .nav-items > .expanded > ul > li > div {
+  #nav-shelter > .list-container > .nav-items > .expanded > ul > li > a, #nav-shelter > .list-container > .nav-items > .expanded > ul > li > span {
     padding: 16px 8px;
     padding: 1rem 0.5rem;
   }
@@ -1735,7 +1735,7 @@ label[for="mobile_menu_toggle"] span:after {
     background: transparent;
     margin-bottom: 1em;
   }
-  #nav-shelter > .list-container > .nav-items > .expanded > ul > li > a, #nav-shelter > .list-container > .nav-items > .expanded > ul > li > div {
+  #nav-shelter > .list-container > .nav-items > .expanded > ul > li > a, #nav-shelter > .list-container > .nav-items > .expanded > ul > li > span {
     font-size: 16px;
     font-size: 1rem;
     padding: 16px 8px;
