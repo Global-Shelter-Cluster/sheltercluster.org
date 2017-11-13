@@ -90,10 +90,14 @@ class SearchApiClusterAlgoliaService extends SearchApiAlgoliaService {
                   $property_value = $property['value'];
                 }
               }
-              if ($key === 'attachments_field_file' && is_string($property_value)) {
-                // Ensure UTF8 encoding (otherwise Algolia throws an error)
-                // Code from https://stackoverflow.com/a/1523574/368864
-                if (!preg_match('%^(?:
+              $fields_to_transliterate = [
+                'attachments_field_file',
+              ];
+              foreach ($fields_to_transliterate as $field) {
+                if ($key === $field && is_string($property_value)) {
+                  // Ensure UTF8 encoding (otherwise Algolia throws an error)
+                  // Code from https://stackoverflow.com/a/1523574/368864
+                  if (!preg_match('%^(?:
                       [\x09\x0A\x0D\x20-\x7E]            # ASCII
                     | [\xC2-\xDF][\x80-\xBF]             # non-overlong 2-byte
                     | \xE0[\xA0-\xBF][\x80-\xBF]         # excluding overlongs
@@ -103,12 +107,13 @@ class SearchApiClusterAlgoliaService extends SearchApiAlgoliaService {
                     | [\xF1-\xF3][\x80-\xBF]{3}          # planes 4-15
                     | \xF4[\x80-\x8F][\x80-\xBF]{2}      # plane 16
                 )*$%xs', $property_value))
-                  $property_value = iconv('CP1252', 'UTF-8', $property_value);
-                $property_value = transliteration_get($property_value);
+                    $property_value = iconv('CP1252', 'UTF-8', $property_value);
+                  $property_value = transliteration_get($property_value);
+                }
+                $item_to_index[$key] = is_string($property_value)
+                  ? substr($property_value, 0, 5000) // Truncate at around 5kb (Algolia has a 10kb limit for docs)
+                  : $property_value;
               }
-              $item_to_index[$key] = is_string($property_value)
-                ? substr($property_value, 0, 5000) // Truncate at 5kb (Algolia has a 10kb limit for docs)
-                : $property_value;
             }
           }
           else {
@@ -127,6 +132,7 @@ class SearchApiClusterAlgoliaService extends SearchApiAlgoliaService {
       $items_indexed = $this->getAlgoliaIndex()->saveObjects($items_to_index);
     }
     catch (Exception $e) {
+      watchdog('cluster_search_index_exception', print_r($items_to_index, TRUE), [], WATCHDOG_DEBUG);
       throw new SearchApiException($e->getMessage());
     }
 
