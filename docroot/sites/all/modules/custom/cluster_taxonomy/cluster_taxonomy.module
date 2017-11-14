@@ -5,3 +5,59 @@
  */
 
 include_once 'cluster_taxonomy.features.inc';
+
+/**
+ * Implements hook_form_alter().
+ */
+function cluster_taxonomy_form_alter(&$form, &$form_state, $form_id) {
+  if (substr($form_id, -strlen('_node_form')) !== '_node_form')
+    // Only in node forms
+    return;
+
+  $fields = array_filter(field_info_fields(), function($field) use ($form) {
+    return $field['type'] === 'taxonomy_term_reference'
+      && isset($field['bundles']['node'])
+      && in_array($form['#bundle'], $field['bundles']['node'])
+      && array_key_exists($field['field_name'], $form)
+      && isset($field['settings']['allowed_values'][0]);
+  });
+
+  $vocabulary_field_map = [];
+  foreach ($fields as $field_name => $field)
+    $vocabulary_field_map[$field['settings']['allowed_values'][0]['vocabulary']] = $field_name;
+
+  foreach ($fields as $field_name => $field) {
+    $vid = $field['settings']['allowed_values'][0]['vocabulary'];
+
+    $instance_info = field_info_instance('taxonomy_term', 'field_dependent_taxonomies', $vid);
+    if (!$instance_info)
+      continue;
+
+    $query = new EntityFieldQuery();
+    $query->entityCondition('entity_type', 'taxonomy_term')
+      ->entityCondition('bundle', $vid)
+      ->fieldCondition('field_dependent_taxonomies', 'target_id', 0, '>');
+    $result = $query->execute();
+
+    if (isset($result['taxonomy_term']))
+      foreach (taxonomy_term_load_multiple(array_keys($result['taxonomy_term'])) as $term) {
+        foreach ($term->field_dependent_taxonomies[LANGUAGE_NONE] as $item) {
+          $dependent_vocabulary = taxonomy_vocabulary_load($item['target_id']);
+          if (!$dependent_vocabulary || !array_key_exists($dependent_vocabulary->machine_name, $vocabulary_field_map))
+            continue;
+
+          $form_field = &$form[$vocabulary_field_map[$dependent_vocabulary->machine_name]];
+          if (!array_key_exists('#states', $form_field))
+            $form_field['#states'] = ['visible' => []];
+          if (!array_key_exists('visible', $form_field['#states']))
+            $form_field['#states']['visible'] = [];
+
+          // CSS selector for the specific checkbox we care about
+          $selector = '#edit-'
+            . drupal_clean_css_identifier($vocabulary_field_map[$term->vocabulary_machine_name])
+            . '-' . LANGUAGE_NONE . '-' . $term->tid;
+          $form_field['#states']['visible'][$selector] = ['checked' => TRUE];
+        }
+      }
+  }
+}

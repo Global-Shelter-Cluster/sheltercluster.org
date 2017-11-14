@@ -10,63 +10,51 @@
 function cluster_taxonomy_field_default_field_bases() {
   $field_bases = array();
 
-  // Exported field_base: 'description_field'
-  $field_bases['description_field'] = array(
+  // Exported field_base: 'field_dependent_taxonomies'
+  $field_bases['field_dependent_taxonomies'] = array(
     'active' => 1,
-    'cardinality' => 1,
+    'cardinality' => -1,
     'deleted' => 0,
     'entity_types' => array(),
-    'field_name' => 'description_field',
+    'field_name' => 'field_dependent_taxonomies',
+    'field_permissions' => array(
+      'type' => 0,
+    ),
     'foreign keys' => array(
-      'format' => array(
+      'taxonomy_vocabulary' => array(
         'columns' => array(
-          'format' => 'format',
+          'target_id' => 'vid',
         ),
-        'table' => 'filter_format',
+        'table' => 'taxonomy_vocabulary',
       ),
     ),
     'indexes' => array(
-      'format' => array(
-        0 => 'format',
+      'target_id' => array(
+        0 => 'target_id',
       ),
     ),
     'locked' => 0,
-    'module' => 'text',
+    'module' => 'entityreference',
     'settings' => array(
       'entity_translation_sync' => FALSE,
-    ),
-    'translatable' => 1,
-    'type' => 'text_with_summary',
-  );
-
-  // Exported field_base: 'name_field'
-  $field_bases['name_field'] = array(
-    'active' => 1,
-    'cardinality' => 1,
-    'deleted' => 0,
-    'entity_types' => array(),
-    'field_name' => 'name_field',
-    'foreign keys' => array(
-      'format' => array(
-        'columns' => array(
-          'format' => 'format',
+      'handler' => 'base',
+      'handler_settings' => array(
+        'behaviors' => array(
+          'views-select-list' => array(
+            'status' => 0,
+          ),
         ),
-        'table' => 'filter_format',
+        'sort' => array(
+          'direction' => 'ASC',
+          'property' => 'name',
+          'type' => 'property',
+        ),
+        'target_bundles' => array(),
       ),
+      'target_type' => 'taxonomy_vocabulary',
     ),
-    'indexes' => array(
-      'format' => array(
-        0 => 'format',
-      ),
-    ),
-    'locked' => 0,
-    'module' => 'text',
-    'settings' => array(
-      'entity_translation_sync' => FALSE,
-      'max_length' => 255,
-    ),
-    'translatable' => 1,
-    'type' => 'text',
+    'translatable' => 0,
+    'type' => 'entityreference',
   );
 
   return $field_bases;
