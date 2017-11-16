@@ -90,10 +90,12 @@ class SearchApiClusterAlgoliaService extends SearchApiAlgoliaService {
                   $property_value = $property['value'];
                 }
               }
+
               $fields_to_transliterate = [
                 'attachments_field_file',
                 'body:value',
               ];
+              $processed = FALSE;
               foreach ($fields_to_transliterate as $field) {
                 if ($key !== $field || is_string($property_value))
                   continue;
@@ -101,8 +103,14 @@ class SearchApiClusterAlgoliaService extends SearchApiAlgoliaService {
                 // Truncate at around 5kb (Algolia has a 10kb limit for docs),
                 // and transliterate to get rid of UTF issues (this is fine
                 // because these fields are never shown to the user).
-                $item_to_index[$key] = transliteration_get(substr($property_value, 0, 5000));;
+                $item_to_index[$key] = transliteration_get(substr($property_value, 0, 5000));
+                $processed = TRUE;
               }
+
+              if (!$processed)
+                $item_to_index[$key] = is_string($property_value)
+                  ? substr($property_value, 0, 5000) // Truncate at 5kb (Algolia has a 10kb limit for docs)
+                  : $property_value;
             }
           }
           else {
