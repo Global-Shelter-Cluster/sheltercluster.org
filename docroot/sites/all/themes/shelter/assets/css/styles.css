@@ -367,9 +367,9 @@ body {
   width: 90%;
   margin: 0 auto;
 }
-@media (min-width: 1200px) {
+@media (min-width: 1777px) {
   .page-margin {
-    width: 1200px;
+    width: 1600px;
   }
 }
 
@@ -2867,6 +2867,7 @@ div.addressfield-container-inline::after {
 }
 .front #site-branding .page-margin {
   background: url(../images/homepage-header.jpg) no-repeat 0% top;
+  background-size: 100%;
   height: 160px;
 }
 @media (min-width: 800px) {

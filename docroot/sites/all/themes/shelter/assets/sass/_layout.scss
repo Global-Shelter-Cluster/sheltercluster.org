@@ -25,8 +25,8 @@ body {
   position: relative;
   width: 90%;
   margin: 0 auto;
-  @include breakpoint(1200px) {
-    width: 1200px;
+  @include breakpoint(1777px) {
+    width: 1600px;
   }
 }
 
