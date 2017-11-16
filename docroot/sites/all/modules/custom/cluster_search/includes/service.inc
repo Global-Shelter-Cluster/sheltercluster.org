@@ -103,7 +103,35 @@ class SearchApiClusterAlgoliaService extends SearchApiAlgoliaService {
                 // Truncate at around 5kb (Algolia has a 10kb limit for docs),
                 // and transliterate to get rid of UTF issues (this is fine
                 // because these fields are never shown to the user).
-                $item_to_index[$key] = transliteration_get(substr($property_value, 0, 5000));
+                $property_value = transliteration_get(substr($property_value, 0, 5000));
+
+                try {
+                  \AlgoliaSearch\Json::encode($property_value);
+                  $item_to_index[$key] = $property_value;
+                } catch (\AlgoliaSearch\AlgoliaException $e) {
+                  // Ensure UTF8 encoding (otherwise Algolia throws an error)
+                  // Code from https://stackoverflow.com/a/1523574/368864
+                  if (!preg_match('%^(?:
+                      [\x09\x0A\x0D\x20-\x7E]            # ASCII
+                    | [\xC2-\xDF][\x80-\xBF]             # non-overlong 2-byte
+                    | \xE0[\xA0-\xBF][\x80-\xBF]         # excluding overlongs
+                    | [\xE1-\xEC\xEE\xEF][\x80-\xBF]{2}  # straight 3-byte
+                    | \xED[\x80-\x9F][\x80-\xBF]         # excluding surrogates
+                    | \xF0[\x90-\xBF][\x80-\xBF]{2}      # planes 1-3
+                    | [\xF1-\xF3][\x80-\xBF]{3}          # planes 4-15
+                    | \xF4[\x80-\x8F][\x80-\xBF]{2}      # plane 16
+                  )*$%xs', $property_value)) {
+                    $property_value = iconv('CP1252', 'UTF-8', $property_value);
+                    try {
+                      \AlgoliaSearch\Json::encode($property_value);
+                      $item_to_index[$key] = $property_value;
+                    } catch (\AlgoliaSearch\AlgoliaException $e) {
+                      // Don't include it in the index
+                      watchdog('cluster_search', 'Skipped field %field in node %nid due to encoding', ['%field' => $key, '%nid' => $item[$entity_key]['value']]);
+                    }
+                  }
+                }
+
                 $processed = TRUE;
               }
 
