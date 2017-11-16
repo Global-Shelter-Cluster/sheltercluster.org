@@ -136,9 +136,16 @@ class SearchApiClusterAlgoliaService extends SearchApiAlgoliaService {
               }
 
               if (!$processed)
-                $item_to_index[$key] = is_string($property_value)
-                  ? substr($property_value, 0, 5000) // Truncate at 5kb (Algolia has a 10kb limit for docs)
-                  : $property_value;
+                try {
+                  \AlgoliaSearch\Json::encode($property_value);
+
+                  $item_to_index[$key] = is_string($property_value)
+                    ? substr($property_value, 0, 5000) // Truncate at 5kb (Algolia has a 10kb limit for docs)
+                    : $property_value;
+                } catch (Exception $e) {
+                  // Don't include it in the index
+                  watchdog('cluster_search', 'Skipped field %field in node %nid due to encoding', ['%field' => $key, '%nid' => $item[$entity_key]['value']]);
+                }
             }
           }
           else {
