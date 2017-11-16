@@ -635,7 +635,6 @@ function cluster_search_default_search_api_index() {
           "article",
           "page",
           "discussion",
-          "homepage",
           "library"
         ]
       },
