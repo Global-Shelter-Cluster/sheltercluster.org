@@ -142,7 +142,7 @@ class SearchApiClusterAlgoliaService extends SearchApiAlgoliaService {
                   $item_to_index[$key] = is_string($property_value)
                     ? substr($property_value, 0, 5000) // Truncate at 5kb (Algolia has a 10kb limit for docs)
                     : $property_value;
-                } catch (Exception $e) {
+                } catch (\AlgoliaSearch\AlgoliaException $e) {
                   // Don't include it in the index
                   watchdog('cluster_search', 'Skipped field %field in node %nid due to encoding', ['%field' => $key, '%nid' => $item[$entity_key]['value']]);
                 }
@@ -155,8 +155,15 @@ class SearchApiClusterAlgoliaService extends SearchApiAlgoliaService {
           }
         }
       }
-      // Add the properly formatted items to the batch.
-      $items_to_index[] = $item_to_index;
+      try {
+        \AlgoliaSearch\Json::encode($item_to_index);
+
+        // Add the properly formatted items to the batch.
+        $items_to_index[] = $item_to_index;
+      } catch (\AlgoliaSearch\AlgoliaException $e) {
+        // Don't include it in the index
+        watchdog('cluster_search', 'Skipped node %nid due to encoding', ['%nid' => $item_to_index['objectID']]);
+      }
     }
 
     try {
