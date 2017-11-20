@@ -10,14 +10,6 @@
         src="https://www.algolia.com/static_assets/images/press/downloads/search-by-algolia.png"
         alt="Search by Algolia">
     </li>
-    <li>
-      <a href="/search-documents?sort=date&sort_direction=DESC"
-         :href="'/search-documents?sort=date&sort_direction=DESC&f[]=title%3A' + query"
-         class="search-documents-link active"
-         style="white-space: nowrap; padding: 0 8px; margin: 5px 0 0; vertical-align: middle; line-height: 32px; text-transform: none; -webkit-appearance: button;">
-        Legacy document search
-      </a>
-    </li>
   </ul>
   <ul class="nav-items menu" v-if="hasResults && !indexFilter">
     <li v-if="results.documents.length > 0">

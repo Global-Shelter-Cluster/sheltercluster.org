@@ -1197,10 +1197,10 @@ header .search {
 }
 @media screen and (min-width: 520px) and (max-width: 979px) {
   #nav-shelter .nav-items.search-input-row li + li {
-    padding: 10px 0;
+    padding: 10px;
     display: inline-block;
-    width: 48%;
-    text-align: center;
+    width: 100%;
+    text-align: right;
   }
 }
 @media screen and (min-width: 980px) {
