@@ -138,7 +138,7 @@
             searching: false,
             shouldScrollOnResults: true,
             indexFilter: null,
-            groupNids: $('#nav-shelter').attr('data-search-group-nids'), //comma-separated string
+            groupNids: typeof settings.cluster_nav !== 'undefined' ? settings.cluster_nav.search_group_nids : null,
             onlyWithinGroup: true
           },
           computed: {
@@ -248,7 +248,6 @@
 
                 if (vue.onlyWithinGroup && vue.groupNids) {
                   item.params.filters = vue.groupNids
-                    .split(',')
                     .map(function(i) {return 'group_nids:' + i})
                     .join(' OR ');
                 }
