@@ -91,11 +91,12 @@ class SearchApiClusterAlgoliaService extends SearchApiAlgoliaService {
                 }
               }
 
+              $processed = FALSE;
+
               $fields_to_transliterate = [
                 'attachments_field_file',
                 'body:value',
               ];
-              $processed = FALSE;
               foreach ($fields_to_transliterate as $field) {
                 if ($key !== $field || is_string($property_value))
                   continue;
@@ -131,6 +132,24 @@ class SearchApiClusterAlgoliaService extends SearchApiAlgoliaService {
                     }
                   }
                 }
+
+                $processed = TRUE;
+              }
+
+              $group_nids_fields = [
+                'og_group_ref:nid',
+                'field_associated_regions:nid',
+                'field_parent_response:nid',
+                'field_parent_region:nid',
+              ];
+              if (in_array($key, $group_nids_fields)) {
+                $key = 'group_nids';
+
+                if (!array_key_exists($key, $item_to_index))
+                  $item_to_index[$key] = [];
+
+                foreach ((array) $property_value as $value)
+                  $item_to_index[$key][] = intval($value);
 
                 $processed = TRUE;
               }

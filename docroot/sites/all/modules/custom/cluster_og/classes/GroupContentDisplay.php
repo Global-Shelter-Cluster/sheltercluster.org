@@ -46,6 +46,24 @@ class GroupDisplayProvider {
   }
 
   /**
+   * Gets a list of nids to be used in searches for this group (this group's nid
+   * and all of its descendants).
+   */
+  public function getSearchGroupNids() {
+    $relatedHubs = $this->getRelatedHubs();
+    $relatedResponses = $this->getRelatedResponses();
+    $relatedWorkingGroups = $this->getRelatedWorkingGroups();
+    $descendantIds = $this->manager->getDescendantIds(TRUE);
+
+    return (array) array_filter(array_unique(array_merge(
+      (array) $relatedHubs,
+      (array) $relatedResponses,
+      (array) $relatedWorkingGroups,
+      (array) $descendantIds
+    )));
+  }
+
+  /**
    * Get related response type nodes for the viewed group.
    * @return
    *  Render array of nodes.

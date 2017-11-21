@@ -1185,6 +1185,15 @@ header .search {
     margin-top: 50px;
   }
 }
+#nav-shelter .nav-items.search-input-row label {
+  white-space: nowrap;
+  color: #000;
+}
+@media screen and (max-width: 979px) {
+  #nav-shelter .nav-items.search-input-row label {
+    padding: 10px 10px 0 10px;
+  }
+}
 @media screen and (max-width: 519px) {
   #nav-shelter .nav-items.search-input-row li + li {
     width: 100%;
@@ -1225,7 +1234,8 @@ header .search {
   width: 130px;
 }
 
-#nav-shelter .search-result-title {
+#nav-shelter .search-result-title,
+#nav-shelter .search-result-title div {
   white-space: nowrap !important;
   overflow: hidden;
   text-overflow: ellipsis;

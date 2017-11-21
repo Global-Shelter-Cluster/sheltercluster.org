@@ -1,6 +1,12 @@
 <li class="expanded last nav-item" id="cluster-search-mega-menu">
   <a href="#" @click.prevent="focus">Search</a>
   <ul class="nav-items menu search-input-row">
+    <li class="within-group" v-if="groupNids">
+      <label>
+        <input type="checkbox" v-model="onlyWithinGroup">
+        Search only within this group
+      </label>
+    </li>
     <li class="search-input">
       <input type="search" v-model="query" @focus="focusHandler"
              @blur="blurHandler">
@@ -17,11 +23,10 @@
       <ul class="nav-items menu">
         <li class="leaf" v-for="document in getPage(results.documents, 0, 10)">
           <a :href="document.url" class="search-result-title"
-             :title="document.title">
-            {{ document.title }}
+             :title="document.title|strip_tags">
+            <div v-html="document.title"></div>
             <small v-if="document.group" class="search-result-title"
-                   :title="document.group">{{ document.group }}
-            </small>
+                   :title="document.group|strip_tags" v-html="document.group"></small>
             <small>
               {{ document.date }}
               <template v-if="document.featured">&middot; Featured</template>
@@ -36,15 +41,14 @@
       <ul class="nav-items menu">
         <li class="leaf" v-for="document in getPage(results.documents, 1, 10)">
           <a :href="document.url" class="search-result-title"
-             :title="document.title">
-            {{ document.title }}
+             :title="document.title|strip_tags">
+            <div v-html="document.title"></div>
             <small v-if="document.group" class="search-result-title"
-                   :title="document.group">{{ document.group }}
-            </small>
+                   :title="document.group|strip_tags" v-html="document.group"></small>
             <small>
               <template v-if="document.date">{{ document.date }}</template>
               <template v-if="document.featured">&middot; Featured</template>
-              <template v-if="document.key">&middot; Key</template>
+              <template v-if="document.key && !document.featured">&middot; Key document</template>
             </small>
           </a>
         </li>
@@ -54,11 +58,10 @@
       <a href="#" @click.prevent="indexFilter = 'events'" title="Click here to search events only">Events</a>
       <ul class="nav-items menu">
         <li class="leaf" v-for="event in results.events">
-          <a :href="event.url" class="search-result-title" :title="event.title">
-            {{ event.title }}
+          <a :href="event.url" class="search-result-title" :title="event.title|strip_tags">
+            <div v-html="event.title"></div>
             <small v-if="event.group" class="search-result-title"
-                   :title="event.group">{{ event.group }}
-            </small>
+                   :title="event.group|strip_tags" v-html="event.group"></small>
             <small>
               {{ event.date }}
               <template v-if="event.location">&middot; {{ event.location }}
@@ -74,11 +77,10 @@
         <ul class="nav-items menu">
           <li class="leaf" v-for="page in results.pages">
             <a :href="page.url">
-              {{ page.title }}
+              <div v-html="page.title"></div>
               <small v-if="page.group" class="search-result-title"
-                     :title="page.group">{{ page.group }}
-              </small>
-              <small>{{ page.type }}</small>
+                     :title="page.group|strip_tags" v-html="page.group"></small>
+              <small v-if="page.type">{{ page.type }}</small>
             </a>
           </li>
         </ul>
@@ -89,7 +91,7 @@
         <ul class="nav-items menu">
           <li class="leaf" v-for="group in results.groups">
             <a :href="group.url">
-              {{ group.title }}
+              <div v-html="group.title"></div>
               <small>{{ group.type }}</small>
             </a>
           </li>
@@ -101,23 +103,14 @@
       <ul class="nav-items menu">
         <li class="leaf" v-for="contact in results.contacts">
           <a :href="contact.url" target="_blank">
-            {{ contact.title }}
+            <div v-html="contact.title"></div>
             <small v-if="contact.group" class="search-result-title"
-                   :title="contact.group">{{ contact.group }}
-            </small>
-            <small v-if="contact.role || contact.org">
-              <template v-if="contact.org">
-                {{ contact.org}}
-                <template v-if="contact.role">
-                  &middot; {{ contact.role }}
-                </template>
-              </template>
-              <template v-if="!contact.org && contact.role">
-                {{ contact.role }}
-              </template>
-            </small>
-            <small v-if="contact.email">{{ contact.email }}</small>
-            <small v-if="contact.phone">{{ contact.phone }}</small>
+                   :title="contact.group|strip_tags" v-html="contact.group"></small>
+            <small v-if="contact.role && contact.org" v-html="contact.org + ' &middot; ' + contact.role"></small>
+            <small v-if="contact.role && !contact.org" v-html="contact.role"></small>
+            <small v-if="!contact.role && contact.org" v-html="contact.org"></small>
+            <small v-if="contact.email" v-html="contact.email"></small>
+            <small v-if="contact.phone" v-html="contact.phone"></small>
           </a>
         </li>
       </ul>
@@ -132,15 +125,14 @@
           <li class="leaf"
               v-for="document in getPage(results.documents, page-1, 10)">
             <a :href="document.url" class="search-result-title"
-               :title="document.title">
-              {{ document.title }}
+               :title="document.title|strip_tags">
+              <div v-html="document.title"></div>
               <small v-if="document.group" class="search-result-title"
-                     :title="document.group">{{ document.group }}
-              </small>
+                     :title="document.group|strip_tags" v-html="document.group"></small>
               <small>
                 {{ document.date }}
                 <template v-if="document.featured">&middot; Featured</template>
-                <template v-if="document.key">&middot; Key</template>
+                <template v-if="document.key && !document.featured">&middot; Key document</template>
               </small>
             </a>
           </li>
@@ -155,11 +147,10 @@
         <span v-if="page > 1">&nbsp;</span>
         <ul class="nav-items menu">
           <li class="leaf" v-for="event in getPage(results.events, page-1, 10)">
-            <a :href="event.url" class="search-result-title" :title="event.title">
-              {{ event.title }}
+            <a :href="event.url" class="search-result-title" :title="event.title|strip_tags">
+              <div v-html="event.title"></div>
               <small v-if="event.group" class="search-result-title"
-                     :title="event.group">{{ event.group }}
-              </small>
+                     :title="event.group|strip_tags" v-html="event.group"></small>
               <small>
                 {{ event.date }}
                 <template v-if="event.location">&middot; {{ event.location }}
@@ -177,14 +168,12 @@
         <a v-if="page === 1" href="#" @click.prevent="indexFilter = null" title="Click here to search everything">* Pages</a>
         <span v-if="page > 1">&nbsp;</span>
         <ul class="nav-items menu">
-          <li class="leaf"
-              v-for="page in getPage(results.pages, page-1, 8)">
+          <li class="leaf" v-for="page in getPage(results.pages, page-1, 8)">
             <a :href="page.url">
-              {{ page.title }}
+              <div v-html="page.title"></div>
               <small v-if="page.group" class="search-result-title"
-                     :title="page.group">{{ page.group }}
-              </small>
-              <small>{{ page.type }}</small>
+                     :title="page.group|strip_tags" v-html="page.group"></small>
+              <small v-if="page.type">{{ page.type }}</small>
             </a>
           </li>
         </ul>
@@ -200,7 +189,7 @@
           <li class="leaf"
               v-for="group in getPage(results.groups, page-1, 8)">
             <a :href="group.url">
-              {{ group.title }}
+              <div v-html="group.title"></div>
               <small>{{ group.type }}</small>
             </a>
           </li>
@@ -217,23 +206,14 @@
           <li class="leaf"
               v-for="contact in getPage(results.contacts, page-1, 6)">
             <a :href="contact.url" target="_blank">
-              {{ contact.title }}
+              <div v-html="contact.title"></div>
               <small v-if="contact.group" class="search-result-title"
-                     :title="contact.group">{{ contact.group }}
-              </small>
-              <small v-if="contact.role || contact.org">
-                <template v-if="contact.org">
-                  {{ contact.org}}
-                  <template v-if="contact.role">
-                    &middot; {{ contact.role }}
-                  </template>
-                </template>
-                <template v-if="!contact.org && contact.role">
-                  {{ contact.role }}
-                </template>
-              </small>
-              <small v-if="contact.email">{{ contact.email }}</small>
-              <small v-if="contact.phone">{{ contact.phone }}</small>
+                     :title="contact.group|strip_tags" v-html="contact.group"></small>
+              <small v-if="contact.role && contact.org" v-html="contact.org + ' &middot; ' + contact.role"></small>
+              <small v-if="contact.role && !contact.org" v-html="contact.role"></small>
+              <small v-if="!contact.role && contact.org" v-html="contact.org"></small>
+              <small v-if="contact.email" v-html="contact.email"></small>
+              <small v-if="contact.phone" v-html="contact.phone"></small>
             </a>
           </li>
         </ul>
@@ -242,8 +222,9 @@
   </ul>
   <ul class="nav-items menu search-no-results" v-if="showNoResultsMessage">
     <li>
-      <span>No results found for "{{ query }}"</span>
+      <span>No results found for "<strong>{{ query }}</strong>"</span>
       <a v-if="indexFilter" href="#" @click.prevent="indexFilter = null">Search everything</a>
+      <a v-if="!indexFilter && groupNids && onlyWithinGroup" href="#" @click.prevent="onlyWithinGroup = false">Search outside this group</a>
     </li>
   </ul>
 </li>
