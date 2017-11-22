@@ -117,27 +117,14 @@ function shelter_base_locale_default_languages() {
   // Exported language: pt.
   $languages['pt'] = array(
     'language' => 'pt',
-    'name' => 'Portuguese, International',
-    'native' => 'Portuguese, International',
+    'name' => 'Portuguese',
+    'native' => 'Portuguese',
     'direction' => 0,
     'enabled' => 1,
     'plurals' => 0,
     'formula' => '',
     'domain' => '',
     'prefix' => 'pt',
-    'weight' => 0,
-  );
-  // Exported language: pt-pt.
-  $languages['pt-pt'] = array(
-    'language' => 'pt-pt',
-    'name' => 'Portuguese, Portugal',
-    'native' => 'Português',
-    'direction' => 0,
-    'enabled' => 1,
-    'plurals' => 0,
-    'formula' => '',
-    'domain' => '',
-    'prefix' => 'pt-pt',
     'weight' => 0,
   );
   return $languages;
