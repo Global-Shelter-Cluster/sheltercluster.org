@@ -24,6 +24,12 @@ function cluster_docs_field_default_field_instances() {
         'type' => 'text_default',
         'weight' => 0,
       ),
+      'ical' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'teaser' => array(
         'label' => 'hidden',
         'module' => 'text',
@@ -51,7 +57,7 @@ function cluster_docs_field_default_field_instances() {
         'summary_rows' => 5,
       ),
       'type' => 'text_textarea_with_summary',
-      'weight' => 1,
+      'weight' => 4,
     ),
   );
 
@@ -68,6 +74,12 @@ function cluster_docs_field_default_field_instances() {
         'settings' => array(),
         'type' => 'taxonomy_term_reference_link',
         'weight' => 9,
+      ),
+      'ical' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
       ),
       'teaser' => array(
         'label' => 'hidden',
@@ -109,6 +121,12 @@ function cluster_docs_field_default_field_instances() {
         'type' => 'taxonomy_term_reference_link',
         'weight' => 20,
       ),
+      'ical' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'teaser' => array(
         'label' => 'hidden',
         'settings' => array(),
@@ -148,6 +166,12 @@ function cluster_docs_field_default_field_instances() {
         'settings' => array(),
         'type' => 'taxonomy_term_reference_link',
         'weight' => 12,
+      ),
+      'ical' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
       ),
       'teaser' => array(
         'label' => 'hidden',
@@ -193,6 +217,12 @@ function cluster_docs_field_default_field_instances() {
         'type' => 'text_default',
         'weight' => 23,
       ),
+      'ical' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'teaser' => array(
         'label' => 'hidden',
         'settings' => array(),
@@ -216,7 +246,7 @@ function cluster_docs_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 11,
+      'weight' => 13,
     ),
   );
 
@@ -233,6 +263,12 @@ function cluster_docs_field_default_field_instances() {
         'settings' => array(),
         'type' => 'taxonomy_term_reference_link',
         'weight' => 27,
+      ),
+      'ical' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -256,7 +292,7 @@ function cluster_docs_field_default_field_instances() {
         'apply_chosen' => '',
       ),
       'type' => 'options_buttons',
-      'weight' => 12,
+      'weight' => 14,
     ),
   );
 
@@ -269,7 +305,7 @@ function cluster_docs_field_default_field_instances() {
       ),
     ),
     'deleted' => 0,
-    'description' => 'Is this a features document ?',
+    'description' => 'Featured document show up in the slider at the top of the response page.',
     'display' => array(
       'default' => array(
         'label' => 'hidden',
@@ -277,6 +313,12 @@ function cluster_docs_field_default_field_instances() {
         'settings' => array(),
         'type' => 'list_default',
         'weight' => 5,
+      ),
+      'ical' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
       ),
       'teaser' => array(
         'label' => 'hidden',
@@ -287,7 +329,7 @@ function cluster_docs_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'field_name' => 'field_featured',
-    'label' => 'Featured',
+    'label' => 'Featured document',
     'required' => 0,
     'settings' => array(
       'entity_translation_sync' => FALSE,
@@ -300,7 +342,7 @@ function cluster_docs_field_default_field_instances() {
         'display_label' => 1,
       ),
       'type' => 'options_onoff',
-      'weight' => 5,
+      'weight' => 9,
     ),
   );
 
@@ -318,6 +360,12 @@ function cluster_docs_field_default_field_instances() {
         'type' => 'file_default',
         'weight' => 3,
       ),
+      'ical' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'teaser' => array(
         'label' => 'hidden',
         'settings' => array(),
@@ -333,8 +381,8 @@ function cluster_docs_field_default_field_instances() {
       'description_field' => 0,
       'entity_translation_sync' => FALSE,
       'file_directory' => 'docs',
-      'file_extensions' => 'txt rtf pdf doc docx dotx xls xlsx ppt pptx png jpg jpeg gif zip odf',
-      'max_filesize' => '20 MB',
+      'file_extensions' => 'txt rtf pdf doc docx dotx xls xlsx ppt pptx png jpg jpeg gif zip odf pps',
+      'max_filesize' => '50 MB',
       'user_register_form' => FALSE,
     ),
     'widget' => array(
@@ -342,7 +390,7 @@ function cluster_docs_field_default_field_instances() {
       'module' => 'pdf_to_image',
       'settings' => array(
         'pdf_to_image' => array(
-          'density' => '25x25',
+          'density' => '30x30',
           'extra_args' => '',
           'hide_imagefield' => 0,
           'target_field' => 'field_preview',
@@ -350,7 +398,7 @@ function cluster_docs_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'pdf_to_image',
-      'weight' => 6,
+      'weight' => 0,
     ),
   );
 
@@ -369,6 +417,12 @@ function cluster_docs_field_default_field_instances() {
         ),
         'type' => 'image',
         'weight' => 1,
+      ),
+      'ical' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -401,7 +455,7 @@ function cluster_docs_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'image_image',
-      'weight' => 3,
+      'weight' => 7,
     ),
   );
 
@@ -418,6 +472,12 @@ function cluster_docs_field_default_field_instances() {
         'settings' => array(),
         'type' => 'taxonomy_term_reference_link',
         'weight' => 7,
+      ),
+      'ical' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
       ),
       'teaser' => array(
         'label' => 'hidden',
@@ -459,6 +519,12 @@ function cluster_docs_field_default_field_instances() {
         'type' => 'taxonomy_term_reference_link',
         'weight' => 11,
       ),
+      'ical' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'teaser' => array(
         'label' => 'hidden',
         'settings' => array(),
@@ -498,6 +564,12 @@ function cluster_docs_field_default_field_instances() {
         'settings' => array(),
         'type' => 'taxonomy_term_reference_link',
         'weight' => 14,
+      ),
+      'ical' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
       ),
       'teaser' => array(
         'label' => 'hidden',
@@ -539,6 +611,12 @@ function cluster_docs_field_default_field_instances() {
         'type' => 'taxonomy_term_reference_link',
         'weight' => 15,
       ),
+      'ical' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'teaser' => array(
         'label' => 'hidden',
         'settings' => array(),
@@ -579,6 +657,12 @@ function cluster_docs_field_default_field_instances() {
         'type' => 'taxonomy_term_reference_link',
         'weight' => 18,
       ),
+      'ical' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'teaser' => array(
         'label' => 'hidden',
         'settings' => array(),
@@ -614,7 +698,7 @@ function cluster_docs_field_default_field_instances() {
       ),
     ),
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Key documents will remain visible on the response page.',
     'display' => array(
       'default' => array(
         'label' => 'hidden',
@@ -622,6 +706,12 @@ function cluster_docs_field_default_field_instances() {
         'settings' => array(),
         'type' => 'list_default',
         'weight' => 1,
+      ),
+      'ical' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
       ),
       'teaser' => array(
         'label' => 'hidden',
@@ -632,7 +722,7 @@ function cluster_docs_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'field_name' => 'field_key_document',
-    'label' => 'Is Key Document',
+    'label' => 'Key Document',
     'required' => 0,
     'settings' => array(
       'entity_translation_sync' => FALSE,
@@ -645,7 +735,7 @@ function cluster_docs_field_default_field_instances() {
         'display_label' => 1,
       ),
       'type' => 'options_onoff',
-      'weight' => 3,
+      'weight' => 6,
     ),
   );
 
@@ -695,7 +785,7 @@ function cluster_docs_field_default_field_instances() {
         'apply_chosen' => '',
       ),
       'type' => 'options_select',
-      'weight' => 6,
+      'weight' => 10,
     ),
   );
 
@@ -704,7 +794,7 @@ function cluster_docs_field_default_field_instances() {
     'bundle' => 'document',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'If you want to link to a document on an external website, you can include the URL here instead of uploading it.',
     'display' => array(
       'default' => array(
         'label' => 'hidden',
@@ -712,6 +802,12 @@ function cluster_docs_field_default_field_instances() {
         'settings' => array(),
         'type' => 'link_default',
         'weight' => 4,
+      ),
+      'ical' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
       ),
       'teaser' => array(
         'label' => 'hidden',
@@ -740,7 +836,7 @@ function cluster_docs_field_default_field_instances() {
       'enable_tokens' => 1,
       'entity_translation_sync' => FALSE,
       'rel_remove' => 'default',
-      'title' => 'optional',
+      'title' => 'none',
       'title_label_use_field_label' => 0,
       'title_maxlength' => 128,
       'title_value' => '',
@@ -753,7 +849,7 @@ function cluster_docs_field_default_field_instances() {
       'module' => 'link',
       'settings' => array(),
       'type' => 'link_field',
-      'weight' => 7,
+      'weight' => 1,
     ),
   );
 
@@ -770,6 +866,12 @@ function cluster_docs_field_default_field_instances() {
         'settings' => array(),
         'type' => 'taxonomy_term_reference_link',
         'weight' => 29,
+      ),
+      'ical' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -808,6 +910,12 @@ function cluster_docs_field_default_field_instances() {
         'settings' => array(),
         'type' => 'taxonomy_term_reference_link',
         'weight' => 17,
+      ),
+      'ical' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
       ),
       'teaser' => array(
         'label' => 'hidden',
@@ -849,6 +957,12 @@ function cluster_docs_field_default_field_instances() {
         'type' => 'text_default',
         'weight' => 28,
       ),
+      'ical' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'teaser' => array(
         'label' => 'above',
         'settings' => array(),
@@ -872,7 +986,7 @@ function cluster_docs_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 15,
+      'weight' => 17,
     ),
   );
 
@@ -891,6 +1005,12 @@ function cluster_docs_field_default_field_instances() {
         ),
         'type' => 'image',
         'weight' => 6,
+      ),
+      'ical' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
       ),
       'teaser' => array(
         'label' => 'hidden',
@@ -923,7 +1043,7 @@ function cluster_docs_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'image_image',
-      'weight' => 9,
+      'weight' => 12,
     ),
   );
 
@@ -946,6 +1066,12 @@ function cluster_docs_field_default_field_instances() {
         ),
         'type' => 'date_default',
         'weight' => 22,
+      ),
+      'ical' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
       ),
       'teaser' => array(
         'label' => 'hidden',
@@ -979,7 +1105,7 @@ function cluster_docs_field_default_field_instances() {
         'year_range' => '-3:+3',
       ),
       'type' => 'date_text',
-      'weight' => 10,
+      'weight' => 3,
     ),
   );
 
@@ -996,6 +1122,12 @@ function cluster_docs_field_default_field_instances() {
         'settings' => array(),
         'type' => 'taxonomy_term_reference_link',
         'weight' => 13,
+      ),
+      'ical' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
       ),
       'teaser' => array(
         'label' => 'hidden',
@@ -1036,6 +1168,12 @@ function cluster_docs_field_default_field_instances() {
         'settings' => array(),
         'type' => 'taxonomy_term_reference_link',
         'weight' => 16,
+      ),
+      'ical' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
       ),
       'teaser' => array(
         'label' => 'hidden',
@@ -1080,6 +1218,12 @@ function cluster_docs_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 30,
       ),
+      'ical' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'teaser' => array(
         'label' => 'above',
         'settings' => array(),
@@ -1104,7 +1248,7 @@ function cluster_docs_field_default_field_instances() {
       'module' => 'number',
       'settings' => array(),
       'type' => 'number',
-      'weight' => 16,
+      'weight' => 18,
     ),
   );
 
@@ -1121,6 +1265,12 @@ function cluster_docs_field_default_field_instances() {
         'settings' => array(),
         'type' => 'taxonomy_term_reference_link',
         'weight' => 10,
+      ),
+      'ical' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
       ),
       'teaser' => array(
         'label' => 'hidden',
@@ -1162,6 +1312,12 @@ function cluster_docs_field_default_field_instances() {
         'type' => 'taxonomy_term_reference_link',
         'weight' => 19,
       ),
+      'ical' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'teaser' => array(
         'label' => 'hidden',
         'settings' => array(),
@@ -1201,6 +1357,12 @@ function cluster_docs_field_default_field_instances() {
         'settings' => array(),
         'type' => 'og_list_default',
         'weight' => 5,
+      ),
+      'ical' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
       ),
       'teaser' => array(
         'label' => 'hidden',
@@ -1244,7 +1406,7 @@ function cluster_docs_field_default_field_instances() {
       'module' => 'og',
       'settings' => array(),
       'type' => 'og_complex',
-      'weight' => 8,
+      'weight' => 11,
     ),
   );
 
@@ -1260,6 +1422,12 @@ function cluster_docs_field_default_field_instances() {
         'settings' => array(),
         'type' => 'hidden',
         'weight' => 24,
+      ),
+      'ical' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -1287,7 +1455,7 @@ function cluster_docs_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 0,
+      'weight' => 2,
     ),
   );
 
@@ -1375,17 +1543,20 @@ function cluster_docs_field_default_field_instances() {
   t('Cross-Cutting Issues');
   t('Description');
   t('Document Type');
-  t('Featured');
+  t('Featured document');
+  t('Featured document show up in the slider at the top of the response page.');
   t('File');
   t('Groups audience');
+  t('If you want to link to a document on an external website, you can include the URL here instead of uploading it.');
   t('Image');
   t('Information Management');
   t('Inter-Cluster');
   t('Intervention Materials');
   t('Intervention Programming');
-  t('Is Key Document');
-  t('Is this a features document ?');
   t('Issues');
+  t('Key Document');
+  t('Key documents will remain visible on the response page.');
+  t('Language');
   t('Link');
   t('Meeting Management');
   t('Name');

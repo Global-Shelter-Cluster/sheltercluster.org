@@ -605,6 +605,9 @@ function cluster_docs_field_default_field_bases() {
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_preview',
+    'field_permissions' => array(
+      'type' => 0,
+    ),
     'foreign keys' => array(
       'fid' => array(
         'columns' => array(
@@ -810,6 +813,9 @@ function cluster_docs_field_default_field_bases() {
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'og_group_ref',
+    'field_permissions' => array(
+      'type' => 0,
+    ),
     'foreign keys' => array(
       'node' => array(
         'columns' => array(
@@ -833,8 +839,14 @@ function cluster_docs_field_default_field_bases() {
           'og_behavior' => array(
             'status' => TRUE,
           ),
+          'views-select-list' => array(
+            'status' => 0,
+          ),
         ),
         'membership_type' => 'og_membership_type_default',
+        'sort' => array(
+          'type' => 'none',
+        ),
         'target_bundles' => array(),
       ),
       'handler_submit' => 'Change handler',
