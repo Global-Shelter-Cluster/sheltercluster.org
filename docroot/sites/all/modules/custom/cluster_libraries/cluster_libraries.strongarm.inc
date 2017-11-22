@@ -219,6 +219,9 @@ function cluster_libraries_strongarm() {
         'language' => array(
           'weight' => '3',
         ),
+        'redirect' => array(
+          'weight' => '10',
+        ),
       ),
       'display' => array(),
     ),
