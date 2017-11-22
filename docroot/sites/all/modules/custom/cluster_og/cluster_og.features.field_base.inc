@@ -676,6 +676,7 @@ function cluster_og_field_default_field_bases() {
         ),
         'target_bundles' => array(
           'geographic_region' => 'geographic_region',
+          'working_group' => 'working_group',
         ),
       ),
       'target_type' => 'node',
@@ -1162,6 +1163,9 @@ function cluster_og_field_default_field_bases() {
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'title_field',
+    'field_permissions' => array(
+      'type' => 0,
+    ),
     'foreign keys' => array(
       'format' => array(
         'columns' => array(
