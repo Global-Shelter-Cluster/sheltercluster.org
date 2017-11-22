@@ -1756,3 +1756,9 @@ function shelter_base_update_7166() {
 
 }
 
+/**
+ * Disable toggle_optional_fields module.
+ */
+function shelter_base_update_7167() {
+  module_disable(['toggle_optional_fields']);
+}
