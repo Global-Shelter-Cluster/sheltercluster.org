@@ -26,6 +26,12 @@ function cluster_home_field_default_field_instances() {
         'type' => 'image',
         'weight' => 2,
       ),
+      'ical' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'teaser' => array(
         'label' => 'hidden',
         'module' => 'image',
@@ -78,6 +84,12 @@ function cluster_home_field_default_field_instances() {
         'settings' => array(),
         'type' => 'link_plain',
         'weight' => 3,
+      ),
+      'ical' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
       ),
       'teaser' => array(
         'label' => 'hidden',
@@ -137,6 +149,12 @@ function cluster_home_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 1,
       ),
+      'ical' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'teaser' => array(
         'label' => 'hidden',
         'module' => 'text',
@@ -148,7 +166,7 @@ function cluster_home_field_default_field_instances() {
     'entity_type' => 'node',
     'field_name' => 'title_field',
     'label' => 'Title',
-    'required' => TRUE,
+    'required' => 1,
     'settings' => array(
       'entity_translation_sync' => FALSE,
       'hide_label' => array(
@@ -159,6 +177,7 @@ function cluster_home_field_default_field_instances() {
       'user_register_form' => FALSE,
     ),
     'widget' => array(
+      'active' => 1,
       'module' => 'text',
       'settings' => array(
         'size' => 60,

@@ -98,6 +98,9 @@ function cluster_home_strongarm() {
         'path' => array(
           'weight' => '2',
         ),
+        'redirect' => array(
+          'weight' => '30',
+        ),
       ),
       'display' => array(),
     ),
