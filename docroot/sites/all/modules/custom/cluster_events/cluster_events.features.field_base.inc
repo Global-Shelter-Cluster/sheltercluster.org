@@ -10,14 +10,13 @@
 function cluster_events_field_default_field_bases() {
   $field_bases = array();
 
-  // Exported field_base: 'date_repeat_entity_clone_state'
+  // Exported field_base: 'date_repeat_entity_clone_state'.
   $field_bases['date_repeat_entity_clone_state'] = array(
     'active' => 1,
     'cardinality' => 1,
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'date_repeat_entity_clone_state',
-    'foreign keys' => array(),
     'indexes' => array(
       'value' => array(
         0 => 'value',
@@ -37,21 +36,13 @@ function cluster_events_field_default_field_bases() {
     'type' => 'list_boolean',
   );
 
-  // Exported field_base: 'date_repeat_entity_master_uuid'
+  // Exported field_base: 'date_repeat_entity_master_uuid'.
   $field_bases['date_repeat_entity_master_uuid'] = array(
     'active' => 1,
     'cardinality' => 1,
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'date_repeat_entity_master_uuid',
-    'foreign keys' => array(
-      'format' => array(
-        'columns' => array(
-          'format' => 'format',
-        ),
-        'table' => 'filter_format',
-      ),
-    ),
     'indexes' => array(
       'format' => array(
         0 => 'format',
@@ -67,7 +58,7 @@ function cluster_events_field_default_field_bases() {
     'type' => 'text',
   );
 
-  // Exported field_base: 'field_coordinates'
+  // Exported field_base: 'field_coordinates'.
   $field_bases['field_coordinates'] = array(
     'active' => 1,
     'cardinality' => 1,
@@ -77,7 +68,6 @@ function cluster_events_field_default_field_bases() {
     'field_permissions' => array(
       'type' => 0,
     ),
-    'foreign keys' => array(),
     'indexes' => array(
       'bbox' => array(
         0 => 'top',
@@ -122,7 +112,7 @@ function cluster_events_field_default_field_bases() {
     'type' => 'geofield',
   );
 
-  // Exported field_base: 'field_event_contact'
+  // Exported field_base: 'field_event_contact'.
   $field_bases['field_event_contact'] = array(
     'active' => 1,
     'cardinality' => -1,
@@ -131,14 +121,6 @@ function cluster_events_field_default_field_bases() {
     'field_name' => 'field_event_contact',
     'field_permissions' => array(
       'type' => 0,
-    ),
-    'foreign keys' => array(
-      'node' => array(
-        'columns' => array(
-          'target_id' => 'nid',
-        ),
-        'table' => 'node',
-      ),
     ),
     'indexes' => array(
       'target_id' => array(
@@ -171,7 +153,7 @@ function cluster_events_field_default_field_bases() {
     'type' => 'entityreference',
   );
 
-  // Exported field_base: 'field_event_files'
+  // Exported field_base: 'field_event_files'.
   $field_bases['field_event_files'] = array(
     'active' => 1,
     'cardinality' => -1,
@@ -180,14 +162,6 @@ function cluster_events_field_default_field_bases() {
     'field_name' => 'field_event_files',
     'field_permissions' => array(
       'type' => 0,
-    ),
-    'foreign keys' => array(
-      'fid' => array(
-        'columns' => array(
-          'fid' => 'fid',
-        ),
-        'table' => 'file_managed',
-      ),
     ),
     'indexes' => array(
       'fid' => array(
@@ -208,7 +182,7 @@ function cluster_events_field_default_field_bases() {
     'type' => 'file',
   );
 
-  // Exported field_base: 'field_postal_address'
+  // Exported field_base: 'field_postal_address'.
   $field_bases['field_postal_address'] = array(
     'active' => 1,
     'cardinality' => 1,
@@ -218,7 +192,6 @@ function cluster_events_field_default_field_bases() {
     'field_permissions' => array(
       'type' => 0,
     ),
-    'foreign keys' => array(),
     'indexes' => array(),
     'locked' => 0,
     'module' => 'addressfield',
@@ -229,7 +202,7 @@ function cluster_events_field_default_field_bases() {
     'type' => 'addressfield',
   );
 
-  // Exported field_base: 'field_recurring_event_date2'
+  // Exported field_base: 'field_recurring_event_date2'.
   $field_bases['field_recurring_event_date2'] = array(
     'active' => 1,
     'cardinality' => -1,
@@ -239,7 +212,6 @@ function cluster_events_field_default_field_bases() {
     'field_permissions' => array(
       'type' => 0,
     ),
-    'foreign keys' => array(),
     'indexes' => array(),
     'locked' => 0,
     'module' => 'date',

@@ -10,7 +10,7 @@
 function cluster_home_field_default_field_bases() {
   $field_bases = array();
 
-  // Exported field_base: 'field_homeimage'
+  // Exported field_base: 'field_homeimage'.
   $field_bases['field_homeimage'] = array(
     'active' => 1,
     'cardinality' => 1,
@@ -19,14 +19,6 @@ function cluster_home_field_default_field_bases() {
     'field_name' => 'field_homeimage',
     'field_permissions' => array(
       'type' => 0,
-    ),
-    'foreign keys' => array(
-      'fid' => array(
-        'columns' => array(
-          'fid' => 'fid',
-        ),
-        'table' => 'file_managed',
-      ),
     ),
     'indexes' => array(
       'fid' => array(
@@ -46,7 +38,7 @@ function cluster_home_field_default_field_bases() {
     'type' => 'image',
   );
 
-  // Exported field_base: 'field_homelink'
+  // Exported field_base: 'field_homelink'.
   $field_bases['field_homelink'] = array(
     'active' => 1,
     'cardinality' => 1,
@@ -56,7 +48,6 @@ function cluster_home_field_default_field_bases() {
     'field_permissions' => array(
       'type' => 0,
     ),
-    'foreign keys' => array(),
     'indexes' => array(),
     'locked' => 0,
     'module' => 'link',

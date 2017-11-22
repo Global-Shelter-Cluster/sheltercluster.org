@@ -10,7 +10,7 @@
 function cluster_contact_field_default_field_instances() {
   $field_instances = array();
 
-  // Exported field_instance: 'node-contact-body'
+  // Exported field_instance: 'node-contact-body'.
   $field_instances['node-contact-body'] = array(
     'bundle' => 'contact',
     'default_value' => NULL,
@@ -62,7 +62,7 @@ function cluster_contact_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-contact-field_email'
+  // Exported field_instance: 'node-contact-field_email'.
   $field_instances['node-contact-field_email'] = array(
     'bundle' => 'contact',
     'default_value' => NULL,
@@ -108,7 +108,7 @@ function cluster_contact_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-contact-field_image'
+  // Exported field_instance: 'node-contact-field_image'.
   $field_instances['node-contact-field_image'] = array(
     'bundle' => 'contact',
     'deleted' => 0,
@@ -165,7 +165,7 @@ function cluster_contact_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-contact-field_organisation_name'
+  // Exported field_instance: 'node-contact-field_organisation_name'.
   $field_instances['node-contact-field_organisation_name'] = array(
     'bundle' => 'contact',
     'default_value' => NULL,
@@ -212,7 +212,7 @@ function cluster_contact_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-contact-field_phone_number'
+  // Exported field_instance: 'node-contact-field_phone_number'.
   $field_instances['node-contact-field_phone_number'] = array(
     'bundle' => 'contact',
     'default_value' => NULL,
@@ -259,7 +259,7 @@ function cluster_contact_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-contact-field_role_or_title'
+  // Exported field_instance: 'node-contact-field_role_or_title'.
   $field_instances['node-contact-field_role_or_title'] = array(
     'bundle' => 'contact',
     'default_value' => NULL,
@@ -306,7 +306,7 @@ function cluster_contact_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-contact-og_group_ref'
+  // Exported field_instance: 'node-contact-og_group_ref'.
   $field_instances['node-contact-og_group_ref'] = array(
     'bundle' => 'contact',
     'default_value' => NULL,
@@ -372,7 +372,7 @@ function cluster_contact_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-contact-title_field'
+  // Exported field_instance: 'node-contact-title_field'.
   $field_instances['node-contact-title_field'] = array(
     'bundle' => 'contact',
     'default_value' => NULL,

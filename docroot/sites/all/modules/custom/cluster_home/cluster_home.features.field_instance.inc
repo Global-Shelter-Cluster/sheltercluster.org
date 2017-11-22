@@ -10,7 +10,7 @@
 function cluster_home_field_default_field_instances() {
   $field_instances = array();
 
-  // Exported field_instance: 'node-homepage-field_homeimage'
+  // Exported field_instance: 'node-homepage-field_homeimage'.
   $field_instances['node-homepage-field_homeimage'] = array(
     'bundle' => 'homepage',
     'deleted' => 0,
@@ -71,7 +71,7 @@ function cluster_home_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-homepage-field_homelink'
+  // Exported field_instance: 'node-homepage-field_homelink'.
   $field_instances['node-homepage-field_homelink'] = array(
     'bundle' => 'homepage',
     'default_value' => NULL,
@@ -136,7 +136,7 @@ function cluster_home_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-homepage-title_field'
+  // Exported field_instance: 'node-homepage-title_field'.
   $field_instances['node-homepage-title_field'] = array(
     'bundle' => 'homepage',
     'default_value' => NULL,

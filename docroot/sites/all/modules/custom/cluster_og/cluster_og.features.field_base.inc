@@ -10,7 +10,7 @@
 function cluster_og_field_default_field_bases() {
   $field_bases = array();
 
-  // Exported field_base: 'field_appeal'
+  // Exported field_base: 'field_appeal'.
   $field_bases['field_appeal'] = array(
     'active' => 1,
     'cardinality' => -1,
@@ -20,7 +20,6 @@ function cluster_og_field_default_field_bases() {
     'field_permissions' => array(
       'type' => 0,
     ),
-    'foreign keys' => array(),
     'indexes' => array(
       'revision_id' => array(
         0 => 'revision_id',
@@ -37,7 +36,7 @@ function cluster_og_field_default_field_bases() {
     'type' => 'field_collection',
   );
 
-  // Exported field_base: 'field_appeal_amount'
+  // Exported field_base: 'field_appeal_amount'.
   $field_bases['field_appeal_amount'] = array(
     'active' => 1,
     'cardinality' => 1,
@@ -47,7 +46,6 @@ function cluster_og_field_default_field_bases() {
     'field_permissions' => array(
       'type' => 0,
     ),
-    'foreign keys' => array(),
     'indexes' => array(),
     'locked' => 0,
     'module' => 'number',
@@ -58,7 +56,7 @@ function cluster_og_field_default_field_bases() {
     'type' => 'number_integer',
   );
 
-  // Exported field_base: 'field_appeal_name'
+  // Exported field_base: 'field_appeal_name'.
   $field_bases['field_appeal_name'] = array(
     'active' => 1,
     'cardinality' => 1,
@@ -67,14 +65,6 @@ function cluster_og_field_default_field_bases() {
     'field_name' => 'field_appeal_name',
     'field_permissions' => array(
       'type' => 0,
-    ),
-    'foreign keys' => array(
-      'format' => array(
-        'columns' => array(
-          'format' => 'format',
-        ),
-        'table' => 'filter_format',
-      ),
     ),
     'indexes' => array(
       'format' => array(
@@ -91,21 +81,13 @@ function cluster_og_field_default_field_bases() {
     'type' => 'text',
   );
 
-  // Exported field_base: 'field_associated_regions'
+  // Exported field_base: 'field_associated_regions'.
   $field_bases['field_associated_regions'] = array(
     'active' => 1,
     'cardinality' => -1,
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_associated_regions',
-    'foreign keys' => array(
-      'node' => array(
-        'columns' => array(
-          'target_id' => 'nid',
-        ),
-        'table' => 'node',
-      ),
-    ),
     'indexes' => array(
       'target_id' => array(
         0 => 'target_id',
@@ -135,7 +117,7 @@ function cluster_og_field_default_field_bases() {
     'type' => 'entityreference',
   );
 
-  // Exported field_base: 'field_cluster_activation_date'
+  // Exported field_base: 'field_cluster_activation_date'.
   $field_bases['field_cluster_activation_date'] = array(
     'active' => 1,
     'cardinality' => 1,
@@ -145,7 +127,6 @@ function cluster_og_field_default_field_bases() {
     'field_permissions' => array(
       'type' => 0,
     ),
-    'foreign keys' => array(),
     'indexes' => array(),
     'locked' => 0,
     'module' => 'date',
@@ -170,7 +151,7 @@ function cluster_og_field_default_field_bases() {
     'type' => 'datetime',
   );
 
-  // Exported field_base: 'field_cluster_deactivation_date'
+  // Exported field_base: 'field_cluster_deactivation_date'.
   $field_bases['field_cluster_deactivation_date'] = array(
     'active' => 1,
     'cardinality' => 1,
@@ -180,7 +161,6 @@ function cluster_og_field_default_field_bases() {
     'field_permissions' => array(
       'type' => 0,
     ),
-    'foreign keys' => array(),
     'indexes' => array(),
     'locked' => 0,
     'module' => 'date',
@@ -205,7 +185,7 @@ function cluster_og_field_default_field_bases() {
     'type' => 'datetime',
   );
 
-  // Exported field_base: 'field_crisis_date_day'
+  // Exported field_base: 'field_crisis_date_day'.
   $field_bases['field_crisis_date_day'] = array(
     'active' => 1,
     'cardinality' => 1,
@@ -215,7 +195,6 @@ function cluster_og_field_default_field_bases() {
     'field_permissions' => array(
       'type' => 0,
     ),
-    'foreign keys' => array(),
     'indexes' => array(),
     'locked' => 0,
     'module' => 'date',
@@ -240,7 +219,7 @@ function cluster_og_field_default_field_bases() {
     'type' => 'datetime',
   );
 
-  // Exported field_base: 'field_current_sc_lead_agency'
+  // Exported field_base: 'field_current_sc_lead_agency'.
   $field_bases['field_current_sc_lead_agency'] = array(
     'active' => 1,
     'cardinality' => 1,
@@ -249,14 +228,6 @@ function cluster_og_field_default_field_bases() {
     'field_name' => 'field_current_sc_lead_agency',
     'field_permissions' => array(
       'type' => 0,
-    ),
-    'foreign keys' => array(
-      'format' => array(
-        'columns' => array(
-          'format' => 'format',
-        ),
-        'table' => 'filter_format',
-      ),
     ),
     'indexes' => array(
       'format' => array(
@@ -273,7 +244,7 @@ function cluster_og_field_default_field_bases() {
     'type' => 'text',
   );
 
-  // Exported field_base: 'field_disaster_causes'
+  // Exported field_base: 'field_disaster_causes'.
   $field_bases['field_disaster_causes'] = array(
     'active' => 1,
     'cardinality' => -1,
@@ -282,14 +253,6 @@ function cluster_og_field_default_field_bases() {
     'field_name' => 'field_disaster_causes',
     'field_permissions' => array(
       'type' => 0,
-    ),
-    'foreign keys' => array(
-      'tid' => array(
-        'columns' => array(
-          'tid' => 'tid',
-        ),
-        'table' => 'taxonomy_term_data',
-      ),
     ),
     'indexes' => array(
       'tid' => array(
@@ -306,12 +269,13 @@ function cluster_og_field_default_field_bases() {
         ),
       ),
       'entity_translation_sync' => FALSE,
+      'options_list_callback' => 'title_taxonomy_allowed_values',
     ),
     'translatable' => 0,
     'type' => 'taxonomy_term_reference',
   );
 
-  // Exported field_base: 'field_disaster_type'
+  // Exported field_base: 'field_disaster_type'.
   $field_bases['field_disaster_type'] = array(
     'active' => 1,
     'cardinality' => 1,
@@ -320,14 +284,6 @@ function cluster_og_field_default_field_bases() {
     'field_name' => 'field_disaster_type',
     'field_permissions' => array(
       'type' => 0,
-    ),
-    'foreign keys' => array(
-      'tid' => array(
-        'columns' => array(
-          'tid' => 'tid',
-        ),
-        'table' => 'taxonomy_term_data',
-      ),
     ),
     'indexes' => array(
       'tid' => array(
@@ -344,12 +300,13 @@ function cluster_og_field_default_field_bases() {
         ),
       ),
       'entity_translation_sync' => FALSE,
+      'options_list_callback' => 'title_taxonomy_allowed_values',
     ),
     'translatable' => 0,
     'type' => 'taxonomy_term_reference',
   );
 
-  // Exported field_base: 'field_emergency_sc_lead'
+  // Exported field_base: 'field_emergency_sc_lead'.
   $field_bases['field_emergency_sc_lead'] = array(
     'active' => 1,
     'cardinality' => 1,
@@ -358,14 +315,6 @@ function cluster_og_field_default_field_bases() {
     'field_name' => 'field_emergency_sc_lead',
     'field_permissions' => array(
       'type' => 0,
-    ),
-    'foreign keys' => array(
-      'format' => array(
-        'columns' => array(
-          'format' => 'format',
-        ),
-        'table' => 'filter_format',
-      ),
     ),
     'indexes' => array(
       'format' => array(
@@ -382,7 +331,7 @@ function cluster_og_field_default_field_bases() {
     'type' => 'text',
   );
 
-  // Exported field_base: 'field_geographic_region_type'
+  // Exported field_base: 'field_geographic_region_type'.
   $field_bases['field_geographic_region_type'] = array(
     'active' => 1,
     'cardinality' => 1,
@@ -391,14 +340,6 @@ function cluster_og_field_default_field_bases() {
     'field_name' => 'field_geographic_region_type',
     'field_permissions' => array(
       'type' => 0,
-    ),
-    'foreign keys' => array(
-      'tid' => array(
-        'columns' => array(
-          'tid' => 'tid',
-        ),
-        'table' => 'taxonomy_term_data',
-      ),
     ),
     'indexes' => array(
       'tid' => array(
@@ -415,12 +356,13 @@ function cluster_og_field_default_field_bases() {
         ),
       ),
       'entity_translation_sync' => FALSE,
+      'options_list_callback' => 'title_taxonomy_allowed_values',
     ),
     'translatable' => 0,
     'type' => 'taxonomy_term_reference',
   );
 
-  // Exported field_base: 'field_glide_number'
+  // Exported field_base: 'field_glide_number'.
   $field_bases['field_glide_number'] = array(
     'active' => 1,
     'cardinality' => 1,
@@ -430,14 +372,6 @@ function cluster_og_field_default_field_bases() {
     'field_permissions' => array(
       'type' => 0,
     ),
-    'foreign keys' => array(
-      'format' => array(
-        'columns' => array(
-          'format' => 'format',
-        ),
-        'table' => 'filter_format',
-      ),
-    ),
     'indexes' => array(
       'format' => array(
         0 => 'format',
@@ -453,7 +387,7 @@ function cluster_og_field_default_field_bases() {
     'type' => 'text',
   );
 
-  // Exported field_base: 'field_govt_counterpart_agency'
+  // Exported field_base: 'field_govt_counterpart_agency'.
   $field_bases['field_govt_counterpart_agency'] = array(
     'active' => 1,
     'cardinality' => 1,
@@ -463,14 +397,6 @@ function cluster_og_field_default_field_bases() {
     'field_permissions' => array(
       'type' => 0,
     ),
-    'foreign keys' => array(
-      'format' => array(
-        'columns' => array(
-          'format' => 'format',
-        ),
-        'table' => 'filter_format',
-      ),
-    ),
     'indexes' => array(
       'format' => array(
         0 => 'format',
@@ -486,7 +412,7 @@ function cluster_og_field_default_field_bases() {
     'type' => 'text',
   );
 
-  // Exported field_base: 'field_group_modules'
+  // Exported field_base: 'field_group_modules'.
   $field_bases['field_group_modules'] = array(
     'active' => 1,
     'cardinality' => -1,
@@ -496,7 +422,6 @@ function cluster_og_field_default_field_bases() {
     'field_permissions' => array(
       'type' => 0,
     ),
-    'foreign keys' => array(),
     'indexes' => array(
       'value' => array(
         0 => 'value',
@@ -517,7 +442,7 @@ function cluster_og_field_default_field_bases() {
     'type' => 'list_text',
   );
 
-  // Exported field_base: 'field_handover_date'
+  // Exported field_base: 'field_handover_date'.
   $field_bases['field_handover_date'] = array(
     'active' => 1,
     'cardinality' => 1,
@@ -527,7 +452,6 @@ function cluster_og_field_default_field_bases() {
     'field_permissions' => array(
       'type' => 0,
     ),
-    'foreign keys' => array(),
     'indexes' => array(),
     'locked' => 0,
     'module' => 'date',
@@ -552,7 +476,7 @@ function cluster_og_field_default_field_bases() {
     'type' => 'datetime',
   );
 
-  // Exported field_base: 'field_humanitarianresponse_link'
+  // Exported field_base: 'field_humanitarianresponse_link'.
   $field_bases['field_humanitarianresponse_link'] = array(
     'active' => 1,
     'cardinality' => 1,
@@ -562,7 +486,6 @@ function cluster_og_field_default_field_bases() {
     'field_permissions' => array(
       'type' => 0,
     ),
-    'foreign keys' => array(),
     'indexes' => array(),
     'locked' => 0,
     'module' => 'link',
@@ -586,7 +509,7 @@ function cluster_og_field_default_field_bases() {
     'type' => 'link_field',
   );
 
-  // Exported field_base: 'field_is_hot_response'
+  // Exported field_base: 'field_is_hot_response'.
   $field_bases['field_is_hot_response'] = array(
     'active' => 1,
     'cardinality' => 1,
@@ -596,7 +519,6 @@ function cluster_og_field_default_field_bases() {
     'field_permissions' => array(
       'type' => 0,
     ),
-    'foreign keys' => array(),
     'indexes' => array(
       'value' => array(
         0 => 'value',
@@ -616,7 +538,7 @@ function cluster_og_field_default_field_bases() {
     'type' => 'list_boolean',
   );
 
-  // Exported field_base: 'field_num_cluster_partners'
+  // Exported field_base: 'field_num_cluster_partners'.
   $field_bases['field_num_cluster_partners'] = array(
     'active' => 1,
     'cardinality' => 1,
@@ -626,7 +548,6 @@ function cluster_og_field_default_field_bases() {
     'field_permissions' => array(
       'type' => 0,
     ),
-    'foreign keys' => array(),
     'indexes' => array(),
     'locked' => 0,
     'module' => 'number',
@@ -637,7 +558,7 @@ function cluster_og_field_default_field_bases() {
     'type' => 'number_integer',
   );
 
-  // Exported field_base: 'field_parent_region'
+  // Exported field_base: 'field_parent_region'.
   $field_bases['field_parent_region'] = array(
     'active' => 1,
     'cardinality' => 1,
@@ -646,14 +567,6 @@ function cluster_og_field_default_field_bases() {
     'field_name' => 'field_parent_region',
     'field_permissions' => array(
       'type' => 0,
-    ),
-    'foreign keys' => array(
-      'node' => array(
-        'columns' => array(
-          'target_id' => 'nid',
-        ),
-        'table' => 'node',
-      ),
     ),
     'indexes' => array(
       'target_id' => array(
@@ -685,7 +598,7 @@ function cluster_og_field_default_field_bases() {
     'type' => 'entityreference',
   );
 
-  // Exported field_base: 'field_parent_response'
+  // Exported field_base: 'field_parent_response'.
   $field_bases['field_parent_response'] = array(
     'active' => 1,
     'cardinality' => 1,
@@ -694,14 +607,6 @@ function cluster_og_field_default_field_bases() {
     'field_name' => 'field_parent_response',
     'field_permissions' => array(
       'type' => 0,
-    ),
-    'foreign keys' => array(
-      'node' => array(
-        'columns' => array(
-          'target_id' => 'nid',
-        ),
-        'table' => 'node',
-      ),
     ),
     'indexes' => array(
       'target_id' => array(
@@ -732,7 +637,7 @@ function cluster_og_field_default_field_bases() {
     'type' => 'entityreference',
   );
 
-  // Exported field_base: 'field_recovery_sc_lead'
+  // Exported field_base: 'field_recovery_sc_lead'.
   $field_bases['field_recovery_sc_lead'] = array(
     'active' => 1,
     'cardinality' => 1,
@@ -741,14 +646,6 @@ function cluster_og_field_default_field_bases() {
     'field_name' => 'field_recovery_sc_lead',
     'field_permissions' => array(
       'type' => 0,
-    ),
-    'foreign keys' => array(
-      'format' => array(
-        'columns' => array(
-          'format' => 'format',
-        ),
-        'table' => 'filter_format',
-      ),
     ),
     'indexes' => array(
       'format' => array(
@@ -765,7 +662,7 @@ function cluster_og_field_default_field_bases() {
     'type' => 'text',
   );
 
-  // Exported field_base: 'field_reliefweb_link'
+  // Exported field_base: 'field_reliefweb_link'.
   $field_bases['field_reliefweb_link'] = array(
     'active' => 1,
     'cardinality' => 1,
@@ -775,7 +672,6 @@ function cluster_og_field_default_field_bases() {
     'field_permissions' => array(
       'type' => 0,
     ),
-    'foreign keys' => array(),
     'indexes' => array(),
     'locked' => 0,
     'module' => 'link',
@@ -799,7 +695,7 @@ function cluster_og_field_default_field_bases() {
     'type' => 'link_field',
   );
 
-  // Exported field_base: 'field_response_auto_redirect'
+  // Exported field_base: 'field_response_auto_redirect'.
   $field_bases['field_response_auto_redirect'] = array(
     'active' => 1,
     'cardinality' => 1,
@@ -808,14 +704,6 @@ function cluster_og_field_default_field_bases() {
     'field_name' => 'field_response_auto_redirect',
     'field_permissions' => array(
       'type' => 0,
-    ),
-    'foreign keys' => array(
-      'node' => array(
-        'columns' => array(
-          'target_id' => 'nid',
-        ),
-        'table' => 'node',
-      ),
     ),
     'indexes' => array(
       'target_id' => array(
@@ -846,14 +734,13 @@ function cluster_og_field_default_field_bases() {
     'type' => 'entityreference',
   );
 
-  // Exported field_base: 'field_response_status'
+  // Exported field_base: 'field_response_status'.
   $field_bases['field_response_status'] = array(
     'active' => 1,
     'cardinality' => 1,
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_response_status',
-    'foreign keys' => array(),
     'indexes' => array(
       'value' => array(
         0 => 'value',
@@ -873,7 +760,7 @@ function cluster_og_field_default_field_bases() {
     'type' => 'list_text',
   );
 
-  // Exported field_base: 'field_sag_member_agencies'
+  // Exported field_base: 'field_sag_member_agencies'.
   $field_bases['field_sag_member_agencies'] = array(
     'active' => 1,
     'cardinality' => -1,
@@ -882,14 +769,6 @@ function cluster_og_field_default_field_bases() {
     'field_name' => 'field_sag_member_agencies',
     'field_permissions' => array(
       'type' => 0,
-    ),
-    'foreign keys' => array(
-      'format' => array(
-        'columns' => array(
-          'format' => 'format',
-        ),
-        'table' => 'filter_format',
-      ),
     ),
     'indexes' => array(
       'format' => array(
@@ -906,7 +785,7 @@ function cluster_og_field_default_field_bases() {
     'type' => 'text',
   );
 
-  // Exported field_base: 'field_url_gov_lead_agency'
+  // Exported field_base: 'field_url_gov_lead_agency'.
   $field_bases['field_url_gov_lead_agency'] = array(
     'active' => 1,
     'cardinality' => 1,
@@ -916,7 +795,6 @@ function cluster_og_field_default_field_bases() {
     'field_permissions' => array(
       'type' => 0,
     ),
-    'foreign keys' => array(),
     'indexes' => array(),
     'locked' => 0,
     'module' => 'link',
@@ -940,7 +818,7 @@ function cluster_og_field_default_field_bases() {
     'type' => 'link_field',
   );
 
-  // Exported field_base: 'field_useful_links'
+  // Exported field_base: 'field_useful_links'.
   $field_bases['field_useful_links'] = array(
     'active' => 1,
     'cardinality' => -1,
@@ -950,7 +828,6 @@ function cluster_og_field_default_field_bases() {
     'field_permissions' => array(
       'type' => 0,
     ),
-    'foreign keys' => array(),
     'indexes' => array(),
     'locked' => 0,
     'module' => 'link',
@@ -974,14 +851,13 @@ function cluster_og_field_default_field_bases() {
     'type' => 'link_field',
   );
 
-  // Exported field_base: 'group_access'
+  // Exported field_base: 'group_access'.
   $field_bases['group_access'] = array(
     'active' => 1,
     'cardinality' => 1,
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'group_access',
-    'foreign keys' => array(),
     'indexes' => array(
       'value' => array(
         0 => 'value',
@@ -1002,14 +878,13 @@ function cluster_og_field_default_field_bases() {
     'type' => 'list_boolean',
   );
 
-  // Exported field_base: 'group_group'
+  // Exported field_base: 'group_group'.
   $field_bases['group_group'] = array(
     'active' => 1,
     'cardinality' => 1,
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'group_group',
-    'foreign keys' => array(),
     'indexes' => array(
       'value' => array(
         0 => 'value',
@@ -1029,14 +904,13 @@ function cluster_og_field_default_field_bases() {
     'type' => 'list_boolean',
   );
 
-  // Exported field_base: 'group_register'
+  // Exported field_base: 'group_register'.
   $field_bases['group_register'] = array(
     'active' => 1,
     'cardinality' => 1,
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'group_register',
-    'foreign keys' => array(),
     'indexes' => array(
       'value' => array(
         0 => 'value',
@@ -1057,7 +931,7 @@ function cluster_og_field_default_field_bases() {
     'type' => 'list_boolean',
   );
 
-  // Exported field_base: 'og_membership_request'
+  // Exported field_base: 'og_membership_request'.
   $field_bases['og_membership_request'] = array(
     'active' => 1,
     'cardinality' => 1,
@@ -1066,14 +940,6 @@ function cluster_og_field_default_field_bases() {
       0 => 'og_membership',
     ),
     'field_name' => 'og_membership_request',
-    'foreign keys' => array(
-      'format' => array(
-        'columns' => array(
-          'format' => 'format',
-        ),
-        'table' => 'filter_format',
-      ),
-    ),
     'indexes' => array(
       'format' => array(
         0 => 'format',
@@ -1088,14 +954,13 @@ function cluster_og_field_default_field_bases() {
     'type' => 'text_long',
   );
 
-  // Exported field_base: 'og_roles_permissions'
+  // Exported field_base: 'og_roles_permissions'.
   $field_bases['og_roles_permissions'] = array(
     'active' => 1,
     'cardinality' => 1,
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'og_roles_permissions',
-    'foreign keys' => array(),
     'indexes' => array(
       'value' => array(
         0 => 'value',
@@ -1115,21 +980,13 @@ function cluster_og_field_default_field_bases() {
     'type' => 'list_boolean',
   );
 
-  // Exported field_base: 'og_user_node'
+  // Exported field_base: 'og_user_node'.
   $field_bases['og_user_node'] = array(
     'active' => 1,
     'cardinality' => -1,
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'og_user_node',
-    'foreign keys' => array(
-      'node' => array(
-        'columns' => array(
-          'target_id' => 'nid',
-        ),
-        'table' => 'node',
-      ),
-    ),
     'indexes' => array(
       'target_id' => array(
         0 => 'target_id',
@@ -1156,7 +1013,7 @@ function cluster_og_field_default_field_bases() {
     'type' => 'entityreference',
   );
 
-  // Exported field_base: 'title_field'
+  // Exported field_base: 'title_field'.
   $field_bases['title_field'] = array(
     'active' => 1,
     'cardinality' => 1,
@@ -1165,14 +1022,6 @@ function cluster_og_field_default_field_bases() {
     'field_name' => 'title_field',
     'field_permissions' => array(
       'type' => 0,
-    ),
-    'foreign keys' => array(
-      'format' => array(
-        'columns' => array(
-          'format' => 'format',
-        ),
-        'table' => 'filter_format',
-      ),
     ),
     'indexes' => array(
       'format' => array(

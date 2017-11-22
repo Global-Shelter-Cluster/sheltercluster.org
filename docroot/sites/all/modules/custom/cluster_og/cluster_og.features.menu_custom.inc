@@ -23,6 +23,5 @@ function cluster_og_menu_default_menu_custom() {
   t('Menu that gets automatically populated from Geographic region content.');
   t('Regions');
 
-
   return $menus;
 }

@@ -10,7 +10,7 @@
 function shelter_base_field_default_field_instances() {
   $field_instances = array();
 
-  // Exported field_instance: 'node-article-body'
+  // Exported field_instance: 'node-article-body'.
   $field_instances['node-article-body'] = array(
     'bundle' => 'article',
     'default_value' => NULL,
@@ -61,7 +61,7 @@ function shelter_base_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-article-field_image'
+  // Exported field_instance: 'node-article-field_image'.
   $field_instances['node-article-field_image'] = array(
     'bundle' => 'article',
     'deleted' => 0,
@@ -121,7 +121,7 @@ function shelter_base_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-article-field_sorting_weight'
+  // Exported field_instance: 'node-article-field_sorting_weight'.
   $field_instances['node-article-field_sorting_weight'] = array(
     'bundle' => 'article',
     'default_value' => array(
@@ -172,7 +172,7 @@ function shelter_base_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-article-field_tags'
+  // Exported field_instance: 'node-article-field_tags'.
   $field_instances['node-article-field_tags'] = array(
     'bundle' => 'article',
     'default_value' => NULL,
@@ -219,7 +219,7 @@ function shelter_base_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-article-og_group_ref'
+  // Exported field_instance: 'node-article-og_group_ref'.
   $field_instances['node-article-og_group_ref'] = array(
     'bundle' => 'article',
     'default_value' => NULL,
@@ -230,6 +230,7 @@ function shelter_base_field_default_field_instances() {
         'label' => 'above',
         'module' => 'entityreference',
         'settings' => array(
+          'bypass_access' => FALSE,
           'link' => FALSE,
         ),
         'type' => 'entityreference_label',
@@ -277,7 +278,7 @@ function shelter_base_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-article-title_field'
+  // Exported field_instance: 'node-article-title_field'.
   $field_instances['node-article-title_field'] = array(
     'bundle' => 'article',
     'default_value' => NULL,
@@ -326,7 +327,7 @@ function shelter_base_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-community_of_practice-field_sorting_weight'
+  // Exported field_instance: 'node-community_of_practice-field_sorting_weight'.
   $field_instances['node-community_of_practice-field_sorting_weight'] = array(
     'bundle' => 'community_of_practice',
     'default_value' => array(
@@ -377,7 +378,7 @@ function shelter_base_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-contact-field_sorting_weight'
+  // Exported field_instance: 'node-contact-field_sorting_weight'.
   $field_instances['node-contact-field_sorting_weight'] = array(
     'bundle' => 'contact',
     'default_value' => array(
@@ -428,7 +429,7 @@ function shelter_base_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-event-field_sorting_weight'
+  // Exported field_instance: 'node-event-field_sorting_weight'.
   $field_instances['node-event-field_sorting_weight'] = array(
     'bundle' => 'event',
     'default_value' => array(
@@ -479,7 +480,7 @@ function shelter_base_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-geographic_region-field_sorting_weight'
+  // Exported field_instance: 'node-geographic_region-field_sorting_weight'.
   $field_instances['node-geographic_region-field_sorting_weight'] = array(
     'bundle' => 'geographic_region',
     'default_value' => array(
@@ -536,7 +537,7 @@ function shelter_base_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-hub-field_sorting_weight'
+  // Exported field_instance: 'node-hub-field_sorting_weight'.
   $field_instances['node-hub-field_sorting_weight'] = array(
     'bundle' => 'hub',
     'default_value' => array(
@@ -593,7 +594,7 @@ function shelter_base_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-page-body'
+  // Exported field_instance: 'node-page-body'.
   $field_instances['node-page-body'] = array(
     'bundle' => 'page',
     'default_value' => NULL,
@@ -644,7 +645,7 @@ function shelter_base_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-page-field_sorting_weight'
+  // Exported field_instance: 'node-page-field_sorting_weight'.
   $field_instances['node-page-field_sorting_weight'] = array(
     'bundle' => 'page',
     'default_value' => array(
@@ -695,7 +696,7 @@ function shelter_base_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-page-og_group_ref'
+  // Exported field_instance: 'node-page-og_group_ref'.
   $field_instances['node-page-og_group_ref'] = array(
     'bundle' => 'page',
     'default_value' => NULL,
@@ -760,7 +761,7 @@ function shelter_base_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-page-title_field'
+  // Exported field_instance: 'node-page-title_field'.
   $field_instances['node-page-title_field'] = array(
     'bundle' => 'page',
     'default_value' => NULL,
@@ -809,7 +810,7 @@ function shelter_base_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-response-field_sorting_weight'
+  // Exported field_instance: 'node-response-field_sorting_weight'.
   $field_instances['node-response-field_sorting_weight'] = array(
     'bundle' => 'response',
     'default_value' => array(
@@ -866,7 +867,7 @@ function shelter_base_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-strategic_advisory-field_sorting_weight'
+  // Exported field_instance: 'node-strategic_advisory-field_sorting_weight'.
   $field_instances['node-strategic_advisory-field_sorting_weight'] = array(
     'bundle' => 'strategic_advisory',
     'default_value' => array(
@@ -917,7 +918,7 @@ function shelter_base_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-working_group-field_sorting_weight'
+  // Exported field_instance: 'node-working_group-field_sorting_weight'.
   $field_instances['node-working_group-field_sorting_weight'] = array(
     'bundle' => 'working_group',
     'default_value' => array(
@@ -968,7 +969,7 @@ function shelter_base_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'taxonomy_term-tags-description_field'
+  // Exported field_instance: 'taxonomy_term-tags-description_field'.
   $field_instances['taxonomy_term-tags-description_field'] = array(
     'bundle' => 'tags',
     'default_value' => NULL,
@@ -1007,7 +1008,7 @@ function shelter_base_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'taxonomy_term-tags-name_field'
+  // Exported field_instance: 'taxonomy_term-tags-name_field'.
   $field_instances['taxonomy_term-tags-name_field'] = array(
     'bundle' => 'tags',
     'default_value' => NULL,
