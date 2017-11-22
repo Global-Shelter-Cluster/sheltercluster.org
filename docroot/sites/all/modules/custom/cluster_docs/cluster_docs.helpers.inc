@@ -61,6 +61,6 @@ function cluster_docs_get_tags_for_document(EntityDrupalWrapper $wrapper, array 
 function _cluster_docs_sort_tags_alphabetically(&$tags) {
   // Sort tags alphabetically based on the term name.
   uasort($tags, function($a, $b) {
-    return $a->name + $b->name ? 1 : -1;
+    return strnatcmp($a->name, $b->name);
   });
 }
