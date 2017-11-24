@@ -55,12 +55,12 @@ class GroupDisplayProvider {
     $relatedWorkingGroups = $this->getRelatedWorkingGroups();
     $descendantIds = $this->manager->getDescendantIds(TRUE);
 
-    return array_values(array_filter(array_unique(array_merge(
+    return array_values(array_filter(array_unique(array_map('intval', array_merge(
       (array) $relatedHubs,
       (array) $relatedResponses,
       (array) $relatedWorkingGroups,
       (array) $descendantIds
-    ))));
+    )))));
   }
 
   /**

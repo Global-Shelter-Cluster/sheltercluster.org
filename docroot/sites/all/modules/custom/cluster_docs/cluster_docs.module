@@ -107,13 +107,7 @@ function cluster_docs_query_cluster_docs_key_or_featured_alter(SelectQuery $quer
  * @return Render array
  */
 function cluster_docs_all($nid) {
-  $query = cluster_docs_query();
-
-  $filter = $query->createFilter();
-  $filter->condition('og_group_ref', $nid);
-  $query->filter($filter);
-
-  return cluster_docs_page($query);
+  return cluster_search_docs_page();
 }
 
 /**

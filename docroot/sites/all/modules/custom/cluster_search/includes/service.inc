@@ -154,6 +154,14 @@ class SearchApiClusterAlgoliaService extends SearchApiAlgoliaService {
                 $processed = TRUE;
               }
 
+              if ($key == 'field_language' && is_string($property_value) && $property_value) {
+                $lang = i18n_language_load($property_value);
+                if ($lang)
+                  $property_value = $lang->name;
+                else
+                  $processed = TRUE; // Skip it
+              }
+
               if (!$processed)
                 try {
                   \AlgoliaSearch\Json::encode($property_value);
