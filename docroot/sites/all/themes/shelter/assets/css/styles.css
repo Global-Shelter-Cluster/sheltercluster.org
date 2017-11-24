@@ -959,6 +959,7 @@ header .search {
   vertical-align: top;
   width: 100%;
   display: inline-block;
+  margin-bottom: 10px;
 }
 .facets .facet .clearfix {
   margin-bottom: 14px;
@@ -967,6 +968,20 @@ header .search {
   color: #2d62f9;
   font-size: 13.6px;
   font-size: 0.85rem;
+}
+.facets .facet input[type=search] {
+  width: 100%;
+  border: 1px solid #575757;
+  border-radius: 20px;
+  padding: 2px 10px;
+  margin-bottom: 10px;
+  box-sizing: border-box;
+}
+.facets .facet label, .facets .facet input[type=search] {
+  font-size: 13.6px;
+  font-size: 0.85rem;
+  font-weight: normal;
+  color: #242424;
 }
 .facets .facet h4 {
   padding: 0 0 0 0;
