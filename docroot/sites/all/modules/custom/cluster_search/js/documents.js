@@ -51,10 +51,11 @@
           return result;
         };
 
-        new Vue({
+        var vue = new Vue({
           el: '#content',
           data: {
-            facets: [],
+            facets: {},
+            facetFilters: {},
             query: '',
             timeout: null,
             results: null,
@@ -85,13 +86,45 @@
             }
           },
           methods: {
+            changeFacetFilter: function(e, facet, value) {
+              var checkbox = $(e.target);
+              if (typeof this.facetFilters[facet] === 'undefined')
+                this.facetFilters[facet] = {};
+              this.facetFilters[facet][value] = checkbox.is(':checked');
+              this.search();
+            },
+            isFacetActive: function(facet, value) {
+              if (typeof this.facetFilters[facet] === 'undefined')
+                return false;
+              if (typeof this.facetFilters[facet][value] === 'undefined')
+                return false;
+              return this.facetFilters[facet][value];
+            },
+            cleanSelectedFacets: function() {
+              var changed = false;
+              for (var facet in this.facetFilters) {
+                if (typeof this.facets[facet] === 'undefined') {
+                  this.facetFilters[facet] = {};
+                  changed = true;
+                  continue;
+                }
+                for (var value in this.facetFilters[facet]) {
+                  if (this.facetFilters[facet][value] && typeof this.facets[facet].values[value] === 'undefined') {
+                    this.facetFilters[facet][value] = false;
+                    changed = true;
+                  }
+                }
+              }
+              if (changed)
+                this.search(true);
+            },
             getPage: function(items, page, items_per_page) {
               return items.slice(items_per_page * page, items_per_page * page + items_per_page);
             },
             focus: function() {
               $('#content .facet input[type=search]').first().focus();
             },
-            search: function() {
+            search: function(skipCleanFacets) {
               var vue = this;
               vue.timeout = null;
 
@@ -130,9 +163,29 @@
               else
                 query[0].params.filters = 'group_nids:' + vue.groupNid;
 
+              if (vue.facetFilters) {
+                var facetFilters = [];
+                for (var facet in vue.facetFilters) {
+                  var currentFacetFilter = [];
+                  if (vue.facetFilters[facet].length === 0)
+                    continue;
+
+                  for (var value in vue.facetFilters[facet])
+                    if (vue.facetFilters[facet][value])
+                      currentFacetFilter[currentFacetFilter.length] = facet + ':' + value;
+
+                  if (currentFacetFilter.length === 1)
+                    facetFilters[facetFilters.length] = currentFacetFilter[0];
+                  else if (currentFacetFilter.length > 1)
+                    facetFilters[facetFilters.length] = currentFacetFilter;
+                }
+                if (facetFilters.length > 0)
+                  query[0].params.facetFilters = facetFilters;
+              }
+
               algolia_client.search(query, function searchDone(err, content) {
                 if (err) {
-                  vue.facets = null;
+                  vue.facets = {};
                   vue.results = null;
                   return;
                 }
@@ -142,27 +195,28 @@
                 else
                   vue.results = null;
 
+                vue.facets = {};
                 for (var facet in facets) {
                   if (typeof content.results[0].facets[facet] === 'undefined')
                     continue;
-                  var facet_values = [];
+                  var facet_values = {};
                   for (var facet_key in content.results[0].facets[facet])
-                    facet_values[facet_values.length] = {
-                      label: facet_key,
-                      count: content.results[0].facets[facet][facet_key]
-                    }
-                  vue.facets.push({
+                    facet_values[facet_key] = content.results[0].facets[facet][facet_key];
+                  vue.facets[facet] = {
                     title: facets[facet],
                     values: facet_values
-                  });
+                  };
                 }
 
+                if (!skipCleanFacets)
+                  vue.cleanSelectedFacets();
                 vue.searching = false;
                 if (vue.results) console.log(vue.results[0]);
               });
             }
           }
-        }).search();
+        });
+        vue.search();
       });
     }
   }
