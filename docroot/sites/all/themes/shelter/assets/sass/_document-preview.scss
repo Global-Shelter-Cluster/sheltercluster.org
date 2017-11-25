@@ -1,0 +1,32 @@
+.document-preview-list {
+  display: flex;
+  flex-wrap: wrap;
+
+  .document-preview {
+    text-decoration: none;
+    color: $shelter-grey;
+    width: 400px;
+    margin: 0 20px 20px 0;
+    padding: 10px;
+    border: 1px solid $shelter-light-blue;
+    min-height: 150px;
+
+    h4 {
+      color: $shelter-red;
+      text-transform: uppercase;
+      font-weight: normal;
+
+      line-height: 21px;
+      max-height: 21px * 3;
+      overflow: hidden;
+      //text-overflow: ellipsis;    // if only this worked for more than one line...
+    }
+
+    .thumbnail {
+      float: left;
+      width: 150px;
+      height: 150px;
+      margin-right: 10px;
+    }
+  }
+}

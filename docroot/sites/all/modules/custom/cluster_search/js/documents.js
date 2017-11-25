@@ -152,7 +152,7 @@
                 params: {
                   facets: facetsToRetrieve,
                   attributesToRetrieve: attributesToRetrieve,
-                  hitsPerPage: 50
+                  hitsPerPage: 24
                 }
               }];
 
