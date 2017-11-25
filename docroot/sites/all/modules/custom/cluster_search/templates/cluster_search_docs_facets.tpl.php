@@ -16,14 +16,14 @@
       </ul>
     </div>
   </div>
-  <div class="facet" v-for="facet in facets">
+  <div class="facet" v-for="(facet, facetField) in facets" :data-facet="facetField">
     <h4>{{ facet.title }}</h4>
     <div class="item-list">
       <ul>
-        <li class="leaf" v-for="value in facet.values">
+        <li class="leaf" v-for="(facetCount, facetValue) in facet.values">
           <label>
-            <input type="checkbox">
-            {{ value.label }} ({{ value.count }})
+            <input type="checkbox" :checked="isFacetActive(facetField, facetValue)" @change="changeFacetFilter($event, facetField, facetValue)">
+            {{ facetValue }} ({{ facetCount }})
           </label>
         </li>
       </ul>
