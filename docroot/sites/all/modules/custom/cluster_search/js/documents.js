@@ -29,6 +29,9 @@
             return null;
           return ret;
         });
+        Vue.filter('file_size', function (bytes) {
+          return parseInt(bytes)/1024/1024;
+        });
 
         var processDocument = function(result) {
           var group = typeof result._highlightResult.og_group_ref !== 'undefined' && result._highlightResult.og_group_ref.length > 0
@@ -131,6 +134,8 @@
               var attributesToRetrieve = [
                 'url',
                 'field_report_meeting_date',
+                'group_nids',
+                'field_document_source',
 
                 'field_featured',
                 'field_key_document',

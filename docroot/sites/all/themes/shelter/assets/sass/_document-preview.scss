@@ -3,7 +3,6 @@
   flex-wrap: wrap;
 
   .document-preview {
-    text-decoration: none;
     color: $shelter-grey;
     width: 400px;
     margin: 0 20px 20px 0;
@@ -11,10 +10,15 @@
     border: 1px solid $shelter-light-blue;
     min-height: 150px;
 
+    a {
+      text-decoration: none;
+    }
+
     h4 {
       color: $shelter-red;
       text-transform: uppercase;
       font-weight: normal;
+      margin: 0;
 
       line-height: 21px;
       max-height: 21px * 3;
@@ -28,5 +32,55 @@
       height: 150px;
       margin-right: 10px;
     }
+
+    .group {
+      color: $shelter-grey;
+      @include rem(font-size, 0.75rem);
+      display: block;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .document-link a {
+      background: url('../images/document-download.png') 0 0 no-repeat;
+      display: inline-block;
+      overflow: hidden;
+      text-indent: 20px;
+      width: 14px;
+    }
+
+    .is-small {
+      @include rem(font-size, 0.85rem);
+    }
+
+    .all-documents a {
+      background: url('../images/plus-red.png') 0 50% no-repeat;
+      padding-left: 12px;
+      text-transform: uppercase;
+    }
+
+    .file-info {
+      @include rem(bottom, .5rem);
+      display: flex;
+      position: absolute;
+      right: 0;
+    }
+
+    .file-info .file-extension {
+      @include rem(font-size, .75rem);
+      background: #CCC;
+      padding: 1px 3px;
+    }
+
+    .file-info .document-link {
+      margin-left: 10px;
+    }
+
+    //.info {
+    //  color: $shelter-grey;
+    //  @include rem(font-size, 0.75rem);
+    //
+    //}
   }
 }
