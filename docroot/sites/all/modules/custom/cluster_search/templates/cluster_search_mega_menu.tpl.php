@@ -1,5 +1,6 @@
 <li class="expanded last nav-item" id="cluster-search-mega-menu">
   <a href="#" @click.prevent="focus">Search</a>
+  <template>
   <ul class="nav-items menu search-input-row">
     <li class="within-group" v-if="groupNids">
       <label>
@@ -227,4 +228,5 @@
       <a v-if="!indexFilter && groupNids && onlyWithinGroup" href="#" @click.prevent="onlyWithinGroup = false">Search outside this group</a>
     </li>
   </ul>
+  </template>
 </li>
