@@ -1374,10 +1374,11 @@ function cluster_docs_field_default_field_instances() {
     'entity_type' => 'node',
     'field_name' => 'og_group_ref',
     'label' => 'Groups audience',
-    'required' => FALSE,
+    'required' => 1,
     'settings' => array(
       'behaviors' => array(
         'og_widget' => array(
+          'access_override' => 0,
           'admin' => array(
             'widget_type' => 'entityreference_autocomplete',
           ),
@@ -1403,6 +1404,7 @@ function cluster_docs_field_default_field_instances() {
       ),
     ),
     'widget' => array(
+      'active' => 0,
       'module' => 'og',
       'settings' => array(),
       'type' => 'og_complex',
