@@ -57,7 +57,7 @@ function cluster_docs_field_default_field_instances() {
         'summary_rows' => 5,
       ),
       'type' => 'text_textarea_with_summary',
-      'weight' => 4,
+      'weight' => 2,
     ),
   );
 
@@ -103,7 +103,7 @@ function cluster_docs_field_default_field_instances() {
         'apply_chosen' => '',
       ),
       'type' => 'options_buttons',
-      'weight' => 35,
+      'weight' => 18,
     ),
   );
 
@@ -195,7 +195,7 @@ function cluster_docs_field_default_field_instances() {
         'apply_chosen' => '',
       ),
       'type' => 'options_buttons',
-      'weight' => 37,
+      'weight' => 20,
     ),
   );
 
@@ -246,7 +246,7 @@ function cluster_docs_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 13,
+      'weight' => 37,
     ),
   );
 
@@ -292,7 +292,7 @@ function cluster_docs_field_default_field_instances() {
         'apply_chosen' => '',
       ),
       'type' => 'options_buttons',
-      'weight' => 14,
+      'weight' => 13,
     ),
   );
 
@@ -342,7 +342,7 @@ function cluster_docs_field_default_field_instances() {
         'display_label' => 1,
       ),
       'type' => 'options_onoff',
-      'weight' => 9,
+      'weight' => 40,
     ),
   );
 
@@ -398,7 +398,7 @@ function cluster_docs_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'pdf_to_image',
-      'weight' => 0,
+      'weight' => 38,
     ),
   );
 
@@ -455,7 +455,7 @@ function cluster_docs_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'image_image',
-      'weight' => 7,
+      'weight' => 4,
     ),
   );
 
@@ -547,7 +547,7 @@ function cluster_docs_field_default_field_instances() {
         'apply_chosen' => '',
       ),
       'type' => 'options_buttons',
-      'weight' => 36,
+      'weight' => 19,
     ),
   );
 
@@ -593,7 +593,7 @@ function cluster_docs_field_default_field_instances() {
         'apply_chosen' => '',
       ),
       'type' => 'options_buttons',
-      'weight' => 39,
+      'weight' => 22,
     ),
   );
 
@@ -639,7 +639,7 @@ function cluster_docs_field_default_field_instances() {
         'apply_chosen' => '',
       ),
       'type' => 'options_buttons',
-      'weight' => 40,
+      'weight' => 23,
     ),
   );
 
@@ -685,7 +685,7 @@ function cluster_docs_field_default_field_instances() {
         'apply_chosen' => '',
       ),
       'type' => 'options_buttons',
-      'weight' => 43,
+      'weight' => 26,
     ),
   );
 
@@ -735,7 +735,7 @@ function cluster_docs_field_default_field_instances() {
         'display_label' => 1,
       ),
       'type' => 'options_onoff',
-      'weight' => 6,
+      'weight' => 39,
     ),
   );
 
@@ -772,7 +772,7 @@ function cluster_docs_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'field_name' => 'field_language',
-    'label' => 'Language',
+    'label' => 'Document Language',
     'required' => 1,
     'settings' => array(
       'entity_translation_sync' => FALSE,
@@ -785,7 +785,7 @@ function cluster_docs_field_default_field_instances() {
         'apply_chosen' => '',
       ),
       'type' => 'options_select',
-      'weight' => 10,
+      'weight' => 41,
     ),
   );
 
@@ -849,7 +849,7 @@ function cluster_docs_field_default_field_instances() {
       'module' => 'link',
       'settings' => array(),
       'type' => 'link_field',
-      'weight' => 1,
+      'weight' => 39,
     ),
   );
 
@@ -893,7 +893,7 @@ function cluster_docs_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 45,
+      'weight' => 29,
     ),
   );
 
@@ -939,7 +939,7 @@ function cluster_docs_field_default_field_instances() {
         'apply_chosen' => '',
       ),
       'type' => 'options_buttons',
-      'weight' => 42,
+      'weight' => 25,
     ),
   );
 
@@ -986,7 +986,7 @@ function cluster_docs_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 17,
+      'weight' => 9,
     ),
   );
 
@@ -1043,7 +1043,7 @@ function cluster_docs_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'image_image',
-      'weight' => 12,
+      'weight' => 6,
     ),
   );
 
@@ -1105,7 +1105,7 @@ function cluster_docs_field_default_field_instances() {
         'year_range' => '-3:+3',
       ),
       'type' => 'date_text',
-      'weight' => 3,
+      'weight' => 40,
     ),
   );
 
@@ -1151,7 +1151,7 @@ function cluster_docs_field_default_field_instances() {
         'apply_chosen' => '',
       ),
       'type' => 'options_buttons',
-      'weight' => 38,
+      'weight' => 21,
     ),
   );
 
@@ -1197,7 +1197,7 @@ function cluster_docs_field_default_field_instances() {
         'apply_chosen' => '',
       ),
       'type' => 'options_buttons',
-      'weight' => 41,
+      'weight' => 24,
     ),
   );
 
@@ -1248,7 +1248,7 @@ function cluster_docs_field_default_field_instances() {
       'module' => 'number',
       'settings' => array(),
       'type' => 'number',
-      'weight' => 18,
+      'weight' => 41,
     ),
   );
 
@@ -1294,7 +1294,7 @@ function cluster_docs_field_default_field_instances() {
         'apply_chosen' => '',
       ),
       'type' => 'options_buttons',
-      'weight' => 36,
+      'weight' => 35,
     ),
   );
 
@@ -1340,7 +1340,7 @@ function cluster_docs_field_default_field_instances() {
         'apply_chosen' => '',
       ),
       'type' => 'options_buttons',
-      'weight' => 44,
+      'weight' => 28,
     ),
   );
 
@@ -1408,7 +1408,7 @@ function cluster_docs_field_default_field_instances() {
       'module' => 'og',
       'settings' => array(),
       'type' => 'og_complex',
-      'weight' => 11,
+      'weight' => 5,
     ),
   );
 
@@ -1457,7 +1457,7 @@ function cluster_docs_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 2,
+      'weight' => 1,
     ),
   );
 
@@ -1545,6 +1545,7 @@ function cluster_docs_field_default_field_instances() {
   t('Coordination Management');
   t('Cross-Cutting Issues');
   t('Description');
+  t('Document Language');
   t('Document Type');
   t('Featured document');
   t('Featured document show up in the slider at the top of the response page.');
@@ -1559,7 +1560,6 @@ function cluster_docs_field_default_field_instances() {
   t('Issues');
   t('Key Document');
   t('Key documents will remain visible on the response page.');
-  t('Language');
   t('Link');
   t('Meeting Management');
   t('Name');
