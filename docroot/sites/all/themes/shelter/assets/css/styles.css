@@ -636,6 +636,7 @@ body {
   flex-wrap: wrap;
 }
 .document-preview-list .document-preview {
+  position: relative;
   color: #575757;
   width: 400px;
   margin: 0 20px 20px 0;
@@ -663,9 +664,12 @@ body {
 }
 .document-preview-list .document-preview .group {
   color: #575757;
+  display: block;
+}
+.document-preview-list .document-preview .group, .document-preview-list .document-preview .document-date {
+  margin-top: 3px;
   font-size: 12px;
   font-size: 0.75rem;
-  display: block;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -676,31 +680,24 @@ body {
   overflow: hidden;
   text-indent: 20px;
   width: 14px;
-}
-.document-preview-list .document-preview .is-small {
-  font-size: 13.6px;
-  font-size: 0.85rem;
-}
-.document-preview-list .document-preview .all-documents a {
-  background: url("../images/plus-red.png") 0 50% no-repeat;
-  padding-left: 12px;
-  text-transform: uppercase;
+  height: 17px;
 }
 .document-preview-list .document-preview .file-info {
   bottom: 8px;
   bottom: 0.5rem;
-  display: flex;
-  position: absolute;
-  right: 0;
-}
-.document-preview-list .document-preview .file-info .file-extension {
   font-size: 12px;
   font-size: 0.75rem;
+  display: flex;
+  position: absolute;
+  right: 10px;
+  height: 15px;
+}
+.document-preview-list .document-preview .file-info .file-extension {
   background: #CCC;
   padding: 1px 3px;
 }
-.document-preview-list .document-preview .file-info .document-link {
-  margin-left: 10px;
+.document-preview-list .document-preview .file-info > * + * {
+  margin-left: 5px;
 }
 
 #featured-documents {

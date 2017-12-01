@@ -3,6 +3,7 @@
   flex-wrap: wrap;
 
   .document-preview {
+    position: relative;
     color: $shelter-grey;
     width: 400px;
     margin: 0 20px 20px 0;
@@ -35,8 +36,12 @@
 
     .group {
       color: $shelter-grey;
-      @include rem(font-size, 0.75rem);
       display: block;
+    }
+
+    .group, .document-date {
+      margin-top: 3px;
+      @include rem(font-size, 0.75rem);
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
@@ -48,33 +53,31 @@
       overflow: hidden;
       text-indent: 20px;
       width: 14px;
+      height: 17px;
     }
 
-    .is-small {
-      @include rem(font-size, 0.85rem);
-    }
-
-    .all-documents a {
-      background: url('../images/plus-red.png') 0 50% no-repeat;
-      padding-left: 12px;
-      text-transform: uppercase;
-    }
+    //.all-documents a {
+    //  background: url('../images/plus-red.png') 0 50% no-repeat;
+    //  padding-left: 12px;
+    //  text-transform: uppercase;
+    //}
 
     .file-info {
       @include rem(bottom, .5rem);
+      @include rem(font-size, .75rem);
       display: flex;
       position: absolute;
-      right: 0;
+      right: 10px;
+      height: 15px;
     }
 
     .file-info .file-extension {
-      @include rem(font-size, .75rem);
       background: #CCC;
       padding: 1px 3px;
     }
 
-    .file-info .document-link {
-      margin-left: 10px;
+    .file-info > * + * {
+      margin-left: 5px;
     }
 
     //.info {

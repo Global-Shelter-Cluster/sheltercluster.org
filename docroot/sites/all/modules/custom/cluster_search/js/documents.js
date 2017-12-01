@@ -27,10 +27,10 @@
           var ret = filename.substr(filename.lastIndexOf('.') + 1);
           if (ret.length > 6)
             return null;
-          return ret;
+          return ret.toUpperCase();
         });
         Vue.filter('file_size', function (bytes) {
-          return parseInt(bytes)/1024/1024;
+          return (parseInt(bytes)/1024/1024).toFixed(2) + 'M';
         });
 
         var processDocument = function(result) {
