@@ -114,10 +114,13 @@ function cluster_events_strongarm() {
     'extra_fields' => array(
       'form' => array(
         'path' => array(
-          'weight' => '9',
+          'weight' => '3',
         ),
         'language' => array(
-          'weight' => '7',
+          'weight' => '3',
+        ),
+        'redirect' => array(
+          'weight' => '5',
         ),
       ),
       'display' => array(),

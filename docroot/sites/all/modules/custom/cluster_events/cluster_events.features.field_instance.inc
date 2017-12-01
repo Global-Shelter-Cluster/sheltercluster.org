@@ -58,7 +58,7 @@ function cluster_events_field_default_field_instances() {
         'summary_rows' => 5,
       ),
       'type' => 'text_textarea_with_summary',
-      'weight' => 4,
+      'weight' => 1,
     ),
   );
 
@@ -112,7 +112,7 @@ function cluster_events_field_default_field_instances() {
         'display_label' => 0,
       ),
       'type' => 'options_onoff',
-      'weight' => 12,
+      'weight' => 6,
     ),
   );
 
@@ -157,7 +157,7 @@ function cluster_events_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 11,
+      'weight' => 4,
     ),
   );
 
@@ -215,7 +215,7 @@ function cluster_events_field_default_field_instances() {
         ),
       ),
       'type' => 'geocoder',
-      'weight' => 10,
+      'weight' => 3,
     ),
   );
 
@@ -266,7 +266,7 @@ function cluster_events_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'entityreference_autocomplete',
-      'weight' => 3,
+      'weight' => 2,
     ),
   );
 
@@ -315,7 +315,7 @@ function cluster_events_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'file_generic',
-      'weight' => 5,
+      'weight' => 2,
     ),
   );
 
