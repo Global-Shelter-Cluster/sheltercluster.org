@@ -260,10 +260,11 @@ function cluster_docs_views_default_views() {
   $handler->display->display_options['fields']['status']['table'] = 'node';
   $handler->display->display_options['fields']['status']['field'] = 'status';
   $handler->display->display_options['fields']['status']['not'] = 0;
-  /* Field: Content: Language */
+  /* Field: Content: Document Language */
   $handler->display->display_options['fields']['field_language']['id'] = 'field_language';
   $handler->display->display_options['fields']['field_language']['table'] = 'field_data_field_language';
   $handler->display->display_options['fields']['field_language']['field'] = 'field_language';
+  $handler->display->display_options['fields']['field_language']['label'] = 'Language';
   $handler->display->display_options['fields']['field_language']['settings'] = array(
     'format' => array(
       'name' => 'name',
@@ -422,7 +423,7 @@ function cluster_docs_views_default_views() {
     5 => 0,
     6 => 0,
   );
-  /* Filter criterion: Content: Language (field_language) */
+  /* Filter criterion: Content: Document Language (field_language) */
   $handler->display->display_options['filters']['field_language_value']['id'] = 'field_language_value';
   $handler->display->display_options['filters']['field_language_value']['table'] = 'field_data_field_language';
   $handler->display->display_options['filters']['field_language_value']['field'] = 'field_language_value';
