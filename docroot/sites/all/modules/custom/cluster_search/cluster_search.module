@@ -123,14 +123,16 @@ function _cluster_search_common_attach(&$render_array) {
     $render_array['#attached'] = [];
 
   $render_array['#attached']['js'][] = drupal_get_path('module', 'cluster_search') . '/js/algolia.js';
-  $render_array['#attached']['js'][] = [
-    'type' => 'external',
-    'data' => 'https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.3/vue.min.js'
-  ];
-  $render_array['#attached']['js'][] = [
-    'type' => 'external',
-    'data' => 'https://cdnjs.cloudflare.com/ajax/libs/algoliasearch/3.24.5/algoliasearchLite.js'
-  ];
+  $render_array['#attached']['js'][] = drupal_get_path('module', 'cluster_search') . '/js/lib/vue.min.js';
+  $render_array['#attached']['js'][] = drupal_get_path('module', 'cluster_search') . '/js/lib/algoliasearchLite.js';
+//  $render_array['#attached']['js'][] = [
+//    'type' => 'external',
+//    'data' => 'https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.3/vue.min.js'
+//  ];
+//  $render_array['#attached']['js'][] = [
+//    'type' => 'external',
+//    'data' => 'https://cdnjs.cloudflare.com/ajax/libs/algoliasearch/3.24.5/algoliasearchLite.js'
+//  ];
   $render_array['#attached']['js'][] = [
     'type' => 'setting',
     'data' => [
