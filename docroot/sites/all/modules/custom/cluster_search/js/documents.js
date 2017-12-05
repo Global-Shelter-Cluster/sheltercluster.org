@@ -51,6 +51,19 @@
           result.featured = result['field_featured'];
           result.key = result['field_key_document'];
 
+          result.tags = [];
+          for (var facet in facets) {
+            if (facet === 'field_language')
+              continue;
+            if (typeof result[facet] === 'undefined' || !result[facet].length)
+              continue;
+            for (var tagIndex in result[facet])
+              result.tags[result.tags.length] = {
+                field: facets[facet],
+                value: result[facet][tagIndex]
+              };
+          }
+
           return result;
         };
 
