@@ -45,8 +45,8 @@
           result.nid = result.objectID;
           result.title = result._highlightResult.title.value;
           result.group = group;
-          result.date = typeof result['field_report_meeting_date'] !== 'undefined'
-            ? Drupal.behaviors.clusterSearchAlgolia.dateHelper(result['field_report_meeting_date'])
+          result.date = typeof result['document_date'] !== 'undefined'
+            ? Drupal.behaviors.clusterSearchAlgolia.dateHelper(result['document_date'])
             : null;
           result.featured = result['field_featured'];
           result.key = result['field_key_document'];
@@ -146,7 +146,7 @@
 
               var attributesToRetrieve = [
                 'url',
-                'field_report_meeting_date',
+                'document_date',
                 'group_nids',
                 'field_document_source',
 
