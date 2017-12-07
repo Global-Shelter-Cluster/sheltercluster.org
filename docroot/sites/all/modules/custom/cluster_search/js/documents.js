@@ -23,12 +23,6 @@
         Vue.filter('strip_tags', function (html) {
           return $('<div />').html(html).text();
         });
-        Vue.filter('file_extension', function (filename) {
-          var ret = filename.substr(filename.lastIndexOf('.') + 1);
-          if (ret.length > 6)
-            return null;
-          return ret.toUpperCase();
-        });
         Vue.filter('file_size', function (bytes) {
           return (parseInt(bytes)/1024/1024).toFixed(2) + 'M';
         });
@@ -64,6 +58,17 @@
               };
           }
 
+          if (typeof result['field_file:file:url'] !== 'undefined')
+            result.direct_url = result['field_file:file:url'];
+          else if (typeof result['field_link:url'] !== 'undefined')
+            result.direct_url = result['field_link:url'];
+
+          if (typeof result.direct_url !== 'undefined') {
+            var file_extension = result.direct_url.substr(result.direct_url.lastIndexOf('.') + 1);
+            if (file_extension.length <= 6)
+              result.file_extension = file_extension.toUpperCase();
+          }
+
           return result;
         };
 
@@ -87,6 +92,9 @@
             },
             showNoResultsMessage: function() {
               return !this.searching && $.trim(this.query) !== '' && !this.hasResults;
+            },
+            hasFacetFiltersSelected: function() {
+              return this.prepareFacetFilters() ? true : false;
             }
           },
           watch: {
@@ -102,6 +110,25 @@
             }
           },
           methods: {
+            prepareFacetFilters: function() {
+              var facetFilters = [];
+              for (var facet in this.facetFilters) {
+                var currentFacetFilter = [];
+                if (this.facetFilters[facet].length === 0)
+                  continue;
+
+                for (var value in this.facetFilters[facet])
+                  if (this.facetFilters[facet][value])
+                    currentFacetFilter[currentFacetFilter.length] = facet + ':' + value;
+
+                if (currentFacetFilter.length === 1)
+                  facetFilters[facetFilters.length] = currentFacetFilter[0];
+                else if (currentFacetFilter.length > 1)
+                  facetFilters[facetFilters.length] = currentFacetFilter;
+              }
+
+              return facetFilters.length > 0 ? facetFilters : null;
+            },
             changeFacetFilter: function(e, facet, value) {
               var checkbox = $(e.target);
               if (typeof this.facetFilters[facet] === 'undefined')
@@ -116,7 +143,7 @@
                 return false;
               return this.facetFilters[facet][value];
             },
-            cleanSelectedFacets: function() {
+            clearSelectedFacets: function() {
               var changed = false;
               for (var facet in this.facetFilters) {
                 if (typeof this.facets[facet] === 'undefined') {
@@ -140,7 +167,7 @@
             focus: function() {
               $('#content .facet input[type=search]').first().focus();
             },
-            search: function(skipCleanFacets) {
+            search: function(skipClearFacets) {
               var vue = this;
               vue.timeout = null;
 
@@ -156,7 +183,8 @@
                 'field_preview:file:url',
 
                 'field_file:file:url',
-                'field_file:file:size'
+                'field_file:file:size',
+                'field_link:url'
               ];
               var facetsToRetrieve = [];
               for (var facet in facets) {
@@ -181,25 +209,9 @@
               else
                 query[0].params.filters = 'group_nids:' + vue.groupNid;
 
-              if (vue.facetFilters) {
-                var facetFilters = [];
-                for (var facet in vue.facetFilters) {
-                  var currentFacetFilter = [];
-                  if (vue.facetFilters[facet].length === 0)
-                    continue;
-
-                  for (var value in vue.facetFilters[facet])
-                    if (vue.facetFilters[facet][value])
-                      currentFacetFilter[currentFacetFilter.length] = facet + ':' + value;
-
-                  if (currentFacetFilter.length === 1)
-                    facetFilters[facetFilters.length] = currentFacetFilter[0];
-                  else if (currentFacetFilter.length > 1)
-                    facetFilters[facetFilters.length] = currentFacetFilter;
-                }
-                if (facetFilters.length > 0)
-                  query[0].params.facetFilters = facetFilters;
-              }
+              var facetFilters = vue.prepareFacetFilters();
+              if (facetFilters)
+                query[0].params.facetFilters = facetFilters;
 
               algolia_client.search(query, function searchDone(err, content) {
                 if (err) {
@@ -226,10 +238,9 @@
                   };
                 }
 
-                if (!skipCleanFacets)
-                  vue.cleanSelectedFacets();
+                if (!skipClearFacets)
+                  vue.clearSelectedFacets();
                 vue.searching = false;
-                if (vue.results) console.log(vue.results[0]);
               });
             }
           }
