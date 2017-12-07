@@ -1,3 +1,15 @@
+<div class="search-summary" v-if="results && hits > 1">
+  <span class="summary">Showing {{ resultsFrom }}&ndash;{{ resultsTo }} of {{ hits }} documents.</span>
+  <ul class="pagination" v-if="pages > 1">
+    <li>Pages:</li>
+    <li v-for="p in paginationPages">
+      <a v-if="p != '-' && p != page" href="#" @click.prevent="search(true, p)">{{ p+1 }}</a>
+      <span v-if="p != '-' && p == page">{{ p+1 }}</span>
+      <span v-if="p == '-'">&hellip;</span>
+    </li>
+  </ul>
+</div>
+
 <section class="document-preview-list">
 
   <article class="document-preview" v-for="document in results">
