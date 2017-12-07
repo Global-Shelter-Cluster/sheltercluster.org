@@ -1,12 +1,10 @@
 <section class="document-preview-list">
 
   <article class="document-preview" v-for="document in results">
-    <a class="thumbnail" :href="document['field_file:file:url']" target="_blank">
+    <a class="thumbnail" :href="document.direct_url" target="_blank">
       <div class="file-info">
-        <div>[ {{ document['field_file:file:size']|file_size }} ]</div>
-        <div v-if="document['field_file:file:url']"
-              class="file-extension"
-        >{{ document['field_file:file:url']|file_extension }}</div>
+        <div v-if="document['field_file:file:size']">[ {{ document['field_file:file:size']|file_size }} ]</div>
+        <div v-if="document.file_extension" class="file-extension">{{ document.file_extension }}</div>
         <div class="document-link">
           Download
         </div>
@@ -54,4 +52,23 @@
     </ul>
   </article>
 
+  <div class="no-results" v-if="!searching && !results">
+    <a v-if="hasFacetFiltersSelected" href="#" @click.prevent="clearSelectedFacets()">
+      No documents found. Try removing the selected filters.
+    </a>
+    <a v-if="!hasFacetFiltersSelected && query && includeDescendants == 0"
+      href="#" @click.prevent="includeDescendants = '1'">
+      No documents found matching "<strong>{{ query }}</strong>". Try including subgroups.
+    </a>
+    <span v-if="!hasFacetFiltersSelected && query && includeDescendants == 1">
+      No documents found matching "<strong>{{ query }}</strong>".
+    </span>
+    <a v-if="!hasFacetFiltersSelected && !query && includeDescendants == 0"
+       href="#" @click.prevent="includeDescendants = '1'">
+      No documents found. Try including subgroups.
+    </a>
+    <span v-if="!hasFacetFiltersSelected && !query && includeDescendants == 1">
+      No documents found.
+    </span>
+  </div>
 </section>

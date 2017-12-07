@@ -1390,6 +1390,15 @@ header .search {
     display: none;
   }
 }
+.no-results {
+  width: 100%;
+  text-align: center;
+  padding: 50px 0;
+}
+.no-results, .no-results a {
+  color: #575757;
+}
+
 /* _header.scss */
 header ul {
   padding: 0;
