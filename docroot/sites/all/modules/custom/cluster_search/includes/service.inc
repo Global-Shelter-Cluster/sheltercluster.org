@@ -162,7 +162,10 @@ class SearchApiClusterAlgoliaService extends SearchApiAlgoliaService {
                   $processed = TRUE; // Skip it
               }
 
-              if (!$processed)
+              if (in_array($key, ['created', 'field_report_meeting_date']))
+                $property_value = intval($property_value);
+
+              if (!$processed) {
                 try {
                   \AlgoliaSearch\Json::encode($property_value);
 
@@ -171,8 +174,12 @@ class SearchApiClusterAlgoliaService extends SearchApiAlgoliaService {
                     : $property_value;
                 } catch (\AlgoliaSearch\AlgoliaException $e) {
                   // Don't include it in the index
-                  watchdog('cluster_search', 'Skipped field %field in node %nid due to encoding', ['%field' => $key, '%nid' => $item[$entity_key]['value']]);
+                  watchdog('cluster_search', 'Skipped field %field in node %nid due to encoding', [
+                    '%field' => $key,
+                    '%nid' => $item[$entity_key]['value']
+                  ]);
                 }
+              }
             }
           }
           else {
@@ -184,6 +191,12 @@ class SearchApiClusterAlgoliaService extends SearchApiAlgoliaService {
       }
       try {
         \AlgoliaSearch\Json::encode($item_to_index);
+
+        if (array_key_exists('created', $item_to_index)) {
+          $item_to_index['document_date'] = array_key_exists('field_report_meeting_date', $item_to_index) && $item_to_index['field_report_meeting_date']
+            ? $item_to_index['field_report_meeting_date']
+            : $item_to_index['created'];
+        }
 
         // Add the properly formatted items to the batch.
         $items_to_index[] = $item_to_index;

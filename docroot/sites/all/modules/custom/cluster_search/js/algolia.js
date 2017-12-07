@@ -27,8 +27,8 @@
             url: result.url,
             title: result._highlightResult.title.value,
             group: group,
-            date: typeof result['field_report_meeting_date'] !== 'undefined'
-              ? Drupal.behaviors.clusterSearchAlgolia.dateHelper(result['field_report_meeting_date'])
+            date: typeof result['document_date'] !== 'undefined'
+              ? Drupal.behaviors.clusterSearchAlgolia.dateHelper(result['document_date'])
               : null,
             featured: result['field_featured'],
             key: result['field_key_document']

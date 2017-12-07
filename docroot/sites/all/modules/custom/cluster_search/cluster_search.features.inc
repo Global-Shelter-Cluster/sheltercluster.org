@@ -254,6 +254,7 @@ function cluster_search_default_search_api_index() {
       "cron_limit" : "0",
       "fields" : {
         "body:value" : { "type" : "text" },
+        "created" : { "type" : "date" },
         "field_assess_monitor_eval" : { "type" : "list\\u003Cinteger\\u003E", "entity_type" : "taxonomy_term" },
         "field_coordination_management" : { "type" : "list\\u003Cinteger\\u003E", "entity_type" : "taxonomy_term" },
         "field_cross_cutting_issues" : { "type" : "list\\u003Cinteger\\u003E", "entity_type" : "taxonomy_term" },
