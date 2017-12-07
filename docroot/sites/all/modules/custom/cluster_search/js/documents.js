@@ -33,8 +33,8 @@
             : null;
 
           result.thumb = result['field_preview:file:url'];
-          if (result.thumb)
-            result.thumb = result.thumb.replace('local.sheltercluster.org', 'dev.sheltercluster.org'); //TODO: temporary code
+          if (result.thumb && settings.cluster_search.algolia_prefix === 'local')
+            result.thumb = result.thumb.replace('local.sheltercluster.org', 'dev.sheltercluster.org').replace('/styles/medium/public', '');
 
           result.nid = result.objectID;
           result.title = result._highlightResult.title.value;
@@ -72,16 +72,20 @@
           return result;
         };
 
+        var hitsPerPage = 24;
+
         var vue = new Vue({
           el: '#content',
           data: {
             facets: {},
             facetFilters: {},
             query: '',
+            page: 0,
+            pages: 0,
+            hits: 0,
             timeout: null,
             results: null,
             searching: false,
-            indexFilter: null,
             groupNid: typeof settings.cluster_nav !== 'undefined' ? settings.cluster_nav.group_nid : null,
             descendantNids: typeof settings.cluster_nav !== 'undefined' ? settings.cluster_nav.search_group_nids : null,
             includeDescendants: "0"
@@ -95,6 +99,56 @@
             },
             hasFacetFiltersSelected: function() {
               return this.prepareFacetFilters() ? true : false;
+            },
+            paginationPages: function() {
+              var ret = [];
+              var lastShown = -1;
+              var i;
+
+              // First few pages
+              for (i = 0; i < Math.min(this.pages, 3); i++) {
+                ret[ret.length] = i;
+                lastShown = i;
+              }
+
+              if (lastShown >= this.pages)
+                return ret;
+
+              // Pages around the current one
+              var from = Math.max(lastShown + 1, this.page - 2);
+              var to = Math.min(this.pages - 1, this.page + 2);
+              if (to >= from) {
+                if (from === lastShown + 2)
+                  from--;
+                if (from > lastShown + 1)
+                  ret[ret.length] = '-';
+                for (i = from; i <= to; i++) {
+                  ret[ret.length] = i;
+                  lastShown = i;
+                }
+              }
+
+              // Last few pages
+              var from = Math.max(lastShown + 1, this.pages - 3);
+              var to = this.pages - 1;
+              if (to >= from) {
+                if (from === lastShown + 2)
+                  from--;
+                if (from > lastShown + 1)
+                  ret[ret.length] = '-';
+                for (i = from; i <= to; i++) {
+                  ret[ret.length] = i;
+                  lastShown = i;
+                }
+              }
+
+              return ret;
+            },
+            resultsFrom: function() {
+              return this.page * hitsPerPage + 1;
+            },
+            resultsTo: function() {
+              return this.resultsFrom + this.results.length - 1;
             }
           },
           watch: {
@@ -106,7 +160,6 @@
             },
             includeDescendants: function() {
               this.search();
-              this.focus();
             }
           },
           methods: {
@@ -161,13 +214,10 @@
               if (changed)
                 this.search(true);
             },
-            getPage: function(items, page, items_per_page) {
-              return items.slice(items_per_page * page, items_per_page * page + items_per_page);
-            },
             focus: function() {
               $('#content .facet input[type=search]').first().focus();
             },
-            search: function(skipClearFacets) {
+            search: function(skipClearFacets, pageChange) {
               var vue = this;
               vue.timeout = null;
 
@@ -192,13 +242,18 @@
                 facetsToRetrieve[facetsToRetrieve.length] = facet;
               }
 
+              var indexName = settings.cluster_search.algolia_prefix + 'Documents';
+              if (!vue.query)
+                indexName += '_sortByDate';
+
               var query = [{
-                indexName: settings.cluster_search.algolia_prefix + 'Documents',
+                indexName: indexName,
                 query: vue.query,
                 params: {
                   facets: facetsToRetrieve,
                   attributesToRetrieve: attributesToRetrieve,
-                  hitsPerPage: 24
+                  hitsPerPage: hitsPerPage,
+                  page: isNaN(pageChange) ? 0 : parseInt(pageChange) // If not given, always resets to the first page
                 }
               }];
 
@@ -237,6 +292,10 @@
                     values: facet_values
                   };
                 }
+
+                vue.pages = content.results[0].nbPages;
+                vue.hits = content.results[0].nbHits;
+                vue.page = content.results[0].page;
 
                 if (!skipClearFacets)
                   vue.clearSelectedFacets();

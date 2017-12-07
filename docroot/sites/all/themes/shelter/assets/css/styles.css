@@ -1399,6 +1399,28 @@ header .search {
   color: #575757;
 }
 
+.search-summary {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 30px;
+  color: #575757;
+}
+
+ul.pagination {
+  list-style: none;
+  display: flex;
+  margin: 0;
+  padding: 0;
+}
+ul.pagination li span, ul.pagination li a {
+  padding: 0 5px;
+}
+ul.pagination li a {
+  color: #575757;
+}
+
 /* _header.scss */
 header ul {
   padding: 0;

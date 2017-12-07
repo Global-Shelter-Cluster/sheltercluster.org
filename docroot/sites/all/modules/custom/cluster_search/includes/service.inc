@@ -165,6 +165,15 @@ class SearchApiClusterAlgoliaService extends SearchApiAlgoliaService {
               if (in_array($key, ['created', 'field_report_meeting_date']))
                 $property_value = intval($property_value);
 
+              if ($key === 'field_preview:file:fid') {
+                $file = file_load($property_value);
+                if ($file) {
+                  $a=$file->uri;
+                  $item_to_index['field_preview:file:url'] = image_style_url('medium', $file->uri);
+                }
+                $processed = TRUE;
+              }
+
               if (!$processed) {
                 try {
                   \AlgoliaSearch\Json::encode($property_value);
