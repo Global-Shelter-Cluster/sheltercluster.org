@@ -274,7 +274,7 @@ function cluster_search_default_search_api_index() {
         "field_meeting_management" : { "type" : "list\\u003Cinteger\\u003E", "entity_type" : "taxonomy_term" },
         "field_non_food_items" : { "type" : "list\\u003Cinteger\\u003E", "entity_type" : "taxonomy_term" },
         "field_other_keywords" : { "type" : "text", "boost" : "2.0" },
-        "field_preview:file:url" : { "type" : "uri" },
+        "field_preview:file:fid" : { "type" : "integer" },
         "field_report_meeting_date" : { "type" : "date" },
         "field_response_phase" : { "type" : "list\\u003Cinteger\\u003E", "entity_type" : "taxonomy_term" },
         "field_settlement_type" : { "type" : "list\\u003Cinteger\\u003E", "entity_type" : "taxonomy_term" },
