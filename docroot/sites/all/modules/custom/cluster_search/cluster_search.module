@@ -175,5 +175,9 @@ function cluster_search_docs_page($query = NULL, $show_facets = TRUE, $default_s
 
   _cluster_search_common_attach($ret);
   $ret['#attached']['js'][] = drupal_get_path('module', 'cluster_search') . '/js/documents.js';
+  $ret['#attached']['js'][] = [
+    'type' => 'external',
+    'data' => 'https://use.fontawesome.com/releases/v5.0.0/js/all.js'
+  ];
   return $ret;
 }

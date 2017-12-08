@@ -695,14 +695,6 @@ body {
   background: #CCC;
   padding: 1px 3px;
 }
-.document-preview-list .document-preview .thumbnail .file-info .document-link {
-  background: url("../images/document-download.png") 0 0 no-repeat;
-  display: inline-block;
-  overflow: hidden;
-  text-indent: 20px;
-  width: 14px;
-  height: 17px;
-}
 .document-preview-list .document-preview .group {
   color: #575757;
   display: block;
@@ -731,10 +723,10 @@ body {
 .document-preview-list .document-preview .tags li {
   font-size: 12px;
   font-size: 0.75rem;
-  color: white;
-  background-color: #7f1416;
+  color: #575757;
+  border: 1px solid #575757;
   border-radius: 6px;
-  padding: 2px 4px;
+  padding: 0 4px;
   margin: 1px;
   height: 18px;
   max-width: 220px;
@@ -1211,6 +1203,13 @@ header .search {
   font-size: 0.75rem;
   color: #575757;
 }
+.document-table .information-title .group {
+  text-transform: uppercase;
+  font-size: 12px;
+  font-size: 0.75rem;
+  color: #575757;
+  text-decoration: none;
+}
 .document-table .information-title .tags h3 {
   position: absolute !important;
   height: 1px;
@@ -1219,14 +1218,32 @@ header .search {
   clip: rect(1px 1px 1px 1px);
 }
 .document-table .information-title .tags ul {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
   margin-top: 10px;
-  text-transform: uppercase;
+}
+.document-table .information-title .tags ul li {
   font-size: 12px;
   font-size: 0.75rem;
   color: #575757;
+  border: 1px solid #575757;
+  border-radius: 6px;
+  padding: 0 4px;
+  margin: 1px;
+  height: 18px;
 }
 .document-table .information-file {
-  min-width: 90px;
+  font-size: 13.6px;
+  font-size: 0.85rem;
+  white-space: nowrap;
+}
+.document-table .information-file, .document-table .information-file a {
+  color: #688394;
+  text-decoration: none;
+}
+.document-table .information-file a:hover {
+  color: #3e4e58;
 }
 .document-table .document-groups {
   margin: 0.75em 0;
@@ -1414,11 +1431,36 @@ ul.pagination {
   margin: 0;
   padding: 0;
 }
+ul.pagination li {
+  margin: 0;
+}
 ul.pagination li span, ul.pagination li a {
   padding: 0 5px;
 }
 ul.pagination li a {
   color: #575757;
+}
+
+ul.search-display {
+  list-style: none;
+  display: flex;
+  margin: 0;
+  padding: 0;
+}
+ul.search-display li {
+  margin: 0;
+}
+ul.search-display li > * {
+  padding: 0 5px;
+}
+ul.search-display li a {
+  color: #688394;
+}
+ul.search-display li a[href] {
+  color: #cdd6db;
+}
+ul.search-display li a[href]:hover {
+  color: #688394;
 }
 
 /* _header.scss */

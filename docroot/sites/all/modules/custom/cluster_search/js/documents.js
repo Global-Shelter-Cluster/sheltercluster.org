@@ -72,11 +72,12 @@
           return result;
         };
 
-        var hitsPerPage = 24;
+        var hitsPerPage = 30;
 
         var vue = new Vue({
           el: '#content',
           data: {
+            display: 'preview', //preview (document blocks) | list (table)
             facets: {},
             facetFilters: {},
             query: '',
