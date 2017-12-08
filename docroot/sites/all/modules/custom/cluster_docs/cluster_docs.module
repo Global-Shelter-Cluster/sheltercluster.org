@@ -139,10 +139,11 @@ function cluster_docs_query() {
 
 /**
  * Returns a list of taxonomy term fields used as facets in document list pages.
+ * @param bool $labels If TRUE, returns machine names as keys and labels as values, otherwise just the machine names.
  * @return array
  */
-function cluster_docs_taxonomies() {
-  return array(
+function cluster_docs_taxonomies($labels = FALSE) {
+  $machine_names = [
 //    'search_api_language',
     'field_language',
     'field_document_type',
@@ -162,7 +163,28 @@ function cluster_docs_taxonomies() {
     'field_issues',
     'field_toolkit',
     'field_meeting_management',
-  );
+  ];
+
+  if (!$labels)
+    return $machine_names;
+
+  $ret = [];
+  foreach ($machine_names as $machine_name) {
+    $field = field_info_instance('node', $machine_name, 'document');
+    $ret[$machine_name] = $field['label'];
+  }
+  return $ret;
+}
+
+/**
+ * Returns how many taxonomies are in each group (regular taxonomies, basic tags, advanced tags).
+ * This matches what's returned by cluster_docs_taxonomies().
+ * @return array
+ */
+function cluster_docs_taxonomy_groups() {
+  $groups = [2, 3];
+  $groups[] = count(cluster_docs_taxonomies()) - array_sum($groups);
+  return $groups;
 }
 
 /**

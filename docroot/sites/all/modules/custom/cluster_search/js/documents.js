@@ -8,17 +8,7 @@
         }
 
         var algolia_client = algoliasearch(settings.cluster_search.algolia_app_id, settings.cluster_search.algolia_search_key);
-        var facets = {
-          'field_language': "Language",
-
-          'field_document_type': "Document Type",
-
-          'field_coordination_management': "Coordination Management",
-          'field_information_management': "Information Management",
-          'field_technical_support_design': "Technical Support and Design"
-
-          //TODO: advanced tags
-        };
+        var facets = settings.cluster_search.taxonomies;
 
         Vue.filter('strip_tags', function (html) {
           return $('<div />').html(html).text();
@@ -53,6 +43,7 @@
               continue;
             for (var tagIndex in result[facet])
               result.tags[result.tags.length] = {
+                field_key: facet,
                 field: facets[facet],
                 value: result[facet][tagIndex]
               };
@@ -89,6 +80,7 @@
             searching: false,
             groupNid: typeof settings.cluster_nav !== 'undefined' ? settings.cluster_nav.group_nid : null,
             descendantNids: typeof settings.cluster_nav !== 'undefined' ? settings.cluster_nav.search_group_nids : null,
+            showGroup: false,
             includeDescendants: "0"
           },
           computed: {
@@ -100,6 +92,50 @@
             },
             hasFacetFiltersSelected: function() {
               return this.prepareFacetFilters() ? true : false;
+            },
+            facetsDisplay: function() {
+              // The "taxonomy_groups" setting is an array of ints where each number represents how many facets belong
+              // to each "group" (lang&doctype, basic tags, advanced tags).
+              // The idea is to decide whether to show "the next group of facets", based on how many we're showing already.
+              // If there's less than 3 facets shown, we add the next group to the display (see facetsDisplay() below).
+              var vue = this, ret = {}, facetsShown = 0, stopLooking = false;
+              var facetKeys = Object.keys(facets), currentFacetKey = 0;
+              for (var i = 0; i < settings.cluster_search.taxonomy_groups.length; i++) {
+                for (var j = 0; j < settings.cluster_search.taxonomy_groups[i]; j++) {
+                  var facet_key = facetKeys[currentFacetKey];
+                  currentFacetKey++;
+                  if (!vue.facets[facet_key])
+                    continue;
+
+                  var show = false, first = true;
+                  for (var value in vue.facets[facet_key].values) {
+                    if (vue.isFacetActive(facet_key, value)) {
+                      // Value is selected by the user
+                      show = true;
+                      break;
+                    }
+                    if (first)
+                      first = false;
+                    else if (!stopLooking) {
+                      // Facet has 2 or more values
+                      show = true;
+                      break;
+                    }
+                  }
+
+                  if (show) {
+                    ret[facet_key] = vue.facets[facet_key];
+                    facetsShown++;
+                  }
+                }
+
+                if (facetsShown >= 3) {
+                  // We're showing 3 or more facets, stop looking actively (only show facets that have selected values).
+                  stopLooking = true;
+                }
+              }
+
+              return ret;
             },
             paginationPages: function() {
               var ret = [];
@@ -185,9 +221,23 @@
             },
             changeFacetFilter: function(e, facet, value) {
               var checkbox = $(e.target);
+              if (checkbox.is(':checked'))
+                this.selectFacet(facet, value);
+              else
+                this.deselectFacet(facet, value);
+            },
+            selectFacet: function(facet, value) {
               if (typeof this.facetFilters[facet] === 'undefined')
                 this.facetFilters[facet] = {};
-              this.facetFilters[facet][value] = checkbox.is(':checked');
+
+              this.facetFilters[facet][value] = true;
+              this.search();
+            },
+            deselectFacet: function(facet, value) {
+              if (typeof this.facetFilters[facet] === 'undefined')
+                return;
+
+              this.facetFilters[facet][value] = false;
               this.search();
             },
             isFacetActive: function(facet, value) {
@@ -221,6 +271,7 @@
             search: function(skipClearFacets, pageChange) {
               var vue = this;
               vue.timeout = null;
+              vue.searching = true;
 
               var attributesToRetrieve = [
                 'url',
@@ -297,6 +348,7 @@
                 vue.pages = content.results[0].nbPages;
                 vue.hits = content.results[0].nbHits;
                 vue.page = content.results[0].page;
+                vue.showGroup = parseInt(vue.includeDescendants) !== 0;
 
                 if (!skipClearFacets)
                   vue.clearSelectedFacets();
