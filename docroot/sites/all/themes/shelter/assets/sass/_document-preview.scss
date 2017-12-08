@@ -69,14 +69,14 @@
           padding: 1px 3px;
         }
 
-        .document-link {
-          background: url('../images/document-download.png') 0 0 no-repeat;
-          display: inline-block;
-          overflow: hidden;
-          text-indent: 20px;
-          width: 14px;
-          height: 17px;
-        }
+        //.document-link {
+        //  background: url('../images/document-download.png') 0 0 no-repeat;
+        //  display: inline-block;
+        //  overflow: hidden;
+        //  text-indent: 20px;
+        //  width: 14px;
+        //  height: 17px;
+        //}
       }
     }
 
@@ -108,10 +108,10 @@
 
       li {
         @include rem(font-size, 0.75rem);
-        color: $white;
-        background-color: $shelter-red;
+        color: $shelter-grey;
+        border: 1px solid $shelter-grey;
         border-radius: 6px;
-        padding: 2px 4px;
+        padding: 0 4px;
         margin: 1px;
         height: 18px;
         max-width: 220px;
