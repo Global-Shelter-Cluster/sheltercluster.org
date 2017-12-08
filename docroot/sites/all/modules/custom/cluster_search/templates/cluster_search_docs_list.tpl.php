@@ -25,7 +25,7 @@
 <table v-if="display == 'list' && results" class="document-table">
   <thead>
   <tr>
-    <th>Document title</th>
+    <th style="width: 100%;">Document title</th>
     <th>Size</th>
     <th>Date</th>
   </tr>
@@ -34,12 +34,12 @@
   <tr v-for="document, i in results" :class="['document-row', i % 2 == 0 ? 'odd' : 'even']">
     <td class="information-title">
       <a :href="document.url" v-html="document.title"></a>
-      <a v-if="includeDescendants == 1" :href="'/node/' + document.group_nids[0]" class="group" v-html="document.group"></a>
+      <a v-if="showGroup" :href="'/node/' + document.group_nids[0]" class="group" v-html="document.group"></a>
       <div v-if="document.tags" class="tags">
         <div class="item-list">
           <h3>Tags</h3>
           <ul>
-            <li v-for="tag in document.tags">{{ tag.value }}</li>
+            <li v-for="tag in document.tags" @click="selectFacet(tag.field_key, tag.value)">{{ tag.value }}</li>
           </ul>
         </div>
       </div>
@@ -87,10 +87,8 @@
       ) + document.title">
       </h4>
     </a>
-    <a :href="'/node/' + document.group_nids[0]"
-       class="group"
-       v-if="includeDescendants == 1"
-       v-html="document.group">
+    <a :href="'/node/' + document.group_nids[0]" class="group"
+       v-if="showGroup" v-html="document.group">
     </a>
 
     <div v-if="document.date || document.field_language || document.field_document_source" class="document-date">
@@ -107,12 +105,12 @@
     </div>
 
     <ul v-if="document.tags" class="tags">
-      <li v-for="tag in document.tags" :title="tag.field + ': ' + tag.value">{{ tag.value }}</li>
+      <li v-for="tag in document.tags" :title="tag.field + ': ' + tag.value" @click="selectFacet(tag.field_key, tag.value)">{{ tag.value }}</li>
     </ul>
   </article>
 </section>
 
-<div class="no-results" v-if="!searching && !results">
+<div class="no-results" v-if="showNoResultsMessage">
   <a v-if="hasFacetFiltersSelected" href="#" @click.prevent="clearSelectedFacets()">
     No documents found. Try removing the selected filters.
   </a>

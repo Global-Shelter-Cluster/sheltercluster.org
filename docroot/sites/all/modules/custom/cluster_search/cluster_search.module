@@ -179,5 +179,14 @@ function cluster_search_docs_page($query = NULL, $show_facets = TRUE, $default_s
     'type' => 'external',
     'data' => 'https://use.fontawesome.com/releases/v5.0.0/js/all.js'
   ];
+  $ret['#attached']['js'][] = [
+    'type' => 'setting',
+    'data' => [
+      'cluster_search' => [
+        'taxonomies' => cluster_docs_taxonomies(TRUE),
+        'taxonomy_groups' => cluster_docs_taxonomy_groups(),
+      ]
+    ]
+  ];
   return $ret;
 }

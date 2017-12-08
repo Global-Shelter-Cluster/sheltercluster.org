@@ -16,7 +16,7 @@
       </ul>
     </div>
   </div>
-  <div class="facet" v-for="(facet, facetField) in facets" :data-facet="facetField">
+  <div class="facet" v-for="(facet, facetField) in facetsDisplay" :data-facet="facetField">
     <h4>{{ facet.title }}</h4>
     <div class="item-list">
       <ul>
