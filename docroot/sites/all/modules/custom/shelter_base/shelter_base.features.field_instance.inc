@@ -476,7 +476,7 @@ function shelter_base_field_default_field_instances() {
       'module' => 'number',
       'settings' => array(),
       'type' => 'number',
-      'weight' => 8,
+      'weight' => 5,
     ),
   );
 

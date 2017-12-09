@@ -117,13 +117,13 @@ function cluster_docs_strongarm() {
           'weight' => '0',
         ),
         'path' => array(
-          'weight' => '3',
+          'weight' => '0',
         ),
         'language' => array(
-          'weight' => '5',
+          'weight' => '4',
         ),
         'redirect' => array(
-          'weight' => '9',
+          'weight' => '7',
         ),
       ),
       'display' => array(),

@@ -5,6 +5,7 @@ package = Cluster
 version = 7.x-1.11
 project = shelter_base
 dependencies[] = cluster_docs
+dependencies[] = cluster_events
 dependencies[] = cluster_og
 dependencies[] = ctools
 dependencies[] = entityreference

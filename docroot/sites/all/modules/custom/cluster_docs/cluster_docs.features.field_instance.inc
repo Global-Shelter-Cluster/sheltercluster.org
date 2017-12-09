@@ -57,7 +57,7 @@ function cluster_docs_field_default_field_instances() {
         'summary_rows' => 5,
       ),
       'type' => 'text_textarea_with_summary',
-      'weight' => 2,
+      'weight' => 1,
     ),
   );
 
@@ -149,7 +149,7 @@ function cluster_docs_field_default_field_instances() {
         'apply_chosen' => '',
       ),
       'type' => 'options_buttons',
-      'weight' => 33,
+      'weight' => 14,
     ),
   );
 
@@ -246,7 +246,7 @@ function cluster_docs_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 37,
+      'weight' => 43,
     ),
   );
 
@@ -398,7 +398,7 @@ function cluster_docs_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'pdf_to_image',
-      'weight' => 38,
+      'weight' => 44,
     ),
   );
 
@@ -455,7 +455,7 @@ function cluster_docs_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'image_image',
-      'weight' => 4,
+      'weight' => 2,
     ),
   );
 
@@ -501,7 +501,7 @@ function cluster_docs_field_default_field_instances() {
         'apply_chosen' => '',
       ),
       'type' => 'options_buttons',
-      'weight' => 34,
+      'weight' => 15,
     ),
   );
 
@@ -639,7 +639,7 @@ function cluster_docs_field_default_field_instances() {
         'apply_chosen' => '',
       ),
       'type' => 'options_buttons',
-      'weight' => 23,
+      'weight' => 24,
     ),
   );
 
@@ -685,7 +685,7 @@ function cluster_docs_field_default_field_instances() {
         'apply_chosen' => '',
       ),
       'type' => 'options_buttons',
-      'weight' => 26,
+      'weight' => 27,
     ),
   );
 
@@ -744,7 +744,7 @@ function cluster_docs_field_default_field_instances() {
     'bundle' => 'document',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'The language of the actual document file or link associated with this page.',
     'display' => array(
       'default' => array(
         'label' => 'hidden',
@@ -785,7 +785,7 @@ function cluster_docs_field_default_field_instances() {
         'apply_chosen' => '',
       ),
       'type' => 'options_select',
-      'weight' => 41,
+      'weight' => 47,
     ),
   );
 
@@ -849,7 +849,7 @@ function cluster_docs_field_default_field_instances() {
       'module' => 'link',
       'settings' => array(),
       'type' => 'link_field',
-      'weight' => 39,
+      'weight' => 45,
     ),
   );
 
@@ -939,7 +939,7 @@ function cluster_docs_field_default_field_instances() {
         'apply_chosen' => '',
       ),
       'type' => 'options_buttons',
-      'weight' => 25,
+      'weight' => 26,
     ),
   );
 
@@ -1043,7 +1043,7 @@ function cluster_docs_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'image_image',
-      'weight' => 6,
+      'weight' => 3,
     ),
   );
 
@@ -1105,7 +1105,7 @@ function cluster_docs_field_default_field_instances() {
         'year_range' => '-3:+3',
       ),
       'type' => 'date_text',
-      'weight' => 40,
+      'weight' => 46,
     ),
   );
 
@@ -1197,7 +1197,7 @@ function cluster_docs_field_default_field_instances() {
         'apply_chosen' => '',
       ),
       'type' => 'options_buttons',
-      'weight' => 24,
+      'weight' => 25,
     ),
   );
 
@@ -1294,7 +1294,7 @@ function cluster_docs_field_default_field_instances() {
         'apply_chosen' => '',
       ),
       'type' => 'options_buttons',
-      'weight' => 35,
+      'weight' => 16,
     ),
   );
 
@@ -1457,7 +1457,7 @@ function cluster_docs_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 1,
+      'weight' => 0,
     ),
   );
 
@@ -1572,6 +1572,7 @@ function cluster_docs_field_default_field_instances() {
   t('Sorting weight');
   t('Source');
   t('Technical Support and Design');
+  t('The language of the actual document file or link associated with this page.');
   t('Title');
   t('Toolkit');
   t('When displayed in sortable lists within group pages, the content will be ordered using this weight field. Smaller values will show up first, bigger values last.');
