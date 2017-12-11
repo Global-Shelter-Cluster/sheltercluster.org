@@ -86,7 +86,10 @@ function cluster_workflow_user_default_permissions() {
   // Exported permission: 'create document content'.
   $permissions['create document content'] = array(
     'name' => 'create document content',
-    'roles' => array(),
+    'roles' => array(
+      'administrator' => 'administrator',
+      'trusted user' => 'trusted user',
+    ),
     'module' => 'node',
   );
 
@@ -95,6 +98,7 @@ function cluster_workflow_user_default_permissions() {
     'name' => 'create page content',
     'roles' => array(
       'administrator' => 'administrator',
+      'trusted user' => 'trusted user',
     ),
     'module' => 'node',
   );
@@ -156,7 +160,10 @@ function cluster_workflow_user_default_permissions() {
   // Exported permission: 'delete own document content'.
   $permissions['delete own document content'] = array(
     'name' => 'delete own document content',
-    'roles' => array(),
+    'roles' => array(
+      'administrator' => 'administrator',
+      'trusted user' => 'trusted user',
+    ),
     'module' => 'node',
   );
 
@@ -165,6 +172,7 @@ function cluster_workflow_user_default_permissions() {
     'name' => 'delete own page content',
     'roles' => array(
       'administrator' => 'administrator',
+      'trusted user' => 'trusted user',
     ),
     'module' => 'node',
   );
@@ -226,7 +234,10 @@ function cluster_workflow_user_default_permissions() {
   // Exported permission: 'edit own document content'.
   $permissions['edit own document content'] = array(
     'name' => 'edit own document content',
-    'roles' => array(),
+    'roles' => array(
+      'administrator' => 'administrator',
+      'trusted user' => 'trusted user',
+    ),
     'module' => 'node',
   );
 
@@ -235,6 +246,7 @@ function cluster_workflow_user_default_permissions() {
     'name' => 'edit own page content',
     'roles' => array(
       'administrator' => 'administrator',
+      'trusted user' => 'trusted user',
     ),
     'module' => 'node',
   );

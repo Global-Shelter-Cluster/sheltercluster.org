@@ -90,5 +90,4 @@ features[taxonomy][] = toolkit
 features[variable][] = uuid_features_entity_taxonomy_term
 features[variable][] = uuid_features_file_taxonomy_term
 features[variable][] = uuid_features_vocabulary_terms
-mtime = 1510678465
 project path = sites/all/modules/custom

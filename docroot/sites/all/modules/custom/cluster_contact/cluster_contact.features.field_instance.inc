@@ -10,7 +10,7 @@
 function cluster_contact_field_default_field_instances() {
   $field_instances = array();
 
-  // Exported field_instance: 'node-contact-body'
+  // Exported field_instance: 'node-contact-body'.
   $field_instances['node-contact-body'] = array(
     'bundle' => 'contact',
     'default_value' => NULL,
@@ -23,6 +23,12 @@ function cluster_contact_field_default_field_instances() {
         'settings' => array(),
         'type' => 'text_default',
         'weight' => 2,
+      ),
+      'ical' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
       ),
       'teaser' => array(
         'label' => 'hidden',
@@ -56,7 +62,7 @@ function cluster_contact_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-contact-field_email'
+  // Exported field_instance: 'node-contact-field_email'.
   $field_instances['node-contact-field_email'] = array(
     'bundle' => 'contact',
     'default_value' => NULL,
@@ -69,6 +75,12 @@ function cluster_contact_field_default_field_instances() {
         'settings' => array(),
         'type' => 'email_default',
         'weight' => 4,
+      ),
+      'ical' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -96,7 +108,7 @@ function cluster_contact_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-contact-field_image'
+  // Exported field_instance: 'node-contact-field_image'.
   $field_instances['node-contact-field_image'] = array(
     'bundle' => 'contact',
     'deleted' => 0,
@@ -111,6 +123,12 @@ function cluster_contact_field_default_field_instances() {
         ),
         'type' => 'image',
         'weight' => 7,
+      ),
+      'ical' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -147,7 +165,7 @@ function cluster_contact_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-contact-field_organisation_name'
+  // Exported field_instance: 'node-contact-field_organisation_name'.
   $field_instances['node-contact-field_organisation_name'] = array(
     'bundle' => 'contact',
     'default_value' => NULL,
@@ -160,6 +178,12 @@ function cluster_contact_field_default_field_instances() {
         'settings' => array(),
         'type' => 'text_default',
         'weight' => 6,
+      ),
+      'ical' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -188,7 +212,7 @@ function cluster_contact_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-contact-field_phone_number'
+  // Exported field_instance: 'node-contact-field_phone_number'.
   $field_instances['node-contact-field_phone_number'] = array(
     'bundle' => 'contact',
     'default_value' => NULL,
@@ -201,6 +225,12 @@ function cluster_contact_field_default_field_instances() {
         'settings' => array(),
         'type' => 'text_default',
         'weight' => 3,
+      ),
+      'ical' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -229,7 +259,7 @@ function cluster_contact_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-contact-field_role_or_title'
+  // Exported field_instance: 'node-contact-field_role_or_title'.
   $field_instances['node-contact-field_role_or_title'] = array(
     'bundle' => 'contact',
     'default_value' => NULL,
@@ -242,6 +272,12 @@ function cluster_contact_field_default_field_instances() {
         'settings' => array(),
         'type' => 'text_default',
         'weight' => 5,
+      ),
+      'ical' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -270,7 +306,7 @@ function cluster_contact_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-contact-og_group_ref'
+  // Exported field_instance: 'node-contact-og_group_ref'.
   $field_instances['node-contact-og_group_ref'] = array(
     'bundle' => 'contact',
     'default_value' => NULL,
@@ -283,6 +319,12 @@ function cluster_contact_field_default_field_instances() {
         'settings' => array(),
         'type' => 'og_list_default',
         'weight' => 1,
+      ),
+      'ical' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -330,7 +372,7 @@ function cluster_contact_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-contact-title_field'
+  // Exported field_instance: 'node-contact-title_field'.
   $field_instances['node-contact-title_field'] = array(
     'bundle' => 'contact',
     'default_value' => NULL,
@@ -346,6 +388,12 @@ function cluster_contact_field_default_field_instances() {
           'title_style' => '',
         ),
         'type' => 'title_linked',
+        'weight' => 0,
+      ),
+      'ical' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
         'weight' => 0,
       ),
       'teaser' => array(

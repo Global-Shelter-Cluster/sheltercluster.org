@@ -10,7 +10,7 @@
 function shelter_base_field_default_field_instances() {
   $field_instances = array();
 
-  // Exported field_instance: 'node-article-body'
+  // Exported field_instance: 'node-article-body'.
   $field_instances['node-article-body'] = array(
     'bundle' => 'article',
     'default_value' => NULL,
@@ -22,6 +22,12 @@ function shelter_base_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
+        'weight' => 0,
+      ),
+      'ical' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
         'weight' => 0,
       ),
       'teaser' => array(
@@ -55,7 +61,7 @@ function shelter_base_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-article-field_image'
+  // Exported field_instance: 'node-article-field_image'.
   $field_instances['node-article-field_image'] = array(
     'bundle' => 'article',
     'deleted' => 0,
@@ -70,6 +76,12 @@ function shelter_base_field_default_field_instances() {
         ),
         'type' => 'image',
         'weight' => -1,
+      ),
+      'ical' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
       ),
       'teaser' => array(
         'label' => 'hidden',
@@ -109,7 +121,7 @@ function shelter_base_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-article-field_sorting_weight'
+  // Exported field_instance: 'node-article-field_sorting_weight'.
   $field_instances['node-article-field_sorting_weight'] = array(
     'bundle' => 'article',
     'default_value' => array(
@@ -125,6 +137,12 @@ function shelter_base_field_default_field_instances() {
         'settings' => array(),
         'type' => 'hidden',
         'weight' => 12,
+      ),
+      'ical' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -154,7 +172,7 @@ function shelter_base_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-article-field_tags'
+  // Exported field_instance: 'node-article-field_tags'.
   $field_instances['node-article-field_tags'] = array(
     'bundle' => 'article',
     'default_value' => NULL,
@@ -167,6 +185,12 @@ function shelter_base_field_default_field_instances() {
         'settings' => array(),
         'type' => 'taxonomy_term_reference_link',
         'weight' => 10,
+      ),
+      'ical' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
       ),
       'teaser' => array(
         'label' => 'hidden',
@@ -195,7 +219,66 @@ function shelter_base_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-article-title_field'
+  // Exported field_instance: 'node-article-og_group_ref'.
+  $field_instances['node-article-og_group_ref'] = array(
+    'bundle' => 'article',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'entityreference',
+        'settings' => array(
+          'bypass_access' => FALSE,
+          'link' => FALSE,
+        ),
+        'type' => 'entityreference_label',
+        'weight' => 13,
+      ),
+      'ical' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'og_group_ref',
+    'label' => 'Groups audience',
+    'required' => 0,
+    'settings' => array(
+      'behaviors' => array(
+        'og_widget' => array(
+          'access_override' => 0,
+          'admin' => array(
+            'widget_type' => 'entityreference_autocomplete',
+          ),
+          'default' => array(
+            'widget_type' => 'options_select',
+          ),
+          'status' => TRUE,
+        ),
+      ),
+      'entity_translation_sync' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 0,
+      'module' => 'og',
+      'settings' => array(),
+      'type' => 'og_complex',
+      'weight' => 32,
+    ),
+  );
+
+  // Exported field_instance: 'node-article-title_field'.
   $field_instances['node-article-title_field'] = array(
     'bundle' => 'article',
     'default_value' => NULL,
@@ -207,6 +290,12 @@ function shelter_base_field_default_field_instances() {
         'settings' => array(),
         'type' => 'hidden',
         'weight' => 11,
+      ),
+      'ical' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
       ),
       'teaser' => array(
         'label' => 'hidden',
@@ -238,7 +327,7 @@ function shelter_base_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-community_of_practice-field_sorting_weight'
+  // Exported field_instance: 'node-community_of_practice-field_sorting_weight'.
   $field_instances['node-community_of_practice-field_sorting_weight'] = array(
     'bundle' => 'community_of_practice',
     'default_value' => array(
@@ -254,6 +343,12 @@ function shelter_base_field_default_field_instances() {
         'settings' => array(),
         'type' => 'hidden',
         'weight' => 6,
+      ),
+      'ical' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -283,7 +378,7 @@ function shelter_base_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-contact-field_sorting_weight'
+  // Exported field_instance: 'node-contact-field_sorting_weight'.
   $field_instances['node-contact-field_sorting_weight'] = array(
     'bundle' => 'contact',
     'default_value' => array(
@@ -299,6 +394,12 @@ function shelter_base_field_default_field_instances() {
         'settings' => array(),
         'type' => 'hidden',
         'weight' => 8,
+      ),
+      'ical' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -328,7 +429,7 @@ function shelter_base_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-event-field_sorting_weight'
+  // Exported field_instance: 'node-event-field_sorting_weight'.
   $field_instances['node-event-field_sorting_weight'] = array(
     'bundle' => 'event',
     'default_value' => array(
@@ -344,6 +445,12 @@ function shelter_base_field_default_field_instances() {
         'settings' => array(),
         'type' => 'hidden',
         'weight' => 6,
+      ),
+      'ical' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -369,11 +476,11 @@ function shelter_base_field_default_field_instances() {
       'module' => 'number',
       'settings' => array(),
       'type' => 'number',
-      'weight' => 8,
+      'weight' => 5,
     ),
   );
 
-  // Exported field_instance: 'node-geographic_region-field_sorting_weight'
+  // Exported field_instance: 'node-geographic_region-field_sorting_weight'.
   $field_instances['node-geographic_region-field_sorting_weight'] = array(
     'bundle' => 'geographic_region',
     'default_value' => array(
@@ -391,6 +498,12 @@ function shelter_base_field_default_field_instances() {
         'weight' => 9,
       ),
       'full' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'ical' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
@@ -424,7 +537,7 @@ function shelter_base_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-hub-field_sorting_weight'
+  // Exported field_instance: 'node-hub-field_sorting_weight'.
   $field_instances['node-hub-field_sorting_weight'] = array(
     'bundle' => 'hub',
     'default_value' => array(
@@ -440,6 +553,12 @@ function shelter_base_field_default_field_instances() {
         'settings' => array(),
         'type' => 'hidden',
         'weight' => 8,
+      ),
+      'ical' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
       ),
       'related_hub' => array(
         'label' => 'above',
@@ -475,7 +594,7 @@ function shelter_base_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-page-body'
+  // Exported field_instance: 'node-page-body'.
   $field_instances['node-page-body'] = array(
     'bundle' => 'page',
     'default_value' => NULL,
@@ -487,6 +606,12 @@ function shelter_base_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
+        'weight' => 0,
+      ),
+      'ical' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
         'weight' => 0,
       ),
       'teaser' => array(
@@ -520,7 +645,7 @@ function shelter_base_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-page-field_sorting_weight'
+  // Exported field_instance: 'node-page-field_sorting_weight'.
   $field_instances['node-page-field_sorting_weight'] = array(
     'bundle' => 'page',
     'default_value' => array(
@@ -536,6 +661,12 @@ function shelter_base_field_default_field_instances() {
         'settings' => array(),
         'type' => 'hidden',
         'weight' => 3,
+      ),
+      'ical' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -565,7 +696,7 @@ function shelter_base_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-page-og_group_ref'
+  // Exported field_instance: 'node-page-og_group_ref'.
   $field_instances['node-page-og_group_ref'] = array(
     'bundle' => 'page',
     'default_value' => NULL,
@@ -577,6 +708,12 @@ function shelter_base_field_default_field_instances() {
         'settings' => array(),
         'type' => 'hidden',
         'weight' => 2,
+      ),
+      'ical' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -624,7 +761,7 @@ function shelter_base_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-page-title_field'
+  // Exported field_instance: 'node-page-title_field'.
   $field_instances['node-page-title_field'] = array(
     'bundle' => 'page',
     'default_value' => NULL,
@@ -636,6 +773,12 @@ function shelter_base_field_default_field_instances() {
         'settings' => array(),
         'type' => 'hidden',
         'weight' => 1,
+      ),
+      'ical' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
       ),
       'teaser' => array(
         'label' => 'hidden',
@@ -667,7 +810,7 @@ function shelter_base_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-response-field_sorting_weight'
+  // Exported field_instance: 'node-response-field_sorting_weight'.
   $field_instances['node-response-field_sorting_weight'] = array(
     'bundle' => 'response',
     'default_value' => array(
@@ -683,6 +826,12 @@ function shelter_base_field_default_field_instances() {
         'settings' => array(),
         'type' => 'hidden',
         'weight' => 24,
+      ),
+      'ical' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
       ),
       'related_response' => array(
         'label' => 'above',
@@ -718,7 +867,7 @@ function shelter_base_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-strategic_advisory-field_sorting_weight'
+  // Exported field_instance: 'node-strategic_advisory-field_sorting_weight'.
   $field_instances['node-strategic_advisory-field_sorting_weight'] = array(
     'bundle' => 'strategic_advisory',
     'default_value' => array(
@@ -734,6 +883,12 @@ function shelter_base_field_default_field_instances() {
         'settings' => array(),
         'type' => 'hidden',
         'weight' => 17,
+      ),
+      'ical' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -763,7 +918,7 @@ function shelter_base_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-working_group-field_sorting_weight'
+  // Exported field_instance: 'node-working_group-field_sorting_weight'.
   $field_instances['node-working_group-field_sorting_weight'] = array(
     'bundle' => 'working_group',
     'default_value' => array(
@@ -779,6 +934,12 @@ function shelter_base_field_default_field_instances() {
         'settings' => array(),
         'type' => 'hidden',
         'weight' => 9,
+      ),
+      'ical' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -808,7 +969,7 @@ function shelter_base_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'taxonomy_term-tags-description_field'
+  // Exported field_instance: 'taxonomy_term-tags-description_field'.
   $field_instances['taxonomy_term-tags-description_field'] = array(
     'bundle' => 'tags',
     'default_value' => NULL,
@@ -847,7 +1008,7 @@ function shelter_base_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'taxonomy_term-tags-name_field'
+  // Exported field_instance: 'taxonomy_term-tags-name_field'.
   $field_instances['taxonomy_term-tags-name_field'] = array(
     'bundle' => 'tags',
     'default_value' => NULL,

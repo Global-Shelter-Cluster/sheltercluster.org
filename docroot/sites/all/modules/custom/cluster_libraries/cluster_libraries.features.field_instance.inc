@@ -10,7 +10,7 @@
 function cluster_libraries_field_default_field_instances() {
   $field_instances = array();
 
-  // Exported field_instance: 'node-arbitrary_library-body'
+  // Exported field_instance: 'node-arbitrary_library-body'.
   $field_instances['node-arbitrary_library-body'] = array(
     'bundle' => 'arbitrary_library',
     'default_value' => NULL,
@@ -61,7 +61,8 @@ function cluster_libraries_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-arbitrary_library-field_arbitrary_document_ref'
+  // Exported field_instance:
+  // 'node-arbitrary_library-field_arbitrary_document_ref'.
   $field_instances['node-arbitrary_library-field_arbitrary_document_ref'] = array(
     'bundle' => 'arbitrary_library',
     'default_value' => NULL,
@@ -108,7 +109,7 @@ function cluster_libraries_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-arbitrary_library-field_sorting_weight'
+  // Exported field_instance: 'node-arbitrary_library-field_sorting_weight'.
   $field_instances['node-arbitrary_library-field_sorting_weight'] = array(
     'bundle' => 'arbitrary_library',
     'default_value' => array(
@@ -159,7 +160,7 @@ function cluster_libraries_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-arbitrary_library-og_group_ref'
+  // Exported field_instance: 'node-arbitrary_library-og_group_ref'.
   $field_instances['node-arbitrary_library-og_group_ref'] = array(
     'bundle' => 'arbitrary_library',
     'default_value' => NULL,
@@ -224,7 +225,7 @@ function cluster_libraries_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-arbitrary_library-title_field'
+  // Exported field_instance: 'node-arbitrary_library-title_field'.
   $field_instances['node-arbitrary_library-title_field'] = array(
     'bundle' => 'arbitrary_library',
     'default_value' => NULL,
@@ -273,7 +274,7 @@ function cluster_libraries_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-library-body'
+  // Exported field_instance: 'node-library-body'.
   $field_instances['node-library-body'] = array(
     'bundle' => 'library',
     'default_value' => NULL,
@@ -322,7 +323,7 @@ function cluster_libraries_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-library-field_assess_monitor_eval'
+  // Exported field_instance: 'node-library-field_assess_monitor_eval'.
   $field_instances['node-library-field_assess_monitor_eval'] = array(
     'bundle' => 'library',
     'default_value' => NULL,
@@ -367,7 +368,7 @@ function cluster_libraries_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-library-field_coordination_management'
+  // Exported field_instance: 'node-library-field_coordination_management'.
   $field_instances['node-library-field_coordination_management'] = array(
     'bundle' => 'library',
     'default_value' => NULL,
@@ -412,7 +413,7 @@ function cluster_libraries_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-library-field_cross_cutting_issues'
+  // Exported field_instance: 'node-library-field_cross_cutting_issues'.
   $field_instances['node-library-field_cross_cutting_issues'] = array(
     'bundle' => 'library',
     'default_value' => NULL,
@@ -457,7 +458,7 @@ function cluster_libraries_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-library-field_document_type'
+  // Exported field_instance: 'node-library-field_document_type'.
   $field_instances['node-library-field_document_type'] = array(
     'bundle' => 'library',
     'default_value' => NULL,
@@ -496,11 +497,11 @@ function cluster_libraries_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 6,
+      'weight' => 5,
     ),
   );
 
-  // Exported field_instance: 'node-library-field_information_management'
+  // Exported field_instance: 'node-library-field_information_management'.
   $field_instances['node-library-field_information_management'] = array(
     'bundle' => 'library',
     'default_value' => NULL,
@@ -545,7 +546,7 @@ function cluster_libraries_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-library-field_inter_cluster'
+  // Exported field_instance: 'node-library-field_inter_cluster'.
   $field_instances['node-library-field_inter_cluster'] = array(
     'bundle' => 'library',
     'default_value' => NULL,
@@ -590,7 +591,7 @@ function cluster_libraries_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-library-field_intervention_materials'
+  // Exported field_instance: 'node-library-field_intervention_materials'.
   $field_instances['node-library-field_intervention_materials'] = array(
     'bundle' => 'library',
     'default_value' => NULL,
@@ -635,7 +636,7 @@ function cluster_libraries_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-library-field_intervention_programming'
+  // Exported field_instance: 'node-library-field_intervention_programming'.
   $field_instances['node-library-field_intervention_programming'] = array(
     'bundle' => 'library',
     'default_value' => NULL,
@@ -680,7 +681,7 @@ function cluster_libraries_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-library-field_is_global_library'
+  // Exported field_instance: 'node-library-field_is_global_library'.
   $field_instances['node-library-field_is_global_library'] = array(
     'bundle' => 'library',
     'default_value' => array(
@@ -725,11 +726,11 @@ function cluster_libraries_field_default_field_instances() {
         'display_label' => 1,
       ),
       'type' => 'options_onoff',
-      'weight' => 5,
+      'weight' => 4,
     ),
   );
 
-  // Exported field_instance: 'node-library-field_issues'
+  // Exported field_instance: 'node-library-field_issues'.
   $field_instances['node-library-field_issues'] = array(
     'bundle' => 'library',
     'default_value' => NULL,
@@ -774,7 +775,7 @@ function cluster_libraries_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-library-field_meeting_management'
+  // Exported field_instance: 'node-library-field_meeting_management'.
   $field_instances['node-library-field_meeting_management'] = array(
     'bundle' => 'library',
     'default_value' => NULL,
@@ -817,7 +818,7 @@ function cluster_libraries_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-library-field_non_food_items'
+  // Exported field_instance: 'node-library-field_non_food_items'.
   $field_instances['node-library-field_non_food_items'] = array(
     'bundle' => 'library',
     'default_value' => NULL,
@@ -862,7 +863,7 @@ function cluster_libraries_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-library-field_response_phase'
+  // Exported field_instance: 'node-library-field_response_phase'.
   $field_instances['node-library-field_response_phase'] = array(
     'bundle' => 'library',
     'default_value' => NULL,
@@ -907,7 +908,7 @@ function cluster_libraries_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-library-field_settlement_type'
+  // Exported field_instance: 'node-library-field_settlement_type'.
   $field_instances['node-library-field_settlement_type'] = array(
     'bundle' => 'library',
     'default_value' => NULL,
@@ -952,7 +953,7 @@ function cluster_libraries_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-library-field_sorting_weight'
+  // Exported field_instance: 'node-library-field_sorting_weight'.
   $field_instances['node-library-field_sorting_weight'] = array(
     'bundle' => 'library',
     'default_value' => array(
@@ -1003,7 +1004,7 @@ function cluster_libraries_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-library-field_technical_support_design'
+  // Exported field_instance: 'node-library-field_technical_support_design'.
   $field_instances['node-library-field_technical_support_design'] = array(
     'bundle' => 'library',
     'default_value' => NULL,
@@ -1048,7 +1049,7 @@ function cluster_libraries_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-library-field_toolkit'
+  // Exported field_instance: 'node-library-field_toolkit'.
   $field_instances['node-library-field_toolkit'] = array(
     'bundle' => 'library',
     'default_value' => NULL,
@@ -1093,7 +1094,7 @@ function cluster_libraries_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-library-og_group_ref'
+  // Exported field_instance: 'node-library-og_group_ref'.
   $field_instances['node-library-og_group_ref'] = array(
     'bundle' => 'library',
     'default_value' => NULL,
@@ -1154,11 +1155,11 @@ function cluster_libraries_field_default_field_instances() {
       'module' => 'og',
       'settings' => array(),
       'type' => 'og_complex',
-      'weight' => 4,
+      'weight' => 3,
     ),
   );
 
-  // Exported field_instance: 'node-library-title_field'
+  // Exported field_instance: 'node-library-title_field'.
   $field_instances['node-library-title_field'] = array(
     'bundle' => 'library',
     'default_value' => NULL,

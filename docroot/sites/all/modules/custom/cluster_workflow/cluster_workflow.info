@@ -48,4 +48,3 @@ features[user_permission][] = view moderation messages
 features[variable][] = workbench_moderation_default_state_discussion
 features[variable][] = workbench_moderation_default_state_document
 features[views_view][] = cluster_workbench_moderation_content
-mtime = 1427464057

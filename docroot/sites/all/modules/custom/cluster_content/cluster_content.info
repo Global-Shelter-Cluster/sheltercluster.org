@@ -5,9 +5,7 @@ package = Cluster
 version = 7.x-1.0
 project = cluster_content
 dependencies[] = views
-dependencies[] = xautoload (>= 7.x-5.0)
 features[ctools][] = views:views_default:3.0
 features[features_api][] = api:2
 features[views_view][] = group_content
 features_exclude[dependencies][ctools] = ctools
-mtime = 1432228325
