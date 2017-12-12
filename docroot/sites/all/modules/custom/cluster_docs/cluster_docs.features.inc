@@ -36,8 +36,8 @@ function cluster_docs_image_default_styles() {
       1 => array(
         'name' => 'image_scale_and_crop',
         'data' => array(
-          'width' => 300,
-          'height' => 300,
+          'width' => 150,
+          'height' => 150,
         ),
         'weight' => 1,
       ),
