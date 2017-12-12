@@ -24,7 +24,7 @@
 
           result.thumb = result['field_preview:file:url'];
           if (result.thumb && settings.cluster_search.algolia_prefix === 'local')
-            result.thumb = result.thumb.replace('local.sheltercluster.org', 'dev.sheltercluster.org').replace('/styles/medium/public', '');
+            result.thumb = result.thumb.replace('local.sheltercluster.org', 'dev.sheltercluster.org').replace('/styles/document_preview/public', '');
 
           result.nid = result.objectID;
           result.title = result._highlightResult.title.value;
