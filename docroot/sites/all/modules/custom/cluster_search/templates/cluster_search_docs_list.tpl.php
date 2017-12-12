@@ -1,5 +1,5 @@
-<div class="search-summary" v-if="results && hits > 1">
-  <span class="summary">Showing {{ resultsFrom }}&ndash;{{ resultsTo }} of {{ hits }} documents.</span>
+<div class="search-summary" v-if="results && hits >= 1">
+  <span v-if="hits > 1" class="summary">Showing {{ resultsFrom }}&ndash;{{ resultsTo }} of {{ hits }} documents.</span>
   <ul class="pagination" v-if="pages > 1">
     <li>Pages:</li>
     <li v-for="p in paginationPages">
@@ -8,6 +8,7 @@
       <span v-if="p == '-'">&hellip;</span>
     </li>
   </ul>
+  <span v-if="hits <= 1"></span>
   <ul class="search-display">
     <li>
       <a :href="display == 'preview' ? null : '#'" @click.prevent="display = 'preview'" title="Document previews">
