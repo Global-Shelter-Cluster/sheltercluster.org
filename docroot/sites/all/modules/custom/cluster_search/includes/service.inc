@@ -169,7 +169,7 @@ class SearchApiClusterAlgoliaService extends SearchApiAlgoliaService {
                 $file = file_load($property_value);
                 if ($file) {
                   $a=$file->uri;
-                  $item_to_index['field_preview:file:url'] = image_style_url('medium', $file->uri);
+                  $item_to_index['field_preview:file:url'] = image_style_url('document_preview', $file->uri);
                 }
                 $processed = TRUE;
               }
