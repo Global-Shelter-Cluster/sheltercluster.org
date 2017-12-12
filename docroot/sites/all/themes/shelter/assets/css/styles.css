@@ -675,7 +675,7 @@ body {
   transition: .2s all;
 }
 .document-preview-list .document-preview .thumbnail:hover > img {
-  opacity: .2;
+  opacity: .05;
   filter: brightness(2);
   transform: scale(1.02);
 }
