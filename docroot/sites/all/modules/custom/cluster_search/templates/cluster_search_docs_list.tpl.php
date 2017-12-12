@@ -68,7 +68,7 @@
         <div v-if="document.file_extension" class="file-extension">{{ document.file_extension }}</div>
         <i class="fas fa-download"></i>
       </div>
-      <img v-if="document.thumb" :src="document.thumb">
+      <img v-if="document.thumb" :src="document.thumb" :key="document.thumb">
     </a>
     <a :href="document.url">
       <h4 :title="document.title|strip_tags" v-html="
@@ -114,18 +114,18 @@
   <a v-if="hasFacetFiltersSelected" href="#" @click.prevent="clearSelectedFacets()">
     No documents found. Try removing the selected filters.
   </a>
-  <a v-if="!hasFacetFiltersSelected && query && includeDescendants == 0"
+  <a v-if="!hasFacetFiltersSelected && query && includeDescendants == 0 && descendantNids.length > 1"
      href="#" @click.prevent="includeDescendants = '1'">
     No documents found matching "<strong>{{ query }}</strong>". Try including subgroups.
   </a>
-  <span v-if="!hasFacetFiltersSelected && query && includeDescendants == 1">
+  <span v-if="!hasFacetFiltersSelected && query && (includeDescendants == 1 || descendantNids.length <= 1)">
     No documents found matching "<strong>{{ query }}</strong>".
   </span>
-  <a v-if="!hasFacetFiltersSelected && !query && includeDescendants == 0"
+  <a v-if="!hasFacetFiltersSelected && !query && includeDescendants == 0 && descendantNids.length > 1"
      href="#" @click.prevent="includeDescendants = '1'">
     No documents found. Try including subgroups.
   </a>
-  <span v-if="!hasFacetFiltersSelected && !query && includeDescendants == 1">
+  <span v-if="!hasFacetFiltersSelected && !query && (includeDescendants == 1 || descendantNids.length <= 1)">
     No documents found.
   </span>
 </div>
