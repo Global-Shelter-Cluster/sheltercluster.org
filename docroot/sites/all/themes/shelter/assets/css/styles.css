@@ -677,7 +677,6 @@ body {
 .document-preview-list .document-preview .thumbnail:hover > img {
   opacity: .2;
   filter: blur(3px) brightness(1.5);
-  transform: scale(1.02);
 }
 .document-preview-list .document-preview .thumbnail .file-info {
   display: flex;
