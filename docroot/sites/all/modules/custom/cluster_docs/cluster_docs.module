@@ -48,6 +48,7 @@ function _cluster_docs_pdf_preview_query() {
   $query->leftJoin('field_data_field_preview', 'd', 'n.nid = d.entity_id');
   $query->fields('n', array('nid'));
   $query->condition('d.field_preview_fid', NULL);
+  $query->condition('n.type', 'document');
   return $query;
 }
 
