@@ -64,6 +64,11 @@ function cluster_docs_pdf_preview_update_form() {
     '#value' => t('Documents without preview (includes non-PDF documents): %count', ['%count' => $count]),
   ];
 
+  $form['limit'] = [
+    '#type' => 'textfield',
+    '#title' => t('Limit (how many batches to run, 0 or empty for no limit)'),
+  ];
+
   $form['submit'] = [
     '#type' => 'submit',
     '#value' => t('Run for all documents without preview'),
@@ -76,6 +81,9 @@ function cluster_docs_pdf_preview_update_form_submit($form, &$form_state) {
   $count = _cluster_docs_pdf_preview_query()->countQuery()->execute()->fetchField();
 
   $num_operations = floor($count / 20); // Batches of 20 docs each
+  if (intval($form_state['values']['limit']) > 0)
+    $num_operations = min($num_operations, intval($form_state['values']['limit']));
+
   $operations = [];
   for ($i = $num_operations - 1; $i >= 0; $i--) {
     $operations[] = [
