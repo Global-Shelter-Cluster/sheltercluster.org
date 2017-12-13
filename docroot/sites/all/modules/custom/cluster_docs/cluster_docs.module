@@ -45,10 +45,13 @@ function cluster_docs_menu() {
 
 function _cluster_docs_pdf_preview_query() {
   $query = db_select('node', 'n');
-  $query->leftJoin('field_data_field_preview', 'd', 'n.nid = d.entity_id');
+  $query->join('field_data_field_file', 'f', 'f.entity_type = :type AND n.nid = f.entity_id', [':type' => 'node']);
+  $query->join('file_managed', 'fm', 'f.field_file_fid = fm.fid');
+  $query->leftJoin('field_data_field_preview', 'd', 'd.entity_type = :type AND n.nid = d.entity_id', [':type' => 'node']);
   $query->fields('n', array('nid'));
   $query->condition('d.field_preview_fid', NULL);
   $query->condition('n.type', 'document');
+  $query->condition('fm.filemime', 'application/pdf');
   return $query;
 }
 
