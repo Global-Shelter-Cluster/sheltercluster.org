@@ -32,7 +32,72 @@ function cluster_docs_menu() {
     'type' => MENU_CALLBACK,
   );
 
+  $items['admin/config/content/doc_preview_update'] = array(
+    'title' => 'Update PDF previews for documents',
+    'access arguments' => array('edit any document content'),
+    'page callback' => 'drupal_get_form',
+    'page arguments' => ['cluster_docs_pdf_preview_update_form'],
+    'type' => MENU_CALLBACK,
+  );
+
   return $items;
+}
+
+function _cluster_docs_pdf_preview_query() {
+  $query = db_select('node', 'n');
+  $query->leftJoin('field_data_field_preview', 'd', 'n.nid = d.entity_id');
+  $query->fields('n', array('nid'));
+  $query->condition('d.field_preview_fid', NULL);
+  return $query;
+}
+
+function cluster_docs_pdf_preview_update_form() {
+  $count = _cluster_docs_pdf_preview_query()->countQuery()->execute()->fetchField();
+
+  $form[] = [
+    '#type' => 'html_tag',
+    '#tag' => 'p',
+    '#value' => t('Documents without preview (includes non-PDF documents): %count', ['%count' => $count]),
+  ];
+
+  $form['submit'] = [
+    '#type' => 'submit',
+    '#value' => t('Run for all documents without preview'),
+  ];
+
+  return $form;
+}
+
+function cluster_docs_pdf_preview_update_form_submit($form, &$form_state) {
+  $count = _cluster_docs_pdf_preview_query()->countQuery()->execute()->fetchField();
+
+  $num_operations = floor($count / 20); // Batches of 20 docs each
+  $operations = [];
+  for ($i = $num_operations - 1; $i >= 0; $i--) {
+    $operations[] = [
+      'cluster_docs_pdf_preview_update_op',
+      [$i],
+    ];
+  }
+
+
+  batch_set([
+    'operations' => $operations,
+    'title' => 'Saving documents',
+    'progress_message' => t('Processed batch @current out of @total (20 documents per batch).'),
+  ]);
+}
+
+function cluster_docs_pdf_preview_update_op($operation_details, &$context) {
+  $query = _cluster_docs_pdf_preview_query();
+  $query->orderBy('nid');
+  $page = $operation_details;
+  $query->range($page * 20, 20);
+  $result = $query->execute()->fetchCol();
+  $nodes = entity_load('node', $result);
+
+  foreach ($nodes as $node)
+    node_save($node);
 }
 
 /**
