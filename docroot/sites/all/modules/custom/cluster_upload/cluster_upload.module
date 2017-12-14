@@ -1,0 +1,28 @@
+<?php
+
+use \Drupal\cluster_upload\Controller\DragDropUploadController;
+
+function cluster_upload_menu() {
+  return [
+    'drag-and-drop-upload' => [
+      'title' => 'Documents',
+      'page callback' => '_cluster_upload_route',
+      'page arguments' => ['drag-and-drop-upload'],
+      'access callback' => TRUE,
+      'type' => MENU_CALLBACK,
+    ],
+  ];
+}
+
+/**
+ * Load controller for menu item.
+ */
+function _cluster_upload_route($path) {
+  $controller = NULL;
+  switch ($path) {
+    case 'drag-and-drop-upload':
+      $controller = new DragDropUploadController();
+  }
+
+  return $controller->build();
+}
