@@ -1,7 +1,6 @@
 (function ($) {
   Drupal.behaviors.dragDropUplaod = {
     attach: function (context, settings) {
-      console.log('FNORD');
       if (!settings.cluster_nav.group_nid) return;
       $("body").on("dragover", false);
       $("body").on("dragend", false);
