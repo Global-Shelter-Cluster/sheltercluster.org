@@ -1762,3 +1762,7 @@ function shelter_base_update_7166() {
 function shelter_base_update_7167() {
   module_disable(['toggle_optional_fields']);
 }
+
+function shelter_base_update_7168() {
+  module_enable(['cluster_upload']);
+}

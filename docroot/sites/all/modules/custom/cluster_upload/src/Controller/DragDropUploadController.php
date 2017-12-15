@@ -4,10 +4,6 @@ namespace Drupal\cluster_upload\Controller;
 
 class DragDropUploadController {
 
-  public function __construct() {
-
-  }
-
   /**
    * @return Render array.
    */
