@@ -5,11 +5,11 @@ use \Drupal\cluster_upload\Controller\UploadDocumentController;
 
 function cluster_upload_menu() {
   return [
-    'drag-and-drop-upload' => [
+    'drag-and-drop-upload-test' => [
       'title' => 'Documents',
       'page callback' => '_cluster_test_route',
       'page arguments' => ['drag-and-drop-upload'],
-      'access arguments' => ['administer site configuration'],
+      'access callback' => FALSE,
       'type' => MENU_CALLBACK,
     ],
     'upload-document/%' => [
@@ -24,7 +24,7 @@ function cluster_upload_menu() {
 }
 
 /**
- * Load controller for menu item.
+ * Load test controller.
  */
 function _cluster_test_route($path) {
   $controller = new DragDropUploadController();

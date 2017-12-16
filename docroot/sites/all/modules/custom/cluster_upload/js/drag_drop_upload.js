@@ -18,6 +18,7 @@ const cluster_upload = {
     var file_data = event.originalEvent.dataTransfer.files[0];
     var form_data = new FormData();
     form_data.append('file', file_data);
+    this.notify("status", "Your document is getting created...");
 
     if (form_data) {
       jQuery.ajax({
@@ -33,5 +34,9 @@ const cluster_upload = {
 
   "redirect": function(response, status) {
     window.location.href = '/node/' + response.document_nid + '/edit';
+  },
+
+  "notify": function(type, message) {
+    jQuery("#operation-title").append("<div class='cluster-upload-message'>" + message + "</div>");
   }
 };

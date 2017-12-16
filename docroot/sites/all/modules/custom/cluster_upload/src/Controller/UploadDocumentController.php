@@ -22,7 +22,6 @@ class UploadDocumentController {
       header('Content-Type: application/json');
       echo json_encode(['document_nid' => $document->nid]);
     }
-
   }
 
   /**
