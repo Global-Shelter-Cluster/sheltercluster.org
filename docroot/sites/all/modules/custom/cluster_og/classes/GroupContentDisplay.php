@@ -164,10 +164,13 @@ class GroupDisplayProvider {
 
     $secondary = array();
 
+    $force_collapse = cluster_docs_is_group_documents_page();
+
     if ($responses = $this->getRelatedResponses()) {
       $secondary['responses'] = partial('navigation_options', array(
         'navigation_type_id' => 'related-operations',
         'title' => t('Related operations'),
+        'collapsed' => $force_collapse,
         'nodes' => node_load_multiple($responses)
       ));
     }
@@ -176,6 +179,7 @@ class GroupDisplayProvider {
       $secondary['hubs'] = partial('navigation_options', array(
         'navigation_type_id' => 'hubs',
         'title' => t('Hubs'),
+        'collapsed' => $force_collapse,
         'nodes' => node_load_multiple($hubs)
       ));
     }
@@ -184,6 +188,7 @@ class GroupDisplayProvider {
       $secondary['working_groups'] = partial('navigation_options', array(
         'navigation_type_id' => 'working-groups',
         'title' => t('Working groups'),
+        'collapsed' => $force_collapse,
         'nodes' => node_load_multiple($working_groups)
       ));
     }
@@ -195,6 +200,7 @@ class GroupDisplayProvider {
       $secondary['pages'] = partial('navigation_options', array(
         'navigation_type_id' => 'pages',
         'title' => t('Pages'),
+        'collapsed' => $force_collapse,
         'nodes' => node_load_multiple($pages)
       ));
     }
@@ -205,6 +211,7 @@ class GroupDisplayProvider {
         array(
           'navigation_type_id' => 'communities-of-practice',
           'title' => t('Communities of practice'),
+          'collapsed' => $force_collapse,
           'nodes' => node_load_multiple($communities_of_practice),
         ));
     }
@@ -214,6 +221,7 @@ class GroupDisplayProvider {
       $secondary['useful_links'] = partial('navigation_options', array(
         'navigation_type_id' => 'useful-links',
         'title' => t('Useful links'),
+        'collapsed' => $force_collapse,
         'links' => $useful_links
       ));
     }
