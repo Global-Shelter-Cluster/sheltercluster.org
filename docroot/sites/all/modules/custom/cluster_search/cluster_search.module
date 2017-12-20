@@ -190,3 +190,18 @@ function cluster_search_docs_page($query = NULL, $show_facets = TRUE, $default_s
   ];
   return $ret;
 }
+
+/**
+ * Implements hook_cluster_og_dashboard_menu_alter().
+ */
+function cluster_search_cluster_og_dashboard_menu_alter(&$items) {
+  if (!cluster_docs_is_group_documents_page() || !isset($items['documents']))
+    return;
+
+  $items['documents']['#suffix'] = <<<EOS
+    <ul class="optgroup" v-cloak v-if="showModes">
+      <li><label><input type="radio" value="normal" v-model="mode"> Group documents</label></li>
+      <li><label><input type="radio" value="descendants" v-model="mode"> Include subgroups</label></li>
+    </ul>
+EOS;
+}

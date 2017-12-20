@@ -68,6 +68,7 @@
         var vue = new Vue({
           el: '#content',
           data: {
+            mode: 'normal', //normal (all docs in this group) | descendants (all docs in this and its subgroups) | key (only key docs from this group)
             display: 'preview', //preview (document blocks) | list (table)
             facets: {},
             facetFilters: {},
@@ -80,10 +81,12 @@
             searching: false,
             groupNid: typeof settings.cluster_nav !== 'undefined' ? settings.cluster_nav.group_nid : null,
             descendantNids: typeof settings.cluster_nav !== 'undefined' ? settings.cluster_nav.search_group_nids : null,
-            showGroup: false,
-            includeDescendants: "0"
+            showGroup: false
           },
           computed: {
+            showModes: function() {
+              return this.descendantNids.length > 1; //TODO: adjust this logic when working on the "key" mode
+            },
             hasResults: function() {
               return this.results && this.results.length > 0;
             },
@@ -195,7 +198,7 @@
               this.searching = true;
               this.timeout = setTimeout(this.search, 150);
             },
-            includeDescendants: function() {
+            mode: function() {
               this.search();
             }
           },
@@ -309,7 +312,7 @@
                 }
               }];
 
-              if (parseInt(vue.includeDescendants))
+              if (vue.mode === 'descendants')
                 query[0].params.filters = vue.descendantNids
                   .map(function(i) {return 'group_nids:' + i})
                   .join(' OR ');
@@ -348,7 +351,7 @@
                 vue.pages = content.results[0].nbPages;
                 vue.hits = content.results[0].nbHits;
                 vue.page = content.results[0].page;
-                vue.showGroup = parseInt(vue.includeDescendants) !== 0;
+                vue.showGroup = vue.mode === 'descendants';
 
                 if (!skipClearFacets)
                   vue.clearSelectedFacets();

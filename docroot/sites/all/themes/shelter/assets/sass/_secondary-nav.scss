@@ -76,6 +76,17 @@
         float: right;
         @include rem(font-size, 0.75rem);
       }
+
+      .optgroup {
+        line-height: 20px;
+        margin: 40px 0 5px 15px;
+
+        label {
+          @include rem(font-size, 0.85rem);
+          font-weight: normal;
+          color: darken($shelter-grey, 20%);
+        }
+      }
     }
 
     .nav-secondary-items {
