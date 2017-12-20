@@ -17,7 +17,7 @@
           }
           collapsible.each( function(index, element) {
             var element = $(element);
-            if (element.data('collapsible-default') == 'collapsed') {
+            if (element.data('collapsible-default') == 'collapsed' || element.data('force-collapsible-default') == 'collapsed') {
               default_state[index] = 1;
             }
           });
@@ -38,6 +38,8 @@
             expires: 7,
             secure: false
           });
+        } else {
+
         }
 
         collapsible.each( function(index, element) {
