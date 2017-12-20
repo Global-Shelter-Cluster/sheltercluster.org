@@ -91,7 +91,7 @@
               return this.results && this.results.length > 0;
             },
             showNoResultsMessage: function() {
-              return !this.searching && $.trim(this.query) !== '' && !this.hasResults;
+              return !this.searching && !this.hasResults;
             },
             hasFacetFiltersSelected: function() {
               return this.prepareFacetFilters() ? true : false;
