@@ -1,4 +1,4 @@
-<div class="search-summary" v-if="results && hits >= 1">
+<div class="search-summary" v-if="results && hits >= 1" v-cloak>
   <span v-if="hits > 1" class="summary">Showing {{ resultsFrom }}&ndash;{{ resultsTo }} of {{ hits }} documents.</span>
   <ul class="pagination" v-if="pages > 1">
     <li>Pages:</li>
@@ -23,7 +23,7 @@
   </ul>
 </div>
 
-<table v-if="display == 'list' && results" class="document-table">
+<table v-if="display == 'list' && results" class="document-table" v-cloak>
   <thead>
   <tr>
     <th style="width: 100%;">Document title</th>
@@ -61,7 +61,7 @@
   </tbody>
 </table>
 
-<section v-if="display == 'preview' && results" class="document-preview-list">
+<section v-if="display == 'preview' && results" class="document-preview-list" v-cloak>
   <article class="document-preview" v-for="document in results">
     <a class="thumbnail" :href="document.direct_url" target="_blank">
       <div class="file-info">
@@ -111,22 +111,28 @@
   </article>
 </section>
 
-<div class="no-results" v-if="showNoResultsMessage">
+<div class="no-results" v-if="false">
+  <span>
+    Loading&hellip;
+  </span>
+</div>
+
+<div class="no-results" v-if="showNoResultsMessage" v-cloak>
   <a v-if="hasFacetFiltersSelected" href="#" @click.prevent="clearSelectedFacets()">
     No documents found. Try removing the selected filters.
   </a>
-  <a v-if="!hasFacetFiltersSelected && query && includeDescendants == 0 && descendantNids.length > 1"
-     href="#" @click.prevent="includeDescendants = '1'">
+  <a v-if="!hasFacetFiltersSelected && query && mode === 'normal' && descendantNids.length > 1"
+     href="#" @click.prevent="mode = 'descendants'">
     No documents found matching "<strong>{{ query }}</strong>". Try including subgroups.
   </a>
-  <span v-if="!hasFacetFiltersSelected && query && (includeDescendants == 1 || descendantNids.length <= 1)">
+  <span v-if="!hasFacetFiltersSelected && query && (mode === 'descendants' || descendantNids.length <= 1)">
     No documents found matching "<strong>{{ query }}</strong>".
   </span>
-  <a v-if="!hasFacetFiltersSelected && !query && includeDescendants == 0 && descendantNids.length > 1"
-     href="#" @click.prevent="includeDescendants = '1'">
+  <a v-if="!hasFacetFiltersSelected && !query && mode === 'normal' && descendantNids.length > 1"
+     href="#" @click.prevent="mode = 'descendants'">
     No documents found. Try including subgroups.
   </a>
-  <span v-if="!hasFacetFiltersSelected && !query && (includeDescendants == 1 || descendantNids.length <= 1)">
+  <span v-if="!hasFacetFiltersSelected && !query && (mode === 'descendants' || descendantNids.length <= 1)">
     No documents found.
   </span>
 </div>

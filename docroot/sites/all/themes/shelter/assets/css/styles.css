@@ -402,6 +402,10 @@ body {
   }
 }
 
+[v-cloak] {
+  display: none !important;
+}
+
 /* _operation.scss */
 #operation-title {
   padding: 20px 0 0 0;
@@ -2086,6 +2090,16 @@ label[for="mobile_menu_toggle"] span:after {
   float: right;
   font-size: 12px;
   font-size: 0.75rem;
+}
+#secondary-nav .nav-items .nav-item .optgroup {
+  line-height: 20px;
+  margin: 40px 0 5px 15px;
+}
+#secondary-nav .nav-items .nav-item .optgroup label {
+  font-size: 13.6px;
+  font-size: 0.85rem;
+  font-weight: normal;
+  color: #242424;
 }
 #secondary-nav .nav-items .nav-secondary-items {
   margin-bottom: 10px;

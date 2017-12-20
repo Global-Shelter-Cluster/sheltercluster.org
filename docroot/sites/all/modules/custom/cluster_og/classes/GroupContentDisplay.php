@@ -108,7 +108,7 @@ class GroupDisplayProvider {
   public function getDashboardMenu() {
     $items = array();
 
-    $items[] = array(
+    $items['dashboard'] = array(
       'label' => t('Dashboard'),
       'path' => 'node/' . $this->node->nid,
       'options' => array(
@@ -117,7 +117,7 @@ class GroupDisplayProvider {
     );
 
     if ($this->manager->isEnabled('documents')) {
-      $items[] = array(
+      $items['documents'] = array(
         'label' => t('Documents'),
         'path' => 'node/' . $this->node->nid . '/documents',
         'total' => $this->manager->getDocumentCount(),
@@ -128,7 +128,7 @@ class GroupDisplayProvider {
     }
     if ($discussions_count = $this->manager->getDiscussionCount() > 0) {
       if ($this->manager->isEnabled('discussions')) {
-        $items[] = array(
+        $items['discussions'] = array(
           'label' => t('Discussions'),
           'path' => 'node/' . $this->node->nid . '/discussions',
           'total' => $discussions_count,
@@ -141,7 +141,7 @@ class GroupDisplayProvider {
 
     if ($events_count = $this->manager->getEventCount()) {
       if ($this->manager->isEnabled('events') && $events_count > 0) {
-        $items[] = array(
+        $items['events'] = array(
           'label' => t('Events'),
           'path' => 'node/' . $this->node->nid . '/events',
           'total' => $events_count,
@@ -153,7 +153,7 @@ class GroupDisplayProvider {
     }
 
     if ($strategic_advisory = $this->manager->getStrategicAdvisory()) {
-      $items[] = array(
+      $items['sag'] = array(
         'label' => t('Strategic Advisory Group'),
         'path' => 'node/' . $strategic_advisory->nid,
         'options' => array(
@@ -162,12 +162,17 @@ class GroupDisplayProvider {
       );
     }
 
+    drupal_alter('cluster_og_dashboard_menu', $items);
+
     $secondary = array();
+
+    $force_collapse = cluster_docs_is_group_documents_page();
 
     if ($responses = $this->getRelatedResponses()) {
       $secondary['responses'] = partial('navigation_options', array(
         'navigation_type_id' => 'related-operations',
         'title' => t('Related operations'),
+        'collapsed' => $force_collapse,
         'nodes' => node_load_multiple($responses)
       ));
     }
@@ -176,6 +181,7 @@ class GroupDisplayProvider {
       $secondary['hubs'] = partial('navigation_options', array(
         'navigation_type_id' => 'hubs',
         'title' => t('Hubs'),
+        'collapsed' => $force_collapse,
         'nodes' => node_load_multiple($hubs)
       ));
     }
@@ -184,6 +190,7 @@ class GroupDisplayProvider {
       $secondary['working_groups'] = partial('navigation_options', array(
         'navigation_type_id' => 'working-groups',
         'title' => t('Working groups'),
+        'collapsed' => $force_collapse,
         'nodes' => node_load_multiple($working_groups)
       ));
     }
@@ -195,6 +202,7 @@ class GroupDisplayProvider {
       $secondary['pages'] = partial('navigation_options', array(
         'navigation_type_id' => 'pages',
         'title' => t('Pages'),
+        'collapsed' => $force_collapse,
         'nodes' => node_load_multiple($pages)
       ));
     }
@@ -205,6 +213,7 @@ class GroupDisplayProvider {
         array(
           'navigation_type_id' => 'communities-of-practice',
           'title' => t('Communities of practice'),
+          'collapsed' => $force_collapse,
           'nodes' => node_load_multiple($communities_of_practice),
         ));
     }
@@ -214,6 +223,7 @@ class GroupDisplayProvider {
       $secondary['useful_links'] = partial('navigation_options', array(
         'navigation_type_id' => 'useful-links',
         'title' => t('Useful links'),
+        'collapsed' => $force_collapse,
         'links' => $useful_links
       ));
     }
