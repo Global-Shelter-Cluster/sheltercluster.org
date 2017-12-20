@@ -367,6 +367,8 @@ header {
   label {
     white-space: nowrap;
     color: #000;
+    overflow: hidden;
+    text-overflow: ellipsis;
     @media screen and (max-width: 979px) {
       padding: 10px 10px 0 10px;
     }

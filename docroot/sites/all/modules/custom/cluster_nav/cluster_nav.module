@@ -159,7 +159,11 @@ function cluster_nav_preprocess_page(&$variables) {
       $variables['editor_menu'] = $display_provider->getEditorMenu();
     }
     $variables['contextual_navigation'] = $display_provider->getContextualNavigation();
-    drupal_add_js(['cluster_nav' => ['search_group_nids' => $display_provider->getSearchGroupNids()]], ['type' => 'setting']);
+    drupal_add_js(['cluster_nav' => [
+      'group_nid' => intval($node->nid),
+      'group_title' => $node->title,
+      'search_group_nids' => $display_provider->getSearchGroupNids(),
+    ]], ['type' => 'setting']);
   }
 }
 

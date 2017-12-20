@@ -1188,6 +1188,8 @@ header .search {
 #nav-shelter .nav-items.search-input-row label {
   white-space: nowrap;
   color: #000;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 @media screen and (max-width: 979px) {
   #nav-shelter .nav-items.search-input-row label {
@@ -1782,6 +1784,9 @@ label[for="mobile_menu_toggle"] span:after {
     font-size: 1rem;
     padding: 16px 8px;
     padding: 1rem 0.5rem;
+  }
+  #nav-shelter > .list-container > .nav-items > .expanded > ul > li.within-group {
+    width: 25%;
   }
 
   #nav-shelter .list-container > .nav-items:not(.disable-hover) > li:hover > ul,

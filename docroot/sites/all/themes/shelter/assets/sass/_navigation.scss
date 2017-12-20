@@ -289,6 +289,10 @@ label[for="mobile_menu_toggle"] span:after {
       @include rem(font-size, 1rem);
       @include rem(padding, 1rem 0.5rem);
     }
+
+    &.within-group {
+      width: 25%;
+    }
   }
 
   #nav-shelter .list-container > .nav-items:not(.disable-hover) > li:hover > ul,
