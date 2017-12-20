@@ -635,6 +635,111 @@ body {
   text-decoration: none;
 }
 
+.document-preview-list {
+  display: flex;
+  flex-wrap: wrap;
+}
+.document-preview-list .document-preview {
+  position: relative;
+  color: #575757;
+  width: 400px;
+  margin: 0 20px 20px 0;
+  padding: 10px;
+  border: 1px solid #cdd6db;
+  min-height: 150px;
+}
+.document-preview-list .document-preview a {
+  text-decoration: none;
+}
+.document-preview-list .document-preview h4 {
+  color: #7f1416;
+  text-transform: uppercase;
+  font-weight: normal;
+  margin: 0;
+  line-height: 21px;
+  max-height: 63px;
+  overflow: hidden;
+}
+.document-preview-list .document-preview .thumbnail {
+  float: left;
+  width: 150px;
+  height: 150px;
+  margin-right: 10px;
+  position: relative;
+  overflow: hidden;
+}
+.document-preview-list .document-preview .thumbnail > * {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+.document-preview-list .document-preview .thumbnail > img {
+  transition: .2s all;
+}
+.document-preview-list .document-preview .thumbnail:hover > img {
+  opacity: .05;
+  filter: brightness(2);
+  transform: scale(1.02);
+}
+.document-preview-list .document-preview .thumbnail .file-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border: 1px solid #575757;
+  color: #575757;
+  font-size: 12px;
+  font-size: 0.75rem;
+}
+.document-preview-list .document-preview .thumbnail .file-info > * {
+  margin: 5px auto;
+}
+.document-preview-list .document-preview .thumbnail .file-info .file-extension {
+  background: #CCC;
+  padding: 1px 3px;
+}
+.document-preview-list .document-preview .group {
+  color: #575757;
+  display: block;
+}
+.document-preview-list .document-preview .group, .document-preview-list .document-preview .document-date {
+  margin-top: 3px;
+  font-size: 12px;
+  font-size: 0.75rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.document-preview-list .document-preview .tags {
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+  max-height: 40px;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  margin: 0;
+  padding-left: 170px;
+  overflow: hidden;
+  z-index: -1;
+}
+.document-preview-list .document-preview .tags li {
+  font-size: 12px;
+  font-size: 0.75rem;
+  color: #575757;
+  border: 1px solid #575757;
+  border-radius: 6px;
+  padding: 0 4px;
+  margin: 1px;
+  height: 18px;
+  max-width: 220px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 #featured-documents {
   position: relative;
   -moz-box-shadow: rgba(0, 0, 0, 0.33) 0px 3px 10px;
