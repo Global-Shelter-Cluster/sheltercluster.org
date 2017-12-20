@@ -121,18 +121,22 @@
   <a v-if="hasFacetFiltersSelected" href="#" @click.prevent="clearSelectedFacets()">
     No documents found. Try removing the selected filters.
   </a>
-  <a v-if="!hasFacetFiltersSelected && query && mode === 'normal' && descendantNids.length > 1"
+  <a v-else-if="query && mode === 'normal' && descendantNids.length > 1"
      href="#" @click.prevent="mode = 'descendants'">
     No documents found matching "<strong>{{ query }}</strong>". Try including subgroups.
   </a>
-  <span v-if="!hasFacetFiltersSelected && query && (mode === 'descendants' || descendantNids.length <= 1)">
+  <span v-else-if="query && (mode === 'descendants' || descendantNids.length <= 1)">
     No documents found matching "<strong>{{ query }}</strong>".
   </span>
-  <a v-if="!hasFacetFiltersSelected && !query && mode === 'normal' && descendantNids.length > 1"
+  <a v-else-if="!query && mode === 'normal' && descendantNids.length > 1"
      href="#" @click.prevent="mode = 'descendants'">
     No documents found. Try including subgroups.
   </a>
-  <span v-if="!hasFacetFiltersSelected && !query && (mode === 'descendants' || descendantNids.length <= 1)">
+  <a v-else-if="!query && mode === 'normal' && descendantNids.length > 1"
+     href="#" @click.prevent="mode = 'descendants'">
+    No documents found. Try including subgroups.
+  </a>
+  <span v-else>
     No documents found.
   </span>
 </div>
