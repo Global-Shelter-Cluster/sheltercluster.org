@@ -111,6 +111,12 @@
   </article>
 </section>
 
+<div class="no-results" v-if="false">
+  <span>
+    Loading&hellip;
+  </span>
+</div>
+
 <div class="no-results" v-if="showNoResultsMessage" v-cloak>
   <a v-if="hasFacetFiltersSelected" href="#" @click.prevent="clearSelectedFacets()">
     No documents found. Try removing the selected filters.
