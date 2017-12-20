@@ -1,26 +1,22 @@
 (function ($) {
   Drupal.behaviors.clusterSearchAlgolia = {
+    dateHelper: function(timestamp) {
+      var date = new Date(parseInt(timestamp) * 1000);
+      var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+      return date.getDate() + ' ' + (months[date.getMonth()]) + ' ' + date.getFullYear();
+    },
     attach: function (context, settings) {
       $('#cluster-search-mega-menu').once('clusterSearchAlgolia', function() {
-        var algolia_app_id = settings.cluster_search.algolia_app_id;
-        var algolia_search_key = settings.cluster_search.algolia_search_key;
-        var algolia_prefix = settings.cluster_search.algolia_prefix;
-        if (!algolia_app_id || !algolia_search_key || !algolia_prefix) {
+        if (!settings.cluster_search.algolia_app_id || !settings.cluster_search.algolia_search_key || !settings.cluster_search.algolia_prefix) {
           $(this).remove();
           return;
         }
 
-        var algolia_client = algoliasearch(algolia_app_id, algolia_search_key);
+        var algolia_client = algoliasearch(settings.cluster_search.algolia_app_id, settings.cluster_search.algolia_search_key);
 
         Vue.filter('strip_tags', function (html) {
           return $('<div />').html(html).text();
         });
-
-        var dateHelper = function(timestamp) {
-          var date = new Date(parseInt(timestamp) * 1000);
-          var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-          return date.getDate() + ' ' + (months[date.getMonth()]) + ' ' + date.getFullYear();
-        };
 
         var processDocument = function(result) {
           var group = typeof result._highlightResult.og_group_ref !== 'undefined' && result._highlightResult.og_group_ref.length > 0
@@ -31,8 +27,8 @@
             url: result.url,
             title: result._highlightResult.title.value,
             group: group,
-            date: typeof result['field_report_meeting_date'] !== 'undefined'
-              ? dateHelper(result['field_report_meeting_date'])
+            date: typeof result['document_date'] !== 'undefined'
+              ? Drupal.behaviors.clusterSearchAlgolia.dateHelper(result['document_date'])
               : null,
             featured: result['field_featured'],
             key: result['field_key_document']
@@ -56,7 +52,7 @@
             url: result.url,
             title: result._highlightResult.title.value,
             group: group,
-            date: dateHelper(result['field_recurring_event_date2:value']),
+            date: Drupal.behaviors.clusterSearchAlgolia.dateHelper(result['field_recurring_event_date2:value']),
             location: location
           };
         };
@@ -240,7 +236,7 @@
 
               for (var index in searchQueries) {
                 var item = {
-                  indexName: algolia_prefix + index,
+                  indexName: settings.cluster_search.algolia_prefix + index,
                   query: vue.query,
                   params: {
                     hitsPerPage: searchQueries[index]

@@ -1,0 +1,125 @@
+.document-preview-list {
+  display: flex;
+  flex-wrap: wrap;
+
+  .document-preview {
+    position: relative;
+    color: $shelter-grey;
+    width: 400px;
+    margin: 0 20px 20px 0;
+    padding: 10px;
+    border: 1px solid $shelter-light-blue;
+    min-height: 150px;
+
+    a {
+      text-decoration: none;
+    }
+
+    h4 {
+      color: $shelter-red;
+      text-transform: uppercase;
+      font-weight: normal;
+      margin: 0;
+
+      line-height: 21px;
+      max-height: 21px * 3;
+      overflow: hidden;
+      //text-overflow: ellipsis;    // if only this worked for more than one line...
+    }
+
+    .thumbnail {
+      float: left;
+      width: 150px;
+      height: 150px;
+      margin-right: 10px;
+      position: relative;
+      overflow: hidden;
+
+      > * {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+      }
+
+      > img {
+        transition: .2s all;
+      }
+      &:hover > img {
+        opacity: .05;
+        filter: brightness(2);
+        transform: scale(1.02);
+      }
+
+      .file-info {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        border: 1px solid $shelter-grey;
+        color: $shelter-grey;
+        @include rem(font-size, 0.75rem);
+
+        > * {
+          margin: 5px auto;
+        }
+
+        .file-extension {
+          background: #CCC;
+          padding: 1px 3px;
+        }
+
+        //.document-link {
+        //  background: url('../images/document-download.png') 0 0 no-repeat;
+        //  display: inline-block;
+        //  overflow: hidden;
+        //  text-indent: 20px;
+        //  width: 14px;
+        //  height: 17px;
+        //}
+      }
+    }
+
+    .group {
+      color: $shelter-grey;
+      display: block;
+    }
+
+    .group, .document-date {
+      margin-top: 3px;
+      @include rem(font-size, 0.75rem);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .tags {
+      position: absolute;
+      bottom: 5px;
+      right: 5px;
+      max-height: 40px;
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      margin: 0;
+      padding-left: 170px;
+      overflow: hidden;
+      z-index: -1;
+
+      li {
+        @include rem(font-size, 0.75rem);
+        color: $shelter-grey;
+        border: 1px solid $shelter-grey;
+        border-radius: 6px;
+        padding: 0 4px;
+        margin: 1px;
+        height: 18px;
+        max-width: 220px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+    }
+  }
+}

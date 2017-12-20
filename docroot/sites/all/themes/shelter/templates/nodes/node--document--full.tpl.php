@@ -30,7 +30,7 @@
   // Preview image field
   if ($preview_images = field_get_items('node', $node, 'field_preview')) {
     $preview_image_uri = $preview_images[0]['uri'];
-    $style          = 'document_preview';
+    $style          = 'medium';
     $derivative_uri = image_style_path($style, $preview_image_uri);
     $success        = file_exists($derivative_uri) || image_style_create_derivative(image_style_load($style), $preview_image_uri, $derivative_uri);
     $new_image_url  = file_create_url($derivative_uri);

@@ -154,7 +154,27 @@ class SearchApiClusterAlgoliaService extends SearchApiAlgoliaService {
                 $processed = TRUE;
               }
 
-              if (!$processed)
+              if ($key == 'field_language' && is_string($property_value) && $property_value) {
+                $lang = i18n_language_load($property_value);
+                if ($lang)
+                  $property_value = $lang->name;
+                else
+                  $processed = TRUE; // Skip it
+              }
+
+              if (in_array($key, ['created', 'field_report_meeting_date']))
+                $property_value = intval($property_value);
+
+              if ($key === 'field_preview:file:fid') {
+                $file = file_load($property_value);
+                if ($file) {
+                  $a=$file->uri;
+                  $item_to_index['field_preview:file:url'] = image_style_url('document_preview', $file->uri);
+                }
+                $processed = TRUE;
+              }
+
+              if (!$processed) {
                 try {
                   \AlgoliaSearch\Json::encode($property_value);
 
@@ -163,8 +183,12 @@ class SearchApiClusterAlgoliaService extends SearchApiAlgoliaService {
                     : $property_value;
                 } catch (\AlgoliaSearch\AlgoliaException $e) {
                   // Don't include it in the index
-                  watchdog('cluster_search', 'Skipped field %field in node %nid due to encoding', ['%field' => $key, '%nid' => $item[$entity_key]['value']]);
+                  watchdog('cluster_search', 'Skipped field %field in node %nid due to encoding', [
+                    '%field' => $key,
+                    '%nid' => $item[$entity_key]['value']
+                  ]);
                 }
+              }
             }
           }
           else {
@@ -176,6 +200,12 @@ class SearchApiClusterAlgoliaService extends SearchApiAlgoliaService {
       }
       try {
         \AlgoliaSearch\Json::encode($item_to_index);
+
+        if (array_key_exists('created', $item_to_index)) {
+          $item_to_index['document_date'] = array_key_exists('field_report_meeting_date', $item_to_index) && $item_to_index['field_report_meeting_date']
+            ? $item_to_index['field_report_meeting_date']
+            : $item_to_index['created'];
+        }
 
         // Add the properly formatted items to the batch.
         $items_to_index[] = $item_to_index;
