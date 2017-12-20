@@ -123,10 +123,6 @@ class GroupDisplayProvider {
         'total' => $this->manager->getDocumentCount(),
         'options' => array(
           'html' => TRUE,
-          'query' => array(
-            'sort' => 'date',
-            'sort_direction' => 'DESC',
-          ),
         ),
       );
     }
