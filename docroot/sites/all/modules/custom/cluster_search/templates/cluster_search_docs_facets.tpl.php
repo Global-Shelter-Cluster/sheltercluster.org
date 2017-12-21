@@ -1,6 +1,6 @@
 <section class="facets" v-cloak>
   <label class="facet">
-    <h4>Search</h4>
+    <h4>Search documents</h4>
     <input type="search" v-model="query">
   </label>
   <div class="facet" v-for="(facet, facetField) in facetsDisplay" :data-facet="facetField">
