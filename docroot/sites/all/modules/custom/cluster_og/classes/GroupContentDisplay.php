@@ -69,6 +69,10 @@ class GroupDisplayProvider {
    */
   public function getSubgroupTypes() {
     $ret = [];
+    if ($this->node->type === 'geographic_region') {
+      if ($this->manager->queryChildren([$this->node->nid], 'field_parent_region', 'geographic_region'))
+        $ret[] = 'regions';
+    }
     if ($this->getRelatedHubs())
       $ret[] = 'hubs';
     if ($this->getRelatedResponses())
