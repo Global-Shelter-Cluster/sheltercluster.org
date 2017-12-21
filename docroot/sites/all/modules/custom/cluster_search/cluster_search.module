@@ -198,10 +198,28 @@ function cluster_search_cluster_og_dashboard_menu_alter(&$items) {
   if (!cluster_docs_is_group_documents_page() || !isset($items['documents']))
     return;
 
+  $normal_label = t('All documents');
+
+  $display_provider = GroupDisplayProvider::getDisplayProvider(node_load(arg(1)));
+  $subgroup_types = $display_provider->getSubgroupTypes();
+  $subgroups_label = t('Include ' . _cluster_search_list_and($subgroup_types));
+
   $items['documents']['#suffix'] = <<<EOS
     <ul class="optgroup" v-cloak v-if="showModes">
-      <li><label><input type="radio" value="normal" v-model="mode"> Group documents</label></li>
-      <li><label><input type="radio" value="descendants" v-model="mode"> Include subgroups</label></li>
+      <li><label><input type="radio" value="normal" v-model="mode"> $normal_label</label></li>
+      <li><label><input type="radio" value="descendants" v-model="mode"> $subgroups_label</label></li>
     </ul>
 EOS;
+}
+
+function _cluster_search_list_and($items) {
+  switch (count($items)) {
+    case 0:
+      return '';
+    case 1:
+      return $items[0];
+    default:
+      return implode(', ', array_slice($items, 0, count($items) - 1))
+        . ' and ' . array_pop($items);
+  }
 }
