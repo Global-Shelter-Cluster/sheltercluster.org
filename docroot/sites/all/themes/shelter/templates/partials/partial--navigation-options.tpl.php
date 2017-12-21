@@ -1,4 +1,6 @@
-<h3 data-collapsible="navigation-option-<?php print $navigation_type_id; ?>"><?php print $title; ?></h3>
+<h3 data-collapsible="navigation-option-<?php print $navigation_type_id; ?>"
+    <?php if (isset($collapsed) && $collapsed): ?>data-force-collapsible-default="collapsed"<?php endif; ?>
+><?php print $title; ?></h3>
 <div id="navigation-option-<?php print $navigation_type_id; ?>">
   <ul class="nav-secondary-items">
     <?php foreach ((isset($nodes) ? $nodes : array()) as $node): ?>

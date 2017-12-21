@@ -402,6 +402,10 @@ body {
   }
 }
 
+[v-cloak] {
+  display: none !important;
+}
+
 /* _operation.scss */
 #operation-title {
   padding: 20px 0 0 0;
@@ -1333,6 +1337,8 @@ header .search {
 #nav-shelter .nav-items.search-input-row label {
   white-space: nowrap;
   color: #000;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 @media screen and (max-width: 979px) {
   #nav-shelter .nav-items.search-input-row label {
@@ -1984,6 +1990,9 @@ label[for="mobile_menu_toggle"] span:after {
     padding: 16px 8px;
     padding: 1rem 0.5rem;
   }
+  #nav-shelter > .list-container > .nav-items > .expanded > ul > li.within-group {
+    width: 25%;
+  }
 
   #nav-shelter .list-container > .nav-items:not(.disable-hover) > li:hover > ul,
   #nav-shelter .list-container > .nav-items > li.force-visible > ul {
@@ -2081,6 +2090,16 @@ label[for="mobile_menu_toggle"] span:after {
   float: right;
   font-size: 12px;
   font-size: 0.75rem;
+}
+#secondary-nav .nav-items .nav-item .optgroup {
+  line-height: 20px;
+  margin: 40px 0 5px 15px;
+}
+#secondary-nav .nav-items .nav-item .optgroup label {
+  font-size: 13.6px;
+  font-size: 0.85rem;
+  font-weight: normal;
+  color: #242424;
 }
 #secondary-nav .nav-items .nav-secondary-items {
   margin-bottom: 10px;

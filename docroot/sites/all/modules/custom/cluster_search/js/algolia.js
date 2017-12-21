@@ -134,6 +134,7 @@
             searching: false,
             shouldScrollOnResults: true,
             indexFilter: null,
+            groupTitle: typeof settings.cluster_nav !== 'undefined' ? settings.cluster_nav.group_title : null,
             groupNids: typeof settings.cluster_nav !== 'undefined' ? settings.cluster_nav.search_group_nids : null,
             onlyWithinGroup: true
           },

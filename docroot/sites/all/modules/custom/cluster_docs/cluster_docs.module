@@ -187,6 +187,15 @@ function cluster_docs_all($nid) {
   return cluster_search_docs_page();
 }
 
+function cluster_docs_is_group_documents_page() {
+  $router_item = menu_get_item(current_path());
+
+  if ($router_item && isset($router_item['path']))
+    return $router_item['path'] === 'node/%/documents';
+
+  return FALSE;
+}
+
 /**
  * Page callback to show all documents of the website.
  *

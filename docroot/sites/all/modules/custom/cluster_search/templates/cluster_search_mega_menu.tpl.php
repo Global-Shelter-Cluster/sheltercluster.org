@@ -5,7 +5,7 @@
     <li class="within-group" v-if="groupNids">
       <label>
         <input type="checkbox" v-model="onlyWithinGroup">
-        Search only within this group
+        Search within <em>{{ groupTitle }}</em>
       </label>
     </li>
     <li class="search-input">
