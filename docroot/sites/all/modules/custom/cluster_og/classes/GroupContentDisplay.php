@@ -64,6 +64,21 @@ class GroupDisplayProvider {
   }
 
   /**
+   * Returns an array of human-readable types (in plural), for the subgroups (not
+   * all descendants) of this group.
+   */
+  public function getSubgroupTypes() {
+    $ret = [];
+    if ($this->getRelatedHubs())
+      $ret[] = 'hubs';
+    if ($this->getRelatedResponses())
+      $ret[] = 'responses';
+    if ($this->getRelatedWorkingGroups())
+      $ret[] = 'working groups';
+    return $ret;
+  }
+
+  /**
    * Get related response type nodes for the viewed group.
    * @return
    *  Render array of nodes.
