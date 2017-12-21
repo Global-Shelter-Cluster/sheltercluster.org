@@ -36,7 +36,7 @@
     <td class="information-title">
       <a :href="document.url" v-html="document.title"></a>
       <a v-if="showGroup" :href="'/node/' + document.group_nids[0]" class="group" v-html="document.group"></a>
-      <div v-if="document.tags" class="tags">
+      <div v-if="document.tags && document.tags.length" class="tags">
         <div class="item-list">
           <h3>Tags</h3>
           <ul>
