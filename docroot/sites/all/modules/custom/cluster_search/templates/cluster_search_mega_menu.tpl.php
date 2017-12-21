@@ -1,5 +1,5 @@
 <li class="expanded last nav-item" id="cluster-search-mega-menu">
-  <a href="#" @click.prevent="focus">Search</a>
+  <a href="#" @click.prevent="focus"><i class="fa fa-search"></i> Search</a>
   <template>
   <ul class="nav-items menu search-input-row">
     <li class="within-group" v-if="groupNids">
