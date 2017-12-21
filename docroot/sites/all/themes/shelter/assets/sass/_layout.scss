@@ -13,7 +13,8 @@ html {
 }
 
 body {
-  background-color: rgb(255,255,255);
+/*  background-color: rgb(255,255,255);*/
+  background-color: rgb(0,0,0);
   font-family: 'Roboto', sans-serif;
   @include rem(font-size, 16px);
   font-weight: normal;
