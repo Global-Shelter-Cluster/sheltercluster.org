@@ -337,6 +337,13 @@ th {
   border-style: none;
 }
 
+a.operation-icon {
+  color: #cdd6db;
+}
+a.operation-icon:hover {
+  color: #688394;
+}
+
 /* _layout.scss */
 * {
   -webkit-tap-highlight-color: transparent;
@@ -659,6 +666,10 @@ body {
   line-height: 21px;
   max-height: 63px;
   overflow: hidden;
+}
+.document-preview-list .document-preview .operation-icon {
+  float: right;
+  margin-left: 5px;
 }
 .document-preview-list .document-preview .thumbnail {
   float: left;
@@ -1165,6 +1176,12 @@ header .search {
 .document-table a {
   color: #031958;
   font-weight: normal;
+}
+.document-table a.operation-icon {
+  color: #688394;
+}
+.document-table a.operation-icon:hover {
+  color: #3e4e58;
 }
 .document-table td {
   padding: 8px 0;

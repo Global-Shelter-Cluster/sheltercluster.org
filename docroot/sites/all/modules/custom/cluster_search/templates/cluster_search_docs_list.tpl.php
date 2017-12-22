@@ -34,6 +34,12 @@
   <tbody>
   <tr v-for="document, i in results" :class="['document-row', i % 2 == 0 ? 'odd' : 'even']">
     <td class="information-title">
+      <a v-if="document.can_edit" class="operation-icon" :href="'/node/' + document.nid + '/edit'" title="Edit this document">
+        <i class="fas fa-edit"></i>
+      </a>
+      <a v-if="document.can_delete" class="operation-icon" :href="'/node/' + document.nid + '/delete'" title="Delete this document">
+        <i class="fas fa-trash-alt"></i>
+      </a>
       <a :href="document.url" v-html="document.title"></a>
       <a v-if="showGroup" :href="'/node/' + document.group_nids[0]" class="group" v-html="document.group"></a>
       <div v-if="document.tags && document.tags.length" class="tags">
@@ -70,6 +76,12 @@
         <i class="fas fa-download"></i>
       </div>
       <img v-if="document.thumb" :src="document.thumb" :key="document.thumb">
+    </a>
+    <a v-if="document.can_edit" class="operation-icon" :href="'/node/' + document.nid + '/edit'" title="Edit this document">
+      <i class="fas fa-edit"></i>
+    </a>
+    <a v-if="document.can_delete" class="operation-icon" :href="'/node/' + document.nid + '/delete'" title="Delete this document">
+      <i class="fas fa-trash-alt"></i>
     </a>
     <a :href="document.url">
       <h4 :title="document.title|strip_tags" v-html="
