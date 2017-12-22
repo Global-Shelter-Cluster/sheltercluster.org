@@ -27,6 +27,11 @@
       //text-overflow: ellipsis;    // if only this worked for more than one line...
     }
 
+    .operation-icon {
+      float: right;
+      margin-left: 5px;
+    }
+
     .thumbnail {
       float: left;
       width: 150px;

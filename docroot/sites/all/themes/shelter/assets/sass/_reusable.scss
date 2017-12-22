@@ -56,3 +56,10 @@ $button-color: lighten($shelter-grey,52%);
     }
   }
 }
+
+a.operation-icon {
+  color: $shelter-light-blue;
+  &:hover {
+    color: $shelter-dark-blue;
+  }
+}
