@@ -240,6 +240,13 @@ header {
   a {
     color: darken(#2d62f9, 40%);
     font-weight: normal;
+
+    &.operation-icon {
+      color: $shelter-dark-blue;
+      &:hover {
+        color: darken($shelter-dark-blue, 20%);
+      }
+    }
   }
   td {
     @include rem(padding, 0.5rem 0);

@@ -22,6 +22,20 @@
             ? result._highlightResult.og_group_ref[0].value
             : null;
 
+          var canEdit = false, canDelete = false;
+          for (var i in result.group_nids) {
+            if (typeof settings.cluster_search.doc_permissions_by_group[result.group_nids[i]] !== 'undefined') {
+              if (settings.cluster_search.doc_permissions_by_group[result.group_nids[i]].edit)
+                canEdit = true;
+              if (settings.cluster_search.doc_permissions_by_group[result.group_nids[i]].delete)
+                canDelete = true;
+              if (canEdit && canDelete)
+                break;
+            }
+          }
+          result.can_edit = canEdit;
+          result.can_delete = canDelete;
+
           result.thumb = result['field_preview:file:url'];
           if (result.thumb && settings.cluster_search.algolia_prefix === 'local')
             result.thumb = result.thumb.replace('local.sheltercluster.org', 'dev.sheltercluster.org').replace('/styles/document_preview/public', '');
