@@ -678,6 +678,7 @@ body {
   margin-right: 10px;
   position: relative;
   overflow: hidden;
+  z-index: 1;
 }
 .document-preview-list .document-preview .thumbnail > * {
   position: absolute;
@@ -734,7 +735,6 @@ body {
   margin: 0;
   padding-left: 170px;
   overflow: hidden;
-  z-index: -1;
 }
 .document-preview-list .document-preview .tags li {
   font-size: 12px;
