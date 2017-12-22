@@ -47,7 +47,7 @@
             <small v-if="document.group" class="search-result-title"
                    :title="document.group|strip_tags" v-html="document.group"></small>
             <small>
-              <template v-if="document.date">{{ document.date }}</template>
+              {{ document.date }}
               <template v-if="document.featured">&middot; Featured</template>
               <template v-if="document.key && !document.featured">&middot; Key document</template>
             </small>
