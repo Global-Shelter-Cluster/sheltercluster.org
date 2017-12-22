@@ -39,6 +39,7 @@
       margin-right: 10px;
       position: relative;
       overflow: hidden;
+      z-index: 1;
 
       > * {
         position: absolute;
@@ -110,7 +111,6 @@
       margin: 0;
       padding-left: 170px;
       overflow: hidden;
-      z-index: -1;
 
       li {
         @include rem(font-size, 0.75rem);
