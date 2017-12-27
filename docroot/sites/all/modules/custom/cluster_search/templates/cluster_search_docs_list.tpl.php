@@ -41,7 +41,7 @@
         <i class="fas fa-trash-alt"></i>
       </a>
       <a :href="document.url" v-html="document.title"></a>
-      <a v-if="showGroup" :href="'/node/' + document.group_nids[0]" class="group" v-html="document.group"></a>
+      <a v-if="showGroup && groupNid != document.group_nids[0]" :href="'/node/' + document.group_nids[0]" class="group" v-html="document.group"></a>
       <div v-if="document.tags && document.tags.length" class="tags">
         <div class="item-list">
           <h3>Tags</h3>
@@ -101,7 +101,7 @@
       </h4>
     </a>
     <a :href="'/node/' + document.group_nids[0]" class="group"
-       v-if="showGroup" v-html="document.group">
+       v-if="showGroup && groupNid != document.group_nids[0]" v-html="document.group">
     </a>
 
     <div v-if="document.date || document.field_language || document.field_document_source" class="document-date">
