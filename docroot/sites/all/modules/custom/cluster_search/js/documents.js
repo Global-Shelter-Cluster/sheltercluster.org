@@ -459,7 +459,10 @@
               if (newURI.equals(new URI()))
                 return;
 
-              history.pushState(data, null, newURI.search());
+              var url = newURI.search();
+              if (url === '')
+                url = '?';
+              history.pushState(data, null, url);
             },
             popHistory: function(data) {
               this.initializing = true;
