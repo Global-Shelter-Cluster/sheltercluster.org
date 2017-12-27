@@ -79,24 +79,60 @@
 
         var hitsPerPage = 30;
 
+        var historyApiAvailable = typeof history.pushState !== 'undefined';
+
+        var data = {
+          mode: 'normal', //normal (all docs in this group) | descendants (all docs in this and its subgroups) | key (only key docs from this group)
+          display: 'preview', //preview (document blocks) | list (table)
+          facets: {},
+          facetFilters: {},
+          search: '',
+          page: 0,
+          pages: 0,
+          hits: 0,
+          timeout: null,
+          results: null,
+          searching: false,
+          initializing: true,
+          groupNid: typeof settings.cluster_nav !== 'undefined' ? settings.cluster_nav.group_nid : null,
+          descendantNids: typeof settings.cluster_nav !== 'undefined' ? settings.cluster_nav.search_group_nids : null,
+          showGroup: false
+        };
+
+        function processQuery(data, query, key, validOptions) {
+          if (typeof query[key] === 'undefined')
+            return;
+
+          if (typeof validOptions === 'object') {
+            if ($.inArray(query[key], validOptions) !== -1)
+              data[key] = query[key];
+          } else if (validOptions === 'string') {
+            if (typeof query[key] === 'string')
+              data[key] = query[key];
+          } else if (validOptions === 'facet') {
+            var facetValue = {};
+            if (typeof query[key] === 'object') {
+              for (var i = 0; i < query[key].length; i++)
+                facetValue[query[key][i]] = true;
+            } else {
+              facetValue[query[key]] = true;
+            }
+            data.facetFilters['field_' + key] = facetValue;
+          }
+        }
+
+        var query = (new URI()).search(true);
+        processQuery(data, query, 'mode', ['normal', 'descendants', 'key']);
+        processQuery(data, query, 'display', ['preview', 'list']);
+        processQuery(data, query, 'search', 'string');
+        for (var facetField in facets) {
+          processQuery(data, query, facetField.substr('field_'.length), 'facet');
+        }
+        var page = typeof query.page !== 'undefined' ? parseInt(query.page) - 1 : 0;
+
         var vue = new Vue({
           el: '#content',
-          data: {
-            mode: 'normal', //normal (all docs in this group) | descendants (all docs in this and its subgroups) | key (only key docs from this group)
-            display: 'preview', //preview (document blocks) | list (table)
-            facets: {},
-            facetFilters: {},
-            query: '',
-            page: 0,
-            pages: 0,
-            hits: 0,
-            timeout: null,
-            results: null,
-            searching: false,
-            groupNid: typeof settings.cluster_nav !== 'undefined' ? settings.cluster_nav.group_nid : null,
-            descendantNids: typeof settings.cluster_nav !== 'undefined' ? settings.cluster_nav.search_group_nids : null,
-            showGroup: false
-          },
+          data: data,
           computed: {
             showModes: function() {
               return this.descendantNids.length > 1; //TODO: adjust this logic when working on the "key" mode
@@ -206,14 +242,23 @@
             }
           },
           watch: {
-            query: function() {
+            search: function() {
+              if (this.initializing)
+                return;
               if (this.timeout)
                 clearTimeout(this.timeout);
               this.searching = true;
-              this.timeout = setTimeout(this.search, 150);
+              this.timeout = setTimeout(this.doSearch, 150);
             },
             mode: function() {
-              this.search();
+              if (this.initializing)
+                return;
+              this.doSearch();
+            },
+            display: function() {
+              if (this.initializing)
+                return;
+              this.pushHistory();
             }
           },
           methods: {
@@ -248,14 +293,14 @@
                 this.facetFilters[facet] = {};
 
               this.facetFilters[facet][value] = true;
-              this.search();
+              this.doSearch();
             },
             deselectFacet: function(facet, value) {
               if (typeof this.facetFilters[facet] === 'undefined')
                 return;
 
               this.facetFilters[facet][value] = false;
-              this.search();
+              this.doSearch();
             },
             isFacetActive: function(facet, value) {
               if (typeof this.facetFilters[facet] === 'undefined')
@@ -280,12 +325,12 @@
                 }
               }
               if (changed)
-                this.search(true);
+                this.doSearch(true);
             },
             focus: function() {
               $('#content .facet input[type=search]').first().focus();
             },
-            search: function(skipClearFacets, pageChange) {
+            doSearch: function(skipClearFacets, pageChange) {
               var vue = this;
               vue.timeout = null;
               vue.searching = true;
@@ -312,12 +357,12 @@
               }
 
               var indexName = settings.cluster_search.algolia_prefix + 'Documents';
-              if (!vue.query)
+              if (!vue.search)
                 indexName += '_sortByDate';
 
               var query = [{
                 indexName: indexName,
-                query: vue.query,
+                query: vue.search,
                 params: {
                   facets: facetsToRetrieve,
                   attributesToRetrieve: attributesToRetrieve,
@@ -370,11 +415,82 @@
                 if (!skipClearFacets)
                   vue.clearSelectedFacets();
                 vue.searching = false;
+
+                if (vue.initializing)
+                  vue.initializing = false;
+                else
+                  vue.pushHistory();
               });
+            },
+            pushHistory: function() {
+              if (!historyApiAvailable)
+                return;
+
+              // Determine if the query string has changed, and push to the browser's history if it did
+              var vue = this;
+              var data = {};
+
+              var process = function(data, value, key, possibleValues) {
+                if (possibleValues === 'string') {
+                  if (value !== '')
+                    data[key] = value;
+                } else if (possibleValues === 'facet') {
+                  data[key] = [];
+                  for (var facetValue in value)
+                    if (value[facetValue])
+                      data[key][data[key].length] = facetValue;
+                } else if ($.inArray(value, possibleValues) !== -1)
+                  data[key] = value;
+              };
+
+              process(data, vue.mode, 'mode', ['descendants', 'key']);
+              process(data, vue.display, 'display', ['list']);
+              process(data, vue.search, 'search', 'string');
+
+              for (var facetField in facets) {
+                if (typeof vue.facetFilters[facetField] !== 'undefined')
+                  process(data, vue.facetFilters[facetField], facetField.substr('field_'.length), 'facet');
+              }
+
+              if (vue.page > 0)
+                data.page = vue.page + 1;
+
+              var newURI = (new URI()).search(data);
+              if (newURI.equals(new URI()))
+                return;
+
+              var url = newURI.search();
+              if (url === '')
+                url = '?';
+              history.pushState(data, null, url);
+            },
+            popHistory: function(data) {
+              this.initializing = true;
+
+              this.mode = 'normal';
+              this.display = 'preview';
+              this.search = '';
+              this.facetFilters = {};
+
+              processQuery(this, data, 'mode', ['normal', 'descendants', 'key']);
+              processQuery(this, data, 'display', ['preview', 'list']);
+              processQuery(this, data, 'search', 'string');
+              for (var facetField in facets) {
+                processQuery(this, data, facetField.substr('field_'.length), 'facet');
+              }
+              var page = typeof data.page !== 'undefined' ? parseInt(data.page) - 1 : 0;
+
+              this.initializing = false;
+              this.doSearch(false, page);
             }
           }
         });
-        vue.search();
+
+        window.addEventListener('popstate', function(e) {
+          vue.popHistory(e.state);
+        });
+
+        vue.doSearch(false, page);
       });
     }
   }

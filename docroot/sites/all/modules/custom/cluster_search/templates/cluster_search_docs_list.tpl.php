@@ -3,7 +3,7 @@
   <ul class="pagination" v-if="pages > 1">
     <li>Pages:</li>
     <li v-for="p in paginationPages">
-      <a v-if="p != '-' && p != page" href="#" @click.prevent="search(true, p)">{{ p+1 }}</a>
+      <a v-if="p != '-' && p != page" href="#" @click.prevent="doSearch(true, p)">{{ p+1 }}</a>
       <span v-if="p != '-' && p == page">{{ p+1 }}</span>
       <span v-if="p == '-'">&hellip;</span>
     </li>
@@ -133,18 +133,18 @@
   <a v-if="hasFacetFiltersSelected" href="#" @click.prevent="clearSelectedFacets()">
     No documents found. Try removing the selected filters.
   </a>
-  <a v-else-if="query && mode === 'normal' && descendantNids.length > 1"
+  <a v-else-if="search && mode === 'normal' && descendantNids.length > 1"
      href="#" @click.prevent="mode = 'descendants'">
-    No documents found matching "<strong>{{ query }}</strong>". Try including subgroups.
+    No documents found matching "<strong>{{ search }}</strong>". Try including subgroups.
   </a>
-  <span v-else-if="query && (mode === 'descendants' || descendantNids.length <= 1)">
-    No documents found matching "<strong>{{ query }}</strong>".
+  <span v-else-if="search && (mode === 'descendants' || descendantNids.length <= 1)">
+    No documents found matching "<strong>{{ search }}</strong>".
   </span>
-  <a v-else-if="!query && mode === 'normal' && descendantNids.length > 1"
+  <a v-else-if="!search && mode === 'normal' && descendantNids.length > 1"
      href="#" @click.prevent="mode = 'descendants'">
     No documents found. Try including subgroups.
   </a>
-  <a v-else-if="!query && mode === 'normal' && descendantNids.length > 1"
+  <a v-else-if="!search && mode === 'normal' && descendantNids.length > 1"
      href="#" @click.prevent="mode = 'descendants'">
     No documents found. Try including subgroups.
   </a>
