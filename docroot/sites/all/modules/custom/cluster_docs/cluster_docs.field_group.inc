@@ -83,10 +83,10 @@ function cluster_docs_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Document details',
-    'weight' => '5',
+    'weight' => '2',
     'children' => array(
-      0 => 'group_document_page_content',
-      1 => 'group_document_og',
+      0 => 'group_document_og',
+      1 => 'group_document_page_content',
       2 => 'group_document_settings',
       3 => 'group_document_source',
     ),
@@ -175,6 +175,7 @@ function cluster_docs_field_group_info() {
       0 => 'field_key_document',
       1 => 'field_featured',
       2 => 'field_sorting_weight',
+      3 => 'field_featured_date',
     ),
     'format_type' => 'tab',
     'format_settings' => array(
@@ -288,7 +289,7 @@ function cluster_docs_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Tags',
-    'weight' => '6',
+    'weight' => '3',
     'children' => array(
       0 => 'group_advanced_tags',
       1 => 'group_document_type',
