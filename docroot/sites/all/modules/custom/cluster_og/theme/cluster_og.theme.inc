@@ -77,7 +77,9 @@ function theme_cluster_og_recent_documents($vars) {
     'title' => t('Latest documents'),
     'docs' => $vars['docs'],
     'all_documents_link' => l(t('All documents'), $vars['all_documents_link'], $link_attributes),
-    'key_documents_link' => l(t('Key documents'), $vars['all_documents_link'], $link_attributes_key),
+    'key_documents_link' => $vars['has_key_documents']
+      ? l(t('Key documents'), $vars['all_documents_link'], $link_attributes_key)
+      : NULL,
   ));
 }
 

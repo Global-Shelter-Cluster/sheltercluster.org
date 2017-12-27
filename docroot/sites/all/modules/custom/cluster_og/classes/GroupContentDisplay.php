@@ -444,6 +444,7 @@ class GroupFullDisplayProvider extends GroupDisplayProvider {
       return theme('cluster_og_recent_documents', array(
         'docs' => cluster_docs_prepare_row_data($nids),
         'all_documents_link' => url('node/' . $this->node->nid . '/documents'),
+        'has_key_documents' => $this->manager->hasKeyDocuments(),
       ));
     }
     return FALSE;
