@@ -322,6 +322,23 @@ class GroupContentManager {
   }
 
   /**
+   * @return bool
+   */
+  public function hasKeyDocuments() {
+    $query = new EntityFieldQuery();
+    $count = $query->entityCondition('entity_type', 'node')
+      ->entityCondition('bundle', 'document')
+      ->fieldCondition('og_group_ref', 'target_id', $this->node->nid)
+      ->fieldCondition('field_key_document', 'value', 1)
+      ->propertyCondition('status', NODE_PUBLISHED)
+      ->range(0, 1)
+      ->count()
+      ->execute();
+
+    return $count > 0;
+  }
+
+  /**
    * Get the role id for a group from the role name.
    * @param $role_name
    *  The role name as stored in the database.
