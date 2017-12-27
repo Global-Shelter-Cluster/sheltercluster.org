@@ -38,7 +38,7 @@ function cluster_og_node_view($node, $view_mode) {
     $node->content['editor_menu'] = $group_content->getEditorMenu();
     $node->content['contact_members'] = $group_content->getContactMembers();
     $node->content['featured_documents'] = $group_content->getFeaturedDocuments();
-    $node->content['key_documents'] = $group_content->getKeyDocuments();
+//    $node->content['key_documents'] = $group_content->getKeyDocuments();
     $node->content['recent_documents'] = $group_content->getRecentDocuments();
     $node->content['recent_discussions'] = $group_content->getRecentDiscussions();
     $node->content['dashboard_menu'] = $group_content->getDashboardMenu();

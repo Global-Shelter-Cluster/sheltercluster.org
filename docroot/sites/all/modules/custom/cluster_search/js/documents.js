@@ -135,7 +135,10 @@
           data: data,
           computed: {
             showModes: function() {
-              return this.descendantNids.length > 1; //TODO: adjust this logic when working on the "key" mode
+              return true;//this.descendantNids.length > 1; //TODO: adjust this logic when working on the "key" mode
+            },
+            hasSubgroups: function() {
+              return this.descendantNids.length > 1;
             },
             hasResults: function() {
               return this.results && this.results.length > 0;
@@ -277,6 +280,10 @@
                   facetFilters[facetFilters.length] = currentFacetFilter[0];
                 else if (currentFacetFilter.length > 1)
                   facetFilters[facetFilters.length] = currentFacetFilter;
+              }
+
+              if (this.mode === 'key') {
+                facetFilters[facetFilters.length] = 'field_key_document:true';
               }
 
               return facetFilters.length > 0 ? facetFilters : null;

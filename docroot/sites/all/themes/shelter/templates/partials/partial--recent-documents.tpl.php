@@ -45,5 +45,6 @@
   </table>
   <div class="all-documents">
     <?php print $all_documents_link; ?>
+    <?php if (isset($key_documents_link)) print ' &nbsp; '.$key_documents_link; ?>
   </div>
 </section>
