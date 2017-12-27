@@ -15,6 +15,7 @@ scripts[] = 'assets/javascripts/collapsible.js'
 scripts[] = 'assets/javascripts/jquery.matchHeight-min.js'
 scripts[] = 'assets/javascripts/matchheight-shelter.js'
 scripts[] = 'assets/javascripts/appendAround.js'
+scripts[] = 'assets/javascripts/URI.js'
 
 regions[header] = Header
 regions[content] = Content
