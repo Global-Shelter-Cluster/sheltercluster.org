@@ -25,13 +25,11 @@
 const cluster_upload = {
   "drop": function(event, gid) {
     event.preventDefault();
-    console.log(event);
     // Only upload the first file.
     var file_data = event.originalEvent.dataTransfer.files[0];
     var form_data = new FormData();
     form_data.append('file', file_data);
     this.notify("status", "Your document is getting created...");
-    console.log(file_data);
     if (form_data) {
       jQuery.ajax({
         url: "/upload-document/" + gid,
@@ -39,7 +37,8 @@ const cluster_upload = {
         data: form_data,
         processData: false,
         contentType: false,
-        success: this.redirect
+        success: this.success,
+        error: this.error,
       });
     }
     else {
@@ -47,11 +46,20 @@ const cluster_upload = {
     }
   },
 
-  "redirect": function(response, status) {
-    window.location.href = '/node/' + response.document_nid + '/edit';
+  "success": function(response, status) {
+    console.log(response)
+    if (response.status === "error") {
+      this.error();
+    }
+    else if (response.status === "ok") {
+      window.location.href = '/node/' + response.document_nid + '/edit';
+    }
   },
 
   "notify": function(type, message) {
-    jQuery("#operation-title").append("<div class='cluster-upload-message'>" + message + "</div>");
-  }
+    jQuery("#operation-title").append("<div id='cluter-upload-status' class='cluster-upload-message throbber'>" + message + "</div>");
+  },
+  "error": function(jqXHR, textStatus, errorThrown) {
+    jQuery("#cluter-upload-status").replaceWith("<div id='cluter-upload-status' class='cluster-upload-message'>Error when creating the document</div>");
+  },
 };

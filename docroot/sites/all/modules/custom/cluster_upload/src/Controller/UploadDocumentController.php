@@ -12,17 +12,20 @@ class UploadDocumentController {
    * @return json response with the document node id.
    */
   public function handleRequest($gid) {
-      header('Content-Type: application/json');
-      echo json_encode(['document_nid' => $document->nid]);    if ( 0 < $_FILES['file']['error'] ) {
+    if ( 0 < $_FILES['file']['error'] ) {
       echo 'Error: ' . $_FILES['file']['error'] . '<br>';
-      return;
     }
     else {
       $file_temp = file_get_contents($_FILES['file']['tmp_name']);
       $file = $this->saveFile();
       $document = $this->createDocumentNode($file, $gid);
       header('Content-Type: application/json');
-      echo json_encode(['document_nid' => $document->nid]);
+      if (!is_null($document)) {
+        echo json_encode(['document_nid' => $document->nid, 'status' => 'ok']);
+      }
+      else {
+        echo json_encode(['document_nid' => NULL, 'status' => 'error']);
+      }
     }
   }
 
@@ -41,24 +44,33 @@ class UploadDocumentController {
    *  Newly created document node.
    */
   private function createDocumentNode($file, $gid) {
-    $initial_date = new DateTime();
-    $file->display = 1;
-    $node = new stdClass();
-    $node->status = 0;
-    $node->type = 'document';
-    $node->title = $file->filename;
-    $node->og_group_ref[LANGUAGE_NONE][0] = [
-      'target_id' => $gid,
-    ];
-    $node->field_language[LANGUAGE_NONE][0] = [
-      'value' => 'en',
-    ];
-    $node->field_report_meeting_date[LANGUAGE_NONE][0] = [
-      'value' => $initial_date->format('Y-m-d H:i:s'),
-    ];
-    $node->field_file[LANGUAGE_NONE][0] = (array) $file;
-    node_save($node);
-    return $node;
+    global $user;
+    try {
+      $initial_date = new DateTime();
+      $file->display = 1;
+      $node = new stdClass();
+      $node->status = 0;
+      $node->uid = $user->uid;
+      $node->type = 'document';
+      $node->title = $file->filename;
+      $node->og_group_ref[LANGUAGE_NONE][0] = [
+        'target_id' => $gid,
+      ];
+      $node->field_language[LANGUAGE_NONE][0] = [
+        'value' => 'en',
+      ];
+      $node->field_report_meeting_date[LANGUAGE_NONE][0] = [
+        'value' => $initial_date->format('Y-m-d H:i:s'),
+      ];
+      $node->field_file[LANGUAGE_NONE][0] = (array) $file;
+      node_save($node);
+      drupal_set_message(t("Your document has been created. Please complete the document form."));
+      return $node;
+    }
+    catch (\Exception $e) {
+      drupal_set_message(t("There was an error during the document creation."));
+      return NULL;
+    }
   }
 
 }
