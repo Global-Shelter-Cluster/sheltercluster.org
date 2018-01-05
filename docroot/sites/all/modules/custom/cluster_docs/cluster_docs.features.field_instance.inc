@@ -351,7 +351,7 @@ function cluster_docs_field_default_field_instances() {
     'bundle' => 'document',
     'default_value' => array(),
     'deleted' => 0,
-    'description' => 'Set a time period after which this document will no longer be featured (applies to all groups).cron',
+    'description' => 'Set a time period after which this document will no longer be featured (applies to all groups).',
     'display' => array(
       'default' => array(
         'label' => 'above',
