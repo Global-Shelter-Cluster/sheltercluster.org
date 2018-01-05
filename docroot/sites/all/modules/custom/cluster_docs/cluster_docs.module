@@ -1098,5 +1098,52 @@ function cluster_docs_cron() {
       $entity->save();
     }
   }
+}
 
+/**
+ * Implements hook_entity_load().
+ *
+ * Sets the value of field_preview to the same as field_file, if the following
+ * conditions are met:
+ *
+ * 1. The value of field_preview is empty.
+ * 2. The extension from the file in field_file matches the field_preview field
+ *    instance configuration (i.e. it's an image).
+ * 3. We're not editing the node.
+ */
+function cluster_docs_entity_load($entities, $type) {
+  if ($type !== 'node')
+    return;
+
+  if (arg(0) === 'node' && arg(2) === 'edit')
+    return; // Fails 3rd condition
+
+  $extensions = NULL; // Only populated if needed
+
+  foreach ($entities as $node) {
+    if ($node->type !== 'document')
+      continue;
+
+    if ($node->field_preview)
+      continue; // Fails 1st condition
+
+    if (!$node->field_file)
+      continue; // No file set in field_file
+    $items = field_get_items('node', $node, 'field_file');
+    if (!$items)
+      continue;
+    $file = file_load($items[0]['fid']);
+    if (!$file)
+      continue;
+
+    if (is_null($extensions)) {
+      $info = field_info_instance('node', 'field_preview', 'document');
+      $extensions = $info['settings']['file_extensions'];
+    }
+
+    if (!file_validate_extensions($file, $extensions)) {
+      // 2nd condition is met
+      $node->field_preview = $node->field_file;
+    }
+  }
 }
