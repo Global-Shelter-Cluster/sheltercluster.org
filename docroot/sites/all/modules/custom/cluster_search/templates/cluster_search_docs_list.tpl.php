@@ -3,7 +3,7 @@
   <ul class="pagination" v-if="pages > 1">
     <li>Pages:</li>
     <li v-for="p in paginationPages">
-      <a v-if="p != '-' && p != page" href="#" @click.prevent="search(true, p)">{{ p+1 }}</a>
+      <a v-if="p != '-' && p != page" href="#" @click.prevent="doSearch(true, p)">{{ p+1 }}</a>
       <span v-if="p != '-' && p == page">{{ p+1 }}</span>
       <span v-if="p == '-'">&hellip;</span>
     </li>
@@ -34,9 +34,15 @@
   <tbody>
   <tr v-for="document, i in results" :class="['document-row', i % 2 == 0 ? 'odd' : 'even']">
     <td class="information-title">
+      <a v-if="document.can_edit" class="operation-icon" :href="'/node/' + document.nid + '/edit'" title="Edit this document">
+        <i class="fas fa-edit"></i>
+      </a>
+      <a v-if="document.can_delete" class="operation-icon" :href="'/node/' + document.nid + '/delete'" title="Delete this document">
+        <i class="fas fa-trash-alt"></i>
+      </a>
       <a :href="document.url" v-html="document.title"></a>
-      <a v-if="showGroup" :href="'/node/' + document.group_nids[0]" class="group" v-html="document.group"></a>
-      <div v-if="document.tags" class="tags">
+      <a v-if="showGroup && groupNid != document.group_nids[0]" :href="'/node/' + document.group_nids[0]" class="group" v-html="document.group"></a>
+      <div v-if="document.tags && document.tags.length" class="tags">
         <div class="item-list">
           <h3>Tags</h3>
           <ul>
@@ -71,6 +77,12 @@
       </div>
       <img v-if="document.thumb" :src="document.thumb" :key="document.thumb">
     </a>
+    <a v-if="document.can_edit" class="operation-icon" :href="'/node/' + document.nid + '/edit'" title="Edit this document">
+      <i class="fas fa-edit"></i>
+    </a>
+    <a v-if="document.can_delete" class="operation-icon" :href="'/node/' + document.nid + '/delete'" title="Delete this document">
+      <i class="fas fa-trash-alt"></i>
+    </a>
     <a :href="document.url">
       <h4 :title="document.title|strip_tags" v-html="
       (
@@ -89,7 +101,7 @@
       </h4>
     </a>
     <a :href="'/node/' + document.group_nids[0]" class="group"
-       v-if="showGroup" v-html="document.group">
+       v-if="showGroup && groupNid != document.group_nids[0]" v-html="document.group">
     </a>
 
     <div v-if="document.date || document.field_language || document.field_document_source" class="document-date">
@@ -121,18 +133,18 @@
   <a v-if="hasFacetFiltersSelected" href="#" @click.prevent="clearSelectedFacets()">
     No documents found. Try removing the selected filters.
   </a>
-  <a v-else-if="query && mode === 'normal' && descendantNids.length > 1"
+  <a v-else-if="search && mode === 'normal' && descendantNids.length > 1"
      href="#" @click.prevent="mode = 'descendants'">
-    No documents found matching "<strong>{{ query }}</strong>". Try including subgroups.
+    No documents found matching "<strong>{{ search }}</strong>". Try including subgroups.
   </a>
-  <span v-else-if="query && (mode === 'descendants' || descendantNids.length <= 1)">
-    No documents found matching "<strong>{{ query }}</strong>".
+  <span v-else-if="search && (mode === 'descendants' || descendantNids.length <= 1)">
+    No documents found matching "<strong>{{ search }}</strong>".
   </span>
-  <a v-else-if="!query && mode === 'normal' && descendantNids.length > 1"
+  <a v-else-if="!search && mode === 'normal' && descendantNids.length > 1"
      href="#" @click.prevent="mode = 'descendants'">
     No documents found. Try including subgroups.
   </a>
-  <a v-else-if="!query && mode === 'normal' && descendantNids.length > 1"
+  <a v-else-if="!search && mode === 'normal' && descendantNids.length > 1"
      href="#" @click.prevent="mode = 'descendants'">
     No documents found. Try including subgroups.
   </a>

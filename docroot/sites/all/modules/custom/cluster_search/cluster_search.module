@@ -176,10 +176,6 @@ function cluster_search_docs_page($query = NULL, $show_facets = TRUE, $default_s
   _cluster_search_common_attach($ret);
   $ret['#attached']['js'][] = drupal_get_path('module', 'cluster_search') . '/js/documents.js';
   $ret['#attached']['js'][] = [
-    'type' => 'external',
-    'data' => 'https://use.fontawesome.com/releases/v5.0.0/js/all.js'
-  ];
-  $ret['#attached']['js'][] = [
     'type' => 'setting',
     'data' => [
       'cluster_search' => [
@@ -198,10 +194,41 @@ function cluster_search_cluster_og_dashboard_menu_alter(&$items) {
   if (!cluster_docs_is_group_documents_page() || !isset($items['documents']))
     return;
 
+  $normal_label = t('All documents');
+
+  $display_provider = GroupDisplayProvider::getDisplayProvider(node_load(arg(1)));
+  $subgroup_types = $display_provider->getSubgroupTypes();
+  $subgroups_label = t('Include ' . _cluster_search_list_and($subgroup_types));
+
   $items['documents']['#suffix'] = <<<EOS
     <ul class="optgroup" v-cloak v-if="showModes">
-      <li><label><input type="radio" value="normal" v-model="mode"> Group documents</label></li>
-      <li><label><input type="radio" value="descendants" v-model="mode"> Include subgroups</label></li>
+      <li><label><input type="radio" value="normal" v-model="mode"> $normal_label</label></li>
+      <li><label><input type="radio" value="descendants" v-model="mode"> $subgroups_label</label></li>
     </ul>
 EOS;
+
+  // Tell the frontend whether the current user has edit/delete permissions for
+  // docs, for the relevant groups.
+  $doc_permissions_by_group = [];
+  foreach ($display_provider->getSearchGroupNids() as $groupNid) {
+    $doc_permissions_by_group[$groupNid] = [
+      'edit' => og_user_access('node', $groupNid, 'edit document content'),
+      'delete' => og_user_access('node', $groupNid, 'delete document content'),
+    ];
+  }
+  drupal_add_js(['cluster_search' => [
+    'doc_permissions_by_group' => $doc_permissions_by_group,
+  ]], ['type' => 'setting']);
+}
+
+function _cluster_search_list_and($items) {
+  switch (count($items)) {
+    case 0:
+      return '';
+    case 1:
+      return $items[0];
+    default:
+      return implode(', ', array_slice($items, 0, count($items) - 1))
+        . ' and ' . array_pop($items);
+  }
 }

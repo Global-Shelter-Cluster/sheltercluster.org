@@ -337,6 +337,13 @@ th {
   border-style: none;
 }
 
+a.operation-icon {
+  color: #cdd6db;
+}
+a.operation-icon:hover {
+  color: #688394;
+}
+
 /* _layout.scss */
 * {
   -webkit-tap-highlight-color: transparent;
@@ -661,6 +668,10 @@ body {
   max-height: 63px;
   overflow: hidden;
 }
+.document-preview-list .document-preview .operation-icon {
+  float: right;
+  margin-left: 5px;
+}
 .document-preview-list .document-preview .thumbnail {
   float: left;
   width: 150px;
@@ -668,6 +679,7 @@ body {
   margin-right: 10px;
   position: relative;
   overflow: hidden;
+  z-index: 1;
 }
 .document-preview-list .document-preview .thumbnail > * {
   position: absolute;
@@ -724,7 +736,6 @@ body {
   margin: 0;
   padding-left: 170px;
   overflow: hidden;
-  z-index: -1;
 }
 .document-preview-list .document-preview .tags li {
   font-size: 12px;
@@ -1166,6 +1177,12 @@ header .search {
 .document-table a {
   color: #031957;
   font-weight: normal;
+}
+.document-table a.operation-icon {
+  color: #688394;
+}
+.document-table a.operation-icon:hover {
+  color: #3e4e58;
 }
 .document-table td {
   padding: 8px 0;

@@ -1,5 +1,5 @@
 <li class="expanded last nav-item" id="cluster-search-mega-menu">
-  <a href="#" @click.prevent="focus">Search</a>
+  <a href="#" @click.prevent="focus"><i class="fa fa-search"></i> Search</a>
   <template>
   <ul class="nav-items menu search-input-row">
     <li class="within-group" v-if="groupNids">
@@ -47,7 +47,7 @@
             <small v-if="document.group" class="search-result-title"
                    :title="document.group|strip_tags" v-html="document.group"></small>
             <small>
-              <template v-if="document.date">{{ document.date }}</template>
+              {{ document.date }}
               <template v-if="document.featured">&middot; Featured</template>
               <template v-if="document.key && !document.featured">&middot; Key document</template>
             </small>
