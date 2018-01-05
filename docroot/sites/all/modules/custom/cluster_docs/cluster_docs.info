@@ -16,7 +16,6 @@ dependencies[] = link
 dependencies[] = list
 dependencies[] = number
 dependencies[] = options
-dependencies[] = pdf_document
 dependencies[] = pdf_to_image
 dependencies[] = shelter_base
 dependencies[] = text
