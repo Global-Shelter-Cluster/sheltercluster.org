@@ -1632,7 +1632,7 @@ function cluster_docs_field_default_field_instances() {
   t('Preview');
   t('Report / Meeting date');
   t('Response Phase');
-  t('Set a time period after which this document will no longer be featured (applies to all groups).cron');
+  t('Set a time period after which this document will no longer be featured (applies to all groups).');
   t('Settlement Type');
   t('Sorting weight');
   t('Source');
