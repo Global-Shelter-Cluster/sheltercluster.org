@@ -1,0 +1,50 @@
+<?php
+
+use \Drupal\cluster_upload\Controller\DragDropUploadController;
+use \Drupal\cluster_upload\Controller\UploadDocumentController;
+
+function cluster_upload_menu() {
+  return [
+    'drag-and-drop-upload-test' => [
+      'title' => 'Documents',
+      'page callback' => '_cluster_test_route',
+      'page arguments' => ['drag-and-drop-upload'],
+      'access callback' => FALSE,
+      'type' => MENU_CALLBACK,
+    ],
+    'upload-document/%' => [
+      'title' => 'Documents',
+      'page callback' => '_cluster_upload_document_to_group',
+      'page arguments' => [1],
+      // @TODO update to group based permission for document creation.
+      'access arguments' => ['administer site configuration'],
+      'type' => MENU_CALLBACK,
+    ],
+  ];
+}
+
+/**
+ * Load test controller.
+ */
+function _cluster_test_route($path) {
+  $controller = new DragDropUploadController();
+  return $controller->build();
+}
+
+/**
+ * Upload a file and create a document for argued group id.
+ */
+function _cluster_upload_document_to_group($gid) {
+  $controller = new UploadDocumentController();
+  return $controller->handleRequest($gid);
+}
+
+/**
+ * Implements hook_node_view().
+ */
+function cluster_upload_node_view($node, $view_mode, $langcode) {
+  if (user_access('administer site configuration')) {
+    $js_path = drupal_get_path('module', 'cluster_upload') . '/js/drag_drop_upload.js';
+    $node->content['#attached']['js'][] = $js_path;
+  }
+}

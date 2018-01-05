@@ -179,6 +179,40 @@ function cluster_docs_field_default_field_bases() {
     'type' => 'list_boolean',
   );
 
+  // Exported field_base: 'field_featured_date'.
+  $field_bases['field_featured_date'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_featured_date',
+    'field_permissions' => array(
+      'type' => 0,
+    ),
+    'indexes' => array(),
+    'locked' => 0,
+    'module' => 'date',
+    'settings' => array(
+      'cache_count' => 4,
+      'cache_enabled' => 0,
+      'entity_translation_sync' => FALSE,
+      'granularity' => array(
+        'day' => 'day',
+        'hour' => 0,
+        'minute' => 0,
+        'month' => 'month',
+        'second' => 0,
+        'year' => 'year',
+      ),
+      'repeat' => 0,
+      'timezone_db' => '',
+      'todate' => '',
+      'tz_handling' => 'none',
+    ),
+    'translatable' => 0,
+    'type' => 'datetime',
+  );
+
   // Exported field_base: 'field_file'.
   $field_bases['field_file'] = array(
     'active' => 1,
@@ -690,14 +724,8 @@ function cluster_docs_field_default_field_bases() {
           'og_behavior' => array(
             'status' => TRUE,
           ),
-          'views-select-list' => array(
-            'status' => 0,
-          ),
         ),
         'membership_type' => 'og_membership_type_default',
-        'sort' => array(
-          'type' => 'none',
-        ),
         'target_bundles' => array(),
       ),
       'handler_submit' => 'Change handler',
