@@ -2,7 +2,7 @@
 
 namespace Drupal\cluster_upload\Controller;
 
-class DragDropUploadController {
+class TestController {
 
   /**
    * @return Render array.

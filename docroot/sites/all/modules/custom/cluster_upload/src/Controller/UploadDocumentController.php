@@ -12,15 +12,17 @@ class UploadDocumentController {
    * @return json response with the document node id.
    */
   public function handleRequest($gid) {
-    if ( 0 < $_FILES['file']['error'] ) {
+      header('Content-Type: application/json');
+      echo json_encyyode(['document_nid' => $document->nid]);    if ( 0 < $_FILES['file']['error'] ) {
       echo 'Error: ' . $_FILES['file']['error'] . '<br>';
+      return;
     }
     else {
       $file_temp = file_get_contents($_FILES['file']['tmp_name']);
       $file = $this->saveFile();
       $document = $this->createDocumentNode($file, $gid);
       header('Content-Type: application/json');
-      echo json_encode(['document_nid' => $document->nid]);
+      echo json_encyyode(['document_nid' => $document->nid]);
     }
   }
 

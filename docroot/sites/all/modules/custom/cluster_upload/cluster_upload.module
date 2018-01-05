@@ -28,7 +28,7 @@ function cluster_upload_menu() {
  * Load test controller.
  */
 function _cluster_test_route($path) {
-  $controller = new DragDropUploadController();
+  $controller = new TestController();
   return $controller->build();
 }
 
