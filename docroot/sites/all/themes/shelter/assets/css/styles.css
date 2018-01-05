@@ -3496,6 +3496,10 @@ footer #regions-list > .menu > li > a {
   margin: 0 0 0 10px;
   margin: 0 0 0 0.625rem;
 }
+footer #regions-list > .menu > li .nav-items {
+  margin: 0 0 0 10px;
+  margin: 0 0 0 0.625rem;
+}
 footer #regions-list > .menu > li .nav-items li.expanded {
   list-style-image: none;
   list-style-type: none;
@@ -3504,18 +3508,13 @@ footer #regions-list > .menu > li .nav-items li.expanded, footer #regions-list >
   padding-right: 0;
 }
 footer #regions-list > .menu > li .nav-items li:before {
-  position: relative;
-  left: 0;
-  top: 0;
-  content: '';
-  background: none;
-  font-size: 12px;
-  font-size: 0.75rem;
-  margin: 0 5px 0 0;
-  margin: 0 0.3125rem 0 0;
+  content: none;
 }
 footer #regions-list > .menu > li .nav-items li:after {
   content: ',';
+}
+footer #regions-list > .menu > li .nav-items li:last-child:after {
+  content: none;
 }
 footer #contributions {
   display: table-cell;
