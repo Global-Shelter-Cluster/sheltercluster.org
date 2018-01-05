@@ -13,7 +13,7 @@ class UploadDocumentController {
    */
   public function handleRequest($gid) {
       header('Content-Type: application/json');
-      echo json_encyyode(['document_nid' => $document->nid]);    if ( 0 < $_FILES['file']['error'] ) {
+      echo json_encode(['document_nid' => $document->nid]);    if ( 0 < $_FILES['file']['error'] ) {
       echo 'Error: ' . $_FILES['file']['error'] . '<br>';
       return;
     }
@@ -22,7 +22,7 @@ class UploadDocumentController {
       $file = $this->saveFile();
       $document = $this->createDocumentNode($file, $gid);
       header('Content-Type: application/json');
-      echo json_encyyode(['document_nid' => $document->nid]);
+      echo json_encode(['document_nid' => $document->nid]);
     }
   }
 
