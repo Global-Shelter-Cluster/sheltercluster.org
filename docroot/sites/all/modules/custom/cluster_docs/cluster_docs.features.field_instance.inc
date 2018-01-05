@@ -351,7 +351,7 @@ function cluster_docs_field_default_field_instances() {
     'bundle' => 'document',
     'default_value' => array(),
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Set a time period after which this document will no longer be featured (applies to all groups).cron',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -382,7 +382,7 @@ function cluster_docs_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'field_name' => 'field_featured_date',
-    'label' => 'Expire',
+    'label' => 'Expire featured setting',
     'required' => 0,
     'settings' => array(
       'default_value' => 'blank',
@@ -1610,7 +1610,7 @@ function cluster_docs_field_default_field_instances() {
   t('Description');
   t('Document Language');
   t('Document Type');
-  t('Expire');
+  t('Expire featured setting');
   t('Featured document');
   t('Featured document show up in the slider at the top of the response page.');
   t('File');
@@ -1632,6 +1632,7 @@ function cluster_docs_field_default_field_instances() {
   t('Preview');
   t('Report / Meeting date');
   t('Response Phase');
+  t('Set a time period after which this document will no longer be featured (applies to all groups).cron');
   t('Settlement Type');
   t('Sorting weight');
   t('Source');
