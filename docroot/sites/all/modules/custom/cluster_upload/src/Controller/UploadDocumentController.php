@@ -16,10 +16,22 @@ class UploadDocumentController {
       echo 'Error: ' . $_FILES['file']['error'] . '<br>';
     }
     else {
-      $file_temp = file_get_contents($_FILES['file']['tmp_name']);
+      $document = NULL;
+      // Test allowed file extensions.
+      $allowed_extensions = field_info_instance('node', 'field_file', 'document')['settings']['file_extensions'];
+      $allowed_extensions_list = explode(' ', $allowed_extensions);
+      $file_extension = pathinfo($_FILES['file']['name'], PATHINFO_EXTENSION);
+
+      header('Content-Type: application/json');
+      // Extension is not allowed by field instance setting.
+      if (!in_array($file_extension, $allowed_extensions_list)) {
+        drupal_set_message(t("The document extension is not allowed, must be one of " . $allowed_extensions));
+        echo json_encode(['document_nid' => NULL, 'status' => 'error']);
+        return;
+      }
+
       $file = $this->saveFile();
       $document = $this->createDocumentNode($file, $gid);
-      header('Content-Type: application/json');
       if (!is_null($document)) {
         echo json_encode(['document_nid' => $document->nid, 'status' => 'ok']);
       }
