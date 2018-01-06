@@ -47,9 +47,10 @@ const cluster_upload = {
   },
 
   "success": function(response, status) {
-    console.log(response)
-    if (response.status === "error") {
+    if (response.status == "error") {
+      console.log(response.status);
       this.error();
+      window.location.reload();
     }
     else if (response.status === "ok") {
       window.location.href = '/node/' + response.document_nid + '/edit';
