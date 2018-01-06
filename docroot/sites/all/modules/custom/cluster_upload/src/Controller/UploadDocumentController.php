@@ -76,7 +76,7 @@ class UploadDocumentController {
       ];
       $node->field_file[LANGUAGE_NONE][0] = (array) $file;
       node_save($node);
-      drupal_set_message(t("Your document has been created. Please complete the document form."));
+      drupal_set_message(t("Your document has been created. Please complete the document form and choose the appropriate publishing status."));
       return $node;
     }
     catch (\Exception $e) {

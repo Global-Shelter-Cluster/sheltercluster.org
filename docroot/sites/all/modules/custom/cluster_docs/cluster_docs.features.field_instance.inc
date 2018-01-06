@@ -42,15 +42,16 @@ function cluster_docs_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'field_name' => 'body',
-    'label' => 'Body',
-    'required' => FALSE,
+    'label' => 'Description',
+    'required' => 0,
     'settings' => array(
-      'display_summary' => TRUE,
+      'display_summary' => 1,
       'entity_translation_sync' => FALSE,
       'text_processing' => 1,
       'user_register_form' => FALSE,
     ),
     'widget' => array(
+      'active' => 1,
       'module' => 'text',
       'settings' => array(
         'rows' => 20,
@@ -1604,7 +1605,6 @@ function cluster_docs_field_default_field_instances() {
   // Translatables
   // Included for use with string extractors like potx.
   t('Assessment, Monitoring and Evaluation');
-  t('Body');
   t('Coordination Management');
   t('Cross-Cutting Issues');
   t('Description');
