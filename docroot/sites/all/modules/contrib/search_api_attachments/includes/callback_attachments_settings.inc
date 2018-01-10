@@ -274,7 +274,7 @@ class SearchApiAttachmentsAlterSettings extends SearchApiAbstractAlterCallback {
     shell_exec("LANG=en_US.utf-8");
     watchdog('shelter_debug', 'Getting data for file: @file', ['@file' => print_r($file, TRUE)], WATCHDOG_DEBUG);
     watchdog('shelter_debug', 'Running tika command: @cmd', ['@cmd' => $cmd], WATCHDOG_DEBUG);
-    return shell_exec($cmd);
+    return shell_exec('timeout 10s ' . $cmd);
   }
 
   protected function extract_pdftotext($file) {
