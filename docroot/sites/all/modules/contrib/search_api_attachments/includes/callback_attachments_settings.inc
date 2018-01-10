@@ -272,6 +272,8 @@ class SearchApiAttachmentsAlterSettings extends SearchApiAbstractAlterCallback {
     setlocale(LC_CTYPE, $backup_locale);
     // Support UTF-8 commands: http://www.php.net/manual/en/function.shell-exec.php#85095
     shell_exec("LANG=en_US.utf-8");
+    watchdog('shelter_debug', 'Getting data for file: @file', ['@file' => print_r($file, TRUE)], WATCHDOG_DEBUG);
+    watchdog('shelter_debug', 'Running tika command: @cmd', ['@cmd' => $cmd], WATCHDOG_DEBUG);
     return shell_exec($cmd);
   }
 
