@@ -10,6 +10,52 @@
 function cluster_taxonomy_field_default_field_instances() {
   $field_instances = array();
 
+  // Exported field_instance: 'node-document-field_document_status'.
+  $field_instances['node-document-field_document_status'] = array(
+    'bundle' => 'document',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'taxonomy',
+        'settings' => array(),
+        'type' => 'taxonomy_term_reference_link',
+        'weight' => 33,
+      ),
+      'ical' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_document_status',
+    'label' => 'Document status',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(
+        'apply_chosen' => '',
+      ),
+      'type' => 'options_select',
+      'weight' => 41,
+    ),
+  );
+
   // Exported field_instance:
   // 'taxonomy_term-assessment_monitoring_evaluation-description_field'.
   $field_instances['taxonomy_term-assessment_monitoring_evaluation-description_field'] = array(
@@ -563,6 +609,82 @@ function cluster_taxonomy_field_default_field_instances() {
       'hide_label' => array(
         'entity' => FALSE,
         'page' => FALSE,
+      ),
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => -5,
+    ),
+  );
+
+  // Exported field_instance: 'taxonomy_term-document_status-description_field'.
+  $field_instances['taxonomy_term-document_status-description_field'] = array(
+    'bundle' => 'document_status',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 1,
+      ),
+    ),
+    'entity_type' => 'taxonomy_term',
+    'field_name' => 'description_field',
+    'label' => 'Description',
+    'required' => FALSE,
+    'settings' => array(
+      'display_summary' => 0,
+      'entity_translation_sync' => FALSE,
+      'hide_label' => array(
+        'entity' => 0,
+        'page' => 0,
+      ),
+      'text_processing' => 1,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'module' => 'text',
+      'settings' => array(
+        'rows' => 20,
+        'summary_rows' => 5,
+      ),
+      'type' => 'text_textarea_with_summary',
+      'weight' => -5,
+    ),
+  );
+
+  // Exported field_instance: 'taxonomy_term-document_status-name_field'.
+  $field_instances['taxonomy_term-document_status-name_field'] = array(
+    'bundle' => 'document_status',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'taxonomy_term',
+    'field_name' => 'name_field',
+    'label' => 'Name',
+    'required' => TRUE,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'hide_label' => array(
+        'entity' => 0,
+        'page' => 0,
       ),
       'text_processing' => 0,
       'user_register_form' => FALSE,
@@ -1924,6 +2046,7 @@ function cluster_taxonomy_field_default_field_instances() {
   // Included for use with string extractors like potx.
   t('Dependent taxonomies');
   t('Description');
+  t('Document status');
   t('Name');
 
   return $field_instances;
