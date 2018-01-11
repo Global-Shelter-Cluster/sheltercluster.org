@@ -180,11 +180,12 @@ class SearchApiClusterAlgoliaService extends SearchApiAlgoliaService {
 
               if (!$processed) {
                 try {
-                  \AlgoliaSearch\Json::encode($property_value);
-
-                  $item_to_index[$key] = is_string($property_value)
+                  $property_value = is_string($property_value)
                     ? substr($property_value, 0, 4500) // Truncate at 4.5kb (Algolia has a 10kb limit for docs)
                     : $property_value;
+
+                  \AlgoliaSearch\Json::encode($property_value);
+                  $item_to_index[$key] = $property_value;
                 } catch (\AlgoliaSearch\AlgoliaException $e) {
                   // Don't include it in the index
                   watchdog('cluster_search', 'Skipped field %field in node %nid due to encoding', [
