@@ -58,7 +58,7 @@ function cluster_docs_field_group_info() {
   $field_group->parent_name = 'group_document_type';
   $field_group->data = array(
     'label' => 'Basic tags',
-    'weight' => '17',
+    'weight' => '29',
     'children' => array(),
     'format_type' => 'tab',
     'format_settings' => array(
@@ -176,6 +176,7 @@ function cluster_docs_field_group_info() {
       1 => 'field_featured',
       2 => 'field_sorting_weight',
       3 => 'field_featured_date',
+      4 => 'field_document_status',
     ),
     'format_type' => 'tab',
     'format_settings' => array(
