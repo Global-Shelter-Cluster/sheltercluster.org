@@ -160,8 +160,8 @@ function cluster_nav_preprocess_page(&$variables) {
     }
     $variables['contextual_navigation'] = $display_provider->getContextualNavigation();
     drupal_add_js(['cluster_nav' => [
-      'group_nid' => intval($node->nid),
-      'group_title' => $node->title,
+      'group_nid' => intval($display_provider->getGroup()->nid),
+      'group_title' => $display_provider->getGroup()->title,
       'search_group_nids' => $display_provider->getSearchGroupNids(),
     ]], ['type' => 'setting']);
   }
