@@ -101,13 +101,13 @@ class SearchApiClusterAlgoliaService extends SearchApiAlgoliaService {
                 if ($key !== $field || is_string($property_value))
                   continue;
 
-                // Truncate at around 4.5kb (Algolia has a 10kb limit for docs),
+                // Truncate at around 4kb (Algolia has a 10kb limit for docs),
                 // and transliterate to get rid of UTF issues (this is fine
                 // because these fields are never shown to the user).
                 $property_value = substr(
-                  transliteration_get(substr($property_value, 0, 4500)),
+                  transliteration_get(substr($property_value, 0, 4000)),
                   0,
-                  4500
+                  4000
                 );
 
                 try {
@@ -181,7 +181,7 @@ class SearchApiClusterAlgoliaService extends SearchApiAlgoliaService {
               if (!$processed) {
                 try {
                   $property_value = is_string($property_value)
-                    ? substr($property_value, 0, 4500) // Truncate at 4.5kb (Algolia has a 10kb limit for docs)
+                    ? substr($property_value, 0, 4000) // Truncate at 4kb (Algolia has a 10kb limit for docs)
                     : $property_value;
 
                   \AlgoliaSearch\Json::encode($property_value);
