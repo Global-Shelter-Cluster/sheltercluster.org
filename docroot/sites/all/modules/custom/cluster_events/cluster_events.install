@@ -134,3 +134,20 @@ function cluster_events_update_7007() {
 function cluster_events_update_7009() {
   features_revert(array('cluster_events' => array('field_instance')));
 }
+
+/**
+ * Delete field_geocoordinates and uninstall geofield module.
+ */
+function cluster_events_update_7010() {
+  $need_purge = FALSE;
+  if ($instance = field_info_instance('node', 'field_coordinates', 'events'))  {
+    field_delete_instance($instance, TRUE);
+    field_delete_field('field_coordinates');
+    $need_purge = TRUE;
+  }
+
+  if ($need_purge) {
+    field_purge_batch(1);
+    module_disable(['geofield']);
+  }
+}
