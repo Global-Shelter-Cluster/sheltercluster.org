@@ -22,53 +22,33 @@ function cluster_libraries_node_view_alter(&$build) {
     return;
   }
 
-  $query = cluster_docs_query();
-
   $wrapper = entity_metadata_wrapper('node', $node);
 
-  // Facets are excluded from view if (and only if) there is exactly ONE value
-  // selected in the corresponding field.
-  $excluded_facets = array();
+  // Keyed by field name, value is an array of term names (string keys) and TRUE (values)
+  $filters = [];
+  $nid_filter = NULL;
 
   switch ($node->type) {
     case 'library' :
-      if (!$wrapper->field_is_global_library->value() && $groups = $wrapper->og_group_ref->value()) {
-        $filter = $query->createFilter();
-        foreach ($groups as $group) {
-          $filter->condition('og_group_ref', $group->nid);
-        }
-        $query->filter($filter);
-      }
-
       $fields = cluster_docs_taxonomies();
       foreach ($fields as $field) {
-        if (!isset($node->$field)) {
+        if (!isset($node->$field))
           continue;
-        }
 
         $value = $wrapper->$field->value();
-
-        if (!$value) {
+        if (!$value)
           continue;
-        }
 
-        $filter = $query->createFilter();
+        $filters[$field] = [];
         foreach ($value as $term) {
-          $filter->condition($field, $term->tid);
-        }
-        $query->filter($filter);
-
-        if (count($value) == 1) {
-          $excluded_facets[] = $field;
+          $filters[$field][$term->name] = TRUE;
         }
       }
-    break;
+      break;
     case 'arbitrary_library':
-      $filter = $query->createFilter();
-      $filter->condition('nid', $wrapper->field_arbitrary_document_ref->raw(), 'IN');
-      $query->filter($filter);
-    break;
+      $nid_filter = $wrapper->field_arbitrary_document_ref->raw();
+      break;
   }
 
-  $build[] = cluster_docs_page($query, TRUE, 'date', 'DESC', $excluded_facets);
+  $build[] = cluster_search_docs_page($filters, $nid_filter);
 }
