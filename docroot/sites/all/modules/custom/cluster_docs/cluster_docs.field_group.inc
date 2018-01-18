@@ -58,7 +58,7 @@ function cluster_docs_field_group_info() {
   $field_group->parent_name = 'group_document_type';
   $field_group->data = array(
     'label' => 'Basic tags',
-    'weight' => '17',
+    'weight' => '29',
     'children' => array(),
     'format_type' => 'tab',
     'format_settings' => array(
@@ -112,7 +112,7 @@ function cluster_docs_field_group_info() {
   $field_group->parent_name = 'group_document_metadata';
   $field_group->data = array(
     'label' => 'Group settings',
-    'weight' => '7',
+    'weight' => '8',
     'children' => array(
       0 => 'og_group_ref',
     ),
@@ -139,7 +139,7 @@ function cluster_docs_field_group_info() {
   $field_group->parent_name = 'group_document_metadata';
   $field_group->data = array(
     'label' => 'Document page content',
-    'weight' => '4',
+    'weight' => '6',
     'children' => array(
       0 => 'field_preview',
       1 => 'body',
@@ -170,12 +170,13 @@ function cluster_docs_field_group_info() {
   $field_group->parent_name = 'group_document_metadata';
   $field_group->data = array(
     'label' => 'Document settings',
-    'weight' => '6',
+    'weight' => '7',
     'children' => array(
       0 => 'field_key_document',
       1 => 'field_featured',
       2 => 'field_sorting_weight',
       3 => 'field_featured_date',
+      4 => 'field_document_status',
     ),
     'format_type' => 'tab',
     'format_settings' => array(

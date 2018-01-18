@@ -42,15 +42,16 @@ function cluster_docs_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'field_name' => 'body',
-    'label' => 'Body',
-    'required' => FALSE,
+    'label' => 'Description',
+    'required' => 0,
     'settings' => array(
-      'display_summary' => TRUE,
+      'display_summary' => 1,
       'entity_translation_sync' => FALSE,
       'text_processing' => 1,
       'user_register_form' => FALSE,
     ),
     'widget' => array(
+      'active' => 1,
       'module' => 'text',
       'settings' => array(
         'rows' => 20,
@@ -149,7 +150,7 @@ function cluster_docs_field_default_field_instances() {
         'apply_chosen' => '',
       ),
       'type' => 'options_buttons',
-      'weight' => 14,
+      'weight' => 26,
     ),
   );
 
@@ -292,7 +293,7 @@ function cluster_docs_field_default_field_instances() {
         'apply_chosen' => '',
       ),
       'type' => 'options_buttons',
-      'weight' => 13,
+      'weight' => 25,
     ),
   );
 
@@ -342,7 +343,7 @@ function cluster_docs_field_default_field_instances() {
         'display_label' => 1,
       ),
       'type' => 'options_onoff',
-      'weight' => 40,
+      'weight' => 43,
     ),
   );
 
@@ -351,7 +352,7 @@ function cluster_docs_field_default_field_instances() {
     'bundle' => 'document',
     'default_value' => array(),
     'deleted' => 0,
-    'description' => 'Set a time period after which this document will no longer be featured (applies to all groups).cron',
+    'description' => 'Set a time period after which this document will no longer be featured (applies to all groups).',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -405,7 +406,7 @@ function cluster_docs_field_default_field_instances() {
         'year_range' => '-3:+3',
       ),
       'type' => 'date_text',
-      'weight' => 41,
+      'weight' => 44,
     ),
   );
 
@@ -564,7 +565,7 @@ function cluster_docs_field_default_field_instances() {
         'apply_chosen' => '',
       ),
       'type' => 'options_buttons',
-      'weight' => 15,
+      'weight' => 27,
     ),
   );
 
@@ -702,7 +703,7 @@ function cluster_docs_field_default_field_instances() {
         'apply_chosen' => '',
       ),
       'type' => 'options_buttons',
-      'weight' => 24,
+      'weight' => 23,
     ),
   );
 
@@ -798,7 +799,7 @@ function cluster_docs_field_default_field_instances() {
         'display_label' => 1,
       ),
       'type' => 'options_onoff',
-      'weight' => 39,
+      'weight' => 42,
     ),
   );
 
@@ -1311,7 +1312,7 @@ function cluster_docs_field_default_field_instances() {
       'module' => 'number',
       'settings' => array(),
       'type' => 'number',
-      'weight' => 42,
+      'weight' => 45,
     ),
   );
 
@@ -1357,7 +1358,7 @@ function cluster_docs_field_default_field_instances() {
         'apply_chosen' => '',
       ),
       'type' => 'options_buttons',
-      'weight' => 16,
+      'weight' => 28,
     ),
   );
 
@@ -1604,7 +1605,6 @@ function cluster_docs_field_default_field_instances() {
   // Translatables
   // Included for use with string extractors like potx.
   t('Assessment, Monitoring and Evaluation');
-  t('Body');
   t('Coordination Management');
   t('Cross-Cutting Issues');
   t('Description');

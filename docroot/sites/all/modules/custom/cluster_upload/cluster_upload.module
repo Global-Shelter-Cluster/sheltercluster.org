@@ -17,7 +17,8 @@ function cluster_upload_menu() {
       'page callback' => '_cluster_upload_document_to_group',
       'page arguments' => [1],
       // @TODO update to group based permission for document creation.
-      'access arguments' => ['administer site configuration'],
+      'access callback' => '_cluster_upload_user_is_allowed_for_group',
+      'access arguments' => [1],
       'type' => MENU_CALLBACK,
     ],
   ];
@@ -27,7 +28,7 @@ function cluster_upload_menu() {
  * Load test controller.
  */
 function _cluster_test_route($path) {
-  $controller = new DragDropUploadController();
+  $controller = new TestController();
   return $controller->build();
 }
 
@@ -40,11 +41,20 @@ function _cluster_upload_document_to_group($gid) {
 }
 
 /**
+ * Test if user is allowed to add documents to argued group.
+ */
+function _cluster_upload_user_is_allowed_for_group($gid) {
+  if (user_access('administer site configuration')) {
+    return TRUE;
+  }
+  return og_user_access('node', $gid, 'create document content');
+}
+
+/**
  * Implements hook_node_view().
  */
 function cluster_upload_node_view($node, $view_mode, $langcode) {
-//  if (user_access('administer site configuration')) {
-  if (FALSE) {
+  if (_cluster_upload_user_is_allowed_for_group($node->nid)) {
     $js_path = drupal_get_path('module', 'cluster_upload') . '/js/drag_drop_upload.js';
     $node->content['#attached']['js'][] = $js_path;
   }
