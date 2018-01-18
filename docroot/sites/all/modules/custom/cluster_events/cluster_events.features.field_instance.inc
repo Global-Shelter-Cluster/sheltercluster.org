@@ -324,7 +324,7 @@ function cluster_events_field_default_field_instances() {
     'bundle' => 'event',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Type your address in the field below. If the location is not automatically recognized, please enter the address manually and locate it on the map.',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -622,6 +622,7 @@ function cluster_events_field_default_field_instances() {
   t('Location');
   t('Master UUID (do not change)');
   t('Title');
+  t('Type your address in the field below. If the location is not automatically recognized, please enter the address manually and locate it on the map.');
 
   return $field_instances;
 }
