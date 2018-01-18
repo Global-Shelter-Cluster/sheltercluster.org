@@ -165,7 +165,17 @@ function cluster_search_theme($existing, $type, $theme, $path) {
   ];
 }
 
-function cluster_search_docs_page($query = NULL, $show_facets = TRUE, $default_sort = NULL, $default_sort_direction = NULL, $excluded_facets = array(), $show_related_groups = FALSE) {
+/**
+ * @param array $facet_filters
+ *   Keyed by field name (e.g. "field_document_type"), value is an array of term names (string keys) and TRUE (values).
+ *   Filters defined by this param will prevent the facet from being shown.
+ * @param array|NULL $nid_filter
+ *   If specified, restricts to only show the given document nids (used for arbitrary libraries).
+ * @param bool $show_facets
+ *
+ * @return array
+ */
+function cluster_search_docs_page($facet_filters = [], $nid_filter = NULL, $show_facets = TRUE) {
   $ret = [
     ['#theme' => 'cluster_search_docs_list'],
   ];
@@ -192,6 +202,8 @@ function cluster_search_docs_page($query = NULL, $show_facets = TRUE, $default_s
         'taxonomies' => cluster_docs_taxonomies(TRUE),
         'taxonomy_groups' => cluster_docs_taxonomy_groups(),
         'doc_permissions_by_group' => $doc_permissions_by_group,
+        'initial_filters' => $facet_filters,
+        'nid_filter' => $nid_filter,
       ]
     ]
   ];
