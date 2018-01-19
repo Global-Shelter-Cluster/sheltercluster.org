@@ -60,6 +60,7 @@ features[field_group][] = group_document_settings|node|document|form
 features[field_group][] = group_document_source|node|document|form
 features[field_group][] = group_document_type|node|document|form
 features[field_group][] = group_keywords|node|document|form
+features[field_group][] = group_source|node|document|form
 features[field_group][] = group_tags|node|document|form
 features[field_instance][] = node-document-body
 features[field_instance][] = node-document-field_assess_monitor_eval
