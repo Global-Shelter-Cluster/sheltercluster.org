@@ -175,7 +175,7 @@ function date_repeat_entity_add_confirmation_buttons(&$form, $form_state) {
 
   // Get related ids.
   $related_entity_ids = date_repeat_entity_get_related_entity_ids($entity_type, $bundle, $master_uuid_value);
-
+  kpr($related_entity_ids);
   // If there are related entities we need to give options to user.
   if (count($related_entity_ids) > 1) {
 
@@ -442,6 +442,7 @@ function date_repeat_entity_get_referenced_entities($form, $form_state) {
 
   // Get an array of field objects which are entity reference types.
   $entity_reference_fields = date_repeat_entity_get_entity_reference_fields($entity_type, $bundle);
+ // kpr($entity_reference_fields);date_repeat_entity_get_entity_reference_fields
 
   // Loop over entity reference field instances to get number of
   // referenced entities.
