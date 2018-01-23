@@ -1,15 +1,30 @@
 .document-preview-list {
   display: flex;
   flex-wrap: wrap;
+  justify-content: space-between;
 
   .document-preview {
     position: relative;
     color: $shelter-grey;
-    width: 400px;
-    margin: 0 20px 20px 0;
+    margin: 0 0 20px 0;
     padding: 10px;
     border: 1px solid $shelter-light-blue;
     min-height: 150px;
+
+    max-width: 500px;
+    width: 100%;
+    @include breakpoint(850px) {
+      width: calc(50% - 10px);
+    }
+    @include breakpoint(980px) {
+      width: 100%;
+    }
+    @include breakpoint(1200px) {
+      width: calc(50% - 10px);
+    }
+    @include breakpoint(1720px) {
+      width: calc(33.33333% - 13.33333px);
+    }
 
     a {
       text-decoration: none;
@@ -35,6 +50,7 @@
     .thumbnail {
       float: left;
       width: 150px;
+      max-width: 30vw;
       height: 150px;
       margin-right: 10px;
       position: relative;

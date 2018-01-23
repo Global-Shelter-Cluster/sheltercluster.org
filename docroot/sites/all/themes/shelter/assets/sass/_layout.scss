@@ -35,21 +35,25 @@ body {
   @include rem(min-height, 15rem);
 }
 
+#content {
+  @include breakpoint(980px) {
+    display: flex;
+  }
+}
+
 .main-column {
-  float: none;
   width: 100%;
   @include breakpoint(980px) {
-    float: right;
-    width: 71%;
   }
 }
 
 .side-column {
-  float: none;
   width: 100%;
   @include breakpoint(980px) {
-    float: left;
     width: 27%;
+    min-width: 240px;
+    max-width: 300px;
+    margin-right: 20px;
   }
 }
 
