@@ -10,7 +10,7 @@
 function cluster_libraries_field_default_field_bases() {
   $field_bases = array();
 
-  // Exported field_base: 'field_arbitrary_document_ref'
+  // Exported field_base: 'field_arbitrary_document_ref'.
   $field_bases['field_arbitrary_document_ref'] = array(
     'active' => 1,
     'cardinality' => -1,
@@ -19,14 +19,6 @@ function cluster_libraries_field_default_field_bases() {
     'field_name' => 'field_arbitrary_document_ref',
     'field_permissions' => array(
       'type' => 0,
-    ),
-    'foreign keys' => array(
-      'node' => array(
-        'columns' => array(
-          'target_id' => 'nid',
-        ),
-        'table' => 'node',
-      ),
     ),
     'indexes' => array(
       'target_id' => array(
@@ -57,7 +49,7 @@ function cluster_libraries_field_default_field_bases() {
     'type' => 'entityreference',
   );
 
-  // Exported field_base: 'field_is_global_library'
+  // Exported field_base: 'field_is_global_library'.
   $field_bases['field_is_global_library'] = array(
     'active' => 1,
     'cardinality' => 1,
@@ -67,7 +59,6 @@ function cluster_libraries_field_default_field_bases() {
     'field_permissions' => array(
       'type' => 0,
     ),
-    'foreign keys' => array(),
     'indexes' => array(
       'value' => array(
         0 => 'value',

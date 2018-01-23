@@ -114,18 +114,34 @@ function cluster_search_cluster_mega_menu_alter(&$menu_output) {
   }
   $menu_output['cluster_search'] = [
     '#theme' => 'cluster_search_mega_menu',
-    '#attached' => [
-      'js' => [
-        drupal_get_path('module', 'cluster_search').'/js/algolia.js',
-        ['type' => 'external', 'data' => 'https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.3/vue.min.js'],
-        ['type' => 'external', 'data' => 'https://cdnjs.cloudflare.com/ajax/libs/algoliasearch/3.24.5/algoliasearchLite.js'],
-        ['type' => 'setting', 'data' => ['cluster_search' => [
-          'algolia_app_id' => variable_get('cluster_search_algolia_app_id'),
-          'algolia_search_key' => variable_get('cluster_search_algolia_search_key'),
-          'algolia_prefix' => variable_get('cluster_search_algolia_prefix'),
-        ]]],
-      ],
-    ],
+  ];
+  _cluster_search_common_attach($menu_output['cluster_search']);
+}
+
+function _cluster_search_common_attach(&$render_array) {
+  if (!array_key_exists('#attached', $render_array))
+    $render_array['#attached'] = [];
+
+  $render_array['#attached']['js'][] = drupal_get_path('module', 'cluster_search') . '/js/algolia.js';
+  $render_array['#attached']['js'][] = drupal_get_path('module', 'cluster_search') . '/js/lib/vue.min.js';
+  $render_array['#attached']['js'][] = drupal_get_path('module', 'cluster_search') . '/js/lib/algoliasearchLite.js';
+//  $render_array['#attached']['js'][] = [
+//    'type' => 'external',
+//    'data' => 'https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.3/vue.min.js'
+//  ];
+//  $render_array['#attached']['js'][] = [
+//    'type' => 'external',
+//    'data' => 'https://cdnjs.cloudflare.com/ajax/libs/algoliasearch/3.24.5/algoliasearchLite.js'
+//  ];
+  $render_array['#attached']['js'][] = [
+    'type' => 'setting',
+    'data' => [
+      'cluster_search' => [
+        'algolia_app_id' => variable_get('cluster_search_algolia_app_id'),
+        'algolia_search_key' => variable_get('cluster_search_algolia_search_key'),
+        'algolia_prefix' => variable_get('cluster_search_algolia_prefix'),
+      ]
+    ]
   ];
 }
 
@@ -138,5 +154,91 @@ function cluster_search_theme($existing, $type, $theme, $path) {
       'template' => 'cluster_search_mega_menu',
       'path' => drupal_get_path('module', 'cluster_search').'/templates',
     ],
+    'cluster_search_docs_list' => [
+      'template' => 'cluster_search_docs_list',
+      'path' => drupal_get_path('module', 'cluster_search').'/templates',
+    ],
+    'cluster_search_docs_facets' => [
+      'template' => 'cluster_search_docs_facets',
+      'path' => drupal_get_path('module', 'cluster_search').'/templates',
+    ],
   ];
+}
+
+/**
+ * @param array $facet_filters
+ *   Keyed by field name (e.g. "field_document_type"), value is an array of term names (string keys) and TRUE (values).
+ *   Filters defined by this param will prevent the facet from being shown.
+ * @param array|NULL $nid_filter
+ *   If specified, restricts to only show the given document nids (used for arbitrary libraries).
+ * @param bool $show_facets
+ *
+ * @return array
+ */
+function cluster_search_docs_page($facet_filters = [], $nid_filter = NULL, $show_facets = TRUE) {
+  $ret = [
+    ['#theme' => 'cluster_search_docs_list'],
+  ];
+
+  if ($show_facets)
+    $ret['side-column'] = ['#theme' => 'cluster_search_docs_facets'];
+
+  _cluster_search_common_attach($ret);
+  // Tell the frontend whether the current user has edit/delete permissions for
+  // docs, for the relevant groups.
+  $display_provider = cluster_nav_get_display_provider();
+  $doc_permissions_by_group = [];
+  foreach ($display_provider->getSearchGroupNids() as $groupNid) {
+    $doc_permissions_by_group[$groupNid] = [
+      'edit' => og_user_access('node', $groupNid, 'edit document content'),
+      'delete' => og_user_access('node', $groupNid, 'delete document content'),
+    ];
+  }
+  $ret['#attached']['js'][] = drupal_get_path('module', 'cluster_search') . '/js/documents.js';
+  $ret['#attached']['js'][] = [
+    'type' => 'setting',
+    'data' => [
+      'cluster_search' => [
+        'taxonomies' => cluster_docs_taxonomies(TRUE),
+        'taxonomy_groups' => cluster_docs_taxonomy_groups(),
+        'doc_permissions_by_group' => $doc_permissions_by_group,
+        'initial_filters' => $facet_filters,
+        'nid_filter' => $nid_filter,
+      ]
+    ]
+  ];
+  return $ret;
+}
+
+/**
+ * Implements hook_cluster_og_dashboard_menu_alter().
+ */
+function cluster_search_cluster_og_dashboard_menu_alter(&$items) {
+  if (!cluster_docs_is_group_documents_page() || !isset($items['documents']))
+    return;
+
+  $normal_label = t('All documents');
+
+  $display_provider = cluster_nav_get_display_provider();
+  $subgroup_types = $display_provider->getSubgroupTypes();
+  $subgroups_label = t('Include ' . _cluster_search_list_and($subgroup_types));
+
+  $items['documents']['#suffix'] = <<<EOS
+    <ul class="optgroup" v-cloak v-if="showModes">
+      <li><label><input type="radio" value="normal" v-model="mode"> $normal_label</label></li>
+      <li><label><input type="radio" value="descendants" v-model="mode"> $subgroups_label</label></li>
+    </ul>
+EOS;
+}
+
+function _cluster_search_list_and($items) {
+  switch (count($items)) {
+    case 0:
+      return '';
+    case 1:
+      return $items[0];
+    default:
+      return implode(', ', array_slice($items, 0, count($items) - 1))
+        . ' and ' . array_pop($items);
+  }
 }

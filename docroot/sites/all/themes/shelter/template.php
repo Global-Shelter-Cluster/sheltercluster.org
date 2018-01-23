@@ -20,6 +20,9 @@ function shelter_preprocess_html(&$variables) {
  * Implements hook_preprocess_page().
  */
 function shelter_preprocess_page(&$variables) {
+  // Font Awesome (icon library)
+  drupal_add_js('https://use.fontawesome.com/releases/v5.0.0/js/all.js', 'external');
+
   // Put the language switcher in a variable.
   $block = module_invoke('locale', 'block_view', 'language_content');
   $variables['language_switcher'] = $block['content'];

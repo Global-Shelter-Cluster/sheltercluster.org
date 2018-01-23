@@ -10,7 +10,7 @@
 function cluster_contact_field_default_field_bases() {
   $field_bases = array();
 
-  // Exported field_base: 'field_email'
+  // Exported field_base: 'field_email'.
   $field_bases['field_email'] = array(
     'active' => 1,
     'cardinality' => -1,
@@ -20,7 +20,6 @@ function cluster_contact_field_default_field_bases() {
     'field_permissions' => array(
       'type' => 0,
     ),
-    'foreign keys' => array(),
     'indexes' => array(),
     'locked' => 0,
     'module' => 'email',
@@ -31,7 +30,7 @@ function cluster_contact_field_default_field_bases() {
     'type' => 'email',
   );
 
-  // Exported field_base: 'field_organisation_name'
+  // Exported field_base: 'field_organisation_name'.
   $field_bases['field_organisation_name'] = array(
     'active' => 1,
     'cardinality' => -1,
@@ -40,14 +39,6 @@ function cluster_contact_field_default_field_bases() {
     'field_name' => 'field_organisation_name',
     'field_permissions' => array(
       'type' => 0,
-    ),
-    'foreign keys' => array(
-      'format' => array(
-        'columns' => array(
-          'format' => 'format',
-        ),
-        'table' => 'filter_format',
-      ),
     ),
     'indexes' => array(
       'format' => array(
@@ -64,7 +55,7 @@ function cluster_contact_field_default_field_bases() {
     'type' => 'text',
   );
 
-  // Exported field_base: 'field_phone_number'
+  // Exported field_base: 'field_phone_number'.
   $field_bases['field_phone_number'] = array(
     'active' => 1,
     'cardinality' => -1,
@@ -73,14 +64,6 @@ function cluster_contact_field_default_field_bases() {
     'field_name' => 'field_phone_number',
     'field_permissions' => array(
       'type' => 0,
-    ),
-    'foreign keys' => array(
-      'format' => array(
-        'columns' => array(
-          'format' => 'format',
-        ),
-        'table' => 'filter_format',
-      ),
     ),
     'indexes' => array(
       'format' => array(
@@ -97,7 +80,7 @@ function cluster_contact_field_default_field_bases() {
     'type' => 'text',
   );
 
-  // Exported field_base: 'field_role_or_title'
+  // Exported field_base: 'field_role_or_title'.
   $field_bases['field_role_or_title'] = array(
     'active' => 1,
     'cardinality' => -1,
@@ -106,14 +89,6 @@ function cluster_contact_field_default_field_bases() {
     'field_name' => 'field_role_or_title',
     'field_permissions' => array(
       'type' => 0,
-    ),
-    'foreign keys' => array(
-      'format' => array(
-        'columns' => array(
-          'format' => 'format',
-        ),
-        'table' => 'filter_format',
-      ),
     ),
     'indexes' => array(
       'format' => array(

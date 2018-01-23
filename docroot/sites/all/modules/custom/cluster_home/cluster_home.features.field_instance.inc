@@ -10,7 +10,7 @@
 function cluster_home_field_default_field_instances() {
   $field_instances = array();
 
-  // Exported field_instance: 'node-homepage-field_homeimage'
+  // Exported field_instance: 'node-homepage-field_homeimage'.
   $field_instances['node-homepage-field_homeimage'] = array(
     'bundle' => 'homepage',
     'deleted' => 0,
@@ -25,6 +25,12 @@ function cluster_home_field_default_field_instances() {
         ),
         'type' => 'image',
         'weight' => 2,
+      ),
+      'ical' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
       ),
       'teaser' => array(
         'label' => 'hidden',
@@ -65,7 +71,7 @@ function cluster_home_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-homepage-field_homelink'
+  // Exported field_instance: 'node-homepage-field_homelink'.
   $field_instances['node-homepage-field_homelink'] = array(
     'bundle' => 'homepage',
     'default_value' => NULL,
@@ -78,6 +84,12 @@ function cluster_home_field_default_field_instances() {
         'settings' => array(),
         'type' => 'link_plain',
         'weight' => 3,
+      ),
+      'ical' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
       ),
       'teaser' => array(
         'label' => 'hidden',
@@ -124,7 +136,7 @@ function cluster_home_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-homepage-title_field'
+  // Exported field_instance: 'node-homepage-title_field'.
   $field_instances['node-homepage-title_field'] = array(
     'bundle' => 'homepage',
     'default_value' => NULL,
@@ -137,6 +149,12 @@ function cluster_home_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 1,
       ),
+      'ical' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'teaser' => array(
         'label' => 'hidden',
         'module' => 'text',
@@ -148,7 +166,7 @@ function cluster_home_field_default_field_instances() {
     'entity_type' => 'node',
     'field_name' => 'title_field',
     'label' => 'Title',
-    'required' => TRUE,
+    'required' => 1,
     'settings' => array(
       'entity_translation_sync' => FALSE,
       'hide_label' => array(
@@ -159,6 +177,7 @@ function cluster_home_field_default_field_instances() {
       'user_register_form' => FALSE,
     ),
     'widget' => array(
+      'active' => 1,
       'module' => 'text',
       'settings' => array(
         'size' => 60,

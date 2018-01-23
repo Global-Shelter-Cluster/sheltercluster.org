@@ -253,13 +253,18 @@ function cluster_search_default_search_api_index() {
       "index_directly" : 1,
       "cron_limit" : "0",
       "fields" : {
+        "attachments_field_event_files" : { "type" : "text" },
+        "attachments_field_file" : { "type" : "text" },
         "body:value" : { "type" : "text" },
+        "created" : { "type" : "date" },
         "field_assess_monitor_eval" : { "type" : "list\\u003Cinteger\\u003E", "entity_type" : "taxonomy_term" },
         "field_coordination_management" : { "type" : "list\\u003Cinteger\\u003E", "entity_type" : "taxonomy_term" },
         "field_cross_cutting_issues" : { "type" : "list\\u003Cinteger\\u003E", "entity_type" : "taxonomy_term" },
         "field_document_source" : { "type" : "text", "boost" : "3.0" },
         "field_document_type" : { "type" : "list\\u003Cinteger\\u003E", "entity_type" : "taxonomy_term" },
         "field_featured" : { "type" : "boolean" },
+        "field_file:file:size" : { "type" : "integer" },
+        "field_file:file:url" : { "type" : "string" },
         "field_information_management" : { "type" : "list\\u003Cinteger\\u003E", "entity_type" : "taxonomy_term" },
         "field_inter_cluster" : { "type" : "list\\u003Cinteger\\u003E", "entity_type" : "taxonomy_term" },
         "field_intervention_materials" : { "type" : "list\\u003Cinteger\\u003E", "entity_type" : "taxonomy_term" },
@@ -267,11 +272,11 @@ function cluster_search_default_search_api_index() {
         "field_issues" : { "type" : "list\\u003Cinteger\\u003E", "entity_type" : "taxonomy_term" },
         "field_key_document" : { "type" : "boolean" },
         "field_language" : { "type" : "string" },
+        "field_link:url" : { "type" : "uri" },
         "field_meeting_management" : { "type" : "list\\u003Cinteger\\u003E", "entity_type" : "taxonomy_term" },
         "field_non_food_items" : { "type" : "list\\u003Cinteger\\u003E", "entity_type" : "taxonomy_term" },
         "field_other_keywords" : { "type" : "text", "boost" : "2.0" },
-        "field_preview:file" : { "type" : "integer", "entity_type" : "file" },
-        "field_preview:file:url" : { "type" : "uri" },
+        "field_preview:file:fid" : { "type" : "integer" },
         "field_report_meeting_date" : { "type" : "date" },
         "field_response_phase" : { "type" : "list\\u003Cinteger\\u003E", "entity_type" : "taxonomy_term" },
         "field_settlement_type" : { "type" : "list\\u003Cinteger\\u003E", "entity_type" : "taxonomy_term" },
@@ -293,7 +298,7 @@ function cluster_search_default_search_api_index() {
         "search_api_alter_node_access" : { "status" : 0, "weight" : "0", "settings" : [] },
         "search_api_alter_node_status" : { "status" : 1, "weight" : "0", "settings" : [] },
         "search_api_attachments_alter_settings" : {
-          "status" : 0,
+          "status" : 1,
           "weight" : "0",
           "settings" : {
             "excluded_extensions" : "aif art avi bmp gif ico mov oga ogv png psd ra ram rgb flv",
@@ -525,12 +530,12 @@ function cluster_search_default_search_api_index() {
       "cron_limit" : "0",
       "fields" : {
         "body:value" : { "type" : "text", "boost" : "2.0" },
-        "field_associated_regions" : { "type" : "list\\u003Cinteger\\u003E", "entity_type" : "node" },
+        "field_associated_regions:nid" : { "type" : "list\\u003Cinteger\\u003E" },
         "field_disaster_causes" : { "type" : "list\\u003Cinteger\\u003E", "entity_type" : "taxonomy_term" },
         "field_disaster_type" : { "type" : "integer", "entity_type" : "taxonomy_term" },
         "field_is_hot_response" : { "type" : "boolean" },
-        "field_parent_region" : { "type" : "integer", "entity_type" : "node" },
-        "field_parent_response" : { "type" : "integer", "entity_type" : "node" },
+        "field_parent_region:nid" : { "type" : "integer" },
+        "field_parent_response:nid" : { "type" : "integer" },
         "field_response_status" : { "type" : "string" },
         "nid" : { "type" : "integer" },
         "search_api_language" : { "type" : "string" },
@@ -630,14 +635,7 @@ function cluster_search_default_search_api_index() {
     "server" : "algolia",
     "item_type" : "node",
     "options" : {
-      "datasource" : { "bundles" : [
-          "arbitrary_library",
-          "article",
-          "page",
-          "discussion",
-          "library"
-        ]
-      },
+      "datasource" : { "bundles" : [ "arbitrary_library", "article", "page", "discussion", "library" ] },
       "index_directly" : 1,
       "cron_limit" : "0",
       "data_alter_callbacks" : {

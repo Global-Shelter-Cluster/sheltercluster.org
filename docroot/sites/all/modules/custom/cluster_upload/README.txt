@@ -1,0 +1,1 @@
+Provides drag and drop upload for document node creation on group pages.

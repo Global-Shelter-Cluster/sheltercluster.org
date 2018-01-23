@@ -7,3 +7,5 @@ logs/
 config/
 npm-debug.log
 dev_settings.inc
+.editorconfig
+localhost_settings.inc

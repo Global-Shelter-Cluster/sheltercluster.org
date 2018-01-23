@@ -130,64 +130,15 @@ function cluster_docs_views_default_views() {
   $handler->display->display_options['relationships']['field_file_fid']['field'] = 'field_file_fid';
   /* Field: Bulk operations: Content */
   $handler->display->display_options['fields']['views_bulk_operations']['id'] = 'views_bulk_operations';
-  $handler->display->display_options['fields']['views_bulk_operations']['table'] = 'node';
+  $handler->display->display_options['fields']['views_bulk_operations']['table'] = 'views_entity_node';
   $handler->display->display_options['fields']['views_bulk_operations']['field'] = 'views_bulk_operations';
   $handler->display->display_options['fields']['views_bulk_operations']['vbo_settings']['display_type'] = '0';
   $handler->display->display_options['fields']['views_bulk_operations']['vbo_settings']['enable_select_all_pages'] = 1;
   $handler->display->display_options['fields']['views_bulk_operations']['vbo_settings']['force_single'] = 0;
   $handler->display->display_options['fields']['views_bulk_operations']['vbo_settings']['entity_load_capacity'] = '10';
   $handler->display->display_options['fields']['views_bulk_operations']['vbo_operations'] = array(
-    'action::node_assign_owner_action' => array(
-      'selected' => 0,
-      'postpone_processing' => 0,
-      'skip_confirmation' => 0,
-      'override_label' => 0,
-      'label' => '',
-    ),
     'action::cluster_libraries_create' => array(
       'selected' => 1,
-      'postpone_processing' => 0,
-      'skip_confirmation' => 0,
-      'override_label' => 0,
-      'label' => '',
-    ),
-    'action::views_bulk_operations_delete_item' => array(
-      'selected' => 0,
-      'postpone_processing' => 0,
-      'skip_confirmation' => 0,
-      'override_label' => 0,
-      'label' => '',
-    ),
-    'action::views_bulk_operations_delete_revision' => array(
-      'selected' => 0,
-      'postpone_processing' => 0,
-      'skip_confirmation' => 0,
-      'override_label' => 0,
-      'label' => '',
-    ),
-    'action::views_bulk_operations_script_action' => array(
-      'selected' => 0,
-      'postpone_processing' => 0,
-      'skip_confirmation' => 0,
-      'override_label' => 0,
-      'label' => '',
-    ),
-    'action::flag_node_action' => array(
-      'selected' => 0,
-      'postpone_processing' => 0,
-      'skip_confirmation' => 0,
-      'override_label' => 0,
-      'label' => '',
-    ),
-    'action::node_make_sticky_action' => array(
-      'selected' => 0,
-      'postpone_processing' => 0,
-      'skip_confirmation' => 0,
-      'override_label' => 0,
-      'label' => '',
-    ),
-    'action::node_make_unsticky_action' => array(
-      'selected' => 0,
       'postpone_processing' => 0,
       'skip_confirmation' => 0,
       'override_label' => 0,
@@ -223,22 +174,6 @@ function cluster_docs_views_default_views() {
         ),
       ),
     ),
-    'action::views_bulk_operations_argument_selector_action' => array(
-      'selected' => 0,
-      'skip_confirmation' => 0,
-      'override_label' => 0,
-      'label' => '',
-      'settings' => array(
-        'url' => '',
-      ),
-    ),
-    'action::node_promote_action' => array(
-      'selected' => 0,
-      'postpone_processing' => 0,
-      'skip_confirmation' => 0,
-      'override_label' => 0,
-      'label' => '',
-    ),
     'action::node_publish_action' => array(
       'selected' => 1,
       'postpone_processing' => 0,
@@ -246,50 +181,8 @@ function cluster_docs_views_default_views() {
       'override_label' => 0,
       'label' => '',
     ),
-    'action::node_unpromote_action' => array(
-      'selected' => 0,
-      'postpone_processing' => 0,
-      'skip_confirmation' => 0,
-      'override_label' => 0,
-      'label' => '',
-    ),
-    'action::node_save_action' => array(
-      'selected' => 0,
-      'postpone_processing' => 0,
-      'skip_confirmation' => 0,
-      'override_label' => 0,
-      'label' => '',
-    ),
-    'action::system_send_email_action' => array(
-      'selected' => 0,
-      'postpone_processing' => 0,
-      'skip_confirmation' => 0,
-      'override_label' => 0,
-      'label' => '',
-    ),
-    'action::workbench_moderation_set_state_action' => array(
-      'selected' => 0,
-      'postpone_processing' => 0,
-      'skip_confirmation' => 0,
-      'override_label' => 0,
-      'label' => '',
-    ),
     'action::node_unpublish_action' => array(
       'selected' => 1,
-      'postpone_processing' => 0,
-      'skip_confirmation' => 0,
-      'override_label' => 0,
-      'label' => '',
-    ),
-    'action::node_unpublish_by_keyword_action' => array(
-      'selected' => 0,
-      'postpone_processing' => 0,
-      'skip_confirmation' => 0,
-      'override_label' => 0,
-      'label' => '',
-    ),
-    'action::pathauto_node_update_action' => array(
-      'selected' => 0,
       'postpone_processing' => 0,
       'skip_confirmation' => 0,
       'override_label' => 0,
@@ -367,6 +260,18 @@ function cluster_docs_views_default_views() {
   $handler->display->display_options['fields']['status']['table'] = 'node';
   $handler->display->display_options['fields']['status']['field'] = 'status';
   $handler->display->display_options['fields']['status']['not'] = 0;
+  /* Field: Content: Document Language */
+  $handler->display->display_options['fields']['field_language']['id'] = 'field_language';
+  $handler->display->display_options['fields']['field_language']['table'] = 'field_data_field_language';
+  $handler->display->display_options['fields']['field_language']['field'] = 'field_language';
+  $handler->display->display_options['fields']['field_language']['label'] = 'Language';
+  $handler->display->display_options['fields']['field_language']['settings'] = array(
+    'format' => array(
+      'name' => 'name',
+      'iso' => 0,
+      'name_native' => 0,
+    ),
+  );
   /* Field: Content: Post date */
   $handler->display->display_options['fields']['created']['id'] = 'created';
   $handler->display->display_options['fields']['created']['table'] = 'node';
@@ -375,11 +280,6 @@ function cluster_docs_views_default_views() {
   $handler->display->display_options['fields']['created']['date_format'] = 'custom';
   $handler->display->display_options['fields']['created']['custom_date_format'] = 'Y/m/d';
   $handler->display->display_options['fields']['created']['second_date_format'] = 'long';
-  /* Sort criterion: Content: Post date */
-  $handler->display->display_options['sorts']['created']['id'] = 'created';
-  $handler->display->display_options['sorts']['created']['table'] = 'node';
-  $handler->display->display_options['sorts']['created']['field'] = 'created';
-  $handler->display->display_options['sorts']['created']['order'] = 'DESC';
   /* Filter criterion: Content: Type */
   $handler->display->display_options['filters']['type']['id'] = 'type';
   $handler->display->display_options['filters']['type']['table'] = 'node';
@@ -489,6 +389,96 @@ function cluster_docs_views_default_views() {
       'value' => '',
     ),
   );
+  /* Filter criterion: Content: Key Document (field_key_document) */
+  $handler->display->display_options['filters']['field_key_document_value']['id'] = 'field_key_document_value';
+  $handler->display->display_options['filters']['field_key_document_value']['table'] = 'field_data_field_key_document';
+  $handler->display->display_options['filters']['field_key_document_value']['field'] = 'field_key_document_value';
+  $handler->display->display_options['filters']['field_key_document_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_key_document_value']['expose']['operator_id'] = 'field_key_document_value_op';
+  $handler->display->display_options['filters']['field_key_document_value']['expose']['label'] = 'Is Key Document';
+  $handler->display->display_options['filters']['field_key_document_value']['expose']['operator'] = 'field_key_document_value_op';
+  $handler->display->display_options['filters']['field_key_document_value']['expose']['identifier'] = 'field_key_document_value';
+  $handler->display->display_options['filters']['field_key_document_value']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    5 => 0,
+    6 => 0,
+  );
+  /* Filter criterion: Content: Featured document (field_featured) */
+  $handler->display->display_options['filters']['field_featured_value']['id'] = 'field_featured_value';
+  $handler->display->display_options['filters']['field_featured_value']['table'] = 'field_data_field_featured';
+  $handler->display->display_options['filters']['field_featured_value']['field'] = 'field_featured_value';
+  $handler->display->display_options['filters']['field_featured_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_featured_value']['expose']['operator_id'] = 'field_featured_value_op';
+  $handler->display->display_options['filters']['field_featured_value']['expose']['label'] = 'Is Featured Document';
+  $handler->display->display_options['filters']['field_featured_value']['expose']['operator'] = 'field_featured_value_op';
+  $handler->display->display_options['filters']['field_featured_value']['expose']['identifier'] = 'field_featured_value';
+  $handler->display->display_options['filters']['field_featured_value']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    5 => 0,
+    6 => 0,
+  );
+  /* Filter criterion: Content: Document Language (field_language) */
+  $handler->display->display_options['filters']['field_language_value']['id'] = 'field_language_value';
+  $handler->display->display_options['filters']['field_language_value']['table'] = 'field_data_field_language';
+  $handler->display->display_options['filters']['field_language_value']['field'] = 'field_language_value';
+  $handler->display->display_options['filters']['field_language_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_language_value']['expose']['operator_id'] = 'field_language_value_op';
+  $handler->display->display_options['filters']['field_language_value']['expose']['label'] = 'Language';
+  $handler->display->display_options['filters']['field_language_value']['expose']['operator'] = 'field_language_value_op';
+  $handler->display->display_options['filters']['field_language_value']['expose']['identifier'] = 'field_language_value';
+  $handler->display->display_options['filters']['field_language_value']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    5 => 0,
+    6 => 0,
+  );
+  /* Filter criterion: Content: Document Type (field_document_type) */
+  $handler->display->display_options['filters']['field_document_type_tid']['id'] = 'field_document_type_tid';
+  $handler->display->display_options['filters']['field_document_type_tid']['table'] = 'field_data_field_document_type';
+  $handler->display->display_options['filters']['field_document_type_tid']['field'] = 'field_document_type_tid';
+  $handler->display->display_options['filters']['field_document_type_tid']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_document_type_tid']['expose']['operator_id'] = 'field_document_type_tid_op';
+  $handler->display->display_options['filters']['field_document_type_tid']['expose']['label'] = 'Document Type';
+  $handler->display->display_options['filters']['field_document_type_tid']['expose']['operator'] = 'field_document_type_tid_op';
+  $handler->display->display_options['filters']['field_document_type_tid']['expose']['identifier'] = 'field_document_type_tid';
+  $handler->display->display_options['filters']['field_document_type_tid']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    5 => 0,
+    6 => 0,
+  );
+  $handler->display->display_options['filters']['field_document_type_tid']['type'] = 'select';
+  $handler->display->display_options['filters']['field_document_type_tid']['vocabulary'] = 'document_type';
+  /* Filter criterion: Content: Document status (field_document_status) */
+  $handler->display->display_options['filters']['field_document_status_tid']['id'] = 'field_document_status_tid';
+  $handler->display->display_options['filters']['field_document_status_tid']['table'] = 'field_data_field_document_status';
+  $handler->display->display_options['filters']['field_document_status_tid']['field'] = 'field_document_status_tid';
+  $handler->display->display_options['filters']['field_document_status_tid']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_document_status_tid']['expose']['operator_id'] = 'field_document_status_tid_op';
+  $handler->display->display_options['filters']['field_document_status_tid']['expose']['label'] = 'Document status';
+  $handler->display->display_options['filters']['field_document_status_tid']['expose']['operator'] = 'field_document_status_tid_op';
+  $handler->display->display_options['filters']['field_document_status_tid']['expose']['identifier'] = 'field_document_status_tid';
+  $handler->display->display_options['filters']['field_document_status_tid']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    5 => 0,
+    6 => 0,
+  );
+  $handler->display->display_options['filters']['field_document_status_tid']['type'] = 'select';
+  $handler->display->display_options['filters']['field_document_status_tid']['vocabulary'] = 'document_status';
+  $handler->display->display_options['filters']['field_document_status_tid']['hierarchy'] = 1;
 
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page');
@@ -499,6 +489,12 @@ function cluster_docs_views_default_views() {
   $handler->display->display_options['menu']['name'] = 'management';
   $handler->display->display_options['menu']['context'] = 0;
   $handler->display->display_options['menu']['context_only_inline'] = 0;
+
+  /* Display: Data export */
+  $handler = $view->new_display('views_data_export', 'Data export', 'views_data_export_1');
+  $handler->display->display_options['pager']['type'] = 'some';
+  $handler->display->display_options['style_plugin'] = 'views_data_export_csv';
+  $handler->display->display_options['path'] = 'data-export';
   $translatables['documents'] = array(
     t('Master'),
     t('Documents'),
@@ -530,10 +526,16 @@ function cluster_docs_views_default_views() {
     t('Link'),
     t('External'),
     t('Published'),
+    t('Language'),
     t('Publication date'),
     t('Group'),
     t('Other Keywords'),
+    t('Is Key Document'),
+    t('Is Featured Document'),
+    t('Document Type'),
+    t('Document status'),
     t('Page'),
+    t('Data export'),
   );
   $export['documents'] = $view;
 

@@ -4,6 +4,7 @@
       $('body').once('collapsibleSections', function() {
         var collapsible = $('[data-collapsible]');
         var collapsible_elements_count = collapsible.length;
+        var current_pathname = window.location.pathname;
 
         // Returns an array of collapsible element states
         var get_collapsed_state = function(count) {
@@ -16,11 +17,29 @@
           }
           collapsible.each( function(index, element) {
             var element = $(element);
-            if (element.data('collapsible-default') == 'collapsed') {
+            if (element.data('collapsible-default') == 'collapsed' || element.data('force-collapsible-default') == 'collapsed') {
               default_state[index] = 1;
             }
           });
           return default_state;
+        };
+
+        if ($.cookie(current_pathname + '_collapsed_state') != null) {
+          var new_collapsed_state = $.cookie(current_pathname + '_collapsed_state').split('');
+
+          collapsible.each( function(index, element) {
+            var element = $(element);
+            if (element.data('force-collapsible-default') == 'collapsed') {
+              new_collapsed_state[index] = 1;
+            }
+          });
+
+          $.cookie(current_pathname + '_collapsed_state', new_collapsed_state.toString().replace(/\,/gi,''), {
+            expires: 7,
+            secure: false
+          });
+        } else {
+
         }
 
         collapsible.each( function(index, element) {

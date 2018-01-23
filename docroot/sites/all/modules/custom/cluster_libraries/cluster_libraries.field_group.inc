@@ -8,7 +8,7 @@
  * Implements hook_field_group_info().
  */
 function cluster_libraries_field_group_info() {
-  $export = array();
+  $field_groups = array();
 
   $field_group = new stdClass();
   $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
@@ -45,7 +45,7 @@ function cluster_libraries_field_group_info() {
       ),
     ),
   );
-  $export['group_advanced_tags|node|library|form'] = $field_group;
+  $field_groups['group_advanced_tags|node|library|form'] = $field_group;
 
   $field_group = new stdClass();
   $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
@@ -74,7 +74,12 @@ function cluster_libraries_field_group_info() {
       ),
     ),
   );
-  $export['group_basic_tags|node|library|form'] = $field_group;
+  $field_groups['group_basic_tags|node|library|form'] = $field_group;
 
-  return $export;
+  // Translatables
+  // Included for use with string extractors like potx.
+  t('Advanced tags');
+  t('Basic tags');
+
+  return $field_groups;
 }

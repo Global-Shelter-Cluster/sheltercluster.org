@@ -38,7 +38,7 @@
 
     <div class="page-margin">
       <div id="nav-master">
-        <nav id="nav-shelter" class="clearfix">
+        <nav id="nav-shelter" class="clearfix" data-search-group-nids="<?php if (isset($search_group_nids)) print $search_group_nids ?>">
           <a href="#" id="button-menu-dropdown">Menu</a>
           <input type="checkbox" id="mobile_menu_toggle">
           <label for="mobile_menu_toggle">

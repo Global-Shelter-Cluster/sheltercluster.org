@@ -155,6 +155,7 @@ header {
     vertical-align: top;
     width: 100%;
     display: inline-block;
+    margin-bottom: 10px;
 
     .clearfix {
       margin-bottom: 14px;
@@ -162,6 +163,19 @@ header {
     a {
       color: #2d62f9;
       @include rem(font-size, 0.85rem);
+    }
+    input[type=search] {
+      width: 100%;
+      border: 1px solid $shelter-grey;
+      border-radius: 20px;
+      padding: 2px 10px;
+      margin-bottom: 10px;
+      box-sizing: border-box;
+    }
+    label, input[type=search] {
+      @include rem(font-size, 0.85rem);
+      font-weight: normal;
+      color: darken($shelter-grey, 20%);
     }
 
     h4 {
@@ -226,6 +240,13 @@ header {
   a {
     color: darken(#2d62f9, 40%);
     font-weight: normal;
+
+    &.operation-icon {
+      color: $shelter-dark-blue;
+      &:hover {
+        color: darken($shelter-dark-blue, 20%);
+      }
+    }
   }
   td {
     @include rem(padding, 0.5rem 0);
@@ -264,6 +285,12 @@ header {
       @include rem(font-size, 0.75rem);
       color: $shelter-grey;
     }
+    .group {
+      text-transform: uppercase;
+      @include rem(font-size, 0.75rem);
+      color: $shelter-grey;
+      text-decoration: none;
+    }
     .tags {
       h3 { 
         position: absolute !important;
@@ -273,16 +300,37 @@ header {
         clip: rect(1px 1px 1px 1px);        
       }
       ul {
+        list-style: none;
+        display: flex;
+        flex-wrap: wrap;
         margin-top: 10px;
-        text-transform: uppercase;
-        font-size: 12px;
-        font-size: 0.75rem;
-        color: #575757;                
+        //text-transform: uppercase;
+        //font-size: 12px;
+        //font-size: 0.75rem;
+        //color: #575757;
+
+        li {
+          @include rem(font-size, 0.75rem);
+          color: $shelter-grey;
+          border: 1px solid $shelter-grey;
+          border-radius: 6px;
+          padding: 0 4px;
+          margin: 1px;
+          height: 18px;
+        }
       }
     }
   }
   .information-file {
-    min-width: 90px;
+    @include rem(font-size, 0.85rem);
+    white-space: nowrap;
+    &, a {
+      color: $shelter-dark-blue;
+      text-decoration: none;
+    }
+    a:hover {
+      color: darken($shelter-dark-blue, 20%);
+    }
   }
   .document-groups {
     margin: 0.75em 0;
@@ -364,6 +412,16 @@ header {
     }
   }
 
+  label {
+    white-space: nowrap;
+    color: #000;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    @media screen and (max-width: 979px) {
+      padding: 10px 10px 0 10px;
+    }
+  }
+
   li + li {
     @media screen and (max-width: 519px) {
       width: 100%;
@@ -374,10 +432,10 @@ header {
       }
     }
     @media screen and (min-width: 520px) and (max-width: 979px) {
-      padding: 10px 0;
+      padding: 10px;
       display: inline-block;
-      width: 48%;
-      text-align: center;
+      width: 100%;
+      text-align: right;
     }
     @media screen and (min-width: 980px) {
       width: auto !important;
@@ -401,7 +459,8 @@ header {
   }
 }
 
-#nav-shelter .search-result-title {
+#nav-shelter .search-result-title,
+#nav-shelter .search-result-title div {
   white-space: nowrap !important;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -427,6 +486,65 @@ header {
     }
     > li + li {
       display: none;
+    }
+  }
+}
+
+.no-results {
+  width: 100%;
+  text-align: center;
+  padding: 50px 0;
+
+  &, a {
+    color: $shelter-grey;
+  }
+}
+
+.search-summary {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 30px;
+  color: $shelter-grey;
+}
+
+ul.pagination {
+  list-style: none;
+  display: flex;
+  margin: 0;
+  padding: 0;
+
+  li {
+    margin: 0;
+    span, a {
+      padding: 0 5px;
+    }
+    a {
+      color: $shelter-grey;
+    }
+  }
+}
+
+ul.search-display {
+  list-style: none;
+  display: flex;
+  margin: 0;
+  padding: 0;
+
+  li {
+    margin: 0;
+    > * {
+      padding: 0 5px;
+    }
+    a {
+      color: $shelter-dark-blue;
+      &[href] {
+        color: $shelter-light-blue;
+        &:hover {
+          color: $shelter-dark-blue;
+        }
+      }
     }
   }
 }

@@ -33,6 +33,7 @@ function cluster_og_user_default_permissions() {
     'name' => 'create hub content',
     'roles' => array(
       'administrator' => 'administrator',
+      'trusted user' => 'trusted user',
     ),
     'module' => 'node',
   );
@@ -141,6 +142,7 @@ function cluster_og_user_default_permissions() {
     'name' => 'delete own hub content',
     'roles' => array(
       'administrator' => 'administrator',
+      'trusted user' => 'trusted user',
     ),
     'module' => 'node',
   );
@@ -249,6 +251,7 @@ function cluster_og_user_default_permissions() {
     'name' => 'edit own hub content',
     'roles' => array(
       'administrator' => 'administrator',
+      'trusted user' => 'trusted user',
     ),
     'module' => 'node',
   );

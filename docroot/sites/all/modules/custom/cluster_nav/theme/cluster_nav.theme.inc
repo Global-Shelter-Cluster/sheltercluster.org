@@ -101,6 +101,9 @@ function template_preprocess_cluster_nav_dashboard(&$variables) {
       '#href' => $item['path'],
       '#options' => $item['options'],
     );
+
+    if (isset($item['#suffix']))
+      $item['link']['#suffix'] = $item['#suffix'];
   }
 }
 

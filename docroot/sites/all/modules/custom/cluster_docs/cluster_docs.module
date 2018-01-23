@@ -32,7 +32,84 @@ function cluster_docs_menu() {
     'type' => MENU_CALLBACK,
   );
 
+  $items['admin/config/content/doc_preview_update'] = array(
+    'title' => 'Update PDF previews for documents',
+    'access arguments' => array('edit any document content'),
+    'page callback' => 'drupal_get_form',
+    'page arguments' => ['cluster_docs_pdf_preview_update_form'],
+    'type' => MENU_CALLBACK,
+  );
+
   return $items;
+}
+
+function _cluster_docs_pdf_preview_query() {
+  $query = db_select('node', 'n');
+  $query->join('field_data_field_file', 'f', 'f.entity_type = :type AND n.nid = f.entity_id', [':type' => 'node']);
+  $query->join('file_managed', 'fm', 'f.field_file_fid = fm.fid');
+  $query->leftJoin('field_data_field_preview', 'd', 'd.entity_type = :type AND n.nid = d.entity_id', [':type' => 'node']);
+  $query->fields('n', array('nid'));
+  $query->condition('d.field_preview_fid', NULL);
+  $query->condition('n.type', 'document');
+  $query->condition('fm.filemime', 'application/pdf');
+  return $query;
+}
+
+function cluster_docs_pdf_preview_update_form() {
+  $count = _cluster_docs_pdf_preview_query()->countQuery()->execute()->fetchField();
+
+  $form[] = [
+    '#type' => 'html_tag',
+    '#tag' => 'p',
+    '#value' => t('Documents without preview (includes non-PDF documents): %count', ['%count' => $count]),
+  ];
+
+  $form['limit'] = [
+    '#type' => 'textfield',
+    '#title' => t('Limit (how many batches to run, 0 or empty for no limit)'),
+  ];
+
+  $form['submit'] = [
+    '#type' => 'submit',
+    '#value' => t('Run for all documents without preview'),
+  ];
+
+  return $form;
+}
+
+function cluster_docs_pdf_preview_update_form_submit($form, &$form_state) {
+  $count = _cluster_docs_pdf_preview_query()->countQuery()->execute()->fetchField();
+
+  $num_operations = floor($count / 20); // Batches of 20 docs each
+  if (intval($form_state['values']['limit']) > 0)
+    $num_operations = min($num_operations, intval($form_state['values']['limit']));
+
+  $operations = [];
+  for ($i = $num_operations - 1; $i >= 0; $i--) {
+    $operations[] = [
+      'cluster_docs_pdf_preview_update_op',
+      [$i],
+    ];
+  }
+
+
+  batch_set([
+    'operations' => $operations,
+    'title' => 'Saving documents',
+    'progress_message' => t('Processed batch @current out of @total (20 documents per batch).'),
+  ]);
+}
+
+function cluster_docs_pdf_preview_update_op($operation_details, &$context) {
+  $query = _cluster_docs_pdf_preview_query();
+  $query->orderBy('nid');
+  $page = $operation_details;
+  $query->range($page * 20, 20);
+  $result = $query->execute()->fetchCol();
+  $nodes = entity_load('node', $result);
+
+  foreach ($nodes as $node)
+    node_save($node);
 }
 
 /**
@@ -107,13 +184,16 @@ function cluster_docs_query_cluster_docs_key_or_featured_alter(SelectQuery $quer
  * @return Render array
  */
 function cluster_docs_all($nid) {
-  $query = cluster_docs_query();
+  return cluster_search_docs_page();
+}
 
-  $filter = $query->createFilter();
-  $filter->condition('og_group_ref', $nid);
-  $query->filter($filter);
+function cluster_docs_is_group_documents_page() {
+  $router_item = menu_get_item(current_path());
 
-  return cluster_docs_page($query);
+  if ($router_item && isset($router_item['path']))
+    return $router_item['path'] === 'node/%/documents';
+
+  return FALSE;
 }
 
 /**
@@ -145,10 +225,11 @@ function cluster_docs_query() {
 
 /**
  * Returns a list of taxonomy term fields used as facets in document list pages.
+ * @param bool $labels If TRUE, returns machine names as keys and labels as values, otherwise just the machine names.
  * @return array
  */
-function cluster_docs_taxonomies() {
-  return array(
+function cluster_docs_taxonomies($labels = FALSE) {
+  $machine_names = [
 //    'search_api_language',
     'field_language',
     'field_document_type',
@@ -168,7 +249,28 @@ function cluster_docs_taxonomies() {
     'field_issues',
     'field_toolkit',
     'field_meeting_management',
-  );
+  ];
+
+  if (!$labels)
+    return $machine_names;
+
+  $ret = [];
+  foreach ($machine_names as $machine_name) {
+    $field = field_info_instance('node', $machine_name, 'document');
+    $ret[$machine_name] = $field['label'];
+  }
+  return $ret;
+}
+
+/**
+ * Returns how many taxonomies are in each group (regular taxonomies, basic tags, advanced tags).
+ * This matches what's returned by cluster_docs_taxonomies().
+ * @return array
+ */
+function cluster_docs_taxonomy_groups() {
+  $groups = [2, 3];
+  $groups[] = count(cluster_docs_taxonomies()) - array_sum($groups);
+  return $groups;
 }
 
 /**
@@ -905,5 +1007,143 @@ function cluster_docs_field_access($op, $field, $entity_type, $entity, $account)
           break;
       }
       break;
+  }
+}
+
+/**
+ * Implements hook_date_combo_process_alter().
+ */
+function cluster_docs_date_combo_process_alter(&$element, &$form_state, $context) {
+  if ($element['#field_name'] == 'field_featured_date') {
+
+    $format = $element['value']['#date_format'];
+    // Add first items to select.
+    $options_raw = array(
+      'today +1 week' => t('1 week from today'),
+      'today +2 weeks' => t('2 weeks from today'),
+      'today +1 month' => t('1 month from today'),
+      'today +3 months' => t('3 months from today'),
+      'today +6 months' => t('6 months from today'),
+    );
+
+    // If we are editing the node, maybe we want to add dates based on the
+    // original saved date.
+    $saved_date = $element['value']['#default_value'];
+    $datetime = new \DateTime($saved_date);
+    $today = new \DateTime('today');
+    if (!empty($saved_date) && $datetime > $today) {
+      $options_raw += array(
+        "$saved_date" => t('Saved date (@date)', array('@date' => $datetime->format($format))),
+      );
+      $default_datetime = new \DateTime($saved_date);
+      $default = $default_datetime->format($format);
+    }
+    else {
+      // Set default to today +1 month only if thats a new node, else, if there
+      // is no value, set default to "Never".
+      $node = $element['#entity'];
+      if (!isset($node->nid)) {
+        $default_datetime = new \DateTime('today +1 month');
+        $default = $default_datetime->format($format);
+        $element['value']['#default_value'] = $default_datetime->format('Y-m-d H:i:s');
+      }
+      else {
+        // Never.
+        $element['value']['#default_value'] = '';
+      }
+    }
+
+    // Never is the first item in the option, selecting it will erase the field.
+    $options[''] = t('Never');
+    foreach ($options_raw as $datetime => $option) {
+      $date = new \DateTime($datetime);
+      $formated = $date->format($format);
+      $options[$formated] = $option;
+    }
+
+    $element['value']['unfeature_on'] = array(
+      '#type' => 'select',
+      '#options' => $options,
+      '#weight' => -1,
+      '#attributes' => array('class' => array('unfeatured-select')),
+      '#default_value' => $default,
+    );
+    $element['#attached']['js'][] = array(
+      'type' => 'file',
+      'data' => drupal_get_path('module', 'cluster_docs') . '/js/unfeature.js',
+    );
+  }
+
+}
+
+/**
+ * Implements hook_cron().
+ */
+function cluster_docs_cron() {
+  $today = new \DateTime('today');
+  $query = new EntityFieldQuery();
+  $query->entityCondition('entity_type', 'node')
+    ->entityCondition('bundle', 'document')
+    ->propertyCondition('status', NODE_PUBLISHED)
+    ->fieldCondition('field_featured_date', 'value', $today->format('Y-m-d H:i:s'), '<')
+    ->fieldCondition('field_featured', 'value', 1, '=');
+
+  $result = $query->execute();
+  if (isset($result['node'])) {
+    $nids = array_keys($result['node']);
+    $nodes = entity_load('node', $nids);
+    foreach ($nodes as $node) {
+      $entity = entity_metadata_wrapper('node', $node);
+      $entity->field_featured->set(0);
+      $entity->save();
+    }
+  }
+}
+
+/**
+ * Implements hook_entity_load().
+ *
+ * Sets the value of field_preview to the same as field_file, if the following
+ * conditions are met:
+ *
+ * 1. The value of field_preview is empty.
+ * 2. The extension from the file in field_file matches the field_preview field
+ *    instance configuration (i.e. it's an image).
+ * 3. We're not editing the node.
+ */
+function cluster_docs_entity_load($entities, $type) {
+  if ($type !== 'node')
+    return;
+
+  if (arg(0) === 'node' && arg(2) === 'edit')
+    return; // Fails 3rd condition
+
+  $extensions = NULL; // Only populated if needed
+
+  foreach ($entities as $node) {
+    if ($node->type !== 'document')
+      continue;
+
+    if ($node->field_preview)
+      continue; // Fails 1st condition
+
+    if (!$node->field_file)
+      continue; // No file set in field_file
+    $items = field_get_items('node', $node, 'field_file');
+    if (!$items)
+      continue;
+    $file = file_load($items[0]['fid']);
+    if (!$file)
+      continue;
+
+    if (is_null($extensions)) {
+      $info = field_info_instance('node', 'field_preview', 'document');
+      $extensions = $info['settings']['file_extensions'];
+    }
+
+    if (!file_validate_extensions($file, $extensions)) {
+      // 2nd condition is met
+      $node->field_preview = $node->field_file;
+    }
   }
 }

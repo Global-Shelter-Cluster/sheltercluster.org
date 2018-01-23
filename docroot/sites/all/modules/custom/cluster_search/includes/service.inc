@@ -90,12 +90,30 @@ class SearchApiClusterAlgoliaService extends SearchApiAlgoliaService {
                   $property_value = $property['value'];
                 }
               }
+
+              $processed = FALSE;
+
               $fields_to_transliterate = [
                 'attachments_field_file',
                 'body:value',
               ];
               foreach ($fields_to_transliterate as $field) {
-                if ($key === $field && is_string($property_value)) {
+                if ($key !== $field || is_string($property_value))
+                  continue;
+
+                // Truncate at around 4kb (Algolia has a 10kb limit for docs),
+                // and transliterate to get rid of UTF issues (this is fine
+                // because these fields are never shown to the user).
+                $property_value = substr(
+                  transliteration_get(substr($property_value, 0, 4000)),
+                  0,
+                  4000
+                );
+
+                try {
+                  \AlgoliaSearch\Json::encode($property_value);
+                  $item_to_index[$key] = $property_value;
+                } catch (\AlgoliaSearch\AlgoliaException $e) {
                   // Ensure UTF8 encoding (otherwise Algolia throws an error)
                   // Code from https://stackoverflow.com/a/1523574/368864
                   if (!preg_match('%^(?:
@@ -107,13 +125,74 @@ class SearchApiClusterAlgoliaService extends SearchApiAlgoliaService {
                     | \xF0[\x90-\xBF][\x80-\xBF]{2}      # planes 1-3
                     | [\xF1-\xF3][\x80-\xBF]{3}          # planes 4-15
                     | \xF4[\x80-\x8F][\x80-\xBF]{2}      # plane 16
-                )*$%xs', $property_value))
+                  )*$%xs', $property_value)) {
                     $property_value = iconv('CP1252', 'UTF-8', $property_value);
-                  $property_value = transliteration_get($property_value);
+                    try {
+                      \AlgoliaSearch\Json::encode($property_value);
+                      $item_to_index[$key] = $property_value;
+                    } catch (\AlgoliaSearch\AlgoliaException $e) {
+                      // Don't include it in the index
+                      watchdog('cluster_search', 'Skipped field %field in node %nid due to encoding', ['%field' => $key, '%nid' => $item[$entity_key]['value']]);
+                    }
+                  }
                 }
-                $item_to_index[$key] = is_string($property_value)
-                  ? substr($property_value, 0, 5000) // Truncate at around 5kb (Algolia has a 10kb limit for docs)
-                  : $property_value;
+
+                $processed = TRUE;
+              }
+
+              $group_nids_fields = [
+                'og_group_ref:nid',
+                'field_associated_regions:nid',
+                'field_parent_response:nid',
+                'field_parent_region:nid',
+              ];
+              if (in_array($key, $group_nids_fields)) {
+                $key = 'group_nids';
+
+                if (!array_key_exists($key, $item_to_index))
+                  $item_to_index[$key] = [];
+
+                foreach ((array) $property_value as $value)
+                  $item_to_index[$key][] = intval($value);
+
+                $processed = TRUE;
+              }
+
+              if ($key == 'field_language' && is_string($property_value) && $property_value) {
+                $lang = i18n_language_load($property_value);
+                if ($lang)
+                  $property_value = $lang->name;
+                else
+                  $processed = TRUE; // Skip it
+              }
+
+              if (in_array($key, ['created', 'field_report_meeting_date']))
+                $property_value = intval($property_value);
+
+              if ($key === 'field_preview:file:fid') {
+                $file = file_load($property_value);
+                if ($file) {
+                  $a=$file->uri;
+                  $item_to_index['field_preview:file:url'] = image_style_url('document_preview', $file->uri);
+                }
+                $processed = TRUE;
+              }
+
+              if (!$processed) {
+                try {
+                  $property_value = is_string($property_value)
+                    ? substr($property_value, 0, 4000) // Truncate at 4kb (Algolia has a 10kb limit for docs)
+                    : $property_value;
+
+                  \AlgoliaSearch\Json::encode($property_value);
+                  $item_to_index[$key] = $property_value;
+                } catch (\AlgoliaSearch\AlgoliaException $e) {
+                  // Don't include it in the index
+                  watchdog('cluster_search', 'Skipped field %field in node %nid due to encoding', [
+                    '%field' => $key,
+                    '%nid' => $item[$entity_key]['value']
+                  ]);
+                }
               }
             }
           }
@@ -124,8 +203,21 @@ class SearchApiClusterAlgoliaService extends SearchApiAlgoliaService {
           }
         }
       }
-      // Add the properly formatted items to the batch.
-      $items_to_index[] = $item_to_index;
+      try {
+        \AlgoliaSearch\Json::encode($item_to_index);
+
+        if (array_key_exists('created', $item_to_index)) {
+          $item_to_index['document_date'] = array_key_exists('field_report_meeting_date', $item_to_index) && $item_to_index['field_report_meeting_date']
+            ? $item_to_index['field_report_meeting_date']
+            : $item_to_index['created'];
+        }
+
+        // Add the properly formatted items to the batch.
+        $items_to_index[] = $item_to_index;
+      } catch (\AlgoliaSearch\AlgoliaException $e) {
+        // Don't include it in the index
+        watchdog('cluster_search', 'Skipped node %nid due to encoding', ['%nid' => $item_to_index['objectID']]);
+      }
     }
 
     try {

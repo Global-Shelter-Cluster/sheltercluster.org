@@ -1,42 +1,42 @@
 (function ($) {
   Drupal.behaviors.clusterSearchAlgolia = {
+    dateHelper: function(timestamp) {
+      var date = new Date(parseInt(timestamp) * 1000);
+      var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+      return date.getDate() + ' ' + (months[date.getMonth()]) + ' ' + date.getFullYear();
+    },
     attach: function (context, settings) {
       $('#cluster-search-mega-menu').once('clusterSearchAlgolia', function() {
-        var algolia_app_id = settings.cluster_search.algolia_app_id;
-        var algolia_search_key = settings.cluster_search.algolia_search_key;
-        var algolia_prefix = settings.cluster_search.algolia_prefix;
-        if (!algolia_app_id || !algolia_search_key || !algolia_prefix) {
+        if (!settings.cluster_search.algolia_app_id || !settings.cluster_search.algolia_search_key || !settings.cluster_search.algolia_prefix) {
           $(this).remove();
           return;
         }
 
-        var algolia_client = algoliasearch(algolia_app_id, algolia_search_key);
+        var algolia_client = algoliasearch(settings.cluster_search.algolia_app_id, settings.cluster_search.algolia_search_key);
 
-        var dateHelper = function(timestamp) {
-          var date = new Date(parseInt(timestamp) * 1000);
-          var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-          return date.getDate() + ' ' + (months[date.getMonth()]) + ' ' + date.getFullYear();
-        };
+        Vue.filter('strip_tags', function (html) {
+          return $('<div />').html(html).text();
+        });
 
         var processDocument = function(result) {
-          var group = typeof result.og_group_ref !== 'undefined' && result.og_group_ref.length > 0
-            ? result.og_group_ref[0]
+          var group = typeof result._highlightResult.og_group_ref !== 'undefined' && result._highlightResult.og_group_ref.length > 0
+            ? result._highlightResult.og_group_ref[0].value
             : null;
 
           return {
             url: result.url,
-            title: result.title,
+            title: result._highlightResult.title.value,
             group: group,
-            date: typeof result['field_report_meeting_date'] !== 'undefined'
-              ? dateHelper(result['field_report_meeting_date'])
+            date: typeof result['document_date'] !== 'undefined'
+              ? Drupal.behaviors.clusterSearchAlgolia.dateHelper(result['document_date'])
               : null,
             featured: result['field_featured'],
             key: result['field_key_document']
           };
         };
         var processEvent = function(result) {
-          var group = typeof result.og_group_ref !== 'undefined' && result.og_group_ref.length > 0
-            ? result.og_group_ref[0]
+          var group = typeof result._highlightResult.og_group_ref !== 'undefined' && result._highlightResult.og_group_ref.length > 0
+            ? result._highlightResult.og_group_ref[0].value
             : null;
 
           var location = '';
@@ -50,9 +50,9 @@
 
           return {
             url: result.url,
-            title: result.title,
+            title: result._highlightResult.title.value,
             group: group,
-            date: dateHelper(result['field_recurring_event_date2:value']),
+            date: Drupal.behaviors.clusterSearchAlgolia.dateHelper(result['field_recurring_event_date2:value']),
             location: location
           };
         };
@@ -66,13 +66,13 @@
             'homepage': null
           };
 
-          var group = typeof result.og_group_ref !== 'undefined' && result.og_group_ref.length > 0
-            ? result.og_group_ref[0]
+          var group = typeof result._highlightResult.og_group_ref !== 'undefined' && result._highlightResult.og_group_ref.length > 0
+            ? result._highlightResult.og_group_ref[0].value
             : null;
 
           return {
             url: result.url,
-            title: result.title,
+            title: result._highlightResult.title.value,
             group: group,
             type: typeof types[result.type] !== 'undefined' ? types[result.type] : null
           };
@@ -90,30 +90,33 @@
 
           return {
             url: result.url,
-            title: result.title,
+            title: result._highlightResult.title.value,
             type: typeof types[result.type] !== 'undefined' ? types[result.type] : null
           };
         };
         var processContact = function(result) {
-          var group = typeof result.og_group_ref !== 'undefined' && result.og_group_ref.length > 0
-            ? result.og_group_ref[0]
+          var group = typeof result._highlightResult.og_group_ref !== 'undefined' && result._highlightResult.og_group_ref.length > 0
+            ? result._highlightResult.og_group_ref[0].value
             : null;
-          var org = typeof result.field_organisation_name !== 'undefined' && result.field_organisation_name.length > 0
-            ? result.field_organisation_name[0]
+          var org = typeof result._highlightResult.field_organisation_name !== 'undefined' && result._highlightResult.field_organisation_name.length > 0
+            ? result._highlightResult.field_organisation_name[0].value
             : null;
-          var role = typeof result.field_role_or_title !== 'undefined' && result.field_role_or_title.length > 0
-            ? result.field_role_or_title[0]
+          var role = typeof result._highlightResult.field_role_or_title !== 'undefined' && result._highlightResult.field_role_or_title.length > 0
+            ? result._highlightResult.field_role_or_title[0].value
             : null;
-          var phone = typeof result.field_phone_number !== 'undefined' && result.field_phone_number.length > 0
-            ? result.field_phone_number[0]
+          var phone = typeof result._highlightResult.field_phone_number !== 'undefined' && result._highlightResult.field_phone_number.length > 0
+            ? result._highlightResult.field_phone_number[0].value
             : null;
-          var email = typeof result.field_email !== 'undefined' && result.field_email.length > 0
+          var email = typeof result._highlightResult.field_email !== 'undefined' && result._highlightResult.field_email.length > 0
+            ? result._highlightResult.field_email[0].value
+            : null;
+          var rawEmail = typeof result.field_email !== 'undefined' && result.field_email.length > 0
             ? result.field_email[0]
             : null;
 
           return {
-            url: email ? 'mailto:' + email : null,
-            title: result.title,
+            url: rawEmail ? 'mailto:' + rawEmail : null,
+            title: result._highlightResult.title.value,
             group: group,
             org: org,
             role: role,
@@ -130,7 +133,10 @@
             results: null,
             searching: false,
             shouldScrollOnResults: true,
-            indexFilter: null
+            indexFilter: null,
+            groupTitle: typeof settings.cluster_nav !== 'undefined' ? settings.cluster_nav.group_title : null,
+            groupNids: typeof settings.cluster_nav !== 'undefined' ? settings.cluster_nav.search_group_nids : null,
+            onlyWithinGroup: true
           },
           computed: {
             hasResults: function() {
@@ -161,6 +167,10 @@
             indexFilter: function(value) {
               if (!value)
                 this.limitResults();
+              this.search();
+              this.focus();
+            },
+            onlyWithinGroup: function() {
               this.search();
               this.focus();
             }
@@ -216,48 +226,31 @@
 
               var query = [];
 
-              // if (category)
-              //   hint_params['filters'] = 'tags:' + category;
+              var searchQueries = {
+                'Documents': !vue.indexFilter ? 20 : (vue.indexFilter === 'documents' ? 50 : 0),
+                'Events': !vue.indexFilter ? 10 : (vue.indexFilter === 'events' ? 50 : 0),
+                'Pages': !vue.indexFilter ? 8 : (vue.indexFilter === 'pages' ? 40 : 0),
+                'Groups': !vue.indexFilter ? 8 : (vue.indexFilter === 'groups' ? 40 : 0),
+                'Contacts': !vue.indexFilter ? 6 : (vue.indexFilter === 'contacts' ? 30 : 0)
+              };
 
-              query.push({
-                indexName: algolia_prefix + 'Documents',
-                query: vue.query,
-                params: {
-                  hitsPerPage: !vue.indexFilter ? 20 : (vue.indexFilter === 'documents' ? 50 : 0)
-                }
-              });
+              for (var index in searchQueries) {
+                var item = {
+                  indexName: settings.cluster_search.algolia_prefix + index,
+                  query: vue.query,
+                  params: {
+                    hitsPerPage: searchQueries[index]
+                  }
+                };
 
-              query.push({
-                indexName: algolia_prefix + 'Events',
-                query: vue.query,
-                params: {
-                  hitsPerPage: !vue.indexFilter ? 10 : (vue.indexFilter === 'events' ? 50 : 0)
+                if (vue.onlyWithinGroup && vue.groupNids) {
+                  item.params.filters = vue.groupNids
+                    .map(function(i) {return 'group_nids:' + i})
+                    .join(' OR ');
                 }
-              });
 
-              query.push({
-                indexName: algolia_prefix + 'Pages',
-                query: vue.query,
-                params: {
-                  hitsPerPage: !vue.indexFilter ? 8 : (vue.indexFilter === 'pages' ? 40 : 0)
-                }
-              });
-
-              query.push({
-                indexName: algolia_prefix + 'Groups',
-                query: vue.query,
-                params: {
-                  hitsPerPage: !vue.indexFilter ? 8 : (vue.indexFilter === 'groups' ? 40 : 0)
-                }
-              });
-
-              query.push({
-                indexName: algolia_prefix + 'Contacts',
-                query: vue.query,
-                params: {
-                  hitsPerPage: !vue.indexFilter ? 6 : (vue.indexFilter === 'contacts' ? 30 : 0)
-                }
-              });
+                query.push(item);
+              }
 
               algolia_client.search(query, function searchDone(err, content) {
                 if (err) {

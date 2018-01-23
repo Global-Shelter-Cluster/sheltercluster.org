@@ -205,7 +205,8 @@ function cluster_events_format_upcoming($nid) {
     $date = strtotime($date[0]['value']);
     $date = format_date($date, 'custom', 'H:i - Y m d');
 
-    $geo = $wrapper->field_coordinates->value();
+    $geo = _cluster_events_get_geocoordinates_from_address_field($wrapper->field_postal_address->value());
+
     $map_link = l(t('map'), 'https://www.google.ca/maps/place/' . $geo['lat'] . ',' . $geo['lon'] . '/@' . $geo['lat'] . ',' . $geo['lon'] . ',15z', array(
       'attributes' => array(
         'target' => '_blank',
@@ -273,7 +274,8 @@ function cluster_events_format_list($nids) {
       // Render the date as per the teaser field display setting.
       $date = field_view_field('node', $node, 'field_recurring_event_date2', 'teaser');
 
-      $geo = $wrapper->field_coordinates->value();
+      $geo = _cluster_events_get_geocoordinates_from_address_field($wrapper->field_postal_address->value());
+
       $map_url = 'https://www.google.ca/maps/place/' . $geo['lat'] . ',' . $geo['lon'] . '/@' . $geo['lat'] . ',' . $geo['lon'] . ',15z';
       $map_link = l(t('map'), $map_url, array(
         'attributes' => array(
@@ -316,7 +318,7 @@ function cluster_events_preprocess_node(&$variables) {
     $variables['map_link'] = FALSE;
     try {
       $wrapper = entity_metadata_wrapper('node', $variables['node']);
-      $geo = $wrapper->field_coordinates->value();
+      $geo = _cluster_events_get_geocoordinates_from_address_field($wrapper->field_postal_address->value());
 
       // Get contact(s).
       $contacts = $wrapper->field_event_contact->value();
@@ -469,4 +471,12 @@ function cluster_events_entity_info_alter(&$entity_info) {
     'label' => t('iCal'),
     'custom settings' => TRUE,
   );
+}
+
+/**
+ * Parse longitude and lattitude out of addressfield.
+ */
+function _cluster_events_get_geocoordinates_from_address_field($addressfield_values) {
+  $data = unserialize($addressfield_values['data']);
+  return ['lon' => $data['longitude'], 'lat' => $data['latitude']];
 }

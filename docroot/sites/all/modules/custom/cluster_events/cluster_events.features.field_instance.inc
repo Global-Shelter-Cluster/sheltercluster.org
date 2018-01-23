@@ -10,7 +10,7 @@
 function cluster_events_field_default_field_instances() {
   $field_instances = array();
 
-  // Exported field_instance: 'node-event-body'
+  // Exported field_instance: 'node-event-body'.
   $field_instances['node-event-body'] = array(
     'bundle' => 'event',
     'default_value' => NULL,
@@ -58,11 +58,11 @@ function cluster_events_field_default_field_instances() {
         'summary_rows' => 5,
       ),
       'type' => 'text_textarea_with_summary',
-      'weight' => 4,
+      'weight' => 1,
     ),
   );
 
-  // Exported field_instance: 'node-event-date_repeat_entity_clone_state'
+  // Exported field_instance: 'node-event-date_repeat_entity_clone_state'.
   $field_instances['node-event-date_repeat_entity_clone_state'] = array(
     'bundle' => 'event',
     'default_value' => array(
@@ -112,11 +112,11 @@ function cluster_events_field_default_field_instances() {
         'display_label' => 0,
       ),
       'type' => 'options_onoff',
-      'weight' => 12,
+      'weight' => 6,
     ),
   );
 
-  // Exported field_instance: 'node-event-date_repeat_entity_master_uuid'
+  // Exported field_instance: 'node-event-date_repeat_entity_master_uuid'.
   $field_instances['node-event-date_repeat_entity_master_uuid'] = array(
     'bundle' => 'event',
     'default_value' => NULL,
@@ -157,11 +157,11 @@ function cluster_events_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 11,
+      'weight' => 4,
     ),
   );
 
-  // Exported field_instance: 'node-event-field_coordinates'
+  // Exported field_instance: 'node-event-field_coordinates'.
   $field_instances['node-event-field_coordinates'] = array(
     'bundle' => 'event',
     'deleted' => 0,
@@ -215,11 +215,11 @@ function cluster_events_field_default_field_instances() {
         ),
       ),
       'type' => 'geocoder',
-      'weight' => 10,
+      'weight' => 3,
     ),
   );
 
-  // Exported field_instance: 'node-event-field_event_contact'
+  // Exported field_instance: 'node-event-field_event_contact'.
   $field_instances['node-event-field_event_contact'] = array(
     'bundle' => 'event',
     'default_value' => NULL,
@@ -230,6 +230,7 @@ function cluster_events_field_default_field_instances() {
         'label' => 'above',
         'module' => 'entityreference',
         'settings' => array(
+          'bypass_access' => FALSE,
           'link' => FALSE,
         ),
         'type' => 'entityreference_label',
@@ -265,11 +266,11 @@ function cluster_events_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'entityreference_autocomplete',
-      'weight' => 3,
+      'weight' => 2,
     ),
   );
 
-  // Exported field_instance: 'node-event-field_event_files'
+  // Exported field_instance: 'node-event-field_event_files'.
   $field_instances['node-event-field_event_files'] = array(
     'bundle' => 'event',
     'deleted' => 0,
@@ -314,16 +315,16 @@ function cluster_events_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'file_generic',
-      'weight' => 5,
+      'weight' => 2,
     ),
   );
 
-  // Exported field_instance: 'node-event-field_postal_address'
+  // Exported field_instance: 'node-event-field_postal_address'.
   $field_instances['node-event-field_postal_address'] = array(
     'bundle' => 'event',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Type your address in the field below. If the location is not automatically recognized, please enter the address manually and locate it on the map.',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -393,7 +394,7 @@ function cluster_events_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-event-field_recurring_event_date2'
+  // Exported field_instance: 'node-event-field_recurring_event_date2'.
   $field_instances['node-event-field_recurring_event_date2'] = array(
     'bundle' => 'event',
     'deleted' => 0,
@@ -493,7 +494,7 @@ function cluster_events_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-event-og_group_ref'
+  // Exported field_instance: 'node-event-og_group_ref'.
   $field_instances['node-event-og_group_ref'] = array(
     'bundle' => 'event',
     'default_value' => NULL,
@@ -559,7 +560,7 @@ function cluster_events_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-event-title_field'
+  // Exported field_instance: 'node-event-title_field'.
   $field_instances['node-event-title_field'] = array(
     'bundle' => 'event',
     'default_value' => NULL,
@@ -621,6 +622,7 @@ function cluster_events_field_default_field_instances() {
   t('Location');
   t('Master UUID (do not change)');
   t('Title');
+  t('Type your address. If the location is not automatically recognized, please enter the address manually and locate it on the map.');
 
   return $field_instances;
 }
