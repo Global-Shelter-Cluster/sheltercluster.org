@@ -167,7 +167,6 @@ function addressfield_generate($address, array $handlers, array $context = array
   elseif ($context['mode'] == 'render') {
     $format['#pre_render'][] = 'addressfield_render_address';
   }
-  dpm($format);
   return $format;
 }
 

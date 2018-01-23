@@ -154,8 +154,7 @@ function cluster_events_strongarm() {
   $strongarm->api_version = 1;
   $strongarm->name = 'node_options_event';
   $strongarm->value = array(
-    0 => 'moderation',
-    1 => 'revision',
+    0 => 'revision',
   );
   $export['node_options_event'] = $strongarm;
 
@@ -163,7 +162,7 @@ function cluster_events_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'node_preview_event';
-  $strongarm->value = '1';
+  $strongarm->value = '2';
   $export['node_preview_event'] = $strongarm;
 
   $strongarm = new stdClass();

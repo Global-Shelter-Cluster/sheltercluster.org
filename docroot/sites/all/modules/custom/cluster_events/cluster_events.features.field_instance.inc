@@ -161,64 +161,6 @@ function cluster_events_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-event-field_coordinates'.
-  $field_instances['node-event-field_coordinates'] = array(
-    'bundle' => 'event',
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'hidden',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 8,
-      ),
-      'ical' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 1,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 4,
-      ),
-    ),
-    'entity_type' => 'node',
-    'field_name' => 'field_coordinates',
-    'label' => 'Coordinates',
-    'required' => 0,
-    'settings' => array(
-      'entity_translation_sync' => FALSE,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'geocoder',
-      'settings' => array(
-        'delta_handling' => 'default',
-        'geocoder_field' => 'field_postal_address',
-        'geocoder_handler' => 'google',
-        'handler_settings' => array(
-          'google' => array(
-            'all_results' => 0,
-            'geometry_type' => 'point',
-            'reject_results' => array(
-              'APPROXIMATE' => 0,
-              'GEOMETRIC_CENTER' => 0,
-              'RANGE_INTERPOLATED' => 0,
-              'ROOFTOP' => 0,
-            ),
-          ),
-        ),
-      ),
-      'type' => 'geocoder',
-      'weight' => 3,
-    ),
-  );
-
   // Exported field_instance: 'node-event-field_event_contact'.
   $field_instances['node-event-field_event_contact'] = array(
     'bundle' => 'event',
@@ -614,7 +556,6 @@ function cluster_events_field_default_field_instances() {
   t('Clone state (do not change)');
   t('Contact');
   t('Contacts to reach for this event.');
-  t('Coordinates');
   t('Description');
   t('Event Date');
   t('Files');
@@ -622,7 +563,7 @@ function cluster_events_field_default_field_instances() {
   t('Location');
   t('Master UUID (do not change)');
   t('Title');
-  t('Type your address. If the location is not automatically recognized, please enter the address manually and locate it on the map.');
+  t('Type your address in the field below. If the location is not automatically recognized, please enter the address manually and locate it on the map.');
 
   return $field_instances;
 }
