@@ -304,7 +304,7 @@ function cluster_libraries_field_default_field_instances() {
     'entity_type' => 'node',
     'field_name' => 'body',
     'label' => 'Description',
-    'required' => 1,
+    'required' => 0,
     'settings' => array(
       'display_summary' => 1,
       'entity_translation_sync' => FALSE,
@@ -364,7 +364,7 @@ function cluster_libraries_field_default_field_instances() {
         'apply_chosen' => '',
       ),
       'type' => 'options_buttons',
-      'weight' => 35,
+      'weight' => 10,
     ),
   );
 
@@ -409,7 +409,7 @@ function cluster_libraries_field_default_field_instances() {
         'apply_chosen' => '',
       ),
       'type' => 'options_buttons',
-      'weight' => 33,
+      'weight' => 7,
     ),
   );
 
@@ -454,7 +454,7 @@ function cluster_libraries_field_default_field_instances() {
         'apply_chosen' => '',
       ),
       'type' => 'options_buttons',
-      'weight' => 37,
+      'weight' => 12,
     ),
   );
 
@@ -497,7 +497,7 @@ function cluster_libraries_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 5,
+      'weight' => 6,
     ),
   );
 
@@ -542,7 +542,7 @@ function cluster_libraries_field_default_field_instances() {
         'apply_chosen' => '',
       ),
       'type' => 'options_buttons',
-      'weight' => 34,
+      'weight' => 8,
     ),
   );
 
@@ -587,7 +587,7 @@ function cluster_libraries_field_default_field_instances() {
         'apply_chosen' => '',
       ),
       'type' => 'options_buttons',
-      'weight' => 36,
+      'weight' => 11,
     ),
   );
 
@@ -632,7 +632,7 @@ function cluster_libraries_field_default_field_instances() {
         'apply_chosen' => '',
       ),
       'type' => 'options_buttons',
-      'weight' => 39,
+      'weight' => 14,
     ),
   );
 
@@ -677,7 +677,7 @@ function cluster_libraries_field_default_field_instances() {
         'apply_chosen' => '',
       ),
       'type' => 'options_buttons',
-      'weight' => 40,
+      'weight' => 15,
     ),
   );
 
@@ -771,7 +771,57 @@ function cluster_libraries_field_default_field_instances() {
         'apply_chosen' => '',
       ),
       'type' => 'options_buttons',
-      'weight' => 43,
+      'weight' => 18,
+    ),
+  );
+
+  // Exported field_instance: 'node-library-field_language'.
+  $field_instances['node-library-field_language'] = array(
+    'bundle' => 'library',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'languagefield',
+        'settings' => array(
+          'format' => array(
+            'name' => 'name',
+          ),
+        ),
+        'type' => 'language_default',
+        'weight' => 20,
+      ),
+      'ical' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_language',
+    'label' => 'Document Language',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(
+        'apply_chosen' => '',
+      ),
+      'type' => 'options_select',
+      'weight' => 5,
     ),
   );
 
@@ -814,7 +864,7 @@ function cluster_libraries_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 45,
+      'weight' => 20,
     ),
   );
 
@@ -859,7 +909,7 @@ function cluster_libraries_field_default_field_instances() {
         'apply_chosen' => '',
       ),
       'type' => 'options_buttons',
-      'weight' => 42,
+      'weight' => 17,
     ),
   );
 
@@ -904,7 +954,7 @@ function cluster_libraries_field_default_field_instances() {
         'apply_chosen' => '',
       ),
       'type' => 'options_buttons',
-      'weight' => 38,
+      'weight' => 13,
     ),
   );
 
@@ -949,7 +999,7 @@ function cluster_libraries_field_default_field_instances() {
         'apply_chosen' => '',
       ),
       'type' => 'options_buttons',
-      'weight' => 41,
+      'weight' => 16,
     ),
   );
 
@@ -1000,7 +1050,7 @@ function cluster_libraries_field_default_field_instances() {
       'module' => 'number',
       'settings' => array(),
       'type' => 'number',
-      'weight' => 9,
+      'weight' => 23,
     ),
   );
 
@@ -1045,7 +1095,7 @@ function cluster_libraries_field_default_field_instances() {
         'apply_chosen' => '',
       ),
       'type' => 'options_buttons',
-      'weight' => 36,
+      'weight' => 9,
     ),
   );
 
@@ -1090,7 +1140,7 @@ function cluster_libraries_field_default_field_instances() {
         'apply_chosen' => '',
       ),
       'type' => 'options_buttons',
-      'weight' => 44,
+      'weight' => 19,
     ),
   );
 
@@ -1218,6 +1268,7 @@ function cluster_libraries_field_default_field_instances() {
   t('Coordination Management');
   t('Cross-Cutting Issues');
   t('Description');
+  t('Document Language');
   t('Document Type');
   t('Global Library');
   t('Groups audience');

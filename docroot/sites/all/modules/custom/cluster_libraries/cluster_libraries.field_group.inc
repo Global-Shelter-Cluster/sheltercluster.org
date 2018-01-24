@@ -21,20 +21,8 @@ function cluster_libraries_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Advanced tags',
-    'weight' => '8',
-    'children' => array(
-      0 => 'field_assess_monitor_eval',
-      1 => 'field_cross_cutting_issues',
-      2 => 'field_inter_cluster',
-      3 => 'field_intervention_materials',
-      4 => 'field_intervention_programming',
-      5 => 'field_issues',
-      6 => 'field_non_food_items',
-      7 => 'field_response_phase',
-      8 => 'field_settlement_type',
-      9 => 'field_toolkit',
-      10 => 'field_meeting_management',
-    ),
+    'weight' => '22',
+    'children' => array(),
     'format_type' => 'fieldset',
     'format_settings' => array(
       'formatter' => 'collapsible',
@@ -58,12 +46,8 @@ function cluster_libraries_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Basic tags',
-    'weight' => '7',
-    'children' => array(
-      0 => 'field_coordination_management',
-      1 => 'field_information_management',
-      2 => 'field_technical_support_design',
-    ),
+    'weight' => '21',
+    'children' => array(),
     'format_type' => 'fieldset',
     'format_settings' => array(
       'formatter' => 'collapsible',
