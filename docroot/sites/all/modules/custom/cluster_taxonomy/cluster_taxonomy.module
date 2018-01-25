@@ -7,6 +7,8 @@
 include_once 'cluster_taxonomy.features.inc';
 
 /**
+ * Uses "states" to show/hide vocabularies in order to simulate a "tree" in the tags.
+ *
  * Implements hook_form_alter().
  */
 function cluster_taxonomy_form_alter(&$form, &$form_state, $form_id) {

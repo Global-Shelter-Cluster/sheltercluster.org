@@ -58,7 +58,7 @@ function cluster_docs_field_default_field_instances() {
         'summary_rows' => 5,
       ),
       'type' => 'text_textarea_with_summary',
-      'weight' => 1,
+      'weight' => 52,
     ),
   );
 
@@ -104,7 +104,7 @@ function cluster_docs_field_default_field_instances() {
         'apply_chosen' => '',
       ),
       'type' => 'options_buttons',
-      'weight' => 18,
+      'weight' => 58,
     ),
   );
 
@@ -150,7 +150,7 @@ function cluster_docs_field_default_field_instances() {
         'apply_chosen' => '',
       ),
       'type' => 'options_buttons',
-      'weight' => 26,
+      'weight' => 55,
     ),
   );
 
@@ -196,7 +196,7 @@ function cluster_docs_field_default_field_instances() {
         'apply_chosen' => '',
       ),
       'type' => 'options_buttons',
-      'weight' => 20,
+      'weight' => 60,
     ),
   );
 
@@ -247,7 +247,7 @@ function cluster_docs_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 43,
+      'weight' => 51,
     ),
   );
 
@@ -293,7 +293,7 @@ function cluster_docs_field_default_field_instances() {
         'apply_chosen' => '',
       ),
       'type' => 'options_buttons',
-      'weight' => 25,
+      'weight' => 54,
     ),
   );
 
@@ -343,7 +343,7 @@ function cluster_docs_field_default_field_instances() {
         'display_label' => 1,
       ),
       'type' => 'options_onoff',
-      'weight' => 43,
+      'weight' => 10,
     ),
   );
 
@@ -406,7 +406,7 @@ function cluster_docs_field_default_field_instances() {
         'year_range' => '-3:+3',
       ),
       'type' => 'date_text',
-      'weight' => 44,
+      'weight' => 11,
     ),
   );
 
@@ -462,7 +462,7 @@ function cluster_docs_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'pdf_to_image',
-      'weight' => 44,
+      'weight' => 48,
     ),
   );
 
@@ -519,7 +519,7 @@ function cluster_docs_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'image_image',
-      'weight' => 2,
+      'weight' => 70,
     ),
   );
 
@@ -565,7 +565,7 @@ function cluster_docs_field_default_field_instances() {
         'apply_chosen' => '',
       ),
       'type' => 'options_buttons',
-      'weight' => 27,
+      'weight' => 56,
     ),
   );
 
@@ -611,7 +611,7 @@ function cluster_docs_field_default_field_instances() {
         'apply_chosen' => '',
       ),
       'type' => 'options_buttons',
-      'weight' => 19,
+      'weight' => 59,
     ),
   );
 
@@ -657,7 +657,7 @@ function cluster_docs_field_default_field_instances() {
         'apply_chosen' => '',
       ),
       'type' => 'options_buttons',
-      'weight' => 22,
+      'weight' => 62,
     ),
   );
 
@@ -703,7 +703,7 @@ function cluster_docs_field_default_field_instances() {
         'apply_chosen' => '',
       ),
       'type' => 'options_buttons',
-      'weight' => 23,
+      'weight' => 63,
     ),
   );
 
@@ -749,7 +749,7 @@ function cluster_docs_field_default_field_instances() {
         'apply_chosen' => '',
       ),
       'type' => 'options_buttons',
-      'weight' => 27,
+      'weight' => 66,
     ),
   );
 
@@ -799,7 +799,7 @@ function cluster_docs_field_default_field_instances() {
         'display_label' => 1,
       ),
       'type' => 'options_onoff',
-      'weight' => 42,
+      'weight' => 9,
     ),
   );
 
@@ -849,7 +849,7 @@ function cluster_docs_field_default_field_instances() {
         'apply_chosen' => '',
       ),
       'type' => 'options_select',
-      'weight' => 47,
+      'weight' => 49,
     ),
   );
 
@@ -913,7 +913,7 @@ function cluster_docs_field_default_field_instances() {
       'module' => 'link',
       'settings' => array(),
       'type' => 'link_field',
-      'weight' => 45,
+      'weight' => 49,
     ),
   );
 
@@ -957,7 +957,7 @@ function cluster_docs_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 29,
+      'weight' => 68,
     ),
   );
 
@@ -1003,7 +1003,7 @@ function cluster_docs_field_default_field_instances() {
         'apply_chosen' => '',
       ),
       'type' => 'options_buttons',
-      'weight' => 26,
+      'weight' => 65,
     ),
   );
 
@@ -1050,7 +1050,7 @@ function cluster_docs_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 9,
+      'weight' => 69,
     ),
   );
 
@@ -1107,7 +1107,7 @@ function cluster_docs_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'image_image',
-      'weight' => 3,
+      'weight' => 53,
     ),
   );
 
@@ -1169,7 +1169,7 @@ function cluster_docs_field_default_field_instances() {
         'year_range' => '-3:+3',
       ),
       'type' => 'date_text',
-      'weight' => 46,
+      'weight' => 50,
     ),
   );
 
@@ -1215,7 +1215,7 @@ function cluster_docs_field_default_field_instances() {
         'apply_chosen' => '',
       ),
       'type' => 'options_buttons',
-      'weight' => 21,
+      'weight' => 61,
     ),
   );
 
@@ -1261,7 +1261,7 @@ function cluster_docs_field_default_field_instances() {
         'apply_chosen' => '',
       ),
       'type' => 'options_buttons',
-      'weight' => 25,
+      'weight' => 64,
     ),
   );
 
@@ -1312,7 +1312,7 @@ function cluster_docs_field_default_field_instances() {
       'module' => 'number',
       'settings' => array(),
       'type' => 'number',
-      'weight' => 45,
+      'weight' => 12,
     ),
   );
 
@@ -1358,7 +1358,7 @@ function cluster_docs_field_default_field_instances() {
         'apply_chosen' => '',
       ),
       'type' => 'options_buttons',
-      'weight' => 28,
+      'weight' => 57,
     ),
   );
 
@@ -1404,7 +1404,7 @@ function cluster_docs_field_default_field_instances() {
         'apply_chosen' => '',
       ),
       'type' => 'options_buttons',
-      'weight' => 28,
+      'weight' => 67,
     ),
   );
 
@@ -1472,7 +1472,7 @@ function cluster_docs_field_default_field_instances() {
       'module' => 'og',
       'settings' => array(),
       'type' => 'og_complex',
-      'weight' => 5,
+      'weight' => 13,
     ),
   );
 
@@ -1521,7 +1521,7 @@ function cluster_docs_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 0,
+      'weight' => 48,
     ),
   );
 

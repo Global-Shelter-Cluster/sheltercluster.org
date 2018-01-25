@@ -220,7 +220,7 @@ function cluster_libraries_strongarm() {
           'weight' => '3',
         ),
         'redirect' => array(
-          'weight' => '10',
+          'weight' => '24',
         ),
       ),
       'display' => array(),

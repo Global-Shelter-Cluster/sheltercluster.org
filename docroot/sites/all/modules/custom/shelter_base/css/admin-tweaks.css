@@ -1,16 +1,16 @@
 .page-node-edit #edit-field-document-type,
-.page-node-add-document #edit-field-document-type {
+.page-node-add #edit-field-document-type {
   background: #eee;
   padding: 0.5em 1.25em 0.1em;
   border: 1px solid #333;
 }
 .page-node-edit #edit-field-document-type .form-type-checkbox,
-.page-node-add-document #edit-field-document-type .form-type-checkbox {
+.page-node-add #edit-field-document-type .form-type-checkbox {
   display: inline-block;
   margin-right: 0.25em;
 }
 .page-node-edit .form-type-checkboxes .form-type-checkbox,
-.page-node-add-document .form-type-checkboxes .form-type-checkbox {
+.page-node-add .form-type-checkboxes .form-type-checkbox {
   display: inline-block;
   margin-right: 0.25em;
   background: #ccc;
@@ -20,22 +20,22 @@
   border: 1px solid #aaa;
 }
 .page-node-edit .form-type-checkboxes .form-type-checkbox.selected,
-.page-node-add-document .form-type-checkboxes .form-type-checkbox.selected {
+.page-node-add .form-type-checkboxes .form-type-checkbox.selected {
   background: #7f1416;
   color: #fff;
   border: 1px solid #9c0104;
 }
 .page-node-edit .form-type-checkboxes .form-type-checkbox input,
-.page-node-add-document .form-type-checkboxes .form-type-checkbox input {
+.page-node-add .form-type-checkboxes .form-type-checkbox input {
   position: relative;
   top: -2px;
   cursor: pointer;
 }
 .page-node-edit .form-type-checkboxes .form-type-checkbox label,
-.page-node-add-document .form-type-checkboxes .form-type-checkbox label {
+.page-node-add .form-type-checkboxes .form-type-checkbox label {
   cursor: pointer;
 }
 .page-node-edit .form-text,
-.page-node-add-document .form-text {
+.page-node-add .form-text {
   float: none;
 }

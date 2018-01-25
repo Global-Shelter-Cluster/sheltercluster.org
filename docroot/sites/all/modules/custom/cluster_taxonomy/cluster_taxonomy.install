@@ -8,7 +8,7 @@ function cluster_taxonomy_update_7001() {
  
   $terms = [
     [
-      'name' => 'Daft',
+      'name' => 'Draft',
       'description' => '',
       'vid' => $vocab->vid,
     ],

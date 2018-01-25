@@ -1,6 +1,7 @@
 (function ($) {
   Drupal.behaviors.dragDropUplaod = {
     attach: function (context, settings) {
+      if (!settings.cluster_nav) return;
       if (!settings.cluster_nav.group_nid) return;
       $("body").on("dragover",  (event) => {
         $("body").addClass('document-upload-ondrag');
