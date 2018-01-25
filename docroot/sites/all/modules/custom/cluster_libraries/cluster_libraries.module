@@ -35,13 +35,24 @@ function cluster_libraries_node_view_alter(&$build) {
         if (!isset($node->$field))
           continue;
 
-        $value = $wrapper->$field->value();
-        if (!$value)
-          continue;
+        $info = field_info_field($field);
+        switch ($info['type']) {
+          case 'language_field':
+            if (!$node->field_language)
+              continue;
 
-        $filters[$field] = [];
-        foreach ($value as $term) {
-          $filters[$field][$term->name] = TRUE;
+            $filters[$field] = [$node->field_language[LANGUAGE_NONE][0]['name'] => TRUE];
+            break;
+          case 'taxonomy_term_reference':
+            $value = $wrapper->$field->value();
+            if (!$value)
+              continue;
+
+            $filters[$field] = [];
+            foreach ((array) $value as $term) {
+              $filters[$field][$term->name] = TRUE;
+            }
+            break;
         }
       }
       break;
