@@ -275,8 +275,9 @@
           },
           methods: {
             prepareFacetFilters: function() {
+              var ret = [];
+
               var process = function(filters) {
-                var ret = [];
                 for (var facet in filters) {
                   var currentFacetFilter = [];
                   if (filters[facet].length === 0)
@@ -291,14 +292,10 @@
                   else if (currentFacetFilter.length > 1)
                     ret[ret.length] = currentFacetFilter;
                 }
-                return ret;
               };
 
-              var ret = process(this.facetFilters);
-              var initial = process(this.initialFilters);
-              if (initial) {
-                ret[ret.length] = initial;
-              }
+              process(this.initialFilters);
+              process(this.facetFilters);
 
               return ret.length > 0 ? ret : null;
             },
