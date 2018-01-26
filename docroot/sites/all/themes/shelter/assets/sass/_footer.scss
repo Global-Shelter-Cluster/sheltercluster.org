@@ -158,8 +158,9 @@ footer {
       }
 
       .nav-items {
-        li {
+        @include rem(margin, 0 0 0 10px);
 
+        li {
           &.expanded {
             list-style-image: none;
             list-style-type: none;
@@ -168,16 +169,13 @@ footer {
             padding-right: 0;
           }
           &:before {
-            position: relative;
-            left: 0;
-            top: 0;
-            content: '';
-            background: none;
-            @include rem(font-size, 0.75rem);
-            @include rem(margin, 0 0.3125rem 0 0);
+            content: none;
           }
           &:after {
             content: ',';
+          }
+          &:last-child:after {
+            content: none;
           }
         }
       }
