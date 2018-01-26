@@ -73,6 +73,38 @@ function _cluster_nav_paged_teaser_list($bundle) {
 }
 
 /**
+ * @return \GroupDisplayProvider
+ */
+function cluster_nav_get_display_provider() {
+  /** @var GroupDisplayProvider $display_provider */
+  $display_provider = &drupal_static(__FUNCTION__);
+
+  if (!isset($display_provider)) {
+    $display_provider = FALSE;
+    if (arg(0) == 'node' && is_numeric(arg(1))) {
+      $node = node_load(arg(1));
+
+      // If viewing a group node page, use it.
+      if (og_is_group('node', $node)) {
+        $display_provider = GroupDisplayProvider::getDisplayProvider($node);
+      }
+
+      // If viewing a group content node page, get the associated group node's navigation elements.
+      // @TODO Properly handle the fact that the group reference is a multivalue field.
+      elseif (isset($node->og_group_ref) && !path_is_admin(current_path())) {
+        $wrapper = entity_metadata_wrapper('node', $node);
+        $group = $wrapper->og_group_ref->value();
+        if (count($group) > 0) {
+          $display_provider = GroupDisplayProvider::getDisplayProvider($group[0]);
+        }
+      }
+    }
+  }
+
+  return $display_provider;
+}
+
+/**
  * Implements hook_preprocess_page().
  *
  * Add contextual navigation.
@@ -91,27 +123,22 @@ function cluster_nav_preprocess_page(&$variables) {
   $variables['main_nav'] = menu_tree_output(menu_tree_all_data('main-menu'));
 
   // Provide dashboard and contextual navigation at page level.
-  $display_provider = FALSE;
   $page_level_nav = FALSE;
   $variables['dashboard_menu'] = FALSE;
   $variables['contextual_navigation'] = FALSE;
   $variables['editor_menu'] = FALSE;
   if (arg(0) == 'node' && is_numeric(arg(1))) {
     $node = node_load(arg(1));
+    if (!$node)
+      return;
   }
   else {
     return;
   }
 
-  // If viewing a group node page, use it.
-  if (og_is_group('node', $node)) {
-    /** @var GroupDisplayProvider $display_provider */
-    $display_provider = GroupDisplayProvider::getDisplayProvider($node);
-  }
-
   // If viewing a group content node page, get the associated group node's navigation elements.
   // @TODO Properly handle the fact that the group reference is a multivalue field.
-  elseif (isset($node->og_group_ref)) {
+  if (!og_is_group('node', $node) && isset($node->og_group_ref)) {
     if (path_is_admin(current_path())) {
       return;
     }
@@ -122,11 +149,7 @@ function cluster_nav_preprocess_page(&$variables) {
       // Set a flag to indicate we want to include the group nav items at the page level.
       $page_level_nav = TRUE;
 
-      /** @var GroupFullDisplayProvider $display_provider */
-      $display_provider = GroupDisplayProvider::getDisplayProvider($group[0]);
-
-      $response = $wrapper->og_group_ref->value();
-      $response = reset($response);
+      $response = reset($group);
 
       // Override the page title and link it back to the response.
       $variables['title'] = $variables['page_title'] = l(
@@ -152,6 +175,7 @@ function cluster_nav_preprocess_page(&$variables) {
   }
 
   // Add the page level elements.
+  $display_provider = cluster_nav_get_display_provider();
   if ($display_provider) {
     // Add the dashboard menu to the page template for group pages other than the dashboard.
     if (arg(2) || $page_level_nav) {
@@ -160,8 +184,8 @@ function cluster_nav_preprocess_page(&$variables) {
     }
     $variables['contextual_navigation'] = $display_provider->getContextualNavigation();
     drupal_add_js(['cluster_nav' => [
-      'group_nid' => intval($node->nid),
-      'group_title' => $node->title,
+      'group_nid' => intval($display_provider->getGroup()->nid),
+      'group_title' => $display_provider->getGroup()->title,
       'search_group_nids' => $display_provider->getSearchGroupNids(),
     ]], ['type' => 'setting']);
   }

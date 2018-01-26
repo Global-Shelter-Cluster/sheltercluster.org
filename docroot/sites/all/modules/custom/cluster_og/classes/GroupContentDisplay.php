@@ -45,6 +45,10 @@ class GroupDisplayProvider {
     return FALSE;
   }
 
+  public function getGroup() {
+    return $this->node;
+  }
+
   /**
    * Gets a list of nids to be used in searches for this group (this group's nid
    * and all of its descendants).

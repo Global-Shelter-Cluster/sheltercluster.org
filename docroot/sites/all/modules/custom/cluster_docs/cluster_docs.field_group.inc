@@ -18,30 +18,23 @@ function cluster_docs_field_group_info() {
   $field_group->entity_type = 'node';
   $field_group->bundle = 'document';
   $field_group->mode = 'form';
-  $field_group->parent_name = 'group_tags';
+  $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Advanced tags',
-    'weight' => '17',
-    'children' => array(
-      0 => 'field_assess_monitor_eval',
-      1 => 'field_cross_cutting_issues',
-      2 => 'field_inter_cluster',
-      3 => 'field_intervention_materials',
-      4 => 'field_intervention_programming',
-      5 => 'field_issues',
-      6 => 'field_non_food_items',
-      7 => 'field_response_phase',
-      8 => 'field_settlement_type',
-      9 => 'field_toolkit',
-      10 => 'field_meeting_management',
-    ),
-    'format_type' => 'tab',
+    'weight' => '27',
+    'children' => array(),
+    'format_type' => 'div',
     'format_settings' => array(
-      'formatter' => 'closed',
+      'formatter' => 'open',
       'instance_settings' => array(
         'description' => '',
+        'show_label' => 1,
+        'label_element' => 'h3',
+        'effect' => 'none',
+        'speed' => 'fast',
         'classes' => '',
         'required_fields' => 1,
+        'id' => '',
       ),
     ),
   );
@@ -55,18 +48,23 @@ function cluster_docs_field_group_info() {
   $field_group->entity_type = 'node';
   $field_group->bundle = 'document';
   $field_group->mode = 'form';
-  $field_group->parent_name = 'group_document_type';
+  $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Basic tags',
-    'weight' => '17',
+    'weight' => '6',
     'children' => array(),
-    'format_type' => 'tab',
+    'format_type' => 'div',
     'format_settings' => array(
-      'formatter' => 'closed',
+      'formatter' => 'open',
       'instance_settings' => array(
         'description' => '',
+        'show_label' => 1,
+        'label_element' => 'h3',
+        'effect' => 'none',
+        'speed' => 'fast',
         'classes' => '',
         'required_fields' => 1,
+        'id' => '',
       ),
     ),
   );
@@ -83,12 +81,10 @@ function cluster_docs_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Document details',
-    'weight' => '5',
+    'weight' => '1',
     'children' => array(
-      0 => 'group_document_page_content',
-      1 => 'group_document_og',
-      2 => 'group_document_settings',
-      3 => 'group_document_source',
+      0 => 'group_document_settings',
+      1 => 'group_document_source',
     ),
     'format_type' => 'tabs',
     'format_settings' => array(
@@ -102,7 +98,7 @@ function cluster_docs_field_group_info() {
   $field_groups['group_document_metadata|node|document|form'] = $field_group;
 
   $field_group = new stdClass();
-  $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
+  $field_group->disabled = TRUE; /* Edit this to true to make a default field_group disabled initially */
   $field_group->api_version = 1;
   $field_group->identifier = 'group_document_og|node|document|form';
   $field_group->group_name = 'group_document_og';
@@ -112,7 +108,7 @@ function cluster_docs_field_group_info() {
   $field_group->parent_name = 'group_document_metadata';
   $field_group->data = array(
     'label' => 'Group settings',
-    'weight' => '7',
+    'weight' => '8',
     'children' => array(
       0 => 'og_group_ref',
     ),
@@ -129,7 +125,7 @@ function cluster_docs_field_group_info() {
   $field_groups['group_document_og|node|document|form'] = $field_group;
 
   $field_group = new stdClass();
-  $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
+  $field_group->disabled = TRUE; /* Edit this to true to make a default field_group disabled initially */
   $field_group->api_version = 1;
   $field_group->identifier = 'group_document_page_content|node|document|form';
   $field_group->group_name = 'group_document_page_content';
@@ -139,7 +135,7 @@ function cluster_docs_field_group_info() {
   $field_group->parent_name = 'group_document_metadata';
   $field_group->data = array(
     'label' => 'Document page content',
-    'weight' => '4',
+    'weight' => '6',
     'children' => array(
       0 => 'field_preview',
       1 => 'body',
@@ -169,21 +165,26 @@ function cluster_docs_field_group_info() {
   $field_group->mode = 'form';
   $field_group->parent_name = 'group_document_metadata';
   $field_group->data = array(
-    'label' => 'Document settings',
-    'weight' => '6',
+    'label' => 'Advanced',
+    'weight' => '8',
     'children' => array(
       0 => 'field_key_document',
-      1 => 'field_featured',
-      2 => 'field_sorting_weight',
+      1 => 'og_group_ref',
+      2 => 'field_featured',
+      3 => 'field_sorting_weight',
+      4 => 'field_featured_date',
+      5 => 'field_document_status',
+      6 => 'redirect',
     ),
     'format_type' => 'tab',
     'format_settings' => array(
-      'formatter' => 'closed',
+      'label' => 'Advanced',
       'instance_settings' => array(
-        'description' => '',
-        'classes' => 'group-document-settings field-group-tab',
         'required_fields' => 1,
+        'classes' => 'group-document-settings field-group-tab',
+        'description' => '',
       ),
+      'formatter' => 'closed',
     ),
   );
   $field_groups['group_document_settings|node|document|form'] = $field_group;
@@ -198,29 +199,49 @@ function cluster_docs_field_group_info() {
   $field_group->mode = 'form';
   $field_group->parent_name = 'group_document_metadata';
   $field_group->data = array(
-    'label' => 'Document source',
+    'label' => 'Document',
     'weight' => '5',
     'children' => array(
-      0 => 'field_file',
-      1 => 'field_link',
-      2 => 'field_document_source',
-      3 => 'field_report_meeting_date',
-      4 => 'field_language',
+      0 => 'field_assess_monitor_eval',
+      1 => 'field_coordination_management',
+      2 => 'field_cross_cutting_issues',
+      3 => 'field_document_source',
+      4 => 'field_information_management',
+      5 => 'field_inter_cluster',
+      6 => 'field_intervention_materials',
+      7 => 'field_intervention_programming',
+      8 => 'field_issues',
+      9 => 'field_non_food_items',
+      10 => 'field_preview',
+      11 => 'field_report_meeting_date',
+      12 => 'field_response_phase',
+      13 => 'field_settlement_type',
+      14 => 'field_technical_support_design',
+      15 => 'field_toolkit',
+      16 => 'body',
+      17 => 'title_field',
+      18 => 'field_document_type',
+      19 => 'field_other_keywords',
+      20 => 'field_meeting_management',
+      21 => 'field_image',
+      22 => 'field_language',
+      23 => 'group_source',
     ),
     'format_type' => 'tab',
     'format_settings' => array(
-      'formatter' => 'closed',
+      'label' => 'Document',
       'instance_settings' => array(
-        'description' => '',
-        'classes' => 'group-document-source field-group-tab',
         'required_fields' => 1,
+        'classes' => 'group-document-source field-group-tab',
+        'description' => '',
       ),
+      'formatter' => 'closed',
     ),
   );
   $field_groups['group_document_source|node|document|form'] = $field_group;
 
   $field_group = new stdClass();
-  $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
+  $field_group->disabled = TRUE; /* Edit this to true to make a default field_group disabled initially */
   $field_group->api_version = 1;
   $field_group->identifier = 'group_document_type|node|document|form';
   $field_group->group_name = 'group_document_type';
@@ -251,7 +272,7 @@ function cluster_docs_field_group_info() {
   $field_groups['group_document_type|node|document|form'] = $field_group;
 
   $field_group = new stdClass();
-  $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
+  $field_group->disabled = TRUE; /* Edit this to true to make a default field_group disabled initially */
   $field_group->api_version = 1;
   $field_group->identifier = 'group_keywords|node|document|form';
   $field_group->group_name = 'group_keywords';
@@ -280,6 +301,36 @@ function cluster_docs_field_group_info() {
   $field_group = new stdClass();
   $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
   $field_group->api_version = 1;
+  $field_group->identifier = 'group_source|node|document|form';
+  $field_group->group_name = 'group_source';
+  $field_group->entity_type = 'node';
+  $field_group->bundle = 'document';
+  $field_group->mode = 'form';
+  $field_group->parent_name = 'group_document_source';
+  $field_group->data = array(
+    'label' => 'Document source',
+    'weight' => '47',
+    'children' => array(
+      0 => 'field_file',
+      1 => 'field_link',
+    ),
+    'format_type' => 'fieldset',
+    'format_settings' => array(
+      'label' => 'Document source',
+      'instance_settings' => array(
+        'required_fields' => 1,
+        'id' => '',
+        'classes' => 'group-source field-group-fieldset',
+        'description' => 'Choose either an uploaded file or link for your document.',
+      ),
+      'formatter' => 'collapsible',
+    ),
+  );
+  $field_groups['group_source|node|document|form'] = $field_group;
+
+  $field_group = new stdClass();
+  $field_group->disabled = TRUE; /* Edit this to true to make a default field_group disabled initially */
+  $field_group->api_version = 1;
   $field_group->identifier = 'group_tags|node|document|form';
   $field_group->group_name = 'group_tags';
   $field_group->entity_type = 'node';
@@ -288,7 +339,7 @@ function cluster_docs_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Tags',
-    'weight' => '6',
+    'weight' => '3',
     'children' => array(
       0 => 'group_advanced_tags',
       1 => 'group_document_type',
@@ -307,11 +358,12 @@ function cluster_docs_field_group_info() {
 
   // Translatables
   // Included for use with string extractors like potx.
+  t('Advanced');
   t('Advanced tags');
   t('Basic tags');
+  t('Document');
   t('Document details');
   t('Document page content');
-  t('Document settings');
   t('Document source');
   t('Document type');
   t('Group settings');

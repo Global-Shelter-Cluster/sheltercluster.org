@@ -86,6 +86,8 @@
           display: 'preview', //preview (document blocks) | list (table)
           facets: {},
           facetFilters: {},
+          initialFilters: typeof settings.cluster_search !== 'undefined' ? settings.cluster_search.initial_filters : null,
+          nidFilter: typeof settings.cluster_search !== 'undefined' ? settings.cluster_search.nid_filter : null,
           search: '',
           page: 0,
           pages: 0,
@@ -147,7 +149,15 @@
               return !this.searching && !this.hasResults;
             },
             hasFacetFiltersSelected: function() {
-              return this.prepareFacetFilters() ? true : false;
+              for (var facet in this.facetFilters) {
+                if (this.facetFilters[facet].length === 0)
+                  continue;
+
+                for (var value in this.facetFilters[facet])
+                  if (this.facetFilters[facet][value])
+                    return true;
+              }
+              return false;
             },
             facetsDisplay: function() {
               // The "taxonomy_groups" setting is an array of ints where each number represents how many facets belong
@@ -161,6 +171,8 @@
                   var facet_key = facetKeys[currentFacetKey];
                   currentFacetKey++;
                   if (!vue.facets[facet_key])
+                    continue;
+                  if (typeof vue.initialFilters[facet_key] !== 'undefined')
                     continue;
 
                   var show = false, first = true;
@@ -266,27 +278,33 @@
           },
           methods: {
             prepareFacetFilters: function() {
-              var facetFilters = [];
-              for (var facet in this.facetFilters) {
-                var currentFacetFilter = [];
-                if (this.facetFilters[facet].length === 0)
-                  continue;
+              var ret = [];
 
-                for (var value in this.facetFilters[facet])
-                  if (this.facetFilters[facet][value])
-                    currentFacetFilter[currentFacetFilter.length] = facet + ':' + value;
+              var process = function(filters) {
+                for (var facet in filters) {
+                  var currentFacetFilter = [];
+                  if (filters[facet].length === 0)
+                    continue;
 
-                if (currentFacetFilter.length === 1)
-                  facetFilters[facetFilters.length] = currentFacetFilter[0];
-                else if (currentFacetFilter.length > 1)
-                  facetFilters[facetFilters.length] = currentFacetFilter;
-              }
+                  for (var value in filters[facet])
+                    if (filters[facet][value])
+                      currentFacetFilter[currentFacetFilter.length] = facet + ':' + value;
+
+                  if (currentFacetFilter.length === 1)
+                    ret[ret.length] = currentFacetFilter[0];
+                  else if (currentFacetFilter.length > 1)
+                    ret[ret.length] = currentFacetFilter;
+                }
+              };
+
+              process(this.initialFilters);
+              process(this.facetFilters);
 
               if (this.mode === 'key') {
-                facetFilters[facetFilters.length] = 'field_key_document:true';
+                ret[ret.length] = 'field_key_document:true';
               }
 
-              return facetFilters.length > 0 ? facetFilters : null;
+              return ret.length > 0 ? ret : null;
             },
             changeFacetFilter: function(e, facet, value) {
               var checkbox = $(e.target);
@@ -384,6 +402,17 @@
                   .join(' OR ');
               else
                 query[0].params.filters = 'group_nids:' + vue.groupNid;
+
+              if (vue.nidFilter) { // E.g. arbitrary libraries
+                if (query[0].params.filters !== '')
+                  query[0].params.filters += ' AND ';
+                query[0].params.filters += '(' + vue.nidFilter
+                    .map(function (i) {
+                      return 'objectID:' + i
+                    })
+                    .join(' OR ')
+                  + ')';
+              }
 
               var facetFilters = vue.prepareFacetFilters();
               if (facetFilters)

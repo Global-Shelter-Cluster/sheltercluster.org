@@ -446,7 +446,7 @@ function cluster_docs_views_default_views() {
   $handler->display->display_options['filters']['field_document_type_tid']['field'] = 'field_document_type_tid';
   $handler->display->display_options['filters']['field_document_type_tid']['exposed'] = TRUE;
   $handler->display->display_options['filters']['field_document_type_tid']['expose']['operator_id'] = 'field_document_type_tid_op';
-  $handler->display->display_options['filters']['field_document_type_tid']['expose']['label'] = 'Document Type (field_document_type)';
+  $handler->display->display_options['filters']['field_document_type_tid']['expose']['label'] = 'Document Type';
   $handler->display->display_options['filters']['field_document_type_tid']['expose']['operator'] = 'field_document_type_tid_op';
   $handler->display->display_options['filters']['field_document_type_tid']['expose']['identifier'] = 'field_document_type_tid';
   $handler->display->display_options['filters']['field_document_type_tid']['expose']['remember_roles'] = array(
@@ -459,6 +459,26 @@ function cluster_docs_views_default_views() {
   );
   $handler->display->display_options['filters']['field_document_type_tid']['type'] = 'select';
   $handler->display->display_options['filters']['field_document_type_tid']['vocabulary'] = 'document_type';
+  /* Filter criterion: Content: Document status (field_document_status) */
+  $handler->display->display_options['filters']['field_document_status_tid']['id'] = 'field_document_status_tid';
+  $handler->display->display_options['filters']['field_document_status_tid']['table'] = 'field_data_field_document_status';
+  $handler->display->display_options['filters']['field_document_status_tid']['field'] = 'field_document_status_tid';
+  $handler->display->display_options['filters']['field_document_status_tid']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_document_status_tid']['expose']['operator_id'] = 'field_document_status_tid_op';
+  $handler->display->display_options['filters']['field_document_status_tid']['expose']['label'] = 'Document status';
+  $handler->display->display_options['filters']['field_document_status_tid']['expose']['operator'] = 'field_document_status_tid_op';
+  $handler->display->display_options['filters']['field_document_status_tid']['expose']['identifier'] = 'field_document_status_tid';
+  $handler->display->display_options['filters']['field_document_status_tid']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    5 => 0,
+    6 => 0,
+  );
+  $handler->display->display_options['filters']['field_document_status_tid']['type'] = 'select';
+  $handler->display->display_options['filters']['field_document_status_tid']['vocabulary'] = 'document_status';
+  $handler->display->display_options['filters']['field_document_status_tid']['hierarchy'] = 1;
 
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page');
@@ -474,6 +494,7 @@ function cluster_docs_views_default_views() {
   $handler = $view->new_display('views_data_export', 'Data export', 'views_data_export_1');
   $handler->display->display_options['pager']['type'] = 'some';
   $handler->display->display_options['style_plugin'] = 'views_data_export_csv';
+  $handler->display->display_options['path'] = 'data-export';
   $translatables['documents'] = array(
     t('Master'),
     t('Documents'),
@@ -511,7 +532,8 @@ function cluster_docs_views_default_views() {
     t('Other Keywords'),
     t('Is Key Document'),
     t('Is Featured Document'),
-    t('Document Type (field_document_type)'),
+    t('Document Type'),
+    t('Document status'),
     t('Page'),
     t('Data export'),
   );

@@ -1,0 +1,31 @@
+<?php
+
+/**
+ * Generate taxonomy terms for document status.
+ */
+function cluster_taxonomy_update_7001() {
+  $vocab = taxonomy_vocabulary_machine_name_load('document_status');
+ 
+  $terms = [
+    [
+      'name' => 'Draft',
+      'description' => '',
+      'vid' => $vocab->vid,
+    ],
+    [
+      'name' => 'Revised',
+      'description' => '',
+      'vid' => $vocab->vid,
+    ],
+    [
+      'name' => 'Final',
+      'description' => '',
+      'vid' => $vocab->vid,
+    ],
+  ];
+  
+  foreach ($terms as $term) {
+    taxonomy_term_save((object)$term);
+  }
+
+}

@@ -253,6 +253,8 @@ function cluster_search_default_search_api_index() {
       "index_directly" : 1,
       "cron_limit" : "0",
       "fields" : {
+        "attachments_field_event_files" : { "type" : "text" },
+        "attachments_field_file" : { "type" : "text" },
         "body:value" : { "type" : "text" },
         "created" : { "type" : "date" },
         "field_assess_monitor_eval" : { "type" : "list\\u003Cinteger\\u003E", "entity_type" : "taxonomy_term" },
@@ -296,7 +298,7 @@ function cluster_search_default_search_api_index() {
         "search_api_alter_node_access" : { "status" : 0, "weight" : "0", "settings" : [] },
         "search_api_alter_node_status" : { "status" : 1, "weight" : "0", "settings" : [] },
         "search_api_attachments_alter_settings" : {
-          "status" : 0,
+          "status" : 1,
           "weight" : "0",
           "settings" : {
             "excluded_extensions" : "aif art avi bmp gif ico mov oga ogv png psd ra ram rgb flv",

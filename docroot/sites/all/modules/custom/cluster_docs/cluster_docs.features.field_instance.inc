@@ -42,22 +42,23 @@ function cluster_docs_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'field_name' => 'body',
-    'label' => 'Body',
-    'required' => FALSE,
+    'label' => 'Description',
+    'required' => 0,
     'settings' => array(
-      'display_summary' => TRUE,
+      'display_summary' => 1,
       'entity_translation_sync' => FALSE,
       'text_processing' => 1,
       'user_register_form' => FALSE,
     ),
     'widget' => array(
+      'active' => 1,
       'module' => 'text',
       'settings' => array(
         'rows' => 20,
         'summary_rows' => 5,
       ),
       'type' => 'text_textarea_with_summary',
-      'weight' => 1,
+      'weight' => 52,
     ),
   );
 
@@ -103,7 +104,7 @@ function cluster_docs_field_default_field_instances() {
         'apply_chosen' => '',
       ),
       'type' => 'options_buttons',
-      'weight' => 18,
+      'weight' => 58,
     ),
   );
 
@@ -149,7 +150,7 @@ function cluster_docs_field_default_field_instances() {
         'apply_chosen' => '',
       ),
       'type' => 'options_buttons',
-      'weight' => 14,
+      'weight' => 55,
     ),
   );
 
@@ -195,7 +196,7 @@ function cluster_docs_field_default_field_instances() {
         'apply_chosen' => '',
       ),
       'type' => 'options_buttons',
-      'weight' => 20,
+      'weight' => 60,
     ),
   );
 
@@ -246,7 +247,7 @@ function cluster_docs_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 43,
+      'weight' => 51,
     ),
   );
 
@@ -292,7 +293,7 @@ function cluster_docs_field_default_field_instances() {
         'apply_chosen' => '',
       ),
       'type' => 'options_buttons',
-      'weight' => 13,
+      'weight' => 54,
     ),
   );
 
@@ -342,7 +343,70 @@ function cluster_docs_field_default_field_instances() {
         'display_label' => 1,
       ),
       'type' => 'options_onoff',
-      'weight' => 40,
+      'weight' => 10,
+    ),
+  );
+
+  // Exported field_instance: 'node-document-field_featured_date'.
+  $field_instances['node-document-field_featured_date'] = array(
+    'bundle' => 'document',
+    'default_value' => array(),
+    'deleted' => 0,
+    'description' => 'Set a time period after which this document will no longer be featured (applies to all groups).',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'date',
+        'settings' => array(
+          'format_type' => 'long',
+          'fromto' => 'both',
+          'multiple_from' => '',
+          'multiple_number' => '',
+          'multiple_to' => '',
+          'show_repeat_rule' => 'show',
+        ),
+        'type' => 'date_default',
+        'weight' => 32,
+      ),
+      'ical' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_featured_date',
+    'label' => 'Expire featured setting',
+    'required' => 0,
+    'settings' => array(
+      'default_value' => 'blank',
+      'default_value2' => 'same',
+      'default_value_code' => '',
+      'default_value_code2' => '',
+      'entity_translation_sync' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'date',
+      'settings' => array(
+        'increment' => 15,
+        'input_format' => 'm/d/Y - H:i:s',
+        'input_format_custom' => '',
+        'label_position' => 'above',
+        'repeat_collapsed' => 0,
+        'text_parts' => array(),
+        'year_range' => '-3:+3',
+      ),
+      'type' => 'date_text',
+      'weight' => 11,
     ),
   );
 
@@ -398,7 +462,7 @@ function cluster_docs_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'pdf_to_image',
-      'weight' => 44,
+      'weight' => 48,
     ),
   );
 
@@ -455,7 +519,7 @@ function cluster_docs_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'image_image',
-      'weight' => 2,
+      'weight' => 70,
     ),
   );
 
@@ -501,7 +565,7 @@ function cluster_docs_field_default_field_instances() {
         'apply_chosen' => '',
       ),
       'type' => 'options_buttons',
-      'weight' => 15,
+      'weight' => 56,
     ),
   );
 
@@ -547,7 +611,7 @@ function cluster_docs_field_default_field_instances() {
         'apply_chosen' => '',
       ),
       'type' => 'options_buttons',
-      'weight' => 19,
+      'weight' => 59,
     ),
   );
 
@@ -593,7 +657,7 @@ function cluster_docs_field_default_field_instances() {
         'apply_chosen' => '',
       ),
       'type' => 'options_buttons',
-      'weight' => 22,
+      'weight' => 62,
     ),
   );
 
@@ -639,7 +703,7 @@ function cluster_docs_field_default_field_instances() {
         'apply_chosen' => '',
       ),
       'type' => 'options_buttons',
-      'weight' => 24,
+      'weight' => 63,
     ),
   );
 
@@ -685,7 +749,7 @@ function cluster_docs_field_default_field_instances() {
         'apply_chosen' => '',
       ),
       'type' => 'options_buttons',
-      'weight' => 27,
+      'weight' => 66,
     ),
   );
 
@@ -735,7 +799,7 @@ function cluster_docs_field_default_field_instances() {
         'display_label' => 1,
       ),
       'type' => 'options_onoff',
-      'weight' => 39,
+      'weight' => 9,
     ),
   );
 
@@ -785,7 +849,7 @@ function cluster_docs_field_default_field_instances() {
         'apply_chosen' => '',
       ),
       'type' => 'options_select',
-      'weight' => 47,
+      'weight' => 49,
     ),
   );
 
@@ -849,7 +913,7 @@ function cluster_docs_field_default_field_instances() {
       'module' => 'link',
       'settings' => array(),
       'type' => 'link_field',
-      'weight' => 45,
+      'weight' => 49,
     ),
   );
 
@@ -893,7 +957,7 @@ function cluster_docs_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 29,
+      'weight' => 68,
     ),
   );
 
@@ -939,7 +1003,7 @@ function cluster_docs_field_default_field_instances() {
         'apply_chosen' => '',
       ),
       'type' => 'options_buttons',
-      'weight' => 26,
+      'weight' => 65,
     ),
   );
 
@@ -986,7 +1050,7 @@ function cluster_docs_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 9,
+      'weight' => 69,
     ),
   );
 
@@ -1043,7 +1107,7 @@ function cluster_docs_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'image_image',
-      'weight' => 3,
+      'weight' => 53,
     ),
   );
 
@@ -1105,7 +1169,7 @@ function cluster_docs_field_default_field_instances() {
         'year_range' => '-3:+3',
       ),
       'type' => 'date_text',
-      'weight' => 46,
+      'weight' => 50,
     ),
   );
 
@@ -1151,7 +1215,7 @@ function cluster_docs_field_default_field_instances() {
         'apply_chosen' => '',
       ),
       'type' => 'options_buttons',
-      'weight' => 21,
+      'weight' => 61,
     ),
   );
 
@@ -1197,7 +1261,7 @@ function cluster_docs_field_default_field_instances() {
         'apply_chosen' => '',
       ),
       'type' => 'options_buttons',
-      'weight' => 25,
+      'weight' => 64,
     ),
   );
 
@@ -1248,7 +1312,7 @@ function cluster_docs_field_default_field_instances() {
       'module' => 'number',
       'settings' => array(),
       'type' => 'number',
-      'weight' => 41,
+      'weight' => 12,
     ),
   );
 
@@ -1294,7 +1358,7 @@ function cluster_docs_field_default_field_instances() {
         'apply_chosen' => '',
       ),
       'type' => 'options_buttons',
-      'weight' => 16,
+      'weight' => 57,
     ),
   );
 
@@ -1340,7 +1404,7 @@ function cluster_docs_field_default_field_instances() {
         'apply_chosen' => '',
       ),
       'type' => 'options_buttons',
-      'weight' => 28,
+      'weight' => 67,
     ),
   );
 
@@ -1408,7 +1472,7 @@ function cluster_docs_field_default_field_instances() {
       'module' => 'og',
       'settings' => array(),
       'type' => 'og_complex',
-      'weight' => 5,
+      'weight' => 13,
     ),
   );
 
@@ -1457,7 +1521,7 @@ function cluster_docs_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 0,
+      'weight' => 48,
     ),
   );
 
@@ -1541,12 +1605,12 @@ function cluster_docs_field_default_field_instances() {
   // Translatables
   // Included for use with string extractors like potx.
   t('Assessment, Monitoring and Evaluation');
-  t('Body');
   t('Coordination Management');
   t('Cross-Cutting Issues');
   t('Description');
   t('Document Language');
   t('Document Type');
+  t('Expire featured setting');
   t('Featured document');
   t('Featured document show up in the slider at the top of the response page.');
   t('File');
@@ -1568,6 +1632,7 @@ function cluster_docs_field_default_field_instances() {
   t('Preview');
   t('Report / Meeting date');
   t('Response Phase');
+  t('Set a time period after which this document will no longer be featured (applies to all groups).');
   t('Settlement Type');
   t('Sorting weight');
   t('Source');
