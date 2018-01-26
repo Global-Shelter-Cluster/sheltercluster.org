@@ -204,7 +204,9 @@ function date_repeat_entity_get_entity_reference_fields($entity_type, $bundle) {
           // same as the entity type and bundle of the repeating date field then
           // we have a match.
           if ($entity_type == $field_entity_type && $bundle == $field_bundle) {
-            $entity_reference_fields[] = $field;
+            if ($field['field_name'] != 'og_group_ref') {
+              $entity_reference_fields[] = $field;
+            }
           }
         }
       }
