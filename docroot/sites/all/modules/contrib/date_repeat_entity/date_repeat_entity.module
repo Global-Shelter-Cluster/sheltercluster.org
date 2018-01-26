@@ -38,6 +38,9 @@ function date_repeat_entity_field_attach_form($entity_type, $entity, &$form, &$f
   if (!empty($form['#node_edit_form'])) {
 
     $bundle = $form['#bundle'];
+    if ($bundle != 'event') {
+      return;
+    }
 
     // Make sure utility functions are available.
     module_load_include('inc', 'date_repeat_entity', 'includes/date_repeat_entity.utility');
