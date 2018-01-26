@@ -464,6 +464,16 @@ function cluster_events_toggle_optional_fields_overridden_fields_alter(array &$f
 }
 
 /**
+ * Implements hook_events_field_widget_form_alter().
+ */
+function cluster_events_field_widget_addressfield_autocomplete_form_alter(&$element, &$form_state, $context) {
+  $widget = &$element['field_postal_address']['widget'];
+  $widget['street_block']['thoroughfare']['#required'] = FALSE;
+  $widget['locality_block']['locality']['#required'] = FALSE;
+  $widget['locality_block']['postal_code']['#required'] = FALSE;
+}
+
+/**
  * Implements hook_entity_info_alter().
  */
 function cluster_events_entity_info_alter(&$entity_info) {
