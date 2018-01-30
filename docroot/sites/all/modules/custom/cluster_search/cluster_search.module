@@ -217,12 +217,12 @@ function cluster_search_cluster_og_dashboard_menu_alter(&$items) {
   if (!cluster_docs_is_group_documents_page() || !isset($items['documents']))
     return;
 
-  $normal_label = t('All documents');
+  $display_provider = cluster_nav_get_display_provider();
+
+  $normal_label = t('Documents from this @type', ['@type' => $display_provider->getGroupTypeLabel()]);
   $key_label = t('Key documents');
 
-  $display_provider = cluster_nav_get_display_provider();
-  $subgroup_types = $display_provider->getSubgroupTypes();
-  $subgroups_label = t('Include ' . _cluster_search_list_and($subgroup_types));
+  $subgroups_label = t('Include ' . _cluster_search_list_and($display_provider->getSubgroupTypes()));
 
   $items['documents']['#suffix'] = <<<EOS
     <ul class="optgroup" v-cloak v-if="showModes">
