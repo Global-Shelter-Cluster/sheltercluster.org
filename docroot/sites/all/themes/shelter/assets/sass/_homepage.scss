@@ -26,6 +26,7 @@
 
     .page-margin {
       background: url(../images/homepage-header.jpg) no-repeat 0% top;
+      background-size: 100%;
       height: 160px;
 
       @include breakpoint(800px) {
