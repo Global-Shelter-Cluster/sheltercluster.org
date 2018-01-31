@@ -4,6 +4,8 @@
       $('body').once('collapsibleSections', function() {
         var collapsible = $('[data-collapsible]');
         var collapsible_elements_count = collapsible.length;
+        if (collapsible_elements_count === 0)
+          return; // No collapsible elements on the page, so let's skip the whole script.
         var current_pathname = window.location.pathname;
 
         // Returns an array of collapsible element states
