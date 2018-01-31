@@ -61,19 +61,25 @@ function theme_cluster_og_upcoming_events($vars) {
 function theme_cluster_og_recent_documents($vars) {
   $link_attributes = array(
     'attributes' => array(
-      'class' => array(
-        'see-all')
-      ),
+      'class' => array('see-all')
+    ),
+  );
+  $link_attributes_key = array(
+    'attributes' => array(
+      'class' => array('see-all')
+    ),
     'query' => array(
-        'sort' => 'date',
-        'sort_direction' => 'DESC',
-      ),
-    );
+      'mode' => 'key',
+    ),
+  );
 
   return partial('recent_documents', array(
     'title' => t('Latest documents'),
     'docs' => $vars['docs'],
-    'all_documents_link' => l(t('All documents'), $vars['all_documents_link'], $link_attributes)
+    'all_documents_link' => l(t('All documents'), $vars['all_documents_link'], $link_attributes),
+    'key_documents_link' => $vars['has_key_documents']
+      ? l(t('Key documents'), $vars['all_documents_link'], $link_attributes_key)
+      : NULL,
   ));
 }
 

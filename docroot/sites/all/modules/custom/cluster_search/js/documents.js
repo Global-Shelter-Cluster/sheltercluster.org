@@ -137,7 +137,10 @@
           data: data,
           computed: {
             showModes: function() {
-              return this.descendantNids.length > 1; //TODO: adjust this logic when working on the "key" mode
+              return true;//this.descendantNids.length > 1; //TODO: adjust this logic when working on the "key" mode
+            },
+            hasSubgroups: function() {
+              return this.descendantNids.length > 1;
             },
             hasResults: function() {
               return this.results && this.results.length > 0;
@@ -296,6 +299,10 @@
 
               process(this.initialFilters);
               process(this.facetFilters);
+
+              if (this.mode === 'key') {
+                ret[ret.length] = 'field_key_document:true';
+              }
 
               return ret.length > 0 ? ret : null;
             },

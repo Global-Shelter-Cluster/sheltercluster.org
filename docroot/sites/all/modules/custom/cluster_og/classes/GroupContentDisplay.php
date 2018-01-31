@@ -75,15 +75,33 @@ class GroupDisplayProvider {
     $ret = [];
     if ($this->node->type === 'geographic_region') {
       if ($this->manager->queryChildren([$this->node->nid], 'field_parent_region', 'geographic_region'))
-        $ret[] = 'regions';
+        $ret[] = $this->getGroupTypeLabel('geographic_region', TRUE);
     }
     if ($this->getRelatedHubs())
-      $ret[] = 'hubs';
+      $ret[] = $this->getGroupTypeLabel('hub', TRUE);
     if ($this->getRelatedResponses())
-      $ret[] = 'responses';
+      $ret[] = $this->getGroupTypeLabel('response', TRUE);
     if ($this->getRelatedWorkingGroups())
-      $ret[] = 'working groups';
+      $ret[] = $this->getGroupTypeLabel('working_group', TRUE);
     return $ret;
+  }
+
+  public function getGroupTypeLabel($type = NULL, $plural = FALSE) {
+    if (is_null($type))
+      $type = $this->node->type;
+
+    switch ($type) {
+      case 'geographic_region':
+        return $plural ? 'regions' : 'region';
+      case 'hub':
+        return $plural ? 'hubs' : 'hub';
+      case 'response':
+        return $plural ? 'responses' : 'response';
+      case 'working_group':
+        return $plural ? 'working groups' : 'working group';
+      default:
+        return $plural ? 'groups' : 'group';
+    }
   }
 
   /**
@@ -448,6 +466,7 @@ class GroupFullDisplayProvider extends GroupDisplayProvider {
       return theme('cluster_og_recent_documents', array(
         'docs' => cluster_docs_prepare_row_data($nids),
         'all_documents_link' => url('node/' . $this->node->nid . '/documents'),
+        'has_key_documents' => $this->manager->hasKeyDocuments(),
       ));
     }
     return FALSE;
