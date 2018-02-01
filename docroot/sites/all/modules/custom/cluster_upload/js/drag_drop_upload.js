@@ -35,9 +35,7 @@ const cluster_upload = {
     if (number_of_files > 1) {
       message = "You dropped " + number_of_files + " files but we can only create one document at a time. The first file will be used to create a document.";
     }
-
     this.notify("status", message);
-
     if (form_data) {
       jQuery.ajax({
         url: "/upload-document/" + gid,
