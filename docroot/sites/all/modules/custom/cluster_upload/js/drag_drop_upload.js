@@ -27,10 +27,17 @@ const cluster_upload = {
   "drop": function(event, gid) {
     event.preventDefault();
     // Only upload the first file.
-    var file_data = event.originalEvent.dataTransfer.files[0];
-    var form_data = new FormData();
+    let file_data = event.originalEvent.dataTransfer.files[0];
+    let number_of_files = event.originalEvent.dataTransfer.files.length;
+    let form_data = new FormData();
     form_data.append('file', file_data);
-    this.notify("status", "Your document is getting created...");
+    let message = "Your document is getting created...";
+    if (number_of_files > 1) {
+      message = "You dropped " + number_of_files + " files but we can only create one document at a time. The first file will be used to create a document.";
+    }
+
+    this.notify("status", message);
+
     if (form_data) {
       jQuery.ajax({
         url: "/upload-document/" + gid,
