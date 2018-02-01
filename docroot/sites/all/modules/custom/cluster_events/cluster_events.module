@@ -488,6 +488,7 @@ function cluster_events_field_widget_addressfield_autocomplete_form_alter(&$elem
   $widget['street_block']['thoroughfare']['#required'] = FALSE;
   $widget['locality_block']['locality']['#required'] = FALSE;
   $widget['locality_block']['postal_code']['#required'] = FALSE;
+  $widget['locality_block']['administrative_area']['#required'] = FALSE;
 }
 
 /**
