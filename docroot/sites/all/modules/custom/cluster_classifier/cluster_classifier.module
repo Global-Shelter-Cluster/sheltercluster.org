@@ -69,7 +69,10 @@ function cluster_classifier_settings($form, &$form_state) {
   ];
   foreach ($classifier->getStorageStats() as $k => $v)
     $form['stats'][$k] = [
-      '#markup' => t('<p><strong>@name</strong>: %value</p>', ['@name' => $k, '%value' => $v]),
+      '#markup' => t('<p><strong>@name</strong>: %value</p>', [
+        '@name' => $k,
+        '%value' => $v,
+      ]),
     ];
 
   return $form;
@@ -149,4 +152,77 @@ function cluster_classifier_node_insert($node) {
  */
 function cluster_classifier_node_update($node) {
   cluster_classifier_node_insert($node);
+}
+
+/**
+ * Implements hook_form_alter().
+ */
+function cluster_classifier_form_alter(&$form, &$form_state, $form_id) {
+  if (substr($form_id, -strlen('_node_form')) !== '_node_form')
+    return;
+
+  if (!isset($form['field_document_type']))
+    return;
+
+  $form['field_document_type']['tag_search'] = [
+    '#type' => 'textfield',
+    '#attributes' => ['placeholder' => t('Search tags')],
+    '#weight' => -20,
+  ];
+
+  $form['field_document_type']['autotag'] = [
+    '#type' => 'button',
+    '#value' => t('Fetch automatic tags'),
+    '#weight' => -10,
+    '#ajax' => [
+      'callback' => 'cluster_classifier_autotag',
+    ],
+    '#limit_validation_errors' => [],
+    '#attached' => [
+      'js' => [
+        drupal_get_path('module', 'cluster_classifier') . '/js/admin-autotag.js',
+      ],
+      'css' => [
+        drupal_get_path('module', 'cluster_classifier') . '/css/admin-autotag.css',
+      ],
+    ],
+    '#prefix' => '<div id="autotag-search-results"></div><div id="autotag-results"></div>',
+  ];
+}
+
+function cluster_classifier_autotag($form, &$form_state) {
+  $text = $form_state['values']['title'] . ' ' . $form_state['values']['title_field']['und'][0]['value'] . ' ' . strip_tags($form_state['values']['body']['und'][0]['value']);
+  $text = trim($text);
+  if (!$text)
+    return [
+      '#type' => 'ajax',
+      '#commands' => [
+        ajax_command_invoke('#edit-field-document-type-autotag', 'data', ['tids', []]),
+        ajax_command_invoke('#edit-field-document-type-autotag', 'change'),
+      ],
+    ];
+
+  /**
+   * Yes, this is convoluted. Yes, it's all necessary.
+   * Basically we're just getting the list of tids that have been selected for
+   * all the fields we care about, that's all. :)
+   */
+  $exclude_tids = [];
+  foreach (cluster_docs_taxonomies(FALSE) as $field) {
+    if (!isset($form_state['values'][$field]))
+      continue;
+    $exclude_tids[] = array_keys(array_filter($form_state['values'][$field]['und']));
+  }
+  $exclude_tids = array_values(array_filter(array_unique(call_user_func_array('array_merge', array_filter($exclude_tids)))));
+
+  $classifier = _cluster_classifier_instance();
+  $tids = $classifier->getTerms($text, $exclude_tids);
+
+  return [
+    '#type' => 'ajax',
+    '#commands' => [
+      ajax_command_invoke('#edit-field-document-type-autotag', 'data', ['tids', $classifier->groupTidsByField($tids)]),
+      ajax_command_invoke('#edit-field-document-type-autotag', 'change'),
+    ],
+  ];
 }

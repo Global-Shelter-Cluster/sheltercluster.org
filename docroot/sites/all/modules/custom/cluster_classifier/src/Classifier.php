@@ -177,6 +177,12 @@ class Classifier {
     $this->storage->clearAllData();
   }
 
+  /**
+   * @param string $text
+   * @param array $exclude_tids
+   *
+   * @return array of term ids
+   */
   public function getTerms($text, $exclude_tids = []) {
     $ret = $this->documer->guess($text);
 
@@ -191,6 +197,26 @@ class Classifier {
     $initial_tids = array_keys(array_slice($ret, 0, self::LIMIT_TERMS_INITIAL, TRUE));
 
     return $this->refineTids($initial_tids);
+  }
+
+  /**
+   * @param array $tids
+   * @return array, e.g. ['field_document_type' => [4, 21], 'field_xyz' => [$xyz_tid_1, ...]]
+   */
+  public function groupTidsByField($tids) {
+    $ret = [];
+    $this->initTermMapping();
+    foreach ($tids as $tid) {
+      foreach ($this->term_mapping as $field => $field_tids) {
+        if (in_array($tid, $field_tids)) {
+          if (!isset($ret[$field]))
+            $ret[$field] = [];
+          $ret[$field][] = $tid;
+          continue;
+        }
+      }
+    }
+    return $ret;
   }
 
   public function extractTextFromNode($node) {
