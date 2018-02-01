@@ -124,6 +124,23 @@ function cluster_events_all($nid) {
   return $ret;
 }
 
+function cluster_events_theme_registry_alter(&$theme_registry) {
+  $path = drupal_get_path('module', 'cluster_events');
+  $theme_registry['node_preview']['file'] = 'cluster_events.module';
+  $theme_registry['node_preview']['theme path'] = $path;
+  $theme_registry['node_preview']['function'] = 'cluster_events_node_preview';
+  $theme_registry['node_preview']['includes'] = [
+    $path . '/cluster_events.module',
+  ];
+}
+
+function cluster_events_node_preview($variables) {
+  if (!$variables['node']->type == 'event') {
+    return theme_node_preview($variables);
+  }
+  return '<div class="preview"><div class="node">' . t('Please preview your event before final submitting.') . '</div></div>';
+}
+
 /**
  * Get upcoming events.
  *
