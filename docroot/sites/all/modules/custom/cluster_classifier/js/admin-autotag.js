@@ -110,8 +110,20 @@
 
           var li = $('#autotag-results li[data-tid=' + tid + ']');
           if (li.length > 0) {
+            var has_siblings = li.siblings('li').length;
             li.remove();
+            if (!has_siblings)
+              $('#autotag-results *').remove();
             Drupal.behaviors.classifierAutotag.fetch();
+          }
+
+          var li = $('#autotag-search-results li[data-tid=' + tid + ']');
+          if (li.length > 0) {
+            var has_siblings = li.siblings('li').length;
+            li.remove();
+            if (!has_siblings)
+              $('#autotag-search-results *').remove();
+            Drupal.behaviors.classifierAutotag.search();
           }
         });
 
