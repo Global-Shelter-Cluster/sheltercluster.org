@@ -1,0 +1,61 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "This file is @generated automatically"
+    ],
+    "content-hash": "669ccc5656f85b97815499a70c235dcb",
+    "packages": [
+        {
+            "name": "kbariotis/documer",
+            "version": "0.2.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/kbariotis/documer.git",
+                "reference": "d6aa31b0498da708b4776061935c36b9362c84d0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/kbariotis/documer/zipball/d6aa31b0498da708b4776061935c36b9362c84d0",
+                "reference": "d6aa31b0498da708b4776061935c36b9362c84d0",
+                "shasum": ""
+            },
+            "require-dev": {
+                "phpspec/phpspec": "~2.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Documer\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Kostas Bariotis",
+                    "email": "konmpar@gmail.com",
+                    "homepage": "http://kostasbariotis.com"
+                }
+            ],
+            "description": "Bayes algorithm implementation in PHP for auto document classification.",
+            "homepage": "http://github.com/kbariotis/documer",
+            "keywords": [
+                "bayes",
+                "classification",
+                "machine learning"
+            ],
+            "time": "2014-12-23T22:35:03+00:00"
+        }
+    ],
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "stable",
+    "stability-flags": [],
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": [],
+    "platform-dev": []
+}
