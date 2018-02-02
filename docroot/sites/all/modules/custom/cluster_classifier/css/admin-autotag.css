@@ -11,6 +11,8 @@
   cursor: pointer;
   margin-left: 20px;
   font-style: italic;
+  color: #7f1416;
+  text-decoration: underline;
 }
 
 #edit-field-document-type-autotag,

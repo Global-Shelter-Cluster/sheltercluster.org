@@ -17,7 +17,7 @@
           var checkbox = $('input[type=checkbox][name="' + checkbox_name + '"]');
           if (checkbox.length && !checkbox.is(':checked')) {
             values_shown = true;
-            var li = $('<li/>').text(checkbox.next('label').text());
+            var li = $('<li/>').text(checkbox.next('label').text().trim());
             var tooltip = checkbox.closest('.cluster-tag-tooltip');
             if (tooltip.length > 0)
               li.attr('title', tooltip.attr('title'));
@@ -86,7 +86,7 @@
           var match = checkbox.attr('name').match(/^[^\[]+\[und\]\[(\d+)\]$/);
           var tid = match[1];
 
-          var li = $('<li/>').text($(this).text());
+          var li = $('<li/>').text($(this).text().trim());
           var tooltip = $(this).closest('.cluster-tag-tooltip');
           if (tooltip.length > 0)
             li.attr('title', tooltip.attr('title'));
