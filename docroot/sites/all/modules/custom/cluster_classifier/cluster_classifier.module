@@ -209,7 +209,7 @@ function cluster_classifier_autotag($form, &$form_state) {
    */
   $exclude_tids = [];
   foreach (cluster_docs_taxonomies(FALSE) as $field) {
-    if (!isset($form_state['values'][$field]))
+    if (!isset($form_state['values'][$field]) || !is_array($form_state['values'][$field]['und']))
       continue;
     $exclude_tids[] = array_keys(array_filter($form_state['values'][$field]['und']));
   }

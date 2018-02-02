@@ -184,6 +184,7 @@ class Classifier {
    * @return array of term ids
    */
   public function getTerms($text, $exclude_tids = []) {
+    $exclude_tids = (array) $exclude_tids;
     $ret = $this->documer->guess($text);
 
     $ret = array_filter($ret, function($percentage, $tid) use ($exclude_tids) {
