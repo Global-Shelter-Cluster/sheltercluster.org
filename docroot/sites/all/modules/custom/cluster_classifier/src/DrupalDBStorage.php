@@ -47,6 +47,7 @@ class DrupalDBStorage implements Adapter {
   }
 
   public function insertWord($word, $label) {
+    $word = substr($word, 0, 255);
     db_insert('cluster_classifier_words')
       ->fields(['word' => $word, 'tid' => $label])
       ->execute();
