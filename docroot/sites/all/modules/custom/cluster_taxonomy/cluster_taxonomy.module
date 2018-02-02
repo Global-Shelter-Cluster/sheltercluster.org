@@ -6,6 +6,18 @@
 
 include_once 'cluster_taxonomy.features.inc';
 
+function cluster_taxonomy_add_term_tooltips($element, &$form_state) {
+  foreach (element_children($element) as $tid) {
+    $term = taxonomy_term_load($tid);
+    if (!$term || !$term->description)
+      continue;
+
+    $element[$tid]['#prefix'] = '<span'.drupal_attributes(['title' => drupal_html_to_text(strip_tags($term->description))]).'>';
+    $element[$tid]['#suffix'] = '</span>';
+  }
+  return $element;
+}
+
 /**
  * Uses "states" to show/hide vocabularies in order to simulate a "tree" in the tags.
  *
@@ -23,6 +35,12 @@ function cluster_taxonomy_form_alter(&$form, &$form_state, $form_id) {
       && array_key_exists($field['field_name'], $form)
       && isset($field['settings']['allowed_values'][0]);
   });
+
+  foreach (array_keys($fields) as $field_name) {
+    if (!isset($form[$field_name][LANGUAGE_NONE]))
+      continue;
+    $form[$field_name][LANGUAGE_NONE]['#after_build'][] = 'cluster_taxonomy_add_term_tooltips';
+  }
 
   $vocabulary_field_map = [];
   foreach ($fields as $field_name => $field)
