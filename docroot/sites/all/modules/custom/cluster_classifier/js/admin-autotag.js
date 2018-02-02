@@ -59,7 +59,7 @@
       results.addClass('has-results');
       var ul = $('<ul/>');
 
-      var lis = $('#document-node-form .form-type-checkboxes .form-type-checkbox label')
+      $('#document-node-form .form-type-checkboxes .form-type-checkbox label')
         .filter(function() {
           var checkbox = $(this).prev('input:checkbox');
           if (checkbox.is(':checked'))
@@ -68,7 +68,14 @@
           if (!match)
             return false;
 
-          return $(this).text().toLowerCase().indexOf(query) !== -1;
+          if ($(this).text().toLowerCase().indexOf(query) !== -1)
+            return true;
+
+          var tooltip = $(this).closest('.cluster-tag-tooltip');
+          if (tooltip.length > 0 && tooltip.attr('title').toLowerCase().indexOf(query) !== -1)
+            return true;
+
+          return false;
         })
         .slice(0, 3)
         .map(function() {

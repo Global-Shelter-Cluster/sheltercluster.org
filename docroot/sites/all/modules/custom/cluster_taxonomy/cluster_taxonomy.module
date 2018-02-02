@@ -12,7 +12,10 @@ function cluster_taxonomy_add_term_tooltips($element, &$form_state) {
     if (!$term || !$term->description)
       continue;
 
-    $element[$tid]['#prefix'] = '<span'.drupal_attributes(['title' => drupal_html_to_text(strip_tags($term->description))]).'>';
+    $element[$tid]['#prefix'] = '<span'.drupal_attributes([
+      'class' => ['cluster-tag-tooltip'],
+      'title' => drupal_html_to_text(strip_tags($term->description)),
+    ]).'>';
     $element[$tid]['#suffix'] = '</span>';
   }
   return $element;
