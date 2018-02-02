@@ -18,6 +18,9 @@
           if (checkbox.length && !checkbox.is(':checked')) {
             values_shown = true;
             var li = $('<li/>').text(checkbox.next('label').text());
+            var tooltip = checkbox.closest('.cluster-tag-tooltip');
+            if (tooltip.length > 0)
+              li.attr('title', tooltip.attr('title'));
             li.data('checkbox', checkbox);
             li.attr('data-tid', tid);
             li.click(function () {
@@ -84,6 +87,9 @@
           var tid = match[1];
 
           var li = $('<li/>').text($(this).text());
+          var tooltip = $(this).closest('.cluster-tag-tooltip');
+          if (tooltip.length > 0)
+            li.attr('title', tooltip.attr('title'));
           li.data('checkbox', checkbox);
           li.attr('data-tid', tid);
           li.click(function () {
