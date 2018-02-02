@@ -1,0 +1,10 @@
+name = Cluster Classifier
+description = Automatically classifies documents into tags. Uses Algolia to train.
+core = 7.x
+package = Cluster
+dependencies[] = cluster_docs
+dependencies[] = cluster_search
+dependencies[] = cluster_taxonomy
+files[] = vendor/autoload.php
+files[] = src/Classifier.php
+files[] = src/DrupalDBStorage.php
