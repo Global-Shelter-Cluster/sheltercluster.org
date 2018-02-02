@@ -55,10 +55,14 @@ function cluster_taxonomy_form_alter(&$form, &$form_state, $form_id) {
             $form_field['#states']['visible'] = [];
 
           // CSS selector for the specific checkbox we care about
-          $selector = '#edit-'
-            . drupal_clean_css_identifier($vocabulary_field_map[$term->vocabulary_machine_name])
-            . '-' . LANGUAGE_NONE . '-' . $term->tid;
+          $selector = 'input:checkbox[name="'
+            . $vocabulary_field_map[$term->vocabulary_machine_name]
+            . '[' . LANGUAGE_NONE . '][' . $term->tid . ']"]';
           $form_field['#states']['visible'][$selector] = ['checked' => TRUE];
+
+          $form_field['#attributes']['data-parent-field'] = $vocabulary_field_map[$term->vocabulary_machine_name];
+          $form_field['#attributes']['data-parent-tid'] = $term->tid;
+          $form_field['#attached']['js'][] = drupal_get_path('module', 'cluster_taxonomy').'/js/hierarchical-tags.js';
         }
       }
   }
