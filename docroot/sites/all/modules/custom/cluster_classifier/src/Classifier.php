@@ -150,7 +150,7 @@ class Classifier {
     $found_results = FALSE;
     foreach ($this->loadResults($page, $found_results) as $result) {
       foreach ($result['tids'] as $tid)
-        $this->documer->train($tid, $result['text']);
+        $this->documer->train($tid, ucwords($result['text']));
     }
     return $found_results;
   }
@@ -170,7 +170,7 @@ class Classifier {
     $text = $this->extractTextFromNode($node);
 
     foreach ($tids as $tid)
-      $this->documer->train($tid, $text);
+      $this->documer->train($tid, ucwords($text));
   }
 
   public function clear() {
@@ -185,7 +185,7 @@ class Classifier {
    */
   public function getTerms($text, $exclude_tids = []) {
     $exclude_tids = (array) $exclude_tids;
-    $ret = $this->documer->guess($text);
+    $ret = $this->documer->guess(ucwords($text));
 
     $ret = array_filter($ret, function($percentage, $tid) use ($exclude_tids) {
       if (in_array($tid, $exclude_tids))
