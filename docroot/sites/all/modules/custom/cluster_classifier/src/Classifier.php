@@ -2,12 +2,10 @@
 
 namespace Cluster;
 
-use AlgoliaSearch\Client;
 use Documer\Documer;
-use Documer\Storage\Memory;
 
 class Classifier {
-  const QUERY_RESULTS_PER_PAGE = 200;
+  const QUERY_RESULTS_PER_PAGE = 20;
   const LIMIT_TERMS_INITIAL = 10; // How many terms to load from the classifier
   const LIMIT_TERMS_FINAL = 3; // How many terms to show to the user (advanced tags get preference, etc.)
   const LIMIT_PERCENTAGE = 0; // If zero, doesn't limit by percentage
