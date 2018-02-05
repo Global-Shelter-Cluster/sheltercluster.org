@@ -213,7 +213,8 @@ function cluster_classifier_autotag($form, &$form_state) {
       continue;
     $exclude_tids[] = array_keys(array_filter($form_state['values'][$field]['und']));
   }
-  $exclude_tids = array_values(array_filter(array_unique(call_user_func_array('array_merge', array_filter($exclude_tids)))));
+  if ($exclude_tids)
+    $exclude_tids = array_values(array_filter(array_unique(call_user_func_array('array_merge', array_filter($exclude_tids)))));
 
   $classifier = _cluster_classifier_instance();
   $tids = $classifier->getTerms($text, $exclude_tids);
