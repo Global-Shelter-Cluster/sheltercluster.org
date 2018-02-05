@@ -4,6 +4,7 @@ function _cluster_classifier_instance() {
   require_once 'vendor/autoload.php';
   require_once 'src/Classifier.php';
   require_once 'src/DrupalDBStorage.php';
+  require_once 'src/Content.php';
 
   $instance = &drupal_static(__FUNCTION__);
 
@@ -191,8 +192,31 @@ function cluster_classifier_form_alter(&$form, &$form_state, $form_id) {
 }
 
 function cluster_classifier_autotag($form, &$form_state) {
-  $text = $form_state['values']['title'] . ' ' . $form_state['values']['title_field']['und'][0]['value'] . ' ' . strip_tags($form_state['values']['body']['und'][0]['value']);
-  $text = trim($text);
+  require_once 'vendor/autoload.php';
+  require_once 'src/Classifier.php';
+  require_once 'src/DrupalDBStorage.php';
+  require_once 'src/Content.php';
+
+  $functions = [
+    function($values) {return $values['title'] . ' ' . $values['title_field']['und'][0]['value'];},
+    function($values) {return strip_tags($values['body']['und'][0]['value']);},
+    function($values) {
+      if (!isset($values['field_file']['und'][0]['fid']))
+        return '';
+
+      $file = file_load($values['field_file']['und'][0]['fid']);
+      if (!$file)
+        return '';
+
+      try {
+        return \Cluster\Content::getFileContents($file);
+      } catch (Exception $e) {
+        return '';
+      }
+    },
+  ];
+
+  $text = \Cluster\Classifier::getTextProgressively($functions, [$form_state['values']]);
   if (!$text)
     return [
       '#type' => 'ajax',
