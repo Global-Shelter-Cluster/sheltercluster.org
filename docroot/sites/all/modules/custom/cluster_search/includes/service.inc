@@ -261,7 +261,8 @@ class SearchApiClusterAlgoliaService extends SearchApiAlgoliaService {
       $args['hitsPerPage'] = $limit;
     }
 
-    $args['attributesToRetrieve'] = implode(',', $query_options['attributesToRetrieve']);
+    if (isset($query_options['attributesToRetrieve']))
+      $args['attributesToRetrieve'] = implode(',', (array) $query_options['attributesToRetrieve']);
 
     if (isset($query_options['algoliaMethod']) && $query_options['algoliaMethod'] === 'browse') {
       $result = $index->browseFrom('', $args);
