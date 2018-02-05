@@ -8,3 +8,4 @@ dependencies[] = cluster_taxonomy
 files[] = vendor/autoload.php
 files[] = src/Classifier.php
 files[] = src/DrupalDBStorage.php
+files[] = src/Content.php

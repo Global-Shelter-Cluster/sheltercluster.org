@@ -57,8 +57,16 @@ class Classifier {
         return strip_tags($node->body[LANGUAGE_NONE][0]['value']);
       },
       'attachments_field_file' => function($node) {
-        //TODO: implement
-        return '';
+        if (!isset($node->field_file['und'][0]) || !$node->field_file['und'][0])
+          return '';
+
+        $file = $node->field_file['und'][0];
+
+        try {
+          return Content::getFileContents($file);
+        } catch (\Exception $e) {
+          return '';
+        }
       },
     ];
   }
@@ -219,17 +227,21 @@ class Classifier {
   }
 
   public function extractTextFromNode($node) {
+    return self::getTextProgressively($this->text_fields, [$node]);
+  }
+
+  public static function getTextProgressively($functions, $args = []) {
     $text = '';
 
-    foreach ($this->text_fields as $fn) {
-      $text .= ' ' . $fn($node);
+    foreach ($functions as $fn) {
+      $text .= ' ' . call_user_func_array($fn, $args);
       if (drupal_strlen($text) > self::LIMIT_CHARS) {
         $text = text_summary($text, NULL, self::LIMIT_CHARS);
         break;
       }
     }
 
-    return $text;
+    return trim($text);
   }
 
   public function getTermsForNode($node, $exclude_tids = []) {
