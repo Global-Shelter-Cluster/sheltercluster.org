@@ -191,6 +191,16 @@ function cluster_classifier_form_alter(&$form, &$form_state, $form_id) {
   ];
 }
 
+/**
+ * AJAX callback to calculate suggested tags.
+ * Any change in this function should probably be replicated in
+ * cluster_classifier_ajax_render_alter().
+ *
+ * @param $form
+ * @param $form_state
+ *
+ * @return array
+ */
 function cluster_classifier_autotag($form, &$form_state) {
   require_once 'vendor/autoload.php';
   require_once 'src/Classifier.php';
@@ -251,4 +261,66 @@ function cluster_classifier_autotag($form, &$form_state) {
       ajax_command_invoke('#edit-field-document-type-autotag', 'change'),
     ],
   ];
+}
+
+/**
+ * This is very similar to cluster_classifier_autotag(), but works when a file
+ * is uploaded. There are some differences in the way data is retrieved (e.g.
+ * using $form_state['input'] instead of $form_state['values']).
+ *
+ * Implements hook_ajax_render_alter().
+ */
+function cluster_classifier_ajax_render_alter(&$commands) {
+  if (arg(0) !== 'file' || arg(1) !== 'ajax')
+    return;
+
+  list($form, $form_state, $form_id, $form_build_id, $commands_dummy) = ajax_get_form();
+  if (!$form || !isset($form['field_file']['und'][0]['#default_value']) || !$form['field_file']['und'][0]['#default_value']['fid'])
+    return;
+
+  require_once 'vendor/autoload.php';
+  require_once 'src/Classifier.php';
+  require_once 'src/DrupalDBStorage.php';
+  require_once 'src/Content.php';
+
+  $functions = [
+    function($form, $form_state) {return $form_state['input']['title_field']['und'][0]['value'];},
+    function($form, $form_state) {return strip_tags($form_state['input']['body']['und'][0]['value']);},
+    function($form, $form_state) {
+      if (!isset($form['field_file']['und'][0]['#default_value']['fid']))
+        return '';
+
+      $file = file_load($form['field_file']['und'][0]['#default_value']['fid']);
+      if (!$file)
+        return '';
+
+      try {
+        return \Cluster\Content::getFileContents($file);
+      } catch (Exception $e) {
+        return '';
+      }
+    },
+  ];
+
+  $text = \Cluster\Classifier::getTextProgressively($functions, [$form, $form_state]);
+  if (!$text) {
+    $commands[] = ajax_command_invoke('#edit-field-document-type-autotag', 'data', ['tids', []]);
+    $commands[] = ajax_command_invoke('#edit-field-document-type-autotag', 'change');
+  }
+
+  $exclude_tids = [];
+  foreach (cluster_docs_taxonomies(FALSE) as $field) {
+    if (!isset($form_state['input'][$field]) || !is_array($form_state['input'][$field]['und']))
+      continue;
+    $exclude_tids[] = array_keys(array_filter($form_state['input'][$field]['und']));
+  }
+  $exclude_tids = array_filter($exclude_tids);
+  if ($exclude_tids)
+    $exclude_tids = array_values(array_filter(array_unique(call_user_func_array('array_merge', $exclude_tids))));
+
+  $classifier = _cluster_classifier_instance();
+  $tids = $classifier->getTerms($text, $exclude_tids);
+
+  $commands[] = ajax_command_invoke('#edit-field-document-type-autotag', 'data', ['tids', $classifier->groupTidsByField($tids)]);
+  $commands[] = ajax_command_invoke('#edit-field-document-type-autotag', 'change');
 }
