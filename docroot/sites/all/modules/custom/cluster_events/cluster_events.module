@@ -224,7 +224,7 @@ function cluster_events_format_upcoming($nid) {
 
     $geo = _cluster_events_get_geocoordinates_from_address_field($wrapper->field_postal_address->value());
 
-    $map_link = l(t('map'), 'https://www.google.ca/maps/place/' . $geo['lat'] . ',' . $geo['lon'] . '/@' . $geo['lat'] . ',' . $geo['lon'] . ',15z', array(
+    $map_link = l(t('map'), 'https://www.google.ca/maps/place/' . $geo['lat'] . ',' . $geo['lon'] . '/@' . $geo['lat'] . ',' . $geo['lon'] . ',' . $geo['zoom'] . 'z', array(
       'attributes' => array(
         'target' => '_blank',
       )
@@ -236,7 +236,7 @@ function cluster_events_format_upcoming($nid) {
 
     $static_map = FALSE;
     if (!empty($geo)) {
-      $static_map_url = 'http://maps.googleapis.com/maps/api/staticmap?center=' . $geo['lat'] . ',' . $geo['lon'] . '&zoom=15&scale=1&size=300x200&maptype=roadmap&format=png&visual_refresh=true&markers=size:small|color:0x000000|label:1|' . $geo['lat'] . ',' . $geo['lon'];
+      $static_map_url = 'http://maps.googleapis.com/maps/api/staticmap?center=' . $geo['lat'] . ',' . $geo['lon'] . '&zoom=' . $geo['zoom'] . '&scale=1&size=300x200&maptype=roadmap&format=png&visual_refresh=true&markers=size:small|color:0x000000|label:1|' . $geo['lat'] . ',' . $geo['lon'];
       $static_map_description = 'Map to ' . $wrapper->title->value();
       $static_map = theme('image', array(
         'path' => $static_map_url,
@@ -293,7 +293,7 @@ function cluster_events_format_list($nids) {
 
       $geo = _cluster_events_get_geocoordinates_from_address_field($wrapper->field_postal_address->value());
 
-      $map_url = 'https://www.google.ca/maps/place/' . $geo['lat'] . ',' . $geo['lon'] . '/@' . $geo['lat'] . ',' . $geo['lon'] . ',15z';
+      $map_url = 'https://www.google.ca/maps/place/' . $geo['lat'] . ',' . $geo['lon'] . '/@' . $geo['lat'] . ',' . $geo['lon'] . ',' . $geo['zoom'] . 'z';
       $map_link = l(t('map'), $map_url, array(
         'attributes' => array(
           'target' => '_blank',
@@ -366,8 +366,8 @@ function cluster_events_preprocess_node(&$variables) {
 function cluster_events_create_map_with_link($geo = NULL, $map_title = '') {
   $static_map = FALSE;
   if (!empty($geo)) {
-    $map_url = 'https://www.google.ca/maps/place/' . $geo['lat'] . ',' . $geo['lon'] . '/@' . $geo['lat'] . ',' . $geo['lon'] . ',15z';
-    $static_map_url = 'http://maps.googleapis.com/maps/api/staticmap?center=' . $geo['lat'] . ',' . $geo['lon'] . '&zoom=15&scale=1&size=300x200&maptype=roadmap&format=png&visual_refresh=true&markers=size:small|color:0x000000|label:1|' . $geo['lat'] . ',' . $geo['lon'];
+    $map_url = 'https://www.google.ca/maps/place/' . $geo['lat'] . ',' . $geo['lon'] . '/@' . $geo['lat'] . ',' . $geo['lon'] . ',' . $geo['zoom'] . 'z';
+    $static_map_url = 'http://maps.googleapis.com/maps/api/staticmap?center=' . $geo['lat'] . ',' . $geo['lon'] . '&zoom=' . $geo['zoom'] . '&scale=1&size=300x200&maptype=roadmap&format=png&visual_refresh=true&markers=size:small|color:0x000000|label:1|' . $geo['lat'] . ',' . $geo['lon'];
     $static_map_description = t('Map to ') . $map_title;
     $static_map = theme('image', array(
       'path' => $static_map_url,
@@ -506,5 +506,23 @@ function cluster_events_entity_info_alter(&$entity_info) {
  */
 function _cluster_events_get_geocoordinates_from_address_field($addressfield_values) {
   $data = unserialize($addressfield_values['data']);
-  return ['lon' => $data['longitude'], 'lat' => $data['latitude']];
+  $zoom = isset($data['zoom']) ? $data['zoom'] : 15;
+  return [
+    'lon' => $data['longitude'],
+    'lat' => $data['latitude'],
+    'zoom' => $zoom,
+  ];
+}
+
+/**
+ * Implements hook_field_widget_WIDGET_TYPE_form_alter().
+ *
+ * Attach our custom javascript to fix the map zoom behavior.
+ */
+function cluster_events_field_widget_addressfield_autocomplete_form_alter(&$element, &$form_state, $context) {
+  $path = drupal_get_path('module', 'cluster_events');
+  $element[$element['#field_name']]['#attached']['js'][$path . '/js/map_widget_fix.js'] = array(
+    'type' => 'file',
+    'weight' => 10,
+  );
 }
