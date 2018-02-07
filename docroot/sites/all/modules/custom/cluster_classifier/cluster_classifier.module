@@ -306,6 +306,7 @@ function cluster_classifier_ajax_render_alter(&$commands) {
   if (!$text) {
     $commands[] = ajax_command_invoke('#edit-field-document-type-autotag', 'data', ['tids', []]);
     $commands[] = ajax_command_invoke('#edit-field-document-type-autotag', 'change');
+    return;
   }
 
   $exclude_tids = [];
