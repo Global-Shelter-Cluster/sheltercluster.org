@@ -489,6 +489,11 @@ function cluster_events_field_widget_addressfield_autocomplete_form_alter(&$elem
   $widget['locality_block']['locality']['#required'] = FALSE;
   $widget['locality_block']['postal_code']['#required'] = FALSE;
   $widget['locality_block']['administrative_area']['#required'] = FALSE;
+  $path = drupal_get_path('module', 'cluster_events');
+  $element[$element['#field_name']]['#attached']['js'][$path . '/js/map_widget_fix.js'] = array(
+    'type' => 'file',
+    'weight' => 10,
+  );
 }
 
 /**
@@ -512,17 +517,4 @@ function _cluster_events_get_geocoordinates_from_address_field($addressfield_val
     'lat' => $data['latitude'],
     'zoom' => $zoom,
   ];
-}
-
-/**
- * Implements hook_field_widget_WIDGET_TYPE_form_alter().
- *
- * Attach our custom javascript to fix the map zoom behavior.
- */
-function cluster_events_field_widget_addressfield_autocomplete_form_alter(&$element, &$form_state, $context) {
-  $path = drupal_get_path('module', 'cluster_events');
-  $element[$element['#field_name']]['#attached']['js'][$path . '/js/map_widget_fix.js'] = array(
-    'type' => 'file',
-    'weight' => 10,
-  );
 }
