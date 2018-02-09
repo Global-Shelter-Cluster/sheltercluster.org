@@ -124,6 +124,23 @@ function cluster_events_all($nid) {
   return $ret;
 }
 
+function cluster_events_theme_registry_alter(&$theme_registry) {
+  $path = drupal_get_path('module', 'cluster_events');
+  $theme_registry['node_preview']['file'] = 'cluster_events.module';
+  $theme_registry['node_preview']['theme path'] = $path;
+  $theme_registry['node_preview']['function'] = 'cluster_events_node_preview';
+  $theme_registry['node_preview']['includes'] = [
+    $path . '/cluster_events.module',
+  ];
+}
+
+function cluster_events_node_preview($variables) {
+  if (!$variables['node']->type == 'event') {
+    return theme_node_preview($variables);
+  }
+  return '<div class="preview"><div class="node">' . t('Please preview your event before final submitting.') . '</div></div>';
+}
+
 /**
  * Get upcoming events.
  *
@@ -207,7 +224,7 @@ function cluster_events_format_upcoming($nid) {
 
     $geo = _cluster_events_get_geocoordinates_from_address_field($wrapper->field_postal_address->value());
 
-    $map_link = l(t('map'), 'https://www.google.ca/maps/place/' . $geo['lat'] . ',' . $geo['lon'] . '/@' . $geo['lat'] . ',' . $geo['lon'] . ',15z', array(
+    $map_link = l(t('map'), 'https://www.google.ca/maps/place/' . $geo['lat'] . ',' . $geo['lon'] . '/@' . $geo['lat'] . ',' . $geo['lon'] . ',' . $geo['zoom'] . 'z', array(
       'attributes' => array(
         'target' => '_blank',
       )
@@ -219,7 +236,7 @@ function cluster_events_format_upcoming($nid) {
 
     $static_map = FALSE;
     if (!empty($geo)) {
-      $static_map_url = 'http://maps.googleapis.com/maps/api/staticmap?center=' . $geo['lat'] . ',' . $geo['lon'] . '&zoom=15&scale=1&size=300x200&maptype=roadmap&format=png&visual_refresh=true&markers=size:small|color:0x000000|label:1|' . $geo['lat'] . ',' . $geo['lon'];
+      $static_map_url = 'http://maps.googleapis.com/maps/api/staticmap?center=' . $geo['lat'] . ',' . $geo['lon'] . '&zoom=' . $geo['zoom'] . '&scale=1&size=300x200&maptype=roadmap&format=png&visual_refresh=true&markers=size:small|color:0x000000|label:1|' . $geo['lat'] . ',' . $geo['lon'];
       $static_map_description = 'Map to ' . $wrapper->title->value();
       $static_map = theme('image', array(
         'path' => $static_map_url,
@@ -276,7 +293,7 @@ function cluster_events_format_list($nids) {
 
       $geo = _cluster_events_get_geocoordinates_from_address_field($wrapper->field_postal_address->value());
 
-      $map_url = 'https://www.google.ca/maps/place/' . $geo['lat'] . ',' . $geo['lon'] . '/@' . $geo['lat'] . ',' . $geo['lon'] . ',15z';
+      $map_url = 'https://www.google.ca/maps/place/' . $geo['lat'] . ',' . $geo['lon'] . '/@' . $geo['lat'] . ',' . $geo['lon'] . ',' . $geo['zoom'] . 'z';
       $map_link = l(t('map'), $map_url, array(
         'attributes' => array(
           'target' => '_blank',
@@ -349,8 +366,8 @@ function cluster_events_preprocess_node(&$variables) {
 function cluster_events_create_map_with_link($geo = NULL, $map_title = '') {
   $static_map = FALSE;
   if (!empty($geo)) {
-    $map_url = 'https://www.google.ca/maps/place/' . $geo['lat'] . ',' . $geo['lon'] . '/@' . $geo['lat'] . ',' . $geo['lon'] . ',15z';
-    $static_map_url = 'http://maps.googleapis.com/maps/api/staticmap?center=' . $geo['lat'] . ',' . $geo['lon'] . '&zoom=15&scale=1&size=300x200&maptype=roadmap&format=png&visual_refresh=true&markers=size:small|color:0x000000|label:1|' . $geo['lat'] . ',' . $geo['lon'];
+    $map_url = 'https://www.google.ca/maps/place/' . $geo['lat'] . ',' . $geo['lon'] . '/@' . $geo['lat'] . ',' . $geo['lon'] . ',' . $geo['zoom'] . 'z';
+    $static_map_url = 'http://maps.googleapis.com/maps/api/staticmap?center=' . $geo['lat'] . ',' . $geo['lon'] . '&zoom=' . $geo['zoom'] . '&scale=1&size=300x200&maptype=roadmap&format=png&visual_refresh=true&markers=size:small|color:0x000000|label:1|' . $geo['lat'] . ',' . $geo['lon'];
     $static_map_description = t('Map to ') . $map_title;
     $static_map = theme('image', array(
       'path' => $static_map_url,
@@ -464,6 +481,22 @@ function cluster_events_toggle_optional_fields_overridden_fields_alter(array &$f
 }
 
 /**
+ * Implements hook_events_field_widget_form_alter().
+ */
+function cluster_events_field_widget_addressfield_autocomplete_form_alter(&$element, &$form_state, $context) {
+  $widget = &$element['field_postal_address']['widget'];
+  $widget['street_block']['thoroughfare']['#required'] = FALSE;
+  $widget['locality_block']['locality']['#required'] = FALSE;
+  $widget['locality_block']['postal_code']['#required'] = FALSE;
+  $widget['locality_block']['administrative_area']['#required'] = FALSE;
+  $path = drupal_get_path('module', 'cluster_events');
+  $element[$element['#field_name']]['#attached']['js'][$path . '/js/map_widget_fix.js'] = array(
+    'type' => 'file',
+    'weight' => 10,
+  );
+}
+
+/**
  * Implements hook_entity_info_alter().
  */
 function cluster_events_entity_info_alter(&$entity_info) {
@@ -478,5 +511,10 @@ function cluster_events_entity_info_alter(&$entity_info) {
  */
 function _cluster_events_get_geocoordinates_from_address_field($addressfield_values) {
   $data = unserialize($addressfield_values['data']);
-  return ['lon' => $data['longitude'], 'lat' => $data['latitude']];
+  $zoom = isset($data['zoom']) ? $data['zoom'] : 15;
+  return [
+    'lon' => $data['longitude'],
+    'lat' => $data['latitude'],
+    'zoom' => $zoom,
+  ];
 }
