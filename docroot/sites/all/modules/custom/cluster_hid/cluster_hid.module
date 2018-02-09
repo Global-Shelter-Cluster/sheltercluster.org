@@ -1,0 +1,32 @@
+<?php
+
+/**
+ * Implements hook_menu().
+ */
+function cluster_hid_menu() {
+  return [
+    'admin/config/shelter/hid' => [
+      'title' => 'Humanitarian Id Settings',
+      'description' => 'Credentials and configs for integration with Humanitarian.id.',
+      'page callback' => 'drupal_get_form',
+      'page arguments' => array('cluster_hid_settings_form'),
+      'access arguments' => array('access administration pages'),
+    ],
+  ];
+}
+
+function cluster_hid_settings_form() {
+  $client = new \GuzzleHttp\Client();
+  return system_settings_form([
+    'form' => [
+      '#type' => 'fieldset',
+      '#title' => t('Humanitarian Id'),
+      'cluster_hid_jwt' => [
+        '#type' => 'textarea',
+        '#title' => 'JWT',
+        '#default_value' => variable_get('cluster_hid_jwt', NULL),
+        '#description' => t('Get your JWT from your Humanitarian Id profile settings.'),
+      ],
+    ],
+  ]);
+}
