@@ -400,7 +400,7 @@
                 query[0].params.filters = vue.descendantNids
                   .map(function(i) {return 'group_nids:' + i})
                   .join(' OR ');
-              else
+              else if (vue.groupNid)
                 query[0].params.filters = 'group_nids:' + vue.groupNid;
 
               if (vue.nidFilter) { // E.g. arbitrary libraries

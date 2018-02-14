@@ -202,11 +202,7 @@ function cluster_docs_is_group_documents_page() {
  * @return Render array
  */
 function cluster_docs_global_search() {
-  $query = cluster_docs_query();
-
-  $filter = $query->createFilter();
-  $query->filter($filter);
-  return cluster_docs_page($query, TRUE, NULL, NULL, array(), TRUE);
+  return cluster_search_docs_page();
 }
 
 /**
