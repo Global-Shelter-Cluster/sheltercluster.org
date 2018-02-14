@@ -188,11 +188,13 @@ function cluster_search_docs_page($facet_filters = [], $nid_filter = NULL, $show
   // docs, for the relevant groups.
   $display_provider = cluster_nav_get_display_provider();
   $doc_permissions_by_group = [];
-  foreach ($display_provider->getSearchGroupNids() as $groupNid) {
-    $doc_permissions_by_group[$groupNid] = [
-      'edit' => og_user_access('node', $groupNid, 'edit document content'),
-      'delete' => og_user_access('node', $groupNid, 'delete document content'),
-    ];
+  if ($display_provider) {
+    foreach ($display_provider->getSearchGroupNids() as $groupNid) {
+      $doc_permissions_by_group[$groupNid] = [
+        'edit' => og_user_access('node', $groupNid, 'edit document content'),
+        'delete' => og_user_access('node', $groupNid, 'delete document content'),
+      ];
+    }
   }
   $ret['#attached']['js'][] = drupal_get_path('module', 'cluster_search') . '/js/documents.js';
   $ret['#attached']['js'][] = [

@@ -73,7 +73,7 @@ function _cluster_nav_paged_teaser_list($bundle) {
 }
 
 /**
- * @return \GroupDisplayProvider
+ * @return \GroupDisplayProvider|FALSE
  */
 function cluster_nav_get_display_provider() {
   /** @var GroupDisplayProvider $display_provider */
