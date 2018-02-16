@@ -1,32 +1,91 @@
 <?php
 
+use Drupal\cluster_hid\ClusterHidHttpClient;
+
 /**
  * Implements hook_menu().
  */
 function cluster_hid_menu() {
   return [
-    'admin/config/shelter/hid' => [
+    'admin/config/shelter/hid-settings' => [
       'title' => 'Humanitarian Id Settings',
       'description' => 'Credentials and configs for integration with Humanitarian.id.',
       'page callback' => 'drupal_get_form',
       'page arguments' => array('cluster_hid_settings_form'),
       'access arguments' => array('access administration pages'),
+      'file' => 'cluster_hid.forms.inc',
+    ],
+    'admin/config/shelter/hid-search' => [
+      'title' => 'Search Humanitarian.id',
+      'description' => 'Search Humanitarian.id for users',
+      'page callback' => 'drupal_get_form',
+      'page arguments' => array('cluster_hid_search_form'),
+      'access arguments' => array('access administration pages'),
+      'file' => 'cluster_hid.forms.inc',
+    ],
+    'hid-search-user-search-autocomplete' => [
+      'title' => 'Search Humanitarian.id autocomplete',
+      'page callback' => 'cluster_hid_user_search_autocomplete',
+      'access arguments' => array('access administration pages'),
+      'type' => MENU_CALLBACK,
+    ],
+    'hid-ajax-get-user-by-id/%' => [
+      'page callback' => 'cluster_hid_get_user_by_id',
+      'access arguments' => array('access administration pages'),
+      'page arguments' => [1],
+      'type' => MENU_CALLBACK,
     ],
   ];
 }
 
-function cluster_hid_settings_form() {
-  $client = new \GuzzleHttp\Client();
-  return system_settings_form([
-    'form' => [
-      '#type' => 'fieldset',
-      '#title' => t('Humanitarian Id'),
-      'cluster_hid_jwt' => [
-        '#type' => 'textarea',
-        '#title' => 'JWT',
-        '#default_value' => variable_get('cluster_hid_jwt', NULL),
-        '#description' => t('Get your JWT from your Humanitarian Id profile settings.'),
+/**
+ * Implements hook_theme.
+ */
+function cluster_hid_theme() {
+  return [
+    'hid_users' => [
+      'variables' => [
+        'users' => [],
       ],
+      'template' => 'hid-users',
+      'path' => drupal_get_path('module', 'cluster_hid') . '/template/',
     ],
-  ]);
+  ];
+}
+
+function cluster_hid_user_search_autocomplete($string) {
+  $matches = [];
+  $argument_length = strlen($string);
+
+  $min_length = 5;
+  if ($argument_length < $min_length) {
+    $matches[$string] = t('Need at least @min characters to perform search (@count more)', [
+      '@min' => $min_length,
+      '@count' => $min_length - $argument_length,
+    ]);
+    return drupal_json_output($matches);
+  }
+
+  $http_client = ClusterHidHttpClient::getInstance();
+  $name = $string;
+  $users = $http_client->searchUserByNameForAutocomplete($name);
+
+  foreach ($users as $user) {
+    $matches[$user->id] = _cluster_hid_format_user_for_autocomplete($user);
+  }
+  return drupal_json_output($matches);
+}
+
+function _cluster_hid_format_user_for_autocomplete($user) {
+  $formated_user = $user->given_name . ' ' . $user->family_name . ' (' . $user->email . ')';
+  if (isset($user->organization)) {
+    $formated_user = $formated_user . ' -- ' . $user->organization->name;
+  }
+  return $formated_user;
+}
+
+function cluster_hid_get_user_by_id($id) {
+  $http_client = ClusterHidHttpClient::getInstance();
+  $user = $http_client->getUserById($id);
+  return drupal_json_output(theme('hid_users', ['users' => [$user]]));
 }
