@@ -1,0 +1,123 @@
+.event-preview-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+
+  .event-preview {
+    position: relative;
+    color: $shelter-grey;
+    margin: 0 0 20px 0;
+    padding: 10px;
+    border: 1px solid $shelter-light-blue;
+    min-height: 150px;
+
+    max-width: 500px;
+    width: 100%;
+    @include breakpoint(850px) {
+      width: calc(50% - 10px);
+    }
+    @include breakpoint(980px) {
+      width: 100%;
+    }
+    @include breakpoint(1200px) {
+      width: calc(50% - 10px);
+    }
+    @include breakpoint(1720px) {
+      width: calc(33.33333% - 13.33333px);
+    }
+
+    a {
+      text-decoration: none;
+    }
+
+    h4 {
+      color: $shelter-red;
+      text-transform: uppercase;
+      font-weight: normal;
+      margin: 0;
+
+      line-height: 21px;
+      max-height: 21px * 3;
+      overflow: hidden;
+    }
+
+    .operation-icon {
+      float: right;
+      margin-left: 5px;
+    }
+
+    .thumbnail {
+      float: right;
+      width: 150px;
+      max-width: 30vw;
+      height: 150px;
+      margin-left: 10px;
+      position: relative;
+      overflow: hidden;
+      z-index: 1;
+
+      > * {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+      }
+
+      > img {
+        transition: .2s all;
+      }
+      &:hover > img {
+        opacity: .05;
+        filter: brightness(2);
+        transform: scale(1.02);
+      }
+    }
+
+    .group {
+      color: $shelter-grey;
+      display: block;
+    }
+
+    .group, .event-date {
+      margin-top: 3px;
+      @include rem(font-size, 0.75rem);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .event-location {
+      margin-top: 7px;
+      @include rem(font-size, 0.9rem);
+    }
+
+    .tags {
+      position: absolute;
+      bottom: 5px;
+      right: 5px;
+      max-height: 40px;
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      margin: 0;
+      padding-left: 170px;
+      overflow: hidden;
+
+      li {
+        @include rem(font-size, 0.75rem);
+        color: $shelter-grey;
+        border: 1px solid $shelter-grey;
+        border-radius: 6px;
+        padding: 0 4px;
+        margin: 1px;
+        height: 18px;
+        max-width: 220px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+    }
+  }
+}

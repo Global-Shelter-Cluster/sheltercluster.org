@@ -162,6 +162,10 @@ function cluster_search_theme($existing, $type, $theme, $path) {
       'template' => 'cluster_search_docs_facets',
       'path' => drupal_get_path('module', 'cluster_search').'/templates',
     ],
+    'cluster_search_events_list' => [
+      'template' => 'cluster_search_events_list',
+      'path' => drupal_get_path('module', 'cluster_search').'/templates',
+    ],
   ];
 }
 
@@ -213,26 +217,74 @@ function cluster_search_docs_page($facet_filters = [], $nid_filter = NULL, $show
 }
 
 /**
+ * @return array
+ */
+function cluster_search_events_page() {
+  $ret = [
+    ['#theme' => 'cluster_search_events_list'],
+  ];
+
+  _cluster_search_common_attach($ret);
+//  // Tell the frontend whether the current user has edit/delete permissions for
+//  // docs, for the relevant groups.
+//  $display_provider = cluster_nav_get_display_provider();
+//  $doc_permissions_by_group = [];
+//  if ($display_provider) {
+//    foreach ($display_provider->getSearchGroupNids() as $groupNid) {
+//      $doc_permissions_by_group[$groupNid] = [
+//        'edit' => og_user_access('node', $groupNid, 'edit event content'),
+//        'delete' => og_user_access('node', $groupNid, 'delete event content'),
+//      ];
+//    }
+//  }
+  $ret['#attached']['js'][] = drupal_get_path('module', 'cluster_search') . '/js/events.js';
+  $ret['#attached']['css'][] = drupal_get_path('module', 'addressfield') . '/addressfield.css';
+//  $ret['#attached']['js'][] = [
+//    'type' => 'setting',
+//    'data' => [
+//      'cluster_search' => [
+//        'doc_permissions_by_group' => $doc_permissions_by_group,
+//      ]
+//    ]
+//  ];
+  return $ret;
+}
+
+/**
  * Implements hook_cluster_og_dashboard_menu_alter().
  */
 function cluster_search_cluster_og_dashboard_menu_alter(&$items) {
-  if (!cluster_docs_is_group_documents_page() || !isset($items['documents']))
-    return;
-
   $display_provider = cluster_nav_get_display_provider();
 
-  $normal_label = t('Documents from this @type', ['@type' => $display_provider->getGroupTypeLabel()]);
-  $key_label = t('Key documents');
+  if (cluster_docs_is_group_documents_page() && isset($items['documents'])) {
+    $normal_label = t('Documents from this @type', ['@type' => $display_provider->getGroupTypeLabel()]);
+    $key_label = t('Key documents');
 
-  $subgroups_label = t('Include ' . _cluster_search_list_and($display_provider->getSubgroupTypes()));
+    $subgroups_label = t('Include ' . _cluster_search_list_and($display_provider->getSubgroupTypes()));
 
-  $items['documents']['#suffix'] = <<<EOS
+    $items['documents']['#suffix'] = <<<EOS
     <ul class="optgroup" v-cloak v-if="showModes">
       <li><label><input type="radio" value="normal" v-model="mode"> $normal_label</label></li>
       <li><label><input type="radio" value="key" v-model="mode"> $key_label</label></li>
       <li v-if="hasSubgroups"><label><input type="radio" value="descendants" v-model="mode"> $subgroups_label</label></li>
     </ul>
 EOS;
+  }
+
+  if (cluster_events_is_group_events_page() && isset($items['events'])) {
+    $upcoming_label = t('Upcoming');
+    $all_label = t('All events');
+
+    $subgroups_label = t('Include ' . _cluster_search_list_and($display_provider->getSubgroupTypes()));
+
+    $items['events']['#suffix'] = <<<EOS
+    <ul class="optgroup" v-cloak v-if="showModes">
+      <li><label><input type="radio" value="upcoming" v-model="mode"> $upcoming_label</label></li>
+      <li><label><input type="radio" value="all" v-model="mode"> $all_label</label></li>
+      <li v-if="hasSubgroups"><label><input type="radio" value="descendants" v-model="mode"> $subgroups_label</label></li>
+    </ul>
+EOS;
+  }
 }
 
 function _cluster_search_list_and($items) {

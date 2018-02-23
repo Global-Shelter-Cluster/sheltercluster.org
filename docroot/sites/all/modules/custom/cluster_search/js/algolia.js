@@ -5,6 +5,35 @@
       var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
       return date.getDate() + ' ' + (months[date.getMonth()]) + ' ' + date.getFullYear();
     },
+    dateHelperWithTime: function(timestamp) {
+      var date = new Date(parseInt(timestamp) * 1000);
+
+      var time = '';
+
+      var hours = date.getHours();
+      if (hours > 12)
+        time = (hours - 12);
+      else if (hours > 0)
+        time = hours;
+      else
+        time = '12';
+
+      time += ':';
+
+      var minutes = date.getMinutes();
+      if (minutes < 10)
+        time += '0';
+      time += minutes;
+
+      if (hours >= 12)
+        time += 'pm';
+      else
+        time += 'am';
+
+      var days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+
+      return days[date.getDay()] + '. ' + this.dateHelper(timestamp) + ', ' + time;
+    },
     attach: function (context, settings) {
       $('#cluster-search-mega-menu').once('clusterSearchAlgolia', function() {
         if (!settings.cluster_search.algolia_app_id || !settings.cluster_search.algolia_search_key || !settings.cluster_search.algolia_prefix) {
@@ -52,7 +81,7 @@
             url: result.url,
             title: result._highlightResult.title.value,
             group: group,
-            date: Drupal.behaviors.clusterSearchAlgolia.dateHelper(result['field_recurring_event_date2:value']),
+            date: Drupal.behaviors.clusterSearchAlgolia.dateHelper(result['event_date']),
             location: location
           };
         };
