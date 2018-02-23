@@ -265,10 +265,14 @@ class SearchApiClusterAlgoliaService extends SearchApiAlgoliaService {
     if (isset($query_options['offset']) || isset($query_options['limit'])) {
       $offset = isset($query_options['offset']) ? $query_options['offset'] : 0;
       $limit = isset($query_options['limit']) ? $query_options['limit'] : 1000000;
-      if ($offset % $limit !== 0)
-        throw new Exception('Cannot convert offset/limit into page/hitsPerPage');
-      $args['page'] = $offset / $limit;
-      $args['hitsPerPage'] = $limit;
+      if ($limit === 0) {
+        $args['hitsPerPage'] = 0;
+      } else {
+        if ($offset % $limit !== 0)
+          throw new Exception('Cannot convert offset/limit into page/hitsPerPage');
+        $args['page'] = $offset / $limit;
+        $args['hitsPerPage'] = $limit;
+      }
     }
 
     if (isset($query_options['attributesToRetrieve']))
