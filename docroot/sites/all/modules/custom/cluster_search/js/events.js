@@ -212,8 +212,8 @@
               ];
 
               var indexName = settings.cluster_search.algolia_prefix + 'Events';
-              // if (!vue.search)
-              //   indexName += '_sortByDate';
+              if (vue.mode === 'upcoming')
+                indexName += '_reverseSort';
 
               var query = [{
                 indexName: indexName,

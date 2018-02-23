@@ -68,8 +68,8 @@
 </table-->
 
 <section v-if="display == 'preview' && results" class="event-preview-list" v-cloak>
-  <article class="event-preview" v-for="event in results">
-    <a v-if="event.event_map_image" class="thumbnail" :href="event.event_map_link" target="_blank">
+  <article :class="['event-preview', event.event_date > nowTS ? '' : 'event-preview--past']" v-for="event in results">
+    <a v-if="event.event_map_image" class="thumbnail" :href="event.url" target="_blank">
       <img v-if="event.event_map_image" :src="event.event_map_image" :key="event.event_map_image">
     </a>
     <a v-if="event.can_edit" class="operation-icon" :href="'/node/' + event.nid + '/edit'" title="Edit this event">
@@ -79,7 +79,6 @@
     </a>
     <a :href="event.url">
       <h4 :title="event.title|strip_tags">
-        <i v-if="event.event_date > nowTS" class="far fa-calendar-alt" title="Upcoming"></i>
         <span v-html="event.title"></span>
       </h4>
     </a>
@@ -88,6 +87,7 @@
     </a>
 
     <div v-if="event.date || event.field_language || event.field_event_source" class="event-date">
+      <i class="far fa-calendar-alt" :title="event.event_date > nowTS ? 'Upcoming event' : 'Past event'"></i>
       {{ event.date }}
     </div>
 
