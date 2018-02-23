@@ -226,6 +226,12 @@ header {
     width: 49%;
     float: left;
   }
+  .full-width & {
+    @include breakpoint(980px) {
+      width: 100%;
+      float: none;
+    }
+  }
 }
 
 .document-table {

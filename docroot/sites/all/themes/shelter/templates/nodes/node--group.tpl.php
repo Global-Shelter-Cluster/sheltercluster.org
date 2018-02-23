@@ -66,7 +66,11 @@
       </section>
     <?php endif; ?>
 
-    <div class="clearfix">
+    <?php if (!$content['recent_documents'] || !$content['upcoming_events']): ?>
+      <div class="clearfix full-width">
+    <?php else: ?>
+      <div class="clearfix">
+    <?php endif; ?>
       <?php if ($content['recent_documents']): ?>
         <?php print render($content['recent_documents']); ?>
       <?php endif; ?>
