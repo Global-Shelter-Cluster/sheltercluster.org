@@ -11,6 +11,20 @@
     border: 1px solid $shelter-light-blue;
     min-height: 150px;
 
+    &.document-preview--draft {
+      color: lighten($shelter-grey, 30%);
+      h4 {color: lighten($shelter-grey, 25%);}
+      .group {color: lighten($shelter-grey, 30%);}
+      .thumbnail img {opacity: .7;}
+    }
+
+    .document-status {
+      @include rem(font-size, 0.5rem);
+      line-height: 1;
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+    
     max-width: 500px;
     width: 100%;
     @include breakpoint(850px) {

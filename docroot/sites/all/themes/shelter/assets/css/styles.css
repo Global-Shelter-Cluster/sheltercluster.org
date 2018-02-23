@@ -657,6 +657,25 @@ body {
   max-width: 500px;
   width: 100%;
 }
+.document-preview-list .document-preview.document-preview--draft {
+  color: #a4a4a4;
+}
+.document-preview-list .document-preview.document-preview--draft h4 {
+  color: #979797;
+}
+.document-preview-list .document-preview.document-preview--draft .group {
+  color: #a4a4a4;
+}
+.document-preview-list .document-preview.document-preview--draft .thumbnail img {
+  opacity: .7;
+}
+.document-preview-list .document-preview .document-status {
+  font-size: 8px;
+  font-size: 0.5rem;
+  line-height: 1;
+  font-weight: bold;
+  text-transform: uppercase;
+}
 @media (min-width: 850px) {
   .document-preview-list .document-preview {
     width: calc(50% - 10px);
