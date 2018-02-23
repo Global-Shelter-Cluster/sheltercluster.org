@@ -258,11 +258,12 @@ function cluster_events_format_upcoming($nid) {
 
     $geo = _cluster_events_get_geocoordinates_from_address_field($wrapper->field_postal_address->value());
 
-    $map_link = l(t('map'), cluster_events_generate_map_url($geo), array(
+    $map_url = cluster_events_generate_map_url($geo);
+    $map_link = $map_url ? l(t('map'), $map_url, array(
       'attributes' => array(
         'target' => '_blank',
       )
-    ));
+    )) : NULL;
 
     // Get contact(s).
     $contacts = $wrapper->field_event_contact->value();
@@ -328,11 +329,11 @@ function cluster_events_format_list($nids) {
       $geo = _cluster_events_get_geocoordinates_from_address_field($wrapper->field_postal_address->value());
 
       $map_url = cluster_events_generate_map_url($geo);
-      $map_link = l(t('map'), $map_url, array(
+      $map_link = $map_url ? l(t('map'), $map_url, array(
         'attributes' => array(
           'target' => '_blank',
         )
-      ));
+      )) : NULL;
 
       // Get contact(s).
       $contacts = $wrapper->field_event_contact->value();
@@ -401,6 +402,8 @@ function cluster_events_create_map_with_link($geo = NULL, $map_title = '') {
   $static_map = FALSE;
   if (!empty($geo)) {
     $map_url = cluster_events_generate_map_url($geo);
+    if (!$map_url)
+      return NULL;
     $static_map_url = cluster_events_generate_static_map_url($geo);
     $static_map_description = t('Map to ') . $map_title;
     $static_map = theme('image', array(
