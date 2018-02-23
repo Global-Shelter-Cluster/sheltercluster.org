@@ -9,18 +9,18 @@
     </li>
   </ul>
   <span v-if="hits <= 1"></span>
-  <ul class="search-display">
-    <li>
-      <a :href="display == 'preview' ? null : '#'" @click.prevent="display = 'preview'" title="Event previews">
-        <i class="fas fa-th-large"></i>
-      </a>
-    </li>
-    <li>
-      <a :href="display == 'list' ? null : '#'" @click.prevent="display = 'list'" title="Table view">
-        <i class="fas fa-th-list"></i>
-      </a>
-    </li>
-  </ul>
+<!--  <ul class="search-display">-->
+<!--    <li>-->
+<!--      <a :href="display == 'preview' ? null : '#'" @click.prevent="display = 'preview'" title="Event previews">-->
+<!--        <i class="fas fa-th-large"></i>-->
+<!--      </a>-->
+<!--    </li>-->
+<!--    <li>-->
+<!--      <a :href="display == 'list' ? null : '#'" @click.prevent="display = 'list'" title="Table view">-->
+<!--        <i class="fas fa-th-list"></i>-->
+<!--      </a>-->
+<!--    </li>-->
+<!--  </ul>-->
 </div>
 
 <!--table v-if="display == 'list' && results" class="event-table" v-cloak>
