@@ -261,6 +261,7 @@ function cluster_search_default_search_api_index() {
         "field_coordination_management" : { "type" : "list\\u003Cinteger\\u003E", "entity_type" : "taxonomy_term" },
         "field_cross_cutting_issues" : { "type" : "list\\u003Cinteger\\u003E", "entity_type" : "taxonomy_term" },
         "field_document_source" : { "type" : "text", "boost" : "3.0" },
+        "field_document_status" : { "type" : "integer", "entity_type" : "taxonomy_term" },
         "field_document_type" : { "type" : "list\\u003Cinteger\\u003E", "entity_type" : "taxonomy_term" },
         "field_featured" : { "type" : "boolean" },
         "field_file:file:size" : { "type" : "integer" },
