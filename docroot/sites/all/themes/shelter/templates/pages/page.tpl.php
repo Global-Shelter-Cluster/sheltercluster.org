@@ -66,6 +66,9 @@
       <?php if ($messages): ?>
         <?php print $messages; ?>
       <?php endif; ?>
+      <?php if (!empty($tabs)): ?>
+        <?php print render($tabs); ?>
+      <?php endif; ?>
     </div>
 
     <?php if (!$is_front): ?>
