@@ -3686,6 +3686,7 @@ footer .table-row {
   padding: 10px;
   border: 1px solid #cdd6db;
   min-height: 150px;
+  min-width: 350px;
   max-width: 500px;
   width: 100%;
 }
@@ -3779,6 +3780,21 @@ footer .table-row {
 .event-preview-list .event-preview .group ~ .event-location {
   max-height: 57.6px;
   max-height: 3.6rem;
+}
+
+.document-table .event-location {
+  min-width: 100px;
+  font-size: 13.6px;
+  font-size: 0.85rem;
+  color: #688394;
+}
+.document-table .event-date {
+  min-width: 100px;
+  white-space: nowrap;
+  text-align: center;
+  font-size: 13.6px;
+  font-size: 0.85rem;
+  color: #688394;
 }
 
 #shelter-calendar.upcoming-events {

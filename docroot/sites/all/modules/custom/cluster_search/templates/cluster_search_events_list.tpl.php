@@ -9,24 +9,24 @@
     </li>
   </ul>
   <span v-if="hits <= 1"></span>
-<!--  <ul class="search-display">-->
-<!--    <li>-->
-<!--      <a :href="display == 'preview' ? null : '#'" @click.prevent="display = 'preview'" title="Event previews">-->
-<!--        <i class="fas fa-th-large"></i>-->
-<!--      </a>-->
-<!--    </li>-->
-<!--    <li>-->
-<!--      <a :href="display == 'list' ? null : '#'" @click.prevent="display = 'list'" title="Table view">-->
-<!--        <i class="fas fa-th-list"></i>-->
-<!--      </a>-->
-<!--    </li>-->
-<!--  </ul>-->
+  <ul class="search-display">
+    <li>
+      <a :href="display == 'preview' ? null : '#'" @click.prevent="display = 'preview'" title="Event previews">
+        <i class="fas fa-th-large"></i>
+      </a>
+    </li>
+    <li>
+      <a :href="display == 'list' ? null : '#'" @click.prevent="display = 'list'" title="Table view">
+        <i class="fas fa-th-list"></i>
+      </a>
+    </li>
+  </ul>
 </div>
 
-<!--table v-if="display == 'list' && results" class="event-table" v-cloak>
+<table v-if="display == 'list' && results" class="document-table" v-cloak>
   <thead>
   <tr>
-    <th style="width: 100%;">Event title</th>
+    <th>Event title</th>
     <th>Location</th>
     <th>Date</th>
   </tr>
@@ -42,30 +42,12 @@
       </a>
       <a :href="event.url" v-html="event.title"></a>
       <a v-if="showGroup && groupNid != event.group_nids[0]" :href="'/node/' + event.group_nids[0]" class="group" v-html="event.group"></a>
-      <div v-if="event.tags && event.tags.length" class="tags">
-        <div class="item-list">
-          <h3>Tags</h3>
-          <ul>
-            <li v-for="tag in event.tags" @click="selectFacet(tag.field_key, tag.value)">{{ tag.value }}</li>
-          </ul>
-        </div>
-      </div>
     </td>
-    <td class="information-file">
-      <a :href="event.direct_url" target="_blank">
-        <span v-if="event['field_file:file:size']">[ {{ event['field_file:file:size']|file_size }} ]</span>
-        <span v-if="event.file_extension">{{ event.file_extension }}</span>
-        <span v-if="!event['field_file:file:size'] && !event.file_extension">LINK</span>
-      </a>
-    </td>
-    <td class="publication-date">
-      <span>
-        {{ event.date }}
-      </span>
-    </td>
+    <td v-html="event.event_location_html" class="event-location"></td>
+    <td class="event-date" v-html="event.short_date"></td>
   </tr>
   </tbody>
-</table-->
+</table>
 
 <section v-if="display == 'preview' && results" class="event-preview-list" v-cloak>
   <article :class="['event-preview', event.event_date > nowTS ? '' : 'event-preview--past']" v-for="event in results">

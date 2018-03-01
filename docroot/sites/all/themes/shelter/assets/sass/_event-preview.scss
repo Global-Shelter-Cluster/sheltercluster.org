@@ -18,6 +18,7 @@
       .thumbnail img {opacity: .7;}
     }
 
+    min-width: 350px;
     max-width: 500px;
     width: 100%;
     @include breakpoint(850px) {
