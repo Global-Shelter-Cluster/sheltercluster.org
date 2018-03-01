@@ -76,6 +76,7 @@
 
     <div v-if="event.event_location_html" v-html="event.event_location_html" class="event-location"></div>
   </article>
+  <div></div>
 </section>
 
 <div class="no-results" v-if="false">
