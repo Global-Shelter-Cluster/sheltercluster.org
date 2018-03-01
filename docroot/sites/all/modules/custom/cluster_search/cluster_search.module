@@ -166,6 +166,10 @@ function cluster_search_theme($existing, $type, $theme, $path) {
       'template' => 'cluster_search_events_list',
       'path' => drupal_get_path('module', 'cluster_search').'/templates',
     ],
+    'cluster_search_events_facets' => [
+      'template' => 'cluster_search_events_facets',
+      'path' => drupal_get_path('module', 'cluster_search').'/templates',
+    ],
   ];
 }
 
@@ -223,6 +227,8 @@ function cluster_search_events_page() {
   $ret = [
     ['#theme' => 'cluster_search_events_list'],
   ];
+
+  $ret['side-column'] = ['#theme' => 'cluster_search_events_facets'];
 
   _cluster_search_common_attach($ret);
   // Tell the frontend whether the current user has edit/delete permissions for

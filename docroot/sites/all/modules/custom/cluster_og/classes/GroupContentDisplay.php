@@ -207,7 +207,7 @@ class GroupDisplayProvider {
 
     $secondary = array();
 
-    $force_collapse = cluster_docs_is_group_documents_page();
+    $force_collapse = cluster_docs_is_group_documents_page() || cluster_events_is_group_events_page();
 
     if ($responses = $this->getRelatedResponses()) {
       $secondary['responses'] = partial('navigation_options', array(
