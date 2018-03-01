@@ -278,7 +278,7 @@
           },
           methods: {
             documentStatusClass: function(value) {
-              if (!value || value.toLowerCase().trim() === 'final') return '';
+              if (!value) return '';
               return 'document-preview--' + value.toLowerCase();
             },
             prepareFacetFilters: function() {

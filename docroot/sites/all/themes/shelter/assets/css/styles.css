@@ -666,8 +666,12 @@ body {
 .document-preview-list .document-preview.document-preview--draft .group {
   color: #a4a4a4;
 }
-.document-preview-list .document-preview.document-preview--draft .thumbnail img {
+.document-preview-list .document-preview.document-preview--draft .thumbnail {
   opacity: .7;
+}
+.document-preview-list .document-preview.document-preview--draft .tags li {
+  color: #a4a4a4;
+  border-color: #a4a4a4;
 }
 .document-preview-list .document-preview .document-status {
   font-size: 8px;

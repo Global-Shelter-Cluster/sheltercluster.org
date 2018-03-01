@@ -15,7 +15,11 @@
       color: lighten($shelter-grey, 30%);
       h4 {color: lighten($shelter-grey, 25%);}
       .group {color: lighten($shelter-grey, 30%);}
-      .thumbnail img {opacity: .7;}
+      .thumbnail {opacity: .7;}
+      .tags li {
+        color: lighten($shelter-grey, 30%);
+        border-color: lighten($shelter-grey, 30%);
+      }
     }
 
     .document-status {
