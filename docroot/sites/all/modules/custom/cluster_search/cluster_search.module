@@ -166,6 +166,10 @@ function cluster_search_theme($existing, $type, $theme, $path) {
       'template' => 'cluster_search_events_list',
       'path' => drupal_get_path('module', 'cluster_search').'/templates',
     ],
+    'cluster_search_events_facets' => [
+      'template' => 'cluster_search_events_facets',
+      'path' => drupal_get_path('module', 'cluster_search').'/templates',
+    ],
   ];
 }
 
@@ -224,29 +228,31 @@ function cluster_search_events_page() {
     ['#theme' => 'cluster_search_events_list'],
   ];
 
+  $ret['side-column'] = ['#theme' => 'cluster_search_events_facets'];
+
   _cluster_search_common_attach($ret);
-//  // Tell the frontend whether the current user has edit/delete permissions for
-//  // docs, for the relevant groups.
-//  $display_provider = cluster_nav_get_display_provider();
-//  $doc_permissions_by_group = [];
-//  if ($display_provider) {
-//    foreach ($display_provider->getSearchGroupNids() as $groupNid) {
-//      $doc_permissions_by_group[$groupNid] = [
-//        'edit' => og_user_access('node', $groupNid, 'edit event content'),
-//        'delete' => og_user_access('node', $groupNid, 'delete event content'),
-//      ];
-//    }
-//  }
+  // Tell the frontend whether the current user has edit/delete permissions for
+  // events, for the relevant groups.
+  $display_provider = cluster_nav_get_display_provider();
+  $event_permissions_by_group = [];
+  if ($display_provider) {
+    foreach ($display_provider->getSearchGroupNids() as $groupNid) {
+      $event_permissions_by_group[$groupNid] = [
+        'edit' => og_user_access('node', $groupNid, 'edit event content'),
+        'delete' => og_user_access('node', $groupNid, 'delete event content'),
+      ];
+    }
+  }
   $ret['#attached']['js'][] = drupal_get_path('module', 'cluster_search') . '/js/events.js';
   $ret['#attached']['css'][] = drupal_get_path('module', 'addressfield') . '/addressfield.css';
-//  $ret['#attached']['js'][] = [
-//    'type' => 'setting',
-//    'data' => [
-//      'cluster_search' => [
-//        'doc_permissions_by_group' => $doc_permissions_by_group,
-//      ]
-//    ]
-//  ];
+  $ret['#attached']['js'][] = [
+    'type' => 'setting',
+    'data' => [
+      'cluster_search' => [
+        'event_permissions_by_group' => $event_permissions_by_group,
+      ]
+    ]
+  ];
   return $ret;
 }
 

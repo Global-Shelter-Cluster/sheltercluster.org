@@ -51,13 +51,14 @@
 
 <section v-if="display == 'preview' && results" class="event-preview-list" v-cloak>
   <article :class="['event-preview', event.event_date > nowTS ? '' : 'event-preview--past']" v-for="event in results">
-    <a v-if="event.event_map_image" class="thumbnail" :href="event.url" target="_blank">
+    <a class="thumbnail" :href="event.url">
       <img v-if="event.event_map_image" :src="event.event_map_image" :key="event.event_map_image">
     </a>
     <a v-if="event.can_edit" class="operation-icon" :href="'/node/' + event.nid + '/edit'" title="Edit this event">
       <i class="fas fa-edit"></i>
     </a>
     <a v-if="event.can_delete" class="operation-icon" :href="'/node/' + event.nid + '/delete'" title="Delete this event">
+      <i class="fas fa-trash-alt"></i>
     </a>
     <a :href="event.url">
       <h4 :title="event.title|strip_tags">
