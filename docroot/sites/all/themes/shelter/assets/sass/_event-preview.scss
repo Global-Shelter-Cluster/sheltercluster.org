@@ -3,6 +3,22 @@
   flex-wrap: wrap;
   justify-content: space-between;
 
+  > * {
+    width: 100%;
+    @include breakpoint(850px) {
+      width: calc(50% - 10px);
+    }
+    @include breakpoint(980px) {
+      width: 100%;
+    }
+    @include breakpoint(1200px) {
+      width: calc(50% - 10px);
+    }
+    @include breakpoint(1720px) {
+      width: calc(33.33333% - 13.33333px);
+    }
+  }
+
   .event-preview {
     position: relative;
     color: $shelter-grey;
@@ -20,19 +36,6 @@
 
     min-width: 350px;
     max-width: 500px;
-    width: 100%;
-    @include breakpoint(850px) {
-      width: calc(50% - 10px);
-    }
-    @include breakpoint(980px) {
-      width: 100%;
-    }
-    @include breakpoint(1200px) {
-      width: calc(50% - 10px);
-    }
-    @include breakpoint(1720px) {
-      width: calc(33.33333% - 13.33333px);
-    }
 
     a {
       text-decoration: none;
