@@ -47,9 +47,6 @@
           result.date = Drupal.behaviors.clusterSearchAlgolia.dateHelperWithTime(result['event_date']);
           result.short_date = Drupal.behaviors.clusterSearchAlgolia.dateHelperShortWithTime(result['event_date']);
 
-          console.log('processEvent');
-          console.log(result);
-
           return result;
         };
 
