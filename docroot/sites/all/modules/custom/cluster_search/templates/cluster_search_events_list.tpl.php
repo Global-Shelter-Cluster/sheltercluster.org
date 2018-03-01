@@ -58,6 +58,7 @@
       <i class="fas fa-edit"></i>
     </a>
     <a v-if="event.can_delete" class="operation-icon" :href="'/node/' + event.nid + '/delete'" title="Delete this event">
+      <i class="fas fa-trash-alt"></i>
     </a>
     <a :href="event.url">
       <h4 :title="event.title|strip_tags">
