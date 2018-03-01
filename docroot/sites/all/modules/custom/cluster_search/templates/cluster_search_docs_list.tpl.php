@@ -68,7 +68,7 @@
 </table>
 
 <section v-if="display == 'preview' && results" class="document-preview-list" v-cloak>
-  <article class="document-preview" v-for="document in results">
+  <article :class="['document-preview', documentStatusClass(document.field_document_status)]" v-for="document in results">
     <a class="thumbnail" :href="document.direct_url" target="_blank">
       <div class="file-info">
         <div v-if="document['field_file:file:size']">[ {{ document['field_file:file:size']|file_size }} ]</div>
@@ -83,6 +83,9 @@
     <a v-if="document.can_delete" class="operation-icon" :href="'/node/' + document.nid + '/delete'" title="Delete this document">
       <i class="fas fa-trash-alt"></i>
     </a>
+    <div v-if="document.field_document_status" class="document-status">
+      {{ document.field_document_status }}
+    </div>
     <a :href="document.url">
       <h4 :title="document.title|strip_tags" v-html="
       (

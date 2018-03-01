@@ -655,6 +655,29 @@ body {
   border: 1px solid #cdd6db;
   min-height: 150px;
 }
+.document-preview-list .document-preview.document-preview--draft {
+  color: #a4a4a4;
+}
+.document-preview-list .document-preview.document-preview--draft h4 {
+  color: #979797;
+}
+.document-preview-list .document-preview.document-preview--draft .group {
+  color: #a4a4a4;
+}
+.document-preview-list .document-preview.document-preview--draft .thumbnail {
+  opacity: .7;
+}
+.document-preview-list .document-preview.document-preview--draft .tags li {
+  color: #a4a4a4;
+  border-color: #a4a4a4;
+}
+.document-preview-list .document-preview .document-status {
+  font-size: 8px;
+  font-size: 0.5rem;
+  line-height: 1;
+  font-weight: bold;
+  text-transform: uppercase;
+}
 .document-preview-list .document-preview a {
   text-decoration: none;
 }

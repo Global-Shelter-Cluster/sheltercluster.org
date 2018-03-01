@@ -277,6 +277,10 @@
             }
           },
           methods: {
+            documentStatusClass: function(value) {
+              if (!value) return '';
+              return 'document-preview--' + value.toLowerCase();
+            },
             prepareFacetFilters: function() {
               var ret = [];
 
@@ -365,6 +369,7 @@
                 'document_date',
                 'group_nids',
                 'field_document_source',
+                'field_document_status',
 
                 'field_featured',
                 'field_key_document',
