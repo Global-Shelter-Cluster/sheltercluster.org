@@ -11,6 +11,14 @@
     border: 1px solid $shelter-light-blue;
     min-height: 150px;
 
+    &.event-preview--past {
+      color: lighten($shelter-grey, 30%);
+      h4 {color: lighten($shelter-grey, 25%);}
+      .group {color: lighten($shelter-grey, 30%);}
+      .thumbnail img {opacity: .7;}
+    }
+
+    min-width: 350px;
     max-width: 500px;
     width: 100%;
     @include breakpoint(850px) {
@@ -31,13 +39,13 @@
     }
 
     h4 {
-      color: $shelter-red;
+      color: $shelter-dark-blue;
       text-transform: uppercase;
       font-weight: normal;
       margin: 0;
 
       line-height: 21px;
-      max-height: 21px * 3;
+      max-height: 21px * 2;
       overflow: hidden;
     }
 
@@ -64,14 +72,14 @@
         height: 100%;
       }
 
-      > img {
-        transition: .2s all;
-      }
-      &:hover > img {
-        opacity: .05;
-        filter: brightness(2);
-        transform: scale(1.02);
-      }
+      //> img {
+      //  transition: .2s all;
+      //}
+      //&:hover > img {
+      //  opacity: .05;
+      //  filter: brightness(2);
+      //  transform: scale(1.02);
+      //}
     }
 
     .group {
@@ -90,34 +98,13 @@
     .event-location {
       margin-top: 7px;
       @include rem(font-size, 0.9rem);
+      @include rem(line-height, 1.2rem);
+      @include rem(max-height, 4 * 1.2rem);
+      overflow: hidden;
     }
 
-    .tags {
-      position: absolute;
-      bottom: 5px;
-      right: 5px;
-      max-height: 40px;
-      list-style: none;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: flex-end;
-      margin: 0;
-      padding-left: 170px;
-      overflow: hidden;
-
-      li {
-        @include rem(font-size, 0.75rem);
-        color: $shelter-grey;
-        border: 1px solid $shelter-grey;
-        border-radius: 6px;
-        padding: 0 4px;
-        margin: 1px;
-        height: 18px;
-        max-width: 220px;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-      }
+    .group ~ .event-location {
+      @include rem(max-height, 3 * 1.2rem);
     }
   }
 }

@@ -3722,8 +3722,21 @@ footer .table-row {
   padding: 10px;
   border: 1px solid #cdd6db;
   min-height: 150px;
+  min-width: 350px;
   max-width: 500px;
   width: 100%;
+}
+.event-preview-list .event-preview.event-preview--past {
+  color: #a4a4a4;
+}
+.event-preview-list .event-preview.event-preview--past h4 {
+  color: #979797;
+}
+.event-preview-list .event-preview.event-preview--past .group {
+  color: #a4a4a4;
+}
+.event-preview-list .event-preview.event-preview--past .thumbnail img {
+  opacity: .7;
 }
 @media (min-width: 850px) {
   .event-preview-list .event-preview {
@@ -3749,12 +3762,12 @@ footer .table-row {
   text-decoration: none;
 }
 .event-preview-list .event-preview h4 {
-  color: #7f1416;
+  color: #688394;
   text-transform: uppercase;
   font-weight: normal;
   margin: 0;
   line-height: 21px;
-  max-height: 63px;
+  max-height: 42px;
   overflow: hidden;
 }
 .event-preview-list .event-preview .operation-icon {
@@ -3778,14 +3791,6 @@ footer .table-row {
   width: 100%;
   height: 100%;
 }
-.event-preview-list .event-preview .thumbnail > img {
-  transition: .2s all;
-}
-.event-preview-list .event-preview .thumbnail:hover > img {
-  opacity: .05;
-  filter: brightness(2);
-  transform: scale(1.02);
-}
 .event-preview-list .event-preview .group {
   color: #575757;
   display: block;
@@ -3802,33 +3807,30 @@ footer .table-row {
   margin-top: 7px;
   font-size: 14.4px;
   font-size: 0.9rem;
-}
-.event-preview-list .event-preview .tags {
-  position: absolute;
-  bottom: 5px;
-  right: 5px;
-  max-height: 40px;
-  list-style: none;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-end;
-  margin: 0;
-  padding-left: 170px;
+  line-height: 19.2px;
+  line-height: 1.2rem;
+  max-height: 76.8px;
+  max-height: 4.8rem;
   overflow: hidden;
 }
-.event-preview-list .event-preview .tags li {
-  font-size: 12px;
-  font-size: 0.75rem;
-  color: #575757;
-  border: 1px solid #575757;
-  border-radius: 6px;
-  padding: 0 4px;
-  margin: 1px;
-  height: 18px;
-  max-width: 220px;
+.event-preview-list .event-preview .group ~ .event-location {
+  max-height: 57.6px;
+  max-height: 3.6rem;
+}
+
+.document-table .event-location {
+  min-width: 100px;
+  font-size: 13.6px;
+  font-size: 0.85rem;
+  color: #688394;
+}
+.document-table .event-date {
+  min-width: 100px;
   white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  text-align: center;
+  font-size: 13.6px;
+  font-size: 0.85rem;
+  color: #688394;
 }
 
 #shelter-calendar.upcoming-events {

@@ -5,7 +5,7 @@
       var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
       return date.getDate() + ' ' + (months[date.getMonth()]) + ' ' + date.getFullYear();
     },
-    dateHelperWithTime: function(timestamp) {
+    timeHelper: function(timestamp) {
       var date = new Date(parseInt(timestamp) * 1000);
 
       var time = '';
@@ -30,9 +30,15 @@
       else
         time += 'am';
 
+      return time;
+    },
+    dateHelperWithTime: function(timestamp) {
+      var date = new Date(parseInt(timestamp) * 1000);
       var days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-
-      return days[date.getDay()] + '. ' + this.dateHelper(timestamp) + ', ' + time;
+      return days[date.getDay()] + '. ' + this.dateHelper(timestamp) + ', ' + this.timeHelper(timestamp);
+    },
+    dateHelperShortWithTime: function(timestamp) {
+      return this.dateHelper(timestamp) + '<br/>' + this.timeHelper(timestamp);
     },
     attach: function (context, settings) {
       $('#cluster-search-mega-menu').once('clusterSearchAlgolia', function() {
