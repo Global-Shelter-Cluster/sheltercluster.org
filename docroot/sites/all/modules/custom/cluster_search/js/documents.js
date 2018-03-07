@@ -1,6 +1,6 @@
 (function ($) {
   Drupal.behaviors.clusterSearchDocuments = {
-    processDocument: function(result, facets) {
+    processDocument: function(result) {
       var group = typeof result._highlightResult.og_group_ref !== 'undefined' && result._highlightResult.og_group_ref.length > 0
         ? result._highlightResult.og_group_ref[0].value
         : null;
