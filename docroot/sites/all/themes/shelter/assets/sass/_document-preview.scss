@@ -2,6 +2,27 @@
   display: flex;
   flex-wrap: wrap;
 
+  .recent-documents & {
+    display: block;
+    .document-preview {
+      width: 100%;
+
+      margin-right: 0;
+      margin-bottom: 10px;
+      &:last-child {
+        margin-bottom:0;
+      }
+
+      &:after { //clearfix
+        content: ".";
+        display: block;
+        height: 0;
+        clear: both;
+        visibility: hidden;
+      }
+    }
+  }
+
   .document-preview {
     position: relative;
     color: $shelter-grey;

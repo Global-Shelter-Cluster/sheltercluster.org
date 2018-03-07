@@ -646,6 +646,24 @@ body {
   display: flex;
   flex-wrap: wrap;
 }
+.recent-documents .document-preview-list {
+  display: block;
+}
+.recent-documents .document-preview-list .document-preview {
+  width: 100%;
+  margin-right: 0;
+  margin-bottom: 10px;
+}
+.recent-documents .document-preview-list .document-preview:last-child {
+  margin-bottom: 0;
+}
+.recent-documents .document-preview-list .document-preview:after {
+  content: ".";
+  display: block;
+  height: 0;
+  clear: both;
+  visibility: hidden;
+}
 .document-preview-list .document-preview {
   position: relative;
   color: #575757;

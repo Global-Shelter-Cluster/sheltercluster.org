@@ -1,4 +1,4 @@
-<div class="search-summary" v-if="results && hits >= 1" v-cloak>
+<div class="cluster-search-docs-list search-summary" v-if="results && hits >= 1" v-cloak>
   <span v-if="hits > 1" class="summary">Showing {{ resultsFrom }}&ndash;{{ resultsTo }} of {{ hits }} documents.</span>
   <ul class="pagination" v-if="pages > 1">
     <li>Pages:</li>
@@ -68,7 +68,7 @@
 </table>
 
 <section v-if="display == 'preview' && results" class="document-preview-list" v-cloak>
-  <article :class="['document-preview', documentStatusClass(document.field_document_status)]" v-for="document in results">
+  <article :class="['document-preview', document.class]" v-for="document in results">
     <a class="thumbnail" :href="document.direct_url" target="_blank">
       <div class="file-info">
         <div v-if="document['field_file:file:size']">[ {{ document['field_file:file:size']|file_size }} ]</div>
