@@ -115,34 +115,58 @@ function cluster_search_cluster_mega_menu_alter(&$menu_output) {
   $menu_output['cluster_search'] = [
     '#theme' => 'cluster_search_mega_menu',
   ];
-  _cluster_search_common_attach($menu_output['cluster_search']);
+  cluster_search_common_attach($menu_output['cluster_search']);
 }
 
-function _cluster_search_common_attach(&$render_array) {
-  if (!array_key_exists('#attached', $render_array))
-    $render_array['#attached'] = [];
+function cluster_search_common_attach_documents(&$render_array) {
+  cluster_search_common_attach($render_array);
 
-  $render_array['#attached']['js'][] = drupal_get_path('module', 'cluster_search') . '/js/algolia.js';
-  $render_array['#attached']['js'][] = drupal_get_path('module', 'cluster_search') . '/js/lib/vue.min.js';
-  $render_array['#attached']['js'][] = drupal_get_path('module', 'cluster_search') . '/js/lib/algoliasearchLite.js';
-//  $render_array['#attached']['js'][] = [
-//    'type' => 'external',
-//    'data' => 'https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.3/vue.min.js'
-//  ];
-//  $render_array['#attached']['js'][] = [
-//    'type' => 'external',
-//    'data' => 'https://cdnjs.cloudflare.com/ajax/libs/algoliasearch/3.24.5/algoliasearchLite.js'
-//  ];
-  $render_array['#attached']['js'][] = [
-    'type' => 'setting',
-    'data' => [
-      'cluster_search' => [
-        'algolia_app_id' => variable_get('cluster_search_algolia_app_id'),
-        'algolia_search_key' => variable_get('cluster_search_algolia_search_key'),
-        'algolia_prefix' => variable_get('cluster_search_algolia_prefix'),
-      ]
+  drupal_add_js(drupal_get_path('module', 'cluster_search') . '/js/documents.js');
+
+  drupal_add_js([
+    'cluster_search' => [
+      'taxonomies' => cluster_docs_taxonomies(TRUE),
+      'taxonomy_groups' => cluster_docs_taxonomy_groups(),
     ]
-  ];
+  ], 'setting');
+
+  $display_provider = cluster_nav_get_display_provider();
+  if ($display_provider) {
+    // Tell the frontend whether the current user has edit/delete permissions for
+    // docs, for the relevant groups.
+    $doc_permissions_by_group = [];
+    if ($display_provider) {
+      foreach ($display_provider->getSearchGroupNids() as $groupNid) {
+        $doc_permissions_by_group[$groupNid] = [
+          'edit' => og_user_access('node', $groupNid, 'edit document content'),
+          'delete' => og_user_access('node', $groupNid, 'delete document content'),
+        ];
+      }
+    }
+
+    drupal_add_js([
+      'cluster_search' => [
+        'doc_permissions_by_group' => $doc_permissions_by_group,
+      ]
+    ], 'setting');
+  }
+}
+
+function cluster_search_common_attach(&$render_array) {
+  drupal_add_js(drupal_get_path('module', 'cluster_search') . '/js/algolia.js');
+// https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.3/vue.min.js
+  drupal_add_js(drupal_get_path('module', 'cluster_search') . '/js/lib/vue.min.js');
+// https://cdnjs.cloudflare.com/ajax/libs/algoliasearch/3.24.5/algoliasearchLite.js
+  drupal_add_js(drupal_get_path('module', 'cluster_search') . '/js/lib/algoliasearchLite.js');
+  drupal_add_js(drupal_get_path('module', 'cluster_search') . '/js/algolia.js');
+
+  drupal_add_js([
+    'cluster_search' => [
+      'algolia_app_id' => variable_get('cluster_search_algolia_app_id'),
+      'algolia_search_key' => variable_get('cluster_search_algolia_search_key'),
+      'algolia_prefix' => variable_get('cluster_search_algolia_prefix'),
+    ]
+  ], 'setting');
 }
 
 /**
@@ -191,27 +215,11 @@ function cluster_search_docs_page($facet_filters = [], $nid_filter = NULL, $show
   if ($show_facets)
     $ret['side-column'] = ['#theme' => 'cluster_search_docs_facets'];
 
-  _cluster_search_common_attach($ret);
-  // Tell the frontend whether the current user has edit/delete permissions for
-  // docs, for the relevant groups.
-  $display_provider = cluster_nav_get_display_provider();
-  $doc_permissions_by_group = [];
-  if ($display_provider) {
-    foreach ($display_provider->getSearchGroupNids() as $groupNid) {
-      $doc_permissions_by_group[$groupNid] = [
-        'edit' => og_user_access('node', $groupNid, 'edit document content'),
-        'delete' => og_user_access('node', $groupNid, 'delete document content'),
-      ];
-    }
-  }
-  $ret['#attached']['js'][] = drupal_get_path('module', 'cluster_search') . '/js/documents.js';
+  cluster_search_common_attach_documents($ret, $facet_filters, $nid_filter);
   $ret['#attached']['js'][] = [
     'type' => 'setting',
     'data' => [
       'cluster_search' => [
-        'taxonomies' => cluster_docs_taxonomies(TRUE),
-        'taxonomy_groups' => cluster_docs_taxonomy_groups(),
-        'doc_permissions_by_group' => $doc_permissions_by_group,
         'initial_filters' => $facet_filters,
         'nid_filter' => $nid_filter,
       ]
@@ -230,7 +238,7 @@ function cluster_search_events_page() {
 
   $ret['side-column'] = ['#theme' => 'cluster_search_events_facets'];
 
-  _cluster_search_common_attach($ret);
+  cluster_search_common_attach($ret);
   // Tell the frontend whether the current user has edit/delete permissions for
   // events, for the relevant groups.
   $display_provider = cluster_nav_get_display_provider();

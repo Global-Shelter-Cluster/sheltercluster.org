@@ -73,6 +73,8 @@ function theme_cluster_og_recent_documents($vars) {
     ),
   );
 
+  cluster_search_common_attach_documents();
+
   return partial('recent_documents', array(
     'title' => t('Latest documents'),
     'docs' => $vars['docs'],
