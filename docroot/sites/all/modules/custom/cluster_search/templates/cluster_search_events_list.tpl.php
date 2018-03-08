@@ -1,4 +1,4 @@
-<div class="search-summary" v-if="results && hits >= 1" v-cloak>
+<div class="cluster-search-events-list search-summary" v-if="results && hits >= 1" v-cloak>
   <span v-if="hits > 1" class="summary">Showing {{ resultsFrom }}&ndash;{{ resultsTo }} of {{ hits }} events.</span>
   <ul class="pagination" v-if="pages > 1">
     <li>Pages:</li>
@@ -89,6 +89,10 @@
   <a v-if="search && mode === 'all' && descendantNids.length > 1"
      href="#" @click.prevent="mode = 'descendants'">
     No events found matching "<strong>{{ search }}</strong>". Try including subgroups.
+  </a>
+  <a v-else-if="search && mode === 'upcoming'"
+     href="#" @click.prevent="mode = 'all'">
+    No events found matching "<strong>{{ search }}</strong>". Try including past events.
   </a>
   <span v-else-if="search && (mode === 'descendants' || descendantNids.length <= 1)">
     No events found matching "<strong>{{ search }}</strong>".

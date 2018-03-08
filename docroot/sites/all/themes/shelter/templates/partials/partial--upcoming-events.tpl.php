@@ -1,40 +1,45 @@
-<section id="shelter-calendar" class="upcoming-events">
-  <div id="box-calendar">
+<section id="shelter-calendar" class="upcoming-events" v-cloak v-if="results">
+  <div id="box-calendar" class="event-preview-list">
     <div id="date-calendar">
       <?php print $title ?>
     </div>
 
-    <?php foreach ($events as $key => $event): ?>
-      <div class="event-card<?php print ($key === 0) ? ' is-first' : ''; ?>">
-        <div class="event-title">
-          <?php print $event['link']; ?>
-        </div>
+    <article
+      :class="['event-preview', event.event_date > nowTS ? '' : 'event-preview--past']"
+      v-for="event in results">
+      <a class="thumbnail" :href="event.url">
+        <img v-if="event.event_map_image" :src="event.event_map_image"
+             :key="event.event_map_image">
+      </a>
+      <a v-if="event.can_edit" class="operation-icon"
+         :href="'/node/' + event.nid + '/edit'" title="Edit this event">
+        <i class="fas fa-edit"></i>
+      </a>
+      <a v-if="event.can_delete" class="operation-icon"
+         :href="'/node/' + event.nid + '/delete'" title="Delete this event">
+        <i class="fas fa-trash-alt"></i>
+      </a>
+      <a :href="event.url">
+        <h4 :title="event.title|strip_tags">
+          <span v-html="event.title"></span>
+        </h4>
+      </a>
+      <a :href="'/node/' + event.group_nids[0]" class="group"
+         v-if="showGroup && groupNid != event.group_nids[0]"
+         v-html="event.group">
+      </a>
 
-        <div class="response is-small">
-          <?php print $event['response']; ?>
-        </div>
-
-        <?php if ($event['location']): ?>
-          <div class="information-item event-location is-small">
-            <span class="label">
-              <?php print t('Location: '); ?>
-            </span>
-
-            <span>
-              <?php print render($event['location']); ?>
-            </span>
-          </div>
-        <?php endif; ?>
-
-        <div class="information-item event-date is-small">
-          <span><?php print render($event['date']); ?></span>
-        </div>
-  
-        <div class="ical">
-          <?php print $event['ical']; ?>
-        </div><!-- /.ical -->
+      <div
+        v-if="event.date || event.field_language || event.field_event_source"
+        class="event-date">
+        <i class="far fa-calendar-alt"
+           :title="event.event_date > nowTS ? 'Upcoming event' : 'Past event'"></i>
+        {{ event.date }}
       </div>
-    <?php endforeach; ?>
+
+      <div v-if="event.event_location_html" v-html="event.event_location_html"
+           class="event-location"></div>
+    </article>
 
     <div class="all-events">
       <?php print $all_events_link; ?>

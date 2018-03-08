@@ -671,7 +671,7 @@ body {
   margin: 0 20px 20px 0;
   padding: 10px;
   border: 1px solid #cdd6db;
-  min-height: 150px;
+  min-height: 170px;
 }
 .document-preview-list .document-preview.document-preview--draft {
   color: #a4a4a4;
@@ -3720,13 +3720,31 @@ footer .table-row {
     width: calc(33.33333% - 13.33333px);
   }
 }
+.upcoming-events .event-preview-list {
+  display: block;
+}
+.upcoming-events .event-preview-list .event-preview {
+  width: 100%;
+  margin-right: 0;
+  margin-bottom: 10px;
+}
+.upcoming-events .event-preview-list .event-preview:last-child {
+  margin-bottom: 0;
+}
+.upcoming-events .event-preview-list .event-preview:after {
+  content: ".";
+  display: block;
+  height: 0;
+  clear: both;
+  visibility: hidden;
+}
 .event-preview-list .event-preview {
   position: relative;
   color: #575757;
   margin: 0 0 20px 0;
   padding: 10px;
   border: 1px solid #cdd6db;
-  min-height: 150px;
+  min-height: 170px;
   min-width: 350px;
   max-width: 500px;
 }

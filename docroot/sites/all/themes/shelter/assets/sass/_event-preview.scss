@@ -19,13 +19,34 @@
     }
   }
 
+  .upcoming-events & {
+    display: block;
+    .event-preview {
+      width: 100%;
+
+      margin-right: 0;
+      margin-bottom: 10px;
+      &:last-child {
+        margin-bottom:0;
+      }
+
+      &:after { //clearfix
+        content: ".";
+        display: block;
+        height: 0;
+        clear: both;
+        visibility: hidden;
+      }
+    }
+  }
+
   .event-preview {
     position: relative;
     color: $shelter-grey;
     margin: 0 0 20px 0;
     padding: 10px;
     border: 1px solid $shelter-light-blue;
-    min-height: 150px;
+    min-height: 170px;
 
     &.event-preview--past {
       color: lighten($shelter-grey, 30%);

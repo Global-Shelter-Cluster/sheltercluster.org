@@ -615,10 +615,6 @@
                 }
               }];
 
-              if (vue.keyDocs) {
-
-              }
-
               // First query is "this group only"
               if (vue.groupNid) {
                 query[0].params.filters = 'group_nids:' + vue.groupNid;
