@@ -1,9 +1,7 @@
-<section id="shelter-calendar" class="upcoming-events" v-cloak v-if="results">
-  <div id="box-calendar" class="event-preview-list">
-    <div id="date-calendar">
-      <?php print $title ?>
-    </div>
+<section id="shelter-calendar" class="upcoming-events preview-block" v-cloak v-if="results">
+  <h4><?php print $title ?></h4>
 
+  <div class="list event-preview-list">
     <article
       :class="['event-preview', event.event_date > nowTS ? '' : 'event-preview--past']"
       v-for="event in results">
@@ -40,16 +38,10 @@
       <div v-if="event.event_location_html" v-html="event.event_location_html"
            class="event-location"></div>
     </article>
+  </div>
 
-    <div class="all-events">
-      <?php print $all_events_link; ?>
-    </div><!-- /.all-events -->
-
-    <?php if ($global_events_link): ?>
-      <div class="all-events">
-        <?php print render($global_events_link); ?>
-      </div>
-    <?php endif; ?>
-
+  <div class="footer">
+    <?php print $all_events_link; ?>
+    <?php if ($global_events_link) print ' &nbsp; '.render($global_events_link); ?>
   </div>
 </section>

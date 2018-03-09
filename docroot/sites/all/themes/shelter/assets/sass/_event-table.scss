@@ -1,4 +1,8 @@
-.document-table {
+.document-table.document-table--event {
+  thead {
+    background: $accent-dark-blue;
+  }
+
   .event-location {
     min-width: 100px;
     @include rem(font-size, 0.85rem);

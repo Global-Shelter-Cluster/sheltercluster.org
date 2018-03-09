@@ -1,0 +1,44 @@
+.preview-block {
+  @include rem(margin, 2.5rem 0 2rem 0);
+
+  width: 100%;
+  @include breakpoint(850px 979px) {
+    width: 49%;
+    &.recent-documents {float: left;}
+    &.upcoming-events {float: right;}
+  }
+  @include breakpoint(1200px) {
+    width: 49%;
+    &.recent-documents {float: left;}
+    &.upcoming-events {float: right;}
+  }
+
+  > h4 {
+    color: white;
+    padding: .5rem .5rem .5rem 40px;
+    text-transform: uppercase;
+  }
+  &.recent-documents > h4 {
+    background: $shelter-red url('../images/document-white.png') 1rem 50% no-repeat;
+  }
+  &.upcoming-events > h4 {
+    background: $accent-dark-blue url('../images/clock-white.png') 1rem 50% no-repeat;
+  }
+
+  > .list {
+    margin: 10px;
+  }
+
+  > .footer {
+    text-align: center;
+    @include rem(font-size, 0.85rem);
+    padding: 0 0 22px;
+    a {
+      color: #000;
+      background: url('../images/plus-red.png') 0 50% no-repeat;
+      margin-top: 15px;
+      padding-left: 12px;
+      text-transform: uppercase;
+    }
+  }
+}
