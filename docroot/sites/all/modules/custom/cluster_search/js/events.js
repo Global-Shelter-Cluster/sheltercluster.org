@@ -330,7 +330,7 @@
         };
 
         var vue = new Vue({
-          el: '#content',
+          el: '#shelter-calendar',
           data: data,
           computed: {
             hasSubgroups: function() {
