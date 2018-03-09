@@ -12,6 +12,10 @@
     &.recent-documents {float: left;}
     &.upcoming-events {float: right;}
   }
+  .full-width > & {
+    width: 100% !important;
+    float: none !important;
+  }
 
   > h4 {
     color: white;

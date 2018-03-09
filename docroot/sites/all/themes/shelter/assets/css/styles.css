@@ -3856,6 +3856,10 @@ body.document-upload-ondrag {
     float: right;
   }
 }
+.full-width .preview-block {
+  width: 100% !important;
+  float: none !important;
+}
 .preview-block > h4 {
   color: white;
   padding: .5rem .5rem .5rem 40px;
