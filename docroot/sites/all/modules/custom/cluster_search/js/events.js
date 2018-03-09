@@ -1,54 +1,55 @@
 (function ($) {
   Drupal.behaviors.clusterSearchEvents = {
+    processEvent: function(result) {
+      var group = typeof result._highlightResult.og_group_ref !== 'undefined' && result._highlightResult.og_group_ref.length > 0
+        ? result._highlightResult.og_group_ref[0].value
+        : null;
+
+      var canEdit = false, canDelete = false;
+      if (typeof Drupal.settings.cluster_search.event_permissions_by_group !== 'undefined') {
+        for (var i in result.group_nids) {
+          if (typeof Drupal.settings.cluster_search.event_permissions_by_group[result.group_nids[i]] !== 'undefined') {
+            if (Drupal.settings.cluster_search.event_permissions_by_group[result.group_nids[i]].edit)
+              canEdit = true;
+            if (Drupal.settings.cluster_search.event_permissions_by_group[result.group_nids[i]].delete)
+              canDelete = true;
+            if (canEdit && canDelete)
+              break;
+          }
+        }
+      }
+      result.can_edit = canEdit;
+      result.can_delete = canDelete;
+
+      var location = '';
+      if (result['field_postal_address:postal_code'])
+        location += ' ' + result['field_postal_address:postal_code'];
+      if (result['field_postal_address:locality'])
+        location += ' ' + result['field_postal_address:locality'];
+      if (result['field_postal_address:country'])
+        location += ' ' + result['field_postal_address:country'];
+      result.location = $.trim(location);
+
+      result.nid = result.objectID;
+      result.title = result._highlightResult.title.value;
+      result.group = group;
+      result.date = Drupal.behaviors.clusterSearchAlgolia.dateHelperWithTime(result['event_date']);
+      result.short_date = Drupal.behaviors.clusterSearchAlgolia.dateHelperShortWithTime(result['event_date']);
+
+      return result;
+    },
     attach: function (context, settings) {
-      $('#content').once('clusterSearchEvents', function() {
+      Vue.filter('strip_tags', function (html) {
+        return $('<div />').html(html).text();
+      });
+
+      $('.cluster-search-events-list').closest('#content').once('clusterSearchEvents', function() {
         if (!settings.cluster_search.algolia_app_id || !settings.cluster_search.algolia_search_key || !settings.cluster_search.algolia_prefix) {
           $(this).remove();
           return;
         }
 
         var algolia_client = algoliasearch(settings.cluster_search.algolia_app_id, settings.cluster_search.algolia_search_key);
-
-        Vue.filter('strip_tags', function (html) {
-          return $('<div />').html(html).text();
-        });
-
-        var processEvent = function(result) {
-          var group = typeof result._highlightResult.og_group_ref !== 'undefined' && result._highlightResult.og_group_ref.length > 0
-            ? result._highlightResult.og_group_ref[0].value
-            : null;
-
-          var canEdit = false, canDelete = false;
-          for (var i in result.group_nids) {
-            if (typeof settings.cluster_search.event_permissions_by_group[result.group_nids[i]] !== 'undefined') {
-              if (settings.cluster_search.event_permissions_by_group[result.group_nids[i]].edit)
-                canEdit = true;
-              if (settings.cluster_search.event_permissions_by_group[result.group_nids[i]].delete)
-                canDelete = true;
-              if (canEdit && canDelete)
-                break;
-            }
-          }
-          result.can_edit = canEdit;
-          result.can_delete = canDelete;
-
-          var location = '';
-          if (result['field_postal_address:postal_code'])
-            location += ' ' + result['field_postal_address:postal_code'];
-          if (result['field_postal_address:locality'])
-            location += ' ' + result['field_postal_address:locality'];
-          if (result['field_postal_address:country'])
-            location += ' ' + result['field_postal_address:country'];
-          result.location = $.trim(location);
-
-          result.nid = result.objectID;
-          result.title = result._highlightResult.title.value;
-          result.group = group;
-          result.date = Drupal.behaviors.clusterSearchAlgolia.dateHelperWithTime(result['event_date']);
-          result.short_date = Drupal.behaviors.clusterSearchAlgolia.dateHelperShortWithTime(result['event_date']);
-
-          return result;
-        };
 
         var hitsPerPage = 30;
 
@@ -237,7 +238,7 @@
                 }
 
                 if (content.results[0].hits.length > 0)
-                  vue.results = content.results[0].hits.map(processEvent);
+                  vue.results = content.results[0].hits.map(Drupal.behaviors.clusterSearchEvents.processEvent);
                 else
                   vue.results = null;
 
@@ -310,6 +311,103 @@
 
         vue.initNow();
         vue.doSearch(page);
+      });
+
+      $('#shelter-calendar').once('clusterSearchEvents', function() {
+        if (!settings.cluster_search.algolia_app_id || !settings.cluster_search.algolia_search_key || !settings.cluster_search.algolia_prefix) {
+          $(this).remove();
+          return;
+        }
+
+        var algolia_client = algoliasearch(settings.cluster_search.algolia_app_id, settings.cluster_search.algolia_search_key);
+
+        var data = {
+          results: null,
+          groupNid: typeof settings.cluster_nav !== 'undefined' ? settings.cluster_nav.group_nid : null,
+          descendantNids: typeof settings.cluster_nav !== 'undefined' ? settings.cluster_nav.search_group_nids : null,
+          showGroup: true,
+          nowTS: 0
+        };
+
+        var vue = new Vue({
+          el: '#shelter-calendar',
+          data: data,
+          computed: {
+            hasSubgroups: function() {
+              return this.descendantNids.length > 1;
+            }
+          },
+          methods: {
+            initNow: function() {
+              var vue = this;
+              var setNow = function() {
+                var date = new Date;
+                vue.nowTS = parseInt(date.valueOf() / 1000);
+              };
+
+              setNow();
+              setInterval(setNow, 1000 * 60);
+            },
+            doSearch: function() {
+              var vue = this;
+
+              var attributesToRetrieve = [
+                'url',
+                'event_date',
+                'event_map_image',
+                'event_map_link',
+                'event_location_html',
+                'group_nids'
+              ];
+
+              var indexName = settings.cluster_search.algolia_prefix + 'Events_reverseSort';
+
+              var query = [{
+                indexName: indexName,
+                query: '',
+                params: {
+                  attributesToRetrieve: attributesToRetrieve,
+                  hitsPerPage: 3
+                }
+              }, {
+                indexName: indexName,
+                query: '',
+                params: {
+                  attributesToRetrieve: attributesToRetrieve,
+                  hitsPerPage: 3
+                }
+              }];
+
+              // First query is "this group only"
+              if (vue.groupNid) {
+                query[0].params.filters = 'group_nids:' + vue.groupNid;
+
+                // Second query is "including descendants"
+                query[1].params.filters = vue.descendantNids
+                  .map(function (i) {
+                    return 'group_nids:' + i
+                  })
+                  .join(' OR ');
+              }
+
+              // Only show upcoming events
+              query[0].params.numericFilters = "event_date>" + vue.nowTS;
+              query[1].params.numericFilters = "event_date>" + vue.nowTS;
+
+              algolia_client.search(query, function searchDone(err, content) {
+                if (err) return;
+
+                if (content.results[0].hits.length > 0)
+                  vue.results = content.results[0].hits.map(Drupal.behaviors.clusterSearchEvents.processEvent);
+                else if (content.results[1].hits.length > 0)
+                  vue.results = content.results[1].hits.map(Drupal.behaviors.clusterSearchEvents.processEvent);
+              });
+            }
+          }
+        });
+
+        vue.initNow();
+        vue.doSearch();
       });
     }
   }

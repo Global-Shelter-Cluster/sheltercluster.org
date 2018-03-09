@@ -1,4 +1,4 @@
-<div class="search-summary" v-if="results && hits >= 1" v-cloak>
+<div class="cluster-search-events-list search-summary" v-if="results && hits >= 1" v-cloak>
   <span v-if="hits > 1" class="summary">Showing {{ resultsFrom }}&ndash;{{ resultsTo }} of {{ hits }} events.</span>
   <ul class="pagination" v-if="pages > 1">
     <li>Pages:</li>
@@ -23,7 +23,7 @@
   </ul>
 </div>
 
-<table v-if="display == 'list' && results" class="document-table" v-cloak>
+<table v-if="display == 'list' && results" class="document-table document-table--event" v-cloak>
   <thead>
   <tr>
     <th>Event title</th>
@@ -41,6 +41,11 @@
         <i class="fas fa-trash-alt"></i>
       </a>
       <a :href="event.url" v-html="event.title"></a>
+      <div class="ical" v-if="event.event_date > nowTS">
+        <a :href="'/node/' + event.nid + '/field_recurring_event_date2/ical/addtocal.ics'">
+          iCal
+        </a>
+      </div>
       <a v-if="showGroup && groupNid != event.group_nids[0]" :href="'/node/' + event.group_nids[0]" class="group" v-html="event.group"></a>
     </td>
     <td v-html="event.event_location_html" class="event-location"></td>
@@ -72,6 +77,11 @@
     <div v-if="event.date || event.field_language || event.field_event_source" class="event-date">
       <i class="far fa-calendar-alt" :title="event.event_date > nowTS ? 'Upcoming event' : 'Past event'"></i>
       {{ event.date }}
+      <div class="ical" v-if="event.event_date > nowTS">
+        <a :href="'/node/' + event.nid + '/field_recurring_event_date2/ical/addtocal.ics'">
+          iCal
+        </a>
+      </div>
     </div>
 
     <div v-if="event.event_location_html" v-html="event.event_location_html" class="event-location"></div>
@@ -89,6 +99,10 @@
   <a v-if="search && mode === 'all' && descendantNids.length > 1"
      href="#" @click.prevent="mode = 'descendants'">
     No events found matching "<strong>{{ search }}</strong>". Try including subgroups.
+  </a>
+  <a v-else-if="search && mode === 'upcoming'"
+     href="#" @click.prevent="mode = 'all'">
+    No events found matching "<strong>{{ search }}</strong>". Try including past events.
   </a>
   <span v-else-if="search && (mode === 'descendants' || descendantNids.length <= 1)">
     No events found matching "<strong>{{ search }}</strong>".

@@ -118,8 +118,8 @@ function cluster_search_cluster_mega_menu_alter(&$menu_output) {
   cluster_search_common_attach($menu_output['cluster_search']);
 }
 
-function cluster_search_common_attach_documents(&$render_array) {
-  cluster_search_common_attach($render_array);
+function cluster_search_common_attach_documents() {
+  cluster_search_common_attach();
 
   drupal_add_js(drupal_get_path('module', 'cluster_search') . '/js/documents.js');
 
@@ -152,7 +152,35 @@ function cluster_search_common_attach_documents(&$render_array) {
   }
 }
 
-function cluster_search_common_attach(&$render_array) {
+function cluster_search_common_attach_events() {
+  cluster_search_common_attach();
+
+  drupal_add_js(drupal_get_path('module', 'cluster_search') . '/js/events.js');
+  drupal_add_css(drupal_get_path('module', 'addressfield') . '/addressfield.css');
+
+  $display_provider = cluster_nav_get_display_provider();
+  if ($display_provider) {
+    // Tell the frontend whether the current user has edit/delete permissions for
+    // events, for the relevant groups.
+    $event_permissions_by_group = [];
+    if ($display_provider) {
+      foreach ($display_provider->getSearchGroupNids() as $groupNid) {
+        $event_permissions_by_group[$groupNid] = [
+          'edit' => og_user_access('node', $groupNid, 'edit event content'),
+          'delete' => og_user_access('node', $groupNid, 'delete event content'),
+        ];
+      }
+    }
+
+    drupal_add_js([
+      'cluster_search' => [
+        'event_permissions_by_group' => $event_permissions_by_group,
+      ]
+    ], 'setting');
+  }
+}
+
+function cluster_search_common_attach() {
   drupal_add_js(drupal_get_path('module', 'cluster_search') . '/js/algolia.js');
 // https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.3/vue.min.js
   drupal_add_js(drupal_get_path('module', 'cluster_search') . '/js/lib/vue.min.js');
@@ -208,6 +236,8 @@ function cluster_search_theme($existing, $type, $theme, $path) {
  * @return array
  */
 function cluster_search_docs_page($facet_filters = [], $nid_filter = NULL, $show_facets = TRUE) {
+  cluster_search_common_attach_documents();
+
   $ret = [
     ['#theme' => 'cluster_search_docs_list'],
   ];
@@ -215,7 +245,6 @@ function cluster_search_docs_page($facet_filters = [], $nid_filter = NULL, $show
   if ($show_facets)
     $ret['side-column'] = ['#theme' => 'cluster_search_docs_facets'];
 
-  cluster_search_common_attach_documents($ret, $facet_filters, $nid_filter);
   $ret['#attached']['js'][] = [
     'type' => 'setting',
     'data' => [
@@ -232,36 +261,11 @@ function cluster_search_docs_page($facet_filters = [], $nid_filter = NULL, $show
  * @return array
  */
 function cluster_search_events_page() {
-  $ret = [
+  cluster_search_common_attach_events();
+  return [
     ['#theme' => 'cluster_search_events_list'],
+    'side-column' => ['#theme' => 'cluster_search_events_facets'],
   ];
-
-  $ret['side-column'] = ['#theme' => 'cluster_search_events_facets'];
-
-  cluster_search_common_attach($ret);
-  // Tell the frontend whether the current user has edit/delete permissions for
-  // events, for the relevant groups.
-  $display_provider = cluster_nav_get_display_provider();
-  $event_permissions_by_group = [];
-  if ($display_provider) {
-    foreach ($display_provider->getSearchGroupNids() as $groupNid) {
-      $event_permissions_by_group[$groupNid] = [
-        'edit' => og_user_access('node', $groupNid, 'edit event content'),
-        'delete' => og_user_access('node', $groupNid, 'delete event content'),
-      ];
-    }
-  }
-  $ret['#attached']['js'][] = drupal_get_path('module', 'cluster_search') . '/js/events.js';
-  $ret['#attached']['css'][] = drupal_get_path('module', 'addressfield') . '/addressfield.css';
-  $ret['#attached']['js'][] = [
-    'type' => 'setting',
-    'data' => [
-      'cluster_search' => [
-        'event_permissions_by_group' => $event_permissions_by_group,
-      ]
-    ]
-  ];
-  return $ret;
 }
 
 /**

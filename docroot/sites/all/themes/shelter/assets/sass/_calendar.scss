@@ -1,23 +1,4 @@
 /* _calendar.scss */
-#shelter-calendar {
-  float: none;
-  width: 100%;
-  @include rem(margin, 2.5rem 0 2rem 0);
-  @include box-shadow(rgba(0,0,0,0.33) 0px 3px 10px);
-  @include border-radius(5px);
-
-  @include breakpoint(980px) {
-    float: right;
-    width: 49%;
-  }
-  .full-width & {
-    @include breakpoint(980px) {
-      width: 100%;
-      float: none;
-    }
-  }
-}
-
 .addressfield-container-inline {
   span {
     display: inline;
@@ -201,5 +182,3 @@ div.addressfield-container-inline::after {
   clear: none;
   display: inline;
 }
-
-
