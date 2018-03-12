@@ -651,8 +651,7 @@ body {
 }
 .recent-documents .document-preview-list .document-preview {
   width: 100%;
-  margin-right: 0;
-  margin-bottom: 10px;
+  margin: 0 auto 10px;
 }
 .recent-documents .document-preview-list .document-preview:last-child {
   margin-bottom: 0;
@@ -3620,8 +3619,7 @@ footer .table-row {
 }
 .upcoming-events .event-preview-list .event-preview {
   width: 100%;
-  margin-right: 0;
-  margin-bottom: 10px;
+  margin: 0 auto 10px;
 }
 .upcoming-events .event-preview-list .event-preview:last-child {
   margin-bottom: 0;
