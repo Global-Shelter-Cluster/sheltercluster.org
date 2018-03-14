@@ -457,9 +457,11 @@
                   vue.clearSelectedFacets();
                 vue.searching = false;
 
-                if (vue.initializing)
+                if (vue.initializing) {
                   vue.initializing = false;
-                else
+                  if (!vue.hasResults && vue.mode === 'normal' && vue.hasSubgroups)
+                    vue.mode = 'descendants';
+                } else
                   vue.pushHistory();
               });
             },
