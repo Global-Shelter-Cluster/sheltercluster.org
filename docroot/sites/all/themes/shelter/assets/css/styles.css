@@ -699,6 +699,8 @@ body {
   text-decoration: none;
 }
 .document-preview-list .document-preview h4 {
+  font-size: 16px;
+  font-size: 1rem;
   color: #7f1416;
   text-transform: uppercase;
   font-weight: normal;
@@ -3657,6 +3659,8 @@ footer .table-row {
   text-decoration: none;
 }
 .event-preview-list .event-preview h4 {
+  font-size: 16px;
+  font-size: 1rem;
   color: #04314c;
   text-transform: uppercase;
   font-weight: normal;
@@ -3686,9 +3690,11 @@ footer .table-row {
   margin-top: 3px;
   font-size: 12px;
   font-size: 0.75rem;
-  white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+.event-preview-list .event-preview .group {
+  white-space: nowrap;
 }
 .event-preview-list .event-preview .event-location {
   margin-top: 7px;
@@ -3854,7 +3860,7 @@ body.document-upload-ondrag {
     float: right;
   }
 }
-.full-width .preview-block {
+.full-width > .preview-block {
   width: 100% !important;
   float: none !important;
 }

@@ -54,6 +54,7 @@
     }
 
     h4 {
+      @include rem(font-size, 1rem);
       color: $shelter-red;
       text-transform: uppercase;
       font-weight: normal;
