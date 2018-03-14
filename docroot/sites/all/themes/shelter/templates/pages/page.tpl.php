@@ -22,11 +22,14 @@
       <div class="page-margin clearfix">
 
         <a id="logo-shelter-cluster" href="<?php print $base_url; ?>">
-          <?php print _svg('logo-global-shelter-cluster', array('id' => 'shelter-cluster', 'alt' => 'Global Shelter Cluster - ShelterCluster.org - Coordinating Humanitarian Shelter')); ?>
+          <?php print _svg('logo-global-shelter-cluster', [
+            'id' => 'shelter-cluster',
+            'alt' => 'Global Shelter Cluster - ShelterCluster.org - Coordinating Humanitarian Shelter',
+          ]); ?>
         </a>
 
         <?php if (isset($user_login) && FALSE): /* Do not use login block for now */ ?>
-          <?php print partial('compact_user_login', array('user_login' => $user_login)); ?>
+          <?php print partial('compact_user_login', ['user_login' => $user_login]); ?>
         <?php endif; ?>
 
         <div id="user-profile-container" class="clearfix">
@@ -38,7 +41,9 @@
 
     <div class="page-margin">
       <div id="nav-master">
-        <nav id="nav-shelter" class="clearfix" data-search-group-nids="<?php if (isset($search_group_nids)) print $search_group_nids ?>">
+        <nav id="nav-shelter" class="clearfix"
+             data-search-group-nids="<?php if (isset($search_group_nids))
+               print $search_group_nids ?>">
           <a href="#" id="button-menu-dropdown">Menu</a>
           <input type="checkbox" id="mobile_menu_toggle">
           <label for="mobile_menu_toggle">
@@ -47,10 +52,10 @@
           </label>
           <div class="list-container">
             <?php
-              $menu_tree = menu_tree_all_data('menu-mega-menu');
-              $menu_output = menu_tree_output($menu_tree);
-              drupal_alter('cluster_mega_menu', $menu_output);
-              print render($menu_output);
+            $menu_tree = menu_tree_all_data('menu-mega-menu');
+            $menu_output = menu_tree_output($menu_tree);
+            drupal_alter('cluster_mega_menu', $menu_output);
+            print render($menu_output);
             ?>
           </div>
         </nav>
@@ -75,32 +80,45 @@
   </header>
 
   <?php if ($is_front): ?>
-  
-    <?php print partial('homepage', array('page' => $page, 'hot_responses' => $hot_responses, 'upcoming_events' => $upcoming_events, 'recent_documents' => $recent_documents)); ?>
+
+    <?php print partial('homepage', [
+      'page' => $page,
+      'hot_responses' => $hot_responses,
+      'upcoming_events' => $upcoming_events,
+      'recent_documents' => $recent_documents,
+    ]); ?>
 
   <?php elseif ($global_events_page): ?>
-    <?php print partial('homepage', array('page' => $page, 'hot_responses' => $hot_responses, 'upcoming_events' => FALSE, 'recent_documents' => FALSE)); ?>
+    <?php print partial('homepage', [
+      'page' => $page,
+      'hot_responses' => $hot_responses,
+      'upcoming_events' => FALSE,
+      'recent_documents' => FALSE,
+      'extra' => $extra,
+    ]); ?>
 
   <?php elseif ($is_regions_and_countries): ?>
-    <?php print partial('regions', array('page' => $page)); ?>
+    <?php print partial('regions', ['page' => $page]); ?>
 
   <?php elseif ($is_user_profile_pages): ?>
 
     <div class="page-margin clearfix">
-      <?php print partial('user_profile_pages', array(
+      <?php print partial('user_profile_pages', [
         'page' => $page,
-        'local_tasks' => $local_tasks));
+        'local_tasks' => $local_tasks,
+      ]);
       ?>
     </div>
 
   <?php elseif ($dashboard_menu || $is_search_documents): ?>
 
     <div class="page-margin clearfix">
-      <?php print partial('non_dashboard_group_page', array(
+      <?php print partial('non_dashboard_group_page', [
         'page' => $page,
         'editor_menu' => $editor_menu,
         'dashboard_menu' => $dashboard_menu,
-        'extra' => $extra));
+        'extra' => $extra,
+      ]);
       ?>
     </div>
 
@@ -112,6 +130,6 @@
 
   <?php endif; ?>
 
-  <?php print partial('footer', array('page' => $page)); ?>
+  <?php print partial('footer', ['page' => $page]); ?>
 
 </div>

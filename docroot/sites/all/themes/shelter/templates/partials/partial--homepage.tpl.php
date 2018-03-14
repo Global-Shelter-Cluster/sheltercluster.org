@@ -5,9 +5,13 @@
  */
 ?>
 
-<div class="page-margin clearfix home-main">
+<div id="content" class="page-margin clearfix home-main">
 
   <div class="side-column clearfix">
+    <?php if ($extra): ?>
+      <?php print render($extra); ?>
+    <?php endif; ?>
+
     <?php if($hot_responses): ?>
       <?php print render($hot_responses); ?>
     <?php endif; ?>
