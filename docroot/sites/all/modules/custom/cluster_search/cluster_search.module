@@ -221,6 +221,7 @@ function cluster_search_theme($existing, $type, $theme, $path) {
     'cluster_search_events_facets' => [
       'template' => 'cluster_search_events_facets',
       'path' => drupal_get_path('module', 'cluster_search').'/templates',
+      'variables' => ['include_mode' => FALSE],
     ],
   ];
 }
@@ -260,11 +261,11 @@ function cluster_search_docs_page($facet_filters = [], $nid_filter = NULL, $show
 /**
  * @return array
  */
-function cluster_search_events_page() {
+function cluster_search_events_page($nid) {
   cluster_search_common_attach_events();
   return [
     ['#theme' => 'cluster_search_events_list'],
-    'side-column' => ['#theme' => 'cluster_search_events_facets'],
+    'side-column' => ['#theme' => 'cluster_search_events_facets', '#include_mode' => !$nid],
   ];
 }
 
