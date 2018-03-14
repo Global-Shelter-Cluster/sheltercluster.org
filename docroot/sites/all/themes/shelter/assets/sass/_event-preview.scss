@@ -24,8 +24,7 @@
     .event-preview {
       width: 100%;
 
-      margin-right: 0;
-      margin-bottom: 10px;
+      margin: 0 auto 10px;
       &:last-child {
         margin-bottom:0;
       }
@@ -63,6 +62,7 @@
     }
 
     h4 {
+      @include rem(font-size, 1rem);
       color: $accent-dark-blue;
       text-transform: uppercase;
       font-weight: normal;
@@ -97,9 +97,12 @@
     .group, .event-date {
       margin-top: 3px;
       @include rem(font-size, 0.75rem);
-      white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
+    }
+
+    .group {
+      white-space: nowrap;
     }
 
     .event-location {

@@ -652,8 +652,7 @@ body {
 }
 .recent-documents .document-preview-list .document-preview {
   width: 100%;
-  margin-right: 0;
-  margin-bottom: 10px;
+  margin: 0 auto 10px;
 }
 .recent-documents .document-preview-list .document-preview:last-child {
   margin-bottom: 0;
@@ -722,6 +721,8 @@ body {
   text-decoration: none;
 }
 .document-preview-list .document-preview h4 {
+  font-size: 16px;
+  font-size: 1rem;
   color: #7f1416;
   text-transform: uppercase;
   font-weight: normal;
@@ -3644,8 +3645,7 @@ footer .table-row {
 }
 .upcoming-events .event-preview-list .event-preview {
   width: 100%;
-  margin-right: 0;
-  margin-bottom: 10px;
+  margin: 0 auto 10px;
 }
 .upcoming-events .event-preview-list .event-preview:last-child {
   margin-bottom: 0;
@@ -3683,6 +3683,8 @@ footer .table-row {
   text-decoration: none;
 }
 .event-preview-list .event-preview h4 {
+  font-size: 16px;
+  font-size: 1rem;
   color: #04314c;
   text-transform: uppercase;
   font-weight: normal;
@@ -3712,9 +3714,11 @@ footer .table-row {
   margin-top: 3px;
   font-size: 12px;
   font-size: 0.75rem;
-  white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+.event-preview-list .event-preview .group {
+  white-space: nowrap;
 }
 .event-preview-list .event-preview .event-location {
   margin-top: 7px;

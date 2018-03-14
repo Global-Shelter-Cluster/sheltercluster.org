@@ -8,8 +8,7 @@
     .document-preview {
       width: 100%;
 
-      margin-right: 0;
-      margin-bottom: 10px;
+      margin: 0 auto 10px;
       &:last-child {
         margin-bottom:0;
       }
@@ -70,6 +69,7 @@
     }
 
     h4 {
+      @include rem(font-size, 1rem);
       color: $shelter-red;
       text-transform: uppercase;
       font-weight: normal;
