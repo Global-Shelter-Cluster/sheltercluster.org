@@ -43,6 +43,7 @@ function cluster_docs_menu_alter(&$items) {
  */
 function cluster_docs_form_document_node_form_alter(&$form, &$form_state, $form_id) {
   $form['#validate'][] = 'cluster_docs_validate';
+  $form['#attached']['js'][] = drupal_get_path('module', 'cluster_docs') . '/js/populate_title.js';
 }
 
 /**
