@@ -249,9 +249,11 @@
 
                 vue.searching = false;
 
-                if (vue.initializing)
+                if (vue.initializing) {
                   vue.initializing = false;
-                else
+                  if (!vue.hasResults && vue.mode === 'upcoming' && vue.hasSubgroups)
+                    vue.mode = 'descendants';
+                } else
                   vue.pushHistory();
               });
             },
@@ -322,6 +324,7 @@
         var algolia_client = algoliasearch(settings.cluster_search.algolia_app_id, settings.cluster_search.algolia_search_key);
 
         var data = {
+          title: '',
           results: null,
           groupNid: typeof settings.cluster_nav !== 'undefined' ? settings.cluster_nav.group_nid : null,
           descendantNids: typeof settings.cluster_nav !== 'undefined' ? settings.cluster_nav.search_group_nids : null,
@@ -359,48 +362,115 @@
                 'event_location_html',
                 'group_nids'
               ];
+              var hitsPerPage = 3;
 
-              var indexName = settings.cluster_search.algolia_prefix + 'Events_reverseSort';
+              var indexName = settings.cluster_search.algolia_prefix + 'Events';
+              var indexNameUpcoming = settings.cluster_search.algolia_prefix + 'Events_reverseSort';
 
-              var query = [{
-                indexName: indexName,
-                query: '',
-                params: {
-                  attributesToRetrieve: attributesToRetrieve,
-                  hitsPerPage: 3
-                }
-              }, {
-                indexName: indexName,
-                query: '',
-                params: {
-                  attributesToRetrieve: attributesToRetrieve,
-                  hitsPerPage: 3
-                }
-              }];
-
-              // First query is "this group only"
               if (vue.groupNid) {
+                var query = [{ // 0: upcoming events from this group
+                  indexName: indexNameUpcoming,
+                  query: '',
+                  params: {
+                    attributesToRetrieve: attributesToRetrieve,
+                    hitsPerPage: hitsPerPage
+                  }
+                }, { // 1: upcoming events from this group, including descendants
+                  indexName: indexNameUpcoming,
+                  query: '',
+                  params: {
+                    attributesToRetrieve: attributesToRetrieve,
+                    hitsPerPage: hitsPerPage
+                  }
+                }, { // 2: past events from this group
+                  indexName: indexName,
+                  query: '',
+                  params: {
+                    attributesToRetrieve: attributesToRetrieve,
+                    hitsPerPage: hitsPerPage
+                  }
+                }, { // 3: past events from this group, including descendants
+                  indexName: indexName,
+                  query: '',
+                  params: {
+                    attributesToRetrieve: attributesToRetrieve,
+                    hitsPerPage: hitsPerPage
+                  }
+                }];
+
+                // First and third queries are "this group only"
                 query[0].params.filters = 'group_nids:' + vue.groupNid;
 
-                // Second query is "including descendants"
+                // Second/fourth are "including descendants"
                 query[1].params.filters = vue.descendantNids
                   .map(function (i) {
                     return 'group_nids:' + i
                   })
                   .join(' OR ');
-              }
 
-              // Only show upcoming events
-              query[0].params.numericFilters = "event_date>" + vue.nowTS;
-              query[1].params.numericFilters = "event_date>" + vue.nowTS;
+                query[2].params.filters = query[0].params.filters;
+                query[3].params.filters = query[1].params.filters;
+
+                // Only show upcoming events
+                query[0].params.numericFilters = "event_date>" + vue.nowTS;
+                query[1].params.numericFilters = "event_date>" + vue.nowTS;
+                // Only show past events
+                query[2].params.numericFilters = "event_date<" + vue.nowTS;
+                query[3].params.numericFilters = "event_date<" + vue.nowTS;
+              } else {
+                // No group id: no "descendants" queries (e.g. homepage)
+                var query = [{ // 0: upcoming events
+                  indexName: indexNameUpcoming,
+                  query: '',
+                  params: {
+                    attributesToRetrieve: attributesToRetrieve,
+                    hitsPerPage: hitsPerPage
+                  }
+                }, { // 1: past events
+                  indexName: indexName,
+                  query: '',
+                  params: {
+                    attributesToRetrieve: attributesToRetrieve,
+                    hitsPerPage: hitsPerPage
+                  }
+                }];
+
+                // Only show upcoming events
+                query[0].params.numericFilters = "event_date>" + vue.nowTS;
+                // Only show past events
+                query[1].params.numericFilters = "event_date<" + vue.nowTS;
+              }
 
               algolia_client.search(query, function searchDone(err, content) {
                 if (err) return;
 
-                if (content.results[0].hits.length > 0)
-                  vue.results = content.results[0].hits.map(Drupal.behaviors.clusterSearchEvents.processEvent);
-                else if (content.results[1].hits.length > 0)
-                  vue.results = content.results[1].hits.map(Drupal.behaviors.clusterSearchEvents.processEvent);
+                if (vue.groupNid) {
+                  if (content.results[0].hits.length > 0) {
+                    vue.title = 'Upcoming events';
+                    vue.results = content.results[0].hits.map(Drupal.behaviors.clusterSearchEvents.processEvent);
+                  }
+                  else if (content.results[1].hits.length > 0) {
+                    vue.title = 'Upcoming events';
+                    vue.results = content.results[1].hits.map(Drupal.behaviors.clusterSearchEvents.processEvent);
+                  }
+                  else if (content.results[2].hits.length > 0) {
+                    vue.title = 'Previous events';
+                    vue.results = content.results[2].hits.map(Drupal.behaviors.clusterSearchEvents.processEvent);
+                  }
+                  else if (content.results[3].hits.length > 0) {
+                    vue.title = 'Previous events';
+                    vue.results = content.results[3].hits.map(Drupal.behaviors.clusterSearchEvents.processEvent);
+                  }
+                } else {
+                  if (content.results[0].hits.length > 0) {
+                    vue.title = 'Upcoming events';
+                    vue.results = content.results[0].hits.map(Drupal.behaviors.clusterSearchEvents.processEvent);
+                  }
+                  else if (content.results[1].hits.length > 0) {
+                    vue.title = 'Previous events';
+                    vue.results = content.results[1].hits.map(Drupal.behaviors.clusterSearchEvents.processEvent);
+                  }
+                }
               });
             }
           }

@@ -47,13 +47,9 @@ function theme_cluster_og_recent_discussions($vars) {
 }
 
 function theme_cluster_og_upcoming_events($vars) {
-  $is_previous_events = !empty($vars['is_previous_events']);
-
   cluster_search_common_attach_events();
 
   return partial('upcoming_events', array(
-    'title' => $is_previous_events ? t('Previous events') : t('Upcoming events'),
-    'events' => $vars['events'],
     'all_events_link' => l(t('All Events'), $vars['all_events_link'], array('attributes' => array('class' => array('see-all')))),
     'global_events_link' => $vars['global_events_link'],
     'previous_events_link' => $vars['previous_events_link'],
@@ -78,8 +74,6 @@ function theme_cluster_og_recent_documents($vars) {
   cluster_search_common_attach_documents();
 
   return partial('recent_documents', array(
-    'title' => t('Latest documents'),
-    'docs' => $vars['docs'],
     'all_documents_link' => l(t('All documents'), $vars['all_documents_link'], $link_attributes),
     'key_documents_link' => $vars['has_key_documents']
       ? l(t('Key documents'), $vars['all_documents_link'], $link_attributes_key)

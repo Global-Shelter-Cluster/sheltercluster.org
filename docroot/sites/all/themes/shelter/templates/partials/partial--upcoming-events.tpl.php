@@ -1,5 +1,5 @@
 <section id="shelter-calendar" class="upcoming-events preview-block" v-cloak v-if="results">
-  <h4><?php print $title ?></h4>
+  <h4>{{ title }}</h4>
 
   <div class="list event-preview-list">
     <article
