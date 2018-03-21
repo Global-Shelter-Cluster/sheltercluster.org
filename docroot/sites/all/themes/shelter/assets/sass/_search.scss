@@ -361,9 +361,10 @@ ul.search-display {
       padding: 0 5px;
     }
     a {
+      text-decoration: none;
       color: $shelter-dark-blue;
       &[href] {
-        color: $shelter-light-blue;
+        color: lighten($shelter-dark-blue, 15%);
         &:hover {
           color: $shelter-dark-blue;
         }

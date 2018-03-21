@@ -1334,10 +1334,11 @@ ul.search-display li > * {
   padding: 0 5px;
 }
 ul.search-display li a {
+  text-decoration: none;
   color: #688394;
 }
 ul.search-display li a[href] {
-  color: #cdd6db;
+  color: #94a8b4;
 }
 ul.search-display li a[href]:hover {
   color: #688394;
