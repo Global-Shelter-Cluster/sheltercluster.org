@@ -10,14 +10,14 @@
   </ul>
   <span v-if="hits <= 1"></span>
   <ul class="search-display">
-    <li>
+    <li v-if="display != 'preview'" key="preview">
       <a :href="display == 'preview' ? null : '#'" @click.prevent="display = 'preview'" title="Document previews">
-        <i class="fas fa-th-large"></i>
+        <i class="fas fa-image"></i> high bandwidth
       </a>
     </li>
-    <li>
+    <li v-if="display != 'list'" key="list">
       <a :href="display == 'list' ? null : '#'" @click.prevent="display = 'list'" title="Table view">
-        <i class="fas fa-th-list"></i>
+        <i class="fas fa-list"></i> low bandwidth
       </a>
     </li>
   </ul>
