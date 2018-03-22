@@ -3676,6 +3676,7 @@ footer .table-row {
 .event-preview-list .event-preview .thumbnail {
   float: right;
   margin-left: 10px;
+  line-height: 0;
 }
 .event-preview-list .event-preview .thumbnail img {
   max-width: 30vw;
