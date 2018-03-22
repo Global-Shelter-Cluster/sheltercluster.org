@@ -30,7 +30,10 @@ function cluster_libraries_node_view_alter(&$build) {
   $skip_group_filters = FALSE;
 
   switch ($node->type) {
-    case 'library' :
+    case 'library':
+      if ($wrapper->field_is_global_library->value())
+        $skip_group_filters = TRUE;
+
       $fields = cluster_docs_taxonomies();
       foreach ($fields as $field) {
         if (!isset($node->$field))
