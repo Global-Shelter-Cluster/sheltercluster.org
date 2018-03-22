@@ -92,6 +92,7 @@
           facetFilters: {},
           initialFilters: typeof settings.cluster_search !== 'undefined' ? settings.cluster_search.initial_filters : null,
           nidFilter: typeof settings.cluster_search !== 'undefined' ? settings.cluster_search.nid_filter : null,
+          skipGroupFilters: typeof settings.cluster_search !== 'undefined' ? settings.cluster_search.skip_group_filters : false,
           search: '',
           page: 0,
           pages: 0,
@@ -101,8 +102,7 @@
           searching: false,
           initializing: true,
           groupNid: typeof settings.cluster_nav !== 'undefined' ? settings.cluster_nav.group_nid : null,
-          descendantNids: typeof settings.cluster_nav !== 'undefined' ? settings.cluster_nav.search_group_nids : null,
-          showGroup: false
+          descendantNids: typeof settings.cluster_nav !== 'undefined' ? settings.cluster_nav.search_group_nids : null
         };
 
         function processQuery(data, query, key, validOptions) {
@@ -401,12 +401,16 @@
                 }
               }];
 
-              if (vue.mode === 'descendants')
-                query[0].params.filters = vue.descendantNids
-                  .map(function(i) {return 'group_nids:' + i})
-                  .join(' OR ');
-              else if (vue.groupNid)
-                query[0].params.filters = 'group_nids:' + vue.groupNid;
+              query[0].params.filters = '';
+
+              if (!vue.skipGroupFilters) {
+                if (vue.mode === 'descendants')
+                  query[0].params.filters = vue.descendantNids
+                    .map(function (i) {return 'group_nids:' + i})
+                    .join(' OR ');
+                else if (vue.groupNid)
+                  query[0].params.filters = 'group_nids:' + vue.groupNid;
+              }
 
               if (vue.nidFilter) { // E.g. arbitrary libraries
                 if (query[0].params.filters !== '')
@@ -451,7 +455,6 @@
                 vue.pages = content.results[0].nbPages;
                 vue.hits = content.results[0].nbHits;
                 vue.page = content.results[0].page;
-                vue.showGroup = vue.mode === 'descendants';
 
                 if (!skipClearFacets)
                   vue.clearSelectedFacets();
@@ -548,8 +551,7 @@
         var data = {
           results: null,
           groupNid: typeof settings.cluster_nav !== 'undefined' ? settings.cluster_nav.group_nid : null,
-          descendantNids: typeof settings.cluster_nav !== 'undefined' ? settings.cluster_nav.search_group_nids : null,
-          showGroup: true
+          descendantNids: typeof settings.cluster_nav !== 'undefined' ? settings.cluster_nav.search_group_nids : null
         };
 
         var vue = new Vue({
