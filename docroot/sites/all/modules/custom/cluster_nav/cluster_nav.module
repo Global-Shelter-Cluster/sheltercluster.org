@@ -117,7 +117,13 @@ function cluster_nav_preprocess_page(&$variables) {
   if (arg(0) == 'user') {
     $local_tasks = menu_local_tasks();
     $variables['local_tasks'] = $local_tasks['tabs']['output'];
+    $variables['tabs'] = NULL; // Remove tabs in this case
   }
+
+  // Remove tabs when already shown as "group administration" (at node level)
+  $node = menu_get_object('node');
+  if ($node && og_is_group('node', $node)) // && og_user_access('node', $node->nid, 'administer group')) {
+    $variables['tabs'] = NULL;
 
   // Add the main menu to every page.
   $variables['main_nav'] = menu_tree_output(menu_tree_all_data('main-menu'));
