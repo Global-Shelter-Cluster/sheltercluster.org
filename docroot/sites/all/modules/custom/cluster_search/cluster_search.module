@@ -233,10 +233,11 @@ function cluster_search_theme($existing, $type, $theme, $path) {
  * @param array|NULL $nid_filter
  *   If specified, restricts to only show the given document nids (used for arbitrary libraries).
  * @param bool $show_facets
+ * @param bool $skip_group_filters If TRUE, doesn't filter results when in a group context.
  *
  * @return array
  */
-function cluster_search_docs_page($facet_filters = [], $nid_filter = NULL, $show_facets = TRUE) {
+function cluster_search_docs_page($facet_filters = [], $nid_filter = NULL, $show_facets = TRUE, $skip_group_filters = FALSE) {
   cluster_search_common_attach_documents();
 
   $ret = [
@@ -252,6 +253,7 @@ function cluster_search_docs_page($facet_filters = [], $nid_filter = NULL, $show
       'cluster_search' => [
         'initial_filters' => $facet_filters,
         'nid_filter' => $nid_filter,
+        'skip_group_filters' => $skip_group_filters,
       ]
     ]
   ];

@@ -46,7 +46,7 @@
           iCal
         </a>
       </div>
-      <a v-if="showGroup && groupNid != event.group_nids[0]" :href="'/node/' + event.group_nids[0]" class="group" v-html="event.group"></a>
+      <a v-if="groupNid != event.group_nids[0]" :href="'/node/' + event.group_nids[0]" class="group" v-html="event.group"></a>
     </td>
     <td v-html="event.event_location_html" class="event-location"></td>
     <td class="event-date" v-html="event.short_date"></td>
@@ -71,7 +71,7 @@
       </h4>
     </a>
     <a :href="'/node/' + event.group_nids[0]" class="group"
-       v-if="showGroup && groupNid != event.group_nids[0]" v-html="event.group">
+       v-if="groupNid != event.group_nids[0]" v-html="event.group">
     </a>
 
     <div v-if="event.date || event.field_language || event.field_event_source" class="event-date">

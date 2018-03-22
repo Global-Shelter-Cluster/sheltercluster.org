@@ -68,7 +68,6 @@
           initializing: true,
           groupNid: typeof settings.cluster_nav !== 'undefined' ? settings.cluster_nav.group_nid : null,
           descendantNids: typeof settings.cluster_nav !== 'undefined' ? settings.cluster_nav.search_group_nids : null,
-          showGroup: false,
           nowTS: 0
         };
 
@@ -245,7 +244,6 @@
                 vue.pages = content.results[0].nbPages;
                 vue.hits = content.results[0].nbHits;
                 vue.page = content.results[0].page;
-                vue.showGroup = vue.mode === 'descendants';
 
                 vue.searching = false;
 
@@ -328,7 +326,6 @@
           results: null,
           groupNid: typeof settings.cluster_nav !== 'undefined' ? settings.cluster_nav.group_nid : null,
           descendantNids: typeof settings.cluster_nav !== 'undefined' ? settings.cluster_nav.search_group_nids : null,
-          showGroup: true,
           nowTS: 0
         };
 
