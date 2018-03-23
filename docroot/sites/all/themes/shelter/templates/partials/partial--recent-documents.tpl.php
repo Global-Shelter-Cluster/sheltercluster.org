@@ -40,7 +40,7 @@
         </h4>
       </a>
       <a :href="'/node/' + document.group_nids[0]" class="group"
-         v-if="showGroup && groupNid != document.group_nids[0]" v-html="document.group">
+         v-if="groupNid != document.group_nids[0]" v-html="document.group">
       </a>
 
       <div v-if="document.date || document.field_language || document.field_document_source" class="document-date">
