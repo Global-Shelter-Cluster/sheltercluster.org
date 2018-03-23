@@ -23,7 +23,7 @@
         </h4>
       </a>
       <a :href="'/node/' + event.group_nids[0]" class="group"
-         v-if="showGroup && groupNid != event.group_nids[0]"
+         v-if="groupNid != event.group_nids[0]"
          v-html="event.group">
       </a>
 
