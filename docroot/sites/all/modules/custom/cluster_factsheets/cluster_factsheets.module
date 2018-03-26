@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Cluster Factsheets feature.
+ */
+
+include_once 'cluster_factsheets.features.inc';
