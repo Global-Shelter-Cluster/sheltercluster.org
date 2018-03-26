@@ -5,3 +5,65 @@
  */
 
 include_once 'cluster_factsheets.features.inc';
+
+/**
+ * Implements hook_menu().
+ */
+function cluster_factsheets_menu() {
+  $items['node/%node/add-factsheet'] = [
+    'title' => 'New Factsheet',
+    'page callback' => 'cluster_factsheets_add',
+    'page arguments' => [1],
+    'access callback' => 'cluster_factsheets_add_access',
+    'access arguments' => [1],
+    'type' => MENU_LOCAL_TASK,
+    'weight' => 1,
+  ];
+
+  $items['node/%node/factsheets'] = array(
+    'title' => 'Factsheets',
+    'page callback' => 'cluster_factsheets_all',
+    'page arguments' => array(1),
+    'access callback' => 'og_is_group',
+    'access arguments' => array(0, 1),
+    'title callback' => '_cluster_factsheets_title_callback',
+    'title arguments' => array(1),
+    'type' => MENU_CALLBACK,
+  );
+
+  return $items;
+}
+
+/**
+ * Menu title callback.
+ *
+ * @see _cluster_docs_title_callback() (mostly copied from there)
+ */
+function _cluster_factsheets_title_callback($node) {
+  return $node->title . ' - ' . t('Factsheets');
+}
+
+function cluster_factsheets_add_access($node) {
+  if (!og_is_group('node', $node))
+    return FALSE;
+
+  return og_user_access('node', $node->nid, 'create factsheet content');
+}
+
+function cluster_factsheets_add($group_node) {
+  $manager = GroupContentManager::getInstance($group_node);
+  $factsheets = $manager->getFactsheets(1);
+  if ($factsheets)
+    drupal_goto("node/{$factsheets[0]}/clone/" . clone_get_token($factsheets[0]));
+  else
+    drupal_goto('node/add/factsheet'); // TODO: populate group id
+}
+
+/**
+ * @param $node
+ * @return Render array
+ */
+function cluster_factsheets_all($node) {
+  $manager = GroupContentManager::getInstance($node);
+  return print_r($manager->getFactsheets(), TRUE);
+}

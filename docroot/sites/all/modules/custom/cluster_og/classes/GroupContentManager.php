@@ -72,6 +72,26 @@ class GroupContentManager {
   }
 
   /**
+   * Get all factsheet nodes that belong the group, ordered by date (recent first).
+   *
+   * @return array of node ids
+   */
+  public function getFactsheets($limit = NULL) {
+    $query = new EntityFieldQuery();
+    $result = $query->entityCondition('entity_type', 'node')
+      ->entityCondition('bundle', 'factsheet')
+      ->fieldCondition('og_group_ref', 'target_id', $this->node->nid)
+      ->propertyCondition('status', NODE_PUBLISHED)
+      ->propertyOrderBy('created', 'DESC')
+      ->range(NULL, $limit)
+      ->execute();
+    if (isset($result['node'])) {
+      return array_keys($result['node']);
+    }
+    return [];
+  }
+
+  /**
    * Get useful links, if any.
    */
   public function getUsefulLinks() {
