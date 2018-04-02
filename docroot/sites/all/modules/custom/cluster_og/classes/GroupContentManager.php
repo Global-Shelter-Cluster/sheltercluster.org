@@ -78,13 +78,15 @@ class GroupContentManager {
    */
   public function getFactsheets($limit = NULL) {
     $query = new EntityFieldQuery();
-    $result = $query->entityCondition('entity_type', 'node')
+    $query->entityCondition('entity_type', 'node')
       ->entityCondition('bundle', 'factsheet')
       ->fieldCondition('og_group_ref', 'target_id', $this->node->nid)
       ->propertyCondition('status', NODE_PUBLISHED)
-      ->propertyOrderBy('created', 'DESC')
-      ->range(NULL, $limit)
-      ->execute();
+      ->fieldOrderBy('field_date', 'value', 'DESC');
+    if ($limit)
+      $query->range(NULL, $limit);
+
+    $result = $query->execute();
     if (isset($result['node'])) {
       return array_keys($result['node']);
     }
@@ -183,6 +185,21 @@ class GroupContentManager {
     $query = new EntityFieldQuery();
     return $query->entityCondition('entity_type', 'node')
       ->entityCondition('bundle', 'event')
+      ->fieldCondition('og_group_ref', 'target_id', $this->node->nid)
+      ->propertyCondition('status', NODE_PUBLISHED)
+      ->count()
+      ->execute();
+  }
+
+  /**
+   * Provide a count value for all published factsheet nodes added to the group.
+   * @return
+   *  Count query result.
+   */
+  public function getFactsheetsCount() {
+    $query = new EntityFieldQuery();
+    return $query->entityCondition('entity_type', 'node')
+      ->entityCondition('bundle', 'factsheet')
       ->fieldCondition('og_group_ref', 'target_id', $this->node->nid)
       ->propertyCondition('status', NODE_PUBLISHED)
       ->count()

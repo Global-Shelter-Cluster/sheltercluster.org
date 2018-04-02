@@ -202,6 +202,18 @@ class GroupDisplayProvider {
       );
     }
 
+    $factsheets_count = $this->manager->getFactsheetsCount();
+    if (cluster_factsheets_is_group_factsheets_page() || ($this->manager->isEnabled('factsheets') && $factsheets_count > 0)) {
+      $items['factsheets'] = [
+        'label' => t('Factsheets'),
+        'path' => 'node/' . $this->node->nid . '/factsheets',
+        'total' => $factsheets_count,
+        'options' => [
+          'html' => TRUE,
+        ],
+      ];
+    }
+
     drupal_alter('cluster_og_dashboard_menu', $items);
 
     $secondary = array();

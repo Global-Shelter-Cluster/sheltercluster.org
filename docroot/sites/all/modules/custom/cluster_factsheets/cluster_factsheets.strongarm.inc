@@ -68,10 +68,13 @@ function cluster_factsheets_strongarm() {
     'extra_fields' => array(
       'form' => array(
         'path' => array(
-          'weight' => '30',
+          'weight' => '4',
         ),
         'redirect' => array(
-          'weight' => '30',
+          'weight' => '3',
+        ),
+        'title' => array(
+          'weight' => '0',
         ),
       ),
       'display' => array(),
