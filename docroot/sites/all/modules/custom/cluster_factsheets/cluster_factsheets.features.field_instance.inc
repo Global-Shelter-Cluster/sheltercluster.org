@@ -18,11 +18,11 @@ function cluster_factsheets_field_default_field_instances() {
     'description' => '',
     'display' => array(
       'default' => array(
-        'label' => 'hidden',
+        'label' => 'above',
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 2,
+        'weight' => 4,
       ),
       'ical' => array(
         'label' => 'above',
@@ -69,10 +69,10 @@ function cluster_factsheets_field_default_field_instances() {
     'description' => '',
     'display' => array(
       'default' => array(
-        'label' => 'above',
+        'label' => 'hidden',
         'module' => 'date',
         'settings' => array(
-          'format_type' => 'long',
+          'format_type' => 'search_api_facetapi_MONTH',
           'fromto' => 'both',
           'multiple_from' => '',
           'multiple_number' => '',
@@ -80,7 +80,7 @@ function cluster_factsheets_field_default_field_instances() {
           'show_repeat_rule' => 'show',
         ),
         'type' => 'date_default',
-        'weight' => 5,
+        'weight' => 0,
       ),
       'ical' => array(
         'label' => 'above',
@@ -141,15 +141,9 @@ function cluster_factsheets_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'number',
-        'settings' => array(
-          'decimal_separator' => '.',
-          'prefix_suffix' => TRUE,
-          'scale' => 0,
-          'thousand_separator' => '',
-        ),
-        'type' => 'number_integer',
-        'weight' => 11,
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 12,
       ),
       'ical' => array(
         'label' => 'above',
@@ -194,15 +188,9 @@ function cluster_factsheets_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'number',
-        'settings' => array(
-          'decimal_separator' => '.',
-          'prefix_suffix' => TRUE,
-          'scale' => 0,
-          'thousand_separator' => '',
-        ),
-        'type' => 'number_integer',
-        'weight' => 10,
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 11,
       ),
       'ical' => array(
         'label' => 'above',
@@ -247,15 +235,9 @@ function cluster_factsheets_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'number',
-        'settings' => array(
-          'decimal_separator' => '.',
-          'prefix_suffix' => TRUE,
-          'scale' => 0,
-          'thousand_separator' => '',
-        ),
-        'type' => 'number_integer',
-        'weight' => 6,
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 8,
       ),
       'ical' => array(
         'label' => 'above',
@@ -300,15 +282,9 @@ function cluster_factsheets_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'number',
-        'settings' => array(
-          'decimal_separator' => '.',
-          'prefix_suffix' => TRUE,
-          'scale' => 0,
-          'thousand_separator' => '',
-        ),
-        'type' => 'number_integer',
-        'weight' => 9,
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 10,
       ),
       'ical' => array(
         'label' => 'above',
@@ -353,15 +329,9 @@ function cluster_factsheets_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'number',
-        'settings' => array(
-          'decimal_separator' => '.',
-          'prefix_suffix' => TRUE,
-          'scale' => 0,
-          'thousand_separator' => '',
-        ),
-        'type' => 'number_integer',
-        'weight' => 8,
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 9,
       ),
       'ical' => array(
         'label' => 'above',
@@ -404,14 +374,14 @@ function cluster_factsheets_field_default_field_instances() {
     'description' => 'The photo should be in landscape orientation.',
     'display' => array(
       'default' => array(
-        'label' => 'above',
+        'label' => 'hidden',
         'module' => 'image',
         'settings' => array(
           'image_link' => '',
-          'image_style' => '',
+          'image_style' => 'factsheet_image',
         ),
         'type' => 'image',
-        'weight' => 3,
+        'weight' => 1,
       ),
       'ical' => array(
         'label' => 'above',
@@ -465,14 +435,14 @@ function cluster_factsheets_field_default_field_instances() {
     'description' => 'The map should be a square image.',
     'display' => array(
       'default' => array(
-        'label' => 'above',
+        'label' => 'hidden',
         'module' => 'image',
         'settings' => array(
-          'image_link' => '',
-          'image_style' => '',
+          'image_link' => 'file',
+          'image_style' => 'factsheet_map',
         ),
         'type' => 'image',
-        'weight' => 4,
+        'weight' => 3,
       ),
       'ical' => array(
         'label' => 'above',
@@ -528,10 +498,9 @@ function cluster_factsheets_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'og_ui',
         'settings' => array(),
-        'type' => 'og_list_default',
-        'weight' => 1,
+        'type' => 'hidden',
+        'weight' => 13,
       ),
       'ical' => array(
         'label' => 'above',
