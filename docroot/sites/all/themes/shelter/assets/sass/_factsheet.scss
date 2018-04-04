@@ -1,0 +1,77 @@
+.factsheet-full {
+  > .date {
+    grid-area: date;
+    color: $shelter-red;
+    @include rem(font-size, 1.6rem);
+    font-weight: bold;
+    text-align: right;
+  }
+  > .photo {
+    grid-area: photo;
+    background-size: cover;
+    background-position: center;
+    @include rem(font-size, .75rem);
+    text-align: right;
+    color: rgba(white, .75);
+    padding: 10px;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, .5);
+  }
+  > .highlights {
+    grid-area: highlights;
+    background: $shelter-red;
+    color: $white;
+    padding: 10px;
+    h3 {
+      color: $white;
+      border-color: rgba(255, 255, 255, .5);
+    }
+  }
+  > .details {
+    grid-area: details;
+    h3 {
+      margin-top: 30px;
+    }
+  }
+  > .map {
+    grid-area: map;
+    line-height: 0;
+
+    img {
+      width: 100%;
+      height: auto;
+    }
+  }
+  > .aside {
+    grid-area: aside;
+    background: lighten($shelter-grey, 50%);
+    padding: 10px;
+  }
+
+  @include breakpoint(max-width 699px) {
+    > .photo {
+      padding-bottom: 50%;
+      margin: 10px 0;
+    }
+    > .map {
+      margin: 10px 0;
+    }
+  }
+
+  @include breakpoint(700px) {
+    display: grid;
+    grid-gap: 10px;
+    grid-template-areas: "date date" "photo map" "highlights aside" "details aside";
+    grid-template-columns: 6fr 5fr;
+  }
+
+  @include breakpoint(900px) {
+    grid-template-areas: "date date date" "photo photo map" "highlights aside aside" "details aside aside";
+    grid-template-columns: 6fr 1fr 4fr;
+  }
+
+  @include breakpoint(980px 1199px) {
+    grid-template-areas: "date date" "photo map" "highlights aside" "details aside";
+    grid-template-columns: 6fr 5fr;
+  }
+
+}

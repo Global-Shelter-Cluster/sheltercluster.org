@@ -3894,6 +3894,84 @@ body.document-upload-ondrag {
   text-transform: uppercase;
 }
 
+.factsheet-full > .date {
+  grid-area: date;
+  color: #7f1416;
+  font-size: 25.6px;
+  font-size: 1.6rem;
+  font-weight: bold;
+  text-align: right;
+}
+.factsheet-full > .photo {
+  grid-area: photo;
+  background-size: cover;
+  background-position: center;
+  font-size: 12px;
+  font-size: 0.75rem;
+  text-align: right;
+  color: rgba(255, 255, 255, 0.75);
+  padding: 10px;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
+}
+.factsheet-full > .highlights {
+  grid-area: highlights;
+  background: #7f1416;
+  color: white;
+  padding: 10px;
+}
+.factsheet-full > .highlights h3 {
+  color: white;
+  border-color: rgba(255, 255, 255, 0.5);
+}
+.factsheet-full > .details {
+  grid-area: details;
+}
+.factsheet-full > .details h3 {
+  margin-top: 30px;
+}
+.factsheet-full > .map {
+  grid-area: map;
+  line-height: 0;
+}
+.factsheet-full > .map img {
+  width: 100%;
+  height: auto;
+}
+.factsheet-full > .aside {
+  grid-area: aside;
+  background: #d7d7d7;
+  padding: 10px;
+}
+@media (max-width: 699px) {
+  .factsheet-full > .photo {
+    padding-bottom: 50%;
+    margin: 10px 0;
+  }
+  .factsheet-full > .map {
+    margin: 10px 0;
+  }
+}
+@media (min-width: 700px) {
+  .factsheet-full {
+    display: grid;
+    grid-gap: 10px;
+    grid-template-areas: "date date" "photo map" "highlights aside" "details aside";
+    grid-template-columns: 6fr 5fr;
+  }
+}
+@media (min-width: 900px) {
+  .factsheet-full {
+    grid-template-areas: "date date date" "photo photo map" "highlights aside aside" "details aside aside";
+    grid-template-columns: 6fr 1fr 4fr;
+  }
+}
+@media (min-width: 980px) and (max-width: 1199px) {
+  .factsheet-full {
+    grid-template-areas: "date date" "photo map" "highlights aside" "details aside";
+    grid-template-columns: 6fr 5fr;
+  }
+}
+
 .factsheet-preview-list {
   display: flex;
   flex-wrap: wrap;

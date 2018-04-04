@@ -401,7 +401,7 @@ function cluster_factsheets_field_default_field_instances() {
   $field_instances['node-factsheet-field_image'] = array(
     'bundle' => 'factsheet',
     'deleted' => 0,
-    'description' => '',
+    'description' => 'The photo should be in landscape orientation.',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -462,7 +462,7 @@ function cluster_factsheets_field_default_field_instances() {
   $field_instances['node-factsheet-field_map'] = array(
     'bundle' => 'factsheet',
     'deleted' => 0,
-    'description' => '',
+    'description' => 'The map should be a square image.',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -515,7 +515,7 @@ function cluster_factsheets_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'image_image',
-      'weight' => 5,
+      'weight' => 6,
     ),
   );
 
@@ -599,6 +599,8 @@ function cluster_factsheets_field_default_field_instances() {
   t('Map');
   t('People reached');
   t('People targeted');
+  t('The map should be a square image.');
+  t('The photo should be in landscape orientation.');
 
   return $field_instances;
 }

@@ -64,33 +64,6 @@ function cluster_factsheets_add($group_node) {
     drupal_goto('node/add/factsheet', $options);
 }
 
-function _cluster_factsheets_render_prepare($nid) {
-  $node = node_load($nid);
-  if (!$node || $node->type !== 'factsheet')
-    return NULL;
-
-  $wrapper = entity_metadata_wrapper('node', $node);
-
-  $body = $wrapper->body->value();
-  $summary = text_summary($body['safe_value'], $body['format'], 600);
-
-  $field_image = $wrapper->field_image->value();
-  $field_map = $wrapper->field_map->value();
-  $image = image_style_url('document_preview', $field_image['uri']);
-  $map = image_style_url('document_preview', $field_map['uri']);
-
-  $indicators = cluster_factsheets_main_indicators($node);
-
-  return [
-    'link' => url('node/' . $node->nid),
-    'date' => $wrapper->field_date->value(),
-    'summary' => $summary,
-    'image' => $image,
-    'map' => $map,
-    'indicators' => $indicators,
-  ];
-}
-
 /**
  * @param $node
  * @return array
@@ -114,7 +87,12 @@ function cluster_factsheets_preprocess_node(&$variables) {
   if ($node->type !== 'factsheet')
     return;
 
+  $wrapper = entity_metadata_wrapper('node', $node);
+
   $variables['content']['indicators'] = cluster_factsheets_main_indicators($node);
+
+  $field_image = $wrapper->field_image->value();
+  $variables['content']['main_image_url'] = image_style_url('factsheet_image', $field_image['uri']);
 }
 
 /**
@@ -153,7 +131,7 @@ function cluster_factsheets_node_presave($node) {
 
   $wrapper = entity_metadata_wrapper('node', $node);
 
-  $date = date('Y-m-d', $wrapper->field_date->value());
+  $date = date('Y-m', $wrapper->field_date->value());
   $group = $wrapper->og_group_ref->value();
   $group_title = count($group) ? $group[0]->title : '';
 

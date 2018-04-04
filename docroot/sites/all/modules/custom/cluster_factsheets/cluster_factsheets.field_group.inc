@@ -25,10 +25,8 @@ function cluster_factsheets_field_group_info() {
     'children' => array(
       0 => 'og_group_ref',
       1 => 'body',
-      2 => 'field_image',
-      3 => 'field_map',
-      4 => 'field_date',
-      5 => 'title',
+      2 => 'field_date',
+      3 => 'title',
     ),
     'format_type' => 'tab',
     'format_settings' => array(
@@ -57,6 +55,8 @@ function cluster_factsheets_field_group_info() {
     'children' => array(
       0 => 'group_indicators',
       1 => 'group_factsheet',
+      2 => 'group_photos',
+      3 => 'group_details',
     ),
     'format_type' => 'tabs',
     'format_settings' => array(
@@ -80,7 +80,7 @@ function cluster_factsheets_field_group_info() {
   $field_group->parent_name = 'group_fields';
   $field_group->data = array(
     'label' => 'Indicators',
-    'weight' => '16',
+    'weight' => '18',
     'children' => array(
       0 => 'field_fsi_partners',
       1 => 'field_fsi_people_targeted',

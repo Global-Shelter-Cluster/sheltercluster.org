@@ -130,7 +130,7 @@ function cluster_factsheets_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'pathauto_node_factsheet_pattern';
-  $strongarm->value = '[node:cluster-response-title]/factsheets/[node:created:custom:"Y-m-d"]';
+  $strongarm->value = '[node:cluster-response-title]/factsheets/[node:cluster-factsheet-date]';
   $export['pathauto_node_factsheet_pattern'] = $strongarm;
 
   return $export;
