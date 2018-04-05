@@ -601,3 +601,5 @@ $file = __DIR__ . '/localhost_settings.inc';
 if (file_exists($file)) {
 	  include_once($file);
 }
+
+$conf['composer_manager_file_dir'] = '../composer';
