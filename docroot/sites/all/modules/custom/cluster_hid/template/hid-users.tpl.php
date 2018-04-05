@@ -1,16 +1,16 @@
 <table>
   <tr>
-    <th>Given Name</th>
-    <th>Last Name</th>
+    <th>Name</th>
     <th>Email</th>
     <th>Organization</th>
+    <th>Sheltercluster.org User</th>
   </tr>
   <?php foreach($users as $user): ?>
     <tr>
-      <td><?php print $user->given_name; ?></td>
-      <td><?php print $user->family_name; ?></td>
-      <td><?php print $user->email; ?></td>
-      <td><?php print $user->organization->name; ?></td>
+      <td><?php print $user->getFullName(); ?></td>
+      <td><?php print $user->getEmail(); ?></td>
+      <td><?php print $user->getOrganizationName(); ?></td>
+      <td><?php print $user->userLink(); ?></td>
     </tr>
   <?php endforeach; ?>
 </table>

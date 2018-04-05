@@ -1,0 +1,246 @@
+{
+   "_id":"5a749d5cf94a9509ffc5ebc5",
+   "user_id":"5a749d5cf94a9509ffc5ebc5",
+   "name":"Jean-Michel Lavarenne",
+   "updatedAt":"2018-04-05T20:17:01.853Z",
+   "createdAt":"2018-02-02T17:18:20.494Z",
+   "appMetadata":{
+      "hid":{
+         "login":true,
+         "viewedTutorial":true,
+         "recentSearches":{
+            "user":[
+               {
+                  "id":"58e4a1e73f0e0d00aeec57ae",
+                  "name":"AL DESTACAMENTO",
+                  "link":"users/58e4a1e73f0e0d00aeec57ae"
+               },
+               {
+                  "id":"58e4abca3f0e0d00aeec8806",
+                  "name":"Camilo Bravo",
+                  "link":"users/58e4abca3f0e0d00aeec8806"
+               }
+            ],
+            "list":[
+
+            ],
+            "operation":[
+
+            ]
+         }
+      }
+   },
+   "email":"jmlavarenne@gmail.com",
+   "given_name":"Jean-Michel",
+   "family_name":"Lavarenne",
+   "__v":5,
+   "verified_by":null,
+   "location":{
+      "country":{
+         "id":"hrinfo_loc_220",
+         "name":"Canada"
+      },
+      "locality":"Montreal",
+      "tempId":"hrinfo_loc_220-0"
+   },
+   "organization":{
+      "list":"58e39b16ab77c100ae45ec80",
+      "name":"International Federation of Red Cross and Red Crescent Societies (IFRC)",
+      "acronym":"IFRC",
+      "visibility":"all",
+      "orgTypeId":445,
+      "orgTypeLabel":"Red Cross / Red Crescent",
+      "_id":"5a749fe2f94a9509ffc5ec8f",
+      "createdAt":"2018-02-02T17:29:06.873Z",
+      "deleted":false,
+      "remindedCheckin":false,
+      "remindedCheckout":false,
+      "pending":false,
+      "managers":[
+         "58e4b5643f0e0d00aeecb58a"
+      ],
+      "acronyms":[
+         {
+            "_id":"58e39b16ab77c100ae45ec81",
+            "text":"IFRC",
+            "language":"en"
+         },
+         {
+            "_id":"58e39d2fab77c100ae4628e3",
+            "text":"FICR",
+            "language":"fr"
+         },
+         {
+            "_id":"58e39f3dab77c100ae4654d1",
+            "text":"IFRC",
+            "language":"es"
+         }
+      ],
+      "names":[
+         {
+            "language":"en",
+            "text":"International Federation of Red Cross and Red Crescent Societies (IFRC)",
+            "_id":"58e522eb097b1100aeee9379"
+         },
+         {
+            "language":"fr",
+            "text":"Fédération internationale des sociétés de la Croix-Rouge et du Croissant-Rouge (FICR)",
+            "_id":"58e522eb097b1100aeee937a"
+         },
+         {
+            "language":"es",
+            "text":"Federación Internacional de Sociedades de la Cruz Roja y de la Media Luna Roja (IFRC)",
+            "_id":"58e522eb097b1100aeee937b"
+         }
+      ]
+   },
+   "phone_number":"+1 514-726-8376",
+   "phone_number_type":"Mobile",
+   "outlookCredentials":false,
+   "googleCredentials":false,
+   "totpTrusted":[
+
+   ],
+   "totp":false,
+   "authOnly":false,
+   "deleted":false,
+   "connections":[
+
+   ],
+   "subscriptions":[
+
+   ],
+   "authorizedClients":[
+
+   ],
+   "offices":[
+
+   ],
+   "disasters":[
+
+   ],
+   "bundles":[
+
+   ],
+   "operations":[
+
+   ],
+   "lists":[
+
+   ],
+   "favoriteLists":[
+
+   ],
+   "expires":"1900-01-01T00:00:00.000Z",
+   "is_ghost":false,
+   "is_orphan":false,
+   "isManager":false,
+   "is_admin":false,
+   "locationsVisibility":"anyone",
+   "locations":[
+      {
+         "country":{
+            "id":"hrinfo_loc_220",
+            "name":"Canada"
+         },
+         "locality":"Montreal",
+         "tempId":"hrinfo_loc_220-0"
+      }
+   ],
+   "functional_roles":[
+
+   ],
+   "job_titles":[
+
+   ],
+   "phonesVisibility":"anyone",
+   "phone_numbers":[
+      {
+         "number":"+1 234-567-8786",
+         "type":"Landline",
+         "_id":"5ac6842c6fa3e3069ed8645b",
+         "validated":false
+      },
+      {
+         "number":"+1 514-726-8376",
+         "type":"Mobile",
+         "_id":"5ac684366fa3e3069ed8645f",
+         "validated":false
+      }
+   ],
+   "organizations":[
+      {
+         "list":"58e39b16ab77c100ae45ec80",
+         "name":"International Federation of Red Cross and Red Crescent Societies (IFRC)",
+         "acronym":"IFRC",
+         "visibility":"all",
+         "orgTypeId":445,
+         "orgTypeLabel":"Red Cross / Red Crescent",
+         "_id":"5a749fe2f94a9509ffc5ec8f",
+         "createdAt":"2018-02-02T17:29:06.873Z",
+         "deleted":false,
+         "remindedCheckin":false,
+         "remindedCheckout":false,
+         "pending":false,
+         "managers":[
+            "58e4b5643f0e0d00aeecb58a"
+         ],
+         "acronyms":[
+            {
+               "_id":"58e39b16ab77c100ae45ec81",
+               "text":"IFRC",
+               "language":"en"
+            },
+            {
+               "_id":"58e39d2fab77c100ae4628e3",
+               "text":"FICR",
+               "language":"fr"
+            },
+            {
+               "_id":"58e39f3dab77c100ae4654d1",
+               "text":"IFRC",
+               "language":"es"
+            }
+         ],
+         "names":[
+            {
+               "language":"en",
+               "text":"International Federation of Red Cross and Red Crescent Societies (IFRC)",
+               "_id":"58e522eb097b1100aeee9379"
+            },
+            {
+               "language":"fr",
+               "text":"Fédération internationale des sociétés de la Croix-Rouge et du Croissant-Rouge (FICR)",
+               "_id":"58e522eb097b1100aeee937a"
+            },
+            {
+               "language":"es",
+               "text":"Federación Internacional de Sociedades de la Cruz Roja y de la Media Luna Roja (IFRC)",
+               "_id":"58e522eb097b1100aeee937b"
+            }
+         ]
+      }
+   ],
+   "locale":"en",
+   "websites":[
+
+   ],
+   "voips":[
+
+   ],
+   "verified":false,
+   "lastPasswordReset":"2018-04-05T17:40:51.250Z",
+   "emailsVisibility":"anyone",
+   "emails":[
+      {
+         "type":"Work",
+         "email":"jmlavarenne@gmail.com",
+         "_id":"5a749d5cf94a9509ffc5ebc6",
+         "validated":true
+      }
+   ],
+   "timesRemindedVerify":0,
+   "email_verified":true,
+   "sub":"5a749d5cf94a9509ffc5ebc5",
+   "id":"5a749d5cf94a9509ffc5ebc5"
+}

@@ -41,6 +41,9 @@ class ClusterHidHttpClient {
   }
 
   public function makeTestRequest() {
+    // use Drupal\cluster_hid\ClusterHidHttpClient;
+    // $s = ClusterHidHttpClient::getInstance();
+    // dpm($s->makeTestRequest());
     try {
       $res = $this->httpClient->request('GET', 'user/5a749d5cf94a9509ffc5ebc5');
       dpm($res->getStatusCode());

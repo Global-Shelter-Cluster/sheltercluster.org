@@ -1,6 +1,7 @@
 <?php
 
 use Drupal\cluster_hid\ClusterHidHttpClient;
+use Drupal\cluster_hid\ClusterHidUser;
 
 /**
  * Implements hook_menu().
@@ -11,27 +12,33 @@ function cluster_hid_menu() {
       'title' => 'Humanitarian Id Settings',
       'description' => 'Credentials and configs for integration with Humanitarian.id.',
       'page callback' => 'drupal_get_form',
-      'page arguments' => array('cluster_hid_settings_form'),
-      'access arguments' => array('access administration pages'),
+      'page arguments' => ['cluster_hid_settings_form'],
+      'access arguments' => ['access administration pages'],
       'file' => 'cluster_hid.forms.inc',
     ],
     'admin/config/shelter/hid-search' => [
       'title' => 'Search Humanitarian.id',
       'description' => 'Search Humanitarian.id for users',
       'page callback' => 'drupal_get_form',
-      'page arguments' => array('cluster_hid_search_form'),
-      'access arguments' => array('access administration pages'),
+      'page arguments' => ['cluster_hid_search_form'],
+      'access arguments' => ['access administration pages'],
       'file' => 'cluster_hid.forms.inc',
+    ],
+    'create-new-user-from-hid-id/%' => [
+      'page callback' => 'cluster_hid_new_drupal_user',
+      'page arguments' => [1],
+      'access arguments' => ['access administration pages'],
+      'type' => MENU_CALLBACK,
     ],
     'hid-search-user-search-autocomplete' => [
       'title' => 'Search Humanitarian.id autocomplete',
       'page callback' => 'cluster_hid_user_search_autocomplete',
-      'access arguments' => array('access administration pages'),
+      'access arguments' => ['access administration pages'],
       'type' => MENU_CALLBACK,
     ],
     'hid-ajax-get-user-by-id/%' => [
-      'page callback' => 'cluster_hid_get_user_by_id',
-      'access arguments' => array('access administration pages'),
+      'page callback' => 'cluster_hid_get_user_by_id_as_table',
+      'access arguments' => ['access administration pages'],
       'page arguments' => [1],
       'type' => MENU_CALLBACK,
     ],
@@ -53,6 +60,11 @@ function cluster_hid_theme() {
   ];
 }
 
+/**
+ * Autocomplete query callback.
+ *
+ * Search Humanitarian ID API for name matching string argument.
+ */
 function cluster_hid_user_search_autocomplete($string) {
   $matches = [];
   $argument_length = strlen($string);
@@ -84,8 +96,28 @@ function _cluster_hid_format_user_for_autocomplete($user) {
   return $formated_user;
 }
 
-function cluster_hid_get_user_by_id($id) {
+/**
+ * Given a humanitarian id, create a new Drupal user.
+ */
+function cluster_hid_new_drupal_user($id) {
+  $hid_user = cluster_hid_get_hid_user_by_id($id);
+  $new_user_id = $hid_user->createNewDrupalUser();
+  return drupal_json_output($new_user_id);
+}
+
+/**
+ * Call hid API to get user information.
+ *
+ * return @clustuer_hid/ClusterHidUser
+ */
+function cluster_hid_get_hid_user_by_id($id) {
   $http_client = ClusterHidHttpClient::getInstance();
-  $user = $http_client->getUserById($id);
+  $hid_user = $http_client->getUserById($id);
+  $user = ClusterHidUser::create($hid_user);
+  return $user;
+}
+
+function cluster_hid_get_user_by_id_as_table($id) {
+  $user = cluster_hid_get_hid_user_by_id($id);
   return drupal_json_output(theme('hid_users', ['users' => [$user]]));
 }

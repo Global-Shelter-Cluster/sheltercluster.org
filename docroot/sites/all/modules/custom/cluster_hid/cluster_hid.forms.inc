@@ -18,6 +18,7 @@ function cluster_hid_settings_form() {
 }
 
 function cluster_hid_search_form($form, &$form_state) {
+  $js_path = drupal_get_path('module', 'cluster_hid') . '/js/';
   return [
     'name' => [
       '#type' => 'textfield',
@@ -28,7 +29,9 @@ function cluster_hid_search_form($form, &$form_state) {
       '#autocomplete_path' => 'hid-search-user-search-autocomplete',
     ],
     '#attached' => [
-      'js' => [drupal_get_path('module', 'cluster_hid') . '/js/autocomplete_select.js'],
+      'js' => [
+        $js_path . 'autocomplete_select.js',
+      ],
     ],
     'user-data' => [
       '#type' => 'item',
