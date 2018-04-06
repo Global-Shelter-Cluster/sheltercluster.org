@@ -116,7 +116,7 @@ class ClusterHidUser {
     $new_user = new \stdClass();
     $new_user->is_new = TRUE;
     $new_user->name = $this->getEmail();
-    $new_user->pass = base64_encode(random_bytes(10));
+    $new_user->pass = crypt(md5(rand(0,100000)+strtotime(time())+$row[0]));
     $new_user->mail = $this->getEmail();
     $new_user->status = 1;
     $new_user->init = $this->getEmail();
