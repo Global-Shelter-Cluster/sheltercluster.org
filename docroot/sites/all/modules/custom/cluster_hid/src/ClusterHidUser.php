@@ -19,7 +19,7 @@ class ClusterHidUser {
   }
 
   public function getHumanitarianId() {
-    return $this->hidUser->user_id;
+    return $this->hidUser->id;
   }
 
   public function getEmail() {
@@ -36,6 +36,18 @@ class ClusterHidUser {
 
   public function getFullName() {
     return $this->getFamilyName() . ', ' . $this->getGivenName();
+  }
+
+  public function getRoleOrTitle() {
+    $first_role = array_pop($this->hidUser->functional_roles);
+    $first_title = array_pop($this->hidUser->job_titles);
+    if (!empty($first_role)) {
+      return $first_role;
+    }
+    if (!empty($first_title)) {
+      return $first_title;
+    }
+    return FALSE;
   }
 
   public function getOrganizationName() {
@@ -118,6 +130,11 @@ class ClusterHidUser {
     $phone_number = $this->getPhoneNumber();
     if ($phone_number) {
       $new_user->field_phone_number[LANGUAGE_NONE][0]['value'] = $phone_number;
+    }
+
+    $role_or_title = $this->getRoleOrTitle();
+    if ($role_or_title) {
+      $new_user->field_role_or_title[LANGUAGE_NONE][0]['value'] = $role_or_title;
     }
 
     $user = user_save($new_user);
