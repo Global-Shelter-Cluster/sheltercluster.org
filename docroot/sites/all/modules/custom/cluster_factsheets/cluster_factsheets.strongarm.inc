@@ -66,7 +66,7 @@ function cluster_factsheets_strongarm() {
   $strongarm->value = array(
     'view_modes' => array(
       'teaser' => array(
-        'custom_settings' => TRUE,
+        'custom_settings' => FALSE,
       ),
       'ical' => array(
         'custom_settings' => TRUE,
@@ -91,6 +91,12 @@ function cluster_factsheets_strongarm() {
       ),
       'token' => array(
         'custom_settings' => FALSE,
+      ),
+      'factsheet_summary' => array(
+        'custom_settings' => TRUE,
+      ),
+      'preview_block' => array(
+        'custom_settings' => TRUE,
       ),
     ),
     'extra_fields' => array(

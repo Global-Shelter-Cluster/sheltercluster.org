@@ -13,6 +13,35 @@ function cluster_factsheets_field_group_info() {
   $field_group = new stdClass();
   $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
   $field_group->api_version = 1;
+  $field_group->identifier = 'group_details|node|factsheet|form';
+  $field_group->group_name = 'group_details';
+  $field_group->entity_type = 'node';
+  $field_group->bundle = 'factsheet';
+  $field_group->mode = 'form';
+  $field_group->parent_name = 'group_fields';
+  $field_group->data = array(
+    'label' => 'Details',
+    'weight' => '17',
+    'children' => array(
+      0 => 'field_need_analysis',
+      1 => 'field_fs_response',
+      2 => 'field_gaps_challenges',
+    ),
+    'format_type' => 'tab',
+    'format_settings' => array(
+      'formatter' => 'closed',
+      'instance_settings' => array(
+        'description' => '',
+        'classes' => 'group-details field-group-tab',
+        'required_fields' => 1,
+      ),
+    ),
+  );
+  $field_groups['group_details|node|factsheet|form'] = $field_group;
+
+  $field_group = new stdClass();
+  $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
+  $field_group->api_version = 1;
   $field_group->identifier = 'group_factsheet|node|factsheet|form';
   $field_group->group_name = 'group_factsheet';
   $field_group->entity_type = 'node';
@@ -53,10 +82,10 @@ function cluster_factsheets_field_group_info() {
     'label' => 'Fields',
     'weight' => '2',
     'children' => array(
-      0 => 'group_indicators',
-      1 => 'group_factsheet',
-      2 => 'group_photos',
-      3 => 'group_details',
+      0 => 'group_factsheet',
+      1 => 'group_photos',
+      2 => 'group_details',
+      3 => 'group_sidebar',
     ),
     'format_type' => 'tabs',
     'format_settings' => array(
@@ -77,10 +106,10 @@ function cluster_factsheets_field_group_info() {
   $field_group->entity_type = 'node';
   $field_group->bundle = 'factsheet';
   $field_group->mode = 'form';
-  $field_group->parent_name = 'group_fields';
+  $field_group->parent_name = 'group_sidebar';
   $field_group->data = array(
     'label' => 'Indicators',
-    'weight' => '18',
+    'weight' => '11',
     'children' => array(
       0 => 'field_fsi_partners',
       1 => 'field_fsi_people_targeted',
@@ -88,23 +117,87 @@ function cluster_factsheets_field_group_info() {
       3 => 'field_fsi_funding_required',
       4 => 'field_fsi_funded',
     ),
+    'format_type' => 'fieldset',
+    'format_settings' => array(
+      'label' => 'Indicators',
+      'instance_settings' => array(
+        'required_fields' => 1,
+        'id' => '',
+        'classes' => '',
+        'description' => '',
+      ),
+      'formatter' => 'open',
+    ),
+  );
+  $field_groups['group_indicators|node|factsheet|form'] = $field_group;
+
+  $field_group = new stdClass();
+  $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
+  $field_group->api_version = 1;
+  $field_group->identifier = 'group_photos|node|factsheet|form';
+  $field_group->group_name = 'group_photos';
+  $field_group->entity_type = 'node';
+  $field_group->bundle = 'factsheet';
+  $field_group->mode = 'form';
+  $field_group->parent_name = 'group_fields';
+  $field_group->data = array(
+    'label' => 'Photos',
+    'weight' => '16',
+    'children' => array(
+      0 => 'field_image',
+      1 => 'field_map',
+      2 => 'field_photo_credit',
+    ),
     'format_type' => 'tab',
     'format_settings' => array(
       'formatter' => 'closed',
       'instance_settings' => array(
         'description' => '',
-        'classes' => '',
+        'classes' => 'group-photos field-group-tab',
         'required_fields' => 1,
       ),
     ),
   );
-  $field_groups['group_indicators|node|factsheet|form'] = $field_group;
+  $field_groups['group_photos|node|factsheet|form'] = $field_group;
+
+  $field_group = new stdClass();
+  $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
+  $field_group->api_version = 1;
+  $field_group->identifier = 'group_sidebar|node|factsheet|form';
+  $field_group->group_name = 'group_sidebar';
+  $field_group->entity_type = 'node';
+  $field_group->bundle = 'factsheet';
+  $field_group->mode = 'form';
+  $field_group->parent_name = 'group_fields';
+  $field_group->data = array(
+    'label' => 'Sidebar',
+    'weight' => '18',
+    'children' => array(
+      0 => 'field_key_links',
+      1 => 'field_key_documents',
+      2 => 'field_key_dates',
+      3 => 'group_indicators',
+    ),
+    'format_type' => 'tab',
+    'format_settings' => array(
+      'formatter' => 'closed',
+      'instance_settings' => array(
+        'description' => '',
+        'classes' => 'group-sidebar field-group-tab',
+        'required_fields' => 1,
+      ),
+    ),
+  );
+  $field_groups['group_sidebar|node|factsheet|form'] = $field_group;
 
   // Translatables
   // Included for use with string extractors like potx.
+  t('Details');
   t('Factsheet');
   t('Fields');
   t('Indicators');
+  t('Photos');
+  t('Sidebar');
 
   return $field_groups;
 }
