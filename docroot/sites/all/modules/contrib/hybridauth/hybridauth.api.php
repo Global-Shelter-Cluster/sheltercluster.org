@@ -129,6 +129,18 @@ function hook_hybridauth_user_login($account, $data) {
 }
 
 /**
+ * Invoked when an account of a user trying to login through HybridAuth is not
+ * activated or is blocked.
+ * @param object $account
+ *   User account object.
+ * @param array $data
+ *   HybridAuth identity data.
+ */
+function hook_hybridauth_user_blocked($account, $data) {
+
+}
+
+/**
  * Allow modules to alter forms list to optionally add HybridAuth login widget
  * to. This list is used on the module settings page to enable HybridAuth widget
  * on selected forms.

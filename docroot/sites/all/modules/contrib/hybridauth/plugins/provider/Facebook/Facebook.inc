@@ -17,10 +17,12 @@ function hybridauth_provider_facebook_configuration_form_callback(&$form, $provi
 
   $form['vtabs']['application']['#description'] = t('<p>Enter your application ID and private key. You can get these by creating a new application at <a href="!apps_uri">!apps_uri</a>.</p>'
     . '<p>You must set <strong>App Domain</strong> to something like <strong>example.com</strong> to cover <strong>*.example.com</strong>.</p>'
-    . '<p>You must set <strong>Site URL</strong> to <strong>%site_uri</strong>.</p>',
+    . '<p>You must set <strong>Site URL</strong> to <strong>%site_uri</strong>.</p>'
+    . '<p>You must set <strong>Callback URL</strong> to <strong>%callback_uri</strong>.</p>',
     array(
       '!apps_uri' => 'https://developers.facebook.com/apps',
       '%site_uri' => url('<front>', array('absolute' => TRUE)),
+      '%callback_uri' => url('hybridauth/endpoint', array('absolute' => TRUE, 'query' => array('hauth.done' => 'Facebook'), 'language' => _hybridauth_language_default())),
     )
   );
 

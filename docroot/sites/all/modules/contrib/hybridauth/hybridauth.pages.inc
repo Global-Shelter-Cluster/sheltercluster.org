@@ -248,6 +248,8 @@ function _hybridauth_window_process_auth($data) {
   if ($identity = _hybridauth_identity_load($data)) {
     // Check if user is blocked.
     if ($account = _hybridauth_user_is_blocked_by_uid($identity['uid'])) {
+      $account = user_load($identity['uid']);
+      module_invoke_all('hybridauth_user_blocked', $account, $data);
       drupal_set_message(t('The username %name has not been activated or is blocked.', array('%name' => $account->name)), 'error');
     }
     // Check for email verification timestamp.
