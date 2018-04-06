@@ -9,9 +9,10 @@ function cluster_hid_settings_form() {
       '#title' => t('Humanitarian Id'),
       'cluster_hid_jwt' => [
         '#type' => 'textarea',
-        '#title' => 'JWT',
+        '#title' => 'Json Web Token',
         '#default_value' => variable_get('cluster_hid_jwt', NULL),
-        '#description' => t('Get your JWT from your Humanitarian Id profile settings.'),
+        '#description' => t('You can get a new JWT from your Humanitarian Id profile settings (https://humanitarian.id/settings).
+          Look for "API Keys".'),
       ],
     ],
   ]);

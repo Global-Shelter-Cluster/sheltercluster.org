@@ -10,7 +10,7 @@ function cluster_hid_menu() {
   return [
     'admin/config/shelter/hid-settings' => [
       'title' => 'Humanitarian Id Settings',
-      'description' => 'Credentials and configs for integration with Humanitarian.id.',
+      'description' => 'Credentials (JWT) and configs for integration with Humanitarian.id.',
       'page callback' => 'drupal_get_form',
       'page arguments' => ['cluster_hid_settings_form'],
       'access arguments' => ['access administration pages'],
