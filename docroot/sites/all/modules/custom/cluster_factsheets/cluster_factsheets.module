@@ -71,7 +71,7 @@ function cluster_factsheets_add($group_node) {
 function cluster_factsheets_all($node) {
   $manager = GroupContentManager::getInstance($node);
   $items = array_filter(array_map(function($node) {
-    return node_view($node, 'teaser');
+    return node_view($node, 'preview_block');
   }, node_load_multiple($manager->getFactsheets())));
   return [
     '#theme' => 'factsheet_list',
@@ -89,10 +89,10 @@ function cluster_factsheets_preprocess_node(&$variables) {
 
   $wrapper = entity_metadata_wrapper('node', $node);
 
-  $variables['content']['indicators'] = cluster_factsheets_main_indicators($node);
+  $variables['cluster_factsheets']['indicators'] = cluster_factsheets_main_indicators($node);
 
   $field_image = $wrapper->field_image->value();
-  $variables['content']['main_image_url'] = image_style_url('factsheet_image', $field_image['uri']);
+  $variables['cluster_factsheets']['main_image_url'] = image_style_url('factsheet_image', $field_image['uri']);
 }
 
 /**
@@ -203,4 +203,14 @@ function cluster_factsheets_main_indicators($node) {
     'required (funded)' => $n($wrapper->field_fsi_funding_required->value(), '$') . ' (' . $funded . ')',
     'people reached / targeted' => $n($wrapper->field_fsi_people_reached->value()) . ' / ' . $n($wrapper->field_fsi_people_targeted->value()),
   ];
+}
+
+/**
+ *  Implements hook_entity_info_alter().
+ */
+function cluster_factsheets_entity_info_alter(&$entity_info) {
+  $entity_info['node']['view modes']['factsheet_summary'] = array(
+    'label' => t('Factsheet summary'),
+    'custom settings' => FALSE,
+  );
 }

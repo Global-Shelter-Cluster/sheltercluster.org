@@ -45,6 +45,12 @@
     grid-area: aside;
     background: lighten($shelter-grey, 50%);
     padding: 10px;
+    h3 {
+      margin-top: 30px;
+      &:first-child {
+        margin-top: 0;
+      }
+    }
   }
 
   @include breakpoint(max-width 699px) {
@@ -62,6 +68,7 @@
     grid-gap: 10px;
     grid-template-areas: "date date" "photo map" "highlights aside" "details aside";
     grid-template-columns: 6fr 5fr;
+    grid-template-rows: max-content max-content max-content min-content;
   }
 
   @include breakpoint(900px) {

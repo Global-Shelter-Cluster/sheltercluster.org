@@ -2,7 +2,7 @@
   <header class="date">
     <?php print render($content['field_date']); ?>
   </header>
-  <div class="photo" style="background-image: url(<?php print $content['main_image_url']; ?>);">
+  <div class="photo" style="background-image: url(<?php print $cluster_factsheets['main_image_url']; ?>);">
     <?php print render($content['field_photo_credit']); ?>
   </div>
   <main class="highlights">
@@ -17,8 +17,13 @@
     <?php print render($content['field_map']); ?>
   </div>
   <aside class="aside">
+    <?php
+    hide($content['field_image']);
+    print render($content);
+    ?>
+    <h3><?php print t('Indicators'); ?></h3>
     <ul class="indicators">
-      <?php foreach ($content['indicators'] as $indicator => $value): ?>
+      <?php foreach ($cluster_factsheets['indicators'] as $indicator => $value): ?>
         <li>
           <strong><?php print $value; ?></strong>
           <?php print $indicator; ?>

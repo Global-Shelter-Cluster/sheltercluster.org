@@ -39,3 +39,6 @@
 .page-node-add .form-text {
   float: none;
 }
+.vertical-tabs .field-type-number-integer .form-type-textfield input {
+  width: inherit;
+}

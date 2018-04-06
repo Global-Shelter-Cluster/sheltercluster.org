@@ -3942,6 +3942,12 @@ body.document-upload-ondrag {
   background: #d7d7d7;
   padding: 10px;
 }
+.factsheet-full > .aside h3 {
+  margin-top: 30px;
+}
+.factsheet-full > .aside h3:first-child {
+  margin-top: 0;
+}
 @media (max-width: 699px) {
   .factsheet-full > .photo {
     padding-bottom: 50%;
@@ -3957,6 +3963,7 @@ body.document-upload-ondrag {
     grid-gap: 10px;
     grid-template-areas: "date date" "photo map" "highlights aside" "details aside";
     grid-template-columns: 6fr 5fr;
+    grid-template-rows: max-content max-content max-content min-content;
   }
 }
 @media (min-width: 900px) {

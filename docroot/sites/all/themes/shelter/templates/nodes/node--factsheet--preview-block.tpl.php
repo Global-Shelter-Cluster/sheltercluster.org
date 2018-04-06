@@ -11,7 +11,7 @@
     <?php print render($content['body']); ?>
   </div>
   <ul class="indicators">
-    <?php foreach ($content['indicators'] as $indicator => $value): ?>
+    <?php foreach ($cluster_factsheets['indicators'] as $indicator => $value): ?>
       <li>
         <strong><?php print $value; ?></strong>
         <?php print $indicator; ?>
