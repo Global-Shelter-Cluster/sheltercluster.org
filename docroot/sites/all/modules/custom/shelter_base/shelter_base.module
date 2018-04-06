@@ -7,6 +7,23 @@
 include_once 'shelter_base.features.inc';
 
 /**
+ * Implements hook_menu().
+ */
+function shelter_base_menu() {
+  $items['admin/config/shelter'] = array(
+    'title' => 'Shelter Cluster',
+    'description' => 'Shelter Cluster Settings.',
+    'position' => 'left',
+    'weight' => -20,
+    'page callback' => 'system_admin_menu_block_page',
+    'access arguments' => array('access administration pages'),
+    'file' => 'system.admin.inc',
+    'file path' => drupal_get_path('module', 'system'),
+  );
+  return $items;
+}
+
+/**
  * Small error handling wrapper for entity_metadata_wrapper.
  */
 function _log_entity_metadata_wrapper_error($exception, $context) {
