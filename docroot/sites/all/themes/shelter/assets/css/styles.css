@@ -3879,7 +3879,7 @@ body.document-upload-ondrag {
   background: #04314c url("../images/clock-white.png") 1rem 50% no-repeat;
 }
 .preview-block > .list {
-  margin: 10px;
+  margin: 10px 0;
 }
 .preview-block > .footer {
   text-align: center;
