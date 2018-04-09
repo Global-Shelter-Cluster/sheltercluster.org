@@ -43,6 +43,7 @@
     }
 
     .document-status {
+      float: right;
       @include rem(font-size, 0.5rem);
       line-height: 1;
       font-weight: bold;
