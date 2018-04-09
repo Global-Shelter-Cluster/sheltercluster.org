@@ -108,7 +108,7 @@ function cluster_factsheets_field_group_info() {
   $field_group->mode = 'form';
   $field_group->parent_name = 'group_sidebar';
   $field_group->data = array(
-    'label' => 'Indicators',
+    'label' => 'Key figures',
     'weight' => '11',
     'children' => array(
       0 => 'field_fsi_partners',
@@ -119,7 +119,7 @@ function cluster_factsheets_field_group_info() {
     ),
     'format_type' => 'fieldset',
     'format_settings' => array(
-      'label' => 'Indicators',
+      'label' => 'Key figures',
       'instance_settings' => array(
         'required_fields' => 1,
         'id' => '',
@@ -195,7 +195,7 @@ function cluster_factsheets_field_group_info() {
   t('Details');
   t('Factsheet');
   t('Fields');
-  t('Indicators');
+  t('Key figures');
   t('Photos');
   t('Sidebar');
 

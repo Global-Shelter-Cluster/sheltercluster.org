@@ -21,7 +21,7 @@
     hide($content['field_image']);
     print render($content);
     ?>
-    <h3><?php print t('Indicators'); ?></h3>
+    <h3><?php print t('Key figures'); ?></h3>
     <ul class="indicators">
       <?php foreach ($cluster_factsheets['indicators'] as $indicator => $value): ?>
         <li>

@@ -21,15 +21,19 @@
     background: $shelter-red;
     color: $white;
     padding: 10px;
+    border-radius: 4px;
     h3 {
       color: $white;
       border-color: rgba(255, 255, 255, .5);
+      //padding: 0 10px .4rem;
+      @include rem(margin, 0 -10px 1rem);
+      @include rem(padding, 0 10px 0.4rem);
     }
   }
   > .details {
     grid-area: details;
     h3 {
-      margin-top: 30px;
+      @include rem(margin, 1.5rem 0 1rem);
     }
   }
   > .map {
@@ -45,8 +49,10 @@
     grid-area: aside;
     background: lighten($shelter-grey, 50%);
     padding: 10px;
+    border-radius: 4px;
     h3 {
-      margin-top: 30px;
+      @include rem(margin, 1.5rem -10px 1rem);
+      @include rem(padding, 0 10px 0.4rem);
       &:first-child {
         margin-top: 0;
       }

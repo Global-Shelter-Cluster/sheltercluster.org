@@ -3918,16 +3918,22 @@ body.document-upload-ondrag {
   background: #7f1416;
   color: white;
   padding: 10px;
+  border-radius: 4px;
 }
 .factsheet-full > .highlights h3 {
   color: white;
   border-color: rgba(255, 255, 255, 0.5);
+  margin: 0 -10px 16px;
+  margin: 0 -0.625rem 1rem;
+  padding: 0 10px 6.4px;
+  padding: 0 0.625rem 0.4rem;
 }
 .factsheet-full > .details {
   grid-area: details;
 }
 .factsheet-full > .details h3 {
-  margin-top: 30px;
+  margin: 24px 0 16px;
+  margin: 1.5rem 0 1rem;
 }
 .factsheet-full > .map {
   grid-area: map;
@@ -3941,9 +3947,13 @@ body.document-upload-ondrag {
   grid-area: aside;
   background: #d7d7d7;
   padding: 10px;
+  border-radius: 4px;
 }
 .factsheet-full > .aside h3 {
-  margin-top: 30px;
+  margin: 24px -10px 16px;
+  margin: 1.5rem -0.625rem 1rem;
+  padding: 0 10px 6.4px;
+  padding: 0 0.625rem 0.4rem;
 }
 .factsheet-full > .aside h3:first-child {
   margin-top: 0;
