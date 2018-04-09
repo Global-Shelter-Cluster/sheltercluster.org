@@ -691,6 +691,7 @@ body {
   border-color: #a4a4a4;
 }
 .document-preview-list .document-preview .document-status {
+  float: right;
   font-size: 8px;
   font-size: 0.5rem;
   line-height: 1;
