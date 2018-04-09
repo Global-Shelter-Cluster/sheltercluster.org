@@ -83,24 +83,26 @@
     <a v-if="document.can_delete" class="operation-icon" :href="'/node/' + document.nid + '/delete'" title="Delete this document">
       <i class="fas fa-trash-alt"></i>
     </a>
-    <div v-if="document.field_document_status" class="document-status">
-      {{ document.field_document_status }}
-    </div>
     <a :href="document.url">
-      <h4 :title="document.title|strip_tags" v-html="
-      (
-        document.featured && document.key
-        ? '<span title=\'Featured and key document\'>★</span> '
-        : (
-          document.featured
-          ? '<span title=\'Featured\'>★</span> '
-          : (
-            document.key
-            ? '<span title=\'Key document\'>★</span> '
-            : ''
-          )
-        )
-      ) + document.title">
+      <h4 :title="document.title|strip_tags">
+        <div v-if="document.field_document_status" class="document-status">
+          {{ document.field_document_status }}
+        </div>
+        <template v-html="
+          (
+            document.featured && document.key
+            ? '<span title=\'Featured and key document\'>★</span>&nbsp;'
+            : (
+              document.featured
+              ? '<span title=\'Featured\'>★</span>&nbsp;'
+              : (
+                document.key
+                ? '<span title=\'Key document\'>★</span>&nbsp;'
+                : ''
+              )
+            )
+          ) + document.title">
+        </template>
       </h4>
     </a>
     <a :href="'/node/' + document.group_nids[0]" class="group"
