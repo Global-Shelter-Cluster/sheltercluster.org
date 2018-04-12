@@ -88,7 +88,7 @@
         <div v-if="document.field_document_status" class="document-status">
           {{ document.field_document_status }}
         </div>
-        <template v-html="
+        <span v-html="
           (
             document.featured && document.key
             ? '<span title=\'Featured and key document\'>★</span>&nbsp;'
@@ -102,7 +102,7 @@
               )
             )
           ) + document.title">
-        </template>
+        </span>
       </h4>
     </a>
     <a :href="'/node/' + document.group_nids[0]" class="group"
