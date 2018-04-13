@@ -1,0 +1,68 @@
+<?php
+
+//Shelter brand guidelines colors
+const CLUSTER_CHART_COLOR_SHELTER_RED = 'rgb(127,20,22)';
+const CLUSTER_CHART_COLOR_SHELTER_GREY = 'rgb(87,87,87)';
+const CLUSTER_CHART_COLOR_SHELTER_LIGHT_BLUE = 'rgb(205,214,219)';
+const CLUSTER_CHART_COLOR_SHELTER_DARK_BLUE = 'rgb(104,131,148)';
+
+//Shelter chart guidelines colors
+const CLUSTER_CHART_COLOR_ACCENT_YELLOW = 'rgba(255,177,0,1)';
+const CLUSTER_CHART_COLOR_ACCENT_GREEN = 'rgb(101,182,48)';
+const CLUSTER_CHART_COLOR_ACCENT_RED = 'rgb(252,0,0)';
+const CLUSTER_CHART_COLOR_ACCENT_BLUE = 'rgb(22,135,203)';
+const CLUSTER_CHART_COLOR_ACCENT_DARK_BLUE = 'rgb(4,49,76)';
+
+function cluster_chart_include_lib() {
+  drupal_add_js(drupal_get_path('module', 'cluster_chart') . '/js/lib/Chart.min.js', ['group' => JS_LIBRARY]);
+  drupal_add_js(drupal_get_path('module', 'cluster_chart') . '/js/lib/Chart.PieceLabel.js', ['group' => JS_LIBRARY]);
+  drupal_add_js(drupal_get_path('module', 'cluster_chart') . '/js/charts.js');
+}
+
+/**
+ * Implements hook_theme().
+ */
+function cluster_chart_theme($existing, $type, $theme, $path) {
+  return [
+    'cluster_chart_pie' => [
+      'variables' => [
+        'extra_css_classes' => NULL,
+        'data' => NULL,
+        'labels' => NULL,
+        'colors' => NULL,
+        'options' => NULL,
+      ],
+    ],
+    'cluster_chart_hbar' => [
+      'variables' => [
+        'extra_css_classes' => NULL,
+        'data' => NULL,
+        'labels' => NULL,
+        'colors' => NULL,
+        'options' => NULL,
+      ],
+    ],
+  ];
+}
+
+function theme_cluster_chart_pie($variables) {
+  $html_id = drupal_html_id('cluster_chart');
+
+  cluster_chart_include_lib();
+
+  drupal_add_js(['cluster_chart' => ['type_pie' => [$html_id => $variables]]], 'setting');
+
+  return '<div' . drupal_attributes(['class' => array_merge(['cluster-chart-wrapper'], $variables['extra_css_classes'])]) . '>'.
+    '<canvas' . drupal_attributes(['id' => $html_id]) . "></canvas></div>\n";
+}
+
+function theme_cluster_chart_hbar($variables) {
+  $html_id = drupal_html_id('cluster_chart');
+
+  cluster_chart_include_lib();
+
+  drupal_add_js(['cluster_chart' => ['type_hbar' => [$html_id => $variables]]], 'setting');
+
+  return '<div' . drupal_attributes(['class' => array_merge(['cluster-chart-wrapper'], $variables['extra_css_classes'])]) . '>'.
+    '<canvas' . drupal_attributes(['id' => $html_id]) . "></canvas></div>\n";
+}

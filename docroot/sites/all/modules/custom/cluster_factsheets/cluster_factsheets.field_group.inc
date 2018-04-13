@@ -82,10 +82,11 @@ function cluster_factsheets_field_group_info() {
     'label' => 'Fields',
     'weight' => '2',
     'children' => array(
-      0 => 'group_factsheet',
-      1 => 'group_photos',
-      2 => 'group_details',
-      3 => 'group_sidebar',
+      0 => 'group_indicators',
+      1 => 'group_factsheet',
+      2 => 'group_photos',
+      3 => 'group_details',
+      4 => 'group_sidebar',
     ),
     'format_type' => 'tabs',
     'format_settings' => array(
@@ -106,27 +107,27 @@ function cluster_factsheets_field_group_info() {
   $field_group->entity_type = 'node';
   $field_group->bundle = 'factsheet';
   $field_group->mode = 'form';
-  $field_group->parent_name = 'group_sidebar';
+  $field_group->parent_name = 'group_fields';
   $field_group->data = array(
-    'label' => 'Key figures',
-    'weight' => '11',
+    'label' => 'Figures',
+    'weight' => '19',
     'children' => array(
       0 => 'field_fsi_partners',
-      1 => 'field_fsi_people_targeted',
-      2 => 'field_fsi_people_reached',
-      3 => 'field_fsi_funding_required',
-      4 => 'field_fsi_funded',
+      1 => 'field_fsi_funding_required',
+      2 => 'field_fsi_funded',
+      3 => 'field_coverage_against_targets',
+      4 => 'field_fsi_in_need',
+      5 => 'field_fsi_targeted',
     ),
-    'format_type' => 'fieldset',
+    'format_type' => 'tab',
     'format_settings' => array(
-      'label' => 'Key figures',
+      'label' => 'Figures',
       'instance_settings' => array(
         'required_fields' => 1,
-        'id' => '',
         'classes' => '',
         'description' => '',
       ),
-      'formatter' => 'open',
+      'formatter' => 'closed',
     ),
   );
   $field_groups['group_indicators|node|factsheet|form'] = $field_group;
@@ -176,7 +177,6 @@ function cluster_factsheets_field_group_info() {
       0 => 'field_key_links',
       1 => 'field_key_documents',
       2 => 'field_key_dates',
-      3 => 'group_indicators',
     ),
     'format_type' => 'tab',
     'format_settings' => array(
@@ -195,7 +195,7 @@ function cluster_factsheets_field_group_info() {
   t('Details');
   t('Factsheet');
   t('Fields');
-  t('Key figures');
+  t('Figures');
   t('Photos');
   t('Sidebar');
 

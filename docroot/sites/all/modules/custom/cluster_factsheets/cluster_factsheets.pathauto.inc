@@ -8,7 +8,7 @@ function cluster_factsheets_pathauto($op) {
   $settings->module = 'cluster_factsheets';
   $settings->groupheader = t('Group factsheets paths');
   $settings->patterndescr = t('Default path pattern');
-  $settings->patterndefault = '[node:content-type]/[node:field_title]/factsheets';
+  $settings->patterndefault = '[node:content-type]/[node:title]/factsheets';
   $settings->token_type = 'node';
   $settings->patternitems = array('factsheets' => 'Group factsheets');
   $settings->batch_update_callback = 'cluster_factsheets_pathauto_bulkupdate';

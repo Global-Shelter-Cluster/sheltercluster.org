@@ -90,7 +90,11 @@ function cluster_factsheets_preprocess_node(&$variables) {
 
   $wrapper = entity_metadata_wrapper('node', $node);
 
-  $variables['cluster_factsheets']['indicators'] = cluster_factsheets_main_indicators($node);
+  if ($variables['view_mode'] === 'full') {
+    $variables['cluster_factsheets']['indicators'] = cluster_factsheets_chart_indicators($node);
+  } else {
+    $variables['cluster_factsheets']['indicators'] = cluster_factsheets_main_indicators($node);
+  }
 
   $field_image = $wrapper->field_image->value();
   $variables['cluster_factsheets']['main_image_url'] = image_style_url('factsheet_image', $field_image['uri']);
@@ -184,26 +188,151 @@ function cluster_factsheets_is_group_factsheets_page() {
   return FALSE;
 }
 
+function cluster_factsheets_number($value, $prefix = '') {
+  if ($value > 100000)
+    return $prefix . number_format($value / 1000000, 1, '.', ' ') . ' M';
+  return $prefix . number_format($value, 0, '.', ' ');
+};
+
 function cluster_factsheets_main_indicators($node) {
   if (!$node || $node->type !== 'factsheet')
     return [];
 
   $wrapper = entity_metadata_wrapper('node', $node);
 
-  $n = function($value, $prefix = '') {
-    if ($value > 100000)
-      return $prefix . number_format($value / 1000000, 1, '.', ' ') . ' M';
-    return $prefix . number_format($value, 0, '.', ' ');
-  };
+  $indicators = [];
 
-  $funded = round($wrapper->field_fsi_funded->value() / $wrapper->field_fsi_funding_required->value() * 100) . '%';
+  if (!is_null($partners = $wrapper->field_fsi_partners->value()))
+    $indicators['partners'] = $partners;
 
-  // TODO
-  return [
-    'partners' => $wrapper->field_fsi_partners->value(),
-    'required (funded)' => $n($wrapper->field_fsi_funding_required->value(), '$') . ' (' . $funded . ')',
-    'people reached / targeted' => $n($wrapper->field_fsi_people_reached->value()) . ' / ' . $n($wrapper->field_fsi_people_targeted->value()),
-  ];
+  if (
+    (!is_null($required = $wrapper->field_fsi_funding_required->value()))
+    && (!is_null($funded = $wrapper->field_fsi_funded->value()))
+  ) {
+    $funded_percentage = round($funded / $required * 100) . '%';
+    $indicators['required (funded)'] = cluster_factsheets_number($required, '$') . ' (' . $funded_percentage . ')';
+  }
+
+  if (
+    (!is_null($in_need = $wrapper->field_fsi_in_need->value()))
+    && (!is_null($targeted = $wrapper->field_fsi_targeted->value()))
+  )
+    $indicators['people in need / targeted'] = cluster_factsheets_number($in_need) . ' / ' . cluster_factsheets_number($targeted);
+
+  return $indicators;
+}
+
+function cluster_factsheets_chart_indicators($node) {
+  if (!$node || $node->type !== 'factsheet')
+    return [];
+
+  $wrapper = entity_metadata_wrapper('node', $node);
+
+  $indicators = [];
+
+  if (($partners = $wrapper->field_fsi_partners->value()) !== '') {
+    $indicators[] = [
+      '#markup' => '<div><strong>' . $partners . '</strong><label>Cluster partners</label></div>',
+    ];
+  }
+
+  if (
+    (($in_need = $wrapper->field_fsi_in_need->value()) !== '')
+    && (($targeted = $wrapper->field_fsi_targeted->value()) !== '')
+  ) {
+    $indicators[] = [
+      [
+        '#theme' => 'html_tag',
+        '#tag' => 'h4',
+        '#value' => 'People',
+      ],
+      [
+        '#theme' => 'cluster_chart_hbar',
+        '#data' => [
+          [
+            'data' => [$in_need, $targeted],
+            'backgroundColor' => [
+              CLUSTER_CHART_COLOR_SHELTER_RED,
+              CLUSTER_CHART_COLOR_ACCENT_DARK_BLUE,
+            ],
+            'borderWidth' => [0, 0],
+          ],
+        ],
+        '#labels' => ['In need', 'Targeted'],
+        '#options' => [
+          'legend' => ['display' => FALSE],
+          'maintainAspectRatio' => FALSE,
+          'scales' => ['xAxes' => [['ticks' => ['beginAtZero' => true]]]],
+        ],
+      ],
+    ];
+  }
+
+  if (
+    (($required = $wrapper->field_fsi_funding_required->value()) !== '')
+    && (($funded = $wrapper->field_fsi_funded->value()) !== '')
+  ) {
+    $funded_percentage = round($funded / $required * 100);
+
+    if ($funded_percentage >= 100)
+      $funding_chart = [
+        '#theme' => 'cluster_chart_pie',
+        '#data' => [
+          'data' => [$funded],
+          'backgroundColor' => [
+            CLUSTER_CHART_COLOR_SHELTER_RED,
+          ],
+          'borderWidth' => [0],
+        ],
+        '#labels' => ['Funded'],
+        '#options' => [
+          'legend' => ['display' => FALSE],
+          'maintainAspectRatio' => FALSE,
+          'pieceLabel' => [
+            'render' => [$funded_percentage . '%'],
+            'fontColor' => 'white',
+          ],
+        ],
+      ];
+    else
+      $funding_chart = [
+        '#theme' => 'cluster_chart_pie',
+        '#data' => [
+          'data' => [$funded, $required - $funded],
+          'backgroundColor' => [
+            CLUSTER_CHART_COLOR_SHELTER_RED,
+          ],
+          'borderWidth' => [0, 0],
+        ],
+        '#labels' => ['Funded', 'Gap'],
+        '#options' => [
+          'legend' => ['display' => FALSE],
+          'maintainAspectRatio' => FALSE,
+          'pieceLabel' => [
+            'render' => [$funded_percentage . '%'],
+            'fontColor' => 'white',
+          ],
+        ],
+      ];
+
+    $indicators[] = [
+      [
+        '#theme' => 'html_tag',
+        '#tag' => 'h4',
+        '#value' => 'Funding',
+      ],
+      [
+        '#type' => 'container',
+        '#attributes' => ['class' => ['indicator-funding']],
+        $funding_chart,
+        [
+          '#markup' => '<div class="funding-total"><label>Total funding required:</label><strong>' . cluster_factsheets_number($required, '$') . '</strong></div>',
+        ],
+      ],
+    ];
+  }
+
+  return $indicators;
 }
 
 /**
@@ -214,4 +343,103 @@ function cluster_factsheets_entity_info_alter(&$entity_info) {
     'label' => t('Factsheet summary'),
     'custom settings' => FALSE,
   );
+}
+
+/**
+ * Implements hook_field_formatter_info().
+ */
+/**
+ * Implements hook_field_formatter_info().
+ */
+function cluster_factsheets_field_formatter_info() {
+  return array(
+    'cluster_factsheets_cat_chart' => array(
+      'label' => t('Coverage against targets chart'),
+      'field types' => array('field_collection'),
+    ),
+  );
+}
+
+/**
+ * Implements hook_field_formatter_view().
+ */
+function cluster_factsheets_field_formatter_view($entity_type, $entity, $field, $instance, $langcode, $items, $display) {
+  $element = array();
+
+  switch ($display['type']) {
+    case 'cluster_factsheets_cat_chart':
+
+      $data = [
+        [
+          'data' => [],
+          'label' => 'Reached',
+          'backgroundColor' => CLUSTER_CHART_COLOR_ACCENT_GREEN,
+          'borderWidth' => 0,
+        ],
+        [
+          'data' => [],
+          'label' => 'Ongoing',
+          'backgroundColor' => CLUSTER_CHART_COLOR_ACCENT_YELLOW,
+          'borderWidth' => 0,
+        ],
+        [
+          'data' => [],
+          'label' => 'Planned',
+          'backgroundColor' => CLUSTER_CHART_COLOR_ACCENT_BLUE,
+          'borderWidth' => 0,
+        ],
+        [
+          'data' => [],
+          'label' => 'Gap',
+          'backgroundColor' => CLUSTER_CHART_COLOR_ACCENT_RED,
+          'borderWidth' => 0,
+        ],
+      ];
+      $labels = [];
+
+      foreach ($items as $delta => $item) {
+        if ($field_collection = field_collection_field_get_entity($item)) {
+          $wrapper = entity_metadata_wrapper('field_collection_item', $field_collection);
+
+          $title = $wrapper->field_cat_title->value();
+          $operational_intent = $wrapper->field_cat_operational_intent->value();
+          if (!$title && $operational_intent) {
+            $operational_intent_info = field_info_field('field_cat_operational_intent');
+            $title = $operational_intent_info['settings']['allowed_values'][$operational_intent];
+          }
+          $targeted = intval($wrapper->field_cat_targeted->value());
+          if (!$targeted)
+            continue;
+          $reached = intval($wrapper->field_cat_reached->value());
+          $ongoing = intval($wrapper->field_cat_ongoing->value());
+          $planned = intval($wrapper->field_cat_planned->value());
+          $gap = $targeted - $reached - $ongoing - $planned;
+
+          $labels[] = $title;
+          $data[0]['data'][] = $reached;
+          $data[1]['data'][] = $ongoing;
+          $data[2]['data'][] = $planned;
+          $data[3]['data'][] = $gap;
+        }
+      }
+
+      if ($labels)
+        $element[0] = [
+          '#theme' => 'cluster_chart_hbar',
+          '#extra_css_classes' => ['fs_cat_chart'],
+          '#data' => $data,
+          '#labels' => $labels,
+          '#options' => [
+//            'legend' => ['display' => FALSE],
+            'maintainAspectRatio' => FALSE,
+            'scales' => [
+              'xAxes' => [['ticks' => ['beginAtZero' => true]]],
+              'yAxes' => [['stacked' => true]],
+            ],
+          ],
+        ];
+      break;
+  }
+
+  return $element;
 }

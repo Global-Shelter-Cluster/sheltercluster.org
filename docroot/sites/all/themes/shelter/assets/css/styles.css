@@ -3916,9 +3916,12 @@ body.document-upload-ondrag {
 .factsheet-full > .highlights {
   grid-area: highlights;
   background: #7f1416;
-  color: white;
   padding: 10px;
   border-radius: 4px;
+  color: white;
+}
+.factsheet-full > .highlights a {
+  color: white;
 }
 .factsheet-full > .highlights h3 {
   color: white;
@@ -3945,18 +3948,22 @@ body.document-upload-ondrag {
 }
 .factsheet-full > .aside {
   grid-area: aside;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   background: #d7d7d7;
   padding: 10px;
   border-radius: 4px;
 }
+.factsheet-full > .aside > * {
+  margin-bottom: 24px;
+  margin-bottom: 1.5rem;
+}
 .factsheet-full > .aside h3 {
-  margin: 24px -10px 16px;
-  margin: 1.5rem -0.625rem 1rem;
+  margin: 0 -10px 16px;
+  margin: 0 -0.625rem 1rem;
   padding: 0 10px 6.4px;
   padding: 0 0.625rem 0.4rem;
-}
-.factsheet-full > .aside h3:first-child {
-  margin-top: 0;
 }
 @media (max-width: 699px) {
   .factsheet-full > .photo {
@@ -3987,6 +3994,41 @@ body.document-upload-ondrag {
     grid-template-areas: "date date" "photo map" "highlights aside" "details aside";
     grid-template-columns: 6fr 5fr;
   }
+}
+
+.factsheet-chart-indicators h4 {
+  color: #575757;
+  margin-top: 20px;
+}
+.factsheet-chart-indicators h4:first-child {
+  margin-top: 0;
+}
+.factsheet-chart-indicators label {
+  font-weight: normal;
+  text-align: center;
+  color: #575757;
+  font-size: 13.6px;
+  font-size: 0.85rem;
+}
+.factsheet-chart-indicators strong {
+  display: block;
+  text-align: center;
+  white-space: nowrap;
+  font-weight: normal;
+  font-size: 32px;
+  font-size: 2rem;
+}
+.factsheet-chart-indicators .indicator-funding {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+.factsheet-chart-indicators .indicator-funding > * {
+  width: 50%;
+}
+
+.cluster-chart-wrapper.fs_cat_chart {
+  min-height: 200px;
 }
 
 .factsheet-preview-list {
@@ -4110,4 +4152,8 @@ body.document-upload-ondrag {
   font-size: 1rem;
   color: #7f1416;
   font-weight: normal;
+}
+
+.cluster-chart-wrapper {
+  max-width: 100%;
 }

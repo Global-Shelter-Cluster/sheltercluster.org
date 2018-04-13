@@ -10,6 +10,257 @@
 function cluster_factsheets_field_default_field_instances() {
   $field_instances = array();
 
+  // Exported field_instance:
+  // 'field_collection_item-field_coverage_against_targets-field_cat_ongoing'.
+  $field_instances['field_collection_item-field_coverage_against_targets-field_cat_ongoing'] = array(
+    'bundle' => 'field_coverage_against_targets',
+    'default_value' => array(
+      0 => array(
+        'value' => 0,
+      ),
+    ),
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'number',
+        'settings' => array(
+          'decimal_separator' => '.',
+          'prefix_suffix' => TRUE,
+          'scale' => 0,
+          'thousand_separator' => '',
+        ),
+        'type' => 'number_integer',
+        'weight' => 4,
+      ),
+    ),
+    'entity_type' => 'field_collection_item',
+    'field_name' => 'field_cat_ongoing',
+    'label' => 'Ongoing',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'max' => '',
+      'min' => 0,
+      'prefix' => '',
+      'suffix' => '',
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 0,
+      'module' => 'number',
+      'settings' => array(),
+      'type' => 'number',
+      'weight' => 5,
+    ),
+  );
+
+  // Exported field_instance:
+  // 'field_collection_item-field_coverage_against_targets-field_cat_operational_intent'.
+  $field_instances['field_collection_item-field_coverage_against_targets-field_cat_operational_intent'] = array(
+    'bundle' => 'field_coverage_against_targets',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 1,
+      ),
+    ),
+    'entity_type' => 'field_collection_item',
+    'field_name' => 'field_cat_operational_intent',
+    'label' => 'Operational intent',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(
+        'apply_chosen' => '',
+      ),
+      'type' => 'options_select',
+      'weight' => 2,
+    ),
+  );
+
+  // Exported field_instance:
+  // 'field_collection_item-field_coverage_against_targets-field_cat_planned'.
+  $field_instances['field_collection_item-field_coverage_against_targets-field_cat_planned'] = array(
+    'bundle' => 'field_coverage_against_targets',
+    'default_value' => array(
+      0 => array(
+        'value' => 0,
+      ),
+    ),
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'number',
+        'settings' => array(
+          'decimal_separator' => '.',
+          'prefix_suffix' => TRUE,
+          'scale' => 0,
+          'thousand_separator' => '',
+        ),
+        'type' => 'number_integer',
+        'weight' => 5,
+      ),
+    ),
+    'entity_type' => 'field_collection_item',
+    'field_name' => 'field_cat_planned',
+    'label' => 'Planned',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'max' => '',
+      'min' => 0,
+      'prefix' => '',
+      'suffix' => '',
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 0,
+      'module' => 'number',
+      'settings' => array(),
+      'type' => 'number',
+      'weight' => 6,
+    ),
+  );
+
+  // Exported field_instance:
+  // 'field_collection_item-field_coverage_against_targets-field_cat_reached'.
+  $field_instances['field_collection_item-field_coverage_against_targets-field_cat_reached'] = array(
+    'bundle' => 'field_coverage_against_targets',
+    'default_value' => array(
+      0 => array(
+        'value' => 0,
+      ),
+    ),
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'number',
+        'settings' => array(
+          'decimal_separator' => '.',
+          'prefix_suffix' => TRUE,
+          'scale' => 0,
+          'thousand_separator' => '',
+        ),
+        'type' => 'number_integer',
+        'weight' => 3,
+      ),
+    ),
+    'entity_type' => 'field_collection_item',
+    'field_name' => 'field_cat_reached',
+    'label' => 'Reached',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'max' => '',
+      'min' => 0,
+      'prefix' => '',
+      'suffix' => '',
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 0,
+      'module' => 'number',
+      'settings' => array(),
+      'type' => 'number',
+      'weight' => 4,
+    ),
+  );
+
+  // Exported field_instance:
+  // 'field_collection_item-field_coverage_against_targets-field_cat_targeted'.
+  $field_instances['field_collection_item-field_coverage_against_targets-field_cat_targeted'] = array(
+    'bundle' => 'field_coverage_against_targets',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'number',
+        'settings' => array(
+          'decimal_separator' => '.',
+          'prefix_suffix' => TRUE,
+          'scale' => 0,
+          'thousand_separator' => '',
+        ),
+        'type' => 'number_integer',
+        'weight' => 2,
+      ),
+    ),
+    'entity_type' => 'field_collection_item',
+    'field_name' => 'field_cat_targeted',
+    'label' => 'Targeted',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'max' => '',
+      'min' => 1,
+      'prefix' => '',
+      'suffix' => '',
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 0,
+      'module' => 'number',
+      'settings' => array(),
+      'type' => 'number',
+      'weight' => 3,
+    ),
+  );
+
+  // Exported field_instance:
+  // 'field_collection_item-field_coverage_against_targets-field_cat_title'.
+  $field_instances['field_collection_item-field_coverage_against_targets-field_cat_title'] = array(
+    'bundle' => 'field_coverage_against_targets',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'field_collection_item',
+    'field_name' => 'field_cat_title',
+    'label' => 'Title',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 1,
+    ),
+  );
+
   // Exported field_instance: 'node-factsheet-body'.
   $field_instances['node-factsheet-body'] = array(
     'bundle' => 'factsheet',
@@ -75,6 +326,57 @@ function cluster_factsheets_field_default_field_instances() {
       ),
       'type' => 'text_textarea_with_summary',
       'weight' => 3,
+    ),
+  );
+
+  // Exported field_instance: 'node-factsheet-field_coverage_against_targets'.
+  $field_instances['node-factsheet-field_coverage_against_targets'] = array(
+    'bundle' => 'factsheet',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'cluster_factsheets',
+        'settings' => array(),
+        'type' => 'cluster_factsheets_cat_chart',
+        'weight' => 8,
+      ),
+      'factsheet_summary' => array(
+        'label' => 'above',
+        'module' => 'cluster_factsheets',
+        'settings' => array(),
+        'type' => 'cluster_factsheets_cat_chart',
+        'weight' => 5,
+      ),
+      'ical' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'preview_block' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_coverage_against_targets',
+    'label' => 'Coverage against targets',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 0,
+      'module' => 'field_collection',
+      'settings' => array(),
+      'type' => 'field_collection_embed',
+      'weight' => 13,
     ),
   );
 
@@ -194,7 +496,7 @@ function cluster_factsheets_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 6,
+        'weight' => 10,
       ),
       'ical' => array(
         'label' => 'above',
@@ -240,13 +542,13 @@ function cluster_factsheets_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 15,
+        'weight' => 16,
       ),
       'factsheet_summary' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 15,
+        'weight' => 16,
       ),
       'ical' => array(
         'label' => 'above',
@@ -299,13 +601,13 @@ function cluster_factsheets_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 14,
+        'weight' => 15,
       ),
       'factsheet_summary' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 14,
+        'weight' => 15,
       ),
       'ical' => array(
         'label' => 'above',
@@ -343,7 +645,60 @@ function cluster_factsheets_field_default_field_instances() {
       'module' => 'number',
       'settings' => array(),
       'type' => 'number',
-      'weight' => 13,
+      'weight' => 12,
+    ),
+  );
+
+  // Exported field_instance: 'node-factsheet-field_fsi_in_need'.
+  $field_instances['node-factsheet-field_fsi_in_need'] = array(
+    'bundle' => 'factsheet',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 12,
+      ),
+      'factsheet_summary' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 8,
+      ),
+      'ical' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'preview_block' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_fsi_in_need',
+    'label' => 'In need',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'max' => '',
+      'min' => 0,
+      'prefix' => '',
+      'suffix' => '',
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 0,
+      'module' => 'number',
+      'settings' => array(),
+      'type' => 'number',
+      'weight' => 9,
     ),
   );
 
@@ -358,13 +713,13 @@ function cluster_factsheets_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 11,
+        'weight' => 14,
       ),
       'factsheet_summary' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 11,
+        'weight' => 14,
       ),
       'ical' => array(
         'label' => 'above',
@@ -406,8 +761,8 @@ function cluster_factsheets_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-factsheet-field_fsi_people_reached'.
-  $field_instances['node-factsheet-field_fsi_people_reached'] = array(
+  // Exported field_instance: 'node-factsheet-field_fsi_targeted'.
+  $field_instances['node-factsheet-field_fsi_targeted'] = array(
     'bundle' => 'factsheet',
     'default_value' => NULL,
     'deleted' => 0,
@@ -423,7 +778,7 @@ function cluster_factsheets_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 13,
+        'weight' => 9,
       ),
       'ical' => array(
         'label' => 'above',
@@ -435,77 +790,12 @@ function cluster_factsheets_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 13,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 4,
-      ),
-    ),
-    'entity_type' => 'node',
-    'field_name' => 'field_fsi_people_reached',
-    'label' => 'People reached',
-    'required' => 0,
-    'settings' => array(
-      'entity_translation_sync' => FALSE,
-      'max' => '',
-      'min' => 0,
-      'prefix' => '',
-      'suffix' => '',
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 0,
-      'module' => 'number',
-      'settings' => array(),
-      'type' => 'number',
-      'weight' => 9,
-    ),
-  );
-
-  // Exported field_instance: 'node-factsheet-field_fsi_people_targeted'.
-  $field_instances['node-factsheet-field_fsi_people_targeted'] = array(
-    'bundle' => 'factsheet',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 12,
-      ),
-      'factsheet_summary' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 12,
-      ),
-      'ical' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
         'weight' => 0,
       ),
-      'preview_block' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 12,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 7,
-      ),
     ),
     'entity_type' => 'node',
-    'field_name' => 'field_fsi_people_targeted',
-    'label' => 'People targeted',
+    'field_name' => 'field_fsi_targeted',
+    'label' => 'Targeted',
     'required' => 0,
     'settings' => array(
       'entity_translation_sync' => FALSE,
@@ -540,10 +830,9 @@ function cluster_factsheets_field_default_field_instances() {
       ),
       'factsheet_summary' => array(
         'label' => 'above',
-        'module' => 'text',
         'settings' => array(),
-        'type' => 'text_default',
-        'weight' => 5,
+        'type' => 'hidden',
+        'weight' => 7,
       ),
       'ical' => array(
         'label' => 'above',
@@ -686,13 +975,29 @@ function cluster_factsheets_field_default_field_instances() {
           'style' => 'inline',
         ),
         'type' => 'double_field_html_list',
-        'weight' => 8,
+        'weight' => 9,
       ),
       'factsheet_summary' => array(
         'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
+        'module' => 'double_field',
+        'settings' => array(
+          'first' => array(
+            'format' => '_none',
+            'hidden' => 0,
+            'prefix' => '<strong>',
+            'suffix' => '</strong>:&nbsp;',
+          ),
+          'list_type' => 'ul',
+          'second' => array(
+            'format' => '_none',
+            'hidden' => 0,
+            'prefix' => '',
+            'suffix' => '',
+          ),
+          'style' => 'inline',
+        ),
+        'type' => 'double_field_html_list',
+        'weight' => 6,
       ),
       'ical' => array(
         'label' => 'above',
@@ -761,18 +1066,17 @@ function cluster_factsheets_field_default_field_instances() {
         'label' => 'above',
         'module' => 'entityreference',
         'settings' => array(
-          'links' => 0,
-          'use_content_language' => 1,
-          'view_mode' => 'preview_block',
+          'bypass_access' => 0,
+          'link' => 1,
         ),
-        'type' => 'entityreference_entity_view',
-        'weight' => 9,
+        'type' => 'entityreference_label',
+        'weight' => 10,
       ),
       'factsheet_summary' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 7,
+        'weight' => 11,
       ),
       'ical' => array(
         'label' => 'above',
@@ -820,13 +1124,13 @@ function cluster_factsheets_field_default_field_instances() {
         'module' => 'link',
         'settings' => array(),
         'type' => 'link_default',
-        'weight' => 10,
+        'weight' => 11,
       ),
       'factsheet_summary' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 9,
+        'weight' => 12,
       ),
       'ical' => array(
         'label' => 'above',
@@ -874,7 +1178,7 @@ function cluster_factsheets_field_default_field_instances() {
       'module' => 'link',
       'settings' => array(),
       'type' => 'link_field',
-      'weight' => 10,
+      'weight' => 11,
     ),
   );
 
@@ -977,7 +1281,7 @@ function cluster_factsheets_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 10,
+        'weight' => 13,
       ),
       'ical' => array(
         'label' => 'above',
@@ -1077,13 +1381,13 @@ function cluster_factsheets_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 16,
+        'weight' => 17,
       ),
       'factsheet_summary' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 16,
+        'weight' => 17,
       ),
       'ical' => array(
         'label' => 'above',
@@ -1148,12 +1452,14 @@ function cluster_factsheets_field_default_field_instances() {
   // Translatables
   // Included for use with string extractors like potx.
   t('Cluster partners');
+  t('Coverage against targets');
   t('Date');
   t('Funded');
   t('Funding required');
   t('Gaps / challenges');
   t('Groups audience');
   t('Highlights');
+  t('In need');
   t('Key dates');
   t('Key documents');
   t('Key links');
@@ -1161,12 +1467,16 @@ function cluster_factsheets_field_default_field_instances() {
   t('Main photo credit');
   t('Map');
   t('Need analysis');
-  t('People reached');
-  t('People targeted');
+  t('Ongoing');
+  t('Operational intent');
   t('Photographer / Organisation, Year');
+  t('Planned');
+  t('Reached');
   t('Response');
+  t('Targeted');
   t('The map should be a square image.');
   t('The photo should be in landscape orientation.');
+  t('Title');
   t('When describing challenges, please start with a keyword (funding, access, capacity, data, security etc.) to facilitate analysis.');
 
   return $field_instances;
