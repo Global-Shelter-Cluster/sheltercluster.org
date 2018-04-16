@@ -509,6 +509,22 @@ class GroupFullDisplayProvider extends GroupDisplayProvider {
     return FALSE;
   }
 
+  /**
+   * Get the most recent factsheet, displayed in its abbreviated mode, to be
+   * shown below the body field on the dashboard page.
+   */
+  public function getFactsheet() {
+    $nids = $this->manager->getFactsheets(1);
+    if (!count($nids))
+      return NULL;
+
+    $fs = node_load($nids[0]);
+    if (!$fs)
+      return NULL;
+
+    return node_view($fs, 'factsheet_summary');
+  }
+
 }
 
 // Defensive default for view modes which are not managed.

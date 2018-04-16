@@ -1,6 +1,21 @@
 (function ($) {
   Drupal.behaviors.clusterCharts = {
+    initialized: false,
+    init: function() {
+      if (this.initialized)
+        return;
+
+      this.initialized = true;
+
+      Chart.defaults.global.legend.position = 'bottom';
+      Chart.defaults.global.elements.rectangle.borderWidth = 0;
+      Chart.defaults.global.elements.arc.borderWidth = 0;
+      Chart.defaults.global.elements.point.borderWidth = 0;
+      Chart.defaults.global.elements.line.borderWidth = 0;
+    },
     attach: function (context, settings) {
+      this.init();
+
       if (typeof settings.cluster_chart === 'undefined')
         return;
 

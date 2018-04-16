@@ -90,10 +90,40 @@ function cluster_factsheets_preprocess_node(&$variables) {
 
   $wrapper = entity_metadata_wrapper('node', $node);
 
-  if ($variables['view_mode'] === 'full') {
-    $variables['cluster_factsheets']['indicators'] = cluster_factsheets_chart_indicators($node);
-  } else {
-    $variables['cluster_factsheets']['indicators'] = cluster_factsheets_main_indicators($node);
+  switch ($variables['view_mode']) {
+    case 'preview_block':
+      $variables['cluster_factsheets']['indicators'] = cluster_factsheets_main_indicators($node);
+      break;
+    case 'factsheet_summary':
+      $variables['cluster_factsheets']['indicators'] = cluster_factsheets_chart_indicators($node);
+      $variables['cluster_factsheets']['full_factsheet'] = [
+        '#theme' => 'link',
+        '#text' => t('See full factsheet'),
+        '#path' => 'node/'.$node->nid,
+        '#options' => ['attributes' => []],
+      ];
+      break;
+    case 'full':
+    default:
+      if ($prev = cluster_factsheets_prev($node)) {
+        $prev_wrapper = entity_metadata_wrapper('node', $prev);
+        $variables['cluster_factsheets']['prev'] = [
+          '#theme' => 'link',
+          '#text' => '< ' . date('M Y', $prev_wrapper->field_date->value()), // e.g. "Apr 2018"
+          '#path' => 'node/' . $prev->nid,
+          '#options' => ['attributes' => []],
+        ];
+      }
+      if ($next = cluster_factsheets_next($node)) {
+        $next_wrapper = entity_metadata_wrapper('node', $next);
+        $variables['cluster_factsheets']['next'] = [
+          '#theme' => 'link',
+          '#text' => date('M Y', $next_wrapper->field_date->value()) . ' >', // e.g. "Apr 2018"
+          '#path' => 'node/' . $next->nid,
+          '#options' => ['attributes' => []],
+        ];
+      }
+      $variables['cluster_factsheets']['indicators'] = cluster_factsheets_chart_indicators($node);
   }
 
   $field_image = $wrapper->field_image->value();
@@ -230,15 +260,15 @@ function cluster_factsheets_chart_indicators($node) {
 
   $indicators = [];
 
-  if (($partners = $wrapper->field_fsi_partners->value()) !== '') {
+  if (!is_null($partners = $wrapper->field_fsi_partners->value())) {
     $indicators[] = [
       '#markup' => '<div><strong>' . $partners . '</strong><label>Cluster partners</label></div>',
     ];
   }
 
   if (
-    (($in_need = $wrapper->field_fsi_in_need->value()) !== '')
-    && (($targeted = $wrapper->field_fsi_targeted->value()) !== '')
+    (!is_null($in_need = $wrapper->field_fsi_in_need->value()))
+    && (!is_null($targeted = $wrapper->field_fsi_targeted->value()))
   ) {
     $indicators[] = [
       [
@@ -255,7 +285,6 @@ function cluster_factsheets_chart_indicators($node) {
               CLUSTER_CHART_COLOR_SHELTER_RED,
               CLUSTER_CHART_COLOR_ACCENT_DARK_BLUE,
             ],
-            'borderWidth' => [0, 0],
           ],
         ],
         '#labels' => ['In need', 'Targeted'],
@@ -269,8 +298,8 @@ function cluster_factsheets_chart_indicators($node) {
   }
 
   if (
-    (($required = $wrapper->field_fsi_funding_required->value()) !== '')
-    && (($funded = $wrapper->field_fsi_funded->value()) !== '')
+    (!is_null($required = $wrapper->field_fsi_funding_required->value()))
+    && (!is_null($funded = $wrapper->field_fsi_funded->value()))
   ) {
     $funded_percentage = round($funded / $required * 100);
 
@@ -282,7 +311,6 @@ function cluster_factsheets_chart_indicators($node) {
           'backgroundColor' => [
             CLUSTER_CHART_COLOR_SHELTER_RED,
           ],
-          'borderWidth' => [0],
         ],
         '#labels' => ['Funded'],
         '#options' => [
@@ -302,7 +330,6 @@ function cluster_factsheets_chart_indicators($node) {
           'backgroundColor' => [
             CLUSTER_CHART_COLOR_SHELTER_RED,
           ],
-          'borderWidth' => [0, 0],
         ],
         '#labels' => ['Funded', 'Gap'],
         '#options' => [
@@ -374,25 +401,21 @@ function cluster_factsheets_field_formatter_view($entity_type, $entity, $field, 
           'data' => [],
           'label' => 'Reached',
           'backgroundColor' => CLUSTER_CHART_COLOR_ACCENT_GREEN,
-          'borderWidth' => 0,
         ],
         [
           'data' => [],
           'label' => 'Ongoing',
           'backgroundColor' => CLUSTER_CHART_COLOR_ACCENT_YELLOW,
-          'borderWidth' => 0,
         ],
         [
           'data' => [],
           'label' => 'Planned',
           'backgroundColor' => CLUSTER_CHART_COLOR_ACCENT_BLUE,
-          'borderWidth' => 0,
         ],
         [
           'data' => [],
           'label' => 'Gap',
           'backgroundColor' => CLUSTER_CHART_COLOR_ACCENT_RED,
-          'borderWidth' => 0,
         ],
       ];
       $labels = [];
@@ -433,7 +456,7 @@ function cluster_factsheets_field_formatter_view($entity_type, $entity, $field, 
 //            'legend' => ['display' => FALSE],
             'maintainAspectRatio' => FALSE,
             'scales' => [
-              'xAxes' => [['ticks' => ['beginAtZero' => true]]],
+              'xAxes' => [['stacked' => true, 'ticks' => ['beginAtZero' => true]]],
               'yAxes' => [['stacked' => true]],
             ],
           ],
@@ -442,4 +465,33 @@ function cluster_factsheets_field_formatter_view($entity_type, $entity, $field, 
   }
 
   return $element;
+}
+
+function cluster_factsheets_next($factsheet_node, $prev = FALSE) {
+  $wrapper = entity_metadata_wrapper('node', $factsheet_node);
+  $group = $wrapper->og_group_ref->value();
+  if (!count($group)) {
+    return NULL;
+  }
+
+  $query = new EntityFieldQuery();
+  $query->entityCondition('entity_type', 'node')
+    ->entityCondition('bundle', 'factsheet')
+    ->propertyCondition('status', NODE_PUBLISHED)
+    ->fieldCondition('og_group_ref', 'target_id', $group[0]->nid)
+    ->fieldCondition('field_date', 'value', date('Y-m-d', $wrapper->field_date->value()), $prev ? '<' : '>')
+    ->fieldOrderBy('field_date', 'value', $prev ? 'DESC' : 'ASC')
+    ->range(NULL, 1);
+
+  $result = $query->execute();
+  if (isset($result['node'])) {
+    $nids = array_keys($result['node']);
+    if (count($nids) >= 1) {
+      return node_load($nids[0]);
+    }
+  }
+}
+
+function cluster_factsheets_prev($factsheet_node) {
+  return cluster_factsheets_next($factsheet_node, TRUE);
 }

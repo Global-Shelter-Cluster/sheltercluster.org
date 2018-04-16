@@ -1,10 +1,21 @@
 .factsheet-full {
   > .date {
     grid-area: date;
+    display: flex;
+    justify-content: flex-end;
+    align-items: baseline;
+    > * {
+      margin-left: 10px;
+    }
+
     color: $shelter-red;
-    @include rem(font-size, 1.6rem);
     font-weight: bold;
-    text-align: right;
+    @include rem(font-size, 1.6rem);
+    a {
+      @include rem(font-size, .85rem);
+      color: $shelter-red;
+      text-decoration: underline;
+    }
   }
   > .photo {
     grid-area: photo;

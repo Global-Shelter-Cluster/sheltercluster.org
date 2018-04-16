@@ -52,7 +52,8 @@ function theme_cluster_chart_pie($variables) {
 
   drupal_add_js(['cluster_chart' => ['type_pie' => [$html_id => $variables]]], 'setting');
 
-  return '<div' . drupal_attributes(['class' => array_merge(['cluster-chart-wrapper'], $variables['extra_css_classes'])]) . '>'.
+  $extra_css_classes = (array) ($variables['extra_css_classes'] ?: []);
+  return '<div' . drupal_attributes(['class' => array_merge(['cluster-chart-wrapper'], $extra_css_classes)]) . '>'.
     '<canvas' . drupal_attributes(['id' => $html_id]) . "></canvas></div>\n";
 }
 
@@ -63,6 +64,7 @@ function theme_cluster_chart_hbar($variables) {
 
   drupal_add_js(['cluster_chart' => ['type_hbar' => [$html_id => $variables]]], 'setting');
 
-  return '<div' . drupal_attributes(['class' => array_merge(['cluster-chart-wrapper'], $variables['extra_css_classes'])]) . '>'.
+  $extra_css_classes = (array) ($variables['extra_css_classes'] ?: []);
+  return '<div' . drupal_attributes(['class' => array_merge(['cluster-chart-wrapper'], $extra_css_classes)]) . '>'.
     '<canvas' . drupal_attributes(['id' => $html_id]) . "></canvas></div>\n";
 }

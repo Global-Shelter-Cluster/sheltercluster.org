@@ -44,6 +44,7 @@ function cluster_og_node_view($node, $view_mode) {
     $node->content['dashboard_menu'] = $group_content->getDashboardMenu();
     $node->content['contextual_navigation'] = $group_content->getContextualNavigation();
     $node->content['upcoming_events'] = $group_content->getUpcomingEvents();
+    $node->content['factsheet'] = $group_content->getFactsheet();
   }
 }
 

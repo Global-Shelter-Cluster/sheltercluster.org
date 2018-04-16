@@ -3896,11 +3896,22 @@ body.document-upload-ondrag {
 
 .factsheet-full > .date {
   grid-area: date;
+  display: flex;
+  justify-content: flex-end;
+  align-items: baseline;
   color: #7f1416;
+  font-weight: bold;
   font-size: 25.6px;
   font-size: 1.6rem;
-  font-weight: bold;
-  text-align: right;
+}
+.factsheet-full > .date > * {
+  margin-left: 10px;
+}
+.factsheet-full > .date a {
+  font-size: 13.6px;
+  font-size: 0.85rem;
+  color: #7f1416;
+  text-decoration: underline;
 }
 .factsheet-full > .photo {
   grid-area: photo;

@@ -1,6 +1,9 @@
 <article class="factsheet-full">
   <header class="date">
+    <?php if (!empty($cluster_factsheets['full_factsheet'])) print render($cluster_factsheets['full_factsheet']); ?>
+    <?php if (!empty($cluster_factsheets['prev'])) print render($cluster_factsheets['prev']); ?>
     <?php print render($content['field_date']); ?>
+    <?php if (!empty($cluster_factsheets['next'])) print render($cluster_factsheets['next']); ?>
   </header>
   <div class="photo"
        style="background-image: url(<?php print $cluster_factsheets['main_image_url']; ?>);">
@@ -23,6 +26,7 @@
     hide($content['field_image']);
     print render($content);
     ?>
+    <?php if ($cluster_factsheets['indicators']): ?>
     <div>
       <h3><?php print t('Key figures'); ?></h3>
       <div class="factsheet-chart-indicators">
@@ -31,5 +35,6 @@
         <?php endforeach; ?>
       </div>
     </div>
+    <?php endif; ?>
   </aside>
 </article>
