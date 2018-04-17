@@ -13,7 +13,7 @@ function cluster_hid_menu() {
       'description' => 'Credentials (JWT) and configs for integration with Humanitarian.id.',
       'page callback' => 'drupal_get_form',
       'page arguments' => ['cluster_hid_settings_form'],
-      'access arguments' => ['access administration pages'],
+      'access arguments' => ['adminster site configuration'],
       'file' => 'cluster_hid.forms.inc',
     ],
     'admin/config/shelter/hid-search' => [
@@ -21,31 +21,35 @@ function cluster_hid_menu() {
       'description' => 'Search Humanitarian.id for users',
       'page callback' => 'drupal_get_form',
       'page arguments' => ['cluster_hid_search_form'],
-      'access arguments' => ['access administration pages'],
+      'access arguments' => ['adminster site configuration'],
       'file' => 'cluster_hid.forms.inc',
     ],
     'create-new-user-from-hid-id/%' => [
       'page callback' => 'cluster_hid_new_drupal_user',
       'page arguments' => [1],
-      'access arguments' => ['access administration pages'],
+      'access arguments' => ['adminster site configuration'],
       'type' => MENU_CALLBACK,
     ],
     'update-user-from-hid-id/%' => [
       'page callback' => 'cluster_hid_update_drupal_user',
       'page arguments' => [1],
-      'access arguments' => ['access administration pages'],
+      'access arguments' => ['adminster site configuration'],
       'type' => MENU_CALLBACK,
     ],
+
+    // Update link from the profile page.
     'update-profile-from-hid-id/%' => [
       'page callback' => 'cluster_hid_update_drupal_profile',
       'page arguments' => [1],
-      'access arguments' => ['access administration pages'],
+      'access callback' => 'cluster_hid_synch_account_allowed',
+      'access arguments' => [1],
       'type' => MENU_CALLBACK,
     ],
+
     'hid-search-user-search-autocomplete' => [
       'title' => 'Search Humanitarian.id autocomplete',
       'page callback' => 'cluster_hid_user_search_autocomplete',
-      'access arguments' => ['access administration pages'],
+      'access arguments' => ['adminster site configuration'],
       'type' => MENU_CALLBACK,
     ],
     'hid-ajax-get-user-by-id/%' => [
@@ -84,11 +88,24 @@ function cluster_hid_permission() {
   ];
 }
 
+function cluster_hid_synch_account_allowed($uid) {
+  if (user_access('adminster site configuration') || user_access('synch humanitarian id profiles')) {
+    return TRUE;
+  }
+  global $user;
+  if ($uid == $user->uid) {
+    return TRUE;
+  }
+}
+
 function cluster_hid_preprocess_user_profile(&$variables) {
   $variables['synch_with_humanitarian_id_profile'] = FALSE;
   $user = $variables['elements']['#account'];
   $hum_id = _cluster_hid_test_if_drupal_user_has_humanitarian_id($user->uid);
   if (!$hum_id) {
+    return;
+  }
+  if (!cluster_hid_synch_account_allowed($user->uid)) {
     return;
   }
   $variables['synch_with_humanitarian_id_profile'] = TRUE;
