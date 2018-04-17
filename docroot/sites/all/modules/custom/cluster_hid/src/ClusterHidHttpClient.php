@@ -11,6 +11,7 @@ class ClusterHidHttpClient {
 
   private $query;
 
+  // https://api.staging.humanitarian.id
   protected $endpoint = 'https://api.humanitarian.id/api/v2/';
 
   /**

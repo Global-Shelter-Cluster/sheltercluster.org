@@ -88,9 +88,7 @@ class ClusterHidUser {
   /**
    * @TODO
    */
-  public function getAddress() {
-
-  }
+  public function getAddress() {}
 
   /**
    * Provide link to drupal user profile if it exists, link to user creation otherwise.
@@ -127,10 +125,6 @@ class ClusterHidUser {
     return l(t('Create New Drupal User'), '#', $link_options);
   }
 
-  public function userSynchLink() {
-    return '@TODO';
-  }
-
   public function getDrupalUid() {
     if ($this->userHasDrupalAccount()) {
       return $this->hidUser->drupalUser->uid;
@@ -148,17 +142,25 @@ class ClusterHidUser {
    */
   private function getDrupalAccount() {
     $user = user_load_by_mail($this->hidUser->email);
+
     // Track the user in the cluster_hid table.
     if ($user) {
-      db_merge('cluster_hid')
-        ->key(['uid' => $user->uid])
-        ->fields([
-            'uid' => $user->uid,
-            'hum_id' => $this->getHumanitarianId(),
-        ])
-        ->execute();
+      $this->trackUser($user->uid);
     }
     return $user;
+  }
+
+  /**
+   * Update the cluster_hid table with the user information.
+   */
+  private function trackUser($uid) {
+    db_merge('cluster_hid')
+      ->key(['uid' => $uid])
+      ->fields([
+        'uid' => $uid,
+        'hum_id' => $this->getHumanitarianId(),
+      ])
+      ->execute();
   }
 
   public function createNewDrupalUser() {
@@ -217,11 +219,22 @@ class ClusterHidUser {
    * Test if a given user id is matched to a humanitarian id.
    */
   public static function drupalUserHasHumanitarianId($uid) {
+    // Test the cluster_hid database.
     $hum_id = db_select('cluster_hid', 'c')
       ->fields('c', ['hum_id'])
       ->condition('uid', $uid)
       ->execute()
       ->fetchField();
+
+    // Test the hybrid auth database.
+    if (!$hum_id && module_exists('hybridauth')) {
+      $hum_id = db_select('hybridauth_identity', 'hi')
+        ->fields('hi', ['provider_identifier'])
+        ->condition('uid', $uid)
+        ->condition('provider', 'HumanitarianId')
+        ->execute()
+        ->fetchField();
+    }
     return $hum_id;
   }
 
