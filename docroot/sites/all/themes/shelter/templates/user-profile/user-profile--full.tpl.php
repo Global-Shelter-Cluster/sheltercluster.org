@@ -19,4 +19,8 @@
     <?php print render($user_profile['summary']); ?>
   </div>
   <?php print render($user_profile); ?>
+  <?php if ($synch_with_humanitarian_id_profile): ?>
+    FNORD
+  <?php endif; ?>
 </div>
+

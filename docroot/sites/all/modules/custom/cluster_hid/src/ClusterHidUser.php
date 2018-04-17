@@ -26,6 +26,13 @@ class ClusterHidUser {
     return $this->hidUser->email;
   }
 
+  public function getDrupalEmail() {
+    if (!$this->userHasDrupalAccount()) {
+      return NULL;
+    }
+    return $this->hidUser->drupalUser->mail;
+  }
+
   public function getGivenName() {
     return $this->hidUser->given_name;
   }
@@ -36,6 +43,19 @@ class ClusterHidUser {
 
   public function getFullName() {
     return $this->getFamilyName() . ', ' . $this->getGivenName();
+  }
+
+  public function getDrupalUserField($field_name) {
+    if (!$this->userHasDrupalAccount()) {
+      return NULL;
+    }
+    $user = $this->hidUser->drupalUser;
+    if (!$user->{$field_name}) {
+      return;
+    }
+    $field = $user->{$field_name};
+    $potentially_localized_field = array_pop($field);
+    return $potentially_localized_field[0]['value'];
   }
 
   public function getRoleOrTitle() {
@@ -66,7 +86,7 @@ class ClusterHidUser {
   }
 
   /**
-   * @TODO consider using addressfield.
+   * @TODO
    */
   public function getAddress() {
 
@@ -77,9 +97,27 @@ class ClusterHidUser {
    */
   public function userLink() {
     $uid = $this->getDrupalUid();
+
+    // Existing Drupal user.
     if ($this->userHasDrupalAccount()) {
-      return l('User id: ' . $uid, 'user/' . $uid);
+      $link_options = [
+        'attributes' => [
+          'class' => ['update-hid-user'],
+          'data-humid' => $this->getHumanitarianId(),
+        ],
+      ];
+
+      // List of links.
+      return [
+        '#theme' => 'item_list',
+        '#items' => [
+          l(t('User id: @uid', ['@uid' => $uid]), 'user/' . $uid),
+          l(t('Update Drupal values from Humanitarian ID'), '#', $link_options),
+        ],
+      ];
     }
+
+    // No drupal user.
     $link_options = [
       'attributes' => [
         'class' => ['create-new-hid-user'],
@@ -87,7 +125,10 @@ class ClusterHidUser {
       ]
     ];
     return l(t('Create New Drupal User'), '#', $link_options);
-    return l(t('Create New Drupal User'), 'create-new-user-from-hid-id/' . $this->getHumanitarianId(), $link_options);
+  }
+
+  public function userSynchLink() {
+    return '@TODO';
   }
 
   public function getDrupalUid() {
@@ -106,13 +147,25 @@ class ClusterHidUser {
    * @return user or false.
    */
   private function getDrupalAccount() {
-    return user_load_by_mail($this->hidUser->email);
+    $user = user_load_by_mail($this->hidUser->email);
+    // Track the user in the cluster_hid table.
+    if ($user) {
+      db_merge('cluster_hid')
+        ->key(['uid' => $user->uid])
+        ->fields([
+            'uid' => $user->uid,
+            'hum_id' => $this->getHumanitarianId(),
+        ])
+        ->execute();
+    }
+    return $user;
   }
 
   public function createNewDrupalUser() {
     if ($this->userHasDrupalAccount()) {
       throw new \Exception('Tried to create a new account for existing user in cluster_hid.');
     }
+
     $new_user = new \stdClass();
     $new_user->is_new = TRUE;
     $new_user->name = $this->getEmail();
@@ -122,31 +175,54 @@ class ClusterHidUser {
     $new_user->init = $this->getEmail();
     $new_user->name_field['en'][0]['value'] = $this->getFullName();
 
-    $organization_name = $this->getOrganizationName();
-    if ($organization_name) {
-      $new_user->field_organisation_name['en'][0]['value'] = $organization_name;
-    }
-
-    $phone_number = $this->getPhoneNumber();
-    if ($phone_number) {
-      $new_user->field_phone_number[LANGUAGE_NONE][0]['value'] = $phone_number;
-    }
-
-    $role_or_title = $this->getRoleOrTitle();
-    if ($role_or_title) {
-      $new_user->field_role_or_title[LANGUAGE_NONE][0]['value'] = $role_or_title;
-    }
+    $this->populateCommonFieldsForCreateOrUpdate($new_user);
 
     $user = user_save($new_user);
     return $user->uid;
   }
 
   public function updateHidUserData() {
+    if (!$this->userHasDrupalAccount()) {
+      throw new \Exception('Cannot update, no Drupal user.');
+    }
+    $user = $this->hidUser->drupalUser;
+    $this->populateCommonFieldsForCreateOrUpdate($user);
+    $user = user_save($user);
+    return $user->uid;
+  }
 
+  private function populateCommonFieldsForCreateOrUpdate($user) {
+    $user->name_field['en'][0]['value'] = $this->getFullName();
+    $organization_name = $this->getOrganizationName();
+    if ($organization_name) {
+      $user->field_organisation_name['en'][0]['value'] = $organization_name;
+    }
+
+    $phone_number = $this->getPhoneNumber();
+    if ($phone_number) {
+      $user->field_phone_number[LANGUAGE_NONE][0]['value'] = $phone_number;
+    }
+
+    $role_or_title = $this->getRoleOrTitle();
+    if ($role_or_title) {
+      $user->field_role_or_title[LANGUAGE_NONE][0]['value'] = $role_or_title;
+    }
   }
 
   public static function create($hid_user) {
     return new static($hid_user);
+  }
+
+  /**
+   * Test if a given user id is matched to a humanitarian id.
+   */
+  public static function drupalUserHasHumanitarianId($uid) {
+    $hum_id = db_select('cluster_hid', 'c')
+      ->fields('c', ['hum_id'])
+      ->condition('uid', $uid)
+      ->execute()
+      ->fetchField();
+    return $hum_id;
   }
 
 }

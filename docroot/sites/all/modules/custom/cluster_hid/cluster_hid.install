@@ -1,0 +1,32 @@
+<?php
+
+function cluster_hid_schema() {
+  return [
+    'cluster_hid' => [
+      'description' => 'Match Drupal user id with humanitarian.id',
+      'fields' => [
+        'uid' => [
+          'description' => 'The Drupal user id',
+          'type' => 'int',
+          'unsigned' => TRUE,
+          'not null' => TRUE,
+          'default' => 0,
+        ],
+        'hum_id' => [
+          'description' => 'The humanitarian.id',
+          'type' => 'varchar',
+          'length' => 32,
+          'not null' => TRUE,
+          'default' => '',
+        ],
+      ],
+    ],
+  ];
+}
+
+/**
+ * Install cluster_hid db schema.
+ */
+function cluster_hid_update_7001() {
+  drupal_install_schema('cluster_hid');
+}
