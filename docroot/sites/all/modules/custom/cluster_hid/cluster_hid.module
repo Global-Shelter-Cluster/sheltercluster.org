@@ -13,7 +13,7 @@ function cluster_hid_menu() {
       'description' => 'Credentials (JWT) and configs for integration with Humanitarian.id.',
       'page callback' => 'drupal_get_form',
       'page arguments' => ['cluster_hid_settings_form'],
-      'access arguments' => ['adminster site configuration'],
+      'access arguments' => ['administer site configuration'],
       'file' => 'cluster_hid.forms.inc',
     ],
     'admin/config/shelter/hid-search' => [
@@ -21,7 +21,7 @@ function cluster_hid_menu() {
       'description' => 'Search Humanitarian.id for users',
       'page callback' => 'drupal_get_form',
       'page arguments' => ['cluster_hid_search_form'],
-      'access arguments' => ['adminster site configuration'],
+      'access arguments' => ['administer site configuration'],
       'file' => 'cluster_hid.forms.inc',
     ],
     'create-new-user-from-hid-id/%' => [
@@ -33,7 +33,7 @@ function cluster_hid_menu() {
     'update-user-from-hid-id/%' => [
       'page callback' => 'cluster_hid_update_drupal_user',
       'page arguments' => [1],
-      'access arguments' => ['adminster site configuration'],
+      'access arguments' => ['administer site configuration'],
       'type' => MENU_CALLBACK,
     ],
 
@@ -49,12 +49,12 @@ function cluster_hid_menu() {
     'hid-search-user-search-autocomplete' => [
       'title' => 'Search Humanitarian.id autocomplete',
       'page callback' => 'cluster_hid_user_search_autocomplete',
-      'access arguments' => ['adminster site configuration'],
+      'access arguments' => ['administer site configuration'],
       'type' => MENU_CALLBACK,
     ],
     'hid-ajax-get-user-by-id/%' => [
       'page callback' => 'cluster_hid_get_user_by_id_as_table',
-      'access arguments' => ['access administration pages'],
+      'access arguments' => ['administer site configuration'],
       'page arguments' => [1],
       'type' => MENU_CALLBACK,
     ],
