@@ -89,7 +89,7 @@ function cluster_hid_permission() {
 }
 
 function cluster_hid_synch_account_allowed($uid) {
-  if (user_access('adminster site configuration') || user_access('synch humanitarian id profiles')) {
+  if (user_access('administer site configuration') || user_access('synch humanitarian id profiles')) {
     return TRUE;
   }
   global $user;
@@ -194,7 +194,7 @@ function cluster_hid_update_drupal_profile($uid) {
   }
   $hid_user = cluster_hid_get_hid_user_by_id($hum_id);
   $updated_user_id = $hid_user->updateHidUserData();
-  drupal_set_message('User has been updated with lated data from Humanitarian.id.');
+  drupal_set_message('User has been updated with data from Humanitarian.id.');
   drupal_goto('/user/' . $uid);
   return drupal_json_output($updated_user_id);
 }
