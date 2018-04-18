@@ -101,15 +101,17 @@ function cluster_hid_synch_account_allowed($uid) {
 function cluster_hid_preprocess_user_profile(&$variables) {
   $variables['synch_with_humanitarian_id_profile'] = FALSE;
   $user = $variables['elements']['#account'];
-  $hum_id = _cluster_hid_test_if_drupal_user_has_humanitarian_id($user->uid);
-  if (!$hum_id) {
+  $humanitarian_id = _cluster_hid_test_if_drupal_user_has_humanitarian_id($user->uid);
+  if (!$humanitarian_id) {
     return;
   }
   if (!cluster_hid_synch_account_allowed($user->uid)) {
     return;
   }
+
   $variables['synch_with_humanitarian_id_profile'] = TRUE;
-  $variables['synch_link'] = l(t('Synch profile with Humanitarian.id'), 'update-profile-from-hid-id/' . $user->uid);
+  $hidUser = cluster_hid_get_hid_user_by_id($humanitarian_id);
+  $variables['synch_link'] = $hidUser->getUpdateLink();
 }
 
 /**
@@ -193,6 +195,9 @@ function cluster_hid_update_drupal_profile($uid) {
     return;
   }
   $hid_user = cluster_hid_get_hid_user_by_id($hum_id);
+  if (!$hid_user) {
+    drupal_set_message('No user with matching email found in Humanitarian.id database.');
+  }
   $updated_user_id = $hid_user->updateHidUserData();
   drupal_set_message('User has been updated with data from Humanitarian.id.');
   drupal_goto('/user/' . $uid);

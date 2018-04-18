@@ -91,6 +91,27 @@ class ClusterHidUser {
   public function getAddress() {}
 
   /**
+   * Provides markup to let a user account be updated, if possible.
+   */
+  public function getUpdateLink() {
+    // Make sure the email address in Drupal and Humanitarian id are matching.
+    $drupalAccount = $this->getDrupalAccount();
+    $output = [
+      '#prefix' => '<div>',
+      '#suffix' => '</div>',
+    ];
+
+    if (!$drupalAccount) {
+      $text = t('The drupal account email address does not match the Humanitarian id email address - no synch possible.');
+      $output['#markup'] = $text;
+    }
+    else {
+      $output['#markup'] = l(t('Synch profile with Humanitarian.id'), 'update-profile-from-hid-id/' . $drupalAccount->uid);
+    }
+    return $output;
+  }
+
+  /**
    * Provide link to drupal user profile if it exists, link to user creation otherwise.
    */
   public function userLink() {
@@ -185,7 +206,7 @@ class ClusterHidUser {
 
   public function updateHidUserData() {
     if (!$this->userHasDrupalAccount()) {
-      throw new \Exception('Cannot update, no Drupal user.');
+      throw new \Exception('Cannot update, no Drupal user for email ' . $this->getEmail());
     }
     $user = $this->hidUser->drupalUser;
     $this->populateCommonFieldsForCreateOrUpdate($user);

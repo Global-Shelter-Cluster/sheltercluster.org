@@ -20,7 +20,7 @@
   </div>
   <?php print render($user_profile); ?>
   <?php if ($synch_with_humanitarian_id_profile): ?>
-    <?php print $synch_link; ?>
+    <?php print render($synch_link); ?>
   <?php endif; ?>
 </div>
 
