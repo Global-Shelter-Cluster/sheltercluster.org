@@ -102,6 +102,7 @@ function cluster_user_user_default_permissions() {
     'name' => 'access devel information',
     'roles' => array(
       'administrator' => 'administrator',
+      'trusted user' => 'trusted user',
     ),
     'module' => 'devel',
   );
@@ -1828,7 +1829,9 @@ function cluster_user_user_default_permissions() {
   // Exported permission: 'synch humanitarian id profiles'.
   $permissions['synch humanitarian id profiles'] = array(
     'name' => 'synch humanitarian id profiles',
-    'roles' => array(),
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
     'module' => 'cluster_hid',
   );
 

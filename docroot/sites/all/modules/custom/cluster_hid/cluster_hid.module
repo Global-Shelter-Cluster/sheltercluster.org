@@ -27,7 +27,7 @@ function cluster_hid_menu() {
     'create-new-user-from-hid-id/%' => [
       'page callback' => 'cluster_hid_new_drupal_user',
       'page arguments' => [1],
-      'access arguments' => ['adminster site configuration'],
+      'access arguments' => ['administer site configuration'],
       'type' => MENU_CALLBACK,
     ],
     'update-user-from-hid-id/%' => [
