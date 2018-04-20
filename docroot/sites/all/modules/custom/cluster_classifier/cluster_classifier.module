@@ -1,0 +1,327 @@
+<?php
+
+function _cluster_classifier_instance() {
+  require_once 'vendor/autoload.php';
+  require_once 'src/Classifier.php';
+  require_once 'src/DrupalDBStorage.php';
+  require_once 'src/Content.php';
+
+  $instance = &drupal_static(__FUNCTION__);
+
+  if (!isset($instance))
+    $instance = new \Cluster\Classifier([
+      'search_api_index' => 'documents',
+    ]);
+
+  return $instance;
+}
+
+/**
+ * Implements hook_menu().
+ */
+function cluster_classifier_menu() {
+  $items['admin/config/content/cluster_classifier'] = [
+    'title' => 'Classifier',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => ['cluster_classifier_settings'],
+    'access arguments' => ['administer search_api'],
+    'type' => MENU_NORMAL_ITEM,
+  ];
+  return $items;
+}
+
+function cluster_classifier_settings($form, &$form_state) {
+  $form = [];
+
+  $form['test'] = [
+    '#type' => 'fieldset',
+    '#title' => t('Test classifier for a single document'),
+  ];
+
+  $form['test']['nid'] = [
+    '#type' => 'textfield',
+    '#title' => t('Node ID'),
+    '#size' => 5,
+    '#default_value' => isset($form_state['values']) ? $form_state['values']['nid'] : '',
+  ];
+
+  $form['test']['test'] = [
+    '#type' => 'submit',
+    '#value' => t('Test'),
+    '#submit' => ['cluster_classifier_test'],
+  ];
+
+  $form['clear'] = [
+    '#type' => 'submit',
+    '#value' => t('Clear all data!'),
+    '#submit' => ['cluster_classifier_clear'],
+  ];
+
+  $form['train'] = [
+    '#type' => 'submit',
+    '#value' => t('Train (call after clearing all data)'),
+    '#submit' => ['cluster_classifier_train'],
+  ];
+
+  $classifier = _cluster_classifier_instance();
+  $form['stats'] = [
+    '#type' => 'fieldset',
+    '#title' => t('Stats'),
+  ];
+  foreach ($classifier->getStorageStats() as $k => $v)
+    $form['stats'][$k] = [
+      '#markup' => t('<p><strong>@name</strong>: %value</p>', [
+        '@name' => $k,
+        '%value' => $v,
+      ]),
+    ];
+
+  return $form;
+}
+
+function cluster_classifier_clear() {
+  $classifier = _cluster_classifier_instance();
+  $classifier->clear();
+  drupal_set_message('All classifier data has been deleted');
+}
+
+function cluster_classifier_test($form, &$form_state) {
+  $nid = $form_state['values']['nid'];
+  $node = node_load($nid);
+  if (!$node || $node->type !== 'document') {
+    drupal_set_message('Not a document: ' . $nid, 'error');
+    return;
+  }
+
+  $classifier = _cluster_classifier_instance();
+  $tids = $classifier->getTermsForNode($node);
+  $terms = taxonomy_term_load_multiple($tids);
+  $ret = [];
+  foreach ($terms as $term) {
+    if (!isset($ret[$term->vocabulary_machine_name]))
+      $ret[$term->vocabulary_machine_name] = [];
+
+    $ret[$term->vocabulary_machine_name][$term->tid] = $term->name;
+  }
+  dpm($ret, 'Terms for document ' . $node->nid . ': ' . $node->title);
+
+  $form_state['rebuild'] = TRUE;
+  form_set_value($form['test']['nid'], $nid, $form_state);
+}
+
+function cluster_classifier_train() {
+  $classifier = _cluster_classifier_instance();
+  $count = $classifier->getAllDocumentCount();
+
+  $num_operations = ceil($count / \Cluster\Classifier::QUERY_RESULTS_PER_PAGE);
+
+  $operations = [];
+  for ($i = 0; $i < $num_operations; $i++) {
+    $operations[] = [
+      'cluster_classifier_train_op',
+      [$i],
+    ];
+  }
+
+  batch_set([
+    'operations' => $operations,
+    'title' => 'Training classifier',
+    'progress_message' => t('Processed batch @current out of @total (' . \Cluster\Classifier::QUERY_RESULTS_PER_PAGE . ' documents per batch).'),
+  ]);
+}
+
+function cluster_classifier_train_op($operation_details, &$context) {
+  $classifier = _cluster_classifier_instance();
+  $page = $operation_details;
+
+  $classifier->train($page);
+}
+
+/**
+ * Implements hook_node_insert().
+ */
+function cluster_classifier_node_insert($node) {
+  if ($node->type !== 'document')
+    return;
+
+  $classifier = _cluster_classifier_instance();
+  $classifier->trainSingleNode($node);
+}
+
+/**
+ * Implements hook_node_update().
+ */
+function cluster_classifier_node_update($node) {
+  cluster_classifier_node_insert($node);
+}
+
+/**
+ * Implements hook_form_alter().
+ */
+function cluster_classifier_form_alter(&$form, &$form_state, $form_id) {
+  if (substr($form_id, -strlen('_node_form')) !== '_node_form')
+    return;
+
+  if (!isset($form['field_document_type']))
+    return;
+
+  $form['field_document_type']['tag_search'] = [
+    '#type' => 'textfield',
+    '#attributes' => ['placeholder' => t('Search tags')],
+    '#weight' => -20,
+  ];
+
+  $form['field_document_type']['autotag'] = [
+    '#type' => 'button',
+    '#value' => t('Fetch automatic tags'),
+    '#weight' => -10,
+    '#ajax' => [
+      'callback' => 'cluster_classifier_autotag',
+    ],
+    '#limit_validation_errors' => [],
+    '#attached' => [
+      'js' => [
+        drupal_get_path('module', 'cluster_classifier') . '/js/admin-autotag.js',
+      ],
+      'css' => [
+        drupal_get_path('module', 'cluster_classifier') . '/css/admin-autotag.css',
+      ],
+    ],
+    '#prefix' => '<div id="autotag-search-results"></div><div id="autotag-results"></div>',
+  ];
+}
+
+/**
+ * AJAX callback to calculate suggested tags.
+ * Any change in this function should probably be replicated in
+ * cluster_classifier_ajax_render_alter().
+ *
+ * @param $form
+ * @param $form_state
+ *
+ * @return array
+ */
+function cluster_classifier_autotag($form, &$form_state) {
+  require_once 'vendor/autoload.php';
+  require_once 'src/Classifier.php';
+  require_once 'src/DrupalDBStorage.php';
+  require_once 'src/Content.php';
+
+  $functions = [
+    function($values) {return $values['title'] . ' ' . $values['title_field']['und'][0]['value'];},
+    function($values) {return strip_tags($values['body']['und'][0]['value']);},
+    function($values) {
+      if (!isset($values['field_file']['und'][0]['fid']))
+        return '';
+
+      $file = file_load($values['field_file']['und'][0]['fid']);
+      if (!$file)
+        return '';
+
+      try {
+        return \Cluster\Content::getFileContents($file);
+      } catch (Exception $e) {
+        return '';
+      }
+    },
+  ];
+
+  $text = \Cluster\Classifier::getTextProgressively($functions, [$form_state['values']]);
+  if (!$text)
+    return [
+      '#type' => 'ajax',
+      '#commands' => [
+        ajax_command_invoke('#edit-field-document-type-autotag', 'data', ['tids', []]),
+        ajax_command_invoke('#edit-field-document-type-autotag', 'change'),
+      ],
+    ];
+
+  /**
+   * Yes, this is convoluted. Yes, it's all necessary.
+   * Basically we're just getting the list of tids that have been selected for
+   * all the fields we care about, that's all. :)
+   */
+  $exclude_tids = [];
+  foreach (cluster_docs_taxonomies(FALSE) as $field) {
+    if (!isset($form_state['values'][$field]) || !is_array($form_state['values'][$field]['und']))
+      continue;
+    $exclude_tids[] = array_keys(array_filter($form_state['values'][$field]['und']));
+  }
+  $exclude_tids = array_filter($exclude_tids);
+  if ($exclude_tids)
+    $exclude_tids = array_values(array_filter(array_unique(call_user_func_array('array_merge', $exclude_tids))));
+
+  $classifier = _cluster_classifier_instance();
+  $tids = $classifier->getTerms($text, $exclude_tids);
+
+  return [
+    '#type' => 'ajax',
+    '#commands' => [
+      ajax_command_invoke('#edit-field-document-type-autotag', 'data', ['tids', $classifier->groupTidsByField($tids)]),
+      ajax_command_invoke('#edit-field-document-type-autotag', 'change'),
+    ],
+  ];
+}
+
+/**
+ * This is very similar to cluster_classifier_autotag(), but works when a file
+ * is uploaded. There are some differences in the way data is retrieved (e.g.
+ * using $form_state['input'] instead of $form_state['values']).
+ *
+ * Implements hook_ajax_render_alter().
+ */
+function cluster_classifier_ajax_render_alter(&$commands) {
+  if (arg(0) !== 'file' || arg(1) !== 'ajax')
+    return;
+
+  list($form, $form_state, $form_id, $form_build_id, $commands_dummy) = ajax_get_form();
+  if (!$form || !isset($form['field_file']['und'][0]['#default_value']) || !$form['field_file']['und'][0]['#default_value']['fid'])
+    return;
+
+  require_once 'vendor/autoload.php';
+  require_once 'src/Classifier.php';
+  require_once 'src/DrupalDBStorage.php';
+  require_once 'src/Content.php';
+
+  $functions = [
+    function($form, $form_state) {return $form_state['input']['title_field']['und'][0]['value'];},
+    function($form, $form_state) {return strip_tags($form_state['input']['body']['und'][0]['value']);},
+    function($form, $form_state) {
+      if (!isset($form['field_file']['und'][0]['#default_value']['fid']))
+        return '';
+
+      $file = file_load($form['field_file']['und'][0]['#default_value']['fid']);
+      if (!$file)
+        return '';
+
+      try {
+        return \Cluster\Content::getFileContents($file);
+      } catch (Exception $e) {
+        return '';
+      }
+    },
+  ];
+
+  $text = \Cluster\Classifier::getTextProgressively($functions, [$form, $form_state]);
+  if (!$text) {
+    $commands[] = ajax_command_invoke('#edit-field-document-type-autotag', 'data', ['tids', []]);
+    $commands[] = ajax_command_invoke('#edit-field-document-type-autotag', 'change');
+    return;
+  }
+
+  $exclude_tids = [];
+  foreach (cluster_docs_taxonomies(FALSE) as $field) {
+    if (!isset($form_state['input'][$field]) || !is_array($form_state['input'][$field]['und']))
+      continue;
+    $exclude_tids[] = array_keys(array_filter($form_state['input'][$field]['und']));
+  }
+  $exclude_tids = array_filter($exclude_tids);
+  if ($exclude_tids)
+    $exclude_tids = array_values(array_filter(array_unique(call_user_func_array('array_merge', $exclude_tids))));
+
+  $classifier = _cluster_classifier_instance();
+  $tids = $classifier->getTerms($text, $exclude_tids);
+
+  $commands[] = ajax_command_invoke('#edit-field-document-type-autotag', 'data', ['tids', $classifier->groupTidsByField($tids)]);
+  $commands[] = ajax_command_invoke('#edit-field-document-type-autotag', 'change');
+}

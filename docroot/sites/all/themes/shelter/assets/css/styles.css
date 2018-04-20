@@ -374,9 +374,9 @@ body {
   width: 90%;
   margin: 0 auto;
 }
-@media (min-width: 1200px) {
+@media (min-width: 1777px) {
   .page-margin {
-    width: 1200px;
+    width: 1600px;
   }
 }
 
@@ -387,25 +387,25 @@ body {
   min-height: 15rem;
 }
 
-.main-column {
-  float: none;
-  width: 100%;
-}
 @media (min-width: 980px) {
-  .main-column {
-    float: right;
-    width: 71%;
+  #content {
+    display: flex;
   }
 }
 
+.main-column {
+  width: 100%;
+}
+
 .side-column {
-  float: none;
   width: 100%;
 }
 @media (min-width: 980px) {
   .side-column {
-    float: left;
     width: 27%;
+    min-width: 240px;
+    max-width: 300px;
+    margin-right: 20px;
   }
 }
 
@@ -645,6 +645,7 @@ body {
 .document-preview-list {
   display: flex;
   flex-wrap: wrap;
+  justify-content: space-between;
 }
 .recent-documents .document-preview-list {
   display: block;
@@ -666,11 +667,12 @@ body {
 .document-preview-list .document-preview {
   position: relative;
   color: #575757;
-  width: 400px;
-  margin: 0 20px 20px 0;
+  margin: 0 0 20px 0;
   padding: 10px;
   border: 1px solid #cdd6db;
   min-height: 170px;
+  max-width: 500px;
+  width: 100%;
 }
 .document-preview-list .document-preview.document-preview--draft {
   color: #a4a4a4;
@@ -689,11 +691,32 @@ body {
   border-color: #a4a4a4;
 }
 .document-preview-list .document-preview .document-status {
+  float: right;
   font-size: 8px;
   font-size: 0.5rem;
   line-height: 1;
   font-weight: bold;
   text-transform: uppercase;
+}
+@media (min-width: 850px) {
+  .document-preview-list .document-preview {
+    width: calc(50% - 10px);
+  }
+}
+@media (min-width: 980px) {
+  .document-preview-list .document-preview {
+    width: 100%;
+  }
+}
+@media (min-width: 1200px) {
+  .document-preview-list .document-preview {
+    width: calc(50% - 10px);
+  }
+}
+@media (min-width: 1720px) {
+  .document-preview-list .document-preview {
+    width: calc(33.33333% - 13.33333px);
+  }
 }
 .document-preview-list .document-preview a {
   text-decoration: none;
@@ -716,6 +739,7 @@ body {
 .document-preview-list .document-preview .thumbnail {
   float: left;
   width: 150px;
+  max-width: 30vw;
   height: 150px;
   margin-right: 10px;
   position: relative;
@@ -2958,6 +2982,7 @@ div.addressfield-container-inline::after {
 }
 .front #site-branding .page-margin {
   background: url(../images/homepage-header.jpg) no-repeat 0% top;
+  background-size: 100%;
   height: 160px;
 }
 @media (min-width: 800px) {
@@ -3878,7 +3903,7 @@ body.document-upload-ondrag {
   background: #04314c url("../images/clock-white.png") 1rem 50% no-repeat;
 }
 .preview-block > .list {
-  margin: 10px;
+  margin: 10px 0;
 }
 .preview-block > .footer {
   text-align: center;

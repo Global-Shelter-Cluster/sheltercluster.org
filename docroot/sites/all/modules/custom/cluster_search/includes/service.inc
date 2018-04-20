@@ -250,4 +250,49 @@ class SearchApiClusterAlgoliaService extends SearchApiAlgoliaService {
     return $items_indexed['objectIDs'];
   }
 
+  /**
+   * Implements search.
+   */
+  public function search(SearchApiQueryInterface $query) {
+    $this->connect($query->getIndex());
+
+    /** @var \AlgoliaSearch\Index $index */
+    $index = $this->getAlgoliaIndex();
+
+    $args = [];
+
+    $query_options = $query->getOptions();
+    if (isset($query_options['offset']) || isset($query_options['limit'])) {
+      $offset = isset($query_options['offset']) ? $query_options['offset'] : 0;
+      $limit = isset($query_options['limit']) ? $query_options['limit'] : 1000000;
+      if ($limit === 0) {
+        $args['hitsPerPage'] = 0;
+      } else {
+        if ($offset % $limit !== 0)
+          throw new Exception('Cannot convert offset/limit into page/hitsPerPage');
+        $args['page'] = $offset / $limit;
+        $args['hitsPerPage'] = $limit;
+      }
+    }
+
+    if (isset($query_options['attributesToRetrieve']))
+      $args['attributesToRetrieve'] = implode(',', (array) $query_options['attributesToRetrieve']);
+
+    if (isset($query_options['algoliaMethod']) && $query_options['algoliaMethod'] === 'browse') {
+      $result = $index->browseFrom('', $args);
+    } else
+      $result = $index->search('*', $args);
+
+    array_walk($result['hits'], function(&$hit) {
+      $hit['id'] = intval($hit['objectID']);
+      unset($hit['objectID']);
+    });
+
+    $result = [
+      'result count' => $result['nbHits'],
+      'results' => $result['hits'],
+    ];
+    return $result;
+  }
+
 }

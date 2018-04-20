@@ -82,13 +82,6 @@ function cluster_context_build_form($type) {
   return $form;
 }
 
-function cluster_context_redirect_home($form, &$form_state) {
-  if ($form_state['nid']) {
-    // The node was created successfully.
-    $form_state['redirect'] = '<front>';
-  }
-}
-
 /**
  * Implements hook_form_alter().
  * Prepopulates fields based on query string params.
@@ -104,10 +97,6 @@ function cluster_context_form_alter(&$form, &$form_state, $form_id) {
   // If any of the possible query string keys is present, simplify the form.
   if (_cluster_context_is_being_used($form_state)) {
     _cluster_context_simplify_form($form);
-  }
-
-  if ($type === 'document' && !_cluster_context_is_being_used($form_state)) {
-    array_push($form['actions']['submit']['#submit'], 'cluster_context_redirect_home');
   }
 
   _cluster_context_prepopulate($form, $form_state, 'og_group_ref', 'group');

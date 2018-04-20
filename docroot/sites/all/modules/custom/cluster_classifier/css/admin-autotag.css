@@ -1,0 +1,34 @@
+#autotag-results ul,
+#autotag-search-results ul {
+  display: inline;
+  list-style: none;
+  margin: 0;
+}
+
+#autotag-results ul li,
+#autotag-search-results ul li {
+  display: inline;
+  cursor: pointer;
+  margin-left: 20px;
+  font-style: italic;
+  color: #7f1416;
+  text-decoration: underline;
+}
+
+#edit-field-document-type-autotag,
+#edit-field-document-type-autotag + .ajax-progress {
+  display: none;
+}
+
+.form-item.form-item-field-document-type-tag-search {
+  margin-bottom: 5px;
+  padding-bottom: 0;
+}
+
+#autotag-search-results.has-results + #autotag-results {
+  display: none;
+}
+
+.form-item.form-item-field-document-type-und {
+  margin-top: 5px;
+}

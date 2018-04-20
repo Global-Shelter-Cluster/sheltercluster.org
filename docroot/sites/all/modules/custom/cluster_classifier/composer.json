@@ -1,0 +1,5 @@
+{
+    "require": {
+        "kbariotis/documer": "^0.2.3"
+    }
+}
