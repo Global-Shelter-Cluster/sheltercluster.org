@@ -13,19 +13,15 @@
     <?php print render($content['body']); ?>
   </main>
   <div class="details">
+    <?php print render($content['field_coverage_against_targets']); ?>
     <?php print render($content['field_need_analysis']); ?>
     <?php print render($content['field_fs_response']); ?>
     <?php print render($content['field_gaps_challenges']); ?>
-    <?php print render($content['field_coverage_against_targets']); ?>
   </div>
   <div class="map">
     <?php print render($content['field_map']); ?>
   </div>
   <aside class="aside">
-    <?php
-    hide($content['field_image']);
-    print render($content);
-    ?>
     <?php if ($cluster_factsheets['indicators']): ?>
     <div>
       <h3><?php print t('Key figures'); ?></h3>
@@ -36,5 +32,9 @@
       </div>
     </div>
     <?php endif; ?>
+    <?php
+    hide($content['field_image']);
+    print render($content);
+    ?>
   </aside>
 </article>

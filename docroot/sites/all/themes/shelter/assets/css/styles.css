@@ -3926,7 +3926,7 @@ body.document-upload-ondrag {
 }
 .factsheet-full > .highlights {
   grid-area: highlights;
-  background: #7f1416;
+  background: #a05a49;
   padding: 10px;
   border-radius: 4px;
   color: white;
@@ -3962,7 +3962,7 @@ body.document-upload-ondrag {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  background: #d7d7d7;
+  background: #e8e8e8;
   padding: 10px;
   border-radius: 4px;
 }

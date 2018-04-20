@@ -29,7 +29,7 @@
   }
   > .highlights {
     grid-area: highlights;
-    background: $shelter-red;
+    background: #a05a49;
     padding: 10px;
     border-radius: 4px;
     color: $white;
@@ -37,6 +37,8 @@
       color: $white;
     }
     h3 {
+      //color: rgba(black, .6);
+      //border-color: rgba(black, .6);
       color: $white;
       border-color: rgba(255, 255, 255, .5);
       //padding: 0 10px .4rem;
@@ -64,7 +66,7 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    background: lighten($shelter-grey, 50%);
+    background: lighten($shelter-grey, 57%);
     padding: 10px;
     border-radius: 4px;
     > * {

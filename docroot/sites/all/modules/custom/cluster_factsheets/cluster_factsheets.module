@@ -400,22 +400,22 @@ function cluster_factsheets_field_formatter_view($entity_type, $entity, $field, 
         [
           'data' => [],
           'label' => 'Reached',
-          'backgroundColor' => CLUSTER_CHART_COLOR_ACCENT_GREEN,
+          'backgroundColor' => CLUSTER_CHART_COLOR_SHELTER_RED,
         ],
         [
           'data' => [],
           'label' => 'Ongoing',
-          'backgroundColor' => CLUSTER_CHART_COLOR_ACCENT_YELLOW,
+          'backgroundColor' => '#a05a49',
         ],
         [
           'data' => [],
           'label' => 'Planned',
-          'backgroundColor' => CLUSTER_CHART_COLOR_ACCENT_BLUE,
+          'backgroundColor' => '#cca496',
         ],
         [
           'data' => [],
           'label' => 'Gap',
-          'backgroundColor' => CLUSTER_CHART_COLOR_ACCENT_RED,
+//          'backgroundColor' => CLUSTER_CHART_COLOR_ACCENT_RED,
         ],
       ];
       $labels = [];
