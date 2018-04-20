@@ -54,3 +54,19 @@
   height: 50px;
   width: 300px;
 }
+
+#login-link {
+  background: url('../images/humanitarianid.png') right center no-repeat;
+  display: block;
+  height: 25px;
+  vertical-align: center;
+  padding-top: 5px;
+  width: 65px;
+}
+
+#login-link a,
+#login-link a:hover,
+#login-link a:visited {
+  color: #000;
+  font-weight: bold;
+}

@@ -33,7 +33,9 @@
         <?php endif; ?>
 
         <div id="user-profile-container" class="clearfix">
-          <?php print render($user_menu); ?>
+          <?php if ($variables['login_link']): ?>
+            <span id="login-link"><?php print $variables['login_link']; ?></span>
+          <?php endif; ?>
         </div>
 
       </div>

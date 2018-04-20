@@ -5,6 +5,22 @@
   width: 300px;
 }
 
+#login-link {
+  background: url('../images/humanitarianid.png') right center no-repeat;
+  display: block;
+  height: 25px;
+  vertical-align: center;
+  padding-top: 5px;
+  width: 65px;
+}
+
+#login-link a,
+#login-link a:hover,
+#login-link a:visited {
+  color: #000;
+  font-weight: bold;
+}
+
 /*! normalize.css v3.0.0 | HTML5 Display Definitions | MIT License | git.io/normalize */
 article,
 aside,
