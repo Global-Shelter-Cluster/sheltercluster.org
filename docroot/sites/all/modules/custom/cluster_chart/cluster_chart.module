@@ -13,6 +13,10 @@ const CLUSTER_CHART_COLOR_ACCENT_RED = 'rgb(252,0,0)';
 const CLUSTER_CHART_COLOR_ACCENT_BLUE = 'rgb(22,135,203)';
 const CLUSTER_CHART_COLOR_ACCENT_DARK_BLUE = 'rgb(4,49,76)';
 
+// Shades
+const CLUSTER_CHART_COLOR_SHELTER_RED_SHADE1 = '#a05a49';
+const CLUSTER_CHART_COLOR_SHELTER_RED_SHADE2 = '#cca496';
+
 function cluster_chart_include_lib() {
   drupal_add_js(drupal_get_path('module', 'cluster_chart') . '/js/lib/Chart.min.js', ['group' => JS_LIBRARY]);
   drupal_add_js(drupal_get_path('module', 'cluster_chart') . '/js/lib/Chart.PieceLabel.js', ['group' => JS_LIBRARY]);

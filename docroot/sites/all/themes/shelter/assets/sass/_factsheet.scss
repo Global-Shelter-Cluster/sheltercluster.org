@@ -29,21 +29,19 @@
   }
   > .highlights {
     grid-area: highlights;
-    background: #a05a49;
+    border: 3px solid $shelter-red;
     padding: 10px;
     border-radius: 4px;
-    color: $white;
-    a {
-      color: $white;
-    }
     h3 {
-      //color: rgba(black, .6);
-      //border-color: rgba(black, .6);
+      background-color: $shelter-red;
+      border: none;
       color: $white;
-      border-color: rgba(255, 255, 255, .5);
-      //padding: 0 10px .4rem;
-      @include rem(margin, 0 -10px 1rem);
-      @include rem(padding, 0 10px 0.4rem);
+      @include rem(margin, -10px -10px 1rem);
+      padding: 8px 10px;
+
+      path {
+        fill: $white;
+      }
     }
   }
   > .details {
