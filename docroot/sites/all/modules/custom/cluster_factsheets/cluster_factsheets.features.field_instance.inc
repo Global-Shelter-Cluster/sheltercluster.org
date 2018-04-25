@@ -376,7 +376,7 @@ function cluster_factsheets_field_default_field_instances() {
       'module' => 'field_collection',
       'settings' => array(),
       'type' => 'field_collection_embed',
-      'weight' => 13,
+      'weight' => 24,
     ),
   );
 
@@ -542,7 +542,7 @@ function cluster_factsheets_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 16,
+        'weight' => 18,
       ),
       'factsheet_summary' => array(
         'label' => 'above',
@@ -586,7 +586,7 @@ function cluster_factsheets_field_default_field_instances() {
       'module' => 'number',
       'settings' => array(),
       'type' => 'number',
-      'weight' => 11,
+      'weight' => 22,
     ),
   );
 
@@ -601,7 +601,7 @@ function cluster_factsheets_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 15,
+        'weight' => 17,
       ),
       'factsheet_summary' => array(
         'label' => 'above',
@@ -645,7 +645,7 @@ function cluster_factsheets_field_default_field_instances() {
       'module' => 'number',
       'settings' => array(),
       'type' => 'number',
-      'weight' => 12,
+      'weight' => 23,
     ),
   );
 
@@ -660,7 +660,7 @@ function cluster_factsheets_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 12,
+        'weight' => 14,
       ),
       'factsheet_summary' => array(
         'label' => 'above',
@@ -698,7 +698,7 @@ function cluster_factsheets_field_default_field_instances() {
       'module' => 'number',
       'settings' => array(),
       'type' => 'number',
-      'weight' => 9,
+      'weight' => 20,
     ),
   );
 
@@ -713,7 +713,7 @@ function cluster_factsheets_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 14,
+        'weight' => 16,
       ),
       'factsheet_summary' => array(
         'label' => 'above',
@@ -757,7 +757,7 @@ function cluster_factsheets_field_default_field_instances() {
       'module' => 'number',
       'settings' => array(),
       'type' => 'number',
-      'weight' => 8,
+      'weight' => 19,
     ),
   );
 
@@ -772,7 +772,7 @@ function cluster_factsheets_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 13,
+        'weight' => 15,
       ),
       'factsheet_summary' => array(
         'label' => 'above',
@@ -810,7 +810,7 @@ function cluster_factsheets_field_default_field_instances() {
       'module' => 'number',
       'settings' => array(),
       'type' => 'number',
-      'weight' => 10,
+      'weight' => 21,
     ),
   );
 
@@ -864,6 +864,59 @@ function cluster_factsheets_field_default_field_instances() {
       ),
       'type' => 'text_textarea',
       'weight' => 15,
+    ),
+  );
+
+  // Exported field_instance: 'node-factsheet-field_household_figures'.
+  $field_instances['node-factsheet-field_household_figures'] = array(
+    'bundle' => 'factsheet',
+    'default_value' => array(
+      0 => array(
+        'value' => 0,
+      ),
+    ),
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 12,
+      ),
+      'factsheet_summary' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'ical' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'preview_block' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_household_figures',
+    'label' => 'Figures represent:',
+    'required' => 1,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_buttons',
+      'weight' => 16,
     ),
   );
 
@@ -1316,6 +1369,59 @@ function cluster_factsheets_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-factsheet-field_people_per_household'.
+  $field_instances['node-factsheet-field_people_per_household'] = array(
+    'bundle' => 'factsheet',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => 'E.g. "3.4". Required if "households" is selected above.',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 13,
+      ),
+      'factsheet_summary' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'ical' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'preview_block' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_people_per_household',
+    'label' => 'People per household',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'max' => '',
+      'min' => 1,
+      'prefix' => '',
+      'suffix' => '',
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 0,
+      'module' => 'number',
+      'settings' => array(),
+      'type' => 'number',
+      'weight' => 17,
+    ),
+  );
+
   // Exported field_instance: 'node-factsheet-field_photo_credit'.
   $field_instances['node-factsheet-field_photo_credit'] = array(
     'bundle' => 'factsheet',
@@ -1381,7 +1487,7 @@ function cluster_factsheets_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 17,
+        'weight' => 19,
       ),
       'factsheet_summary' => array(
         'label' => 'above',
@@ -1454,6 +1560,8 @@ function cluster_factsheets_field_default_field_instances() {
   t('Cluster partners');
   t('Coverage against targets');
   t('Date');
+  t('E.g. "3.4". Required if "households" is selected above.');
+  t('Figures represent:');
   t('Funded');
   t('Funding required');
   t('Gaps / challenges');
@@ -1469,6 +1577,7 @@ function cluster_factsheets_field_default_field_instances() {
   t('Need analysis');
   t('Ongoing');
   t('Operational intent');
+  t('People per household');
   t('Photographer / Organisation, Year');
   t('Planned');
   t('Reached');

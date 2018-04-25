@@ -102,6 +102,36 @@ function cluster_factsheets_field_group_info() {
   $field_group = new stdClass();
   $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
   $field_group->api_version = 1;
+  $field_group->identifier = 'group_hh|node|factsheet|form';
+  $field_group->group_name = 'group_hh';
+  $field_group->entity_type = 'node';
+  $field_group->bundle = 'factsheet';
+  $field_group->mode = 'form';
+  $field_group->parent_name = 'group_indicators';
+  $field_group->data = array(
+    'label' => 'Individual people / households',
+    'weight' => '17',
+    'children' => array(
+      0 => 'field_household_figures',
+      1 => 'field_people_per_household',
+    ),
+    'format_type' => 'fieldset',
+    'format_settings' => array(
+      'label' => 'Individual people / households',
+      'instance_settings' => array(
+        'required_fields' => 1,
+        'id' => '',
+        'classes' => 'group-hh field-group-fieldset',
+        'description' => '',
+      ),
+      'formatter' => 'open',
+    ),
+  );
+  $field_groups['group_hh|node|factsheet|form'] = $field_group;
+
+  $field_group = new stdClass();
+  $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
+  $field_group->api_version = 1;
   $field_group->identifier = 'group_indicators|node|factsheet|form';
   $field_group->group_name = 'group_indicators';
   $field_group->entity_type = 'node';
@@ -118,6 +148,7 @@ function cluster_factsheets_field_group_info() {
       3 => 'field_coverage_against_targets',
       4 => 'field_fsi_in_need',
       5 => 'field_fsi_targeted',
+      6 => 'group_hh',
     ),
     'format_type' => 'tab',
     'format_settings' => array(
@@ -196,6 +227,7 @@ function cluster_factsheets_field_group_info() {
   t('Factsheet');
   t('Fields');
   t('Figures');
+  t('Individual people / households');
   t('Photos');
   t('Sidebar');
 
