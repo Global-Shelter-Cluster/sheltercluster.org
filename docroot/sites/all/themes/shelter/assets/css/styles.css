@@ -344,6 +344,11 @@ a.operation-icon:hover {
   color: #688394;
 }
 
+abbr[title] {
+  cursor: help;
+  text-decoration: none;
+}
+
 /* _layout.scss */
 * {
   -webkit-tap-highlight-color: transparent;

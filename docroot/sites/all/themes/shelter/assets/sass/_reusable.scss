@@ -63,3 +63,8 @@ a.operation-icon {
     color: $shelter-dark-blue;
   }
 }
+
+abbr[title] {
+  cursor: help;
+  text-decoration: none;
+}

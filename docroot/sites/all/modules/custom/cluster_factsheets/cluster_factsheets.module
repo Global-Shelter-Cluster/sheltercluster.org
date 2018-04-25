@@ -83,6 +83,20 @@ function cluster_factsheets_all($node) {
 /**
  * Implements hook_preprocess_HOOK().
  */
+function cluster_factsheets_preprocess_field(&$variables) {
+  if (
+    $variables['element']['#field_name'] !== 'field_coverage_against_targets'
+    || !isset($variables['element']['#object'])
+    || $variables['element']['#object']->type !== 'factsheet'
+  )
+    return;
+
+  $variables['cluster_factsheets']['hh_abbr'] = _cluster_factsheets_hh_abbr($variables['element']['#object']);
+}
+
+/**
+ * Implements hook_preprocess_HOOK().
+ */
 function cluster_factsheets_preprocess_node(&$variables) {
   $node = $variables['node'];
   if ($node->type !== 'factsheet')
@@ -128,6 +142,22 @@ function cluster_factsheets_preprocess_node(&$variables) {
 
   $field_image = $wrapper->field_image->value();
   $variables['cluster_factsheets']['main_image_url'] = image_style_url('factsheet_image', $field_image['uri']);
+
+  $variables['cluster_factsheets']['hh_abbr'] = _cluster_factsheets_hh_abbr($node);
+}
+
+function _cluster_factsheets_hh_abbr($node) {
+  $wrapper = entity_metadata_wrapper('node', $node);
+  if (!$wrapper->field_household_figures->value())
+    return '';
+
+  return ' (<abbr'
+    . drupal_attributes([
+      'title' => t('@number people per household', [
+        '@number' => $wrapper->field_people_per_household->value(),
+      ]),
+    ])
+    . '>' . t('HH') . '</abbr>)';
 }
 
 /**
@@ -177,6 +207,9 @@ function cluster_factsheets_node_presave($node) {
  * Implements hook_node_validate().
  */
 function cluster_factsheets_node_validate($node, $form, &$form_state) {
+  if ($node->type !== 'factsheet')
+    return;
+
   $wrapper = entity_metadata_wrapper('node', $node);
   $group = $wrapper->og_group_ref->value();
   if (!count($group)) {
@@ -184,6 +217,9 @@ function cluster_factsheets_node_validate($node, $form, &$form_state) {
     form_set_error('og_group_ref', t('No response specified.'));
     return;
   }
+
+  if ($wrapper->field_household_figures->value() && !$wrapper->field_people_per_household->value())
+    form_set_error('field_people_per_household', t('This value is required if the figures represent households.'));
 
   if ($node->status !== NODE_PUBLISHED)
     // Date condition not required for unpublished nodes
@@ -247,7 +283,7 @@ function cluster_factsheets_main_indicators($node) {
     (!is_null($in_need = $wrapper->field_fsi_in_need->value()))
     && (!is_null($targeted = $wrapper->field_fsi_targeted->value()))
   )
-    $indicators['people in need / targeted'] = cluster_factsheets_number($in_need) . ' / ' . cluster_factsheets_number($targeted);
+    $indicators['people in need / targeted' . _cluster_factsheets_hh_abbr($node)] = cluster_factsheets_number($in_need) . ' / ' . cluster_factsheets_number($targeted);
 
   return $indicators;
 }
@@ -274,7 +310,7 @@ function cluster_factsheets_chart_indicators($node) {
       [
         '#theme' => 'html_tag',
         '#tag' => 'h4',
-        '#value' => 'People',
+        '#value' => 'People' . _cluster_factsheets_hh_abbr($node),
       ],
       [
         '#theme' => 'cluster_chart_hbar',
@@ -396,7 +432,6 @@ function cluster_factsheets_field_formatter_view($entity_type, $entity, $field, 
 
   switch ($display['type']) {
     case 'cluster_factsheets_cat_chart':
-
       $data = [
         [
           'data' => [],
