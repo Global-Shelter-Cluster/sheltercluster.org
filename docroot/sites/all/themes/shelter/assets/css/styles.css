@@ -3926,21 +3926,20 @@ body.document-upload-ondrag {
 }
 .factsheet-full > .highlights {
   grid-area: highlights;
-  background: #a05a49;
+  border: 3px solid #7f1416;
   padding: 10px;
   border-radius: 4px;
-  color: white;
-}
-.factsheet-full > .highlights a {
-  color: white;
 }
 .factsheet-full > .highlights h3 {
+  background-color: #7f1416;
+  border: none;
   color: white;
-  border-color: rgba(255, 255, 255, 0.5);
-  margin: 0 -10px 16px;
-  margin: 0 -0.625rem 1rem;
-  padding: 0 10px 6.4px;
-  padding: 0 0.625rem 0.4rem;
+  margin: -10px -10px 16px;
+  margin: -0.625rem -0.625rem 1rem;
+  padding: 8px 10px;
+}
+.factsheet-full > .highlights h3 path {
+  fill: white;
 }
 .factsheet-full > .details {
   grid-area: details;

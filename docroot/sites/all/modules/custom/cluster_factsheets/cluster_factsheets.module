@@ -283,7 +283,7 @@ function cluster_factsheets_chart_indicators($node) {
             'data' => [$in_need, $targeted],
             'backgroundColor' => [
               CLUSTER_CHART_COLOR_SHELTER_RED,
-              CLUSTER_CHART_COLOR_ACCENT_DARK_BLUE,
+              CLUSTER_CHART_COLOR_SHELTER_RED_SHADE2,
             ],
           ],
         ],
@@ -329,6 +329,7 @@ function cluster_factsheets_chart_indicators($node) {
           'data' => [$funded, $required - $funded],
           'backgroundColor' => [
             CLUSTER_CHART_COLOR_SHELTER_RED,
+            CLUSTER_CHART_COLOR_SHELTER_RED_SHADE2,
           ],
         ],
         '#labels' => ['Funded', 'Gap'],
@@ -405,12 +406,12 @@ function cluster_factsheets_field_formatter_view($entity_type, $entity, $field, 
         [
           'data' => [],
           'label' => 'Ongoing',
-          'backgroundColor' => '#a05a49',
+          'backgroundColor' => CLUSTER_CHART_COLOR_SHELTER_RED_SHADE1,
         ],
         [
           'data' => [],
           'label' => 'Planned',
-          'backgroundColor' => '#cca496',
+          'backgroundColor' => CLUSTER_CHART_COLOR_SHELTER_RED_SHADE2,
         ],
         [
           'data' => [],
