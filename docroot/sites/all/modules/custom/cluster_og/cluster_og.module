@@ -41,7 +41,7 @@ function cluster_og_node_view($node, $view_mode) {
 //    $node->content['key_documents'] = $group_content->getKeyDocuments();
     $node->content['recent_documents'] = $group_content->getRecentDocuments();
     $node->content['recent_discussions'] = $group_content->getRecentDiscussions();
-    $node->content['dashboard_menu'] = $group_content->getDashboardMenu();
+    $node->content['dashboard_menu'] = $group_content->getDashboardMenu($node->nid);
     $node->content['contextual_navigation'] = $group_content->getContextualNavigation();
     $node->content['upcoming_events'] = $group_content->getUpcomingEvents();
   }
@@ -488,4 +488,12 @@ function cluster_og_og_permission() {
       'description' => t("Allow user to manage child technical working group."),
     ),
   );
+}
+
+/**
+ * Implements hook_query_TAG_alter()
+ */
+function cluster_og_query_node_has_no_parent_alter(QueryAlterableInterface $query) {
+  $query->leftJoin('field_data_field_parent_content', 'p', 'node.nid = p.entity_id');
+  $query->isNull('p.field_parent_content_target_id');
 }

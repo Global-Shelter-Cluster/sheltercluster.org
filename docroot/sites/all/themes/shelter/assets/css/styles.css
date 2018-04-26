@@ -1,26 +1,4 @@
 @charset "UTF-8";
-#page #user-login .hybridauth-widget .hybridauth-icon {
-  background-image: url('../images/humanitarian-id-logo.svg');
-  height: 50px;
-  width: 300px;
-}
-
-#login-link {
-  background: url('../images/humanitarianid.png') right center no-repeat;
-  display: block;
-  height: 25px;
-  vertical-align: center;
-  padding-top: 5px;
-  width: 65px;
-}
-
-#login-link a,
-#login-link a:hover,
-#login-link a:visited {
-  color: #000;
-  font-weight: bold;
-}
-
 /*! normalize.css v3.0.0 | HTML5 Display Definitions | MIT License | git.io/normalize */
 article,
 aside,
@@ -3200,6 +3178,28 @@ div.addressfield-container-inline::after {
   font-size: 48px;
   font-size: 3rem;
   display: block;
+}
+
+#page #user-login .hybridauth-widget .hybridauth-icon {
+  background-image: url("../images/humanitarian-id-logo.svg");
+  height: 50px;
+  width: 300px;
+}
+
+#login-link {
+  background: url("../images/humanitarianid.png") right center no-repeat;
+  display: block;
+  height: 25px;
+  vertical-align: center;
+  padding-top: 5px;
+  width: 65px;
+}
+
+#login-link a,
+#login-link a:hover,
+#login-link a:visited {
+  color: #000;
+  font-weight: bold;
 }
 
 /* _footer.scss */

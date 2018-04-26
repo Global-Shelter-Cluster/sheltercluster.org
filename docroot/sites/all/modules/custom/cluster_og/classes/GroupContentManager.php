@@ -54,6 +54,19 @@ class GroupContentManager {
     return FALSE;
   }
 
+  public function getChildrenPages($currently_visible_node_id) {
+    $query = new EntityFieldQuery();
+    $result = $query->entityCondition('entity_type', 'node')
+      ->fieldCondition('field_parent_content', 'target_id', $currently_visible_node_id)
+      ->propertyCondition('status', NODE_PUBLISHED)
+      ->fieldOrderBy('field_sorting_weight', 'value', 'ASC')
+      ->execute();
+    if (isset($result['node'])) {
+      return array_keys($result['node']);
+    }
+    return [];
+  }
+
   /**
    * Get all the page nodes that are content for the group.
    */
@@ -303,6 +316,8 @@ class GroupContentManager {
       ->entityCondition('bundle', array('library', 'arbitrary_library'), 'IN')
       ->fieldCondition('og_group_ref', 'target_id', $this->node->nid)
       ->propertyCondition('status', NODE_PUBLISHED)
+      // Include only libraries that are 'Top Level' content, i.e. no parents
+      ->addTag('node_has_no_parent')
       ->fieldOrderBy('field_sorting_weight', 'value', 'ASC')
       ->execute();
 

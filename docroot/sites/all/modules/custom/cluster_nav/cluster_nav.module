@@ -185,7 +185,7 @@ function cluster_nav_preprocess_page(&$variables) {
   if ($display_provider) {
     // Add the dashboard menu to the page template for group pages other than the dashboard.
     if (arg(2) || $page_level_nav) {
-      $variables['dashboard_menu'] = $display_provider->getDashboardMenu();
+      $variables['dashboard_menu'] = $display_provider->getDashboardMenu($node->nid);
       $variables['editor_menu'] = $display_provider->getEditorMenu();
     }
     $variables['contextual_navigation'] = $display_provider->getContextualNavigation();

@@ -143,12 +143,13 @@ class GroupDisplayProvider {
   /**
    * Generate the dashboard links for a group node.
    * Delegates theme implementation to cluster_nav module.
+   * @param $currently_visible_node_id
+   *   The node which is currently being viewed, rather that the group context.
    * @return
    *  Render array of dashboard links.
    */
-  public function getDashboardMenu() {
+  public function getDashboardMenu($currently_visible_node_id = NULL) {
     $items = array();
-
     $items['dashboard'] = array(
       'label' => t('Dashboard'),
       'path' => 'node/' . $this->node->nid,
@@ -244,6 +245,17 @@ class GroupDisplayProvider {
         'title' => t('Pages'),
         'collapsed' => $force_collapse,
         'nodes' => node_load_multiple($pages)
+      ));
+    }
+
+    $child_page_ids = $this->manager->getChildrenPages($currently_visible_node_id);
+    $child_pages = shelter_base_sort_nids_by_weight($child_page_ids);
+    if ($child_pages) {
+      $secondary['child_pages'] = partial('navigation_options', array(
+        'navigation_type_id' => 'child_pages',
+        'title' => t('Child Pages'),
+        'collapsed' => $force_collapse,
+        'nodes' => node_load_multiple($child_pages)
       ));
     }
 
