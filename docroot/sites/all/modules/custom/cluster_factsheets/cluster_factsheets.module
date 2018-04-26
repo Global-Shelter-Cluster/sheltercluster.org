@@ -18,22 +18,64 @@ function cluster_factsheets_menu() {
     'access callback' => 'cluster_factsheets_add_access',
     'access arguments' => [1],
     'type' => MENU_CALLBACK,
-//    'type' => MENU_LOCAL_TASK,
-//    'weight' => 1,
   ];
 
-  $items['node/%node/factsheets'] = array(
+  $items['node/%node/factsheets'] = [
     'title' => 'Factsheets',
     'page callback' => 'cluster_factsheets_all',
-    'page arguments' => array(1),
+    'page arguments' => [1],
     'access callback' => 'og_is_group',
-    'access arguments' => array(0, 1),
+    'access arguments' => [0, 1],
     'title callback' => '_cluster_factsheets_title_callback',
-    'title arguments' => array(1),
+    'title arguments' => [1],
     'type' => MENU_CALLBACK,
-  );
+  ];
+
+  $items['factsheets-temp'] = [
+    'title' => 'Factsheets',
+    'page callback' => 'cluster_factsheets_page',
+    'access arguments' => array('access content'),
+    'type' => MENU_CALLBACK,
+  ];
 
   return $items;
+}
+
+function cluster_factsheets_page() {
+  // Get a list of group nids that have factsheets, and the dates of their most recent respective factsheets,
+  // ordered (DESC) by that date.
+  $group_nids_and_latest_factsheet_date = db_query(<<<EOS
+    SELECT
+      ngroup.nid,
+      MAX(field_date.field_date_value)
+    FROM {node} ngroup
+      INNER JOIN {og_membership} ogm
+        ON ngroup.nid = ogm.gid AND ogm.group_type = 'node' AND ogm.state = 1 AND ogm.type = 'og_membership_type_default'
+      INNER JOIN {node} nfactsheet
+        ON ogm.etid = nfactsheet.nid AND ogm.entity_type = 'node'
+      INNER JOIN {field_data_field_date} field_date
+        ON nfactsheet.nid = field_date.entity_id AND field_date.entity_type = 'node' AND field_date.bundle = 'factsheet' AND
+           field_date.deleted = 0
+    WHERE nfactsheet.type = 'factsheet'
+          AND nfactsheet.status = 1
+          AND ngroup.status = 1
+    GROUP BY ngroup.nid
+    ORDER BY MAX(field_date.field_date_value) DESC
+EOS
+  )->fetchAllKeyed();
+
+  $ret = [];
+
+  foreach ($group_nids_and_latest_factsheet_date as $gid => $fs_date) {
+    $manager = GroupContentManager::getInstance(node_load($gid));
+    $group_factsheets = $manager->getFactsheets(1);
+    if (!$group_factsheets)
+      continue; // Shouldn't happen
+
+    $ret[] = node_view(node_load($group_factsheets[0]), 'preview_block');
+  }
+
+  return $ret;
 }
 
 /**
@@ -72,7 +114,7 @@ function cluster_factsheets_add($group_node) {
 function cluster_factsheets_all($node) {
   $manager = GroupContentManager::getInstance($node);
   $items = array_filter(array_map(function($node) {
-    return node_view($node, 'preview_block');
+    return node_view($node, 'factsheet_preview_block');
   }, node_load_multiple($manager->getFactsheets())));
   return [
     '#theme' => 'factsheet_list',
@@ -405,6 +447,14 @@ function cluster_factsheets_chart_indicators($node) {
 function cluster_factsheets_entity_info_alter(&$entity_info) {
   $entity_info['node']['view modes']['factsheet_summary'] = array(
     'label' => t('Factsheet summary'),
+    'custom settings' => FALSE,
+  );
+  $entity_info['node']['view modes']['factsheet_homepage_teaser'] = array(
+    'label' => t('Factsheet homepage teaser'),
+    'custom settings' => FALSE,
+  );
+  $entity_info['node']['view modes']['factsheet_preview_block'] = array(
+    'label' => t('Factsheet preview block (no group title)'),
     'custom settings' => FALSE,
   );
 }
