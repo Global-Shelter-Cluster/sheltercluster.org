@@ -260,7 +260,6 @@ class GroupDisplayProvider {
     }
 
     $parent_page = $this->manager->getParentPage($currently_visible_node_id);
-    dpm($parent_page);
     if ($parent_page) {
       $secondary['parent_page'] = partial('navigation_options', array(
         'navigation_type_id' => 'parent_page',

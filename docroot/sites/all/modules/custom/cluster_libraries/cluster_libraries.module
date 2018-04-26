@@ -117,8 +117,9 @@ function cluster_libraries_form_node_form_alter(&$form, &$form_state, $form_id) 
     $form['field_parent_content'][LANGUAGE_NONE]['#options'] = [t('No available parents')];
     return;
   }
-
-  $form['field_parent_content'][LANGUAGE_NONE]['#options'] = $available_parents;
+  $options['_none'] = '--none--';
+  $options['Possible parents'] = $available_parents;
+  $form['field_parent_content'][LANGUAGE_NONE]['#options'] = $options;
 }
 
 function _cluster_librabries_get_audience_node_ids_from_node_edit_form($form) {
