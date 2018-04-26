@@ -67,6 +67,13 @@ class GroupContentManager {
     return [];
   }
 
+  public function getParentPage($currently_visible_node_id) {
+    $node = node_load($currently_visible_node_id);
+    if (isset($node->field_parent_content)) {
+      return $node->field_parent_content[LANGUAGE_NONE][0]['target_id'];
+    }
+  }
+
   /**
    * Get all the page nodes that are content for the group.
    */

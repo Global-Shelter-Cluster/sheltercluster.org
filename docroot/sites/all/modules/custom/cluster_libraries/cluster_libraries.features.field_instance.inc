@@ -73,7 +73,7 @@ function cluster_libraries_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 2,
+        'weight' => 3,
       ),
       'ical' => array(
         'label' => 'above',
@@ -119,13 +119,9 @@ The structure is only one level deep - it is not possible to choose for parent a
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'entityreference',
-        'settings' => array(
-          'bypass_access' => FALSE,
-          'link' => FALSE,
-        ),
-        'type' => 'entityreference_label',
-        'weight' => 5,
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 1,
       ),
       'ical' => array(
         'label' => 'above',
@@ -174,7 +170,7 @@ The structure is only one level deep - it is not possible to choose for parent a
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 4,
+        'weight' => 5,
       ),
       'ical' => array(
         'label' => 'above',
@@ -221,7 +217,7 @@ The structure is only one level deep - it is not possible to choose for parent a
         'label' => 'hidden',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 1,
+        'weight' => 2,
       ),
       'ical' => array(
         'label' => 'above',
@@ -286,7 +282,7 @@ The structure is only one level deep - it is not possible to choose for parent a
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 3,
+        'weight' => 4,
       ),
       'ical' => array(
         'label' => 'above',
@@ -384,7 +380,7 @@ The structure is only one level deep - it is not possible to choose for parent a
         'label' => 'hidden',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 9,
+        'weight' => 10,
       ),
       'ical' => array(
         'label' => 'above',
@@ -429,7 +425,7 @@ The structure is only one level deep - it is not possible to choose for parent a
         'label' => 'hidden',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 16,
+        'weight' => 17,
       ),
       'ical' => array(
         'label' => 'above',
@@ -474,7 +470,7 @@ The structure is only one level deep - it is not possible to choose for parent a
         'label' => 'hidden',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 11,
+        'weight' => 12,
       ),
       'ical' => array(
         'label' => 'above',
@@ -519,7 +515,7 @@ The structure is only one level deep - it is not possible to choose for parent a
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 18,
+        'weight' => 19,
       ),
       'ical' => array(
         'label' => 'above',
@@ -562,7 +558,7 @@ The structure is only one level deep - it is not possible to choose for parent a
         'label' => 'hidden',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 7,
+        'weight' => 8,
       ),
       'ical' => array(
         'label' => 'above',
@@ -607,7 +603,7 @@ The structure is only one level deep - it is not possible to choose for parent a
         'label' => 'hidden',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 6,
+        'weight' => 7,
       ),
       'ical' => array(
         'label' => 'above',
@@ -652,7 +648,7 @@ The structure is only one level deep - it is not possible to choose for parent a
         'label' => 'hidden',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 13,
+        'weight' => 14,
       ),
       'ical' => array(
         'label' => 'above',
@@ -697,7 +693,7 @@ The structure is only one level deep - it is not possible to choose for parent a
         'label' => 'hidden',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 10,
+        'weight' => 11,
       ),
       'ical' => array(
         'label' => 'above',
@@ -746,7 +742,7 @@ The structure is only one level deep - it is not possible to choose for parent a
         'label' => 'hidden',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 2,
+        'weight' => 3,
       ),
       'ical' => array(
         'label' => 'above',
@@ -791,7 +787,7 @@ The structure is only one level deep - it is not possible to choose for parent a
         'label' => 'hidden',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 4,
+        'weight' => 5,
       ),
       'ical' => array(
         'label' => 'above',
@@ -836,7 +832,7 @@ The structure is only one level deep - it is not possible to choose for parent a
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 1,
+        'weight' => 2,
       ),
       'ical' => array(
         'label' => 'above',
@@ -881,7 +877,7 @@ The structure is only one level deep - it is not possible to choose for parent a
         'label' => 'hidden',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 3,
+        'weight' => 4,
       ),
       'ical' => array(
         'label' => 'above',
@@ -924,7 +920,7 @@ The structure is only one level deep - it is not possible to choose for parent a
         'label' => 'hidden',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 15,
+        'weight' => 16,
       ),
       'ical' => array(
         'label' => 'above',
@@ -967,14 +963,10 @@ The structure is only one level deep - it is not possible to choose for parent a
 The structure is only one level deep - it is not possible to choose for parent a content that already has a parent. The parent content must be in the same group.',
     'display' => array(
       'default' => array(
-        'label' => 'above',
-        'module' => 'entityreference',
-        'settings' => array(
-          'bypass_access' => FALSE,
-          'link' => FALSE,
-        ),
-        'type' => 'entityreference_label',
-        'weight' => 21,
+        'label' => 'hidden',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 1,
       ),
       'ical' => array(
         'label' => 'above',
@@ -1019,7 +1011,7 @@ The structure is only one level deep - it is not possible to choose for parent a
         'label' => 'hidden',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 12,
+        'weight' => 13,
       ),
       'ical' => array(
         'label' => 'above',
@@ -1064,7 +1056,7 @@ The structure is only one level deep - it is not possible to choose for parent a
         'label' => 'hidden',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 14,
+        'weight' => 15,
       ),
       'ical' => array(
         'label' => 'above',
@@ -1113,7 +1105,7 @@ The structure is only one level deep - it is not possible to choose for parent a
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 20,
+        'weight' => 21,
       ),
       'ical' => array(
         'label' => 'above',
@@ -1160,7 +1152,7 @@ The structure is only one level deep - it is not possible to choose for parent a
         'label' => 'hidden',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 8,
+        'weight' => 9,
       ),
       'ical' => array(
         'label' => 'above',
@@ -1205,7 +1197,7 @@ The structure is only one level deep - it is not possible to choose for parent a
         'label' => 'hidden',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 17,
+        'weight' => 18,
       ),
       'ical' => array(
         'label' => 'above',
@@ -1250,7 +1242,7 @@ The structure is only one level deep - it is not possible to choose for parent a
         'label' => 'hidden',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 5,
+        'weight' => 6,
       ),
       'ical' => array(
         'label' => 'above',
@@ -1315,7 +1307,7 @@ The structure is only one level deep - it is not possible to choose for parent a
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 19,
+        'weight' => 20,
       ),
       'ical' => array(
         'label' => 'above',
@@ -1361,7 +1353,7 @@ The structure is only one level deep - it is not possible to choose for parent a
   t('Assessment, Monitoring and Evaluation');
   t('Body');
   t('Choosing a parent for this content will make it so that the content will appear in the navigation sidebar only on the parent page.
-The structure is only one level deep - it is not possible to choose for parent a content that already has a parent. ');
+The structure is only one level deep - it is not possible to choose for parent a content that already has a parent. The parent content must be in the same group.');
   t('Coordination Management');
   t('Cross-Cutting Issues');
   t('Description');

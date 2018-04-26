@@ -159,6 +159,9 @@ function cluster_libraries_strongarm() {
       'token' => array(
         'custom_settings' => FALSE,
       ),
+      'ical' => array(
+        'custom_settings' => TRUE,
+      ),
     ),
     'extra_fields' => array(
       'form' => array(
@@ -209,6 +212,9 @@ function cluster_libraries_strongarm() {
       ),
       'diff_standard' => array(
         'custom_settings' => FALSE,
+      ),
+      'ical' => array(
+        'custom_settings' => TRUE,
       ),
     ),
     'extra_fields' => array(

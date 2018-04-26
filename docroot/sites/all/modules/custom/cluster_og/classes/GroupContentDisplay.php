@@ -259,6 +259,17 @@ class GroupDisplayProvider {
       ));
     }
 
+    $parent_page = $this->manager->getParentPage($currently_visible_node_id);
+    dpm($parent_page);
+    if ($parent_page) {
+      $secondary['parent_page'] = partial('navigation_options', array(
+        'navigation_type_id' => 'parent_page',
+        'title' => t('Parent Page'),
+        'collapsed' => $force_collapse,
+        'nodes' => [node_load($parent_page)],
+      ));
+    }
+
     $communities_of_practice = $this->manager->getCommunitiesOfPractice();
     if ($communities_of_practice) {
       $secondary['communities_of_practice'] = partial('navigation_options',
