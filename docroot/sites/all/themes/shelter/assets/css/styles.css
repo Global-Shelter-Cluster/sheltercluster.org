@@ -3939,8 +3939,8 @@ body.document-upload-ondrag {
   background-color: #7f1416;
   border: none;
   color: white;
-  margin: -10px -10px 16px;
-  margin: -0.625rem -0.625rem 1rem;
+  margin: -11px -10px 16px;
+  margin: -0.6875rem -0.625rem 1rem;
   padding: 8px 10px;
 }
 .factsheet-full > .highlights h3 path {
