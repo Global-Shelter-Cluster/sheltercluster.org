@@ -42,16 +42,24 @@ ul.addtocal_menu {
 }
 
 .ical {
-  border: 1px solid #575757;
-  color: #575757;
-  padding: 3px;
-  float: right;
-  margin: 0 5px 0 0;
+  color: $shelter-grey;
   font-size: 11px;
   display: inline-block;
-    a {
-      color: #575757;
-    }
+  border-radius: 3px;
+  padding: 1px 3px;
+  margin-left: 5px;
+  line-height: 1;
+  border: 2px solid $shelter-grey;
+
+  opacity: .8;
+  &:hover {
+    opacity: 1;
+  }
+
+  a {
+    color: $shelter-grey;
+    text-decoration: none;
+  }
 }
 
 .event-card .event-description img {

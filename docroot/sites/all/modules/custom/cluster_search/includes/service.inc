@@ -43,6 +43,10 @@ class SearchApiClusterAlgoliaService extends SearchApiAlgoliaService {
       $item_to_index = array();
       // And then iterate over all the properties of these items.
       foreach ($item as $key => $property) {
+
+        if ($key === 'field_postal_address:country')
+          cluster_events_add_algolia_fields($item, $item_to_index);
+
         // Do not index the property if its value is not set.
         if (isset($property['value'])) {
           // Do not process the entity id at that stage. Its value is indexed
@@ -175,6 +179,12 @@ class SearchApiClusterAlgoliaService extends SearchApiAlgoliaService {
                   $a=$file->uri;
                   $item_to_index['field_preview:file:url'] = image_style_url('document_preview', $file->uri);
                 }
+                $processed = TRUE;
+              }
+
+              if ($key === 'field_recurring_event_date2:value') {
+                if (is_array($property_value))
+                  $item_to_index['event_date'] = intval($property_value[0]);
                 $processed = TRUE;
               }
 

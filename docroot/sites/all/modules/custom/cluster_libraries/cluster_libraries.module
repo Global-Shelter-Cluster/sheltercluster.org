@@ -27,9 +27,13 @@ function cluster_libraries_node_view_alter(&$build) {
   // Keyed by field name, value is an array of term names (string keys) and TRUE (values)
   $filters = [];
   $nid_filter = NULL;
+  $skip_group_filters = FALSE;
 
   switch ($node->type) {
-    case 'library' :
+    case 'library':
+      if ($wrapper->field_is_global_library->value())
+        $skip_group_filters = TRUE;
+
       $fields = cluster_docs_taxonomies();
       foreach ($fields as $field) {
         if (!isset($node->$field))
@@ -58,8 +62,9 @@ function cluster_libraries_node_view_alter(&$build) {
       break;
     case 'arbitrary_library':
       $nid_filter = $wrapper->field_arbitrary_document_ref->raw();
+      $skip_group_filters = TRUE;
       break;
   }
 
-  $build[] = cluster_search_docs_page($filters, $nid_filter);
+  $build[] = cluster_search_docs_page($filters, $nid_filter, TRUE, $skip_group_filters);
 }

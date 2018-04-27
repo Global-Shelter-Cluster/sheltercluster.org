@@ -43,6 +43,8 @@ function cluster_docs_menu_alter(&$items) {
  */
 function cluster_docs_form_document_node_form_alter(&$form, &$form_state, $form_id) {
   $form['#validate'][] = 'cluster_docs_validate';
+  $form['#attached']['js'][] = drupal_get_path('module', 'cluster_docs') . '/js/populate_title.js';
+  $form['#attached']['js'][] = drupal_get_path('module', 'cluster_docs') . '/js/add_required_field_marker.js';
 }
 
 /**
@@ -89,7 +91,7 @@ function cluster_docs_form_views_form_documents_page_alter(&$form, &$form_state)
   if (!isset($form['bundle_document'])) {
     return;
   }
-  
+
   foreach ($form['bundle_document'] as $key => &$field) {
     if (substr($key, 0, 9) == '_append::' && $field['#type'] == 'checkbox') {
       $field['#default_value'] = TRUE;

@@ -1,4 +1,4 @@
-<div class="search-summary" v-if="results && hits >= 1" v-cloak>
+<div class="cluster-search-docs-list search-summary" v-if="results && hits >= 1" v-cloak>
   <span v-if="hits > 1" class="summary">Showing {{ resultsFrom }}&ndash;{{ resultsTo }} of {{ hits }} documents.</span>
   <ul class="pagination" v-if="pages > 1">
     <li>Pages:</li>
@@ -10,14 +10,14 @@
   </ul>
   <span v-if="hits <= 1"></span>
   <ul class="search-display">
-    <li>
+    <li v-if="display != 'preview'" key="preview">
       <a :href="display == 'preview' ? null : '#'" @click.prevent="display = 'preview'" title="Document previews">
-        <i class="fas fa-th-large"></i>
+        <i class="fas fa-image"></i> high bandwidth
       </a>
     </li>
-    <li>
+    <li v-if="display != 'list'" key="list">
       <a :href="display == 'list' ? null : '#'" @click.prevent="display = 'list'" title="Table view">
-        <i class="fas fa-th-list"></i>
+        <i class="fas fa-list"></i> low bandwidth
       </a>
     </li>
   </ul>
@@ -41,7 +41,7 @@
         <i class="fas fa-trash-alt"></i>
       </a>
       <a :href="document.url" v-html="document.title"></a>
-      <a v-if="showGroup && groupNid != document.group_nids[0]" :href="'/node/' + document.group_nids[0]" class="group" v-html="document.group"></a>
+      <a v-if="groupNid != document.group_nids[0]" :href="'/node/' + document.group_nids[0]" class="group" v-html="document.group"></a>
       <div v-if="document.tags && document.tags.length" class="tags">
         <div class="item-list">
           <h3>Tags</h3>
@@ -68,7 +68,7 @@
 </table>
 
 <section v-if="display == 'preview' && results" class="document-preview-list" v-cloak>
-  <article class="document-preview" v-for="document in results">
+  <article :class="['document-preview', document.class]" v-for="document in results">
     <a class="thumbnail" :href="document.direct_url" target="_blank">
       <div class="file-info">
         <div v-if="document['field_file:file:size']">[ {{ document['field_file:file:size']|file_size }} ]</div>
@@ -83,6 +83,9 @@
     <a v-if="document.can_delete" class="operation-icon" :href="'/node/' + document.nid + '/delete'" title="Delete this document">
       <i class="fas fa-trash-alt"></i>
     </a>
+    <div v-if="document.field_document_status" class="document-status">
+      {{ document.field_document_status }}
+    </div>
     <a :href="document.url">
       <h4 :title="document.title|strip_tags" v-html="
       (
@@ -101,7 +104,7 @@
       </h4>
     </a>
     <a :href="'/node/' + document.group_nids[0]" class="group"
-       v-if="showGroup && groupNid != document.group_nids[0]" v-html="document.group">
+       v-if="groupNid != document.group_nids[0]" v-html="document.group">
     </a>
 
     <div v-if="document.date || document.field_language || document.field_document_source" class="document-date">

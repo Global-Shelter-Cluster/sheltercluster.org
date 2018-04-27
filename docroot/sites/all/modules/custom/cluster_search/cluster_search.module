@@ -115,34 +115,86 @@ function cluster_search_cluster_mega_menu_alter(&$menu_output) {
   $menu_output['cluster_search'] = [
     '#theme' => 'cluster_search_mega_menu',
   ];
-  _cluster_search_common_attach($menu_output['cluster_search']);
+  cluster_search_common_attach($menu_output['cluster_search']);
 }
 
-function _cluster_search_common_attach(&$render_array) {
-  if (!array_key_exists('#attached', $render_array))
-    $render_array['#attached'] = [];
+function cluster_search_common_attach_documents() {
+  cluster_search_common_attach();
 
-  $render_array['#attached']['js'][] = drupal_get_path('module', 'cluster_search') . '/js/algolia.js';
-  $render_array['#attached']['js'][] = drupal_get_path('module', 'cluster_search') . '/js/lib/vue.min.js';
-  $render_array['#attached']['js'][] = drupal_get_path('module', 'cluster_search') . '/js/lib/algoliasearchLite.js';
-//  $render_array['#attached']['js'][] = [
-//    'type' => 'external',
-//    'data' => 'https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.3/vue.min.js'
-//  ];
-//  $render_array['#attached']['js'][] = [
-//    'type' => 'external',
-//    'data' => 'https://cdnjs.cloudflare.com/ajax/libs/algoliasearch/3.24.5/algoliasearchLite.js'
-//  ];
-  $render_array['#attached']['js'][] = [
-    'type' => 'setting',
-    'data' => [
-      'cluster_search' => [
-        'algolia_app_id' => variable_get('cluster_search_algolia_app_id'),
-        'algolia_search_key' => variable_get('cluster_search_algolia_search_key'),
-        'algolia_prefix' => variable_get('cluster_search_algolia_prefix'),
-      ]
+  drupal_add_js(drupal_get_path('module', 'cluster_search') . '/js/documents.js');
+
+  drupal_add_js([
+    'cluster_search' => [
+      'taxonomies' => cluster_docs_taxonomies(TRUE),
+      'taxonomy_groups' => cluster_docs_taxonomy_groups(),
     ]
-  ];
+  ], 'setting');
+
+  $display_provider = cluster_nav_get_display_provider();
+  if ($display_provider) {
+    // Tell the frontend whether the current user has edit/delete permissions for
+    // docs, for the relevant groups.
+    $doc_permissions_by_group = [];
+    if ($display_provider) {
+      foreach ($display_provider->getSearchGroupNids() as $groupNid) {
+        $doc_permissions_by_group[$groupNid] = [
+          'edit' => og_user_access('node', $groupNid, 'edit document content'),
+          'delete' => og_user_access('node', $groupNid, 'delete document content'),
+        ];
+      }
+    }
+
+    drupal_add_js([
+      'cluster_search' => [
+        'doc_permissions_by_group' => $doc_permissions_by_group,
+      ]
+    ], 'setting');
+  }
+}
+
+function cluster_search_common_attach_events() {
+  cluster_search_common_attach();
+
+  drupal_add_js(drupal_get_path('module', 'cluster_search') . '/js/events.js');
+  drupal_add_css(drupal_get_path('module', 'addressfield') . '/addressfield.css');
+
+  $display_provider = cluster_nav_get_display_provider();
+  if ($display_provider) {
+    // Tell the frontend whether the current user has edit/delete permissions for
+    // events, for the relevant groups.
+    $event_permissions_by_group = [];
+    if ($display_provider) {
+      foreach ($display_provider->getSearchGroupNids() as $groupNid) {
+        $event_permissions_by_group[$groupNid] = [
+          'edit' => og_user_access('node', $groupNid, 'edit event content'),
+          'delete' => og_user_access('node', $groupNid, 'delete event content'),
+        ];
+      }
+    }
+
+    drupal_add_js([
+      'cluster_search' => [
+        'event_permissions_by_group' => $event_permissions_by_group,
+      ]
+    ], 'setting');
+  }
+}
+
+function cluster_search_common_attach() {
+  drupal_add_js(drupal_get_path('module', 'cluster_search') . '/js/algolia.js');
+// https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.3/vue.min.js
+  drupal_add_js(drupal_get_path('module', 'cluster_search') . '/js/lib/vue.min.js');
+// https://cdnjs.cloudflare.com/ajax/libs/algoliasearch/3.24.5/algoliasearchLite.js
+  drupal_add_js(drupal_get_path('module', 'cluster_search') . '/js/lib/algoliasearchLite.js');
+  drupal_add_js(drupal_get_path('module', 'cluster_search') . '/js/algolia.js');
+
+  drupal_add_js([
+    'cluster_search' => [
+      'algolia_app_id' => variable_get('cluster_search_algolia_app_id'),
+      'algolia_search_key' => variable_get('cluster_search_algolia_search_key'),
+      'algolia_prefix' => variable_get('cluster_search_algolia_prefix'),
+    ]
+  ], 'setting');
 }
 
 /**
@@ -162,6 +214,15 @@ function cluster_search_theme($existing, $type, $theme, $path) {
       'template' => 'cluster_search_docs_facets',
       'path' => drupal_get_path('module', 'cluster_search').'/templates',
     ],
+    'cluster_search_events_list' => [
+      'template' => 'cluster_search_events_list',
+      'path' => drupal_get_path('module', 'cluster_search').'/templates',
+    ],
+    'cluster_search_events_facets' => [
+      'template' => 'cluster_search_events_facets',
+      'path' => drupal_get_path('module', 'cluster_search').'/templates',
+      'variables' => ['include_mode' => FALSE],
+    ],
   ];
 }
 
@@ -172,10 +233,13 @@ function cluster_search_theme($existing, $type, $theme, $path) {
  * @param array|NULL $nid_filter
  *   If specified, restricts to only show the given document nids (used for arbitrary libraries).
  * @param bool $show_facets
+ * @param bool $skip_group_filters If TRUE, doesn't filter results when in a group context.
  *
  * @return array
  */
-function cluster_search_docs_page($facet_filters = [], $nid_filter = NULL, $show_facets = TRUE) {
+function cluster_search_docs_page($facet_filters = [], $nid_filter = NULL, $show_facets = TRUE, $skip_group_filters = FALSE) {
+  cluster_search_common_attach_documents();
+
   $ret = [
     ['#theme' => 'cluster_search_docs_list'],
   ];
@@ -183,27 +247,13 @@ function cluster_search_docs_page($facet_filters = [], $nid_filter = NULL, $show
   if ($show_facets)
     $ret['side-column'] = ['#theme' => 'cluster_search_docs_facets'];
 
-  _cluster_search_common_attach($ret);
-  // Tell the frontend whether the current user has edit/delete permissions for
-  // docs, for the relevant groups.
-  $display_provider = cluster_nav_get_display_provider();
-  $doc_permissions_by_group = [];
-  foreach ($display_provider->getSearchGroupNids() as $groupNid) {
-    $doc_permissions_by_group[$groupNid] = [
-      'edit' => og_user_access('node', $groupNid, 'edit document content'),
-      'delete' => og_user_access('node', $groupNid, 'delete document content'),
-    ];
-  }
-  $ret['#attached']['js'][] = drupal_get_path('module', 'cluster_search') . '/js/documents.js';
   $ret['#attached']['js'][] = [
     'type' => 'setting',
     'data' => [
       'cluster_search' => [
-        'taxonomies' => cluster_docs_taxonomies(TRUE),
-        'taxonomy_groups' => cluster_docs_taxonomy_groups(),
-        'doc_permissions_by_group' => $doc_permissions_by_group,
         'initial_filters' => $facet_filters,
         'nid_filter' => $nid_filter,
+        'skip_group_filters' => $skip_group_filters,
       ]
     ]
   ];
@@ -211,26 +261,51 @@ function cluster_search_docs_page($facet_filters = [], $nid_filter = NULL, $show
 }
 
 /**
+ * @return array
+ */
+function cluster_search_events_page($nid) {
+  cluster_search_common_attach_events();
+  return [
+    ['#theme' => 'cluster_search_events_list'],
+    'side-column' => ['#theme' => 'cluster_search_events_facets', '#include_mode' => !$nid],
+  ];
+}
+
+/**
  * Implements hook_cluster_og_dashboard_menu_alter().
  */
 function cluster_search_cluster_og_dashboard_menu_alter(&$items) {
-  if (!cluster_docs_is_group_documents_page() || !isset($items['documents']))
-    return;
-
-  $normal_label = t('All documents');
-  $key_label = t('Key documents');
-
   $display_provider = cluster_nav_get_display_provider();
-  $subgroup_types = $display_provider->getSubgroupTypes();
-  $subgroups_label = t('Include ' . _cluster_search_list_and($subgroup_types));
 
-  $items['documents']['#suffix'] = <<<EOS
+  if (cluster_docs_is_group_documents_page() && isset($items['documents'])) {
+    $normal_label = t('Documents from this @type', ['@type' => $display_provider->getGroupTypeLabel()]);
+    $key_label = t('Key documents');
+
+    $subgroups_label = t('Include ' . _cluster_search_list_and($display_provider->getSubgroupTypes()));
+
+    $items['documents']['#suffix'] = <<<EOS
     <ul class="optgroup" v-cloak v-if="showModes">
       <li><label><input type="radio" value="normal" v-model="mode"> $normal_label</label></li>
       <li><label><input type="radio" value="key" v-model="mode"> $key_label</label></li>
       <li v-if="hasSubgroups"><label><input type="radio" value="descendants" v-model="mode"> $subgroups_label</label></li>
     </ul>
 EOS;
+  }
+
+  if (cluster_events_is_group_events_page() && isset($items['events'])) {
+    $upcoming_label = t('Upcoming');
+    $all_label = t('All events');
+
+    $subgroups_label = t('Include ' . _cluster_search_list_and($display_provider->getSubgroupTypes()));
+
+    $items['events']['#suffix'] = <<<EOS
+    <ul class="optgroup" v-cloak v-if="showModes">
+      <li><label><input type="radio" value="upcoming" v-model="mode"> $upcoming_label</label></li>
+      <li><label><input type="radio" value="all" v-model="mode"> $all_label</label></li>
+      <li v-if="hasSubgroups"><label><input type="radio" value="descendants" v-model="mode"> $subgroups_label</label></li>
+    </ul>
+EOS;
+  }
 }
 
 function _cluster_search_list_and($items) {

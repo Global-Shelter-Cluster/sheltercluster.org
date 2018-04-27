@@ -1,7 +1,78 @@
 (function ($) {
   Drupal.behaviors.clusterSearchDocuments = {
+    processDocument: function(result) {
+      var group = typeof result._highlightResult.og_group_ref !== 'undefined' && result._highlightResult.og_group_ref.length > 0
+        ? result._highlightResult.og_group_ref[0].value
+        : null;
+
+      var canEdit = false, canDelete = false;
+      if (typeof Drupal.settings.cluster_search.doc_permissions_by_group !== 'undefined') {
+        for (var i in result.group_nids) {
+          if (typeof Drupal.settings.cluster_search.doc_permissions_by_group[result.group_nids[i]] !== 'undefined') {
+            if (Drupal.settings.cluster_search.doc_permissions_by_group[result.group_nids[i]].edit)
+              canEdit = true;
+            if (Drupal.settings.cluster_search.doc_permissions_by_group[result.group_nids[i]].delete)
+              canDelete = true;
+            if (canEdit && canDelete)
+              break;
+          }
+        }
+      }
+      result.can_edit = canEdit;
+      result.can_delete = canDelete;
+
+      result.thumb = result['field_preview:file:url'];
+      if (result.thumb && Drupal.settings.cluster_search.algolia_prefix === 'local')
+        result.thumb = result.thumb.replace('local.sheltercluster.org', 'dev.sheltercluster.org').replace('/styles/document_preview/public', '');
+
+      result.nid = result.objectID;
+      result.title = result._highlightResult.title.value;
+      result.group = group;
+      result.date = typeof result['document_date'] !== 'undefined'
+        ? Drupal.behaviors.clusterSearchAlgolia.dateHelper(result['document_date'])
+        : null;
+      result.featured = result['field_featured'];
+      result.key = result['field_key_document'];
+
+      result.tags = [];
+      for (var facet in Drupal.settings.cluster_search.taxonomies) {
+        if (facet === 'field_language')
+          continue;
+        if (typeof result[facet] === 'undefined' || !result[facet].length)
+          continue;
+        for (var tagIndex in result[facet])
+          result.tags[result.tags.length] = {
+            field_key: facet,
+            field: Drupal.settings.cluster_search.taxonomies[facet],
+            value: result[facet][tagIndex]
+          };
+      }
+
+      if (typeof result['field_file:file:url'] !== 'undefined')
+        result.direct_url = result['field_file:file:url'];
+      else if (typeof result['field_link:url'] !== 'undefined')
+        result.direct_url = result['field_link:url'];
+
+      if (typeof result.direct_url !== 'undefined') {
+        var file_extension = result.direct_url.substr(result.direct_url.lastIndexOf('.') + 1);
+        if (file_extension.length <= 6)
+          result.file_extension = file_extension.toUpperCase();
+      }
+
+      if (typeof result.field_document_status !== 'undefined' && result.field_document_status)
+        result.class = 'document-preview--' + result.field_document_status.toLowerCase().replace(/[^a-z]+/g, '-');
+
+      return result;
+    },
     attach: function (context, settings) {
-      $('#content').once('clusterSearchDocuments', function() {
+      Vue.filter('strip_tags', function (html) {
+        return $('<div />').html(html).text();
+      });
+      Vue.filter('file_size', function (bytes) {
+        return (parseInt(bytes)/1024/1024).toFixed(2) + 'M';
+      });
+
+      $('.cluster-search-docs-list').closest('#content').once('clusterSearchDocuments', function() {
         if (!settings.cluster_search.algolia_app_id || !settings.cluster_search.algolia_search_key || !settings.cluster_search.algolia_prefix) {
           $(this).remove();
           return;
@@ -9,73 +80,6 @@
 
         var algolia_client = algoliasearch(settings.cluster_search.algolia_app_id, settings.cluster_search.algolia_search_key);
         var facets = settings.cluster_search.taxonomies;
-
-        Vue.filter('strip_tags', function (html) {
-          return $('<div />').html(html).text();
-        });
-        Vue.filter('file_size', function (bytes) {
-          return (parseInt(bytes)/1024/1024).toFixed(2) + 'M';
-        });
-
-        var processDocument = function(result) {
-          var group = typeof result._highlightResult.og_group_ref !== 'undefined' && result._highlightResult.og_group_ref.length > 0
-            ? result._highlightResult.og_group_ref[0].value
-            : null;
-
-          var canEdit = false, canDelete = false;
-          for (var i in result.group_nids) {
-            if (typeof settings.cluster_search.doc_permissions_by_group[result.group_nids[i]] !== 'undefined') {
-              if (settings.cluster_search.doc_permissions_by_group[result.group_nids[i]].edit)
-                canEdit = true;
-              if (settings.cluster_search.doc_permissions_by_group[result.group_nids[i]].delete)
-                canDelete = true;
-              if (canEdit && canDelete)
-                break;
-            }
-          }
-          result.can_edit = canEdit;
-          result.can_delete = canDelete;
-
-          result.thumb = result['field_preview:file:url'];
-          if (result.thumb && settings.cluster_search.algolia_prefix === 'local')
-            result.thumb = result.thumb.replace('local.sheltercluster.org', 'dev.sheltercluster.org').replace('/styles/document_preview/public', '');
-
-          result.nid = result.objectID;
-          result.title = result._highlightResult.title.value;
-          result.group = group;
-          result.date = typeof result['document_date'] !== 'undefined'
-            ? Drupal.behaviors.clusterSearchAlgolia.dateHelper(result['document_date'])
-            : null;
-          result.featured = result['field_featured'];
-          result.key = result['field_key_document'];
-
-          result.tags = [];
-          for (var facet in facets) {
-            if (facet === 'field_language')
-              continue;
-            if (typeof result[facet] === 'undefined' || !result[facet].length)
-              continue;
-            for (var tagIndex in result[facet])
-              result.tags[result.tags.length] = {
-                field_key: facet,
-                field: facets[facet],
-                value: result[facet][tagIndex]
-              };
-          }
-
-          if (typeof result['field_file:file:url'] !== 'undefined')
-            result.direct_url = result['field_file:file:url'];
-          else if (typeof result['field_link:url'] !== 'undefined')
-            result.direct_url = result['field_link:url'];
-
-          if (typeof result.direct_url !== 'undefined') {
-            var file_extension = result.direct_url.substr(result.direct_url.lastIndexOf('.') + 1);
-            if (file_extension.length <= 6)
-              result.file_extension = file_extension.toUpperCase();
-          }
-
-          return result;
-        };
 
         var hitsPerPage = 30;
 
@@ -88,6 +92,7 @@
           facetFilters: {},
           initialFilters: typeof settings.cluster_search !== 'undefined' ? settings.cluster_search.initial_filters : null,
           nidFilter: typeof settings.cluster_search !== 'undefined' ? settings.cluster_search.nid_filter : null,
+          skipGroupFilters: typeof settings.cluster_search !== 'undefined' ? settings.cluster_search.skip_group_filters : false,
           search: '',
           page: 0,
           pages: 0,
@@ -97,8 +102,7 @@
           searching: false,
           initializing: true,
           groupNid: typeof settings.cluster_nav !== 'undefined' ? settings.cluster_nav.group_nid : null,
-          descendantNids: typeof settings.cluster_nav !== 'undefined' ? settings.cluster_nav.search_group_nids : null,
-          showGroup: false
+          descendantNids: typeof settings.cluster_nav !== 'undefined' ? settings.cluster_nav.search_group_nids : null
         };
 
         function processQuery(data, query, key, validOptions) {
@@ -365,6 +369,7 @@
                 'document_date',
                 'group_nids',
                 'field_document_source',
+                'field_document_status',
 
                 'field_featured',
                 'field_key_document',
@@ -396,12 +401,16 @@
                 }
               }];
 
-              if (vue.mode === 'descendants')
-                query[0].params.filters = vue.descendantNids
-                  .map(function(i) {return 'group_nids:' + i})
-                  .join(' OR ');
-              else
-                query[0].params.filters = 'group_nids:' + vue.groupNid;
+              query[0].params.filters = '';
+
+              if (!vue.skipGroupFilters) {
+                if (vue.mode === 'descendants')
+                  query[0].params.filters = vue.descendantNids
+                    .map(function (i) {return 'group_nids:' + i})
+                    .join(' OR ');
+                else if (vue.groupNid)
+                  query[0].params.filters = 'group_nids:' + vue.groupNid;
+              }
 
               if (vue.nidFilter) { // E.g. arbitrary libraries
                 if (query[0].params.filters !== '')
@@ -426,7 +435,7 @@
                 }
 
                 if (content.results[0].hits.length > 0)
-                  vue.results = content.results[0].hits.map(processDocument);
+                  vue.results = content.results[0].hits.map(Drupal.behaviors.clusterSearchDocuments.processDocument);
                 else
                   vue.results = null;
 
@@ -446,15 +455,16 @@
                 vue.pages = content.results[0].nbPages;
                 vue.hits = content.results[0].nbHits;
                 vue.page = content.results[0].page;
-                vue.showGroup = vue.mode === 'descendants';
 
                 if (!skipClearFacets)
                   vue.clearSelectedFacets();
                 vue.searching = false;
 
-                if (vue.initializing)
+                if (vue.initializing) {
                   vue.initializing = false;
-                else
+                  if (!vue.hasResults && vue.mode === 'normal' && vue.hasSubgroups)
+                    vue.mode = 'descendants';
+                } else
                   vue.pushHistory();
               });
             },
@@ -527,6 +537,117 @@
         });
 
         vue.doSearch(false, page);
+      });
+
+      $('#shelter-documents').once('clusterSearchDocuments', function() {
+        if (!settings.cluster_search.algolia_app_id || !settings.cluster_search.algolia_search_key || !settings.cluster_search.algolia_prefix) {
+          $(this).remove();
+          return;
+        }
+
+        var algolia_client = algoliasearch(settings.cluster_search.algolia_app_id, settings.cluster_search.algolia_search_key);
+        var facets = settings.cluster_search.taxonomies;
+
+        var data = {
+          results: null,
+          groupNid: typeof settings.cluster_nav !== 'undefined' ? settings.cluster_nav.group_nid : null,
+          descendantNids: typeof settings.cluster_nav !== 'undefined' ? settings.cluster_nav.search_group_nids : null
+        };
+
+        var vue = new Vue({
+          el: '#shelter-documents',
+          data: data,
+          computed: {
+            title: function() {
+              return this.keyDocs ? 'Recent Key Documents' : 'Recent Documents';
+            },
+            keyDocs: function() {
+              return this.groupNid ? false : true;
+            },
+            hasSubgroups: function() {
+              return this.descendantNids.length > 1;
+            }
+          },
+          methods: {
+            prepareFacetFilters: function() {
+              var ret = [];
+
+              if (this.keyDocs) {
+                ret[ret.length] = 'field_key_document:true';
+              }
+
+              return ret.length > 0 ? ret : null;
+            },
+            doSearch: function() {
+              var vue = this;
+
+              var attributesToRetrieve = [
+                'url',
+                'document_date',
+                'group_nids',
+                'field_document_source',
+                'field_document_status',
+
+                'field_featured',
+                'field_key_document',
+
+                'field_preview:file:url',
+
+                'field_file:file:url',
+                'field_file:file:size',
+                'field_link:url'
+              ];
+              for (var facet in facets) {
+                attributesToRetrieve[attributesToRetrieve.length] = facet;
+              }
+
+              var indexName = settings.cluster_search.algolia_prefix + 'Documents_sortByDate';
+
+              var query = [{
+                indexName: indexName,
+                query: '',
+                params: {
+                  attributesToRetrieve: attributesToRetrieve,
+                  hitsPerPage: 3
+                }
+              }, {
+                indexName: indexName,
+                query: '',
+                params: {
+                  attributesToRetrieve: attributesToRetrieve,
+                  hitsPerPage: 3
+                }
+              }];
+
+              // First query is "this group only"
+              if (vue.groupNid) {
+                query[0].params.filters = 'group_nids:' + vue.groupNid;
+
+                // Second query is "including descendants"
+                query[1].params.filters = vue.descendantNids
+                  .map(function (i) {
+                    return 'group_nids:' + i
+                  })
+                  .join(' OR ');
+              }
+
+              var facetFilters = vue.prepareFacetFilters();
+              if (facetFilters)
+                query[0].params.facetFilters = facetFilters;
+
+              algolia_client.search(query, function searchDone(err, content) {
+                if (err) return;
+
+                if (content.results[0].hits.length > 0)
+                  vue.results = content.results[0].hits.map(Drupal.behaviors.clusterSearchDocuments.processDocument);
+                else if (content.results[1].hits.length > 0)
+                  vue.results = content.results[1].hits.map(Drupal.behaviors.clusterSearchDocuments.processDocument);
+              });
+            }
+          }
+        });
+
+        vue.doSearch();
       });
     }
   }

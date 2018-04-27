@@ -375,7 +375,7 @@ class GroupContentManager {
 
   public function getDescendantIds($include_self = FALSE, &$collected_nids = array()) {
     if (!$this->parent_field) {
-      return NULL;
+      return $include_self ? [$this->node->nid] : NULL;
     }
 
     if (is_null($this->descendant_ids)) {

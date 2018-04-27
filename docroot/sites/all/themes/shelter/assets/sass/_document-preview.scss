@@ -2,6 +2,26 @@
   display: flex;
   flex-wrap: wrap;
 
+  .recent-documents & {
+    display: block;
+    .document-preview {
+      width: 100%;
+
+      margin: 0 auto 10px;
+      &:last-child {
+        margin-bottom:0;
+      }
+
+      &:after { //clearfix
+        content: ".";
+        display: block;
+        height: 0;
+        clear: both;
+        visibility: hidden;
+      }
+    }
+  }
+
   .document-preview {
     position: relative;
     color: $shelter-grey;
@@ -9,13 +29,32 @@
     margin: 0 20px 20px 0;
     padding: 10px;
     border: 1px solid $shelter-light-blue;
-    min-height: 150px;
+    min-height: 170px;
+
+    &.document-preview--draft {
+      color: lighten($shelter-grey, 30%);
+      h4 {color: lighten($shelter-grey, 25%);}
+      .group {color: lighten($shelter-grey, 30%);}
+      .thumbnail {opacity: .7;}
+      .tags li {
+        color: lighten($shelter-grey, 30%);
+        border-color: lighten($shelter-grey, 30%);
+      }
+    }
+
+    .document-status {
+      @include rem(font-size, 0.5rem);
+      line-height: 1;
+      font-weight: bold;
+      text-transform: uppercase;
+    }
 
     a {
       text-decoration: none;
     }
 
     h4 {
+      @include rem(font-size, 1rem);
       color: $shelter-red;
       text-transform: uppercase;
       font-weight: normal;
