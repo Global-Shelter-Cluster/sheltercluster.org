@@ -13,6 +13,13 @@ function cluster_factsheets_strongarm() {
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
+  $strongarm->name = 'clone_use_node_type_name';
+  $strongarm->value = 1;
+  $export['clone_use_node_type_name'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
   $strongarm->name = 'comment_anonymous_factsheet';
   $strongarm->value = 0;
   $export['comment_anonymous_factsheet'] = $strongarm;
@@ -165,6 +172,20 @@ function cluster_factsheets_strongarm() {
   $strongarm->name = 'node_submitted_factsheet';
   $strongarm->value = 1;
   $export['node_submitted_factsheet'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_cluster_factsheets_factsheets_pattern';
+  $strongarm->value = '';
+  $export['pathauto_cluster_factsheets_factsheets_pattern'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_cluster_factsheets_pattern';
+  $strongarm->value = '[node:content-type]/[node:title]/factsheets';
+  $export['pathauto_cluster_factsheets_pattern'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
