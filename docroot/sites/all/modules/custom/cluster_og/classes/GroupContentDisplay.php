@@ -248,18 +248,17 @@ class GroupDisplayProvider {
       ));
     }
 
-    $child_page_ids = $this->manager->getChildrenPages($currently_visible_node_id);
-    $child_pages = shelter_base_sort_nids_by_weight($child_page_ids);
-    if ($child_pages) {
+    $child_page_ids = $this->getChildrenPagesIds($currently_visible_node_id);
+    if ($child_page_ids) {
       $secondary['child_pages'] = partial('navigation_options', array(
         'navigation_type_id' => 'child_pages',
         'title' => t('Child Pages'),
         'collapsed' => $force_collapse,
-        'nodes' => node_load_multiple($child_pages)
+        'nodes' => node_load_multiple($child_page_ids)
       ));
     }
 
-    $parent_page = $this->manager->getParentPage($currently_visible_node_id);
+    $parent_page = $this->getParentPageId($currently_visible_node_id);
     if ($parent_page) {
       $secondary['parent_page'] = partial('navigation_options', array(
         'navigation_type_id' => 'parent_page',
@@ -295,6 +294,46 @@ class GroupDisplayProvider {
       '#items' => $items,
       '#secondary' => $secondary,
     );
+  }
+
+  private function getChildrenPagesIds($currently_visible_node_id) {
+    $child_page_ids = $this->manager->getChildrenPages($currently_visible_node_id);
+    return shelter_base_sort_nids_by_weight($child_page_ids);
+  }
+
+  private function getParentPageId($currently_visible_node_id) {
+    return $this->manager->getParentPage($currently_visible_node_id);
+  }
+
+  /**
+   * Prepare parent or children links.
+   */
+  public function getRelatedPagesLinks($currently_visible_node_id) {
+    $parent_id = $this->getParentPageId($currently_visible_node_id);
+    $links = [];
+    if ($parent_id) {
+      $list_title = t('Parent page');
+      $node = node_load($parent_id);
+      $links[] = l($node->title, 'node/' . $node->nid);
+    }
+
+    $children_ids = $this->getChildrenPagesIds($currently_visible_node_id);
+    if ($children_ids) {
+      $list_title = t('Children pages');
+      $nodes = node_load_multiple($children_ids);
+      foreach ($nodes as $node) {
+        $links[] = l($node->title, 'node/' . $node->nid);
+      }
+    }
+    if (!$links) {
+      return FALSE;
+    }
+
+    return [
+      '#theme' => 'item_list',
+      '#items' => $links,
+      '#title' => $list_title,
+    ];
   }
 
   /**
