@@ -330,9 +330,15 @@ class GroupDisplayProvider {
     }
 
     return [
-      '#theme' => 'item_list',
-      '#items' => $links,
-      '#title' => $list_title,
+      '#type' => 'container',
+      '#attributes' => [
+        'class' => ['related-page-navigation'],
+      ],
+      'list' => [
+        '#theme' => 'item_list',
+        '#items' => $links,
+        '#title' => $list_title,
+      ],
     ];
   }
 
