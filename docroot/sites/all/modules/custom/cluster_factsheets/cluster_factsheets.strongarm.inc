@@ -98,6 +98,12 @@ function cluster_factsheets_strongarm() {
       'preview_block' => array(
         'custom_settings' => TRUE,
       ),
+      'factsheet_homepage_teaser' => array(
+        'custom_settings' => TRUE,
+      ),
+      'factsheet_preview_block' => array(
+        'custom_settings' => TRUE,
+      ),
     ),
     'extra_fields' => array(
       'form' => array(

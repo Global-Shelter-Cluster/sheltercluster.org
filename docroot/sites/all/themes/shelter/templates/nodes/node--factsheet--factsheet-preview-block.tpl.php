@@ -4,12 +4,9 @@
     <?php print render($content['field_map']); ?>
   </a>
   <a href="<?php print url('node/' . $nid); ?>">
-    <h4 title="<?php print t($content['og_group_ref'][0]['#label']); ?>"><?php print render($content['og_group_ref']); ?></h4>
+    <h4><?php print render($content['field_date']); ?></h4>
   </a>
 
-  <div class="subtitle">
-    <?php print render($content['field_date']); ?>
-  </div>
   <div class="summary">
     <?php print render($content['body']); ?>
   </div>

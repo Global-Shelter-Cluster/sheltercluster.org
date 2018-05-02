@@ -50,6 +50,10 @@
       margin: 0;
       line-height: 21px;
       white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+
+      div {display: inline;}
     }
 
     .operation-icon {
@@ -83,6 +87,12 @@
         transform: scale(1.02);
       }
     }
+
+    .subtitle {
+      @include rem(font-size, 0.75rem);
+    }
+
+    .subtitle + .summary {height: 105px;}
 
     .summary {
       @include rem(font-size, 0.75rem);
