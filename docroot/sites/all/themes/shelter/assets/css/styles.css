@@ -1361,6 +1361,10 @@ header a {
   text-decoration: none;
 }
 
+.front header #login-link a {
+  color: #fff;
+}
+
 #button-menu-dropdown {
   display: inline-block;
   background: black;
