@@ -211,12 +211,13 @@ function cluster_factsheets_field_group_info() {
     ),
     'format_type' => 'tab',
     'format_settings' => array(
-      'formatter' => 'closed',
+      'label' => 'Sidebar',
       'instance_settings' => array(
-        'description' => '',
-        'classes' => 'group-sidebar field-group-tab',
         'required_fields' => 1,
+        'classes' => 'group-sidebar field-group-tab',
+        'description' => 'Provide links to key documents and websites as well as key figures on the number of cluster partners (based on cluster 3W) and people in need / targeted (based on cluster strategy).',
       ),
+      'formatter' => 'closed',
     ),
   );
   $field_groups['group_sidebar|node|factsheet|form'] = $field_group;

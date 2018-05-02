@@ -64,7 +64,7 @@ function cluster_factsheets_page() {
 EOS
   )->fetchAllKeyed();
 
-  $ret = [];
+  $factsheet_views = [];
 
   foreach ($group_nids_and_latest_factsheet_date as $gid => $fs_date) {
     $manager = GroupContentManager::getInstance(node_load($gid));
@@ -72,10 +72,14 @@ EOS
     if (!$group_factsheets)
       continue; // Shouldn't happen
 
-    $ret[] = node_view(node_load($group_factsheets[0]), 'preview_block');
+    $factsheet_views[] = node_view(node_load($group_factsheets[0]), 'preview_block');
   }
 
-  return $ret;
+  return [
+    'prefix' => ['#markup' => '<div class="factsheet-preview-list">'],
+    'factsheets' => $factsheet_views,
+    'suffix' => ['#markup' => '</div>'],
+  ];
 }
 
 /**
@@ -147,6 +151,7 @@ function cluster_factsheets_preprocess_node(&$variables) {
   $wrapper = entity_metadata_wrapper('node', $node);
 
   switch ($variables['view_mode']) {
+    case 'factsheet_preview_block':
     case 'preview_block':
       $variables['cluster_factsheets']['indicators'] = cluster_factsheets_main_indicators($node);
       break;

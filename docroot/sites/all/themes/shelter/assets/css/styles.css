@@ -4095,6 +4095,11 @@ body.document-upload-ondrag {
   margin: 0;
   line-height: 21px;
   white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.factsheet-preview-list .factsheet-preview h4 div {
+  display: inline;
 }
 .factsheet-preview-list .factsheet-preview .operation-icon {
   float: right;
@@ -4123,6 +4128,13 @@ body.document-upload-ondrag {
   opacity: 0;
   filter: brightness(2);
   transform: scale(1.02);
+}
+.factsheet-preview-list .factsheet-preview .subtitle {
+  font-size: 12px;
+  font-size: 0.75rem;
+}
+.factsheet-preview-list .factsheet-preview .subtitle + .summary {
+  height: 105px;
 }
 .factsheet-preview-list .factsheet-preview .summary {
   font-size: 12px;
