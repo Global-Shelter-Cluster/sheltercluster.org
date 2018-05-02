@@ -54,9 +54,13 @@ function cluster_rss_pathauto_bulkupdate(&$context) {
     $context['sandbox']['current'] = 0;
   }
 
+  $all_group_bundles = og_get_all_group_bundle();
+  $group_node_types = array_keys($all_group_bundles['node']);
+
   $query = db_select('node', 'n');
   $query->fields('n', array('nid'));
   $query->condition('n.nid', $context['sandbox']['current'], '>');
+  $query->condition('n.type', $group_node_types);
   $query->orderBy('n.nid');
 
   // Get the total amount of items to process.
@@ -75,9 +79,7 @@ function cluster_rss_pathauto_bulkupdate(&$context) {
 
   foreach ($nids as $nid) {
     $node = node_load($nid);
-    if (og_is_group('node', $node)) {
-      cluster_rss_create_alias($node, 'bulkupdate');
-    }
+    cluster_rss_create_alias($node, 'bulkupdate');
   }
 
   $context['sandbox']['count'] += count($nids);

@@ -53,7 +53,7 @@
       </section>
     <?php endif; ?>
 
-    <?php if (!empty($content['body'])): ?>
+    <?php if (!empty($content['body']) || !empty($content['factsheet'])): ?>
       <h3 data-collapsible="operation-overview">
         <?php print _svg('icons/overview', array('id' => 'overview-icon', 'alt' => t('An icon representing'))); ?>
         Overview
@@ -64,6 +64,7 @@
         <?php endif; ?>
         <?php print render($content['body']); ?>
       </section>
+      <?php if ($content['factsheet']) print render($content['factsheet']); ?>
     <?php endif; ?>
 
     <div class="clearfix">

@@ -319,3 +319,13 @@ function _cluster_search_list_and($items) {
         . ' and ' . array_pop($items);
   }
 }
+
+/**
+ *  Implements hook_entity_info_alter().
+ */
+function cluster_search_entity_info_alter(&$entity_info) {
+  $entity_info['node']['view modes']['preview_block'] = array(
+    'label' => t('Preview block'),
+    'custom settings' => FALSE,
+  );
+}
