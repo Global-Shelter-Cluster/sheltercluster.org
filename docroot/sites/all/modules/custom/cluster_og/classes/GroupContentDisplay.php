@@ -203,6 +203,18 @@ class GroupDisplayProvider {
       );
     }
 
+    $factsheets_count = $this->manager->getFactsheetsCount();
+    if (cluster_factsheets_is_group_factsheets_page() || ($this->manager->isEnabled('factsheets') && $factsheets_count > 0)) {
+      $items['factsheets'] = [
+        'label' => t('Factsheets'),
+        'path' => 'node/' . $this->node->nid . '/factsheets',
+        'total' => $factsheets_count,
+        'options' => [
+          'html' => TRUE,
+        ],
+      ];
+    }
+
     drupal_alter('cluster_og_dashboard_menu', $items);
 
     $secondary = array();
@@ -562,6 +574,22 @@ class GroupFullDisplayProvider extends GroupDisplayProvider {
    */
   public function getContextualNavigation() {
     return FALSE;
+  }
+
+  /**
+   * Get the most recent factsheet, displayed in its abbreviated mode, to be
+   * shown below the body field on the dashboard page.
+   */
+  public function getFactsheet() {
+    $nids = $this->manager->getFactsheets(1);
+    if (!count($nids))
+      return NULL;
+
+    $fs = node_load($nids[0]);
+    if (!$fs)
+      return NULL;
+
+    return node_view($fs, 'factsheet_summary');
   }
 
 }
