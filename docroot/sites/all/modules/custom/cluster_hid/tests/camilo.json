@@ -1,57 +1,33 @@
 {
-   "_id":"5a749d5cf94a9509ffc5ebc5",
-   "user_id":"5a749d5cf94a9509ffc5ebc5",
-   "name":"Jean-Michel Lavarenne",
-   "updatedAt":"2018-05-02T16:24:18.117Z",
-   "createdAt":"2018-02-02T17:18:20.494Z",
+   "_id":"58e4abca3f0e0d00aeec8806",
+   "updatedAt":"2018-03-01T10:02:18.156Z",
+   "createdAt":"2016-05-11T19:14:59.570Z",
+   "given_name":"Camilo",
+   "family_name":"Bravo",
+   "email":"hola@cambraca.com",
+   "user_id":"hola@cambraca.com_1462994099570",
+   "__v":6,
    "appMetadata":{
       "hid":{
          "login":true,
-         "viewedTutorial":true,
-         "recentSearches":{
-            "user":[
-               {
-                  "id":"58e4a1e73f0e0d00aeec57ae",
-                  "name":"AL DESTACAMENTO",
-                  "link":"users/58e4a1e73f0e0d00aeec57ae"
-               },
-               {
-                  "id":"58e4abca3f0e0d00aeec8806",
-                  "name":"Camilo Bravo",
-                  "link":"users/58e4abca3f0e0d00aeec8806"
-               }
-            ],
-            "list":[
-
-            ],
-            "operation":[
-
-            ]
-         }
+         "viewedTutorial":true
       }
    },
-   "email":"jmlavarenne@gmail.com",
-   "given_name":"Jean-Michel",
-   "family_name":"Lavarenne",
-   "__v":7,
-   "verified_by":null,
+   "job_title":"Information Manager",
+   "legacyId":"57360738cd5ae66e1101cbe9",
    "location":{
       "country":{
-         "id":"hrinfo_loc_220",
-         "name":"Canada"
-      },
-      "locality":"Montreal",
-      "tempId":"hrinfo_loc_220-0"
+         "name":"Ecuador",
+         "id":"hrinfo_loc_245"
+      }
    },
    "organization":{
       "list":"58e39b16ab77c100ae45ec80",
-      "name":"International Federation of Red Cross and Red Crescent Societies (IFRC)",
       "acronym":"IFRC",
       "visibility":"all",
-      "orgTypeId":445,
-      "orgTypeLabel":"Red Cross / Red Crescent",
-      "_id":"5a749fe2f94a9509ffc5ec8f",
-      "createdAt":"2018-02-02T17:29:06.873Z",
+      "name":"International Federation of Red Cross and Red Crescent Societies (IFRC)",
+      "_id":"58e500023f0e0d00aeee449f",
+      "createdAt":"2017-04-05T14:32:34.611Z",
       "deleted":false,
       "remindedCheckin":false,
       "remindedCheckout":false,
@@ -61,19 +37,19 @@
       ],
       "acronyms":[
          {
-            "_id":"58e39b16ab77c100ae45ec81",
+            "language":"en",
             "text":"IFRC",
-            "language":"en"
+            "_id":"58e39b16ab77c100ae45ec81"
          },
          {
-            "_id":"58e39d2fab77c100ae4628e3",
+            "language":"fr",
             "text":"FICR",
-            "language":"fr"
+            "_id":"58e39d2fab77c100ae4628e3"
          },
          {
-            "_id":"58e39f3dab77c100ae4654d1",
+            "language":"es",
             "text":"IFRC",
-            "language":"es"
+            "_id":"58e39f3dab77c100ae4654d1"
          }
       ],
       "names":[
@@ -94,10 +70,12 @@
          }
       ]
    },
-   "phone_number":"+1 514-726-8376",
+   "phone_number":"+593984733363",
    "phone_number_type":"Mobile",
-   "picture":"https://api.humanitarian.id/assets/pictures/5a749d5cf94a9509ffc5ebc5.jpeg",
-   "job_title":"CEO of Monarq",
+   "status":"",
+   "name":"Camilo Bravo",
+   "remindedUpdate":"2018-01-12T03:05:17.130Z",
+   "verified_by":null,
    "outlookCredentials":false,
    "googleCredentials":false,
    "totpTrusted":[
@@ -113,17 +91,61 @@
 
    ],
    "authorizedClients":[
-      {
-         "_id":"5a686878e3bf83025897b113",
-         "id":"shelter-cluster-stage",
-         "name":"Shelter Cluster Stage"
-      }
+
    ],
    "offices":[
 
    ],
    "disasters":[
+      {
+         "list":"58e39b07ab77c100ae45eb18",
+         "name":"Ecuador: Earthquake - Apr 2016",
+         "acronym":"",
+         "visibility":"all",
+         "_id":"5a747eca5965d80991958a14",
+         "createdAt":"2018-02-02T15:07:54.281Z",
+         "deleted":false,
+         "remindedCheckin":false,
+         "remindedCheckout":false,
+         "pending":false,
+         "managers":[
 
+         ],
+         "acronyms":[
+            {
+               "language":"en",
+               "text":"",
+               "_id":"58e39b07ab77c100ae45eb19"
+            },
+            {
+               "language":"fr",
+               "text":"",
+               "_id":"58e39d19ab77c100ae4627f3"
+            },
+            {
+               "language":"es",
+               "text":"",
+               "_id":"58e39f30ab77c100ae4653e1"
+            }
+         ],
+         "names":[
+            {
+               "language":"en",
+               "text":"Ecuador: Earthquake - Apr 2016",
+               "_id":"58e522ea097b1100aeee9211"
+            },
+            {
+               "language":"fr",
+               "text":"Ecuador: Earthquake - Apr 2016",
+               "_id":"58e522ea097b1100aeee9212"
+            },
+            {
+               "language":"es",
+               "text":"Ecuador: Earthquake - Apr 2016",
+               "_id":"58e522ea097b1100aeee9213"
+            }
+         ]
+      }
    ],
    "bundles":[
 
@@ -146,45 +168,37 @@
    "locations":[
       {
          "country":{
-            "id":"hrinfo_loc_220",
-            "name":"Canada"
-         },
-         "locality":"Montreal",
-         "tempId":"hrinfo_loc_220-0"
+            "id":"hrinfo_loc_245",
+            "name":"Ecuador"
+         }
       }
    ],
    "functional_roles":[
 
    ],
    "job_titles":[
-      "Developer for sheltercluster.org",
-      "CEO of Monarq"
+      "Information Manager"
    ],
    "phonesVisibility":"anyone",
    "phone_numbers":[
       {
-         "_id":"5ac684366fa3e3069ed8645f",
+         "_id":"58e4bee93f0e0d00aeed02ab",
+         "number":"+593984733363",
          "type":"Mobile",
-         "number":"+1 514-726-8376",
-         "validated":false
-      },
-      {
-         "_id":"5ac6842c6fa3e3069ed8645b",
-         "type":"Landline",
-         "number":"+1 234-567-8786",
          "validated":false
       }
    ],
    "organizations":[
       {
-         "list":"58e39b16ab77c100ae45ec80",
          "name":"International Federation of Red Cross and Red Crescent Societies (IFRC)",
+         "list":"58e39b16ab77c100ae45ec80",
          "acronym":"IFRC",
          "visibility":"all",
          "orgTypeId":445,
          "orgTypeLabel":"Red Cross / Red Crescent",
-         "_id":"5a749fe2f94a9509ffc5ec8f",
-         "createdAt":"2018-02-02T17:29:06.873Z",
+         "checkoutDate":null,
+         "_id":"58e4bee93f0e0d00aeed02ad",
+         "createdAt":"2017-04-05T09:54:49.579Z",
          "deleted":false,
          "remindedCheckin":false,
          "remindedCheckout":false,
@@ -194,19 +208,19 @@
          ],
          "acronyms":[
             {
-               "_id":"58e39b16ab77c100ae45ec81",
+               "language":"en",
                "text":"IFRC",
-               "language":"en"
+               "_id":"58e39b16ab77c100ae45ec81"
             },
             {
-               "_id":"58e39d2fab77c100ae4628e3",
+               "language":"fr",
                "text":"FICR",
-               "language":"fr"
+               "_id":"58e39d2fab77c100ae4628e3"
             },
             {
-               "_id":"58e39f3dab77c100ae4654d1",
+               "language":"es",
                "text":"IFRC",
-               "language":"es"
+               "_id":"58e39f3dab77c100ae4654d1"
             }
          ],
          "names":[
@@ -230,30 +244,35 @@
    ],
    "locale":"en",
    "websites":[
-
+      {
+         "url":"http://sheltercluster.org"
+      }
    ],
    "voips":[
-
+      {
+         "username":"cambraca",
+         "type":"Skype"
+      }
    ],
    "verified":false,
-   "lastPasswordReset":"2018-05-02T16:21:05.404Z",
+   "lastPasswordReset":"2018-02-02T14:59:40.772Z",
    "emailsVisibility":"anyone",
    "emails":[
       {
-         "_id":"5a749d5cf94a9509ffc5ebc6",
-         "email":"jmlavarenne@gmail.com",
          "type":"Work",
+         "email":"hola@cambraca.com",
+         "_id":"58e4abca3f0e0d00aeec8807",
          "validated":true
       },
       {
-         "email":"jmlavarenne+23@gmail.com",
+         "_id":"58e4bee93f0e0d00aeed02aa",
+         "email":"im1.ecuador@sheltercluster.org",
          "type":"Work",
-         "_id":"5ae9e5e3ed6bdc03e6708869",
-         "validated":true
+         "validated":false
       }
    ],
    "timesRemindedVerify":0,
    "email_verified":true,
-   "sub":"5a749d5cf94a9509ffc5ebc5",
-   "id":"5a749d5cf94a9509ffc5ebc5"
+   "sub":"58e4abca3f0e0d00aeec8806",
+   "id":"58e4abca3f0e0d00aeec8806"
 }

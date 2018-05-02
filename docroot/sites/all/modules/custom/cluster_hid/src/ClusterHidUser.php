@@ -85,6 +85,35 @@ class ClusterHidUser {
     return FALSE;
   }
 
+  public function getPicture() {
+    if (isset($this->hidUser->picture)) {
+      return $this->hidUser->picture;
+    }
+    return FALSE;
+  }
+
+  public function getPictureTag() {
+    $url = $this->getPicture();
+    if (!$url) {
+      return FALSE;
+    }
+    return [
+      '#theme' => 'image',
+      '#path' => $url,
+    ];
+  }
+
+  public function getDrupalUserPicture() {
+    if (!$this->userHasDrupalAccount()) {
+      return NULL;
+    }
+
+    return [
+      '#theme' => 'user_picture',
+      '#account' => $this->hidUser->drupalUser,
+    ];
+  }
+
   /**
    * @TODO
    */
@@ -230,6 +259,23 @@ class ClusterHidUser {
     if ($role_or_title) {
       $user->field_role_or_title[LANGUAGE_NONE][0]['value'] = $role_or_title;
     }
+
+    $picture_file = $this->savePicture();
+    if ($picture_file) {
+      $user->picture = $picture_file;
+    }
+  }
+
+  /**
+   * Saves the picture from Humanitarian id to Drupal file system and returns file object.
+   */
+  private function savePicture() {
+    $image_path = $this->getPicture();
+    if (!$image_path) {
+      return FALSE;
+    }
+    $file = system_retrieve_file($image_path, 'public://pictures', TRUE, FILE_EXISTS_REPLACE);
+    return $file;
   }
 
   public static function create($hid_user) {
@@ -237,7 +283,7 @@ class ClusterHidUser {
   }
 
   /**
-   * Test if a given user id is matched to a humanitarian id.
+   * Test if a given Drupal user id is matched to a known humanitarian id.
    */
   public static function drupalUserHasHumanitarianId($uid) {
     // Test the cluster_hid database.

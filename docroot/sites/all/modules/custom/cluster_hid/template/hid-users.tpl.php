@@ -40,5 +40,10 @@
       <td><?php print $user->getAddress(); ?></td>
       <td></td>
     </tr>
+    <tr>
+      <td>Picture</td>
+      <td><?php print render($user->getPictureTag()); ?></td>
+      <td><?php print render($user->getDrupalUserPicture()); ?></td>
+    </tr>
   <?php endforeach; ?>
 </table>
