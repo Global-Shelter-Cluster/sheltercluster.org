@@ -21,7 +21,7 @@ function cluster_events_field_group_info() {
   $field_group->parent_name = 'group_event_field_group';
   $field_group->data = array(
     'label' => 'Contact',
-    'weight' => '11',
+    'weight' => '12',
     'children' => array(
       0 => 'field_event_contact',
     ),
@@ -48,7 +48,7 @@ function cluster_events_field_group_info() {
   $field_group->parent_name = 'group_event_field_group';
   $field_group->data = array(
     'label' => 'Event content details',
-    'weight' => '7',
+    'weight' => '9',
     'children' => array(
       0 => 'body',
       1 => 'field_event_files',
@@ -81,7 +81,7 @@ function cluster_events_field_group_info() {
   $field_group->parent_name = 'group_event_field_group';
   $field_group->data = array(
     'label' => 'Event date',
-    'weight' => '9',
+    'weight' => '10',
     'children' => array(
       0 => 'field_recurring_event_date2',
     ),
@@ -110,11 +110,11 @@ function cluster_events_field_group_info() {
     'label' => 'Event field groups',
     'weight' => '0',
     'children' => array(
-      0 => 'group_event_location',
-      1 => 'group_event_date_group',
-      2 => 'group_event_group_audience',
-      3 => 'group_event_content_details',
-      4 => 'group_event_contact',
+      0 => 'group_event_contact',
+      1 => 'group_event_content_details',
+      2 => 'group_event_date_group',
+      3 => 'group_event_group_audience',
+      4 => 'group_event_location',
     ),
     'format_type' => 'tabs',
     'format_settings' => array(
@@ -138,7 +138,7 @@ function cluster_events_field_group_info() {
   $field_group->parent_name = 'group_event_field_group';
   $field_group->data = array(
     'label' => 'Event group audience',
-    'weight' => '10',
+    'weight' => '11',
     'children' => array(
       0 => 'og_group_ref',
     ),
