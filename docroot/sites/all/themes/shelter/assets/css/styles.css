@@ -4050,6 +4050,9 @@ body.document-upload-ondrag {
   font-size: 13.6px;
   font-size: 0.85rem;
 }
+.factsheet-chart-indicators label ~ label {
+  margin-top: 10px;
+}
 .factsheet-chart-indicators strong {
   display: block;
   text-align: center;
@@ -4057,6 +4060,9 @@ body.document-upload-ondrag {
   font-weight: normal;
   font-size: 32px;
   font-size: 2rem;
+}
+.factsheet-chart-indicators div {
+  text-align: center;
 }
 .factsheet-chart-indicators .indicator-funding {
   display: flex;

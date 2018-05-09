@@ -405,7 +405,7 @@ function cluster_factsheets_field_default_field_instances() {
       'module' => 'field_collection',
       'settings' => array(),
       'type' => 'field_collection_embed',
-      'weight' => 24,
+      'weight' => 25,
     ),
   );
 
@@ -606,13 +606,13 @@ function cluster_factsheets_field_default_field_instances() {
     'bundle' => 'factsheet',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'Provide information on the funding status based on your cluster appeal and OCHA’s Financial Tracking Service (if you use other sources do not forget to mention them).',
+    'description' => '',
     'display' => array(
       'default' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 18,
+        'weight' => 19,
       ),
       'factsheet_homepage_teaser' => array(
         'label' => 'above',
@@ -668,7 +668,7 @@ function cluster_factsheets_field_default_field_instances() {
       'module' => 'number',
       'settings' => array(),
       'type' => 'number',
-      'weight' => 22,
+      'weight' => 23,
     ),
   );
 
@@ -683,7 +683,7 @@ function cluster_factsheets_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 17,
+        'weight' => 18,
       ),
       'factsheet_homepage_teaser' => array(
         'label' => 'above',
@@ -724,7 +724,7 @@ function cluster_factsheets_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'field_name' => 'field_fsi_funding_required',
-    'label' => 'Funding required',
+    'label' => 'Required',
     'required' => 0,
     'settings' => array(
       'entity_translation_sync' => FALSE,
@@ -739,7 +739,7 @@ function cluster_factsheets_field_default_field_instances() {
       'module' => 'number',
       'settings' => array(),
       'type' => 'number',
-      'weight' => 23,
+      'weight' => 22,
     ),
   );
 
@@ -754,7 +754,7 @@ function cluster_factsheets_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 14,
+        'weight' => 15,
       ),
       'factsheet_homepage_teaser' => array(
         'label' => 'above',
@@ -804,7 +804,7 @@ function cluster_factsheets_field_default_field_instances() {
       'module' => 'number',
       'settings' => array(),
       'type' => 'number',
-      'weight' => 20,
+      'weight' => 19,
     ),
   );
 
@@ -819,7 +819,7 @@ function cluster_factsheets_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 16,
+        'weight' => 17,
       ),
       'factsheet_homepage_teaser' => array(
         'label' => 'above',
@@ -875,7 +875,7 @@ function cluster_factsheets_field_default_field_instances() {
       'module' => 'number',
       'settings' => array(),
       'type' => 'number',
-      'weight' => 19,
+      'weight' => 18,
     ),
   );
 
@@ -890,7 +890,7 @@ function cluster_factsheets_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 15,
+        'weight' => 16,
       ),
       'factsheet_homepage_teaser' => array(
         'label' => 'above',
@@ -940,7 +940,71 @@ function cluster_factsheets_field_default_field_instances() {
       'module' => 'number',
       'settings' => array(),
       'type' => 'number',
-      'weight' => 21,
+      'weight' => 20,
+    ),
+  );
+
+  // Exported field_instance: 'node-factsheet-field_funding_source'.
+  $field_instances['node-factsheet-field_funding_source'] = array(
+    'bundle' => 'factsheet',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 12,
+      ),
+      'factsheet_homepage_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'factsheet_preview_block' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'factsheet_summary' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'ical' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'preview_block' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_funding_source',
+    'label' => 'Source',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 24,
     ),
   );
 
@@ -1025,7 +1089,7 @@ function cluster_factsheets_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 12,
+        'weight' => 13,
       ),
       'factsheet_homepage_teaser' => array(
         'label' => 'above',
@@ -1645,7 +1709,7 @@ function cluster_factsheets_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 13,
+        'weight' => 14,
       ),
       'factsheet_homepage_teaser' => array(
         'label' => 'above',
@@ -1777,7 +1841,7 @@ function cluster_factsheets_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 19,
+        'weight' => 20,
       ),
       'factsheet_homepage_teaser' => array(
         'label' => 'above',
@@ -1869,7 +1933,6 @@ function cluster_factsheets_field_default_field_instances() {
   t('E.g. "3.4". Required if "households" is selected above.');
   t('Figures represent:');
   t('Funded');
-  t('Funding required');
   t('Gaps / challenges');
   t('Groups audience');
   t('Highlights');
@@ -1888,10 +1951,11 @@ function cluster_factsheets_field_default_field_instances() {
   t('People per household');
   t('Photographer / Organisation, Year');
   t('Planned');
-  t('Provide information on the funding status based on your cluster appeal and OCHA’s Financial Tracking Service (if you use other sources do not forget to mention them).');
   t('Provide information on the progress against targets based on your cluster strategy and 4W data. Please report on the progress for the year to date. Under NFI, only count the equivalent of a standard kit. Under shelter, you can provide a total figure if they do not overlap and provide emergency shelter (no single items) or support permanent shelter. You are encouraged to provide the breakdown between emergency shelter and permanent shelter whenever possible.');
   t('Reached');
+  t('Required');
   t('Response');
+  t('Source');
   t('Targeted');
   t('Title');
   t('When describing challenges, please start with a keyword (funding, access, capacity, data, stockpiles, HLP, material, armed groups, protracted displacement etc.) to facilitate analysis.');

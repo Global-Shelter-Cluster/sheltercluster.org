@@ -120,6 +120,10 @@
     text-align: center;
     color: $shelter-grey;
     @include rem(font-size, .85rem);
+
+    & ~ label {
+      margin-top: 10px;
+    }
   }
 
   strong {
@@ -128,6 +132,10 @@
     white-space: nowrap;
     font-weight: normal;
     @include rem(font-size, 2rem)
+  }
+
+  div {
+    text-align: center;
   }
 
   .indicator-funding {
