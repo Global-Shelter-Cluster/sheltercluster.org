@@ -322,8 +322,12 @@ function cluster_factsheets_main_indicators($node) {
     (!is_null($required = $wrapper->field_fsi_funding_required->value()))
     && (!is_null($funded = $wrapper->field_fsi_funded->value()))
   ) {
+    $funding_source = trim($wrapper->field_funding_source->value());
+    $source_prefix = $funding_source ? '<span' . drupal_attributes(['title' => t('Source') . ': ' . $funding_source]) . '>' : '';
+    $source_suffix = $funding_source ? '</span>' : '';
+
     $funded_percentage = round($funded / $required * 100) . '%';
-    $indicators['required (funded)'] = cluster_factsheets_number($required, '$') . ' (' . $funded_percentage . ')';
+    $indicators['required (funded)'] = $source_prefix . cluster_factsheets_number($required, '$') . ' (' . $funded_percentage . ')' . $source_suffix;
   }
 
   if (
@@ -426,6 +430,11 @@ function cluster_factsheets_chart_indicators($node) {
         ],
       ];
 
+    $total = '<label>Total funding required:</label><strong>' . cluster_factsheets_number($required, '$') . '</strong>';
+
+    $funding_source = trim($wrapper->field_funding_source->value());
+    $source = $funding_source ? '<label>Source:</label><div>' . check_plain($funding_source) . '</div>' : '';
+
     $indicators[] = [
       [
         '#theme' => 'html_tag',
@@ -437,7 +446,7 @@ function cluster_factsheets_chart_indicators($node) {
         '#attributes' => ['class' => ['indicator-funding']],
         $funding_chart,
         [
-          '#markup' => '<div class="funding-total"><label>Total funding required:</label><strong>' . cluster_factsheets_number($required, '$') . '</strong></div>',
+          '#markup' => '<div class="funding-info">' . $total . $source . '</div>',
         ],
       ],
     ];

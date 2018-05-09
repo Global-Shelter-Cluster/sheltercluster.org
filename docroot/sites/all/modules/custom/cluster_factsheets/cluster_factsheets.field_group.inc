@@ -102,6 +102,37 @@ function cluster_factsheets_field_group_info() {
   $field_group = new stdClass();
   $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
   $field_group->api_version = 1;
+  $field_group->identifier = 'group_funding|node|factsheet|form';
+  $field_group->group_name = 'group_funding';
+  $field_group->entity_type = 'node';
+  $field_group->bundle = 'factsheet';
+  $field_group->mode = 'form';
+  $field_group->parent_name = 'group_indicators';
+  $field_group->data = array(
+    'label' => 'Funding',
+    'weight' => '21',
+    'children' => array(
+      0 => 'field_fsi_funding_required',
+      1 => 'field_fsi_funded',
+      2 => 'field_funding_source',
+    ),
+    'format_type' => 'fieldset',
+    'format_settings' => array(
+      'label' => 'Funding',
+      'instance_settings' => array(
+        'required_fields' => 1,
+        'id' => '',
+        'classes' => 'group-funding field-group-fieldset',
+        'description' => 'Provide information on the funding status based on your cluster appeal and OCHA’s Financial Tracking Service (if you use other sources do not forget to mention them).',
+      ),
+      'formatter' => 'open',
+    ),
+  );
+  $field_groups['group_funding|node|factsheet|form'] = $field_group;
+
+  $field_group = new stdClass();
+  $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
+  $field_group->api_version = 1;
   $field_group->identifier = 'group_hh|node|factsheet|form';
   $field_group->group_name = 'group_hh';
   $field_group->entity_type = 'node';
@@ -143,12 +174,11 @@ function cluster_factsheets_field_group_info() {
     'weight' => '19',
     'children' => array(
       0 => 'field_fsi_partners',
-      1 => 'field_fsi_funding_required',
-      2 => 'field_fsi_funded',
-      3 => 'field_coverage_against_targets',
-      4 => 'field_fsi_in_need',
-      5 => 'field_fsi_targeted',
-      6 => 'group_hh',
+      1 => 'field_coverage_against_targets',
+      2 => 'field_fsi_in_need',
+      3 => 'field_fsi_targeted',
+      4 => 'group_hh',
+      5 => 'group_funding',
     ),
     'format_type' => 'tab',
     'format_settings' => array(
@@ -228,6 +258,7 @@ function cluster_factsheets_field_group_info() {
   t('Factsheet');
   t('Fields');
   t('Figures');
+  t('Funding');
   t('Individual people / households');
   t('Photos');
   t('Sidebar');
