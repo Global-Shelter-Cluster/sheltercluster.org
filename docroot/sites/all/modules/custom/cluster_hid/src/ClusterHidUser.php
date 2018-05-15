@@ -258,7 +258,7 @@ class ClusterHidUser {
 
     $role_or_title = $this->getRoleOrTitle();
     if ($role_or_title) {
-      $user->field_role_or_title[LANGUAGE_NONE][0]['value'] = $role_or_title;
+      $user->field_role_or_title['en'][0]['value'] = $role_or_title;
     }
 
     $picture_file = $this->savePicture();
