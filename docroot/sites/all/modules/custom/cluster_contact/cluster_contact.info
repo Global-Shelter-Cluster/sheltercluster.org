@@ -4,6 +4,7 @@ core = 7.x
 package = Cluster
 dependencies[] = cluster_docs
 dependencies[] = cluster_og
+dependencies[] = cluster_hid
 dependencies[] = ctools
 dependencies[] = email
 dependencies[] = features

@@ -209,6 +209,7 @@ class ClusterHidUser {
       ->fields([
         'uid' => $uid,
         'hum_id' => $this->getHumanitarianId(),
+        'data' => serialize($this->hidUser),
       ])
       ->execute();
   }

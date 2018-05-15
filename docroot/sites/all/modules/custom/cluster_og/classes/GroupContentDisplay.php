@@ -252,33 +252,35 @@ class GroupDisplayProvider {
     $page_ids = array_merge($this->manager->getPages(), $this->manager->getLibraries());
     $pages = shelter_base_sort_nids_by_weight($page_ids);
     if ($pages) {
+      $all_child_pages = $this->getAllChildPagesIds($pages);
       $secondary['pages'] = partial('navigation_options', array(
         'navigation_type_id' => 'pages',
         'title' => t('Pages'),
         'collapsed' => $force_collapse,
-        'nodes' => node_load_multiple($pages)
+        'nodes' => node_load_multiple($pages),
+        'children' => $all_child_pages,
       ));
     }
 
-    $child_page_ids = $this->getChildrenPagesIds($currently_visible_node_id);
-    if ($child_page_ids) {
-      $secondary['child_pages'] = partial('navigation_options', array(
-        'navigation_type_id' => 'child_pages',
-        'title' => t('Child Pages'),
-        'collapsed' => $force_collapse,
-        'nodes' => node_load_multiple($child_page_ids)
-      ));
-    }
+    // $child_page_ids = $this->getChildrenPagesIds($currently_visible_node_id);
+    // if ($child_page_ids) {
+    //   $secondary['child_pages'] = partial('navigation_options', array(
+    //     'navigation_type_id' => 'child_pages',
+    //     'title' => t('Child Pages'),
+    //     'collapsed' => $force_collapse,
+    //     'nodes' => node_load_multiple($child_page_ids)
+    //   ));
+    // }
 
-    $parent_page = $this->getParentPageId($currently_visible_node_id);
-    if ($parent_page) {
-      $secondary['parent_page'] = partial('navigation_options', array(
-        'navigation_type_id' => 'parent_page',
-        'title' => t('Parent Page'),
-        'collapsed' => $force_collapse,
-        'nodes' => [node_load($parent_page)],
-      ));
-    }
+    // $parent_page = $this->getParentPageId($currently_visible_node_id);
+    // if ($parent_page) {
+    //   $secondary['parent_page'] = partial('navigation_options', array(
+    //     'navigation_type_id' => 'parent_page',
+    //     'title' => t('Parent Page'),
+    //     'collapsed' => $force_collapse,
+    //     'nodes' => [node_load($parent_page)],
+    //   ));
+    // }
 
     $communities_of_practice = $this->manager->getCommunitiesOfPractice();
     if ($communities_of_practice) {
@@ -308,9 +310,21 @@ class GroupDisplayProvider {
     );
   }
 
-  private function getChildrenPagesIds($currently_visible_node_id) {
-    $child_page_ids = $this->manager->getChildrenPages($currently_visible_node_id);
+  private function getChildrenPagesIds($id) {
+    $child_page_ids = $this->manager->getChildrenPages($id);
     return shelter_base_sort_nids_by_weight($child_page_ids);
+  }
+
+  /**
+   * Given a list of ids, return a keyed array with child page nodes.
+   */
+  private function getAllChildPagesIds($ids) {
+    $children = [];
+    foreach ($ids as $id) {
+      $child_ids = $this->getChildrenPagesIds($id);
+      $children[$id] = node_load_multiple($child_ids);
+    }
+    return $children;
   }
 
   private function getParentPageId($currently_visible_node_id) {

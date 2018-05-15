@@ -19,6 +19,11 @@ function cluster_hid_schema() {
           'not null' => TRUE,
           'default' => '',
         ],
+        'data' => [
+          'description' => 'The profile data',
+          'type' => 'text',
+          'size' => 'big',
+        ],
       ],
     ],
   ];
@@ -29,4 +34,12 @@ function cluster_hid_schema() {
  */
 function cluster_hid_update_7001() {
   drupal_install_schema('cluster_hid');
+}
+
+/**
+ * Add data field to cluster_hid table.
+ */
+function cluster_hid_update_7002() {
+  $schema = drupal_get_schema('cluster_hid');
+  db_add_field('cluster_hid', 'data', $schema['fields']['data']);
 }

@@ -5,3 +5,11 @@
  */
 
 include_once 'cluster_contact.features.inc';
+
+/**
+ * @TODO add the hid form to contact content type form.
+ */
+// function cluster_contact_form_contact_node_form_alter(&$form, &$form_state) {
+//   module_load_include('inc', 'cluster_hid', 'cluster_hid.forms');
+//   $form['humanitarian_id_search'] = drupal_get_form('cluster_hid_search_form');
+// }

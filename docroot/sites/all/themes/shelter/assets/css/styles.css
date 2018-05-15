@@ -1993,6 +1993,9 @@ label[for="mobile_menu_toggle"] span:after {
   list-style-position: outside;
   margin-left: 20px;
 }
+#secondary-nav .nav-items .nav-secondary-items li .nav-secondary-child-item {
+  list-style-type: circle;
+}
 #secondary-nav .nav-items .nav-secondary-items a {
   display: inline;
   color: #242424;
@@ -2952,7 +2955,9 @@ div.addressfield-container-inline::after {
   right: 5%;
   top: 85px;
   color: white;
-  padding: 0;
+  background-color: #688394;
+  border-radius: 10px;
+  padding: 1px 2px 5px 10px;
 }
 .front #user-profile-container a {
   color: white;

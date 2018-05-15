@@ -96,6 +96,9 @@
         list-style-type: square;
         list-style-position: outside;
         margin-left: 20px;
+        .nav-secondary-child-item {
+          list-style-type: circle;
+        }
       }
       a {
         display: inline;
