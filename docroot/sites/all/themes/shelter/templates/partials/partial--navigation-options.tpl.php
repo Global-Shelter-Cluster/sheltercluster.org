@@ -6,7 +6,7 @@
     <?php foreach ((isset($nodes) ? $nodes : array()) as $node): ?>
       <li class="nav-secondary-item clearfix">
         <?php print l($node->title, 'node/' . $node->nid); ?>
-          <?php if (isset($children) && isset($children[$node->nid])): ?>
+          <?php if (!empty($children) && isset($children[$node->nid])): ?>
             <ul class="nav-secondary-items">
               <?php foreach ($children[$node->nid] as $child_node): ?>
                 <li class="nav-secondary-child-item clearfix"><?php print l($child_node->title, 'node/' . $child_node->nid); ?></li>

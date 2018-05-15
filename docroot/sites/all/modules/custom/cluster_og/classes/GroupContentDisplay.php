@@ -322,7 +322,9 @@ class GroupDisplayProvider {
     $children = [];
     foreach ($ids as $id) {
       $child_ids = $this->getChildrenPagesIds($id);
-      $children[$id] = node_load_multiple($child_ids);
+      if ($child_ids) {
+        $children[$id] = node_load_multiple($child_ids);
+      }
     }
     return $children;
   }
