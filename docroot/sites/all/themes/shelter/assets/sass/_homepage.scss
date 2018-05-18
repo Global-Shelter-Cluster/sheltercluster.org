@@ -7,11 +7,15 @@
     right: 5%;
     top: 85px;
     color: $white;
-    background-color: #688394;
-    border-radius: 10px;
+    background-color: #FFF;
+    border: solid 1px #688394;
+    border-radius: 5px;
     padding: 1px 2px 5px 10px;
-    a {
-      color: $white;
+    #login-link a {
+      color: #222;
+      &:hover {
+        color: #688394;
+      };
     }
     @include breakpoint(800px) {
       right: 45px;

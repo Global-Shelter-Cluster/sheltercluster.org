@@ -1361,10 +1361,6 @@ header a {
   text-decoration: none;
 }
 
-.front header #login-link a {
-  color: #fff;
-}
-
 #button-menu-dropdown {
   display: inline-block;
   background: black;
@@ -2955,12 +2951,16 @@ div.addressfield-container-inline::after {
   right: 5%;
   top: 85px;
   color: white;
-  background-color: #688394;
-  border-radius: 10px;
+  background-color: #FFF;
+  border: solid 1px #688394;
+  border-radius: 5px;
   padding: 1px 2px 5px 10px;
 }
-.front #user-profile-container a {
-  color: white;
+.front #user-profile-container #login-link a {
+  color: #222;
+}
+.front #user-profile-container #login-link a:hover {
+  color: #688394;
 }
 @media (min-width: 800px) {
   .front #user-profile-container {
@@ -3214,10 +3214,12 @@ div.addressfield-container-inline::after {
   width: 65px;
 }
 
-#login-link a,
-#login-link a:hover,
-#login-link a:visited {
-  color: #000;
+#login-link a:hover {
+  color: #688394;
+}
+
+#login-link a {
+  color: #222;
   font-weight: bold;
 }
 

@@ -64,9 +64,11 @@
   width: 65px;
 }
 
-#login-link a,
-#login-link a:hover,
-#login-link a:visited {
-  color: #000;
+#login-link a:hover {
+  color: #688394;
+}
+
+#login-link a{
+  color: #222;
   font-weight: bold;
 }
