@@ -5,10 +5,10 @@ class ClusterAPI_Object {
   const MODE_PRIVATE = 'private';
   const MODE_PUBLIC = 'public';
   const MODE_STUB = 'stub';
-  protected $user = NULL;
+  protected $current_user;
 
-  public function __construct($user) {
-    $this->user = $user;
+  public function __construct($current_user) {
+    $this->current_user = $current_user;
   }
 
   static function detailLevel($mode) {
@@ -33,8 +33,8 @@ class ClusterAPI_Object {
       $objects[$type] = [];
 
     foreach ($requests as $request)
-      ClusterAPI_Type::get($request['type'], $request['id'], self::MODE_PUBLIC, FALSE, $objects, $this->user);
+      ClusterAPI_Type::get($request['type'], $request['id'], self::MODE_PUBLIC, FALSE, $objects, $this->current_user);
 
-    return $objects;
+    return array_filter($objects);
   }
 }

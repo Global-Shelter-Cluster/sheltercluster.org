@@ -3,6 +3,21 @@
 class ClusterAPI_Type_Group extends ClusterAPI_Type {
 
   protected static $type = 'group';
+  protected static $related_def = [
+    'associated_regions' => [
+      'type' => 'group',
+      'mode' => ClusterAPI_Object::MODE_STUB,
+    ],
+    'parent_response' => [
+      'type' => 'group',
+      'mode' => ClusterAPI_Object::MODE_STUB,
+    ],
+    'parent_region' => [
+      'type' => 'group',
+      'mode' => ClusterAPI_Object::MODE_STUB,
+    ],
+    //    'latest_factsheet' => ['type' => 'factsheet', 'mode' => ClusterAPI_Object::MODE_PUBLIC],
+  ];
 
   /**
    * Example:
@@ -18,13 +33,15 @@ class ClusterAPI_Type_Group extends ClusterAPI_Type {
    * }
    *
    */
-  protected static function getById($id, $mode, $persist, &$objects, &$current_user) {
-    // TODO:
-//    if ($current_user && $current_user->id == $id) {
-//      // Force private mode and persist if the user is getting a group they're following.
-//      $mode = Object::MODE_PRIVATE;
-//      $persist = TRUE;
-//    }
+  protected function getById($id, $mode, $persist, &$objects, $level) {
+    if ($this->current_user) {
+      $current_user_groups = array_values(og_get_groups_by_user($this->current_user, 'node'));
+      if (in_array($id, $current_user_groups)) {
+        // Force public mode and persist if this is one of the current user's followed groups.
+        $mode = ClusterAPI_Object::MODE_PUBLIC;
+        $persist = TRUE;
+      }
+    }
 
     if (array_key_exists($id, $objects[self::$type])) {
       $existing = $objects[self::$type];
@@ -44,7 +61,6 @@ class ClusterAPI_Type_Group extends ClusterAPI_Type {
       // This id is not for a group node
       return;
 
-    $related = [];
     $ret = [
       '_mode' => $mode,
       '_persist' => $persist,
@@ -52,28 +68,11 @@ class ClusterAPI_Type_Group extends ClusterAPI_Type {
 
     switch ($mode) {
       case ClusterAPI_Object::MODE_PRIVATE:
-//        // TODO: read 'groups' properly
-//        $ret += [
-//          'groups' => [9175, 10318],
-//        ];
-//        $related[] = [
-//          'type' => 'group',
-//          'id' => 9175,
-//          'mode' => Object::MODE_PUBLIC,
-//        ];
-//        $related[] = [
-//          'type' => 'group',
-//          'id' => 10318,
-//          'mode' => Object::MODE_PUBLIC,
-//        ];
+
+        //Fall-through
       case ClusterAPI_Object::MODE_PUBLIC:
-        //        $wrapper = entity_metadata_wrapper('node', $node);
-        //        $ret += [
-        //          'mail' => $node->mail,
-        //          //          'picture' => $picture,
-        //          'org' => $wrapper->field_organisation_name->value(),
-        //          'role' => $wrapper->field_role_or_title->value(),
-        //        ];
+
+        //Fall-through
       case ClusterAPI_Object::MODE_STUB:
         $ret += [
           'type' => $node->type,
@@ -84,7 +83,7 @@ class ClusterAPI_Type_Group extends ClusterAPI_Type {
 
     $objects[self::$type][$id] = $ret;
 
-    foreach ($related as $request)
-      ClusterAPI_Type::get($request['type'], $request['id'], $request['mode'], $persist, $objects, $current_user);
+    foreach ($this->related($ret) as $request)
+      ClusterAPI_Type::get($request['type'], $request['id'], $request['mode'], $persist, $objects, $this->current_user, $level);
   }
 }

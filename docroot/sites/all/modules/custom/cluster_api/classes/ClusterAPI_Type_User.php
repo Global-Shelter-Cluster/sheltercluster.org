@@ -3,6 +3,9 @@
 class ClusterAPI_Type_User extends ClusterAPI_Type {
 
   protected static $type = 'user';
+  protected static $related_def = [
+    'groups' => ['type' => 'group', 'mode' => ClusterAPI_Object::MODE_PUBLIC],
+  ];
 
   /**
    * Example:
@@ -20,8 +23,8 @@ class ClusterAPI_Type_User extends ClusterAPI_Type {
    * }
    *
    */
-  protected static function getById($id, $mode, $persist, &$objects, &$current_user) {
-    if ($current_user && $current_user->uid == $id) {
+  protected function getById($id, $mode, $persist, &$objects, $level) {
+    if ($this->current_user && $this->current_user->uid == $id) {
       // Force private mode and persist if the user is getting their object.
       $mode = ClusterAPI_Object::MODE_PRIVATE;
       $persist = TRUE;
@@ -42,7 +45,6 @@ class ClusterAPI_Type_User extends ClusterAPI_Type {
 
     $user = user_load($id);
 
-    $related = [];
     $ret = [
       '_mode' => $mode,
       '_persist' => $persist,
@@ -50,28 +52,20 @@ class ClusterAPI_Type_User extends ClusterAPI_Type {
 
     switch ($mode) {
       case ClusterAPI_Object::MODE_PRIVATE:
-        // TODO: read 'groups' properly
-        $ret += [
-          'groups' => [9175, 10318],
-        ];
-        $related[] = [
-          'type' => 'group',
-          'id' => 9175,
-          'mode' => ClusterAPI_Object::MODE_PUBLIC,
-        ];
-        $related[] = [
-          'type' => 'group',
-          'id' => 10318,
-          'mode' => ClusterAPI_Object::MODE_PUBLIC,
-        ];
+        $groups = array_values(og_get_groups_by_user($user, 'node'));
+        $ret += ['groups' => $groups];
+
+      //Fall-through
       case ClusterAPI_Object::MODE_PUBLIC:
         $wrapper = entity_metadata_wrapper('user', $user);
         $ret += [
           'mail' => $user->mail,
-          //          'picture' => $picture,
-//          'org' => $wrapper->field_organisation_name->value(),
-//          'role' => $wrapper->field_role_or_title->value(),
+          'picture' => $user->picture ? image_style_url('medium', $user->picture->uri) : '',
+          'org' => implode(', ', $wrapper->field_organisation_name->value()),
+          'role' => implode(', ', $wrapper->field_role_or_title->value()),
         ];
+
+      //Fall-through
       case ClusterAPI_Object::MODE_STUB:
         $ret += [
           'id' => $user->uid,
@@ -81,7 +75,7 @@ class ClusterAPI_Type_User extends ClusterAPI_Type {
 
     $objects[self::$type][$id] = $ret;
 
-    foreach ($related as $request)
-      ClusterAPI_Type::get($request['type'], $request['id'], $request['mode'], $persist, $objects, $current_user);
+    foreach ($this->related($ret) as $request)
+      ClusterAPI_Type::get($request['type'], $request['id'], $request['mode'], $persist, $objects, $this->current_user, $level);
   }
 }
