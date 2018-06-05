@@ -7,3 +7,6 @@ files[] = classes/ClusterAPI_Object.php
 files[] = classes/ClusterAPI_Type.php
 files[] = classes/ClusterAPI_Type_Group.php
 files[] = classes/ClusterAPI_Type_User.php
+files[] = classes/ClusterAPI_Type_Factsheet.php
+files[] = classes/ClusterAPI_Type_Document.php
+files[] = classes/ClusterAPI_Type_Event.php

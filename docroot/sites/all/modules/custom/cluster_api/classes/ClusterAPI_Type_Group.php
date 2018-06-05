@@ -16,8 +16,22 @@ class ClusterAPI_Type_Group extends ClusterAPI_Type {
       'type' => 'group',
       'mode' => ClusterAPI_Object::MODE_STUB,
     ],
-    //    'latest_factsheet' => ['type' => 'factsheet', 'mode' => ClusterAPI_Object::MODE_PUBLIC],
+    'latest_factsheet' => [
+      'type' => 'factsheet',
+      'mode' => ClusterAPI_Object::MODE_PUBLIC,
+    ],
   ];
+
+  protected function preprocessModeAndPersist($id, &$mode, &$persist) {
+    if ($this->current_user) {
+      $current_user_groups = array_values(og_get_groups_by_user($this->current_user, 'node'));
+      if (in_array($id, $current_user_groups)) {
+        // Force public mode and persist if this is one of the current user's followed groups.
+        $mode = ClusterAPI_Object::MODE_PUBLIC;
+        $persist = TRUE;
+      }
+    }
+  }
 
   /**
    * Example:
@@ -33,57 +47,42 @@ class ClusterAPI_Type_Group extends ClusterAPI_Type {
    * }
    *
    */
-  protected function getById($id, $mode, $persist, &$objects, $level) {
-    if ($this->current_user) {
-      $current_user_groups = array_values(og_get_groups_by_user($this->current_user, 'node'));
-      if (in_array($id, $current_user_groups)) {
-        // Force public mode and persist if this is one of the current user's followed groups.
-        $mode = ClusterAPI_Object::MODE_PUBLIC;
-        $persist = TRUE;
-      }
-    }
-
-    if (array_key_exists($id, $objects[self::$type])) {
-      $existing = $objects[self::$type];
-
-      $is_higher_detail_level = ClusterAPI_Object::detailLevel($mode) > ClusterAPI_Object::detailLevel($existing['_mode']);
-      if (!$is_higher_detail_level) {
-        $persist_changed_to_true = !$existing['_persist'] && $persist;
-        if (!$persist_changed_to_true) {
-          // No reason to calculate this object again.
-          return;
-        }
-      }
-    }
-
+  protected function generateObject($id, $mode) {
     $node = node_load($id);
-    if (!og_is_group('node', $node))
+    if (!$node || !og_is_group('node', $node))
       // This id is not for a group node
-      return;
+      return NULL;
 
-    $ret = [
-      '_mode' => $mode,
-      '_persist' => $persist,
-    ];
+    $ret = [];
+    //    $wrapper = entity_metadata_wrapper('node', $node);
+    $manager = GroupContentManager::getInstance($node);
 
     switch ($mode) {
       case ClusterAPI_Object::MODE_PRIVATE:
 
         //Fall-through
       case ClusterAPI_Object::MODE_PUBLIC:
+        if ($value = self::getReferenceIds('node', $node, 'field_associated_regions', TRUE))
+          $ret['associated_regions'] = $value;
 
-        //Fall-through
+        if ($value = self::getReferenceIds('node', $node, 'field_parent_region'))
+          $ret['parent_region'] = $value;
+
+        if ($value = self::getReferenceIds('node', $node, 'field_parent_response'))
+          $ret['parent_response'] = $value;
+
+        $factsheets = $manager->getFactsheets(1);
+        if ($factsheets)
+          $ret['latest_factsheet'] = $factsheets[0];
+
+      //Fall-through
       case ClusterAPI_Object::MODE_STUB:
         $ret += [
           'type' => $node->type,
-          'id' => $node->nid,
           'title' => $node->title,
         ];
     }
 
-    $objects[self::$type][$id] = $ret;
-
-    foreach ($this->related($ret) as $request)
-      ClusterAPI_Type::get($request['type'], $request['id'], $request['mode'], $persist, $objects, $this->current_user, $level);
+    return $ret;
   }
 }
