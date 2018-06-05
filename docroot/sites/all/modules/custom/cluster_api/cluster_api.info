@@ -1,0 +1,9 @@
+name = Cluster API
+description = API for mobile app
+core = 7.x
+package = Cluster
+dependencies[] = services
+files[] = classes/ClusterAPI_Object.php
+files[] = classes/ClusterAPI_Type.php
+files[] = classes/ClusterAPI_Type_Group.php
+files[] = classes/ClusterAPI_Type_User.php

@@ -1,0 +1,117 @@
+<?php
+
+//require_once 'classes/Object/Object.php';
+//require_once 'classes/Object/Type.php';
+//require_once 'classes/Object/Type/User.php';
+//require_once 'classes/Object/Type/Group.php';
+
+/**
+ * Implements hook_services_resources().
+ */
+function cluster_api_services_resources() {
+  return array(
+    'get-objects' => array(
+      'operations' => array(
+        'create' => array( // This isn't "creating" anything. REST verbs just suck.
+          'help' => 'Load objects, including any related objects.',
+          'file' => array('type' => 'inc', 'module' => 'cluster_api', 'name' => 'resources/get_objects'),
+          'callback' => '_cluster_api_get_objects_resource',
+          'args' => array(
+            array(
+              'name' => 'requests',
+              'optional' => FALSE,
+              'source' => 'data',
+              'type' => 'array',
+//              'source' => array('path' => 0),
+//              'type' => 'int',
+              'description' => 'A list of object ids (and their types) to load.',
+            ),
+          ),
+          'access callback' => 'user_access',
+          'access arguments' => array('access content'),
+          'access arguments append' => FALSE,
+//          'access callback' => '_node_resource_access',
+//          'access arguments' => array('view'),
+//          'access arguments append' => TRUE,
+        ),
+      ),
+//      'targeted_actions' => array(
+//        'attach_file' => array(
+//          'help' => 'Upload and attach file(s) to a node. POST multipart/form-data to node/123/attach_file',
+//          'file' => array('type' => 'inc', 'module' => 'services', 'name' => 'resources/node_resource'),
+//          'callback' => '_node_resource_attach_file',
+//          'access callback' => '_node_resource_access',
+//          'access arguments' => array('update'),
+//          'access arguments append' => TRUE,
+//          'args' => array(
+//            array(
+//              'name' => 'nid',
+//              'optional' => FALSE,
+//              'source' => array('path' => 0),
+//              'type' => 'int',
+//              'description' => 'The nid of the node to attach a file to',
+//            ),
+//            array(
+//              'name' => 'field_name',
+//              'optional' => FALSE,
+//              'source' => array('data' => 'field_name'),
+//              'description' => 'The file field name',
+//              'type' => 'string',
+//            ),
+//            array(
+//              'name' => 'attach',
+//              'optional' => TRUE,
+//              'source' => array('data' => 'attach'),
+//              'description' => 'Attach the file(s) to the node. If FALSE, this clears ALL files attached, and attaches the files',
+//              'type' => 'int',
+//              'default value' => TRUE,
+//            ),
+//            array(
+//              'name' => 'field_values',
+//              'optional' => TRUE,
+//              'source' => array('data' => 'field_values'),
+//              'description' => 'The extra field values',
+//              'type' => 'array',
+//              'default value' => array(),
+//            ),
+//          ),
+//        ),
+//      ),
+//      'relationships' => array(
+//        'files' => array(
+//          'file' => array('type' => 'inc', 'module' => 'services', 'name' => 'resources/node_resource'),
+//          'help'   => 'This method returns files associated with a node.',
+//          'access callback' => '_node_resource_access',
+//          'access arguments' => array('view'),
+//          'access arguments append' => TRUE,
+//          'callback' => '_node_resource_load_node_files',
+//          'args'     => array(
+//            array(
+//              'name' => 'nid',
+//              'optional' => FALSE,
+//              'source' => array('path' => 0),
+//              'type' => 'int',
+//              'description' => 'The nid of the node whose files we are getting',
+//            ),
+//            array(
+//              'name' => 'file_contents',
+//              'type' => 'int',
+//              'description'  => t('To return file contents or not.'),
+//              'source' => array('path' => 2),
+//              'optional' => TRUE,
+//              'default value' => TRUE,
+//            ),
+//            array(
+//              'name'         => 'image_styles',
+//              'type'         => 'int',
+//              'description'  => t('To return image styles or not.'),
+//              'source'       => array('path' => 3),
+//              'optional'     => TRUE,
+//              'default value' => FALSE,
+//            ),
+//          ),
+//        ),
+//      ),
+    ),
+  );
+}
