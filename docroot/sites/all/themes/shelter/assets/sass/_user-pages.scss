@@ -49,3 +49,26 @@
     }
   }
 }
+#page #user-login .hybridauth-widget .hybridauth-icon {
+  background-image: url('../images/humanitarian-id-logo.svg');
+  height: 50px;
+  width: 300px;
+}
+
+#login-link {
+  background: url('../images/humanitarianid.png') right center no-repeat;
+  display: block;
+  height: 25px;
+  vertical-align: center;
+  padding-top: 5px;
+  width: 65px;
+}
+
+#login-link a:hover {
+  color: #688394;
+}
+
+#login-link a{
+  color: #222;
+  font-weight: bold;
+}

@@ -10,3 +10,4 @@ dev_settings.inc
 .editorconfig
 localhost_settings.inc
 dump
+package-lock.json

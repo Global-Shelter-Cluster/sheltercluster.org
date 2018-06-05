@@ -1,0 +1,45 @@
+<?php
+
+function cluster_hid_schema() {
+  return [
+    'cluster_hid' => [
+      'description' => 'Match Drupal user id with humanitarian.id',
+      'fields' => [
+        'uid' => [
+          'description' => 'The Drupal user id',
+          'type' => 'int',
+          'unsigned' => TRUE,
+          'not null' => TRUE,
+          'default' => 0,
+        ],
+        'hum_id' => [
+          'description' => 'The humanitarian.id',
+          'type' => 'varchar',
+          'length' => 32,
+          'not null' => TRUE,
+          'default' => '',
+        ],
+        'data' => [
+          'description' => 'The profile data',
+          'type' => 'text',
+          'size' => 'big',
+        ],
+      ],
+    ],
+  ];
+}
+
+/**
+ * Install cluster_hid db schema.
+ */
+function cluster_hid_update_7001() {
+  drupal_install_schema('cluster_hid');
+}
+
+/**
+ * Add data field to cluster_hid table.
+ */
+function cluster_hid_update_7002() {
+  $schema = drupal_get_schema('cluster_hid');
+  db_add_field('cluster_hid', 'data', $schema['fields']['data']);
+}

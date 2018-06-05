@@ -11,6 +11,7 @@ class ClusterHidHttpClient {
 
   private $query;
 
+  // https://api.staging.humanitarian.id
   protected $endpoint = 'https://api.humanitarian.id/api/v2/';
 
   /**
@@ -43,9 +44,11 @@ class ClusterHidHttpClient {
   public function makeTestRequest() {
     // use Drupal\cluster_hid\ClusterHidHttpClient;
     // $s = ClusterHidHttpClient::getInstance();
-    // dpm($s->makeTestRequest());
+    // $s->makeTestRequest();
+    // 58e4abca3f0e0d00aeec8806
+    // 5a749d5cf94a9509ffc5ebc5
     try {
-      $res = $this->httpClient->request('GET', 'user/5a749d5cf94a9509ffc5ebc5');
+      $res = $this->httpClient->request('GET', 'user/58e4abca3f0e0d00aeec8806');
       dpm($res->getStatusCode());
       $contents = $res->getBody()->getContents();
       dpm($contents);

@@ -22,7 +22,7 @@ function hybridauth_provider_facebook_configuration_form_callback(&$form, $provi
     array(
       '!apps_uri' => 'https://developers.facebook.com/apps',
       '%site_uri' => url('<front>', array('absolute' => TRUE)),
-      '%callback_uri' => url('hybridauth/endpoint', array('absolute' => TRUE, 'query' => array('hauth.done' => 'Facebook'), 'language' => _hybridauth_language_default())),
+      '%callback_uri' => url('hybridauth/endpoint', array('absolute' => TRUE, 'query' => array('hauth_done' => 'Facebook'), 'language' => _hybridauth_language_default())),
     )
   );
 

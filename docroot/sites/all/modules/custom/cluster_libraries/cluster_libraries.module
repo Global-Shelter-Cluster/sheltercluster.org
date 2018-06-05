@@ -9,7 +9,7 @@ include_once 'cluster_libraries.vbo.inc';
 
 /**
  * Implements hook_node_view_alter().
- * 
+ *
  * Creates a document table list and appends it to the page content.
  * Most of the logic of this function has to do with applying filters to the
  * Search API query based on the library's configuration.
@@ -67,4 +67,74 @@ function cluster_libraries_node_view_alter(&$build) {
   }
 
   $build[] = cluster_search_docs_page($filters, $nid_filter, TRUE, $skip_group_filters);
+}
+
+/**
+ * Implements hook_form_BASE_FORM_ID_alter().
+ *
+ * Populate field_parent_content options with target reference nodes following these rules:
+ * - nodes that are audience of the same group as the content
+ * - nodes that are of the appropriate type
+ * - nodes that do not themselves have parents
+ */
+function cluster_libraries_form_node_form_alter(&$form, &$form_state, $form_id) {
+  if (!isset($form['field_parent_content'])) {
+    return;
+  }
+
+  $group_audiences = _cluster_librabries_get_audience_node_ids_from_node_edit_form($form);
+  if (!$group_audiences) {
+    $form['field_parent_content'][LANGUAGE_NONE]['#disabled'] = TRUE;
+    $form['field_parent_content'][LANGUAGE_NONE]['#options'] = [t('No group')];
+    return;
+  }
+
+  $target_parent_content_types = [
+    'library',
+    'arbitrary_library',
+    'page',
+  ];
+
+  // Get nodes from the same group audiences.
+  $query = db_select('og_membership', 'om')
+    ->condition('om.gid', $group_audiences, 'IN')
+    ->condition('om.etid', $form['#node']->nid, '!=');
+
+  // Include only nodes of the appropriate type.
+  $query->join('node', 'n', 'n.nid = om.etid');
+  $query->condition('n.type', $target_parent_content_types, 'IN');
+
+  // Exclude nodes that already have parents of their own.
+  $query->leftJoin('field_data_field_parent_content', 'p', 'om.etid = p.entity_id');
+  $query->isNull('p.entity_id');
+
+  $query->fields('n', ['nid', 'title']);
+  $query->orderBy('n.title', 'ASC');
+  $available_parents = $query->execute()->fetchAllKeyed();
+
+  if (!$available_parents) {
+    $form['field_parent_content'][LANGUAGE_NONE]['#disabled'] = TRUE;
+    $form['field_parent_content'][LANGUAGE_NONE]['#options'] = [t('No available parents')];
+    return;
+  }
+  $options['_none'] = '--none--';
+  $options['Possible parents'] = $available_parents;
+  $form['field_parent_content'][LANGUAGE_NONE]['#options'] = $options;
+}
+
+function _cluster_librabries_get_audience_node_ids_from_node_edit_form($form) {
+  // Get group id from url.
+  $parameters = drupal_get_query_parameters();
+  if (isset($parameters['group'])) {
+    return [$parameters['group']];
+  }
+
+  // Unable to get group audience.
+  if (! isset($form['#node']->og_group_ref)) {
+    return [];
+  }
+
+  // Get the group audiences from the form node object.
+  $audience_nids = array_column($form['#node']->og_group_ref[LANGUAGE_NONE], 'target_id');
+  return $audience_nids;
 }

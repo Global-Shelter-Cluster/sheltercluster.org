@@ -7,10 +7,15 @@
     right: 5%;
     top: 85px;
     color: $white;
-    padding: 0;
-
-    a {
-      color: $white;
+    background-color: #eee;
+    border: solid 1px #688394;
+    border-radius: 5px;
+    padding: 1px 2px 5px 10px;
+    #login-link a {
+      color: #222;
+      &:hover {
+        color: #688394;
+      };
     }
     @include breakpoint(800px) {
       right: 45px;
@@ -127,7 +132,7 @@
           height: auto;
         }
     }
-    
+
     .views-field-title {
       position: absolute;
       bottom: 5px;
@@ -140,9 +145,9 @@
       background: -webkit-linear-gradient(top,  rgba(0,0,0,0.01) 0%,rgba(0,0,0,0.68) 50%,rgba(0,0,0,1) 74%,rgba(0,0,0,1) 100%);
       background: linear-gradient(to bottom,  rgba(0,0,0,0.01) 0%,rgba(0,0,0,0.68) 50%,rgba(0,0,0,1) 74%,rgba(0,0,0,1) 100%);
       filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#03000000', endColorstr='#000000',GradientType=0 );
-      
+
     }
-    
+
     .views-field-field-homeimage {
       position: relative;
     }

@@ -5,9 +5,9 @@ package = "HybridAuth"
 configure = admin/config/people/hybridauth
 dependencies[] = ctools
 
-; Information added by Drupal.org packaging script on 2017-06-22
-version = "7.x-2.15+18-dev"
+; Information added by Drupal.org packaging script on 2018-03-09
+version = "7.x-2.15+21-dev"
 core = "7.x"
 project = "hybridauth"
-datestamp = "1498145191"
+datestamp = "1520585887"
 

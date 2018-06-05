@@ -32,10 +32,11 @@
           <?php print partial('compact_user_login', ['user_login' => $user_login]); ?>
         <?php endif; ?>
 
-        <div id="user-profile-container" class="clearfix">
-          <?php print render($user_menu); ?>
-        </div>
-
+        <?php if ($variables['login_link']): ?>
+          <div id="user-profile-container" class="clearfix">
+            <span id="login-link"><?php print $variables['login_link']; ?></span>
+          </div>
+        <?php endif; ?>
       </div>
     </section>
 

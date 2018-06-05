@@ -23,6 +23,11 @@ function shelter_preprocess_page(&$variables) {
   // Font Awesome (icon library)
   drupal_add_js('https://use.fontawesome.com/releases/v5.0.0/js/all.js', 'external');
 
+  $variables['login_link'] = FALSE;
+  if (!user_is_logged_in()) {
+    $variables['login_link'] = l(t('Login'), '/user');
+  }
+
   // Put the language switcher in a variable.
   $block = module_invoke('locale', 'block_view', 'language_content');
   $variables['language_switcher'] = $block['content'];

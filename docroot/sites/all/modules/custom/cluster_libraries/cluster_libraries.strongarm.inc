@@ -159,14 +159,20 @@ function cluster_libraries_strongarm() {
       'token' => array(
         'custom_settings' => FALSE,
       ),
+      'ical' => array(
+        'custom_settings' => TRUE,
+      ),
     ),
     'extra_fields' => array(
       'form' => array(
         'path' => array(
-          'weight' => '3',
+          'weight' => '2',
         ),
         'language' => array(
           'weight' => '2',
+        ),
+        'redirect' => array(
+          'weight' => '7',
         ),
       ),
       'display' => array(),
@@ -207,6 +213,9 @@ function cluster_libraries_strongarm() {
       'diff_standard' => array(
         'custom_settings' => FALSE,
       ),
+      'ical' => array(
+        'custom_settings' => TRUE,
+      ),
     ),
     'extra_fields' => array(
       'form' => array(
@@ -220,7 +229,7 @@ function cluster_libraries_strongarm() {
           'weight' => '3',
         ),
         'redirect' => array(
-          'weight' => '24',
+          'weight' => '25',
         ),
       ),
       'display' => array(),

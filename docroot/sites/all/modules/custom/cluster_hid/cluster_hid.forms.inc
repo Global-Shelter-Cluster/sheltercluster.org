@@ -9,9 +9,10 @@ function cluster_hid_settings_form() {
       '#title' => t('Humanitarian Id'),
       'cluster_hid_jwt' => [
         '#type' => 'textarea',
-        '#title' => 'JWT',
+        '#title' => 'Json Web Token',
         '#default_value' => variable_get('cluster_hid_jwt', NULL),
-        '#description' => t('Get your JWT from your Humanitarian Id profile settings.'),
+        '#description' => t('You can get a new JWT from your Humanitarian Id profile settings (https://humanitarian.id/settings).
+          Look for "API Keys".'),
       ],
     ],
   ]);
@@ -30,7 +31,7 @@ function cluster_hid_search_form($form, &$form_state) {
     ],
     '#attached' => [
       'js' => [
-        $js_path . 'autocomplete_select.js',
+        $js_path . 'humanitarianIdSearchUsers.js',
       ],
     ],
     'user-data' => [
@@ -44,5 +45,4 @@ function cluster_hid_search_form_submit(&$form, &$form_state) {
   $http_client = ClusterHidHttpClient::getInstance();
   $name = $form_state['values']['name'];
   $values = $http_client->searchUserByName($name);
-  dpm($values);
 }
