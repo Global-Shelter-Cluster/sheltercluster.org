@@ -1,5 +1,7 @@
 <?php
 
+include_once 'cluster_api.features.inc';
+
 //require_once 'classes/Object/Object.php';
 //require_once 'classes/Object/Type.php';
 //require_once 'classes/Object/Type/User.php';
