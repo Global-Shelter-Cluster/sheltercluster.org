@@ -7,6 +7,14 @@ class ClusterAPI_Type_User extends ClusterAPI_Type {
     'groups' => ['type' => 'group', 'mode' => ClusterAPI_Object::MODE_PUBLIC],
   ];
 
+  protected function preprocessModeAndPersist($id, &$mode, &$persist) {
+    if ($this->current_user && $this->current_user->uid == $id) {
+      // Force private mode and persist if the user is getting their object.
+      $mode = ClusterAPI_Object::MODE_PRIVATE;
+      $persist = TRUE;
+    }
+  }
+
   /**
    * Example:
    *
@@ -23,41 +31,24 @@ class ClusterAPI_Type_User extends ClusterAPI_Type {
    * }
    *
    */
-  protected function getById($id, $mode, $persist, &$objects, $level) {
-    if ($this->current_user && $this->current_user->uid == $id) {
-      // Force private mode and persist if the user is getting their object.
-      $mode = ClusterAPI_Object::MODE_PRIVATE;
-      $persist = TRUE;
-    }
-
-    if (array_key_exists($id, $objects[self::$type])) {
-      $existing = $objects[self::$type];
-
-      $is_higher_detail_level = ClusterAPI_Object::detailLevel($mode) > ClusterAPI_Object::detailLevel($existing['_mode']);
-      if (!$is_higher_detail_level) {
-        $persist_changed_to_true = !$existing['_persist'] && $persist;
-        if (!$persist_changed_to_true) {
-          // No reason to calculate this object again.
-          return;
-        }
-      }
-    }
-
+  protected function generateObject($id, $mode) {
     $user = user_load($id);
+    if (!$user)
+      return NULL;
 
-    $ret = [
-      '_mode' => $mode,
-      '_persist' => $persist,
-    ];
+    $ret = [];
+    $wrapper = entity_metadata_wrapper('user', $user);
 
     switch ($mode) {
       case ClusterAPI_Object::MODE_PRIVATE:
-        $groups = array_values(og_get_groups_by_user($user, 'node'));
+        $convert_to_int = function($string) {
+          return intval($string);
+        };
+        $groups = array_map($convert_to_int, array_values(og_get_groups_by_user($user, 'node')));
         $ret += ['groups' => $groups];
 
       //Fall-through
       case ClusterAPI_Object::MODE_PUBLIC:
-        $wrapper = entity_metadata_wrapper('user', $user);
         $ret += [
           'mail' => $user->mail,
           'picture' => $user->picture ? image_style_url('medium', $user->picture->uri) : '',
@@ -68,14 +59,10 @@ class ClusterAPI_Type_User extends ClusterAPI_Type {
       //Fall-through
       case ClusterAPI_Object::MODE_STUB:
         $ret += [
-          'id' => $user->uid,
           'name' => $user->name,
         ];
     }
 
-    $objects[self::$type][$id] = $ret;
-
-    foreach ($this->related($ret) as $request)
-      ClusterAPI_Type::get($request['type'], $request['id'], $request['mode'], $persist, $objects, $this->current_user, $level);
+    return $ret;
   }
 }
