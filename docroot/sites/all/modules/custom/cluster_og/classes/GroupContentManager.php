@@ -398,6 +398,28 @@ class GroupContentManager {
   }
 
   /**
+   * Get documents with the 'field_key_document' flag for the current group.
+   *  @return
+   *   Return a list of key document nids.
+   */
+  public function getKeyDocumentIds() {
+    $query = new EntityFieldQuery();
+    $res = $query->entityCondition('entity_type', 'node')
+      ->entityCondition('bundle', 'document')
+      ->fieldCondition('og_group_ref', 'target_id', $this->node->nid)
+      ->fieldCondition('field_key_document', 'value', 1)
+      ->propertyCondition('status', NODE_PUBLISHED)
+      ->propertyOrderBy('changed', 'DESC')
+      ->execute();
+
+    if (!isset($res['node'])) {
+      return FALSE;
+    }
+
+    return array_keys($res['node']);
+  }
+
+  /**
    * Get the role id for a group from the role name.
    * @param $role_name
    *  The role name as stored in the database.

@@ -20,6 +20,14 @@ class ClusterAPI_Type_Group extends ClusterAPI_Type {
       'type' => 'factsheet',
       'mode' => ClusterAPI_Object::MODE_PUBLIC,
     ],
+    'featured_documents' => [
+      'type' => 'document',
+      'mode' => ClusterAPI_Object::MODE_PUBLIC,
+    ],
+    'key_documents' => [
+      'type' => 'document',
+      'mode' => ClusterAPI_Object::MODE_PUBLIC,
+    ],
   ];
 
   protected function preprocessModeAndPersist($id, &$mode, &$persist) {
@@ -44,6 +52,8 @@ class ClusterAPI_Type_Group extends ClusterAPI_Type {
    *   title: "Ecuador Earthquake 2016",
    *   associated_regions: [9104, 62],
    *   latest_factsheet: 13454,
+   *   featured_documents: [30, 45],
+   *   key_documents: [30, 45],
    * }
    *
    */
@@ -74,6 +84,9 @@ class ClusterAPI_Type_Group extends ClusterAPI_Type {
         $factsheets = $manager->getFactsheets(1);
         if ($factsheets)
           $ret['latest_factsheet'] = $factsheets[0];
+
+        $ret['featured_documents'] = (array) $manager->getFeaturedDocuments();
+        $ret['key_documents'] = (array) $manager->getKeyDocumentIds();
 
       //Fall-through
       case ClusterAPI_Object::MODE_STUB:

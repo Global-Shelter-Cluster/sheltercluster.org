@@ -3,13 +3,34 @@
 class ClusterAPI_Type_Document extends ClusterAPI_Type {
 
   protected static $type = 'document';
-  protected static $related_def = [];
+  protected static $related_def = [
+    'publisher' => [
+      'type' => 'user',
+      'mode' => ClusterAPI_Object::MODE_STUB,
+    ],
+    'groups' => [
+      'type' => 'group',
+      'mode' => ClusterAPI_Object::MODE_STUB,
+    ],
+  ];
 
   /**
    * Example:
    *
    * {
-   *   ?: "",
+   *   title: "Humanitarian Guidance note: CASH TRANSFER PROGRAMMING",
+   *   publisher: 300, // user id
+   *   groups: [8616], // group(s) the document belongs to
+   *   date: "2016-04-01",
+   *   // TODO: taxonomy
+   *   file: "http://path/to/file.pdf",
+   *   link: "http://external/link", // the object has either "file" or "link"
+   *   source: "DFID",
+   *   language: "English",
+   *   featured: true,
+   *   key: false,
+   *   preview: "http://path/to/thumbnail.jpg",
+   *   description: "<p>document description</p>",
    * }
    *
    */
@@ -19,6 +40,7 @@ class ClusterAPI_Type_Document extends ClusterAPI_Type {
       return NULL;
 
     $ret = [];
+    $wrapper = entity_metadata_wrapper('node', $node);
 
     switch ($mode) {
       case ClusterAPI_Object::MODE_PRIVATE:
@@ -30,7 +52,19 @@ class ClusterAPI_Type_Document extends ClusterAPI_Type {
       case ClusterAPI_Object::MODE_STUB:
         $ret += [
           'title' => $node->title,
+          'publisher' => $node->uid,
+          'groups' => self::getReferenceIds('node', $node, 'og_group_ref'),
+          'date' => format_date($wrapper->field_report_meeting_date->value(), 'custom', 'Y-m-d'),
+          'preview' => self::getFileValue('field_preview', $wrapper, 'medium'),
         ];
+
+        if ($node->field_file)
+          $ret['file'] = self::getFileValue('field_file', $wrapper);
+        elseif ($node->field_link)
+          $ret['link'] = $wrapper->field_link->value(); // TODO: check if this works
+        else
+          // Document has neither a file nor a link, so it's useless.
+          return NULL;
     }
 
     return $ret;
