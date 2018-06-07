@@ -41,21 +41,19 @@ class ClusterAPI_Type_Factsheet extends ClusterAPI_Type {
 
         //Fall-through
       case ClusterAPI_Object::MODE_PUBLIC:
-        $map_uri = $node->field_map ? $wrapper->field_map->file->value()->uri : NULL;
-
         $ret += [
           'highlights' => trim($wrapper->body->value()['safe_value']),
-          'map' => $map_uri ? image_style_url('factsheet_map', $map_uri) : '',
           'photo_credit' => (string) $wrapper->field_photo_credit->value(),
         ];
 
+        if ($value = self::getFileValue('field_map', $wrapper, 'factsheet_map'))
+          $ret['map'] = $value;
+
       //Fall-through
       case ClusterAPI_Object::MODE_STUB:
-        $image_uri = $node->field_image ? $wrapper->field_image->file->value()->uri : NULL;
-
         $ret += [
           'date' => format_date($wrapper->field_date->value(), 'custom', 'Y-m'),
-          'image' => $image_uri ? image_style_url('factsheet_image', $image_uri) : '',
+          'image' => self::getFileValue('field_image', $wrapper, 'factsheet_image'),
         ];
     }
 

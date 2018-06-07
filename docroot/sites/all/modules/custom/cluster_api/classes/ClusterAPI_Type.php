@@ -57,6 +57,25 @@ abstract class ClusterAPI_Type {
   }
 
   /**
+   * @param string $field_name
+   * @param EntityMetadataWrapper $wrapper
+   * @param string|null $image_style
+   * @return string|null
+   */
+  protected static function getFileValue($field_name, $wrapper, $image_style = NULL) {
+    $node = $wrapper->raw();
+    $uri = $node->$field_name ? $wrapper->$field_name->file->value()->uri : NULL;
+
+    if (!$uri)
+      return NULL;
+
+    if ($image_style)
+      return image_style_url($image_style, $uri);
+    else
+      return file_create_url($uri);
+  }
+
+  /**
    * @param integer $id
    * @param string $mode
    * @param boolean $persist
@@ -131,6 +150,10 @@ abstract class ClusterAPI_Type {
       return;
 
     if (!array_key_exists($type, self::$types))
+      return;
+
+    if (array_key_exists($id, $objects[$type]) && ClusterAPI_Object::detailLevel($objects[$type]) >= ClusterAPI_Object::detailLevel($mode))
+      // We already have this object, in the same or higher level of detail.
       return;
 
     $class = self::$types[$type];
