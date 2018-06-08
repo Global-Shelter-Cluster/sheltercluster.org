@@ -53,7 +53,7 @@ class ClusterAPI_Type_Document extends ClusterAPI_Type {
         $ret += [
           'title' => $node->title,
           'publisher' => $node->uid,
-          'groups' => self::getReferenceIds('node', $node, 'og_group_ref'),
+          'groups' => self::getReferenceIds('node', $node, 'og_group_ref', TRUE),
           'date' => format_date($wrapper->field_report_meeting_date->value(), 'custom', 'Y-m-d'),
           'preview' => self::getFileValue('field_preview', $wrapper, 'medium'),
         ];
