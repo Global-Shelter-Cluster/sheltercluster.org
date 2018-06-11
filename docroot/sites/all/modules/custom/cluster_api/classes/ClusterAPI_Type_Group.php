@@ -58,6 +58,7 @@ class ClusterAPI_Type_Group extends ClusterAPI_Type {
    *   type: "response",
    *   id: 9175,
    *   title: "Ecuador Earthquake 2016",
+   *   url: "https://www.sheltercluster.org/response/ecuador-earthquake-2016",
    *   associated_regions: [9104, 62],
    *   latest_factsheet: 13454,
    *   featured_documents: [30, 45],
@@ -97,6 +98,8 @@ class ClusterAPI_Type_Group extends ClusterAPI_Type {
         $ret['featured_documents'] = array_filter((array) $manager->getFeaturedDocuments());
         $ret['key_documents'] = array_filter((array) $manager->getKeyDocumentIds());
         $ret['recent_documents'] = array_filter((array) $manager->getRecentDocuments(100, FALSE));
+
+        $ret['url'] = url('node/' . $id, ['absolute' => TRUE]);
 
       //Fall-through
       case ClusterAPI_Object::MODE_STUB:
