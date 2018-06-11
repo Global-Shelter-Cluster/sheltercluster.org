@@ -7,8 +7,12 @@ class ClusterAPI_Type_User extends ClusterAPI_Type {
     'groups' => ['type' => 'group', 'mode' => ClusterAPI_Object::MODE_PUBLIC],
   ];
 
-  protected function preprocessModeAndPersist($id, &$mode, &$persist) {
-    if ($this->current_user && $this->current_user->uid == $id) {
+  protected function preprocessModeAndPersist($id, &$mode, &$persist, $previous_type, $previous_id) {
+    if (
+      $previous_type === NULL // Only do this when the user is a top-level request
+      && $this->current_user
+      && $this->current_user->uid == $id
+    ) {
       // Force private mode and persist if the user is getting their object.
       $mode = ClusterAPI_Object::MODE_PRIVATE;
       $persist = TRUE;
