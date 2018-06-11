@@ -76,6 +76,20 @@ abstract class ClusterAPI_Type {
   }
 
   /**
+   * @param string|int $field_name_or_timestamp
+   * @param EntityMetadataWrapper|null $wrapper
+   * @param string|null $custom_format
+   * @return string|null
+   */
+  protected static function getDateValue($field_name_or_timestamp, $wrapper = NULL, $custom_format = NULL) {
+    if (!is_numeric($field_name_or_timestamp))
+      $field_name_or_timestamp = $wrapper->$field_name_or_timestamp->value(); // returns a timestamp in UTC
+
+    // 'c' means ISO8601-formatted date
+    return format_date($field_name_or_timestamp, 'custom', $custom_format ? $custom_format : 'c');
+  }
+
+  /**
    * @param integer $id
    * @param string $mode
    * @param boolean $persist

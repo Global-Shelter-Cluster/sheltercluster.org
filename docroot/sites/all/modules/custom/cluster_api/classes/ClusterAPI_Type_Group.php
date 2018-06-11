@@ -28,6 +28,10 @@ class ClusterAPI_Type_Group extends ClusterAPI_Type {
       'type' => 'document',
       'mode' => ClusterAPI_Object::MODE_PUBLIC,
     ],
+    'recent_documents' => [
+      'type' => 'document',
+      'mode' => ClusterAPI_Object::MODE_STUB,
+    ],
   ];
 
   protected function preprocessModeAndPersist($id, &$mode, &$persist) {
@@ -54,6 +58,7 @@ class ClusterAPI_Type_Group extends ClusterAPI_Type {
    *   latest_factsheet: 13454,
    *   featured_documents: [30, 45],
    *   key_documents: [30, 45],
+   *   recent_documents: [30, 45, 123, 693],
    * }
    *
    */
@@ -85,8 +90,9 @@ class ClusterAPI_Type_Group extends ClusterAPI_Type {
         if ($factsheets)
           $ret['latest_factsheet'] = $factsheets[0];
 
-        $ret['featured_documents'] = (array) $manager->getFeaturedDocuments();
-        $ret['key_documents'] = (array) $manager->getKeyDocumentIds();
+        $ret['featured_documents'] = array_filter((array) $manager->getFeaturedDocuments());
+        $ret['key_documents'] = array_filter((array) $manager->getKeyDocumentIds());
+        $ret['recent_documents'] = array_filter((array) $manager->getRecentDocuments(100, FALSE));
 
       //Fall-through
       case ClusterAPI_Object::MODE_STUB:

@@ -18,6 +18,7 @@ class ClusterAPI_Type_Document extends ClusterAPI_Type {
    * Example:
    *
    * {
+   *   changed: "2016-05-02T08:22:29+00:00", // ISO 8601
    *   title: "Humanitarian Guidance note: CASH TRANSFER PROGRAMMING",
    *   publisher: 300, // user id
    *   groups: [8616], // group(s) the document belongs to
@@ -42,29 +43,30 @@ class ClusterAPI_Type_Document extends ClusterAPI_Type {
     $ret = [];
     $wrapper = entity_metadata_wrapper('node', $node);
 
+    if (!$node->field_file && !$node->field_link)
+      // Document has neither a file nor a link, so it's useless.
+      return NULL;
+
     switch ($mode) {
       case ClusterAPI_Object::MODE_PRIVATE:
 
         //Fall-through
       case ClusterAPI_Object::MODE_PUBLIC:
+        if ($node->field_file)
+          $ret['file'] = self::getFileValue('field_file', $wrapper);
+        else
+          $ret['link'] = $wrapper->field_link->value(); // TODO: check if this works
 
-        //Fall-through
+      //Fall-through
       case ClusterAPI_Object::MODE_STUB:
         $ret += [
+          'changed' => self::getDateValue($node->changed),
           'title' => $node->title,
           'publisher' => $node->uid,
           'groups' => self::getReferenceIds('node', $node, 'og_group_ref', TRUE),
-          'date' => format_date($wrapper->field_report_meeting_date->value(), 'custom', 'Y-m-d'),
+          'date' => self::getDateValue('field_report_meeting_date', $wrapper, 'Y-m-d'),
           'preview' => self::getFileValue('field_preview', $wrapper, 'medium'),
         ];
-
-        if ($node->field_file)
-          $ret['file'] = self::getFileValue('field_file', $wrapper);
-        elseif ($node->field_link)
-          $ret['link'] = $wrapper->field_link->value(); // TODO: check if this works
-        else
-          // Document has neither a file nor a link, so it's useless.
-          return NULL;
     }
 
     return $ret;
