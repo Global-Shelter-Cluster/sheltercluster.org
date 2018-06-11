@@ -22,14 +22,8 @@
 function _cluster_api_get_objects_resource($requests) {
   global $user;
 
-  $user = user_load(733); // Camilo
+  $user = user_load(733); // 733: Camilo, 74: Shirin, 70: Neil, 531: Bo
 
   $object = new ClusterAPI_Object($user);
   return $object->getObjects($requests);
-  $a = 1;
-
-  return array_merge([
-    ['a' => 3],
-    ['b' => 4],
-  ], (array) $requests);
 }
