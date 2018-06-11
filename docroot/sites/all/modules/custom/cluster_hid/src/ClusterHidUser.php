@@ -303,6 +303,15 @@ class ClusterHidUser {
         ->execute()
         ->fetchField();
     }
+
+    // Test if hum_id can be used to query the humanitarian.id API.
+    // This is simply based on observation that older ids that contain the '@' character won't work.
+    // @see /patches/humanitarianid_library_indentifier.patch
+    // for the solution that is attempting to address this issue in the future.
+    if (strpos($hum_id, '@') !== FALSE) {
+      $hum_id = NULL;
+    }
+
     return $hum_id;
   }
 
