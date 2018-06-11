@@ -5,6 +5,8 @@ class ClusterAPI_Object {
   const MODE_PRIVATE = 'private';
   const MODE_PUBLIC = 'public';
   const MODE_STUB = 'stub';
+
+  /** @var \stdClass User object */
   protected $current_user;
 
   public function __construct($current_user) {

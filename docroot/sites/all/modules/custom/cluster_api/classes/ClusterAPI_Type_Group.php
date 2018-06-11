@@ -34,8 +34,12 @@ class ClusterAPI_Type_Group extends ClusterAPI_Type {
     ],
   ];
 
-  protected function preprocessModeAndPersist($id, &$mode, &$persist) {
-    if ($this->current_user) {
+  protected function preprocessModeAndPersist($id, &$mode, &$persist, $previous_type, $previous_id) {
+    if (
+      $this->current_user
+      && $previous_type === 'user'
+      && $this->current_user->nid === $previous_id // Only do this if we come from the logged in user (e.g. not from a document)
+    ) {
       $current_user_groups = array_values(og_get_groups_by_user($this->current_user, 'node'));
       if (in_array($id, $current_user_groups)) {
         // Force public mode and persist if this is one of the current user's followed groups.

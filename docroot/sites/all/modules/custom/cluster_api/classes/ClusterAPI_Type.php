@@ -22,6 +22,8 @@ abstract class ClusterAPI_Type {
     'document' => 'ClusterAPI_Type_Document',
     'event' => 'ClusterAPI_Type_Event',
   ];
+
+  /** @var \stdClass User object */
   protected $current_user;
 
   protected function __construct($current_user) {
@@ -95,11 +97,13 @@ abstract class ClusterAPI_Type {
    * @param boolean $persist
    * @param array $objects
    * @param integer $level
+   * @param string|NULL $previous_type
+   * @param integer|NULL $previous_id
    *
    * @return null
    */
-  protected function getById($id, $mode, $persist, &$objects, $level) {
-    $this->preprocessModeAndPersist($id, $mode, $persist);
+  protected function getById($id, $mode, $persist, &$objects, $level, $previous_type, $previous_id) {
+    $this->preprocessModeAndPersist($id, $mode, $persist, $previous_type, $previous_id);
 
     if (array_key_exists($id, $objects[self::$type])) {
       $existing = $objects[self::$type];
@@ -127,10 +131,10 @@ abstract class ClusterAPI_Type {
     $objects[static::$type][$id] = $object;
 
     foreach ($this->related($object) as $request)
-      ClusterAPI_Type::get($request['type'], $request['id'], $request['mode'], $persist, $objects, $this->current_user, $level);
+      ClusterAPI_Type::get($request['type'], $request['id'], $request['mode'], $persist, $objects, $this->current_user, $level, static::$type, $id);
   }
 
-  protected function preprocessModeAndPersist($id, &$mode, &$persist) {
+  protected function preprocessModeAndPersist($id, &$mode, &$persist, $previous_type, $previous_id) {
     return;
   }
 
@@ -158,7 +162,7 @@ abstract class ClusterAPI_Type {
     return $ret;
   }
 
-  static function get($type, $id, $mode, $persist, &$objects, &$current_user, $level = 0) {
+  static function get($type, $id, $mode, $persist, &$objects, &$current_user, $level = 0, $previous_type = NULL, $previous_id = NULL) {
     if ($level > 20)
       // Infinite loop protection
       return;
@@ -174,7 +178,7 @@ abstract class ClusterAPI_Type {
     if (is_string($class))
       $class = self::$types[$type] = $class::create($current_user);
 
-    $class->getById($id, $mode, $persist, $objects, $level + 1);
+    $class->getById($id, $mode, $persist, $objects, $level + 1, $previous_type, $previous_id);
   }
 
   /**
