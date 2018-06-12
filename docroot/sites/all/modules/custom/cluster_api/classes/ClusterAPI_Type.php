@@ -106,10 +106,10 @@ abstract class ClusterAPI_Type {
   protected function getById($id, $mode, $persist, &$objects, $level, $previous_type, $previous_id) {
     $this->preprocessModeAndPersist($id, $mode, $persist, $previous_type, $previous_id);
 
-    if (!is_array($objects[self::$type]))
-      dpm(func_get_args(), 'temp debug clusterapi_type::getbyid()');
-    if (array_key_exists($id, $objects[self::$type])) {
-      $existing = $objects[self::$type];
+    if (!is_array($objects[static::$type]))
+      die(print_r(func_get_args(), TRUE));
+    if (array_key_exists($id, $objects[static::$type])) {
+      $existing = $objects[static::$type];
 
       $is_higher_detail_level = ClusterAPI_Object::detailLevel($mode) > ClusterAPI_Object::detailLevel($existing['_mode']);
       if (!$is_higher_detail_level) {
