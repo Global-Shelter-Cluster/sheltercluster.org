@@ -2,6 +2,9 @@
 
 class ClusterAPI_Type_Group extends ClusterAPI_Type {
 
+  /** @var int How many documents to return in the "recent_documents" property */
+  const RECENT_DOCS_LIMIT = 50;
+
   protected static $type = 'group';
   protected static $related_def = [
     'associated_regions' => [
@@ -97,7 +100,7 @@ class ClusterAPI_Type_Group extends ClusterAPI_Type {
 
         $ret['featured_documents'] = array_filter((array) $manager->getFeaturedDocuments());
         $ret['key_documents'] = array_filter((array) $manager->getKeyDocumentIds());
-        $ret['recent_documents'] = array_filter((array) $manager->getRecentDocuments(100, FALSE));
+        $ret['recent_documents'] = array_filter((array) $manager->getRecentDocuments(self::RECENT_DOCS_LIMIT, FALSE));
 
         $ret['url'] = url('node/' . $id, ['absolute' => TRUE]);
 

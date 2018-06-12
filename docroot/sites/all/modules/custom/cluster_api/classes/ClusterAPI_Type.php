@@ -16,6 +16,7 @@ abstract class ClusterAPI_Type {
    *   objects.
    */
   protected static $types = [
+    'global' => 'ClusterAPI_Type_Global',
     'user' => 'ClusterAPI_Type_User',
     'group' => 'ClusterAPI_Type_Group',
     'factsheet' => 'ClusterAPI_Type_Factsheet',
@@ -105,6 +106,8 @@ abstract class ClusterAPI_Type {
   protected function getById($id, $mode, $persist, &$objects, $level, $previous_type, $previous_id) {
     $this->preprocessModeAndPersist($id, $mode, $persist, $previous_type, $previous_id);
 
+    if (!is_array($objects[self::$type]))
+      dpm(func_get_args(), 'temp debug clusterapi_type::getbyid()');
     if (array_key_exists($id, $objects[self::$type])) {
       $existing = $objects[self::$type];
 
