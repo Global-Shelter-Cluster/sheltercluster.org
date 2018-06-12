@@ -7,6 +7,11 @@ class ClusterAPI_Type_Global extends ClusterAPI_Type {
     'featured_groups' => ['type' => 'group', 'mode' => ClusterAPI_Object::MODE_PUBLIC],
   ];
 
+  protected function preprocessModeAndPersist($id, &$mode, &$persist, $previous_type, $previous_id) {
+    // Always persist global object
+    $persist = TRUE;
+  }
+
   /**
    * Example:
    *
