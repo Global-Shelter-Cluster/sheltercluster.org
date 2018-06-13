@@ -57,13 +57,17 @@ class ClusterAPI_Type_Document extends ClusterAPI_Type {
         else
           $ret['link'] = $wrapper->field_link->value(); // TODO: check if this works
 
+        $ret += [
+          'publisher' => intval($node->uid),
+          'groups' => self::getReferenceIds('node', $node, 'og_group_ref', TRUE),
+          'description' => $wrapper->body->value()['safe_value'],
+        ];
+
       //Fall-through
       default:
         $ret += [
           'changed' => self::getDateValue($node->changed),
           'title' => $node->title,
-          'publisher' => intval($node->uid),
-          'groups' => self::getReferenceIds('node', $node, 'og_group_ref', TRUE),
           'date' => self::getDateValue('field_report_meeting_date', $wrapper, 'Y-m-d'),
           'preview' => self::getFileValue('field_preview', $wrapper, 'medium'),
         ];

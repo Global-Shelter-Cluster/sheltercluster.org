@@ -4,6 +4,8 @@ class ClusterAPI_Type_Group extends ClusterAPI_Type {
 
   /** @var int How many documents to return in the "recent_documents" property */
   const RECENT_DOCS_LIMIT = 50;
+  const UPCOMING_EVENTS_LIMIT = 10;
+  const UPCOMING_EVENTS_DAYS_LIMIT = 14;
   protected static $type = 'group';
   protected static $related_def = [
     'associated_regions' => [
@@ -34,6 +36,10 @@ class ClusterAPI_Type_Group extends ClusterAPI_Type {
       'type' => 'document',
       'mode' => ClusterAPI_Object::MODE_STUB,
     ],
+    'upcoming_events' => [
+      'type' => 'event',
+      'mode' => ClusterAPI_Object::MODE_STUB,
+    ],
   ];
 
   protected function preprocessModeAndPersist($id, &$mode, &$persist, $previous_type, $previous_id) {
@@ -44,7 +50,7 @@ class ClusterAPI_Type_Group extends ClusterAPI_Type {
       $current_user_groups = $this->current_user
         ? array_values(og_get_groups_by_user($this->current_user, 'node'))
         : [];
-      
+
       if (in_array($id, $current_user_groups)) {
         // Force private mode and persist if this is one of the current user's
         // followed groups.
@@ -91,7 +97,7 @@ class ClusterAPI_Type_Group extends ClusterAPI_Type {
     switch ($mode) {
       case ClusterAPI_Object::MODE_PRIVATE:
 
-        //Fall-through
+      //Fall-through
       case ClusterAPI_Object::MODE_PUBLIC:
         if ($value = self::getReferenceIds('node', $node, 'field_associated_regions', TRUE))
           $ret['associated_regions'] = $value;
@@ -105,10 +111,11 @@ class ClusterAPI_Type_Group extends ClusterAPI_Type {
         $ret['featured_documents'] = array_filter((array) $manager->getFeaturedDocuments());
         $ret['key_documents'] = array_filter((array) $manager->getKeyDocumentIds());
         $ret['recent_documents'] = array_filter((array) $manager->getRecentDocuments(self::RECENT_DOCS_LIMIT, FALSE));
+        $ret['upcoming_events'] = array_filter((array) $manager->getUpcomingEvents(self::UPCOMING_EVENTS_LIMIT, self::UPCOMING_EVENTS_DAYS_LIMIT));
 
         $ret['url'] = url('node/' . $id, ['absolute' => TRUE]);
 
-        //Fall-through
+      //Fall-through
       case ClusterAPI_Object::MODE_STUBPLUS:
         $factsheets = $manager->getFactsheets(1);
         if ($factsheets)

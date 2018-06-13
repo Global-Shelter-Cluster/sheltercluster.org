@@ -23,7 +23,6 @@ abstract class ClusterAPI_Type {
     'document' => 'ClusterAPI_Type_Document',
     'event' => 'ClusterAPI_Type_Event',
   ];
-
   /** @var \stdClass User object */
   protected $current_user;
 
@@ -63,6 +62,7 @@ abstract class ClusterAPI_Type {
    * @param string $field_name
    * @param EntityMetadataWrapper $wrapper
    * @param string|null $image_style
+   *
    * @return string|null
    */
   protected static function getFileValue($field_name, $wrapper, $image_style = NULL) {
@@ -82,14 +82,22 @@ abstract class ClusterAPI_Type {
    * @param string|int $field_name_or_timestamp
    * @param EntityMetadataWrapper|null $wrapper
    * @param string|null $custom_format
+   *
    * @return string|null
    */
-  protected static function getDateValue($field_name_or_timestamp, $wrapper = NULL, $custom_format = NULL) {
-    if (!is_numeric($field_name_or_timestamp))
-      $field_name_or_timestamp = $wrapper->$field_name_or_timestamp->value(); // returns a timestamp in UTC
+  protected static function getDateValue($field_name_or_timestamp, $wrapper = NULL, $custom_format = 'c') {
+    if (!is_numeric($field_name_or_timestamp)) {
+      switch ($field_name_or_timestamp) {
+        case 'field_recurring_event_date2':
+          $field_name_or_timestamp = strtotime($wrapper->$field_name_or_timestamp->value()[0]['value']);
+          break;
+        default:
+          $field_name_or_timestamp = $wrapper->$field_name_or_timestamp->value(); // returns a timestamp in UTC
+      }
+    }
 
     // 'c' means ISO8601-formatted date
-    return format_date($field_name_or_timestamp, 'custom', $custom_format ? $custom_format : 'c');
+    return format_date($field_name_or_timestamp, 'custom', $custom_format);
   }
 
   /**
