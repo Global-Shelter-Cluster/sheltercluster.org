@@ -4,6 +4,7 @@ class ClusterAPI_Object {
 
   const MODE_PRIVATE = 'private';
   const MODE_PUBLIC = 'public';
+  const MODE_STUBPLUS = 'stubplus';
   const MODE_STUB = 'stub';
 
   /** @var \stdClass User object */
@@ -15,8 +16,9 @@ class ClusterAPI_Object {
 
   static function detailLevel($mode) {
     $levels = [
-      self::MODE_PRIVATE => 2,
-      self::MODE_PUBLIC => 1,
+      self::MODE_PRIVATE => 3,
+      self::MODE_PUBLIC => 2,
+      self::MODE_STUBPLUS => 1,
       self::MODE_STUB => 0,
     ];
   }

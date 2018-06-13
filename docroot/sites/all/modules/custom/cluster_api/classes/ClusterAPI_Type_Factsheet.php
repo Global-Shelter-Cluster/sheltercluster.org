@@ -50,7 +50,7 @@ class ClusterAPI_Type_Factsheet extends ClusterAPI_Type {
           $ret['map'] = $value;
 
       //Fall-through
-      case ClusterAPI_Object::MODE_STUB:
+      default:
         $ret += [
           'date' => format_date($wrapper->field_date->value(), 'custom', 'Y-m'),
           'image' => self::getFileValue('field_image', $wrapper, 'factsheet_image'),

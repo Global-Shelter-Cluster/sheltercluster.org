@@ -27,7 +27,7 @@ class ClusterAPI_Type_Event extends ClusterAPI_Type {
       case ClusterAPI_Object::MODE_PUBLIC:
 
         //Fall-through
-      case ClusterAPI_Object::MODE_STUB:
+      default:
         $ret += [
           'title' => $node->title,
         ];

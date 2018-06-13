@@ -61,7 +61,7 @@ class ClusterAPI_Type_User extends ClusterAPI_Type {
         ];
 
       //Fall-through
-      case ClusterAPI_Object::MODE_STUB:
+      default:
         $ret += [
           'name' => $user->name,
         ];
