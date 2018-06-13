@@ -60,6 +60,7 @@ class ClusterAPI_Type_Document extends ClusterAPI_Type {
         $ret += [
           'publisher' => intval($node->uid),
           'groups' => self::getReferenceIds('node', $node, 'og_group_ref', TRUE),
+          'description' => $wrapper->body->value()['safe_value'],
         ];
 
       //Fall-through

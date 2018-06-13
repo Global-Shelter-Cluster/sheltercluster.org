@@ -274,18 +274,27 @@ class GroupContentManager {
 
   /**
    * Get the next upcoming event for the group, if any.
-   * @return
+   * @return []int|FALSE
    *  nid, FALSE if none exist.
    */
-  public function getUpcomingEvents($range = 3) {
+  public function getUpcomingEvents($range = 3, $days_limit = NULL) {
     $query = new EntityFieldQuery();
-    $res = $query->entityCondition('entity_type', 'node')
+    $query->entityCondition('entity_type', 'node')
       ->entityCondition('bundle', 'event')
       ->fieldCondition('og_group_ref', 'target_id', $this->node->nid)
       ->fieldCondition('field_recurring_event_date2', 'value', date('Y-m-d'), '>')
       ->propertyCondition('status', NODE_PUBLISHED)
-      ->fieldOrderBy('field_recurring_event_date2', 'value', 'ASC')
-      ->range(0, $range)
+      ->fieldOrderBy('field_recurring_event_date2', 'value', 'ASC');
+
+    if (!is_null($range))
+      $query->range(0, $range);
+
+    if (!is_null($days_limit)) {
+//      $end_date = date('Y-m-d', time() + (3600 * 24 * ($days_limit + 1)));
+//      $query->fieldCondition('field_recurring_event_date2', 'value', $end_date, '<');
+    }
+
+    $res = $query
       ->execute();
 
     if (!isset($res['node'])) {
