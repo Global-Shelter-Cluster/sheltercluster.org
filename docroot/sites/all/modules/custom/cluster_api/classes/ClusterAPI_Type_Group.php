@@ -20,7 +20,7 @@ class ClusterAPI_Type_Group extends ClusterAPI_Type {
     ],
     'latest_factsheet' => [
       'type' => 'factsheet',
-      'mode' => ClusterAPI_Object::MODE_PUBLIC,
+      'mode' => ClusterAPI_Object::MODE_STUB,
     ],
     'featured_documents' => [
       'type' => 'document',
@@ -45,10 +45,16 @@ class ClusterAPI_Type_Group extends ClusterAPI_Type {
         ? array_values(og_get_groups_by_user($this->current_user, 'node'))
         : [];
       
-      if (in_array($id, $current_user_groups) || in_array($id, cluster_og_get_hot_response_nids())) {
-        // Force public mode and persist if this is one of the current user's
-        // followed groups, or if it's one of the globally featured responses.
-        $mode = ClusterAPI_Object::MODE_PUBLIC;
+      if (in_array($id, $current_user_groups)) {
+        // Force private mode and persist if this is one of the current user's
+        // followed groups.
+        $mode = ClusterAPI_Object::MODE_PRIVATE;
+        $persist = TRUE;
+      }
+      elseif ($mode === ClusterAPI_Object::MODE_STUB && in_array($id, cluster_og_get_hot_response_nids())) {
+        // Force at least stubplus mode (and persist) if this is one of the
+        // globally featured responses.
+        $mode = ClusterAPI_Object::MODE_STUBPLUS;
         $persist = TRUE;
       }
     }
@@ -96,18 +102,20 @@ class ClusterAPI_Type_Group extends ClusterAPI_Type {
         if ($value = self::getReferenceIds('node', $node, 'field_parent_response'))
           $ret['parent_response'] = $value;
 
-        $factsheets = $manager->getFactsheets(1);
-        if ($factsheets)
-          $ret['latest_factsheet'] = $factsheets[0];
-
         $ret['featured_documents'] = array_filter((array) $manager->getFeaturedDocuments());
         $ret['key_documents'] = array_filter((array) $manager->getKeyDocumentIds());
         $ret['recent_documents'] = array_filter((array) $manager->getRecentDocuments(self::RECENT_DOCS_LIMIT, FALSE));
 
         $ret['url'] = url('node/' . $id, ['absolute' => TRUE]);
 
+        //Fall-through
+      case ClusterAPI_Object::MODE_STUBPLUS:
+        $factsheets = $manager->getFactsheets(1);
+        if ($factsheets)
+          $ret['latest_factsheet'] = $factsheets[0];
+
       //Fall-through
-      case ClusterAPI_Object::MODE_STUB:
+      default:
         $ret += [
           'type' => $node->type,
           'title' => $node->title,

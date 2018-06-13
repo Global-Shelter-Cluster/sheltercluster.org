@@ -4,7 +4,7 @@ class ClusterAPI_Type_Global extends ClusterAPI_Type {
 
   protected static $type = 'global';
   protected static $related_def = [
-    'featured_groups' => ['type' => 'group', 'mode' => ClusterAPI_Object::MODE_PUBLIC],
+    'featured_groups' => ['type' => 'group', 'mode' => ClusterAPI_Object::MODE_STUBPLUS],
   ];
 
   protected function preprocessModeAndPersist($id, &$mode, &$persist, $previous_type, $previous_id) {

@@ -58,7 +58,7 @@ class ClusterAPI_Type_Document extends ClusterAPI_Type {
           $ret['link'] = $wrapper->field_link->value(); // TODO: check if this works
 
       //Fall-through
-      case ClusterAPI_Object::MODE_STUB:
+      default:
         $ret += [
           'changed' => self::getDateValue($node->changed),
           'title' => $node->title,
