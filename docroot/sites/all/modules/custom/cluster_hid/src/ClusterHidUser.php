@@ -294,14 +294,18 @@ class ClusterHidUser {
       ->execute()
       ->fetchField();
 
-    // Test the hybrid auth database.
+    // Look for the user in the hybrid auth database.
     if (!$hum_id && module_exists('hybridauth')) {
-      $hum_id = db_select('hybridauth_identity', 'hi')
-        ->fields('hi', ['provider_identifier'])
+      $user_profile_data = db_select('hybridauth_identity', 'hi')
+        ->fields('hi', ['data'])
         ->condition('uid', $uid)
         ->condition('provider', 'HumanitarianId')
         ->execute()
         ->fetchField();
+
+      $user_profile_data = unserialize($user_profile_data);
+        $hum_id = $user_profile_data['identifier'];
+      }
     }
 
     // Test if hum_id can be used to query the humanitarian.id API.
