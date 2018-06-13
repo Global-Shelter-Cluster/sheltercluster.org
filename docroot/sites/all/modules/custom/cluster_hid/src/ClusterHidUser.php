@@ -304,6 +304,7 @@ class ClusterHidUser {
         ->fetchField();
 
       $user_profile_data = unserialize($user_profile_data);
+      if (isset($user_profile_data['identifier'])) {
         $hum_id = $user_profile_data['identifier'];
       }
     }
