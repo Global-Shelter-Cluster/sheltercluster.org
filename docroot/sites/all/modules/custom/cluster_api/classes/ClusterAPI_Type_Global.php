@@ -26,12 +26,7 @@ class ClusterAPI_Type_Global extends ClusterAPI_Type {
 
     $ret = [];
 
-    $featured_groups = cluster_og_get_hot_response_nodes();
-    if ($featured_groups === FALSE)
-      $featured_groups = [];
-    else
-      $featured_groups = array_values(array_map(function($node) {return intval($node->nid);}, $featured_groups));
-    $ret['featured_groups'] = $featured_groups;
+    $ret['featured_groups'] = cluster_og_get_hot_response_nids();
 
     return $ret;
   }

@@ -389,6 +389,18 @@ function cluster_og_get_hot_response_nodes() {
 }
 
 /**
+ * @return array
+ */
+function cluster_og_get_hot_response_nids() {
+  $nids = cluster_og_get_hot_response_nodes();
+  if ($nids === FALSE)
+    $nids = [];
+  else
+    $nids = array_values(array_map(function($node) {return intval($node->nid);}, $nids));
+  return $nids;
+}
+
+/**
  * Implements hook_url_outbound_alter().
  * Changes region URL to response URL when field_response_auto_redirect is set.
  */

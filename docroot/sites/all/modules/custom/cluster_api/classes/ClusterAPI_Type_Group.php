@@ -4,7 +4,6 @@ class ClusterAPI_Type_Group extends ClusterAPI_Type {
 
   /** @var int How many documents to return in the "recent_documents" property */
   const RECENT_DOCS_LIMIT = 50;
-
   protected static $type = 'group';
   protected static $related_def = [
     'associated_regions' => [
@@ -40,11 +39,15 @@ class ClusterAPI_Type_Group extends ClusterAPI_Type {
   protected function preprocessModeAndPersist($id, &$mode, &$persist, $previous_type, $previous_id) {
     $came_from_logged_in_user = $this->current_user && $previous_type === 'user' && $this->current_user->nid === $previous_id;
     $is_top_level_request = $previous_type === NULL && $previous_id === NULL;
-    
+
     if ($came_from_logged_in_user || $is_top_level_request) {
-      $current_user_groups = array_values(og_get_groups_by_user($this->current_user, 'node'));
-      if (in_array($id, $current_user_groups)) {
-        // Force public mode and persist if this is one of the current user's followed groups.
+      $current_user_groups = $this->current_user
+        ? array_values(og_get_groups_by_user($this->current_user, 'node'))
+        : [];
+      
+      if (in_array($id, $current_user_groups) || in_array($id, cluster_og_get_hot_response_nids())) {
+        // Force public mode and persist if this is one of the current user's
+        // followed groups, or if it's one of the globally featured responses.
         $mode = ClusterAPI_Object::MODE_PUBLIC;
         $persist = TRUE;
       }
