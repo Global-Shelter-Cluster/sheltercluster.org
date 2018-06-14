@@ -210,7 +210,15 @@ class ClusterHidUser {
    * @return user or false.
    */
   private function getDrupalAccount() {
+    // Test if there is a matching email.
     $user = user_load_by_mail($this->hidUser->email);
+
+    if (!$user) {
+      $uid = $this->getUserIdFromHybridAuthIdentifier($this->getHumanitarianId());
+      if ($uid) {
+        $user = user_load($uid);
+      }
+    }
 
     // Track the user in the cluster_hid table.
     if ($user) {
@@ -261,6 +269,38 @@ class ClusterHidUser {
     $this->populateCommonFieldsForCreateOrUpdate($user);
     $user = user_save($user);
     return $user->uid;
+  }
+
+  /**
+   * Look for user id by identifier in the hybridauth table.
+   * This could be necessary if the humanitarian id user does not disclose their email address.
+   */
+  public function getUserIdFromHybridAuthIdentifier($identifier) {
+    if (!module_exists('hybridauth')) {
+      return FALSE;
+    }
+
+    // Search for matching identifier.
+    $uid = db_select('hybridauth_identity', 'hi')
+      ->fields('hi', ['uid'])
+      ->condition('provider', 'HumanitarianId')
+      ->condition('provider_identifier', $identifier)
+      ->execute()
+      ->fetchField();
+
+    if ($uid) {
+      return $uid;
+    }
+
+    // Search the humanitarian serialized data for matching id.
+    $uid = db_select('hybridauth_identity', 'hi')
+      ->fields('hi', ['uid'])
+      ->condition('provider', 'HumanitarianId')
+      ->condition('data', '%' . db_like($identifier) . '%', 'LIKE')
+      ->execute()
+      ->fetchField();
+
+    return $uid;
   }
 
   private function populateCommonFieldsForCreateOrUpdate($user) {
