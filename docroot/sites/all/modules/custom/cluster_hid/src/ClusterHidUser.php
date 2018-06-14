@@ -23,6 +23,9 @@ class ClusterHidUser {
   }
 
   public function getEmail() {
+    if (!isset($this->hidUser->email)) {
+      return NULL;
+    }
     return $this->hidUser->email;
   }
 
@@ -58,11 +61,22 @@ class ClusterHidUser {
     return $potentially_localized_field[0]['value'];
   }
 
+  /**
+   * Get a value that represents a role or title.
+   * If there are functional roles, return the name of the first functional role.
+   * If there are titles, return the first title.
+   */
   public function getRoleOrTitle() {
-    $first_role = array_pop($this->hidUser->functional_roles);
-    $first_title = array_pop($this->hidUser->job_titles);
+    $first_role = $first_title = '';
+    if (isset($this->hidUser->functional_roles)) {
+      $first_role = array_pop($this->hidUser->functional_roles);
+    }
     if (!empty($first_role)) {
-      return $first_role;
+      return $first_role->name;
+    }
+
+    if (isset($this->hidUser->job_titles)) {
+      $first_title = array_pop($this->hidUser->job_titles);
     }
     if (!empty($first_title)) {
       return $first_title;
@@ -165,7 +179,12 @@ class ClusterHidUser {
       ];
     }
 
-    // No drupal user.
+    // No Drupal user and email address is not disclosed.
+    if (is_null($this->getEmail())) {
+      return t('User does not disclose email address. Account cannot be created manually.');
+    }
+
+    // No Drupal user, account can be created.
     $link_options = [
       'attributes' => [
         'class' => ['create-new-hid-user'],

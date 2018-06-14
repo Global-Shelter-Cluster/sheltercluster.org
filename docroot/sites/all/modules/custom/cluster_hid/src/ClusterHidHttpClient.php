@@ -47,6 +47,7 @@ class ClusterHidHttpClient {
     // $s->makeTestRequest();
     // 58e4abca3f0e0d00aeec8806
     // 5a749d5cf94a9509ffc5ebc5
+    // 58e4ac763f0e0d00aeec8b36
     try {
       $res = $this->httpClient->request('GET', 'user/58e4abca3f0e0d00aeec8806');
       dpm($res->getStatusCode());
