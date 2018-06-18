@@ -567,7 +567,7 @@ function cluster_factsheets_field_formatter_view($entity_type, $entity, $field, 
   return $element;
 }
 
-function cluster_factsheets_next($factsheet_node, $prev = FALSE) {
+function cluster_factsheets_next_nid($factsheet_node, $prev = FALSE) {
   $wrapper = entity_metadata_wrapper('node', $factsheet_node);
   $group = $wrapper->og_group_ref->value();
   if (!count($group)) {
@@ -587,9 +587,22 @@ function cluster_factsheets_next($factsheet_node, $prev = FALSE) {
   if (isset($result['node'])) {
     $nids = array_keys($result['node']);
     if (count($nids) >= 1) {
-      return node_load($nids[0]);
+      return intval($nids[0]);
     }
   }
+
+  return NULL;
+}
+
+function cluster_factsheets_prev_nid($factsheet_node) {
+  return cluster_factsheets_next_nid($factsheet_node, TRUE);
+}
+
+function cluster_factsheets_next($factsheet_node, $prev = FALSE) {
+  $nid = cluster_factsheets_next_nid($factsheet_node, $prev);
+  if ($nid)
+    return node_load($nid);
+  return NULL;
 }
 
 function cluster_factsheets_prev($factsheet_node) {
