@@ -27,12 +27,19 @@ class ClusterAPI_Type_Factsheet extends ClusterAPI_Type {
    *
    * {
    *   date: "2016-04",
-   *   highlights: "<p>text in html format</p>",
    *   image: 'http://path/to/image.jpg',
-   *   photo_credit: 'John Smith',
-   *   map: 'http://path/to/image.jpg',
+   *   groups: [123, 234],
    *   prev: 23, // id of previous factsheet for this group
    *   next: 25,
+   *   highlights: "<p>text in html format</p>", // HTML
+   *   map: 'http://path/to/image.jpg',
+   *   photo_credit: 'John Smith',
+   *   need_analysis: '', // HTML
+   *   response: '', // HTML
+   *   gaps_challenges: '', // HTML
+   *   key_dates: [['date' => 'Apr 1', 'description' => "April fools"], ['date' => 'Dec 23 to 31', description => "Holidays"]],
+   *   key_documents: [56, 1238, 3380],
+   *   key_links: [['url' => 'http://path/to/url', 'title' => "Resource"]],
    * }
    *
    */
@@ -51,6 +58,8 @@ class ClusterAPI_Type_Factsheet extends ClusterAPI_Type {
       case ClusterAPI_Object::MODE_PUBLIC:
         $ret += [
           'groups' => self::getReferenceIds('node', $node, 'og_group_ref', TRUE),
+          'prev' => cluster_factsheets_prev_nid($node),
+          'next' => cluster_factsheets_next_nid($node),
           'highlights' => trim($wrapper->body->value()['safe_value']),
           'map' => self::getFileValue('field_map', $wrapper, 'factsheet_map'),
           'photo_credit' => (string) $wrapper->field_photo_credit->value(),
