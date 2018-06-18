@@ -137,7 +137,7 @@ abstract class ClusterAPI_Type {
       'id' => intval($id),
     ];
 
-    $objects[static::$type][$id] = $object;
+    $objects[static::$type][$id] = array_filter($object);
 
     foreach ($this->related($object) as $request)
       ClusterAPI_Type::get($request['type'], $request['id'], $request['mode'], $persist, $objects, $this->current_user, $level, static::$type, $id);
