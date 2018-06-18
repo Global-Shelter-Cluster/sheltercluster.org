@@ -161,12 +161,27 @@ abstract class ClusterAPI_Type {
       if (!array_key_exists($property, $object) || !$object[$property])
         continue;
 
-      foreach ((array) $object[$property] as $id)
+      foreach ((array) $object[$property] as $id) {
+        $related_mode = $def['mode'];
+
+        if (is_array($related_mode)) {
+          foreach ($related_mode as $source_mode => $target_mode) {
+            if ($source_mode === $object['_mode']) {
+              $related_mode = $target_mode;
+              break;
+            }
+          }
+        }
+
+        if (is_array($related_mode))
+          continue;
+
         $ret[] = [
           'type' => $def['type'],
           'id' => $id,
-          'mode' => $def['mode'],
+          'mode' => $related_mode,
         ];
+      }
     }
     return $ret;
   }

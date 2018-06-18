@@ -22,7 +22,11 @@ class ClusterAPI_Type_Group extends ClusterAPI_Type {
     ],
     'latest_factsheet' => [
       'type' => 'factsheet',
-      'mode' => ClusterAPI_Object::MODE_STUB,
+      'mode' => [
+        ClusterAPI_Object::MODE_STUBPLUS => ClusterAPI_Object::MODE_STUB,
+        ClusterAPI_Object::MODE_PUBLIC => ClusterAPI_Object::MODE_PUBLIC,
+        ClusterAPI_Object::MODE_PRIVATE => ClusterAPI_Object::MODE_PUBLIC,
+      ],
     ],
     'featured_documents' => [
       'type' => 'document',
