@@ -42,7 +42,7 @@ class ClusterAPI_Type_Group extends ClusterAPI_Type {
     ],
     'upcoming_events' => [
       'type' => 'event',
-      'mode' => ClusterAPI_Object::MODE_STUB,
+      'mode' => ClusterAPI_Object::MODE_PUBLIC,
     ],
   ];
 
