@@ -3,14 +3,14 @@
     dateHelper: function(timestamp) {
       var date = new Date(parseInt(timestamp) * 1000);
       var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-      return date.getDate() + ' ' + (months[date.getMonth()]) + ' ' + date.getFullYear();
+      return date.getUTCDate() + ' ' + (months[date.getUTCMonth()]) + ' ' + date.getUTCFullYear();
     },
     timeHelper: function(timestamp) {
       var date = new Date(parseInt(timestamp) * 1000);
 
       var time = '';
 
-      var hours = date.getHours();
+      var hours = date.getUTCHours();
       if (hours > 12)
         time = (hours - 12);
       else if (hours > 0)
@@ -20,7 +20,7 @@
 
       time += ':';
 
-      var minutes = date.getMinutes();
+      var minutes = date.getUTCMinutes();
       if (minutes < 10)
         time += '0';
       time += minutes;
@@ -35,7 +35,7 @@
     dateHelperWithTime: function(timestamp) {
       var date = new Date(parseInt(timestamp) * 1000);
       var days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-      return days[date.getDay()] + '. ' + this.dateHelper(timestamp) + ', ' + this.timeHelper(timestamp);
+      return days[date.getUTCDay()] + '. ' + this.dateHelper(timestamp) + ', ' + this.timeHelper(timestamp);
     },
     dateHelperShortWithTime: function(timestamp) {
       return this.dateHelper(timestamp) + '<br/>' + this.timeHelper(timestamp);
