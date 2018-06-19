@@ -10,6 +10,14 @@
 function cluster_og_og_features_default_roles() {
   $roles = array();
 
+  // Exported OG Role: 'node:community_of_practice:follower'.
+  $roles['node:community_of_practice:follower'] = array(
+    'gid' => 0,
+    'group_type' => 'node',
+    'group_bundle' => 'community_of_practice',
+    'name' => 'follower',
+  );
+
   // Exported OG Role: 'node:geographic_region:contact member'.
   $roles['node:geographic_region:contact member'] = array(
     'gid' => 0,
@@ -24,6 +32,14 @@ function cluster_og_og_features_default_roles() {
     'group_type' => 'node',
     'group_bundle' => 'geographic_region',
     'name' => 'content editor',
+  );
+
+  // Exported OG Role: 'node:geographic_region:follower'.
+  $roles['node:geographic_region:follower'] = array(
+    'gid' => 0,
+    'group_type' => 'node',
+    'group_bundle' => 'geographic_region',
+    'name' => 'follower',
   );
 
   // Exported OG Role: 'node:hub:contact member'.
@@ -42,6 +58,14 @@ function cluster_og_og_features_default_roles() {
     'name' => 'content editor',
   );
 
+  // Exported OG Role: 'node:hub:follower'.
+  $roles['node:hub:follower'] = array(
+    'gid' => 0,
+    'group_type' => 'node',
+    'group_bundle' => 'hub',
+    'name' => 'follower',
+  );
+
   // Exported OG Role: 'node:response:contact member'.
   $roles['node:response:contact member'] = array(
     'gid' => 0,
@@ -56,6 +80,14 @@ function cluster_og_og_features_default_roles() {
     'group_type' => 'node',
     'group_bundle' => 'response',
     'name' => 'content editor',
+  );
+
+  // Exported OG Role: 'node:response:follower'.
+  $roles['node:response:follower'] = array(
+    'gid' => 0,
+    'group_type' => 'node',
+    'group_bundle' => 'response',
+    'name' => 'follower',
   );
 
   // Exported OG Role: 'node:strategic_advisory:contact member'.
@@ -74,6 +106,14 @@ function cluster_og_og_features_default_roles() {
     'name' => 'content editor',
   );
 
+  // Exported OG Role: 'node:strategic_advisory:follower'.
+  $roles['node:strategic_advisory:follower'] = array(
+    'gid' => 0,
+    'group_type' => 'node',
+    'group_bundle' => 'strategic_advisory',
+    'name' => 'follower',
+  );
+
   // Exported OG Role: 'node:working_group:contact member'.
   $roles['node:working_group:contact member'] = array(
     'gid' => 0,
@@ -88,6 +128,14 @@ function cluster_og_og_features_default_roles() {
     'group_type' => 'node',
     'group_bundle' => 'working_group',
     'name' => 'content editor',
+  );
+
+  // Exported OG Role: 'node:working_group:follower'.
+  $roles['node:working_group:follower'] = array(
+    'gid' => 0,
+    'group_type' => 'node',
+    'group_bundle' => 'working_group',
+    'name' => 'follower',
   );
 
   return $roles;

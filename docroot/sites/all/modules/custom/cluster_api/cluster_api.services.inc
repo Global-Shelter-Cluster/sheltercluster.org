@@ -19,6 +19,16 @@ function cluster_api_default_services_endpoint() {
   $endpoint->authentication = array();
   $endpoint->server_settings = array();
   $endpoint->resources = array(
+    'follow' => array(
+      'operations' => array(
+        'create' => array(
+          'enabled' => '1',
+        ),
+        'delete' => array(
+          'enabled' => '1',
+        ),
+      ),
+    ),
     'get-objects' => array(
       'operations' => array(
         'create' => array(

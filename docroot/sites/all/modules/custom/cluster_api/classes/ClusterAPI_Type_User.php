@@ -19,6 +19,20 @@ class ClusterAPI_Type_User extends ClusterAPI_Type {
     }
   }
 
+  static function getFollowedGroups($user) {
+    $convert_to_int = function($string) {
+      return intval($string);
+    };
+
+    $groups = array_map($convert_to_int, array_values(og_get_groups_by_user($user, 'node')));
+
+    $has_followed_role = function($gid) use ($user) {
+      return in_array(CLUSTER_API_FOLLOWER_ROLE_NAME, og_get_user_roles('node', $gid, $user->uid));
+    };
+
+    return array_values(array_filter($groups, $has_followed_role));
+  }
+
   /**
    * Example:
    *
@@ -45,11 +59,7 @@ class ClusterAPI_Type_User extends ClusterAPI_Type {
 
     switch ($mode) {
       case ClusterAPI_Object::MODE_PRIVATE:
-        $convert_to_int = function($string) {
-          return intval($string);
-        };
-        $groups = array_map($convert_to_int, array_values(og_get_groups_by_user($user, 'node')));
-        $ret += ['groups' => $groups];
+        $ret += ['groups' => self::getFollowedGroups($user)];
 
       //Fall-through
       case ClusterAPI_Object::MODE_PUBLIC:

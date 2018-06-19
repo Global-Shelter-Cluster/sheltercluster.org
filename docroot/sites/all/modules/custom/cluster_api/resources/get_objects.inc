@@ -19,7 +19,7 @@
  *
  * @return array
  */
-function _cluster_api_get_objects_resource($requests) {
+function _cluster_api_get_objects($requests) {
   global $user;
 
   $user = user_load(733); // 733: Camilo, 74: Shirin, 70: Neil, 531: Bo
