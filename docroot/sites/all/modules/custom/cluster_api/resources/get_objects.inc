@@ -25,5 +25,5 @@ function _cluster_api_get_objects($requests) {
   $user = user_load(733); // 733: Camilo, 74: Shirin, 70: Neil, 531: Bo
 
   $object = new ClusterAPI_Object($user);
-  return $object->getObjects($requests);
+  return serialize($requests);//$object->getObjects($requests);
 }

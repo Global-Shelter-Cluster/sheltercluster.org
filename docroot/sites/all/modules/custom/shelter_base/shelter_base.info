@@ -10,7 +10,11 @@ dependencies[] = cluster_og
 dependencies[] = ctools
 dependencies[] = entityreference
 dependencies[] = features
+<<<<<<< HEAD
 dependencies[] = filter
+=======
+dependencies[] = hybridauth
+>>>>>>> 89d4cc6a... Fix feature conflicts between cluster_user and shelter_base on hybridauth permissions and input filters
 dependencies[] = image
 dependencies[] = languagefield
 dependencies[] = locale
@@ -68,7 +72,10 @@ features[menu_custom][] = menu-homepage
 features[menu_custom][] = user-menu
 features[node][] = article
 features[node][] = page
+<<<<<<< HEAD
 features[user_permission][] = use text format full_html
+=======
+>>>>>>> 89d4cc6a... Fix feature conflicts between cluster_user and shelter_base on hybridauth permissions and input filters
 features[user_role][] = Full HTML user
 features[user_role][] = administrator
 features[user_role][] = editor
@@ -245,8 +252,6 @@ features[variable][] = transliteration_file_uploads_display_name
 features[views_view][] = content_administration
 features[views_view][] = homepage
 features[views_view][] = homepage2
-features[wysiwyg][] = filtered_html
-features[wysiwyg][] = full_html
 features_exclude[filter][filtered_html] = filtered_html
 features_exclude[filter][full_html] = full_html
 features_exclude[taxonomy][tags] = tags
