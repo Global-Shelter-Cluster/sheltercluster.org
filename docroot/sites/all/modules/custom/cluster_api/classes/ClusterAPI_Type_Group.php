@@ -51,9 +51,7 @@ class ClusterAPI_Type_Group extends ClusterAPI_Type {
     $is_top_level_request = $previous_type === NULL && $previous_id === NULL;
 
     if ($came_from_logged_in_user || $is_top_level_request) {
-      $current_user_groups = $this->current_user
-        ? array_values(og_get_groups_by_user($this->current_user, 'node'))
-        : [];
+      $current_user_groups = ClusterAPI_Type_User::getFollowedGroups($this->current_user);
 
       if (in_array($id, $current_user_groups)) {
         // Force private mode and persist if this is one of the current user's
@@ -87,6 +85,10 @@ class ClusterAPI_Type_Group extends ClusterAPI_Type {
    *   recent_documents: [30, 45, 123, 693],
    * }
    *
+   * @param int $id
+   * @param string $mode
+   *
+   * @return array|null
    */
   protected function generateObject($id, $mode) {
     $node = node_load($id);

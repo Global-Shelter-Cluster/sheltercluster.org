@@ -26,7 +26,7 @@ class ClusterAPI_Object {
 
   /**
    * @param array $requests Each request has a type and an id, e.g.
-   *   ['type'=> 'user', 'id' => 123]
+   *   ['type' => 'user', 'id' => 123]
    *
    * @return array keyed by type, each object is keyed by its id, and contains
    *   the object in the appropriate detail level for the current user.
