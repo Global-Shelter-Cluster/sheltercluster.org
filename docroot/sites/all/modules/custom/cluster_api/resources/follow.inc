@@ -21,8 +21,12 @@ function _cluster_api_follow($id) {
   if (!$group || !og_is_group('node', $group))
     throw new Exception('Wrong group id');
 
-  og_membership_create('node', $id, 'user', $user->uid, OG_AUDIENCE_FIELD);
-  og_role_grant('node', $id, $user->uid, _cluster_api_get_follower_role_by_bundle($group->type));
+  if (!og_is_member('node', $id, 'user', $user)) {
+    $m = og_membership_create('node', $id, 'user', $user->uid, 'og_user_node1');
+    $m->save();
+  }
+  if (!in_array($id, ClusterAPI_Type_User::getFollowedGroups($user)))
+    og_role_grant('node', $id, $user->uid, _cluster_api_get_follower_role_by_bundle($group->type));
 
   $object = new ClusterAPI_Object($user);
   return $object->getObjects([['type' => 'group', 'id' => $id]]);
