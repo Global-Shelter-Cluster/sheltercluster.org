@@ -23,6 +23,9 @@ class ClusterHidUser {
   }
 
   public function getEmail() {
+    if (!isset($this->hidUser->email)) {
+      return NULL;
+    }
     return $this->hidUser->email;
   }
 
@@ -58,11 +61,22 @@ class ClusterHidUser {
     return $potentially_localized_field[0]['value'];
   }
 
+  /**
+   * Get a value that represents a role or title.
+   * If there are functional roles, return the name of the first functional role.
+   * If there are titles, return the first title.
+   */
   public function getRoleOrTitle() {
-    $first_role = array_pop($this->hidUser->functional_roles);
-    $first_title = array_pop($this->hidUser->job_titles);
+    $first_role = $first_title = '';
+    if (isset($this->hidUser->functional_roles)) {
+      $first_role = array_pop($this->hidUser->functional_roles);
+    }
     if (!empty($first_role)) {
-      return $first_role;
+      return $first_role->name;
+    }
+
+    if (isset($this->hidUser->job_titles)) {
+      $first_title = array_pop($this->hidUser->job_titles);
     }
     if (!empty($first_title)) {
       return $first_title;
@@ -165,7 +179,12 @@ class ClusterHidUser {
       ];
     }
 
-    // No drupal user.
+    // No Drupal user and email address is not disclosed.
+    if (is_null($this->getEmail())) {
+      return t('User does not disclose email address. Account cannot be created manually.');
+    }
+
+    // No Drupal user, account can be created.
     $link_options = [
       'attributes' => [
         'class' => ['create-new-hid-user'],
@@ -191,7 +210,15 @@ class ClusterHidUser {
    * @return user or false.
    */
   private function getDrupalAccount() {
+    // Test if there is a matching email.
     $user = user_load_by_mail($this->hidUser->email);
+
+    if (!$user) {
+      $uid = $this->getUserIdFromHybridAuthIdentifier($this->getHumanitarianId());
+      if ($uid) {
+        $user = user_load($uid);
+      }
+    }
 
     // Track the user in the cluster_hid table.
     if ($user) {
@@ -244,6 +271,38 @@ class ClusterHidUser {
     return $user->uid;
   }
 
+  /**
+   * Look for user id by identifier in the hybridauth table.
+   * This could be necessary if the humanitarian id user does not disclose their email address.
+   */
+  public function getUserIdFromHybridAuthIdentifier($identifier) {
+    if (!module_exists('hybridauth')) {
+      return FALSE;
+    }
+
+    // Search for matching identifier.
+    $uid = db_select('hybridauth_identity', 'hi')
+      ->fields('hi', ['uid'])
+      ->condition('provider', 'HumanitarianId')
+      ->condition('provider_identifier', $identifier)
+      ->execute()
+      ->fetchField();
+
+    if ($uid) {
+      return $uid;
+    }
+
+    // Search the humanitarian serialized data for matching id.
+    $uid = db_select('hybridauth_identity', 'hi')
+      ->fields('hi', ['uid'])
+      ->condition('provider', 'HumanitarianId')
+      ->condition('data', '%' . db_like($identifier) . '%', 'LIKE')
+      ->execute()
+      ->fetchField();
+
+    return $uid;
+  }
+
   private function populateCommonFieldsForCreateOrUpdate($user) {
     $user->name_field['en'][0]['value'] = $this->getFullName();
     $organization_name = $this->getOrganizationName();
@@ -294,15 +353,29 @@ class ClusterHidUser {
       ->execute()
       ->fetchField();
 
-    // Test the hybrid auth database.
+    // Look for the user in the hybrid auth database.
     if (!$hum_id && module_exists('hybridauth')) {
-      $hum_id = db_select('hybridauth_identity', 'hi')
-        ->fields('hi', ['provider_identifier'])
+      $user_profile_data = db_select('hybridauth_identity', 'hi')
+        ->fields('hi', ['data'])
         ->condition('uid', $uid)
         ->condition('provider', 'HumanitarianId')
         ->execute()
         ->fetchField();
+
+      $user_profile_data = unserialize($user_profile_data);
+      if (isset($user_profile_data['identifier'])) {
+        $hum_id = $user_profile_data['identifier'];
+      }
     }
+
+    // Test if hum_id can be used to query the humanitarian.id API.
+    // This is simply based on observation that older ids that contain the '@' character won't work.
+    // @see /patches/humanitarianid_library_indentifier.patch
+    // for the solution that is attempting to address this issue in the future.
+    if (strpos($hum_id, '@') !== FALSE) {
+      $hum_id = NULL;
+    }
+
     return $hum_id;
   }
 

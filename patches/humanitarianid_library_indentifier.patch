@@ -1,0 +1,27 @@
+diff --git a/docroot/sites/all/libraries/hybridauth/additional-providers/hybridauth-humanitarianid/Providers/HumanitarianId.php b/docroot/sites/all/libraries/hybridauth/additional-providers/hybridauth-humanitarianid/Providers/HumanitarianId.php
+index a580011f..1090749c 100644
+--- a/docroot/sites/all/libraries/hybridauth/additional-providers/hybridauth-humanitarianid/Providers/HumanitarianId.php
++++ b/docroot/sites/all/libraries/hybridauth/additional-providers/hybridauth-humanitarianid/Providers/HumanitarianId.php
+@@ -79,11 +79,11 @@ class Hybrid_Providers_HumanitarianId extends Hybrid_Provider_Model_OAuth2
+   */
+   function getUserProfile() {
+     $data = $this->api->api( "account.json" );
+-    if ( ! isset( $data->id ) ){
++    if ( ! isset( $data->sub ) ){
+       throw new Exception( "User profile request failed! {$this->providerId} returned an invalid response.", 6 );
+     }
+ 
+-    $this->user->profile->identifier  = @ $data->id;
++    $this->user->profile->identifier  = @ $data->sub;
+     $this->user->profile->displayName = @ $data->name;
+     $this->user->profile->email       = @ $data->email;
+     $this->user->profile->firstName   = @ $data->given_name;
+@@ -94,7 +94,7 @@ class Hybrid_Providers_HumanitarianId extends Hybrid_Provider_Model_OAuth2
+     $this->user->profile->photoURL = @ $data->picture;
+ 
+     if( empty($this->user->profile->displayName) ){
+-      $this->user->profile->displayName = @ $data->id;
++      $this->user->profile->displayName = @ $data->sub;
+     }
+ 
+     return $this->user->profile;

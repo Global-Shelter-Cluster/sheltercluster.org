@@ -98,6 +98,9 @@ function cluster_hid_synch_account_allowed($uid) {
   }
 }
 
+/**
+ * Implements hook_preprocess_user_profile().
+ */
 function cluster_hid_preprocess_user_profile(&$variables) {
   $variables['synch_with_humanitarian_id_profile'] = FALSE;
   $user = $variables['elements']['#account'];
@@ -112,6 +115,15 @@ function cluster_hid_preprocess_user_profile(&$variables) {
   $variables['synch_with_humanitarian_id_profile'] = TRUE;
   $hidUser = cluster_hid_get_hid_user_by_id($humanitarian_id);
   $variables['synch_link'] = $hidUser->getUpdateLink();
+}
+
+/**
+ * Implements hook_user_delete().
+ */
+function cluster_hid_user_delete($account) {
+  db_delete('cluster_hid')
+    ->condition('uid', $account->uid)
+    ->execute();
 }
 
 /**
@@ -172,7 +184,7 @@ function cluster_hid_new_drupal_user($hum_id) {
 
 /**
  * Menu callback for admin ajax call.
- * Update drupal user with values fetched from the humanitarian id database.
+ * Update drupal user fields with values fetched from the humanitarian id database.
  */
 function cluster_hid_update_drupal_user($hum_id) {
   $hid_user = cluster_hid_get_hid_user_by_id($hum_id);
@@ -205,9 +217,9 @@ function cluster_hid_update_drupal_profile($uid) {
 }
 
 /**
- * Call hid API to get user information with humanitatian id
+ * Call humanitarianid API over http to get user information for matching humanitatian id.
  *
- * @param $id
+ * @param $hum_id
  *  humanitatian id
  * @return cluster_hid/ClusterHidUser
  */
@@ -221,7 +233,12 @@ function cluster_hid_get_hid_user_by_id($hum_id) {
   return $user;
 }
 
+/**
+ * Menu callback.
+ * Returns table markup describing a user profile matching the given humanitarianid.
+ */
 function cluster_hid_get_user_by_id_as_table($hum_id) {
   $user = cluster_hid_get_hid_user_by_id($hum_id);
-  return drupal_json_output(theme('hid_users', ['users' => [$user]]));
+  $table = theme('hid_users', ['users' => [$user]]);
+  return drupal_json_output($table);
 }
