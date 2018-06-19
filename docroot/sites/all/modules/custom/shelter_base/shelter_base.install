@@ -103,3 +103,11 @@ function shelter_base_update_7169() {
   module_disable(['workbench']);
   features_revert_module('cluster_docs');
 }
+
+/**
+ * Prepare module enabling once ready to deploy.
+ */
+function shelter_base_update_X() {
+  module_enable(['cluster_kobo']);
+  module_enable(['cluster_api']);
+}
