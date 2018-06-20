@@ -626,6 +626,10 @@ class GroupContentManagerGeographicRegion extends GroupContentManager {
   public function getRelatedWorkingGroups() {
     return $this::queryChildren($this->getDescendantIds(TRUE), 'field_parent_region', 'working_group');
   }
+
+  public function getRelatedRegions() {
+    return $this::queryChildren([$this->node->nid], 'field_parent_region', 'geographic_region');
+  }
 }
 
 class GroupContentManagerStategicAdvisory extends GroupContentManager {
