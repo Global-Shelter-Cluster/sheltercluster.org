@@ -23,14 +23,6 @@ dependencies[] = taxonomy
 dependencies[] = text
 dependencies[] = views
 dependencies[] = wysiwyg
-<<<<<<< HEAD
-dependencies[] = filter
-<<<<<<< HEAD
-features[user_permission][] = use text format full_html
->>>>>>> 89d4cc6a... Fix feature conflicts between cluster_user and shelter_base on hybridauth permissions and input filters
-dependencies[] = image
->>>>>>> 89d4cc6a... Fix feature conflicts between cluster_user and shelter_base on hybridauth permissions and input filters
-features[user_role][] = Full HTML user
 features[ctools][] = strongarm:strongarm:1
 features[ctools][] = views:views_default:3.0
 features[features_api][] = api:2
