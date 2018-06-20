@@ -68,6 +68,10 @@ class ClusterAPI_Type_Group extends ClusterAPI_Type {
       'type' => 'event',
       'mode' => ClusterAPI_Object::MODE_PUBLIC,
     ],
+    'kobo_forms' => [
+      'type' => 'kobo_form',
+      'mode' => ClusterAPI_Object::MODE_PUBLIC,
+    ],
   ];
 
   protected function preprocessModeAndPersist($id, &$mode, &$persist, $previous_type, $previous_id) {
@@ -130,6 +134,7 @@ class ClusterAPI_Type_Group extends ClusterAPI_Type {
 
     switch ($mode) {
       case ClusterAPI_Object::MODE_PRIVATE:
+        $ret['kobo_forms'] = array_filter((array) $manager->getKoboForms());
 
         //Fall-through
       case ClusterAPI_Object::MODE_PUBLIC:
@@ -149,11 +154,14 @@ class ClusterAPI_Type_Group extends ClusterAPI_Type {
                    'regions' => 'getRelatedRegions',
                    'communities_of_practice' => 'getCommunitiesOfPractice',
                  ] as $property => $method) {
-          if (method_exists($manager, $method) && $value = $manager->$method())
+          if (method_exists($manager, $method) && $value = $manager->$method()) {
             $ret[$property] = array_values(array_filter(array_map($convert_to_int, $value)));
+          }
         }
-        if (method_exists($manager, 'getStrategicAdvisory') && $sag = $manager->getStrategicAdvisory())
+
+        if (method_exists($manager, 'getStrategicAdvisory') && $sag = $manager->getStrategicAdvisory()) {
           $ret['strategic_advisory'] = intval($sag->nid);
+        }
 
         $ret['featured_documents'] = array_filter((array) $manager->getFeaturedDocuments());
         $ret['key_documents'] = array_filter((array) $manager->getKeyDocumentIds());

@@ -17,3 +17,4 @@ files[] = classes/ClusterAPI_Type_User.php
 files[] = classes/ClusterAPI_Type_Factsheet.php
 files[] = classes/ClusterAPI_Type_Document.php
 files[] = classes/ClusterAPI_Type_Event.php
+files[] = classes/ClusterAPI_Type_KoboForm.php
