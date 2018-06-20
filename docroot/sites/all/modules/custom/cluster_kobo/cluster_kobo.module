@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Cluster kobo feature.
+ */
+
+include_once 'cluster_kobo.features.inc';
