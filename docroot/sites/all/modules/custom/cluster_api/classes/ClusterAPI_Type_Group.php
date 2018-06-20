@@ -97,7 +97,7 @@ class ClusterAPI_Type_Group extends ClusterAPI_Type {
       return NULL;
 
     $ret = [];
-    //    $wrapper = entity_metadata_wrapper('node', $node);
+    $wrapper = entity_metadata_wrapper('node', $node);
     $manager = GroupContentManager::getInstance($node);
 
     switch ($mode) {
@@ -126,6 +126,8 @@ class ClusterAPI_Type_Group extends ClusterAPI_Type {
         $factsheets = $manager->getFactsheets(1);
         if ($factsheets)
           $ret['latest_factsheet'] = $factsheets[0];
+
+        $ret['image'] = self::getFileValue('field_image', $wrapper, 'medium');
 
       //Fall-through
       default:
