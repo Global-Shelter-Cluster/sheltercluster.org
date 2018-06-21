@@ -134,10 +134,14 @@ class ClusterAPI_Type_Group extends ClusterAPI_Type {
 
     switch ($mode) {
       case ClusterAPI_Object::MODE_PRIVATE:
-        $ret['kobo_forms'] = array_filter((array) $manager->getKoboForms());
+       //$ret['kobo_forms'] = array_filter((array) $manager->getKoboForms());
 
         //Fall-through
       case ClusterAPI_Object::MODE_PUBLIC:
+        if (method_exists($manager, 'getKoboForms') && $value = $manager->getKoboForms()) {
+          $ret['kobo_forms'] = array_values(array_filter(array_map($convert_to_int, $value)));
+        }
+
         if ($value = self::getReferenceIds('node', $node, 'field_associated_regions', TRUE))
           $ret['associated_regions'] = $value;
 

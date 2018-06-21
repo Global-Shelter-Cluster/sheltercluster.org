@@ -66,16 +66,13 @@ function cluster_kobo_field_default_field_instances() {
     'bundle' => 'kobo_form',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'Copy the Kobo form url which can be obtained by opening the form from the Kobo interface.',
+    'description' => 'Copy the complete URL of the kobo form, example: https://ee.humanitarianresponse.info/x/#cOLnX2Ld',
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'url',
-        'settings' => array(
-          'nofollow' => FALSE,
-          'trim_length' => 80,
-        ),
-        'type' => 'url_default',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
         'weight' => 3,
       ),
       'ical' => array(
@@ -97,17 +94,16 @@ function cluster_kobo_field_default_field_instances() {
     'required' => 1,
     'settings' => array(
       'entity_translation_sync' => FALSE,
-      'title_fetch' => 0,
-      'title_field' => 0,
+      'text_processing' => 0,
       'user_register_form' => FALSE,
     ),
     'widget' => array(
       'active' => 1,
-      'module' => 'url',
+      'module' => 'text',
       'settings' => array(
         'size' => 60,
       ),
-      'type' => 'url_external',
+      'type' => 'text_textfield',
       'weight' => 32,
     ),
   );
@@ -230,7 +226,7 @@ function cluster_kobo_field_default_field_instances() {
   // Translatables
   // Included for use with string extractors like potx.
   t('Body');
-  t('Copy the Kobo form url which can be obtained by opening the form from the Kobo interface.');
+  t('Copy the complete URL of the kobo form, example: https://ee.humanitarianresponse.info/x/#cOLnX2Ld');
   t('Groups audience');
   t('Kobo form url');
   t('Title');
