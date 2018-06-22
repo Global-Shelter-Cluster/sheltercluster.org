@@ -21,6 +21,7 @@ class ClusterAPI_Object {
       self::MODE_STUBPLUS => 1,
       self::MODE_STUB => 0,
     ];
+
     return $levels[$mode];
   }
 

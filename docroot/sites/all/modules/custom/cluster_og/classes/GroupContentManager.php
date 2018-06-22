@@ -381,6 +381,21 @@ class GroupContentManager {
     return array_keys($res['node']);
   }
 
+  public function getKoboForms() {
+    $query = new EntityFieldQuery();
+    $res = $query->entityCondition('entity_type', 'node')
+      ->entityCondition('bundle', 'kobo_form')
+      ->fieldCondition('og_group_ref', 'target_id', $this->node->nid)
+      ->propertyCondition('status', NODE_PUBLISHED)
+      ->execute();
+
+    if (!isset($res['node'])) {
+      return array();
+    }
+
+    return array_keys($res['node']);
+  }
+
   /**
    * Delegates key documents management to the cluster_docs module.
    * @return render array of documents.
