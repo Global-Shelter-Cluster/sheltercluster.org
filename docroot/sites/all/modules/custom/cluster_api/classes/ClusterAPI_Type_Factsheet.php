@@ -62,6 +62,8 @@ class ClusterAPI_Type_Factsheet extends ClusterAPI_Type {
           'next' => cluster_factsheets_next_nid($node),
           'highlights' => trim($wrapper->body->value()['safe_value']),
           'map' => self::getFileValue('field_map', $wrapper, 'factsheet_map'),
+          'full_map' => self::getFileValue('field_map', $wrapper),
+          'full_image' => self::getFileValue('field_image', $wrapper),
           'photo_credit' => (string) $wrapper->field_photo_credit->value(),
           'need_analysis' => trim($wrapper->field_need_analysis->value()['safe_value']),
           'response' => trim($wrapper->field_fs_response->value()['safe_value']),
