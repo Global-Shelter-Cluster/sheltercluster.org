@@ -299,6 +299,8 @@ function cluster_content_views_default_views() {
     'discussion' => 'discussion',
     'document' => 'document',
     'event' => 'event',
+    'factsheet' => 'factsheet',
+    'kobo_form' => 'kobo_form',
     'library' => 'library',
   );
   $handler->display->display_options['filters']['type']['group'] = 1;
@@ -314,6 +316,7 @@ function cluster_content_views_default_views() {
     3 => 0,
     4 => 0,
     5 => 0,
+    6 => 0,
   );
   $handler->display->display_options['filters']['type']['expose']['reduce'] = TRUE;
   /* Filter criterion: Content: Title (title_field) */
