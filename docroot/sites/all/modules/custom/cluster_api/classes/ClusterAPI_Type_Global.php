@@ -25,6 +25,9 @@ class ClusterAPI_Type_Global extends ClusterAPI_Type {
    * {
    *   featured_groups: [123, 456],
    *   top_regions: [4290, ...],
+   *   algolia_app_id: 'abc123',
+   *   algolia_search_key: 'abc123',
+   *   algolia_prefix: 'abc123',
    * }
    *
    */
@@ -42,6 +45,12 @@ class ClusterAPI_Type_Global extends ClusterAPI_Type {
         ? intval(substr($path, 5))
         : NULL;
     }, menu_tree_page_data('menu-regions', 1)))));
+
+    $ret += [
+      'algolia_app_id' => variable_get('cluster_search_algolia_app_id'),
+      'algolia_search_key' => variable_get('cluster_search_algolia_search_key'),
+      'algolia_prefix' => variable_get('cluster_search_algolia_prefix'),
+    ];
 
     return $ret;
   }
