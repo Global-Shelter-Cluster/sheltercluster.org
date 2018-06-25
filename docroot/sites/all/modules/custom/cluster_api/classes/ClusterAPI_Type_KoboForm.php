@@ -20,7 +20,7 @@ class ClusterAPI_Type_KoboForm extends ClusterAPI_Type {
     return [
       'groups' => self::getReferenceIds('node', $node, 'og_group_ref', TRUE),
       'title' => $node->title,
-      'description' => $wrapper->body->value()['safe_value'],
+      'description' => strip_tags($wrapper->body->value()['safe_value']),
       'kobo_form_url' => $wrapper->field_kobo_form_url->value(),
     ];
   }
