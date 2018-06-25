@@ -64,7 +64,11 @@ function cluster_kobo_field_default_field_instances() {
   // Exported field_instance: 'node-kobo_form-field_kobo_form_url'.
   $field_instances['node-kobo_form-field_kobo_form_url'] = array(
     'bundle' => 'kobo_form',
-    'default_value' => NULL,
+    'default_value' => array(
+      0 => array(
+        'value' => 'https://ee.humanitarianresponse.info/x/#UPDATE_WITH_YOUR_FORM',
+      ),
+    ),
     'deleted' => 0,
     'description' => 'Copy the complete URL of the kobo form, example: https://ee.humanitarianresponse.info/x/#cOLnX2Ld',
     'display' => array(
