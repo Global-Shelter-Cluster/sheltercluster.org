@@ -4,7 +4,7 @@ class ClusterAPI_Type_User extends ClusterAPI_Type {
 
   protected static $type = 'user';
   protected static $related_def = [
-    'groups' => ['type' => 'group', 'mode' => ClusterAPI_Object::MODE_PUBLIC],
+    'groups' => ['type' => 'group', 'mode' => ClusterAPI_Object::MODE_PRIVATE],
   ];
 
   protected function preprocessModeAndPersist($id, &$mode, &$persist, $previous_type, $previous_id) {
