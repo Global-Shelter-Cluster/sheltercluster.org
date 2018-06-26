@@ -15,17 +15,18 @@
 
   <div class="page-margin inside-footer">
     <section id="contributions">
-      <h3><?php print t('This website is made possible through the financial and in-kind contributions of:'); ?></h3>
+      <h3><?php print t('Program/Initiative/activity undertaken with the financial support of the Government of Canada provided through Global Affairs Canada (GAC)'); ?></h3>
       <ul class="contributors clearfix">
         <li class="contributor">
           <?php print theme('image', array(
-            'path' => drupal_get_path('theme', 'shelter') . '/assets/images/humanitarian-aid.png',
-            'alt' => t('Humanitarian Aid and Civil Protection'),
+            'path' => drupal_get_path('theme', 'shelter') . '/assets/images/crc-wordmark-en-whitebg-small.jpg',
+            'alt' => t('Canadian Red Cross'),
+            ''
           )); ?>
         </li>
         <li class="contributor">
           <?php print theme('image', array(
-            'path' => drupal_get_path('theme', 'shelter') . '/assets/images/canadian-red-cross.png',
+            'path' => drupal_get_path('theme', 'shelter') . '/assets/images/red-cross.jpg',
             'alt' => t('Canadian Red Cross'),
           )); ?>
         </li>
@@ -36,6 +37,8 @@
           )); ?>
         </li>
       </ul>
+
+      <h3><?php print t('This website is made possible through the financial and in-kind contributions of:'); ?></h3>
       <ul class="contributors clearfix">
         <li class="contributor">
           <?php print theme('image', array(
@@ -49,7 +52,14 @@
             'alt' => t('International Federation of Red Cross and Red Crescent Societies'),
           )); ?>
         </li>
+        <li class="contributor">
+          <?php print theme('image', array(
+            'path' => drupal_get_path('theme', 'shelter') . '/assets/images/humanitarian-aid.png',
+            'alt' => t('Humanitarian Aid and Civil Protection'),
+          )); ?>
+        </li>
       </ul>
+
     </section>
   </div>
 </footer>
