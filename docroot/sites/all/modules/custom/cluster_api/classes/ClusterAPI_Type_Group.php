@@ -72,6 +72,10 @@ class ClusterAPI_Type_Group extends ClusterAPI_Type {
       'type' => 'kobo_form',
       'mode' => ClusterAPI_Object::MODE_PUBLIC,
     ],
+    'alerts' => [
+      'type' => 'alert',
+      'mode' => ClusterAPI_Object::MODE_PUBLIC,
+    ],
   ];
 
   protected function preprocessModeAndPersist($id, &$mode, &$persist, $previous_type, $previous_id) {
@@ -137,6 +141,8 @@ class ClusterAPI_Type_Group extends ClusterAPI_Type {
         if (method_exists($manager, 'getKoboForms') && $value = $manager->getKoboForms()) {
           $ret['kobo_forms'] = array_values(array_filter(array_map($convert_to_int, $value)));
         }
+
+        $ret['alerts'] = array_filter((array) $manager->getLatestAlerts());
 
       //Fall-through
       case ClusterAPI_Object::MODE_PUBLIC:

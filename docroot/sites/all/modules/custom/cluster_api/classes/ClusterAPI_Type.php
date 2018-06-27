@@ -23,6 +23,7 @@ abstract class ClusterAPI_Type {
     'document' => 'ClusterAPI_Type_Document',
     'event' => 'ClusterAPI_Type_Event',
     'kobo_form' => 'ClusterAPI_Type_KoboForm',
+    'alert' => 'ClusterAPI_Type_Alert',
   ];
   /** @var \stdClass User object */
   protected $current_user;

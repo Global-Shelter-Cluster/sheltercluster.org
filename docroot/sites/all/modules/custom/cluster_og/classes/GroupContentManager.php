@@ -290,8 +290,39 @@ class GroupContentManager {
       $query->range(0, $range);
 
     if (!is_null($days_limit)) {
-//      $end_date = date('Y-m-d', time() + (3600 * 24 * ($days_limit + 1)));
-//      $query->fieldCondition('field_recurring_event_date2', 'value', $end_date, '<');
+      $end_date = date('Y-m-d', time() + (3600 * 24 * ($days_limit + 1)));
+      $query->fieldCondition('field_recurring_event_date2', 'value', $end_date, '<');
+    }
+
+    $res = $query
+      ->execute();
+
+    if (!isset($res['node'])) {
+      return FALSE;
+    }
+
+    return array_keys($res['node']);
+  }
+
+  /**
+   * Get the latest alerts, if any.
+   * @return []int|FALSE
+   *  nid, FALSE if none exist.
+   */
+  public function getLatestAlerts($limit = 10, $days_limit = 7) {
+    $query = new EntityFieldQuery();
+    $query->entityCondition('entity_type', 'node')
+      ->entityCondition('bundle', 'alert')
+      ->fieldCondition('og_group_ref', 'target_id', $this->node->nid)
+      ->propertyCondition('status', NODE_PUBLISHED)
+      ->propertyOrderBy('created', 'DESC');
+
+    if (!is_null($limit))
+      $query->range(0, $limit);
+
+    if (!is_null($days_limit)) {
+      $timestamp_limit = REQUEST_TIME - (3600 * 24 * $days_limit);
+      $query->propertyCondition('created', $timestamp_limit, '>');
     }
 
     $res = $query
