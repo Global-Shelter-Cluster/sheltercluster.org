@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Cluster Alert feature.
+ */
+
+include_once 'cluster_alert.features.inc';
