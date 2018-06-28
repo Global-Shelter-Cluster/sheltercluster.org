@@ -44,7 +44,7 @@ abstract class ClusterAPI_Type {
    *
    * @return array|integer|null
    */
-  protected static function getReferenceIds($entity_type, $entity, $field_name, $multiple = FALSE) {
+  public static function getReferenceIds($entity_type, $entity, $field_name, $multiple = FALSE) {
     $items = field_get_items($entity_type, $entity, $field_name);
     if (!$items)
       return NULL;
@@ -198,11 +198,13 @@ abstract class ClusterAPI_Type {
       return;
     }
 
-    $object_details_level = ClusterAPI_Object::detailLevel($objects[$type][$id]['_mode']);
-    $requested_details_level = ClusterAPI_Object::detailLevel($mode);
-    if (array_key_exists($id, $objects[$type]) && $object_details_level >= $requested_details_level) {
-      // We already have this object, in the same or higher level of detail.
-      return;
+    if (array_key_exists($id, $objects[$type])) {
+      $object_details_level = ClusterAPI_Object::detailLevel($objects[$type][$id]['_mode']);
+      $requested_details_level = ClusterAPI_Object::detailLevel($mode);
+      if ($object_details_level >= $requested_details_level) {
+        // We already have this object, in the same or higher level of detail.
+        return;
+      }
     }
 
     $class = self::$types[$type];
