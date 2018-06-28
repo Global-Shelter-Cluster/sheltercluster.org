@@ -126,9 +126,20 @@ function cluster_context_links($node) {
   }
 
   if (node_access('create', 'kobo_form')) {
-    $links['new-contact'] = array(
-      'title' => t('Create Kobo Form'),
+    $links['new-kobo-form'] = array(
+      'title' => t('Create Kobo form'),
       'href' => 'node/add/kobo-form',
+      'query' => array(
+        'group' => $node->nid,
+        'destination' => 'node/' . $node->nid
+      ),
+    );
+  }
+
+  if (node_access('create', 'alert') && og_user_access('node', $node->nid, 'create alert content')) {
+    $links['alert'] = array(
+      'title' => t('Create alert'),
+      'href' => 'node/add/alert',
       'query' => array(
         'group' => $node->nid,
         'destination' => 'node/' . $node->nid
