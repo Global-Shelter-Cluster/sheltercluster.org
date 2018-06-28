@@ -518,7 +518,7 @@ function cluster_alert_field_default_field_instances() {
     'entity_type' => 'node',
     'field_name' => 'title_field',
     'label' => 'Title',
-    'required' => 0,
+    'required' => 1,
     'settings' => array(
       'entity_translation_sync' => FALSE,
       'hide_label' => array(
