@@ -21,7 +21,7 @@ $req_s = '{
 }';
 
 $requests = json_decode($req_s, TRUE);
-$res = $auth->getUser($requests);
+$res = $auth->authorize($requests);
 dpm($res);
 
 // Example of http request for password grant

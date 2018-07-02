@@ -42,7 +42,7 @@ class Authorization {
       $return_access_token_in_response = FALSE;
     }
 
-    // Try to idenfy user with login password grant.
+    // Try to idenfy user with specified grant.
     else {
       $oauth_response = $this->authorizeWithCredentials($requests);
       $bearer_token = isset($oauth_response['access_token']) ? $oauth_response['access_token'] : NULL;
@@ -53,6 +53,10 @@ class Authorization {
     // Authorization failed.
     if (!$oauth_response['code'] == '200') {
       return $response;
+    }
+
+    if (isset($oauth_response['expires_in'])) {
+      $response['authorization']['expires_at'] = time() + $oauth_response['expires_in'];
     }
 
     // Access token was successfuly generated or validated.
@@ -66,7 +70,8 @@ class Authorization {
    * Get bearer token for request Authorization header.
    */
   private function getBearerToken() {
-    $authorization_header = getallheaders()['Authorization'];
+    $authorization_header = array_change_key_case(getallheaders())['authorization'];
+    watchdog('cluster_api_headers', json_encode(getallheaders()));
     if (substr($authorization_header, 0, 7) !== 'Bearer ') {
       return FALSE;
     }
@@ -115,6 +120,7 @@ class Authorization {
       !isset($requests['credentials']['type']) &&
       ($requests['credentials']['type'] != 'password' || $requests['credentials']['type'] != 'refresh_token')
     ) {
+      watchdog('cluster_api_credentials', json_encode($requests));
       return [
         'code' => '400',
         'response_error' => 'Bad request',
