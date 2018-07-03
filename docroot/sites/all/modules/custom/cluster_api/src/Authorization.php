@@ -120,7 +120,7 @@ class Authorization {
       !isset($requests['credentials']['type']) &&
       ($requests['credentials']['type'] != 'password' || $requests['credentials']['type'] != 'refresh_token')
     ) {
-      watchdog('cluster_api_credentials', json_encode($requests));
+      //watchdog('cluster_api_credentials', json_encode($requests));
       return [
         'code' => '400',
         'response_error' => 'Bad request',

@@ -22,14 +22,14 @@ use \Drupal\cluster_api\Authorization;
  * @return array
  */
 function _cluster_api_get_objects($request) {
-  watchdog('cluster_api_request', json_encode($request));
+  // watchdog('cluster_api_request', json_encode($request));
   $auth = new Authorization();
   $auth_response = $auth->authorize($request);
   $user = $auth_response['user'];
   $response['authorization'] = $auth_response['authorization'];
 
   // Log the response.
-  watchdog('cluster_api_response', json_encode($response));
+  // watchdog('cluster_api_response', json_encode($response));
 
   // Can't authorize.
   if (!$user || $response['authorization']['code'] != '200') {

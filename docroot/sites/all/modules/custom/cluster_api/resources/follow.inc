@@ -10,13 +10,24 @@ use \Drupal\cluster_api\Authorization;
  * @throws \OgException
  * @throws \Exception
  */
-function _cluster_api_follow($id) {
+function _cluster_api_follow($id, $config) {
+  switch ($config['action']) {
+    case 'follow':
+      return _cluster_api_follow_action($id, $config);
+    case 'unfollow':
+      return _cluster_api_unfollow_action($id, $config);
+  }
+}
+
+function _cluster_api_follow_action($id, $config) {
   $id = intval($id, 10);
   if ($id <= 0) {
     throw new Exception('Wrong group id');
   }
-
-  $user = user_load(733); // 733: Camilo, 74: Shirin, 70: Neil, 531: Bo
+  $auth = new Authorization();
+  $auth_response = $auth->authorize($request);
+  $user = $auth_response['user'];
+  $response['authorization'] = $auth_response['authorization'];
 
   $group = node_load($id);
   if (!$group || !og_is_group('node', $group)) {
@@ -43,13 +54,15 @@ function _cluster_api_follow($id) {
  *
  * @throws \Exception
  */
-function _cluster_api_unfollow($id) {
+function _cluster_api_unfollow_action($id, $config) {
   $id = intval($id, 10);
   if ($id <= 0) {
     throw new Exception('Wrong group id');
   }
-
-  $user = user_load(733); // 733: Camilo, 74: Shirin, 70: Neil, 531: Bo
+  $auth = new Authorization();
+  $auth_response = $auth->authorize($request);
+  $user = $auth_response['user'];
+  $response['authorization'] = $auth_response['authorization'];
 
   $group = node_load($id);
   if (!$group || !og_is_group('node', $group)) {
