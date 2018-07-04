@@ -24,9 +24,6 @@ function cluster_api_default_services_endpoint() {
         'create' => array(
           'enabled' => '1',
         ),
-        'delete' => array(
-          'enabled' => '1',
-        ),
       ),
     ),
     'get-objects' => array(

@@ -4,6 +4,23 @@ include_once 'cluster_api.features.inc';
 
 const CLUSTER_API_FOLLOWER_ROLE_NAME = 'follower';
 
+function cluster_api_menu() {
+
+  $items = [];
+
+  $items['admin/config/shelter/cluser-api'] = [
+    'title' => 'Cluster API settings',
+    'description' => 'Set the cluster API configurations, such as local enpoint urls',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => ['cluster_api_settings'],
+    'access arguments' => ['administer site configuration'],
+    'file' => 'cluster_api.form.inc',
+    'type' => MENU_NORMAL_ITEM,
+   ];
+
+  return $items;
+}
+
 /**
  * Implements hook_services_resources().
  */
@@ -50,28 +67,14 @@ function cluster_api_services_resources() {
               'optional' => FALSE,
               'source' => ['path' => 0],
               'type' => 'int',
-              'description' => 'The id of the group node to follow',
+              'description' => 'The id of the group node to follow or unfollow',
             ],
-          ],
-          'access callback' => 'user_access',
-          'access arguments' => ['access content'],
-          'access arguments append' => FALSE,
-        ],
-        'delete' => [
-          'help' => 'Un-follow a group',
-          'file' => [
-            'type' => 'inc',
-            'module' => 'cluster_api',
-            'name' => 'resources/follow',
-          ],
-          'callback' => '_cluster_api_unfollow',
-          'args' => [
             [
-              'name' => 'id',
+              'name' => 'follow',
               'optional' => FALSE,
-              'source' => ['path' => 0],
-              'type' => 'int',
-              'description' => 'The id of the group node to un-follow',
+              'source' => 'data',
+              'type' => 'array',
+              'description' => 'The action name, follow or unfollow',
             ],
           ],
           'access callback' => 'user_access',

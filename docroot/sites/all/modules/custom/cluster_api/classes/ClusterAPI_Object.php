@@ -35,8 +35,9 @@ class ClusterAPI_Object {
   function getObjects(array $requests) {
     $objects = [];
 
-    foreach (ClusterAPI_Type::allTypes() as $type)
+    foreach (ClusterAPI_Type::allTypes() as $type) {
       $objects[$type] = [];
+    }
 
     foreach ($requests as $request)
       ClusterAPI_Type::get($request['type'], $request['id'], self::MODE_PUBLIC, FALSE, $objects, $this->current_user);
