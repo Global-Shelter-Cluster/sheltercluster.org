@@ -822,10 +822,7 @@ function cluster_user_user_default_permissions() {
   // Exported permission: 'create field_push_token'.
   $permissions['create field_push_token'] = array(
     'name' => 'create field_push_token',
-    'roles' => array(
-      'administrator' => 'administrator',
-      'anonymous user' => 'anonymous user',
-    ),
+    'roles' => array(),
     'module' => 'field_permissions',
   );
 
