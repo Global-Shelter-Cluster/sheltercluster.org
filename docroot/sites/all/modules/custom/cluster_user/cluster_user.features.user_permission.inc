@@ -819,6 +819,16 @@ function cluster_user_user_default_permissions() {
     'module' => 'node',
   );
 
+  // Exported permission: 'create field_push_token'.
+  $permissions['create field_push_token'] = array(
+    'name' => 'create field_push_token',
+    'roles' => array(
+      'administrator' => 'administrator',
+      'anonymous user' => 'anonymous user',
+    ),
+    'module' => 'field_permissions',
+  );
+
   // Exported permission: 'create homepage content'.
   $permissions['create homepage content'] = array(
     'name' => 'create homepage content',
@@ -1287,6 +1297,13 @@ function cluster_user_user_default_permissions() {
     'module' => 'node',
   );
 
+  // Exported permission: 'edit field_push_token'.
+  $permissions['edit field_push_token'] = array(
+    'name' => 'edit field_push_token',
+    'roles' => array(),
+    'module' => 'field_permissions',
+  );
+
   // Exported permission: 'edit own arbitrary_library content'.
   $permissions['edit own arbitrary_library content'] = array(
     'name' => 'edit own arbitrary_library content',
@@ -1349,6 +1366,13 @@ function cluster_user_user_default_permissions() {
       'administrator' => 'administrator',
     ),
     'module' => 'node',
+  );
+
+  // Exported permission: 'edit own field_push_token'.
+  $permissions['edit own field_push_token'] = array(
+    'name' => 'edit own field_push_token',
+    'roles' => array(),
+    'module' => 'field_permissions',
   );
 
   // Exported permission: 'edit own homepage content'.
@@ -2008,6 +2032,13 @@ function cluster_user_user_default_permissions() {
     'module' => 'date_repeat_field',
   );
 
+  // Exported permission: 'view field_push_token'.
+  $permissions['view field_push_token'] = array(
+    'name' => 'view field_push_token',
+    'roles' => array(),
+    'module' => 'field_permissions',
+  );
+
   // Exported permission: 'view moderation history'.
   $permissions['view moderation history'] = array(
     'name' => 'view moderation history',
@@ -2025,6 +2056,13 @@ function cluster_user_user_default_permissions() {
       'authenticated user' => 'authenticated user',
     ),
     'module' => 'workbench_moderation',
+  );
+
+  // Exported permission: 'view own field_push_token'.
+  $permissions['view own field_push_token'] = array(
+    'name' => 'view own field_push_token',
+    'roles' => array(),
+    'module' => 'field_permissions',
   );
 
   // Exported permission: 'view own unpublished content'.

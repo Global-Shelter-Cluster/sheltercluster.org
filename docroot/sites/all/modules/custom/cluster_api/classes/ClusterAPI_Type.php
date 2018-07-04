@@ -22,6 +22,8 @@ abstract class ClusterAPI_Type {
     'factsheet' => 'ClusterAPI_Type_Factsheet',
     'document' => 'ClusterAPI_Type_Document',
     'event' => 'ClusterAPI_Type_Event',
+    'kobo_form' => 'ClusterAPI_Type_KoboForm',
+    'alert' => 'ClusterAPI_Type_Alert',
   ];
   /** @var \stdClass User object */
   protected $current_user;
@@ -42,7 +44,7 @@ abstract class ClusterAPI_Type {
    *
    * @return array|integer|null
    */
-  protected static function getReferenceIds($entity_type, $entity, $field_name, $multiple = FALSE) {
+  public static function getReferenceIds($entity_type, $entity, $field_name, $multiple = FALSE) {
     $items = field_get_items($entity_type, $entity, $field_name);
     if (!$items)
       return NULL;
@@ -187,20 +189,28 @@ abstract class ClusterAPI_Type {
   }
 
   static function get($type, $id, $mode, $persist, &$objects, &$current_user, $level = 0, $previous_type = NULL, $previous_id = NULL) {
-    if ($level > 20)
+    if ($level > 20) {
       // Infinite loop protection
       return;
+    }
 
-    if (!array_key_exists($type, self::$types))
+    if (!array_key_exists($type, self::$types)) {
       return;
+    }
 
-    if (array_key_exists($id, $objects[$type]) && ClusterAPI_Object::detailLevel($objects[$type]) >= ClusterAPI_Object::detailLevel($mode))
-      // We already have this object, in the same or higher level of detail.
-      return;
+    if (array_key_exists($id, $objects[$type])) {
+      $object_details_level = ClusterAPI_Object::detailLevel($objects[$type][$id]['_mode']);
+      $requested_details_level = ClusterAPI_Object::detailLevel($mode);
+      if ($object_details_level >= $requested_details_level) {
+        // We already have this object, in the same or higher level of detail.
+        return;
+      }
+    }
 
     $class = self::$types[$type];
-    if (is_string($class))
+    if (is_string($class)) {
       $class = self::$types[$type] = $class::create($current_user);
+    }
 
     $class->getById($id, $mode, $persist, $objects, $level + 1, $previous_type, $previous_id);
   }
@@ -210,7 +220,7 @@ abstract class ClusterAPI_Type {
    *
    * @return \ClusterAPI_Type
    */
-  protected final function create($current_user) {
+  protected static final function create($current_user) {
     $class = get_called_class();
     return new $class($current_user);
   }

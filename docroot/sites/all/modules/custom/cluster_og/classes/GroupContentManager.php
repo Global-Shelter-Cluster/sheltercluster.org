@@ -290,8 +290,39 @@ class GroupContentManager {
       $query->range(0, $range);
 
     if (!is_null($days_limit)) {
-//      $end_date = date('Y-m-d', time() + (3600 * 24 * ($days_limit + 1)));
-//      $query->fieldCondition('field_recurring_event_date2', 'value', $end_date, '<');
+      $end_date = date('Y-m-d', time() + (3600 * 24 * ($days_limit + 1)));
+      $query->fieldCondition('field_recurring_event_date2', 'value', $end_date, '<');
+    }
+
+    $res = $query
+      ->execute();
+
+    if (!isset($res['node'])) {
+      return FALSE;
+    }
+
+    return array_keys($res['node']);
+  }
+
+  /**
+   * Get the latest alerts, if any.
+   * @return []int|FALSE
+   *  nid, FALSE if none exist.
+   */
+  public function getLatestAlerts($limit = 10, $days_limit = 7) {
+    $query = new EntityFieldQuery();
+    $query->entityCondition('entity_type', 'node')
+      ->entityCondition('bundle', 'alert')
+      ->fieldCondition('og_group_ref', 'target_id', $this->node->nid)
+      ->propertyCondition('status', NODE_PUBLISHED)
+      ->propertyOrderBy('created', 'DESC');
+
+    if (!is_null($limit))
+      $query->range(0, $limit);
+
+    if (!is_null($days_limit)) {
+      $timestamp_limit = REQUEST_TIME - (3600 * 24 * $days_limit);
+      $query->propertyCondition('created', $timestamp_limit, '>');
     }
 
     $res = $query
@@ -372,6 +403,21 @@ class GroupContentManager {
       // Include only libraries that are 'Top Level' content, i.e. no parents
       ->addTag('node_has_no_parent')
       ->fieldOrderBy('field_sorting_weight', 'value', 'ASC')
+      ->execute();
+
+    if (!isset($res['node'])) {
+      return array();
+    }
+
+    return array_keys($res['node']);
+  }
+
+  public function getKoboForms() {
+    $query = new EntityFieldQuery();
+    $res = $query->entityCondition('entity_type', 'node')
+      ->entityCondition('bundle', 'kobo_form')
+      ->fieldCondition('og_group_ref', 'target_id', $this->node->nid)
+      ->propertyCondition('status', NODE_PUBLISHED)
       ->execute();
 
     if (!isset($res['node'])) {
@@ -625,6 +671,10 @@ class GroupContentManagerGeographicRegion extends GroupContentManager {
 
   public function getRelatedWorkingGroups() {
     return $this::queryChildren($this->getDescendantIds(TRUE), 'field_parent_region', 'working_group');
+  }
+
+  public function getRelatedRegions() {
+    return $this::queryChildren([$this->node->nid], 'field_parent_region', 'geographic_region');
   }
 }
 

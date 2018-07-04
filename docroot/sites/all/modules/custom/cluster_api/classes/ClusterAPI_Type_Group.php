@@ -20,6 +20,30 @@ class ClusterAPI_Type_Group extends ClusterAPI_Type {
       'type' => 'group',
       'mode' => ClusterAPI_Object::MODE_STUB,
     ],
+    'hubs' => [
+      'type' => 'group',
+      'mode' => ClusterAPI_Object::MODE_STUB,
+    ],
+    'responses' => [
+      'type' => 'group',
+      'mode' => ClusterAPI_Object::MODE_STUB,
+    ],
+    'working_groups' => [
+      'type' => 'group',
+      'mode' => ClusterAPI_Object::MODE_STUB,
+    ],
+    'regions' => [
+      'type' => 'group',
+      'mode' => ClusterAPI_Object::MODE_STUB,
+    ],
+    'communities_of_practice' => [
+      'type' => 'group',
+      'mode' => ClusterAPI_Object::MODE_STUB,
+    ],
+    'strategic_advisory' => [
+      'type' => 'group',
+      'mode' => ClusterAPI_Object::MODE_STUB,
+    ],
     'latest_factsheet' => [
       'type' => 'factsheet',
       'mode' => [
@@ -42,6 +66,14 @@ class ClusterAPI_Type_Group extends ClusterAPI_Type {
     ],
     'upcoming_events' => [
       'type' => 'event',
+      'mode' => ClusterAPI_Object::MODE_PUBLIC,
+    ],
+    'kobo_forms' => [
+      'type' => 'kobo_form',
+      'mode' => ClusterAPI_Object::MODE_PUBLIC,
+    ],
+    'alerts' => [
+      'type' => 'alert',
       'mode' => ClusterAPI_Object::MODE_PUBLIC,
     ],
   ];
@@ -97,11 +129,20 @@ class ClusterAPI_Type_Group extends ClusterAPI_Type {
       return NULL;
 
     $ret = [];
-    //    $wrapper = entity_metadata_wrapper('node', $node);
+    $wrapper = entity_metadata_wrapper('node', $node);
     $manager = GroupContentManager::getInstance($node);
+
+    $convert_to_int = function($string) {
+      return intval($string);
+    };
 
     switch ($mode) {
       case ClusterAPI_Object::MODE_PRIVATE:
+        if (method_exists($manager, 'getKoboForms') && $value = $manager->getKoboForms()) {
+          $ret['kobo_forms'] = array_values(array_filter(array_map($convert_to_int, $value)));
+        }
+
+        $ret['alerts'] = array_filter((array) $manager->getLatestAlerts());
 
       //Fall-through
       case ClusterAPI_Object::MODE_PUBLIC:
@@ -113,6 +154,22 @@ class ClusterAPI_Type_Group extends ClusterAPI_Type {
 
         if ($value = self::getReferenceIds('node', $node, 'field_parent_response'))
           $ret['parent_response'] = $value;
+
+        foreach ([
+                   'hubs' => 'getRelatedHubs',
+                   'responses' => 'getRelatedResponses',
+                   'working_groups' => 'getRelatedWorkingGroups',
+                   'regions' => 'getRelatedRegions',
+                   'communities_of_practice' => 'getCommunitiesOfPractice',
+                 ] as $property => $method) {
+          if (method_exists($manager, $method) && $value = $manager->$method()) {
+            $ret[$property] = array_values(array_filter(array_map($convert_to_int, $value)));
+          }
+        }
+
+        if (method_exists($manager, 'getStrategicAdvisory') && $sag = $manager->getStrategicAdvisory()) {
+          $ret['strategic_advisory'] = intval($sag->nid);
+        }
 
         $ret['featured_documents'] = array_filter((array) $manager->getFeaturedDocuments());
         $ret['key_documents'] = array_filter((array) $manager->getKeyDocumentIds());
@@ -126,6 +183,14 @@ class ClusterAPI_Type_Group extends ClusterAPI_Type {
         $factsheets = $manager->getFactsheets(1);
         if ($factsheets)
           $ret['latest_factsheet'] = $factsheets[0];
+
+        $ret['image'] = self::getFileValue('field_image', $wrapper, 'large');
+
+        if ($node->type === 'geographic_region') {
+          $region_type = $wrapper->field_geographic_region_type->value();
+          if ($region_type)
+            $ret['region_type'] = $region_type->name;
+        }
 
       //Fall-through
       default:
