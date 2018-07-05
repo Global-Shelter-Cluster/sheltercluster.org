@@ -30,6 +30,11 @@ function _cluster_api_follow_action($id, $request) {
   $user = $auth_response['user'];
   $response['authorization'] = $auth_response['authorization'];
 
+  // Can't authorize.
+  if (!$user || $response['authorization']['code'] != '200') {
+    return $response;
+  }
+
   $group = node_load($id);
   if (!$group || !og_is_group('node', $group)) {
     throw new Exception('Wrong group id');
@@ -65,6 +70,11 @@ function _cluster_api_unfollow_action($id, $request) {
   $auth_response = $auth->authorize($request);
   $user = $auth_response['user'];
   $response['authorization'] = $auth_response['authorization'];
+
+  // Can't authorize.
+  if (!$user || $response['authorization']['code'] != '200') {
+    return $response;
+  }
 
   $group = node_load($id);
   if (!$group || !og_is_group('node', $group)) {
