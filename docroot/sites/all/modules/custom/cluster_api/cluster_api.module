@@ -98,3 +98,44 @@ function _cluster_api_get_follower_role_by_bundle($group_bundle) {
     throw new Exception('Group bundle does not have follower role: ' . $group_bundle);
   return $roles[CLUSTER_API_FOLLOWER_ROLE_NAME];
 }
+
+/**
+ * Send a push notification to all users logged in ("following") the given
+ * group.
+ *
+ * @param integer $gid Node id for the group.
+ * @param string $title
+ * @param string $body Plain text
+ * @param mixed $data This gets sent as json data to the app.
+ * @param boolean $sound
+ */
+function cluster_api_push($gid, $title, $body = NULL, $data = NULL, $sound = TRUE) {
+  $expo = new ClusterAPI_Expo();
+
+  $group = node_load($gid);
+  if (!og_is_group('node', $group))
+    throw new Exception('Not a group id: ' . $id);
+
+  $manager = new GroupContentManager($group);
+  $uids = $manager->getUsersByRole(CLUSTER_API_FOLLOWER_ROLE_NAME, $group);
+  $users = user_load_multiple($uids);
+  $tokens = [];
+  foreach ($users as $user) {
+    foreach (field_get_items('user', $user, 'field_push_token') as $item) {
+      $tokens[] = $item['value'];
+    }
+  }
+  if (!count($tokens))
+    return;
+
+  $notification = array_filter([
+    'title' => $title,
+    'body' => $body,
+    'data' => $data ? json_encode($data) : NULL,
+  ]);
+
+  if ($sound)
+    $notification['sound'] = 'default';
+
+  $expo->notify($tokens, $notification);
+}

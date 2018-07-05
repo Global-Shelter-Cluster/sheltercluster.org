@@ -80,6 +80,41 @@ function cluster_user_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'user-user-field_push_token'.
+  $field_instances['user-user-field_push_token'] = array(
+    'bundle' => 'user',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => 'Push notification token for mobile app. Managed by the API.',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 5,
+      ),
+    ),
+    'entity_type' => 'user',
+    'field_name' => 'field_push_token',
+    'label' => 'Push token',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => 0,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 39,
+    ),
+  );
+
   // Exported field_instance: 'user-user-field_role_or_title'.
   $field_instances['user-user-field_role_or_title'] = array(
     'bundle' => 'user',
@@ -216,6 +251,8 @@ function cluster_user_field_default_field_instances() {
   t('Name');
   t('Organization name');
   t('Phone number');
+  t('Push notification token for mobile app. Managed by the API.');
+  t('Push token');
   t('Role or title');
 
   return $field_instances;
