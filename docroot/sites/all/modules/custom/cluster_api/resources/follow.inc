@@ -82,6 +82,6 @@ function _cluster_api_unfollow_action($id, $request) {
     ['type' => 'global', 'id' => 1],
     ['type' => 'group', 'id' => $id], // Include the group being un-followed, so the app can keep showing it.
   ]);
-  // watchdog('cluster_api_return', json_encode($return));
+  watchdog('cluster_api_return_value', json_encode($return));
   return $return;
 }
