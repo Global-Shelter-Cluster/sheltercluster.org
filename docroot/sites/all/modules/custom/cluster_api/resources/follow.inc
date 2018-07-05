@@ -10,21 +10,22 @@ use \Drupal\cluster_api\Authorization;
  * @throws \OgException
  * @throws \Exception
  */
-function _cluster_api_follow($id, $config) {
-  switch ($config['action']) {
+function _cluster_api_follow($id, $request) {
+  switch ($request['action']) {
     case 'follow':
-      return _cluster_api_follow_action($id, $config);
+      return _cluster_api_follow_action($id, $request);
     case 'unfollow':
-      return _cluster_api_unfollow_action($id, $config);
+      return _cluster_api_unfollow_action($id, $request);
   }
 }
 
-function _cluster_api_follow_action($id, $config) {
+function _cluster_api_follow_action($id, $request) {
   $id = intval($id, 10);
   if ($id <= 0) {
     throw new Exception('Wrong group id');
   }
   $auth = new Authorization();
+
   $auth_response = $auth->authorize($request);
   $user = $auth_response['user'];
   $response['authorization'] = $auth_response['authorization'];
@@ -54,7 +55,7 @@ function _cluster_api_follow_action($id, $config) {
  *
  * @throws \Exception
  */
-function _cluster_api_unfollow_action($id, $config) {
+function _cluster_api_unfollow_action($id, $request) {
   $id = intval($id, 10);
   if ($id <= 0) {
     throw new Exception('Wrong group id');
@@ -76,9 +77,11 @@ function _cluster_api_unfollow_action($id, $config) {
   //TODO: if the user was only involved with the group as a follower, remove them from it altogether.
 
   $object = new ClusterAPI_Object($user);
-  return $object->getObjects([
+  $return = $object->getObjects([
     ['type' => 'user', 'id' => $user->uid],
     ['type' => 'global', 'id' => 1],
     ['type' => 'group', 'id' => $id], // Include the group being un-followed, so the app can keep showing it.
   ]);
+  watchdog('cluster_api_return_value', json_encode($return));
+  return $return;
 }

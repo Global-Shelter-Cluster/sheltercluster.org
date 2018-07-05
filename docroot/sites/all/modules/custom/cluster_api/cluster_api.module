@@ -139,3 +139,25 @@ function cluster_api_push($gid, $title, $body = NULL, $data = NULL, $sound = TRU
 
   $expo->notify($tokens, $notification);
 }
+
+function _cluster_set_add_push_notification_token($user, $token) {
+  // Test if the user already has the token.
+  $query = new EntityFieldQuery();
+  $result = $query->entityCondition('entity_type', 'user')
+    ->fieldCondition('field_push_token', 'value', $token, '=')
+    ->propertyCondition('uid', $user->uid)
+    ->execute();
+
+  if (count($result)) {
+    return;
+  }
+
+  $wrapper = entity_metadata_wrapper('user', $user);
+  try {
+
+  }
+  catch(\Exception $e) {
+    watchdog('cluster_api', 'Entity metadata wrapper error: ' . $e->getMessage());
+  }
+
+}
