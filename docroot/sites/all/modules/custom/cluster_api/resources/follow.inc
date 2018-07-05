@@ -11,7 +11,7 @@ use \Drupal\cluster_api\Authorization;
  * @throws \Exception
  */
 function _cluster_api_follow($id, $request) {
-  watchdog('cluster_api_follow_actions_request', $request);
+  watchdog('cluster_api_follow_actions_request', json_encode(func_get_args()));
   switch ($request['action']) {
     case 'follow':
       return _cluster_api_follow_action($id, $request);
@@ -33,6 +33,7 @@ function _cluster_api_follow_action($id, $request) {
 
   // Can't authorize.
   if (!$user || $response['authorization']['code'] != '200') {
+    watchdog('cluster_api_follow_auth_fail', json_encode($response));
     return $response;
   }
 
@@ -74,6 +75,7 @@ function _cluster_api_unfollow_action($id, $request) {
 
   // Can't authorize.
   if (!$user || $response['authorization']['code'] != '200') {
+    watchdog('cluster_api_unfollow_auth_fail', json_encode($response));
     return $response;
   }
 
