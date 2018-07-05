@@ -11,6 +11,7 @@ use \Drupal\cluster_api\Authorization;
  * @throws \Exception
  */
 function _cluster_api_follow($id, $request) {
+  watchdog('cluster_api_follow_actions_request', $request);
   switch ($request['action']) {
     case 'follow':
       return _cluster_api_follow_action($id, $request);
