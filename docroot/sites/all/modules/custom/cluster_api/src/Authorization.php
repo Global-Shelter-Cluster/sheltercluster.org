@@ -121,11 +121,16 @@ class Authorization {
       ($requests['credentials']['type'] != 'password' || $requests['credentials']['type'] != 'refresh_token')
     ) {
       //watchdog('cluster_api_credentials', json_encode($requests));
+      $grant_type = $requests['credentials']['type'];
+      $error_descriptor = $grant_type . ' is not a valid grant type';
+      if (!$grant_type) {
+        $error_descriptor = 'Grant type not provided';
+      }
       return [
         'code' => '400',
         'response_error' => 'Bad request',
         'status_message' => 'Bad request',
-        'error_description' => $requests['credentials']['type'] . ' is not a valid type',
+        'error_description' => $error_descriptor,
       ];
     }
 
