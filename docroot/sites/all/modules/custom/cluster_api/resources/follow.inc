@@ -24,8 +24,8 @@ function _cluster_api_follow_action($id, $request) {
   if ($id <= 0) {
     throw new Exception('Wrong group id');
   }
-  $auth = new Authorization();
 
+  $auth = new Authorization();
   $auth_response = $auth->authorize($request);
   $user = $auth_response['user'];
   $response['authorization'] = $auth_response['authorization'];
@@ -44,7 +44,8 @@ function _cluster_api_follow_action($id, $request) {
   }
 
   $object = new ClusterAPI_Object($user);
-  return $object->getObjects([['type' => 'group', 'id' => $id]]);
+  $response['objects'] = $object->getObjects([['type' => 'group', 'id' => $id]]);
+  return $response;
 }
 
 /**
@@ -77,11 +78,11 @@ function _cluster_api_unfollow_action($id, $request) {
   //TODO: if the user was only involved with the group as a follower, remove them from it altogether.
 
   $object = new ClusterAPI_Object($user);
-  $return = $object->getObjects([
+  $response['objects'] = $object->getObjects([
     ['type' => 'user', 'id' => $user->uid],
     ['type' => 'global', 'id' => 1],
     ['type' => 'group', 'id' => $id], // Include the group being un-followed, so the app can keep showing it.
   ]);
-  watchdog('cluster_api_return_value', json_encode($return));
-  return $return;
+
+  return $response;
 }
