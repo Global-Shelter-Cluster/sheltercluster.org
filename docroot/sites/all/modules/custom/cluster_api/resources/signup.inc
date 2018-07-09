@@ -57,7 +57,8 @@ function _cluster_api_signup($requests) {
 
   $response['authorization'] = $auth_response['authorization'];
 
-  if (!empty($request['pushNotificationToken'])) {
+  if (!empty($requests['pushNotificationToken'])) {
+    watchdog('cluster_api_signup', $requests['pushNotificationToken']);
     _cluster_api_set_push_notification_token($user, $request['pushNotificationToken']);
   }
 

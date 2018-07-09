@@ -32,7 +32,7 @@ function _cluster_api_get_objects($request) {
     _cluster_api_set_push_notification_token($user, $request['pushNotificationToken']);
   }
 
-  // Log the response.
+  // Log the authorization server response.
   // watchdog('cluster_api_response', json_encode($response));
 
   // Can't authorize.
