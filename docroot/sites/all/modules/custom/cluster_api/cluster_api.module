@@ -165,7 +165,18 @@ function cluster_api_push($gid, $title, $body = NULL, $data = NULL, $sound = TRU
   $expo->notify($tokens, $notification);
 }
 
-function _cluster_set_add_push_notification_token($user, $token) {
+/**
+ * Add token to user profile.
+ *
+ * Remove token from other users' profiles.
+ *
+ * @param $user
+ *  User entity.
+ * @param $token
+ *  Push notification token string.
+ */
+function _cluster_api_set_push_notification_token($user, $token) {
+  watchdog('cluster_api_token', json_encode([$user->uid, $token]));
   // Test if the user already has the token.
   $query = new EntityFieldQuery();
   $result = $query->entityCondition('entity_type', 'user')
@@ -177,12 +188,43 @@ function _cluster_set_add_push_notification_token($user, $token) {
     return;
   }
 
+  // Test if other users have the same token, and remove the token for those users.
+  $query = new EntityFieldQuery();
+  $result = $query->entityCondition('entity_type', 'user')
+    ->fieldCondition('field_push_token', 'value', $token, '=')
+    ->execute();
+
+  if (isset($result['user'])) {
+    foreach (array_keys($result['user']) as $uid) {
+      _cluster_api_clear_push_token_for_user($token, $uid);
+    }
+  }
+
+  // Save the token to the user profile.
   $wrapper = entity_metadata_wrapper('user', $user);
   try {
-    // @TODO: update the user account
+    $wrapper->field_push_token[] = $token;
+    $wrapper->save();
   }
   catch(\Exception $e) {
     watchdog('cluster_api', 'Entity metadata wrapper error: ' . $e->getMessage());
   }
 
+}
+
+/**
+ * Remove argued push notification from user entity.
+ */
+function _cluster_api_clear_push_token_for_user($token, $uid) {
+  $user = user_load($uid);
+  try {
+    $wrapper = entity_metadata_wrapper('user', $user);
+    $tokens = $wrapper->field_push_token->value();
+    $remaining_tokens = array_diff($tokens, [$token]);
+    $wrapper->field_push_token->set($remaining_tokens);
+    $wrapper->save();
+  }
+  catch(\Exception $e) {
+    watchdog('cluster_api', 'Entity metadata wrapper error when removing push notification tokens: ' . $e->getMessage());
+  }
 }
