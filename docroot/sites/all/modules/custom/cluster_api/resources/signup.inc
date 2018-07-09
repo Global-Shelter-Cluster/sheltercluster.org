@@ -62,7 +62,7 @@ function _cluster_api_signup($requests) {
   }
 
   // Add the authorized user id to the requested objects.
-  $requested_objects = $request['objects'];
+  $requested_objects = $requests['objects'];
   $requested_objects[] = ['type' => 'user', 'id' => $user->uid];
 
   // Get all objects from API.

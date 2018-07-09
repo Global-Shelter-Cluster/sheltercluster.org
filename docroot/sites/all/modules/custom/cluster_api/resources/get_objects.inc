@@ -22,7 +22,7 @@ use \Drupal\cluster_api\Authorization;
  * @return array
  */
 function _cluster_api_get_objects($request) {
-  // watchdog('cluster_api_request', json_encode($request));
+  watchdog('cluster_api_get_objects', json_encode($request));
   $auth = new Authorization();
   $auth_response = $auth->authorize($request);
   $user = $auth_response['user'];
