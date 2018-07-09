@@ -47,6 +47,11 @@ function cluster_api_default_oauth2_server() {
         "name" : "response",
         "description" : "Grants response related auth",
         "rdf_mapping" : []
+      },
+      {
+        "name" : "signup",
+        "description" : "Lets user create accounts",
+        "rdf_mapping" : []
       }
     ]
   }');
