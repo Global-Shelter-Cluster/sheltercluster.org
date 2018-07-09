@@ -51,6 +51,31 @@ function cluster_api_services_resources() {
         ],
       ],
     ],
+    'signup' => [
+      'operations' => [
+        'create' => [
+          'help' => 'Create a Drupal user',
+          'file' => [
+            'type' => 'inc',
+            'module' => 'cluster_api',
+            'name' => 'resources/signup',
+          ],
+          'callback' => '_cluster_api_signup',
+          'args' => [
+            [
+              'name' => 'credentials',
+              'optional' => FALSE,
+              'source' => 'data',
+              'type' => 'array',
+              'description' => 'Email and password for new user.',
+            ],
+          ],
+          'access callback' => 'user_access',
+          'access arguments' => ['access content'],
+          'access arguments append' => FALSE,
+        ],
+      ],
+    ],
     'follow' => [
       'operations' => [
         'create' => [
@@ -154,7 +179,7 @@ function _cluster_set_add_push_notification_token($user, $token) {
 
   $wrapper = entity_metadata_wrapper('user', $user);
   try {
-
+    // @TODO: update the user account
   }
   catch(\Exception $e) {
     watchdog('cluster_api', 'Entity metadata wrapper error: ' . $e->getMessage());
