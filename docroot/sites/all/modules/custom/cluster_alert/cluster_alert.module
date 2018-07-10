@@ -16,6 +16,10 @@ function cluster_alert_node_insert($node) {
   $wrapper = entity_metadata_wrapper('node', $node);
   $group_ids = ClusterAPI_Type::getReferenceIds('node', $node, 'og_group_ref', TRUE);
 
+  if (!$group_ids) {
+    return;
+  }
+
   foreach ($group_ids as $gid) {
     $plain_text_body = trim(strip_tags(text_summary($wrapper->body->value()['value'])));
     cluster_api_push($gid, $node->title, $plain_text_body, ['type' => 'new_alert', 'group_id' => $gid]);

@@ -136,22 +136,27 @@ function _cluster_api_get_follower_role_by_bundle($group_bundle) {
  */
 function cluster_api_push($gid, $title, $body = NULL, $data = NULL, $sound = TRUE) {
   $expo = new ClusterAPI_Expo();
-
   $group = node_load($gid);
-  if (!og_is_group('node', $group))
+  if (!og_is_group('node', $group)) {
     throw new Exception('Not a group id: ' . $id);
+  }
 
   $manager = new GroupContentManager($group);
   $uids = $manager->getUsersByRole(CLUSTER_API_FOLLOWER_ROLE_NAME, $group);
   $users = user_load_multiple($uids);
   $tokens = [];
   foreach ($users as $user) {
-    foreach (field_get_items('user', $user, 'field_push_token') as $item) {
+    $field_items = field_get_items('user', $user, 'field_push_token');
+    if (!$field_items) {
+      continue;
+    }
+    foreach ($field_items as $k => $item) {
       $tokens[] = $item['value'];
     }
   }
-  if (!count($tokens))
+  if (!count($tokens)) {
     return;
+  }
 
   $notification = array_filter([
     'title' => $title,
@@ -159,8 +164,9 @@ function cluster_api_push($gid, $title, $body = NULL, $data = NULL, $sound = TRU
     'data' => $data ? json_encode($data) : NULL,
   ]);
 
-  if ($sound)
+  if ($sound) {
     $notification['sound'] = 'default';
+  }
 
   $expo->notify($tokens, $notification);
 }
