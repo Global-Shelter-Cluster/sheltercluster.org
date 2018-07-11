@@ -74,6 +74,7 @@ features[field_base][] = field_name
 features[field_base][] = field_public_email
 features[field_base][] = field_push_token
 features[field_base][] = og_user_node1
+features[field_instance][] = user-user-field_account_origin
 features[field_instance][] = user-user-field_organisation_name
 features[field_instance][] = user-user-field_phone_number
 features[field_instance][] = user-user-field_push_token
