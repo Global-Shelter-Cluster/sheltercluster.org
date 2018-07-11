@@ -264,10 +264,13 @@ function _cluster_api_clear_push_token_for_user($token, $uid) {
  * Keep track of how users where created.
  */
 function cluster_api_track_users($uid, $origin) {
-  db_insert('cluster_api_users')
-    ->fields([
-      'uid' => 1,
-      'origin' => $origin,
-    ])
-    ->execute();
+  $user = user_load($uid);
+  try {
+    $wrapper = entity_metadata_wrapper('user', $user);
+    $wrapper->field_account_origin->set($origin);
+    $wrapper->save();
+  }
+  catch(\Exception $e) {
+    watchdog('cluster_api', 'Entity metadata wrapper error when recording user account origin: ' . $e->getMessage());
+  }
 }

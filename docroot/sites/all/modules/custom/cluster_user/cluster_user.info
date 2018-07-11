@@ -68,6 +68,7 @@ dependencies[] = workbench_moderation
 dependencies[] = wysiwyg
 features[ctools][] = strongarm:strongarm:1
 features[features_api][] = api:2
+features[field_base][] = field_account_origin
 features[field_base][] = field_address
 features[field_base][] = field_name
 features[field_base][] = field_public_email
