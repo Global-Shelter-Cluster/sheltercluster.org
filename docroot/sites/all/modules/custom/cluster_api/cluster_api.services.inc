@@ -40,6 +40,13 @@ function cluster_api_default_services_endpoint() {
         ),
       ),
     ),
+    'logout' => array(
+      'operations' => array(
+        'create' => array(
+          'enabled' => '1',
+        ),
+      ),
+    ),
   );
   $endpoint->debug = 1;
   $export['mobile'] = $endpoint;

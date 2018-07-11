@@ -67,7 +67,32 @@ function cluster_api_services_resources() {
               'optional' => FALSE,
               'source' => 'data',
               'type' => 'array',
-              'description' => 'Email and password for new user.',
+              'description' => 'Account details for new user.',
+            ],
+          ],
+          'access callback' => 'user_access',
+          'access arguments' => ['access content'],
+          'access arguments append' => FALSE,
+        ],
+      ],
+    ],
+    'logout' => [
+      'operations' => [
+        'create' => [
+          'help' => 'Logout',
+          'file' => [
+            'type' => 'inc',
+            'module' => 'cluster_api',
+            'name' => 'resources/logout',
+          ],
+          'callback' => '_cluster_api_logout',
+          'args' => [
+            [
+              'name' => 'credentials',
+              'optional' => FALSE,
+              'source' => 'data',
+              'type' => 'array',
+              'description' => 'Details about user loging out',
             ],
           ],
           'access callback' => 'user_access',
@@ -231,5 +256,20 @@ function _cluster_api_clear_push_token_for_user($token, $uid) {
   }
   catch(\Exception $e) {
     watchdog('cluster_api', 'Entity metadata wrapper error when removing push notification tokens: ' . $e->getMessage());
+  }
+}
+
+/**
+ * Keep track of how users where created.
+ */
+function cluster_api_track_users($uid, $origin) {
+  $user = user_load($uid);
+  try {
+    $wrapper = entity_metadata_wrapper('user', $user);
+    $wrapper->field_account_origin->set($origin);
+    $wrapper->save();
+  }
+  catch(\Exception $e) {
+    watchdog('cluster_api', 'Entity metadata wrapper error when recording user account origin: ' . $e->getMessage());
   }
 }

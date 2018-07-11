@@ -8,16 +8,18 @@ function _cluster_api_signup($requests) {
     'authorization' => [],
     'objects' => [],
     'code' => [],
-    'error'
+    'error' => '',
   ];
 
-  if (empty($requests['credentials']['email']) || empty($requests['credentials']['password'])) {
+  $account_values = $requests['credentials']['account_values'];
+
+  if (empty($account_values['email']) || empty($account_values['password'])) {
     $response['authorization'] = _cluster_api_signup_error_response('400', 'Bad request', 'Missing credentials');
     return $response;
   }
 
-  $email = $requests['credentials']['email'];
-  $password = $requests['credentials']['password'];
+  $email = $account_values['email'];
+  $password = $account_values['password'];
 
   if (!valid_email_address($email)) {
     $response['authorization'] = _cluster_api_signup_error_response('400', 'Bad request', 'Invalid email address');
@@ -29,7 +31,7 @@ function _cluster_api_signup($requests) {
     return $response;
   }
 
-  // Create new user with supplied credentials.
+  // Create new user with supplied credentials and values.
   $fields = [
     'name' => $email,
     'mail' => $email,
@@ -39,9 +41,25 @@ function _cluster_api_signup($requests) {
     'roles' => [
       DRUPAL_AUTHENTICATED_RID => 'authenticated user',
     ],
+    'name_field' => [
+      'en' => [
+        0 => [
+          'value' => $account_values['name'],
+        ],
+      ],
+    ],
+    'field_organisation_name' => [
+      'en' => [
+        0 => [
+          'value' => $account_values['organization'],
+        ],
+      ],
+    ],
   ];
 
   $user = user_save('', $fields);
+
+  cluster_api_track_users($user->uid, 'shelter_app');
 
   // Generate oauth credentials for the new user.
   $auth = new Authorization();
