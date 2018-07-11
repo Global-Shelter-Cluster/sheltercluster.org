@@ -10,6 +10,41 @@
 function cluster_user_field_default_field_instances() {
   $field_instances = array();
 
+  // Exported field_instance: 'user-user-field_account_origin'.
+  $field_instances['user-user-field_account_origin'] = array(
+    'bundle' => 'user',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => 'Store information about how the account was created.',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 6,
+      ),
+    ),
+    'entity_type' => 'user',
+    'field_name' => 'field_account_origin',
+    'label' => 'Account origin',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => 0,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 40,
+    ),
+  );
+
   // Exported field_instance: 'user-user-field_organisation_name'.
   $field_instances['user-user-field_organisation_name'] = array(
     'bundle' => 'user',
@@ -247,6 +282,7 @@ function cluster_user_field_default_field_instances() {
 
   // Translatables
   // Included for use with string extractors like potx.
+  t('Account origin');
   t('Group membership');
   t('Name');
   t('Organization name');
@@ -254,6 +290,7 @@ function cluster_user_field_default_field_instances() {
   t('Push notification token for mobile app. Managed by the API.');
   t('Push token');
   t('Role or title');
+  t('Store information about how the account was created.');
 
   return $field_instances;
 }
