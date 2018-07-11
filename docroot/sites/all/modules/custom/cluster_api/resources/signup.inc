@@ -77,7 +77,7 @@ function _cluster_api_signup($requests) {
 
   if (!empty($requests['pushNotificationToken'])) {
     watchdog('cluster_api_signup', $requests['pushNotificationToken']);
-    _cluster_api_set_push_notification_token($user, $request['pushNotificationToken']);
+    _cluster_api_set_push_notification_token($user, $requests['pushNotificationToken']);
   }
 
   // Add the authorized user id to the requested objects.
