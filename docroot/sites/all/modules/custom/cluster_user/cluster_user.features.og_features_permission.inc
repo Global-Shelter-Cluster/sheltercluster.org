@@ -10,6 +10,11 @@
 function cluster_user_og_features_default_permissions() {
   $permissions = array();
 
+  // Exported og permission: 'node:community_of_practice:create alert content'
+  $permissions['node:community_of_practice:create alert content'] = array(
+    'roles' => array(),
+  );
+
   // Exported og permission: 'node:community_of_practice:create article content'
   $permissions['node:community_of_practice:create article content'] = array(
     'roles' => array(),
@@ -22,6 +27,11 @@ function cluster_user_og_features_default_permissions() {
     ),
   );
 
+  // Exported og permission: 'node:community_of_practice:delete any alert content'
+  $permissions['node:community_of_practice:delete any alert content'] = array(
+    'roles' => array(),
+  );
+
   // Exported og permission: 'node:community_of_practice:delete any article content'
   $permissions['node:community_of_practice:delete any article content'] = array(
     'roles' => array(),
@@ -32,6 +42,11 @@ function cluster_user_og_features_default_permissions() {
     'roles' => array(
       'member' => 'member',
     ),
+  );
+
+  // Exported og permission: 'node:community_of_practice:delete own alert content'
+  $permissions['node:community_of_practice:delete own alert content'] = array(
+    'roles' => array(),
   );
 
   // Exported og permission: 'node:community_of_practice:delete own article content'
@@ -61,6 +76,11 @@ function cluster_user_og_features_default_permissions() {
     'roles' => array(),
   );
 
+  // Exported og permission: 'node:community_of_practice:update any alert content'
+  $permissions['node:community_of_practice:update any alert content'] = array(
+    'roles' => array(),
+  );
+
   // Exported og permission: 'node:community_of_practice:update any article content'
   $permissions['node:community_of_practice:update any article content'] = array(
     'roles' => array(),
@@ -71,6 +91,11 @@ function cluster_user_og_features_default_permissions() {
     'roles' => array(
       'member' => 'member',
     ),
+  );
+
+  // Exported og permission: 'node:community_of_practice:update own alert content'
+  $permissions['node:community_of_practice:update own alert content'] = array(
+    'roles' => array(),
   );
 
   // Exported og permission: 'node:community_of_practice:update own article content'
@@ -85,6 +110,11 @@ function cluster_user_og_features_default_permissions() {
     ),
   );
 
+  // Exported og permission: 'node:geographic_region:create alert content'
+  $permissions['node:geographic_region:create alert content'] = array(
+    'roles' => array(),
+  );
+
   // Exported og permission: 'node:geographic_region:create article content'
   $permissions['node:geographic_region:create article content'] = array(
     'roles' => array(),
@@ -95,6 +125,11 @@ function cluster_user_og_features_default_permissions() {
     'roles' => array(),
   );
 
+  // Exported og permission: 'node:geographic_region:delete any alert content'
+  $permissions['node:geographic_region:delete any alert content'] = array(
+    'roles' => array(),
+  );
+
   // Exported og permission: 'node:geographic_region:delete any article content'
   $permissions['node:geographic_region:delete any article content'] = array(
     'roles' => array(),
@@ -102,6 +137,11 @@ function cluster_user_og_features_default_permissions() {
 
   // Exported og permission: 'node:geographic_region:delete any community_of_practice content'
   $permissions['node:geographic_region:delete any community_of_practice content'] = array(
+    'roles' => array(),
+  );
+
+  // Exported og permission: 'node:geographic_region:delete own alert content'
+  $permissions['node:geographic_region:delete own alert content'] = array(
     'roles' => array(),
   );
 
@@ -130,6 +170,11 @@ function cluster_user_og_features_default_permissions() {
     'roles' => array(),
   );
 
+  // Exported og permission: 'node:geographic_region:update any alert content'
+  $permissions['node:geographic_region:update any alert content'] = array(
+    'roles' => array(),
+  );
+
   // Exported og permission: 'node:geographic_region:update any article content'
   $permissions['node:geographic_region:update any article content'] = array(
     'roles' => array(),
@@ -137,6 +182,11 @@ function cluster_user_og_features_default_permissions() {
 
   // Exported og permission: 'node:geographic_region:update any community_of_practice content'
   $permissions['node:geographic_region:update any community_of_practice content'] = array(
+    'roles' => array(),
+  );
+
+  // Exported og permission: 'node:geographic_region:update own alert content'
+  $permissions['node:geographic_region:update own alert content'] = array(
     'roles' => array(),
   );
 
@@ -150,6 +200,11 @@ function cluster_user_og_features_default_permissions() {
     'roles' => array(),
   );
 
+  // Exported og permission: 'node:hub:create alert content'
+  $permissions['node:hub:create alert content'] = array(
+    'roles' => array(),
+  );
+
   // Exported og permission: 'node:hub:create article content'
   $permissions['node:hub:create article content'] = array(
     'roles' => array(),
@@ -160,6 +215,11 @@ function cluster_user_og_features_default_permissions() {
     'roles' => array(),
   );
 
+  // Exported og permission: 'node:hub:delete any alert content'
+  $permissions['node:hub:delete any alert content'] = array(
+    'roles' => array(),
+  );
+
   // Exported og permission: 'node:hub:delete any article content'
   $permissions['node:hub:delete any article content'] = array(
     'roles' => array(),
@@ -167,6 +227,11 @@ function cluster_user_og_features_default_permissions() {
 
   // Exported og permission: 'node:hub:delete any community_of_practice content'
   $permissions['node:hub:delete any community_of_practice content'] = array(
+    'roles' => array(),
+  );
+
+  // Exported og permission: 'node:hub:delete own alert content'
+  $permissions['node:hub:delete own alert content'] = array(
     'roles' => array(),
   );
 
@@ -195,6 +260,11 @@ function cluster_user_og_features_default_permissions() {
     'roles' => array(),
   );
 
+  // Exported og permission: 'node:hub:update any alert content'
+  $permissions['node:hub:update any alert content'] = array(
+    'roles' => array(),
+  );
+
   // Exported og permission: 'node:hub:update any article content'
   $permissions['node:hub:update any article content'] = array(
     'roles' => array(),
@@ -202,6 +272,11 @@ function cluster_user_og_features_default_permissions() {
 
   // Exported og permission: 'node:hub:update any community_of_practice content'
   $permissions['node:hub:update any community_of_practice content'] = array(
+    'roles' => array(),
+  );
+
+  // Exported og permission: 'node:hub:update own alert content'
+  $permissions['node:hub:update own alert content'] = array(
     'roles' => array(),
   );
 
@@ -215,6 +290,11 @@ function cluster_user_og_features_default_permissions() {
     'roles' => array(),
   );
 
+  // Exported og permission: 'node:response:create alert content'
+  $permissions['node:response:create alert content'] = array(
+    'roles' => array(),
+  );
+
   // Exported og permission: 'node:response:create article content'
   $permissions['node:response:create article content'] = array(
     'roles' => array(),
@@ -225,6 +305,11 @@ function cluster_user_og_features_default_permissions() {
     'roles' => array(),
   );
 
+  // Exported og permission: 'node:response:delete any alert content'
+  $permissions['node:response:delete any alert content'] = array(
+    'roles' => array(),
+  );
+
   // Exported og permission: 'node:response:delete any article content'
   $permissions['node:response:delete any article content'] = array(
     'roles' => array(),
@@ -232,6 +317,11 @@ function cluster_user_og_features_default_permissions() {
 
   // Exported og permission: 'node:response:delete any community_of_practice content'
   $permissions['node:response:delete any community_of_practice content'] = array(
+    'roles' => array(),
+  );
+
+  // Exported og permission: 'node:response:delete own alert content'
+  $permissions['node:response:delete own alert content'] = array(
     'roles' => array(),
   );
 
@@ -260,6 +350,11 @@ function cluster_user_og_features_default_permissions() {
     'roles' => array(),
   );
 
+  // Exported og permission: 'node:response:update any alert content'
+  $permissions['node:response:update any alert content'] = array(
+    'roles' => array(),
+  );
+
   // Exported og permission: 'node:response:update any article content'
   $permissions['node:response:update any article content'] = array(
     'roles' => array(),
@@ -267,6 +362,11 @@ function cluster_user_og_features_default_permissions() {
 
   // Exported og permission: 'node:response:update any community_of_practice content'
   $permissions['node:response:update any community_of_practice content'] = array(
+    'roles' => array(),
+  );
+
+  // Exported og permission: 'node:response:update own alert content'
+  $permissions['node:response:update own alert content'] = array(
     'roles' => array(),
   );
 
@@ -280,6 +380,11 @@ function cluster_user_og_features_default_permissions() {
     'roles' => array(),
   );
 
+  // Exported og permission: 'node:strategic_advisory:create alert content'
+  $permissions['node:strategic_advisory:create alert content'] = array(
+    'roles' => array(),
+  );
+
   // Exported og permission: 'node:strategic_advisory:create article content'
   $permissions['node:strategic_advisory:create article content'] = array(
     'roles' => array(),
@@ -290,6 +395,11 @@ function cluster_user_og_features_default_permissions() {
     'roles' => array(),
   );
 
+  // Exported og permission: 'node:strategic_advisory:delete any alert content'
+  $permissions['node:strategic_advisory:delete any alert content'] = array(
+    'roles' => array(),
+  );
+
   // Exported og permission: 'node:strategic_advisory:delete any article content'
   $permissions['node:strategic_advisory:delete any article content'] = array(
     'roles' => array(),
@@ -297,6 +407,11 @@ function cluster_user_og_features_default_permissions() {
 
   // Exported og permission: 'node:strategic_advisory:delete any community_of_practice content'
   $permissions['node:strategic_advisory:delete any community_of_practice content'] = array(
+    'roles' => array(),
+  );
+
+  // Exported og permission: 'node:strategic_advisory:delete own alert content'
+  $permissions['node:strategic_advisory:delete own alert content'] = array(
     'roles' => array(),
   );
 
@@ -325,6 +440,11 @@ function cluster_user_og_features_default_permissions() {
     'roles' => array(),
   );
 
+  // Exported og permission: 'node:strategic_advisory:update any alert content'
+  $permissions['node:strategic_advisory:update any alert content'] = array(
+    'roles' => array(),
+  );
+
   // Exported og permission: 'node:strategic_advisory:update any article content'
   $permissions['node:strategic_advisory:update any article content'] = array(
     'roles' => array(),
@@ -335,6 +455,11 @@ function cluster_user_og_features_default_permissions() {
     'roles' => array(),
   );
 
+  // Exported og permission: 'node:strategic_advisory:update own alert content'
+  $permissions['node:strategic_advisory:update own alert content'] = array(
+    'roles' => array(),
+  );
+
   // Exported og permission: 'node:strategic_advisory:update own article content'
   $permissions['node:strategic_advisory:update own article content'] = array(
     'roles' => array(),
@@ -342,6 +467,11 @@ function cluster_user_og_features_default_permissions() {
 
   // Exported og permission: 'node:strategic_advisory:update own community_of_practice content'
   $permissions['node:strategic_advisory:update own community_of_practice content'] = array(
+    'roles' => array(),
+  );
+
+  // Exported og permission: 'node:working_group:create alert content'
+  $permissions['node:working_group:create alert content'] = array(
     'roles' => array(),
   );
 
@@ -357,6 +487,11 @@ function cluster_user_og_features_default_permissions() {
     ),
   );
 
+  // Exported og permission: 'node:working_group:delete any alert content'
+  $permissions['node:working_group:delete any alert content'] = array(
+    'roles' => array(),
+  );
+
   // Exported og permission: 'node:working_group:delete any article content'
   $permissions['node:working_group:delete any article content'] = array(
     'roles' => array(),
@@ -367,6 +502,11 @@ function cluster_user_og_features_default_permissions() {
     'roles' => array(
       'administrator member' => 'administrator member',
     ),
+  );
+
+  // Exported og permission: 'node:working_group:delete own alert content'
+  $permissions['node:working_group:delete own alert content'] = array(
+    'roles' => array(),
   );
 
   // Exported og permission: 'node:working_group:delete own article content'
@@ -400,6 +540,11 @@ function cluster_user_og_features_default_permissions() {
     ),
   );
 
+  // Exported og permission: 'node:working_group:update any alert content'
+  $permissions['node:working_group:update any alert content'] = array(
+    'roles' => array(),
+  );
+
   // Exported og permission: 'node:working_group:update any article content'
   $permissions['node:working_group:update any article content'] = array(
     'roles' => array(),
@@ -410,6 +555,11 @@ function cluster_user_og_features_default_permissions() {
     'roles' => array(
       'administrator member' => 'administrator member',
     ),
+  );
+
+  // Exported og permission: 'node:working_group:update own alert content'
+  $permissions['node:working_group:update own alert content'] = array(
+    'roles' => array(),
   );
 
   // Exported og permission: 'node:working_group:update own article content'
