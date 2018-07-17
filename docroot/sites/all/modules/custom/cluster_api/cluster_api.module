@@ -1,0 +1,276 @@
+<?php
+
+include_once 'cluster_api.features.inc';
+
+const CLUSTER_API_FOLLOWER_ROLE_NAME = 'follower';
+
+function cluster_api_menu() {
+
+  $items = [];
+
+  $items['admin/config/shelter/cluser-api'] = [
+    'title' => 'Cluster API settings',
+    'description' => 'Set the cluster API configurations, such as local enpoint urls',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => ['cluster_api_settings'],
+    'access arguments' => ['administer site configuration'],
+    'file' => 'cluster_api.form.inc',
+    'type' => MENU_NORMAL_ITEM,
+   ];
+
+  return $items;
+}
+
+/**
+ * Implements hook_services_resources().
+ */
+function cluster_api_services_resources() {
+  return [
+    'get-objects' => [
+      'operations' => [
+        'create' => [ // This isn't "creating" anything. REST verbs just suck.
+          'help' => 'Load objects, including any related objects',
+          'file' => [
+            'type' => 'inc',
+            'module' => 'cluster_api',
+            'name' => 'resources/get_objects',
+          ],
+          'callback' => '_cluster_api_get_objects',
+          'args' => [
+            [
+              'name' => 'requests',
+              'optional' => FALSE,
+              'source' => 'data',
+              'type' => 'array',
+              'description' => 'A list of object ids (and their types) to load.',
+            ],
+          ],
+          'access callback' => 'user_access',
+          'access arguments' => ['access content'],
+          'access arguments append' => FALSE,
+        ],
+      ],
+    ],
+    'signup' => [
+      'operations' => [
+        'create' => [
+          'help' => 'Create a Drupal user',
+          'file' => [
+            'type' => 'inc',
+            'module' => 'cluster_api',
+            'name' => 'resources/signup',
+          ],
+          'callback' => '_cluster_api_signup',
+          'args' => [
+            [
+              'name' => 'credentials',
+              'optional' => FALSE,
+              'source' => 'data',
+              'type' => 'array',
+              'description' => 'Account details for new user.',
+            ],
+          ],
+          'access callback' => 'user_access',
+          'access arguments' => ['access content'],
+          'access arguments append' => FALSE,
+        ],
+      ],
+    ],
+    'logout' => [
+      'operations' => [
+        'create' => [
+          'help' => 'Logout',
+          'file' => [
+            'type' => 'inc',
+            'module' => 'cluster_api',
+            'name' => 'resources/logout',
+          ],
+          'callback' => '_cluster_api_logout',
+          'args' => [
+            [
+              'name' => 'credentials',
+              'optional' => FALSE,
+              'source' => 'data',
+              'type' => 'array',
+              'description' => 'Details about user loging out',
+            ],
+          ],
+          'access callback' => 'user_access',
+          'access arguments' => ['access content'],
+          'access arguments append' => FALSE,
+        ],
+      ],
+    ],
+    'follow' => [
+      'operations' => [
+        'create' => [
+          'help' => 'Follow a group',
+          'file' => [
+            'type' => 'inc',
+            'module' => 'cluster_api',
+            'name' => 'resources/follow',
+          ],
+          'callback' => '_cluster_api_follow',
+          'args' => [
+            [
+              'name' => 'id',
+              'optional' => FALSE,
+              'source' => ['path' => 0],
+              'type' => 'int',
+              'description' => 'The id of the group node to follow or unfollow',
+            ],
+            [
+              'name' => 'follow',
+              'optional' => FALSE,
+              'source' => 'data',
+              'type' => 'array',
+              'description' => 'The action name, follow or unfollow',
+            ],
+          ],
+          'access callback' => 'user_access',
+          'access arguments' => ['access content'],
+          'access arguments append' => FALSE,
+        ],
+      ],
+    ],
+  ];
+}
+
+/**
+ * @param string $group_bundle e.g. "geographic_region"
+ *
+ * @return int
+ * @throws \Exception
+ */
+function _cluster_api_get_follower_role_by_bundle($group_bundle) {
+  $roles = array_flip(og_roles('node', $group_bundle));
+  if (!array_key_exists(CLUSTER_API_FOLLOWER_ROLE_NAME, $roles))
+    throw new Exception('Group bundle does not have follower role: ' . $group_bundle);
+  return $roles[CLUSTER_API_FOLLOWER_ROLE_NAME];
+}
+
+/**
+ * Send a push notification to all users logged in ("following") the given
+ * group.
+ *
+ * @param integer $gid Node id for the group.
+ * @param string $title
+ * @param string $body Plain text
+ * @param mixed $data This gets sent as json data to the app.
+ * @param boolean $sound
+ */
+function cluster_api_push($gid, $title, $body = NULL, $data = NULL, $sound = TRUE) {
+  $expo = new ClusterAPI_Expo();
+  $group = node_load($gid);
+  if (!og_is_group('node', $group)) {
+    throw new Exception('Not a group id: ' . $id);
+  }
+
+  $manager = new GroupContentManager($group);
+  $uids = $manager->getUsersByRole(CLUSTER_API_FOLLOWER_ROLE_NAME, $group);
+  $users = user_load_multiple($uids);
+  $tokens = [];
+  foreach ($users as $user) {
+    $field_items = field_get_items('user', $user, 'field_push_token');
+    if (!$field_items) {
+      continue;
+    }
+    foreach ($field_items as $k => $item) {
+      $tokens[] = $item['value'];
+    }
+  }
+  if (!count($tokens)) {
+    return;
+  }
+
+  $notification = array_filter([
+    'title' => $title,
+    'body' => $body,
+    'data' => $data ? json_encode($data) : NULL,
+  ]);
+
+  if ($sound) {
+    $notification['sound'] = 'default';
+  }
+
+  $expo->notify($tokens, $notification);
+}
+
+/**
+ * Add token to user profile.
+ *
+ * Remove token from other users' profiles.
+ *
+ * @param $user
+ *  User entity.
+ * @param $token
+ *  Push notification token string.
+ */
+function _cluster_api_set_push_notification_token($user, $token) {
+  watchdog('cluster_api_token', json_encode([$user->uid, $token]));
+  // Test if the user already has the token.
+  $query = new EntityFieldQuery();
+  $result = $query->entityCondition('entity_type', 'user')
+    ->fieldCondition('field_push_token', 'value', $token, '=')
+    ->propertyCondition('uid', $user->uid)
+    ->execute();
+
+  if (count($result)) {
+    return;
+  }
+
+  // Test if other users have the same token, and remove the token for those users.
+  $query = new EntityFieldQuery();
+  $result = $query->entityCondition('entity_type', 'user')
+    ->fieldCondition('field_push_token', 'value', $token, '=')
+    ->execute();
+
+  if (isset($result['user'])) {
+    foreach (array_keys($result['user']) as $uid) {
+      _cluster_api_clear_push_token_for_user($token, $uid);
+    }
+  }
+
+  // Save the token to the user profile.
+  $wrapper = entity_metadata_wrapper('user', $user);
+  try {
+    $wrapper->field_push_token[] = $token;
+    $wrapper->save();
+  }
+  catch(\Exception $e) {
+    watchdog('cluster_api', 'Entity metadata wrapper error: ' . $e->getMessage());
+  }
+
+}
+
+/**
+ * Remove argued push notification from user entity.
+ */
+function _cluster_api_clear_push_token_for_user($token, $uid) {
+  $user = user_load($uid);
+  try {
+    $wrapper = entity_metadata_wrapper('user', $user);
+    $tokens = $wrapper->field_push_token->value();
+    $remaining_tokens = array_diff($tokens, [$token]);
+    $wrapper->field_push_token->set($remaining_tokens);
+    $wrapper->save();
+  }
+  catch(\Exception $e) {
+    watchdog('cluster_api', 'Entity metadata wrapper error when removing push notification tokens: ' . $e->getMessage());
+  }
+}
+
+/**
+ * Keep track of how users where created.
+ */
+function cluster_api_track_users($uid, $origin) {
+  $user = user_load($uid);
+  try {
+    $wrapper = entity_metadata_wrapper('user', $user);
+    $wrapper->field_account_origin->set($origin);
+    $wrapper->save();
+  }
+  catch(\Exception $e) {
+    watchdog('cluster_api', 'Entity metadata wrapper error when recording user account origin: ' . $e->getMessage());
+  }
+}

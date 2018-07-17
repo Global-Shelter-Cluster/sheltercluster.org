@@ -66,6 +66,11 @@ function cluster_og_og_features_default_permissions() {
     ),
   );
 
+  // Exported og permission: 'node:community_of_practice:create kobo_form content'
+  $permissions['node:community_of_practice:create kobo_form content'] = array(
+    'roles' => array(),
+  );
+
   // Exported og permission: 'node:community_of_practice:create library content'
   $permissions['node:community_of_practice:create library content'] = array(
     'roles' => array(
@@ -115,6 +120,11 @@ function cluster_og_og_features_default_permissions() {
     ),
   );
 
+  // Exported og permission: 'node:community_of_practice:delete any kobo_form content'
+  $permissions['node:community_of_practice:delete any kobo_form content'] = array(
+    'roles' => array(),
+  );
+
   // Exported og permission: 'node:community_of_practice:delete any library content'
   $permissions['node:community_of_practice:delete any library content'] = array(
     'roles' => array(
@@ -162,6 +172,11 @@ function cluster_og_og_features_default_permissions() {
     'roles' => array(
       'member' => 'member',
     ),
+  );
+
+  // Exported og permission: 'node:community_of_practice:delete own kobo_form content'
+  $permissions['node:community_of_practice:delete own kobo_form content'] = array(
+    'roles' => array(),
   );
 
   // Exported og permission: 'node:community_of_practice:delete own library content'
@@ -253,6 +268,11 @@ function cluster_og_og_features_default_permissions() {
     ),
   );
 
+  // Exported og permission: 'node:community_of_practice:update any kobo_form content'
+  $permissions['node:community_of_practice:update any kobo_form content'] = array(
+    'roles' => array(),
+  );
+
   // Exported og permission: 'node:community_of_practice:update any library content'
   $permissions['node:community_of_practice:update any library content'] = array(
     'roles' => array(
@@ -307,6 +327,11 @@ function cluster_og_og_features_default_permissions() {
     'roles' => array(
       'member' => 'member',
     ),
+  );
+
+  // Exported og permission: 'node:community_of_practice:update own kobo_form content'
+  $permissions['node:community_of_practice:update own kobo_form content'] = array(
+    'roles' => array(),
   );
 
   // Exported og permission: 'node:community_of_practice:update own library content'
@@ -384,6 +409,11 @@ function cluster_og_og_features_default_permissions() {
     ),
   );
 
+  // Exported og permission: 'node:geographic_region:create kobo_form content'
+  $permissions['node:geographic_region:create kobo_form content'] = array(
+    'roles' => array(),
+  );
+
   // Exported og permission: 'node:geographic_region:create library content'
   $permissions['node:geographic_region:create library content'] = array(
     'roles' => array(
@@ -432,6 +462,11 @@ function cluster_og_og_features_default_permissions() {
     'roles' => array(
       'administrator member' => 'administrator member',
     ),
+  );
+
+  // Exported og permission: 'node:geographic_region:delete any kobo_form content'
+  $permissions['node:geographic_region:delete any kobo_form content'] = array(
+    'roles' => array(),
   );
 
   // Exported og permission: 'node:geographic_region:delete any library content'
@@ -486,6 +521,11 @@ function cluster_og_og_features_default_permissions() {
       'administrator member' => 'administrator member',
       'content editor' => 'content editor',
     ),
+  );
+
+  // Exported og permission: 'node:geographic_region:delete own kobo_form content'
+  $permissions['node:geographic_region:delete own kobo_form content'] = array(
+    'roles' => array(),
   );
 
   // Exported og permission: 'node:geographic_region:delete own library content'
@@ -580,6 +620,11 @@ function cluster_og_og_features_default_permissions() {
     ),
   );
 
+  // Exported og permission: 'node:geographic_region:update any kobo_form content'
+  $permissions['node:geographic_region:update any kobo_form content'] = array(
+    'roles' => array(),
+  );
+
   // Exported og permission: 'node:geographic_region:update any library content'
   $permissions['node:geographic_region:update any library content'] = array(
     'roles' => array(
@@ -639,6 +684,11 @@ function cluster_og_og_features_default_permissions() {
       'administrator member' => 'administrator member',
       'content editor' => 'content editor',
     ),
+  );
+
+  // Exported og permission: 'node:geographic_region:update own kobo_form content'
+  $permissions['node:geographic_region:update own kobo_form content'] = array(
+    'roles' => array(),
   );
 
   // Exported og permission: 'node:geographic_region:update own library content'
@@ -717,6 +767,11 @@ function cluster_og_og_features_default_permissions() {
     ),
   );
 
+  // Exported og permission: 'node:hub:create kobo_form content'
+  $permissions['node:hub:create kobo_form content'] = array(
+    'roles' => array(),
+  );
+
   // Exported og permission: 'node:hub:create library content'
   $permissions['node:hub:create library content'] = array(
     'roles' => array(
@@ -765,6 +820,11 @@ function cluster_og_og_features_default_permissions() {
     'roles' => array(
       'administrator member' => 'administrator member',
     ),
+  );
+
+  // Exported og permission: 'node:hub:delete any kobo_form content'
+  $permissions['node:hub:delete any kobo_form content'] = array(
+    'roles' => array(),
   );
 
   // Exported og permission: 'node:hub:delete any library content'
@@ -819,6 +879,11 @@ function cluster_og_og_features_default_permissions() {
       'administrator member' => 'administrator member',
       'content editor' => 'content editor',
     ),
+  );
+
+  // Exported og permission: 'node:hub:delete own kobo_form content'
+  $permissions['node:hub:delete own kobo_form content'] = array(
+    'roles' => array(),
   );
 
   // Exported og permission: 'node:hub:delete own library content'
@@ -913,6 +978,11 @@ function cluster_og_og_features_default_permissions() {
     ),
   );
 
+  // Exported og permission: 'node:hub:update any kobo_form content'
+  $permissions['node:hub:update any kobo_form content'] = array(
+    'roles' => array(),
+  );
+
   // Exported og permission: 'node:hub:update any library content'
   $permissions['node:hub:update any library content'] = array(
     'roles' => array(
@@ -972,6 +1042,11 @@ function cluster_og_og_features_default_permissions() {
       'administrator member' => 'administrator member',
       'content editor' => 'content editor',
     ),
+  );
+
+  // Exported og permission: 'node:hub:update own kobo_form content'
+  $permissions['node:hub:update own kobo_form content'] = array(
+    'roles' => array(),
   );
 
   // Exported og permission: 'node:hub:update own library content'
@@ -1050,6 +1125,11 @@ function cluster_og_og_features_default_permissions() {
     ),
   );
 
+  // Exported og permission: 'node:response:create kobo_form content'
+  $permissions['node:response:create kobo_form content'] = array(
+    'roles' => array(),
+  );
+
   // Exported og permission: 'node:response:create library content'
   $permissions['node:response:create library content'] = array(
     'roles' => array(
@@ -1098,6 +1178,11 @@ function cluster_og_og_features_default_permissions() {
     'roles' => array(
       'administrator member' => 'administrator member',
     ),
+  );
+
+  // Exported og permission: 'node:response:delete any kobo_form content'
+  $permissions['node:response:delete any kobo_form content'] = array(
+    'roles' => array(),
   );
 
   // Exported og permission: 'node:response:delete any library content'
@@ -1152,6 +1237,11 @@ function cluster_og_og_features_default_permissions() {
       'administrator member' => 'administrator member',
       'content editor' => 'content editor',
     ),
+  );
+
+  // Exported og permission: 'node:response:delete own kobo_form content'
+  $permissions['node:response:delete own kobo_form content'] = array(
+    'roles' => array(),
   );
 
   // Exported og permission: 'node:response:delete own library content'
@@ -1246,6 +1336,11 @@ function cluster_og_og_features_default_permissions() {
     ),
   );
 
+  // Exported og permission: 'node:response:update any kobo_form content'
+  $permissions['node:response:update any kobo_form content'] = array(
+    'roles' => array(),
+  );
+
   // Exported og permission: 'node:response:update any library content'
   $permissions['node:response:update any library content'] = array(
     'roles' => array(
@@ -1305,6 +1400,11 @@ function cluster_og_og_features_default_permissions() {
       'administrator member' => 'administrator member',
       'content editor' => 'content editor',
     ),
+  );
+
+  // Exported og permission: 'node:response:update own kobo_form content'
+  $permissions['node:response:update own kobo_form content'] = array(
+    'roles' => array(),
   );
 
   // Exported og permission: 'node:response:update own library content'
@@ -1383,6 +1483,11 @@ function cluster_og_og_features_default_permissions() {
     ),
   );
 
+  // Exported og permission: 'node:strategic_advisory:create kobo_form content'
+  $permissions['node:strategic_advisory:create kobo_form content'] = array(
+    'roles' => array(),
+  );
+
   // Exported og permission: 'node:strategic_advisory:create library content'
   $permissions['node:strategic_advisory:create library content'] = array(
     'roles' => array(
@@ -1431,6 +1536,11 @@ function cluster_og_og_features_default_permissions() {
     'roles' => array(
       'administrator member' => 'administrator member',
     ),
+  );
+
+  // Exported og permission: 'node:strategic_advisory:delete any kobo_form content'
+  $permissions['node:strategic_advisory:delete any kobo_form content'] = array(
+    'roles' => array(),
   );
 
   // Exported og permission: 'node:strategic_advisory:delete any library content'
@@ -1485,6 +1595,11 @@ function cluster_og_og_features_default_permissions() {
       'administrator member' => 'administrator member',
       'content editor' => 'content editor',
     ),
+  );
+
+  // Exported og permission: 'node:strategic_advisory:delete own kobo_form content'
+  $permissions['node:strategic_advisory:delete own kobo_form content'] = array(
+    'roles' => array(),
   );
 
   // Exported og permission: 'node:strategic_advisory:delete own library content'
@@ -1575,6 +1690,11 @@ function cluster_og_og_features_default_permissions() {
     ),
   );
 
+  // Exported og permission: 'node:strategic_advisory:update any kobo_form content'
+  $permissions['node:strategic_advisory:update any kobo_form content'] = array(
+    'roles' => array(),
+  );
+
   // Exported og permission: 'node:strategic_advisory:update any library content'
   $permissions['node:strategic_advisory:update any library content'] = array(
     'roles' => array(
@@ -1634,6 +1754,11 @@ function cluster_og_og_features_default_permissions() {
       'administrator member' => 'administrator member',
       'content editor' => 'content editor',
     ),
+  );
+
+  // Exported og permission: 'node:strategic_advisory:update own kobo_form content'
+  $permissions['node:strategic_advisory:update own kobo_form content'] = array(
+    'roles' => array(),
   );
 
   // Exported og permission: 'node:strategic_advisory:update own library content'
@@ -1712,6 +1837,11 @@ function cluster_og_og_features_default_permissions() {
     ),
   );
 
+  // Exported og permission: 'node:working_group:create kobo_form content'
+  $permissions['node:working_group:create kobo_form content'] = array(
+    'roles' => array(),
+  );
+
   // Exported og permission: 'node:working_group:create library content'
   $permissions['node:working_group:create library content'] = array(
     'roles' => array(
@@ -1760,6 +1890,11 @@ function cluster_og_og_features_default_permissions() {
     'roles' => array(
       'administrator member' => 'administrator member',
     ),
+  );
+
+  // Exported og permission: 'node:working_group:delete any kobo_form content'
+  $permissions['node:working_group:delete any kobo_form content'] = array(
+    'roles' => array(),
   );
 
   // Exported og permission: 'node:working_group:delete any library content'
@@ -1814,6 +1949,11 @@ function cluster_og_og_features_default_permissions() {
       'administrator member' => 'administrator member',
       'content editor' => 'content editor',
     ),
+  );
+
+  // Exported og permission: 'node:working_group:delete own kobo_form content'
+  $permissions['node:working_group:delete own kobo_form content'] = array(
+    'roles' => array(),
   );
 
   // Exported og permission: 'node:working_group:delete own library content'
@@ -1904,6 +2044,11 @@ function cluster_og_og_features_default_permissions() {
     ),
   );
 
+  // Exported og permission: 'node:working_group:update any kobo_form content'
+  $permissions['node:working_group:update any kobo_form content'] = array(
+    'roles' => array(),
+  );
+
   // Exported og permission: 'node:working_group:update any library content'
   $permissions['node:working_group:update any library content'] = array(
     'roles' => array(
@@ -1963,6 +2108,11 @@ function cluster_og_og_features_default_permissions() {
       'administrator member' => 'administrator member',
       'content editor' => 'content editor',
     ),
+  );
+
+  // Exported og permission: 'node:working_group:update own kobo_form content'
+  $permissions['node:working_group:update own kobo_form content'] = array(
+    'roles' => array(),
   );
 
   // Exported og permission: 'node:working_group:update own library content'

@@ -17,6 +17,19 @@
   <title><?php print $head_title; ?></title>
   <?php print $styles; ?>
   <?php print $scripts; ?>
+<script>
+  console.log(JSON.stringify([{type: 'user', id: 733}]));
+ // jQuery.ajax({
+ //    type: "POST",
+ //    url: "http://sheltercluster.lndo.site:8000/api-v1/get-objects",
+ //    dataType: "json",
+ //    contentType: "application/json",
+ //    success: console.log,
+ //    data: JSON.stringify([
+ //      {type: 'user', id: 733},
+ //    ])
+ //  });
+</script>
 </head>
 <body class="<?php print $classes; ?>" <?php print $attributes;?>>
   <div id="skip-link">

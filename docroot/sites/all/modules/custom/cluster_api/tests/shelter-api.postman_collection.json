@@ -1,0 +1,119 @@
+{
+	"info": {
+		"_postman_id": "2740a5b3-3dd9-472a-b361-cf5609f93073",
+		"name": "shelter-api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "password-grant",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "",
+						"value": "",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"objects\": [{\n    \"type\": \"global\",\n    \"id\": 1\n  }],\n  \"credentials\": {\n    \"type\": \"password\",\n    \"username\": \"jmlavarennestage\",\n    \"password\": \"123\",\n    \"client_id\": \"shelter-client\",\n    \"scope\": \"response\"\n  }\n}"
+				},
+				"url": {
+					"raw": "http://192.168.0.102:32778/api-v1/get-objects",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"0",
+						"102"
+					],
+					"port": "32778",
+					"path": [
+						"api-v1",
+						"get-objects"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "bearer",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer 961660fc8ce00cbf6d6ff4392cd60562f642012a"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"objects\": [{\n    \"type\": \"global\",\n    \"id\": 1\n  }]\n}"
+				},
+				"url": {
+					"raw": "http://192.168.0.102:32778/api-v1/get-objects",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"0",
+						"102"
+					],
+					"port": "32778",
+					"path": [
+						"api-v1",
+						"get-objects"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "refresh_token-grant",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "",
+						"value": "",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"objects\": [{\n    \"type\": \"global\",\n    \"id\": 1\n  }],\n \"credentials\": {\n    \"type\": \"refresh_token\",\n    \"refresh_token\": \"deabcabdfdd337b3111b2b5def96aa6ee29bf6fc\",\n    \"client_id\": \"shelter-client\",\n    \"scope\": \"response\"\n  }\n}"
+				},
+				"url": {
+					"raw": "http://192.168.0.102:32778/api-v1/get-objects",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"0",
+						"102"
+					],
+					"port": "32778",
+					"path": [
+						"api-v1",
+						"get-objects"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

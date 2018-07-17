@@ -274,18 +274,58 @@ class GroupContentManager {
 
   /**
    * Get the next upcoming event for the group, if any.
-   * @return
+   * @return []int|FALSE
    *  nid, FALSE if none exist.
    */
-  public function getUpcomingEvents($range = 3) {
+  public function getUpcomingEvents($range = 3, $days_limit = NULL) {
     $query = new EntityFieldQuery();
-    $res = $query->entityCondition('entity_type', 'node')
+    $query->entityCondition('entity_type', 'node')
       ->entityCondition('bundle', 'event')
       ->fieldCondition('og_group_ref', 'target_id', $this->node->nid)
       ->fieldCondition('field_recurring_event_date2', 'value', date('Y-m-d'), '>')
       ->propertyCondition('status', NODE_PUBLISHED)
-      ->fieldOrderBy('field_recurring_event_date2', 'value', 'ASC')
-      ->range(0, $range)
+      ->fieldOrderBy('field_recurring_event_date2', 'value', 'ASC');
+
+    if (!is_null($range))
+      $query->range(0, $range);
+
+    if (!is_null($days_limit)) {
+      $end_date = date('Y-m-d', time() + (3600 * 24 * ($days_limit + 1)));
+      $query->fieldCondition('field_recurring_event_date2', 'value', $end_date, '<');
+    }
+
+    $res = $query
+      ->execute();
+
+    if (!isset($res['node'])) {
+      return FALSE;
+    }
+
+    return array_keys($res['node']);
+  }
+
+  /**
+   * Get the latest alerts, if any.
+   * @return []int|FALSE
+   *  nid, FALSE if none exist.
+   */
+  public function getLatestAlerts($limit = 10, $days_limit = 7) {
+    $query = new EntityFieldQuery();
+    $query->entityCondition('entity_type', 'node')
+      ->entityCondition('bundle', 'alert')
+      ->fieldCondition('og_group_ref', 'target_id', $this->node->nid)
+      ->propertyCondition('status', NODE_PUBLISHED)
+      ->propertyOrderBy('created', 'DESC');
+
+    if (!is_null($limit))
+      $query->range(0, $limit);
+
+    if (!is_null($days_limit)) {
+      $timestamp_limit = REQUEST_TIME - (3600 * 24 * $days_limit);
+      $query->propertyCondition('created', $timestamp_limit, '>');
+    }
+
+    $res = $query
       ->execute();
 
     if (!isset($res['node'])) {
@@ -372,6 +412,21 @@ class GroupContentManager {
     return array_keys($res['node']);
   }
 
+  public function getKoboForms() {
+    $query = new EntityFieldQuery();
+    $res = $query->entityCondition('entity_type', 'node')
+      ->entityCondition('bundle', 'kobo_form')
+      ->fieldCondition('og_group_ref', 'target_id', $this->node->nid)
+      ->propertyCondition('status', NODE_PUBLISHED)
+      ->execute();
+
+    if (!isset($res['node'])) {
+      return array();
+    }
+
+    return array_keys($res['node']);
+  }
+
   /**
    * Delegates key documents management to the cluster_docs module.
    * @return render array of documents.
@@ -395,6 +450,28 @@ class GroupContentManager {
       ->execute();
 
     return $count > 0;
+  }
+
+  /**
+   * Get documents with the 'field_key_document' flag for the current group.
+   *  @return
+   *   Return a list of key document nids.
+   */
+  public function getKeyDocumentIds() {
+    $query = new EntityFieldQuery();
+    $res = $query->entityCondition('entity_type', 'node')
+      ->entityCondition('bundle', 'document')
+      ->fieldCondition('og_group_ref', 'target_id', $this->node->nid)
+      ->fieldCondition('field_key_document', 'value', 1)
+      ->propertyCondition('status', NODE_PUBLISHED)
+      ->propertyOrderBy('changed', 'DESC')
+      ->execute();
+
+    if (!isset($res['node'])) {
+      return FALSE;
+    }
+
+    return array_keys($res['node']);
   }
 
   /**
@@ -594,6 +671,10 @@ class GroupContentManagerGeographicRegion extends GroupContentManager {
 
   public function getRelatedWorkingGroups() {
     return $this::queryChildren($this->getDescendantIds(TRUE), 'field_parent_region', 'working_group');
+  }
+
+  public function getRelatedRegions() {
+    return $this::queryChildren([$this->node->nid], 'field_parent_region', 'geographic_region');
   }
 }
 

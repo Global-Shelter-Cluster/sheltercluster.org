@@ -1,0 +1,27 @@
+<?php
+/**
+ * @file
+ * Code for the Cluster kobo feature.
+ */
+
+include_once 'cluster_kobo.features.inc';
+
+function cluster_kobo_node_validate($node, $form, &$form_state) {
+  if ($node->type != 'kobo_form') {
+    return;
+  }
+
+  $error_message = t('Kobo form URL must be a valid URL starting with "https://ee.humanitarianresponse.info"');
+
+  $field_kobo_form_url = field_get_items('node', $node, 'field_kobo_form_url');
+  if (!isset($field_kobo_form_url[0]['value'])) {
+    form_set_error('field_kobo_form_url', $error_message);
+    return;
+  }
+
+  $url_value = $field_kobo_form_url[0]['value'];
+  if (strpos($url_value, 'https://ee.humanitarianresponse.info') !== 0) {
+    form_set_error('field_kobo_form_url', $error_message);
+  }
+
+}

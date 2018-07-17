@@ -182,6 +182,41 @@ function cluster_user_user_default_permissions() {
     'module' => 'restws',
   );
 
+  // Exported permission: 'access resource oauth2_server'.
+  $permissions['access resource oauth2_server'] = array(
+    'name' => 'access resource oauth2_server',
+    'roles' => array(),
+    'module' => 'restws',
+  );
+
+  // Exported permission: 'access resource oauth2_server_authorization_code'.
+  $permissions['access resource oauth2_server_authorization_code'] = array(
+    'name' => 'access resource oauth2_server_authorization_code',
+    'roles' => array(),
+    'module' => 'restws',
+  );
+
+  // Exported permission: 'access resource oauth2_server_client'.
+  $permissions['access resource oauth2_server_client'] = array(
+    'name' => 'access resource oauth2_server_client',
+    'roles' => array(),
+    'module' => 'restws',
+  );
+
+  // Exported permission: 'access resource oauth2_server_scope'.
+  $permissions['access resource oauth2_server_scope'] = array(
+    'name' => 'access resource oauth2_server_scope',
+    'roles' => array(),
+    'module' => 'restws',
+  );
+
+  // Exported permission: 'access resource oauth2_server_token'.
+  $permissions['access resource oauth2_server_token'] = array(
+    'name' => 'access resource oauth2_server_token',
+    'roles' => array(),
+    'module' => 'restws',
+  );
+
   // Exported permission: 'access resource og_membership'.
   $permissions['access resource og_membership'] = array(
     'name' => 'access resource og_membership',
@@ -538,6 +573,15 @@ function cluster_user_user_default_permissions() {
     'module' => 'node',
   );
 
+  // Exported permission: 'administer oauth2 server'.
+  $permissions['administer oauth2 server'] = array(
+    'name' => 'administer oauth2 server',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'oauth2_server',
+  );
+
   // Exported permission: 'administer pathauto'.
   $permissions['administer pathauto'] = array(
     'name' => 'administer pathauto',
@@ -819,9 +863,23 @@ function cluster_user_user_default_permissions() {
     'module' => 'node',
   );
 
+  // Exported permission: 'create field_push_token'.
+  $permissions['create field_push_token'] = array(
+    'name' => 'create field_push_token',
+    'roles' => array(),
+    'module' => 'field_permissions',
+  );
+
   // Exported permission: 'create homepage content'.
   $permissions['create homepage content'] = array(
     'name' => 'create homepage content',
+    'roles' => array(),
+    'module' => 'node',
+  );
+
+  // Exported permission: 'create kobo_form content'.
+  $permissions['create kobo_form content'] = array(
+    'name' => 'create kobo_form content',
     'roles' => array(),
     'module' => 'node',
   );
@@ -933,6 +991,13 @@ function cluster_user_user_default_permissions() {
     'module' => 'node',
   );
 
+  // Exported permission: 'delete any kobo_form content'.
+  $permissions['delete any kobo_form content'] = array(
+    'name' => 'delete any kobo_form content',
+    'roles' => array(),
+    'module' => 'node',
+  );
+
   // Exported permission: 'delete any library content'.
   $permissions['delete any library content'] = array(
     'name' => 'delete any library content',
@@ -1018,6 +1083,13 @@ function cluster_user_user_default_permissions() {
   // Exported permission: 'delete own homepage content'.
   $permissions['delete own homepage content'] = array(
     'name' => 'delete own homepage content',
+    'roles' => array(),
+    'module' => 'node',
+  );
+
+  // Exported permission: 'delete own kobo_form content'.
+  $permissions['delete own kobo_form content'] = array(
+    'name' => 'delete own kobo_form content',
     'roles' => array(),
     'module' => 'node',
   );
@@ -1269,6 +1341,13 @@ function cluster_user_user_default_permissions() {
     'module' => 'node',
   );
 
+  // Exported permission: 'edit any kobo_form content'.
+  $permissions['edit any kobo_form content'] = array(
+    'name' => 'edit any kobo_form content',
+    'roles' => array(),
+    'module' => 'node',
+  );
+
   // Exported permission: 'edit any library content'.
   $permissions['edit any library content'] = array(
     'name' => 'edit any library content',
@@ -1285,6 +1364,13 @@ function cluster_user_user_default_permissions() {
       'administrator' => 'administrator',
     ),
     'module' => 'node',
+  );
+
+  // Exported permission: 'edit field_push_token'.
+  $permissions['edit field_push_token'] = array(
+    'name' => 'edit field_push_token',
+    'roles' => array(),
+    'module' => 'field_permissions',
   );
 
   // Exported permission: 'edit own arbitrary_library content'.
@@ -1351,9 +1437,23 @@ function cluster_user_user_default_permissions() {
     'module' => 'node',
   );
 
+  // Exported permission: 'edit own field_push_token'.
+  $permissions['edit own field_push_token'] = array(
+    'name' => 'edit own field_push_token',
+    'roles' => array(),
+    'module' => 'field_permissions',
+  );
+
   // Exported permission: 'edit own homepage content'.
   $permissions['edit own homepage content'] = array(
     'name' => 'edit own homepage content',
+    'roles' => array(),
+    'module' => 'node',
+  );
+
+  // Exported permission: 'edit own kobo_form content'.
+  $permissions['edit own kobo_form content'] = array(
+    'name' => 'edit own kobo_form content',
     'roles' => array(),
     'module' => 'node',
   );
@@ -1950,6 +2050,17 @@ function cluster_user_user_default_permissions() {
     'module' => 'hybridauth',
   );
 
+  // Exported permission: 'use oauth2 server'.
+  $permissions['use oauth2 server'] = array(
+    'name' => 'use oauth2 server',
+    'roles' => array(
+      'administrator' => 'administrator',
+      'anonymous user' => 'anonymous user',
+      'authenticated user' => 'authenticated user',
+    ),
+    'module' => 'oauth2_server',
+  );
+
   // Exported permission: 'use text format filtered_html'.
   $permissions['use text format filtered_html'] = array(
     'name' => 'use text format filtered_html',
@@ -2008,6 +2119,13 @@ function cluster_user_user_default_permissions() {
     'module' => 'date_repeat_field',
   );
 
+  // Exported permission: 'view field_push_token'.
+  $permissions['view field_push_token'] = array(
+    'name' => 'view field_push_token',
+    'roles' => array(),
+    'module' => 'field_permissions',
+  );
+
   // Exported permission: 'view moderation history'.
   $permissions['view moderation history'] = array(
     'name' => 'view moderation history',
@@ -2025,6 +2143,13 @@ function cluster_user_user_default_permissions() {
       'authenticated user' => 'authenticated user',
     ),
     'module' => 'workbench_moderation',
+  );
+
+  // Exported permission: 'view own field_push_token'.
+  $permissions['view own field_push_token'] = array(
+    'name' => 'view own field_push_token',
+    'roles' => array(),
+    'module' => 'field_permissions',
   );
 
   // Exported permission: 'view own unpublished content'.
