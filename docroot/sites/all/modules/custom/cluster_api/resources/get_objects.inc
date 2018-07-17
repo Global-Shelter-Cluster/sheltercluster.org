@@ -33,7 +33,7 @@ function _cluster_api_get_objects($request) {
   }
 
   // Log the authorization server response.
-  // watchdog('cluster_api_response', json_encode($response));
+  watchdog('cluster_api_response', json_encode($response));
 
   // Can't authorize.
   if (!$user || $response['authorization']['code'] != '200') {
