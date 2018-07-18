@@ -445,8 +445,8 @@ function cluster_docs_field_default_field_instances() {
       'description_field' => 0,
       'entity_translation_sync' => FALSE,
       'file_directory' => 'docs',
-      'file_extensions' => 'txt rtf pdf doc docx dotx xls xlsx ppt pptx png jpg jpeg gif zip odf pps',
-      'max_filesize' => '50 MB',
+      'file_extensions' => 'txt rtf pdf doc docx dotx xls xlsx ppt pptx png jpg jpeg gif zip odf pps xml',
+      'max_filesize' => '200M',
       'user_register_form' => FALSE,
     ),
     'widget' => array(
