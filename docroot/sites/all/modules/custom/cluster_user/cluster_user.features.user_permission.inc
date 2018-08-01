@@ -15,7 +15,7 @@ function cluster_user_user_default_permissions() {
     'name' => 'access administration menu',
     'roles' => array(
       'administrator' => 'administrator',
-      'authenticated user' => 'authenticated user',
+      'trusted user' => 'trusted user',
     ),
     'module' => 'admin_menu',
   );
@@ -25,7 +25,7 @@ function cluster_user_user_default_permissions() {
     'name' => 'access administration pages',
     'roles' => array(
       'administrator' => 'administrator',
-      'authenticated user' => 'authenticated user',
+      'trusted user' => 'trusted user',
     ),
     'module' => 'system',
   );
@@ -84,6 +84,7 @@ function cluster_user_user_default_permissions() {
     'name' => 'access content overview',
     'roles' => array(
       'administrator' => 'administrator',
+      'trusted user' => 'trusted user',
     ),
     'module' => 'node',
   );
@@ -102,7 +103,6 @@ function cluster_user_user_default_permissions() {
     'name' => 'access devel information',
     'roles' => array(
       'administrator' => 'administrator',
-      'trusted user' => 'trusted user',
     ),
     'module' => 'devel',
   );
@@ -177,7 +177,6 @@ function cluster_user_user_default_permissions() {
     'name' => 'access resource node',
     'roles' => array(
       'administrator' => 'administrator',
-      'anonymous user' => 'anonymous user',
     ),
     'module' => 'restws',
   );
@@ -185,35 +184,45 @@ function cluster_user_user_default_permissions() {
   // Exported permission: 'access resource oauth2_server'.
   $permissions['access resource oauth2_server'] = array(
     'name' => 'access resource oauth2_server',
-    'roles' => array(),
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
     'module' => 'restws',
   );
 
   // Exported permission: 'access resource oauth2_server_authorization_code'.
   $permissions['access resource oauth2_server_authorization_code'] = array(
     'name' => 'access resource oauth2_server_authorization_code',
-    'roles' => array(),
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
     'module' => 'restws',
   );
 
   // Exported permission: 'access resource oauth2_server_client'.
   $permissions['access resource oauth2_server_client'] = array(
     'name' => 'access resource oauth2_server_client',
-    'roles' => array(),
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
     'module' => 'restws',
   );
 
   // Exported permission: 'access resource oauth2_server_scope'.
   $permissions['access resource oauth2_server_scope'] = array(
     'name' => 'access resource oauth2_server_scope',
-    'roles' => array(),
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
     'module' => 'restws',
   );
 
   // Exported permission: 'access resource oauth2_server_token'.
   $permissions['access resource oauth2_server_token'] = array(
     'name' => 'access resource oauth2_server_token',
-    'roles' => array(),
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
     'module' => 'restws',
   );
 
@@ -238,7 +247,9 @@ function cluster_user_user_default_permissions() {
   // Exported permission: 'access resource redirect'.
   $permissions['access resource redirect'] = array(
     'name' => 'access resource redirect',
-    'roles' => array(),
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
     'module' => 'restws',
   );
 
@@ -344,7 +355,9 @@ function cluster_user_user_default_permissions() {
   // Exported permission: 'add JS snippets for google analytics'.
   $permissions['add JS snippets for google analytics'] = array(
     'name' => 'add JS snippets for google analytics',
-    'roles' => array(),
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
     'module' => 'googleanalytics',
   );
 
@@ -776,7 +789,6 @@ function cluster_user_user_default_permissions() {
     'name' => 'bypass workbench moderation',
     'roles' => array(
       'administrator' => 'administrator',
-      'trusted user' => 'trusted user',
     ),
     'module' => 'workbench_moderation',
   );
@@ -813,6 +825,7 @@ function cluster_user_user_default_permissions() {
     'name' => 'create arbitrary_library content',
     'roles' => array(
       'administrator' => 'administrator',
+      'trusted user' => 'trusted user',
     ),
     'module' => 'node',
   );
@@ -831,6 +844,7 @@ function cluster_user_user_default_permissions() {
     'name' => 'create contact content',
     'roles' => array(
       'administrator' => 'administrator',
+      'trusted user' => 'trusted user',
     ),
     'module' => 'node',
   );
@@ -839,7 +853,7 @@ function cluster_user_user_default_permissions() {
   $permissions['create discussion content'] = array(
     'name' => 'create discussion content',
     'roles' => array(
-      'authenticated user' => 'authenticated user',
+      'administrator' => 'administrator',
     ),
     'module' => 'node',
   );
@@ -859,6 +873,7 @@ function cluster_user_user_default_permissions() {
     'name' => 'create event content',
     'roles' => array(
       'administrator' => 'administrator',
+      'trusted user' => 'trusted user',
     ),
     'module' => 'node',
   );
@@ -866,21 +881,28 @@ function cluster_user_user_default_permissions() {
   // Exported permission: 'create field_push_token'.
   $permissions['create field_push_token'] = array(
     'name' => 'create field_push_token',
-    'roles' => array(),
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
     'module' => 'field_permissions',
   );
 
   // Exported permission: 'create homepage content'.
   $permissions['create homepage content'] = array(
     'name' => 'create homepage content',
-    'roles' => array(),
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
     'module' => 'node',
   );
 
   // Exported permission: 'create kobo_form content'.
   $permissions['create kobo_form content'] = array(
     'name' => 'create kobo_form content',
-    'roles' => array(),
+    'roles' => array(
+      'administrator' => 'administrator',
+      'trusted user' => 'trusted user',
+    ),
     'module' => 'node',
   );
 
@@ -889,6 +911,7 @@ function cluster_user_user_default_permissions() {
     'name' => 'create library content',
     'roles' => array(
       'administrator' => 'administrator',
+      'trusted user' => 'trusted user',
     ),
     'module' => 'node',
   );
@@ -987,14 +1010,18 @@ function cluster_user_user_default_permissions() {
   // Exported permission: 'delete any homepage content'.
   $permissions['delete any homepage content'] = array(
     'name' => 'delete any homepage content',
-    'roles' => array(),
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
     'module' => 'node',
   );
 
   // Exported permission: 'delete any kobo_form content'.
   $permissions['delete any kobo_form content'] = array(
     'name' => 'delete any kobo_form content',
-    'roles' => array(),
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
     'module' => 'node',
   );
 
@@ -1030,6 +1057,7 @@ function cluster_user_user_default_permissions() {
     'name' => 'delete own arbitrary_library content',
     'roles' => array(
       'administrator' => 'administrator',
+      'trusted user' => 'trusted user',
     ),
     'module' => 'node',
   );
@@ -1048,6 +1076,7 @@ function cluster_user_user_default_permissions() {
     'name' => 'delete own contact content',
     'roles' => array(
       'administrator' => 'administrator',
+      'trusted user' => 'trusted user',
     ),
     'module' => 'node',
   );
@@ -1056,7 +1085,7 @@ function cluster_user_user_default_permissions() {
   $permissions['delete own discussion content'] = array(
     'name' => 'delete own discussion content',
     'roles' => array(
-      'authenticated user' => 'authenticated user',
+      'administrator' => 'administrator',
     ),
     'module' => 'node',
   );
@@ -1076,6 +1105,7 @@ function cluster_user_user_default_permissions() {
     'name' => 'delete own event content',
     'roles' => array(
       'administrator' => 'administrator',
+      'trusted user' => 'trusted user',
     ),
     'module' => 'node',
   );
@@ -1083,14 +1113,19 @@ function cluster_user_user_default_permissions() {
   // Exported permission: 'delete own homepage content'.
   $permissions['delete own homepage content'] = array(
     'name' => 'delete own homepage content',
-    'roles' => array(),
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
     'module' => 'node',
   );
 
   // Exported permission: 'delete own kobo_form content'.
   $permissions['delete own kobo_form content'] = array(
     'name' => 'delete own kobo_form content',
-    'roles' => array(),
+    'roles' => array(
+      'administrator' => 'administrator',
+      'trusted user' => 'trusted user',
+    ),
     'module' => 'node',
   );
 
@@ -1099,6 +1134,7 @@ function cluster_user_user_default_permissions() {
     'name' => 'delete own library content',
     'roles' => array(
       'administrator' => 'administrator',
+      'trusted user' => 'trusted user',
     ),
     'module' => 'node',
   );
@@ -1125,126 +1161,162 @@ function cluster_user_user_default_permissions() {
   // Exported permission: 'delete terms in assessment_monitoring_evaluation'.
   $permissions['delete terms in assessment_monitoring_evaluation'] = array(
     'name' => 'delete terms in assessment_monitoring_evaluation',
-    'roles' => array(),
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
     'module' => 'taxonomy',
   );
 
   // Exported permission: 'delete terms in coordination_management'.
   $permissions['delete terms in coordination_management'] = array(
     'name' => 'delete terms in coordination_management',
-    'roles' => array(),
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
     'module' => 'taxonomy',
   );
 
   // Exported permission: 'delete terms in cross_cutting_issues'.
   $permissions['delete terms in cross_cutting_issues'] = array(
     'name' => 'delete terms in cross_cutting_issues',
-    'roles' => array(),
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
     'module' => 'taxonomy',
   );
 
   // Exported permission: 'delete terms in disaster_causes'.
   $permissions['delete terms in disaster_causes'] = array(
     'name' => 'delete terms in disaster_causes',
-    'roles' => array(),
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
     'module' => 'taxonomy',
   );
 
   // Exported permission: 'delete terms in disaster_onset'.
   $permissions['delete terms in disaster_onset'] = array(
     'name' => 'delete terms in disaster_onset',
-    'roles' => array(),
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
     'module' => 'taxonomy',
   );
 
   // Exported permission: 'delete terms in disaster_type'.
   $permissions['delete terms in disaster_type'] = array(
     'name' => 'delete terms in disaster_type',
-    'roles' => array(),
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
     'module' => 'taxonomy',
   );
 
   // Exported permission: 'delete terms in document_status'.
   $permissions['delete terms in document_status'] = array(
     'name' => 'delete terms in document_status',
-    'roles' => array(),
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
     'module' => 'taxonomy',
   );
 
   // Exported permission: 'delete terms in document_type'.
   $permissions['delete terms in document_type'] = array(
     'name' => 'delete terms in document_type',
-    'roles' => array(),
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
     'module' => 'taxonomy',
   );
 
   // Exported permission: 'delete terms in geographic_region_type'.
   $permissions['delete terms in geographic_region_type'] = array(
     'name' => 'delete terms in geographic_region_type',
-    'roles' => array(),
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
     'module' => 'taxonomy',
   );
 
   // Exported permission: 'delete terms in information_management'.
   $permissions['delete terms in information_management'] = array(
     'name' => 'delete terms in information_management',
-    'roles' => array(),
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
     'module' => 'taxonomy',
   );
 
   // Exported permission: 'delete terms in inter_cluster'.
   $permissions['delete terms in inter_cluster'] = array(
     'name' => 'delete terms in inter_cluster',
-    'roles' => array(),
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
     'module' => 'taxonomy',
   );
 
   // Exported permission: 'delete terms in intervention_materials'.
   $permissions['delete terms in intervention_materials'] = array(
     'name' => 'delete terms in intervention_materials',
-    'roles' => array(),
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
     'module' => 'taxonomy',
   );
 
   // Exported permission: 'delete terms in intervention_programming'.
   $permissions['delete terms in intervention_programming'] = array(
     'name' => 'delete terms in intervention_programming',
-    'roles' => array(),
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
     'module' => 'taxonomy',
   );
 
   // Exported permission: 'delete terms in issues'.
   $permissions['delete terms in issues'] = array(
     'name' => 'delete terms in issues',
-    'roles' => array(),
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
     'module' => 'taxonomy',
   );
 
   // Exported permission: 'delete terms in meeting_management'.
   $permissions['delete terms in meeting_management'] = array(
     'name' => 'delete terms in meeting_management',
-    'roles' => array(),
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
     'module' => 'taxonomy',
   );
 
   // Exported permission: 'delete terms in non_food_items'.
   $permissions['delete terms in non_food_items'] = array(
     'name' => 'delete terms in non_food_items',
-    'roles' => array(),
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
     'module' => 'taxonomy',
   );
 
   // Exported permission: 'delete terms in response_phase'.
   $permissions['delete terms in response_phase'] = array(
     'name' => 'delete terms in response_phase',
-    'roles' => array(),
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
     'module' => 'taxonomy',
   );
 
   // Exported permission: 'delete terms in settlement_type'.
   $permissions['delete terms in settlement_type'] = array(
     'name' => 'delete terms in settlement_type',
-    'roles' => array(),
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
     'module' => 'taxonomy',
   );
 
@@ -1260,14 +1332,18 @@ function cluster_user_user_default_permissions() {
   // Exported permission: 'delete terms in technical_support_design'.
   $permissions['delete terms in technical_support_design'] = array(
     'name' => 'delete terms in technical_support_design',
-    'roles' => array(),
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
     'module' => 'taxonomy',
   );
 
   // Exported permission: 'delete terms in toolkit'.
   $permissions['delete terms in toolkit'] = array(
     'name' => 'delete terms in toolkit',
-    'roles' => array(),
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
     'module' => 'taxonomy',
   );
 
@@ -1285,6 +1361,7 @@ function cluster_user_user_default_permissions() {
     'name' => 'edit any arbitrary_library content',
     'roles' => array(
       'administrator' => 'administrator',
+      'trusted user' => 'trusted user',
     ),
     'module' => 'node',
   );
@@ -1303,6 +1380,7 @@ function cluster_user_user_default_permissions() {
     'name' => 'edit any contact content',
     'roles' => array(
       'administrator' => 'administrator',
+      'trusted user' => 'trusted user',
     ),
     'module' => 'node',
   );
@@ -1321,6 +1399,7 @@ function cluster_user_user_default_permissions() {
     'name' => 'edit any document content',
     'roles' => array(
       'administrator' => 'administrator',
+      'trusted user' => 'trusted user',
     ),
     'module' => 'node',
   );
@@ -1330,6 +1409,7 @@ function cluster_user_user_default_permissions() {
     'name' => 'edit any event content',
     'roles' => array(
       'administrator' => 'administrator',
+      'trusted user' => 'trusted user',
     ),
     'module' => 'node',
   );
@@ -1337,14 +1417,19 @@ function cluster_user_user_default_permissions() {
   // Exported permission: 'edit any homepage content'.
   $permissions['edit any homepage content'] = array(
     'name' => 'edit any homepage content',
-    'roles' => array(),
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
     'module' => 'node',
   );
 
   // Exported permission: 'edit any kobo_form content'.
   $permissions['edit any kobo_form content'] = array(
     'name' => 'edit any kobo_form content',
-    'roles' => array(),
+    'roles' => array(
+      'administrator' => 'administrator',
+      'trusted user' => 'trusted user',
+    ),
     'module' => 'node',
   );
 
@@ -1353,6 +1438,7 @@ function cluster_user_user_default_permissions() {
     'name' => 'edit any library content',
     'roles' => array(
       'administrator' => 'administrator',
+      'trusted user' => 'trusted user',
     ),
     'module' => 'node',
   );
@@ -1362,6 +1448,7 @@ function cluster_user_user_default_permissions() {
     'name' => 'edit any page content',
     'roles' => array(
       'administrator' => 'administrator',
+      'trusted user' => 'trusted user',
     ),
     'module' => 'node',
   );
@@ -1369,7 +1456,9 @@ function cluster_user_user_default_permissions() {
   // Exported permission: 'edit field_push_token'.
   $permissions['edit field_push_token'] = array(
     'name' => 'edit field_push_token',
-    'roles' => array(),
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
     'module' => 'field_permissions',
   );
 
@@ -1378,6 +1467,7 @@ function cluster_user_user_default_permissions() {
     'name' => 'edit own arbitrary_library content',
     'roles' => array(
       'administrator' => 'administrator',
+      'trusted user' => 'trusted user',
     ),
     'module' => 'node',
   );
@@ -1396,6 +1486,7 @@ function cluster_user_user_default_permissions() {
     'name' => 'edit own comments',
     'roles' => array(
       'administrator' => 'administrator',
+      'authenticated user' => 'authenticated user',
     ),
     'module' => 'comment',
   );
@@ -1405,6 +1496,7 @@ function cluster_user_user_default_permissions() {
     'name' => 'edit own contact content',
     'roles' => array(
       'administrator' => 'administrator',
+      'trusted user' => 'trusted user',
     ),
     'module' => 'node',
   );
@@ -1413,7 +1505,7 @@ function cluster_user_user_default_permissions() {
   $permissions['edit own discussion content'] = array(
     'name' => 'edit own discussion content',
     'roles' => array(
-      'authenticated user' => 'authenticated user',
+      'administrator' => 'administrator',
     ),
     'module' => 'node',
   );
@@ -1433,6 +1525,7 @@ function cluster_user_user_default_permissions() {
     'name' => 'edit own event content',
     'roles' => array(
       'administrator' => 'administrator',
+      'trusted user' => 'trusted user',
     ),
     'module' => 'node',
   );
@@ -1440,21 +1533,28 @@ function cluster_user_user_default_permissions() {
   // Exported permission: 'edit own field_push_token'.
   $permissions['edit own field_push_token'] = array(
     'name' => 'edit own field_push_token',
-    'roles' => array(),
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
     'module' => 'field_permissions',
   );
 
   // Exported permission: 'edit own homepage content'.
   $permissions['edit own homepage content'] = array(
     'name' => 'edit own homepage content',
-    'roles' => array(),
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
     'module' => 'node',
   );
 
   // Exported permission: 'edit own kobo_form content'.
   $permissions['edit own kobo_form content'] = array(
     'name' => 'edit own kobo_form content',
-    'roles' => array(),
+    'roles' => array(
+      'administrator' => 'administrator',
+      'trusted user' => 'trusted user',
+    ),
     'module' => 'node',
   );
 
@@ -1463,6 +1563,7 @@ function cluster_user_user_default_permissions() {
     'name' => 'edit own library content',
     'roles' => array(
       'administrator' => 'administrator',
+      'trusted user' => 'trusted user',
     ),
     'module' => 'node',
   );
@@ -1480,126 +1581,162 @@ function cluster_user_user_default_permissions() {
   // Exported permission: 'edit terms in assessment_monitoring_evaluation'.
   $permissions['edit terms in assessment_monitoring_evaluation'] = array(
     'name' => 'edit terms in assessment_monitoring_evaluation',
-    'roles' => array(),
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
     'module' => 'taxonomy',
   );
 
   // Exported permission: 'edit terms in coordination_management'.
   $permissions['edit terms in coordination_management'] = array(
     'name' => 'edit terms in coordination_management',
-    'roles' => array(),
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
     'module' => 'taxonomy',
   );
 
   // Exported permission: 'edit terms in cross_cutting_issues'.
   $permissions['edit terms in cross_cutting_issues'] = array(
     'name' => 'edit terms in cross_cutting_issues',
-    'roles' => array(),
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
     'module' => 'taxonomy',
   );
 
   // Exported permission: 'edit terms in disaster_causes'.
   $permissions['edit terms in disaster_causes'] = array(
     'name' => 'edit terms in disaster_causes',
-    'roles' => array(),
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
     'module' => 'taxonomy',
   );
 
   // Exported permission: 'edit terms in disaster_onset'.
   $permissions['edit terms in disaster_onset'] = array(
     'name' => 'edit terms in disaster_onset',
-    'roles' => array(),
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
     'module' => 'taxonomy',
   );
 
   // Exported permission: 'edit terms in disaster_type'.
   $permissions['edit terms in disaster_type'] = array(
     'name' => 'edit terms in disaster_type',
-    'roles' => array(),
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
     'module' => 'taxonomy',
   );
 
   // Exported permission: 'edit terms in document_status'.
   $permissions['edit terms in document_status'] = array(
     'name' => 'edit terms in document_status',
-    'roles' => array(),
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
     'module' => 'taxonomy',
   );
 
   // Exported permission: 'edit terms in document_type'.
   $permissions['edit terms in document_type'] = array(
     'name' => 'edit terms in document_type',
-    'roles' => array(),
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
     'module' => 'taxonomy',
   );
 
   // Exported permission: 'edit terms in geographic_region_type'.
   $permissions['edit terms in geographic_region_type'] = array(
     'name' => 'edit terms in geographic_region_type',
-    'roles' => array(),
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
     'module' => 'taxonomy',
   );
 
   // Exported permission: 'edit terms in information_management'.
   $permissions['edit terms in information_management'] = array(
     'name' => 'edit terms in information_management',
-    'roles' => array(),
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
     'module' => 'taxonomy',
   );
 
   // Exported permission: 'edit terms in inter_cluster'.
   $permissions['edit terms in inter_cluster'] = array(
     'name' => 'edit terms in inter_cluster',
-    'roles' => array(),
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
     'module' => 'taxonomy',
   );
 
   // Exported permission: 'edit terms in intervention_materials'.
   $permissions['edit terms in intervention_materials'] = array(
     'name' => 'edit terms in intervention_materials',
-    'roles' => array(),
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
     'module' => 'taxonomy',
   );
 
   // Exported permission: 'edit terms in intervention_programming'.
   $permissions['edit terms in intervention_programming'] = array(
     'name' => 'edit terms in intervention_programming',
-    'roles' => array(),
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
     'module' => 'taxonomy',
   );
 
   // Exported permission: 'edit terms in issues'.
   $permissions['edit terms in issues'] = array(
     'name' => 'edit terms in issues',
-    'roles' => array(),
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
     'module' => 'taxonomy',
   );
 
   // Exported permission: 'edit terms in meeting_management'.
   $permissions['edit terms in meeting_management'] = array(
     'name' => 'edit terms in meeting_management',
-    'roles' => array(),
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
     'module' => 'taxonomy',
   );
 
   // Exported permission: 'edit terms in non_food_items'.
   $permissions['edit terms in non_food_items'] = array(
     'name' => 'edit terms in non_food_items',
-    'roles' => array(),
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
     'module' => 'taxonomy',
   );
 
   // Exported permission: 'edit terms in response_phase'.
   $permissions['edit terms in response_phase'] = array(
     'name' => 'edit terms in response_phase',
-    'roles' => array(),
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
     'module' => 'taxonomy',
   );
 
   // Exported permission: 'edit terms in settlement_type'.
   $permissions['edit terms in settlement_type'] = array(
     'name' => 'edit terms in settlement_type',
-    'roles' => array(),
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
     'module' => 'taxonomy',
   );
 
@@ -1615,14 +1752,18 @@ function cluster_user_user_default_permissions() {
   // Exported permission: 'edit terms in technical_support_design'.
   $permissions['edit terms in technical_support_design'] = array(
     'name' => 'edit terms in technical_support_design',
-    'roles' => array(),
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
     'module' => 'taxonomy',
   );
 
   // Exported permission: 'edit terms in toolkit'.
   $permissions['edit terms in toolkit'] = array(
     'name' => 'edit terms in toolkit',
-    'roles' => array(),
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
     'module' => 'taxonomy',
   );
 
@@ -1893,7 +2034,6 @@ function cluster_user_user_default_permissions() {
     'name' => 'select text formats on context aware forms',
     'roles' => array(
       'administrator' => 'administrator',
-      'editor' => 'editor',
     ),
     'module' => 'cluster_context',
   );
@@ -1903,7 +2043,7 @@ function cluster_user_user_default_permissions() {
     'name' => 'skip comment approval',
     'roles' => array(
       'administrator' => 'administrator',
-      'authenticated user' => 'authenticated user',
+      'trusted user' => 'trusted user',
     ),
     'module' => 'comment',
   );
@@ -1983,7 +2123,9 @@ function cluster_user_user_default_permissions() {
   // Exported permission: 'translate taxonomy_term entities'.
   $permissions['translate taxonomy_term entities'] = array(
     'name' => 'translate taxonomy_term entities',
-    'roles' => array(),
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
     'module' => 'entity_translation',
   );
 
@@ -2026,7 +2168,9 @@ function cluster_user_user_default_permissions() {
   // Exported permission: 'use ctools import'.
   $permissions['use ctools import'] = array(
     'name' => 'use ctools import',
-    'roles' => array(),
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
     'module' => 'ctools',
   );
 
@@ -2066,7 +2210,7 @@ function cluster_user_user_default_permissions() {
     'name' => 'use text format filtered_html',
     'roles' => array(
       'administrator' => 'administrator',
-      'editor' => 'editor',
+      'trusted user' => 'trusted user',
     ),
     'module' => 'filter',
   );
@@ -2085,7 +2229,6 @@ function cluster_user_user_default_permissions() {
     'name' => 'use workbench_moderation my drafts tab',
     'roles' => array(
       'administrator' => 'administrator',
-      'authenticated user' => 'authenticated user',
     ),
     'module' => 'workbench_moderation',
   );
@@ -2095,7 +2238,6 @@ function cluster_user_user_default_permissions() {
     'name' => 'use workbench_moderation needs review tab',
     'roles' => array(
       'administrator' => 'administrator',
-      'trusted user' => 'trusted user',
     ),
     'module' => 'workbench_moderation',
   );
@@ -2105,7 +2247,6 @@ function cluster_user_user_default_permissions() {
     'name' => 'view all unpublished content',
     'roles' => array(
       'administrator' => 'administrator',
-      'trusted user' => 'trusted user',
     ),
     'module' => 'workbench_moderation',
   );
@@ -2122,7 +2263,9 @@ function cluster_user_user_default_permissions() {
   // Exported permission: 'view field_push_token'.
   $permissions['view field_push_token'] = array(
     'name' => 'view field_push_token',
-    'roles' => array(),
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
     'module' => 'field_permissions',
   );
 
@@ -2140,7 +2283,6 @@ function cluster_user_user_default_permissions() {
     'name' => 'view moderation messages',
     'roles' => array(
       'administrator' => 'administrator',
-      'authenticated user' => 'authenticated user',
     ),
     'module' => 'workbench_moderation',
   );
@@ -2148,7 +2290,9 @@ function cluster_user_user_default_permissions() {
   // Exported permission: 'view own field_push_token'.
   $permissions['view own field_push_token'] = array(
     'name' => 'view own field_push_token',
-    'roles' => array(),
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
     'module' => 'field_permissions',
   );
 
@@ -2157,7 +2301,7 @@ function cluster_user_user_default_permissions() {
     'name' => 'view own unpublished content',
     'roles' => array(
       'administrator' => 'administrator',
-      'authenticated user' => 'authenticated user',
+      'trusted user' => 'trusted user',
     ),
     'module' => 'node',
   );
