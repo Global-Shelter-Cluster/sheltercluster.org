@@ -10,22 +10,10 @@
 function shelter_base_user_default_roles() {
   $roles = array();
 
-  // Exported role: Full HTML user.
-  $roles['Full HTML user'] = array(
-    'name' => 'Full HTML user',
-    'weight' => 5,
-  );
-
   // Exported role: administrator.
   $roles['administrator'] = array(
     'name' => 'administrator',
     'weight' => 2,
-  );
-
-  // Exported role: editor.
-  $roles['editor'] = array(
-    'name' => 'editor',
-    'weight' => 4,
   );
 
   // Exported role: trusted user.

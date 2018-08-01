@@ -762,7 +762,7 @@ function cluster_docs_field_default_field_instances() {
       ),
     ),
     'deleted' => 0,
-    'description' => 'Key documents will remain visible on the response page.',
+    'description' => 'Key documents will also be visible on the GSC homepage.',
     'display' => array(
       'default' => array(
         'label' => 'hidden',
@@ -1623,7 +1623,7 @@ function cluster_docs_field_default_field_instances() {
   t('Intervention Programming');
   t('Issues');
   t('Key Document');
-  t('Key documents will remain visible on the response page.');
+  t('Key documents will also be visible on the GSC homepage.');
   t('Link');
   t('Meeting Management');
   t('Name');
