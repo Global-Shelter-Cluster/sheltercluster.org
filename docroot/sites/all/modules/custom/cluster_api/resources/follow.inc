@@ -6,9 +6,6 @@ use \Drupal\cluster_api\Authorization;
  * Returns the group object (with persist=true) and all its related objects.
  *
  * @param int $id
- *
- * @throws \OgException
- * @throws \Exception
  */
 function _cluster_api_follow($id, $request) {
   switch ($request['action']) {
@@ -22,7 +19,7 @@ function _cluster_api_follow($id, $request) {
 function _cluster_api_follow_action($id, $request) {
   $id = intval($id, 10);
   if ($id <= 0) {
-    throw new Exception('Wrong group id');
+    return services_error('Wrong group id', 400);
   }
 
   $auth = new Authorization();
@@ -37,7 +34,7 @@ function _cluster_api_follow_action($id, $request) {
 
   $group = node_load($id);
   if (!$group || !og_is_group('node', $group)) {
-    throw new Exception('Wrong group id');
+    return services_error('Wrong group id', 400);
   }
 
   if (!og_is_member('node', $id, 'user', $user)) {
@@ -58,13 +55,11 @@ function _cluster_api_follow_action($id, $request) {
  * global object).
  *
  * @param int $id
- *
- * @throws \Exception
  */
 function _cluster_api_unfollow_action($id, $request) {
   $id = intval($id, 10);
   if ($id <= 0) {
-    throw new Exception('Wrong group id');
+    return services_error('Wrong group id', 400);
   }
   $auth = new Authorization();
   $auth_response = $auth->authorize($request);
@@ -78,7 +73,7 @@ function _cluster_api_unfollow_action($id, $request) {
 
   $group = node_load($id);
   if (!$group || !og_is_group('node', $group)) {
-    throw new Exception('Wrong group id');
+    return services_error('Wrong group id', 400);
   }
 
   if (in_array($id, ClusterAPI_Type_User::getFollowedGroups($user))) {
