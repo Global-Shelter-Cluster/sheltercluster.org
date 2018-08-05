@@ -26,6 +26,13 @@ function cluster_api_default_services_endpoint() {
         ),
       ),
     ),
+    'forgot' => array(
+      'operations' => array(
+        'create' => array(
+          'enabled' => '1',
+        ),
+      ),
+    ),
     'get-objects' => array(
       'operations' => array(
         'create' => array(
@@ -33,14 +40,14 @@ function cluster_api_default_services_endpoint() {
         ),
       ),
     ),
-    'signup' => array(
+    'logout' => array(
       'operations' => array(
         'create' => array(
           'enabled' => '1',
         ),
       ),
     ),
-    'logout' => array(
+    'signup' => array(
       'operations' => array(
         'create' => array(
           'enabled' => '1',
