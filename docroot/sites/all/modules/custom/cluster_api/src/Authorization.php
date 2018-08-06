@@ -70,7 +70,12 @@ class Authorization {
    * Get bearer token for request Authorization header.
    */
   private function getBearerToken() {
-    $authorization_header = array_change_key_case(getallheaders())['authorization'];
+    $headers = array_change_key_case(getallheaders());
+    if (!array_key_exists('authorization', $headers)) {
+      return FALSE;
+    }
+
+    $authorization_header = $headers['authorization'];
     watchdog('cluster_api_headers', json_encode(getallheaders()));
     if (substr($authorization_header, 0, 7) !== 'Bearer ') {
       return FALSE;
