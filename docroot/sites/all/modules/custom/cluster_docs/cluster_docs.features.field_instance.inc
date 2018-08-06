@@ -445,8 +445,8 @@ function cluster_docs_field_default_field_instances() {
       'description_field' => 0,
       'entity_translation_sync' => FALSE,
       'file_directory' => 'docs',
-      'file_extensions' => 'txt rtf pdf doc docx dotx xls xlsx ppt pptx png jpg jpeg gif zip odf pps',
-      'max_filesize' => '50 MB',
+      'file_extensions' => 'txt rtf pdf doc docx dotx xls xlsx ppt pptx png jpg jpeg gif zip odf pps xlsm',
+      'max_filesize' => '200M',
       'user_register_form' => FALSE,
     ),
     'widget' => array(
@@ -762,7 +762,7 @@ function cluster_docs_field_default_field_instances() {
       ),
     ),
     'deleted' => 0,
-    'description' => 'Key documents will remain visible on the response page.',
+    'description' => 'Key documents will also be visible on the GSC homepage.',
     'display' => array(
       'default' => array(
         'label' => 'hidden',
@@ -1623,7 +1623,7 @@ function cluster_docs_field_default_field_instances() {
   t('Intervention Programming');
   t('Issues');
   t('Key Document');
-  t('Key documents will remain visible on the response page.');
+  t('Key documents will also be visible on the GSC homepage.');
   t('Link');
   t('Meeting Management');
   t('Name');

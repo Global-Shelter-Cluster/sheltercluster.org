@@ -52,6 +52,7 @@ function cluster_og_user_default_permissions() {
     'name' => 'create strategic_advisory content',
     'roles' => array(
       'administrator' => 'administrator',
+      'trusted user' => 'trusted user',
     ),
     'module' => 'node',
   );
@@ -61,6 +62,7 @@ function cluster_og_user_default_permissions() {
     'name' => 'create working_group content',
     'roles' => array(
       'administrator' => 'administrator',
+      'trusted user' => 'trusted user',
     ),
     'module' => 'node',
   );
@@ -161,6 +163,7 @@ function cluster_og_user_default_permissions() {
     'name' => 'delete own strategic_advisory content',
     'roles' => array(
       'administrator' => 'administrator',
+      'trusted user' => 'trusted user',
     ),
     'module' => 'node',
   );
@@ -170,6 +173,7 @@ function cluster_og_user_default_permissions() {
     'name' => 'delete own working_group content',
     'roles' => array(
       'administrator' => 'administrator',
+      'trusted user' => 'trusted user',
     ),
     'module' => 'node',
   );
@@ -206,6 +210,7 @@ function cluster_og_user_default_permissions() {
     'name' => 'edit any response content',
     'roles' => array(
       'administrator' => 'administrator',
+      'trusted user' => 'trusted user',
     ),
     'module' => 'node',
   );
@@ -261,6 +266,7 @@ function cluster_og_user_default_permissions() {
     'name' => 'edit own response content',
     'roles' => array(
       'administrator' => 'administrator',
+      'trusted user' => 'trusted user',
     ),
     'module' => 'node',
   );
@@ -270,6 +276,7 @@ function cluster_og_user_default_permissions() {
     'name' => 'edit own strategic_advisory content',
     'roles' => array(
       'administrator' => 'administrator',
+      'trusted user' => 'trusted user',
     ),
     'module' => 'node',
   );
@@ -279,6 +286,7 @@ function cluster_og_user_default_permissions() {
     'name' => 'edit own working_group content',
     'roles' => array(
       'administrator' => 'administrator',
+      'trusted user' => 'trusted user',
     ),
     'module' => 'node',
   );

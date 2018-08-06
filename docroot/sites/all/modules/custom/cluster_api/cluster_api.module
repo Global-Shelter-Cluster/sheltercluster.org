@@ -76,6 +76,31 @@ function cluster_api_services_resources() {
         ],
       ],
     ],
+    'forgot' => [
+      'operations' => [
+        'create' => [
+          'help' => 'Request a new password for an existing Drupal user',
+          'file' => [
+            'type' => 'inc',
+            'module' => 'cluster_api',
+            'name' => 'resources/forgot',
+          ],
+          'callback' => '_cluster_api_forgot',
+          'args' => [
+            [
+              'name' => 'data',
+              'optional' => FALSE,
+              'source' => 'data',
+              'type' => 'array',
+              'description' => 'Username or e-mail address.',
+            ],
+          ],
+          'access callback' => 'user_access',
+          'access arguments' => ['access content'],
+          'access arguments append' => FALSE,
+        ],
+      ],
+    ],
     'logout' => [
       'operations' => [
         'create' => [

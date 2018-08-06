@@ -1,0 +1,39 @@
+Environments
+
+Dev: integration server. Checked out on the dev branch. A Github webhook triggers a script that keeps
+the code updated whenever the branch is updated.
+
+Stage: the next version of production where QA is performed. Checked out on the stage branch.
+A Github webhook is configured similarly to dev.
+
+Prod: checked out on the current release tag. When we are ready to deploy, the stage branch gets merged
+into master, master gets tagged, and the tag gets deployed to production.
+
+YouTrack board
+
+Our board has 5 columns, I propose changing "Can't reproduce" to "In QA".
+PROPOSED, READY, IN PROGRESS, IN QA, DONE
+
+Proposed: tickets that we describe work that needs to be done, but that requires discussion. Can't start developing until those discussions take place.
+
+Ready: development can start on those, but nobody is assigned.
+
+In progress: someone is assigned, typically a developer.
+
+In QA: the branch has been merged into the QA environment and the ticket is assigned to the designated QA team member.
+
+Done: Feature branch has been merged into the stage branch and will get deployed with the next production tag.
+
+Git
+Each ticket gets a feature branch. The naming convention is [ticket type]/[number]-[small description],
+e.g. cosmetics/16-page-width, feature/31-documents-pages.
+
+Feature branches get merged into the dev branch and stage branches for QA.
+
+A tag is made out of master when we want to deploy to production.
+Tag names start with the letter "v" and are version numbers, for example v1.2.2.
+Always increment the third number for a release, unless it contains a major functionality improvement,
+in which case increment the second number (e.g. v1.3).
+
+Deploying
+cd /var/www/redc-001 && sudo -u apache git fetch --tags && sudo -u apache git checkout TAG_NAME
