@@ -62,8 +62,7 @@ class Authorization {
     }
 
     // Access token was successfuly generated or validated.
-    $token_data = oauth2_server_token_load($bearer_token);
-    watchdog('cluster_api_auth', json_encode($token_data));
+    $token_data =  oauth2_server_token_load($bearer_token);
     $response['user'] = user_load($token_data->uid);
 
     return $response;
