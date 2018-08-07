@@ -55,8 +55,6 @@ class Authorization {
       return $response;
     }
 
-    watchdog('cluster_api_auth', json_encode([$oauth_response, $bearer_token]));
-
     if (isset($oauth_response['expires_in'])) {
       $response['authorization']['expires_at'] = time() + $oauth_response['expires_in'];
     }
