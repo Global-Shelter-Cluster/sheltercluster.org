@@ -19,13 +19,6 @@
       <ul class="contributors clearfix">
         <li class="contributor">
           <?php print theme('image', array(
-            'path' => drupal_get_path('theme', 'shelter') . '/assets/images/crc-wordmark-en-whitebg-small.jpg',
-            'alt' => t('Canadian Red Cross'),
-            ''
-          )); ?>
-        </li>
-        <li class="contributor">
-          <?php print theme('image', array(
             'path' => drupal_get_path('theme', 'shelter') . '/assets/images/red-cross.jpg',
             'alt' => t('Canadian Red Cross'),
           )); ?>
