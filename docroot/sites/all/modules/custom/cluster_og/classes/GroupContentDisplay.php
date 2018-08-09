@@ -222,12 +222,43 @@ class GroupDisplayProvider {
     $force_collapse = cluster_docs_is_group_documents_page() || cluster_events_is_group_events_page();
 
     if ($responses = $this->getRelatedResponses()) {
-      $secondary['responses'] = partial('navigation_options', array(
+      $variables = [
         'navigation_type_id' => 'related-operations',
         'title' => t('Related operations'),
         'collapsed' => $force_collapse,
         'nodes' => node_load_multiple($responses)
-      ));
+      ];
+
+      if ($this->node->type === 'geographic_region') {
+        $hierarchy = $this->manager->getResponseRegionHierarchy();
+        if ($hierarchy) {
+          $missing = [];
+          foreach (array_keys($variables['nodes']) as $nid) {
+            $found = FALSE;
+            foreach ($hierarchy as $parent_id => $response_ids) {
+              if (in_array($nid, $response_ids)) {
+                $found = TRUE;
+                break;
+              }
+            }
+            if (!$found)
+              $missing[] = $nid;
+          }
+
+          if ($missing)
+            $hierarchy = [($this->node->nid) => $missing] + $hierarchy;
+
+          array_walk($hierarchy, function(&$ids) {
+            $ids = node_load_multiple($ids);
+          });
+
+          $variables['children'] = $hierarchy;
+          $variables['nodes'] = node_load_multiple(array_keys($hierarchy));
+          $variables['navigation_type_id'] .= '-hierarchical';
+        }
+      }
+
+      $secondary['responses'] = partial('navigation_options', $variables);
     }
 
     if ($hubs = $this->getRelatedHubs()) {
