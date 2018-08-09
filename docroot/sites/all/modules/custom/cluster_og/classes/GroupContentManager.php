@@ -661,8 +661,54 @@ class GroupContentManagerResponse extends GroupContentManager {
 class GroupContentManagerGeographicRegion extends GroupContentManager {
   protected $parent_field = 'field_parent_region';
 
+  /**
+   * @return array keys are region nids, values are arrays of response ids
+   */
+  public function getResponseRegionHierarchy() {
+    $regions = $this->getRelatedRegions();
+    $responses = $this->getRelatedResponses();
+
+    $get_target_id = function($i) {
+      return intval($i['target_id']);
+    };
+
+    $ret = [];
+
+    foreach ($responses as $response_id) {
+      $response = node_load($response_id);
+
+      $response_regions = field_get_items('node', $response, 'field_associated_regions');
+      if (!$response_regions)
+        continue;
+      $response_regions = array_unique(array_values(array_map($get_target_id, $response_regions)));
+      $response_regions = array_filter($response_regions, function($id) use ($regions) {
+        return in_array($id, $regions);
+      });
+      if (count($response_regions) === 0)
+        continue;
+
+      $found = FALSE;
+      foreach ($response_regions as $id) {
+        if (array_key_exists($id, $ret)) {
+          $ret[$id][] = $response_id;
+          $found = TRUE;
+          break;
+        }
+      }
+
+      if (!$found) {
+        reset($response_regions);
+        $ret[current($response_regions)] = [$response_id];
+      }
+    }
+
+    return $ret;
+  }
+
   public function getRelatedResponses() {
-    return $this::queryChildren($this->getDescendantIds(TRUE), 'field_associated_regions', 'response');
+    $nids = $this::queryChildren($this->getDescendantIds(TRUE), 'field_associated_regions', 'response');
+    cluster_og_sort_response_nids_active_first($nids);
+    return $nids;
   }
 
   public function getRelatedHubs() {

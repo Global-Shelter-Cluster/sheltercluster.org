@@ -1998,6 +1998,9 @@ label[for="mobile_menu_toggle"] span:after {
   font-size: 13.6px;
   font-size: 0.85rem;
 }
+#secondary-nav .nav-items #navigation-option-related-operations .archived {
+  opacity: .6;
+}
 #secondary-nav .nav-items #navigation-option-related-operations .nav-secondary-items li {
   list-style-type: none;
   margin-left: 0;
@@ -2024,6 +2027,50 @@ label[for="mobile_menu_toggle"] span:after {
   background: white;
 }
 #secondary-nav .nav-items #navigation-option-related-operations .nav-secondary-items a:after {
+  border: none;
+}
+#secondary-nav .nav-items #navigation-option-related-operations-hierarchical .archived {
+  opacity: .6;
+}
+#secondary-nav .nav-items #navigation-option-related-operations-hierarchical .nav-secondary-items li {
+  list-style-type: none;
+  margin-left: 0;
+}
+#secondary-nav .nav-items #navigation-option-related-operations-hierarchical > .nav-secondary-items > .nav-secondary-item > a {
+  display: inline-block;
+  margin-bottom: 4px;
+}
+#secondary-nav .nav-items #navigation-option-related-operations-hierarchical > .nav-secondary-items > .nav-secondary-item > a.active {
+  display: none;
+}
+#secondary-nav .nav-items #navigation-option-related-operations-hierarchical .nav-secondary-items .nav-secondary-items {
+  margin-bottom: 0;
+}
+#secondary-nav .nav-items #navigation-option-related-operations-hierarchical .nav-secondary-items .nav-secondary-items li:last-child {
+  margin-bottom: 0;
+}
+#secondary-nav .nav-items #navigation-option-related-operations-hierarchical .nav-secondary-items .nav-secondary-items a {
+  float: left;
+  width: 100%;
+  text-decoration: none;
+  background: #242424;
+  color: white;
+  font-weight: bold;
+  padding: 8px 16px 8px;
+  padding: 0.5rem 1rem 0.5rem;
+  margin: 0 0 4px 0;
+  margin: 0 0 0.25rem 0;
+  font-size: 14.4px;
+  font-size: 0.9rem;
+}
+#secondary-nav .nav-items #navigation-option-related-operations-hierarchical .nav-secondary-items .nav-secondary-items a:hover {
+  background: black;
+  text-decoration: none;
+}
+#secondary-nav .nav-items #navigation-option-related-operations-hierarchical .nav-secondary-items .nav-secondary-items a.active {
+  background: white;
+}
+#secondary-nav .nav-items #navigation-option-related-operations-hierarchical .nav-secondary-items .nav-secondary-items a:after {
   border: none;
 }
 

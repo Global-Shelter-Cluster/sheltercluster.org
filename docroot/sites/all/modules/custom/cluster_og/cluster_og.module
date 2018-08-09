@@ -510,3 +510,33 @@ function cluster_og_query_node_has_no_parent_alter(QueryAlterableInterface $quer
   $query->leftJoin('field_data_field_parent_content', 'p', 'node.nid = p.entity_id');
   $query->isNull('p.field_parent_content_target_id');
 }
+
+function cluster_og_sort_response_nids_active_first(&$nids) {
+  // Stable usort function from http://php.net/manual/en/array.sorting.php#119944
+  $stable_usort = function(&$array, $cmp) {
+    $i = 0;
+    $array = array_map(function($elt)use(&$i) {
+      return [$i++, $elt];
+    }, $array);
+    usort($array, function($a, $b)use($cmp) {
+      return $cmp($a[1], $b[1]) ?: ($a[0] - $b[0]);
+    });
+    $array = array_column($array, 1);
+  };
+
+  $nodes = node_load_multiple($nids);
+
+  $stable_usort($nids, function($a, $b) use ($nodes) {
+    if (!array_key_exists($a, $nodes) || !array_key_exists($b, $nodes))
+      return 0;
+
+    $items_a = field_get_items('node', $nodes[$a], 'field_response_status');
+    if (!$items_a)
+      return 1;
+    $items_b = field_get_items('node', $nodes[$b], 'field_response_status');
+    if (!$items_b)
+      return -1;
+
+    return strcmp($items_a[0]['value'], $items_b[0]['value']);
+  });
+}

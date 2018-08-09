@@ -109,10 +109,60 @@
     }
 
     #navigation-option-related-operations {
+      .archived {
+        opacity: .6;
+      }
       .nav-secondary-items {
         li {
           list-style-type: none;
           margin-left: 0;
+        }
+        a {
+          float: left;
+          width: 100%;
+          text-decoration: none;
+          background: darken($shelter-grey, 20%);
+          color: $white;
+          font-weight: bold;
+          @include rem(padding, 0.5rem 1rem 0.5rem);
+          @include rem(margin, 0 0 0.25rem 0);
+          @include rem(font-size, 0.9rem);
+
+          &:hover {
+            background: darken($shelter-grey, 40%);
+            text-decoration: none;
+          }
+          &.active {
+            background: $white;
+          }
+          &:after {
+            border: none;
+          }
+        }
+      }
+    }
+
+    #navigation-option-related-operations-hierarchical {
+      .archived {
+        opacity: .6;
+      }
+      .nav-secondary-items {
+        li {
+          list-style-type: none;
+          margin-left: 0;
+        }
+      }
+      > .nav-secondary-items > .nav-secondary-item > a {
+        display: inline-block;
+        margin-bottom: 4px;
+        &.active {
+          display: none;
+        }
+      }
+      .nav-secondary-items .nav-secondary-items {
+        margin-bottom: 0;
+        li:last-child {
+          margin-bottom: 0;
         }
         a {
           float: left;
