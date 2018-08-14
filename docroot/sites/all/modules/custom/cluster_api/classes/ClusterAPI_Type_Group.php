@@ -209,6 +209,7 @@ class ClusterAPI_Type_Group extends ClusterAPI_Type {
 
         if ($node->type === 'response') {
           $ret['response_status'] = $wrapper->field_response_status->value();
+        }
     }
 
     return $ret;
