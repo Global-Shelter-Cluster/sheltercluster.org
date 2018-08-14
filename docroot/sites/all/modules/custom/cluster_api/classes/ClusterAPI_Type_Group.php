@@ -167,6 +167,10 @@ class ClusterAPI_Type_Group extends ClusterAPI_Type {
           }
         }
 
+        if ($node->type === 'geographic_region') {
+          $ret['response_region_hierarchy'] = $this->manager->getResponseRegionHierarchy();
+        }
+
         if (method_exists($manager, 'getStrategicAdvisory') && $sag = $manager->getStrategicAdvisory()) {
           $ret['strategic_advisory'] = intval($sag->nid);
         }
@@ -186,18 +190,18 @@ class ClusterAPI_Type_Group extends ClusterAPI_Type {
 
         $ret['image'] = self::getFileValue('field_image', $wrapper, 'large');
 
-        if ($node->type === 'geographic_region') {
-          $region_type = $wrapper->field_geographic_region_type->value();
-          if ($region_type)
-            $ret['region_type'] = $region_type->name;
-        }
-
       //Fall-through
       default:
         $ret += [
           'type' => $node->type,
           'title' => $node->title,
         ];
+
+        if ($node->type === 'geographic_region') {
+          $region_type = $wrapper->field_geographic_region_type->value();
+          if ($region_type)
+            $ret['region_type'] = $region_type->name;
+        }
     }
 
     return $ret;
