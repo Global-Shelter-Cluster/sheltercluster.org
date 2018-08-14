@@ -28,7 +28,7 @@ function _cluster_api_get_objects($request) {
   $user = $auth_response['user'];
   $response['authorization'] = $auth_response['authorization'];
 
-  if (!empty($request['pushNotificationToken'])) {
+  if ($user && !empty($request['pushNotificationToken'])) {
     _cluster_api_set_push_notification_token($user, $request['pushNotificationToken']);
   }
 
