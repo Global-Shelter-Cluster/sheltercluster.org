@@ -168,7 +168,11 @@ class ClusterAPI_Type_Group extends ClusterAPI_Type {
         }
 
         if ($node->type === 'geographic_region') {
-          $ret['response_region_hierarchy'] = $manager->getResponseRegionHierarchy();
+          $hierarchy = $manager->getResponseRegionHierarchy();
+          $hierarchy2 = [];
+          foreach ($hierarchy as $region_nid => $response_nids)
+            $hierarchy2[] = ['region' => $region_nid, 'responses' => $response_nids];
+          $ret['response_region_hierarchy'] = $hierarchy2;
         }
 
         if (method_exists($manager, 'getStrategicAdvisory') && $sag = $manager->getStrategicAdvisory()) {
