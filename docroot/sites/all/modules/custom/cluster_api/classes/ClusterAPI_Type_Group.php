@@ -3,9 +3,11 @@
 class ClusterAPI_Type_Group extends ClusterAPI_Type {
 
   /** @var int How many documents to return in the "recent_documents" property */
-  const RECENT_DOCS_LIMIT = 50;
+  const RECENT_DOCS_LIMIT = 30;
   const UPCOMING_EVENTS_LIMIT = 10;
   const UPCOMING_EVENTS_DAYS_LIMIT = 14;
+  const ALERTS_LIMIT = 40;
+  const ALERTS_DAYS_LIMIT = 60;
   protected static $type = 'group';
   protected static $related_def = [
     'associated_regions' => [
@@ -142,7 +144,7 @@ class ClusterAPI_Type_Group extends ClusterAPI_Type {
           $ret['kobo_forms'] = array_values(array_filter(array_map($convert_to_int, $value)));
         }
 
-        $ret['alerts'] = array_filter((array) $manager->getLatestAlerts());
+        $ret['alerts'] = array_filter((array) $manager->getLatestAlerts(self::ALERTS_LIMIT, self::ALERTS_DAYS_LIMIT));
 
       //Fall-through
       case ClusterAPI_Object::MODE_PUBLIC:
