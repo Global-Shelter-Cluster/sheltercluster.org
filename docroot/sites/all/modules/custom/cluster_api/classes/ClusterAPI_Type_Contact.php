@@ -28,7 +28,6 @@ class ClusterAPI_Type_Contact extends ClusterAPI_Type {
    *   mail: ["coord1.ecuador@sheltercluster.org"],
    *   phone: ["+1 555 1234 567"],
    *   bio: "<p>html bio text</p>",
-   *   weight: 2,
    *   groups: [9175, 10318],
    *   user: 123, // TODO
    * }
@@ -62,7 +61,6 @@ class ClusterAPI_Type_Contact extends ClusterAPI_Type {
           'mail' => $wrapper->field_email->value(),
           'phone' => $wrapper->field_phone_number->value(),
           'bio' => $wrapper->body->value()['safe_value'],
-          'weight' => intval($wrapper->field_sorting_weight->value(), 10),
         ];
     }
 
