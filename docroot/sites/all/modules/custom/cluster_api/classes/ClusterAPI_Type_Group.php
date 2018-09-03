@@ -78,6 +78,10 @@ class ClusterAPI_Type_Group extends ClusterAPI_Type {
       'type' => 'alert',
       'mode' => ClusterAPI_Object::MODE_PUBLIC,
     ],
+    'contacts' => [
+      'type' => 'contact',
+      'mode' => ClusterAPI_Object::MODE_STUB,
+    ],
   ];
 
   protected function preprocessModeAndPersist($id, &$mode, &$persist, $previous_type, $previous_id) {
@@ -185,6 +189,8 @@ class ClusterAPI_Type_Group extends ClusterAPI_Type {
         $ret['key_documents'] = array_filter((array) $manager->getKeyDocumentIds());
         $ret['recent_documents'] = array_filter((array) $manager->getRecentDocuments(self::RECENT_DOCS_LIMIT, FALSE));
         $ret['upcoming_events'] = array_filter((array) $manager->getUpcomingEvents(self::UPCOMING_EVENTS_LIMIT, self::UPCOMING_EVENTS_DAYS_LIMIT));
+
+        $ret['contacts'] = array_filter((array) $manager->getContactMembers());
 
         $ret['url'] = url('node/' . $id, ['absolute' => TRUE]);
 
