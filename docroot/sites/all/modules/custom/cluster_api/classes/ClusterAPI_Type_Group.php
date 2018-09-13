@@ -78,7 +78,36 @@ class ClusterAPI_Type_Group extends ClusterAPI_Type {
       'type' => 'alert',
       'mode' => ClusterAPI_Object::MODE_PUBLIC,
     ],
+    'followers' => [
+      'type' => 'user',
+      'mode' => ClusterAPI_Object::MODE_PUBLIC,
+    ],
   ];
+
+  static function getFollowers($group_nid) {
+    $convert_to_int = function($string) {
+      return intval($string);
+    };
+
+    $query = new EntityFieldQuery();
+    $query->entityCondition('entity_type', 'user')
+      ->fieldCondition('og_user_node', 'target_id', $group_nid);
+
+    $results = $query->execute();
+
+    if (!isset($results['user']))
+      return [];
+
+    $uids = array_map(function($item) {
+      return $item->uid;
+    }, $results['user']);
+
+    $has_followed_role = function($uid) use ($group_nid) {
+      return in_array(CLUSTER_API_FOLLOWER_ROLE_NAME, og_get_user_roles('node', $group_nid, $uid));
+    };
+
+    return array_map($convert_to_int, array_values(array_filter($uids, $has_followed_role)));
+  }
 
   protected function preprocessModeAndPersist($id, &$mode, &$persist, $previous_type, $previous_id) {
     $came_from_logged_in_user = $this->current_user && $previous_type === 'user' && $this->current_user->nid === $previous_id;
@@ -146,6 +175,8 @@ class ClusterAPI_Type_Group extends ClusterAPI_Type {
 
         $ret['alerts'] = array_filter((array) $manager->getLatestAlerts(self::ALERTS_LIMIT, self::ALERTS_DAYS_LIMIT));
 
+        $ret['followers'] = self::getFollowers($id);
+
       //Fall-through
       case ClusterAPI_Object::MODE_PUBLIC:
         if ($value = self::getReferenceIds('node', $node, 'field_associated_regions', TRUE))
@@ -173,7 +204,10 @@ class ClusterAPI_Type_Group extends ClusterAPI_Type {
           $hierarchy = $manager->getResponseRegionHierarchy();
           $hierarchy2 = [];
           foreach ($hierarchy as $region_nid => $response_nids)
-            $hierarchy2[] = ['region' => $region_nid, 'responses' => $response_nids];
+            $hierarchy2[] = [
+              'region' => $region_nid,
+              'responses' => $response_nids,
+            ];
           $ret['response_region_hierarchy'] = $hierarchy2;
         }
 
