@@ -23,5 +23,40 @@ function cluster_kobo_node_validate($node, $form, &$form_state) {
   if (strpos($url_value, 'https://ee.humanitarianresponse.info') !== 0) {
     form_set_error('field_kobo_form_url', $error_message);
   }
+}
 
+/**
+ * Implements hook_menu().
+ */
+function cluster_kobo_menu() {
+  return [
+    'kobo' => [
+      'page callback' => 'cluster_kobo_callback',
+    ],
+  ];
+}
+
+/**
+ * This is what's called by the Kobo hook. It receives a JSON object through
+ * php://input.
+ */
+function cluster_kobo_callback() {
+  try {
+    $data = json_decode(file_get_contents('php://input'), TRUE);
+  } catch (Exception $e) {
+    watchdog('cluster_kobo', 'Error on Kobo callback: ' . $e->getMessage(), [], WATCHDOG_ERROR);
+    return;
+  }
+
+  $module_info = system_get_info('module', 'cluster_kobo');
+
+  $row = [
+    'module_version' => $module_info['version'],
+    'submission_id' => $data['_uuid'],
+    'form_id' => $data['_userform_id'],
+    'submission_time' => strtotime($data['_submission_time']),
+    'data' => $data,
+  ];
+
+  drupal_write_record('kobo_submission', $row);
 }

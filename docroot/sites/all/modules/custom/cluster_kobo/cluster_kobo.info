@@ -1,6 +1,7 @@
 name = Cluster kobo
 description = Expose a content type an business logic to integrate kobo forms with groups and expose them to users
 core = 7.x
+version = 7.x-1.1
 package = Cluster
 dependencies[] = cluster_docs
 dependencies[] = cluster_og

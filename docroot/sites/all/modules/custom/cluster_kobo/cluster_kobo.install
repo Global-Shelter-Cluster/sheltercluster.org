@@ -1,0 +1,66 @@
+<?php
+
+function cluster_kobo_schema() {
+  $schema['kobo_submission'] = [
+    'description' => 'Form submissions added through Kobo hooks.',
+    'fields' => [
+      'kid' => [
+        'description' => 'The primary identifier for a form submission.',
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ],
+      'module_version' => [
+        'description' => 'Cluster_kobo module version, used to migrate data if the table structure ever changes.',
+        'type' => 'varchar',
+        'length' => 32,
+        'not null' => TRUE,
+        'default' => '',
+      ],
+      'submission_id' => [
+        'description' => 'Kobo id for the submission.',
+        'type' => 'varchar',
+        'length' => 64,
+        'not null' => TRUE,
+        'default' => '',
+      ],
+      'form_id' => [
+        'description' => 'Kobo form id.',
+        'type' => 'varchar',
+        'length' => 64,
+        'not null' => TRUE,
+        'default' => '',
+      ],
+      'submission_time' => [
+        'description' => 'Submission time, stored as a UTC timestamp.',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ],
+      'data' => [
+        'description' => 'Entire data object in JSON format.',
+        'type' => 'text',
+        'not null' => TRUE,
+        'default' => '',
+      ],
+    ],
+    'indexes' => [
+      'kobo_submission_form_id' => [
+        'form_id',
+        'submission_time',
+      ],
+    ],
+    'unique keys' => [
+    ],
+    'primary key' => [
+      'kid',
+    ],
+  ];
+  return $schema;
+}
+
+function cluster_kobo_update_7000() {
+  if (!db_table_exists('kobo_submissions')) {
+    drupal_install_schema('cluster_kobo');
+  }
+}
