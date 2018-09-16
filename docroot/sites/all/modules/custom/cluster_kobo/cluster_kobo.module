@@ -269,6 +269,8 @@ function cluster_kobo_callback($arg = '') {
  */
 function _cluster_kobo_download_attachment($attachment) {
   $path = 'public://'.format_date(time(), 'custom', 'Y/m');
+  drupal_mkdir($path, NULL, TRUE);
+
   $filename = _cluster_kobo_get_filename_from_path($attachment['filename']);
 
   return system_retrieve_file(
