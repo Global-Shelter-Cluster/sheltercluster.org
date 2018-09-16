@@ -61,6 +61,56 @@ function cluster_kobo_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-kobo_form-field_is_public'.
+  $field_instances['node-kobo_form-field_is_public'] = array(
+    'bundle' => 'kobo_form',
+    'default_value' => array(
+      0 => array(
+        'value' => 0,
+      ),
+    ),
+    'deleted' => 0,
+    'description' => 'If checked, form submissions are available for anyone to see.',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 4,
+      ),
+      'ical' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_is_public',
+    'label' => 'Public',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(
+        'display_label' => 1,
+      ),
+      'type' => 'options_onoff',
+      'weight' => 33,
+    ),
+  );
+
   // Exported field_instance: 'node-kobo_form-field_kobo_form_url'.
   $field_instances['node-kobo_form-field_kobo_form_url'] = array(
     'bundle' => 'kobo_form',
@@ -232,7 +282,9 @@ function cluster_kobo_field_default_field_instances() {
   t('Body');
   t('Copy the complete URL of the kobo form, example: https://ee.humanitarianresponse.info/x/#cOLnX2Ld');
   t('Groups audience');
+  t('If checked, form submissions are available for anyone to see.');
   t('Kobo form url');
+  t('Public');
   t('Title');
 
   return $field_instances;
