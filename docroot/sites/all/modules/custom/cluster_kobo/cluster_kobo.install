@@ -10,12 +10,11 @@ function cluster_kobo_schema() {
         'unsigned' => TRUE,
         'not null' => TRUE,
       ],
-      'module_version' => [
-        'description' => 'Cluster_kobo module version, used to migrate data if the table structure ever changes.',
-        'type' => 'varchar',
-        'length' => 32,
+      'data_format_version' => [
+        'description' => 'Cluster_kobo data format version, used to migrate data if the table structure ever changes.',
+        'type' => 'int',
         'not null' => TRUE,
-        'default' => '',
+        'default' => 0,
       ],
       'submission_id' => [
         'description' => 'Kobo id for the submission.',
@@ -66,6 +65,13 @@ function cluster_kobo_schema() {
 
 function cluster_kobo_update_7000() {
   if (!db_table_exists('kobo_submissions')) {
+    drupal_install_schema('cluster_kobo');
+  }
+}
+
+function cluster_kobo_update_7001() {
+  if (db_table_exists('kobo_submissions')) {
+    db_drop_table('kobo_submissions');
     drupal_install_schema('cluster_kobo');
   }
 }

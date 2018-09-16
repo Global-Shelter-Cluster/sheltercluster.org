@@ -8,6 +8,7 @@ include_once 'cluster_kobo.features.inc';
 
 const CLUSTER_KOBO_ENCRYPTION_KEY = 'cluster_kobo_key';
 const CLUSTER_KOBO_ENCRYPTION_IV = 'cluster_kobo_iv';
+const CLUSTER_KOBO_DATA_FORMAT_VERSION = 1;
 
 function cluster_kobo_node_validate($node, $form, &$form_state) {
   if ($node->type != 'kobo_form') {
@@ -103,15 +104,13 @@ function cluster_kobo_callback($arg = '') {
     return;
   }
 
-  $module_info = system_get_info('module', 'cluster_kobo');
-
   $row = [
-    'module_version' => $module_info['version'],
+    'data_format_version' => CLUSTER_KOBO_DATA_FORMAT_VERSION,
     'submission_id' => $data['_uuid'],
     'form_id' => $data['_userform_id'],
     'submission_time' => strtotime($data['_submission_time']),
     'nid' => $argdata['nid'],
-    'data' => $data,
+    'data' => json_encode($data),
   ];
 
   drupal_write_record('kobo_submission', $row);
