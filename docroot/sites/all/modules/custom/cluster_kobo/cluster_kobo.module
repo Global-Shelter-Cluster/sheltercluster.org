@@ -171,7 +171,7 @@ function cluster_kobo_submissions($node) {
         $filename = _cluster_kobo_get_filename_from_path($attachment['filename']);
         if (strtolower(trim($filename)) === strtolower(trim($value))) {
           if (isset($attachment['stored_path']))
-            $value = l($value, $attachment['stored_path'], ['target' => '_blank']);
+            $value = l($value, file_create_url($attachment['stored_path']), ['target' => '_blank']);
           else
             $value = l($value, $attachment['download_url'], ['target' => '_blank']);
         }
@@ -242,9 +242,7 @@ function cluster_kobo_callback($arg = '') {
 
   if (isset($data['_attachments'])) {
     foreach ($data['_attachments'] as &$attachment) {
-      watchdog('cluster_kobo att', 'downloading attachment '.json_encode($attachment));
       $stored_path = _cluster_kobo_download_attachment($attachment);
-      watchdog('cluster_kobo att', 'stored path: '.$stored_path);
       if ($stored_path)
         $attachment['stored_path'] = $stored_path;
     }
