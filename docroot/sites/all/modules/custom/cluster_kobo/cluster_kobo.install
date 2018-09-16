@@ -64,7 +64,7 @@ function cluster_kobo_schema() {
 }
 
 function cluster_kobo_update_7000() {
-  if (!db_table_exists('kobo_submissions')) {
+  if (!db_table_exists('kobo_submission')) {
     drupal_install_schema('cluster_kobo');
   }
 }
