@@ -40,7 +40,7 @@ function cluster_kobo_node_insert($node) {
 
   $argdata = ['nid' => $node->nid];
   $callback_url = $base_url . '/kobo/' . _cluster_kobo_encrypt_decrypt('encrypt', $argdata);
-  drupal_set_message('Make sure you configure this URL in the form as a "JSON POST REST service": '.$callback_url, 'warning');
+  drupal_set_message('Make sure you configure this URL in the form as a "JSON POST REST service": ' . $callback_url, 'warning');
 }
 
 /**
@@ -98,7 +98,7 @@ function cluster_kobo_preprocess_node(&$variables) {
 
 function cluster_kobo_submissions_access($node) {
   if ($node->type !== 'kobo_form')
-    return;
+    return FALSE;
 
   $wrapper = entity_metadata_wrapper('node', $node);
 
@@ -109,26 +109,102 @@ function cluster_kobo_submissions_access($node) {
   return $user->uid === $node->uid;
 }
 
-function cluster_kobo_submissions($nid) {
-  return 'hola';
+function cluster_kobo_submissions($node) {
+  //Initialize header with items you need
+  $header = [
+    'submission_time' => [
+      'data' => 'Submitted',
+      'field' => 'submission_time',
+      'sort' => 'desc',
+    ],
+  ];
+
+  $select = db_select('kobo_submission', 'ks');
+  $select->extend('PagerDefault')->limit(25);
+  $select->extend('TableSort')->orderByHeader($header);
+  $select->condition('nid', $node->nid);
+  $select->fields('ks', ['submission_time', 'data']);
+
+  $result = $select->execute();
+
+  $tablerows = [];
+  foreach ($result as $row) {
+    $tablerow = [
+      format_date($row->submission_time, 'custom', 'Y-m-d H:i'),
+    ];
+
+    $data = json_decode($row->data, TRUE);
+
+    foreach ($data as $key => $value) {
+      if (substr($key, 0, 1) === '_')
+        continue;
+
+      if (strpos($key, '/') !== FALSE)
+        continue;
+
+      if (!isset($header[$key]))
+        $header[$key] = [
+          'data' => str_replace('_', ' ', $key),
+        ];
+    }
+
+    foreach ($header as $header_key => $header_data) {
+      if ($header_key === 'submission_time')
+        continue;
+
+      if (!isset($data[$header_key])) {
+        $tablerow[] = '';
+        continue;
+      }
+
+      $value = $data[$header_key];
+
+      // Is this an attachment? (e.g. an image)
+      foreach ((array) $data['_attachments'] as $attachment) {
+        $filename = $attachment['filename'];
+        $filename = ltrim(substr($filename, strrpos($filename, '/')), '/');
+        if (strtolower(trim($filename)) === strtolower(trim($value)))
+          $value = l($value, $attachment['download_url'], ['target' => '_blank']);
+      }
+
+      $tablerow[] = $value;
+    }
+
+    $tablerows[] = $tablerow;
+  }
+
+  $output = [
+    [
+      '#theme' => 'table',
+      '#header' => $header,
+      '#rows' => $tablerows,
+      '#empty' => t('No submissions have been recorded for this form yet.'),
+    ],
+    [
+      '#theme' => 'pager',
+    ],
+  ];
+
+  return $output;
 }
 
 /**
  * Modified from https://gist.github.com/joashp/a1ae9cb30fa533f4ad94
  */
 function _cluster_kobo_encrypt_decrypt($action, $data) {
-  $output = false;
+  $output = FALSE;
   $encrypt_method = "AES-256-CBC";
   $secret_key = CLUSTER_KOBO_ENCRYPTION_KEY;
   $secret_iv = CLUSTER_KOBO_ENCRYPTION_IV;
   $key = hash('sha256', $secret_key);
 
   $iv = substr(hash('sha256', $secret_iv), 0, 16);
-  if ( $action == 'encrypt' ) {
+  if ($action == 'encrypt') {
     $output = json_encode($data);
     $output = openssl_encrypt($output, $encrypt_method, $key, 0, $iv);
     $output = base64_encode($output);
-  } else if( $action == 'decrypt' ) {
+  }
+  else if ($action == 'decrypt') {
     $output = base64_decode($data);
     $output = openssl_decrypt($output, $encrypt_method, $key, 0, $iv);
     $output = json_decode($output, TRUE);
