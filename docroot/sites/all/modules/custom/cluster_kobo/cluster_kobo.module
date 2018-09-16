@@ -65,7 +65,7 @@ function cluster_kobo_menu() {
 /**
  * Modified from https://gist.github.com/joashp/a1ae9cb30fa533f4ad94
  */
-function _cluster_kobo_encrypt_decrypt($action, $string) {
+function _cluster_kobo_encrypt_decrypt($action, $data) {
   $output = false;
   $encrypt_method = "AES-256-CBC";
   $secret_key = CLUSTER_KOBO_ENCRYPTION_KEY;
@@ -74,10 +74,13 @@ function _cluster_kobo_encrypt_decrypt($action, $string) {
 
   $iv = substr(hash('sha256', $secret_iv), 0, 16);
   if ( $action == 'encrypt' ) {
-    $output = openssl_encrypt($string, $encrypt_method, $key, 0, $iv);
+    $output = json_encode($data);
+    $output = openssl_encrypt($output, $encrypt_method, $key, 0, $iv);
     $output = base64_encode($output);
   } else if( $action == 'decrypt' ) {
-    $output = openssl_decrypt(base64_decode($string), $encrypt_method, $key, 0, $iv);
+    $output = base64_decode($data);
+    $output = openssl_decrypt($output, $encrypt_method, $key, 0, $iv);
+    $output = json_decode($output, TRUE);
   }
   return $output;
 }
