@@ -181,6 +181,7 @@ function cluster_kobo_submissions($node) {
                 '#style_name' => 'thumbnail',
                 '#path' => $attachment['stored_path'],
               ];
+              $options['html'] = TRUE;
               $value = l(render($element), file_create_url($attachment['stored_path']), $options);
             }
             else
