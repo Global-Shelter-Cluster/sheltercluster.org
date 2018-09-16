@@ -242,7 +242,9 @@ function cluster_kobo_callback($arg = '') {
 
   if (isset($data['_attachments'])) {
     foreach ($data['_attachments'] as &$attachment) {
+      dpm($attachment, 'downloading attachment');
       $stored_path = _cluster_kobo_download_attachment($attachment);
+      dpm($stored_path, 'stored path');
       if ($stored_path)
         $attachment['stored_path'] = $stored_path;
     }
