@@ -242,9 +242,9 @@ function cluster_kobo_callback($arg = '') {
 
   if (isset($data['_attachments'])) {
     foreach ($data['_attachments'] as &$attachment) {
-      dpm($attachment, 'downloading attachment');
+      watchdog('cluster_kobo att', 'downloading attachment '.json_encode($attachment));
       $stored_path = _cluster_kobo_download_attachment($attachment);
-      dpm($stored_path, 'stored path');
+      watchdog('cluster_kobo att', 'stored path: '.$stored_path);
       if ($stored_path)
         $attachment['stored_path'] = $stored_path;
     }
