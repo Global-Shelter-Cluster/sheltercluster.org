@@ -47,7 +47,6 @@ function cluster_kobo_schema() {
         'description' => 'Entire data object in JSON format.',
         'type' => 'text',
         'not null' => TRUE,
-        'default' => '',
       ],
     ],
     'indexes' => [
