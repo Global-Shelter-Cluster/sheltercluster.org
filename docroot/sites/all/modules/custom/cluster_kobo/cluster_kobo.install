@@ -37,6 +37,12 @@ function cluster_kobo_schema() {
         'not null' => TRUE,
         'default' => 0,
       ],
+      'nid' => [
+        'description' => 'Corresponding node id (kobo_form content type).',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ],
       'data' => [
         'description' => 'Entire data object in JSON format.',
         'type' => 'text',

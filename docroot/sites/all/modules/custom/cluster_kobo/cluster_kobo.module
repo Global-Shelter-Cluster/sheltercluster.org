@@ -6,6 +6,9 @@
 
 include_once 'cluster_kobo.features.inc';
 
+const CLUSTER_KOBO_ENCRYPTION_KEY = 'cluster_kobo_key';
+const CLUSTER_KOBO_ENCRYPTION_IV = 'cluster_kobo_iv';
+
 function cluster_kobo_node_validate($node, $form, &$form_state) {
   if ($node->type != 'kobo_form') {
     return;
@@ -26,21 +29,70 @@ function cluster_kobo_node_validate($node, $form, &$form_state) {
 }
 
 /**
+ * Implements hook_node_insert().
+ */
+function cluster_kobo_node_insert($node) {
+  global $base_url;
+
+  if ($node->type !== 'kobo_form')
+    return;
+
+  $argdata = ['nid' => $node->nid];
+  $callback_url = $base_url . '/kobo/' . _cluster_kobo_encrypt_decrypt('encrypt', $argdata);
+  drupal_set_message('Make sure you configure this URL in the form as a "JSON POST REST service": '.$callback_url, 'warning');
+}
+
+/**
+ * Implements hook_node_update().
+ */
+function cluster_kobo_node_update($node) {
+  cluster_kobo_node_insert($node);
+}
+
+/**
  * Implements hook_menu().
  */
 function cluster_kobo_menu() {
   return [
-    'kobo' => [
+    'kobo/%' => [
       'page callback' => 'cluster_kobo_callback',
+      'page arguments' => [1],
+      'access callback' => TRUE,
     ],
   ];
+}
+
+/**
+ * Modified from https://gist.github.com/joashp/a1ae9cb30fa533f4ad94
+ */
+function _cluster_kobo_encrypt_decrypt($action, $string) {
+  $output = false;
+  $encrypt_method = "AES-256-CBC";
+  $secret_key = CLUSTER_KOBO_ENCRYPTION_KEY;
+  $secret_iv = CLUSTER_KOBO_ENCRYPTION_IV;
+  $key = hash('sha256', $secret_key);
+
+  $iv = substr(hash('sha256', $secret_iv), 0, 16);
+  if ( $action == 'encrypt' ) {
+    $output = openssl_encrypt($string, $encrypt_method, $key, 0, $iv);
+    $output = base64_encode($output);
+  } else if( $action == 'decrypt' ) {
+    $output = openssl_decrypt(base64_decode($string), $encrypt_method, $key, 0, $iv);
+  }
+  return $output;
 }
 
 /**
  * This is what's called by the Kobo hook. It receives a JSON object through
  * php://input.
  */
-function cluster_kobo_callback() {
+function cluster_kobo_callback($arg = '') {
+  $argdata = _cluster_kobo_encrypt_decrypt('decrypt', $arg);
+  if (!$argdata || !isset($argdata['nid'])) {
+    watchdog('cluster_kobo', 'Error on Kobo callback arg: couldn\'t decrypt/parse (' . $arg . ')', [], WATCHDOG_ERROR);
+    return;
+  }
+
   try {
     $data = json_decode(file_get_contents('php://input'), TRUE);
   } catch (Exception $e) {
@@ -55,6 +107,7 @@ function cluster_kobo_callback() {
     'submission_id' => $data['_uuid'],
     'form_id' => $data['_userform_id'],
     'submission_time' => strtotime($data['_submission_time']),
+    'nid' => $argdata['nid'],
     'data' => $data,
   ];
 
