@@ -171,10 +171,21 @@ function cluster_kobo_submissions($node) {
         $filename = _cluster_kobo_get_filename_from_path($attachment['filename']);
         if (strtolower(trim($filename)) === strtolower(trim($value))) {
           $options = [
-            'attributes' => ['target' => '_blank']
+            'attributes' => ['target' => '_blank'],
           ];
-          if (isset($attachment['stored_path']))
-            $value = l($value, file_create_url($attachment['stored_path']), $options);
+          if (isset($attachment['stored_path'])) {
+            // Is this an image? then show a thumbnail instead of the filename
+            if (substr(file_get_mimetype($attachment['stored_path']), 0, 6) === 'image/') {
+              $element = [
+                '#theme' => 'image_style',
+                '#style_name' => 'thumbnail',
+                '#path' => $attachment['stored_path'],
+              ];
+              $value = l(render($element), file_create_url($attachment['stored_path']), $options);
+            }
+            else
+              $value = l($value, file_create_url($attachment['stored_path']), $options);
+          }
           else
             $value = l($value, $attachment['download_url'], $options);
         }
@@ -265,17 +276,18 @@ function cluster_kobo_callback($arg = '') {
 
 /**
  * @param array $attachment
+ *
  * @return string|FALSE the path of the stored file (public://...), or FALSE if
  * the file couldn't be downloaded.
  */
 function _cluster_kobo_download_attachment($attachment) {
-  $path = 'public://'.format_date(time(), 'custom', 'Y/m');
+  $path = 'public://' . format_date(time(), 'custom', 'Y/m');
   drupal_mkdir($path, NULL, TRUE);
 
   $filename = _cluster_kobo_get_filename_from_path($attachment['filename']);
 
   return system_retrieve_file(
     $attachment['download_url'],
-    $path.'/'.$filename, FALSE, FILE_EXISTS_RENAME
+    $path . '/' . $filename, FALSE, FILE_EXISTS_RENAME
   );
 }
