@@ -109,6 +109,13 @@ function cluster_kobo_submissions_access($node) {
   return $user->uid === $node->uid;
 }
 
+/**
+ * Gets only the filename, e.g. returns "a.jpg" from "path/to/a.jpg".
+ */
+function _cluster_kobo_get_filename_from_path($path) {
+  return ltrim(substr($path, strrpos($path, '/')), '/');
+}
+
 function cluster_kobo_submissions($node) {
   //Initialize header with items you need
   $header = [
@@ -161,10 +168,13 @@ function cluster_kobo_submissions($node) {
 
       // Is this an attachment? (e.g. an image)
       foreach ((array) $data['_attachments'] as $attachment) {
-        $filename = $attachment['filename'];
-        $filename = ltrim(substr($filename, strrpos($filename, '/')), '/');
-        if (strtolower(trim($filename)) === strtolower(trim($value)))
-          $value = l($value, $attachment['download_url'], ['target' => '_blank']);
+        $filename = _cluster_kobo_get_filename_from_path($attachment['filename']);
+        if (strtolower(trim($filename)) === strtolower(trim($value))) {
+          if (isset($attachment['stored_path']))
+            $value = l($value, $attachment['stored_path'], ['target' => '_blank']);
+          else
+            $value = l($value, $attachment['download_url'], ['target' => '_blank']);
+        }
       }
 
       $tablerow[] = $value;
@@ -230,6 +240,14 @@ function cluster_kobo_callback($arg = '') {
     return;
   }
 
+  if (isset($data['_attachments'])) {
+    foreach ($data['_attachments'] as &$attachment) {
+      $stored_path = _cluster_kobo_download_attachment($attachment);
+      if ($stored_path)
+        $attachment['stored_path'] = $stored_path;
+    }
+  }
+
   $row = [
     'data_format_version' => CLUSTER_KOBO_DATA_FORMAT_VERSION,
     'submission_id' => $data['_uuid'],
@@ -240,4 +258,19 @@ function cluster_kobo_callback($arg = '') {
   ];
 
   drupal_write_record('kobo_submission', $row);
+}
+
+/**
+ * @param array $attachment
+ * @return string|FALSE the path of the stored file (public://...), or FALSE if
+ * the file couldn't be downloaded.
+ */
+function _cluster_kobo_download_attachment($attachment) {
+  $path = 'public://'.format_date(time(), 'custom', 'Y/m');
+  $filename = _cluster_kobo_get_filename_from_path($attachment['filename']);
+
+  return system_retrieve_file(
+    $attachment['download_url'],
+    $path.'/'.$filename, FALSE, FILE_EXISTS_RENAME
+  );
 }
