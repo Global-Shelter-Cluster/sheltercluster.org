@@ -60,7 +60,57 @@ function cluster_kobo_menu() {
       'page arguments' => [1],
       'access callback' => TRUE,
     ],
+    'node/%node/kobo-submissions' => [
+      'title' => 'Form submissions',
+      'page callback' => 'cluster_kobo_submissions',
+      'page arguments' => [1],
+      'access callback' => 'cluster_kobo_submissions_access',
+      'access arguments' => [1],
+      'weight' => 20,
+      'type' => MENU_LOCAL_TASK,
+    ],
   ];
+}
+
+/**
+ * Implements hook_preprocess_node().
+ */
+function cluster_kobo_preprocess_node(&$variables) {
+  if ($variables['type'] !== 'kobo_form' || $variables['view_mode'] !== 'full')
+    return;
+
+  $wrapper = entity_metadata_wrapper('node', $variables['node']);
+
+  $url = $wrapper->field_kobo_form_url->value();
+  if (!$url)
+    return;
+
+  $variables['content']['kobo_form'] = [
+    '#theme' => 'html_tag',
+    '#tag' => 'iframe',
+    '#attributes' => [
+      'src' => $url,
+      'style' => 'width: 100%; min-height: 800px; border: 0;',
+    ],
+    '#weight' => 10,
+  ];
+}
+
+function cluster_kobo_submissions_access($node) {
+  if ($node->type !== 'kobo_form')
+    return;
+
+  $wrapper = entity_metadata_wrapper('node', $node);
+
+  if ($wrapper->field_is_public->value())
+    return TRUE;
+
+  global $user;
+  return $user->uid === $node->uid;
+}
+
+function cluster_kobo_submissions($nid) {
+  return 'hola';
 }
 
 /**
