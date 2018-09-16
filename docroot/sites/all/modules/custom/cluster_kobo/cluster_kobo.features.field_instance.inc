@@ -22,7 +22,7 @@ function cluster_kobo_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 2,
+        'weight' => 0,
       ),
       'ical' => array(
         'label' => 'above',
@@ -74,10 +74,9 @@ function cluster_kobo_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'list',
         'settings' => array(),
-        'type' => 'list_default',
-        'weight' => 4,
+        'type' => 'hidden',
+        'weight' => 2,
       ),
       'ical' => array(
         'label' => 'above',
@@ -123,11 +122,10 @@ function cluster_kobo_field_default_field_instances() {
     'description' => 'Copy the complete URL of the kobo form, example: https://ee.humanitarianresponse.info/x/#cOLnX2Ld',
     'display' => array(
       'default' => array(
-        'label' => 'above',
-        'module' => 'text',
+        'label' => 'hidden',
         'settings' => array(),
-        'type' => 'text_default',
-        'weight' => 3,
+        'type' => 'hidden',
+        'weight' => 1,
       ),
       'ical' => array(
         'label' => 'above',
@@ -171,10 +169,9 @@ function cluster_kobo_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'og_ui',
         'settings' => array(),
-        'type' => 'og_list_default',
-        'weight' => 1,
+        'type' => 'hidden',
+        'weight' => 3,
       ),
       'ical' => array(
         'label' => 'above',
@@ -239,7 +236,7 @@ function cluster_kobo_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 0,
+        'weight' => 4,
       ),
       'ical' => array(
         'label' => 'above',

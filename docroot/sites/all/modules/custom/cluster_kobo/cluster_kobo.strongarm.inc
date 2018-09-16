@@ -64,7 +64,47 @@ function cluster_kobo_strongarm() {
   $strongarm->api_version = 1;
   $strongarm->name = 'field_bundle_settings_node__kobo_form';
   $strongarm->value = array(
-    'view_modes' => array(),
+    'view_modes' => array(
+      'teaser' => array(
+        'custom_settings' => TRUE,
+      ),
+      'ical' => array(
+        'custom_settings' => TRUE,
+      ),
+      'full' => array(
+        'custom_settings' => FALSE,
+      ),
+      'rss' => array(
+        'custom_settings' => FALSE,
+      ),
+      'search_index' => array(
+        'custom_settings' => FALSE,
+      ),
+      'search_result' => array(
+        'custom_settings' => FALSE,
+      ),
+      'factsheet_summary' => array(
+        'custom_settings' => FALSE,
+      ),
+      'factsheet_homepage_teaser' => array(
+        'custom_settings' => FALSE,
+      ),
+      'factsheet_preview_block' => array(
+        'custom_settings' => FALSE,
+      ),
+      'related_response' => array(
+        'custom_settings' => FALSE,
+      ),
+      'related_hub' => array(
+        'custom_settings' => FALSE,
+      ),
+      'preview_block' => array(
+        'custom_settings' => FALSE,
+      ),
+      'token' => array(
+        'custom_settings' => FALSE,
+      ),
+    ),
     'extra_fields' => array(
       'form' => array(
         'path' => array(
