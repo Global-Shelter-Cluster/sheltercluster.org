@@ -227,6 +227,21 @@ class GroupContentManager {
   }
 
   /**
+   * Provide a count value for all published kobo form nodes added to the group.
+   * @return
+   *  Count query result.
+   */
+  public function getKoboFormsCount() {
+    $query = new EntityFieldQuery();
+    return $query->entityCondition('entity_type', 'node')
+      ->entityCondition('bundle', 'kobo_form')
+      ->fieldCondition('og_group_ref', 'target_id', $this->node->nid)
+      ->propertyCondition('status', NODE_PUBLISHED)
+      ->count()
+      ->execute();
+  }
+
+  /**
    * Get contact content for the group.
    *  @return
    */

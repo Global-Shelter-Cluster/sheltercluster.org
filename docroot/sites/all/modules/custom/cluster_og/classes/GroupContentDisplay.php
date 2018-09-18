@@ -215,6 +215,18 @@ class GroupDisplayProvider {
       ];
     }
 
+    $kobo_forms_count = $this->manager->getKoboFormsCount();
+    if (cluster_kobo_is_group_kobo_forms_page() || ($kobo_forms_count > 0)) {
+      $items['kobo_forms'] = [
+        'label' => t('Assessment forms'),
+        'path' => 'node/' . $this->node->nid . '/kobo-forms',
+        'total' => $kobo_forms_count,
+        'options' => [
+          'html' => TRUE,
+        ],
+      ];
+    }
+
     drupal_alter('cluster_og_dashboard_menu', $items);
 
     $secondary = array();
