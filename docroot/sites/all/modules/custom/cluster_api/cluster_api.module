@@ -8,7 +8,7 @@ function cluster_api_menu() {
 
   $items = [];
 
-  $items['admin/config/shelter/cluser-api'] = [
+  $items['admin/config/shelter/cluster-api'] = [
     'title' => 'Cluster API settings',
     'description' => 'Set the cluster API configurations, such as local enpoint urls',
     'page callback' => 'drupal_get_form',

@@ -1,6 +1,6 @@
 <?php
 
-use \Drupal\cluster_api\Authorization;
+use Drupal\cluster_api\Authorization;
 
 function _cluster_api_signup($requests) {
   watchdog('cluster_api_signup', json_encode($requests));
@@ -60,6 +60,23 @@ function _cluster_api_signup($requests) {
   $user = user_save('', $fields);
 
   cluster_api_track_users($user->uid, 'shelter_app');
+
+  // Auto-follow Global group
+  if ($global_id = variable_get('cluster_og_global_id')) {
+    $group = node_load($global_id);
+    if ($group && og_is_group('node', $group)) {
+      try {
+        $m = og_membership_create('node', $global_id, 'user', $user->uid, 'og_user_node1');
+        $m->save();
+        og_role_grant('node', $global_id, $user->uid, _cluster_api_get_follower_role_by_bundle($group->type));
+      } catch (Exception $e) {
+        watchdog('cluster_api_signup', 'Error in Global group auto-follow', [
+          'exception' => $e,
+          'uid' => $user->uid,
+        ], WATCHDOG_ERROR);
+      }
+    }
+  }
 
   // Generate oauth credentials for the new user.
   $auth = new Authorization();
