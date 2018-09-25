@@ -57,30 +57,36 @@ function _cluster_api_signup($requests) {
     ],
   ];
 
+  // Auto-follow Global group
+  if ($global_id = variable_get('cluster_og_global_id')) {
+    $global_group = node_load($global_id);
+    if ($global_group && og_is_group('node', $global_group)) {
+      $fields['og_user_node1'] = [
+        'und' => [
+          0 => [
+            'target_id' => $global_id,
+          ],
+        ],
+      ];
+    }
+    else {
+      $global_group = NULL;
+    }
+  }
+
   $user = user_save('', $fields);
 
   cluster_api_track_users($user->uid, 'shelter_app');
 
-  // Auto-follow Global group
-  if ($global_id = variable_get('cluster_og_global_id')) {
-    $group = node_load($global_id);
-    if ($group && og_is_group('node', $group)) {
-      try {
-        watchdog('cluster_api_signup', 'debug: ' . json_encode([
-          'uid' => $user->uid,
-          'global id' => $global_id,
-          'group type' => $group->type,
-          'follower role' => _cluster_api_get_follower_role_by_bundle($group->type),
-        ]));
-        $m = og_membership_create('node', $global_id, 'user', $user->uid, 'og_user_node1');
-        $m->save();
-        og_role_grant('node', $global_id, $user->uid, _cluster_api_get_follower_role_by_bundle($group->type));
-      } catch (Exception $e) {
-        watchdog('cluster_api_signup', 'Error in Global group auto-follow', [
-          'exception' => $e,
-          'uid' => $user->uid,
-        ], WATCHDOG_ERROR);
-      }
+  // Grant "follower" role for global group
+  if ($global_group) {
+    try {
+      og_role_grant('node', $global_group->nid, $user->uid, _cluster_api_get_follower_role_by_bundle($global_group->type));
+    } catch (Exception $e) {
+      watchdog('cluster_api_signup', 'Error in Global group auto-follow', [
+        'exception' => $e,
+        'uid' => $user->uid,
+      ], WATCHDOG_ERROR);
     }
   }
 
