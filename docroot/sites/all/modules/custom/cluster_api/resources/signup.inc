@@ -66,12 +66,12 @@ function _cluster_api_signup($requests) {
     $group = node_load($global_id);
     if ($group && og_is_group('node', $group)) {
       try {
-        watchdog('cluster_api_signup', 'debug', [
+        watchdog('cluster_api_signup', 'debug: ' . json_encode([
           'uid' => $user->uid,
           'global id' => $global_id,
           'group type' => $group->type,
           'follower role' => _cluster_api_get_follower_role_by_bundle($group->type),
-        ], WATCHDOG_ERROR);
+        ]));
         $m = og_membership_create('node', $global_id, 'user', $user->uid, 'og_user_node1');
         $m->save();
         og_role_grant('node', $global_id, $user->uid, _cluster_api_get_follower_role_by_bundle($group->type));
