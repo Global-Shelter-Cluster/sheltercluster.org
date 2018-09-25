@@ -447,6 +447,16 @@ function cluster_og_menu() {
     'access arguments' => array('administer nodes'),
   );
 
+  $items['admin/config/shelter/og'] = [
+    'title' => 'Cluster group settings',
+    'description' => 'Settings related to groups',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => ['cluster_og_settings'],
+    'access arguments' => ['administer site configuration'],
+    'file' => 'cluster_og.form.inc',
+    'type' => MENU_NORMAL_ITEM,
+  ];
+
   return $items;
 }
 

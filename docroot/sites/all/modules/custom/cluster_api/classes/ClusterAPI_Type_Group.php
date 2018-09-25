@@ -227,6 +227,9 @@ class ClusterAPI_Type_Group extends ClusterAPI_Type {
         if ($node->type === 'response') {
           $ret['response_status'] = $wrapper->field_response_status->value();
         }
+
+        if (variable_get('cluster_og_global_id') == $node->nid)
+          $ret['is_global'] = TRUE;
     }
 
     return $ret;
