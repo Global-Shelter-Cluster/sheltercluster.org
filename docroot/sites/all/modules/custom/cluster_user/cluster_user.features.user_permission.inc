@@ -976,6 +976,7 @@ function cluster_user_user_default_permissions() {
     'name' => 'delete any contact content',
     'roles' => array(
       'administrator' => 'administrator',
+      'trusted user' => 'trusted user',
     ),
     'module' => 'node',
   );
