@@ -78,7 +78,7 @@ function shelter_base_locale_default_languages() {
   // Exported language: id.
   $languages['id'] = array(
     'language' => 'id',
-    'name' => 'Indonesian',
+    'name' => 'Bahasa Indonesian',
     'native' => 'Bahasa Indonesia',
     'direction' => 0,
     'enabled' => 1,
