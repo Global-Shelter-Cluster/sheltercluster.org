@@ -125,6 +125,7 @@ class ClusterAPI_Type_Group extends ClusterAPI_Type {
    *   featured_documents: [30, 45],
    *   key_documents: [30, 45],
    *   recent_documents: [30, 45, 123, 693],
+   *   useful_links: [{url: "http://example.com", title: "Example"}, {url: "http://example.com/2"}]
    * }
    *
    * @param int $id
@@ -202,6 +203,20 @@ class ClusterAPI_Type_Group extends ClusterAPI_Type {
         $ret['contacts'] = array_filter((array) $manager->getContactMembers());
 
         $ret['url'] = url('node/' . $id, ['absolute' => TRUE]);
+
+        $useful_links = [];
+        foreach ((array) field_get_items('node', $node, 'field_useful_links') as $item) {
+          if (!$item['url'])
+            continue;
+
+          $useful_link = ['url' => $item['url']];
+          if ($item['title'])
+            $useful_link['title'] = $item['title'];
+
+          $useful_links[] = $useful_link;
+        }
+        if ($useful_links)
+          $ret['useful_links'] = $useful_links;
 
       //Fall-through
       case ClusterAPI_Object::MODE_STUBPLUS:
