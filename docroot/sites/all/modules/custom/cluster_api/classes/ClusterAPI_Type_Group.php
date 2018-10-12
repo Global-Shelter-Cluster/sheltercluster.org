@@ -245,6 +245,9 @@ class ClusterAPI_Type_Group extends ClusterAPI_Type {
 
         if (variable_get('cluster_og_global_id') == $node->nid)
           $ret['is_global'] = TRUE;
+
+        if (variable_get('cluster_og_resources_id') == $node->nid)
+          $ret['is_resources'] = TRUE;
     }
 
     return $ret;
