@@ -12,6 +12,10 @@ class ClusterAPI_Type_Global extends ClusterAPI_Type {
       'type' => 'group',
       'mode' => ClusterAPI_Object::MODE_STUBPLUS,
     ],
+    'resources_id' => [
+      'type' => 'group',
+      'mode' => ClusterAPI_Object::MODE_PUBLIC,
+    ],
   ];
 
   protected function preprocessModeAndPersist($id, &$mode, &$persist, $previous_type, $previous_id) {
