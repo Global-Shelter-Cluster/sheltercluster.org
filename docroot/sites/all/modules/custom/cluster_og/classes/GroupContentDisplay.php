@@ -292,7 +292,7 @@ class GroupDisplayProvider {
     }
 
     // Combine libraries, pages and other required entities under the same listing.
-    $page_ids = array_merge($this->manager->getPages(), $this->manager->getLibraries());
+    $page_ids = array_merge($this->manager->getPages(), $this->manager->getLibraries(), $this->manager->getPhotoGalleries());
     $pages = shelter_base_sort_nids_by_weight($page_ids);
     if ($pages) {
       $all_child_pages = $this->getAllChildPagesIds($pages);
