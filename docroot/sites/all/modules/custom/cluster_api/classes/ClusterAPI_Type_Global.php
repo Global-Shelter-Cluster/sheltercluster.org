@@ -12,6 +12,10 @@ class ClusterAPI_Type_Global extends ClusterAPI_Type {
       'type' => 'group',
       'mode' => ClusterAPI_Object::MODE_STUBPLUS,
     ],
+    'resources_id' => [
+      'type' => 'group',
+      'mode' => ClusterAPI_Object::MODE_PUBLIC,
+    ],
   ];
 
   protected function preprocessModeAndPersist($id, &$mode, &$persist, $previous_type, $previous_id) {
@@ -50,6 +54,11 @@ class ClusterAPI_Type_Global extends ClusterAPI_Type {
       'algolia_app_id' => variable_get('cluster_search_algolia_app_id'),
       'algolia_search_key' => variable_get('cluster_search_algolia_search_key'),
       'algolia_prefix' => variable_get('cluster_search_algolia_prefix'),
+    ];
+
+    $ret += [
+      'global_id' => intval(variable_get('cluster_og_global_id', '4290'), 10),
+      'resources_id' => intval(variable_get('cluster_og_resources_id', '4652'), 10),
     ];
 
     return $ret;

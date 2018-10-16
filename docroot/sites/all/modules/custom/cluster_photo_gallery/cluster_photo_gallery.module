@@ -1,0 +1,38 @@
+<?php
+/**
+ * @file
+ * Code for the Cluster photo gallery feature.
+ */
+
+include_once 'cluster_photo_gallery.features.inc';
+
+/**
+ * Implements hook_preprocess_HOOK().
+ */
+function cluster_photo_gallery_preprocess_field(&$variables) {
+  switch ($variables['element']['#field_name']) {
+    case 'field_photos':
+      $variables['items'][0]['#attached']['js'][] = drupal_get_path('module', 'cluster_photo_gallery') . '/js/photo_gallery.js';
+      $variables['items'][0]['#attached']['js'][] = ['type' => 'external', 'data' => 'https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.25/vue.min.js'];
+      $variables['items'][0]['#attached']['js'][] = ['type' => 'external', 'data' => 'https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.min.js'];
+
+      $variables['items'][0]['#attached']['css'][] = drupal_get_path('module', 'cluster_photo_gallery') . '/css/photo_gallery.css';
+      $variables['items'][0]['#attached']['css'][] = ['type' => 'external', 'data' => 'https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/magnific-popup.min.css'];
+      break;
+    case 'field_photo':
+      // Wrap each photo in a div with data attributes for "large" images.
+      foreach ($variables['items'] as $k => $item) {
+        $variables['items'][$k] = [
+          '#type' => 'container',
+          '#attributes' => [
+            'class' => ['photo_gallery_image'],
+            'data-url-full' => image_style_url('photo_gallery_full', $item['#item']['uri']),
+//            'data-url-medium' => image_style_url('photo_gallery_medium', $item['#item']['uri']),
+          ],
+          $item,
+        ];
+      }
+
+      break;
+  }
+}

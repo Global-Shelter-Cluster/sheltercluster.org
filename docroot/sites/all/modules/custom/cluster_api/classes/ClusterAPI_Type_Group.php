@@ -108,6 +108,9 @@ class ClusterAPI_Type_Group extends ClusterAPI_Type {
         $persist = TRUE;
       }
     }
+
+    if (variable_get('cluster_og_resources_id') == $id)
+      $persist = TRUE;
   }
 
   /**
@@ -125,6 +128,7 @@ class ClusterAPI_Type_Group extends ClusterAPI_Type {
    *   featured_documents: [30, 45],
    *   key_documents: [30, 45],
    *   recent_documents: [30, 45, 123, 693],
+   *   useful_links: [{url: "http://example.com", title: "Example"}, {url: "http://example.com/2"}]
    * }
    *
    * @param int $id
@@ -203,6 +207,20 @@ class ClusterAPI_Type_Group extends ClusterAPI_Type {
 
         $ret['url'] = url('node/' . $id, ['absolute' => TRUE]);
 
+        $useful_links = [];
+        foreach ((array) field_get_items('node', $node, 'field_useful_links') as $item) {
+          if (!$item['url'])
+            continue;
+
+          $useful_link = ['url' => $item['url']];
+          if ($item['title'])
+            $useful_link['title'] = $item['title'];
+
+          $useful_links[] = $useful_link;
+        }
+        if ($useful_links)
+          $ret['useful_links'] = $useful_links;
+
       //Fall-through
       case ClusterAPI_Object::MODE_STUBPLUS:
         $factsheets = $manager->getFactsheets(1);
@@ -230,6 +248,9 @@ class ClusterAPI_Type_Group extends ClusterAPI_Type {
 
         if (variable_get('cluster_og_global_id') == $node->nid)
           $ret['is_global'] = TRUE;
+
+        if (variable_get('cluster_og_resources_id') == $node->nid)
+          $ret['is_resources'] = TRUE;
     }
 
     return $ret;

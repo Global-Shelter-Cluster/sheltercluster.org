@@ -427,6 +427,20 @@ class GroupContentManager {
     return array_keys($res['node']);
   }
 
+  public function getPhotoGalleries() {
+    $query = new EntityFieldQuery();
+    $result = $query->entityCondition('entity_type', 'node')
+      ->entityCondition('bundle', 'photo_gallery')
+      ->fieldCondition('og_group_ref', 'target_id', $this->node->nid)
+      ->propertyCondition('status', NODE_PUBLISHED)
+      ->fieldOrderBy('field_sorting_weight', 'value', 'ASC')
+      ->execute();
+    if (isset($result['node'])) {
+      return array_keys($result['node']);
+    }
+    return array();
+  }
+
   public function getKoboForms() {
     $query = new EntityFieldQuery();
     $res = $query->entityCondition('entity_type', 'node')
