@@ -98,7 +98,8 @@
             'article': 'Article',
             'basic_page': null,
             'discussion': 'Discussion',
-            'homepage': null
+            'homepage': null,
+            'photo_gallery': 'Photo gallery'
           };
 
           var group = typeof result._highlightResult.og_group_ref !== 'undefined' && result._highlightResult.og_group_ref.length > 0

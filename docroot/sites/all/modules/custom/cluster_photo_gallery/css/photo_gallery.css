@@ -1,0 +1,39 @@
+/*.slide-transition {*/
+  /*transition: all .5s ease-in-out;*/
+  /*overflow-y: hidden*/
+/*}*/
+
+/*.slide-enter, .slide-leave {*/
+  /*transition: all .5s ease-in-out;*/
+  /*max-height: 0;*/
+  /*opacity: 0*/
+/*}*/
+
+.mfp-title a {
+  color: #f3f3f3
+}
+
+/*.mfp-with-zoom .mfp-container, .mfp-with-zoom.mfp-bg {*/
+  /*opacity: 0;*/
+  /*-webkit-backface-visibility: hidden;*/
+  /*-webkit-transition: all .3s ease-out;*/
+  /*-moz-transition: all .3s ease-out;*/
+  /*-o-transition: all .3s ease-out;*/
+  /*transition: all .3s ease-out*/
+/*}*/
+
+/*.mfp-with-zoom.mfp-ready .mfp-container {*/
+  /*opacity: 1*/
+/*}*/
+
+/*.mfp-with-zoom.mfp-ready.mfp-bg {*/
+  /*opacity: .8*/
+/*}*/
+
+/*.mfp-with-zoom.mfp-removing .mfp-container, .mfp-with-zoom.mfp-removing.mfp-bg {*/
+  /*opacity: 0*/
+/*}*/
+
+.mfp-with-zoom .mfp-img {
+  max-height: 90vh !important
+}
