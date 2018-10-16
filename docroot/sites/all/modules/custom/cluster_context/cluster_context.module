@@ -93,6 +93,17 @@ function cluster_context_links($node) {
     );
   }
 
+  if (node_access('create', 'photo_gallery')) {
+    $links['new-photo-gallery'] = array(
+      'title' => t('Create photo gallery'),
+      'href' => 'node/add/photo-gallery',
+      'query' => array(
+        'group' => $node->nid,
+        'destination' => 'node/' . $node->nid
+      ),
+    );
+  }
+
   if (node_access('create', 'contact')) {
     $links['new-contact'] = array(
       'title' => t('Create coordination team member'),
