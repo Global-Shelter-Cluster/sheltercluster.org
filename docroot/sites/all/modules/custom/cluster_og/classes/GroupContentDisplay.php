@@ -361,7 +361,7 @@ class GroupDisplayProvider {
   /**
    * Given a list of ids, return a keyed array with child page nodes.
    */
-  private function getAllChildPagesIds($ids) {
+  public function getAllChildPagesIds($ids) {
     $children = [];
     foreach ($ids as $id) {
       $child_ids = $this->getChildrenPagesIds($id);
