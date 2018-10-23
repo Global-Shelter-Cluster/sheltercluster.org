@@ -35,7 +35,7 @@ class ClusterAPI_Type_Page extends ClusterAPI_Type {
    */
   protected function generateObject($id, $mode) {
     $node = node_load($id);
-    if (!$node || !in_array($node->type, ['basic_page', 'library', 'arbitrary_library', 'photo_gallery']))
+    if (!$node || !in_array($node->type, ['page', 'library', 'arbitrary_library', 'photo_gallery']))
       // This id is not for a page node
       return NULL;
 
