@@ -80,7 +80,6 @@ class ClusterAPI_Type_Page extends ClusterAPI_Type {
         }
 
         $ret += [
-          'url' => url('node/' . $id, ['absolute' => TRUE]),
           'body' => $wrapper->body->value()['safe_value'],
           'groups' => self::getReferenceIds('node', $node, 'og_group_ref', TRUE),
         ];
@@ -90,6 +89,7 @@ class ClusterAPI_Type_Page extends ClusterAPI_Type {
         $ret += [
           'type' => $node->type,
           'title' => $node->title,
+          'url' => url('node/' . $id, ['absolute' => TRUE]),
         ];
     }
 
