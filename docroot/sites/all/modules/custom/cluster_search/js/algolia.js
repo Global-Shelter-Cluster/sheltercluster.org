@@ -96,7 +96,7 @@
             'arbitrary_library': 'Library',
             'library': 'Library',
             'article': 'Article',
-            'basic_page': null,
+            'page': null,
             'discussion': 'Discussion',
             'homepage': null,
             'photo_gallery': 'Photo gallery'
