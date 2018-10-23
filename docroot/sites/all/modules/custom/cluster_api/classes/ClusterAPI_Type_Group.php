@@ -90,6 +90,10 @@ class ClusterAPI_Type_Group extends ClusterAPI_Type {
       'type' => 'page',
       'mode' => ClusterAPI_Object::MODE_STUB,
     ],
+    'child_pages' => [
+      'type' => 'page',
+      'mode' => ClusterAPI_Object::MODE_STUB,
+    ],
   ];
 
   protected function preprocessModeAndPersist($id, &$mode, &$persist, $previous_type, $previous_id) {
@@ -227,8 +231,16 @@ class ClusterAPI_Type_Group extends ClusterAPI_Type {
 
         $page_ids = array_merge($manager->getPages(), $manager->getLibraries(), $manager->getPhotoGalleries());
         $ret['pages'] = shelter_base_sort_nids_by_weight($page_ids);
-        if ($ret['pages'])
-          $ret['all_child_pages'] = $display->getAllChildPagesIds($ret['pages']);
+        if ($ret['pages']) {
+          $ret['child_pages'] = [];
+          $ret['all_child_pages'] = [];
+          $all_child_pages = $display->getAllChildPagesIds($ret['pages']);
+          foreach ($all_child_pages as $parent_id => $children) {
+            $children_ids = shelter_base_sort_nids_by_weight(array_keys($children));
+            $ret['child_pages'] = array_merge($ret['child_pages'], $children_ids);
+            $ret['all_child_pages'][$parent_id] = $children_ids;
+          }
+        }
 
       //Fall-through
       case ClusterAPI_Object::MODE_STUBPLUS:
