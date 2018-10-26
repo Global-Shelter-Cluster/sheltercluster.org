@@ -636,7 +636,7 @@ function cluster_search_default_search_api_index() {
     "server" : "algolia",
     "item_type" : "node",
     "options" : {
-      "datasource" : { "bundles" : [ "arbitrary_library", "article", "page", "discussion", "library" ] },
+      "datasource" : { "bundles" : [ "arbitrary_library", "article", "page", "discussion", "library", "photo_gallery" ] },
       "index_directly" : 1,
       "cron_limit" : "0",
       "data_alter_callbacks" : {
