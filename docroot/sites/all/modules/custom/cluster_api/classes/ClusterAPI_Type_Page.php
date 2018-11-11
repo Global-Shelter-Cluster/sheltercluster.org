@@ -47,7 +47,7 @@ class ClusterAPI_Type_Page extends ClusterAPI_Type {
         switch ($node->type) {
           case 'library':
             $ret['is_global_library'] = (bool)$wrapper->field_is_global_library->value();
-            // TODO: "search filters"
+            $ret['search'] = cluster_libraries_search_facet_filters($node);
             break;
           case 'arbitrary_library':
             $ret['documents'] = self::getReferenceIds('node', $node, 'field_arbitrary_document_ref', TRUE);
