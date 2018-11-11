@@ -170,6 +170,8 @@ class ClusterAPI_Type_Group extends ClusterAPI_Type {
 
       //Fall-through
       case ClusterAPI_Object::MODE_PUBLIC:
+        $ret['search_group_nids'] = $display->getSearchGroupNids();
+
         if ($value = self::getReferenceIds('node', $node, 'field_associated_regions', TRUE))
           $ret['associated_regions'] = $value;
 
