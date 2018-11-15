@@ -25,6 +25,7 @@ abstract class ClusterAPI_Type {
     'kobo_form' => 'ClusterAPI_Type_KoboForm',
     'alert' => 'ClusterAPI_Type_Alert',
     'contact' => 'ClusterAPI_Type_Contact',
+    'page' => 'ClusterAPI_Type_Page',
   ];
   /** @var \stdClass User object */
   protected $current_user;
@@ -71,6 +72,21 @@ abstract class ClusterAPI_Type {
   protected static function getFileValue($field_name, $wrapper, $image_style = NULL) {
     $node = $wrapper->raw();
     $uri = $node->$field_name ? $wrapper->$field_name->file->value()->uri : NULL;
+
+    if (!$uri)
+      return NULL;
+
+    if ($image_style)
+      return image_style_url($image_style, $uri);
+    else
+      return file_create_url($uri);
+  }
+
+  /**
+   * Similar to getFileValue(), used when dealing with field collections.
+   */
+  protected static function getFileValue2($field_name, $wrapper, $image_style = NULL) {
+    $uri = $wrapper->$field_name ? $wrapper->$field_name->value()['uri'] : NULL;
 
     if (!$uri)
       return NULL;

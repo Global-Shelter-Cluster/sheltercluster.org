@@ -86,6 +86,14 @@ class ClusterAPI_Type_Group extends ClusterAPI_Type {
       'type' => 'user',
       'mode' => ClusterAPI_Object::MODE_PUBLIC,
     ],
+    'pages' => [
+      'type' => 'page',
+      'mode' => ClusterAPI_Object::MODE_STUB,
+    ],
+    'child_pages' => [
+      'type' => 'page',
+      'mode' => ClusterAPI_Object::MODE_STUB,
+    ],
   ];
 
   protected function preprocessModeAndPersist($id, &$mode, &$persist, $previous_type, $previous_id) {
@@ -100,8 +108,7 @@ class ClusterAPI_Type_Group extends ClusterAPI_Type {
         // followed groups.
         $mode = ClusterAPI_Object::MODE_PRIVATE;
         $persist = TRUE;
-      }
-      elseif ($mode === ClusterAPI_Object::MODE_STUB && in_array($id, cluster_og_get_hot_response_nids())) {
+      } elseif ($mode === ClusterAPI_Object::MODE_STUB && in_array($id, cluster_og_get_hot_response_nids())) {
         // Force at least stubplus mode (and persist) if this is one of the
         // globally featured responses.
         $mode = ClusterAPI_Object::MODE_STUBPLUS;
@@ -145,8 +152,9 @@ class ClusterAPI_Type_Group extends ClusterAPI_Type {
     $ret = [];
     $wrapper = entity_metadata_wrapper('node', $node);
     $manager = GroupContentManager::getInstance($node);
+    $display = GroupDisplayProvider::getDisplayProvider($node);
 
-    $convert_to_int = function($string) {
+    $convert_to_int = function ($string) {
       return intval($string);
     };
 
@@ -156,12 +164,14 @@ class ClusterAPI_Type_Group extends ClusterAPI_Type {
           $ret['kobo_forms'] = array_values(array_filter(array_map($convert_to_int, $value)));
         }
 
-        $ret['alerts'] = array_filter((array) $manager->getLatestAlerts(self::ALERTS_LIMIT, self::ALERTS_DAYS_LIMIT));
+        $ret['alerts'] = array_filter((array)$manager->getLatestAlerts(self::ALERTS_LIMIT, self::ALERTS_DAYS_LIMIT));
 
         $ret['followers'] = self::getFollowers($id);
 
       //Fall-through
       case ClusterAPI_Object::MODE_PUBLIC:
+        $ret['search_group_nids'] = $display->getSearchGroupNids();
+
         if ($value = self::getReferenceIds('node', $node, 'field_associated_regions', TRUE))
           $ret['associated_regions'] = $value;
 
@@ -198,17 +208,17 @@ class ClusterAPI_Type_Group extends ClusterAPI_Type {
           $ret['strategic_advisory'] = intval($sag->nid);
         }
 
-        $ret['featured_documents'] = array_filter((array) $manager->getFeaturedDocuments());
-        $ret['key_documents'] = array_filter((array) $manager->getKeyDocumentIds());
-        $ret['recent_documents'] = array_filter((array) $manager->getRecentDocuments(self::RECENT_DOCS_LIMIT, FALSE));
-        $ret['upcoming_events'] = array_filter((array) $manager->getUpcomingEvents(self::UPCOMING_EVENTS_LIMIT, self::UPCOMING_EVENTS_DAYS_LIMIT));
+        $ret['featured_documents'] = array_filter((array)$manager->getFeaturedDocuments());
+        $ret['key_documents'] = array_filter((array)$manager->getKeyDocumentIds());
+        $ret['recent_documents'] = array_filter((array)$manager->getRecentDocuments(self::RECENT_DOCS_LIMIT, FALSE));
+        $ret['upcoming_events'] = array_filter((array)$manager->getUpcomingEvents(self::UPCOMING_EVENTS_LIMIT, self::UPCOMING_EVENTS_DAYS_LIMIT));
 
-        $ret['contacts'] = array_filter((array) $manager->getContactMembers());
+        $ret['contacts'] = array_filter((array)$manager->getContactMembers());
 
         $ret['url'] = url('node/' . $id, ['absolute' => TRUE]);
 
         $useful_links = [];
-        foreach ((array) field_get_items('node', $node, 'field_useful_links') as $item) {
+        foreach ((array)field_get_items('node', $node, 'field_useful_links') as $item) {
           if (!$item['url'])
             continue;
 
@@ -220,6 +230,19 @@ class ClusterAPI_Type_Group extends ClusterAPI_Type {
         }
         if ($useful_links)
           $ret['useful_links'] = $useful_links;
+
+        $page_ids = array_merge($manager->getPages(), $manager->getLibraries(), $manager->getPhotoGalleries());
+        $ret['pages'] = shelter_base_sort_nids_by_weight($page_ids);
+        if ($ret['pages']) {
+          $ret['child_pages'] = [];
+          $ret['all_child_pages'] = [];
+          $all_child_pages = $display->getAllChildPagesIds($ret['pages']);
+          foreach ($all_child_pages as $parent_id => $children) {
+            $children_ids = shelter_base_sort_nids_by_weight(array_keys($children));
+            $ret['child_pages'] = array_merge($ret['child_pages'], $children_ids);
+            $ret['all_child_pages'][$parent_id] = $children_ids;
+          }
+        }
 
       //Fall-through
       case ClusterAPI_Object::MODE_STUBPLUS:
@@ -257,7 +280,7 @@ class ClusterAPI_Type_Group extends ClusterAPI_Type {
   }
 
   static function getFollowers($group_nid) {
-    $convert_to_int = function($string) {
+    $convert_to_int = function ($string) {
       return intval($string);
     };
 
@@ -270,11 +293,11 @@ class ClusterAPI_Type_Group extends ClusterAPI_Type {
     if (!isset($results['user']))
       return [];
 
-    $uids = array_map(function($item) {
+    $uids = array_map(function ($item) {
       return $item->uid;
     }, $results['user']);
 
-    $has_followed_role = function($uid) use ($group_nid) {
+    $has_followed_role = function ($uid) use ($group_nid) {
       return in_array(CLUSTER_API_FOLLOWER_ROLE_NAME, og_get_user_roles('node', $group_nid, $uid));
     };
 
