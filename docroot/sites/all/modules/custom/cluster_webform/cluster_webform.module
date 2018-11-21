@@ -10,6 +10,7 @@ include_once 'cluster_webform.features.inc';
  * Implements hook_webform_component_info_alter().
  */
 function cluster_webform_webform_component_info_alter(&$components) {
+//  unset($components['pagebreak']);
 //  unset($components['markup']);
 //  unset($components['textfield']);
   unset($components['fieldset']);
@@ -18,7 +19,6 @@ function cluster_webform_webform_component_info_alter(&$components) {
   unset($components['grid']);
   unset($components['hidden']);
   unset($components['number']);
-  unset($components['pagebreak']);
   unset($components['select']);
   unset($components['textarea']);
   unset($components['time']);
@@ -34,6 +34,11 @@ function cluster_webform_form_webform_component_edit_form_alter(&$form, &$form_s
     return;
 
   switch ($form['type']['#value']) {
+    case 'pagebreak':
+      $form['extra']['next_page_label']['#access'] = FALSE;
+      $form['extra']['prev_page_label']['#access'] = FALSE;
+      break;
+
     case 'markup':
       $form['display']['#access'] = FALSE;
       break;
