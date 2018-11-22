@@ -147,6 +147,16 @@ function cluster_context_links($node) {
     );
   }
 
+  if (node_access('create', 'webform')) {
+    $links['new-webform'] = array(
+      'title' => t('Create assessment form'),
+      'href' => 'node/add/webform',
+      'query' => array(
+        'group' => $node->nid,
+      ),
+    );
+  }
+
   if (node_access('create', 'alert') && og_user_access('node', $node->nid, 'create alert content')) {
     $links['alert'] = array(
       'title' => t('Create alert'),
