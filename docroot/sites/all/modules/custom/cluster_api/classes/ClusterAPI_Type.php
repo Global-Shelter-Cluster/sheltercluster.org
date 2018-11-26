@@ -23,6 +23,7 @@ abstract class ClusterAPI_Type {
     'document' => 'ClusterAPI_Type_Document',
     'event' => 'ClusterAPI_Type_Event',
     'kobo_form' => 'ClusterAPI_Type_KoboForm',
+    'webform' => 'ClusterAPI_Type_Webform',
     'alert' => 'ClusterAPI_Type_Alert',
     'contact' => 'ClusterAPI_Type_Contact',
     'page' => 'ClusterAPI_Type_Page',
