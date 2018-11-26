@@ -20,7 +20,7 @@ class ClusterAPI_Type_Webform extends ClusterAPI_Type {
     return [
       'groups' => self::getReferenceIds('node', $node, 'og_group_ref', TRUE),
       'title' => $node->title,
-      'fields' => cluster_webform_export($node),
+      'form' => cluster_webform_export($node),
     ];
   }
 }
