@@ -1,0 +1,78 @@
+<?php
+
+/**
+ * Implements hook_menu().
+ */
+function cluster_assessment_menu() {
+  return [
+    'node/%node/assessment-forms' => [
+      'title' => 'Assessment forms',
+      'page callback' => 'cluster_assessment_all',
+      'page arguments' => [1],
+      'access callback' => 'og_is_group',
+      'access arguments' => [0, 1],
+      'title callback' => '_cluster_assessment_title_callback',
+      'title arguments' => [1],
+      'type' => MENU_CALLBACK,
+    ],
+  ];
+}
+
+/**
+ * @param $node
+ * @return array|int
+ */
+function cluster_assessment_all($node) {
+  $manager = GroupContentManager::getInstance($node);
+
+  $nids = [];
+  if (module_exists('cluster_webform'))
+    $nids = array_merge($nids, $manager->getWebforms());
+  if (module_exists('cluster_kobo'))
+    $nids = array_merge($nids, $manager->getKoboForms());
+  if (!$nids)
+    return MENU_NOT_FOUND;
+
+  $nodes = node_load_multiple($nids);
+
+  return [
+    '#theme' => 'links',
+    '#links' => array_map(function($node) {
+      return [
+        'title' => $node->title,
+        'href' => 'node/'.$node->nid,
+      ];
+    }, $nodes),
+  ];
+}
+
+/**
+ * Menu title callback.
+ *
+ * @see _cluster_docs_title_callback() (mostly copied from there)
+ */
+function _cluster_assessment_title_callback($node) {
+  return $node->title . ' - ' . t('Assessment forms');
+}
+
+function cluster_assessment_total_count($gid) {
+  $group = node_load($gid);
+  $manager = GroupContentManager::getInstance($group);
+  $ret = 0;
+
+  if (module_exists('cluster_webform'))
+    $ret += $manager->getWebformsCount();
+  if (module_exists('cluster_kobo'))
+    $ret += $manager->getKoboFormsCount();
+
+  return $ret;
+}
+
+function cluster_assessment_is_group_forms_page() {
+  $router_item = menu_get_item(current_path());
+
+  if ($router_item && isset($router_item['path']))
+    return $router_item['path'] === 'node/%/assessment-forms';
+
+  return FALSE;
+}
