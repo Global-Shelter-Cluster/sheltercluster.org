@@ -158,6 +158,44 @@ function cluster_api_services_resources() {
         ],
       ],
     ],
+    'submit-assessment' => [
+      'operations' => [
+        'create' => [
+          'help' => 'Submit an assessment submission',
+          'file' => [
+            'type' => 'inc',
+            'module' => 'cluster_api',
+            'name' => 'resources/submit_assessment',
+          ],
+          'callback' => '_cluster_api_submit_assessment',
+          'args' => [
+            [
+              'name' => 'form-service',
+              'optional' => FALSE,
+              'source' => ['path' => 0],
+              'type' => 'string',
+              'description' => 'The name of the service which will receive the submission, such as webform',
+            ],
+            [
+              'name' => 'id',
+              'optional' => FALSE,
+              'source' => ['path' => 1],
+              'type' => 'int',
+              'description' => 'The id of the form receiving the submission',
+            ],
+            [
+              'name' => 'submission',
+              'optional' => FALSE,
+              'source' => 'data',
+              'type' => 'array',
+              'description' => 'The form data being submitted',
+            ],
+          ],
+          'access callback' => 'cluster_api_access_submit_assessment',
+          'access arguments append' => TRUE,
+        ],
+      ],
+    ],
   ];
 }
 
@@ -172,6 +210,14 @@ function _cluster_api_get_follower_role_by_bundle($group_bundle) {
   if (!array_key_exists(CLUSTER_API_FOLLOWER_ROLE_NAME, $roles))
     throw new Exception('Group bundle does not have follower role: ' . $group_bundle);
   return $roles[CLUSTER_API_FOLLOWER_ROLE_NAME];
+}
+
+/**
+ * Access callback.
+ * Test if user is allowed to submit to an assemsment form.
+ */
+function cluster_api_access_submit_assessment() {
+  return TRUE;
 }
 
 /**
