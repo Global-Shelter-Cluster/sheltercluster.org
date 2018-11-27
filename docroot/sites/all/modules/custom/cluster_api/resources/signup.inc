@@ -1,6 +1,6 @@
 <?php
 
-use Drupal\cluster_api\Authorization;
+use Drupal\cluster_api\Oauth\Authorization;
 
 function _cluster_api_signup($requests) {
   watchdog('cluster_api_signup', json_encode($requests));

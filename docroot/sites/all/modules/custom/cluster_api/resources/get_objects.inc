@@ -1,6 +1,6 @@
 <?php
 
-use \Drupal\cluster_api\Authorization;
+use \Drupal\cluster_api\Oauth\Authorization;
 
 /**
  * Example:
