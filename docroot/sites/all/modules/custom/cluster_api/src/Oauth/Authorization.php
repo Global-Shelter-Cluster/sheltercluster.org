@@ -4,6 +4,10 @@ namespace Drupal\cluster_api\Oauth;
 
 class Authorization {
 
+
+  private $user;
+  private $is_authorized = FALSE;
+
   /**
    * Attempt to get a Drupal user object either from login credentials or bearer token.
    *
@@ -55,15 +59,21 @@ class Authorization {
       return $response;
     }
 
+    $this->is_authorized = TRUE;
+
     if (isset($oauth_response['expires_in'])) {
       $response['authorization']['expires_at'] = time() + $oauth_response['expires_in'];
     }
 
     // Access token was successfuly generated or validated.
     $token_data =  oauth2_server_token_load($bearer_token);
-    $response['user'] = user_load($token_data->uid);
+    $this->user = $response['user'] = user_load($token_data->uid);
 
     return $response;
+  }
+
+  public function isAuthorized() {
+    return $this->is_authorized;
   }
 
   /**
