@@ -215,16 +215,18 @@ class GroupDisplayProvider {
       ];
     }
 
-    $kobo_forms_count = $this->manager->getKoboFormsCount();
-    if (cluster_kobo_is_group_kobo_forms_page() || ($kobo_forms_count > 0)) {
-      $items['kobo_forms'] = [
-        'label' => t('Assessment forms'),
-        'path' => 'node/' . $this->node->nid . '/kobo-forms',
-        'total' => $kobo_forms_count,
-        'options' => [
-          'html' => TRUE,
-        ],
-      ];
+    if (module_exists('cluster_assessment')) {
+      $forms_count = cluster_assessment_total_count($this->node->nid);
+      if (cluster_assessment_is_group_forms_page() || ($forms_count > 0)) {
+        $items['assessment_forms'] = [
+          'label' => t('Assessment forms'),
+          'path' => 'node/' . $this->node->nid . '/assessment-forms',
+          'total' => $forms_count,
+          'options' => [
+            'html' => TRUE,
+          ],
+        ];
+      }
     }
 
     drupal_alter('cluster_og_dashboard_menu', $items);

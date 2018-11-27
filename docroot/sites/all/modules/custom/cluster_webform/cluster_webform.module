@@ -1,0 +1,73 @@
+<?php
+/**
+ * @file
+ * Code for the Cluster Webform feature.
+ */
+
+include_once 'cluster_webform.features.inc';
+
+/**
+ * Implements hook_webform_component_info_alter().
+ */
+function cluster_webform_webform_component_info_alter(&$components) {
+//  unset($components['pagebreak']);
+//  unset($components['markup']);
+//  unset($components['textfield']);
+  unset($components['fieldset']);
+  unset($components['date']);
+  unset($components['email']);
+  unset($components['grid']);
+  unset($components['hidden']);
+  unset($components['number']);
+  unset($components['select']);
+  unset($components['textarea']);
+  unset($components['time']);
+  unset($components['file']);
+  unset($components['name']);
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function cluster_webform_form_webform_component_edit_form_alter(&$form, &$form_state) {
+  if (!isset($form['type']['#value']))
+    return;
+
+  switch ($form['type']['#value']) {
+    case 'pagebreak':
+      $form['extra']['next_page_label']['#access'] = FALSE;
+      $form['extra']['prev_page_label']['#access'] = FALSE;
+      break;
+
+    case 'markup':
+      $form['display']['#access'] = FALSE;
+      break;
+
+    case 'textfield':
+      $form['display']['#access'] = FALSE;
+      $form['validation']['unique']['#access'] = FALSE;
+      $form['validation']['maxlength']['#access'] = FALSE;
+      $form['validation']['minlength']['#access'] = FALSE;
+      break;
+  }
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function cluster_webform_form_webform_configure_form_alter(&$form, &$form_state) {
+  $form['submission']['redirection']['#access'] = FALSE;
+  $form['submission']['total_submit_limit']['#access'] = FALSE;
+  $form['submission']['submit_limit']['#access'] = FALSE;
+  $form['role_control']['#access'] = FALSE;
+  $form['progressbar']['#access'] = FALSE;
+  $form['preview']['#access'] = FALSE;
+  $form['advanced']['#access'] = FALSE;
+}
+
+/**
+ * Implements hook_menu_alter().
+ */
+function cluster_webform_menu_alter(&$items) {
+  unset($items['node/%webform_menu/webform/conditionals']);
+}

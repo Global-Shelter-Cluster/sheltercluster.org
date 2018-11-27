@@ -242,6 +242,21 @@ class GroupContentManager {
   }
 
   /**
+   * Provide a count value for all published kobo form nodes added to the group.
+   * @return
+   *  Count query result.
+   */
+  public function getWebformsCount() {
+    $query = new EntityFieldQuery();
+    return $query->entityCondition('entity_type', 'node')
+      ->entityCondition('bundle', 'webform')
+      ->fieldCondition('og_group_ref', 'target_id', $this->node->nid)
+      ->propertyCondition('status', NODE_PUBLISHED)
+      ->count()
+      ->execute();
+  }
+
+  /**
    * Get contact content for the group.
    *  @return
    */
@@ -439,6 +454,21 @@ class GroupContentManager {
       return array_keys($result['node']);
     }
     return array();
+  }
+
+  public function getWebforms() {
+    $query = new EntityFieldQuery();
+    $res = $query->entityCondition('entity_type', 'node')
+      ->entityCondition('bundle', 'webform')
+      ->fieldCondition('og_group_ref', 'target_id', $this->node->nid)
+      ->propertyCondition('status', NODE_PUBLISHED)
+      ->execute();
+
+    if (!isset($res['node'])) {
+      return array();
+    }
+
+    return array_keys($res['node']);
   }
 
   public function getKoboForms() {
