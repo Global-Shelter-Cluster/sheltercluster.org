@@ -68,7 +68,6 @@ class Authorization {
 
     // Access token was successfuly generated or validated.
     $token_data =  oauth2_server_token_load($bearer_token);
-    watchdog('oauth_token', serialize($token_data));
     $this->user = $response['user'] = user_load($token_data->uid);
     $this->authorization = $response['authorization'];
 
@@ -115,7 +114,6 @@ class Authorization {
     }
 
     $authorization_header = $headers['authorization'];
-    watchdog('cluster_api_headers', json_encode(getallheaders()));
     if (substr($authorization_header, 0, 7) !== 'Bearer ') {
       return FALSE;
     }
@@ -164,7 +162,7 @@ class Authorization {
       !isset($requests['credentials']['type']) &&
       ($requests['credentials']['type'] != 'password' || $requests['credentials']['type'] != 'refresh_token')
     ) {
-      //watchdog('cluster_api_credentials', json_encode($requests));
+
       $grant_type = $requests['credentials']['type'];
       $error_descriptor = $grant_type . ' is not a valid grant type';
       if (!$grant_type) {
@@ -186,7 +184,6 @@ class Authorization {
         $grant_manager = new RefreshTokenGrantManager();
         break;
     }
-    watchdog('oauth', $requests['credentials']['type']);
     return $grant_manager->authorizeWithCredentials($requests['credentials']);
   }
 

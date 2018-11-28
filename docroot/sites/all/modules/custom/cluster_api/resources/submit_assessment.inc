@@ -13,7 +13,15 @@ use Drupal\cluster_api\Oauth\Authorization;
  * @param $form_id
  *  Identifier for the form for which the data is submitted.
  * @param $request
- *  Submitted values to store into the service and Authorization credentials
+ *  Submitted values to store into the service and Authorization credentials if not bearing token.
+ *  Assessment is expected to be an object where the key matches 'form_key'.
+ *  {
+ *    "assessment": {
+ *      "other_value": "fnord",
+ *      "test_123": 42
+ *    },
+ *    "credentials": {...}
+ *  }
  */
 function _cluster_api_submit_assessment($form_service, $form_id, $request) {
   if (empty($request['assessment'])) {
@@ -21,7 +29,7 @@ function _cluster_api_submit_assessment($form_service, $form_id, $request) {
   }
 
   $auth = new Authorization();
-  $auth->authorize($request);
+  $auth_response = $auth->authorize($request);
 
   // Authorization failed.
   if (!$auth->isAuthorized()) {
@@ -31,14 +39,11 @@ function _cluster_api_submit_assessment($form_service, $form_id, $request) {
   $user = $auth->getUser();
   $response['authorization'] = $auth->getAuthorization();
 
-  return $user->uid;
   $assessment_submission = AssessmentSubmissionFactory::createInstance($form_service);
   $result = $assessment_submission->saveSubmission($user, $form_id, $request['assessment']);
   if (!$result['success']) {
-    return services_error('Assessment form submission unaceptable: ' . $result['message'], 403);
+    $response['assessment_errors'] = 'Assessment form submission unaceptable: ' . $result['message'];
   }
-
-  //$response = $success;
 
   return $response;
 }

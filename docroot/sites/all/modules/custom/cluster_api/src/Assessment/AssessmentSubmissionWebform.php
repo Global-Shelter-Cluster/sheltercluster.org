@@ -15,10 +15,27 @@ class AssessmentSubmissionWebform implements AssessmentSubmissionInterface {
    * @return boolean indicating submission success;
    */
   public function saveSubmission($user, $form_id, $submission) {
-    // @TODO test user permission to post on that webform.
     $this->user = $user;
 
     $this->node = node_load($form_id);
+
+    // If the user is follower of at least one group in which this form is posted, allow.
+    $user_is_follower = FALSE;
+    if (!isset($this->node->og_group_ref)) {
+      return ['success' => FALSE, 'message' => 'Form not in a group'];
+    }
+    foreach ($this->node->og_group_ref[LANGUAGE_NONE] as $group_id) {
+      $roles = og_get_user_roles('node', $group_id['target_id'], $this->user->uid);
+      if (in_array('follower', $roles)) {
+        $user_is_follower = TRUE;
+        break;
+      }
+    }
+
+    if (!$user_is_follower) {
+      return ['success' => FALSE, 'message' => 'User is not group follower'];
+    }
+
     if (!$this->node) {
       return ['success' => FALSE, 'message' => 'Bad form id'];
     }

@@ -22,7 +22,6 @@ use \Drupal\cluster_api\Oauth\Authorization;
  * @return array
  */
 function _cluster_api_get_objects($request) {
-  watchdog('cluster_api_get_objects', json_encode($request));
   $auth = new Authorization();
   $auth_response = $auth->authorize($request);
   $user = $auth_response['user'];
@@ -31,9 +30,6 @@ function _cluster_api_get_objects($request) {
   if ($user && !empty($request['pushNotificationToken'])) {
     _cluster_api_set_push_notification_token($user, $request['pushNotificationToken']);
   }
-
-  // Log the authorization server response.
-  watchdog('cluster_api_response', json_encode($response));
 
   // Can't authorize.
   if (!$user || $response['authorization']['code'] != '200') {
