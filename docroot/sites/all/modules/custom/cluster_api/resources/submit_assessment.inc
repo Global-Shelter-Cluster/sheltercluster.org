@@ -1,5 +1,6 @@
 <?php
 
+use Drupal\cluster_api\Assessment\AssessmentSubmissionFactory;
 use Drupal\cluster_api\Oauth\Authorization;
 
 // @file services module resource
@@ -11,21 +12,33 @@ use Drupal\cluster_api\Oauth\Authorization;
  *  Service used to handle form submission. Supports 'webform'.
  * @param $form_id
  *  Identifier for the form for which the data is submitted.
- * @param $submissions_data
- *  Submitted values to store into the service.
+ * @param $request
+ *  Submitted values to store into the service and Authorization credentials
  */
-function _cluster_api_submit_assessment($form_service, $form_id, $submission) {
+function _cluster_api_submit_assessment($form_service, $form_id, $request) {
+  if (empty($request['assessment'])) {
+    return services_error('Assessment form submission unaceptable', 403);
+  }
+
   $auth = new Authorization();
-  $auth_response = $auth->authorize($submission);
+  $auth->authorize($request);
 
   // Authorization failed.
   if (!$auth->isAuthorized()) {
-    return $auth_response;
+    return services_error($auth->getErrorMessage(), $auth->getResponseCode());
   }
 
-  $user = $auth_response['user'];
-  $response['authorization'] = $auth_response['authorization'];
+  $user = $auth->getUser();
+  $response['authorization'] = $auth->getAuthorization();
 
-  $response['fnord'] = 'FNORD';
+  return $user->uid;
+  $assessment_submission = AssessmentSubmissionFactory::createInstance($form_service);
+  $result = $assessment_submission->saveSubmission($user, $form_id, $request['assessment']);
+  if (!$result['success']) {
+    return services_error('Assessment form submission unaceptable: ' . $result['message'], 403);
+  }
+
+  //$response = $success;
+
   return $response;
 }

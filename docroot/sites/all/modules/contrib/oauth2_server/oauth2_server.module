@@ -706,6 +706,8 @@ function oauth2_server_authorization_code_load_multiple($codes) {
 function oauth2_server_entity_load_by_properties($entity_type, array $values) {
   $entities = array();
   $query = new EntityFieldQuery;
+  watchdog('contrib_oauth', serialize($entity_type));
+  watchdog('contrib_oauth', serialize($values));
   $query->entityCondition('entity_type', $entity_type);
   foreach ($values as $key => $value) {
     $query->propertyCondition($key, $value);

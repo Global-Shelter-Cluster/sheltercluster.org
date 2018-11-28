@@ -7,6 +7,7 @@ class Authorization {
 
   private $user;
   private $is_authorized = FALSE;
+  private $authorization;
 
   /**
    * Attempt to get a Drupal user object either from login credentials or bearer token.
@@ -52,10 +53,10 @@ class Authorization {
       $bearer_token = isset($oauth_response['access_token']) ? $oauth_response['access_token'] : NULL;
     }
 
-    $response['authorization'] = $oauth_response;
+    $this->authorization = $response['authorization'] = $oauth_response;
 
     // Authorization failed.
-    if (!$oauth_response['code'] == '200') {
+    if ($oauth_response['code'] != '200') {
       return $response;
     }
 
@@ -67,13 +68,41 @@ class Authorization {
 
     // Access token was successfuly generated or validated.
     $token_data =  oauth2_server_token_load($bearer_token);
+    watchdog('oauth_token', serialize($token_data));
     $this->user = $response['user'] = user_load($token_data->uid);
+    $this->authorization = $response['authorization'];
 
     return $response;
   }
 
   public function isAuthorized() {
     return $this->is_authorized;
+  }
+
+  /**
+   * @return the Drupal user that was identified by Oauth credentials.
+   */
+  public function getUser() {
+    return $this->user;
+  }
+
+  public function getAuthorization() {
+    return $this->authorization;
+  }
+
+  public function getErrorMessage() {
+    if (!isset($this->authorization['status_message']) && !isset($this->authorization['error_description'])) {
+      return '';
+    }
+
+    return $this->authorization['status_message'] . ' ' . $this->authorization['error_description'];
+  }
+
+  public function getResponseCode() {
+    if (!isset($this->authorization['code'])) {
+      return 0;
+    }
+    return $this->authorization['code'];
   }
 
   /**
@@ -157,7 +186,7 @@ class Authorization {
         $grant_manager = new RefreshTokenGrantManager();
         break;
     }
-
+    watchdog('oauth', $requests['credentials']['type']);
     return $grant_manager->authorizeWithCredentials($requests['credentials']);
   }
 
