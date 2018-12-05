@@ -10,6 +10,56 @@
 function cluster_webform_field_default_field_instances() {
   $field_instances = array();
 
+  // Exported field_instance: 'node-webform-field_allow_public_result'.
+  $field_instances['node-webform-field_allow_public_result'] = array(
+    'bundle' => 'webform',
+    'default_value' => array(
+      0 => array(
+        'value' => 0,
+      ),
+    ),
+    'deleted' => 0,
+    'description' => 'Makes it so that webform results are available to all users for this form.',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 3,
+      ),
+      'ical' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_allow_public_result',
+    'label' => 'Allow public access',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(
+        'display_label' => 1,
+      ),
+      'type' => 'options_onoff',
+      'weight' => 32,
+    ),
+  );
+
   // Exported field_instance: 'node-webform-og_group_ref'.
   $field_instances['node-webform-og_group_ref'] = array(
     'bundle' => 'webform',
@@ -126,7 +176,9 @@ function cluster_webform_field_default_field_instances() {
 
   // Translatables
   // Included for use with string extractors like potx.
+  t('Allow public access');
   t('Groups audience');
+  t('Makes it so that webform results are available to all users for this form.');
   t('Title');
 
   return $field_instances;
