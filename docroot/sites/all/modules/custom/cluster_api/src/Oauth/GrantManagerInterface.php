@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\cluster_api;
+namespace Drupal\cluster_api\Oauth;
 
 interface GrantManagerInterface {
 

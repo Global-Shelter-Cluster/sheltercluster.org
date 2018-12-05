@@ -17,7 +17,6 @@ features[features_api][] = api:2
 features[oauth2_server][] = shelter
 features[services_endpoint][] = mobile
 features[variable][] = cluster_api_oauth2_server
-features_exclude[dependencies][entity] = entity
 files[] = classes/ClusterAPI_Expo.php
 files[] = classes/ClusterAPI_Object.php
 files[] = classes/ClusterAPI_Type.php
