@@ -67,17 +67,10 @@ function cluster_webform_form_webform_configure_form_alter(&$form, &$form_state)
 }
 
 /**
- * Implements hook_menu_alter().
+ * Implements hook_webform_results_access().
  */
-function cluster_webform_menu_alter(&$items) {
-  unset($items['node/%webform_menu/webform/conditionals']);
-  $items['node/%webform_menu/webform-results']['access callback'] = 'cluster_webform_results_access';
-  $items['node/%webform_menu/submission/%webform_menu_submission']['access callback'] = 'cluster_webform_results_access';
-}
-
-function cluster_webform_results_access($node, $account = NULL) {
+function cluster_webform_webform_results_access($node, $account = NULL) {
   if (isset($node->field_allow_public_result) && $node->field_allow_public_result) {
     return TRUE;
   }
-  return webform_results_access($node, $account = NULL);
 }
