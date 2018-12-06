@@ -77,7 +77,7 @@ function cluster_webform_menu_alter(&$items) {
  * Implements hook_webform_results_access().
  */
 function cluster_webform_webform_results_access($node, $account = NULL) {
-  if (isset($node->field_allow_public_result) && $node->field_allow_public_result) {
+  if (isset($node->field_allow_public_result) && $node->field_allow_public_result[LANGUAGE_NONE][0]['value']) {
     return TRUE;
   }
 }
