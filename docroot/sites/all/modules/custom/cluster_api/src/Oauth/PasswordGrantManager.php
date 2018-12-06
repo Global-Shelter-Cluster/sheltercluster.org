@@ -1,8 +1,8 @@
 <?php
 
-namespace Drupal\cluster_api;
+namespace Drupal\cluster_api\Oauth;
 
-use Drupal\cluster_api\GrantManagerBase;
+use Drupal\cluster_api\Oauth\GrantManagerBase;
 
 class PasswordGrantManager extends GrantManagerBase {
 
