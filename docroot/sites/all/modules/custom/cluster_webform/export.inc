@@ -41,26 +41,34 @@ function cluster_webform_export($node) {
     $current_page = ['fields' => []];
   };
 
+  $supported_components = _cluster_webform_get_supported_components();
   foreach ($node->webform['components'] as $cid => $component) {
     $type = $component['type'];
-    $item = NULL;
-
-    switch ($type) {
-      case 'pagebreak':
-        $store_page();
-        $current_page['title'] = $component['name'];
-        continue 2;
-
-      case 'markup':
-      case 'textfield':
-        $item = call_user_func('_cluster_webform_export_' . $type, $component);
-        if (!$item)
-          continue 2;
-        $item['type'] = $type;
+    if (!in_array($type, $supported_components)) {
+      continue;
     }
 
-    if ($item)
-      $current_page['fields'][] = $item;
+    $item = NULL;
+
+    if ($type == 'pagebreak') {
+      $store_page();
+      $current_page['title'] = $component['name'];
+      continue;
+    }
+
+    if (function_exists('_cluster_webform_export_' . $type)) {
+      $item = call_user_func('_cluster_webform_export_' . $type, $component, $type);
+    }
+    else {
+      $item = _cluster_webform_export_component($component, $type);
+    }
+
+    if (!$item) {
+      continue;
+    }
+    $item['type'] = $type;
+    $current_page['fields'][] = $item;
+
   }
 
   $store_page();
@@ -75,7 +83,7 @@ function _cluster_webform_export_markup($component) {
   return ['value' => $component['value']];
 }
 
-function _cluster_webform_export_textfield($component) {
+function _cluster_webform_export_component($component, $type) {
   $item = [
     'key' => $component['form_key'],
     'name' => $component['name'],
@@ -87,8 +95,29 @@ function _cluster_webform_export_textfield($component) {
   if ($component['value'])
     $item['default'] = $component['value'];
 
-  if ($component['extra']['description'])
-    $item['description'] = $component['extra']['description'];
+  $supported_validation = _cluster_webform_get_supported_component_elements($type);
+  foreach ($supported_validation as $key) {
+    $item[$key] = $component['extra'][$key];
+  }
 
   return $item;
+}
+
+function _cluster_webform_export_select($component, $type) {
+  $items = _cluster_webform_export_component($component, $type);
+
+  // It is unfortunate that webforms did not use the key 'options'.
+  $options = explode(PHP_EOL, $items['items']);
+  unset($items['items']);
+
+  $export = [];
+  foreach ($options as $option) {
+    if ($option) {
+      $exploded = explode('|', $option);
+      $export[] = [$exploded[0] => trim($exploded[1])];
+    }
+  }
+  $items['options'] = $export;
+
+  return $items;
 }
