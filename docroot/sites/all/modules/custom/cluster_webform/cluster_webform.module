@@ -67,6 +67,13 @@ function cluster_webform_form_webform_configure_form_alter(&$form, &$form_state)
 }
 
 /**
+ * Implements hook_menu_alter().
+ */
+function cluster_webform_menu_alter(&$items) {
+  unset($items['node/%webform_menu/webform/conditionals']);
+}
+
+/**
  * Implements hook_webform_results_access().
  */
 function cluster_webform_webform_results_access($node, $account = NULL) {
