@@ -42,7 +42,7 @@ function _cluster_api_submit_assessment($form_service, $form_id, $request) {
   $assessment_submission = AssessmentSubmissionFactory::createInstance($form_service);
   $result = $assessment_submission->saveSubmission($user, $form_id, $request['assessment']);
   if (!$result['success']) {
-    $response['assessment_errors'] = 'Assessment form submission unaceptable: ' . $result['message'];
+    $response['assessment_errors'] = $result['message'];
   }
 
   return $response;

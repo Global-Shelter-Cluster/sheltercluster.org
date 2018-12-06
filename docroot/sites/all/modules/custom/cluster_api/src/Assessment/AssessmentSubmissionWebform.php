@@ -22,7 +22,7 @@ class AssessmentSubmissionWebform implements AssessmentSubmissionInterface {
     // If the user is follower of at least one group in which this form is posted, allow.
     $user_is_follower = FALSE;
     if (!isset($this->node->og_group_ref)) {
-      return ['success' => FALSE, 'message' => 'Form not in a group'];
+      return ['success' => FALSE, 'message' => t('Form not in a group')];
     }
     foreach ($this->node->og_group_ref[LANGUAGE_NONE] as $group_id) {
       $roles = og_get_user_roles('node', $group_id['target_id'], $this->user->uid);
@@ -33,21 +33,21 @@ class AssessmentSubmissionWebform implements AssessmentSubmissionInterface {
     }
 
     if (!$user_is_follower) {
-      return ['success' => FALSE, 'message' => 'User is not group follower'];
+      return ['success' => FALSE, 'message' => t('User is not group follower')];
     }
 
     if (!$this->node) {
-      return ['success' => FALSE, 'message' => 'Bad form id'];
+      return ['success' => FALSE, 'message' => t('Bad form id')];
     }
     if (empty($this->node->webform)) {
-      return ['success' => FALSE, 'message' => 'Not a form'];
+      return ['success' => FALSE, 'message' => t('Not a form')];
     }
     $this->webform = $this->node->webform;
     return $this->mapSubmissionToComponents($submission);
   }
 
   private function mapSubmissionToComponents($submission) {
-    $result = ['success' => TRUE, 'message' => 'Form submission successful'];
+    $result = ['success' => TRUE, 'message' => t('Form submission successful')];
     $all_form_keys = [];
     $webform_data = [];
 
@@ -58,7 +58,7 @@ class AssessmentSubmissionWebform implements AssessmentSubmissionInterface {
 
       // Test if required values are present.
       if ($component['required'] && empty($submission[$form_key])) {
-        return ['success' => FALSE, 'message' => 'Missing required component ' . $form_key];
+        return ['success' => FALSE, 'message' => t('@field is required', ['@field' => $component['name']])];
       }
       $webform_data[$cid] = [$submission[$form_key]];
     }
@@ -66,7 +66,7 @@ class AssessmentSubmissionWebform implements AssessmentSubmissionInterface {
     // Test if submission includes values that are not supported by the webform.
     $unsuported_keys = array_diff(array_keys($submission), $all_form_keys);
     if ($unsuported_keys) {
-      return ['success' => FALSE, 'message' => 'Unsuported form component: ' . implode($unsuported_keys, ', ')];
+      return ['success' => FALSE, 'message' => t('Form submission contains inputs that are not defined in the form')];
     }
 
     $webform_submission = (object) array(

@@ -7,6 +7,7 @@ project = shelter_base
 dependencies[] = cluster_docs
 dependencies[] = cluster_events
 dependencies[] = cluster_og
+dependencies[] = cluster_webform
 dependencies[] = ctools
 dependencies[] = entityreference
 dependencies[] = features
