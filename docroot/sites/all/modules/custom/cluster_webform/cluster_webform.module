@@ -11,20 +11,12 @@ include_once 'export.inc';
  * Implements hook_webform_component_info_alter().
  */
 function cluster_webform_webform_component_info_alter(&$components) {
-//  unset($components['pagebreak']);
-//  unset($components['markup']);
-//  unset($components['textfield']);
-  unset($components['fieldset']);
-  unset($components['date']);
-  unset($components['email']);
-  unset($components['grid']);
-  unset($components['hidden']);
-  unset($components['number']);
-  unset($components['select']);
-  unset($components['textarea']);
-  unset($components['time']);
-  unset($components['file']);
-  unset($components['name']);
+  $supported_components = _cluster_webform_get_supported_components();
+  foreach ($components as $type => $value) {
+    if (!in_array($type, $supported_components)) {
+      unset($components[$type]);
+    }
+  }
 }
 
 /**
@@ -34,22 +26,94 @@ function cluster_webform_form_webform_component_edit_form_alter(&$form, &$form_s
   if (!isset($form['type']['#value']))
     return;
 
-  switch ($form['type']['#value']) {
+  $component_type = $form['type']['#value'];
+  switch ($component_type) {
     case 'pagebreak':
       $form['extra']['next_page_label']['#access'] = FALSE;
       $form['extra']['prev_page_label']['#access'] = FALSE;
       break;
 
-    case 'markup':
+    default:
       $form['display']['#access'] = FALSE;
+      $form['analysis']['#access'] = FALSE;
+      _cluster_webform_allow_supported_validation($form);
+      _cluster_webform_allow_supported_extra($form);
       break;
+  }
+}
 
-    case 'textfield':
-      $form['display']['#access'] = FALSE;
-      $form['validation']['unique']['#access'] = FALSE;
-      $form['validation']['maxlength']['#access'] = FALSE;
-      $form['validation']['minlength']['#access'] = FALSE;
+function _cluster_webform_get_supported_components() {
+  return [
+    'pagebreak',
+    'markup',
+    'textfield',
+    'textarea',
+    'number',
+    'date',
+    'time',
+    'select',
+    // 'fieldset',
+    // 'email',
+    // 'grid',
+    // 'hidden',
+    // 'file',
+    // 'name',
+  ];
+}
+
+function _cluster_webform_get_supported_component_validation($component_type) {
+  switch($component_type) {
+    case 'number':
+      return [
+        'min',
+        'max',
+        'integer',
+      ];
+  }
+  return [];
+}
+
+
+function _cluster_webform_get_supported_component_extra($component_type) {
+  $supported = [
+    'description',
+  ];
+  switch($component_type) {
+    case 'select':
+      $supported = array_merge($supported, [
+        'items',
+        'options_source',
+        'multiple',
+      ]);
       break;
+    default:
+  }
+  return $supported;
+}
+
+function _cluster_webform_allow_supported_validation(&$form) {
+  $supported_validation = _cluster_webform_get_supported_component_validation($form['type']['#value']);
+  foreach (element_children($form['validation']) as $key) {
+    if (!in_array($key, $supported_validation)) {
+      $form['validation'][$key]['#access'] = FALSE;
+    }
+  }
+  $form['validation']['required']['#access'] = TRUE;
+}
+
+function _cluster_webform_get_supported_component_elements($type) {
+  return array_merge(
+    _cluster_webform_get_supported_component_extra($type),
+    _cluster_webform_get_supported_component_validation($type)
+  );
+}
+
+function _cluster_webform_allow_supported_extra(&$form) {
+  $supported_extra = _cluster_webform_get_supported_component_extra($form['type']['#value']);
+  foreach (element_children($form['extra']) as $key) {
+    if (!in_array($key, $supported_extra)) {
+      $form['extra'][$key]['#access'] = FALSE;
+    }
   }
 }
 
