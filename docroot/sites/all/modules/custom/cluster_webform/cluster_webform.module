@@ -33,6 +33,16 @@ function cluster_webform_form_webform_component_edit_form_alter(&$form, &$form_s
       $form['extra']['prev_page_label']['#access'] = FALSE;
       break;
 
+    case 'date':
+      $form['display']['#access'] = FALSE;
+      $form['analysis']['#access'] = FALSE;
+      _cluster_webform_allow_supported_validation($form);
+      _cluster_webform_allow_supported_extra($form);
+      $form['validation']['start_date']['#default_value'] = $form['validation']['end_date']['#default_value'] = 0;
+      $form['value']['#description'] = t('Default date must be in format (1972-09-24)');
+      $form['#validate'][] = '_cluster_webform_validate_date';
+      break;
+
     default:
       $form['display']['#access'] = FALSE;
       $form['analysis']['#access'] = FALSE;
@@ -143,5 +153,32 @@ function cluster_webform_menu_alter(&$items) {
 function cluster_webform_webform_results_access($node, $account = NULL) {
   if (isset($node->field_allow_public_result) && $node->field_allow_public_result[LANGUAGE_NONE][0]['value']) {
     return TRUE;
+  }
+}
+
+/**
+ * Allow only values in the form YYYY-MM-DD.
+ */
+function _cluster_webform_validate_date($form, &$form_state) {
+  $date = $form_state['values']['value'];
+  if (empty($date)) {
+    return;
+  }
+
+  $form_set_error = function () {
+    form_set_error('value', t('Not a valid date format for this field (YYYY-MM-DD)'));
+  };
+
+  $test = FALSE;
+  try {
+    $d = new DateTime($date);
+    $test = $d->format('Y-m-d');
+  }
+  catch (Exception $e) {
+    $form_set_error();
+  }
+
+  if ($date !== $test) {
+    $form_set_error();
   }
 }
