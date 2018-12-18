@@ -135,10 +135,25 @@ function _cluster_webform_export_select($component, $type) {
   foreach ($options as $option) {
     if ($option) {
       $exploded = explode('|', $option);
-      $export[] = [$exploded[0] => trim($exploded[1])];
+      $export[$exploded[0]] = trim($exploded[1]);
     }
   }
   $items['options'] = $export;
+
+  return $items;
+}
+
+function _cluster_webform_export_time($component, $type) {
+  $items = _cluster_webform_export_component($component, $type);
+
+  // Format default time to expose hours and minutes.
+  if (!empty($items['default'])) {
+    $time_values = explode(':', $items['default']);
+    if (count($time_values) == 2) {
+      $items['hours'] = $time_values[0];
+      $items['minutes'] = $time_values[1];
+    }
+  }
 
   return $items;
 }

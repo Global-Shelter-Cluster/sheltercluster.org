@@ -43,6 +43,17 @@ function cluster_webform_form_webform_component_edit_form_alter(&$form, &$form_s
       $form['#validate'][] = '_cluster_webform_validate_date';
       break;
 
+    case 'time':
+      $form['display']['#access'] = FALSE;
+      $form['analysis']['#access'] = FALSE;
+      _cluster_webform_allow_supported_validation($form);
+      _cluster_webform_allow_supported_extra($form);
+      $form['validation']['start_date']['#default_value'] = $form['validation']['end_date']['#default_value'] = 0;
+      $form['value']['#description'] = t('Default time must be in 24h format (13:30)');
+      $form['display']['hourformat']['#default_value'] = '24-hour';
+      $form['#validate'][] = '_cluster_webform_validate_time';
+      break;
+
     default:
       $form['display']['#access'] = FALSE;
       $form['analysis']['#access'] = FALSE;
@@ -181,4 +192,31 @@ function _cluster_webform_validate_date($form, &$form_state) {
   if ($date !== $test) {
     $form_set_error();
   }
+}
+
+/**
+ * Allow only values in the form of 24h time.
+ */
+function _cluster_webform_validate_time($form, &$form_state) {
+  $time = $form_state['values']['value'];
+  if (empty($time)) {
+    return;
+  }
+
+  $error = FALSE;
+  $time_values = explode(':', $time);
+  if (count($time_values) != 2) {
+    $error = TRUE;
+  }
+  if (!((int) $time_values[0] >= 0) || !((int) $time_values[0] <= 23)) {
+    $error = TRUE;
+  }
+  if (!((int) $time_values[1] >= 0) || !((int) $time_values[1] <= 59)) {
+    $error = TRUE;
+  }
+
+  if ($error) {
+    form_set_error('value', t('Not a valid 24h time format for this field (HH:MM)'));
+  };
+
 }
