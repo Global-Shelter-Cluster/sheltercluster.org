@@ -24,6 +24,10 @@ class ClusterAPI_Type_Alert extends ClusterAPI_Type {
       'type' => 'kobo_form',
       'mode' => ClusterAPI_Object::MODE_PUBLIC,
     ],
+    'webform' => [
+      'type' => 'webform',
+      'mode' => ClusterAPI_Object::MODE_PUBLIC,
+    ],
     'group' => [
       'type' => 'group',
       'mode' => ClusterAPI_Object::MODE_STUBPLUS,
@@ -65,6 +69,7 @@ class ClusterAPI_Type_Alert extends ClusterAPI_Type {
       case 'event':
       case 'factsheet':
       case 'kobo_form':
+      case 'webform':
       case 'group':
         $ret[$link_type] = self::getReferenceIds('node', $node, 'field_' . $link_type);
         break;
