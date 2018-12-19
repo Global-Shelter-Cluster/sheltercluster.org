@@ -89,17 +89,38 @@ function _cluster_webform_export_component($component, $type) {
     'name' => $component['name'],
   ];
 
-  if ($component['required'] == 1)
-    $item['required'] = TRUE;
-
-  if ($component['value'])
-    $item['default'] = $component['value'];
-
-  $supported_validation = _cluster_webform_get_supported_component_elements($type);
-  foreach ($supported_validation as $key) {
-    $item[$key] = $component['extra'][$key];
+  if (!empty($component['description'])) {
+    $item['description'] = $component['description'];
   }
 
+  if ($component['required'] == 1) {
+    $item['required'] = TRUE;
+  }
+
+  if ($component['value']) {
+    $item['default'] = $component['value'];
+  }
+
+  $supported_elements = _cluster_webform_get_supported_component_elements($type);
+  foreach ($supported_elements as $key) {
+    if (!empty ($component['extra'][$key])) {
+      switch ($key) {
+        // Cast to boolean.
+        case 'integer':
+        case 'multiple':
+          $item[$key] = $component['extra'][$key] ? 'true' : 'false';
+          break;
+
+        // Cast to int.
+        case 'max':
+        case 'min':
+          $item[$key] = (int) $component['extra'][$key];
+          break;
+        default:
+          $item[$key] = $component['extra'][$key];
+      }
+    }
+  }
   return $item;
 }
 
@@ -114,10 +135,25 @@ function _cluster_webform_export_select($component, $type) {
   foreach ($options as $option) {
     if ($option) {
       $exploded = explode('|', $option);
-      $export[] = [$exploded[0] => trim($exploded[1])];
+      $export[$exploded[0]] = trim($exploded[1]);
     }
   }
   $items['options'] = $export;
+
+  return $items;
+}
+
+function _cluster_webform_export_time($component, $type) {
+  $items = _cluster_webform_export_component($component, $type);
+
+  // Format default time to expose hours and minutes.
+  if (!empty($items['default'])) {
+    $time_values = explode(':', $items['default']);
+    if (count($time_values) == 2) {
+      $items['hours'] = $time_values[0];
+      $items['minutes'] = $time_values[1];
+    }
+  }
 
   return $items;
 }

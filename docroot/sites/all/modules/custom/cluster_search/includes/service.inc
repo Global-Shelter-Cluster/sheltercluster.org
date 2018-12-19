@@ -21,7 +21,19 @@ class SearchApiClusterAlgoliaService extends SearchApiAlgoliaService {
     // report page for instance, and during the install process).
     if (($library = libraries_load('algolia')) && !empty($library['loaded'])) {
       $algolia_client = new \AlgoliaSearch\Client($this->getApplicationID(), $this->getApiKey());
-      $this->setAlgoliaIndex($algolia_client->initIndex(variable_get('cluster_search_algolia_prefix', 'dev') . $index->name));
+
+      // Safety check so only production can modify the prod* Algolia indexes. The check is based on $base_url, and it
+      // will determine that it's the prod site if it matches either http or https, on the www subdomain or non-www.
+      // IMPORTANT: to run the cron from drush we need to pass the --uri param, otherwise this check will change the
+      // index name prefix.
+      $regex = '/^https?:\/\/(www\.)?sheltercluster\.org\b/'; // if this matches then it's production
+      global $base_url;
+      $is_prod = preg_match($regex, $base_url);
+      $prefix = variable_get('cluster_search_algolia_prefix', 'dev');
+      if (strtolower($prefix) === 'prod' && !$is_prod)
+        $prefix = 'local';
+
+      $this->setAlgoliaIndex($algolia_client->initIndex($prefix . $index->name));
     }
     else {
       throw new SearchApiException(t('Algolia library could not be found or did not load properly.'));
