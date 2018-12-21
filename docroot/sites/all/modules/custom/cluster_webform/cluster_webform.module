@@ -17,6 +17,12 @@ function cluster_webform_webform_component_info_alter(&$components) {
       unset($components[$type]);
     }
   }
+
+  if (isset($components['file'])) {
+    // For now, let's treat this as an "image" field. Later we may want to enable any files, which would involve a
+    // different widget on the app, etc.
+    $components['file']['label'] = t('Image');
+  }
 }
 
 /**
@@ -25,6 +31,8 @@ function cluster_webform_webform_component_info_alter(&$components) {
 function cluster_webform_form_webform_component_edit_form_alter(&$form, &$form_state) {
   if (!isset($form['type']['#value']))
     return;
+
+  $is_add = $form['cid']['#value'] === NULL;
 
   $component_type = $form['type']['#value'];
   switch ($component_type) {
@@ -54,6 +62,21 @@ function cluster_webform_form_webform_component_edit_form_alter(&$form, &$form_s
       $form['#validate'][] = '_cluster_webform_validate_time';
       break;
 
+    case 'file':
+      // For now we're treating "file" as "image", hiding the "allowed extensions" input but setting it to all image types by default.
+      if ($is_add)
+        $form['validation']['extensions']['types']['webimages']['#default_value'] = $form['validation']['extensions']['types']['webimages']['#options'];
+      $form['validation']['extensions'] = [
+        '#type' => 'fieldset',
+        '#attributes' => ['class' => ['element-hidden']],
+        $form['validation']['extensions'],
+      ];
+      $form['display']['#access'] = FALSE;
+      $form['analysis']['#access'] = FALSE;
+      _cluster_webform_allow_supported_validation($form);
+      _cluster_webform_allow_supported_extra($form);
+      break;
+
     default:
       $form['display']['#access'] = FALSE;
       $form['analysis']['#access'] = FALSE;
@@ -73,22 +96,26 @@ function _cluster_webform_get_supported_components() {
     'date',
     'time',
     'select',
+    'file',
     // 'fieldset',
     // 'email',
     // 'grid',
     // 'hidden',
-    // 'file',
     // 'name',
   ];
 }
 
 function _cluster_webform_get_supported_component_validation($component_type) {
-  switch($component_type) {
+  switch ($component_type) {
     case 'number':
       return [
         'min',
         'max',
         'integer',
+      ];
+    case 'file':
+      return [
+        'extensions',
       ];
   }
   return [];
@@ -99,7 +126,7 @@ function _cluster_webform_get_supported_component_extra($component_type) {
   $supported = [
     'description',
   ];
-  switch($component_type) {
+  switch ($component_type) {
     case 'select':
       $supported = array_merge($supported, [
         'items',
@@ -107,6 +134,10 @@ function _cluster_webform_get_supported_component_extra($component_type) {
         'multiple',
       ]);
       break;
+    case 'file':
+      $supported = array_merge($supported, [
+        'filtering',
+      ]);
     default:
   }
   return $supported;
@@ -184,8 +215,7 @@ function _cluster_webform_validate_date($form, &$form_state) {
   try {
     $d = new DateTime($date);
     $test = $d->format('Y-m-d');
-  }
-  catch (Exception $e) {
+  } catch (Exception $e) {
     $form_set_error();
   }
 
@@ -208,10 +238,10 @@ function _cluster_webform_validate_time($form, &$form_state) {
   if (count($time_values) != 2) {
     $error = TRUE;
   }
-  if (!((int) $time_values[0] >= 0) || !((int) $time_values[0] <= 23)) {
+  if (!((int)$time_values[0] >= 0) || !((int)$time_values[0] <= 23)) {
     $error = TRUE;
   }
-  if (!((int) $time_values[1] >= 0) || !((int) $time_values[1] <= 59)) {
+  if (!((int)$time_values[1] >= 0) || !((int)$time_values[1] <= 59)) {
     $error = TRUE;
   }
 

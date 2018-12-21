@@ -116,6 +116,22 @@ function _cluster_webform_export_component($component, $type) {
         case 'min':
           $item[$key] = (int) $component['extra'][$key];
           break;
+
+        case 'filtering':
+          $item['file_extensions'] = $component['extra'][$key]['types']; // array of extensions, e.g. ['gif', 'jpg', 'jpeg', 'png']
+
+          $item['file_type'] = 'file'; // possible values: "file", "image", possibly others in the future (e.g. "video", "signature/drawing", etc.)
+
+          $image_extensions = ['gif', 'jpg', 'jpeg', 'png'];
+          if (
+            count(array_intersect($item['file_extensions'], $image_extensions)) > 0 // there are image extensions,
+            && count(array_diff($item['file_extensions'], $image_extensions)) === 0 // and _only_ image extensions
+          ) {
+            $item['file_type'] = 'image';
+          }
+
+          break;
+
         default:
           $item[$key] = $component['extra'][$key];
       }
