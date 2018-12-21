@@ -145,9 +145,11 @@ function _cluster_webform_get_supported_component_extra($component_type) {
 
 function _cluster_webform_allow_supported_validation(&$form) {
   $supported_validation = _cluster_webform_get_supported_component_validation($form['type']['#value']);
-  foreach (element_children($form['validation']) as $key) {
-    if (!in_array($key, $supported_validation)) {
-      $form['validation'][$key]['#access'] = FALSE;
+  if ($form['validation']) {
+    foreach (element_children($form['validation']) as $key) {
+      if (!in_array($key, $supported_validation)) {
+        $form['validation'][$key]['#access'] = FALSE;
+      }
     }
   }
   $form['validation']['required']['#access'] = TRUE;
@@ -162,9 +164,11 @@ function _cluster_webform_get_supported_component_elements($type) {
 
 function _cluster_webform_allow_supported_extra(&$form) {
   $supported_extra = _cluster_webform_get_supported_component_extra($form['type']['#value']);
-  foreach (element_children($form['extra']) as $key) {
-    if (!in_array($key, $supported_extra)) {
-      $form['extra'][$key]['#access'] = FALSE;
+  if ($form['extra']) {
+    foreach (element_children($form['extra']) as $key) {
+      if (!in_array($key, $supported_extra)) {
+        $form['extra'][$key]['#access'] = FALSE;
+      }
     }
   }
 }
