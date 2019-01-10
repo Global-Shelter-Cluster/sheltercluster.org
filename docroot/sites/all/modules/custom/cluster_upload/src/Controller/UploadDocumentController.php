@@ -64,7 +64,7 @@ class UploadDocumentController {
       $file->display = 1;
       $node = new stdClass();
       $node->language = LANGUAGE_NONE;
-      $node->status = 0;
+      $node->status = 1;
       $node->uid = $user->uid;
       $node->type = 'document';
       $node->title = $file->filename;
