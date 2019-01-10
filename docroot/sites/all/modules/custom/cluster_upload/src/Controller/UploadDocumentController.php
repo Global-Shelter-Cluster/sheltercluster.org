@@ -9,7 +9,9 @@ class UploadDocumentController {
   /**
    * @param $gid:
    *  Group node id which is audience of document.
-   * @return json response with the document node id.
+   * @return void
+   *
+   * Prints json response with the document node id.
    */
   public function handleRequest($gid) {
     if ( 0 < $_FILES['file']['error'] ) {
@@ -33,7 +35,7 @@ class UploadDocumentController {
       $file = $this->saveFile();
       $document = $this->createDocumentNode($file, $gid);
       if (!is_null($document)) {
-        echo json_encode(['document_nid' => $document->nid, 'status' => 'ok']);
+        echo json_encode(['document_nid' => $document->nid, 'status' => 'ok', 'audience_gid' => $gid]);
       }
       else {
         echo json_encode(['document_nid' => NULL, 'status' => 'error']);

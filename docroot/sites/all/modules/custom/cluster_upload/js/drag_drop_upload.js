@@ -59,7 +59,7 @@ const cluster_upload = {
       window.location.reload();
     }
     else if (response.status === "ok") {
-      window.location.href = '/node/' + response.document_nid + '/edit';
+      window.location.href = "/node/" + response.document_nid + "/edit?destination=node/" + response.audience_gid;
     }
   },
 
