@@ -22,7 +22,10 @@ function hybridauth_hook_info() {
     'hybridauth_user_preinsert',
     'hybridauth_user_insert',
     'hybridauth_user_login',
+    'hybridauth_user_blocked',
     'hybridauth_forms_list_alter',
+    'hybridauth_destination_options_alter',
+    'hybridauth_destination_error_options_alter',
   );
 
   return array_fill_keys($hooks, array('group' => 'hybridauth'));

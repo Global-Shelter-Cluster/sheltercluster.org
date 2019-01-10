@@ -150,3 +150,21 @@ function hook_hybridauth_user_blocked($account, $data) {
 function hook_hybridauth_forms_list_alter(&$forms) {
 
 }
+
+/**
+ * Allow modules to alter additional options of the redirect URL.
+ * @param array $destination_options
+ *   An associative array of additional options. For more info see url().
+ */
+function hook_hybridauth_destination_options_alter(&$destination_options) {
+
+}
+
+/**
+ * Allow modules to alter additional options of the redirect error URL.
+ * @param array $destination_error_options
+ *   An associative array of additional options. For more info see url().
+ */
+function hook_hybridauth_destination_error_options_alter(&$destination_error_options) {
+
+}
