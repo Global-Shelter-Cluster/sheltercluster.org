@@ -4079,21 +4079,30 @@ body.document-upload-ondrag {
   .factsheet-full {
     display: grid;
     grid-gap: 10px;
-    grid-template-areas: "date date" "photo map" "highlights aside" "details aside";
     grid-template-columns: 6fr 5fr;
     grid-template-rows: max-content max-content max-content min-content;
+    grid-template-areas: "date date" "photo map" "highlights aside" "details aside";
+  }
+  .factsheet-full.factsheet-no-sidebar {
+    grid-template-areas: "date date" "photo map" "highlights highlights" "details details";
   }
 }
 @media (min-width: 900px) {
   .factsheet-full {
-    grid-template-areas: "date date date" "photo photo map" "highlights aside aside" "details aside aside";
     grid-template-columns: 6fr 1fr 4fr;
+    grid-template-areas: "date date date" "photo photo map" "highlights aside aside" "details aside aside";
+  }
+  .factsheet-full.factsheet-no-sidebar {
+    grid-template-areas: "date date date" "photo photo map" "highlights highlights highlights" "details details details";
   }
 }
 @media (min-width: 980px) and (max-width: 1199px) {
   .factsheet-full {
-    grid-template-areas: "date date" "photo map" "highlights aside" "details aside";
     grid-template-columns: 6fr 5fr;
+    grid-template-areas: "date date" "photo map" "highlights aside" "details aside";
+  }
+  .factsheet-full.factsheet-no-sidebar {
+    grid-template-areas: "date date" "photo map" "highlights highlights" "details details";
   }
 }
 
