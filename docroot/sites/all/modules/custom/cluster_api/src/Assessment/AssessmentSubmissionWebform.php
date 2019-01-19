@@ -72,7 +72,10 @@ class AssessmentSubmissionWebform implements AssessmentSubmissionInterface {
 
           // Make sure the directory exists
           $dir = 'public://webform/' . date('Y-m');
-          drupal_mkdir($dir, NULL, TRUE);
+          if (file_exists($dir) && !is_dir($dir))
+            throw new \Exception("Not a directory: ".$dir);
+          if (!file_exists($dir))
+            drupal_mkdir($dir, NULL, TRUE);
 
           // Now save as a file
           $path = $dir . '/' . $form_key . $ext;
