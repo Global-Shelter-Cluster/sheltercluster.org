@@ -64,8 +64,14 @@ class AssessmentSubmissionWebform implements AssessmentSubmissionInterface {
 
       switch ($component['type']) {
         case 'file':
+          if (!$submission[$form_key])
+            break;
+
           // This reads from a base64 string (e.g. "data:image/jpeg;base64,...")
           $data = file_get_contents($submission[$form_key]);
+
+          if (!$data)
+            break;
 
           // Figure out the extension from the mime type
           $ext = _cluster_api_mime2ext(mime_content_type($submission[$form_key]));
