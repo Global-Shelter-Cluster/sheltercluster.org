@@ -12,7 +12,8 @@ class AssessmentSubmissionWebform implements AssessmentSubmissionInterface {
   private $submission;
 
   /**
-   * @return boolean indicating submission success;
+   * @return array;
+   * @throws \Exception
    */
   public function saveSubmission($user, $form_id, $submission) {
     $this->user = $user;
@@ -88,6 +89,11 @@ class AssessmentSubmissionWebform implements AssessmentSubmissionInterface {
 
           break;
 
+        // Submissions are nested too deeply in select.
+        case 'select':
+          $webform_data[$cid] = [$submission[$form_key]][0];
+          break;
+
         default:
           $webform_data[$cid] = [$submission[$form_key]];
       }
@@ -99,6 +105,10 @@ class AssessmentSubmissionWebform implements AssessmentSubmissionInterface {
       return ['success' => FALSE, 'message' => t('Form submission contains inputs that are not defined in the form')];
     }
 
+    module_load_include('inc', 'webform', 'includes/webform.submissions');
+//    $webform_data = _webform_client_form_submit_flatten($this->node, $webform_data);
+    $webform_data = webform_submission_data($this->node, $webform_data);
+
     $webform_submission = (object)array(
       'nid' => $this->node->nid,
       'uid' => $this->user->uid,
@@ -108,7 +118,7 @@ class AssessmentSubmissionWebform implements AssessmentSubmissionInterface {
       'data' => $webform_data,
     );
 
-    module_load_include('inc', 'webform', 'includes/webform.submissions');
+
     webform_submission_insert($this->node, $webform_submission);
     return $result;
   }

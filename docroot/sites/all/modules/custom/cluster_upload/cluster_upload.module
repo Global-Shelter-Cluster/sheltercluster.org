@@ -16,7 +16,6 @@ function cluster_upload_menu() {
       'title' => 'Documents',
       'page callback' => '_cluster_upload_document_to_group',
       'page arguments' => [1],
-      // @TODO update to group based permission for document creation.
       'access callback' => '_cluster_upload_user_is_allowed_for_group',
       'access arguments' => [1],
       'type' => MENU_CALLBACK,

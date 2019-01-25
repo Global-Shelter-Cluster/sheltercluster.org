@@ -114,6 +114,9 @@ function _hybridauth_window_close($redirect = TRUE) {
   $destination_options = drupal_parse_url($destination) + $base_options;
   $destination_error_options = drupal_parse_url($destination_error) + $base_options;
 
+  drupal_alter('hybridauth_destination_options', $destination_options);
+  drupal_alter('hybridauth_destination_error_options', $destination_error_options);
+
   $destination = url($destination_options['path'], $destination_options);
   $destination_error = url($destination_error_options['path'], $destination_error_options);
 
