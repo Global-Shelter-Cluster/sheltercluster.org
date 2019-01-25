@@ -97,6 +97,7 @@ function _cluster_webform_get_supported_components() {
     'time',
     'select',
     'file',
+    'gpslocation',
     // 'fieldset',
     // 'email',
     // 'grid',
