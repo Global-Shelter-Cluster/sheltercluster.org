@@ -1,0 +1,68 @@
+<?php
+
+/**
+ * Implements hook_help
+ * @return array
+ */
+function cluster_geo_help($path, $arg) {
+  switch ($path) {
+
+    // Main module help for the block module
+    case 'admin/help#cluster_geo':
+      return t("Geographic coordinates handling, gathering and displaying");
+      break;
+  }
+}
+
+/**
+ * Implements hook_menu
+ * @return array
+ */
+function cluster_geo_menu () {
+  return [
+    'cluster-geo' => [
+      'page callback' => '_cluster_geo_menu_callback',
+      'type' => MENU_CALLBACK,
+      'access callback' => TRUE,
+     ],
+  ];
+}
+
+/**
+ * Page callback
+ * @return string
+ */
+function _cluster_geo_menu_callback() {
+  $render = [
+    'text' => [
+      '#markup' => '<div id="map" style="height: 500px;"></div>',
+    ],
+  ];
+  $render['#attached']['js'][] = [
+    'type' => 'file',
+    'data' => drupal_get_path('module', 'cluster_geo') . '/js/geolocation.js',
+  ];
+
+  $render['#attached']['css'][] = [
+    'type' => 'file',
+    'data' => drupal_get_path('module', 'cluster_geo') . '/leaflet/leaflet.css',
+  ];
+  $render['#attached']['js'][] = [
+    'type' => 'file',
+    'data' => drupal_get_path('module', 'cluster_geo') . '/leaflet/leaflet.js',
+  ];
+  return $render;
+}
+
+/**
+ * Implement hook_webform_component_info
+ */
+function cluster_geo_webform_component_info() {
+  return [
+    'current_location' => [
+      'label' => t('Current location'),
+      'description' => t("The user's current location."),
+      'file' => 'webform_component/current_location.inc',
+    ]
+  ];
+}
