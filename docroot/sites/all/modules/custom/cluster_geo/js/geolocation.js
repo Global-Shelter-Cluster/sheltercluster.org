@@ -25,13 +25,21 @@
     },
 
     updateDisplay: function() {
-      $("#edit-submitted-test-lon").val(this.coordinates.lat);
-      $("#edit-submitted-test-lat").val(this.coordinates.lon);
+      $("#webform-cluster_geo-latitude").val(this.coordinates.lat);
+      $("#webform-cluster_geo-longitude").val(this.coordinates.lon);
+    },
+
+    coordinatesAreDefined: function() {
+      return (this.coordinates.lat != undefined && this.coordinates.lon != undefined);
     },
 
     showMap: function() {
       const cluster_geo = this;
-      var map = L.map('map').setView([cluster_geo.coordinates.lat, cluster_geo.coordinates.lon], 13);
+      let map_coordinates = [51.4826, 0.0077];
+      if (cluster_geo.coordinatesAreDefined()) {
+        map_coordinates = [cluster_geo.coordinates.lat, cluster_geo.coordinates.lon];
+      }
+      var map = L.map('map').setView(map_coordinates, 13);
       L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
       }).addTo(map);

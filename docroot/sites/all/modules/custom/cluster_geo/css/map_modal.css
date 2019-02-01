@@ -20,7 +20,7 @@
 .modal .modal_content {
   z-index: 999;
   position: absolute;
-  top: 25%;
+  top: 15%;
   left: 50%;
   transform: translate(-50%, -50%);
   max-height: 90%;
@@ -30,7 +30,7 @@
   padding: 20px;
   box-shadow: 0 1px 5px rgba(0,0,0,0.7);
   border-radius: 4px;
-  margin-top: 25%;
+  margin-top: 15%;
   width: 800px;
 }
 

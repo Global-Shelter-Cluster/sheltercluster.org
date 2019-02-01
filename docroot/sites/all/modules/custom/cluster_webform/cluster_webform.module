@@ -77,7 +77,7 @@ function cluster_webform_form_webform_component_edit_form_alter(&$form, &$form_s
       _cluster_webform_allow_supported_extra($form);
       break;
 
-    case 'current_location':
+    case 'geolocation':
       // Custom component @see cluster_geo module
       break;
 
@@ -101,7 +101,7 @@ function _cluster_webform_get_supported_components() {
     'time',
     'select',
     'file',
-    'current_location',
+    'geolocation',
     // 'fieldset',
     // 'email',
     // 'grid',

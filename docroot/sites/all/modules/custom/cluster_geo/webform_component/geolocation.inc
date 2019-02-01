@@ -8,7 +8,7 @@
 /**
  * Implements _webform_defaults_component().
  */
-function _webform_defaults_current_location() {
+function _webform_defaults_geolocation() {
   return array(
     'name' => '',
     'form_key' => NULL,
@@ -38,11 +38,11 @@ function _webform_defaults_current_location() {
 /**
  * Implements _webform_theme_component().
  */
-function _webform_theme_current_location() {
+function _webform_theme_geolocation() {
   return array(
-    'webform_display_current_location' => array(
+    'webform_display_geolocation' => array(
       'render element' => 'element',
-      'file' => 'current_location.inc',
+      'file' => 'geolocation.inc',
       'path' => drupal_get_path('module', 'cluster_geo') . '/webform_component',
     ),
   );
@@ -51,7 +51,7 @@ function _webform_theme_current_location() {
 /**
  * Implements _webform_edit_component().
  */
-function _webform_edit_current_location($component) {
+function _webform_edit_geolocation($component) {
   return [
     '#markup' => t('This component does not provide extra options.'),
   ];
@@ -60,7 +60,7 @@ function _webform_edit_current_location($component) {
 /**
  * Implements _webform_render_component().
  */
-function _webform_render_current_location($component, $value = NULL, $filter = TRUE, $submission = NULL) {
+function _webform_render_geolocation($component, $value = NULL, $filter = TRUE, $submission = NULL) {
   $node = isset($component['nid']) ? node_load($component['nid']) : NULL;
   $element = [
     '#title' => $component['name'],
@@ -72,7 +72,7 @@ function _webform_render_current_location($component, $value = NULL, $filter = T
       '#type' => 'textfield',
       '#title' => 'Longitude',
       '#default_value' => isset($value['lon']) ? check_plain($value['lon']) : '','#description' => $filter ? webform_filter_descriptions($component['extra']['description'], $node) : $component['extra']['description'],
-      '#attributes' => $component['extra']['attributes'],
+      '#attributes' => ['id' => 'webform-cluster_geo-longitude'],
       '#theme_wrappers' => array('webform_element'),
       '#required' => $component['required'],
     ],
@@ -81,7 +81,7 @@ function _webform_render_current_location($component, $value = NULL, $filter = T
       '#title' => 'Latitude',
       '#default_value' => isset($value['lat']) ? check_plain($value['lat']) : '',
       '#description' => $filter ? webform_filter_descriptions($component['extra']['description'], $node) : $component['extra']['description'],
-      '#attributes' => $component['extra']['attributes'],
+      '#attributes' => ['id' => 'webform-cluster_geo-latitude'],
       '#theme_wrappers' => array('webform_element'),
       '#required' => $component['required'],
     ],
@@ -125,11 +125,11 @@ function _webform_render_current_location($component, $value = NULL, $filter = T
 /**
  * Implements _webform_display_component().
  */
-function _webform_display_current_location($component, $value, $format = 'html', $submission = array()) {
+function _webform_display_geolocation($component, $value, $format = 'html', $submission = array()) {
   return [
     '#title' => 'Location',
     '#weight' => $component['weight'],
-    '#theme' => 'webform_display_current_location',
+    '#theme' => 'webform_display_geolocation',
     '#theme_wrappers' => $format == 'html' ? array('webform_element') : array('webform_element_text'),
     '#format' => $format,
     '#value' => $value,
@@ -140,28 +140,28 @@ function _webform_display_current_location($component, $value, $format = 'html',
 /**
  * Format the output of data for this component.
  */
-function theme_webform_display_current_location($variables) {
+function theme_webform_display_geolocation($variables) {
   return _cluster_geo_format_coordinates($variables['element']['#value']);
 }
 
 /**
  * Implements _webform_analysis_component().
  */
-function _webform_analysis_current_location($component, $sids = array(), $single = FALSE, $join = NULL) {
+function _webform_analysis_geolocation($component, $sids = array(), $single = FALSE, $join = NULL) {
  // @TODO
 }
 
 /**
  * Implements _webform_table_component().
  */
-function _webform_table_current_location($component, $value) {
+function _webform_table_geolocation($component, $value) {
   return _cluster_geo_format_coordinates($value);
 }
 
 /**
  * Implements _webform_action_set_component().
  */
-function _webform_action_set_current_location($component, &$element, &$form_state, $value) {
+function _webform_action_set_geolocation($component, &$element, &$form_state, $value) {
   $element['#value'] = $value;
   form_set_value($element, $value, $form_state);
 }
@@ -169,7 +169,7 @@ function _webform_action_set_current_location($component, &$element, &$form_stat
 /**
  * Implements _webform_csv_headers_component().
  */
-function _webform_csv_headers_current_location($component, $export_options) {
+function _webform_csv_headers_geolocation($component, $export_options) {
   // @TODO
   return [];
 }
@@ -177,7 +177,7 @@ function _webform_csv_headers_current_location($component, $export_options) {
 /**
  * Implements _webform_csv_data_component().
  */
-function _webform_csv_data_current_location($component, $export_options, $value) {
+function _webform_csv_data_geolocation($component, $export_options, $value) {
   return _cluster_geo_format_coordinates($value);
 }
 
