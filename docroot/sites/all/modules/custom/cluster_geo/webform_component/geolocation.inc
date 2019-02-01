@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Webform module current_location component.
+ * Webform module for geocoordinates component.
  */
 
 /**
@@ -52,53 +52,88 @@ function _webform_theme_geolocation() {
  * Implements _webform_edit_component().
  */
 function _webform_edit_geolocation($component) {
-  return [
-    '#markup' => t('This component does not provide extra options.'),
-  ];
+  $form['extra']['current_coordinates'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Pre-populate with current coordinates'),
+    '#default_value' => $component['extra']['current_coordinates'],
+    '#description' => t('Automatically populate the coordinates for this component with the current location of the user. Requires permission and https.'),
+  );
+  $form['extra']['use_modal'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Modal map'),
+    '#default_value' => $component['extra']['use_modal'],
+    '#description' => t('Show the map for this component in a modal. Otherwise show under the coordinate textfields.'),
+  );
+  return $form;
 }
 
 /**
  * Implements _webform_render_component().
  */
 function _webform_render_geolocation($component, $value = NULL, $filter = TRUE, $submission = NULL) {
-  $node = isset($component['nid']) ? node_load($component['nid']) : NULL;
   $element = [
     '#title' => $component['name'],
-    '#type' => 'fieldset',
-    '#weight' => $component['weight'],
-    '#required' => $component['required'],
-    '#description' => t('The coordinates will be automatically populated when you allow the browser to access your location.'),
-    'lon' => [
-      '#type' => 'textfield',
-      '#title' => 'Longitude',
-      '#default_value' => isset($value['lon']) ? check_plain($value['lon']) : '','#description' => $filter ? webform_filter_descriptions($component['extra']['description'], $node) : $component['extra']['description'],
-      '#attributes' => ['id' => 'webform-cluster_geo-longitude'],
-      '#theme_wrappers' => array('webform_element'),
-      '#required' => $component['required'],
-    ],
-    'lat' => [
-      '#type' => 'textfield',
-      '#title' => 'Latitude',
-      '#default_value' => isset($value['lat']) ? check_plain($value['lat']) : '',
-      '#description' => $filter ? webform_filter_descriptions($component['extra']['description'], $node) : $component['extra']['description'],
-      '#attributes' => ['id' => 'webform-cluster_geo-latitude'],
-      '#theme_wrappers' => array('webform_element'),
-      '#required' => $component['required'],
-    ],
-    'modal_map' => [
-      '#theme' => 'cluster_geo_modal',
-      '#attached' => [
-        'css' => [
-          'type' => 'file',
-          'data' => drupal_get_path('module', 'cluster_geo') . '/css/map_modal.css',
+    '#theme_wrappers' => ['webform_element'],
+    'fieldset' => [
+      '#type' => 'fieldset',
+      '#attributes' => [
+        'data-use-modal' => $component['extra']['use_modal'] ? 'true' : 'false',
+        'data-current_coordinates' => $component['extra']['current_coordinates'] ? 'true' : 'false',
+        'class' => [
+          'geolocation-coordinates',
         ],
-        'js' => [
-          'type' => 'file',
-          'data' => drupal_get_path('module', 'cluster_geo') . '/js/map_modal.js',
-        ],
-      ]
+      ],
+      '#weight' => $component['weight'],
+      '#required' => $component['required'],
+      '#description' => t('The coordinates will be automatically populated when you allow the browser to access your location.'),
+      'lon' => [
+        '#type' => 'textfield',
+        '#title' => 'Longitude',
+        '#default_value' => isset($value['lon']) ? check_plain($value['lon']) : '','#description' => $filter ? webform_filter_descriptions($component['extra']['description'], $node) : $component['extra']['description'],
+        '#attributes' => ['id' => 'webform-cluster_geo-longitude'],
+        '#required' => $component['required'],
+      ],
+      'lat' => [
+        '#type' => 'textfield',
+        '#title' => 'Latitude',
+        '#default_value' => isset($value['lat']) ? check_plain($value['lat']) : '',
+        '#description' => $filter ? webform_filter_descriptions($component['extra']['description'], $node) : $component['extra']['description'],
+        '#attributes' => ['id' => 'webform-cluster_geo-latitude'],
+        '#theme_wrappers' => array('webform_element'),
+        '#required' => $component['required'],
+      ],
     ],
   ];
+
+  switch ($component['extra']['use_modal']) {
+    case TRUE:
+      $element['map'] = [
+        '#theme' => 'cluster_geo_modal',
+        '#attached' => [
+          'css' => [
+            'type' => 'file',
+            'data' => drupal_get_path('module', 'cluster_geo') . '/css/map_modal.css',
+          ],
+          'js' => [
+            'type' => 'file',
+            'data' => drupal_get_path('module', 'cluster_geo') . '/js/map_modal.js',
+          ],
+        ]
+      ];
+      break;
+
+    case FALSE;
+      $element['map'] = [
+        '#theme' => 'cluster_geo_map',
+        '#attached' => [
+          'css' => [
+            'type' => 'file',
+            'data' => drupal_get_path('module', 'cluster_geo') . '/css/geolocation_map.css',
+          ],
+        ],
+      ];
+      break;
+  }
 
   // Add auto detect location.
   $element['#attached']['js'][] = [
@@ -133,7 +168,7 @@ function _webform_display_geolocation($component, $value, $format = 'html', $sub
     '#theme_wrappers' => $format == 'html' ? array('webform_element') : array('webform_element_text'),
     '#format' => $format,
     '#value' => $value,
-    '#translatable' => array('title', 'field_prefix', 'field_suffix'),
+    '#translatable' => ['title'],
   ];
 }
 

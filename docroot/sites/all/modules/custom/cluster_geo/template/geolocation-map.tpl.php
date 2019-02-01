@@ -1,1 +1,1 @@
-<div id="map" style="height: 480px"></div>
+<div id="geolocation-map"></div>

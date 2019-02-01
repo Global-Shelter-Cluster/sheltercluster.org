@@ -45,25 +45,30 @@ function template_preprocess_cluster_geo_modal(&$variables) {
   // @TODO declare all attached css and js here instead of geolocation.inc
 }
 
+function template_preprocess_cluster_geo_map(&$variables) {
+  // @TODO declare all attached css and js here instead of geolocation.inc
+}
+
+
 /**
  * Page callback
  * @return string
  */
 function _cluster_geo_menu_callback() {
   $render = [
-    'modal' => [
-      '#theme' => 'cluster_geo_modal',
-      '#attached' => [
-        'css' => [
-          'type' => 'file',
-          'data' => drupal_get_path('module', 'cluster_geo') . '/css/map_modal.css',
-        ],
-        'js' => [
-          'type' => 'file',
-          'data' => drupal_get_path('module', 'cluster_geo') . '/js/map_modal.js',
-        ],
-      ]
-    ],
+//    'modal' => [
+//      '#theme' => 'cluster_geo_modal',
+//      '#attached' => [
+//        'css' => [
+//          'type' => 'file',
+//          'data' => drupal_get_path('module', 'cluster_geo') . '/css/map_modal.css',
+//        ],
+//        'js' => [
+//          'type' => 'file',
+//          'data' => drupal_get_path('module', 'cluster_geo') . '/js/map_modal.js',
+//        ],
+//      ]
+//    ],
     'not-modal' => [
       '#theme' => 'cluster_geo_map',
     ],

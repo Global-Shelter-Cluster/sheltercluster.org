@@ -13,6 +13,8 @@
     attach: function (context, settings) {
       navigator.geolocation.getCurrentPosition(this.setCoordinatesFromNavigator.bind(this));
       const cluster_geo = this;
+      //geolocation-coordinates.attr('data-use-modal');
+      //geolocation-coordinates.attr('data-data-current_coordinates');
       $("#modal_opener").click(function() {
         cluster_geo.showMap();
       });
@@ -20,7 +22,7 @@
 
     setCoordinatesFromNavigator: function(position) {
       this.setCoordinates(position.coords.latitude, position.coords.longitude);
-      //this.showMap();
+      this.showMap();
     },
 
     setCoordinates: function (lat, lon) {
@@ -40,7 +42,7 @@
 
     initializeMapContainer: function() {
       const cluster_geo = this;
-      this.map = L.map('map');
+      this.map = L.map('geolocation-map');
       this.mapContainerIsInitialized = true;
       L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
