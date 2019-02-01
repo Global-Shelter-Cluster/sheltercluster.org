@@ -3,7 +3,7 @@
     attach: function (context, settings) {
 
       var btn = document.getElementById('modal_opener');
-      var modal = document.querySelector('.modal');
+      var modal = document.querySelector('.geolocation-map-modal');
 
       function attachModalListeners(modalElm) {
         modalElm.querySelector('.close_modal').addEventListener('click', toggleModal);

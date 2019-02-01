@@ -34,6 +34,10 @@ function cluster_geo_theme($existing, $type, $theme, $path) {
     'template' => 'map-modal',
     'path' => drupal_get_path('module', 'cluster_geo') . '/template',
   ];
+  $theme['cluster_geo_map'] = [
+    'template' => 'geolocation-map',
+    'path' => drupal_get_path('module', 'cluster_geo') . '/template',
+  ];
   return $theme;
 }
 
@@ -59,6 +63,9 @@ function _cluster_geo_menu_callback() {
           'data' => drupal_get_path('module', 'cluster_geo') . '/js/map_modal.js',
         ],
       ]
+    ],
+    'not-modal' => [
+      '#theme' => 'cluster_geo_map',
     ],
   ];
   $render['#attached']['js'][] = [

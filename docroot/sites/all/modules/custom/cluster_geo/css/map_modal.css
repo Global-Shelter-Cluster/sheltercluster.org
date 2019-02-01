@@ -1,4 +1,4 @@
-.modal {
+.geolocation-map-modal {
   position: fixed;
   left: 0;
   top: 0;
@@ -7,7 +7,7 @@
   z-index: 990;
 }
 
-.modal .overlay {
+.geolocation-map-modal .overlay {
   position: absolute;
   left: 0;
   top: 0;
@@ -17,7 +17,7 @@
   background: rgba(0,0,0,0.85);
 }
 
-.modal .modal_content {
+.geolocation-map-modal .modal_content {
   z-index: 999;
   position: absolute;
   top: 15%;
@@ -34,18 +34,18 @@
   width: 800px;
 }
 
-.modal .modal_content > h2 {
+.geolocation-map-modal .modal_content > h2 {
   font-size: 28px;
   font-weight: 200;
   margin: 20px 0 40px;
   text-align: center;
 }
 
-.modal .modal_content .buttons_wrapper {
+.geolocation-map-modal .modal_content .buttons_wrapper {
   padding: 20px;
 }
 
-.modal .close_modal {
+.geolocation-map-modal .close_modal {
   position: absolute;
   right: 10px;
   top: 10px;
@@ -57,6 +57,6 @@
   transition: opacity 0.2s ease;
 }
 
-.modal .close_modal:hover {
+.geolocation-map-modal .close_modal:hover {
   opacity: 0.9;
 }
