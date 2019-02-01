@@ -84,13 +84,35 @@ function _webform_render_current_location($component, $value = NULL, $filter = T
       '#attributes' => $component['extra']['attributes'],
       '#theme_wrappers' => array('webform_element'),
       '#required' => $component['required'],
-    ]
+    ],
+    'modal_map' => [
+      '#theme' => 'cluster_geo_modal',
+      '#attached' => [
+        'css' => [
+          'type' => 'file',
+          'data' => drupal_get_path('module', 'cluster_geo') . '/css/map_modal.css',
+        ],
+        'js' => [
+          'type' => 'file',
+          'data' => drupal_get_path('module', 'cluster_geo') . '/js/map_modal.js',
+        ],
+      ]
+    ],
   ];
 
   // Add auto detect location.
   $element['#attached']['js'][] = [
     'type' => 'file',
     'data' => drupal_get_path('module', 'cluster_geo') . '/js/geolocation.js',
+  ];
+
+  $element['#attached']['css'][] = [
+    'type' => 'file',
+    'data' => drupal_get_path('module', 'cluster_geo') . '/leaflet/leaflet.css',
+  ];
+  $element['#attached']['js'][] = [
+    'type' => 'file',
+    'data' => drupal_get_path('module', 'cluster_geo') . '/leaflet/leaflet.js',
   ];
 
   if ($component['required']) {
