@@ -90,7 +90,7 @@ function _webform_render_geolocation($component, $value = NULL, $filter = TRUE, 
         '#type' => 'textfield',
         '#title' => 'Longitude',
         '#default_value' => isset($value['lon']) ? check_plain($value['lon']) : '','#description' => $filter ? webform_filter_descriptions($component['extra']['description'], $node) : $component['extra']['description'],
-        '#attributes' => ['id' => 'webform-cluster_geo-longitude'],
+        '#attributes' => ['class' => ['form-text', 'webform-cluster_geo-longitude']],
         '#required' => $component['required'],
       ],
       'lat' => [
@@ -98,7 +98,7 @@ function _webform_render_geolocation($component, $value = NULL, $filter = TRUE, 
         '#title' => 'Latitude',
         '#default_value' => isset($value['lat']) ? check_plain($value['lat']) : '',
         '#description' => $filter ? webform_filter_descriptions($component['extra']['description'], $node) : $component['extra']['description'],
-        '#attributes' => ['id' => 'webform-cluster_geo-latitude'],
+        '#attributes' => ['class' => ['form-text', 'webform-cluster_geo-latitude']],
         '#theme_wrappers' => array('webform_element'),
         '#required' => $component['required'],
       ],
@@ -107,7 +107,7 @@ function _webform_render_geolocation($component, $value = NULL, $filter = TRUE, 
 
   switch ($component['extra']['use_modal']) {
     case TRUE:
-      $element['map'] = [
+      $element['fieldset']['map'] = [
         '#theme' => 'cluster_geo_modal',
         '#attached' => [
           'css' => [
@@ -123,7 +123,7 @@ function _webform_render_geolocation($component, $value = NULL, $filter = TRUE, 
       break;
 
     case FALSE;
-      $element['map'] = [
+      $element['fieldset']['map'] = [
         '#theme' => 'cluster_geo_map',
         '#attached' => [
           'css' => [
