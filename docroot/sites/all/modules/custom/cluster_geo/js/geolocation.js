@@ -83,7 +83,6 @@
         const cluster_geo = this;
 
         const id = $('.geolocation-map-container', this.wrapper).attr('id');
-        console.log(this.wrapper);
         this.map = L.map(id);
         this.mapContainerIsInitialized = true;
 
