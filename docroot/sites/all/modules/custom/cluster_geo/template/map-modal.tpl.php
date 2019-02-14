@@ -1,4 +1,4 @@
-<a href="#" id="modal_opener">Choose coordinates from map</a>
+<a href="#" class="modal_opener">Choose coordinates from map</a>
 <div class="geolocation-map-modal" style="display: none">
   <div class="overlay"></div>
   <div class="modal_content">

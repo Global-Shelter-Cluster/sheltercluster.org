@@ -31,6 +31,8 @@ function _webform_defaults_geolocation() {
       'attributes' => array(),
       'private' => FALSE,
       'analysis' => FALSE,
+      'lon' => '',
+      'lat' => '',
     ),
   );
 }
@@ -92,6 +94,7 @@ function _webform_render_geolocation($component, $value = NULL, $filter = TRUE, 
         '#default_value' => isset($value['lon']) ? check_plain($value['lon']) : '','#description' => $filter ? webform_filter_descriptions($component['extra']['description'], $node) : $component['extra']['description'],
         '#attributes' => ['class' => ['form-text', 'webform-cluster_geo-longitude']],
         '#required' => $component['required'],
+        '#parents' => array('submitted', $component['form_key'], 'lon'),
       ],
       'lat' => [
         '#type' => 'textfield',
@@ -101,6 +104,7 @@ function _webform_render_geolocation($component, $value = NULL, $filter = TRUE, 
         '#attributes' => ['class' => ['form-text', 'webform-cluster_geo-latitude']],
         '#theme_wrappers' => array('webform_element'),
         '#required' => $component['required'],
+        '#parents' => array('submitted', $component['form_key'], 'lat'),
       ],
     ],
   ];
@@ -113,10 +117,6 @@ function _webform_render_geolocation($component, $value = NULL, $filter = TRUE, 
           'css' => [
             'type' => 'file',
             'data' => drupal_get_path('module', 'cluster_geo') . '/css/map_modal.css',
-          ],
-          'js' => [
-            'type' => 'file',
-//            'data' => drupal_get_path('module', 'cluster_geo') . '/js/map_modal.js',
           ],
         ]
       ];

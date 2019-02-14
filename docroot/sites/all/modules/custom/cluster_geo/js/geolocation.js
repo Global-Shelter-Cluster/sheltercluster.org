@@ -29,12 +29,13 @@
       };
 
       this.setCoordinatesFromNavigator = function(position) {
-        this.setCoordinates(position.coords.latitude, position.coords.longitude);
+        this.wrapper.find(".throbber").removeClass("throbber");
+        this.setCoordinates(position.coords.latitude, position.coords.longitude, 13);
       };
 
       // Valid longitudes are from -180 to 180 degrees.
       // Valid latitudes are from -85.05112878 to 85.05112878 degrees.
-      this.setCoordinates = function (lat, lon) {
+      this.setCoordinates = function (lat, lon, zoom = null) {
         if (lon < -180) {
           lon = -180;
         }
@@ -54,7 +55,7 @@
         if (this.coordinatesAreDefined()) {
           this.updateDisplay();
           this.updateMarker();
-          this.setMapCoordinates([lat, lon]);
+          this.setMapCoordinates([lat, lon], zoom);
         }
       };
 
@@ -82,6 +83,7 @@
         const cluster_geo = this;
 
         const id = $('.geolocation-map-container', this.wrapper).attr('id');
+        console.log(this.wrapper);
         this.map = L.map(id);
         this.mapContainerIsInitialized = true;
 
@@ -97,12 +99,20 @@
 
         this.map.addControl(new this.centerOnMyPositionControl());
 
+        var typeTimeout = null;
         $(".webform-cluster_geo-latitude, .webform-cluster_geo-longitude", this.wrapper).on('keyup', function() {
-          let lat = $(".webform-cluster_geo-latitude", this.wrapper).val() || undefined;
-          let lon = $(".webform-cluster_geo-longitude", this.wrapper).val() || undefined;
-          if (!isNaN(lat) && !isNaN(lon)) {
-            cluster_geo.setCoordinates(lat, lon);
+          if (typeTimeout != null) {
+            clearTimeout(typeTimeout);
           }
+          let wrapper = this.wrapper;
+
+          typeTimeout = setTimeout(function() {
+            let lat = $(".webform-cluster_geo-latitude", this.wrapper).val() || undefined;
+            let lon = $(".webform-cluster_geo-longitude", this.wrapper).val() || undefined;
+            if (!isNaN(lat) && !isNaN(lon)) {
+              cluster_geo.setCoordinates(lat, lon, 13);
+            }
+          }, 500);
         })
         .on('keypress', function(e) {
           // Prevent submission on enter at these fields.
@@ -110,8 +120,13 @@
         });
       };
 
-      this.setMapCoordinates = function(map_coordinates) {
-        this.map.flyTo(map_coordinates);
+      this.setMapCoordinates = function(map_coordinates, zoom = null) {
+        if (zoom) {
+          this.map.setView(map_coordinates, zoom);
+        }
+        else {
+          this.map.flyTo(map_coordinates);
+        }
       };
 
       var _this = this;
@@ -134,6 +149,7 @@
 
           container.onclick = function(e) {
             e.stopPropagation();
+            $("input", _this.wrapper).addClass("throbber");
             navigator.geolocation.getCurrentPosition(_this.setCoordinatesFromNavigator.bind(_this));
           };
 
@@ -148,26 +164,26 @@
 
     attach: function (context, settings) {
       const _this = this;
-      const wrapper = $(".geolocation-coordinates").once('leaflet-init').each(function() {
-        let id = _this.shelterMaps.lenght;
+      $(".geolocation-coordinates").once('leaflet-init').each(function() {
+        const wrapper = $(this).parent();
+        const id = _this.shelterMaps.lenght;
         _this.shelterMaps[id] = new _this.shelterMap($(this));
 
-        let useModal = $(this).data('use-modal') === 'true';
-        let useCurrentCoordinates = $(this).data('current-coordinates') === 'true';
+        let useModal = $(this).data('use-modal');
+        let useCurrentCoordinates = $(this).data('current-coordinates');
 
-        if (useCurrentCoordinates) {
-          navigator.geolocation.getCurrentPosition(this.setCoordinatesFromNavigator.bind(this));
-        }
-
+        _this.shelterMaps[id].showMap();
         if (useModal) {
-          $("#modal_opener, .close_modal, .overlay").click(() => {
-            $(".geolocation-map-modal", $(this)).toggle();
-            _this.shelterMaps[id].showMap();
+          $(".modal_opener, .close_modal, .overlay", wrapper).click(function() {
+            $(".geolocation-map-modal", wrapper).toggle();
           });
         }
-        else {
-          _this.shelterMaps[id].showMap();
+
+        if (useCurrentCoordinates) {
+          $("input", wrapper).addClass("throbber");
+          navigator.geolocation.getCurrentPosition(_this.shelterMaps[id].setCoordinatesFromNavigator.bind(_this.shelterMaps[id]));
         }
+
       });
 
     },
