@@ -80,7 +80,7 @@ function _webform_render_geolocation($component, $value = NULL, $filter = TRUE, 
       '#type' => 'fieldset',
       '#attributes' => [
         'data-use-modal' => $component['extra']['use_modal'] ? 'true' : 'false',
-        'data-current-coordinates' => $component['extra']['current_coordinates'] ? 'true' : 'false',
+        'data-current-coordinates' => $component['extra']['current_coordinates'] && !$submission ? 'true' : 'false',
         'class' => [
           'geolocation-coordinates',
         ],

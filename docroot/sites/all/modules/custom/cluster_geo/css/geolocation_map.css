@@ -1,3 +1,8 @@
 .geolocation-map-container {
   height: 320px;
 }
+
+input.webform-cluster_geo-longitude,
+input.webform-cluster_geo-latitude {
+  background-position: 0;
+}

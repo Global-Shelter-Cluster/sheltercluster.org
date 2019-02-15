@@ -163,9 +163,10 @@
 
     attach: function (context, settings) {
       const _this = this;
+      let id = 0;
       $(".geolocation-coordinates").once('leaflet-init').each(function() {
         const wrapper = $(this).parent();
-        const id = _this.shelterMaps.lenght;
+        wrapper.data('id', id);
         _this.shelterMaps[id] = new _this.shelterMap($(this));
 
         let useModal = $(this).data('use-modal');
@@ -175,14 +176,14 @@
         if (useModal) {
           $(".modal_opener, .close_modal, .overlay", wrapper).click(function() {
             $(".geolocation-map-modal", wrapper).toggle();
+            _this.shelterMaps[wrapper.data('id')].map.invalidateSize();
           });
         }
-
         if (useCurrentCoordinates) {
           $("input", wrapper).addClass("throbber");
           navigator.geolocation.getCurrentPosition(_this.shelterMaps[id].setCoordinatesFromNavigator.bind(_this.shelterMaps[id]));
         }
-
+        id++;
       });
 
     },
