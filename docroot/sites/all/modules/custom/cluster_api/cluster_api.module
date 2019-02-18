@@ -261,10 +261,12 @@ function cluster_api_push_to_users($uids, $title, $body = NULL, $data = NULL, $s
     return;
   }
 
+  $data = ['title' => $title, 'body' => $body] + (array)$data;
+
   $notification = array_filter([
     'title' => $title,
     'body' => $body,
-    'data' => $data ? json_encode($data) : NULL,
+    'data' => $data,
   ]);
 
   if ($sound) {
