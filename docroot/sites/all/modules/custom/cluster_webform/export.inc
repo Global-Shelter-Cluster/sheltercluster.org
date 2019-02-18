@@ -72,7 +72,7 @@ function cluster_webform_export($node) {
   }
 
   $store_page();
-
+  // @TODO format conditionals for app.
   return $ret;
 }
 
@@ -87,6 +87,7 @@ function _cluster_webform_export_component($component, $type) {
   $item = [
     'key' => $component['form_key'],
     'name' => $component['name'],
+    'id' => $component['cid']
   ];
 
   if (!empty($component['description'])) {

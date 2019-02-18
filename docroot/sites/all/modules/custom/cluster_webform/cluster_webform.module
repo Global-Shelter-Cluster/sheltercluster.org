@@ -28,6 +28,41 @@ function cluster_webform_webform_component_info_alter(&$components) {
 /**
  * Implements hook_form_FORM_ID_alter().
  */
+function cluster_webform_form_webform_conditionals_form_alter(&$form, &$form_state) {
+  // Filter the source list with components type that are handled for in the app.
+  $supported_conditional_types = ['select'];
+  $components = $form['#node']->webform['components'];
+  $normal_source_list = webform_component_list($form['#node'], 'conditional', 'path', TRUE);
+  $filtered_source_list = [];
+  foreach ($components as $cid => $component) {
+    if (in_array($component['type'], $supported_conditional_types)) {
+      $filtered_source_list[$cid] = $normal_source_list[$cid];
+    }
+  }
+
+  // Reduce the conditional sources to the filtered values.
+  foreach (element_children($form['conditionals']) as $i) {
+    if ($i === 'new') {
+      continue;
+    }
+    $form['conditionals'][$i]['conditional']['#sources'] = $filtered_source_list;
+  }
+}
+
+/**
+ * Implements hook_webform_conditional_operators_alter().
+ */
+function cluster_webform_webform_conditional_operators_alter(&$operators) {
+  // Limit operators to those supported by the app.
+  $supported_operators = ['equal', 'not_equal'];
+  foreach ($operators as $type => $type_operators) {
+    $operators[$type] = array_intersect_key($type_operators, array_flip($supported_operators));
+  }
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
 function cluster_webform_form_webform_component_edit_form_alter(&$form, &$form_state) {
   if (!isset($form['type']['#value']))
     return;
@@ -189,13 +224,6 @@ function cluster_webform_form_webform_configure_form_alter(&$form, &$form_state)
   $form['progressbar']['#access'] = FALSE;
   $form['preview']['#access'] = FALSE;
   $form['advanced']['#access'] = FALSE;
-}
-
-/**
- * Implements hook_menu_alter().
- */
-function cluster_webform_menu_alter(&$items) {
-  unset($items['node/%webform_menu/webform/conditionals']);
 }
 
 /**
