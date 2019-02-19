@@ -29,23 +29,42 @@ function cluster_webform_webform_component_info_alter(&$components) {
  * Implements hook_form_FORM_ID_alter().
  */
 function cluster_webform_form_webform_conditionals_form_alter(&$form, &$form_state) {
-  // Filter the source list with components type that are handled for in the app.
-  $supported_conditional_types = ['select'];
-  $components = $form['#node']->webform['components'];
-  $normal_source_list = webform_component_list($form['#node'], 'conditional', 'path', TRUE);
-  $filtered_source_list = [];
-  foreach ($components as $cid => $component) {
-    if (in_array($component['type'], $supported_conditional_types)) {
-      $filtered_source_list[$cid] = $normal_source_list[$cid];
+  $node = $form['#node'];
+  $components = $node->webform['components'];
+  $source_list = webform_component_list($node, 'conditional', 'path', TRUE);
+
+  // Flatten select options for sources and targets, removing pagebreak groups.
+  foreach ($source_list as $i => $element) {
+    if (is_array($element)) {
+      foreach ($element as $f => $component) {
+        $source_list[$f] = $component;
+      }
+      unset($source_list[$i]);
     }
   }
 
-  // Reduce the conditional sources to the filtered values.
+  // Make lists of supported components for sources and targets.
+  $supported_conditional_types = ['select'];
+  $filtered_source_list = [];
+  $non_page_targets = [];
+  foreach ($components as $cid => $component) {
+    // Filter the source list. Keep component types that are handled in the app.
+    if (in_array($component['type'], $supported_conditional_types)) {
+      $filtered_source_list[$cid] = $source_list[$cid];
+    }
+    // Remove pagebreak components from targets.
+    if ($component['type'] != 'pagebreak') {
+      $non_page_targets[$cid] = $source_list[$cid];
+    }
+  }
+
+  // Reduce the conditional sources and targets to the filtered values.
   foreach (element_children($form['conditionals']) as $i) {
     if ($i === 'new') {
       continue;
     }
     $form['conditionals'][$i]['conditional']['#sources'] = $filtered_source_list;
+    $form['conditionals'][$i]['conditional']['#targets'] = $non_page_targets;
   }
 }
 
