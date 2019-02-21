@@ -41,6 +41,8 @@ function cluster_webform_export($node) {
     $current_page = ['fields' => []];
   };
 
+  $rules_by_component = [];
+  $target_components = [];
   $supported_components = _cluster_webform_get_supported_components();
   foreach ($node->webform['components'] as $cid => $component) {
     $type = $component['type'];

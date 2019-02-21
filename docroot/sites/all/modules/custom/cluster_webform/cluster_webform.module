@@ -2,6 +2,7 @@
 /**
  * @file
  * Code for the Cluster Webform feature.
+ * module_load_include('inc', 'webform', 'export');
  */
 
 include_once 'cluster_webform.features.inc';
