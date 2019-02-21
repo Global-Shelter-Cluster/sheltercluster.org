@@ -27,6 +27,26 @@ function cluster_webform_webform_component_info_alter(&$components) {
 }
 
 /**
+ * Implements hook_element_info_alter().
+ */
+function cluster_webform_element_info_alter(&$type) {
+  if (isset($type['webform_conditional'])) {
+    $type['webform_conditional']['#process'] = ['_cluster_webform_conditional_expand'];
+  }
+}
+
+/**
+ * Remove subconditionnals.
+ */
+function _cluster_webform_conditional_expand($element) {
+  $element = webform_conditional_expand($element);
+  foreach ($element['rules'] as $i => &$rule) {
+    unset($rule['add_subconditional']);
+  }
+  return $element;
+}
+
+/**
  * Implements hook_form_FORM_ID_alter().
  */
 function cluster_webform_form_webform_conditionals_form_alter(&$form, &$form_state) {
@@ -46,6 +66,7 @@ function cluster_webform_form_webform_conditionals_form_alter(&$form, &$form_sta
 
   // Make lists of supported components for sources and targets.
   $supported_conditional_types = ['select'];
+  $supported_actions = ['show' => 'shown'];
   $filtered_source_list = [];
   $non_page_targets = [];
   foreach ($components as $cid => $component) {
@@ -59,13 +80,14 @@ function cluster_webform_form_webform_conditionals_form_alter(&$form, &$form_sta
     }
   }
 
-  // Reduce the conditional sources and targets to the filtered values.
+  // Reduce the conditional sources, targets and actions to the filtered and limited values.
   foreach (element_children($form['conditionals']) as $i) {
     if ($i === 'new') {
       continue;
     }
     $form['conditionals'][$i]['conditional']['#sources'] = $filtered_source_list;
     $form['conditionals'][$i]['conditional']['#targets'] = $non_page_targets;
+    $form['conditionals'][$i]['conditional']['#actions'] = $supported_actions;
   }
 }
 

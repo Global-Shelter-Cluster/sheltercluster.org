@@ -2,6 +2,7 @@
 /**
  * @file
  * These functions export a webform's fields as a simple JSON structure, in order to be exported through the API.
+ * module_load_include('inc', 'webform', 'export');
  */
 
 /**
@@ -41,10 +42,11 @@ function cluster_webform_export($node) {
     $current_page = ['fields' => []];
   };
 
-  $rules_by_component = [];
-  $target_components = [];
+  $webform_components = &$node->webform['components'];
+  $targeted_conditional_components = _cluster_webform_get_condition_target_components($node->webform['conditionals'], $node->webform['components']);
   $supported_components = _cluster_webform_get_supported_components();
   foreach ($node->webform['components'] as $cid => $component) {
+
     $type = $component['type'];
     if (!in_array($type, $supported_components)) {
       continue;
@@ -69,13 +71,42 @@ function cluster_webform_export($node) {
       continue;
     }
     $item['type'] = $type;
+
+    // Add conditionals for this item.
+    if (array_key_exists($cid, $targeted_conditional_components)) {
+      $item['conditional'] = $targeted_conditional_components[$cid];
+    };
+
     $current_page['fields'][] = $item;
 
   }
 
   $store_page();
-  // @TODO format conditionals for app.
+  dpm(json_encode($ret));
   return $ret;
+}
+
+function _cluster_webform_get_condition_target_components($conditionals, $form_components) {
+  $components = [];
+  foreach($conditionals as $rule_group_id => $rule_group) {
+    $component_rules = [];
+    foreach ($rule_group['rules'] as $rules) {
+      $component_rules[] = [
+        'operator' => $rules['operator'],
+        'source_field_name' => $form_components[$rules['source']]['form_key'],
+        'trigger_value' => $rules['value'],
+      ];
+    }
+    foreach ($rule_group['actions'] as $action) {
+      $components[$action['target']] = [
+        'logical_operator' => $rule_group['andor'] ? $rule_group['andor'] : 'none',
+        'rules' => $component_rules,
+        'action_type' => $action['action'],
+        'invert' => $action['invert'],
+      ];
+    }
+  }
+  return $components;
 }
 
 function _cluster_webform_export_markup($component) {
@@ -89,7 +120,6 @@ function _cluster_webform_export_component($component, $type) {
   $item = [
     'key' => $component['form_key'],
     'name' => $component['name'],
-    'id' => $component['cid']
   ];
 
   if (!empty($component['description'])) {
