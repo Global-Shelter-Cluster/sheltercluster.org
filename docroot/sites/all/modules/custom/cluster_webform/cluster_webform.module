@@ -36,12 +36,17 @@ function cluster_webform_element_info_alter(&$type) {
 }
 
 /**
- * Remove subconditionnals.
+ * Alter conditional settings webform elements.
  */
 function _cluster_webform_conditional_expand($element) {
   $element = webform_conditional_expand($element);
+  // Remove subconditionnals.
   foreach ($element['rules'] as $i => &$rule) {
     unset($rule['add_subconditional']);
+  }
+  // Restrict 'invert' options (only allow show and not hide).
+  foreach ($element['actions'] as $i => $action) {
+    $element['actions'][$i]['invert']['#options'] = [0 => 'is'];
   }
   return $element;
 }

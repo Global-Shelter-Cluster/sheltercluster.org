@@ -42,7 +42,6 @@ function cluster_webform_export($node) {
     $current_page = ['fields' => []];
   };
 
-  $webform_components = &$node->webform['components'];
   $targeted_conditional_components = _cluster_webform_get_condition_target_components($node->webform['conditionals'], $node->webform['components']);
   $supported_components = _cluster_webform_get_supported_components();
   foreach ($node->webform['components'] as $cid => $component) {
@@ -82,31 +81,40 @@ function cluster_webform_export($node) {
   }
 
   $store_page();
-  dpm(json_encode($ret));
   return $ret;
 }
 
+/**
+ * Format the conditional webform rules and actions for export.
+ */
 function _cluster_webform_get_condition_target_components($conditionals, $form_components) {
-  $components = [];
+  $export = [];
   foreach($conditionals as $rule_group_id => $rule_group) {
     $component_rules = [];
     foreach ($rule_group['rules'] as $rules) {
-      $component_rules[] = [
-        'operator' => $rules['operator'],
-        'source_field_name' => $form_components[$rules['source']]['form_key'],
-        'trigger_value' => $rules['value'],
-      ];
+      $optional = [];
+      if ($rules['operator'] !== 'equal') {
+        $optional['operator'] = $rules['operator'];
+      }
+      $component_rules[] = array_merge(
+        $optional, [
+        'field' => $form_components[$rules['source']]['form_key'],
+        'value' => $rules['value'],
+      ]);
     }
+
     foreach ($rule_group['actions'] as $action) {
-      $components[$action['target']] = [
-        'logical_operator' => $rule_group['andor'] ? $rule_group['andor'] : 'none',
+      $optional = [];
+      if ($rule_group['andor'] == 'or') {
+        $optional['or'] = TRUE;
+      }
+      $export[$action['target']] = array_merge(
+        $optional, [
         'rules' => $component_rules,
-        'action_type' => $action['action'],
-        'invert' => $action['invert'],
-      ];
+      ]);
     }
   }
-  return $components;
+  return $export;
 }
 
 function _cluster_webform_export_markup($component) {
@@ -141,7 +149,7 @@ function _cluster_webform_export_component($component, $type) {
         // Cast to boolean.
         case 'integer':
         case 'multiple':
-          $item[$key] = $component['extra'][$key] ? 'true' : 'false';
+          $item[$key] = $component['extra'][$key] ? TRUE : FALSE;
           break;
 
         // Cast to int.
