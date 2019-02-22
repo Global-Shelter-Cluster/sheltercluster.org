@@ -33,6 +33,13 @@ function cluster_api_default_services_endpoint() {
         ),
       ),
     ),
+    'get-files-size' => array(
+      'operations' => array(
+        'create' => array(
+          'enabled' => '1',
+        ),
+      ),
+    ),
     'get-objects' => array(
       'operations' => array(
         'create' => array(

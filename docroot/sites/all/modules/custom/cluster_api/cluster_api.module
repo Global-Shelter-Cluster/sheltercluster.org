@@ -158,6 +158,69 @@ function cluster_api_services_resources() {
         ],
       ],
     ],
+    'submit-assessment' => [
+      'operations' => [
+        'create' => [
+          'help' => 'Submit an assessment submission',
+          'file' => [
+            'type' => 'inc',
+            'module' => 'cluster_api',
+            'name' => 'resources/submit_assessment',
+          ],
+          'callback' => '_cluster_api_submit_assessment',
+          'args' => [
+            [
+              'name' => 'form-service',
+              'optional' => FALSE,
+              'source' => ['path' => 0],
+              'type' => 'string',
+              'description' => 'The name of the service which will receive the submission, such as webform',
+            ],
+            [
+              'name' => 'id',
+              'optional' => FALSE,
+              'source' => ['path' => 1],
+              'type' => 'int',
+              'description' => 'The id of the form receiving the submission',
+            ],
+            [
+              'name' => 'submission',
+              'optional' => FALSE,
+              'source' => 'data',
+              'type' => 'array',
+              'description' => 'The form data being submitted',
+            ],
+          ],
+          'access callback' => 'cluster_api_access_submit_assessment',
+          'access arguments append' => TRUE,
+        ],
+      ],
+    ],
+    'get-files-size' => [
+      'operations' => [
+        'create' => [ // This isn't "creating" anything. REST verbs just suck.
+          'help' => 'Retrieve size of given files path.',
+          'file' => [
+            'type' => 'inc',
+            'module' => 'cluster_api',
+            'name' => 'resources/get_files_size',
+          ],
+          'callback' => '_cluster_api_get_files_size',
+          'args' => [
+            [
+              'name' => 'requests',
+              'optional' => FALSE,
+              'source' => 'data',
+              'type' => 'array',
+              'description' => 'A list of file paths.',
+            ],
+          ],
+          'access callback' => 'user_access',
+          'access arguments' => ['access content'],
+          'access arguments append' => FALSE,
+        ],
+      ],
+    ],
   ];
 }
 
