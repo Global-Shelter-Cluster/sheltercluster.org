@@ -196,6 +196,31 @@ function cluster_api_services_resources() {
         ],
       ],
     ],
+    'get-files-size' => [
+      'operations' => [
+        'create' => [ // This isn't "creating" anything. REST verbs just suck.
+          'help' => 'Retrieve size of given files path.',
+          'file' => [
+            'type' => 'inc',
+            'module' => 'cluster_api',
+            'name' => 'resources/get_files_size',
+          ],
+          'callback' => '_cluster_api_get_files_size',
+          'args' => [
+            [
+              'name' => 'requests',
+              'optional' => FALSE,
+              'source' => 'data',
+              'type' => 'array',
+              'description' => 'A list of file paths.',
+            ],
+          ],
+          'access callback' => 'user_access',
+          'access arguments' => ['access content'],
+          'access arguments append' => FALSE,
+        ],
+      ],
+    ],
   ];
 }
 
