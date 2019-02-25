@@ -2,6 +2,7 @@
 /**
  * @file
  * Code for the Cluster Webform feature.
+ * module_load_include('inc', 'webform', 'export');
  */
 
 include_once 'cluster_webform.features.inc';
@@ -22,6 +23,87 @@ function cluster_webform_webform_component_info_alter(&$components) {
     // For now, let's treat this as an "image" field. Later we may want to enable any files, which would involve a
     // different widget on the app, etc.
     $components['file']['label'] = t('Image');
+  }
+}
+
+/**
+ * Implements hook_element_info_alter().
+ */
+function cluster_webform_element_info_alter(&$type) {
+  if (isset($type['webform_conditional'])) {
+    $type['webform_conditional']['#process'] = ['_cluster_webform_conditional_expand'];
+  }
+}
+
+/**
+ * Alter conditional settings webform elements.
+ */
+function _cluster_webform_conditional_expand($element) {
+  $element = webform_conditional_expand($element);
+  // Remove subconditionnals.
+  foreach ($element['rules'] as $i => &$rule) {
+    unset($rule['add_subconditional']);
+  }
+  // Restrict 'invert' options (only allow show and not hide).
+  foreach ($element['actions'] as $i => $action) {
+    $element['actions'][$i]['invert']['#options'] = [0 => 'is'];
+  }
+  return $element;
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function cluster_webform_form_webform_conditionals_form_alter(&$form, &$form_state) {
+  $node = $form['#node'];
+  $components = $node->webform['components'];
+  $source_list = webform_component_list($node, 'conditional', 'path', TRUE);
+
+  // Flatten select options for sources and targets, removing pagebreak groups.
+  foreach ($source_list as $i => $element) {
+    if (is_array($element)) {
+      foreach ($element as $f => $component) {
+        $source_list[$f] = $component;
+      }
+      unset($source_list[$i]);
+    }
+  }
+
+  // Make lists of supported components for sources and targets.
+  $supported_conditional_types = ['select'];
+  $supported_actions = ['show' => 'shown'];
+  $filtered_source_list = [];
+  $non_page_targets = [];
+  foreach ($components as $cid => $component) {
+    // Filter the source list. Keep component types that are handled in the app.
+    if (in_array($component['type'], $supported_conditional_types)) {
+      $filtered_source_list[$cid] = $source_list[$cid];
+    }
+    // Remove pagebreak components from targets.
+    if ($component['type'] != 'pagebreak') {
+      $non_page_targets[$cid] = $source_list[$cid];
+    }
+  }
+
+  // Reduce the conditional sources, targets and actions to the filtered and limited values.
+  foreach (element_children($form['conditionals']) as $i) {
+    if ($i === 'new') {
+      continue;
+    }
+    $form['conditionals'][$i]['conditional']['#sources'] = $filtered_source_list;
+    $form['conditionals'][$i]['conditional']['#targets'] = $non_page_targets;
+    $form['conditionals'][$i]['conditional']['#actions'] = $supported_actions;
+  }
+}
+
+/**
+ * Implements hook_webform_conditional_operators_alter().
+ */
+function cluster_webform_webform_conditional_operators_alter(&$operators) {
+  // Limit operators to those supported by the app.
+  $supported_operators = ['equal', 'not_equal'];
+  foreach ($operators as $type => $type_operators) {
+    $operators[$type] = array_intersect_key($type_operators, array_flip($supported_operators));
   }
 }
 
@@ -189,13 +271,6 @@ function cluster_webform_form_webform_configure_form_alter(&$form, &$form_state)
   $form['progressbar']['#access'] = FALSE;
   $form['preview']['#access'] = FALSE;
   $form['advanced']['#access'] = FALSE;
-}
-
-/**
- * Implements hook_menu_alter().
- */
-function cluster_webform_menu_alter(&$items) {
-  unset($items['node/%webform_menu/webform/conditionals']);
 }
 
 /**
