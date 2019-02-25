@@ -1,0 +1,103 @@
+<?php
+
+/**
+ * Implements hook_help
+ * @return array
+ */
+function cluster_geo_help($path, $arg) {
+  switch ($path) {
+
+    // Main module help for the block module
+    case 'admin/help#cluster_geo':
+      return t("Geographic coordinates handling, gathering and displaying");
+      break;
+  }
+}
+
+/**
+ * Implements hook_menu
+ * @return array
+ */
+function cluster_geo_menu () {
+  return [
+    'cluster-geo' => [
+      'page callback' => '_cluster_geo_menu_callback',
+      'type' => MENU_CALLBACK,
+      'access callback' => TRUE,
+     ],
+  ];
+}
+
+function cluster_geo_theme($existing, $type, $theme, $path) {
+  $theme = [];
+  $theme['cluster_geo_modal'] = [
+    'template' => 'map-modal',
+    'path' => drupal_get_path('module', 'cluster_geo') . '/template',
+  ];
+  $theme['cluster_geo_map'] = [
+    'template' => 'geolocation-map',
+    'path' => drupal_get_path('module', 'cluster_geo') . '/template',
+  ];
+  return $theme;
+}
+
+function template_preprocess_cluster_geo_modal(&$variables) {
+  // @TODO declare all attached css and js here instead of geolocation.inc
+}
+
+function template_preprocess_cluster_geo_map(&$variables) {
+  // @TODO declare all attached css and js here instead of geolocation.inc
+}
+
+
+/**
+ * Page callback
+ * @return string
+ */
+function _cluster_geo_menu_callback() {
+  $render = [
+//    'modal' => [
+//      '#theme' => 'cluster_geo_modal',
+//      '#attached' => [
+//        'css' => [
+//          'type' => 'file',
+//          'data' => drupal_get_path('module', 'cluster_geo') . '/css/map_modal.css',
+//        ],
+//        'js' => [
+//          'type' => 'file',
+//          'data' => drupal_get_path('module', 'cluster_geo') . '/js/map_modal.js',
+//        ],
+//      ]
+//    ],
+    'not-modal' => [
+      '#theme' => 'cluster_geo_map',
+    ],
+  ];
+  $render['#attached']['js'][] = [
+    'type' => 'file',
+    'data' => drupal_get_path('module', 'cluster_geo') . '/js/geolocation.js',
+  ];
+
+  $render['#attached']['css'][] = [
+    'type' => 'file',
+    'data' => drupal_get_path('module', 'cluster_geo') . '/leaflet/leaflet.css',
+  ];
+  $render['#attached']['js'][] = [
+    'type' => 'file',
+    'data' => drupal_get_path('module', 'cluster_geo') . '/leaflet/leaflet.js',
+  ];
+  return $render;
+}
+
+/**
+ * Implement hook_webform_component_info
+ */
+function cluster_geo_webform_component_info() {
+  return [
+    'geolocation' => [
+      'label' => t('Geolocation'),
+      'description' => t("The user's current location."),
+      'file' => 'webform_component/geolocation.inc',
+    ]
+  ];
+}

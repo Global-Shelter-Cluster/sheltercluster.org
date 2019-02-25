@@ -77,6 +77,10 @@ function cluster_webform_form_webform_component_edit_form_alter(&$form, &$form_s
       _cluster_webform_allow_supported_extra($form);
       break;
 
+    case 'geolocation':
+      // Custom component @see cluster_geo module
+      break;
+
     default:
       $form['display']['#access'] = FALSE;
       $form['analysis']['#access'] = FALSE;
@@ -97,6 +101,7 @@ function _cluster_webform_get_supported_components() {
     'time',
     'select',
     'file',
+    'geolocation',
     // 'fieldset',
     // 'email',
     // 'grid',
