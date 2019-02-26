@@ -30,13 +30,17 @@ function _cluster_api_get_files_size($request) {
     $url = str_replace($external_url, $file_scheme, $url);
   }
 
-  // Get file size from file_managed table.
-  $query = db_select('file_managed', 'f')
-    ->condition('uri', $request, 'IN');
-  $query->addExpression('SUM(filesize)', 'total');
-  $results = $query->execute()->fetchCol();
-  $total = reset($results);
+  $total = 0;
+
+  if ($request) {
+    // Get file size from file_managed table.
+    $query = db_select('file_managed', 'f')
+      ->condition('uri', $request, 'IN');
+    $query->addExpression('SUM(filesize)', 'total');
+    $results = $query->execute()->fetchCol();
+    $total = reset($results);
+  }
 
   // If there are no files, $total will be null, return 0 instead.
-  return $total ? $total : 0;
+  return ['total' => intval($total ? $total : 0, 10)];
 }
