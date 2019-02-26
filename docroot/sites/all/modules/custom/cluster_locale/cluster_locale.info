@@ -1,0 +1,7 @@
+name = Cluster Locale
+description = Localization options for mobile app.
+core = 7.x
+package = Cluster
+version = 7.x-1.0
+dependencies[] = locale
+dependencies[] = cluster_api

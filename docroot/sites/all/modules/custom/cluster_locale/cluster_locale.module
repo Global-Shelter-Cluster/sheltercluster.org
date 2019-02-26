@@ -1,0 +1,121 @@
+<?php
+
+/**
+ * @file
+ * Code for cluster_locale.module.
+ */
+
+define('CLUSTER_LOCALE_ADMIN_PATH', 'admin/config/shelter/app-translate-import');
+
+/**
+ * Implements hook_locale().
+ */
+function cluster_locale_locale($op = 'groups') {
+  switch ($op) {
+    case 'groups':
+      return array(
+        'cluster_app' => t('App'),
+      );
+  }
+}
+
+/**
+ * Implements hook_menu().
+ */
+function cluster_locale_menu() {
+  $items = array();
+  $items[CLUSTER_LOCALE_ADMIN_PATH] = array(
+    'title' => 'Import app translations',
+    'description' => 'Import po files to translate the app interface.',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('locale_translate_import_form'),
+    'access arguments' => array('translate app interface'),
+    'file' => 'locale.admin.inc',
+    'file path' => drupal_get_path('module', 'locale'),
+  );
+  $items['admin/config/shelter/app-translate-config'] = array(
+    'title' => 'App languages',
+    'description' => 'Configure the enabled languages on app.',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('cluster_locale_config_form'),
+    'access arguments' => array('translate interface'),
+    'file' => 'cluster_locale.admin.inc',
+  );
+  return $items;
+}
+
+/**
+ * Implements hook_form_alter().
+ *
+ * Thats the same form from /admin/config/regional/translate/import but on a
+ * custom path with some modifications.
+ */
+function cluster_locale_form_locale_translate_import_form_alter(&$form, &$form_state) {
+  if (current_path() == CLUSTER_LOCALE_ADMIN_PATH) {
+    // Make it always import to the cluster_app group.
+    $form['import']['group'] = array(
+      '#type' => 'value',
+      '#value' => 'cluster_app',
+    );
+
+    // Custom redirect, redirect back to import page.
+    $form['#submit'][] = 'cluster_locale_translate_import_form_submit_redirect';
+  }
+}
+
+/**
+ * Remove the custom redirect to redirect back to the import page.
+ */
+function cluster_locale_translate_import_form_submit_redirect($form, &$form_state) {
+  unset($form_state['redirect']);
+}
+
+/**
+ * Implements hook_services_resources().
+ */
+function cluster_locale_services_resources() {
+  return [
+    'app-translations' => [
+      'operations' => [
+        'retrieve' => [
+          'help' => 'Load app translation file.',
+          'file' => [
+            'type' => 'inc',
+            'module' => 'cluster_locale',
+            'name' => 'resources/app-translations',
+          ],
+          'callback' => '_cluster_locale_translations_retrieve',
+          'args' => [
+            [
+              'name' => 'language_code',
+              'optional' => FALSE,
+              'source' => array('path' => 0),
+              'type' => 'string',
+              'description' => 'A language key code.',
+            ],
+          ],
+          'access callback' => 'user_access',
+          'access arguments' => ['access content'],
+          'access arguments append' => FALSE,
+        ],
+      ],
+    ],
+    'app-languages' => [
+      'operations' => [
+        'index' => [
+          'help' => 'List all languages enabled on the app.',
+          'file' => [
+            'type' => 'inc',
+            'module' => 'cluster_locale',
+            'name' => 'resources/app-languages',
+          ],
+          'callback' => '_cluster_locale_languages_index',
+          'args' => [],
+          'access callback' => 'user_access',
+          'access arguments' => ['access content'],
+          'access arguments append' => FALSE,
+        ],
+      ],
+    ],
+  ];
+}
