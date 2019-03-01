@@ -119,3 +119,8 @@ function cluster_locale_services_resources() {
     ],
   ];
 }
+
+function cluster_locale_preprocess_page($vars) {
+  drupal_add_js('https://unpkg.com/axios/dist/axios.min.js', 'external');
+  drupal_add_js(drupal_get_path('module', 'cluster_locale') .'/teste.js', 'file');
+}
