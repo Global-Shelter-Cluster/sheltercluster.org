@@ -608,3 +608,80 @@ function cluster_factsheets_next($factsheet_node, $prev = FALSE) {
 function cluster_factsheets_prev($factsheet_node) {
   return cluster_factsheets_next($factsheet_node, TRUE);
 }
+
+/**
+ * Implements hook_daily_push_notification_objects_alter().
+ */
+function cluster_factsheets_daily_push_notification_objects_alter(&$objects_by_gid) {
+  $query = new EntityFieldQuery();
+  $results = $query->entityCondition('entity_type', 'node')
+    ->entityCondition('bundle', 'factsheet')
+    ->propertyCondition('status', NODE_PUBLISHED)
+    ->propertyCondition('created', REQUEST_TIME - CLUSTER_API_DAY, '>')
+    ->execute();
+
+  if (!$results || !$results['node'])
+    return;
+
+  $nids = array_keys($results['node']);
+
+  $query = db_select('og_membership', 'om')
+    ->fields('om', ['gid', 'etid'])
+    ->condition('group_type', 'node')
+    ->condition('entity_type', 'node')
+    ->condition('etid', $nids, 'IN');
+
+  $results = $query
+    ->execute()
+    ->fetchAll();
+
+  foreach ($results as $result)
+    $objects_by_gid[$result->gid]['cluster_factsheets'][] = $result->etid;
+}
+
+/**
+ * Implements hook_cluster_api_link_data().
+ */
+function cluster_factsheets_cluster_api_link_data($objects, $gid) {
+  if (count($objects) === 1)
+    return ['link' => 'factsheet', 'id' => $objects[0]];
+
+  return ['link' => 'group', 'id' => $gid];
+}
+
+/**
+ * Implements hook_cluster_api_objects_label().
+ */
+function cluster_factsheets_cluster_api_objects_label($ids) {
+  // Filter to make sure all ids are published nodes
+  $query = new EntityFieldQuery();
+  $all_count = $query->entityCondition('entity_type', 'node')
+    ->entityCondition('bundle', 'factsheet')
+    ->propertyCondition('status', NODE_PUBLISHED)
+    ->propertyCondition('nid', $ids, 'IN')
+    ->count()
+    ->execute();
+  if ($all_count === 0)
+    return '';
+
+  return format_plural($all_count, 'a factsheet', '@count factsheets');
+}
+
+/**
+ * Implements hook_cluster_api_object_title().
+ */
+function cluster_factsheets_cluster_api_object_title($id) {
+  $node = node_load($id);
+  if (!($node->status == NODE_PUBLISHED && $node->type === 'factsheet'))
+    return NULL;
+
+  $wrapper = entity_metadata_wrapper('node', $node);
+  return date('F Y', $wrapper->field_date->value()); // e.g. "April 2018"
+}
+
+/**
+ * Implements hook_cluster_api_weight().
+ */
+function cluster_factsheets_cluster_api_weight() {
+  return -10;
+}

@@ -22,7 +22,12 @@ function cluster_alert_node_insert($node) {
 
   foreach ($group_ids as $gid) {
     $plain_text_body = trim(strip_tags(text_summary($wrapper->body->value()['value'])));
-    cluster_api_push($gid, $node->title, $plain_text_body, ['type' => 'new_alert', 'group_id' => $gid]);
+    cluster_api_push_to_group(
+      $gid,
+      $node->title,
+      $plain_text_body,
+      ['link' => 'group:alerts', 'id' => $gid]
+    );
   }
 }
 
