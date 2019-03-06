@@ -85,8 +85,12 @@ class ClusterAPI_Type_Factsheet extends ClusterAPI_Type {
 
       //Fall-through
       default:
+        // We add a couple of days so we don't have to deal with time zone issues. This is fine because we're only
+        // showing the year and month.
+        $format_date = format_date($wrapper->field_date->value() + 60 * 60 * 24 * 2, 'custom', 'Y-m');
+
         $ret += [
-          'date' => format_date($wrapper->field_date->value(), 'custom', 'Y-m'),
+          'date' => $format_date,
           'image' => self::getFileValue('field_image', $wrapper, 'factsheet_image'),
         ];
     }
