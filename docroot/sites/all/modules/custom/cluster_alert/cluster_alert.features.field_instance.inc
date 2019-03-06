@@ -57,7 +57,7 @@ function cluster_alert_field_default_field_instances() {
         'summary_rows' => 5,
       ),
       'type' => 'text_textarea_with_summary',
-      'weight' => 31,
+      'weight' => 4,
     ),
   );
 
@@ -108,7 +108,7 @@ function cluster_alert_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'entityreference_autocomplete',
-      'weight' => 33,
+      'weight' => 6,
     ),
   );
 
@@ -159,7 +159,7 @@ function cluster_alert_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'entityreference_autocomplete',
-      'weight' => 34,
+      'weight' => 8,
     ),
   );
 
@@ -210,7 +210,7 @@ function cluster_alert_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'entityreference_autocomplete',
-      'weight' => 34,
+      'weight' => 9,
     ),
   );
 
@@ -273,7 +273,7 @@ function cluster_alert_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'entityreference_autocomplete',
-      'weight' => 34,
+      'weight' => 7,
     ),
   );
 
@@ -324,7 +324,7 @@ function cluster_alert_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'entityreference_autocomplete',
-      'weight' => 34,
+      'weight' => 10,
     ),
   );
 
@@ -368,7 +368,7 @@ function cluster_alert_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 32,
+      'weight' => 5,
     ),
   );
 
@@ -419,7 +419,58 @@ function cluster_alert_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'url_external',
-      'weight' => 35,
+      'weight' => 12,
+    ),
+  );
+
+  // Exported field_instance: 'node-alert-field_webform'.
+  $field_instances['node-alert-field_webform'] = array(
+    'bundle' => 'alert',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'entityreference',
+        'settings' => array(
+          'bypass_access' => FALSE,
+          'link' => FALSE,
+        ),
+        'type' => 'entityreference_label',
+        'weight' => 10,
+      ),
+      'ical' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_webform',
+    'label' => 'Webform',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'entityreference',
+      'settings' => array(
+        'match_operator' => 'CONTAINS',
+        'path' => '',
+        'size' => 60,
+      ),
+      'type' => 'entityreference_autocomplete',
+      'weight' => 11,
     ),
   );
 
@@ -485,7 +536,7 @@ function cluster_alert_field_default_field_instances() {
       'module' => 'og',
       'settings' => array(),
       'type' => 'og_complex',
-      'weight' => -4,
+      'weight' => 1,
     ),
   );
 
@@ -535,7 +586,7 @@ function cluster_alert_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => -5,
+      'weight' => 0,
     ),
   );
 
@@ -551,6 +602,7 @@ function cluster_alert_field_default_field_instances() {
   t('Kobo form');
   t('Title');
   t('URL');
+  t('Webform');
 
   return $field_instances;
 }

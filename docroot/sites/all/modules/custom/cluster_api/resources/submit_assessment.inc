@@ -25,7 +25,7 @@ use Drupal\cluster_api\Oauth\Authorization;
  */
 function _cluster_api_submit_assessment($form_service, $form_id, $request) {
   if (empty($request['assessment'])) {
-    return services_error('Assessment form submission unaceptable', 403);
+    return services_error('Assessment form submission unacceptable', 403);
   }
 
   $auth = new Authorization();

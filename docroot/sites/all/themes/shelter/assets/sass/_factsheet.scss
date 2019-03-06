@@ -89,19 +89,29 @@
   @include breakpoint(700px) {
     display: grid;
     grid-gap: 10px;
-    grid-template-areas: "date date" "photo map" "highlights aside" "details aside";
     grid-template-columns: 6fr 5fr;
     grid-template-rows: max-content max-content max-content min-content;
+
+    grid-template-areas: "date date" "photo map" "highlights aside" "details aside";
+    &.factsheet-no-sidebar {
+      grid-template-areas: "date date" "photo map" "highlights highlights" "details details";
+    }
   }
 
   @include breakpoint(900px) {
-    grid-template-areas: "date date date" "photo photo map" "highlights aside aside" "details aside aside";
     grid-template-columns: 6fr 1fr 4fr;
+    grid-template-areas: "date date date" "photo photo map" "highlights aside aside" "details aside aside";
+    &.factsheet-no-sidebar {
+      grid-template-areas: "date date date" "photo photo map" "highlights highlights highlights" "details details details";
+    }
   }
 
   @include breakpoint(980px 1199px) {
-    grid-template-areas: "date date" "photo map" "highlights aside" "details aside";
     grid-template-columns: 6fr 5fr;
+    grid-template-areas: "date date" "photo map" "highlights aside" "details aside";
+    &.factsheet-no-sidebar {
+      grid-template-areas: "date date" "photo map" "highlights highlights" "details details";
+    }
   }
 
 }
