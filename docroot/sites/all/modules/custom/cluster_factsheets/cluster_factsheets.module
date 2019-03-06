@@ -578,8 +578,9 @@ function cluster_factsheets_next_nid($factsheet_node, $prev = FALSE) {
   $query->entityCondition('entity_type', 'node')
     ->entityCondition('bundle', 'factsheet')
     ->propertyCondition('status', NODE_PUBLISHED)
+    ->propertyCondition('nid', $factsheet_node->nid, '<>')
     ->fieldCondition('og_group_ref', 'target_id', $group[0]->nid)
-    ->fieldCondition('field_date', 'value', date('Y-m-d', $wrapper->field_date->value()), $prev ? '<' : '>')
+    ->fieldCondition('field_date', 'value', format_date($wrapper->field_date->value(), 'custom', 'Y-m-d'), $prev ? '<' : '>')
     ->fieldOrderBy('field_date', 'value', $prev ? 'DESC' : 'ASC')
     ->range(NULL, 1);
 
