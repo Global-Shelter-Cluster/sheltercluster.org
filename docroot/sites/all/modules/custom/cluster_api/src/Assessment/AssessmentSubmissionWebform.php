@@ -100,6 +100,10 @@ class AssessmentSubmissionWebform implements AssessmentSubmissionInterface {
           $webform_data[$cid] = [$submission[$form_key]][0];
           break;
 
+        case 'geolocation':
+          $webform_data[$cid] = $submission[$form_key];
+          break;
+
         default:
           $webform_data[$cid] = [$submission[$form_key]];
       }
