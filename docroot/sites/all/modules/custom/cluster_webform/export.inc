@@ -173,6 +173,11 @@ function _cluster_webform_export_component($component, $type) {
 
           break;
 
+        case 'current_coordinates':
+          if ($component['extra'][$key])
+            $item[$key] = TRUE;
+          break;
+
         default:
           $item[$key] = $component['extra'][$key];
       }
