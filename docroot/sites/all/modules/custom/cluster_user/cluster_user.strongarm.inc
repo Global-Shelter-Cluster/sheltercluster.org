@@ -13,6 +13,20 @@ function cluster_user_strongarm() {
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
+  $strongarm->name = 'configurable_timezones';
+  $strongarm->value = 1;
+  $export['configurable_timezones'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'empty_timezone_message';
+  $strongarm->value = 1;
+  $export['empty_timezone_message'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
   $strongarm->name = 'hybridauth_debug';
   $strongarm->value = 0;
   $export['hybridauth_debug'] = $strongarm;
@@ -455,6 +469,13 @@ After that, you will be able to log in at [site:login-url] using your [user:hybr
   $strongarm->name = 'imce_settings_thumb_method';
   $strongarm->value = 'scale_and_crop';
   $export['imce_settings_thumb_method'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'user_default_timezone';
+  $strongarm->value = '2';
+  $export['user_default_timezone'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
