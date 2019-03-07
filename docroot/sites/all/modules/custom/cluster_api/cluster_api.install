@@ -1,0 +1,45 @@
+<?php
+
+/**
+ * @file
+ *  Install file.
+ */
+
+function cluster_api_install() {
+  module_load_include('module', 'cluster_api', 'cluster_api');
+
+  $temp = [];
+  cluster_api_schema_alter($temp);
+
+  foreach ($temp as $table => $table_data) {
+    if (!isset($table_data['fields']))
+      continue;
+
+    foreach ($table_data['fields'] as $field => $spec)
+      if (!db_field_exists($table, $field))
+        db_add_field($table, $field, $spec);
+  }
+}
+
+function cluster_api_uninstall() {
+  module_load_include('module', 'cluster_api', 'cluster_api');
+
+  $temp = [];
+  cluster_api_schema_alter($temp);
+
+  foreach ($temp as $table => $table_data) {
+    if (!isset($table_data['fields']))
+      continue;
+
+    foreach ($table_data['fields'] as $field => $spec)
+      if (db_field_exists($table, $field))
+        db_drop_field($table, $field);
+  }
+}
+
+/**
+ * Adds some columns to the `og_users_roles` table.
+ */
+function cluster_api_update_7100() {
+  cluster_api_install();
+}
