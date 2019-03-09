@@ -61,7 +61,7 @@ function cluster_kobo_menu() {
       'access callback' => TRUE,
     ],
     'node/%node/kobo-submissions' => [
-      'title' => 'Form submissions',
+      'title' => 'Results',
       'page callback' => 'cluster_kobo_submissions',
       'page arguments' => [1],
       'access callback' => 'cluster_kobo_submissions_access',
@@ -69,44 +69,7 @@ function cluster_kobo_menu() {
       'weight' => 20,
       'type' => MENU_LOCAL_TASK,
     ],
-    'node/%node/kobo-forms' => [
-      'title' => 'Assessment forms',
-      'page callback' => 'cluster_kobo_all',
-      'page arguments' => [1],
-      'access callback' => 'og_is_group',
-      'access arguments' => [0, 1],
-      'title callback' => '_cluster_kobo_title_callback',
-      'title arguments' => [1],
-      'type' => MENU_CALLBACK,
-    ],
   ];
-}
-
-/**
- * @param $node
- * @return array
- */
-function cluster_kobo_all($node) {
-  $manager = GroupContentManager::getInstance($node);
-
-  return [
-    '#theme' => 'links',
-    '#links' => array_map(function($node) {
-      return [
-        'title' => $node->title,
-        'href' => 'node/'.$node->nid,
-      ];
-    }, node_load_multiple($manager->getKoboForms())),
-  ];
-}
-
-/**
- * Menu title callback.
- *
- * @see _cluster_docs_title_callback() (mostly copied from there)
- */
-function _cluster_kobo_title_callback($node) {
-  return $node->title . ' - ' . t('Assessment forms');
 }
 
 /**
@@ -328,13 +291,4 @@ function _cluster_kobo_download_attachment($attachment) {
     $attachment['download_url'],
     $path . '/' . $filename, FALSE, FILE_EXISTS_RENAME
   );
-}
-
-function cluster_kobo_is_group_kobo_forms_page() {
-  $router_item = menu_get_item(current_path());
-
-  if ($router_item && isset($router_item['path']))
-    return $router_item['path'] === 'node/%/kobo-forms';
-
-  return FALSE;
 }

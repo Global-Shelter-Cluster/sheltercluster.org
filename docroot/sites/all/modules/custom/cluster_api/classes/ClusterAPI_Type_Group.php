@@ -74,6 +74,10 @@ class ClusterAPI_Type_Group extends ClusterAPI_Type {
       'type' => 'kobo_form',
       'mode' => ClusterAPI_Object::MODE_PUBLIC,
     ],
+    'webforms' => [
+      'type' => 'webform',
+      'mode' => ClusterAPI_Object::MODE_PUBLIC,
+    ],
     'alerts' => [
       'type' => 'alert',
       'mode' => ClusterAPI_Object::MODE_PUBLIC,
@@ -162,6 +166,10 @@ class ClusterAPI_Type_Group extends ClusterAPI_Type {
       case ClusterAPI_Object::MODE_PRIVATE:
         if (method_exists($manager, 'getKoboForms') && $value = $manager->getKoboForms()) {
           $ret['kobo_forms'] = array_values(array_filter(array_map($convert_to_int, $value)));
+        }
+
+        if (method_exists($manager, 'getWebforms') && $value = $manager->getWebforms()) {
+          $ret['webforms'] = array_values(array_filter(array_map($convert_to_int, $value)));
         }
 
         $ret['alerts'] = array_filter((array)$manager->getLatestAlerts(self::ALERTS_LIMIT, self::ALERTS_DAYS_LIMIT));

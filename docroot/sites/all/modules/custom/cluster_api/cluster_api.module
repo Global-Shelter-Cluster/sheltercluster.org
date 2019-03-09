@@ -3,6 +3,9 @@
 include_once 'cluster_api.features.inc';
 
 const CLUSTER_API_FOLLOWER_ROLE_NAME = 'follower';
+const CLUSTER_API_DAILY_WINDOW_FROM_HOUR = 14;
+const CLUSTER_API_DAILY_WINDOW_TO_HOUR = 18; // send daily notifications from 2pm to 6pm
+const CLUSTER_API_DAY = 60 * 60 * 24;
 
 function cluster_api_menu() {
 
@@ -238,6 +241,14 @@ function _cluster_api_get_follower_role_by_bundle($group_bundle) {
 }
 
 /**
+ * Access callback.
+ * Test if user is allowed to submit to an assemsment form.
+ */
+function cluster_api_access_submit_assessment() {
+  return TRUE;
+}
+
+/**
  * Send a push notification to all users logged in ("following") the given
  * group.
  *
@@ -247,15 +258,19 @@ function _cluster_api_get_follower_role_by_bundle($group_bundle) {
  * @param mixed $data This gets sent as json data to the app.
  * @param boolean $sound
  */
-function cluster_api_push($gid, $title, $body = NULL, $data = NULL, $sound = TRUE) {
-  $expo = new ClusterAPI_Expo();
+function cluster_api_push_to_group($gid, $title, $body = NULL, $data = NULL, $sound = TRUE) {
   $group = node_load($gid);
   if (!og_is_group('node', $group)) {
-    throw new Exception('Not a group id: ' . $id);
+    throw new Exception('Not a group id: ' . $gid);
   }
 
-  $manager = new GroupContentManager($group);
-  $uids = $manager->getUsersByRole(CLUSTER_API_FOLLOWER_ROLE_NAME, $group);
+  $manager = GroupContentManager::getInstance($group);
+  $uids = $manager->getUsersByRole(CLUSTER_API_FOLLOWER_ROLE_NAME);
+
+  cluster_api_push_to_users($uids, $title, $body, $data, $sound);
+}
+
+function cluster_api_push_to_users($uids, $title, $body = NULL, $data = NULL, $sound = TRUE) {
   $users = user_load_multiple($uids);
   $tokens = [];
   foreach ($users as $user) {
@@ -271,16 +286,19 @@ function cluster_api_push($gid, $title, $body = NULL, $data = NULL, $sound = TRU
     return;
   }
 
+  $data = ['title' => $title, 'body' => $body] + (array)$data;
+
   $notification = array_filter([
     'title' => $title,
     'body' => $body,
-    'data' => $data ? json_encode($data) : NULL,
+    'data' => $data,
   ]);
 
   if ($sound) {
     $notification['sound'] = 'default';
   }
 
+  $expo = new ClusterAPI_Expo();
   $expo->notify($tokens, $notification);
 }
 
@@ -361,4 +379,191 @@ function cluster_api_track_users($uid, $origin) {
   catch(\Exception $e) {
     watchdog('cluster_api', 'Entity metadata wrapper error when recording user account origin: ' . $e->getMessage());
   }
+}
+
+/**
+ * Implements hook_cron().
+ */
+function cluster_api_cron() {
+  // Daily push notifications
+  $objects_by_gid = [];
+  drupal_alter('daily_push_notification_objects', $objects_by_gid);
+
+  $hour = 60*60; // const
+  $timezones = _cluster_api_daily_notification_timezones();
+
+  foreach ($objects_by_gid as $gid => $objects_by_module) {
+    $group = node_load($gid);
+    if (!og_is_group('node', $group))
+      continue; // shouldn't happen
+    $manager = GroupContentManager::getInstance($group);
+
+    // Gets a list of users who match these conditions:
+    // - they follow this group (filter by group role)
+    // - it's a reasonable time right for them (filter by timezone)
+    // - we haven't sent them a "daily push notification" in the past 22 hours (for this particular group)
+    $uids = $manager->getUsersByRole(
+      CLUSTER_API_FOLLOWER_ROLE_NAME,
+      $timezones,
+      function (SelectQuery $query) use ($hour) {
+        // The time of the last notification sent to this user, about this group, is at least 22 hours ago.
+        $filter_time = REQUEST_TIME - (22 * $hour);
+        $query->condition('og_ur.last_daily_push_notification', $filter_time, '<');
+      }
+    );
+    if (!$uids)
+      continue;
+
+    $body = _cluster_api_daily_notification_body($objects_by_module);
+    if (!$body)
+      continue;
+
+    cluster_api_push_to_users(
+      $uids,
+      _cluster_api_daily_notification_title($group),
+      $body,
+      _cluster_api_daily_notification_link_data($objects_by_module, $gid),
+      FALSE
+    );
+
+    $manager->updateUsersTimestamp(CLUSTER_API_FOLLOWER_ROLE_NAME, $uids, 'last_daily_push_notification');
+  }
+}
+
+/**
+ * Returns data to be sent with the push notification, used to link to the appropriate place.
+ *
+ * @param array $objects_by_module Objects for a single group. See hook_daily_push_notification_objects_alter().
+ * @param int $gid Group id
+ * @return array
+ */
+function _cluster_api_daily_notification_link_data($objects_by_module, $gid) {
+  if (count($objects_by_module) > 1)
+    // There are multiple types of objects, so just link to the group screen.
+    return ['link' => 'group', 'id' => $gid];
+
+  $module = key($objects_by_module);
+
+  return module_invoke($module, 'cluster_api_link_data', $objects_by_module[$module], $gid);
+}
+
+/**
+ * If there is a single object, calls
+ *
+ * @param array $object_ids_by_module Objects for a single group. See hook_daily_push_notification_objects_alter().
+ * @return string
+ */
+function _cluster_api_daily_notification_body($object_ids_by_module) {
+  $data = [];
+  foreach ($object_ids_by_module as $module => $object_ids) {
+    $label = module_invoke($module, 'cluster_api_objects_label', $object_ids);
+    if (!$label)
+      continue;
+
+    $data[$module] = [
+      'label' => $label,
+      'ids' => $object_ids,
+      'weight' => module_invoke($module, 'cluster_api_weight'),
+    ];
+  }
+
+  if (count($data) === 0)
+    return '';
+
+  if (count($data) === 1) {
+    $module = key($data);
+    $datum = current($data);
+    $object_ids = $datum['ids'];
+    $label = $datum['label'];
+
+    if (count($object_ids) === 1) {
+      // E.g. 'A document was added recently: "My document title"'
+
+      $title = module_invoke($module, 'cluster_api_object_title', current($object_ids));
+      if (!$title)
+        return '';
+
+      return t('@object was added recently: @title', [
+        '@object' => drupal_ucfirst($label),
+        '@title' => $title,
+      ]);
+    } else {
+      // E.g. '4 documents were added recently.'
+      return t('@objects were added recently.', [
+        '@objects' => drupal_ucfirst($label),
+      ]);
+    }
+  }
+
+  // E.g. "4 documents, 2 pages and a factsheet were added recently."
+  usort($data, function($a, $b) {return $a['weight'] - $b['weight'];});
+  $items = [];
+  foreach ($data as $module => $datum)
+    $items[] = $datum['label'];
+  return t('@objects were added recently.', ['@objects' => _cluster_api_list_and($items, TRUE)]);
+}
+
+function _cluster_api_list_and($items, $ucfirst) {
+  if ($ucfirst && count($items) > 0)
+    $items[0] = ucfirst($items[0]);
+
+  switch (count($items)) {
+    case 0:
+      return '';
+    case 1:
+      return $items[0];
+    default:
+      return implode(', ', array_slice($items, 0, count($items) - 1))
+        . ' and ' . array_pop($items);
+  }
+}
+
+/**
+ * @param stdClass $group Node object
+ * @return string E.g. "Vanuatu Ambae Volcano 2018 (response)", "Africa (region)"
+ */
+function _cluster_api_daily_notification_title($group) {
+  $display = GroupDisplayProvider::getDisplayProvider($group);
+
+  $title = $group->title;
+
+  $type_label = $display->getGroupTypeLabel();
+  if ($type_label)
+    $title .= ' ('.$type_label.')';
+
+  return $title;
+}
+
+/**
+ * Get a list of timezones for which it's acceptable to send a "daily notification" right now,
+ * i.e. the current time is anywhere from 2pm to 6pm.
+ */
+function _cluster_api_daily_notification_timezones() {
+  $all_timezones = array_keys(system_time_zones());
+
+  $filter = function($timezone) {
+    $d = new DateTime('now', new DateTimeZone($timezone));
+    $hour = intval($d->format('H'), 10);
+    return $hour >= CLUSTER_API_DAILY_WINDOW_FROM_HOUR && $hour < CLUSTER_API_DAILY_WINDOW_TO_HOUR;
+  };
+
+  return array_values(array_filter($all_timezones, $filter));
+}
+
+/**
+ * Implements hook_schema_alter().
+ */
+function cluster_api_schema_alter(&$schema) {
+  $schema['og_users_roles']['fields']['last_daily_push_notification'] = [
+    'type' => 'int',
+    'unsigned' => TRUE,
+    'not null' => TRUE,
+    'default' => 0,
+  ];
+  $schema['og_users_roles']['fields']['last_weekly_push_notification'] = [
+    'type' => 'int',
+    'unsigned' => TRUE,
+    'not null' => TRUE,
+    'default' => 0,
+  ];
 }

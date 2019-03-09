@@ -1,6 +1,6 @@
 <?php
 
-use \Drupal\cluster_api\Authorization;
+use \Drupal\cluster_api\Oauth\Authorization;
 
 /**
  * Returns the group object (with persist=true) and all its related objects.

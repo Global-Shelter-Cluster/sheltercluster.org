@@ -242,6 +242,21 @@ class GroupContentManager {
   }
 
   /**
+   * Provide a count value for all published kobo form nodes added to the group.
+   * @return
+   *  Count query result.
+   */
+  public function getWebformsCount() {
+    $query = new EntityFieldQuery();
+    return $query->entityCondition('entity_type', 'node')
+      ->entityCondition('bundle', 'webform')
+      ->fieldCondition('og_group_ref', 'target_id', $this->node->nid)
+      ->propertyCondition('status', NODE_PUBLISHED)
+      ->count()
+      ->execute();
+  }
+
+  /**
    * Get contact content for the group.
    *  @return
    */
@@ -441,6 +456,21 @@ class GroupContentManager {
     return array();
   }
 
+  public function getWebforms() {
+    $query = new EntityFieldQuery();
+    $res = $query->entityCondition('entity_type', 'node')
+      ->entityCondition('bundle', 'webform')
+      ->fieldCondition('og_group_ref', 'target_id', $this->node->nid)
+      ->propertyCondition('status', NODE_PUBLISHED)
+      ->execute();
+
+    if (!isset($res['node'])) {
+      return array();
+    }
+
+    return array_keys($res['node']);
+  }
+
   public function getKoboForms() {
     $query = new EntityFieldQuery();
     $res = $query->entityCondition('entity_type', 'node')
@@ -521,21 +551,62 @@ class GroupContentManager {
 
   /**
    * Get all users with specified role for a group.
-   * @param $role_name
+   * @param string $role_name
    *  The role name as stored in the database.
+   * @param NULL|string[] $filter_user_timezones
+   *  Only return users with one of the given timezones, e.g. ["Europe/Budapest", "Americas/New_York"]
+   * @param NULL|callable $query_alter
+   *  Callback that alters the query (e.g. can add conditions to it).
    * @return Array of user IDs.
    */
-  public function getUsersByRole($role_name, $node) {
-    $rid = $this->getRoleIdByName($role_name, $node->type);
+  public function getUsersByRole($role_name, $filter_user_timezones = NULL, $query_alter = NULL) {
+    $rid = $this->getRoleIdByName($role_name, $this->node->type);
     if (!$rid) {
       return;
     }
 
-    return db_select('og_users_roles', 'og_ur')
-      ->fields('og_ur', array('uid'))
-      ->condition('gid', $node->nid)
-      ->condition('rid', $rid)
-      ->execute()->fetchCol();
+    $query = db_select('og_users_roles', 'og_ur')
+      ->fields('og_ur', array('uid'));
+
+    if (!is_null($filter_user_timezones)) {
+      $query->join('users', 'u', 'og_ur.uid = u.uid');
+      $query->condition('u.timezone', $filter_user_timezones, 'IN');
+    }
+
+    $query->condition('og_ur.gid', $this->node->nid);
+    $query->condition('og_ur.rid', $rid);
+
+    if (!is_null($query_alter))
+      $query_alter($query);
+
+    return $query->execute()->fetchCol();
+  }
+
+  /**
+   * Set the current timestamp (using the REQUEST_TIME const) into a field on the og_users_roles table,
+   * for the given role and user ids.
+   *
+   * In order for this to work, the field name must already exist in the table (see cluster_api.install
+   * for an example).
+   *
+   * @param string $role_name See self::getUsersByRole()
+   * @param $uids int[]
+   * @param $field_name string E.g. "last_daily_push_notification"
+   */
+  public function updateUsersTimestamp($role_name, $uids, $field_name) {
+    $rid = $this->getRoleIdByName($role_name, $this->node->type);
+    if (!$rid)
+      return;
+
+    $query = db_update('og_users_roles')
+      ->fields([
+        $field_name => REQUEST_TIME,
+      ])
+      ->condition('uid', $uids, 'IN')
+      ->condition('gid', $this->node->nid)
+      ->condition('rid', $rid);
+
+    $query->execute();
   }
 
   public function getDescendantIds($include_self = FALSE, &$collected_nids = array()) {

@@ -1,6 +1,6 @@
 <?php
 
-use \Drupal\cluster_api\Authorization;
+use \Drupal\cluster_api\Oauth\Authorization;
 
 function _cluster_api_logout($request) {
   watchdog('cluster_api_logout', json_encode($request));

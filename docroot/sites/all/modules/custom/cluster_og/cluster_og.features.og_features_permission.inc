@@ -85,6 +85,16 @@ function cluster_og_og_features_default_permissions() {
     ),
   );
 
+  // Exported og permission: 'node:community_of_practice:create photo_gallery content'
+  $permissions['node:community_of_practice:create photo_gallery content'] = array(
+    'roles' => array(),
+  );
+
+  // Exported og permission: 'node:community_of_practice:create webform content'
+  $permissions['node:community_of_practice:create webform content'] = array(
+    'roles' => array(),
+  );
+
   // Exported og permission: 'node:community_of_practice:delete any arbitrary_library content'
   $permissions['node:community_of_practice:delete any arbitrary_library content'] = array(
     'roles' => array(
@@ -139,6 +149,16 @@ function cluster_og_og_features_default_permissions() {
     ),
   );
 
+  // Exported og permission: 'node:community_of_practice:delete any photo_gallery content'
+  $permissions['node:community_of_practice:delete any photo_gallery content'] = array(
+    'roles' => array(),
+  );
+
+  // Exported og permission: 'node:community_of_practice:delete any webform content'
+  $permissions['node:community_of_practice:delete any webform content'] = array(
+    'roles' => array(),
+  );
+
   // Exported og permission: 'node:community_of_practice:delete own arbitrary_library content'
   $permissions['node:community_of_practice:delete own arbitrary_library content'] = array(
     'roles' => array(
@@ -191,6 +211,16 @@ function cluster_og_og_features_default_permissions() {
     'roles' => array(
       'member' => 'member',
     ),
+  );
+
+  // Exported og permission: 'node:community_of_practice:delete own photo_gallery content'
+  $permissions['node:community_of_practice:delete own photo_gallery content'] = array(
+    'roles' => array(),
+  );
+
+  // Exported og permission: 'node:community_of_practice:delete own webform content'
+  $permissions['node:community_of_practice:delete own webform content'] = array(
+    'roles' => array(),
   );
 
   // Exported og permission: 'node:community_of_practice:manage members'
@@ -287,6 +317,16 @@ function cluster_og_og_features_default_permissions() {
     ),
   );
 
+  // Exported og permission: 'node:community_of_practice:update any photo_gallery content'
+  $permissions['node:community_of_practice:update any photo_gallery content'] = array(
+    'roles' => array(),
+  );
+
+  // Exported og permission: 'node:community_of_practice:update any webform content'
+  $permissions['node:community_of_practice:update any webform content'] = array(
+    'roles' => array(),
+  );
+
   // Exported og permission: 'node:community_of_practice:update group'
   $permissions['node:community_of_practice:update group'] = array(
     'roles' => array(
@@ -346,6 +386,16 @@ function cluster_og_og_features_default_permissions() {
     'roles' => array(
       'member' => 'member',
     ),
+  );
+
+  // Exported og permission: 'node:community_of_practice:update own photo_gallery content'
+  $permissions['node:community_of_practice:update own photo_gallery content'] = array(
+    'roles' => array(),
+  );
+
+  // Exported og permission: 'node:community_of_practice:update own webform content'
+  $permissions['node:community_of_practice:update own webform content'] = array(
+    'roles' => array(),
   );
 
   // Exported og permission: 'node:geographic_region:add user'
@@ -429,6 +479,16 @@ function cluster_og_og_features_default_permissions() {
     ),
   );
 
+  // Exported og permission: 'node:geographic_region:create photo_gallery content'
+  $permissions['node:geographic_region:create photo_gallery content'] = array(
+    'roles' => array(),
+  );
+
+  // Exported og permission: 'node:geographic_region:create webform content'
+  $permissions['node:geographic_region:create webform content'] = array(
+    'roles' => array(),
+  );
+
   // Exported og permission: 'node:geographic_region:delete any arbitrary_library content'
   $permissions['node:geographic_region:delete any arbitrary_library content'] = array(
     'roles' => array(
@@ -481,6 +541,16 @@ function cluster_og_og_features_default_permissions() {
     'roles' => array(
       'administrator member' => 'administrator member',
     ),
+  );
+
+  // Exported og permission: 'node:geographic_region:delete any photo_gallery content'
+  $permissions['node:geographic_region:delete any photo_gallery content'] = array(
+    'roles' => array(),
+  );
+
+  // Exported og permission: 'node:geographic_region:delete any webform content'
+  $permissions['node:geographic_region:delete any webform content'] = array(
+    'roles' => array(),
   );
 
   // Exported og permission: 'node:geographic_region:delete own arbitrary_library content'
@@ -541,6 +611,16 @@ function cluster_og_og_features_default_permissions() {
     'roles' => array(
       'administrator member' => 'administrator member',
     ),
+  );
+
+  // Exported og permission: 'node:geographic_region:delete own photo_gallery content'
+  $permissions['node:geographic_region:delete own photo_gallery content'] = array(
+    'roles' => array(),
+  );
+
+  // Exported og permission: 'node:geographic_region:delete own webform content'
+  $permissions['node:geographic_region:delete own webform content'] = array(
+    'roles' => array(),
   );
 
   // Exported og permission: 'node:geographic_region:manage members'
@@ -639,6 +719,16 @@ function cluster_og_og_features_default_permissions() {
     ),
   );
 
+  // Exported og permission: 'node:geographic_region:update any photo_gallery content'
+  $permissions['node:geographic_region:update any photo_gallery content'] = array(
+    'roles' => array(),
+  );
+
+  // Exported og permission: 'node:geographic_region:update any webform content'
+  $permissions['node:geographic_region:update any webform content'] = array(
+    'roles' => array(),
+  );
+
   // Exported og permission: 'node:geographic_region:update group'
   $permissions['node:geographic_region:update group'] = array(
     'roles' => array(
@@ -704,6 +794,16 @@ function cluster_og_og_features_default_permissions() {
     'roles' => array(
       'administrator member' => 'administrator member',
     ),
+  );
+
+  // Exported og permission: 'node:geographic_region:update own photo_gallery content'
+  $permissions['node:geographic_region:update own photo_gallery content'] = array(
+    'roles' => array(),
+  );
+
+  // Exported og permission: 'node:geographic_region:update own webform content'
+  $permissions['node:geographic_region:update own webform content'] = array(
+    'roles' => array(),
   );
 
   // Exported og permission: 'node:hub:add user'
@@ -787,6 +887,16 @@ function cluster_og_og_features_default_permissions() {
     ),
   );
 
+  // Exported og permission: 'node:hub:create photo_gallery content'
+  $permissions['node:hub:create photo_gallery content'] = array(
+    'roles' => array(),
+  );
+
+  // Exported og permission: 'node:hub:create webform content'
+  $permissions['node:hub:create webform content'] = array(
+    'roles' => array(),
+  );
+
   // Exported og permission: 'node:hub:delete any arbitrary_library content'
   $permissions['node:hub:delete any arbitrary_library content'] = array(
     'roles' => array(
@@ -839,6 +949,16 @@ function cluster_og_og_features_default_permissions() {
     'roles' => array(
       'administrator member' => 'administrator member',
     ),
+  );
+
+  // Exported og permission: 'node:hub:delete any photo_gallery content'
+  $permissions['node:hub:delete any photo_gallery content'] = array(
+    'roles' => array(),
+  );
+
+  // Exported og permission: 'node:hub:delete any webform content'
+  $permissions['node:hub:delete any webform content'] = array(
+    'roles' => array(),
   );
 
   // Exported og permission: 'node:hub:delete own arbitrary_library content'
@@ -899,6 +1019,16 @@ function cluster_og_og_features_default_permissions() {
     'roles' => array(
       'administrator member' => 'administrator member',
     ),
+  );
+
+  // Exported og permission: 'node:hub:delete own photo_gallery content'
+  $permissions['node:hub:delete own photo_gallery content'] = array(
+    'roles' => array(),
+  );
+
+  // Exported og permission: 'node:hub:delete own webform content'
+  $permissions['node:hub:delete own webform content'] = array(
+    'roles' => array(),
   );
 
   // Exported og permission: 'node:hub:manage members'
@@ -997,6 +1127,16 @@ function cluster_og_og_features_default_permissions() {
     ),
   );
 
+  // Exported og permission: 'node:hub:update any photo_gallery content'
+  $permissions['node:hub:update any photo_gallery content'] = array(
+    'roles' => array(),
+  );
+
+  // Exported og permission: 'node:hub:update any webform content'
+  $permissions['node:hub:update any webform content'] = array(
+    'roles' => array(),
+  );
+
   // Exported og permission: 'node:hub:update group'
   $permissions['node:hub:update group'] = array(
     'roles' => array(
@@ -1064,6 +1204,16 @@ function cluster_og_og_features_default_permissions() {
     ),
   );
 
+  // Exported og permission: 'node:hub:update own photo_gallery content'
+  $permissions['node:hub:update own photo_gallery content'] = array(
+    'roles' => array(),
+  );
+
+  // Exported og permission: 'node:hub:update own webform content'
+  $permissions['node:hub:update own webform content'] = array(
+    'roles' => array(),
+  );
+
   // Exported og permission: 'node:response:add user'
   $permissions['node:response:add user'] = array(
     'roles' => array(
@@ -1127,7 +1277,9 @@ function cluster_og_og_features_default_permissions() {
 
   // Exported og permission: 'node:response:create kobo_form content'
   $permissions['node:response:create kobo_form content'] = array(
-    'roles' => array(),
+    'roles' => array(
+      'administrator member' => 'administrator member',
+    ),
   );
 
   // Exported og permission: 'node:response:create library content'
@@ -1140,6 +1292,18 @@ function cluster_og_og_features_default_permissions() {
 
   // Exported og permission: 'node:response:create page content'
   $permissions['node:response:create page content'] = array(
+    'roles' => array(
+      'administrator member' => 'administrator member',
+    ),
+  );
+
+  // Exported og permission: 'node:response:create photo_gallery content'
+  $permissions['node:response:create photo_gallery content'] = array(
+    'roles' => array(),
+  );
+
+  // Exported og permission: 'node:response:create webform content'
+  $permissions['node:response:create webform content'] = array(
     'roles' => array(
       'administrator member' => 'administrator member',
     ),
@@ -1182,7 +1346,9 @@ function cluster_og_og_features_default_permissions() {
 
   // Exported og permission: 'node:response:delete any kobo_form content'
   $permissions['node:response:delete any kobo_form content'] = array(
-    'roles' => array(),
+    'roles' => array(
+      'administrator member' => 'administrator member',
+    ),
   );
 
   // Exported og permission: 'node:response:delete any library content'
@@ -1194,6 +1360,18 @@ function cluster_og_og_features_default_permissions() {
 
   // Exported og permission: 'node:response:delete any page content'
   $permissions['node:response:delete any page content'] = array(
+    'roles' => array(
+      'administrator member' => 'administrator member',
+    ),
+  );
+
+  // Exported og permission: 'node:response:delete any photo_gallery content'
+  $permissions['node:response:delete any photo_gallery content'] = array(
+    'roles' => array(),
+  );
+
+  // Exported og permission: 'node:response:delete any webform content'
+  $permissions['node:response:delete any webform content'] = array(
     'roles' => array(
       'administrator member' => 'administrator member',
     ),
@@ -1241,7 +1419,9 @@ function cluster_og_og_features_default_permissions() {
 
   // Exported og permission: 'node:response:delete own kobo_form content'
   $permissions['node:response:delete own kobo_form content'] = array(
-    'roles' => array(),
+    'roles' => array(
+      'administrator member' => 'administrator member',
+    ),
   );
 
   // Exported og permission: 'node:response:delete own library content'
@@ -1254,6 +1434,18 @@ function cluster_og_og_features_default_permissions() {
 
   // Exported og permission: 'node:response:delete own page content'
   $permissions['node:response:delete own page content'] = array(
+    'roles' => array(
+      'administrator member' => 'administrator member',
+    ),
+  );
+
+  // Exported og permission: 'node:response:delete own photo_gallery content'
+  $permissions['node:response:delete own photo_gallery content'] = array(
+    'roles' => array(),
+  );
+
+  // Exported og permission: 'node:response:delete own webform content'
+  $permissions['node:response:delete own webform content'] = array(
     'roles' => array(
       'administrator member' => 'administrator member',
     ),
@@ -1338,7 +1530,9 @@ function cluster_og_og_features_default_permissions() {
 
   // Exported og permission: 'node:response:update any kobo_form content'
   $permissions['node:response:update any kobo_form content'] = array(
-    'roles' => array(),
+    'roles' => array(
+      'administrator member' => 'administrator member',
+    ),
   );
 
   // Exported og permission: 'node:response:update any library content'
@@ -1350,6 +1544,18 @@ function cluster_og_og_features_default_permissions() {
 
   // Exported og permission: 'node:response:update any page content'
   $permissions['node:response:update any page content'] = array(
+    'roles' => array(
+      'administrator member' => 'administrator member',
+    ),
+  );
+
+  // Exported og permission: 'node:response:update any photo_gallery content'
+  $permissions['node:response:update any photo_gallery content'] = array(
+    'roles' => array(),
+  );
+
+  // Exported og permission: 'node:response:update any webform content'
+  $permissions['node:response:update any webform content'] = array(
     'roles' => array(
       'administrator member' => 'administrator member',
     ),
@@ -1404,7 +1610,9 @@ function cluster_og_og_features_default_permissions() {
 
   // Exported og permission: 'node:response:update own kobo_form content'
   $permissions['node:response:update own kobo_form content'] = array(
-    'roles' => array(),
+    'roles' => array(
+      'administrator member' => 'administrator member',
+    ),
   );
 
   // Exported og permission: 'node:response:update own library content'
@@ -1417,6 +1625,18 @@ function cluster_og_og_features_default_permissions() {
 
   // Exported og permission: 'node:response:update own page content'
   $permissions['node:response:update own page content'] = array(
+    'roles' => array(
+      'administrator member' => 'administrator member',
+    ),
+  );
+
+  // Exported og permission: 'node:response:update own photo_gallery content'
+  $permissions['node:response:update own photo_gallery content'] = array(
+    'roles' => array(),
+  );
+
+  // Exported og permission: 'node:response:update own webform content'
+  $permissions['node:response:update own webform content'] = array(
     'roles' => array(
       'administrator member' => 'administrator member',
     ),
@@ -1503,6 +1723,19 @@ function cluster_og_og_features_default_permissions() {
     ),
   );
 
+  // Exported og permission: 'node:strategic_advisory:create photo_gallery content'
+  $permissions['node:strategic_advisory:create photo_gallery content'] = array(
+    'roles' => array(),
+  );
+
+  // Exported og permission: 'node:strategic_advisory:create webform content'
+  $permissions['node:strategic_advisory:create webform content'] = array(
+    'roles' => array(
+      'administrator member' => 'administrator member',
+      'member' => 'member',
+    ),
+  );
+
   // Exported og permission: 'node:strategic_advisory:delete any arbitrary_library content'
   $permissions['node:strategic_advisory:delete any arbitrary_library content'] = array(
     'roles' => array(
@@ -1552,6 +1785,18 @@ function cluster_og_og_features_default_permissions() {
 
   // Exported og permission: 'node:strategic_advisory:delete any page content'
   $permissions['node:strategic_advisory:delete any page content'] = array(
+    'roles' => array(
+      'administrator member' => 'administrator member',
+    ),
+  );
+
+  // Exported og permission: 'node:strategic_advisory:delete any photo_gallery content'
+  $permissions['node:strategic_advisory:delete any photo_gallery content'] = array(
+    'roles' => array(),
+  );
+
+  // Exported og permission: 'node:strategic_advisory:delete any webform content'
+  $permissions['node:strategic_advisory:delete any webform content'] = array(
     'roles' => array(
       'administrator member' => 'administrator member',
     ),
@@ -1612,6 +1857,18 @@ function cluster_og_og_features_default_permissions() {
 
   // Exported og permission: 'node:strategic_advisory:delete own page content'
   $permissions['node:strategic_advisory:delete own page content'] = array(
+    'roles' => array(
+      'administrator member' => 'administrator member',
+    ),
+  );
+
+  // Exported og permission: 'node:strategic_advisory:delete own photo_gallery content'
+  $permissions['node:strategic_advisory:delete own photo_gallery content'] = array(
+    'roles' => array(),
+  );
+
+  // Exported og permission: 'node:strategic_advisory:delete own webform content'
+  $permissions['node:strategic_advisory:delete own webform content'] = array(
     'roles' => array(
       'administrator member' => 'administrator member',
     ),
@@ -1709,6 +1966,18 @@ function cluster_og_og_features_default_permissions() {
     ),
   );
 
+  // Exported og permission: 'node:strategic_advisory:update any photo_gallery content'
+  $permissions['node:strategic_advisory:update any photo_gallery content'] = array(
+    'roles' => array(),
+  );
+
+  // Exported og permission: 'node:strategic_advisory:update any webform content'
+  $permissions['node:strategic_advisory:update any webform content'] = array(
+    'roles' => array(
+      'administrator member' => 'administrator member',
+    ),
+  );
+
   // Exported og permission: 'node:strategic_advisory:update group'
   $permissions['node:strategic_advisory:update group'] = array(
     'roles' => array(
@@ -1773,6 +2042,19 @@ function cluster_og_og_features_default_permissions() {
   $permissions['node:strategic_advisory:update own page content'] = array(
     'roles' => array(
       'administrator member' => 'administrator member',
+    ),
+  );
+
+  // Exported og permission: 'node:strategic_advisory:update own photo_gallery content'
+  $permissions['node:strategic_advisory:update own photo_gallery content'] = array(
+    'roles' => array(),
+  );
+
+  // Exported og permission: 'node:strategic_advisory:update own webform content'
+  $permissions['node:strategic_advisory:update own webform content'] = array(
+    'roles' => array(
+      'administrator member' => 'administrator member',
+      'member' => 'member',
     ),
   );
 
@@ -1857,6 +2139,16 @@ function cluster_og_og_features_default_permissions() {
     ),
   );
 
+  // Exported og permission: 'node:working_group:create photo_gallery content'
+  $permissions['node:working_group:create photo_gallery content'] = array(
+    'roles' => array(),
+  );
+
+  // Exported og permission: 'node:working_group:create webform content'
+  $permissions['node:working_group:create webform content'] = array(
+    'roles' => array(),
+  );
+
   // Exported og permission: 'node:working_group:delete any arbitrary_library content'
   $permissions['node:working_group:delete any arbitrary_library content'] = array(
     'roles' => array(
@@ -1909,6 +2201,16 @@ function cluster_og_og_features_default_permissions() {
     'roles' => array(
       'administrator member' => 'administrator member',
     ),
+  );
+
+  // Exported og permission: 'node:working_group:delete any photo_gallery content'
+  $permissions['node:working_group:delete any photo_gallery content'] = array(
+    'roles' => array(),
+  );
+
+  // Exported og permission: 'node:working_group:delete any webform content'
+  $permissions['node:working_group:delete any webform content'] = array(
+    'roles' => array(),
   );
 
   // Exported og permission: 'node:working_group:delete own arbitrary_library content'
@@ -1969,6 +2271,16 @@ function cluster_og_og_features_default_permissions() {
     'roles' => array(
       'administrator member' => 'administrator member',
     ),
+  );
+
+  // Exported og permission: 'node:working_group:delete own photo_gallery content'
+  $permissions['node:working_group:delete own photo_gallery content'] = array(
+    'roles' => array(),
+  );
+
+  // Exported og permission: 'node:working_group:delete own webform content'
+  $permissions['node:working_group:delete own webform content'] = array(
+    'roles' => array(),
   );
 
   // Exported og permission: 'node:working_group:manage members'
@@ -2063,6 +2375,16 @@ function cluster_og_og_features_default_permissions() {
     ),
   );
 
+  // Exported og permission: 'node:working_group:update any photo_gallery content'
+  $permissions['node:working_group:update any photo_gallery content'] = array(
+    'roles' => array(),
+  );
+
+  // Exported og permission: 'node:working_group:update any webform content'
+  $permissions['node:working_group:update any webform content'] = array(
+    'roles' => array(),
+  );
+
   // Exported og permission: 'node:working_group:update group'
   $permissions['node:working_group:update group'] = array(
     'roles' => array(
@@ -2128,6 +2450,16 @@ function cluster_og_og_features_default_permissions() {
     'roles' => array(
       'administrator member' => 'administrator member',
     ),
+  );
+
+  // Exported og permission: 'node:working_group:update own photo_gallery content'
+  $permissions['node:working_group:update own photo_gallery content'] = array(
+    'roles' => array(),
+  );
+
+  // Exported og permission: 'node:working_group:update own webform content'
+  $permissions['node:working_group:update own webform content'] = array(
+    'roles' => array(),
   );
 
   return $permissions;

@@ -88,10 +88,17 @@ class GroupDisplayProvider {
 
   public function getGroupTypeLabel($type = NULL, $plural = FALSE) {
     if (is_null($type))
-      $type = $this->node->type;
+      $type2 = $this->node->type;
+    else
+      $type2 = $type;
 
-    switch ($type) {
+    switch ($type2) {
       case 'geographic_region':
+        if (is_null($type)) {
+          $wrapper = entity_metadata_wrapper('node', $this->node);
+          if (strtolower(trim($wrapper->field_geographic_region_type->value()->name)) === 'country')
+            return $plural ? 'countries' : 'country';
+        }
         return $plural ? 'regions' : 'region';
       case 'hub':
         return $plural ? 'hubs' : 'hub';
@@ -215,16 +222,18 @@ class GroupDisplayProvider {
       ];
     }
 
-    $kobo_forms_count = $this->manager->getKoboFormsCount();
-    if (cluster_kobo_is_group_kobo_forms_page() || ($kobo_forms_count > 0)) {
-      $items['kobo_forms'] = [
-        'label' => t('Assessment forms'),
-        'path' => 'node/' . $this->node->nid . '/kobo-forms',
-        'total' => $kobo_forms_count,
-        'options' => [
-          'html' => TRUE,
-        ],
-      ];
+    if (module_exists('cluster_assessment')) {
+      $forms_count = cluster_assessment_total_count($this->node->nid);
+      if (cluster_assessment_is_group_forms_page() || ($forms_count > 0)) {
+        $items['assessment_forms'] = [
+          'label' => t('Assessment forms'),
+          'path' => 'node/' . $this->node->nid . '/assessment-forms',
+          'total' => $forms_count,
+          'options' => [
+            'html' => TRUE,
+          ],
+        ];
+      }
     }
 
     drupal_alter('cluster_og_dashboard_menu', $items);

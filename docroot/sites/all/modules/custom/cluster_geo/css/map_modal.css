@@ -1,0 +1,62 @@
+.geolocation-map-modal {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1990;
+}
+
+.geolocation-map-modal .overlay {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1995;
+  background: rgba(0,0,0,0.85);
+}
+
+.geolocation-map-modal .modal_content {
+  z-index: 1999;
+  position: absolute;
+  top: 15%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-height: 90%;
+  overflow: auto;
+  background: #fff;
+  box-sizing: border-box;
+  padding: 20px;
+  box-shadow: 0 1px 5px rgba(0,0,0,0.7);
+  border-radius: 4px;
+  margin-top: 15%;
+  width: 800px;
+}
+
+.geolocation-map-modal .modal_content > h2 {
+  font-size: 28px;
+  font-weight: 200;
+  margin: 20px 0 40px;
+  text-align: center;
+}
+
+.geolocation-map-modal .modal_content .buttons_wrapper {
+  padding: 20px;
+}
+
+.geolocation-map-modal .close_modal {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  cursor: pointer;
+  font-size: 18px;
+  opacity: 0.5;
+  background: none;
+  border: none;
+  transition: opacity 0.2s ease;
+}
+
+.geolocation-map-modal .close_modal:hover {
+  opacity: 0.9;
+}

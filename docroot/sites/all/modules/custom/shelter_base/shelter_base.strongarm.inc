@@ -258,6 +258,11 @@ function shelter_base_strongarm() {
     'comment' => 0,
     'field_collection_item' => 0,
     'flagging' => 0,
+    'oauth2_server' => 0,
+    'oauth2_server_scope' => 0,
+    'oauth2_server_client' => 0,
+    'oauth2_server_token' => 0,
+    'oauth2_server_authorization_code' => 0,
     'og_membership_type' => 0,
     'og_membership' => 0,
     'user' => 0,
@@ -459,7 +464,7 @@ function shelter_base_strongarm() {
   $strongarm->value = array(
     'default_language' => 'en',
     'hide_language_selector' => 0,
-    'exclude_language_none' => 1,
+    'exclude_language_none' => 0,
     'lock_language' => 0,
     'shared_fields_original_only' => 0,
   );
