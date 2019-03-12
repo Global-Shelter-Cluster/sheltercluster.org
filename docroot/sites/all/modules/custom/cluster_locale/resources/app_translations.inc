@@ -1,5 +1,7 @@
 <?php
 
+use \Drupal\cluster_api\Oauth\Authorization;
+
 /**
  * Example:
  *
@@ -16,6 +18,7 @@
  * @return array
  */
 function _cluster_locale_translations_retrieve($language_code) {
+  watchdog('cluster_local', $language_code);
   $enabled_languages = variable_get('cluster_locale_mobile_enabled_languages', array());
 
   if (!isset($enabled_languages[$language_code])) {

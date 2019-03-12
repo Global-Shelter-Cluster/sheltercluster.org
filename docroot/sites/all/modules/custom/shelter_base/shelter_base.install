@@ -125,3 +125,10 @@ function shelter_base_update_7170() {
 function shelter_base_update_7171() {
   module_enable(['flood_unblock']);
 }
+
+/**
+ * Enable cluster_locale.
+ */
+function shelter_base_update_7172() {
+  module_enable(['cluster_locale']);
+}
