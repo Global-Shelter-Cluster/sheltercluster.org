@@ -326,16 +326,7 @@ function _cluster_api_set_push_notification_token($user, $token) {
   }
 
   // Test if other users have the same token, and remove the token for those users.
-  $query = new EntityFieldQuery();
-  $result = $query->entityCondition('entity_type', 'user')
-    ->fieldCondition('field_push_token', 'value', $token, '=')
-    ->execute();
-
-  if (isset($result['user'])) {
-    foreach (array_keys($result['user']) as $uid) {
-      _cluster_api_clear_push_token_for_user($token, $uid);
-    }
-  }
+  _cluster_api_clear_push_token($token);
 
   // Save the token to the user profile.
   $wrapper = entity_metadata_wrapper('user', $user);
@@ -364,6 +355,27 @@ function _cluster_api_clear_push_token_for_user($token, $uid) {
   catch(\Exception $e) {
     watchdog('cluster_api', 'Entity metadata wrapper error when removing push notification tokens: ' . $e->getMessage());
   }
+}
+
+/**
+ * Remove push notification token from any user that may have it associated.
+ */
+function _cluster_api_clear_push_token($token) {
+  $removed_count = 0;
+
+  $query = new EntityFieldQuery();
+  $result = $query->entityCondition('entity_type', 'user')
+    ->fieldCondition('field_push_token', 'value', $token, '=')
+    ->execute();
+
+  if (isset($result['user'])) {
+    foreach (array_keys($result['user']) as $uid) {
+      _cluster_api_clear_push_token_for_user($token, $uid);
+      $removed_count++;
+    }
+  }
+
+  return $removed_count;
 }
 
 /**
