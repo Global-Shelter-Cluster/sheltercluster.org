@@ -1,0 +1,228 @@
+# LANGUAGE translation of PROJECT
+# Copyright (c) YEAR NAME <EMAIL@ADDRESS>
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"POT-Creation-Date: 2019-03-12 21:03+0000\n"
+"PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
+"Last-Translator: NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+
+msgid "Queued assessment form submissions"
+msgstr ""
+
+msgid "App testing string"
+msgstr ""
+
+# Search components
+msgid "Featured"
+msgstr ""
+
+msgid "Key document"
+msgstr ""
+
+msgid "Community of practice"
+msgstr ""
+
+msgid "Geographic region"
+msgstr ""
+
+msgid "Hub"
+msgstr ""
+
+msgid "Response"
+msgstr ""
+
+msgid "Discussion"
+msgstr ""
+
+msgid "Strategic Advisory Group"
+msgstr ""
+
+msgid "Working Group"
+msgstr ""
+
+msgid "Library"
+msgstr ""
+
+msgid "Article"
+msgstr ""
+
+msgid "Discussion"
+msgstr ""
+
+# Multiselect factory
+msgid "Search Items..."
+msgstr ""
+
+msgid "View"
+msgstr ""
+
+msgid "Map"
+msgstr ""
+
+msgid "Download"
+msgstr ""
+
+msgid "Skip for now"
+msgstr ""
+
+msgid "Loading..."
+msgstr ""
+
+msgid "Follow"
+msgstr ""
+
+msgid "Un-follow"
+msgstr ""
+
+msgid "Website"
+msgstr ""
+
+msgid "Countries"
+msgstr ""
+
+msgid "Regions"
+msgstr ""
+
+msgid "In"
+msgstr ""
+
+msgid "Related to"
+msgstr ""
+
+msgid "Useful links"
+msgstr ""
+
+msgid "Submitting assessment form"
+msgstr ""
+
+msgid "Downloading file"
+msgstr ""
+
+msgid "Offline"
+msgstr ""
+
+msgid "Technical information"
+msgstr ""
+
+msgid "PROGRAM/INITIATIVE/ACTIVITY UNDERTAKEN WITH THE FINANCIAL SUPPORT OF THE GOVERNMENT OF CANADA PROVIDED THROUGH GLOBAL AFFAIRS CANADA (GAC)"
+msgstr ""
+
+msgid "THIS APP IS MADE POSSIBLE THROUGH THE FINANCIAL AND IN-KIND CONTRIBUTIONS OF"
+msgstr ""
+
+msgid "Search"
+msgstr ""
+
+msgid "Select"
+msgstr ""
+
+msgid "Submit"
+msgstr ""
+
+msgid "name"
+msgstr ""
+
+msgid "Settings"
+msgstr ""
+
+# Nav
+msgid "Document"
+msgstr ""
+
+msgid "Event"
+msgstr ""
+
+msgid "Factsheet"
+msgstr ""
+
+msgid "KoboForm"
+msgstr ""
+
+msgid "Webform"
+msgstr ""
+
+msgid "Group"
+msgstr ""
+
+msgid "WebsiteViewer"
+msgstr ""
+
+msgid "AlertList"
+msgstr ""
+
+msgid "Contact"
+msgstr ""
+
+msgid "UserList"
+msgstr ""
+
+msgid "ReportList"
+msgstr ""
+
+msgid "DocumentList"
+msgstr ""
+
+msgid "Auth"
+msgstr ""
+
+msgid "Settings"
+msgstr ""
+
+msgid "User"
+msgstr ""
+
+#
+
+msgid "Assessment forms"
+msgstr ""
+
+msgid "Recent documents"
+msgstr ""
+
+msgid "Featured documents"
+msgstr ""
+
+msgid "Key documents"
+msgstr ""
+
+msgid "All documents"
+msgstr ""
+
+msgid "Documents"
+msgstr ""
+
+msgid "Upcoming events"
+msgstr ""
+
+msgid "Events"
+msgstr ""
+
+msgid "Latest factsheet"
+msgstr ""
+
+msgid "Factsheets"
+msgstr ""
+
+msgid "Log out"
+msgstr ""
+
+msgid "and"
+msgstr ""
+
+msgid "Photo gallery"
+msgstr ""
+
+msgid "Integer"
+msgstr ""
+
+msgid "Unknown error, please try again"
+msgstr ""
+
+# NEXT: /screens
