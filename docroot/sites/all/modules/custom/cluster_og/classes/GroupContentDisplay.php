@@ -88,10 +88,17 @@ class GroupDisplayProvider {
 
   public function getGroupTypeLabel($type = NULL, $plural = FALSE) {
     if (is_null($type))
-      $type = $this->node->type;
+      $type2 = $this->node->type;
+    else
+      $type2 = $type;
 
-    switch ($type) {
+    switch ($type2) {
       case 'geographic_region':
+        if (is_null($type)) {
+          $wrapper = entity_metadata_wrapper('node', $this->node);
+          if (strtolower(trim($wrapper->field_geographic_region_type->value()->name)) === 'country')
+            return $plural ? 'countries' : 'country';
+        }
         return $plural ? 'regions' : 'region';
       case 'hub':
         return $plural ? 'hubs' : 'hub';

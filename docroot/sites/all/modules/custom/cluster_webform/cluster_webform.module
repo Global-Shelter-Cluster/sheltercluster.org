@@ -213,6 +213,7 @@ function _cluster_webform_get_supported_component_extra($component_type) {
   $supported = [
     'description',
   ];
+
   switch ($component_type) {
     case 'select':
       $supported = array_merge($supported, [
@@ -221,10 +222,19 @@ function _cluster_webform_get_supported_component_extra($component_type) {
         'multiple',
       ]);
       break;
+
     case 'file':
       $supported = array_merge($supported, [
         'filtering',
       ]);
+      break;
+
+    case 'geolocation':
+      $supported = array_merge($supported, [
+        'current_coordinates',
+      ]);
+      break;
+
     default:
   }
   return $supported;
