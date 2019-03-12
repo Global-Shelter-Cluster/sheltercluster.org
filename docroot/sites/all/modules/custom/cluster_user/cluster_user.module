@@ -9,3 +9,68 @@ include_once 'cluster_user.features.inc';
  * @file
  * Feature module which hanldes user parameters.
  */
+
+/**
+ * Implements hook_action_info().
+ */
+function cluster_user_action_info() {
+  return array(
+    'cluster_user_block_account' => array(
+      'type' => 'user',
+      'label' => t('Block user account'),
+      'behavior' => array('changes_property'),
+      'configurable' => FALSE,
+      'vbo_configurable' => FALSE,
+      'triggers' => array('any'),
+    ),
+    'cluster_user_unblock_account' => array(
+      'type' => 'user',
+      'label' => t('Unblock user account'),
+      'behavior' => array('changes_property'),
+      'configurable' => FALSE,
+      'vbo_configurable' => FALSE,
+      'triggers' => array('any'),
+    ),
+  );
+}
+
+/**
+ * Block the user account, set status to 0.
+ */
+function cluster_user_block_account(&$entity, $context) {
+  $entity->status = 0;
+}
+
+/**
+ * Unblock the user account, set status to 1.
+ */
+function cluster_user_unblock_account(&$entity, $context) {
+  $entity->status = 1;
+}
+
+/**
+ * Implements hook_views_default_views_alter().
+ */
+function cluster_user_views_default_views_alter(&$views) {
+  // Modify the user admin_views to include our custom actions.
+  if (isset($views['admin_views_user'])) {
+    $handler = &$views['admin_views_user']->display['default']->handler;
+    $vbo = &$handler->display->display_options['fields']['views_bulk_operations']['vbo_operations'];
+    $vbo['action::cluster_user_block_account'] = array(
+      'selected' => 1,
+      'postpone_processing' => 0,
+      'skip_confirmation' => 0,
+      'skip_permission_check' => 0,
+      'override_label' => 0,
+      'label' => '',
+    );
+    $vbo['action::cluster_user_unblock_account'] = array(
+      'selected' => 1,
+      'postpone_processing' => 0,
+      'skip_confirmation' => 0,
+      'skip_permission_check' => 0,
+      'override_label' => 0,
+      'label' => '',
+    );
+  }
+}

@@ -45,7 +45,7 @@ function _shelter_base_modules_enable($type) {
  * List of required contrib modules.
  */
 function _shelter_base_required_contrib() {
-  return array('addressfield', 'admin_menu', 'backup_migrate', 'chosen', 'ctools', 'date',
+  return array('addressfield', 'admin_menu', 'admin_views', 'backup_migrate', 'chosen', 'ctools', 'date',
     'devel', 'email', 'entity', 'entity_translation',
     'uuid', 'uuid_features', 'url', 'views', 'views_ui', 'views_bulk_operations',
     'entityreference', 'facetapi', 'features', 'field_collection', 'field_group',
@@ -110,4 +110,11 @@ function shelter_base_update_7169() {
 function shelter_base_update_X() {
   module_enable(['cluster_kobo']);
   module_enable(['cluster_api']);
+}
+
+/**
+ * Enable admin_views.
+ */
+function shelter_base_update_7170() {
+  module_enable(['admin_views']);
 }
