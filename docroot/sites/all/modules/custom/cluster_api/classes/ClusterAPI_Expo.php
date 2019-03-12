@@ -33,6 +33,7 @@ class ClusterAPI_Expo {
    */
   public function notify($tokens, array $data) {
     $currentBatch = 0;
+    $okCount = 0;
 
     while (TRUE) {
       $currentBatchTokens = array_slice($tokens, $currentBatch * self::BATCH_SIZE, self::BATCH_SIZE);
@@ -55,14 +56,19 @@ class ClusterAPI_Expo {
       $loggedTooBigAlready = FALSE;
 
       foreach ($response as $key => $item) {
-        if ($item['status'] !== 'ok') {
+        if ($item['status'] === 'ok')
+          $okCount++;
+        else {
           $token = $currentBatchTokens[$key];
           switch (isset($item['details']) && isset($item['details']['error']) ? $item['details']['error'] : NULL) {
             case 'DeviceNotRegistered':
               // Remove this push token from our database
               $removed_count = _cluster_api_clear_push_token($token);
               if ($removed_count)
-                watchdog('expo', 'Removed token @token from @count users.', ['@token' => $token, '@count' => $removed_count]);
+                watchdog('expo', 'Removed token @token from @count users.', [
+                  '@token' => $token,
+                  '@count' => $removed_count,
+                ]);
               break;
 
             case 'MessageRateExceeded':
@@ -72,7 +78,10 @@ class ClusterAPI_Expo {
               // See https://docs.expo.io/versions/latest/guides/push-notifications/
 
               if (!$sleptAlready) {
-                watchdog('expo', 'MessageRateExceeded response on token @token (and possibly others): @body', ['@token' => $token, '@body' => print_r($item, TRUE)], WATCHDOG_WARNING);
+                watchdog('expo', 'MessageRateExceeded response on token @token (and possibly others): @body', [
+                  '@token' => $token,
+                  '@body' => print_r($item, TRUE),
+                ], WATCHDOG_WARNING);
                 sleep(5);
                 $sleptAlready = TRUE;
               }
@@ -80,18 +89,31 @@ class ClusterAPI_Expo {
 
             case 'MessageTooBig':
               if (!$loggedTooBigAlready) {
-                watchdog('expo', 'MessageTooBig response on token @token (and possibly others): @body. Notification data was: @notification', ['@token' => $token, '@body' => print_r($item, TRUE), '@notification' => print_r($data, TRUE)], WATCHDOG_WARNING);
+                watchdog('expo', 'MessageTooBig response on token @token (and possibly others): @body. Notification data was: @notification', [
+                  '@token' => $token,
+                  '@body' => print_r($item, TRUE),
+                  '@notification' => print_r($data, TRUE),
+                ], WATCHDOG_WARNING);
                 $loggedTooBigAlready = TRUE;
               }
               break;
 
             case 'InvalidCredentials':
             default:
-              watchdog('expo', 'Non-ok response on token @token: @body', ['@token' => $token, '@body' => print_r($item, TRUE)], WATCHDOG_WARNING);
+              watchdog('expo', 'Non-ok response on token @token: @body', [
+                '@token' => $token,
+                '@body' => print_r($item, TRUE),
+              ], WATCHDOG_WARNING);
           }
         }
       }
     }
+
+    watchdog('expo', 'Push notification sent: @count recipient token(s); @ok succeeded: @data', [
+      '@count' => count($tokens),
+      '@ok' => $okCount,
+      '@data' => print_r($data, TRUE),
+    ], WATCHDOG_DEBUG);
   }
 
   /**
@@ -138,7 +160,10 @@ class ClusterAPI_Expo {
     ];
 
     if ($response['status_code'] != 200) {
-      watchdog('expo', 'Non-200 response from @url: @response', ['@url' => self::EXPO_API_URL, '@response' => print_r($response, TRUE)], WATCHDOG_ERROR);
+      watchdog('expo', 'Non-200 response from @url: @response', [
+        '@url' => self::EXPO_API_URL,
+        '@response' => print_r($response, TRUE),
+      ], WATCHDOG_ERROR);
     }
 
     $data = json_decode($response['body'], TRUE)['data'];
