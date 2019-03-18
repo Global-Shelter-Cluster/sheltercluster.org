@@ -42,8 +42,6 @@ class ClusterAPI_Object {
     foreach ($requests as $request)
       ClusterAPI_Type::get($request['type'], $request['id'], self::MODE_PUBLIC, FALSE, $objects, $this->current_user);
 
-    // Add available languages.
-    $objects['languages'] = cluster_locale_get_enabled_app_languages();
     return array_filter($objects);
   }
 }

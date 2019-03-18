@@ -17,3 +17,387 @@ msgstr "Soumissions en attente"
 
 msgid "App testing string"
 msgstr "Chaîne de test pour l'application"
+
+msgid "Asked to download files"
+msgstr "Permission déjà demandée"
+
+msgid "Download files"
+msgstr "Télécharger les fichiers"
+
+msgid "Allows for offline use of documents."
+msgstr "Permet l'utilisation de documents tandis que déconnecté"
+
+msgid "Only available in DEBUG mode."
+msgstr "Seulement disponible en mode DEBUG"
+
+msgid "Current language"
+msgstr "Langue courrante"
+
+msgid "Settings"
+msgstr "Configurations"
+
+msgid "Select your language"
+msgstr "Choisissez votre langue"
+
+msgid "Followed"
+msgstr "Suivit"
+
+msgid "Dashboard"
+msgstr "Tableau de bord"
+
+msgid "Logout"
+msgstr "Se déconnecter"
+
+msgid "Import all translations"
+msgstr "Importer toutes les traductions"
+
+msgid "Queued assessment form submissions"
+msgstr "temp"
+
+# Search components
+msgid "Featured"
+msgstr "En vedette"
+
+msgid "Key document"
+msgstr "Document clef"
+
+msgid "Community of practice"
+msgstr "temp"
+
+msgid "Geographic region"
+msgstr "Région géographique"
+
+msgid "Hub"
+msgstr "Cercle"
+
+msgid "Response"
+msgstr "Réponse"
+
+msgid "Discussion"
+msgstr "Discussion"
+
+msgid "Strategic Advisory Group"
+msgstr "temp"
+
+msgid "Working Group"
+msgstr "Groupe de travail"
+
+msgid "Library"
+msgstr "Librairie"
+
+msgid "Article"
+msgstr "Article"
+
+# Multiselect factory
+msgid "Search Items..."
+msgstr "Recherche"
+
+msgid "View"
+msgstr "Vue"
+
+msgid "Map"
+msgstr "Carte"
+
+msgid "Download"
+msgstr "Télécharger"
+
+msgid "Skip for now"
+msgstr "Passer pour le moment"
+
+msgid "Loading..."
+msgstr "Chargement"
+
+msgid "Follow"
+msgstr "Suivre"
+
+msgid "Un-follow"
+msgstr "Ne plus suivre"
+
+msgid "Website"
+msgstr "Site web"
+
+msgid "Countries"
+msgstr "Pays"
+
+msgid "Regions"
+msgstr "Régions"
+
+msgid "In"
+msgstr "Dans"
+
+msgid "Related to"
+msgstr "Relié à"
+
+msgid "Useful links"
+msgstr "Liens utiles"
+
+msgid "Submitting assessment form"
+msgstr "temp"
+
+msgid "Downloading file"
+msgstr "Télécharger fichier"
+
+msgid "Offline"
+msgstr "Hors ligne"
+
+msgid "Technical information"
+msgstr "Information technique"
+
+msgid "PROGRAM/INITIATIVE/ACTIVITY UNDERTAKEN WITH THE FINANCIAL SUPPORT OF THE GOVERNMENT OF CANADA PROVIDED THROUGH GLOBAL AFFAIRS CANADA (GAC)"
+msgstr "temp long long long long"
+
+msgid "THIS APP IS MADE POSSIBLE THROUGH THE FINANCIAL AND IN-KIND CONTRIBUTIONS OF"
+msgstr "temp long long long long"
+
+msgid "Search"
+msgstr "Recherche"
+
+msgid "Select"
+msgstr "Choisir"
+
+msgid "Submit"
+msgstr "Soumettre"
+
+msgid "name"
+msgstr "nom"
+
+msgid "Settings"
+msgstr "Configurations"
+
+# Nav
+msgid "Document"
+msgstr "Document"
+
+msgid "Event"
+msgstr "Événement"
+
+msgid "Factsheet"
+msgstr "temp"
+
+msgid "KoboForm"
+msgstr "Formulaire Kobo"
+
+msgid "Webform"
+msgstr "Formulaire web"
+
+msgid "Group"
+msgstr "Groupe"
+
+msgid "WebsiteViewer"
+msgstr ""
+
+msgid "AlertList"
+msgstr ""
+
+msgid "Contact"
+msgstr "Contact"
+
+msgid "UserList"
+msgstr ""
+
+msgid "ReportList"
+msgstr ""
+
+msgid "DocumentList"
+msgstr ""
+
+msgid "Auth"
+msgstr ""
+
+msgid "User"
+msgstr "Utilisateur"
+
+#
+
+msgid "Assessment forms"
+msgstr "temp"
+
+msgid "Recent documents"
+msgstr "Documents récents"
+
+msgid "Featured documents"
+msgstr "Documents vedettes"
+
+msgid "Key documents"
+msgstr "Documents clef"
+
+msgid "All documents"
+msgstr "Tous les documents"
+
+msgid "Documents"
+msgstr "Documents"
+
+msgid "Upcoming events"
+msgstr "Événements à venir"
+
+msgid "Latest factsheet"
+msgstr "temp"
+
+msgid "Factsheets"
+msgstr "temp"
+
+msgid "Log out"
+msgstr "Se déconnecter"
+
+msgid "and"
+msgstr "et"
+
+msgid "Photo gallery"
+msgstr "Gallerie d'images"
+
+msgid "Integer"
+msgstr "Entier"
+
+msgid "Unknown error, please try again"
+msgstr "Erreur inconnue, essayer de nouveau"
+
+msgid "Further instructions have been sent to your e-mail address."
+msgstr "Des instructions vous ont été envoyées par courriel"
+
+msgid "No internet connection detected."
+msgstr "Pas de connection internet"
+
+msgid "Requesting a new password for your account..."
+msgstr "Demande de nouveau mot de passe envoyée"
+
+msgid "Request a new password for your Shelter Cluster account"
+msgstr "Demander un nouveau mot de passe pour votre compte"
+
+msgid "Username or e-mail address"
+msgstr "Nom d'utilisateur ou courriel"
+
+msgid "Log in"
+msgstr "Se connecter"
+
+msgid "Me"
+msgstr "Moi"
+
+msgid "Sign up"
+msgstr "S'enregistrer"
+
+msgid "Forgot your username/password?"
+msgstr "Mot de passe ou nom d'utilisateur oublié?"
+
+msgid "Seen"
+msgstr "Vu"
+
+msgid "Alerts"
+msgstr "Alèrtes"
+
+msgid "Recent"
+msgstr "Récent"
+
+msgid "Featured"
+msgstr "En vedette"
+
+msgid "Key"
+msgstr "Clef"
+
+msgid "Try again"
+msgstr "Réessayer"
+
+msgid "Error loading data, please check your connection"
+msgstr "Erreur lors du chargement, vérifier votre connection"
+
+msgid "Pages"
+msgstr "Pages"
+
+msgid "Dashboard"
+msgstr "Tableau de bord"
+
+msgid "Navigation"
+msgstr "Navigation"
+
+msgid "Coordination team"
+msgstr "Équipe de coordination"
+
+msgid "Followed"
+msgstr "Suivit"
+
+msgid "Operations"
+msgstr "Opérations"
+
+msgid "Followers"
+msgstr "Inscrits"
+
+msgid "Unrecognized item"
+msgstr "Non-reconnu"
+
+msgid "Not implemented yet!"
+msgstr "Pas encore implémenté!"
+
+msgid "Not implemented yet"
+msgstr "Pas encore implémenté"
+
+msgid "Error loading, please check your connection and try again"
+msgstr "Erreur, vérifier votre connection et réessayer"
+
+msgid "Thank you, your submission has been queued and will be sent when you are online."
+msgstr "temp"
+
+msgid "Go back to the form"
+msgstr "Retour au formulaire"
+
+msgid "Thank you, your submission has been received."
+msgstr "temp"
+
+msgid "Next page"
+msgstr "Page suivante"
+
+msgid "Sending 1 submission…"
+msgstr "temp"
+
+msgid "Sending @count submissions…"
+msgstr "temp"
+
+msgid "1 submission queued to be sent when online."
+msgstr "temp"
+
+msgid "@count submissions queued to be sent when online."
+msgstr "temp"
+
+msgid "Search..."
+msgstr "Recherche"
+
+msgid "Contacts"
+msgstr "Contacts"
+
+msgid "Search is not enabled."
+msgstr "Recherche désactivée"
+
+msgid "Please try again later."
+msgstr "Réessayer plus tard."
+
+msgid "You must be online for search to work."
+msgstr "Vous devez être connecté pour utiliser la recherche"
+
+msgid "Assessment form type not implemented: @type"
+msgstr "temp"
+
+msgid "New alerts"
+msgstr "Nouvelles alertes"
+
+msgid "Profile"
+msgstr "Profile"
+
+msgid "Preferences"
+msgstr "Préférences"
+
+msgid "Map"
+msgstr "Carte"
+
+msgid "Need analysis"
+msgstr "Analyse des besoinds"
+
+msgid "Response"
+msgstr "Réponse"
+
+msgid "Gaps / challenges"
+msgstr "Écarts / défis"
+
+msgid "You're not following any responses yet."
+msgstr ""
+
+msgid "Back to Log in"
+msgstr "Retour à la page de connection"
+

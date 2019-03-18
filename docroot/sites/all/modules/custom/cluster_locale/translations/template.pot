@@ -225,4 +225,170 @@ msgstr ""
 msgid "Unknown error, please try again"
 msgstr ""
 
-# NEXT: /screens
+msgid "Further instructions have been sent to your e-mail address."
+msgstr ""
+
+msgid "No internet connection detected."
+msgstr ""
+
+msgid "Requesting a new password for your account..."
+msgstr ""
+
+msgid "Request a new password for your Shelter Cluster account"
+msgstr ""
+
+msgid "Username or e-mail address"
+msgstr ""
+
+msgid "Log in"
+msgstr ""
+
+msgid "Me"
+msgstr ""
+
+msgid "Sign up"
+msgstr ""
+
+msgid "Forgot your username/password?"
+msgstr ""
+
+msgid "Username or e-mail address"
+msgstr ""
+
+msgid "Seen"
+msgstr ""
+
+msgid "Alerts"
+msgstr ""
+
+msgid "Recent"
+msgstr ""
+
+msgid "Featured"
+msgstr ""
+
+msgid "Key"
+msgstr ""
+
+msgid "Try again"
+msgstr ""
+
+msgid "Error loading data, please check your connection"
+msgstr ""
+
+msgid "Pages"
+msgstr ""
+
+msgid "Dashboard"
+msgstr ""
+
+msgid "Navigation"
+msgstr ""
+
+msgid "Coordination team"
+msgstr ""
+
+msgid "Followed"
+msgstr ""
+
+msgid "Operations"
+msgstr ""
+
+msgid "Followers"
+msgstr ""
+
+msgid "Unrecognized item"
+msgstr ""
+
+msgid "Not implemented yet!"
+msgstr ""
+
+msgid "Not implemented yet"
+msgstr ""
+
+msgid "Error loading, please check your connection and try again"
+msgstr ""
+
+msgid "Thank you, your submission has been queued and will be sent when you are online."
+msgstr ""
+
+msgid "Go back to the form"
+msgstr ""
+
+msgid "Thank you, your submission has been received."
+msgstr ""
+
+msgid "Next page"
+msgstr ""
+
+msgid "Sending 1 submission…"
+msgstr ""
+
+msgid "Sending @count submissions…"
+msgstr ""
+
+msgid "1 submission queued to be sent when online."
+msgstr ""
+
+msgid "@count submissions queued to be sent when online."
+msgstr ""
+
+msgid "Search..."
+msgstr ""
+
+msgid "Contacts"
+msgstr ""
+
+msgid "Search is not enabled."
+msgstr ""
+
+msgid "Please try again later."
+msgstr ""
+
+msgid "You must be online for search to work."
+msgstr ""
+
+msgid "Assessment form type not implemented: @type"
+msgstr ""
+
+msgid "New alerts"
+msgstr ""
+
+msgid "Select your language"
+msgstr ""
+
+msgid "Download files"
+msgstr ""
+
+msgid "Allows for offline use of documents."
+msgstr ""
+
+msgid "Asked to download files"
+msgstr ""
+
+msgid "Only available in DEBUG mode."
+msgstr ""
+
+msgid "Import all translations"
+msgstr ""
+
+msgid "Profile"
+msgstr ""
+
+msgid "Preferences"
+msgstr ""
+
+msgid "Map"
+msgstr ""
+
+msgid "Need analysis"
+msgstr ""
+
+msgid "Response"
+msgstr ""
+
+msgid "Gaps / challenges"
+msgstr ""
+
+msgid "You're not following any responses yet."
+msgstr ""
