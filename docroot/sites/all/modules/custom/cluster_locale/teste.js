@@ -22,9 +22,14 @@ class Locale {
     G.dictionary[G.language] = response.data;
   }
 
-  static t(text, count = null) {
+  static t(text, count = null, replacements = {}, count0 = null) {
     let count_replace = '@count';
-    if (count !== null) {
+
+    // If count = 0 and we provide a string for when count is 0.
+    if (count === 0 && count0 !== null) {
+      text = count0;
+    }
+    else if (count !== null) {
       // Get the plural index for languages with multiple plurals.
       const formula = G.languages[G.language].formula;
       const $n = count;
@@ -42,6 +47,10 @@ class Locale {
     const dictionary = G.dictionary[G.language];
     let translated_text = dictionary[text] || text;
 
+    for (let i in replacements) {
+      translated_text = translated_text.replace(i, replacements[i]);
+    }
+    
     // Replace @count for count.
     if (count !== null) {
       translated_text = translated_text.replace(count_replace, count);
