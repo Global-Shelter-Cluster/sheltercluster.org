@@ -5,9 +5,9 @@
  * https://github.com/Alymosul/exponent-server-sdk-php
  */
 
-use ExponentPhpSDK\Exceptions\ExpoException;
-
 class ClusterAPI_Expo {
+
+  const BATCH_SIZE = 100;
 
   /**
    * The Expo Api Url that will receive the requests
@@ -31,43 +31,95 @@ class ClusterAPI_Expo {
    *
    * @return array|bool
    */
-  public function notify($tokens, array $data, $debug = FALSE) {
-    $postData = [];
+  public function notify($tokens, array $data) {
+    $currentBatch = 0;
+    $okCount = 0;
 
-    if (count($tokens) == 0) {
-      return;
-    }
+    while (TRUE) {
+      $currentBatchTokens = array_slice($tokens, $currentBatch * self::BATCH_SIZE, self::BATCH_SIZE);
+      if (count($currentBatchTokens) === 0)
+        break;
+      $currentBatch++;
 
-    foreach ($tokens as $token) {
-      $postData[] = $data + ['to' => $token];
-    }
-
-    $ch = $this->prepareCurl();
-
-    curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($postData));
-
-    $response = $this->executeCurl($ch);
-
-    // If the notification failed completely, throw an exception with the details
-    if (!$debug && $this->failedCompletely($response, $tokens)) {
-      $message = '';
-      foreach ($response as $key => $item) {
-        if ($item['status'] === 'error') {
-          $message .= $key == 0 ? "" : "\r\n";
-          $message .= $item['message'];
-        }
+      $postData = [];
+      foreach ($currentBatchTokens as $token) {
+        $postData[] = $data + ['to' => $token];
       }
 
-      throw new Exception($message);
+      $ch = $this->prepareCurl();
+
+      curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($postData));
+
+      $response = $this->executeCurl($ch);
+
+      $sleptAlready = FALSE;
+      $loggedTooBigAlready = FALSE;
+
+      foreach ($response as $key => $item) {
+        if ($item['status'] === 'ok')
+          $okCount++;
+        else {
+          $token = $currentBatchTokens[$key];
+          switch (isset($item['details']) && isset($item['details']['error']) ? $item['details']['error'] : NULL) {
+            case 'DeviceNotRegistered':
+              // Remove this push token from our database
+              $removed_count = _cluster_api_clear_push_token($token);
+              if ($removed_count)
+                watchdog('expo', 'Removed token @token from @count users.', [
+                  '@token' => $token,
+                  '@count' => $removed_count,
+                ]);
+              break;
+
+            case 'MessageRateExceeded':
+              // We're supposed to retry these notifications, and implement exponential backoff, but for now we just
+              // sleep for a while before continuing, and discard the lost notifications.
+              // Eventually, we might want to do something smarter.
+              // See https://docs.expo.io/versions/latest/guides/push-notifications/
+
+              if (!$sleptAlready) {
+                watchdog('expo', 'MessageRateExceeded response on token @token (and possibly others): @body', [
+                  '@token' => $token,
+                  '@body' => print_r($item, TRUE),
+                ], WATCHDOG_WARNING);
+                sleep(5);
+                $sleptAlready = TRUE;
+              }
+              break;
+
+            case 'MessageTooBig':
+              if (!$loggedTooBigAlready) {
+                watchdog('expo', 'MessageTooBig response on token @token (and possibly others): @body. Notification data was: @notification', [
+                  '@token' => $token,
+                  '@body' => print_r($item, TRUE),
+                  '@notification' => print_r($data, TRUE),
+                ], WATCHDOG_WARNING);
+                $loggedTooBigAlready = TRUE;
+              }
+              break;
+
+            case 'InvalidCredentials':
+            default:
+              watchdog('expo', 'Non-ok response on token @token: @body', [
+                '@token' => $token,
+                '@body' => print_r($item, TRUE),
+              ], WATCHDOG_WARNING);
+          }
+        }
+      }
     }
 
-    return $response;
+    watchdog('expo', 'Push notification sent: @count recipient token(s); @ok succeeded: @data', [
+      '@count' => count($tokens),
+      '@ok' => $okCount,
+      '@data' => print_r($data, TRUE),
+    ], WATCHDOG_DEBUG);
   }
 
   /**
    * Sets the request url and headers
    *
-   * @throws ExpoException
+   * @throws Exception
    *
    * @return null|resource
    */
@@ -77,7 +129,7 @@ class ClusterAPI_Expo {
 
     // Throw exception if the cURL handle failed
     if (!$this->ch) {
-      throw new ExpoException('Could not initialise cURL!');
+      throw new Exception('Could not initialise cURL!');
     }
 
     $ch = $this->ch;
@@ -107,27 +159,15 @@ class ClusterAPI_Expo {
       'status_code' => curl_getinfo($ch, CURLINFO_HTTP_CODE),
     ];
 
-    return json_decode($response['body'], TRUE)['data'];
-  }
-
-  /**
-   * Determines if the request we sent has failed completely
-   *
-   * @param $response
-   * @param array $interests
-   *
-   * @return bool
-   */
-  private function failedCompletely($response, array $interests) {
-    $numberOfInterests = count($interests);
-    $numberOfFailures = 0;
-
-    foreach ($response as $item) {
-      if ($item['status'] === 'error') {
-        $numberOfFailures++;
-      }
+    if ($response['status_code'] != 200) {
+      watchdog('expo', 'Non-200 response from @url: @response', [
+        '@url' => self::EXPO_API_URL,
+        '@response' => print_r($response, TRUE),
+      ], WATCHDOG_ERROR);
     }
 
-    return $numberOfFailures === $numberOfInterests;
+    $data = json_decode($response['body'], TRUE)['data'];
+
+    return is_array($data) ? $data : [];
   }
 }

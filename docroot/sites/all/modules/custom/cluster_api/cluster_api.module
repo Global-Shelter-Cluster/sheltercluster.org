@@ -19,7 +19,7 @@ function cluster_api_menu() {
     'access arguments' => ['administer site configuration'],
     'file' => 'cluster_api.form.inc',
     'type' => MENU_NORMAL_ITEM,
-   ];
+  ];
 
   return $items;
 }
@@ -326,24 +326,14 @@ function _cluster_api_set_push_notification_token($user, $token) {
   }
 
   // Test if other users have the same token, and remove the token for those users.
-  $query = new EntityFieldQuery();
-  $result = $query->entityCondition('entity_type', 'user')
-    ->fieldCondition('field_push_token', 'value', $token, '=')
-    ->execute();
-
-  if (isset($result['user'])) {
-    foreach (array_keys($result['user']) as $uid) {
-      _cluster_api_clear_push_token_for_user($token, $uid);
-    }
-  }
+  _cluster_api_clear_push_token($token);
 
   // Save the token to the user profile.
   $wrapper = entity_metadata_wrapper('user', $user);
   try {
     $wrapper->field_push_token[] = $token;
     $wrapper->save();
-  }
-  catch(\Exception $e) {
+  } catch (\Exception $e) {
     watchdog('cluster_api', 'Entity metadata wrapper error: ' . $e->getMessage());
   }
 
@@ -360,10 +350,30 @@ function _cluster_api_clear_push_token_for_user($token, $uid) {
     $remaining_tokens = array_diff($tokens, [$token]);
     $wrapper->field_push_token->set($remaining_tokens);
     $wrapper->save();
-  }
-  catch(\Exception $e) {
+  } catch (\Exception $e) {
     watchdog('cluster_api', 'Entity metadata wrapper error when removing push notification tokens: ' . $e->getMessage());
   }
+}
+
+/**
+ * Remove push notification token from any user that may have it associated.
+ */
+function _cluster_api_clear_push_token($token) {
+  $removed_count = 0;
+
+  $query = new EntityFieldQuery();
+  $result = $query->entityCondition('entity_type', 'user')
+    ->fieldCondition('field_push_token', 'value', $token, '=')
+    ->execute();
+
+  if (isset($result['user'])) {
+    foreach (array_keys($result['user']) as $uid) {
+      _cluster_api_clear_push_token_for_user($token, $uid);
+      $removed_count++;
+    }
+  }
+
+  return $removed_count;
 }
 
 /**
@@ -375,8 +385,7 @@ function cluster_api_track_users($uid, $origin) {
     $wrapper = entity_metadata_wrapper('user', $user);
     $wrapper->field_account_origin->set($origin);
     $wrapper->save();
-  }
-  catch(\Exception $e) {
+  } catch (\Exception $e) {
     watchdog('cluster_api', 'Entity metadata wrapper error when recording user account origin: ' . $e->getMessage());
   }
 }
@@ -389,7 +398,7 @@ function cluster_api_cron() {
   $objects_by_gid = [];
   drupal_alter('daily_push_notification_objects', $objects_by_gid);
 
-  $hour = 60*60; // const
+  $hour = 60 * 60; // const
   $timezones = _cluster_api_daily_notification_timezones();
 
   foreach ($objects_by_gid as $gid => $objects_by_module) {
@@ -418,13 +427,24 @@ function cluster_api_cron() {
     if (!$body)
       continue;
 
-    cluster_api_push_to_users(
-      $uids,
-      _cluster_api_daily_notification_title($group),
-      $body,
-      _cluster_api_daily_notification_link_data($objects_by_module, $gid),
-      FALSE
-    );
+    $title = _cluster_api_daily_notification_title($group);
+    $link_data = _cluster_api_daily_notification_link_data($objects_by_module, $gid);
+
+    try {
+      cluster_api_push_to_users(
+        $uids,
+        $title,
+        $body,
+        $link_data,
+        FALSE
+      );
+    } catch (Exception $e) {
+      watchdog('cluster_api', 'Error sending push notifications for gid @gid: @error. Notification was: @body', [
+        '@gid' => $gid,
+        '@error' => $e->getMessage(),
+        '@body' => print_r(['title' => $title, 'body' => $body, 'link_data', $link_data], TRUE),
+      ], WATCHDOG_ERROR);
+    }
 
     $manager->updateUsersTimestamp(CLUSTER_API_FOLLOWER_ROLE_NAME, $uids, 'last_daily_push_notification');
   }
@@ -496,7 +516,9 @@ function _cluster_api_daily_notification_body($object_ids_by_module) {
   }
 
   // E.g. "4 documents, 2 pages and a factsheet were added recently."
-  usort($data, function($a, $b) {return $a['weight'] - $b['weight'];});
+  usort($data, function ($a, $b) {
+    return $a['weight'] - $b['weight'];
+  });
   $items = [];
   foreach ($data as $module => $datum)
     $items[] = $datum['label'];
@@ -529,7 +551,7 @@ function _cluster_api_daily_notification_title($group) {
 
   $type_label = $display->getGroupTypeLabel();
   if ($type_label)
-    $title .= ' ('.$type_label.')';
+    $title .= ' (' . $type_label . ')';
 
   return $title;
 }
@@ -541,7 +563,7 @@ function _cluster_api_daily_notification_title($group) {
 function _cluster_api_daily_notification_timezones() {
   $all_timezones = array_keys(system_time_zones());
 
-  $filter = function($timezone) {
+  $filter = function ($timezone) {
     $d = new DateTime('now', new DateTimeZone($timezone));
     $hour = intval($d->format('H'), 10);
     return $hour >= CLUSTER_API_DAILY_WINDOW_FROM_HOUR && $hour < CLUSTER_API_DAILY_WINDOW_TO_HOUR;
