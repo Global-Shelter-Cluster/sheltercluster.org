@@ -14,7 +14,7 @@ msgstr ""
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
 msgid "Queued assessment form submissions"
-msgstr ""
+msgstr "Bahasa goes here"
 
 msgid "App testing string"
 msgstr ""
