@@ -35,6 +35,9 @@ msgstr ""
 msgid "Hub"
 msgstr ""
 
+msgid "RESPONSE"
+msgstr ""
+
 msgid "Response"
 msgstr ""
 
@@ -64,6 +67,9 @@ msgid "View"
 msgstr ""
 
 msgid "Map"
+msgstr ""
+
+msgid "Share"
 msgstr ""
 
 msgid "Download"
@@ -139,6 +145,9 @@ msgstr ""
 msgid "Event"
 msgstr ""
 
+msgid "Events"
+msgstr ""
+
 msgid "Factsheet"
 msgstr ""
 
@@ -183,16 +192,28 @@ msgstr ""
 msgid "Assessment forms"
 msgstr ""
 
+msgid "Assessment form"
+msgstr ""
+
 msgid "Recent documents"
 msgstr ""
 
 msgid "Featured documents"
 msgstr ""
 
+msgid "Featured/ndocuments"
+msgstr ""
+
 msgid "Key documents"
 msgstr ""
 
+msgid "Key/ndocuments"
+msgstr ""
+
 msgid "All documents"
+msgstr ""
+
+msgid "All/ndocuments"
 msgstr ""
 
 msgid "Documents"
@@ -201,10 +222,13 @@ msgstr ""
 msgid "Upcoming events"
 msgstr ""
 
-msgid "Events"
+msgid "Upcoming/nevents"
 msgstr ""
 
 msgid "Latest factsheet"
+msgstr ""
+
+msgid "Latest/nfactsheet"
 msgstr ""
 
 msgid "Factsheets"
@@ -387,8 +411,44 @@ msgstr ""
 msgid "Response"
 msgstr ""
 
+msgid "responses"
+msgstr ""
+
 msgid "Gaps / challenges"
 msgstr ""
 
 msgid "You're not following any responses yet."
+msgstr ""
+
+msgid "Password"
+msgstr ""
+
+msgid "Create a Shelter Cluster account"
+msgstr ""
+
+msgid "Request password"
+msgstr ""
+
+msgid "E-mail address"
+msgstr ""
+
+msgid "Organization"
+msgstr ""
+
+msgid "Name"
+msgstr ""
+
+msgid "Logging in..."
+msgstr ""
+
+msgid "Groups"
+msgstr ""
+
+msgid "REGION"
+msgstr ""
+
+msgid "Start"
+msgstr ""
+
+msgid "Next page"
 msgstr ""
