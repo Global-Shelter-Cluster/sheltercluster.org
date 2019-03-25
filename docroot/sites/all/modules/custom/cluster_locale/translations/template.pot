@@ -120,7 +120,7 @@ msgstr ""
 msgid "PROGRAM/INITIATIVE/ACTIVITY UNDERTAKEN WITH THE FINANCIAL SUPPORT OF THE GOVERNMENT OF CANADA PROVIDED THROUGH GLOBAL AFFAIRS CANADA (GAC)"
 msgstr ""
 
-msgid "THIS APP IS MADE POSSIBLE THROUGH THE FINANCIAL AND IN-KIND CONTRIBUTIONS OF"
+msgid "THIS APP IS MADE POSSIBLE THROUGH THE FINANCIAL AND IN-KIND CONTRIBUTIONS OF:"
 msgstr ""
 
 msgid "Search"
@@ -451,4 +451,28 @@ msgid "Start"
 msgstr ""
 
 msgid "Next page"
+msgstr ""
+
+msgid "online"
+msgstr ""
+
+msgid "offline"
+msgstr ""
+
+msgid "Expo version: @version"
+msgstr ""
+
+msgid "App version: @version"
+msgstr ""
+
+msgid "<none>"
+msgstr ""
+
+msgid "Environment: @env"
+msgstr ""
+
+msgid "Connectivity"
+msgstr ""
+
+msgid "Language settings can't be changed while offline"
 msgstr ""

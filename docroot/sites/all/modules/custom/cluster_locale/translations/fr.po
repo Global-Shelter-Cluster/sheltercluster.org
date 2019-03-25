@@ -155,7 +155,7 @@ msgstr "Information technique"
 msgid "PROGRAM/INITIATIVE/ACTIVITY UNDERTAKEN WITH THE FINANCIAL SUPPORT OF THE GOVERNMENT OF CANADA PROVIDED THROUGH GLOBAL AFFAIRS CANADA (GAC)"
 msgstr "temp long long long long"
 
-msgid "THIS APP IS MADE POSSIBLE THROUGH THE FINANCIAL AND IN-KIND CONTRIBUTIONS OF"
+msgid "THIS APP IS MADE POSSIBLE THROUGH THE FINANCIAL AND IN-KIND CONTRIBUTIONS OF:"
 msgstr "temp long long long long"
 
 msgid "Search"
@@ -460,3 +460,27 @@ msgstr "Début"
 
 msgid "Next page"
 msgstr "Page suivante"
+
+msgid "online"
+msgstr "en-ligne"
+
+msgid "offline"
+msgstr "hors-ligne"
+
+msgid "Expo version: @version"
+msgstr "Version de Expo: @version"
+
+msgid "App version: @version"
+msgstr "Version de l'app: @version"
+
+msgid "<none>"
+msgstr "<aucun>"
+
+msgid "Environment: @env"
+msgstr "Environnement: @env"
+
+msgid "Connectivity"
+msgstr "État de la connection"
+
+msgid "Language settings can't be changed while offline"
+msgstr "Les configurations ne sont disponibles que lorsque l'appareil est en-ligne"

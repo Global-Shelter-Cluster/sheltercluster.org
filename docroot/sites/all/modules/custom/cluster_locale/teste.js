@@ -32,15 +32,12 @@ class Locale {
     else if (count !== null) {
       // Get the plural index for languages with multiple plurals.
       const formula = G.languages[G.language].formula;
-      const $n = count;
       const pluralIndex = eval(formula);
 
       if (pluralIndex > 0) {
         count_replace = '@count[' + pluralIndex + ']';
+        text = text.replace('@count', count_replace);
       }
-
-      // Replace count in text first.
-      text = text.replace('@count', count_replace);
     }
 
     // Replace the text.
