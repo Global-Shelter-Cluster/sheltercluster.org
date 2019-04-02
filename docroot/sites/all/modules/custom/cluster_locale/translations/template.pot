@@ -476,3 +476,33 @@ msgstr ""
 
 msgid "Language settings can't be changed while offline"
 msgstr ""
+
+msgid "reponse"
+msgstr ""
+
+msgid "region"
+msgstr ""
+
+msgid "regions"
+msgstr ""
+
+msgid "hub"
+msgstr ""
+
+msgid "hubs"
+msgstr ""
+
+msgid "working group"
+msgstr ""
+
+msgid "working groups"
+msgstr ""
+
+msgid "CoP"
+msgstr ""
+
+msgid "CoPs"
+msgstr ""
+
+msgid "1 SAG"
+msgstr ""

@@ -417,7 +417,7 @@ msgid "Response"
 msgstr "Réponse"
 
 msgid "responses"
-msgstr "réponse"
+msgstr "réponses"
 
 msgid "Gaps / challenges"
 msgstr "Écarts / défis"
@@ -484,3 +484,33 @@ msgstr "État de la connection"
 
 msgid "Language settings can't be changed while offline"
 msgstr "Les configurations ne sont disponibles que lorsque l'appareil est en-ligne"
+
+msgid "reponse"
+msgstr "réponse"
+
+msgid "region"
+msgstr "région"
+
+msgid "regions"
+msgstr "régions"
+
+msgid "hub"
+msgstr "centre"
+
+msgid "hubs"
+msgstr "centres"
+
+msgid "working group"
+msgstr "groupe de travail"
+
+msgid "working groups"
+msgstr "groupes de travail"
+
+msgid "CoP"
+msgstr "CdP"
+
+msgid "CoPs"
+msgstr "CdPs"
+
+msgid "1 SAG"
+msgstr "1 GCS"
