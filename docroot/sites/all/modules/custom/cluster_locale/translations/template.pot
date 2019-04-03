@@ -1,0 +1,478 @@
+# LANGUAGE translation of PROJECT
+# Copyright (c) YEAR NAME <EMAIL@ADDRESS>
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"POT-Creation-Date: 2019-03-12 21:03+0000\n"
+"PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
+"Last-Translator: NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+
+msgid "Queued assessment form submissions"
+msgstr "Bahasa goes here"
+
+msgid "App testing string"
+msgstr ""
+
+# Search components
+msgid "Featured"
+msgstr ""
+
+msgid "Key document"
+msgstr ""
+
+msgid "Community of practice"
+msgstr ""
+
+msgid "Geographic region"
+msgstr ""
+
+msgid "Hub"
+msgstr ""
+
+msgid "RESPONSE"
+msgstr ""
+
+msgid "Response"
+msgstr ""
+
+msgid "Discussion"
+msgstr ""
+
+msgid "Strategic Advisory Group"
+msgstr ""
+
+msgid "Working Group"
+msgstr ""
+
+msgid "Library"
+msgstr ""
+
+msgid "Article"
+msgstr ""
+
+msgid "Discussion"
+msgstr ""
+
+# Multiselect factory
+msgid "Search Items..."
+msgstr ""
+
+msgid "View"
+msgstr ""
+
+msgid "Map"
+msgstr ""
+
+msgid "Share"
+msgstr ""
+
+msgid "Download"
+msgstr ""
+
+msgid "Skip for now"
+msgstr ""
+
+msgid "Loading..."
+msgstr ""
+
+msgid "Follow"
+msgstr ""
+
+msgid "Un-follow"
+msgstr ""
+
+msgid "Website"
+msgstr ""
+
+msgid "Countries"
+msgstr ""
+
+msgid "Regions"
+msgstr ""
+
+msgid "In"
+msgstr ""
+
+msgid "Related to"
+msgstr ""
+
+msgid "Useful links"
+msgstr ""
+
+msgid "Submitting assessment form"
+msgstr ""
+
+msgid "Downloading file"
+msgstr ""
+
+msgid "Offline"
+msgstr ""
+
+msgid "Technical information"
+msgstr ""
+
+msgid "PROGRAM/INITIATIVE/ACTIVITY UNDERTAKEN WITH THE FINANCIAL SUPPORT OF THE GOVERNMENT OF CANADA PROVIDED THROUGH GLOBAL AFFAIRS CANADA (GAC)"
+msgstr ""
+
+msgid "THIS APP IS MADE POSSIBLE THROUGH THE FINANCIAL AND IN-KIND CONTRIBUTIONS OF:"
+msgstr ""
+
+msgid "Search"
+msgstr ""
+
+msgid "Select"
+msgstr ""
+
+msgid "Submit"
+msgstr ""
+
+msgid "name"
+msgstr ""
+
+msgid "Settings"
+msgstr ""
+
+# Nav
+msgid "Document"
+msgstr ""
+
+msgid "Event"
+msgstr ""
+
+msgid "Events"
+msgstr ""
+
+msgid "Factsheet"
+msgstr ""
+
+msgid "KoboForm"
+msgstr ""
+
+msgid "Webform"
+msgstr ""
+
+msgid "Group"
+msgstr ""
+
+msgid "WebsiteViewer"
+msgstr ""
+
+msgid "AlertList"
+msgstr ""
+
+msgid "Contact"
+msgstr ""
+
+msgid "UserList"
+msgstr ""
+
+msgid "ReportList"
+msgstr ""
+
+msgid "DocumentList"
+msgstr ""
+
+msgid "Auth"
+msgstr ""
+
+msgid "Settings"
+msgstr ""
+
+msgid "User"
+msgstr ""
+
+#
+
+msgid "Assessment forms"
+msgstr ""
+
+msgid "Assessment form"
+msgstr ""
+
+msgid "Recent documents"
+msgstr ""
+
+msgid "Featured documents"
+msgstr ""
+
+msgid "Featured/ndocuments"
+msgstr ""
+
+msgid "Key documents"
+msgstr ""
+
+msgid "Key/ndocuments"
+msgstr ""
+
+msgid "All documents"
+msgstr ""
+
+msgid "All/ndocuments"
+msgstr ""
+
+msgid "Documents"
+msgstr ""
+
+msgid "Upcoming events"
+msgstr ""
+
+msgid "Upcoming/nevents"
+msgstr ""
+
+msgid "Latest factsheet"
+msgstr ""
+
+msgid "Latest/nfactsheet"
+msgstr ""
+
+msgid "Factsheets"
+msgstr ""
+
+msgid "Log out"
+msgstr ""
+
+msgid "and"
+msgstr ""
+
+msgid "Photo gallery"
+msgstr ""
+
+msgid "Integer"
+msgstr ""
+
+msgid "Unknown error, please try again"
+msgstr ""
+
+msgid "Further instructions have been sent to your e-mail address."
+msgstr ""
+
+msgid "No internet connection detected."
+msgstr ""
+
+msgid "Requesting a new password for your account..."
+msgstr ""
+
+msgid "Request a new password for your Shelter Cluster account"
+msgstr ""
+
+msgid "Username or e-mail address"
+msgstr ""
+
+msgid "Log in"
+msgstr ""
+
+msgid "Me"
+msgstr ""
+
+msgid "Sign up"
+msgstr ""
+
+msgid "Forgot your username/password?"
+msgstr ""
+
+msgid "Username or e-mail address"
+msgstr ""
+
+msgid "Seen"
+msgstr ""
+
+msgid "Alerts"
+msgstr ""
+
+msgid "Recent"
+msgstr ""
+
+msgid "Featured"
+msgstr ""
+
+msgid "Key"
+msgstr ""
+
+msgid "Try again"
+msgstr ""
+
+msgid "Error loading data, please check your connection"
+msgstr ""
+
+msgid "Pages"
+msgstr ""
+
+msgid "Dashboard"
+msgstr ""
+
+msgid "Navigation"
+msgstr ""
+
+msgid "Coordination team"
+msgstr ""
+
+msgid "Followed"
+msgstr ""
+
+msgid "Operations"
+msgstr ""
+
+msgid "Followers"
+msgstr ""
+
+msgid "Unrecognized item"
+msgstr ""
+
+msgid "Not implemented yet!"
+msgstr ""
+
+msgid "Not implemented yet"
+msgstr ""
+
+msgid "Error loading, please check your connection and try again"
+msgstr ""
+
+msgid "Thank you, your submission has been queued and will be sent when you are online."
+msgstr ""
+
+msgid "Go back to the form"
+msgstr ""
+
+msgid "Thank you, your submission has been received."
+msgstr ""
+
+msgid "Next page"
+msgstr ""
+
+msgid "Sending 1 submission…"
+msgstr ""
+
+msgid "Sending @count submissions…"
+msgstr ""
+
+msgid "1 submission queued to be sent when online."
+msgstr ""
+
+msgid "@count submissions queued to be sent when online."
+msgstr ""
+
+msgid "Search..."
+msgstr ""
+
+msgid "Contacts"
+msgstr ""
+
+msgid "Search is not enabled."
+msgstr ""
+
+msgid "Please try again later."
+msgstr ""
+
+msgid "You must be online for search to work."
+msgstr ""
+
+msgid "Assessment form type not implemented: @type"
+msgstr ""
+
+msgid "New alerts"
+msgstr ""
+
+msgid "Select your language"
+msgstr ""
+
+msgid "Download files"
+msgstr ""
+
+msgid "Allows for offline use of documents."
+msgstr ""
+
+msgid "Asked to download files"
+msgstr ""
+
+msgid "Only available in DEBUG mode."
+msgstr ""
+
+msgid "Import all translations"
+msgstr ""
+
+msgid "Profile"
+msgstr ""
+
+msgid "Preferences"
+msgstr ""
+
+msgid "Map"
+msgstr ""
+
+msgid "Need analysis"
+msgstr ""
+
+msgid "Response"
+msgstr ""
+
+msgid "responses"
+msgstr ""
+
+msgid "Gaps / challenges"
+msgstr ""
+
+msgid "You're not following any responses yet."
+msgstr ""
+
+msgid "Password"
+msgstr ""
+
+msgid "Create a Shelter Cluster account"
+msgstr ""
+
+msgid "Request password"
+msgstr ""
+
+msgid "E-mail address"
+msgstr ""
+
+msgid "Organization"
+msgstr ""
+
+msgid "Name"
+msgstr ""
+
+msgid "Logging in..."
+msgstr ""
+
+msgid "Groups"
+msgstr ""
+
+msgid "REGION"
+msgstr ""
+
+msgid "Start"
+msgstr ""
+
+msgid "Next page"
+msgstr ""
+
+msgid "online"
+msgstr ""
+
+msgid "offline"
+msgstr ""
+
+msgid "Expo version: @version"
+msgstr ""
+
+msgid "App version: @version"
+msgstr ""
+
+msgid "<none>"
+msgstr ""
+
+msgid "Environment: @env"
+msgstr ""
+
+msgid "Connectivity"
+msgstr ""
+
+msgid "Language settings can't be changed while offline"
+msgstr ""
