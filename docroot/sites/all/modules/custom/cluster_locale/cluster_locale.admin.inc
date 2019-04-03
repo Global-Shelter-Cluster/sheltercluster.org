@@ -21,5 +21,6 @@ function cluster_locale_config_form($form, $form_state) {
     '#multiple' => TRUE,
     '#default_value' => variable_get('cluster_locale_mobile_enabled_languages'),
   );
+
   return system_settings_form($form);
 }

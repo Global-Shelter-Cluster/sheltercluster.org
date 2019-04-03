@@ -506,3 +506,15 @@ msgstr ""
 
 msgid "1 SAG"
 msgstr ""
+
+msgid "approximately <b>@bytes</b>."
+msgstr ""
+
+msgid "You can turn file downloads on/off in Settings."
+msgstr ""
+
+msgid "In order for the app to work while offline, we need to download <b>1 file</b>."
+msgstr ""
+
+msgid "In order for the app to work while offline, we need to download <b>@count files</b>."
+msgstr ""
