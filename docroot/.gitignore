@@ -4,3 +4,6 @@ sites/*/settings*.php
 # Ignore paths that contain user-generated content.
 sites/*/files
 sites/*/private
+
+# Automatically generated app config file.
+docroot/app_config.json

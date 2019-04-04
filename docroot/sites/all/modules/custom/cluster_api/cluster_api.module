@@ -594,7 +594,9 @@ function cluster_api_schema_alter(&$schema) {
  * Maintains a json file which can communicate configs to the cluster_app.
  */
 function cluster_api_update_app_config($key, $value) {
+  // App currently supports only flat [key, value] pairs.
   $config = json_decode(file_get_contents("app_config.json"));
   $config->{$key} = $value;
+  $config->updatedAt = time();
   file_put_contents("app_config.json", json_encode($config, JSON_PRETTY_PRINT));
 }
