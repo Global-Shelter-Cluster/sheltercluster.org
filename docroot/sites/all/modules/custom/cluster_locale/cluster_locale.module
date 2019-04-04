@@ -139,5 +139,5 @@ function _cluster_locale_update_app_last_change(&$form, &$form_state) {
 }
 
 function _cluster_locale_update_last_change() {
-  cluster_api_update_app_config('last-locale-update', time());
+  cluster_api_update_app_config('lastLocaleUpdate', time());
 }

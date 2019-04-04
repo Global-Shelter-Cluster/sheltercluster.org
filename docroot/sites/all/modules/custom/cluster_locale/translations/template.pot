@@ -518,3 +518,18 @@ msgstr ""
 
 msgid "In order for the app to work while offline, we need to download <b>@count files</b>."
 msgstr ""
+
+msgid "Back"
+msgstr ""
+
+msgid "In order for the app to work while offline, we need to download <b>1 file</b> (approximately <b>@bytes</b>). You can turn file downloads on/off in Settings."
+msgstr ""
+
+msgid "In order for the app to work while offline, we need to download <b>@count files</b> (approximately <b>@bytes</b>). You can turn file downloads on/off in Settings."
+msgstr ""
+
+msgid "In order for the app to work while offline, we need to download <b>1 file</b>. You can turn file downloads on/off in Settings"
+msgstr ""
+
+msgid "In order for the app to work while offline, we need to download <b>@count files</b>. You can turn file downloads on/off in Settings."
+msgstr ""
