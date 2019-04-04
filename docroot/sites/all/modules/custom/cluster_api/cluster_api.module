@@ -595,7 +595,8 @@ function cluster_api_schema_alter(&$schema) {
  */
 function cluster_api_update_app_config($key, $value) {
   // App currently supports only flat [key, value] pairs.
-  $config = json_decode(file_get_contents("app_config.json"));
+  $content = @file_get_contents("app_config.json");
+  $config = $content ? json_decode($content) : new stdClass();
   $config->{$key} = $value;
   $config->updatedAt = time();
   file_put_contents("app_config.json", json_encode($config, JSON_PRETTY_PRINT));

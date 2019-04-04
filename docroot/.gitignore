@@ -6,4 +6,4 @@ sites/*/files
 sites/*/private
 
 # Automatically generated app config file.
-docroot/app_config.json
+app_config.json
