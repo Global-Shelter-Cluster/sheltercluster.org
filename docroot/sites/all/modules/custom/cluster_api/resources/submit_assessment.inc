@@ -6,7 +6,7 @@ use Drupal\cluster_api\Oauth\Authorization;
 // @file services module resource
 
 /**
- * Handle submission of an assessment form.
+ * Handle submission of a form.
  *
  * @param $form_service
  *  Service used to handle form submission. Supports 'webform'.
@@ -25,7 +25,7 @@ use Drupal\cluster_api\Oauth\Authorization;
  */
 function _cluster_api_submit_assessment($form_service, $form_id, $request) {
   if (empty($request['assessment'])) {
-    return services_error('Assessment form submission unacceptable', 403);
+    return services_error('Form submission unacceptable', 403);
   }
 
   $auth = new Authorization();

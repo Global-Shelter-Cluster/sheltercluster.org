@@ -1,4 +1,4 @@
-name = Cluster Assessment forms
-description = Logic shared between all assessment form types (e.g. webforms, kobo forms).
+name = Cluster data collection forms
+description = Logic shared between all form types (e.g. webforms, kobo forms).
 core = 7.x
 package = Cluster

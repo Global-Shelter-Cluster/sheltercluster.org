@@ -149,7 +149,7 @@ function cluster_context_links($node) {
 
   if (node_access('create', 'webform')) {
     $links['new-webform'] = array(
-      'title' => t('Create assessment form'),
+      'title' => t('Create form'),
       'href' => 'node/add/webform',
       'query' => array(
         'group' => $node->nid,
