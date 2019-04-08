@@ -1,5 +1,5 @@
 name = Cluster Webform
-description = Assessment forms using Webform
+description = Data collection forms using Webform
 core = 7.x
 package = Cluster
 version = 7.x-1.3

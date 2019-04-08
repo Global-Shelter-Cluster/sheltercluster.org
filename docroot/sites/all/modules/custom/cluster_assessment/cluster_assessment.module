@@ -5,8 +5,8 @@
  */
 function cluster_assessment_menu() {
   return [
-    'node/%node/assessment-forms' => [
-      'title' => 'Assessment forms',
+    'node/%node/data-collection' => [
+      'title' => 'Data collection',
       'page callback' => 'cluster_assessment_all',
       'page arguments' => [1],
       'access callback' => 'og_is_group',
@@ -52,7 +52,7 @@ function cluster_assessment_all($node) {
  * @see _cluster_docs_title_callback() (mostly copied from there)
  */
 function _cluster_assessment_title_callback($node) {
-  return $node->title . ' - ' . t('Assessment forms');
+  return $node->title . ' - ' . t('Data collection');
 }
 
 function cluster_assessment_total_count($gid) {
