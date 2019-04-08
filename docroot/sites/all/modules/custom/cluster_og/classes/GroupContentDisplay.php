@@ -226,8 +226,8 @@ class GroupDisplayProvider {
       $forms_count = cluster_assessment_total_count($this->node->nid);
       if (cluster_assessment_is_group_forms_page() || ($forms_count > 0)) {
         $items['assessment_forms'] = [
-          'label' => t('Assessment forms'),
-          'path' => 'node/' . $this->node->nid . '/assessment-forms',
+          'label' => t('Data collection'),
+          'path' => 'node/' . $this->node->nid . '/data-collection',
           'total' => $forms_count,
           'options' => [
             'html' => TRUE,

@@ -13,9 +13,6 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
-msgid "Queued assessment form submissions"
-msgstr "Bahasa goes here"
-
 msgid "App testing string"
 msgstr ""
 
@@ -105,9 +102,6 @@ msgstr ""
 msgid "Useful links"
 msgstr ""
 
-msgid "Submitting assessment form"
-msgstr ""
-
 msgid "Downloading file"
 msgstr ""
 
@@ -188,12 +182,6 @@ msgid "User"
 msgstr ""
 
 #
-
-msgid "Assessment forms"
-msgstr ""
-
-msgid "Assessment form"
-msgstr ""
 
 msgid "Recent documents"
 msgstr ""
@@ -372,9 +360,6 @@ msgstr ""
 msgid "You must be online for search to work."
 msgstr ""
 
-msgid "Assessment form type not implemented: @type"
-msgstr ""
-
 msgid "New alerts"
 msgstr ""
 
@@ -532,4 +517,13 @@ msgid "In order for the app to work while offline, we need to download <b>1 file
 msgstr ""
 
 msgid "In order for the app to work while offline, we need to download <b>@count files</b>. You can turn file downloads on/off in Settings."
+msgstr ""
+
+msgid "Submitting form"
+msgstr ""
+
+msgid "Queued form submissions"
+msgstr ""
+
+msgid "Data collection"
 msgstr ""

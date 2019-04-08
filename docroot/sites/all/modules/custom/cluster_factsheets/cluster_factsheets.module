@@ -268,7 +268,7 @@ function cluster_factsheets_node_validate($node, $form, &$form_state) {
   if ($wrapper->field_household_figures->value() && !$wrapper->field_people_per_household->value())
     form_set_error('field_people_per_household', t('This value is required if the figures represent households.'));
 
-  if ($node->status !== NODE_PUBLISHED)
+  if ($node->status != NODE_PUBLISHED)
     // Date condition not required for unpublished nodes
     return;
 
