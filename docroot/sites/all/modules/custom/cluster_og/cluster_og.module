@@ -592,7 +592,7 @@ function cluster_og_cluster_api_link_data($objects, $gid) {
   if (count($objects) === 1) {
     $page_node = node_load($objects[0]);
 
-    if (!$page_node || $page_node->status !== NODE_PUBLISHED)
+    if (!$page_node || $page_node->status != NODE_PUBLISHED)
       // Shouldn't happen, but if it does, let's just go to the group
       return ['link' => 'group:pages', 'id' => $gid];
 
