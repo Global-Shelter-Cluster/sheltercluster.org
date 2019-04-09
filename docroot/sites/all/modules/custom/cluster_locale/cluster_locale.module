@@ -61,6 +61,7 @@ function cluster_locale_form_locale_translate_import_form_alter(&$form, &$form_s
     // Custom redirect, redirect back to import page.
     $form['#submit'][] = 'cluster_locale_translate_import_form_submit_redirect';
   }
+  $form['#submit'][] = '_cluster_locale_update_app_last_change';
 }
 
 /**
@@ -127,7 +128,16 @@ function cluster_locale_get_enabled_app_languages() {
   return array_intersect_key(language_list(), $enabled_app_languages);
 }
 
-function cluster_locale_preprocess_page($vars) {
-//  drupal_add_js('https://unpkg.com/axios/dist/axios.min.js', 'external');
-//  drupal_add_js(drupal_get_path('module', 'cluster_locale') .'/teste.js', 'file');
+function cluster_locale_form_cluster_locale_config_form_alter(&$form, &$form_state) {
+  $form['#submit'][] = '_cluster_locale_update_last_change';
+}
+
+function _cluster_locale_update_app_last_change(&$form, &$form_state) {
+  if ($form_state['values']['group'] == 'cluster_app') {
+    _cluster_locale_update_last_change();
+  }
+}
+
+function _cluster_locale_update_last_change() {
+  cluster_api_update_app_config('lastLocaleUpdate', time());
 }
