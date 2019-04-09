@@ -411,7 +411,7 @@ function cluster_api_cron() {
     // - they follow this group (filter by group role)
     // - it's a reasonable time right for them (filter by timezone)
     // - we haven't sent them a "daily push notification" in the past 22 hours (for this particular group)
-    $uids = $manager->getUsersByRole(
+    $all_uids = $manager->getUsersByRole(
       CLUSTER_API_FOLLOWER_ROLE_NAME,
       $timezones,
       function (SelectQuery $query) use ($hour) {
@@ -420,34 +420,57 @@ function cluster_api_cron() {
         $query->condition('og_ur.last_daily_push_notification', $filter_time, '<');
       }
     );
-    if (!$uids)
+    if (!$all_uids)
       continue;
 
-    $body = _cluster_api_daily_notification_body($objects_by_module);
-    if (!$body)
-      continue;
+    foreach (cluster_api_split_users_by_langcode($all_uids) as $langcode => $uids) {
+      $body = _cluster_api_daily_notification_body($objects_by_module, $langcode);
+      if (!$body)
+        continue;
 
-    $title = _cluster_api_daily_notification_title($group);
-    $link_data = _cluster_api_daily_notification_link_data($objects_by_module, $gid);
+      $title = _cluster_api_daily_notification_title($group, $langcode);
+      $link_data = _cluster_api_daily_notification_link_data($objects_by_module, $gid);
 
-    try {
-      cluster_api_push_to_users(
-        $uids,
-        $title,
-        $body,
-        $link_data,
-        FALSE
-      );
-    } catch (Exception $e) {
-      watchdog('cluster_api', 'Error sending push notifications for gid @gid: @error. Notification was: @body', [
-        '@gid' => $gid,
-        '@error' => $e->getMessage(),
-        '@body' => print_r(['title' => $title, 'body' => $body, 'link_data', $link_data], TRUE),
-      ], WATCHDOG_ERROR);
+      try {
+        cluster_api_push_to_users(
+          $uids,
+          $title,
+          $body,
+          $link_data,
+          FALSE
+        );
+      } catch (Exception $e) {
+        watchdog('cluster_api', 'Error sending push notifications for gid @gid: @error. Notification was: @body', [
+          '@gid' => $gid,
+          '@error' => $e->getMessage(),
+          '@body' => print_r(['title' => $title, 'body' => $body, 'link_data', $link_data], TRUE),
+        ], WATCHDOG_ERROR);
+      }
+
+      $manager->updateUsersTimestamp(CLUSTER_API_FOLLOWER_ROLE_NAME, $uids, 'last_daily_push_notification');
     }
-
-    $manager->updateUsersTimestamp(CLUSTER_API_FOLLOWER_ROLE_NAME, $uids, 'last_daily_push_notification');
   }
+}
+
+/**
+ * @param array $uids user ids, e.g. [12,34,56,78,90]
+ * @return array keyed by langcode, values are arrays of uids, e.g. ['en' => [12,34,56], 'fr' => [78, 90]]
+ */
+function cluster_api_split_users_by_langcode($uids) {
+  $ret = [];
+
+  foreach (user_load_multiple($uids) as $user) {
+    $langcode = $user->language;
+    if (!$langcode)
+      $langcode = 'en';
+
+    if (!array_key_exists($langcode, $ret))
+      $ret[$langcode] = [];
+
+    $ret[$langcode][] = $user->uid;
+  }
+
+  return $ret;
 }
 
 /**
@@ -471,12 +494,13 @@ function _cluster_api_daily_notification_link_data($objects_by_module, $gid) {
  * If there is a single object, calls
  *
  * @param array $object_ids_by_module Objects for a single group. See hook_daily_push_notification_objects_alter().
+ * @param string $langcode
  * @return string
  */
-function _cluster_api_daily_notification_body($object_ids_by_module) {
+function _cluster_api_daily_notification_body($object_ids_by_module, $langcode = 'en') {
   $data = [];
   foreach ($object_ids_by_module as $module => $object_ids) {
-    $label = module_invoke($module, 'cluster_api_objects_label', $object_ids);
+    $label = module_invoke($module, 'cluster_api_objects_label', $object_ids, $langcode);
     if (!$label)
       continue;
 
@@ -499,18 +523,22 @@ function _cluster_api_daily_notification_body($object_ids_by_module) {
     if (count($object_ids) === 1) {
       // E.g. 'A document was added recently: "My document title"'
 
-      $title = module_invoke($module, 'cluster_api_object_title', current($object_ids));
+      $title = module_invoke($module, 'cluster_api_object_title', current($object_ids), $langcode);
       if (!$title)
         return '';
 
       return t('@object was added recently: @title', [
         '@object' => drupal_ucfirst($label),
         '@title' => $title,
+      ], [
+        'langcode' => $langcode,
       ]);
     } else {
       // E.g. '4 documents were added recently.'
       return t('@objects were added recently.', [
         '@objects' => drupal_ucfirst($label),
+      ], [
+        'langcode' => $langcode,
       ]);
     }
   }
@@ -522,10 +550,14 @@ function _cluster_api_daily_notification_body($object_ids_by_module) {
   $items = [];
   foreach ($data as $module => $datum)
     $items[] = $datum['label'];
-  return t('@objects were added recently.', ['@objects' => _cluster_api_list_and($items, TRUE)]);
+  return t('@objects were added recently.', [
+    '@objects' => _cluster_api_list_and($items, TRUE, $langcode),
+  ], [
+    'langcode' => $langcode,
+  ]);
 }
 
-function _cluster_api_list_and($items, $ucfirst) {
+function _cluster_api_list_and($items, $ucfirst, $langcode = 'en') {
   if ($ucfirst && count($items) > 0)
     $items[0] = ucfirst($items[0]);
 
@@ -535,23 +567,30 @@ function _cluster_api_list_and($items, $ucfirst) {
     case 1:
       return $items[0];
     default:
-      return implode(', ', array_slice($items, 0, count($items) - 1))
-        . ' and ' . array_pop($items);
+      return t('@a and @b', [
+        '@a' => implode(', ', array_slice($items, 0, count($items) - 1)),
+        '@b' => array_pop($items),
+      ], [
+        'langcode' => $langcode,
+      ]);
   }
 }
 
 /**
  * @param stdClass $group Node object
+ * @param string $langcode
  * @return string E.g. "Vanuatu Ambae Volcano 2018 (response)", "Africa (region)"
  */
-function _cluster_api_daily_notification_title($group) {
+function _cluster_api_daily_notification_title($group, $langcode = 'en') {
   $display = GroupDisplayProvider::getDisplayProvider($group);
 
   $title = $group->title;
 
   $type_label = $display->getGroupTypeLabel();
   if ($type_label)
-    $title .= ' (' . $type_label . ')';
+    $title .= ' (' . t($type_label, [], [
+        'langcode' => $langcode,
+      ]) . ')';
 
   return $title;
 }
