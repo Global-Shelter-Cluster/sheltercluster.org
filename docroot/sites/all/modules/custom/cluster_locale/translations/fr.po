@@ -526,3 +526,12 @@ msgstr "Pour utiliser l'app hors ligne, il faut télécharger <b>1 fichier</b>."
 
 msgid "In order for the app to work while offline, we need to download <b>@count files</b>."
 msgstr "Pour utiliser l'app hors ligne, il faut télécharger <b>@count fichiers</b>."
+
+msgid "Submitting form"
+msgstr "Envoi en cours"
+
+msgid "Queued form submissions"
+msgstr "En attente"
+
+msgid "Data collection"
+msgstr "Collecte de données"
