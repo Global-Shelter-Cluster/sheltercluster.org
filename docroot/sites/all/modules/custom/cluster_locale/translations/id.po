@@ -90,10 +90,10 @@ msgid "Website"
 msgstr "Situs Web"
 
 msgid "Countries"
-msgstr "Negara-negara”
+msgstr "Negara-negara"
 
 msgid "Regions"
-msgstr "Wilayah-wilayah”
+msgstr "Wilayah-wilayah"
 
 msgid "In"
 msgstr "Dalam"
@@ -108,7 +108,7 @@ msgid "Submitting assessment form"
 msgstr "Mengirim form pengkajian"
 
 msgid "Downloading file"
-msgstr "Mengunduh berkas
+msgstr "Mengunduh berkas"
 
 msgid "Offline"
 msgstr "Luring"
