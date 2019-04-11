@@ -164,6 +164,8 @@ class ClusterAPI_Type_Group extends ClusterAPI_Type {
 
     switch ($mode) {
       case ClusterAPI_Object::MODE_PRIVATE:
+      //Fall-through
+      case ClusterAPI_Object::MODE_PUBLIC:
         if (method_exists($manager, 'getKoboForms') && $value = $manager->getKoboForms()) {
           $ret['kobo_forms'] = array_values(array_filter(array_map($convert_to_int, $value)));
         }
@@ -176,8 +178,6 @@ class ClusterAPI_Type_Group extends ClusterAPI_Type {
 
         $ret['followers'] = self::getFollowers($id);
 
-      //Fall-through
-      case ClusterAPI_Object::MODE_PUBLIC:
         $ret['search_group_nids'] = $display->getSearchGroupNids();
 
         if ($value = self::getReferenceIds('node', $node, 'field_associated_regions', TRUE))

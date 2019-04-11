@@ -1304,9 +1304,7 @@ function cluster_og_og_features_default_permissions() {
 
   // Exported og permission: 'node:response:create webform content'
   $permissions['node:response:create webform content'] = array(
-    'roles' => array(
-      'administrator member' => 'administrator member',
-    ),
+    'roles' => array(),
   );
 
   // Exported og permission: 'node:response:delete any arbitrary_library content'
@@ -1372,9 +1370,7 @@ function cluster_og_og_features_default_permissions() {
 
   // Exported og permission: 'node:response:delete any webform content'
   $permissions['node:response:delete any webform content'] = array(
-    'roles' => array(
-      'administrator member' => 'administrator member',
-    ),
+    'roles' => array(),
   );
 
   // Exported og permission: 'node:response:delete own arbitrary_library content'
@@ -1446,9 +1442,7 @@ function cluster_og_og_features_default_permissions() {
 
   // Exported og permission: 'node:response:delete own webform content'
   $permissions['node:response:delete own webform content'] = array(
-    'roles' => array(
-      'administrator member' => 'administrator member',
-    ),
+    'roles' => array(),
   );
 
   // Exported og permission: 'node:response:manage members'
@@ -1556,9 +1550,7 @@ function cluster_og_og_features_default_permissions() {
 
   // Exported og permission: 'node:response:update any webform content'
   $permissions['node:response:update any webform content'] = array(
-    'roles' => array(
-      'administrator member' => 'administrator member',
-    ),
+    'roles' => array(),
   );
 
   // Exported og permission: 'node:response:update group'
@@ -1637,9 +1629,7 @@ function cluster_og_og_features_default_permissions() {
 
   // Exported og permission: 'node:response:update own webform content'
   $permissions['node:response:update own webform content'] = array(
-    'roles' => array(
-      'administrator member' => 'administrator member',
-    ),
+    'roles' => array(),
   );
 
   // Exported og permission: 'node:strategic_advisory:add user'
@@ -1730,10 +1720,7 @@ function cluster_og_og_features_default_permissions() {
 
   // Exported og permission: 'node:strategic_advisory:create webform content'
   $permissions['node:strategic_advisory:create webform content'] = array(
-    'roles' => array(
-      'administrator member' => 'administrator member',
-      'member' => 'member',
-    ),
+    'roles' => array(),
   );
 
   // Exported og permission: 'node:strategic_advisory:delete any arbitrary_library content'
@@ -1797,9 +1784,7 @@ function cluster_og_og_features_default_permissions() {
 
   // Exported og permission: 'node:strategic_advisory:delete any webform content'
   $permissions['node:strategic_advisory:delete any webform content'] = array(
-    'roles' => array(
-      'administrator member' => 'administrator member',
-    ),
+    'roles' => array(),
   );
 
   // Exported og permission: 'node:strategic_advisory:delete own arbitrary_library content'
@@ -1869,9 +1854,7 @@ function cluster_og_og_features_default_permissions() {
 
   // Exported og permission: 'node:strategic_advisory:delete own webform content'
   $permissions['node:strategic_advisory:delete own webform content'] = array(
-    'roles' => array(
-      'administrator member' => 'administrator member',
-    ),
+    'roles' => array(),
   );
 
   // Exported og permission: 'node:strategic_advisory:manage members'
@@ -1973,9 +1956,7 @@ function cluster_og_og_features_default_permissions() {
 
   // Exported og permission: 'node:strategic_advisory:update any webform content'
   $permissions['node:strategic_advisory:update any webform content'] = array(
-    'roles' => array(
-      'administrator member' => 'administrator member',
-    ),
+    'roles' => array(),
   );
 
   // Exported og permission: 'node:strategic_advisory:update group'
@@ -2052,10 +2033,7 @@ function cluster_og_og_features_default_permissions() {
 
   // Exported og permission: 'node:strategic_advisory:update own webform content'
   $permissions['node:strategic_advisory:update own webform content'] = array(
-    'roles' => array(
-      'administrator member' => 'administrator member',
-      'member' => 'member',
-    ),
+    'roles' => array(),
   );
 
   // Exported og permission: 'node:working_group:add user'

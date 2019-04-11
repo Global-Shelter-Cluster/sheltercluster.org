@@ -1,0 +1,451 @@
+# LANGUAGE translation of PROJECT
+# Copyright (c) YEAR NAME <EMAIL@ADDRESS>
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"POT-Creation-Date: 2019-03-05 20:04+0000\n"
+"PO-Revision-Date: 2019-03-05 20:04+0000\n"
+"Last-Translator: NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "Queued assessment form submissions"
+msgstr "Bahasa goes here"
+
+msgid "App testing string"
+msgstr "Pengujian aplikasi"
+
+# Search components
+msgid "Featured"
+msgstr "Fitur"
+
+msgid "Key document"
+msgstr "Dokumen Kunci"
+
+msgid "Community of practice"
+msgstr "Komunitas praktisi"
+
+msgid "Geographic region"
+msgstr "Wilayah"
+
+msgid "Hub"
+msgstr "Wilayah Operasi"
+
+msgid "RESPONSE"
+msgstr "RESPONS"
+
+msgid "Response"
+msgstr "Respons"
+
+msgid "Discussion"
+msgstr "Diskusi"
+
+msgid "Strategic Advisory Group"
+msgstr "Kelompok Penasihat Strategis"
+
+msgid "Working Group"
+msgstr "Kelompok Kerja"
+
+msgid "Library"
+msgstr "Perpustakaan"
+
+msgid "Article"
+msgstr "Artikel"
+
+msgid "Discussion"
+msgstr "Diskusi"
+
+# Multiselect factory
+msgid "Search Items..."
+msgstr "Mencari..."
+
+msgid "View"
+msgstr "Tampilan"
+
+msgid "Map"
+msgstr "Peta"
+
+msgid "Share"
+msgstr "Berbagi"
+
+msgid "Download"
+msgstr "Unduh"
+
+msgid "Skip for now"
+msgstr "Lewati untuk saat ini"
+
+msgid "Loading..."
+msgstr "Memuat..."
+
+msgid "Follow"
+msgstr "Ikuti"
+
+msgid "Un-follow"
+msgstr "Berhenti mengikuti"
+
+msgid "Website"
+msgstr "Situs Web"
+
+msgid "Countries"
+msgstr "Negara-negara"
+
+msgid "Regions"
+msgstr "Wilayah-wilayah"
+
+msgid "In"
+msgstr "Dalam"
+
+msgid "Related to"
+msgstr "Terkait pada"
+
+msgid "Useful links"
+msgstr "Pranala yang bermanfaat"
+
+msgid "Submitting assessment form"
+msgstr "Mengirim form pengkajian"
+
+msgid "Downloading file"
+msgstr "Mengunduh berkas"
+
+msgid "Offline"
+msgstr "Luring"
+
+msgid "Technical information"
+msgstr "Informasi teknis"
+
+msgid "PROGRAM/INITIATIVE/ACTIVITY UNDERTAKEN WITH THE FINANCIAL SUPPORT OF THE GOVERNMENT OF CANADA PROVIDED THROUGH GLOBAL AFFAIRS CANADA (GAC)"
+msgstr "PROGRAM/INISIATIF/AKTIVITAS DILAKUKAN DENGAN DUKUNGAN FINANSIAL DARI PEMERINTAH KANADA YANG DISEDIAKAN MELALUI GLOBAL AFFAIRS CANADA (GAC)"
+
+msgid "THIS APP IS MADE POSSIBLE THROUGH THE FINANCIAL AND IN-KIND CONTRIBUTIONS OF"
+msgstr "APLIKASI INI DIKEMBANGKAN DENGAN DUKUNGAN FINANSIAL DAN BANTUAN DARI"
+
+msgid "Search"
+msgstr "Cari"
+
+msgid "Select"
+msgstr "Pilih"
+
+msgid "Submit"
+msgstr "Kirim"
+
+msgid "name"
+msgstr "nama"
+
+msgid "Settings"
+msgstr "Pengaturan"
+
+# Nav
+msgid "Document"
+msgstr "Dokumen"
+
+msgid "Event"
+msgstr "Kejadian"
+
+msgid "Events"
+msgstr "Kejadian-kejadian"
+
+msgid "Factsheet"
+msgstr "Lembar fakta"
+
+msgid "KoboForm"
+msgstr "Form Kobo"
+
+msgid "Webform"
+msgstr "Form web"
+
+msgid "Group"
+msgstr "Kelompok"
+
+msgid "WebsiteViewer"
+msgstr "TampilanSitusWeb"
+
+msgid "AlertList"
+msgstr "DaftarNotifikasi"
+
+msgid "Contact"
+msgstr "Kontak"
+
+msgid "UserList"
+msgstr "Daftar Pengguna"
+
+msgid "ReportList"
+msgstr "Daftar Laporan"
+
+msgid "DocumentList"
+msgstr "Daftar Dokumen"
+
+msgid "Auth"
+msgstr "Otorisasi"
+
+msgid "Settings"
+msgstr "Pengaturan"
+
+msgid "User"
+msgstr "Pengguna"
+
+msgid "Assessment forms"
+msgstr "Formulir-formulir Pengkajian"
+
+msgid "Assessment form"
+msgstr "Formulir Pengkajian"
+
+msgid "Recent documents"
+msgstr "Dokumen terbaru"
+
+msgid "Featured documents"
+msgstr "Dokumen Fitur"
+
+msgid "Featured/ndocuments"
+msgstr "Dokumen-dokumen fitur"
+
+msgid "Key documents"
+msgstr "Dokumen-dokumen kunci"
+
+msgid "Key/ndocuments"
+msgstr "Dokumen Kunci"
+
+msgid "All documents"
+msgstr "Seluruh dokumen"
+
+msgid "All/ndocuments"
+msgstr "SeluruhDokumen"
+
+msgid "Documents"
+msgstr "Dokumen"
+
+msgid "Upcoming events"
+msgstr "Jadwal"
+
+msgid "Upcoming/nevents"
+msgstr "Kegiatan yang Akan Datang"
+
+msgid "Latest factsheet"
+msgstr "Lembar fakta terbaru"
+
+msgid "Latest/nfactsheet"
+msgstr "Lembar Fakta Terbaru"
+
+msgid "Factsheets"
+msgstr "Lembar fakta"
+
+msgid "Log out"
+msgstr "Keluar"
+
+msgid "and"
+msgstr "dan"
+
+msgid "Photo gallery"
+msgstr "Galeri foto"
+
+msgid "Integer"
+msgstr "Bilangan bulat"
+
+msgid "Unknown error, please try again"
+msgstr "Kesalahan yang tak diketahui, silahkan coba lagi"
+
+msgid "Further instructions have been sent to your e-mail address."
+msgstr "Instruksi selanjutnya telah dikirim ke alamat email Anda"
+
+msgid "No internet connection detected."
+msgstr "Tidak ada koneksi internet"
+
+msgid "Requesting a new password for your account..."
+msgstr "Meminta kata sandi baru untuk akun Anda"
+
+msgid "Request a new password for your Shelter Cluster account"
+msgstr "Meminta kata sandi baru untuk akun Klaster Shelter Anda"
+
+msgid "Username or e-mail address"
+msgstr "Nama pengguna atau alamat e-mail"
+
+msgid "Log in"
+msgstr "Masuk"
+
+msgid "Me"
+msgstr "Saya"
+
+msgid "Sign up"
+msgstr "Daftar"
+
+msgid "Forgot your username/password?"
+msgstr "Lupa nama pengguna anda/ kata sandi"
+
+msgid "Username or e-mail address"
+msgstr "Nama pengguna atau alamat email"
+
+msgid "Seen"
+msgstr "Telah dilihat"
+
+msgid "Alerts"
+msgstr "Notifikasi"
+
+msgid "Recent"
+msgstr "Terbaru"
+
+msgid "Featured"
+msgstr "Yang diutamakan"
+
+msgid "Key"
+msgstr "Kunci"
+
+msgid "Try again"
+msgstr "Coba lagi"
+
+msgid "Error loading data, please check your connection"
+msgstr "Kesalahan dalam memuat data, silahkan periksa koneksi Anda"
+
+msgid "Pages"
+msgstr "Halaman"
+
+msgid "Dashboard"
+msgstr "Panel informasi"
+
+msgid "Navigation"
+msgstr "Navigasi"
+
+msgid "Coordination team"
+msgstr "Tim Koordinasi"
+
+msgid "Followed"
+msgstr "Diikuti"
+
+msgid "Operations"
+msgstr "Operasi"
+
+msgid "Followers"
+msgstr "Pengikut"
+
+msgid "Unrecognized item"
+msgstr "Hal tidak dikenal"
+
+msgid "Not implemented yet!"
+msgstr "Belum diimplementasi!"
+
+msgid "Not implemented yet"
+msgstr "Belum diimplementasi"
+
+msgid "Error loading, please check your connection and try again"
+msgstr "Kesalahan memuat, silahkan periksa koneksi Anda dan coba lagi"
+
+msgid "Thank you, your submission has been queued and will be sent when you are online."
+msgstr "Terima kasih, kiriman Anda telah masuk dan akan dikirim saat Anda mendapat koneksi internet"
+
+msgid "Go back to the form"
+msgstr "Kembali ke form"
+
+msgid "Thank you, your submission has been received."
+msgstr "Terima kasih, kiriman Anda telah diterima"
+
+msgid "Next page"
+msgstr "Halaman berikutnya"
+
+msgid "Sending 1 submission…"
+msgstr "Mengirim 1 dokumen.."
+
+msgid "Sending @count submissions…"
+msgstr "Mengirim @count dokumen"
+
+msgid "1 submission queued to be sent when online."
+msgstr "1 dokumen akan dikirim saat mendapat koneksi internet"
+
+msgid "@count submissions queued to be sent when online."
+msgstr "@count dokumen akan dikirim saat mendapat koneksi internet"
+
+msgid "Search..."
+msgstr "Mencari..."
+
+msgid "Contacts"
+msgstr "Daftar kontak"
+
+msgid "Search is not enabled."
+msgstr "Fitur pencarian tidak diaktifkan"
+
+msgid "Please try again later."
+msgstr "Silahkan coba lagi nanti"
+
+msgid "You must be online for search to work."
+msgstr "Anda mesti memiliki koneksi internet untuk melakukan pencarian"
+
+msgid "Assessment form type not implemented: @type"
+msgstr "Jenis form pengkajian"
+
+msgid "New alerts"
+msgstr "Notifikasi baru"
+
+msgid "Select your language"
+msgstr "Pilih bahasa Anda"
+
+msgid "Download files"
+msgstr "Unduh dokumen"
+
+msgid "Allows for offline use of documents."
+msgstr "Ijinkan untuk menggunakan dokumen secara luring"
+
+msgid "Asked to download files"
+msgstr "Meminta untuk mengunduh dokumen"
+
+msgid "Only available in DEBUG mode."
+msgstr "Hanya tersedia dalam mode DEBUG"
+
+msgid "Import all translations"
+msgstr "Memasukkan seluruh terjemahan"
+
+msgid "Profile"
+msgstr "Profil"
+
+msgid "Preferences"
+msgstr "Pilihan"
+
+msgid "Map"
+msgstr "Peta"
+
+msgid "Need analysis"
+msgstr "Analisis Kebutuhan"
+
+msgid "Response"
+msgstr "Penanganan Bencana"
+
+msgid "responses"
+msgstr "penangangan bencana"
+
+msgid "Gaps / challenges"
+msgstr "Kesenjangan / tantangan"
+
+msgid "You're not following any responses yet."
+msgstr "Anda belum mengikuti penanganan bencana"
+
+msgid "Password"
+msgstr "Kata kunci"
+
+msgid "Create a Shelter Cluster account"
+msgstr "Bikin akun untuk Klaster Shelter"
+
+msgid "Request password"
+msgstr "Meminta kata kunci"
+
+msgid "E-mail address"
+msgstr "Alamat e-mail"
+
+msgid "Organization"
+msgstr "Lembaga"
+
+msgid "Name"
+msgstr "Nama"
+
+msgid "Logging in..."
+msgstr "Masuk..."
+
+msgid "Groups"
+msgstr "Kelompok"
+
+msgid "REGION"
+msgstr "WILAYAH"
+
+msgid "Start"
+msgstr "Mulai"
+
+msgid "Next page"
+msgstr "Halaman berikutnya"
