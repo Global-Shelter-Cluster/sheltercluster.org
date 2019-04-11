@@ -76,6 +76,7 @@ function _webform_render_geolocation($component, $value = NULL, $filter = TRUE, 
   $element = [
     '#title' => $component['name'],
     '#theme_wrappers' => ['webform_element'],
+    '#weight' => $component['weight'],
     'fieldset' => [
       '#type' => 'fieldset',
       '#attributes' => [
