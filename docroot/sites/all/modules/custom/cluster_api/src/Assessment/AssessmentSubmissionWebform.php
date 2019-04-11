@@ -33,9 +33,10 @@ class AssessmentSubmissionWebform implements AssessmentSubmissionInterface {
       }
     }
 
-    if (!$user_is_follower) {
-      return ['success' => FALSE, 'message' => t('User is not group follower')];
-    }
+    // 2019-04-11: We're removing this requirement (as per SA-70)
+//    if (!$user_is_follower) {
+//      return ['success' => FALSE, 'message' => t('User is not group follower')];
+//    }
 
     if (!$this->node) {
       return ['success' => FALSE, 'message' => t('Bad form id')];
