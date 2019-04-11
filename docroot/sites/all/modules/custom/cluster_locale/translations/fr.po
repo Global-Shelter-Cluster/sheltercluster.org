@@ -528,10 +528,25 @@ msgid "In order for the app to work while offline, we need to download <b>@count
 msgstr "Pour utiliser l'app hors ligne, il faut télécharger <b>@count fichiers</b>."
 
 msgid "Submitting form"
-msgstr "Envoi en cours"
+msgstr "Soumission du formulaire"
 
 msgid "Queued form submissions"
-msgstr "En attente"
+msgstr "En attente de soumission"
 
 msgid "Data collection"
 msgstr "Collecte de données"
+
+msgid "Submitting form"
+msgstr "Soumission du formulaire"
+
+msgid "Resources"
+msgstr "Resources"
+
+msgid "community of practice"
+msgstr "communautés de pratique"
+
+msgid "country"
+msgstr "pays"
+
+msgid "Country"
+msgstr "Pays"
