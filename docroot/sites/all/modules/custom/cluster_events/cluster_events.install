@@ -134,3 +134,42 @@ function cluster_events_update_7007() {
 function cluster_events_update_7009() {
   features_revert(array('cluster_events' => array('field_instance')));
 }
+
+function cluster_events_install() {
+  module_load_include('module', 'cluster_events', 'cluster_events');
+
+  $temp = [];
+  cluster_events_schema_alter($temp);
+
+  foreach ($temp as $table => $table_data) {
+    if (!isset($table_data['fields']))
+      continue;
+
+    foreach ($table_data['fields'] as $field => $spec)
+      if (!db_field_exists($table, $field))
+        db_add_field($table, $field, $spec);
+  }
+}
+
+function cluster_events_uninstall() {
+  module_load_include('module', 'cluster_events', 'cluster_events');
+
+  $temp = [];
+  cluster_events_schema_alter($temp);
+
+  foreach ($temp as $table => $table_data) {
+    if (!isset($table_data['fields']))
+      continue;
+
+    foreach ($table_data['fields'] as $field => $spec)
+      if (db_field_exists($table, $field))
+        db_drop_field($table, $field);
+  }
+}
+
+/**
+ * Adds some columns to the `og_users_roles` table.
+ */
+function cluster_events_update_7010() {
+  cluster_events_install();
+}

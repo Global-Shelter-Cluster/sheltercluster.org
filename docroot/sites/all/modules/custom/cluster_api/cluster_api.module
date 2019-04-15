@@ -399,7 +399,7 @@ function cluster_api_cron() {
   drupal_alter('daily_push_notification_objects', $objects_by_gid);
 
   $hour = 60 * 60; // const
-  $timezones = _cluster_api_daily_notification_timezones();
+  $timezones = cluster_api_daily_notification_timezones();
 
   foreach ($objects_by_gid as $gid => $objects_by_module) {
     $group = node_load($gid);
@@ -428,7 +428,7 @@ function cluster_api_cron() {
       if (!$body)
         continue;
 
-      $title = _cluster_api_daily_notification_title($group, $langcode);
+      $title = cluster_api_group_notification_title($group, $langcode);
       $link_data = _cluster_api_daily_notification_link_data($objects_by_module, $gid);
 
       try {
@@ -581,7 +581,7 @@ function _cluster_api_list_and($items, $ucfirst, $langcode = 'en') {
  * @param string $langcode
  * @return string E.g. "Vanuatu Ambae Volcano 2018 (response)", "Africa (region)"
  */
-function _cluster_api_daily_notification_title($group, $langcode = 'en') {
+function cluster_api_group_notification_title($group, $langcode = 'en') {
   $display = GroupDisplayProvider::getDisplayProvider($group);
 
   $title = $group->title;
@@ -599,7 +599,7 @@ function _cluster_api_daily_notification_title($group, $langcode = 'en') {
  * Get a list of timezones for which it's acceptable to send a "daily notification" right now,
  * i.e. the current time is anywhere from 2pm to 6pm.
  */
-function _cluster_api_daily_notification_timezones() {
+function cluster_api_daily_notification_timezones() {
   $all_timezones = array_keys(system_time_zones());
 
   $filter = function ($timezone) {
