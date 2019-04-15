@@ -621,7 +621,7 @@ function cluster_og_cluster_api_link_data($objects, $gid) {
  *
  * Implements hook_cluster_api_objects_label().
  */
-function cluster_og_cluster_api_objects_label($ids) {
+function cluster_og_cluster_api_objects_label($ids, $langcode) {
   // Filter to make sure all ids are published nodes
   $query = new EntityFieldQuery();
   $all_count = $query->entityCondition('entity_type', 'node')
@@ -633,7 +633,7 @@ function cluster_og_cluster_api_objects_label($ids) {
   if ($all_count === 0)
     return '';
 
-  return format_plural($all_count, 'a page', '@count pages');
+  return format_plural($all_count, 'a page', '@count pages', [], ['langcode' => $langcode]);
 }
 
 /**
@@ -641,7 +641,7 @@ function cluster_og_cluster_api_objects_label($ids) {
  *
  * Implements hook_cluster_api_object_title().
  */
-function cluster_og_cluster_api_object_title($id) {
+function cluster_og_cluster_api_object_title($id, $langcode) {
   $node = node_load($id);
   return ($node->status == NODE_PUBLISHED && in_array($node->type, ['page', 'library', 'arbitrary_library', 'photo_gallery']))
     ? $node->title
