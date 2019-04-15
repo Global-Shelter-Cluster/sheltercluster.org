@@ -612,7 +612,7 @@ function _cluster_events_load_upcoming_events() {
     ->execute();
 
   if (!$results || !$results['node'])
-    return;
+    return $ret;
 
   $nids = array_keys($results['node']);
 
