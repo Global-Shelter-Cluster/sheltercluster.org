@@ -668,7 +668,7 @@ function _cluster_events_upcoming_notification_link_data($event_nids, $gid) {
 /**
  * Implements hook_cron().
  */
-function cluster_api_cron() {
+function cluster_events_cron() {
   // Upcoming events (events that happen tomorrow) push notifications
   $hour = 60 * 60; // const
   $timezones = cluster_api_daily_notification_timezones();
