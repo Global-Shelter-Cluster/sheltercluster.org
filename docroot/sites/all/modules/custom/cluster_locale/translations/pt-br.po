@@ -14,47 +14,47 @@ msgstr ""
 
 # Search components
 msgid "Featured"
-msgstr "Destacados"
+msgstr "Em destaque"
 
 msgid "Key document"
-msgstr "Documento clave"
+msgstr "Documento chave"
 
 msgid "Community of practice"
-msgstr "Comunidad de prácticas"
+msgstr "Comunidade de prática"
 
 msgid "Geographic region"
-msgstr "Región geográfica"
+msgstr "Região geográfica"
 
 msgid "Hub"
 msgstr "Centro"
 
 msgid "RESPONSE"
-msgstr "RESPUESTA"
+msgstr "RESPOSTA"
 
 msgid "Response"
-msgstr "Respuesta"
+msgstr "Resposta"
 
 msgid "Discussion"
-msgstr "Discusión"
+msgstr "Discussão"
 
 msgid "Strategic Advisory Group"
-msgstr "Grupo de Asesoramiento Estratégico"
+msgstr "Grupo de Assessoramento Estratégico"
 
 msgid "Working Group"
-msgstr "Grupo de Trabajo"
+msgstr "Grupo de Trabalho"
 
 msgid "Library"
-msgstr "Librería"
+msgstr "Biblioteca"
 
 msgid "Article"
-msgstr "Artículo"
+msgstr "Artígo"
 
 msgid "Discussion"
-msgstr "Discusión"
+msgstr "Discussão"
 
 # Multiselect factory
 msgid "Search Items..."
-msgstr "Búsqueda..."
+msgstr "Busca..."
 
 msgid "View"
 msgstr "Ver"
@@ -63,31 +63,31 @@ msgid "Map"
 msgstr "Mapa"
 
 msgid "Share"
-msgstr "Compartir"
+msgstr "Compartilhar"
 
 msgid "Download"
-msgstr "Descargar"
+msgstr "Baixar"
 
 msgid "Skip for now"
-msgstr "No por ahora"
+msgstr "Ignorar por enquanto"
 
 msgid "Loading..."
-msgstr "Cargando..."
+msgstr "Carregando..."
 
 msgid "Follow"
 msgstr "Seguir"
 
 msgid "Un-follow"
-msgstr "Dejar"
+msgstr "Deixar de seguir"
 
 msgid "Website"
-msgstr "Sitio web"
+msgstr "Site"
 
 msgid "Countries"
 msgstr "Países"
 
 msgid "Regions"
-msgstr "Regiones"
+msgstr "Regiões"
 
 msgid "In"
 msgstr "En"
@@ -96,37 +96,37 @@ msgid "Related to"
 msgstr "Relacionado a"
 
 msgid "Useful links"
-msgstr "Enlaces de interés"
+msgstr "Links úteis"
 
 msgid "Downloading file"
-msgstr "Descargando archivo"
+msgstr "Baixando arquivo"
 
 msgid "Offline"
 msgstr "Desconectado"
 
 msgid "Technical information"
-msgstr "Información técnica"
+msgstr "Informação técnica"
 
 msgid "PROGRAM/INITIATIVE/ACTIVITY UNDERTAKEN WITH THE FINANCIAL SUPPORT OF THE GOVERNMENT OF CANADA PROVIDED THROUGH GLOBAL AFFAIRS CANADA (GAC)"
-msgstr "PROGRAMA/INICIATIVA/ACTIVIDAD REALIZADA CON EL APOYO FINANCIERO DEL GOBIERNO DE CANADÁ PROPORCIONADO A TRAVÉS DE GLOBAL AFFAIRS CANADA (GAC)"
+msgstr "PROGRAMA/INICIATIVA/ATIVIDADE REALIZADA CON O APOIO FINANCEIRO DO GOVERNO DO CANADÁ PROPORCIONADO ATRAVÉS DE GLOBAL AFFAIRS CANADA (GAC)"
 
 msgid "THIS APP IS MADE POSSIBLE THROUGH THE FINANCIAL AND IN-KIND CONTRIBUTIONS OF:"
-msgstr "ESTA APLICACIÓN SE HACE POSIBLE A TRAVÉS DE LAS CONTRIBUCIONES FINANCIERAS Y EN ESPECIE DE:"
+msgstr "ESTE APP SE FAZ POSSÍVEL ATRAVÉS DE CONTRIBUIÇÕES FINANCEIRAS E EM ESPÉCIE DE:"
 
 msgid "Search"
 msgstr "Buscar"
 
 msgid "Select"
-msgstr "Seleccionar"
+msgstr "Selecionar"
 
 msgid "Submit"
 msgstr "Enviar"
 
 msgid "name"
-msgstr "nombre"
+msgstr "nome"
 
 msgid "Settings"
-msgstr "Ajustes"
+msgstr "Configurações"
 
 # Nav
 msgid "Document"
@@ -142,30 +142,30 @@ msgid "Factsheet"
 msgstr "Ficha informativa"
 
 msgid "Contact"
-msgstr "Contacto"
+msgstr "Contato"
 
 #
 
 msgid "Recent documents"
-msgstr "Documentos recientes"
+msgstr "Documentos recentes"
 
 msgid "Featured documents"
-msgstr "Documentos destacados"
+msgstr "Documentos em destaque"
 
 msgid "Featured/ndocuments"
-msgstr "Documentos/ndestacados"
+msgstr "Documentos/nem destaque"
 
 msgid "Key documents"
-msgstr "Documentos clave"
+msgstr "Documentos chave"
 
 msgid "Key/ndocuments"
-msgstr "Documentos/nclave"
+msgstr "Documentos/nchave"
 
 msgid "All documents"
-msgstr "Todos los documentos"
+msgstr "Todos documentos"
 
 msgid "All/ndocuments"
-msgstr "Todos los/ndocumentos"
+msgstr "Todos/ndocumentos"
 
 msgid "Documents"
 msgstr "Documentos"
@@ -186,46 +186,46 @@ msgid "Factsheets"
 msgstr "Fichas informativas"
 
 msgid "Log out"
-msgstr "Salir"
+msgstr "Sair"
 
 msgid "and"
-msgstr "y"
+msgstr "e"
 
 msgid "Photo gallery"
 msgstr "Galería de fotos"
 
 msgid "Integer"
-msgstr "Entero"
+msgstr "Inteiro"
 
 msgid "Unknown error, please try again"
-msgstr "Error desconocido, por favor inténtelo de nuevo"
+msgstr "Error desconhecido, por favor tente novamente"
 
 msgid "Further instructions have been sent to your e-mail address."
-msgstr "Se han enviado instrucciones a su correo electrónico."
+msgstr "Mais instruções foram enviadas ao seu endereço de e-mail."
 
 msgid "No internet connection detected."
-msgstr "No se detecta conexión a internet."
+msgstr "Sem conexão a internet."
 
 msgid "Requesting a new password for your account..."
-msgstr "Solicitando una nueva contraseña para su cuenta..."
+msgstr "Solicitando uma nova senha para sua conta..."
 
 msgid "Request a new password for your Shelter Cluster account"
-msgstr "Solicitar una nueva contraseña para su cuenta de Shelter Cluster."
+msgstr "Solicitar uma nova senha para sua conta em Shelter Cluster"
 
 msgid "Username or e-mail address"
-msgstr "Nombre de usuario o e-mail"
+msgstr "Nome de usuário ou endereço de e-mail"
 
 msgid "Log in"
 msgstr "Entrar"
 
 msgid "Me"
-msgstr "Yo"
+msgstr "Eu"
 
 msgid "Sign up"
-msgstr "Registrarse"
+msgstr "Registrar-se"
 
 msgid "Forgot your username/password?"
-msgstr "¿Olvidó su usuario / contraseña?"
+msgstr "Esqueceu seu usuário / senha?"
 
 msgid "Seen"
 msgstr "Visto"
@@ -234,202 +234,202 @@ msgid "Alerts"
 msgstr "Alertas"
 
 msgid "Recent"
-msgstr "Reciente"
+msgstr "Recente"
 
 msgid "Featured"
-msgstr "Destacado"
+msgstr "Em destaque"
 
 msgid "Key"
-msgstr "Clave"
+msgstr "Chave"
 
 msgid "Try again"
-msgstr "Volver a intentar"
+msgstr "Tentar novamente"
 
 msgid "Error loading data, please check your connection"
-msgstr "Error al cargar los datos, por favor revise su conexión"
+msgstr "Erro ao carregar os dados, por favor cheque sua conexão"
 
 msgid "Pages"
 msgstr "Páginas"
 
 msgid "Dashboard"
-msgstr "Panel"
+msgstr "Painel"
 
 msgid "Navigation"
-msgstr "Navegación"
+msgstr "Navegação"
 
 msgid "Coordination team"
-msgstr "Equipo de coordinación"
+msgstr "Equipe de coordenação"
 
 msgid "Followed"
 msgstr "Seguidos"
 
 msgid "Operations"
-msgstr "Operaciones"
+msgstr "Operações"
 
 msgid "Followers"
 msgstr "Seguidores"
 
 msgid "Unrecognized item"
-msgstr "Elemento no reconocido"
+msgstr "Item não reconhecido"
 
 msgid "Not implemented yet!"
-msgstr "¡No implementado todavía!"
+msgstr "Ainda não implementado!"
 
 msgid "Not implemented yet"
-msgstr "No implementado todavía"
+msgstr "Ainda não implementado"
 
 msgid "Error loading, please check your connection and try again"
-msgstr "Error al cargar, por favor revise su conexión y vuelva a intentar"
+msgstr "Erro ao carregar, por favor cheque sua conexão e tente novamente"
 
 msgid "Thank you, your submission has been queued and will be sent when you are online."
-msgstr "Gracias, los datos han sido puestos en cola y se enviarán cuando esté en línea."
+msgstr "Obrigado, seus dados foram salvos e serão enviados quando houver conexão com a internet."
 
 msgid "Go back to the form"
-msgstr "Volver al formulario"
+msgstr "Voltar ao formulário"
 
 msgid "Thank you, your submission has been received."
-msgstr "Gracias, los datos han sido recibidos."
+msgstr "Obrigado, seus dados foram recebidos."
 
 msgid "Next page"
-msgstr "Siguiente"
+msgstr "Próxima página"
 
 msgid "Sending 1 submission…"
-msgstr "Enviando 1 formulario…"
+msgstr "Enviando 1 formulário…"
 
 msgid "Sending @count submissions…"
-msgstr "Enviando @count formularios…"
+msgstr "Enviando @count formulários…"
 
 msgid "1 submission queued to be sent when online."
-msgstr "1 formulario puesto en cola para enviarse cuando esté en línea."
+msgstr "1 formulário salvo para ser enviado quando houver conexão com a internet."
 
 msgid "@count submissions queued to be sent when online."
-msgstr "@count formularios puestos en cola para enviarse cuando esté en línea."
+msgstr "@count formulários salvos para serem enviados quando houver conexão com a internet."
 
 msgid "Search..."
 msgstr "Buscar..."
 
 msgid "Contacts"
-msgstr "Contactos"
+msgstr "Contatos"
 
 msgid "Search is not enabled."
-msgstr "La búsqueda no está activada."
+msgstr "A busca não está ativa."
 
 msgid "Please try again later."
-msgstr "Por favor, inténtelo de nuevo más tarde."
+msgstr "Por favor, tente novamente mais tarde."
 
 msgid "You must be online for search to work."
-msgstr "Debe estar en línea para que la búsqueda funcione."
+msgstr "Você deve estar online para que a busca funcione."
 
 msgid "New alerts"
-msgstr "Alertas nuevas"
+msgstr "Novos alertas"
 
 msgid "Select your language"
-msgstr "Seleccione su idioma"
+msgstr "Selecione seu idioma"
 
 msgid "Download files"
-msgstr "Descargar archivos"
+msgstr "Baixar arquivos"
 
 msgid "Allows for offline use of documents."
-msgstr "Permite el uso offline de documentos."
+msgstr "Permite o uso offline de documentos."
 
 msgid "Asked to download files"
-msgstr "Pidió descargar archivos"
+msgstr "Pediu para baixar arquivos"
 
 msgid "Only available in DEBUG mode."
-msgstr "Solo disponible en modo DEBUG."
+msgstr "Apenas disponível em modo de depuração."
 
 msgid "Import all translations"
-msgstr "Importar todas las traducciones"
+msgstr "Importar todas as traduções"
 
 msgid "Profile"
 msgstr "Perfil"
 
 msgid "Preferences"
-msgstr "Preferencias"
+msgstr "Preferências"
 
 msgid "Map"
 msgstr "Mapa"
 
 msgid "Need analysis"
-msgstr "Análisis de necesidades"
+msgstr "Análise de necessidades"
 
 msgid "Response"
-msgstr "Respuesta"
+msgstr "Resposta"
 
 msgid "responses"
-msgstr "respuestas"
+msgstr "respostas"
 
 msgid "Gaps / challenges"
-msgstr "Brechas / desafíos"
+msgstr "Lacunas / desafios"
 
 msgid "You're not following any responses yet."
-msgstr "Aún no está siguiendo ninguna respuesta."
+msgstr "Você não está seguindo nenhuma resposta ainda."
 
 msgid "Password"
-msgstr "Contraseña"
+msgstr "Senha"
 
 msgid "Create a Shelter Cluster account"
-msgstr "Crear una cuenta de Shelter Cluster"
+msgstr "Criar uma conta em Shelter Cluster"
 
 msgid "Request password"
-msgstr "Solicitar contraseña"
+msgstr "Solicitar senha"
 
 msgid "E-mail address"
-msgstr "Dirección de e-mail"
+msgstr "Endereço de e-mail"
 
 msgid "Organization"
-msgstr "Organización"
+msgstr "Organização"
 
 msgid "Name"
-msgstr "Nombre"
+msgstr "Nome"
 
 msgid "Logging in..."
-msgstr "Ingresando..."
+msgstr "Fazendo login..."
 
 msgid "Groups"
 msgstr "Grupos"
 
 msgid "REGION"
-msgstr "REGIÓN"
+msgstr "REGIÃO"
 
 msgid "Start"
-msgstr "Empezar"
+msgstr "Iniciar"
 
 msgid "Next page"
-msgstr "Siguiente pág."
+msgstr "Página seguinte."
 
 msgid "online"
-msgstr ""
+msgstr "online"
 
 msgid "offline"
-msgstr ""
+msgstr "offline"
 
 msgid "Expo version: @version"
-msgstr "Versión de Expo: @version"
+msgstr "Versão do Expo: @version"
 
 msgid "App version: @version"
-msgstr "Versión de la aplicación: @version"
+msgstr "Versão do app: @version"
 
 msgid "<none>"
-msgstr "<ninguno>"
+msgstr "<nenhum>"
 
 msgid "Environment: @env"
 msgstr "Ambiente: @env"
 
 msgid "Connectivity"
-msgstr "Conectividad"
+msgstr "Conectividade"
 
 msgid "Language settings can't be changed while offline"
-msgstr "La configuración de idioma no se puede cambiar sin conexión"
+msgstr "As configurações de idioma não podem estar alteradas enquanto offline"
 
 msgid "response"
-msgstr "respuesta"
+msgstr "resposta"
 
 msgid "region"
-msgstr "región"
+msgstr "região"
 
 msgid "regions"
-msgstr "regiones"
+msgstr "regiões"
 
 msgid "hub"
 msgstr "centro"
@@ -438,10 +438,10 @@ msgid "hubs"
 msgstr "centros"
 
 msgid "working group"
-msgstr "grupo de trabajo"
+msgstr "grupo de trabalho"
 
 msgid "working groups"
-msgstr "grupos de trabajo"
+msgstr "grupos de trabalho"
 
 msgid "CoP"
 msgstr "CoP"
@@ -453,34 +453,34 @@ msgid "1 SAG"
 msgstr "1 SAG"
 
 msgid "Back"
-msgstr "Atrás"
+msgstr "Voltar"
 
 msgid "In order for the app to work while offline, we need to download <b>1 file</b> (approximately <b>@bytes</b>). You can turn file downloads on/off in Settings."
-msgstr "Para que la aplicación funcione sin conexión, debemos descargar <b>1 archivo</b> (aproximadamente <b>@bytes</b>). Puede activar / desactivar la descarga de archivos en Ajustes."
+msgstr "Para que o app funcione sem internet, devemos baixar <b>1 arquivo</b> (aproximadamente <b>@bytes</b>). Você pode ativar / desativar o download de arquivos em Configurações."
 
 msgid "In order for the app to work while offline, we need to download <b>@count files</b> (approximately <b>@bytes</b>). You can turn file downloads on/off in Settings."
-msgstr "Para que la aplicación funcione sin conexión, debemos descargar <b>@count archivos</b> (aproximadamente <b>@bytes</b>). Puede activar / desactivar la descarga de archivos en Ajustes."
+msgstr "Para que o app funcione sem internet, devemos baixar <b>@count arquivos</b> (aproximadamente <b>@bytes</b>). Você pode ativar / desativar o download de arquivos em Configurações."
 
 msgid "In order for the app to work while offline, we need to download <b>1 file</b>. You can turn file downloads on/off in Settings"
-msgstr "Para que la aplicación funcione sin conexión, debemos descargar <b>1 archivo</b>. Puede activar / desactivar la descarga de archivos en Ajustes."
+msgstr "Para que o app funcione sem internet, devemos baixar <b>1 arquivo</b>. Você pode ativar / desativar o download de arquivos em Configurações."
 
 msgid "In order for the app to work while offline, we need to download <b>@count files</b>. You can turn file downloads on/off in Settings."
-msgstr "Para que la aplicación funcione sin conexión, debemos descargar <b>@count archivos</b>. Puede activar / desactivar la descarga de archivos en Ajustes."
+msgstr "Para que o app funcione sem internet, devemos baixar <b>@count arquivos</b>. Você pode ativar / desativar o download de arquivos em Configurações."
 
 msgid "Submitting form"
-msgstr "Enviando formulario"
+msgstr "Enviando formulário"
 
 msgid "Queued form submissions"
-msgstr "Envíos de formularios en cola"
+msgstr "Formulários salvos"
 
 msgid "Data collection"
-msgstr "Recolección de datos"
+msgstr "Coleção de dados"
 
 msgid "Resources"
 msgstr "Recursos"
 
 msgid "community of practice"
-msgstr "comunidad de prácticas"
+msgstr "comunidade de práticas"
 
 msgid "country"
 msgstr "país"

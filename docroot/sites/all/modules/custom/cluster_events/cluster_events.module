@@ -584,3 +584,144 @@ function cluster_events_add_algolia_fields($item, &$item_to_index) {
     $item_to_index['event_location_html'] = drupal_render($view);
   }
 }
+
+/**
+ * Implements hook_schema_alter().
+ */
+function cluster_events_schema_alter(&$schema) {
+  $schema['og_users_roles']['fields']['last_upcevt_push_notification'] = [
+    'type' => 'int',
+    'unsigned' => TRUE,
+    'not null' => TRUE,
+    'default' => 0,
+  ];
+}
+
+function _cluster_events_load_upcoming_events() {
+  $ret = [];
+
+  $query = new EntityFieldQuery();
+  $results = $query->entityCondition('entity_type', 'node')
+    ->entityCondition('bundle', 'event')
+    ->propertyCondition('status', NODE_PUBLISHED)
+
+    // "happens tomorrow"
+    ->fieldCondition('field_recurring_event_date2', 'value', date('Y-m-d',strtotime('+1 day')), '>=')
+    ->fieldCondition('field_recurring_event_date2', 'value', date('Y-m-d',strtotime('+2 day')), '<')
+
+    ->execute();
+
+  if (!$results || !$results['node'])
+    return;
+
+  $nids = array_keys($results['node']);
+
+  $query = db_select('og_membership', 'om')
+    ->fields('om', ['gid', 'etid'])
+    ->condition('group_type', 'node')
+    ->condition('entity_type', 'node')
+    ->condition('etid', $nids, 'IN');
+
+  $results = $query
+    ->execute()
+    ->fetchAll();
+
+  foreach ($results as $result)
+    $ret[$result->gid][] = $result->etid;
+
+  return $ret;
+}
+
+function _cluster_events_upcoming_notification_body($event_nids, $langcode) {
+  if (count($event_nids) === 1) {
+    $event_nid = current($event_nids);
+
+    $node = node_load($event_nid);
+    if (!$node || $node->status != NODE_PUBLISHED || $node->type !== 'event')
+      return '';
+
+    return t('Upcoming event: @title', [
+      '@title' => $node->title,
+    ], [
+      'langcode' => $langcode,
+    ]);
+
+  } elseif (count($event_nids) > 1) {
+
+    return t('There are @count upcoming events.', [
+      '@count' => count($event_nids),
+    ], [
+      'langcode' => $langcode,
+    ]);
+  }
+
+  return '';
+}
+
+function _cluster_events_upcoming_notification_link_data($event_nids, $gid) {
+  if (count($event_nids) === 1)
+    return ['link' => 'event', 'id' => $event_nids[0]];
+
+  return ['link' => 'group:events:upcoming', 'id' => $gid];
+}
+
+/**
+ * Implements hook_cron().
+ */
+function cluster_api_cron() {
+  // Upcoming events (events that happen tomorrow) push notifications
+  $hour = 60 * 60; // const
+  $timezones = cluster_api_daily_notification_timezones();
+
+  $events_by_group = _cluster_events_load_upcoming_events();
+
+  foreach ($events_by_group as $gid => $event_nids) {
+    $group = node_load($gid);
+    if (!og_is_group('node', $group))
+      continue; // shouldn't happen
+    $manager = GroupContentManager::getInstance($group);
+
+    // Gets a list of users who match these conditions:
+    // - they follow this group (filter by group role)
+    // - it's a reasonable time right for them (filter by timezone)
+    // - we haven't sent them an "upcoming events push notification" in the past 22 hours (for this particular group)
+    $all_uids = $manager->getUsersByRole(
+      CLUSTER_API_FOLLOWER_ROLE_NAME,
+      $timezones,
+      function (SelectQuery $query) use ($hour) {
+        // The time of the last notification sent to this user, about this group, is at least 22 hours ago.
+        $filter_time = REQUEST_TIME - (22 * $hour);
+        $query->condition('og_ur.last_upcevt_push_notification', $filter_time, '<');
+      }
+    );
+    if (!$all_uids)
+      continue;
+
+    foreach (cluster_api_split_users_by_langcode($all_uids) as $langcode => $uids) {
+      $body = _cluster_events_upcoming_notification_body($event_nids, $langcode);
+      if (!$body)
+        continue;
+
+      $title = cluster_api_group_notification_title($group, $langcode);
+      $link_data = _cluster_events_upcoming_notification_link_data($event_nids, $gid);
+
+      try {
+        cluster_api_push_to_users(
+          $uids,
+          $title,
+          $body,
+          $link_data,
+          FALSE
+        );
+      } catch (Exception $e) {
+        watchdog('cluster_events', 'Error sending push notifications for gid @gid: @error. Notification was: @body', [
+          '@gid' => $gid,
+          '@error' => $e->getMessage(),
+          '@body' => print_r(['title' => $title, 'body' => $body, 'link_data', $link_data], TRUE),
+        ], WATCHDOG_ERROR);
+      }
+
+      $manager->updateUsersTimestamp(CLUSTER_API_FOLLOWER_ROLE_NAME, $uids, 'last_upcevt_push_notification');
+    }
+  }
+}

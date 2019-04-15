@@ -145,40 +145,7 @@ msgstr ""
 msgid "Factsheet"
 msgstr ""
 
-msgid "KoboForm"
-msgstr ""
-
-msgid "Webform"
-msgstr ""
-
-msgid "Group"
-msgstr ""
-
-msgid "WebsiteViewer"
-msgstr ""
-
-msgid "AlertList"
-msgstr ""
-
 msgid "Contact"
-msgstr ""
-
-msgid "UserList"
-msgstr ""
-
-msgid "ReportList"
-msgstr ""
-
-msgid "DocumentList"
-msgstr ""
-
-msgid "Auth"
-msgstr ""
-
-msgid "Settings"
-msgstr ""
-
-msgid "User"
 msgstr ""
 
 #
@@ -262,9 +229,6 @@ msgid "Sign up"
 msgstr ""
 
 msgid "Forgot your username/password?"
-msgstr ""
-
-msgid "Username or e-mail address"
 msgstr ""
 
 msgid "Seen"
@@ -492,18 +456,6 @@ msgstr ""
 msgid "1 SAG"
 msgstr ""
 
-msgid "approximately <b>@bytes</b>."
-msgstr ""
-
-msgid "You can turn file downloads on/off in Settings."
-msgstr ""
-
-msgid "In order for the app to work while offline, we need to download <b>1 file</b>."
-msgstr ""
-
-msgid "In order for the app to work while offline, we need to download <b>@count files</b>."
-msgstr ""
-
 msgid "Back"
 msgstr ""
 
@@ -526,4 +478,16 @@ msgid "Queued form submissions"
 msgstr ""
 
 msgid "Data collection"
+msgstr ""
+
+msgid "Resources"
+msgstr ""
+
+msgid "community of practice"
+msgstr ""
+
+msgid "country"
+msgstr ""
+
+msgid "Country"
 msgstr ""

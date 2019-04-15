@@ -1187,7 +1187,7 @@ function cluster_docs_cluster_api_link_data($objects, $gid) {
 /**
  * Implements hook_cluster_api_objects_label().
  */
-function cluster_docs_cluster_api_objects_label($ids) {
+function cluster_docs_cluster_api_objects_label($ids, $langcode) {
   // Filter to make sure all ids are published documents
   $query = new EntityFieldQuery();
   $all_count = $query->entityCondition('entity_type', 'node')
@@ -1207,7 +1207,7 @@ function cluster_docs_cluster_api_objects_label($ids) {
     ->count()
     ->execute();
   if ($count === $all_count)
-    return format_plural($all_count, 'a featured document', '@count featured documents');
+    return format_plural($all_count, 'a featured document', '@count featured documents', [], ['langcode' => $langcode]);
 
   // Are all docs "key"?
   $query = new EntityFieldQuery();
@@ -1217,16 +1217,16 @@ function cluster_docs_cluster_api_objects_label($ids) {
     ->count()
     ->execute();
   if ($count === $all_count)
-    return format_plural($all_count, 'a key document', '@count key documents');
+    return format_plural($all_count, 'a key document', '@count key documents', [], ['langcode' => $langcode]);
 
   // At least some of the docs are just regular docs
-  return format_plural($all_count, 'a document', '@count documents');
+  return format_plural($all_count, 'a document', '@count documents', [], ['langcode' => $langcode]);
 }
 
 /**
  * Implements hook_cluster_api_object_title().
  */
-function cluster_docs_cluster_api_object_title($id) {
+function cluster_docs_cluster_api_object_title($id, $langcode) {
   $node = node_load($id);
   return ($node->status == NODE_PUBLISHED && $node->type === 'document') ? $node->title : NULL;
 }

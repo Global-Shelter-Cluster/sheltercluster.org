@@ -31,7 +31,7 @@ msgid "Only available in DEBUG mode."
 msgstr "Seulement disponible en mode DEBUG"
 
 msgid "Current language"
-msgstr "Langue courrante"
+msgstr "Langue courante"
 
 msgid "Settings"
 msgstr "Configurations"
@@ -40,7 +40,7 @@ msgid "Select your language"
 msgstr "Choisissez votre langue"
 
 msgid "Followed"
-msgstr "Suivit"
+msgstr "Suivi"
 
 msgid "Dashboard"
 msgstr "Principal"
@@ -141,7 +141,7 @@ msgid "Share"
 msgstr "Partager"
 
 msgid "Submitting assessment form"
-msgstr "temp"
+msgstr "Soumission en cours"
 
 msgid "Downloading file"
 msgstr "Télécharger fichier"
@@ -153,10 +153,10 @@ msgid "Technical information"
 msgstr "Information technique"
 
 msgid "PROGRAM/INITIATIVE/ACTIVITY UNDERTAKEN WITH THE FINANCIAL SUPPORT OF THE GOVERNMENT OF CANADA PROVIDED THROUGH GLOBAL AFFAIRS CANADA (GAC)"
-msgstr "temp long long long long"
+msgstr "CE PROJET EST ENTREPRIS AVEC AVEC LE SUPPORT FINANCIER DU GOUVERNEMENT DU CANADA PAR L'ENTREMISE D'AFFAIRES MONDIALES CANADA (AMC)"
 
 msgid "THIS APP IS MADE POSSIBLE THROUGH THE FINANCIAL AND IN-KIND CONTRIBUTIONS OF:"
-msgstr "temp long long long long"
+msgstr "LE DÉVELOPPEMENT DE CETTE APPLICATION A ÉTÉ POSSIBLE GR CE À:"
 
 msgid "Search"
 msgstr "Recherche"
@@ -270,7 +270,7 @@ msgid "and"
 msgstr "et"
 
 msgid "Photo gallery"
-msgstr "Gallerie d'images"
+msgstr "Galerie d'images"
 
 msgid "Integer"
 msgstr "Entier"
@@ -336,7 +336,7 @@ msgid "Coordination team"
 msgstr "Équipe de coordination"
 
 msgid "Followed"
-msgstr "Suivit"
+msgstr "Suivi"
 
 msgid "Operations"
 msgstr "Opérations"
@@ -393,7 +393,7 @@ msgid "Please try again later."
 msgstr "Réessayer plus tard."
 
 msgid "You must be online for search to work."
-msgstr "Accès au web requit pour rechercher"
+msgstr "Accès au web requis pour rechercher"
 
 msgid "Assessment form type not implemented: @type"
 msgstr "temp"
@@ -411,7 +411,7 @@ msgid "Map"
 msgstr "Carte"
 
 msgid "Need analysis"
-msgstr "Analyse des besoinds"
+msgstr "Analyse des besoins"
 
 msgid "Response"
 msgstr "Réponse"
@@ -528,10 +528,25 @@ msgid "In order for the app to work while offline, we need to download <b>@count
 msgstr "Pour utiliser l'app hors ligne, il faut télécharger <b>@count fichiers</b>."
 
 msgid "Submitting form"
-msgstr "Envoi en cours"
+msgstr "Soumission du formulaire"
 
 msgid "Queued form submissions"
-msgstr "En attente"
+msgstr "En attente de soumission"
 
 msgid "Data collection"
 msgstr "Collecte de données"
+
+msgid "Submitting form"
+msgstr "Soumission du formulaire"
+
+msgid "Resources"
+msgstr "Resources"
+
+msgid "community of practice"
+msgstr "communautés de pratique"
+
+msgid "country"
+msgstr "pays"
+
+msgid "Country"
+msgstr "Pays"

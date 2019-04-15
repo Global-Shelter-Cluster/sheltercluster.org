@@ -15,11 +15,11 @@ function hook_cluster_api_link_data($objects, $gid) {
   return ['link' => 'group:events', 'id' => $gid];
 }
 
-function hook_cluster_api_objects_label($ids) {
-  return format_plural(count($ids), 'a document', '@count documents');
+function hook_cluster_api_objects_label($ids, $langcode) {
+  return format_plural(count($ids), 'a document', '@count documents', [], ['langcode' => $langcode]);
 }
 
-function hook_cluster_api_object_title($id) {
+function hook_cluster_api_object_title($id, $langcode) {
   $node = node_load($id);
   return $node->title;
 }

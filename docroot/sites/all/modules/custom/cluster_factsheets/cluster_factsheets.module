@@ -653,7 +653,7 @@ function cluster_factsheets_cluster_api_link_data($objects, $gid) {
 /**
  * Implements hook_cluster_api_objects_label().
  */
-function cluster_factsheets_cluster_api_objects_label($ids) {
+function cluster_factsheets_cluster_api_objects_label($ids, $langcode) {
   // Filter to make sure all ids are published nodes
   $query = new EntityFieldQuery();
   $all_count = $query->entityCondition('entity_type', 'node')
@@ -665,19 +665,19 @@ function cluster_factsheets_cluster_api_objects_label($ids) {
   if ($all_count === 0)
     return '';
 
-  return format_plural($all_count, 'a factsheet', '@count factsheets');
+  return format_plural($all_count, 'a factsheet', '@count factsheets', [], ['langcode' => $langcode]);
 }
 
 /**
  * Implements hook_cluster_api_object_title().
  */
-function cluster_factsheets_cluster_api_object_title($id) {
+function cluster_factsheets_cluster_api_object_title($id, $langcode) {
   $node = node_load($id);
   if (!($node->status == NODE_PUBLISHED && $node->type === 'factsheet'))
     return NULL;
 
   $wrapper = entity_metadata_wrapper('node', $node);
-  return date('F Y', $wrapper->field_date->value()); // e.g. "April 2018"
+  return format_date($wrapper->field_date->value(), 'custom', 'F Y', NULL, $langcode); // e.g. "April 2018"
 }
 
 /**
