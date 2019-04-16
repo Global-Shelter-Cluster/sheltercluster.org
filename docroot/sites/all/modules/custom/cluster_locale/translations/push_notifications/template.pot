@@ -1,0 +1,102 @@
+# Translation of strings used in push notifications.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"POT-Creation-Date: 2019-03-12 21:03+0000\n"
+"PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
+"Last-Translator: NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+
+msgid "@a and @b"
+msgstr ""
+
+msgid "@object was added recently: @title"
+msgstr ""
+
+msgid "@objects were added recently."
+msgstr ""
+
+###
+
+msgid "countries"
+msgstr ""
+
+msgid "country"
+msgstr ""
+
+msgid "regions"
+msgstr ""
+
+msgid "region"
+msgstr ""
+
+msgid "hubs"
+msgstr ""
+
+msgid "hub"
+msgstr ""
+
+msgid "responses"
+msgstr ""
+
+msgid "response"
+msgstr ""
+
+msgid "working groups"
+msgstr ""
+
+msgid "working group"
+msgstr ""
+
+msgid "groups"
+msgstr ""
+
+msgid "group"
+msgstr ""
+
+###
+
+msgid "a page"
+msgstr ""
+
+msgid "@count pages"
+msgstr ""
+
+msgid "a factsheet"
+msgstr ""
+
+msgid "@count factsheets"
+msgstr ""
+
+msgid "a featured document"
+msgstr ""
+
+msgid "@count featured documents"
+msgstr ""
+
+msgid "a key document"
+msgstr ""
+
+msgid "@count key documents"
+msgstr ""
+
+msgid "a document"
+msgstr ""
+
+msgid "@count documents"
+msgstr ""
+
+###
+
+msgid "Upcoming event: @title"
+msgstr ""
+
+msgid "There are @count upcoming events."
+msgstr ""
+
+###
