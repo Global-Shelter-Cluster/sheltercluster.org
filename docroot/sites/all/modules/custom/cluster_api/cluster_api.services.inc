@@ -47,6 +47,13 @@ function cluster_api_default_services_endpoint() {
         ),
       ),
     ),
+    'update-user' => array(
+      'operations' => array(
+        'create' => array(
+          'enabled' => '1',
+        ),
+      ),
+    ),
     'get-files-size' => array(
       'operations' => array(
         'create' => array(

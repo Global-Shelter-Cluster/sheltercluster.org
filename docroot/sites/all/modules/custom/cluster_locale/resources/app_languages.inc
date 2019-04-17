@@ -16,7 +16,7 @@
  * @return array
  */
 function _cluster_locale_languages_index() {
-  $enabled_languages = variable_get('cluster_locale_mobile_enabled_languages');
+  $enabled_languages = variable_get('cluster_locale_mobile_enabled_languages', NULL);
   if (count($enabled_languages)) {
     $languages = db_select('languages', 'l')
       ->fields('l', array('language', 'name', 'native', 'formula', 'direction'))

@@ -550,3 +550,12 @@ msgstr "pays"
 
 msgid "Country"
 msgstr "Pays"
+
+msgid "Language @lang is not available"
+msgstr "@lang n'est pas une langue disponible"
+
+msgid "Update not supported for field @field"
+msgstr "Mise à jour du champ @field non supportée"
+
+msgid "Language set to @lang"
+msgstr "Langue changée pour @lang"
