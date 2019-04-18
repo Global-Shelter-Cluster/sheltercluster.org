@@ -52,12 +52,27 @@ function _cluster_api_update_user_language($user, $lang) {
   if (!array_key_exists($lang, $enabled_languages)) {
     return [
       'do_update' => FALSE,
-      'update_message' => t('Language @lang is not available', ['@lang' => $lang], ['langcode' => $lang]),
+      'update_message' => t('Language @lang is not available', ['@lang' => $lang], ['langcode' => $user->language]),
     ];
   }
   $user->language = $lang;
   return [
     'do_update' => TRUE,
-    'update_message' => t('Language set to @lang', ['@lang' => $lang], ['langcode' => $lang]),
+    'update_message' => t('Language set to @lang', ['@lang' => $lang], ['langcode' => $user->language]),
+  ];
+}
+
+function _cluster_api_update_user_timezone($user, $timezone) {
+  $available_timezones = array_keys(system_time_zones());
+  if (!in_array($timezone, $available_timezones)) {
+    return [
+      'do_update' => FALSE,
+      'update_message' => t('Timezone @timezone is not available', ['@timezone' => $timezone], ['langcode' => $user->language]),
+    ];
+  }
+  $user->timezone = $timezone;
+  return [
+    'do_update' => TRUE,
+    'update_message' => t('Timezone set to @timezone', ['@timezone' => $timezone], ['langcode' => $user->language]),
   ];
 }

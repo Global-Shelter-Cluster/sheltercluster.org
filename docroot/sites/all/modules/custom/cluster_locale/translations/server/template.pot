@@ -109,3 +109,9 @@ msgstr ""
 
 msgid "Language set to @lang"
 msgstr ""
+
+msgid "Timezone @timezone is not available"
+msgstr ""
+
+msgid "Timezone set to @timezone"
+msgstr ""

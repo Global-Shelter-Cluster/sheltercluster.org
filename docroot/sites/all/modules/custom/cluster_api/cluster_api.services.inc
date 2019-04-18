@@ -33,6 +33,13 @@ function cluster_api_default_services_endpoint() {
         ),
       ),
     ),
+    'app-timezones' => array(
+      'operations' => array(
+        'index' => array(
+          'enabled' => '1',
+        ),
+      ),
+    ),
     'follow' => array(
       'operations' => array(
         'create' => array(

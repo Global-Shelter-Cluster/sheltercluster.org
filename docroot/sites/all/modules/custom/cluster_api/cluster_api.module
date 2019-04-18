@@ -249,6 +249,23 @@ function cluster_api_services_resources() {
         ],
       ],
     ],
+    'app-timezones' => [
+      'operations' => [
+        'index' => [
+          'help' => 'Get list of available timezones.',
+          'file' => [
+            'type' => 'inc',
+            'module' => 'cluster_api',
+            'name' => 'resources/app_timezones',
+          ],
+          'args' => [],
+          'callback' => '_cluster_api_get_timezones',
+          'access callback' => 'user_access',
+          'access arguments' => ['access content'],
+          'access arguments append' => FALSE,
+        ],
+      ],
+    ],
   ];
 }
 

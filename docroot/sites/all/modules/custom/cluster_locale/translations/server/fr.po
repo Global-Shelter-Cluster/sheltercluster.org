@@ -98,3 +98,9 @@ msgstr "Mise à jour du champ @field non supportée"
 
 msgid "Language set to @lang"
 msgstr "Langue changée pour @lang"
+
+msgid "Timezone @timezone is not available"
+msgstr "Fuseau horaire @timezone n'est pas disponible"
+
+msgid "Timezone set to @timezone"
+msgstr "Fuseau horaire changé pour @timezone"

@@ -550,3 +550,9 @@ msgstr "pays"
 
 msgid "Country"
 msgstr "Pays"
+
+msgid "Select your timezone"
+msgstr "Choisissez votre fuseau horaire"
+
+msgid "Timezone can't be changed while offline"
+msgstr "Le fuseau horaire ne peut pas être changé hors-ligne"
