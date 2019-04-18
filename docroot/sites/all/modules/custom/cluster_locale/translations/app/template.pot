@@ -491,12 +491,3 @@ msgstr ""
 
 msgid "Country"
 msgstr ""
-
-msgid "Language @lang is not available"
-msgstr ""
-
-msgid "Update not supported for field @field"
-msgstr ""
-
-msgid "Language set to @lang"
-msgstr ""

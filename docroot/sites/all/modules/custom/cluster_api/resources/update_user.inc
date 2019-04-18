@@ -17,6 +17,7 @@ function _cluster_api_update_user($request) {
     return $response;
   }
 
+  watchdog('cluster_api', json_encode($request));
   $update_messages = [];
   $updates_performed = FALSE;
   foreach ($request['updates'] as $field => $new_value) {
@@ -32,8 +33,18 @@ function _cluster_api_update_user($request) {
 
   if ($updates_performed) {
     user_save($user);
+    // Add the authorized user id to the requested objects.
+    $requested_objects = $request['objects'];
+    $requested_objects[] = ['type' => 'user', 'id' => $user->uid];
+
+    // Get all objects from API.
+    $object_api = new ClusterAPI_Object($user);
+    $response['objects'] = $object_api->getObjects($requested_objects);
   }
-  return $response['update_messages'] = $update_messages;
+
+  $response['update_messages'] = $update_messages;
+
+  return $response;
 }
 
 function _cluster_api_update_user_language($user, $lang) {

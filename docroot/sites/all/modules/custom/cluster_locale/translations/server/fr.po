@@ -1,101 +1,100 @@
-# Translation of strings used in push notifications.
-#
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "POT-Creation-Date: 2019-04-16 10:20+0000\n"
 "PO-Revision-Date: 2019-04-16 10:20+ZZZZ\n"
-"Last-Translator: Camilo Bravo <hola@cambraca.com>\n"
+"Last-Translator: NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
 msgid "@a and @b"
-msgstr "@a y @b"
+msgstr "@a et @b"
 
 msgid "@object was added recently: @title"
-msgstr "@object fue añadido recientemente: @title"
+msgstr "@object ajouté récemment: @title"
 
 msgid "@objects were added recently."
-msgstr "@objects fueron añadidos recientemente."
-
-###
+msgstr ""
 
 msgid "countries"
-msgstr "países"
+msgstr "pays"
 
 msgid "country"
-msgstr "país"
+msgstr "pays"
 
 msgid "regions"
-msgstr "regiones"
+msgstr "régions"
 
 msgid "region"
-msgstr "región"
+msgstr "region"
 
 msgid "hubs"
-msgstr "centros"
+msgstr "centres"
 
 msgid "hub"
-msgstr "centro"
+msgstr "centre"
 
 msgid "responses"
-msgstr "respuestas"
+msgstr "réponses"
 
 msgid "response"
-msgstr "respuesta"
+msgstr "réponse"
 
 msgid "working groups"
-msgstr "grupos de trabajo"
+msgstr "groupes de travail"
 
 msgid "working group"
-msgstr "grupo de trabajo"
+msgstr "groupe de travail"
 
 msgid "groups"
-msgstr "grupos"
+msgstr "groupes"
 
 msgid "group"
-msgstr "grupo"
-
-###
+msgstr "goupe"
 
 msgid "a page"
-msgstr "una página"
+msgstr "une page"
 
 msgid "@count pages"
-msgstr "@count páginas"
+msgstr "@count pages"
 
 msgid "a factsheet"
-msgstr "una ficha informativa"
+msgstr "une fiche"
 
 msgid "@count factsheets"
-msgstr "@count fichas informativas"
+msgstr "@count fiches"
 
 msgid "a featured document"
-msgstr "un documento destacado"
+msgstr "un document vedette"
 
 msgid "@count featured documents"
-msgstr "@count documentos destacados"
+msgstr "@count documents vedette"
 
 msgid "a key document"
-msgstr "un documento clave"
+msgstr "un document clef"
 
 msgid "@count key documents"
-msgstr "@count documentos clave"
+msgstr "@count documents clef"
 
 msgid "a document"
-msgstr "un documento"
+msgstr "un document"
 
 msgid "@count documents"
-msgstr "@count documentos"
-
-###
+msgstr "@count documents"
 
 msgid "Upcoming event: @title"
-msgstr "Próximo evento: @title"
+msgstr "Événement à venir: @title"
 
 msgid "There are @count upcoming events."
-msgstr "Hay @count próximos eventos."
+msgstr "Il y a @count événements à venir"
 
-###
+msgid "Language @lang is not available"
+msgstr "@lang n'est pas une langue disponible"
+
+msgid "Update not supported for field @field"
+msgstr "Mise à jour du champ @field non supportée"
+
+msgid "Language set to @lang"
+msgstr "Langue changée pour @lang"

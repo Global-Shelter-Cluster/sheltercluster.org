@@ -1,0 +1,99 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"POT-Creation-Date: 2019-04-16 10:20+0000\n"
+"PO-Revision-Date: 2019-04-16 10:20+ZZZZ\n"
+"Last-Translator: Camilo Bravo <hola@cambraca.com>\n"
+"Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "@a and @b"
+msgstr "@a y @b"
+
+msgid "@object was added recently: @title"
+msgstr "@object fue añadido recientemente: @title"
+
+msgid "@objects were added recently."
+msgstr "@objects fueron añadidos recientemente."
+
+###
+
+msgid "countries"
+msgstr "países"
+
+msgid "country"
+msgstr "país"
+
+msgid "regions"
+msgstr "regiones"
+
+msgid "region"
+msgstr "región"
+
+msgid "hubs"
+msgstr "centros"
+
+msgid "hub"
+msgstr "centro"
+
+msgid "responses"
+msgstr "respuestas"
+
+msgid "response"
+msgstr "respuesta"
+
+msgid "working groups"
+msgstr "grupos de trabajo"
+
+msgid "working group"
+msgstr "grupo de trabajo"
+
+msgid "groups"
+msgstr "grupos"
+
+msgid "group"
+msgstr "grupo"
+
+###
+
+msgid "a page"
+msgstr "una página"
+
+msgid "@count pages"
+msgstr "@count páginas"
+
+msgid "a factsheet"
+msgstr "una ficha informativa"
+
+msgid "@count factsheets"
+msgstr "@count fichas informativas"
+
+msgid "a featured document"
+msgstr "un documento destacado"
+
+msgid "@count featured documents"
+msgstr "@count documentos destacados"
+
+msgid "a key document"
+msgstr "un documento clave"
+
+msgid "@count key documents"
+msgstr "@count documentos clave"
+
+msgid "a document"
+msgstr "un documento"
+
+msgid "@count documents"
+msgstr "@count documentos"
+
+###
+
+msgid "Upcoming event: @title"
+msgstr "Próximo evento: @title"
+
+msgid "There are @count upcoming events."
+msgstr "Hay @count próximos eventos."
+
+###
