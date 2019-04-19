@@ -33,12 +33,9 @@ function _cluster_api_update_user($request) {
 
   if ($updates_performed) {
     user_save($user);
-    // Add the authorized user id to the requested objects.
-    $requested_objects = $request['objects'];
-    $requested_objects[] = ['type' => 'user', 'id' => $user->uid];
-
-    // Get all objects from API.
+    // Return the updated user object and any related objects.
     $object_api = new ClusterAPI_Object($user);
+    $requested_objects = [['type' => 'user', 'id' => $user->uid]];
     $response['objects'] = $object_api->getObjects($requested_objects);
   }
 
