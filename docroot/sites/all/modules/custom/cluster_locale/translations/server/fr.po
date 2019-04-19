@@ -1,0 +1,106 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"POT-Creation-Date: 2019-04-16 10:20+0000\n"
+"PO-Revision-Date: 2019-04-16 10:20+ZZZZ\n"
+"Last-Translator: NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "@a and @b"
+msgstr "@a et @b"
+
+msgid "@object was added recently: @title"
+msgstr "@object ajouté récemment: @title"
+
+msgid "@objects were added recently."
+msgstr ""
+
+msgid "countries"
+msgstr "pays"
+
+msgid "country"
+msgstr "pays"
+
+msgid "regions"
+msgstr "régions"
+
+msgid "region"
+msgstr "region"
+
+msgid "hubs"
+msgstr "centres"
+
+msgid "hub"
+msgstr "centre"
+
+msgid "responses"
+msgstr "réponses"
+
+msgid "response"
+msgstr "réponse"
+
+msgid "working groups"
+msgstr "groupes de travail"
+
+msgid "working group"
+msgstr "groupe de travail"
+
+msgid "groups"
+msgstr "groupes"
+
+msgid "group"
+msgstr "goupe"
+
+msgid "a page"
+msgstr "une page"
+
+msgid "@count pages"
+msgstr "@count pages"
+
+msgid "a factsheet"
+msgstr "une fiche"
+
+msgid "@count factsheets"
+msgstr "@count fiches"
+
+msgid "a featured document"
+msgstr "un document vedette"
+
+msgid "@count featured documents"
+msgstr "@count documents vedette"
+
+msgid "a key document"
+msgstr "un document clef"
+
+msgid "@count key documents"
+msgstr "@count documents clef"
+
+msgid "a document"
+msgstr "un document"
+
+msgid "@count documents"
+msgstr "@count documents"
+
+msgid "Upcoming event: @title"
+msgstr "Événement à venir: @title"
+
+msgid "There are @count upcoming events."
+msgstr "Il y a @count événements à venir"
+
+msgid "Language @lang is not available"
+msgstr "@lang n'est pas une langue disponible"
+
+msgid "Update not supported for field @field"
+msgstr "Mise à jour du champ @field non supportée"
+
+msgid "Language set to @lang"
+msgstr "Langue changée pour @lang"
+
+msgid "Timezone @timezone is not available"
+msgstr "Fuseau horaire @timezone n'est pas disponible"
+
+msgid "Timezone set to @timezone"
+msgstr "Fuseau horaire changé pour @timezone"

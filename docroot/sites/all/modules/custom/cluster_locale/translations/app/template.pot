@@ -491,3 +491,9 @@ msgstr ""
 
 msgid "Country"
 msgstr ""
+
+msgid "Select your timezone"
+msgstr ""
+
+msgid "Timezone can't be changed while offline"
+msgstr ""

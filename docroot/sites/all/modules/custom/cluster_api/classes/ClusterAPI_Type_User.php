@@ -60,6 +60,7 @@ class ClusterAPI_Type_User extends ClusterAPI_Type {
     switch ($mode) {
       case ClusterAPI_Object::MODE_PRIVATE:
         $ret += ['groups' => self::getFollowedGroups($user)];
+        $ret += ['timezone' => $user->timezone];
 
       //Fall-through
       case ClusterAPI_Object::MODE_PUBLIC:
@@ -80,3 +81,8 @@ class ClusterAPI_Type_User extends ClusterAPI_Type {
     return $ret;
   }
 }
+
+/*
+$all_timezones = array_keys(system_time_zones());
+dpm($all_timezones);
+ */
