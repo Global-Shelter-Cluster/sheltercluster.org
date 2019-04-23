@@ -61,6 +61,8 @@ class ClusterAPI_Type_Global extends ClusterAPI_Type {
       'resources_id' => intval(variable_get('cluster_og_resources_id', '4652'), 10),
     ];
 
+    $ret['timezones'] = array_keys(system_time_zones());
+
     return $ret;
   }
 }
