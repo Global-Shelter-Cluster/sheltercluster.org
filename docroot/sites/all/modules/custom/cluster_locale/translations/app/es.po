@@ -487,3 +487,9 @@ msgstr "país"
 
 msgid "Country"
 msgstr "País"
+
+msgid "Select your timezone"
+msgstr "Seleccione su zona horaria"
+
+msgid "Timezone can't be changed while offline"
+msgstr "La zona horaria no se puede cambiar sin conexión"

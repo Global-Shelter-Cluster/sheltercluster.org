@@ -97,3 +97,18 @@ msgid "There are @count upcoming events."
 msgstr "Hay @count próximos eventos."
 
 ###
+
+msgid "El idioma @lang no está disponible"
+msgstr ""
+
+msgid "Actualización no soportada para el campo @field"
+msgstr ""
+
+msgid "Idioma cambiado a @lang"
+msgstr ""
+
+msgid "La zona horaria @timezone no está disponible"
+msgstr ""
+
+msgid "Zona horaria cambiada a @timezone"
+msgstr ""
