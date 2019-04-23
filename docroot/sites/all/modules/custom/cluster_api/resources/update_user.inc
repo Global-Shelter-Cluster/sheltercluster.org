@@ -17,7 +17,6 @@ function _cluster_api_update_user($request) {
     return $response;
   }
 
-  watchdog('cluster_api', json_encode($request));
   $update_messages = [];
   $updates_performed = FALSE;
   foreach ($request['updates'] as $field => $new_value) {
