@@ -82,7 +82,3 @@ class ClusterAPI_Type_User extends ClusterAPI_Type {
   }
 }
 
-/*
-$all_timezones = array_keys(system_time_zones());
-dpm($all_timezones);
- */
