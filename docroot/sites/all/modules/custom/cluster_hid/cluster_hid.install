@@ -41,5 +41,6 @@ function cluster_hid_update_7001() {
  */
 function cluster_hid_update_7002() {
   $schema = drupal_get_schema('cluster_hid');
-  db_add_field('cluster_hid', 'data', $schema['fields']['data']);
+  if (!db_field_exists('cluster_hid', 'data'))
+    db_add_field('cluster_hid', 'data', $schema['fields']['data']);
 }
