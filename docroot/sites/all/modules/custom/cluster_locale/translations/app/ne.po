@@ -1,0 +1,493 @@
+# LANGUAGE translation of PROJECT
+# Copyright (c) YEAR NAME <EMAIL@ADDRESS>
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"POT-Creation-Date: 2019-03-12 21:03+0000\n"
+"PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
+"Last-Translator: NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "App testing string"
+msgstr "आप्प परिक्च्यान्न स्त्रिंग"
+
+# Search components
+msgid "Featured"
+msgstr "विशेष गरी"
+
+msgid "Key document"
+msgstr "महत्वपुर्ण दोकुमेंट"
+
+msgid "Community of practice"
+msgstr "समुदायको अभ्यास"
+
+msgid "Geographic region"
+msgstr "भौगोलिक क्षेत्र"
+
+msgid "Hub"
+msgstr "हब"
+
+msgid "RESPONSE"
+msgstr "प्रतिक्रिया"
+
+msgid "Response"
+msgstr "प्रतिक्रिया" 
+
+msgid "Discussion"
+msgstr "छलफल"
+
+msgid "Strategic Advisory Group"
+msgstr "रणनीतिक सल्लाहकार समूह"
+
+msgid "Working Group"
+msgstr "कार्य समूह"
+
+msgid "Library"
+msgstr "पुस्तकालय"
+
+msgid "Article"
+msgstr "लेख"
+
+msgid "Discussion"
+msgstr "छलफल" 
+
+# Multiselect factory
+msgid "Search Items..."
+msgstr "खोजि बस्तुहरु"
+
+msgid "View"
+msgstr "हेर्नुस्"
+
+msgid "Map"
+msgstr "नक्सा"
+
+msgid "Share"
+msgstr "साझेदारी गर्नुहोस"
+
+msgid "Download"
+msgstr "डाउनलोड"
+
+msgid "Skip for now"
+msgstr "अहिलेको लागि छोड्नुहोस्"
+
+msgid "Loading..."
+msgstr "लोड हुँदै"
+
+msgid "Follow"
+msgstr "पछ्याउन"
+
+msgid "Un-follow"
+msgstr "पछ्याउँदैन" 
+
+msgid "Website"
+msgstr "वेबसाइट"
+
+msgid "Countries"
+msgstr "देशहरू"
+
+msgid "Regions"
+msgstr "क्षेत्रहरु"
+
+msgid "In"
+msgstr "भित्र"
+
+msgid "Related to"
+msgstr "सम्बन्धित"
+
+msgid "Useful links"
+msgstr "उपयोगी लिङ्कहरू"
+
+msgid "Downloading file"
+msgstr "फाइल डाउनलोड गर्दै"
+
+msgid "Offline"
+msgstr "अफलाइन"
+
+msgid "Technical information"
+msgstr "प्राविधिक जानकारी"
+
+msgid "PROGRAM/INITIATIVE/ACTIVITY UNDERTAKEN WITH THE FINANCIAL SUPPORT OF THE GOVERNMENT OF CANADA PROVIDED THROUGH GLOBAL AFFAIRS CANADA (GAC)"
+msgstr "कार्यक्रम / क्यानाडा सरकार द्वारा प्रदान"
+
+msgid "THIS APP IS MADE POSSIBLE THROUGH THE FINANCIAL AND IN-KIND CONTRIBUTIONS OF:"
+msgstr "यो एप  वित्तीय सहायताको साथ छ" 
+
+msgid "Search"
+msgstr "खोजी गर्नुहोस्" 
+
+msgid "Select"
+msgstr "चयन गर्नुहोस्" 
+
+msgid "Submit"
+msgstr "पेश गर्नुहोस्" 
+
+msgid "name"
+msgstr "नाम"
+
+msgid "Settings"
+msgstr "सेटिङ्हरू" 
+
+# Nav
+msgid "Document"
+msgstr "कागजात" 
+
+msgid "Event"
+msgstr "कार्यक्रम"
+
+msgid "Events"
+msgstr "कार्यक्रम"
+
+msgid "Factsheet"
+msgstr "तथ्य पृष्ठ"
+
+msgid "Contact"
+msgstr "सम्पर्कहरू"
+
+#
+
+msgid "Recent documents"
+msgstr "भर्खरैका कागजातहरू" 
+
+msgid "Featured documents"
+msgstr "विशेष कागजातहरू" 
+
+msgid "Featured/ndocuments"
+msgstr ""
+
+msgid "Key documents"
+msgstr "महत्त्वपूर्ण कागजातहरू" 
+
+msgid "Key/ndocuments"
+msgstr ""
+
+msgid "All documents"
+msgstr "सबै कागजातहरू" 
+
+msgid "All/ndocuments"
+msgstr ""
+
+msgid "Documents"
+msgstr "कागजातहरू"
+
+msgid "Upcoming events"
+msgstr "आगामी कार्यक्रमहरू" 
+
+msgid "Upcoming/nevents"
+msgstr ""
+
+msgid "Latest factsheet"
+msgstr "नवीनतम तथ्याङ्क" 
+
+msgid "Latest/nfactsheet"
+msgstr ""
+
+msgid "Factsheets"
+msgstr "तथ्याङ्क" 
+
+msgid "Log out"
+msgstr "बाहिर निस्कनु" 
+
+msgid "and"
+msgstr "र" 
+
+msgid "Photo gallery"
+msgstr "तस्बिर पुस्तिका" 
+
+msgid "Integer"
+msgstr "पूर्णांक" 
+
+msgid "Unknown error, please try again"
+msgstr "अज्ञात त्रुटि कृपया फेरि प्रयास गर्नुहोस्" 
+
+msgid "Further instructions have been sent to your e-mail address."
+msgstr "थप निर्देशनहरू तपाईंको इमेलमा पठाइएको छ"
+
+msgid "No internet connection detected."
+msgstr "इन्टरनेट जडान फेला परेन" 
+
+msgid "Requesting a new password for your account..."
+msgstr "तपाईंको खाताको लागि नयाँ पासवर्ड अनुरोध गर्दै" 
+
+msgid "Request a new password for your Shelter Cluster account"
+msgstr "तपाईंको आश्रय क्लस्टर खाताको लागि नयाँ पासवर्ड अनुरोध गर्नुहोस्" 
+
+msgid "Username or e-mail address"
+msgstr "प्रयोगकर्ता नाम वा इ-मेल ठेगाना" 
+
+msgid "Log in"
+msgstr "लग - इन" 
+
+msgid "Me"
+msgstr "म" 
+
+msgid "Sign up"
+msgstr "साइन अप" 
+
+msgid "Forgot your username/password?"
+msgstr "तपाईको प्रयोगकर्ता नाम / पासवर्ड बिर्सनुभयो?" 
+
+msgid "Seen"
+msgstr "देखियो" 
+
+msgid "Alerts"
+msgstr "अलर्टहरू" 
+
+msgid "Recent"
+msgstr "हालै" 
+
+msgid "Featured"
+msgstr "विशेष गरी" 
+
+msgid "Key"
+msgstr "महत्त्वपूर्ण" 
+
+msgid "Try again"
+msgstr "फेरि प्रयास गर्नुहोस्" 
+
+msgid "Error loading data, please check your connection"
+msgstr "डेटा लोड गर्दा त्रुटि कृपया आफ्नो जडान जाँच गर्नुहोस्" 
+
+msgid "Pages"
+msgstr "पृष्ठहरू" 
+
+msgid "Dashboard"
+msgstr "ड्यासबोर्ड" 
+
+msgid "Navigation"
+msgstr "नेविगेशन" 
+
+msgid "Coordination team"
+msgstr "समन्वय टोली" 
+
+msgid "Followed"
+msgstr "पछि लागे" 
+
+msgid "Operations"
+msgstr "सञ्चालनहरू" 
+
+msgid "Followers"
+msgstr "अनुयायीहरू" 
+
+msgid "Unrecognized item"
+msgstr "अपरिचित वस्तु" 
+
+msgid "Not implemented yet!"
+msgstr "अझै सम्म लागु गरिएको छैन" 
+
+msgid "Not implemented yet"
+msgstr "अझै सम्म लागु गरिएको छैन"
+
+msgid "Error loading, please check your connection and try again"
+msgstr ""
+
+msgid "Thank you, your submission has been queued and will be sent when you are online."
+msgstr "धन्यवाद, तपाईंको सबमिशन लामिलाएको छ र तपाइँ अनलाइन हुनुहुन्छ जब पठाइनेछ" 
+
+msgid "Go back to the form"
+msgstr "फारममा फर्कनुहोस्" 
+
+msgid "Thank you, your submission has been received."
+msgstr "धन्यवाद, तपाइँको सबमिशन प्राप्त भएको छ" 
+
+msgid "Next page"
+msgstr "अर्को पाना" 
+
+msgid "Sending 1 submission…"
+msgstr "1 सबमिशन पठाउँदै" 
+
+msgid "Sending @count submissions…"
+msgstr "@Count सबमिशन पठाउँदै" 
+
+msgid "1 submission queued to be sent when online."
+msgstr "1 सबमिशनलाई अनलाइनमा पठाइने क्रमबद्ध गरियो"
+
+msgid "@count submissions queued to be sent when online."
+msgstr "@count अनलाईन सबमिशनहरू अनलाइन हुँदा पठाइने क्रमबद्ध गरियो"
+
+msgid "Search..."
+msgstr "खोजी गर्नुहोस्"
+
+msgid "Contacts"
+msgstr "सम्पर्कहरू"
+
+msgid "Search is not enabled."
+msgstr "खोज सक्षम गरिएको छैन"
+
+msgid "Please try again later."
+msgstr "फेरी प्रयास गर्नु होला"
+
+msgid "You must be online for search to work."
+msgstr "तपाईं काम गर्न खोजीको लागि अनलाइन हुनुपर्दछ" 
+
+msgid "New alerts"
+msgstr "नयाँ सतर्कताहरू" 
+
+msgid "Select your language"
+msgstr "आफ्नो भाषा चयन गर्नुहोस्" 
+
+msgid "Download files"
+msgstr "फाइलहरू डाउनलोड गर्नुहोस्" 
+
+msgid "Allows for offline use of documents."
+msgstr "कागजातहरूको अफलाइन प्रयोगको लागि अनुमति दिन्छ" 
+
+msgid "Asked to download files"
+msgstr "फाइलहरू डाउनलोड गर्न सोध्नुभयो" 
+
+msgid "Only available in DEBUG mode."
+msgstr "केवल DEBUG मोडमा उपलब्ध छ" 
+
+msgid "Import all translations"
+msgstr "सबै अनुवादहरू आयात गर्नुहोस्" 
+ 
+
+msgid "Profile"
+msgstr "प्रोफाइल" 
+
+msgid "Preferences"
+msgstr "प्राथमिकताहरू" 
+
+msgid "Map"
+msgstr "नक्शा" 
+
+msgid "Need analysis"
+msgstr "आवश्यक विश्लेषण" 
+
+msgid "Response"
+msgstr "प्रतिक्रिया" 
+
+msgid "responses"
+msgstr "प्रतिक्रियाहरू" 
+
+msgid "Gaps / challenges"
+msgstr "अंतराल / चुनौतीहरू" 
+
+msgid "You're not following any responses yet."
+msgstr "तपाइँ अझै कुनै पनि प्रतिक्रियाहरू पछ्याइरहनुभएको छैन" 
+
+msgid "Password"
+msgstr "पासवर्ड" 
+
+msgid "Create a Shelter Cluster account"
+msgstr "आश्रय क्लस्टर खाता सिर्जना गर्नुहोस्" 
+
+msgid "Request password"
+msgstr "पासवर्ड अनुरोध गर्नुहोस्" 
+
+msgid "E-mail address"
+msgstr "इ - मेल ठेगाना" 
+
+msgid "Organization"
+msgstr "संगठन" 
+
+msgid "Name"
+msgstr "नाम" 
+
+msgid "Logging in..."
+msgstr "लग इन गर्दै" 
+
+msgid "Groups"
+msgstr "समूहहरू" 
+
+msgid "REGION"
+msgstr "समूहहरू" 
+
+msgid "Start"
+msgstr "सुरु गर्नुहोस्" 
+
+msgid "Next page"
+msgstr "अर्को पाना" 
+
+msgid "online"
+msgstr "अनलाइन" 
+
+msgid "offline"
+msgstr "अफलाइन" 
+
+msgid "Expo version: @version"
+msgstr "एक्सपो संस्करण: @version" 
+
+msgid "App version: @version"
+msgstr "एप संस्करण: @version" 
+
+msgid "<none>"
+msgstr "कुनै पनि छैन" 
+
+msgid "Environment: @env"
+msgstr "वातावरण: @env"
+
+msgid "Connectivity"
+msgstr "कनेक्टिविटी" 
+
+msgid "Language settings can't be changed while offline"
+msgstr "अफलाइन हुँदा भाषा सेटिङहरू परिवर्तन गर्न सकिँदैन" 
+
+msgid "response"
+msgstr "प्रतिक्रिया" 
+
+msgid "region"
+msgstr "क्षेत्र" 
+
+msgid "regions"
+msgstr "क्षेत्रहरु" 
+
+msgid "hub"
+msgstr "केन्द्र" 
+
+msgid "hubs"
+msgstr "केन्द्रहरू" 
+
+msgid "working group"
+msgstr "कामकाजी समूह" 
+
+msgid "working groups"
+msgstr "कामकाजी समूहहरू" 
+
+msgid "CoP"
+msgstr ""
+
+msgid "CoPs"
+msgstr ""
+
+msgid "1 SAG"
+msgstr ""
+
+msgid "Back"
+msgstr "फिर्ता" 
+
+msgid "In order for the app to work while offline, we need to download <b>1 file</b> (approximately <b>@bytes</b>). You can turn file downloads on/off in Settings."
+msgstr "अफलाइन हुँदा काम गर्न अनुप्रयोगको लागि, हामीले <b> 1 फाइल </ b> (लगभग <b>@bytes</b>) डाउनलोड गर्न आवश्यक छ। तपाइँले फाईल डाउनलोडहरू अफ / सेटिङहरूमा खोल्न सक्नुहुन्छ" 
+
+msgid "In order for the app to work while offline, we need to download <b>@count files</b> (approximately <b>@bytes</b>). You can turn file downloads on/off in Settings."
+msgstr "अफलाइन बेला काम गर्न अनुप्रयोगको लागि, हामीले <b> @count फाइलहरू </ b> (लगभग <b>@bytes</b>) डाउनलोड गर्न आवश्यक छ। तपाइँले फाइल डाउनलोडहरू / बन्द सेटिङहरूमा खोल्न सक्नुहुन्छ।"  
+
+msgid "In order for the app to work while offline, we need to download <b>1 file</b>. You can turn file downloads on/off in Settings"
+msgstr "अफलाइन हुँदा काम गर्न अनुप्रयोगको लागि, हामीले <b> 1 फाइल </b> डाउनलोड गर्न आवश्यक छ। तपाइँले फाइल डाउनलोडहरू / बन्द सेटिङहरूमा "" खोल्न सक्नुहुन्छ"
+
+msgid "In order for the app to work while offline, we need to download <b>@count files</b>. You can turn file downloads on/off in Settings."
+msgstr "अफलाइन बेला काम गर्न अनुप्रयोगको लागि, हामीले <b> @count फाइलहरू </b> डाउनलोड गर्न आवश्यक छ। तपाइँले फाइल डाउनलोडहरू / बन्द सेटिङहरूमा खोल्न सक्नुहुन्छ।"
+
+msgid "Submitting form"
+msgstr "फारम पेश गर्दै" 
+
+msgid "Queued form submissions"
+msgstr "लामबद्ध फारम सबमिशनहरू" 
+
+msgid "Data collection"
+msgstr "तथ्यांक संकलन" 
+
+msgid "Resources"
+msgstr "स्रोतहरू" 
+
+msgid "community of practice"
+msgstr "समुदायको अभ्यास" 
+
+msgid "country"
+msgstr "देश" 
+
+msgid "Country"
+msgstr "देश" 

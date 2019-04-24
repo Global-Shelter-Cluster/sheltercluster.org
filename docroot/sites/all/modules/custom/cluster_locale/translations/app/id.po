@@ -4,8 +4,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2019-03-05 20:04+0000\n"
-"PO-Revision-Date: 2019-03-05 20:04+0000\n"
+"POT-Creation-Date: 2019-03-12 21:03+0000\n"
+"PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
 "Last-Translator: NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
 "MIME-Version: 1.0\n"
@@ -185,6 +185,8 @@ msgstr "Pengaturan"
 
 msgid "User"
 msgstr "Pengguna"
+
+#
 
 msgid "Assessment forms"
 msgstr "Formulir-formulir Pengkajian"
@@ -449,3 +451,87 @@ msgstr "Mulai"
 
 msgid "Next page"
 msgstr "Halaman berikutnya"
+
+msgid "Sending 1 submission…"
+msgstr "Mengirimkan 1 pengajuan…"
+
+msgid "Sending @count submissions…"
+msgstr "Mengirimkan @count pengajuan"
+
+msgid "1 submission queued to be sent when online."
+msgstr "1 pengajuan dalam antrian untuk dikirim saat terhubung internet"
+
+msgid "@count submissions queued to be sent when online."
+msgstr "@count pengajuan dalam antrian untuk dikirim saat terhubung internet"
+
+msgid "Search..."
+msgstr "Mencari..."
+
+msgid "Contacts"
+msgstr "Daftar kontak"
+
+msgid "Search is not enabled."
+msgstr "Pencarian tidak tersedia"
+
+msgid "Please try again later."
+msgstr "Mohon coba lagi di lain waktu"
+
+msgid "You must be online for search to work."
+msgstr "Anda harus terhubung internet agar pencarian berfungsi"
+
+msgid "New alerts"
+msgstr "Peringatan baru"
+
+msgid "Select your language"
+msgstr "Pilih bahasa anda"
+
+msgid "Download files"
+msgstr "Unduh dokumen"
+
+msgid "Allows for offline use of documents."
+msgstr "Memungkinkan penggunaan dokumen tanpa terhubung internet"
+
+msgid "Asked to download files"
+msgstr "Diminta untuk mengunduh dokumen"
+
+msgid "Only available in DEBUG mode."
+msgstr "Hanya tersedia di mode DEBUG"
+
+msgid "Import all translations"
+msgstr "Impor seluruh terjemahan"
+
+msgid "Profile"
+msgstr "Profil"
+
+msgid "Preferences"
+msgstr "Preferensi"
+
+msgid "Map"
+msgstr "Peta"
+
+msgid "Need analysis"
+msgstr "Kajian kebutuhan"
+
+msgid "Response"
+msgstr "Respons"
+
+msgid "responses"
+msgstr "Daftar respons"
+
+msgid "Gaps / challenges"
+msgstr "Kesenjangan / tantangan"
+
+msgid "You're not following any responses yet."
+msgstr "Anda tidak mengikuti respons apapun saat ini"
+
+msgid "Password"
+msgstr "Kata sandi"
+
+msgid "Create a Shelter Cluster account"
+msgstr "Buat akun klaster shelter"
+
+msgid "Request password"
+msgstr "Minta kata sandi"
+
+msgid "E-mail address"
+msgstr "Alamat e-mail"
