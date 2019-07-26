@@ -284,15 +284,6 @@ function cluster_webform_form_webform_configure_form_alter(&$form, &$form_state)
 }
 
 /**
- * Implements hook_webform_results_access().
- */
-function cluster_webform_webform_results_access($node, $account = NULL) {
-  if (isset($node->field_allow_public_result) && $node->field_allow_public_result[LANGUAGE_NONE][0]['value']) {
-    return TRUE;
-  }
-}
-
-/**
  * Allow only values in the form YYYY-MM-DD.
  */
 function _cluster_webform_validate_date($form, &$form_state) {
@@ -343,4 +334,55 @@ function _cluster_webform_validate_time($form, &$form_state) {
     form_set_error('value', t('Not a valid 24h time format for this field (HH:MM)'));
   };
 
+}
+
+/**
+ * Implements hook_webform_update_access().
+ */
+function cluster_webform_webform_update_access($node, $account) {
+  return _cluster_webform_access_if_group_admin($node, $account);
+}
+
+/**
+ * Implements hook_webform_submission_access().
+ */
+function cluster_webform_webform_submission_access($node, $submission, $op = 'view', $account = NULL) {
+  switch ($op) {
+    case 'delete':
+    case 'edit':
+      return NULL;
+
+    case 'view':
+    case 'list':
+      // If the user is a group admin, allow them to view/list the form submissions
+    return _cluster_webform_access_if_group_admin($node, $account);
+  }
+}
+
+/**
+ * Implements hook_webform_results_access().
+ */
+function cluster_webform_webform_results_access($node, $account = NULL) {
+  if (isset($node->field_allow_public_result) && $node->field_allow_public_result[LANGUAGE_NONE][0]['value']) {
+    return TRUE;
+  }
+
+  return _cluster_webform_access_if_group_admin($node, $account);
+}
+
+function _cluster_webform_access_if_group_admin($node, $account) {
+  if (!$account)
+    return NULL;
+
+  $gids = array_column($node->og_group_ref[LANGUAGE_NONE], 'target_id');
+  if (count($gids) === 0)
+    return NULL;
+
+  foreach ($gids as $gid) {
+    $roles = og_get_user_roles('node', $gid, $account->uid);
+    if (in_array(OG_ADMINISTRATOR_ROLE, $roles))
+      return TRUE;
+  }
+
+  return NULL;
 }
