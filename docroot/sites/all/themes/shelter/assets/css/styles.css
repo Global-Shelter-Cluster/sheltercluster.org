@@ -1106,7 +1106,7 @@ header .search {
   padding: 0;
 }
 .page-search .search-results .search-snippet-info strong {
-  background-color: #fff7e6;
+  background-color: #fff7e5;
   padding: 0 5px;
   -moz-border-radius: 5px;
   -webkit-border-radius: 5px;
@@ -1762,7 +1762,7 @@ label[for="mobile_menu_toggle"] span:after {
 #nav-shelter .list-container > .nav-items > .nav-item > a {
   position: relative;
   display: block;
-  background-color: #0b0b0b;
+  background-color: #0a0a0a;
   text-transform: uppercase;
   white-space: nowrap;
   color: white;
@@ -2897,19 +2897,69 @@ div.addressfield-container-inline::after {
 #admin-links a {
   color: white;
 }
-#add-content .editor-menu,
-#admin-links .editor-menu {
-  padding: 0;
-  margin: 0;
-  list-style: none;
-  list-style-position: inside;
-  padding: 8px 0 0 0;
-  padding: 0.5rem 0 0 0;
+#add-content #add-content-container,
+#admin-links #add-content-container {
+  color: white;
 }
-#add-content .editor-menu li,
-#admin-links .editor-menu li {
-  padding: 0 0 8px 0;
-  padding: 0 0 0.5rem 0;
+#add-content #add-content-container > div,
+#admin-links #add-content-container > div {
+  margin-top: 15px;
+}
+#add-content #add-content-container > div + div,
+#admin-links #add-content-container > div + div {
+  border-top: 1px solid #4d4d4d;
+  padding-top: 15px;
+}
+#add-content .editor-menu-individual,
+#admin-links .editor-menu-individual {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  grid-gap: 20px;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-column-gap: 10px;
+}
+#add-content .editor-menu-individual svg,
+#admin-links .editor-menu-individual svg {
+  display: block;
+  font-size: 20px;
+  margin: 0 auto 8px;
+  margin: 0 auto 0.5rem;
+}
+#add-content .editor-menu-individual li,
+#admin-links .editor-menu-individual li {
+  margin: 0;
+  text-align: center;
+}
+#add-content .editor-menu-grouped,
+#admin-links .editor-menu-grouped {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+}
+#add-content .editor-menu-grouped svg,
+#admin-links .editor-menu-grouped svg {
+  display: block;
+  font-size: 20px;
+  position: absolute;
+  left: -35px;
+  top: 0;
+}
+#add-content .editor-menu-grouped > li,
+#admin-links .editor-menu-grouped > li {
+  flex-grow: 1;
+  position: relative;
+  margin: 0 0 0 35px;
+}
+#add-content .editor-menu-grouped ul,
+#admin-links .editor-menu-grouped ul {
+  list-style: none;
+  padding: 0;
+}
+#add-content .editor-menu-grouped ul li,
+#admin-links .editor-menu-grouped ul li {
+  margin-left: 0;
 }
 #add-content .collapsible,
 #add-content .collapsed,
@@ -3546,7 +3596,7 @@ footer .table-row {
   }
 }
 .document-table a {
-  color: #031958;
+  color: #031957;
   font-weight: normal;
 }
 .document-table a.operation-icon {
