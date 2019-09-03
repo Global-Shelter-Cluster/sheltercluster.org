@@ -35,8 +35,9 @@
     padding: 0;
     display: grid;
     grid-gap: 20px;
-    grid-template-columns: 1fr 1fr 1fr;
     grid-column-gap: 10px;
+    grid-template-columns: repeat(auto-fill, 77px);
+    justify-content: space-evenly;
 
     svg {
       display: block;
