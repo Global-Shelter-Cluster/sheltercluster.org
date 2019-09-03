@@ -499,7 +499,7 @@ class GroupDisplayProvider {
       [
         'enabled' => node_access('create', 'contact'),
         'icon' => 'fas fa-user',
-        'title' => t('Coordination team member'),
+        'title' => t('Team member'),
         'href' => 'node/add/contact',
         'query' => array(
           'group' => $node->nid,
