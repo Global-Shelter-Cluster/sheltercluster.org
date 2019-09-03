@@ -1,4 +1,3 @@
-
 <?php
 
 /**
@@ -429,19 +428,326 @@ class GroupDisplayProvider {
    * @return render array of links.
    */
   public function getEditorMenu() {
-    if (!function_exists('cluster_context_links')) {
-      return FALSE;
-    }
-    $links = cluster_context_links($this->node);
-    if (!$links) {
+    $node = $this->node;
+
+    if (!user_is_logged_in()) {
+      // Logged out.
       return FALSE;
     }
 
-    return array(
-      '#theme' => 'links',
-      '#links' => $links,
-      '#attributes' => array('class' => 'editor-menu'),
-    );
+    global $user;
+
+    if (!og_is_member('node', $node->nid, 'user', $user)) {
+      // Current user does not belong to the group.
+      return FALSE;
+    }
+
+    $manager = GroupContentManager::getInstance($node);
+
+    $ret = []; // Array of render arrays for each section in the menu
+
+    $this->generateEditorMenuSectionIndividual($ret, [
+      [
+        'enabled' => $manager->isEnabled('documents') && node_access('create', 'document'),
+        'icon' => 'fas fa-file-alt',
+        'title' => t('Document'),
+        'href' => 'node/add/document',
+        'query' => [
+          'group' => $node->nid,
+          'destination' => 'node/' . $node->nid
+        ],
+      ],
+      [
+        'enabled' => $manager->isEnabled('events') && node_access('create', 'event'),
+        'icon' => 'fas fa-calendar-alt',
+        'title' => t('Event'),
+        'href' => 'node/add/event',
+        'query' => array(
+          'group' => $node->nid,
+          'destination' => 'node/' . $node->nid
+        ),
+      ],
+      [
+        'enabled' => node_access('create', 'page'),
+        'icon' => 'fas fa-file',
+        'title' => t('Page'),
+        'href' => 'node/add/page',
+        'query' => array(
+          'group' => $node->nid,
+          'destination' => 'node/' . $node->nid
+        ),
+      ],
+      [
+        'enabled' => node_access('create', 'factsheet') && og_user_access('node', $node->nid, 'create factsheet content'),
+        'icon' => 'fas fa-chart-bar',
+        'title' => t('Factsheet'),
+        'href' => 'node/' . $node->nid . '/add-factsheet',
+        'query' => array(
+          'group' => $node->nid,
+        ),
+      ],
+      [
+        'enabled' => $manager->isEnabled('discussions') && node_access('create', 'discussion'),
+        'icon' => 'fas fa-comment',
+        'title' => t('Discussion'),
+        'href' => 'node/add/discussion',
+        'query' => array(
+          'group' => $node->nid,
+          'destination' => 'node/' . $node->nid
+        ),
+      ],
+      [
+        'enabled' => node_access('create', 'contact'),
+        'icon' => 'fas fa-user',
+        'title' => t('Coordination team member'),
+        'href' => 'node/add/contact',
+        'query' => array(
+          'group' => $node->nid,
+          'destination' => 'node/' . $node->nid
+        ),
+      ],
+    ]);
+
+    $this->generateEditorMenuSectionIndividual($ret, [
+      [
+        'enabled' => node_access('create', 'alert') && og_user_access('node', $node->nid, 'create alert content'),
+        'icon' => 'fas fa-bullhorn',
+        'title' => t('Alert'),
+        'href' => 'node/add/alert',
+        'query' => array(
+          'group' => $node->nid,
+          'destination' => 'node/' . $node->nid
+        ),
+      ],
+    ]);
+
+    $this->generateEditorMenuSectionGrouped($ret, [
+      [
+        'icon' => 'fas fa-list-ul',
+        'links' => [
+          [
+            'enabled' => $manager->isEnabled('documents') && node_access('create', 'library'),
+            'title' => t('Library'),
+            'href' => 'node/add/library',
+            'query' => array(
+              'group' => $node->nid,
+              'destination' => 'node/' . $node->nid
+            ),
+          ],
+          [
+            'enabled' => $manager->isEnabled('documents') && node_access('create', 'arbitrary_library'),
+            'title' => t('Arbitrary library'),
+            'href' => 'node/add/arbitrary-library',
+            'query' => array(
+              'group' => $node->nid,
+              'destination' => 'node/' . $node->nid
+            ),
+          ],
+          [
+            'enabled' => node_access('create', 'photo_gallery'),
+            'title' => t('Photo gallery'),
+            'href' => 'node/add/photo-gallery',
+            'query' => array(
+              'group' => $node->nid,
+              'destination' => 'node/' . $node->nid
+            ),
+          ],
+        ],
+      ],
+      [
+        'icon' => 'fas fa-edit',
+        'links' => [
+          [
+            'enabled' => node_access('create', 'webform'),
+            'title' => t('Form'),
+            'href' => 'node/add/webform',
+            'query' => array(
+              'group' => $node->nid,
+            ),
+          ],
+          [
+            'enabled' => node_access('create', 'kobo_form'),
+            'title' => t('Kobo form'),
+            'href' => 'node/add/kobo-form',
+            'query' => array(
+              'group' => $node->nid,
+              'destination' => 'node/' . $node->nid
+            ),
+          ],
+        ],
+      ],
+    ]);
+
+    $this->generateEditorMenuSectionGrouped($ret, [
+      [
+        'icon' => 'fas fa-users',
+        'links' => [
+          // For responses
+          [
+            'enabled' => $node->type === 'response' && node_access('create', 'response'),
+            'title' => t('Child response'),
+            'href' => 'node/add/response',
+            'query' => array(
+              'response' => $node->nid,
+              'destination' => 'node/' . $node->nid
+            ),
+          ],
+          [
+            'enabled' => $node->type === 'response' && (node_access('create', 'hub') || og_user_access('node', $node->nid, 'manage_child_hub')),
+            'title' => t('Hub'),
+            'href' => 'node/add/hub',
+            'query' => array(
+              'response' => $node->nid,
+              'destination' => 'node/' . $node->nid
+            ),
+          ],
+          [
+            'enabled' => $node->type === 'response' && (node_access('create', 'working_group') || og_user_access('node', $node->nid, 'manage_child_working_group')),
+            'title' => t('Working group'),
+            'href' => 'node/add/working-group',
+            'query' => array(
+              'response' => $node->nid,
+              'destination' => 'node/' . $node->nid
+            ),
+          ],
+          [
+            'enabled' => $node->type === 'response' && !$manager->getStrategicAdvisory() && (node_access('create', 'strategic-advisory') || og_user_access('node', $node->nid, 'manage_child_sag')),
+            'title' => t('Strategic advisory group'),
+            'href' => 'node/add/strategic-advisory',
+            'query' => array(
+              'response' => $node->nid,
+              'destination' => 'node/' . $node->nid
+            ),
+          ],
+
+          // For geographic regions
+          [
+            'enabled' => $node->type === 'geographic_region' && node_access('create', 'geographic-region'),
+            'title' => t('Child region'),
+            'href' => 'node/add/geographic-region',
+            'query' => array(
+              'region' => $node->nid,
+              'destination' => 'node/' . $node->nid
+            ),
+          ],
+          [
+            'enabled' => $node->type === 'geographic_region' && node_access('create', 'response'),
+            'title' => t('Response'),
+            'href' => 'node/add/response',
+            'query' => array(
+              'region' => $node->nid,
+              'destination' => 'node/' . $node->nid
+            ),
+          ],
+          [
+            'enabled' => $node->type === 'geographic_region' && (node_access('create', 'working_group') || og_user_access('node', $node->nid, 'manage_child_working_group')),
+            'title' => t('Working group'),
+            'href' => 'node/add/working-group',
+            'query' => array(
+              'response' => $node->nid,
+              'destination' => 'node/' . $node->nid
+            ),
+          ],
+          [
+            'enabled' => $node->type === 'geographic_region' && !$manager->getStrategicAdvisory() && (node_access('create', 'strategic-advisory') || og_user_access('node', $node->nid, 'manage_child_sag')),
+            'title' => t('Strategic advisory group'),
+            'href' => 'node/add/strategic-advisory',
+            'query' => array(
+              'region' => $node->nid,
+              'destination' => 'node/' . $node->nid
+            ),
+          ],
+
+          // General
+          [
+            'enabled' => node_access('create', 'community_of_practice'),
+            'title' => t('Community of practice'),
+            'href' => 'node/add/community-of-practice',
+            'query' => array(
+              'group' => $node->nid,
+              'destination' => 'node/' . $node->nid
+            ),
+          ],
+        ],
+      ],
+    ]);
+
+    return $ret ?: FALSE;
+  }
+
+  private function generateEditorMenuSectionGrouped(&$sections, $data) {
+    foreach ($data as &$group)
+      $group['links'] = array_filter($group['links'], function($link) {
+        return $link['enabled'];
+      });
+
+    $data = array_filter($data, function($group) {
+      return count($group['links']) > 0;
+    });
+
+    if (!count($data))
+      return;
+
+    $items = array_map(function($group) {
+      $item = [
+        [
+          '#theme'      => 'html_tag',
+          '#tag'        => 'i',
+          '#attributes' => ['class' => $group['icon'] . ' fa-fw'],
+          '#value'      => '',
+        ],
+        [
+          '#theme' => 'item_list',
+          '#type'  => 'ul',
+          '#items' => array_map([$this, 'generateEditorMenuLink'], $group['links']),
+        ]
+      ];
+
+      return render($item);
+    }, $data);
+
+    $sections[] = [
+      '#theme'      => 'item_list',
+      '#type'       => 'ul',
+      '#attributes' => array('class' => 'editor-menu-grouped'),
+      '#items'      => $items,
+    ];
+  }
+
+  private function generateEditorMenuSectionIndividual(&$sections, $data) {
+    $data = array_filter($data, function($link) {
+      return $link['enabled'];
+    });
+
+    if (!count($data))
+      return;
+
+    $items = array_map([$this, 'generateEditorMenuLink'], $data);
+
+    $sections[] = [
+      '#theme'      => 'item_list',
+      '#type'       => 'ul',
+      '#attributes' => array('class' => 'editor-menu-individual'),
+      '#items'      => $items,
+    ];
+  }
+
+  private function generateEditorMenuLink($link) {
+    $text = check_plain($link['title']);
+
+    if (isset($link['icon']))
+      $text = theme_html_tag([
+          'element'       => [
+            '#tag'        => 'i',
+            '#attributes' => ['class' => $link['icon']],
+            '#value'      => '',
+          ],
+        ]) . $text;
+
+    return l($text, $link['href'], [
+      'html'  => TRUE,
+      'query' => isset($link['query']) ? $link['query'] : NULL,
+    ]);
   }
 
   /**
