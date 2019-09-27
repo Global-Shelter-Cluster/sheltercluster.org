@@ -74,3 +74,27 @@ function cluster_user_views_default_views_alter(&$views) {
     );
   }
 }
+
+/**
+ * Implements hook_menu().
+ */
+function cluster_user_menu() {
+  return [
+    'user/me/edit' => [
+      'title' => 'Redirecting to user edit page',
+      'access callback' => TRUE,
+      'page callback' => 'cluster_user_edit_redirect',
+      'type' => MENU_CALLBACK,
+    ],
+  ];
+}
+
+function cluster_user_edit_redirect() {
+  global $user;
+  if ($user->uid)
+    drupal_goto('user/'.$user->uid.'/edit');
+  else
+    drupal_goto('user/login', [
+      'query' => ['destination' => 'user/me/edit'],
+    ]);
+}
