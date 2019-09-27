@@ -6,7 +6,10 @@
   <?php include 'notification-header.tpl.php'; ?>
 
   <p style="margin-top: 20px;">
-    <?php print t('Here\'s the latest activity for %title:', ['%title' => $group->title], ['langcode' => $langcode]); ?>
+    <?php print t('Here\'s the latest activity for <a href="@link">@title</a>:', [
+      '@title' => $group->title,
+      '@link' => url('node/'.$group->nid),
+    ], ['langcode' => $langcode]); ?>
   </p>
 
   <?php include 'notification-common.tpl.php'; ?>
