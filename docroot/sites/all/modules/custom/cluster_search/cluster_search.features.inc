@@ -100,9 +100,9 @@ function cluster_search_default_search_api_index() {
         "body:value" : { "type" : "text" },
         "field_email" : { "type" : "list\\u003Ctext\\u003E" },
         "field_image:file:url" : { "type" : "text" },
-        "field_organisation_name" : { "type" : "list\\u003Ctext\\u003E" },
+        "field_organisation_name" : { "type" : "text" },
         "field_phone_number" : { "type" : "list\\u003Ctext\\u003E" },
-        "field_role_or_title" : { "type" : "list\\u003Ctext\\u003E" },
+        "field_role_or_title" : { "type" : "text" },
         "nid" : { "type" : "integer" },
         "og_group_ref" : { "type" : "list\\u003Cinteger\\u003E", "entity_type" : "node" },
         "og_group_ref:nid" : { "type" : "list\\u003Cinteger\\u003E" },
@@ -636,7 +636,15 @@ function cluster_search_default_search_api_index() {
     "server" : "algolia",
     "item_type" : "node",
     "options" : {
-      "datasource" : { "bundles" : [ "arbitrary_library", "article", "page", "discussion", "library", "photo_gallery" ] },
+      "datasource" : { "bundles" : [
+          "arbitrary_library",
+          "article",
+          "page",
+          "discussion",
+          "library",
+          "photo_gallery"
+        ]
+      },
       "index_directly" : 1,
       "cron_limit" : "0",
       "data_alter_callbacks" : {

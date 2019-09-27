@@ -2,7 +2,7 @@ name = Cluster Search
 description = Search configuration.
 core = 7.x
 package = Cluster
-version = 7.x-1.15
+version = 7.x-1.16
 project = cluster_search
 dependencies[] = cluster_search
 dependencies[] = current_search
@@ -11,7 +11,7 @@ dependencies[] = search_api
 dependencies[] = search_api_algolia
 dependencies[] = search_api_db
 dependencies[] = search_api_facetapi
-explanation = Service class in use by the following server: <a href="/admin/config/search/search_api/server/algolia">Algolia</a>. Service class in use by the following server: <a href="/admin/config/search/search_api/server/algolia">Algolia</a>.
+explanation = Service class in use by the following server: <a href="/admin/config/search/search_api/server/algolia">Algolia</a>. Service class in use by the following server: <a href="/admin/config/search/search_api/server/algolia">Algolia</a>. Service class in use by the following server: <a href="/admin/config/search/search_api/server/algolia">Algolia</a>.
 features[ctools][] = facetapi:facetapi_defaults:1
 features[facetapi][] = search_api@default_node_index::attachments_field_file
 features[facetapi][] = search_api@default_node_index::field_assess_monitor_eval
