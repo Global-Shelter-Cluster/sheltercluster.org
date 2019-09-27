@@ -1,0 +1,33 @@
+<?php
+
+function cluster_email_install() {
+  module_load_include('module', 'cluster_email', 'cluster_email');
+
+  $temp = [];
+  cluster_email_schema_alter($temp);
+
+  foreach ($temp as $table => $table_data) {
+    if (!isset($table_data['fields']))
+      continue;
+
+    foreach ($table_data['fields'] as $field => $spec)
+      if (!db_field_exists($table, $field))
+        db_add_field($table, $field, $spec);
+  }
+}
+
+function cluster_email_uninstall() {
+  module_load_include('module', 'cluster_email', 'cluster_email');
+
+  $temp = [];
+  cluster_email_schema_alter($temp);
+
+  foreach ($temp as $table => $table_data) {
+    if (!isset($table_data['fields']))
+      continue;
+
+    foreach ($table_data['fields'] as $field => $spec)
+      if (db_field_exists($table, $field))
+        db_drop_field($table, $field);
+  }
+}

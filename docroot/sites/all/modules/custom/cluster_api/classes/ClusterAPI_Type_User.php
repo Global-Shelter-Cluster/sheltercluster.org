@@ -46,6 +46,12 @@ class ClusterAPI_Type_User extends ClusterAPI_Type {
    *   org: "International Federation of Red Crosses",
    *   role: "Software developer",
    *   groups: [9175, 10318],
+   *   notifications: {
+   *     app_daily: true,
+   *     app_upcoming_events: true,
+   *     email_daily: false,
+   *     email_weekly: true,
+   *   },
    * }
    *
    */
@@ -62,13 +68,22 @@ class ClusterAPI_Type_User extends ClusterAPI_Type {
         $ret += ['groups' => self::getFollowedGroups($user)];
         $ret += ['timezone' => $user->timezone];
 
+        $ret += ['notifications' => [
+          'app_daily' => !!$wrapper->field_notif_push_daily->value(),
+          'app_upcoming_events' => !!$wrapper->field_notif_push_upcevents->value(),
+          'email_daily' => !!$wrapper->field_notif_email_daily->value(),
+          'email_weekly' => !!$wrapper->field_notif_email_weekly->value(),
+        ]];
+
       //Fall-through
       case ClusterAPI_Object::MODE_PUBLIC:
+        dpm($wrapper->field_organisation_name->value(), 'CAM2 '.$user->uid.' - '.$mode);
+        dpm($user->field_organisation_name, 'CAM3');
         $ret += [
           'mail' => $user->mail,
           'picture' => $user->picture ? image_style_url('medium', $user->picture->uri) : '',
-          'org' => implode(', ', $wrapper->field_organisation_name->value()),
-          'role' => implode(', ', $wrapper->field_role_or_title->value()),
+          'org' => $wrapper->field_organisation_name->value(),
+          'role' => $wrapper->field_role_or_title->value(),
         ];
 
       //Fall-through

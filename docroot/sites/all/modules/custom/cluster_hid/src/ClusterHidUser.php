@@ -248,12 +248,11 @@ class ClusterHidUser {
 
     $new_user = new \stdClass();
     $new_user->is_new = TRUE;
-    $new_user->name = $this->getEmail();
+    $new_user->name = $this->getFullName();
     $new_user->pass = crypt(md5(rand(0,100000)+strtotime(time())+$row[0]));
     $new_user->mail = $this->getEmail();
     $new_user->status = 1;
     $new_user->init = $this->getEmail();
-    $new_user->name_field['en'][0]['value'] = $this->getFullName();
 
     $this->populateCommonFieldsForCreateOrUpdate($new_user);
 
@@ -304,10 +303,10 @@ class ClusterHidUser {
   }
 
   private function populateCommonFieldsForCreateOrUpdate($user) {
-    $user->name_field['en'][0]['value'] = $this->getFullName();
+    $user->name = $this->getFullName();
     $organization_name = $this->getOrganizationName();
     if ($organization_name) {
-      $user->field_organisation_name['en'][0]['value'] = $organization_name;
+      $user->field_organisation_name[LANGUAGE_NONE][0]['value'] = $organization_name;
     }
 
     $phone_number = $this->getPhoneNumber();
@@ -317,7 +316,7 @@ class ClusterHidUser {
 
     $role_or_title = $this->getRoleOrTitle();
     if ($role_or_title) {
-      $user->field_role_or_title['en'][0]['value'] = $role_or_title;
+      $user->field_role_or_title[LANGUAGE_NONE][0]['value'] = $role_or_title;
     }
 
     $picture_file = $this->savePicture();

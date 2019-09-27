@@ -1150,11 +1150,29 @@ function cluster_docs_entity_load($entities, $type) {
  * Implements hook_daily_push_notification_objects_alter().
  */
 function cluster_docs_daily_push_notification_objects_alter(&$objects_by_gid) {
+  return _cluster_docs_notification_objects_alter($objects_by_gid, CLUSTER_API_DAY);
+}
+
+/**
+ * Implements hook_daily_email_notification_objects_alter().
+ */
+function cluster_docs_daily_email_notification_objects_alter(&$objects_by_gid) {
+  return _cluster_docs_notification_objects_alter($objects_by_gid, CLUSTER_API_DAY);
+}
+
+/**
+ * Implements hook_weekly_email_notification_objects_alter().
+ */
+function cluster_docs_weekly_email_notification_objects_alter(&$objects_by_gid) {
+  return _cluster_docs_notification_objects_alter($objects_by_gid, CLUSTER_API_WEEK);
+}
+
+function _cluster_docs_notification_objects_alter(&$objects_by_gid, $period) {
   $query = new EntityFieldQuery();
   $results = $query->entityCondition('entity_type', 'node')
     ->entityCondition('bundle', 'document')
     ->propertyCondition('status', NODE_PUBLISHED)
-    ->propertyCondition('created', REQUEST_TIME - CLUSTER_API_DAY, '>')
+    ->propertyCondition('created', REQUEST_TIME - $period, '>')
     ->execute();
 
   if (!$results || !$results['node'])
@@ -1238,4 +1256,64 @@ function cluster_docs_cluster_api_object_title($id, $langcode) {
  */
 function cluster_docs_cluster_api_weight() {
   return 10;
+}
+
+/**
+ * Implements hook_cluster_email_render_data().
+ */
+function cluster_docs_cluster_email_render_data($ids, $langcode)
+{
+  require_once 'cluster_docs.helpers.inc';
+
+  // Filter to make sure all ids are published documents
+  $query = new EntityFieldQuery();
+  $query->entityCondition('entity_type', 'node')
+    ->entityCondition('bundle', 'document')
+    ->propertyCondition('status', NODE_PUBLISHED)
+    ->propertyCondition('nid', $ids, 'IN')
+    ->range(0, 12); // max. 12 docs
+
+  $results = $query->execute();
+  if (!isset($results['node']))
+    return NULL;
+
+  $nids = array_keys($results['node']);
+  $ret = [];
+  foreach (node_load_multiple($nids) as $nid => $node) {
+    $wrapper = entity_metadata_wrapper('node', $node);
+
+    $report_meeting_date = $wrapper->field_report_meeting_date->value();
+
+    if ($tags = cluster_docs_get_tags_for_document($wrapper)) {
+      $tags = array_map(function(stdClass $tag) {
+        return check_plain($tag->name);
+      }, $tags);
+    }
+
+    $field_preview = $wrapper->field_preview->value();
+    $preview = $field_preview && $field_preview['uri']
+      ? image_style_url('document_preview', $field_preview['uri'])
+      : NULL;
+
+    $ret[$nid] = [
+      'title' => $node->title,
+      'link' => url('node/'.$nid, ['absolute' => TRUE]),
+      'date' => $report_meeting_date ? format_date($report_meeting_date, 'custom', 'j M Y', NULL, $langcode) : NULL,
+      'language' => _cluster_docs_language_name($wrapper->field_language->value()),
+      'source' => $wrapper->field_document_source->value(),
+      'tags' => $tags,
+      'thumbnail' => $preview,
+    ];
+  }
+
+  return $ret;
+}
+
+function _cluster_docs_language_name($langcode) {
+  $languages = language_list();
+
+  if (empty($languages[$langcode]))
+    return $langcode;
+
+  return $languages[$langcode]->name;
 }
