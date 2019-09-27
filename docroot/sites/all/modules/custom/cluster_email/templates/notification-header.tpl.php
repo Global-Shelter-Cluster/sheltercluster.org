@@ -1,7 +1,9 @@
-<img
-  style="width: 200px"
-  src="<?php print $logo; ?>"
-/>
+<a href="<?php print url('<front>', ['absolute' => TRUE]); ?>">
+  <img
+    style="width: 200px"
+    src="<?php print $logo; ?>"
+  />
+</a>
 
 <?php
 
@@ -31,7 +33,7 @@ if ($data['cluster_og'])
 if ($items): ?>
 
 <p style="display: none;">
-  <?php print implode(check_plain(' · '), $items); ?>
+  <?php print implode(check_plain(' · '), $items).'.'; ?>
 </p>
 
 <?php endif;
