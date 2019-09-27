@@ -73,14 +73,14 @@ function cluster_email_cron() {
       continue;
 
     foreach (cluster_api_split_users_by_langcode($all_uids) as $langcode => $uids) {
-      $body = _cluster_email_daily_notification_body_data($objects_by_module, $langcode);
-      if (!$body)
+      $data = _cluster_email_daily_notification_body_data($objects_by_module, $langcode);
+      if (!$data)
         continue;
 
       try {
         $params = [
           'group' => $group,
-          'body' => $body,
+          'data' => $data,
           'langcode' => $langcode,
         ];
         $to = _cluster_email_recipients_string($uids);
@@ -126,14 +126,14 @@ function cluster_email_cron() {
       continue;
 
     foreach (cluster_api_split_users_by_langcode($all_uids) as $langcode => $uids) {
-      $body = _cluster_email_weekly_notification_body_data($objects_by_module, $langcode);
-      if (!$body)
+      $data = _cluster_email_weekly_notification_body_data($objects_by_module, $langcode);
+      if (!$data)
         continue;
 
       try {
         $params = [
           'group' => $group,
-          'body' => $body,
+          'data' => $data,
           'langcode' => $langcode,
         ];
         $to = _cluster_email_recipients_string($uids);
