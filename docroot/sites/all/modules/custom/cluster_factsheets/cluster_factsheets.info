@@ -1,10 +1,11 @@
 name = Cluster Factsheets
 core = 7.x
 package = Cluster
-version = 7.x-1.5
+version = 7.x-1.6
 dependencies[] = clone
 dependencies[] = cluster_chart
 dependencies[] = double_field
+dependencies[] = field_collection
 dependencies[] = field_group
 features[ctools][] = field_group:field_group:1
 features[ctools][] = strongarm:strongarm:1
