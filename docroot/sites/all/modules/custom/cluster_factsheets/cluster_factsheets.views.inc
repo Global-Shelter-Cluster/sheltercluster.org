@@ -10,7 +10,7 @@ function cluster_factsheets_views_data_alter(&$data) {
     'filter' => [
       'field' => 'status',
       'handler' => 'cluster_factsheets_views_latest_published_factsheets',
-      'label' => t('Latest published factsheetss'),
+      'label' => t('Latest published factsheets'),
     ],
   ];
 }

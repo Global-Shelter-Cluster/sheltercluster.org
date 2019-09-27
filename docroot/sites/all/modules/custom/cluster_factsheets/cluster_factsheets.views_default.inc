@@ -281,6 +281,7 @@ function cluster_factsheets_views_default_views() {
   $handler->display->display_options['fields']['field_household_figures']['id'] = 'field_household_figures';
   $handler->display->display_options['fields']['field_household_figures']['table'] = 'field_data_field_household_figures';
   $handler->display->display_options['fields']['field_household_figures']['field'] = 'field_household_figures';
+  $handler->display->display_options['fields']['field_household_figures']['label'] = 'Figures represent';
   /* Field: Content: People per household */
   $handler->display->display_options['fields']['field_people_per_household']['id'] = 'field_people_per_household';
   $handler->display->display_options['fields']['field_people_per_household']['table'] = 'field_data_field_people_per_household';
@@ -335,16 +336,6 @@ function cluster_factsheets_views_default_views() {
   $handler->display->display_options['fields']['field_funding_source']['id'] = 'field_funding_source';
   $handler->display->display_options['fields']['field_funding_source']['table'] = 'field_data_field_funding_source';
   $handler->display->display_options['fields']['field_funding_source']['field'] = 'field_funding_source';
-  /* Field: Content: Coverage against targets */
-  $handler->display->display_options['fields']['field_coverage_against_targets']['id'] = 'field_coverage_against_targets';
-  $handler->display->display_options['fields']['field_coverage_against_targets']['table'] = 'field_data_field_coverage_against_targets';
-  $handler->display->display_options['fields']['field_coverage_against_targets']['field'] = 'field_coverage_against_targets';
-  $handler->display->display_options['fields']['field_coverage_against_targets']['type'] = 'field_collection_fields';
-  $handler->display->display_options['fields']['field_coverage_against_targets']['settings'] = array(
-    'view_mode' => 'full',
-  );
-  $handler->display->display_options['fields']['field_coverage_against_targets']['delta_offset'] = '0';
-  $handler->display->display_options['fields']['field_coverage_against_targets']['multi_type'] = 'ul';
   $handler->display->display_options['defaults']['sorts'] = FALSE;
   /* Sort criterion: Content: Date (field_date) */
   $handler->display->display_options['sorts']['field_date_value']['id'] = 'field_date_value';
@@ -365,7 +356,7 @@ function cluster_factsheets_views_default_views() {
   $handler->display->display_options['filters']['latest_published_factsheets']['id'] = 'latest_published_factsheets';
   $handler->display->display_options['filters']['latest_published_factsheets']['table'] = 'node';
   $handler->display->display_options['filters']['latest_published_factsheets']['field'] = 'latest_published_factsheets';
-  $handler->display->display_options['path'] = 'data-export/factsheets';
+  $handler->display->display_options['path'] = 'data-export/factsheets.csv';
   $handler->display->display_options['displays'] = array(
     'latest' => 'latest',
     'default' => 0,
@@ -439,6 +430,7 @@ function cluster_factsheets_views_default_views() {
   $handler->display->display_options['fields']['field_household_figures']['id'] = 'field_household_figures';
   $handler->display->display_options['fields']['field_household_figures']['table'] = 'field_data_field_household_figures';
   $handler->display->display_options['fields']['field_household_figures']['field'] = 'field_household_figures';
+  $handler->display->display_options['fields']['field_household_figures']['label'] = 'Figures represent';
   /* Field: Content: People per household */
   $handler->display->display_options['fields']['field_people_per_household']['id'] = 'field_people_per_household';
   $handler->display->display_options['fields']['field_people_per_household']['table'] = 'field_data_field_people_per_household';
@@ -493,23 +485,13 @@ function cluster_factsheets_views_default_views() {
   $handler->display->display_options['fields']['field_funding_source']['id'] = 'field_funding_source';
   $handler->display->display_options['fields']['field_funding_source']['table'] = 'field_data_field_funding_source';
   $handler->display->display_options['fields']['field_funding_source']['field'] = 'field_funding_source';
-  /* Field: Content: Coverage against targets */
-  $handler->display->display_options['fields']['field_coverage_against_targets']['id'] = 'field_coverage_against_targets';
-  $handler->display->display_options['fields']['field_coverage_against_targets']['table'] = 'field_data_field_coverage_against_targets';
-  $handler->display->display_options['fields']['field_coverage_against_targets']['field'] = 'field_coverage_against_targets';
-  $handler->display->display_options['fields']['field_coverage_against_targets']['type'] = 'field_collection_fields';
-  $handler->display->display_options['fields']['field_coverage_against_targets']['settings'] = array(
-    'view_mode' => 'full',
-  );
-  $handler->display->display_options['fields']['field_coverage_against_targets']['delta_offset'] = '0';
-  $handler->display->display_options['fields']['field_coverage_against_targets']['multi_type'] = 'ul';
   $handler->display->display_options['defaults']['sorts'] = FALSE;
   /* Sort criterion: Content: Date (field_date) */
   $handler->display->display_options['sorts']['field_date_value']['id'] = 'field_date_value';
   $handler->display->display_options['sorts']['field_date_value']['table'] = 'field_data_field_date';
   $handler->display->display_options['sorts']['field_date_value']['field'] = 'field_date_value';
   $handler->display->display_options['sorts']['field_date_value']['order'] = 'DESC';
-  $handler->display->display_options['path'] = 'data-export/factsheets/all';
+  $handler->display->display_options['path'] = 'data-export/factsheets-all.csv';
   $handler->display->display_options['displays'] = array(
     'all' => 'all',
     'default' => 0,
@@ -547,7 +529,7 @@ function cluster_factsheets_views_default_views() {
     t('Need analysis'),
     t('Response'),
     t('Gaps / challenges'),
-    t('Figures represent:'),
+    t('Figures represent'),
     t('People per household'),
     t('Cluster partners'),
     t('In need'),
@@ -555,7 +537,6 @@ function cluster_factsheets_views_default_views() {
     t('Required'),
     t('Funded'),
     t('Source'),
-    t('Coverage against targets'),
     t('All'),
     t('All factsheets'),
     t('Data export - All'),
