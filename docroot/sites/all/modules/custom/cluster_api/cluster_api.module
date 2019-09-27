@@ -3,9 +3,12 @@
 include_once 'cluster_api.features.inc';
 
 const CLUSTER_API_FOLLOWER_ROLE_NAME = 'follower';
-const CLUSTER_API_DAILY_WINDOW_FROM_HOUR = 14;
-const CLUSTER_API_DAILY_WINDOW_TO_HOUR = 18; // send daily notifications from 2pm to 6pm
 const CLUSTER_API_DAY = 60 * 60 * 24;
+const CLUSTER_API_WEEK = 60 * 60 * 24 * 7;
+
+// send daily push notifications from 2pm to 6pm
+const CLUSTER_API_DAILY_PUSH_NOTIFICATION_FROM = 14;
+const CLUSTER_API_DAILY_PUSH_NOTIFICATION_TO = 18;
 
 function cluster_api_menu() {
 
@@ -433,15 +436,59 @@ function cluster_api_track_users($uid, $origin) {
 }
 
 /**
+ * Get a list of users who match these conditions:
+ * - they follow the given group (filter by group role)
+ * - it's a reasonable time right for them to receive a notification (filter by timezone)
+ * - we haven't sent them this type of notification in a while (for this particular group)
+ * - they haven't disabled this type of notification (boolean fields in account entity)
+ *
+ * @param GroupContentManager $manager
+ * @param string[] $timezones
+ *    See cluster_api_daily_notification_timezones().
+ * @param string|NULL $last_notification_field
+ *    Field in the og_users_roles table that stores the last timestamp when we notified
+ *    this user. See $manager->updateUsersTimestamp().
+ * @param int|NULL $threshold
+ *    Hours that must have passed until we can send a notification to this user again
+ *    (only applicable if $last_notification_field is set).
+ * @param string|NULL $enabled_field
+ *    Name of boolean field in the account entity, to filter out users who have disabled
+ *    this type of notification.
+ *
+ * @return int[] User IDs
+ */
+function cluster_api_get_followers($manager, $timezones, $last_notification_field = NULL, $threshold = NULL, $enabled_field = NULL) {
+  $hour = 60 * 60; // const
+
+  return $manager->getUsersByRole(
+    CLUSTER_API_FOLLOWER_ROLE_NAME,
+    $timezones,
+    function (SelectQuery $query) use ($hour, $last_notification_field, $threshold, $enabled_field) {
+      if (!is_null($last_notification_field)) {
+        // The time of the last notification sent to this user, about this group, is at least 22 hours ago.
+        $filter_time = REQUEST_TIME - ($threshold * $hour);
+        $query->condition('og_ur.'.$last_notification_field, $filter_time, '<');
+      }
+
+      if (!is_null($enabled_field)) {
+        $query->join('field_data_'.$enabled_field, 'ef', 'ef.entity_type = \'user\' AND ef.entity_id = u.uid');
+        $query->condition('ef.'.$enabled_field.'_value', 1);
+      }
+    }
+  );
+}
+
+/**
  * Implements hook_cron().
  */
 function cluster_api_cron() {
   // Daily push notifications
+  $last_notification_field = 'last_daily_push_notification';
+  $enabled_field = 'field_notif_push_daily';
+  $timezones = cluster_api_timezones(CLUSTER_API_DAILY_PUSH_NOTIFICATION_FROM, CLUSTER_API_DAILY_PUSH_NOTIFICATION_TO);
+
   $objects_by_gid = [];
   drupal_alter('daily_push_notification_objects', $objects_by_gid);
-
-  $hour = 60 * 60; // const
-  $timezones = cluster_api_daily_notification_timezones();
 
   foreach ($objects_by_gid as $gid => $objects_by_module) {
     $group = node_load($gid);
@@ -449,18 +496,12 @@ function cluster_api_cron() {
       continue; // shouldn't happen
     $manager = GroupContentManager::getInstance($group);
 
-    // Gets a list of users who match these conditions:
-    // - they follow this group (filter by group role)
-    // - it's a reasonable time right for them (filter by timezone)
-    // - we haven't sent them a "daily push notification" in the past 22 hours (for this particular group)
-    $all_uids = $manager->getUsersByRole(
-      CLUSTER_API_FOLLOWER_ROLE_NAME,
+    $all_uids = cluster_api_get_followers(
+      $manager,
       $timezones,
-      function (SelectQuery $query) use ($hour) {
-        // The time of the last notification sent to this user, about this group, is at least 22 hours ago.
-        $filter_time = REQUEST_TIME - (22 * $hour);
-        $query->condition('og_ur.last_daily_push_notification', $filter_time, '<');
-      }
+      $last_notification_field,
+      22,
+      $enabled_field
     );
     if (!$all_uids)
       continue;
@@ -489,7 +530,7 @@ function cluster_api_cron() {
         ], WATCHDOG_ERROR);
       }
 
-      $manager->updateUsersTimestamp(CLUSTER_API_FOLLOWER_ROLE_NAME, $uids, 'last_daily_push_notification');
+      $manager->updateUsersTimestamp(CLUSTER_API_FOLLOWER_ROLE_NAME, $uids, $last_notification_field);
     }
   }
 }
@@ -638,16 +679,30 @@ function cluster_api_group_notification_title($group, $langcode = 'en') {
 }
 
 /**
- * Get a list of timezones for which it's acceptable to send a "daily notification" right now,
- * i.e. the current time is anywhere from 2pm to 6pm.
+ * Get a list of timezones within a range of hours
+ * (e.g. where the current time is anywhere from 2pm to 6pm.)
+ *
+ * @param int $from E.g. 14 (aka. 2 pm)
+ * @param int $to E.g. 18 (aka. 6 pm)
+ * @param int[]|NULL $days_of_week Optionally filter by days of the week (0 = sunday)
+ * @return string[]
  */
-function cluster_api_daily_notification_timezones() {
+function cluster_api_timezones($from, $to, $days_of_week = NULL) {
   $all_timezones = array_keys(system_time_zones());
 
-  $filter = function ($timezone) {
+  $filter = function ($timezone) use ($from, $to, $days_of_week) {
     $d = new DateTime('now', new DateTimeZone($timezone));
     $hour = intval($d->format('H'), 10);
-    return $hour >= CLUSTER_API_DAILY_WINDOW_FROM_HOUR && $hour < CLUSTER_API_DAILY_WINDOW_TO_HOUR;
+    $dow = intval($d->format('w'), 10);
+
+    $hour_check = $hour >= $from && $hour < $to;
+    if (!$hour_check)
+      return FALSE;
+
+    if (!is_null($days_of_week))
+      return in_array($dow, $days_of_week);
+
+    return TRUE;
   };
 
   return array_values(array_filter($all_timezones, $filter));

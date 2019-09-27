@@ -1,0 +1,253 @@
+<?php
+
+// send daily email notifications from 2pm to 6pm
+const CLUSTER_EMAIL_DAILY_NOTIFICATION_FROM = 14;
+const CLUSTER_EMAIL_DAILY_NOTIFICATION_TO = 18;
+
+// send weekly email notifications from 2pm to 6pm (Saturdays or Sundays)
+const CLUSTER_EMAIL_WEEKLY_NOTIFICATION_FROM = 14;
+const CLUSTER_EMAIL_WEEKLY_NOTIFICATION_TO = 18;
+
+/**
+ * Implements hook_menu().
+ */
+function cluster_email_menu() {
+  return [
+    'admin/config/shelter/email' => [
+      'title' => 'Email settings',
+      'page callback' => 'drupal_get_form',
+      'page arguments' => ['cluster_email_settings_form'],
+      'access arguments' => ['administer site configuration'],
+      'file' => 'cluster_email.forms.inc',
+    ],
+  ];
+}
+
+/**
+ * Implements hook_schema_alter().
+ */
+function cluster_email_schema_alter(&$schema) {
+  $schema['og_users_roles']['fields']['last_daily_email_notification'] = [
+    'type' => 'int',
+    'unsigned' => TRUE,
+    'not null' => TRUE,
+    'default' => 0,
+  ];
+  $schema['og_users_roles']['fields']['last_weekly_email_notification'] = [
+    'type' => 'int',
+    'unsigned' => TRUE,
+    'not null' => TRUE,
+    'default' => 0,
+  ];
+}
+
+/**
+ * Implements hook_cron().
+ */
+function cluster_email_cron() {
+  // Daily notifications
+  $last_notification_field = 'last_daily_email_notification';
+  $enabled_field = 'field_notif_email_daily';
+  $timezones = cluster_api_timezones(
+    CLUSTER_EMAIL_DAILY_NOTIFICATION_FROM,
+    CLUSTER_EMAIL_DAILY_NOTIFICATION_TO
+  );
+
+  $objects_by_gid = [];
+  drupal_alter('daily_email_notification_objects', $objects_by_gid);
+
+  foreach ($objects_by_gid as $gid => $objects_by_module) {
+    $group = node_load($gid);
+    if (!og_is_group('node', $group))
+      continue; // shouldn't happen
+    $manager = GroupContentManager::getInstance($group);
+
+    $all_uids = cluster_api_get_followers(
+      $manager,
+      $timezones,
+      $last_notification_field,
+      22,
+      $enabled_field
+    );
+    if (!$all_uids)
+      continue;
+
+    foreach (cluster_api_split_users_by_langcode($all_uids) as $langcode => $uids) {
+      $body = _cluster_email_daily_notification_body_data($objects_by_module, $langcode);
+      if (!$body)
+        continue;
+
+      try {
+        $params = [
+          'group' => $group,
+          'body' => $body,
+          'langcode' => $langcode,
+        ];
+        $to = _cluster_email_recipients_string($uids);
+
+        drupal_mail('cluster_email', 'daily_notification', $to, $langcode, $params);
+      } catch (Exception $e) {
+        watchdog('cluster_email', 'Error sending daily email notifications for gid @gid: @error', [
+          '@gid' => $gid,
+          '@error' => $e->getMessage(),
+        ], WATCHDOG_ERROR);
+      }
+
+      $manager->updateUsersTimestamp(CLUSTER_API_FOLLOWER_ROLE_NAME, $uids, $last_notification_field);
+    }
+  }
+
+  // Weekly notifications
+  $last_notification_field = 'last_weekly_email_notification';
+  $enabled_field = 'field_notif_email_weekly';
+  $timezones = cluster_api_timezones(
+    CLUSTER_EMAIL_WEEKLY_NOTIFICATION_FROM,
+    CLUSTER_EMAIL_WEEKLY_NOTIFICATION_TO,
+    [0, 6] // we send these emails on Saturday and Sunday
+  );
+
+  $objects_by_gid = [];
+  drupal_alter('weekly_email_notification_objects', $objects_by_gid);
+
+  foreach ($objects_by_gid as $gid => $objects_by_module) {
+    $group = node_load($gid);
+    if (!og_is_group('node', $group))
+      continue; // shouldn't happen
+    $manager = GroupContentManager::getInstance($group);
+
+    $all_uids = cluster_api_get_followers(
+      $manager,
+      $timezones,
+      $last_notification_field,
+      24 * 6,
+      $enabled_field
+    );
+    if (!$all_uids)
+      continue;
+
+    foreach (cluster_api_split_users_by_langcode($all_uids) as $langcode => $uids) {
+      $body = _cluster_email_weekly_notification_body_data($objects_by_module, $langcode);
+      if (!$body)
+        continue;
+
+      try {
+        $params = [
+          'group' => $group,
+          'body' => $body,
+          'langcode' => $langcode,
+        ];
+        $to = _cluster_email_recipients_string($uids);
+
+        drupal_mail('cluster_email', 'weekly_notification', $to, $langcode, $params);
+      } catch (Exception $e) {
+        watchdog('cluster_email', 'Error sending weekly email notifications for gid @gid: @error', [
+          '@gid' => $gid,
+          '@error' => $e->getMessage(),
+        ], WATCHDOG_ERROR);
+      }
+
+      $manager->updateUsersTimestamp(CLUSTER_API_FOLLOWER_ROLE_NAME, $uids, $last_notification_field);
+    }
+  }
+}
+
+/**
+ * @param int[] $uids
+ * @return string E.g. "User <user@example.com>, Another User <anotheruser@example.com>"
+ */
+function _cluster_email_recipients_string($uids) {
+  $users = user_load_multiple($uids);
+  $strings = [];
+  foreach ($users as $user) {
+    // Idea taken from _webform_submission_prepare_mail()
+    $name = implode(' ', array_map('mime_header_encode', explode(' ', $user->name)));
+    $strings[] = '"' . $name . '" <' . $user->mail . '>';
+  }
+  return join(', ', $strings);
+}
+
+/**
+ * Returns structured data to be used by the email template.
+ *
+ * @param array $object_ids_by_module
+ * @param string $langcode
+ * @return array
+ */
+function _cluster_email_daily_notification_body_data($object_ids_by_module, $langcode) {
+  $ret = [];
+
+  foreach ($object_ids_by_module as $module => $object_ids) {
+    $temp = module_invoke($module, 'cluster_email_render_data', $object_ids, $langcode);
+
+    if ($temp)
+      $ret[$module] = $temp;
+  }
+
+  return $ret;
+}
+
+function _cluster_email_weekly_notification_body_data($object_ids_by_module, $langcode) {
+  return _cluster_email_daily_notification_body_data($object_ids_by_module, $langcode);
+}
+
+/**
+ * Implements hook_mail().
+ */
+function cluster_email_mail($key, &$message, $params) {
+  $body = [
+    '#theme' => 'cluster_email_' . $key,
+    '#logo' => url('sites/all/themes/shelter/assets/svg/replacement/logo-global-shelter-cluster-4x.png', ['absolute' => TRUE]),
+  ];
+
+  // E.g. "Ecuador Earthquake 2016 (response)"
+  $group_name = cluster_api_group_notification_title($params['group'], $params['langcode']);
+
+  switch ($key) {
+    case 'daily_notification':
+      $message['subject'] = $group_name;
+      $body['#group'] = $params['group'];
+      $body['#data'] = $params['data'];
+      break;
+
+    case 'weekly_notification':
+      $message['subject'] = t('Weekly activity for @group', [
+        '@group' => $group_name,
+      ], [
+        'langcode' => $params['langcode'],
+      ]);
+      $body['#group'] = $params['group'];
+      $body['#data'] = $params['data'];
+      break;
+  }
+
+  $message['body'] = [drupal_render($body)];
+//  die($message['body'][0]);
+}
+
+/**
+ * Implements hook_theme().
+ */
+function cluster_email_theme($existing, $type, $theme, $path) {
+  return [
+    'cluster_email_daily_notification' => [
+      'template' => 'daily-notification',
+      'variables' => [
+        'langcode' => '',
+        'logo' => '',
+        'group' => [],
+        'data' => [],
+      ],
+      'path' => drupal_get_path('module', 'cluster_email') . '/templates',
+    ],
+    'cluster_email_weekly_notification' => [
+      'template' => 'weekly-notification',
+      'variables' => [
+        'langcode' => '',
+        'logo' => '',
+        'group' => [],
+        'data' => [],
+      ],
+      'path' => drupal_get_path('module', 'cluster_email') . '/templates',
+    ],
+  ];
+}

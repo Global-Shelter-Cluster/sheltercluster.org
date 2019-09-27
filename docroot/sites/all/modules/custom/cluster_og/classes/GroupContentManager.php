@@ -561,9 +561,8 @@ class GroupContentManager {
    */
   public function getUsersByRole($role_name, $filter_user_timezones = NULL, $query_alter = NULL) {
     $rid = $this->getRoleIdByName($role_name, $this->node->type);
-    if (!$rid) {
+    if (!$rid)
       return;
-    }
 
     $query = db_select('og_users_roles', 'og_ur')
       ->fields('og_ur', array('uid'));

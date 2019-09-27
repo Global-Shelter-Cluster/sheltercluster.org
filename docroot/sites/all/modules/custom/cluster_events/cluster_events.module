@@ -665,13 +665,18 @@ function _cluster_events_upcoming_notification_link_data($event_nids, $gid) {
   return ['link' => 'group:events:upcoming', 'id' => $gid];
 }
 
+// send "upcoming events" notifications from 2pm to 6pm
+const CLUSTER_EVENTS_UPCOMING_NOTIFICATION_FROM = 14;
+const CLUSTER_EVENTS_UPCOMING_NOTIFICATION_TO = 18;
+
 /**
  * Implements hook_cron().
  */
 function cluster_events_cron() {
   // Upcoming events (events that happen tomorrow) push notifications
-  $hour = 60 * 60; // const
-  $timezones = cluster_api_daily_notification_timezones();
+  $last_notification_field = 'last_upcevt_push_notification';
+  $enabled_field = 'field_notif_push_upcevents';
+  $timezones = cluster_api_timezones(CLUSTER_EVENTS_UPCOMING_NOTIFICATION_FROM, CLUSTER_EVENTS_UPCOMING_NOTIFICATION_TO);
 
   $events_by_group = _cluster_events_load_upcoming_events();
 
@@ -681,18 +686,12 @@ function cluster_events_cron() {
       continue; // shouldn't happen
     $manager = GroupContentManager::getInstance($group);
 
-    // Gets a list of users who match these conditions:
-    // - they follow this group (filter by group role)
-    // - it's a reasonable time right for them (filter by timezone)
-    // - we haven't sent them an "upcoming events push notification" in the past 22 hours (for this particular group)
-    $all_uids = $manager->getUsersByRole(
-      CLUSTER_API_FOLLOWER_ROLE_NAME,
+    $all_uids = cluster_api_get_followers(
+      $manager,
       $timezones,
-      function (SelectQuery $query) use ($hour) {
-        // The time of the last notification sent to this user, about this group, is at least 22 hours ago.
-        $filter_time = REQUEST_TIME - (22 * $hour);
-        $query->condition('og_ur.last_upcevt_push_notification', $filter_time, '<');
-      }
+      $last_notification_field,
+      22,
+      $enabled_field
     );
     if (!$all_uids)
       continue;
@@ -721,7 +720,7 @@ function cluster_events_cron() {
         ], WATCHDOG_ERROR);
       }
 
-      $manager->updateUsersTimestamp(CLUSTER_API_FOLLOWER_ROLE_NAME, $uids, 'last_upcevt_push_notification');
+      $manager->updateUsersTimestamp(CLUSTER_API_FOLLOWER_ROLE_NAME, $uids, $last_notification_field);
     }
   }
 }
