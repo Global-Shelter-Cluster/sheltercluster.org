@@ -6,6 +6,7 @@
 
 include_once 'cluster_factsheets.features.inc';
 include_once 'cluster_factsheets.pathauto.inc';
+include_once 'cluster_factsheets.views.inc';
 
 /**
  * Implements hook_menu().
@@ -614,11 +615,29 @@ function cluster_factsheets_prev($factsheet_node) {
  * Implements hook_daily_push_notification_objects_alter().
  */
 function cluster_factsheets_daily_push_notification_objects_alter(&$objects_by_gid) {
+  return _cluster_factsheets_notification_objects_alter($objects_by_gid, CLUSTER_API_DAY);
+}
+
+/**
+ * Implements hook_daily_email_notification_objects_alter().
+ */
+function cluster_factsheets_daily_email_notification_objects_alter(&$objects_by_gid) {
+  return _cluster_factsheets_notification_objects_alter($objects_by_gid, CLUSTER_API_DAY);
+}
+
+/**
+ * Implements hook_weekly_email_notification_objects_alter().
+ */
+function cluster_factsheets_weekly_email_notification_objects_alter(&$objects_by_gid) {
+  return _cluster_factsheets_notification_objects_alter($objects_by_gid, CLUSTER_API_WEEK);
+}
+
+function _cluster_factsheets_notification_objects_alter(&$objects_by_gid, $period) {
   $query = new EntityFieldQuery();
   $results = $query->entityCondition('entity_type', 'node')
     ->entityCondition('bundle', 'factsheet')
     ->propertyCondition('status', NODE_PUBLISHED)
-    ->propertyCondition('created', REQUEST_TIME - CLUSTER_API_DAY, '>')
+    ->propertyCondition('created', REQUEST_TIME - $period, '>')
     ->execute();
 
   if (!$results || !$results['node'])
@@ -685,4 +704,44 @@ function cluster_factsheets_cluster_api_object_title($id, $langcode) {
  */
 function cluster_factsheets_cluster_api_weight() {
   return -10;
+}
+
+/**
+ * Implements hook_cluster_email_render_data().
+ */
+function cluster_factsheets_cluster_email_render_data($ids, $langcode) {
+  // Filter to make sure all ids are published
+  $query = new EntityFieldQuery();
+  $query->entityCondition('entity_type', 'node')
+    ->entityCondition('bundle', 'factsheet')
+    ->propertyCondition('status', NODE_PUBLISHED)
+    ->propertyCondition('nid', $ids, 'IN')
+    ->range(0, 2); // max. 2 nodes
+
+  $results = $query->execute();
+  if (!isset($results['node']))
+    return NULL;
+
+  $nids = array_keys($results['node']);
+  $ret = [];
+  foreach (node_load_multiple($nids) as $nid => $node) {
+    $wrapper = entity_metadata_wrapper('node', $node);
+
+    $field_image = $wrapper->field_image->value();
+    $image = $field_image && $field_image['uri']
+      ? image_style_url('factsheet_image', $field_image['uri'])
+      : NULL;
+
+    $highlights = $wrapper->body->value();
+
+    $ret[$nid] = [
+      'title' => $node->title,
+      'link' => url('node/'.$nid, ['absolute' => TRUE]),
+      'date' => format_date($wrapper->field_date->value(), 'custom', 'F Y', NULL, $langcode),
+      'image' => $image,
+      'highlights' => text_summary($highlights['safe_value'], $highlights['format']),
+    ];
+  }
+
+  return $ret;
 }

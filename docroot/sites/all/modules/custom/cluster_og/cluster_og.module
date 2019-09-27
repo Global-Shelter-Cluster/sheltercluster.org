@@ -561,11 +561,29 @@ function cluster_og_sort_response_nids_active_first(&$nids) {
  * Implements hook_daily_push_notification_objects_alter().
  */
 function cluster_og_daily_push_notification_objects_alter(&$objects_by_gid) {
+  return _cluster_og_notification_objects_alter($objects_by_gid, CLUSTER_API_DAY);
+}
+
+/**
+ * Implements hook_daily_email_notification_objects_alter().
+ */
+function cluster_og_daily_email_notification_objects_alter(&$objects_by_gid) {
+  return _cluster_og_notification_objects_alter($objects_by_gid, CLUSTER_API_DAY);
+}
+
+/**
+ * Implements hook_weekly_email_notification_objects_alter().
+ */
+function cluster_og_weekly_email_notification_objects_alter(&$objects_by_gid) {
+  return _cluster_og_notification_objects_alter($objects_by_gid, CLUSTER_API_WEEK);
+}
+
+function _cluster_og_notification_objects_alter(&$objects_by_gid, $period) {
   $query = new EntityFieldQuery();
   $results = $query->entityCondition('entity_type', 'node')
     ->entityCondition('bundle', ['page', 'library', 'arbitrary_library', 'photo_gallery'], 'IN')
     ->propertyCondition('status', NODE_PUBLISHED)
-    ->propertyCondition('created', REQUEST_TIME - CLUSTER_API_DAY, '>')
+    ->propertyCondition('created', REQUEST_TIME - $period, '>')
     ->execute();
 
   if (!$results || !$results['node'])
@@ -659,4 +677,31 @@ function cluster_og_cluster_api_object_title($id, $langcode) {
  */
 function cluster_og_cluster_api_weight() {
   return 20;
+}
+
+/**
+ * Implements hook_cluster_email_render_data().
+ */
+function cluster_og_cluster_email_render_data($ids, $langcode) {
+  // Filter to make sure all ids are published
+  $query = new EntityFieldQuery();
+  $query->entityCondition('entity_type', 'node')
+    ->entityCondition('bundle', ['page', 'library', 'arbitrary_library', 'photo_gallery'], 'IN')
+    ->propertyCondition('status', NODE_PUBLISHED)
+    ->propertyCondition('nid', $ids, 'IN');
+
+  $results = $query->execute();
+  if (!isset($results['node']))
+    return NULL;
+
+  $nids = array_keys($results['node']);
+  $ret = [];
+  foreach (node_load_multiple($nids) as $nid => $node) {
+    $ret[$nid] = [
+      'title' => $node->title,
+      'link' => url('node/'.$nid, ['absolute' => TRUE]),
+    ];
+  }
+
+  return $ret;
 }

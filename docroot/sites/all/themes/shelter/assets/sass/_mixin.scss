@@ -39,13 +39,22 @@
   @return $n / ($n * 0 + 1);
 }
 
+// From https://css-tricks.com/snippets/sass/strip-unit-function/
+@function strip-unit($number) {
+  @if type-of($number) == 'number' and not unitless($number) {
+    @return $number / ($number * 0 + 1);
+  }
+
+  @return $number;
+}
+
 @mixin rem($property, $values) {
   $px : ();
   $rem: ();
 
   @each $value in $values {
 
-    @if $value == 0 or type-of($value) != "number" {
+    @if strip-unit($value) == 0 or type-of($value) != "number" {
       $px : append($px , $value);
       $rem: append($rem, $value);
     }

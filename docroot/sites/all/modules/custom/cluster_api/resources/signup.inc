@@ -33,7 +33,7 @@ function _cluster_api_signup($requests) {
 
   // Create new user with supplied credentials and values.
   $fields = [
-    'name' => $email,
+    'name' => $account_values['name'],
     'mail' => $email,
     'pass' => $password,
     'status' => 1,
@@ -41,20 +41,14 @@ function _cluster_api_signup($requests) {
     'roles' => [
       DRUPAL_AUTHENTICATED_RID => 'authenticated user',
     ],
-    'name_field' => [
-      'en' => [
-        0 => [
-          'value' => $account_values['name'],
-        ],
-      ],
-    ],
-    'field_organisation_name' => [
-      'en' => [
-        0 => [
-          'value' => $account_values['organization'],
-        ],
-      ],
-    ],
+//    'name_field' => [
+//      LANGUAGE_NONE => [
+//        0 => [
+//          'value' => $account_values['name'],
+//        ],
+//      ],
+//    ],
+    'field_organisation_name' => [LANGUAGE_NONE => [['value' => $account_values['organization']]]],
   ];
 
   // Auto-follow Global group
@@ -62,7 +56,7 @@ function _cluster_api_signup($requests) {
     $global_group = node_load($global_id);
     if ($global_group && og_is_group('node', $global_group)) {
       $fields['og_user_node1'] = [
-        'und' => [
+        LANGUAGE_NONE => [
           0 => [
             'target_id' => $global_id,
           ],

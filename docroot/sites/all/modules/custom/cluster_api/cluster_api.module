@@ -3,9 +3,12 @@
 include_once 'cluster_api.features.inc';
 
 const CLUSTER_API_FOLLOWER_ROLE_NAME = 'follower';
-const CLUSTER_API_DAILY_WINDOW_FROM_HOUR = 14;
-const CLUSTER_API_DAILY_WINDOW_TO_HOUR = 18; // send daily notifications from 2pm to 6pm
 const CLUSTER_API_DAY = 60 * 60 * 24;
+const CLUSTER_API_WEEK = 60 * 60 * 24 * 7;
+
+// send daily push notifications from 2pm to 6pm
+const CLUSTER_API_DAILY_PUSH_NOTIFICATION_FROM = 14;
+const CLUSTER_API_DAILY_PUSH_NOTIFICATION_TO = 18;
 
 function cluster_api_menu() {
 
@@ -432,15 +435,59 @@ function cluster_api_track_users($uid, $origin) {
 }
 
 /**
+ * Get a list of users who match these conditions:
+ * - they follow the given group (filter by group role)
+ * - it's a reasonable time right for them to receive a notification (filter by timezone)
+ * - we haven't sent them this type of notification in a while (for this particular group)
+ * - they haven't disabled this type of notification (boolean fields in account entity)
+ *
+ * @param GroupContentManager $manager
+ * @param string[] $timezones
+ *    See cluster_api_daily_notification_timezones().
+ * @param string|NULL $last_notification_field
+ *    Field in the og_users_roles table that stores the last timestamp when we notified
+ *    this user. See $manager->updateUsersTimestamp().
+ * @param int|NULL $threshold
+ *    Hours that must have passed until we can send a notification to this user again
+ *    (only applicable if $last_notification_field is set).
+ * @param string|NULL $enabled_field
+ *    Name of boolean field in the account entity, to filter out users who have disabled
+ *    this type of notification.
+ *
+ * @return int[] User IDs
+ */
+function cluster_api_get_followers($manager, $timezones, $last_notification_field = NULL, $threshold = NULL, $enabled_field = NULL) {
+  $hour = 60 * 60; // const
+
+  return $manager->getUsersByRole(
+    CLUSTER_API_FOLLOWER_ROLE_NAME,
+    $timezones,
+    function (SelectQuery $query) use ($hour, $last_notification_field, $threshold, $enabled_field) {
+      if (!is_null($last_notification_field)) {
+        // The time of the last notification sent to this user, about this group, is at least 22 hours ago.
+        $filter_time = REQUEST_TIME - ($threshold * $hour);
+        $query->condition('og_ur.'.$last_notification_field, $filter_time, '<');
+      }
+
+      if (!is_null($enabled_field)) {
+        $query->join('field_data_'.$enabled_field, 'ef', 'ef.entity_type = \'user\' AND ef.entity_id = u.uid');
+        $query->condition('ef.'.$enabled_field.'_value', 1);
+      }
+    }
+  );
+}
+
+/**
  * Implements hook_cron().
  */
 function cluster_api_cron() {
   // Daily push notifications
+  $last_notification_field = 'last_daily_push_notification';
+  $enabled_field = 'field_notif_push_daily';
+  $timezones = cluster_api_timezones(CLUSTER_API_DAILY_PUSH_NOTIFICATION_FROM, CLUSTER_API_DAILY_PUSH_NOTIFICATION_TO);
+
   $objects_by_gid = [];
   drupal_alter('daily_push_notification_objects', $objects_by_gid);
-
-  $hour = 60 * 60; // const
-  $timezones = cluster_api_daily_notification_timezones();
 
   foreach ($objects_by_gid as $gid => $objects_by_module) {
     $group = node_load($gid);
@@ -448,18 +495,12 @@ function cluster_api_cron() {
       continue; // shouldn't happen
     $manager = GroupContentManager::getInstance($group);
 
-    // Gets a list of users who match these conditions:
-    // - they follow this group (filter by group role)
-    // - it's a reasonable time right for them (filter by timezone)
-    // - we haven't sent them a "daily push notification" in the past 22 hours (for this particular group)
-    $all_uids = $manager->getUsersByRole(
-      CLUSTER_API_FOLLOWER_ROLE_NAME,
+    $all_uids = cluster_api_get_followers(
+      $manager,
       $timezones,
-      function (SelectQuery $query) use ($hour) {
-        // The time of the last notification sent to this user, about this group, is at least 22 hours ago.
-        $filter_time = REQUEST_TIME - (22 * $hour);
-        $query->condition('og_ur.last_daily_push_notification', $filter_time, '<');
-      }
+      $last_notification_field,
+      22,
+      $enabled_field
     );
     if (!$all_uids)
       continue;
@@ -488,7 +529,7 @@ function cluster_api_cron() {
         ], WATCHDOG_ERROR);
       }
 
-      $manager->updateUsersTimestamp(CLUSTER_API_FOLLOWER_ROLE_NAME, $uids, 'last_daily_push_notification');
+      $manager->updateUsersTimestamp(CLUSTER_API_FOLLOWER_ROLE_NAME, $uids, $last_notification_field);
     }
   }
 }
@@ -637,16 +678,30 @@ function cluster_api_group_notification_title($group, $langcode = 'en') {
 }
 
 /**
- * Get a list of timezones for which it's acceptable to send a "daily notification" right now,
- * i.e. the current time is anywhere from 2pm to 6pm.
+ * Get a list of timezones within a range of hours
+ * (e.g. where the current time is anywhere from 2pm to 6pm.)
+ *
+ * @param int $from E.g. 14 (aka. 2 pm)
+ * @param int $to E.g. 18 (aka. 6 pm)
+ * @param int[]|NULL $days_of_week Optionally filter by days of the week (0 = sunday)
+ * @return string[]
  */
-function cluster_api_daily_notification_timezones() {
+function cluster_api_timezones($from, $to, $days_of_week = NULL) {
   $all_timezones = array_keys(system_time_zones());
 
-  $filter = function ($timezone) {
+  $filter = function ($timezone) use ($from, $to, $days_of_week) {
     $d = new DateTime('now', new DateTimeZone($timezone));
     $hour = intval($d->format('H'), 10);
-    return $hour >= CLUSTER_API_DAILY_WINDOW_FROM_HOUR && $hour < CLUSTER_API_DAILY_WINDOW_TO_HOUR;
+    $dow = intval($d->format('w'), 10);
+
+    $hour_check = $hour >= $from && $hour < $to;
+    if (!$hour_check)
+      return FALSE;
+
+    if (!is_null($days_of_week))
+      return in_array($dow, $days_of_week);
+
+    return TRUE;
   };
 
   return array_values(array_filter($all_timezones, $filter));
@@ -680,4 +735,225 @@ function cluster_api_update_app_config($key, $value) {
   $config->{$key} = $value;
   $config->updatedAt = time();
   file_put_contents("app_config.json", json_encode($config, JSON_PRETTY_PRINT));
+}
+
+/**
+ * @param string $data E.g. "data://..."
+ * @param string $dir E.g. 'public://my/dir"
+ * @param string $basename E.g. "picture" yields something like "public://my/dir/picture.jpg"
+ * @return int|NULL Created file's fid, or NULL if for any reason it couldn't be created
+ * @throws Exception
+ */
+function _cluster_api_receive_file($data, $dir, $basename) {
+  // This reads from a base64 string (e.g. "data:image/jpeg;base64,...")
+  $data = file_get_contents($data);
+  if (!$data)
+    return NULL;
+
+  // Figure out the extension from the mime type
+  $ext = _cluster_api_mime2ext(mime_content_type($data));
+  $ext = $ext ? '.' . $ext : '';
+
+  // Make sure the directory exists
+  if (file_exists($dir) && !is_dir($dir))
+    throw new Exception("Not a directory: ".$dir);
+  if (!file_exists($dir))
+    drupal_mkdir($dir, NULL, TRUE);
+
+  // Now save as a file
+  $path = $dir . '/' . $basename . $ext;
+  $file = file_save_data($data, $path, FILE_EXISTS_RENAME);
+  if ($file === FALSE)
+    return NULL;
+
+  return $file->fid;
+}
+
+/**
+ * Adapted from: https://stackoverflow.com/a/53662733
+ */
+function _cluster_api_mime2ext($mime) {
+  $mime_map = [
+    'video/3gpp2' => '3g2',
+    'video/3gp' => '3gp',
+    'video/3gpp' => '3gp',
+    'application/x-compressed' => '7zip',
+    'audio/x-acc' => 'aac',
+    'audio/ac3' => 'ac3',
+    'application/postscript' => 'ai',
+    'audio/x-aiff' => 'aif',
+    'audio/aiff' => 'aif',
+    'audio/x-au' => 'au',
+    'video/x-msvideo' => 'avi',
+    'video/msvideo' => 'avi',
+    'video/avi' => 'avi',
+    'application/x-troff-msvideo' => 'avi',
+    'application/macbinary' => 'bin',
+    'application/mac-binary' => 'bin',
+    'application/x-binary' => 'bin',
+    'application/x-macbinary' => 'bin',
+    'image/bmp' => 'bmp',
+    'image/x-bmp' => 'bmp',
+    'image/x-bitmap' => 'bmp',
+    'image/x-xbitmap' => 'bmp',
+    'image/x-win-bitmap' => 'bmp',
+    'image/x-windows-bmp' => 'bmp',
+    'image/ms-bmp' => 'bmp',
+    'image/x-ms-bmp' => 'bmp',
+    'application/bmp' => 'bmp',
+    'application/x-bmp' => 'bmp',
+    'application/x-win-bitmap' => 'bmp',
+    'application/cdr' => 'cdr',
+    'application/coreldraw' => 'cdr',
+    'application/x-cdr' => 'cdr',
+    'application/x-coreldraw' => 'cdr',
+    'image/cdr' => 'cdr',
+    'image/x-cdr' => 'cdr',
+    'zz-application/zz-winassoc-cdr' => 'cdr',
+    'application/mac-compactpro' => 'cpt',
+    'application/pkix-crl' => 'crl',
+    'application/pkcs-crl' => 'crl',
+    'application/x-x509-ca-cert' => 'crt',
+    'application/pkix-cert' => 'crt',
+    'text/css' => 'css',
+    'text/x-comma-separated-values' => 'csv',
+    'text/comma-separated-values' => 'csv',
+    'application/vnd.msexcel' => 'csv',
+    'application/x-director' => 'dcr',
+    'application/vnd.openxmlformats-officedocument.wordprocessingml.document' => 'docx',
+    'application/x-dvi' => 'dvi',
+    'message/rfc822' => 'eml',
+    'application/x-msdownload' => 'exe',
+    'video/x-f4v' => 'f4v',
+    'audio/x-flac' => 'flac',
+    'video/x-flv' => 'flv',
+    'image/gif' => 'gif',
+    'application/gpg-keys' => 'gpg',
+    'application/x-gtar' => 'gtar',
+    'application/x-gzip' => 'gzip',
+    'application/mac-binhex40' => 'hqx',
+    'application/mac-binhex' => 'hqx',
+    'application/x-binhex40' => 'hqx',
+    'application/x-mac-binhex40' => 'hqx',
+    'text/html' => 'html',
+    'image/x-icon' => 'ico',
+    'image/x-ico' => 'ico',
+    'image/vnd.microsoft.icon' => 'ico',
+    'text/calendar' => 'ics',
+    'application/java-archive' => 'jar',
+    'application/x-java-application' => 'jar',
+    'application/x-jar' => 'jar',
+    'image/jp2' => 'jp2',
+    'video/mj2' => 'jp2',
+    'image/jpx' => 'jp2',
+    'image/jpm' => 'jp2',
+    'image/jpeg' => 'jpg',
+    'image/jpg' => 'jpg',
+    'image/pjpeg' => 'jpg',
+    'application/x-javascript' => 'js',
+    'application/json' => 'json',
+    'text/json' => 'json',
+    'application/vnd.google-earth.kml+xml' => 'kml',
+    'application/vnd.google-earth.kmz' => 'kmz',
+    'text/x-log' => 'log',
+    'audio/x-m4a' => 'm4a',
+    'application/vnd.mpegurl' => 'm4u',
+    'audio/midi' => 'mid',
+    'application/vnd.mif' => 'mif',
+    'video/quicktime' => 'mov',
+    'video/x-sgi-movie' => 'movie',
+    'audio/mpeg' => 'mp3',
+    'audio/mpg' => 'mp3',
+    'audio/mpeg3' => 'mp3',
+    'audio/mp3' => 'mp3',
+    'video/mp4' => 'mp4',
+    'video/mpeg' => 'mpeg',
+    'application/oda' => 'oda',
+    'audio/ogg' => 'ogg',
+    'video/ogg' => 'ogg',
+    'application/ogg' => 'ogg',
+    'application/x-pkcs10' => 'p10',
+    'application/pkcs10' => 'p10',
+    'application/x-pkcs12' => 'p12',
+    'application/x-pkcs7-signature' => 'p7a',
+    'application/pkcs7-mime' => 'p7c',
+    'application/x-pkcs7-mime' => 'p7c',
+    'application/x-pkcs7-certreqresp' => 'p7r',
+    'application/pkcs7-signature' => 'p7s',
+    'application/pdf' => 'pdf',
+    'application/octet-stream' => 'pdf',
+    'application/x-x509-user-cert' => 'pem',
+    'application/x-pem-file' => 'pem',
+    'application/pgp' => 'pgp',
+    'application/x-httpd-php' => 'php',
+    'application/php' => 'php',
+    'application/x-php' => 'php',
+    'text/php' => 'php',
+    'text/x-php' => 'php',
+    'application/x-httpd-php-source' => 'php',
+    'image/png' => 'png',
+    'image/x-png' => 'png',
+    'application/powerpoint' => 'ppt',
+    'application/vnd.ms-powerpoint' => 'ppt',
+    'application/vnd.ms-office' => 'ppt',
+    'application/msword' => 'ppt',
+    'application/vnd.openxmlformats-officedocument.presentationml.presentation' => 'pptx',
+    'application/x-photoshop' => 'psd',
+    'image/vnd.adobe.photoshop' => 'psd',
+    'audio/x-realaudio' => 'ra',
+    'audio/x-pn-realaudio' => 'ram',
+    'application/x-rar' => 'rar',
+    'application/rar' => 'rar',
+    'application/x-rar-compressed' => 'rar',
+    'audio/x-pn-realaudio-plugin' => 'rpm',
+    'application/x-pkcs7' => 'rsa',
+    'text/rtf' => 'rtf',
+    'text/richtext' => 'rtx',
+    'video/vnd.rn-realvideo' => 'rv',
+    'application/x-stuffit' => 'sit',
+    'application/smil' => 'smil',
+    'text/srt' => 'srt',
+    'image/svg+xml' => 'svg',
+    'application/x-shockwave-flash' => 'swf',
+    'application/x-tar' => 'tar',
+    'application/x-gzip-compressed' => 'tgz',
+    'image/tiff' => 'tiff',
+    'text/plain' => 'txt',
+    'text/x-vcard' => 'vcf',
+    'application/videolan' => 'vlc',
+    'text/vtt' => 'vtt',
+    'audio/x-wav' => 'wav',
+    'audio/wave' => 'wav',
+    'audio/wav' => 'wav',
+    'application/wbxml' => 'wbxml',
+    'video/webm' => 'webm',
+    'audio/x-ms-wma' => 'wma',
+    'application/wmlc' => 'wmlc',
+    'video/x-ms-wmv' => 'wmv',
+    'video/x-ms-asf' => 'wmv',
+    'application/xhtml+xml' => 'xhtml',
+    'application/excel' => 'xl',
+    'application/msexcel' => 'xls',
+    'application/x-msexcel' => 'xls',
+    'application/x-ms-excel' => 'xls',
+    'application/x-excel' => 'xls',
+    'application/x-dos_ms_excel' => 'xls',
+    'application/xls' => 'xls',
+    'application/x-xls' => 'xls',
+    'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' => 'xlsx',
+    'application/vnd.ms-excel' => 'xlsx',
+    'application/xml' => 'xml',
+    'text/xml' => 'xml',
+    'text/xsl' => 'xsl',
+    'application/xspf+xml' => 'xspf',
+    'application/x-compress' => 'z',
+    'application/x-zip' => 'zip',
+    'application/zip' => 'zip',
+    'application/x-zip-compressed' => 'zip',
+    'application/s-compressed' => 'zip',
+    'multipart/x-zip' => 'zip',
+    'text/x-scriptzsh' => 'zsh',
+  ];
+
+  return isset($mime_map[$mime]) ? $mime_map[$mime] : false;
 }
