@@ -8,7 +8,7 @@
   <p style="margin-top: 20px;">
     <?php print t('Here\'s the latest activity for <a href="@link">@title</a>:', [
       '@title' => $group->title,
-      '@link' => url('node/'.$group->nid),
+      '@link' => url('node/'.$group->nid, ['absolute' => TRUE]),
     ], ['langcode' => $langcode]); ?>
   </p>
 
