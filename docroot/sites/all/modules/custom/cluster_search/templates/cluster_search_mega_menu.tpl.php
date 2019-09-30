@@ -14,7 +14,7 @@
     </li>
     <li class="algolia-logo">
       <img
-        src="https://www.algolia.com/static_assets/images/press/downloads/search-by-algolia.png"
+        src="<?php print url('/sites/all/themes/shelter/assets/images/search-by-algolia.png'); ?>"
         alt="Search by Algolia">
     </li>
   </ul>
