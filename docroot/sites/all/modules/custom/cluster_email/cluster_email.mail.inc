@@ -29,4 +29,12 @@ class ClusterMailSystem extends MandrillMailSystem {
 
     return parent::mail($message);
   }
+
+  public function format(array $message) {
+    // Join the body array into one string.
+    if (is_array($message['body']))
+      $message['body'] = implode("\n\n", $message['body']);
+
+    return $message;
+  }
 }
