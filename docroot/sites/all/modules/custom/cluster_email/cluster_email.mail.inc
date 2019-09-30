@@ -3,8 +3,13 @@
 class ClusterMailSystem extends MandrillMailSystem {
   public function mail(array $message) {
     $whitelist = variable_get('cluster_email_whitelist', NULL);
-    if (empty($whitelist))
-      return parent::mail($message);
+    if (empty($whitelist)) {
+      $is_prod = function_exists('shelter_base_is_prod') ? shelter_base_is_prod() : FALSE;
+      if ($is_prod)
+        return parent::mail($message);
+      else
+        throw new Exception('Only the production environment is allowed to send emails without a whitelist. Go to admin/config/shelter/email to configure one.');
+    }
 
     $whitelist = explode("\n", $whitelist);
     $whitelist = array_map('trim', $whitelist);

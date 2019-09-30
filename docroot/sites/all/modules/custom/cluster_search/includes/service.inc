@@ -26,9 +26,7 @@ class SearchApiClusterAlgoliaService extends SearchApiAlgoliaService {
       // will determine that it's the prod site if it matches either http or https, on the www subdomain or non-www.
       // IMPORTANT: to run the cron from drush we need to pass the --uri param, otherwise this check will change the
       // index name prefix.
-      $regex = '/^https?:\/\/(www\.)?sheltercluster\.org\b/'; // if this matches then it's production
-      global $base_url;
-      $is_prod = preg_match($regex, $base_url);
+      $is_prod = function_exists('shelter_base_is_prod') ? shelter_base_is_prod() : FALSE;
       $prefix = variable_get('cluster_search_algolia_prefix', 'dev');
       if (strtolower($prefix) === 'prod' && !$is_prod)
         $prefix = 'local';

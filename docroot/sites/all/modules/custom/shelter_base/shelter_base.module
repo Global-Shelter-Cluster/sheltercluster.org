@@ -140,3 +140,10 @@ function shelter_base_get_group_count_for_user($uid) {
   }
   return $count;
 }
+
+function shelter_base_is_prod() {
+  $regex = '/^https?:\/\/(www\.)?sheltercluster\.org\b/'; // if this matches then it's production
+  global $base_url;
+  $is_prod = preg_match($regex, $base_url);
+  return $is_prod;
+}
