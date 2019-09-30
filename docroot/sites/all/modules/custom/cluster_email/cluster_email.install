@@ -31,3 +31,26 @@ function cluster_email_uninstall() {
         db_drop_field($table, $field);
   }
 }
+
+/**
+ * Sets default notification fields (email and push notifications) for all users.
+ */
+function cluster_email_update_7000() {
+  $uids = db_select('users', 'u')->fields('u', ['uid'])->execute()->fetchCol();
+
+  foreach ($uids as $uid) {
+    $user = user_load($uid);
+
+    $user->field_notif_push_daily = [LANGUAGE_NONE => [['value' => '1']]];
+    $user->field_notif_push_upcevents = [LANGUAGE_NONE => [['value' => '1']]];
+    $user->field_notif_email_daily = [LANGUAGE_NONE => [['value' => '0']]];
+    $user->field_notif_email_weekly = [LANGUAGE_NONE => [['value' => '1']]];
+
+    try
+    {
+      user_save($user);
+    } catch (Exception $exception) {
+      watchdog('cluster_email_update', 'User update failed for uid: '.$uid);
+    }
+  }
+}
