@@ -2,9 +2,14 @@
 
 /**
  * @file This is only meant for development.
+ *
+ * Use module_load_include('inc', 'node', 'cluster_email.testdev'); to load it.
  */
 
-function cluster_email_cron_test() {
+/**
+ * Sends a manual "daily email" notification (warning: hardcoded values).
+ */
+function _cluster_email_cron_test() {
   $gid = 9175;
 
   // Daily notifications
@@ -24,13 +29,13 @@ function cluster_email_cron_test() {
       continue; // shouldn't happen
     $manager = GroupContentManager::getInstance($group);
 
-    $all_uids = cluster_api_get_followers(
-      $manager,
-      $timezones,
-      $last_notification_field,
-      22,
-      $enabled_field
-    );
+//    $all_uids = cluster_api_get_followers(
+//      $manager,
+//      $timezones,
+//      $last_notification_field,
+//      22,
+//      $enabled_field
+//    );
 
     $all_uids = [733];
     if (!$all_uids)
@@ -60,4 +65,34 @@ function cluster_email_cron_test() {
       $manager->updateUsersTimestamp(CLUSTER_API_FOLLOWER_ROLE_NAME, $uids, $last_notification_field);
     }
   }
+}
+
+/**
+ * Resets some "last sent" timestamps (warning: hardcoded values).
+ */
+function _cluster_email_testdev_reset_last_timestamps() {
+  db_update('og_users_roles')
+    ->fields([
+      'last_daily_email_notification' => 0,
+      'last_weekly_email_notification' => 0,
+      'last_upcevt_push_notification' => 0,
+      'last_daily_push_notification' => 0,
+      'last_weekly_push_notification' => 0,
+    ])
+    ->condition('uid', [733], 'IN') // Camilo
+//    ->condition('gid', 9175)
+    ->execute();
+}
+
+/**
+ * Sets some content to "created today" so that it shows in the next notifications (warning: hardcoded values).
+ */
+function _cluster_email_testdev_reset_some_data() {
+  db_update('node')
+    ->fields([
+      'created' => REQUEST_TIME,
+    ])
+    // Some content from response # 9175 (Ecuador)
+    ->condition('nid', [ 13492, 9731, 9936, 9968, 10162, 13484 ], 'IN')
+    ->execute();
 }
