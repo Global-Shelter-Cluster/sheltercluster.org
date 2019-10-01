@@ -27,7 +27,7 @@ function cluster_tokens_tokens($type, $tokens, array $data = array(), array $opt
     foreach ($tokens as $name => $original) {
       switch ($name) {
         case 'cluster-response-title':
-          if (!in_array($node->type, array('arbitrary_library', 'document', 'discussion', 'event', 'factsheet', 'library', 'page', 'photo_gallery', 'webform'))) {
+          if (!in_array($node->type, array('arbitrary_library', 'document', 'discussion', 'event', 'factsheet', 'library', 'page', 'photo_gallery', 'webform', 'news'))) {
             return;
           }
 

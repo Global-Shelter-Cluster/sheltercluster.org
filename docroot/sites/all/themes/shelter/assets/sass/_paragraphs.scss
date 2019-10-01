@@ -1,0 +1,20 @@
+.paragraphs-items {
+  .content {
+    min-height: initial;
+  }
+
+  .paragraphs-item-images {
+    .field-name-field-images .field-items {
+      margin: -10px;
+      > .field-item {
+        display: inline-block;
+        padding: 10px;
+
+        img {
+          max-width: 100%;
+          height: auto;
+        }
+      }
+    }
+  }
+}

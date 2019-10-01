@@ -1,0 +1,32 @@
+<?php
+/**
+ * @file
+ * Code for the Cluster News feature.
+ */
+
+include_once 'cluster_news.features.inc';
+
+/**
+ * Implements hook_preprocess_HOOK().
+ */
+function cluster_news_preprocess_node(&$variables) {
+return;
+  $title_field_weight = 0;
+  foreach ($variables['content'] as $k => $v) {
+    if ($k === 'title_field') {
+      $title_field_weight = $v['#weight'];
+      break;
+    }
+  }
+
+  foreach ($variables['content'] as $k => &$v) {
+    if (isset($v['#weight']) && $v['#weight'] > $title_field_weight)
+      $v['#weight']++;
+  }
+
+  $variables['content'][] = [
+    '#weight' => $title_field_weight + 1, // Put it right after the title
+
+  ];
+
+}
