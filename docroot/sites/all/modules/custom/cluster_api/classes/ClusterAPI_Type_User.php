@@ -20,6 +20,9 @@ class ClusterAPI_Type_User extends ClusterAPI_Type {
   }
 
   static function getFollowedGroups($user) {
+    if (!$user->uid)
+      return []; // Logged out
+
     $convert_to_int = function($string) {
       return intval($string);
     };
