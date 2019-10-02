@@ -6,6 +6,8 @@
 
 include_once 'cluster_og.features.inc';
 
+const MAX_FOLLOWED_GROUPS = 10;
+
 /**
  *  Implements hook_entity_info_alter().
  */
@@ -461,7 +463,77 @@ function cluster_og_menu() {
     'type' => MENU_NORMAL_ITEM,
   ];
 
+  $items['node/%node/follow'] = [
+    'title' => 'Follow group',
+    'page callback' => 'cluster_og_follow_callback',
+    'page arguments' => [1],
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
+  ];
+
+  $items['node/%node/un-follow'] = [
+    'title' => 'Un-follow group',
+    'page callback' => 'cluster_og_unfollow_callback',
+    'page arguments' => [1],
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
+  ];
+
   return $items;
+}
+
+function cluster_og_follow($user, $group) {
+  if (!og_is_group('node', $group))
+    throw new Exception('Not a group');
+
+  $followed_groups = ClusterAPI_Type_User::getFollowedGroups($user);
+
+  $following = in_array($group->nid, $followed_groups);
+  if ($following)
+    return;
+
+  if (count($followed_groups) >= MAX_FOLLOWED_GROUPS)
+    throw new Exception('Cannot follow more groups, maximum reached');
+
+  if (!og_is_member('node', $group->nid, 'user', $user)) {
+    $m = og_membership_create('node', $group->nid, 'user', $user->uid, 'og_user_node1');
+    $m->save();
+  }
+
+  og_role_grant('node', $group->nid, $user->uid, cluster_api_get_follower_role_by_bundle($group->type));
+}
+
+function cluster_og_follow_callback($group) {
+  global $user;
+  if (!user_is_logged_in())
+    drupal_goto('user/login', ['query' => ['destination' => 'node/'.$group->nid.'/follow']]);
+
+  cluster_og_follow($user, $group);
+  drupal_goto('node/'.$group->nid);
+}
+
+function cluster_og_unfollow_callback($group) {
+  global $user;
+  if (!user_is_logged_in())
+    drupal_goto('user/login', ['query' => ['destination' => 'node/' . $group->nid . '/follow']]);
+
+  cluster_og_unfollow($user, $group);
+  drupal_goto('node/'.$group->nid);
+}
+
+function cluster_og_unfollow($user, $group) {
+  if (!og_is_group('node', $group))
+    throw new Exception('Not a group');
+
+  $followed_groups = ClusterAPI_Type_User::getFollowedGroups($user);
+
+  $following = in_array($group->nid, $followed_groups);
+  if (!$following)
+    return;
+
+  og_role_revoke('node', $group->nid, $user->uid, cluster_api_get_follower_role_by_bundle($group->type));
+
+  //TODO: if the user was only involved with the group as a follower, remove them from it altogether.
 }
 
 /**

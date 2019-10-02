@@ -146,6 +146,47 @@ class GroupDisplayProvider {
     return FALSE;
   }
 
+  protected function followButton() {
+    global $user;
+    $followed_groups = ClusterAPI_Type_User::getFollowedGroups($user);
+    $following = user_is_logged_in() && in_array($this->node->nid, $followed_groups);
+
+    if (!$following && count($followed_groups) >= MAX_FOLLOWED_GROUPS)
+      return [
+        'label' => t('Cannot follow this @type (you\'re already following too many groups)', ['@type' => $this->getGroupTypeLabel()]),
+        'path' => 'user/'.$user->uid.'/edit',
+        'options' => array(
+          'html' => TRUE,
+          'attributes' => [
+            'class' => 'cant-follow',
+          ],
+        ),
+      ];
+
+    if (!$following)
+      return [
+        'label' => t('Follow this @type', ['@type' => $this->getGroupTypeLabel()]),
+        'path' => 'node/' . $this->node->nid . '/follow',
+        'options' => array(
+          'html' => TRUE,
+          'attributes' => [
+            'class' => 'follow',
+          ],
+        ),
+      ];
+    else
+      return [
+        'label' => t('Un-follow this @type', ['@type' => $this->getGroupTypeLabel()]),
+        'path' => 'node/' . $this->node->nid . '/un-follow',
+        'options' => array(
+          'html' => TRUE,
+          'attributes' => [
+            'class' => 'un-follow',
+          ],
+        ),
+      ];
+  }
+
   /**
    * Generate the dashboard links for a group node.
    * Delegates theme implementation to cluster_nav module.
@@ -156,6 +197,9 @@ class GroupDisplayProvider {
    */
   public function getDashboardMenu($currently_visible_node_id = NULL) {
     $items = array();
+
+    $items[] = $this->followButton();
+
     $items['dashboard'] = array(
       'label' => t('Dashboard'),
       'path' => 'node/' . $this->node->nid,

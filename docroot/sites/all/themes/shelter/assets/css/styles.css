@@ -1984,6 +1984,27 @@ label[for="mobile_menu_toggle"] span:after {
 #secondary-nav .nav-items .nav-item a.active {
   background: #cdd6db;
 }
+#secondary-nav .nav-items .nav-item a.cant-follow {
+  background: #fc0000;
+  color: white;
+}
+#secondary-nav .nav-items .nav-item a.cant-follow:hover, #secondary-nav .nav-items .nav-item a.cant-follow.active {
+  background: #ff3030;
+}
+#secondary-nav .nav-items .nav-item a.follow {
+  background: #7f1416;
+  color: white;
+}
+#secondary-nav .nav-items .nav-item a.follow:hover, #secondary-nav .nav-items .nav-item a.follow.active {
+  background: #ab1b1e;
+}
+#secondary-nav .nav-items .nav-item a.un-follow {
+  background: #04314c;
+  color: white;
+}
+#secondary-nav .nav-items .nav-item a.un-follow:hover, #secondary-nav .nav-items .nav-item a.un-follow.active {
+  background: #07507c;
+}
 #secondary-nav .nav-items .nav-item .total {
   color: #3e3e3e;
   font-size: 11.2px;

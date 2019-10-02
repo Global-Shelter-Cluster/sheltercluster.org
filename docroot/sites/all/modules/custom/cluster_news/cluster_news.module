@@ -51,8 +51,8 @@ function cluster_news_cron() {
     foreach (cluster_api_split_users_by_langcode($all_uids) as $langcode => $uids) {
       try {
         $params = [
+          'node' => $news_node,
           'group' => $first_group,
-          'title' => $news_node->title,
           'date' => $news_wrapper->field_news_date->value(),
           'content' => cluster_paragraphs_render_email_content($news_wrapper->field_content->value()),
           'langcode' => $langcode,
@@ -81,10 +81,10 @@ function cluster_news_mail($key, &$message, $params) {
     '#theme' => 'cluster_news_email',
     '#logo' => url('sites/all/themes/shelter/assets/svg/replacement/logo-global-shelter-cluster-4x.png', ['absolute' => TRUE]),
     '#langcode' => $params['langcode'],
-    '#title' => $params['title'],
     '#date' => $params['date'],
     '#content' => $params['content'],
     '#group' => $params['group'],
+    '#node' => $params['node'],
   ];
 
   // E.g. "Ecuador Earthquake 2016 (response)"
@@ -104,10 +104,10 @@ function cluster_news_theme($existing, $type, $theme, $path) {
       'variables' => [
         'langcode' => '',
         'logo' => '',
-        'title' => '',
         'date' => '',
         'content' => [],
         'group' => [],
+        'node' => [],
       ],
       'path' => drupal_get_path('module', 'cluster_news') . '/templates',
     ],

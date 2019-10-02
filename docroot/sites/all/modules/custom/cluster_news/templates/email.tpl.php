@@ -8,7 +8,7 @@
   <h1 style="
     margin: 20px 0 0;
   ">
-    <?php print l($title, 'node/'.$group->nid, ['absolute' => TRUE, 'attributes' => [
+    <?php print l($node->title, 'node/'.$node->nid, ['absolute' => TRUE, 'attributes' => [
       'style' => 'color: #7f1416; text-decoration: none;'
     ]]); ?>
   </h1>
