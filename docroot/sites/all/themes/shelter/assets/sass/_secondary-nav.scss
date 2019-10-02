@@ -67,6 +67,30 @@
         &.active {
           background: $shelter-light-blue;
         }
+
+        &.cant-follow {
+          background: $accent-red;
+          color: $white;
+          &:hover, &.active {
+            background: lighten($accent-red, 10%);
+          }
+        }
+
+        &.follow {
+          background: $shelter-red;
+          color: $white;
+          &:hover, &.active {
+            background: lighten($shelter-red, 10%);
+          }
+        }
+
+        &.un-follow {
+          background: $accent-dark-blue;
+          color: $white;
+          &:hover, &.active {
+            background: lighten($accent-dark-blue, 10%);
+          }
+        }
       }
       .total {
         color: darken($shelter-grey,10%);

@@ -33,16 +33,10 @@ function _cluster_api_follow_action($id, $request) {
   }
 
   $group = node_load($id);
-  if (!$group || !og_is_group('node', $group)) {
-    return services_error('Wrong group id', 400);
-  }
-
-  if (!og_is_member('node', $id, 'user', $user)) {
-    $m = og_membership_create('node', $id, 'user', $user->uid, 'og_user_node1');
-    $m->save();
-  }
-  if (!in_array($id, ClusterAPI_Type_User::getFollowedGroups($user))) {
-    og_role_grant('node', $id, $user->uid, _cluster_api_get_follower_role_by_bundle($group->type));
+  try {
+    cluster_og_follow($user, $group);
+  } catch (Exception $e) {
+    return services_error($e->getMessage(), 400);
   }
 
   $object = new ClusterAPI_Object($user);
@@ -72,15 +66,11 @@ function _cluster_api_unfollow_action($id, $request) {
   }
 
   $group = node_load($id);
-  if (!$group || !og_is_group('node', $group)) {
-    return services_error('Wrong group id', 400);
+  try {
+    cluster_og_unfollow($user, $group);
+  } catch (Exception $e) {
+    return services_error($e->getMessage(), 400);
   }
-
-  if (in_array($id, ClusterAPI_Type_User::getFollowedGroups($user))) {
-    og_role_revoke('node', $id, $user->uid, _cluster_api_get_follower_role_by_bundle($group->type));
-  }
-
-  //TODO: if the user was only involved with the group as a follower, remove them from it altogether.
 
   $object = new ClusterAPI_Object($user);
   $response['objects'] = $object->getObjects([

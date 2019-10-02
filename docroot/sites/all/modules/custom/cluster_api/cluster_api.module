@@ -278,7 +278,7 @@ function cluster_api_services_resources() {
  * @return int
  * @throws \Exception
  */
-function _cluster_api_get_follower_role_by_bundle($group_bundle) {
+function cluster_api_get_follower_role_by_bundle($group_bundle) {
   $roles = array_flip(og_roles('node', $group_bundle));
   if (!array_key_exists(CLUSTER_API_FOLLOWER_ROLE_NAME, $roles))
     throw new Exception('Group bundle does not have follower role: ' . $group_bundle);

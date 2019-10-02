@@ -75,7 +75,7 @@ function _cluster_api_signup($requests) {
   // Grant "follower" role for global group
   if ($global_group) {
     try {
-      og_role_grant('node', $global_group->nid, $user->uid, _cluster_api_get_follower_role_by_bundle($global_group->type));
+      og_role_grant('node', $global_group->nid, $user->uid, cluster_api_get_follower_role_by_bundle($global_group->type));
     } catch (Exception $e) {
       watchdog('cluster_api_signup', 'Error in Global group auto-follow', [
         'exception' => $e,
