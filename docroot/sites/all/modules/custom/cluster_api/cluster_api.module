@@ -738,20 +738,20 @@ function cluster_api_update_app_config($key, $value) {
 }
 
 /**
- * @param string $data E.g. "data://..."
+ * @param string $data_base64 E.g. "data://..."
  * @param string $dir E.g. 'public://my/dir"
  * @param string $basename E.g. "picture" yields something like "public://my/dir/picture.jpg"
  * @return int|NULL Created file's fid, or NULL if for any reason it couldn't be created
  * @throws Exception
  */
-function _cluster_api_receive_file($data, $dir, $basename) {
+function _cluster_api_receive_file($data_base64, $dir, $basename) {
   // This reads from a base64 string (e.g. "data:image/jpeg;base64,...")
-  $data = file_get_contents($data);
+  $data = file_get_contents($data_base64);
   if (!$data)
     return NULL;
 
   // Figure out the extension from the mime type
-  $ext = _cluster_api_mime2ext(mime_content_type($data));
+  $ext = _cluster_api_mime2ext(mime_content_type($data_base64));
   $ext = $ext ? '.' . $ext : '';
 
   // Make sure the directory exists

@@ -8,8 +8,6 @@ const CLUSTER_EMAIL_DAILY_NOTIFICATION_TO = 18;
 const CLUSTER_EMAIL_WEEKLY_NOTIFICATION_FROM = 14;
 const CLUSTER_EMAIL_WEEKLY_NOTIFICATION_TO = 18;
 
-require_once 'cluster_email.testdev.inc';
-
 /**
  * Implements hook_menu().
  */
