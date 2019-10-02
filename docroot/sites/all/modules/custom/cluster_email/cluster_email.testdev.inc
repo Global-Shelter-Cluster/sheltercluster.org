@@ -3,7 +3,7 @@
 /**
  * @file This is only meant for development.
  *
- * Use module_load_include('inc', 'node', 'cluster_email.testdev'); to load it.
+ * Use module_load_include('inc', 'cluster_email', 'cluster_email.testdev'); to load it.
  */
 
 /**

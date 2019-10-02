@@ -70,6 +70,56 @@ function cluster_news_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-news-field_is_sent'.
+  $field_instances['node-news-field_is_sent'] = array(
+    'bundle' => 'news',
+    'default_value' => array(
+      0 => array(
+        'value' => 0,
+      ),
+    ),
+    'deleted' => 0,
+    'description' => 'Set by the system when the email is sent to the group\'s followers. Do not change manually.',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 4,
+      ),
+      'ical' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_is_sent',
+    'label' => 'Is sent',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(
+        'display_label' => 1,
+      ),
+      'type' => 'options_onoff',
+      'weight' => 6,
+    ),
+  );
+
   // Exported field_instance: 'node-news-field_news_date'.
   $field_instances['node-news-field_news_date'] = array(
     'bundle' => 'news',
@@ -256,6 +306,8 @@ function cluster_news_field_default_field_instances() {
   t('Content');
   t('Date');
   t('Groups audience');
+  t('Is sent');
+  t('Set by the system when the email is sent to the group\'s followers. Do not change manually.');
   t('Title');
 
   return $field_instances;

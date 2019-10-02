@@ -1,7 +1,7 @@
 <a href="<?php print url('<front>', ['absolute' => TRUE]); ?>">
   <img
     style="width: 200px"
-    src="<?php print $logo; ?>"
+    src="<?php print check_url($logo); ?>"
   />
 </a>
 

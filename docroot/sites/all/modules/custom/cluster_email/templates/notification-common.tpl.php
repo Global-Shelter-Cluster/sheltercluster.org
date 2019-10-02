@@ -17,7 +17,7 @@
           text-decoration: none;
           color: black;
         "
-          href="<?php print $factsheet['link']; ?>"
+          href="<?php print check_url($factsheet['link']); ?>"
         >
           <h4 style="
           text-align: right;
@@ -30,15 +30,15 @@
             <div style="
               width: 100%;
               height: 120px;
-              background-image: url(<?php print $factsheet['image']; ?>);
+              background-image: url(<?php print check_url($factsheet['image']); ?>);
               background-size: cover;
               background-position: center;
               "></div>
           <?php endif; ?>
           <div style="
-          margin-top: 10px;
-          font-size: 12px;
-        ">
+            margin-top: 10px;
+            font-size: 12px;
+          ">
             <?php print $factsheet['highlights']; ?>
           </div>
           <p style="font-size: 12px; color: #575757;"><?php print t('See full factsheet'); ?></p>
@@ -79,19 +79,19 @@
           text-decoration: none;
           color: black;
         "
-          href="<?php print $doc['link']; ?>"
+          href="<?php print check_url($doc['link']); ?>"
         >
           <?php if ($doc['thumbnail']): ?>
             <img
               style="
-            float: left;
-            width: 100px;
-            height: 100px;
-            margin-right: 10px;
-          "
+                float: left;
+                width: 100px;
+                height: 100px;
+                margin-right: 10px;
+              "
               width="100"
               height="100"
-              src="<?php print $doc['thumbnail']; ?>"
+              src="<?php print check_url($doc['thumbnail']); ?>"
             />
           <?php endif; ?>
           <div>
@@ -110,7 +110,7 @@
           ">
               <?php
               $line = [$doc['date'], $doc['language'], $doc['source']];
-              print join(check_plain(' · '), array_filter($line));
+              print join(check_plain(' · '), array_filter(array_map('check_plain', $line)));
               ?>
             </p>
             <?php if ($doc['tags']): ?>
@@ -130,7 +130,7 @@
               white-space: nowrap;
               overflow: hidden;
               text-overflow: ellipsis;
-            "><?php print $tag; ?></span>
+            "><?php print check_plain($tag); ?></span>
                 <?php endforeach; ?>
               </p>
             <?php endif; ?>
@@ -163,9 +163,9 @@
           text-decoration: none;
           color: black;
         "
-          href="<?php print $page['link']; ?>"
+          href="<?php print check_url($page['link']); ?>"
         >
-          <?php print $page['title']; ?>
+          <?php print check_plain($page['title']); ?>
         </a>
       </li>
     <?php
