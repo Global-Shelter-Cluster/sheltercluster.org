@@ -154,7 +154,7 @@ class GroupDisplayProvider {
     if (!$following && count($followed_groups) >= MAX_FOLLOWED_GROUPS)
       return [
         'label' => t('Cannot follow this @type (you\'re already following too many groups)', ['@type' => $this->getGroupTypeLabel()]),
-        'path' => 'user/'.$user->uid,
+        'path' => 'user/'.$user->uid.'/edit',
         'options' => array(
           'html' => TRUE,
           'attributes' => [
