@@ -2,9 +2,19 @@
 
 class ClusterMailSystem extends MandrillMailSystem {
   public function mail(array $message) {
+    $is_prod = function_exists('shelter_base_is_prod') ? shelter_base_is_prod() : FALSE;
+    $env = function_exists('shelter_base_get_env') ? shelter_base_get_env() : 'unknown';
+
+    if (!$is_prod) {
+      // Add environment to subject line (if not prod)
+      if (strlen($env) > 10)
+        $env = substr($env, 0, 7).'...';
+
+      $message['subject'] = '('.$env.') '.$message['subject'];
+    }
+
     $whitelist = variable_get('cluster_email_whitelist', NULL);
     if (empty($whitelist)) {
-      $is_prod = function_exists('shelter_base_is_prod') ? shelter_base_is_prod() : FALSE;
       if ($is_prod)
         return parent::mail($message);
       else

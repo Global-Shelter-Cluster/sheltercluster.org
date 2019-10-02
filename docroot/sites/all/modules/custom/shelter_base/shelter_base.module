@@ -142,8 +142,19 @@ function shelter_base_get_group_count_for_user($uid) {
 }
 
 function shelter_base_is_prod() {
-  $regex = '/^https?:\/\/(www\.)?sheltercluster\.org\b/'; // if this matches then it's production
+  return shelter_base_get_env() === 'www';
+}
+
+function shelter_base_get_env() {
+  $regex = '/^https?:\/\/(([^\.]+)\.)?sheltercluster\.org\b/';
   global $base_url;
-  $is_prod = preg_match($regex, $base_url);
-  return $is_prod;
+  $is_match = preg_match($regex, $base_url, $matches);
+
+  if (!$is_match)
+    return $base_url;
+
+  if (!isset($matches[2]))
+    return 'www'; // a.k.a. "production"
+
+  return $matches[2];
 }

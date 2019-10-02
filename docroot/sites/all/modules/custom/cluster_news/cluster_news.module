@@ -1,0 +1,115 @@
+<?php
+/**
+ * @file
+ * Code for the Cluster News feature.
+ */
+
+include_once 'cluster_news.features.inc';
+
+/**
+ * Implements hook_cron().
+ */
+function cluster_news_cron() {
+  $query = new EntityFieldQuery();
+  $results = $query->entityCondition('entity_type', 'node')
+    ->entityCondition('bundle', 'news')
+    ->propertyCondition('status', NODE_PUBLISHED)
+    ->fieldCondition('field_is_sent', 'value', '1', '<>')
+
+    // Just in case, don't send if it's more than a day old
+    ->propertyCondition('created', REQUEST_TIME - CLUSTER_API_DAY, '>')
+
+    ->execute();
+
+  if (!$results || !$results['node'])
+    return;
+
+  $nids = array_keys($results['node']);
+
+  foreach (node_load_multiple($nids) as $news_node) {
+    $news_wrapper = entity_metadata_wrapper('node', $news_node);
+
+    $news_wrapper->field_is_sent->set(1);
+    $news_wrapper->save();
+
+    $all_uids = []; // Unified list of uids for all the groups to which this news item belongs.
+    $first_group = NULL;
+
+    foreach ($news_wrapper->og_group_ref->value() as $group) {
+      if (!og_is_group('node', $group))
+        continue; // shouldn't happen
+      $manager = GroupContentManager::getInstance($group);
+      if (is_null($first_group))
+        $first_group = $group;
+
+      $all_uids = array_unique(array_merge($all_uids, cluster_api_get_followers($manager)));
+    }
+
+    if (!$all_uids)
+      continue;
+
+    foreach (cluster_api_split_users_by_langcode($all_uids) as $langcode => $uids) {
+      try {
+        $params = [
+          'group' => $first_group,
+          'title' => $news_node->title,
+          'date' => $news_wrapper->field_news_date->value(),
+          'content' => cluster_paragraphs_render_email_content($news_wrapper->field_content->value()),
+          'langcode' => $langcode,
+        ];
+        $to = _cluster_email_recipients_string($uids);
+
+        drupal_mail('cluster_news', 'news', $to, $langcode, $params);
+      } catch (Exception $e) {
+        watchdog('cluster_news', 'Error sending news email @nid: @error', [
+          '@nid' => $news_node->nid,
+          '@error' => $e->getMessage(),
+        ], WATCHDOG_ERROR);
+      }
+    }
+  }
+}
+
+/**
+ * Implements hook_mail().
+ */
+function cluster_news_mail($key, &$message, $params) {
+  if ($key !== 'news')
+    throw new Exception("Unknown key: ".$key);
+
+  $body = [
+    '#theme' => 'cluster_news_email',
+    '#logo' => url('sites/all/themes/shelter/assets/svg/replacement/logo-global-shelter-cluster-4x.png', ['absolute' => TRUE]),
+    '#langcode' => $params['langcode'],
+    '#title' => $params['title'],
+    '#date' => $params['date'],
+    '#content' => $params['content'],
+    '#group' => $params['group'],
+  ];
+
+  // E.g. "Ecuador Earthquake 2016 (response)"
+  $group_name = cluster_api_group_notification_title($params['group'], $params['langcode']);
+
+  $message['subject'] = $params['title'] . ' - ' . $group_name;
+  $message['body'] = [drupal_render($body)];
+}
+
+/**
+ * Implements hook_theme().
+ */
+function cluster_news_theme($existing, $type, $theme, $path) {
+  return [
+    'cluster_news_email' => [
+      'template' => 'email',
+      'variables' => [
+        'langcode' => '',
+        'logo' => '',
+        'title' => '',
+        'date' => '',
+        'content' => [],
+        'group' => [],
+      ],
+      'path' => drupal_get_path('module', 'cluster_news') . '/templates',
+    ],
+  ];
+}

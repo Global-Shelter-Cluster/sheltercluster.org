@@ -442,8 +442,8 @@ function cluster_api_track_users($uid, $origin) {
  * - they haven't disabled this type of notification (boolean fields in account entity)
  *
  * @param GroupContentManager $manager
- * @param string[] $timezones
- *    See cluster_api_daily_notification_timezones().
+ * @param string[]|NULL $timezones
+ *    See cluster_api_daily_notification_timezones(). NULL for no restriction.
  * @param string|NULL $last_notification_field
  *    Field in the og_users_roles table that stores the last timestamp when we notified
  *    this user. See $manager->updateUsersTimestamp().
@@ -456,7 +456,7 @@ function cluster_api_track_users($uid, $origin) {
  *
  * @return int[] User IDs
  */
-function cluster_api_get_followers($manager, $timezones, $last_notification_field = NULL, $threshold = NULL, $enabled_field = NULL) {
+function cluster_api_get_followers($manager, $timezones = NULL, $last_notification_field = NULL, $threshold = NULL, $enabled_field = NULL) {
   $hour = 60 * 60; // const
 
   return $manager->getUsersByRole(

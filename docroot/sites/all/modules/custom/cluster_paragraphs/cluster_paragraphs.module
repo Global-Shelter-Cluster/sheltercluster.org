@@ -1,0 +1,68 @@
+<?php
+/**
+ * @file
+ * Code for the Cluster Paragraphs feature.
+ */
+
+include_once 'cluster_paragraphs.features.inc';
+
+/**
+ * Example:
+ *
+ *   $node = node_load(123); // This node contains field_content (reference to paragraphs)
+ *   $wrapper = entity_metadata_wrapper('node', $node);
+ *   cluster_paragraphs_render_email_content($wrapper->field_content->value());
+ *
+ * @param ParagraphsItemEntity[] $content
+ * @return array
+ */
+function cluster_paragraphs_render_email_content($content) {
+  $ret = [];
+
+  foreach ($content as $item) {
+    $item_wrapper = $item->wrapper();
+    $rendered_item = [
+      'type' => $item_wrapper->getBundle(),
+    ];
+
+    if (isset($item_wrapper->field_paragraph_title))
+      $rendered_item['title'] = $item_wrapper->field_paragraph_title->value();
+
+    switch ($item->bundle()) {
+      case 'text':
+        $body = $item_wrapper->field_body->value();
+        $rendered_item['body'] = $body['safe_value'];
+        break;
+
+      case 'images':
+        $images = $item_wrapper->field_images->value();
+        $rendered_item['images'] = array_map(function($image) {
+          return [
+            'url' => image_style_url('photo_gallery_medium', $image['uri']),
+            'alt' => $image['alt'],
+            'title' => $image['title'],
+          ];
+        }, $images);
+        break;
+
+      case 'links':
+        $links = $item_wrapper->field_links->value();
+        $rendered_item['links'] = array_map(function($link) {
+          return [
+            'url' => $link['url'],
+            'title' => $link['title'],
+          ];
+        }, $links);
+        break;
+
+      default:
+        watchdog('cluster_paragraphs', 'Unrecognized bundle: @bundle', [
+          '@bundle' => $item->bundle(),
+        ], WATCHDOG_ERROR);
+    }
+
+    $ret[] = $rendered_item;
+  }
+
+  return $ret;
+}

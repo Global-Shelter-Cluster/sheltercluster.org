@@ -4404,3 +4404,18 @@ body.document-upload-ondrag {
   display: inline-block;
   margin: 10px;
 }
+
+.paragraphs-items .content {
+  min-height: initial;
+}
+.paragraphs-items .paragraphs-item-images .field-name-field-images .field-items {
+  margin: -10px;
+}
+.paragraphs-items .paragraphs-item-images .field-name-field-images .field-items > .field-item {
+  display: inline-block;
+  padding: 10px;
+}
+.paragraphs-items .paragraphs-item-images .field-name-field-images .field-items > .field-item img {
+  max-width: 100%;
+  height: auto;
+}

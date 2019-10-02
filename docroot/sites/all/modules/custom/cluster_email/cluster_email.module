@@ -199,6 +199,7 @@ function cluster_email_mail($key, &$message, $params) {
   $body = [
     '#theme' => 'cluster_email_' . $key,
     '#logo' => url('sites/all/themes/shelter/assets/svg/replacement/logo-global-shelter-cluster-4x.png', ['absolute' => TRUE]),
+    '#langcode' => $params['langcode'],
   ];
 
   // E.g. "Ecuador Earthquake 2016 (response)"
@@ -223,7 +224,6 @@ function cluster_email_mail($key, &$message, $params) {
   }
 
   $message['body'] = [drupal_render($body)];
-//  die($message['body'][0]);
 }
 
 /**
