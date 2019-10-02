@@ -519,6 +519,16 @@ class GroupDisplayProvider {
           'destination' => 'node/' . $node->nid
         ),
       ],
+      [
+        'enabled' => node_access('create', 'news') && og_user_access('node', $node->nid, 'create news content'),
+        'icon' => 'fas fa-newspaper',
+        'title' => t('News'),
+        'href' => 'node/add/news',
+        'query' => array(
+          'group' => $node->nid,
+          'destination' => 'node/' . $node->nid
+        ),
+      ],
     ]);
 
     $this->generateEditorMenuSectionGrouped($ret, [

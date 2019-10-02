@@ -6,10 +6,11 @@
   <?php require __DIR__.'/../../cluster_email/templates/notification-header.tpl.php'; ?>
 
   <h1 style="
-    color: #7f1416;
     margin: 20px 0 0;
   ">
-    <?php print check_plain($title); ?>
+    <?php print l($title, 'node/'.$group->nid, ['absolute' => TRUE, 'attributes' => [
+      'style' => 'color: #7f1416; text-decoration: none;'
+    ]]); ?>
   </h1>
   <small style="
     display: block;
