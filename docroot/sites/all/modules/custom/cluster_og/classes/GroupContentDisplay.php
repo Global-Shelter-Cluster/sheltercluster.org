@@ -218,6 +218,7 @@ class GroupDisplayProvider {
         ),
       );
     }
+
     if ($discussions_count = $this->manager->getDiscussionCount() > 0) {
       if ($this->manager->isEnabled('discussions')) {
         $items['discussions'] = array(
@@ -277,6 +278,18 @@ class GroupDisplayProvider {
           ],
         ];
       }
+    }
+
+    $news_count = $this->manager->getNewsCount();
+    if (cluster_news_is_group_news_page() || ($news_count && $this->manager->isEnabled('news'))) {
+      $items['news'] = array(
+        'label' => t('News'),
+        'path' => 'node/' . $this->node->nid . '/news',
+        'total' => $news_count,
+        'options' => array(
+          'html' => TRUE,
+        ),
+      );
     }
 
     drupal_alter('cluster_og_dashboard_menu', $items);

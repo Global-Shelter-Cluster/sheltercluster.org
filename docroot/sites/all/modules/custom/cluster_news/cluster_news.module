@@ -5,6 +5,7 @@
  */
 
 include_once 'cluster_news.features.inc';
+include_once 'cluster_news.pathauto.inc';
 
 /**
  * Implements hook_cron().
@@ -114,4 +115,62 @@ function cluster_news_theme($existing, $type, $theme, $path) {
       'path' => drupal_get_path('module', 'cluster_news') . '/templates',
     ],
   ];
+}
+
+/**
+ * Implements hook_menu().
+ */
+function cluster_news_menu() {
+  $items['node/%/news'] = array(
+    'title' => 'News',
+    'page callback' => 'cluster_news_all',
+    'page arguments' => array(1),
+    'access callback' => 'og_is_group',
+    'access arguments' => array(0, 1),
+    'title callback' => '_cluster_news_title_callback',
+    'title arguments' => array(1),
+    'type' => MENU_CALLBACK,
+  );
+
+  return $items;
+}
+
+/**
+ * Menu title callback.
+ */
+function _cluster_news_title_callback($nid) {
+  global $language;
+  $title = t('News');
+  if (! is_numeric($nid)) {
+    return $title;
+  }
+
+  try {
+    // @TODO manage multilingual loading of entities.
+    $wrapper = entity_metadata_wrapper('node', node_load($nid));
+    return $wrapper->label() . ' - ' . $title;
+  }
+  catch (EntityMetadataWrapperException $exc) {
+    watchdog(
+      'cluster_news',
+      'See '  . __FUNCTION__ . '() ' .  $exc->getTraceAsString(),
+      NULL,
+      WATCHDOG_ERROR
+    );
+  }
+  return $title;
+}
+
+function cluster_news_is_group_news_page() {
+  $router_item = menu_get_item(current_path());
+
+  if ($router_item && isset($router_item['path']))
+    return $router_item['path'] === 'node/%/news';
+
+  return FALSE;
+}
+
+function cluster_news_all($gid) {
+  $view = views_get_view('news');
+  return $view->render();
 }

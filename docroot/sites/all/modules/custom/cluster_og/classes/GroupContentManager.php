@@ -182,6 +182,21 @@ class GroupContentManager {
   }
 
   /**
+   * Provide a count value for all published news nodes added to the group.
+   * @return
+   *  Count query result.
+   */
+  public function getNewsCount() {
+    $query = new EntityFieldQuery();
+    return $query->entityCondition('entity_type', 'node')
+      ->entityCondition('bundle', 'news')
+      ->fieldCondition('og_group_ref', 'target_id', $this->node->nid)
+      ->propertyCondition('status', NODE_PUBLISHED)
+      ->count()
+      ->execute();
+  }
+
+  /**
    * Provide a count value for all published discussion nodes added to the group.
    * @return
    *  Count query result.
