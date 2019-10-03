@@ -213,7 +213,7 @@ function cluster_email_mail($key, &$message, $params) {
       break;
 
     case 'weekly_notification':
-      $message['subject'] = t('Weekly activity for @group', [
+      $message['subject'] = t('@group — Weekly activity', [
         '@group' => $group_name,
       ], [
         'langcode' => $params['langcode'],
