@@ -292,6 +292,18 @@ class GroupDisplayProvider {
       );
     }
 
+    $followers_count = $this->manager->getFollowersCount();
+    if (cluster_og_is_group_followers_page() || $followers_count) {
+      $items['followers'] = array(
+        'label' => t('Followers'),
+        'path' => 'node/' . $this->node->nid . '/followers',
+        'total' => $followers_count,
+        'options' => array(
+          'html' => TRUE,
+        ),
+      );
+    }
+
     drupal_alter('cluster_og_dashboard_menu', $items);
 
     $secondary = array();

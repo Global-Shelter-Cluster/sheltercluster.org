@@ -197,6 +197,24 @@ class GroupContentManager {
   }
 
   /**
+   * Provide a count value for all users following the group.
+   * @return
+   *  Count result.
+   */
+  public function getFollowersCount() {
+    $query = db_select('og_users_roles', 'our');
+    $query->fields('n', array('nid'));
+    $query->condition('our.group_type', 'node');
+    $query->condition('our.gid', $this->node->nid);
+    $query->condition('our.rid', cluster_api_get_follower_role_by_bundle($this->node->type));
+
+    $query->join('users', 'u', 'u.uid = our.uid');
+    $query->condition('u.status', 1);
+
+    return $query->countQuery()->execute()->fetchField();
+  }
+
+  /**
    * Provide a count value for all published discussion nodes added to the group.
    * @return
    *  Count query result.

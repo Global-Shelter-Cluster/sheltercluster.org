@@ -14,6 +14,13 @@ function cluster_og_ctools_plugin_api($module = NULL, $api = NULL) {
 }
 
 /**
+ * Implements hook_views_api().
+ */
+function cluster_og_views_api($module = NULL, $api = NULL) {
+  return array("api" => "3.0");
+}
+
+/**
  * Implements hook_fe_nodequeue_export_fields().
  */
 function cluster_og_fe_nodequeue_export_fields() {
