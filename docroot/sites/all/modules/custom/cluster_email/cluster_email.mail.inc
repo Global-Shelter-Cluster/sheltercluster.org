@@ -2,6 +2,11 @@
 
 class ClusterMailSystem extends MandrillMailSystem {
   public function mail(array $message) {
+//    watchdog('cluster_email', 'Sending email: %subject, to %recipients.', [
+//      '%subject' => $message['subject'],
+//      '%recipients' => $message['to'],
+//    ]);
+
     $is_prod = function_exists('shelter_base_is_prod') ? shelter_base_is_prod() : FALSE;
     $env = function_exists('shelter_base_get_env') ? shelter_base_get_env() : 'unknown';
 
@@ -26,19 +31,31 @@ class ClusterMailSystem extends MandrillMailSystem {
     $whitelist = array_map('strtolower', $whitelist);
     $whitelist = array_filter($whitelist);
 
+    $excluded = [];
+
     $recipients = explode(',', $message['to']);
     $recipients = array_map('trim', $recipients);
-    $recipients = array_filter($recipients, function($recipient) use ($whitelist) {
+    $recipients = array_filter($recipients, function($recipient) use ($whitelist, &$excluded) {
       foreach ($whitelist as $address) {
         if (strtolower($recipient) === $address)
           return TRUE;
 
-        return strpos(strtolower($recipient), '<'.$address.'>') !== FALSE;
+        if (strpos(strtolower($recipient), '<' . $address . '>') !== FALSE)
+          return TRUE;
       }
+
+      $excluded[] = $recipient;
     });
 
+    if (count($excluded) > 0)
+      watchdog('cluster_email', 'Filtered out email recipients for email: %subject. Excluded: @excluded, included: @included.', [
+        '%subject' => $message['subject'],
+        '@excluded' => implode(', ', $excluded),
+        '@included' => count($recipients) > 0 ? implode(', ', $recipients) : 'none (email will not be sent)',
+      ]);
+
     if (count($recipients) === 0)
-      return;
+      return TRUE;
 
     $message['to'] = implode(',', $recipients);
 
