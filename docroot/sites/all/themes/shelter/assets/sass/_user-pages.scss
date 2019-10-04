@@ -61,14 +61,21 @@
   height: 25px;
   vertical-align: center;
   padding-top: 5px;
-  width: 65px;
+  padding-right: 30px;
+
+  a {
+    white-space: nowrap;
+    color: #222;
+    font-weight: bold;
+
+    &:hover {
+      color: #688394;
+    }
+  }
 }
 
-#login-link a:hover {
-  color: #688394;
-}
-
-#login-link a{
-  color: #222;
-  font-weight: bold;
+.user-picture {
+  img {
+    border-radius: 50%;
+  }
 }
