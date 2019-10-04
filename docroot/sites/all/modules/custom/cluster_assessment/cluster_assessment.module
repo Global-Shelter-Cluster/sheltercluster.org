@@ -1,5 +1,8 @@
 <?php
 
+include_once 'cluster_assessment.features.inc';
+include_once 'cluster_assessment.pathauto.inc';
+
 /**
  * Implements hook_menu().
  */

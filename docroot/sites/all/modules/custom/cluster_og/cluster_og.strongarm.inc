@@ -1045,5 +1045,19 @@ function cluster_og_strongarm() {
   $strongarm->value = 0;
   $export['node_submitted_working_group'] = $strongarm;
 
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_cluster_og_followers_pattern';
+  $strongarm->value = '[node:content-type]/[node:title]/followers';
+  $export['pathauto_cluster_og_followers_pattern'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_cluster_og_pattern';
+  $strongarm->value = '[node:content-type]/[node:title]/followers';
+  $export['pathauto_cluster_og_pattern'] = $strongarm;
+
   return $export;
 }

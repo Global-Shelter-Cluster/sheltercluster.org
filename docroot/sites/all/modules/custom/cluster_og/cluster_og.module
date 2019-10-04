@@ -5,6 +5,7 @@
  */
 
 include_once 'cluster_og.features.inc';
+include_once 'cluster_og.pathauto.inc';
 
 const MAX_FOLLOWED_GROUPS = 10;
 
@@ -58,9 +59,22 @@ function cluster_og_node_view($node, $view_mode) {
  * Implements hook_node_insert().
  */
 function cluster_og_node_insert($node) {
+  if (og_is_group('node', $node)) {
+    cluster_og_create_alias($node, 'insert');
+  }
+
   // Clear the menu cache to add the new region to the menu.
   if ($node->type == 'geographic_region') {
     menu_rebuild();
+  }
+}
+
+/**
+ *  Implements hook_node_update().
+ */
+function cluster_og_node_update($node) {
+  if (og_is_group('node', $node)) {
+    cluster_og_create_alias($node, 'update');
   }
 }
 
@@ -479,7 +493,58 @@ function cluster_og_menu() {
     'type' => MENU_CALLBACK,
   ];
 
+  $items['node/%/followers'] = array(
+    'title' => 'Followers',
+    'page callback' => 'cluster_og_followers',
+    'page arguments' => array(1),
+    'access callback' => 'og_is_group',
+    'access arguments' => array(0, 1),
+    'title callback' => '_cluster_og_followers_title_callback',
+    'title arguments' => array(1),
+    'type' => MENU_CALLBACK,
+  );
+
   return $items;
+}
+
+function cluster_og_is_group_followers_page() {
+  $router_item = menu_get_item(current_path());
+
+  if ($router_item && isset($router_item['path']))
+    return $router_item['path'] === 'node/%/followers';
+
+  return FALSE;
+}
+
+function cluster_og_followers($gid) {
+  $view = views_get_view('followers');
+  return $view->render();
+}
+
+/**
+ * Menu title callback.
+ */
+function _cluster_og_followers_title_callback($nid) {
+  global $language;
+  $title = t('Followers');
+  if (! is_numeric($nid)) {
+    return $title;
+  }
+
+  try {
+    // @TODO manage multilingual loading of entities.
+    $wrapper = entity_metadata_wrapper('node', node_load($nid));
+    return $wrapper->label() . ' - ' . $title;
+  }
+  catch (EntityMetadataWrapperException $exc) {
+    watchdog(
+      'cluster_og',
+      'See '  . __FUNCTION__ . '() ' .  $exc->getTraceAsString(),
+      NULL,
+      WATCHDOG_ERROR
+    );
+  }
+  return $title;
 }
 
 function cluster_og_follow($user, $group) {

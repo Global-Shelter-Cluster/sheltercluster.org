@@ -59,6 +59,10 @@ class ClusterMailSystem extends MandrillMailSystem {
 
     $message['to'] = implode(',', $recipients);
 
+    // TODO: make this work (right now it sets this in the "reply-to" field, not in "from")
+//    if ($message['from_name'])
+//      $message['from'] = $message['from_name'] . ' <'.$message['from'].'>';
+
     return parent::mail($message);
   }
 

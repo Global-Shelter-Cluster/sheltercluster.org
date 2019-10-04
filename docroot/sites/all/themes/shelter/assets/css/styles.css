@@ -4440,3 +4440,39 @@ body.document-upload-ondrag {
   max-width: 100%;
   height: auto;
 }
+
+.view-followers .view-content {
+  display: flex;
+  flex-wrap: wrap;
+}
+.view-followers .views-row {
+  width: 340px;
+  max-width: 100vw;
+  min-height: 100px;
+  padding: 20px 10px 20px 90px;
+  font-size: 14.4px;
+  font-size: 0.9rem;
+  line-height: 18px;
+  line-height: 1.125rem;
+}
+.view-followers .views-row a {
+  color: #7f1416;
+}
+.view-followers .views-field-picture {
+  float: left;
+  width: 80px;
+  margin-left: -90px;
+}
+.view-followers .views-field-picture img {
+  width: 100%;
+  height: auto;
+  border-radius: 50%;
+}
+.view-followers .views-field-name {
+  font-weight: bold;
+}
+.view-followers .views-field-mail a {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

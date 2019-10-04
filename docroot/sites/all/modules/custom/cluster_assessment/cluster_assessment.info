@@ -1,4 +1,12 @@
-name = Cluster data collection forms
+name = Cluster Data Collection
 description = Logic shared between all form types (e.g. webforms, kobo forms).
 core = 7.x
 package = Cluster
+version = 7.x-1.0
+dependencies[] = ctools
+dependencies[] = strongarm
+features[ctools][] = strongarm:strongarm:1
+features[features_api][] = api:2
+features[variable][] = pathauto_cluster_assessment_assessment_pattern
+features[variable][] = pathauto_cluster_assessment_pattern
+project path = sites/all/modules/custom
