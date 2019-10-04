@@ -4468,9 +4468,6 @@ body.document-upload-ondrag {
   height: auto;
   border-radius: 50%;
 }
-.view-followers .views-field-name {
-  font-weight: bold;
-}
 .view-followers .views-field-mail a {
   display: block;
   overflow: hidden;

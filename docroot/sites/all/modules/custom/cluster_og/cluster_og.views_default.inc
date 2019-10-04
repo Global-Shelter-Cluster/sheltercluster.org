@@ -55,25 +55,25 @@ function cluster_og_views_default_views() {
   $handler->display->display_options['fields']['picture']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['picture']['link_photo_to_profile'] = FALSE;
   $handler->display->display_options['fields']['picture']['image_style'] = 'contact_avatar';
-  /* Field: Field: Name */
-  $handler->display->display_options['fields']['name_field']['id'] = 'name_field';
-  $handler->display->display_options['fields']['name_field']['table'] = 'field_data_name_field';
-  $handler->display->display_options['fields']['name_field']['field'] = 'name_field';
-  $handler->display->display_options['fields']['name_field']['relationship'] = 'og_membership_related_user';
-  $handler->display->display_options['fields']['name_field']['label'] = '';
-  $handler->display->display_options['fields']['name_field']['exclude'] = TRUE;
-  $handler->display->display_options['fields']['name_field']['element_type'] = 'strong';
-  $handler->display->display_options['fields']['name_field']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['name_field']['link_to_entity'] = 0;
   /* Field: User: Name */
   $handler->display->display_options['fields']['name']['id'] = 'name';
   $handler->display->display_options['fields']['name']['table'] = 'users';
   $handler->display->display_options['fields']['name']['field'] = 'name';
   $handler->display->display_options['fields']['name']['relationship'] = 'og_membership_related_user';
   $handler->display->display_options['fields']['name']['label'] = '';
+  $handler->display->display_options['fields']['name']['exclude'] = TRUE;
   $handler->display->display_options['fields']['name']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['name']['empty'] = '[name_field]';
   $handler->display->display_options['fields']['name']['link_to_user'] = FALSE;
+  /* Field: Field: Name */
+  $handler->display->display_options['fields']['name_field']['id'] = 'name_field';
+  $handler->display->display_options['fields']['name_field']['table'] = 'field_data_name_field';
+  $handler->display->display_options['fields']['name_field']['field'] = 'name_field';
+  $handler->display->display_options['fields']['name_field']['relationship'] = 'og_membership_related_user';
+  $handler->display->display_options['fields']['name_field']['label'] = '';
+  $handler->display->display_options['fields']['name_field']['element_type'] = 'strong';
+  $handler->display->display_options['fields']['name_field']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['name_field']['empty'] = '[name]';
+  $handler->display->display_options['fields']['name_field']['link_to_entity'] = 0;
   /* Field: Field: Organization name */
   $handler->display->display_options['fields']['field_organisation_name']['id'] = 'field_organisation_name';
   $handler->display->display_options['fields']['field_organisation_name']['table'] = 'field_data_field_organisation_name';
@@ -155,7 +155,7 @@ function cluster_og_views_default_views() {
     t('last »'),
     t('user'),
     t('roles'),
-    t('[name_field]'),
+    t('[name]'),
     t('All'),
   );
   $export['followers'] = $view;
