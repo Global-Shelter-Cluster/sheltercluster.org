@@ -159,6 +159,34 @@ function cluster_user_field_group_info() {
   $field_group = new stdClass();
   $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
   $field_group->api_version = 1;
+  $field_group->identifier = 'group_preferences|user|user|form';
+  $field_group->group_name = 'group_preferences';
+  $field_group->entity_type = 'user';
+  $field_group->bundle = 'user';
+  $field_group->mode = 'form';
+  $field_group->parent_name = 'group_tabs';
+  $field_group->data = array(
+    'label' => 'Preferences',
+    'weight' => '47',
+    'children' => array(
+      0 => 'timezone',
+      1 => 'locale',
+    ),
+    'format_type' => 'accordion-item',
+    'format_settings' => array(
+      'formatter' => 'closed',
+      'instance_settings' => array(
+        'description' => '',
+        'classes' => '',
+        'required_fields' => 1,
+      ),
+    ),
+  );
+  $field_groups['group_preferences|user|user|form'] = $field_group;
+
+  $field_group = new stdClass();
+  $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
+  $field_group->api_version = 1;
   $field_group->identifier = 'group_profile|user|user|form';
   $field_group->group_name = 'group_profile';
   $field_group->entity_type = 'user';
@@ -219,15 +247,44 @@ function cluster_user_field_group_info() {
   );
   $field_groups['group_tabs|user|user|form'] = $field_group;
 
+  $field_group = new stdClass();
+  $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
+  $field_group->api_version = 1;
+  $field_group->identifier = 'group_user|user|user|form';
+  $field_group->group_name = 'group_user';
+  $field_group->entity_type = 'user';
+  $field_group->bundle = 'user';
+  $field_group->mode = 'form';
+  $field_group->parent_name = 'group_tabs';
+  $field_group->data = array(
+    'label' => 'User and security',
+    'weight' => '48',
+    'children' => array(
+      0 => 'account',
+    ),
+    'format_type' => 'accordion-item',
+    'format_settings' => array(
+      'formatter' => 'closed',
+      'instance_settings' => array(
+        'description' => '',
+        'classes' => '',
+        'required_fields' => 1,
+      ),
+    ),
+  );
+  $field_groups['group_user|user|user|form'] = $field_group;
+
   // Translatables
   // Included for use with string extractors like potx.
   t('Administrators only');
   t('Email notifications');
   t('Groups');
   t('Notifications');
+  t('Preferences');
   t('Profile');
   t('Push notifications');
   t('Tabs');
+  t('User and security');
 
   return $field_groups;
 }
