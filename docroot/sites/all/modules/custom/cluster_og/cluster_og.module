@@ -493,14 +493,18 @@ function cluster_og_menu() {
     'title' => 'Followers',
     'page callback' => 'cluster_og_followers',
     'page arguments' => array(1),
-    'access callback' => 'og_is_group',
-    'access arguments' => array(0, 1),
+    'access callback' => 'cluster_og_followers_access',
+    'access arguments' => array(1),
     'title callback' => '_cluster_og_followers_title_callback',
     'title arguments' => array(1),
     'type' => MENU_CALLBACK,
   );
 
   return $items;
+}
+
+function cluster_og_followers_access($gid) {
+  return og_is_group('node', $gid) && user_access('administer nodes');
 }
 
 function cluster_og_is_group_followers_page() {

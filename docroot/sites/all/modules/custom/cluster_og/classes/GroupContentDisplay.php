@@ -293,7 +293,7 @@ class GroupDisplayProvider {
     }
 
     $followers_count = $this->manager->getFollowersCount();
-    if (cluster_og_is_group_followers_page() || $followers_count) {
+    if (cluster_og_is_group_followers_page() || ($followers_count && cluster_og_followers_access($this->node->nid))) {
       $items['followers'] = array(
         'label' => t('Followers'),
         'path' => 'node/' . $this->node->nid . '/followers',
