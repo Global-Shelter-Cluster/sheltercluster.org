@@ -21,7 +21,7 @@ function cluster_user_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 6,
+        'weight' => 5,
       ),
     ),
     'entity_type' => 'user',
@@ -40,7 +40,7 @@ function cluster_user_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 13,
+      'weight' => 10,
     ),
   );
 
@@ -59,7 +59,7 @@ function cluster_user_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 8,
+        'weight' => 9,
       ),
     ),
     'entity_type' => 'user',
@@ -96,7 +96,7 @@ function cluster_user_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 11,
+        'weight' => 12,
       ),
     ),
     'entity_type' => 'user',
@@ -170,7 +170,7 @@ function cluster_user_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 10,
+        'weight' => 11,
       ),
     ),
     'entity_type' => 'user',
@@ -200,11 +200,11 @@ function cluster_user_field_default_field_instances() {
     'description' => '',
     'display' => array(
       'default' => array(
-        'label' => 'above',
+        'label' => 'hidden',
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 2,
+        'weight' => 1,
       ),
     ),
     'entity_type' => 'user',
@@ -223,7 +223,7 @@ function cluster_user_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 10,
+      'weight' => 34,
     ),
   );
 
@@ -235,11 +235,11 @@ function cluster_user_field_default_field_instances() {
     'description' => '',
     'display' => array(
       'default' => array(
-        'label' => 'above',
+        'label' => 'hidden',
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 1,
+        'weight' => 3,
       ),
     ),
     'entity_type' => 'user',
@@ -258,7 +258,7 @@ function cluster_user_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 9,
+      'weight' => 36,
     ),
   );
 
@@ -273,7 +273,7 @@ function cluster_user_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 12,
+        'weight' => 8,
       ),
     ),
     'entity_type' => 'user',
@@ -292,7 +292,7 @@ function cluster_user_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 12,
+      'weight' => 11,
     ),
   );
 
@@ -304,11 +304,11 @@ function cluster_user_field_default_field_instances() {
     'description' => '',
     'display' => array(
       'default' => array(
-        'label' => 'above',
+        'label' => 'hidden',
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 3,
+        'weight' => 2,
       ),
     ),
     'entity_type' => 'user',
@@ -327,7 +327,42 @@ function cluster_user_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 11,
+      'weight' => 35,
+    ),
+  );
+
+  // Exported field_instance: 'user-user-name_field'.
+  $field_instances['user-user-name_field'] = array(
+    'bundle' => 'user',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'hidden',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 4,
+      ),
+    ),
+    'entity_type' => 'user',
+    'field_name' => 'name_field',
+    'label' => 'Name',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => 0,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 32,
     ),
   );
 
@@ -349,7 +384,7 @@ function cluster_user_field_default_field_instances() {
         'module' => 'og_ui',
         'settings' => array(),
         'type' => 'og_list_default',
-        'weight' => 4,
+        'weight' => 0,
       ),
     ),
     'entity_type' => 'user',
@@ -396,6 +431,7 @@ function cluster_user_field_default_field_instances() {
   t('Account origin');
   t('Daily digest');
   t('Group membership');
+  t('Name');
   t('Organization name');
   t('Phone number');
   t('Push notification token for mobile app. Managed by the API.');

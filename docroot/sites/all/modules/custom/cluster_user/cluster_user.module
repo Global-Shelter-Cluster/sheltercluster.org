@@ -91,10 +91,60 @@ function cluster_user_menu() {
 
 function cluster_user_edit_redirect() {
   global $user;
-  if ($user->uid)
-    drupal_goto('user/'.$user->uid.'/edit');
-  else
+
+  if (isset($_GET['destination'])) {
+    $destination = $_GET['destination'];
+    unset($_GET['destination']);
+  }
+
+  if ($user->uid) {
+    drupal_goto('user/'.$user->uid.'/edit', [
+      'query' => ['destination' => $destination],
+    ]);
+  } else
     drupal_goto('user/login', [
       'query' => ['destination' => 'user/me/edit'],
     ]);
+}
+
+/**
+ * Implements hook_custom_theme().
+ */
+function cluster_user_custom_theme() {
+  if (arg(0) === 'user' && arg(2) === 'edit') {
+    return variable_get('theme_default');
+  }
+}
+
+/**
+ * Implements hook_module_implements_alter().
+ */
+function cluster_user_module_implements_alter(&$implementations, $hook) {
+  if ($hook == 'custom_theme' && isset($implementations['cluster_user'])) {
+    $group = $implementations['cluster_user'];
+    unset($implementations['cluster_user']);
+    $implementations['cluster_user'] = $group;
+  }
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function cluster_user_form_user_profile_form_alter(&$form, &$form_state, $form_id) {
+//  dpm($form);
+  $form['#pre_render'][] = '_cluster_user_edit_form_pre_render';
+
+  $form['picture']['picture_delete']['#access'] = FALSE;
+  unset($form['picture']['picture_upload']['#description']);
+}
+
+function _cluster_user_edit_form_pre_render($elements) {
+  unset($elements['group_tabs']['group_preferences']['timezone']['#theme_wrappers']);
+  unset($elements['group_tabs']['group_preferences']['locale']['#theme_wrappers']);
+  unset($elements['group_tabs']['group_groups']['og_user_node1']['und']['#theme_wrappers']);
+
+  unset($elements['group_tabs']['group_preferences']['timezone']['timezone']['#description']);
+  unset($elements['group_tabs']['group_preferences']['locale']['language']['#description']);
+
+  return $elements;
 }

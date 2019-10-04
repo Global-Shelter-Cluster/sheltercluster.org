@@ -242,3 +242,10 @@ function cluster_hid_get_user_by_id_as_table($hum_id) {
   $table = theme('hid_users', ['users' => [$user]]);
   return drupal_json_output($table);
 }
+
+/**
+ * Implements hook_menu_alter().
+ */
+function cluster_hid_menu_alter(&$items) {
+  $items['user/%user/hybridauth']['title'] = t('Humanitarian ID');
+}

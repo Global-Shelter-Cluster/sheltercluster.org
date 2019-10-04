@@ -23,9 +23,22 @@ function shelter_preprocess_page(&$variables) {
   // Font Awesome (icon library)
   drupal_add_js('https://use.fontawesome.com/releases/v5.0.0/js/all.js', 'external');
 
-  $variables['login_link'] = FALSE;
-  if (!user_is_logged_in()) {
-    $variables['login_link'] = l(t('Login'), '/user');
+  $current_path = current_path();
+
+  if (user_is_logged_in()) {
+    $destination = $current_path;
+
+    if (arg(0) === 'user' && arg(2) === 'edit') {
+      // We're already on the edit page. Instead of setting the destination to itself, let's try to copy the
+      // destination we had in the query string.
+      $destination = drupal_get_destination()['destination'];
+    }
+
+    $variables['login_link'] = l(t('Your profile'), 'user/me/edit', [
+      'query' => ['destination' => $destination],
+    ]);
+  } else {
+    $variables['login_link'] = l(t('Login'), 'user/login');
   }
 
   // Put the language switcher in a variable.
@@ -33,7 +46,6 @@ function shelter_preprocess_page(&$variables) {
   $variables['language_switcher'] = $block['content'];
   global $base_url;
   $variables['base_url'] = $base_url;
-  $current_path = current_path();
   // Adding the viewport for mobile view.
   $viewport = array(
     '#tag' => 'meta',
