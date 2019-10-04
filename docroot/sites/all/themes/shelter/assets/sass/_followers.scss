@@ -1,0 +1,41 @@
+.view-followers {
+  .view-content {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .views-row {
+    width: 340px;
+    max-width: 100vw;
+    min-height: 100px;
+    padding: 20px 10px 20px 90px;
+    @include rem(font-size, 0.9rem);
+    @include rem(line-height, 1.125rem);
+
+    a {
+      color: $shelter-red;
+    }
+  }
+
+  .views-field-picture {
+    float: left;
+    width: 80px;
+    margin-left: -90px;
+
+    img {
+      width: 100%;
+      height: auto;
+      border-radius: 50%;
+    }
+  }
+
+  .views-field-name {
+    font-weight: bold;
+  }
+
+  .views-field-mail a {
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
