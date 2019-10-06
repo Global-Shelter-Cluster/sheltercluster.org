@@ -79,14 +79,31 @@ function cluster_user_views_default_views_alter(&$views) {
  * Implements hook_menu().
  */
 function cluster_user_menu() {
-  return [
-    'user/me/edit' => [
-      'title' => 'Redirecting to user edit page',
-      'access callback' => TRUE,
-      'page callback' => 'cluster_user_edit_redirect',
-      'type' => MENU_CALLBACK,
-    ],
+  $items['user/%user/logout'] = array(
+    'title' => t('Log out'),
+    'page callback' => 'user_logout',
+    'page arguments' => array(1),
+    'access callback' => 'cluster_user_logout_access',
+    'access arguments' => array(1),
+    'type' => MENU_LOCAL_TASK,
+    'weight' => 1000,
+    'file' => 'user.pages.inc',
+    'file path' => drupal_get_path('module', 'user'),
+  );
+
+  $items['user/me/edit'] = [
+    'title' => 'Redirecting to user edit page',
+    'access callback' => TRUE,
+    'page callback' => 'cluster_user_edit_redirect',
+    'type' => MENU_CALLBACK,
   ];
+
+  return $items;
+}
+
+function cluster_user_logout_access($current_user) {
+  global $user;
+  return user_is_logged_in() && $user->uid == $current_user->uid;
 }
 
 function cluster_user_edit_redirect() {
