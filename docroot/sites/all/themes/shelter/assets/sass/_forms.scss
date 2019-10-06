@@ -44,6 +44,10 @@ form .field-multiple-table .form-item {
 }
 
 #user-profile-form {
+  table {
+    width: 100%;
+  }
+
   #edit-picture .fieldset-wrapper {
     display: flex;
     > * + * {

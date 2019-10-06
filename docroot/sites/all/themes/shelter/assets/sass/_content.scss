@@ -1,6 +1,6 @@
 /* _content.scss */
 .content {
-  table td{
+  table td, table th {
     border: 1px solid lighten($shelter-grey, 50%);
     @include rem(padding, 0.5rem);
   }

@@ -602,7 +602,14 @@ function cluster_og_unfollow($user, $group) {
 
   og_role_revoke('node', $group->nid, $user->uid, cluster_api_get_follower_role_by_bundle($group->type));
 
-  //TODO: if the user was only involved with the group as a follower, remove them from it altogether.
+  $membership = og_get_membership('node', $group->nid, 'user', $user->uid);
+  if (!$membership)
+    return; // Shouldn't happen
+
+  $roles = og_get_user_roles('node', $group->nid, $user->uid);
+  $roles = array_filter($roles, function($role) {return $role !== OG_AUTHENTICATED_ROLE;}); // Because _of course_ they have this role.
+  if (empty($roles))
+    og_membership_delete($membership->identifier());
 }
 
 /**
