@@ -52,6 +52,7 @@ function _cluster_api_signup($requests) {
   ];
 
   // Auto-follow Global group
+  // In theory, cluster_user_user_insert() should handle this. In practice, it just doesn't work. For some reason...
   if ($global_id = variable_get('cluster_og_global_id')) {
     $global_group = node_load($global_id);
     if ($global_group && og_is_group('node', $global_group)) {

@@ -24,10 +24,11 @@ class ClusterAPI_Type_User extends ClusterAPI_Type {
       return []; // Logged out
 
     $convert_to_int = function($string) {
-      return intval($string);
+      return intval($string, 10);
     };
 
-    $groups = array_map($convert_to_int, array_values(og_get_groups_by_user($user, 'node')));
+    $groups_by_user = (array) og_get_groups_by_user($user, 'node');
+    $groups = array_map($convert_to_int, array_values($groups_by_user));
 
     $has_followed_role = function($gid) use ($user) {
       return in_array(CLUSTER_API_FOLLOWER_ROLE_NAME, og_get_user_roles('node', $gid, $user->uid));

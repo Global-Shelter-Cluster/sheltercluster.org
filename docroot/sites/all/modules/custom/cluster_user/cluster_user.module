@@ -130,43 +130,102 @@ function cluster_user_module_implements_alter(&$implementations, $hook) {
 /**
  * Implements hook_form_FORM_ID_alter().
  */
+function cluster_user_form_user_register_form_alter(&$form, &$form_state, $form_id) {
+  $form['#pre_render'][] = '_cluster_user_register_form_pre_render';
+
+  $groups = ['group_profile', 'group_preferences', 'group_user', 'group_groups', 'group_notifications'];
+  $form['#group_children'] = array_filter($form['#group_children'], function($current_group) use ($groups) {
+    return !in_array($current_group, $groups);
+  });
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
 function cluster_user_form_user_profile_form_alter(&$form, &$form_state, $form_id) {
-//  dpm($form);
   $form['#pre_render'][] = '_cluster_user_edit_form_pre_render';
 
   $form['picture']['picture_delete']['#access'] = FALSE;
   unset($form['picture']['picture_upload']['#description']);
 
+  // Fancy "groups" tableselect field so users can remove themselves from groups.
+
+  $uid = $form['#user']->uid;
   $options = [];
   $default_value = [];
 
-  foreach ($form['og_user_node1']['und'][0]['default']['#options'] as $type => $groups) {
-    if (!is_array($groups))
-      continue;
+  $query = new EntityFieldQuery();
+  $result = $query
+    ->entityCondition('entity_type', 'og_membership')
+    ->propertyCondition('group_type', 'node')
+    ->propertyCondition('etid', $uid)
+    ->propertyCondition('entity_type', 'user')
+    ->execute();
 
-    foreach (array_keys($groups) as $gid) {
+  $gids = [];
+  $default_value = [];
+  if (!empty($result['og_membership'])) {
+    $memberships = og_membership_load_multiple(array_keys($result['og_membership']));
+    foreach ($memberships as $membership) {
+      $gid = $membership->gid;
+      $gids[] = $gid;
       $default_value[$gid] = TRUE;
-      $group = node_load($gid);
-      $display = GroupDisplayProvider::getDisplayProvider($group);
-      $roles = array_filter(
-        og_get_user_roles('node', $gid),
-        function($role) {
-          if ($role === OG_AUTHENTICATED_ROLE)
-            return FALSE;
-
-          return TRUE;
-        }
-      );
-
-      $options[$gid] = [
-        'name' => l($group->title, 'node/'.$group->nid, [
-          'attributes' => ['target' => '_blank'],
-        ]),
-        'type' => $display->getGroupTypeLabel(),
-        'role' => implode(', ', $roles),
-      ];
     }
   }
+
+  $global_id = variable_get('cluster_og_global_id');
+  if ($global_id && !in_array($global_id, $gids))
+    $gids[] = $global_id;
+
+  foreach ($gids as $gid) {
+    $group = node_load($gid);
+    $display = GroupDisplayProvider::getDisplayProvider($group);
+    $roles = array_filter(
+      og_get_user_roles('node', $gid, $uid),
+      function($role) {
+        return !in_array($role, [OG_AUTHENTICATED_ROLE, OG_ANONYMOUS_ROLE]);
+      }
+    );
+
+    $options[$gid] = [
+      'name' => l($group->title, 'node/'.$group->nid, [
+        'attributes' => ['target' => '_blank'],
+      ]),
+      'type' => $display->getGroupTypeLabel(),
+      'role' => implode(', ', $roles),
+      'type_machine_name' => $group->type,
+      'gid' => $group->nid,
+    ];
+  }
+
+  $weights_by_type = [
+    'geographic_region' => 0,
+    'response' => 1,
+    'working_group' => 2,
+    'hub' => 3,
+    'strategic_advisory' => 4,
+    'community_of_practice' => 5,
+  ];
+
+  uasort($options, function($a, $b) use ($global_id, $weights_by_type) {
+    // Global group always comes first
+    if ($a['gid'] === $global_id)
+      return -1;
+    if ($b['gid'] === $global_id)
+      return 1;
+
+    // Now sort by group type
+    if ($a['type_machine_name'] !== $b['type_machine_name']) {
+      if (!isset($weights_by_type[$a['type_machine_name']]))
+        $weights_by_type[$a['type_machine_name']] = 100;
+      if (!isset($weights_by_type[$b['type_machine_name']]))
+        $weights_by_type[$b['type_machine_name']] = 100;
+      return $weights_by_type[$a['type_machine_name']] - $weights_by_type[$b['type_machine_name']];
+    }
+
+    // Finally, sort alphabetically
+    return strcmp($a['name'], $b['name']);
+  });
 
   $header = array(
     'name' => t('Name'),
@@ -190,17 +249,24 @@ function cluster_user_form_user_profile_form_alter(&$form, &$form_state, $form_i
 }
 
 function cluster_user_edit_groups_submit($form, &$form_state) {
-  global $user;
+  $user = $form['#user'];
 
-  $gids_to_remove = array_keys(array_filter($form_state['values']['cluster_groups'], function($value) {return !$value;}));
+  $groups_input = $form_state['values']['cluster_groups'];
+  $gids_to_add = array_keys(array_filter($groups_input));
+  $gids_to_remove = array_keys(array_filter($groups_input, function($value) {return !$value;}));
+
+  foreach ($gids_to_add as $gid) {
+    $membership = og_get_membership('node', $gid, 'user', $user->uid);
+    if (!$membership)
+      cluster_og_follow($user, node_load($gid));
+  }
+
   $membership_ids = [];
-
   foreach ($gids_to_remove as $gid) {
     $membership = og_get_membership('node', $gid, 'user', $user->uid);
     if ($membership)
       $membership_ids[] = $membership->identifier();
   }
-
   if (!empty($membership_ids))
     og_membership_delete_multiple($membership_ids);
 }
@@ -214,4 +280,24 @@ function _cluster_user_edit_form_pre_render($elements) {
   unset($elements['group_tabs']['group_preferences']['locale']['language']['#description']);
 
   return $elements;
+}
+
+function _cluster_user_register_form_pre_render($elements) {
+  unset($elements['timezone']['#theme_wrappers']);
+  unset($elements['locale']['#theme_wrappers']);
+  unset($elements['timezone']['timezone']['#description']);
+  unset($elements['locale']['language']['#description']);
+
+  return $elements;
+}
+
+/**
+ * Implements hook_user_insert().
+ *
+ * Auto-follows the "Global" group.
+ */
+function cluster_user_user_insert(&$edit, $account, $category) {
+  if ($global_id = variable_get('cluster_og_global_id')) {
+    cluster_og_follow($account, node_load($global_id));
+  }
 }
