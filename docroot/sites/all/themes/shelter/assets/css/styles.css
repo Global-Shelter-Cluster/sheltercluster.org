@@ -2096,7 +2096,7 @@ label[for="mobile_menu_toggle"] span:after {
 }
 
 /* _content.scss */
-.content table td {
+.content table td, .content table th {
   border: 1px solid #d7d7d7;
   padding: 8px;
   padding: 0.5rem;
@@ -4497,6 +4497,9 @@ form .field-multiple-table .form-item {
   max-width: 97%;
 }
 
+#user-profile-form table {
+  width: 100%;
+}
 #user-profile-form #edit-picture .fieldset-wrapper {
   display: flex;
 }

@@ -15,7 +15,7 @@ function _cluster_email_cron_test() {
   // Daily notifications
   $last_notification_field = 'last_daily_email_notification';
   $enabled_field = 'field_notif_email_daily';
-  $timezones = cluster_api_timezones(CLUSTER_EMAIL_DAILY_NOTIFICATION_FROM, CLUSTER_EMAIL_DAILY_NOTIFICATION_TO);
+  $timezones = NULL; // cluster_api_timezones(CLUSTER_EMAIL_DAILY_NOTIFICATION_FROM, CLUSTER_EMAIL_DAILY_NOTIFICATION_TO);
 
   $objects_by_gid = [];
   $objects_by_gid[$gid]['cluster_docs'] = [500, 600, 800, 911, 9175];

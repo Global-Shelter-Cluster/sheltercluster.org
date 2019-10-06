@@ -1430,9 +1430,7 @@ function cluster_user_user_default_permissions() {
   // Exported permission: 'edit field_push_token'.
   $permissions['edit field_push_token'] = array(
     'name' => 'edit field_push_token',
-    'roles' => array(
-      'administrator' => 'administrator',
-    ),
+    'roles' => array(),
     'module' => 'field_permissions',
   );
 
@@ -1507,9 +1505,7 @@ function cluster_user_user_default_permissions() {
   // Exported permission: 'edit own field_push_token'.
   $permissions['edit own field_push_token'] = array(
     'name' => 'edit own field_push_token',
-    'roles' => array(
-      'administrator' => 'administrator',
-    ),
+    'roles' => array(),
     'module' => 'field_permissions',
   );
 
@@ -2183,18 +2179,14 @@ function cluster_user_user_default_permissions() {
   // Exported permission: 'view field_push_token'.
   $permissions['view field_push_token'] = array(
     'name' => 'view field_push_token',
-    'roles' => array(
-      'administrator' => 'administrator',
-    ),
+    'roles' => array(),
     'module' => 'field_permissions',
   );
 
   // Exported permission: 'view own field_push_token'.
   $permissions['view own field_push_token'] = array(
     'name' => 'view own field_push_token',
-    'roles' => array(
-      'administrator' => 'administrator',
-    ),
+    'roles' => array(),
     'module' => 'field_permissions',
   );
 

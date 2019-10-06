@@ -136,6 +136,73 @@ function cluster_user_form_user_profile_form_alter(&$form, &$form_state, $form_i
 
   $form['picture']['picture_delete']['#access'] = FALSE;
   unset($form['picture']['picture_upload']['#description']);
+
+  $options = [];
+  $default_value = [];
+
+  foreach ($form['og_user_node1']['und'][0]['default']['#options'] as $type => $groups) {
+    if (!is_array($groups))
+      continue;
+
+    foreach (array_keys($groups) as $gid) {
+      $default_value[$gid] = TRUE;
+      $group = node_load($gid);
+      $display = GroupDisplayProvider::getDisplayProvider($group);
+      $roles = array_filter(
+        og_get_user_roles('node', $gid),
+        function($role) {
+          if ($role === OG_AUTHENTICATED_ROLE)
+            return FALSE;
+
+          return TRUE;
+        }
+      );
+
+      $options[$gid] = [
+        'name' => l($group->title, 'node/'.$group->nid, [
+          'attributes' => ['target' => '_blank'],
+        ]),
+        'type' => $display->getGroupTypeLabel(),
+        'role' => implode(', ', $roles),
+      ];
+    }
+  }
+
+  $header = array(
+    'name' => t('Name'),
+    'type' => t('Type'),
+    'role' => t('Role'),
+  );
+
+  $form['cluster_groups'] = array(
+    '#type' => 'tableselect',
+    '#suffix' => '<p><em>' . t('Uncheck any group to un-follow.') . '</em></p>',
+    '#header' => $header,
+    '#options' => $options,
+    '#multiple' => TRUE,
+    '#default_value' => $default_value,
+  );
+
+  $form['#group_children']['cluster_groups'] = 'group_groups';
+  $form['#submit'][] = 'cluster_user_edit_groups_submit';
+
+  $form['#attached']['js'][] = drupal_get_path('module', 'cluster_user') . '/js/user-edit.js';
+}
+
+function cluster_user_edit_groups_submit($form, &$form_state) {
+  global $user;
+
+  $gids_to_remove = array_keys(array_filter($form_state['values']['cluster_groups'], function($value) {return !$value;}));
+  $membership_ids = [];
+
+  foreach ($gids_to_remove as $gid) {
+    $membership = og_get_membership('node', $gid, 'user', $user->uid);
+    if ($membership)
+      $membership_ids[] = $membership->identifier();
+  }
+
+  if (!empty($membership_ids))
+    og_membership_delete_multiple($membership_ids);
 }
 
 function _cluster_user_edit_form_pre_render($elements) {

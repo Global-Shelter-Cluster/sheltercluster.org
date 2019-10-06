@@ -23,11 +23,12 @@ function cluster_user_field_group_info() {
     'label' => 'Administrators only',
     'weight' => '51',
     'children' => array(
-      0 => 'field_account_origin',
-      1 => 'field_push_token',
-      2 => 'googleanalytics',
-      3 => 'redirect',
-      4 => 'wysiwyg',
+      0 => 'og_user_node1',
+      1 => 'field_account_origin',
+      2 => 'field_push_token',
+      3 => 'googleanalytics',
+      4 => 'redirect',
+      5 => 'wysiwyg',
     ),
     'format_type' => 'accordion-item',
     'format_settings' => array(
@@ -53,9 +54,7 @@ function cluster_user_field_group_info() {
   $field_group->data = array(
     'label' => 'Groups',
     'weight' => '49',
-    'children' => array(
-      0 => 'og_user_node1',
-    ),
+    'children' => array(),
     'format_type' => 'accordion-item',
     'format_settings' => array(
       'formatter' => 'closed',
@@ -141,8 +140,8 @@ function cluster_user_field_group_info() {
     'label' => 'Notifications',
     'weight' => '50',
     'children' => array(
-      0 => 'group_notif_push',
-      1 => 'group_notif_email',
+      0 => 'group_notif_email',
+      1 => 'group_notif_push',
     ),
     'format_type' => 'accordion-item',
     'format_settings' => array(
@@ -228,12 +227,12 @@ function cluster_user_field_group_info() {
     'label' => 'Tabs',
     'weight' => '2',
     'children' => array(
-      0 => 'group_notifications',
-      1 => 'group_profile',
-      2 => 'group_admin',
-      3 => 'group_user',
-      4 => 'group_groups',
-      5 => 'group_preferences',
+      0 => 'group_admin',
+      1 => 'group_groups',
+      2 => 'group_notifications',
+      3 => 'group_preferences',
+      4 => 'group_profile',
+      5 => 'group_user',
     ),
     'format_type' => 'accordion',
     'format_settings' => array(

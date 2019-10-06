@@ -11,16 +11,19 @@
   margin: 30px auto 0;
   font-size: 11px;
   line-height: 1.5;
+  color: #575757;
 ">
   <?php
 
-  $text = t('You are receiving this email because you\'re following @group on the Shelter Cluster website or mobile app. To unsubscribe, please unfollow this group or change your notification settings by clicking here.', [
+  print t('You are receiving this email because you\'re following @group on the Shelter Cluster website or mobile app.'
+    .' To unsubscribe, please <a href="@group_link">unfollow this group</a> or'
+    .' <a href="@notification_settings">change your notification settings</a>.', [
     '@group' => $group->title,
+    '@group_link' => url('node/'.$group->nid, ['absolute' => TRUE]),
+    '@notification_settings' => url('user/me/edit', ['absolute' => TRUE, 'fragment' => 'notifications']),
   ], [
     'langcode' => $langcode,
   ]);
 
-  print l($text, 'user/me/edit', ['absolute' => TRUE, 'attributes' => [
-    'style' => 'color: #575757; text-decoration: none;'
-  ]]); ?>
+  ?>
 </p>
