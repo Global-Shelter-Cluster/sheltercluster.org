@@ -37,8 +37,10 @@ function shelter_preprocess_page(&$variables) {
     $variables['login_link'] = l(t('Your profile'), 'user/me/edit', [
       'query' => ['destination' => $destination],
     ]);
+
+    $variables['logout_link'] = l(t('Log out'), 'user/logout');
   } else {
-    $variables['login_link'] = l(t('Login'), 'user/login');
+    $variables['login_link'] = l(t('Log in'), 'user/login');
   }
 
   // Put the language switcher in a variable.

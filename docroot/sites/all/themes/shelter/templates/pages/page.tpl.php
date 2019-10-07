@@ -35,6 +35,9 @@
         <?php if ($variables['login_link']): ?>
           <div id="user-profile-container" class="clearfix">
             <span id="login-link"><?php print $variables['login_link']; ?></span>
+            <?php if ($variables['logout_link']): ?>
+            <span id="logout-link"><?php print $variables['logout_link']; ?></span>
+            <?php endif; ?>
           </div>
         <?php endif; ?>
       </div>

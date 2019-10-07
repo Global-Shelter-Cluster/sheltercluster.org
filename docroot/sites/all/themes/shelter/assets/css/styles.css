@@ -1473,6 +1473,9 @@ header a {
   font-size: 13.6px;
   font-size: 0.85rem;
 }
+#user-profile-container > * {
+  display: inline-block;
+}
 @media (min-width: 800px) {
   #user-profile-container {
     padding: 16px 0 32px 0;
@@ -3075,10 +3078,10 @@ div.addressfield-container-inline::after {
   border-radius: 5px;
   padding: 1px 2px 5px 10px;
 }
-.front #user-profile-container #login-link a {
+.front #user-profile-container #login-link a, .front #user-profile-container #logout-link a {
   color: #222;
 }
-.front #user-profile-container #login-link a:hover {
+.front #user-profile-container #login-link a:hover, .front #user-profile-container #logout-link a:hover {
   color: #688394;
 }
 @media (min-width: 800px) {
@@ -3326,11 +3329,9 @@ div.addressfield-container-inline::after {
 
 #login-link {
   background: url("../images/humanitarianid.png") right center no-repeat;
-  display: block;
   height: 25px;
   vertical-align: center;
-  padding-top: 5px;
-  padding-right: 30px;
+  padding: 5px 30px 0 0;
 }
 #login-link a {
   white-space: nowrap;
@@ -3338,6 +3339,20 @@ div.addressfield-container-inline::after {
   font-weight: bold;
 }
 #login-link a:hover {
+  color: #688394;
+}
+
+#logout-link {
+  height: 25px;
+  vertical-align: center;
+  padding: 5px 10px 0 20px;
+}
+#logout-link a {
+  white-space: nowrap;
+  color: #222;
+  font-weight: bold;
+}
+#logout-link a:hover {
   color: #688394;
 }
 
