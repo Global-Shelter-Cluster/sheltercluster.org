@@ -11,7 +11,7 @@
     border: solid 1px #688394;
     border-radius: 5px;
     padding: 1px 2px 5px 10px;
-    #login-link a {
+    #login-link a, #logout-link a {
       color: #222;
       &:hover {
         color: #688394;
