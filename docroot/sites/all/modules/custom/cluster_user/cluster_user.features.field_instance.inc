@@ -348,7 +348,7 @@ function cluster_user_field_default_field_instances() {
     ),
     'entity_type' => 'user',
     'field_name' => 'name_field',
-    'label' => 'Name',
+    'label' => 'Full name',
     'required' => 0,
     'settings' => array(
       'entity_translation_sync' => FALSE,
@@ -430,8 +430,8 @@ function cluster_user_field_default_field_instances() {
   // Included for use with string extractors like potx.
   t('Account origin');
   t('Daily digest');
+  t('Full name');
   t('Group membership');
-  t('Name');
   t('Organization name');
   t('Phone number');
   t('Push notification token for mobile app. Managed by the API.');
