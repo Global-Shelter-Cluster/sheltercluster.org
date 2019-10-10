@@ -56,8 +56,8 @@ class ClusterAPI_Type_Contact extends ClusterAPI_Type {
         $ret += [
           'name' => $node->title,
           'picture' => self::getFileValue('field_image', $wrapper, 'contact_avatar'),
-          'org' => implode(', ', $wrapper->field_organisation_name->value()),
-          'role' => implode(', ', $wrapper->field_role_or_title->value()),
+          'org' => $wrapper->field_organisation_name->value(),
+          'role' => $wrapper->field_role_or_title->value(),
           'mail' => $wrapper->field_email->value(),
           'phone' => $wrapper->field_phone_number->value(),
           'bio' => $wrapper->body->value()['safe_value'],

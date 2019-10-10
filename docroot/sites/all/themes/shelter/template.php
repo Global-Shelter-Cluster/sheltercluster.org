@@ -145,7 +145,7 @@ function shelter_preprocess_user_profile(&$variables) {
     }
     else {
       $variables['user_profile']['user_picture']['#markup'] = theme('image_style', array(
-        'style_name' => 'thumbnail',
+        'style_name' => variable_get('user_picture_style', 'thumbnail'),
         'path' => $account->picture->uri,
         'width' => 100,
         'height' => 100,

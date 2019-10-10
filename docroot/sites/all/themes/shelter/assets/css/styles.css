@@ -3335,6 +3335,11 @@ div.addressfield-container-inline::after {
   height: 120px;
   float: left;
 }
+.page-user .profile .avatar img {
+  width: 100px;
+  height: auto;
+  border-radius: 50%;
+}
 .page-user .profile .avatar .svg {
   width: 100px;
   height: 100px;
@@ -3343,6 +3348,16 @@ div.addressfield-container-inline::after {
   font-size: 48px;
   font-size: 3rem;
   display: block;
+}
+.page-user .profile .field-label {
+  margin: 20px 0 .2em 0;
+  font-weight: bold;
+}
+.page-user .profile .telephone {
+  display: inline-block;
+}
+.page-user .profile .telephone + .telephone {
+  margin-left: 10px;
 }
 
 #page #user-login .hybridauth-widget .hybridauth-icon {

@@ -81,13 +81,13 @@ class ClusterAPI_Type_User extends ClusterAPI_Type {
 
       //Fall-through
       case ClusterAPI_Object::MODE_PUBLIC:
-        dpm($wrapper->field_organisation_name->value(), 'CAM2 '.$user->uid.' - '.$mode);
-        dpm($user->field_organisation_name, 'CAM3');
         $ret += [
           'mail' => $user->mail,
           'picture' => $user->picture ? image_style_url('medium', $user->picture->uri) : '',
           'org' => $wrapper->field_organisation_name->value(),
           'role' => $wrapper->field_role_or_title->value(),
+          'phone' => $wrapper->field_phone_number->value(),
+          'full_name' => $wrapper->name_field->value(),
         ];
 
       //Fall-through

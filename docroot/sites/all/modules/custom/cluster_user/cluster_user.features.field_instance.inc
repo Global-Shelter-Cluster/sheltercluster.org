@@ -21,7 +21,7 @@ function cluster_user_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 6,
+        'weight' => 7,
       ),
     ),
     'entity_type' => 'user',
@@ -59,7 +59,7 @@ function cluster_user_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 8,
+        'weight' => 9,
       ),
     ),
     'entity_type' => 'user',
@@ -133,7 +133,7 @@ function cluster_user_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 7,
+        'weight' => 8,
       ),
     ),
     'entity_type' => 'user',
@@ -223,7 +223,7 @@ function cluster_user_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 10,
+      'weight' => 7,
     ),
   );
 
@@ -239,7 +239,7 @@ function cluster_user_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 1,
+        'weight' => 4,
       ),
     ),
     'entity_type' => 'user',
@@ -327,7 +327,7 @@ function cluster_user_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 11,
+      'weight' => 8,
     ),
   );
 
@@ -348,7 +348,7 @@ function cluster_user_field_default_field_instances() {
     ),
     'entity_type' => 'user',
     'field_name' => 'name_field',
-    'label' => 'Name',
+    'label' => 'Full name',
     'required' => 0,
     'settings' => array(
       'entity_translation_sync' => FALSE,
@@ -362,7 +362,7 @@ function cluster_user_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 32,
+      'weight' => 6,
     ),
   );
 
@@ -384,7 +384,7 @@ function cluster_user_field_default_field_instances() {
         'module' => 'og_ui',
         'settings' => array(),
         'type' => 'og_list_default',
-        'weight' => 4,
+        'weight' => 5,
       ),
     ),
     'entity_type' => 'user',
@@ -430,8 +430,8 @@ function cluster_user_field_default_field_instances() {
   // Included for use with string extractors like potx.
   t('Account origin');
   t('Daily digest');
+  t('Full name');
   t('Group membership');
-  t('Name');
   t('Organization name');
   t('Phone number');
   t('Push notification token for mobile app. Managed by the API.');
