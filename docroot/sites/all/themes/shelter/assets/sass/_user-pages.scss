@@ -38,6 +38,12 @@
       height: 120px;
       float: left;
 
+      img {
+        width: 100px;
+        height: auto;
+        border-radius: 50%;
+      }
+
       .svg {
         width: 100px;
         height: 100px;
@@ -46,6 +52,16 @@
     .name {
       @include rem(font-size, 3rem);
       display: block;
+    }
+    .field-label {
+      margin: 20px 0 .2em 0;
+      font-weight: bold;
+    }
+    .telephone {
+      display: inline-block;
+      + .telephone {
+        margin-left: 10px;
+      }
     }
   }
 }

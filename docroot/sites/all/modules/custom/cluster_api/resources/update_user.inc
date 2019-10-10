@@ -110,6 +110,7 @@ function _cluster_api_update_user_name($user, $data) {
 }
 
 function _cluster_api_update_user_mail($user, $data) {
+  $data = trim($data);
   // Snippet taken from user.module:user_account_form_validate()
   if ($error = user_validate_mail($data)) {
     throw new Exception(t('Invalid e-mail address.', [], ['langcode' => $user->language]));
@@ -125,7 +126,31 @@ function _cluster_api_update_user_mail($user, $data) {
   ];
 }
 
+function _cluster_api_update_user_full_name($user, $data) {
+  $data = trim($data);
+  $user->name_field = [LANGUAGE_NONE => [['value' => $data]]];
+
+  return [
+    'do_update' => TRUE,
+    'update_message' => t('Full name changed', [], ['langcode' => $user->language]),
+  ];
+}
+
+function _cluster_api_update_user_phone($user, $data) {
+  $data = array_filter(array_map('trim', (array) $data));
+
+  $user->field_phone_number = [LANGUAGE_NONE => array_map(function($value) {
+    return ['value' => $value];
+  }, $data)];
+
+  return [
+    'do_update' => TRUE,
+    'update_message' => t('Full name changed', [], ['langcode' => $user->language]),
+  ];
+}
+
 function _cluster_api_update_user_org($user, $data) {
+  $data = trim($data);
   $user->field_organisation_name = [LANGUAGE_NONE => [['value' => $data]]];
 
   return [
@@ -135,6 +160,7 @@ function _cluster_api_update_user_org($user, $data) {
 }
 
 function _cluster_api_update_user_role($user, $data) {
+  $data = trim($data);
   $user->field_role_or_title = [LANGUAGE_NONE => [['value' => $data]]];
 
   return [
@@ -144,6 +170,8 @@ function _cluster_api_update_user_role($user, $data) {
 }
 
 function _cluster_api_update_user_pass($user, $data) {
+  $data = trim($data);
+
   // Snippet taken from user.module:user_save()
   if (strlen(trim($data)) > 0) {
     // Allow alternate password hashing schemes.
