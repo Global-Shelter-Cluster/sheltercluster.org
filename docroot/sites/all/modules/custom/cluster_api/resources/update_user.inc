@@ -128,7 +128,7 @@ function _cluster_api_update_user_mail($user, $data) {
 
 function _cluster_api_update_user_full_name($user, $data) {
   $data = trim($data);
-  $user->name_field = [LANGUAGE_NONE => [['value' => $data]]];
+  $user->field_full_name = [LANGUAGE_NONE => [['value' => $data]]];
 
   return [
     'do_update' => TRUE,
