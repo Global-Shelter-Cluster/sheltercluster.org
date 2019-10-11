@@ -56,7 +56,7 @@ function cluster_user_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 13,
+        'weight' => 1,
       ),
     ),
     'entity_type' => 'user',
