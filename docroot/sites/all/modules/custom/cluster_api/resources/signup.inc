@@ -41,13 +41,6 @@ function _cluster_api_signup($requests) {
     'roles' => [
       DRUPAL_AUTHENTICATED_RID => 'authenticated user',
     ],
-//    'name_field' => [
-//      LANGUAGE_NONE => [
-//        0 => [
-//          'value' => $account_values['name'],
-//        ],
-//      ],
-//    ],
     'field_organisation_name' => [LANGUAGE_NONE => [['value' => $account_values['organization']]]],
   ];
 

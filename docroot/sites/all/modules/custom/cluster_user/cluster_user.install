@@ -1,0 +1,27 @@
+<?php
+
+/**
+ * Move data from `name_field` (which is a translatable field that we use for things like taxonomy terms) to the new `field_full_name`. Then, delete the `name_field` instance.
+ */
+function cluster_user_update_7001() {
+  $query = new EntityFieldQuery();
+  $result = $query
+    ->entityCondition('entity_type', 'user')
+    ->execute();
+
+  foreach (array_keys($result['user']) as $uid) {
+    $user = user_load($uid);
+    if (!$user->name_field || $user->field_full_name) continue;
+
+    $a = current($user->name_field);
+    if (!$a || !isset($a[0]['value']))
+      continue;
+
+    $user->field_full_name = [LANGUAGE_NONE => [['value' => $a[0]['value']]]];
+    user_save($user);
+  }
+
+  $instance = field_info_instance('user', 'name_field', 'user');
+  if ($instance)
+    field_delete_instance($instance);
+}

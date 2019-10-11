@@ -87,7 +87,7 @@ class ClusterAPI_Type_User extends ClusterAPI_Type {
           'org' => $wrapper->field_organisation_name->value(),
           'role' => $wrapper->field_role_or_title->value(),
           'phone' => $wrapper->field_phone_number->value(),
-          'full_name' => $wrapper->name_field->value(),
+          'full_name' => $wrapper->field_full_name->value(),
         ];
 
       //Fall-through

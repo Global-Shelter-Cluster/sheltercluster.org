@@ -203,7 +203,7 @@ function cluster_user_field_group_info() {
       0 => 'field_organisation_name',
       1 => 'field_phone_number',
       2 => 'field_role_or_title',
-      3 => 'name_field',
+      3 => 'field_full_name',
       4 => 'picture',
     ),
     'format_type' => 'accordion-item',
