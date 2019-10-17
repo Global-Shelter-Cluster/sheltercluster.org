@@ -27,6 +27,7 @@ abstract class ClusterAPI_Type {
     'alert' => 'ClusterAPI_Type_Alert',
     'contact' => 'ClusterAPI_Type_Contact',
     'page' => 'ClusterAPI_Type_Page',
+    'news' => 'ClusterAPI_Type_News',
   ];
   /** @var \stdClass User object */
   protected $current_user;
