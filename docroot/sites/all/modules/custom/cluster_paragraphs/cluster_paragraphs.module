@@ -25,7 +25,7 @@ function cluster_paragraphs_render_email_content($content) {
       'type' => $item_wrapper->getBundle(),
     ];
 
-    if (isset($item_wrapper->field_paragraph_title))
+    if (isset($item_wrapper->field_paragraph_title) && $item_wrapper->field_paragraph_title->value())
       $rendered_item['title'] = $item_wrapper->field_paragraph_title->value();
 
     switch ($item->bundle()) {
@@ -51,6 +51,7 @@ function cluster_paragraphs_render_email_content($content) {
           return [
             'url' => $link['url'],
             'title' => $link['title'],
+            // TODO: populate "linkType" and "id", according to the SmartLink component in the mobile app
           ];
         }, $links);
         break;

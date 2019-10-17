@@ -399,6 +399,37 @@ class GroupContentManager {
   }
 
   /**
+   * Get the latest news, if any.
+   * @return []int|FALSE
+   *  nid, FALSE if none exist.
+   */
+  public function getLatestNews($limit = 10, $days_limit = 7) {
+    $query = new EntityFieldQuery();
+    $query->entityCondition('entity_type', 'node')
+      ->entityCondition('bundle', 'news')
+      ->fieldCondition('og_group_ref', 'target_id', $this->node->nid)
+      ->propertyCondition('status', NODE_PUBLISHED)
+      ->propertyOrderBy('created', 'DESC');
+
+    if (!is_null($limit))
+      $query->range(0, $limit);
+
+    if (!is_null($days_limit)) {
+      $timestamp_limit = REQUEST_TIME - (3600 * 24 * $days_limit);
+      $query->propertyCondition('created', $timestamp_limit, '>');
+    }
+
+    $res = $query
+      ->execute();
+
+    if (!isset($res['node'])) {
+      return FALSE;
+    }
+
+    return array_keys($res['node']);
+  }
+
+  /**
    * Get latest document nodes added to a group.
    * @TODO expose admin settings form for range default argument.
    *  @return

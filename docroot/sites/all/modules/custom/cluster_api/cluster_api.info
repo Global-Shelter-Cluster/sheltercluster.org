@@ -28,3 +28,4 @@ files[] = classes/ClusterAPI_Type_Webform.php
 files[] = classes/ClusterAPI_Type_Alert.php
 files[] = classes/ClusterAPI_Type_Contact.php
 files[] = classes/ClusterAPI_Type_Page.php
+files[] = classes/ClusterAPI_Type_News.php

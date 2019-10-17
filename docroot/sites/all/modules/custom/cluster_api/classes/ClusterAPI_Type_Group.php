@@ -8,6 +8,8 @@ class ClusterAPI_Type_Group extends ClusterAPI_Type {
   const UPCOMING_EVENTS_DAYS_LIMIT = 14;
   const ALERTS_LIMIT = 40;
   const ALERTS_DAYS_LIMIT = 60;
+  const NEWS_LIMIT = 20;
+  const NEWS_DAYS_LIMIT = 30;
   protected static $type = 'group';
   protected static $related_def = [
     'associated_regions' => [
@@ -81,6 +83,10 @@ class ClusterAPI_Type_Group extends ClusterAPI_Type {
     'alerts' => [
       'type' => 'alert',
       'mode' => ClusterAPI_Object::MODE_PUBLIC,
+    ],
+    'news' => [
+      'type' => 'news',
+      'mode' => ClusterAPI_Object::MODE_STUB,
     ],
     'contacts' => [
       'type' => 'contact',
@@ -175,6 +181,7 @@ class ClusterAPI_Type_Group extends ClusterAPI_Type {
         }
 
         $ret['alerts'] = array_filter((array)$manager->getLatestAlerts(self::ALERTS_LIMIT, self::ALERTS_DAYS_LIMIT));
+        $ret['news'] = array_filter((array)$manager->getLatestNews(self::NEWS_LIMIT, self::NEWS_DAYS_LIMIT));
 
         $ret['followers'] = self::getFollowers($id);
 
