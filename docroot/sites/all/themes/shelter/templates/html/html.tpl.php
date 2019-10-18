@@ -17,6 +17,9 @@
   <title><?php print $head_title; ?></title>
   <?php print $styles; ?>
   <?php print $scripts; ?>
+
+  <?php /* TODO: add "app-argument" to link to the proper place in the app (see SA-114) */ ?>
+  <meta name="apple-itunes-app" content="app-id=1415068304">
 <script>
   console.log(JSON.stringify([{type: 'user', id: 733}]));
  // jQuery.ajax({

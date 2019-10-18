@@ -53,6 +53,26 @@
         </li>
       </ul>
 
+      <h3><?php print t('Download the Shelter Cluster mobile app'); ?></h3>
+      <ul class="contributors clearfix appstores">
+        <li class="contributor">
+          <a href="https://apps.apple.com/app/shelter-cluster/id1415068304" target="_blank">
+            <?php print theme('image', array(
+              'path' => drupal_get_path('theme', 'shelter') . '/assets/images/app store.png',
+              'alt' => t('App Store'),
+            )); ?>
+          </a>
+        </li>
+        <li class="contributor">
+          <a href="https://play.google.com/store/apps/details?id=org.sheltercluster.shelterapp" target="_blank">
+            <?php print theme('image', array(
+              'path' => drupal_get_path('theme', 'shelter') . '/assets/images/google play.png',
+              'alt' => t('Google Play'),
+            )); ?>
+          </a>
+        </li>
+      </ul>
+
     </section>
   </div>
 </footer>

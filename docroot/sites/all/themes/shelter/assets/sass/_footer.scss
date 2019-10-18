@@ -205,6 +205,14 @@ footer {
         img {
           width: 75%;
         }
+        a:after {
+          border: none;
+        }
+      }
+
+      &.appstores img {
+        width: auto;
+        height: 50px;
       }
     }
   }
