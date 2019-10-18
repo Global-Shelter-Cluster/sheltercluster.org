@@ -3604,6 +3604,13 @@ footer #contributions .contributors .contributor:before {
 footer #contributions .contributors .contributor img {
   width: 75%;
 }
+footer #contributions .contributors .contributor a:after {
+  border: none;
+}
+footer #contributions .contributors.appstores img {
+  width: auto;
+  height: 50px;
+}
 footer #general-information li {
   margin: 0;
 }
