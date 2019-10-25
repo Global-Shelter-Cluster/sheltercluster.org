@@ -599,7 +599,7 @@ function shelter_base_field_default_field_instances() {
     'bundle' => 'page',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Used for old pages. Please use <strong>Sections</strong> instead.',
     'display' => array(
       'default' => array(
         'label' => 'hidden',
@@ -627,14 +627,15 @@ function shelter_base_field_default_field_instances() {
     'entity_type' => 'node',
     'field_name' => 'body',
     'label' => 'Body',
-    'required' => FALSE,
+    'required' => 0,
     'settings' => array(
-      'display_summary' => TRUE,
+      'display_summary' => 1,
       'entity_translation_sync' => FALSE,
       'text_processing' => 1,
       'user_register_form' => FALSE,
     ),
     'widget' => array(
+      'active' => 1,
       'module' => 'text',
       'settings' => array(
         'rows' => 20,
@@ -642,6 +643,66 @@ function shelter_base_field_default_field_instances() {
       ),
       'type' => 'text_textarea_with_summary',
       'weight' => 1,
+    ),
+  );
+
+  // Exported field_instance: 'node-page-field_content'.
+  $field_instances['node-page-field_content'] = array(
+    'bundle' => 'page',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'hidden',
+        'module' => 'paragraphs',
+        'settings' => array(
+          'view_mode' => 'full',
+        ),
+        'type' => 'paragraphs_view',
+        'weight' => 4,
+      ),
+      'ical' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_content',
+    'label' => 'Content',
+    'required' => 0,
+    'settings' => array(
+      'add_mode' => 'button',
+      'allowed_bundles' => array(
+        'images' => -1,
+        'links' => -1,
+        'text' => -1,
+      ),
+      'bundle_weights' => array(
+        'images' => 2,
+        'links' => 3,
+        'text' => 4,
+      ),
+      'default_edit_mode' => 'open',
+      'entity_translation_sync' => FALSE,
+      'title' => 'Section',
+      'title_multiple' => 'Sections',
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 0,
+      'module' => 'paragraphs',
+      'settings' => array(),
+      'type' => 'paragraphs_embed',
+      'weight' => 2,
     ),
   );
 
@@ -692,7 +753,7 @@ function shelter_base_field_default_field_instances() {
       'module' => 'number',
       'settings' => array(),
       'type' => 'number',
-      'weight' => 5,
+      'weight' => 6,
     ),
   );
 
@@ -757,7 +818,7 @@ function shelter_base_field_default_field_instances() {
       'module' => 'og',
       'settings' => array(),
       'type' => 'og_complex',
-      'weight' => 4,
+      'weight' => 5,
     ),
   );
 
@@ -1048,6 +1109,7 @@ function shelter_base_field_default_field_instances() {
   // Translatables
   // Included for use with string extractors like potx.
   t('Body');
+  t('Content');
   t('Description');
   t('Enter a comma-separated list of words to describe your content.');
   t('Groups audience');
@@ -1057,6 +1119,7 @@ function shelter_base_field_default_field_instances() {
   t('Tags');
   t('Title');
   t('Upload an image to go with this article.');
+  t('Used for old pages. Please use <strong>Sections</strong> instead.');
   t('When displayed in sortable lists within group pages, the content will be ordered using this weight field. Smaller values will show up first, bigger values last.');
 
   return $field_instances;

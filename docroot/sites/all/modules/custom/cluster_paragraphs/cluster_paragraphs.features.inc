@@ -24,6 +24,11 @@ function cluster_paragraphs_paragraphs_info() {
       'bundle' => 'text',
       'locked' => '1',
     ),
+    'twocol_text_link' => array(
+      'name' => 'Two-column table (text, link)',
+      'bundle' => 'twocol_text_link',
+      'locked' => '1',
+    ),
   );
   return $items;
 }
