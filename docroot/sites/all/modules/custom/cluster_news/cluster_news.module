@@ -132,7 +132,46 @@ function cluster_news_menu() {
     'type' => MENU_CALLBACK,
   );
 
+  $items['node/%node/email-preview'] = array(
+    'title' => 'Email preview',
+    'page callback' => 'cluster_news_email_preview',
+    'page arguments' => array(1),
+    'access callback' => '_cluster_news_email_preview_access',
+    'access arguments' => array(1),
+    'type' => MENU_LOCAL_TASK,
+    'weight' => 200,
+  );
+
   return $items;
+}
+
+function _cluster_news_email_preview_access($node) {
+  return user_access('administer mandrill') && $node->type === 'news';
+}
+
+function cluster_news_email_preview($news_node) {
+  $news_wrapper = entity_metadata_wrapper('node', $news_node);
+  $first_group = NULL;
+  foreach ($news_wrapper->og_group_ref->value() as $group) {
+    if (!og_is_group('node', $group))
+      continue; // shouldn't happen
+    $first_group = $group;
+    break;
+  }
+
+  $message = [];
+  $params = [
+    'node' => $news_node,
+    'group' => $first_group,
+    'date' => $news_wrapper->field_news_date->value(),
+    'content' => cluster_paragraphs_render_email_content($news_wrapper->field_content->value()),
+    'langcode' => i18n_langcode(),
+  ];
+
+  cluster_news_mail('news', $message, $params);
+
+  $body = implode(' ', $message['body']);
+  die("<html><body><h1>{$message['subject']}</h1><hr/>{$body}</body></html>");
 }
 
 /**
