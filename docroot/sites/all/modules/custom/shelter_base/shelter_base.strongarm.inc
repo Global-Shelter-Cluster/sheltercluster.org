@@ -832,14 +832,32 @@ function shelter_base_strongarm() {
       'token' => array(
         'custom_settings' => FALSE,
       ),
+      'ical' => array(
+        'custom_settings' => TRUE,
+      ),
+      'factsheet_summary' => array(
+        'custom_settings' => FALSE,
+      ),
+      'factsheet_homepage_teaser' => array(
+        'custom_settings' => FALSE,
+      ),
+      'factsheet_preview_block' => array(
+        'custom_settings' => FALSE,
+      ),
+      'preview_block' => array(
+        'custom_settings' => FALSE,
+      ),
     ),
     'extra_fields' => array(
       'form' => array(
         'path' => array(
-          'weight' => '3',
+          'weight' => '4',
         ),
         'language' => array(
-          'weight' => '2',
+          'weight' => '3',
+        ),
+        'redirect' => array(
+          'weight' => '7',
         ),
       ),
       'display' => array(),

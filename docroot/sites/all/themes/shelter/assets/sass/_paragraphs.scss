@@ -17,4 +17,19 @@
       }
     }
   }
+
+  .field-name-field-links .field-item {
+    display: list-item;
+    margin: 0 0 .5em 30px;
+  }
+
+  .entity-paragraphs-item table {
+    min-width: 70%;
+
+    thead th {
+      background-color: $shelter-red;
+      border-color: $shelter-red;
+      color: $white;
+    }
+  }
 }
