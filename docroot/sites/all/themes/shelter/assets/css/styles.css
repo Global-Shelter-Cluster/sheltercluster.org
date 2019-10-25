@@ -4456,6 +4456,18 @@ body.document-upload-ondrag {
   max-width: 100%;
   height: auto;
 }
+.paragraphs-items .field-name-field-links .field-item {
+  display: list-item;
+  margin: 0 0 .5em 30px;
+}
+.paragraphs-items .entity-paragraphs-item table {
+  min-width: 70%;
+}
+.paragraphs-items .entity-paragraphs-item table thead th {
+  background-color: #7f1416;
+  border-color: #7f1416;
+  color: white;
+}
 
 .view-followers .view-content {
   display: flex;

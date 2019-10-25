@@ -77,6 +77,9 @@ class ClusterAPI_Type_Page extends ClusterAPI_Type {
               $ret['sections'][] = array_filter($s);
             }
             break;
+          case 'page':
+            $ret['content'] = cluster_paragraphs_render_email_content($wrapper->field_content->value());
+            break;
         }
 
         $ret += [

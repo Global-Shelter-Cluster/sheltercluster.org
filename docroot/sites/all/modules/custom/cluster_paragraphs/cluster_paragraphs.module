@@ -56,14 +56,92 @@ function cluster_paragraphs_render_email_content($content) {
         }, $links);
         break;
 
+      case 'twocol_text_link':
+        /**
+         * Example:
+          {
+            "type": "twocol_text_link",
+            "title": "section title",
+            "headers": [
+              "first column",
+              "second column"
+            ],
+            "rows": [
+              [
+                {"title": "cell 1"},
+                {"title": "cell 2", "url": "http:\/\/google.com"}
+              ],
+              [
+                {"title": "cell 3"},
+                {"title": "cell 4"}
+              ]
+            ]
+          }
+         */
+        $rendered_item['type'] = 'table'; // Other paragraph types could map to "table" too.
+
+        if ($headers = $item_wrapper->field_twocol_headers->value())
+          $rendered_item['headers'] = [$headers['first'], $headers['second']];
+
+        foreach ($item_wrapper->field_twocol_text_link->value() as $row) {
+          $row_wrapper = entity_metadata_wrapper('field_collection_item', $row);
+
+          $text = ['title' => $row_wrapper->field_cell_text->value()];
+          $link = array_filter($row_wrapper->field_cell_link->value(), function($v, $k) {
+            return $v && in_array($k, ['url', 'title']);
+          }, ARRAY_FILTER_USE_BOTH);
+
+          $rendered_item['rows'][] = [
+            $text, // string
+            $link, // object with "url" and "title" properties
+          ];
+        }
+
+        break;
+
       default:
         watchdog('cluster_paragraphs', 'Unrecognized bundle: @bundle', [
           '@bundle' => $item->bundle(),
         ], WATCHDOG_ERROR);
+        continue 2;
     }
 
     $ret[] = $rendered_item;
   }
 
   return $ret;
+}
+
+/**
+ * Implements hook_field_widget_form_alter().
+ */
+function cluster_paragraphs_field_widget_form_alter(&$element, &$form_state, $context) {
+  if ($context['form']['#entity_type'] !== 'paragraphs_item')
+    return;
+
+  if (substr($context['form']['#field_name'], 0, 13) !== 'field_twocol_')
+    return;
+
+  switch ($context['field']['type']) {
+    case 'link_field':
+
+      $element['#pre_render'][] = $context['instance']['settings']['url']
+        ? '_cluster_paragraphs_alter_link_fields_optionalurl'
+        : '_cluster_paragraphs_alter_link_fields';
+      break;
+  }
+}
+
+function _cluster_paragraphs_alter_link_fields($element) {
+  unset($element['#title']);
+  unset($element['title']['#description']);
+  $element['title']['#title'] = t('Link title');
+  $element['url']['#title'] = t('Link URL');
+  return $element;
+}
+
+function _cluster_paragraphs_alter_link_fields_optionalurl($element) {
+  $element = _cluster_paragraphs_alter_link_fields($element);
+  $element['url']['#title'] = t('Link URL (optional)');
+  return $element;
 }
