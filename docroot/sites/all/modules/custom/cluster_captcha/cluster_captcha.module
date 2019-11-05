@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Cluster Captcha feature.
+ */
+
+include_once 'cluster_captcha.features.inc';
