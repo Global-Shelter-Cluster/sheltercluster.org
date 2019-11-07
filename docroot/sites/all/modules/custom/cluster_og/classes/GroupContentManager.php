@@ -619,22 +619,28 @@ class GroupContentManager {
    *  The role name as stored in the database.
    * @param NULL|string[] $filter_user_timezones
    *  Only return users with one of the given timezones, e.g. ["Europe/Budapest", "Americas/New_York"]
+   * @param NULL|int $filter_access_threshold
+   *  Only return users who have accessed the site (or mobile app) in the last X seconds.
    * @param NULL|callable $query_alter
    *  Callback that alters the query (e.g. can add conditions to it).
    * @return Array of user IDs.
    */
-  public function getUsersByRole($role_name, $filter_user_timezones = NULL, $query_alter = NULL) {
+  public function getUsersByRole($role_name, $filter_user_timezones = NULL, $filter_access_threshold = NULL, $query_alter = NULL) {
     $rid = $this->getRoleIdByName($role_name, $this->node->type);
     if (!$rid)
-      return;
+      return [];
 
     $query = db_select('og_users_roles', 'og_ur')
       ->fields('og_ur', array('uid'));
 
-    if (!is_null($filter_user_timezones)) {
+    if (!is_null($filter_user_timezones) || !is_null($filter_access_threshold))
       $query->join('users', 'u', 'og_ur.uid = u.uid');
+
+    if (!is_null($filter_user_timezones))
       $query->condition('u.timezone', $filter_user_timezones, 'IN');
-    }
+
+    if (!is_null($filter_access_threshold))
+      $query->condition('u.access', REQUEST_TIME - $filter_access_threshold, '>');
 
     $query->condition('og_ur.gid', $this->node->nid);
     $query->condition('og_ur.rid', $rid);
