@@ -40,6 +40,7 @@ class Authorization {
     $response = ['user' => FALSE];
     $bearer_token = $this->getBearerToken();
     $return_access_token_in_response = TRUE;
+    $is_login = FALSE;
 
     // Try to identify token bearer.
     if ($bearer_token) {
@@ -47,10 +48,11 @@ class Authorization {
       $return_access_token_in_response = FALSE;
     }
 
-    // Try to idenfy user with specified grant.
+    // Try to identify user with specified grant.
     else {
       $oauth_response = $this->authorizeWithCredentials($requests);
       $bearer_token = isset($oauth_response['access_token']) ? $oauth_response['access_token'] : NULL;
+      $is_login = TRUE;
     }
 
     $this->authorization = $response['authorization'] = $oauth_response;
@@ -66,9 +68,26 @@ class Authorization {
       $response['authorization']['expires_at'] = time() + $oauth_response['expires_in'];
     }
 
-    // Access token was successfuly generated or validated.
+    // Access token was successfully generated or validated.
     $token_data =  oauth2_server_token_load($bearer_token);
-    $this->user = $response['user'] = user_load($token_data->uid);
+    $user = user_load($token_data->uid);
+
+    // Set user timestamps. Adapted from session.inc:_drupal_session_write().
+    if ($user->uid && ($is_login || (REQUEST_TIME - $user->access) > variable_get('session_write_interval', 180))) {
+      $fields = ['access' => REQUEST_TIME];
+      if ($is_login)
+        $fields['login'] = REQUEST_TIME;
+
+      foreach ($fields as $field => $value)
+        $user->{$field} = $value;
+
+      db_update('users')
+        ->fields($fields)
+        ->condition('uid', $user->uid)
+        ->execute();
+    }
+
+    $this->user = $response['user'] = $user;
     $this->authorization = $response['authorization'];
 
     return $response;
