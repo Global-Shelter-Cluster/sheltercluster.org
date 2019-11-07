@@ -5,6 +5,7 @@ include_once 'cluster_api.features.inc';
 const CLUSTER_API_FOLLOWER_ROLE_NAME = 'follower';
 const CLUSTER_API_DAY = 60 * 60 * 24;
 const CLUSTER_API_WEEK = 60 * 60 * 24 * 7;
+const CLUSTER_API_NOTIF_ACCESS_THRESHOLD = 60 * 60 * 24 * 30 * 6; // 6 months
 
 // send daily push notifications from 2pm to 6pm
 const CLUSTER_API_DAILY_PUSH_NOTIFICATION_FROM = 14;
@@ -440,6 +441,7 @@ function cluster_api_track_users($uid, $origin) {
  * - it's a reasonable time right for them to receive a notification (filter by timezone)
  * - we haven't sent them this type of notification in a while (for this particular group)
  * - they haven't disabled this type of notification (boolean fields in account entity)
+ * - they've accessed the site in the last 6 months (can be overridden)
  *
  * @param GroupContentManager $manager
  * @param string[]|NULL $timezones
@@ -453,16 +455,21 @@ function cluster_api_track_users($uid, $origin) {
  * @param string|NULL $enabled_field
  *    Name of boolean field in the account entity, to filter out users who have disabled
  *    this type of notification.
+ * @param int|NULL $access_threshold
+ *    Users that haven't access the site (or the mobile app through the api) before this
+ *    interval are not returned (stops, for example, users who have never logged in from
+ *    getting email notifications).
  *
  * @return int[] User IDs
  */
-function cluster_api_get_followers($manager, $timezones = NULL, $last_notification_field = NULL, $threshold = NULL, $enabled_field = NULL) {
+function cluster_api_get_followers($manager, $timezones = NULL, $last_notification_field = NULL, $threshold = NULL, $enabled_field = NULL, $access_threshold = CLUSTER_API_NOTIF_ACCESS_THRESHOLD) {
   $hour = 60 * 60; // const
 
   return $manager->getUsersByRole(
     CLUSTER_API_FOLLOWER_ROLE_NAME,
     $timezones,
-    function (SelectQuery $query) use ($hour, $last_notification_field, $threshold, $enabled_field) {
+    $access_threshold,
+    function (SelectQuery $query) use ($hour, $last_notification_field, $threshold, $access_threshold, $enabled_field) {
       if (!is_null($last_notification_field)) {
         // The time of the last notification sent to this user, about this group, is at least 22 hours ago.
         $filter_time = REQUEST_TIME - ($threshold * $hour);
