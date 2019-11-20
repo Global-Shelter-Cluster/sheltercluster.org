@@ -49,7 +49,7 @@ function cluster_user_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'hybridauth_disable_username_change';
-  $strongarm->value = 1;
+  $strongarm->value = 0;
   $export['hybridauth_disable_username_change'] = $strongarm;
 
   $strongarm = new stdClass();
