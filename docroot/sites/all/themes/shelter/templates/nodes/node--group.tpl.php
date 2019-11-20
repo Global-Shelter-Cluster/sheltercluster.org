@@ -16,7 +16,7 @@
 
     <?php if ($content['editor_menu']): ?>
       <section id="add-content" class="clearfix">
-        <h3 data-collapsible="add-content-container" data-collapsible-default="collapsed">Add content</h3>
+        <h3 data-collapsible="add-content-container" data-collapsible-default="collapsed"><?php echo t('Add content'); ?></h3>
         <div id="add-content-container">
           <?php print render($content['editor_menu']); ?>
         </div>
@@ -25,7 +25,7 @@
 
     <?php if ($content['local_tasks']): ?>
       <section id="admin-links" class="clearfix">
-        <h3 data-collapsible="admin-links-container" data-collapsible-default="collapsed">Group Administration</h3>
+        <h3 data-collapsible="admin-links-container" data-collapsible-default="collapsed"><?php echo t('Group Administration'); ?></h3>
         <div id="admin-links-container">
           <?php print render($content['local_tasks']); ?>
         </div>

@@ -15,6 +15,7 @@ function cluster_locale_locale($op = 'groups') {
     case 'groups':
       return array(
         'cluster_app' => t('App'),
+        'cluster_groups' => t('Responses and other groups'),
       );
   }
 }

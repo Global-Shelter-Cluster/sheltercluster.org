@@ -96,17 +96,17 @@ class GroupDisplayProvider {
         if (is_null($type)) {
           $wrapper = entity_metadata_wrapper('node', $this->node);
           if (strtolower(trim($wrapper->field_geographic_region_type->value()->name)) === 'country')
-            return $plural ? 'countries' : 'country';
+            return $plural ? t('countries') : t('country');
         }
-        return $plural ? 'regions' : 'region';
+        return $plural ? t('regions') : t('region');
       case 'hub':
-        return $plural ? 'hubs' : 'hub';
+        return $plural ? t('hubs') : t('hub');
       case 'response':
-        return $plural ? 'responses' : 'response';
+        return $plural ? t('responses') : t('response');
       case 'working_group':
-        return $plural ? 'working groups' : 'working group';
+        return $plural ? t('working groups') : t('working group');
       default:
-        return $plural ? 'groups' : 'group';
+        return $plural ? t('groups') : t('group');
     }
   }
 
