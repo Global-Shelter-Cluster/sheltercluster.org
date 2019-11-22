@@ -15,6 +15,20 @@
       @include rem(font-size, .85rem);
       color: $shelter-red;
       text-decoration: underline;
+
+      &.export-link {
+        flex: 1;
+        margin-left: 0;
+        margin-right: 10px;
+        text-decoration: none;
+        @include rem(font-size, 1rem);
+
+        span {
+          @include rem(font-size, .85rem);
+          text-decoration: underline;
+        }
+      }
+
     }
   }
   > .photo {

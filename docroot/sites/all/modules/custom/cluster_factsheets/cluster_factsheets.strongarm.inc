@@ -111,6 +111,9 @@ function cluster_factsheets_strongarm() {
       'factsheet_preview_block' => array(
         'custom_settings' => TRUE,
       ),
+      'print' => array(
+        'custom_settings' => TRUE,
+      ),
     ),
     'extra_fields' => array(
       'form' => array(

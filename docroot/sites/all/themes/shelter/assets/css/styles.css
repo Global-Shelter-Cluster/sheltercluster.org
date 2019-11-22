@@ -4116,6 +4116,19 @@ body.document-upload-ondrag {
   color: #7f1416;
   text-decoration: underline;
 }
+.factsheet-full > .date a.export-link {
+  flex: 1;
+  margin-left: 0;
+  margin-right: 10px;
+  text-decoration: none;
+  font-size: 16px;
+  font-size: 1rem;
+}
+.factsheet-full > .date a.export-link span {
+  font-size: 13.6px;
+  font-size: 0.85rem;
+  text-decoration: underline;
+}
 .factsheet-full > .photo {
   grid-area: photo;
   background-size: cover;
