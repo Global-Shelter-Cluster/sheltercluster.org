@@ -4117,17 +4117,21 @@ body.document-upload-ondrag {
   text-decoration: underline;
 }
 .factsheet-full > .date a.export-link {
-  flex: 1;
+  align-self: flex-start;
+  padding: 8px 15px;
   margin-left: 0;
   margin-right: 10px;
   text-decoration: none;
+  color: white;
+  background: #7f1416;
   font-size: 16px;
   font-size: 1rem;
 }
+.factsheet-full > .date a.export-link:hover, .factsheet-full > .date a.export-link.active {
+  background: #ab1b1e;
+}
 .factsheet-full > .date a.export-link span {
-  font-size: 13.6px;
-  font-size: 0.85rem;
-  text-decoration: underline;
+  margin-left: 5px;
 }
 .factsheet-full > .photo {
   grid-area: photo;

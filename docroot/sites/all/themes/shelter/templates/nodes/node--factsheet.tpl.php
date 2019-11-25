@@ -14,11 +14,12 @@ $is_sidebar_empty = (trim($r_sidebar) === '');
 <article class="factsheet-full<?php print ($is_sidebar_empty ? ' factsheet-no-sidebar' : ''); ?>">
   <header class="date">
     <?php
-    print l('<i class="far fa-file-pdf"></i> <span>PDF</span>', 'printpdf'.url('node/'.arg(1)), [
+    print l('<i class="far fa-file-pdf"></i> <span>'.check_plain(variable_get('print_pdf_link_text')).'</span>', 'printpdf'.url('node/'.arg(1)), [
       'html' => TRUE,
       'attributes' => ['class' => 'export-link'],
     ]);
     ?>
+    <div style="flex: 1;"></div>
     <?php if (!empty($cluster_factsheets['full_factsheet'])) print render($cluster_factsheets['full_factsheet']); ?>
     <?php if (!empty($cluster_factsheets['prev'])) print render($cluster_factsheets['prev']); ?>
     <?php print $r_field_date; ?>
