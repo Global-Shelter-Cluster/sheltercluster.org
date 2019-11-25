@@ -227,7 +227,7 @@ function cluster_pdf_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'print_pdf_link_text';
-  $strongarm->value = 'PDF';
+  $strongarm->value = 'Download as PDF';
   $export['print_pdf_link_text'] = $strongarm;
 
   $strongarm = new stdClass();

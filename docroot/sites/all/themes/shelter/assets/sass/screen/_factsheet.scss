@@ -17,15 +17,20 @@
       text-decoration: underline;
 
       &.export-link {
-        flex: 1;
+        align-self: flex-start;
+        padding: 8px 15px;
         margin-left: 0;
         margin-right: 10px;
         text-decoration: none;
+        color: white;
+        background: $shelter-red;
+        &:hover, &.active {
+          background: lighten($shelter-red, 10%);
+        }
         @include rem(font-size, 1rem);
 
         span {
-          @include rem(font-size, .85rem);
-          text-decoration: underline;
+          margin-left: 5px;
         }
       }
 
