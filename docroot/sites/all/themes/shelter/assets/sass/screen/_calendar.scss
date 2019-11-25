@@ -1,0 +1,184 @@
+/* _calendar.scss */
+.addressfield-container-inline {
+  span {
+    display: inline;
+  }
+}
+#all-events,
+#box-calendar {
+  position: relative;
+  width: 100%;
+  background-color: #eee;
+  color: #000;
+  @include border-radius(0.1875rem);
+
+  a {
+    color: #031957;
+  }
+
+  .event-card {
+    @include rem(padding, 0 0 0.25rem 0);
+    @include rem(line-height, 1rem);
+    @include border-radius(7px);
+    border-bottom: 1px solid #ddd;
+    padding-top: 7px;
+    margin-bottom: 9px;
+    clear: right;
+    display: table;
+    width: 100%;
+
+    .event-title {
+      background: #ddd;
+      position: relative;
+      @include border-radius(10px 10px 0 0);
+      @include box-shadow(rgba(100,100,100,0.23) 0px -7px 5px);
+
+      .arrow {
+        @include rem(font-size, 1.8rem);
+        color: #000;
+        font-weight: bold;
+        position: absolute;
+        top: 10px;
+        left: 10px;
+      }
+
+      a {
+        color: #000;
+        width: 100%;
+        display: block;
+        @include rem(padding, 0.75rem 0 0.75rem 1.75rem);
+        margin-bottom: 5px;
+        text-transform: capitalize;
+        border-bottom: 1px solid #ccc;
+
+        &:hover,
+        &:active {
+          text-decoration: none;
+        }
+      }
+    }
+    .information-item {
+      margin-bottom: 7px;
+      @include rem(padding, 0 0.75rem);
+    }
+    .response {
+       padding: 0 5px;
+    }    
+    .label {
+      position: relative;
+      display: block;
+      .map-link {
+        position: absolute;
+        right: 0;
+      }
+    }
+  }
+
+  .all-events,
+  .previous-events {
+    text-align: center;
+    @include rem(font-size, 0.85rem);
+    padding: 0 0 10px;
+    a {
+      color: #000;
+    }
+  }
+
+}
+
+#date-calendar {
+  @include rem(text-indent, -2.25rem);
+  @include rem(margin, 0 0.625rem 0 3.125rem);
+  @include rem(padding, 0.5rem 0 0.5rem 0);
+  text-align: center;
+  font-weight: bold;
+
+  sup {
+    position: relative;
+    vertical-align: top;
+    @include rem(vertical-align, 0.10rem);
+  }
+}
+
+#calendar-pin-icon {
+  position: absolute;
+  top: -35px;
+  left: 15px;
+  z-index: 10;
+  fill: $shelter-red;
+  width: 62px;
+  height: 59px;
+  @include rem(margin, 0.375rem 0px 0.375rem 0px);
+  @include rem(padding, 0 0.3125rem 0.3125rem 0);
+  @include border-radius(15px);
+  @include box-sizing(initial);
+}
+
+.past-events-link a {
+  @extend .button;
+}
+
+#all-events {
+  position: relative;
+  background-color: #fff;
+
+  .future-event-card {
+    position: relative;
+    background-color: #eee;
+
+    .table-wrapper {
+      display: table;
+      height: 100px;
+      width: 100%;
+      table-layout: fixed;
+    }
+    .event-information {
+      display: block;
+      width: auto;
+
+      @include breakpoint(640px) {
+        display: table-cell;
+        vertical-align: top;
+      }
+    }
+    .event-map {
+      display: block;
+      width: 100%;
+      @include breakpoint(640px) {
+        display: table-cell;
+        width: 300px;
+      }
+
+      div {
+        width: 100%;
+        padding: 3px 7px 1px 0;
+      }
+
+      img {
+        width: 100%;
+        height: auto;
+        border: 1px solid #888;
+      }
+    }
+  }
+  .past-event-card {
+    opacity: 0.5;
+    background: #fcfcfc;
+
+    &:hover {
+      opacity: 1;
+    }
+    .event-title {
+      background: #999;
+    }
+  }
+}
+
+div.street-block,
+div.addressfield-container-inline {
+  display: inline;
+}
+div.addressfield-container-inline::after {
+  clear: none;
+  display: inline;
+}

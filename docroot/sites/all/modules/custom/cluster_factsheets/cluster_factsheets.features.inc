@@ -61,6 +61,38 @@ function cluster_factsheets_image_default_styles() {
     ),
   );
 
+  // Exported image style: print_factsheet_image.
+  $styles['print_factsheet_image'] = array(
+    'label' => 'Print Factsheet Image',
+    'effects' => array(
+      1 => array(
+        'name' => 'image_scale',
+        'data' => array(
+          'width' => 1600,
+          'height' => 1200,
+          'upscale' => 0,
+        ),
+        'weight' => 1,
+      ),
+    ),
+  );
+
+  // Exported image style: print_factsheet_map.
+  $styles['print_factsheet_map'] = array(
+    'label' => 'Print Factsheet Map',
+    'effects' => array(
+      2 => array(
+        'name' => 'image_scale',
+        'data' => array(
+          'width' => 1200,
+          'height' => 1200,
+          'upscale' => 0,
+        ),
+        'weight' => 1,
+      ),
+    ),
+  );
+
   return $styles;
 }
 

@@ -1,0 +1,177 @@
+.factsheet-full {
+  > .date {
+    grid-area: date;
+    display: flex;
+    justify-content: flex-end;
+    align-items: baseline;
+    > * {
+      margin-left: 10px;
+    }
+
+    color: $shelter-red;
+    font-weight: bold;
+    @include rem(font-size, 1.6rem);
+    a {
+      @include rem(font-size, .85rem);
+      color: $shelter-red;
+      text-decoration: underline;
+
+      &.export-link {
+        flex: 1;
+        margin-left: 0;
+        margin-right: 10px;
+        text-decoration: none;
+        @include rem(font-size, 1rem);
+
+        span {
+          @include rem(font-size, .85rem);
+          text-decoration: underline;
+        }
+      }
+
+    }
+  }
+  > .photo {
+    grid-area: photo;
+    background-size: cover;
+    background-position: center;
+    @include rem(font-size, .75rem);
+    text-align: right;
+    color: rgba(white, .75);
+    padding: 10px;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, .5);
+  }
+  > .highlights {
+    grid-area: highlights;
+    border: 3px solid $shelter-red;
+    padding: 10px;
+    border-radius: 4px;
+    h3 {
+      background-color: $shelter-red;
+      border: none;
+      color: $white;
+      @include rem(margin, -11px -10px 1rem);
+      padding: 8px 10px;
+
+      path {
+        fill: $white;
+      }
+    }
+  }
+  > .details {
+    grid-area: details;
+    h3 {
+      @include rem(margin, 1.5rem 0 1rem);
+    }
+  }
+  > .map {
+    grid-area: map;
+    line-height: 0;
+
+    img {
+      width: 100%;
+      height: auto;
+    }
+  }
+  > .aside {
+    grid-area: aside;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background: lighten($shelter-grey, 57%);
+    padding: 10px;
+    border-radius: 4px;
+    > * {
+      @include rem(margin-bottom, 1.5rem);
+    }
+    h3 {
+      @include rem(margin, 0 -10px 1rem);
+      @include rem(padding, 0 10px 0.4rem);
+    }
+  }
+
+  @include breakpoint(max-width 699px) {
+    > .photo {
+      padding-bottom: 50%;
+      margin: 10px 0;
+    }
+    > .map {
+      margin: 10px 0;
+    }
+  }
+
+  @include breakpoint(700px) {
+    display: grid;
+    grid-gap: 10px;
+    grid-template-columns: 6fr 5fr;
+    grid-template-rows: max-content max-content max-content min-content;
+
+    grid-template-areas: "date date" "photo map" "highlights aside" "details aside";
+    &.factsheet-no-sidebar {
+      grid-template-areas: "date date" "photo map" "highlights highlights" "details details";
+    }
+  }
+
+  @include breakpoint(900px) {
+    grid-template-columns: 6fr 1fr 4fr;
+    grid-template-areas: "date date date" "photo photo map" "highlights aside aside" "details aside aside";
+    &.factsheet-no-sidebar {
+      grid-template-areas: "date date date" "photo photo map" "highlights highlights highlights" "details details details";
+    }
+  }
+
+  @include breakpoint(980px 1199px) {
+    grid-template-columns: 6fr 5fr;
+    grid-template-areas: "date date" "photo map" "highlights aside" "details aside";
+    &.factsheet-no-sidebar {
+      grid-template-areas: "date date" "photo map" "highlights highlights" "details details";
+    }
+  }
+
+}
+
+.factsheet-chart-indicators {
+  h4 {
+    color: $shelter-grey;
+    margin-top: 20px;
+    &:first-child {
+      margin-top: 0;
+    }
+  }
+
+  label {
+    font-weight: normal;
+    text-align: center;
+    color: $shelter-grey;
+    @include rem(font-size, .85rem);
+
+    & ~ label {
+      margin-top: 10px;
+    }
+  }
+
+  strong {
+    display: block;
+    text-align: center;
+    white-space: nowrap;
+    font-weight: normal;
+    @include rem(font-size, 2rem)
+  }
+
+  div {
+    text-align: center;
+  }
+
+  .indicator-funding {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    > * {
+      width: 50%;
+    }
+  }
+}
+
+.cluster-chart-wrapper.fs_cat_chart {
+  min-height: 200px;
+}

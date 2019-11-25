@@ -1,0 +1,210 @@
+.front {
+  #site-options-bar {
+    margin-bottom: 0;
+  }
+  #user-profile-container {
+    position: absolute;
+    right: 5%;
+    top: 85px;
+    color: $white;
+    background-color: #eee;
+    border: solid 1px #688394;
+    border-radius: 5px;
+    padding: 1px 2px 5px 10px;
+    #login-link a, #logout-link a {
+      color: #222;
+      &:hover {
+        color: #688394;
+      };
+    }
+    @include breakpoint(800px) {
+      right: 45px;
+      top: 48px;
+    }
+  }
+  .video-container {
+    @include rem(margin, 0.5rem 0 1.5rem 0);
+  }
+  #site-branding {
+    height: 160px;
+    margin: 0;
+
+    .page-margin {
+      background: url(../images/homepage-header.jpg) no-repeat 0% top;
+      background-size: 100%;
+      height: 160px;
+
+      @include breakpoint(800px) {
+        background-position: top center;
+      }
+    }
+    #logo-shelter-cluster .svg{
+      top: -5px;
+      left: 5%;
+      max-width: 75%;
+
+      @include breakpoint(800px) {
+        top: 28px;
+        left: 35px;
+        max-width: 92%;
+      }
+    }
+    .search {
+      bottom: 0px;
+      right: 5%;
+
+      @include breakpoint(800px) {
+        bottom: 38px;
+        right: 45px;
+      }
+    }
+    #shelter-cluster {
+      polygon {
+        fill: $white;
+      }
+      path {
+        fill: $white;
+      }
+      .second-color {
+        fill: #cfd0d2;
+      }
+    }
+  }
+  #secondary-nav {
+    margin-bottom: 20px;
+  }
+  .main-content {
+    width: 100%;
+    display: inline-block;
+    vertical-align: top;
+
+    h2 {
+      font-weight: normal;
+    }
+
+    @include breakpoint(900px) {
+      width: 53%;
+    }
+    @include breakpoint(1100px) {
+      width: 60%;
+    }
+  }
+  #twitter-timeline {
+    margin: 0 auto;
+    width: 100%;
+    margin-bottom: 20px;
+    display: inline-block;
+    text-align: center;
+  }
+  .posters {
+    list-style: none;
+    padding: 0;
+    @include rem(margin, 0 0 2rem 0);
+
+    .poster {
+      width: 100%;
+      float: left;
+      @include rem(margin, 0 0 1rem 0);
+
+      img {
+        width: 100%;
+        height: auto;
+        float: left;
+      }
+      @include breakpoint(500px) {
+        @include rem(margin, 0 0 1rem 1rem);
+        width: 46%;
+      }
+    }
+  }
+  .view-homepage2 {
+    margin-top: 41px;
+    .views-row {
+      position: relative;
+      @include desktop() {
+        float: right;
+        width: 49%;
+      }
+
+      &:first-child { float: left; }
+        img {
+          width: 100%;
+          height: auto;
+        }
+    }
+
+    .views-field-title {
+      position: absolute;
+      bottom: 5px;
+      z-index: 10;
+      color: #fff;
+      padding: 30px 10px 10px;
+      display: block;
+      width: 100%;
+      background: -moz-linear-gradient(top,  rgba(0,0,0,0.01) 0%, rgba(0,0,0,0.68) 50%, rgba(0,0,0,1) 74%, rgba(0,0,0,1) 100%);
+      background: -webkit-linear-gradient(top,  rgba(0,0,0,0.01) 0%,rgba(0,0,0,0.68) 50%,rgba(0,0,0,1) 74%,rgba(0,0,0,1) 100%);
+      background: linear-gradient(to bottom,  rgba(0,0,0,0.01) 0%,rgba(0,0,0,0.68) 50%,rgba(0,0,0,1) 74%,rgba(0,0,0,1) 100%);
+      filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#03000000', endColorstr='#000000',GradientType=0 );
+
+    }
+
+    .views-field-field-homeimage {
+      position: relative;
+    }
+  }
+}
+
+@include desktop() {
+  html.flexbox {
+    .front .home-main {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .front .side-column {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .front .side-column [data-set="twitter-timeline"] {
+      flex: 1;
+    }
+
+    .front #twitter-timeline iframe {
+      height: 100% !important;
+    }
+
+    .front .main-column:after {
+      content: '' !important;
+    }
+  }
+}
+
+@include mobile() {
+  .front .main-column {
+    padding-top: 0;
+  }
+
+  #block-views-homepage2-block-1 > .content {
+    padding-bottom: 0;
+  }
+}
+
+.front .twitter-timeline-sidebar {
+  display: none;
+}
+
+.front .twitter-timeline-main {
+  display: block;
+}
+
+@include desktop() {
+  .front .twitter-timeline-sidebar {
+    display: flex;
+    flex: 1;
+  }
+
+  .front .twitter-timeline-main {
+    display: none;
+  }
+}

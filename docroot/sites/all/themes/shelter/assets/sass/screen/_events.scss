@@ -1,0 +1,68 @@
+.event-item {
+  background: rgb(218,222,228);
+  @include rem(margin-bottom, 0.25rem);
+  @include rem(padding, 0.8rem);
+
+  a {
+    @extend .underlined-links;
+    color: $shelter-dark-blue;
+  }
+}
+
+.node-event {
+  a {
+    color: #031957;
+  }
+  .field-items {
+    @include rem(margin-bottom, 1rem);
+  }
+  .field-label {
+    text-transform: uppercase;
+    color: #888;
+    @include rem(font-size, 0.7rem);
+  }
+  .field-name-field-postal-address {
+    background: #ddd;
+    @include rem(padding, 0.75rem);
+    @include rem(margin-bottom, 1rem);
+    .field-items {
+      margin: 0;
+    }
+  }
+}
+
+.addtocal,
+.addtocal_menu {
+  @extend .button;
+}
+
+ul.addtocal_menu {
+  border: none;
+  margin-left: 8px !important;
+}
+
+.ical {
+  color: $shelter-grey;
+  font-size: 11px;
+  display: inline-block;
+  border-radius: 3px;
+  padding: 1px 3px;
+  margin-left: 5px;
+  line-height: 1;
+  border: 2px solid $shelter-grey;
+
+  opacity: .8;
+  &:hover {
+    opacity: 1;
+  }
+
+  a {
+    color: $shelter-grey;
+    text-decoration: none;
+  }
+}
+
+.event-card .event-description img {
+  height: auto !important;
+  max-width: 100%;
+}

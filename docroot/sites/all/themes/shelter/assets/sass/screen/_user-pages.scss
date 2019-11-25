@@ -1,0 +1,111 @@
+.page-user {
+  .form-text {
+    float: none;
+    @include rem(margin-bottom, 0.5rem);
+    max-width: 100%;
+  }
+  .form-item .description {
+    width: 100%;
+    @include breakpoint(700px) {
+      width: 70%;
+    }
+  }
+  #user-profile-links-container {
+    ul {
+      list-style: none;
+      padding-left: 0;
+    }
+    a {
+      color: $shelter-grey;
+    }
+    .active a {
+      font-weight: bold;
+    }
+  }
+
+  .profile {
+    .history {
+      background: lighten($shelter-light-blue, 10%);
+      @include rem(padding, 1rem 1rem 0.1rem);
+      @include rem(margin-bottom, 1rem);
+    }
+    a {
+      color: $shelter-dark-blue;
+      @extend .underlined-links;
+    }
+    .avatar {
+      width: 120px;
+      height: 120px;
+      float: left;
+
+      img {
+        width: 100px;
+        height: auto;
+        border-radius: 50%;
+      }
+
+      .svg {
+        width: 100px;
+        height: 100px;
+      }
+    }
+    .name {
+      @include rem(font-size, 3rem);
+      display: block;
+    }
+    .field-label {
+      margin: 20px 0 .2em 0;
+      font-weight: bold;
+    }
+    .telephone {
+      display: inline-block;
+      + .telephone {
+        margin-left: 10px;
+      }
+    }
+  }
+}
+#page #user-login .hybridauth-widget .hybridauth-icon {
+  background-image: url('../images/humanitarian-id-logo.svg');
+  height: 50px;
+  width: 300px;
+}
+
+#login-link {
+  background: url('../images/humanitarianid.png') right center no-repeat;
+  height: 25px;
+  vertical-align: center;
+  padding: 5px 30px 0 0;
+
+  a {
+    white-space: nowrap;
+    color: #222;
+    font-weight: bold;
+
+    &:hover {
+      color: $shelter-dark-blue;
+    }
+  }
+}
+
+#logout-link {
+  height: 25px;
+  vertical-align: center;
+  padding: 5px 10px 0 20px;
+
+  a {
+    white-space: nowrap;
+    color: #222;
+    font-weight: bold;
+
+    &:hover {
+      color: $shelter-dark-blue;
+    }
+  }
+}
+
+.user-picture {
+  img {
+    border-radius: 50%;
+  }
+}

@@ -1,0 +1,217 @@
+/* _secondary-nav.scss */
+
+#secondary-nav {
+  @include rem(margin, 0 0 0 0);
+  @include rem(padding, 0.5rem 0 0.5rem 0);
+
+  h1 {
+    color: $shelter-red;
+    font: bold 2em verdana, sans-serif;
+  }
+  ul {
+    @include reset-list;
+  }
+  ul li.leaf {
+    list-style: none;
+    padding: 0;
+  }
+  a {
+    text-decoration: none;
+    display: block;
+  }
+
+  .svg {
+    fill: darken($shelter-grey,20%);
+    width: 14px;
+    height: 14px;
+    position: absolute;
+    top: 11px;
+    left: 13px;
+  }
+  .nav-group {
+    clear: both;
+    margin-bottom: 10px;
+
+    h3 {
+      @include rem(margin, 0.75rem 0 0.25rem 0);
+      @include rem(font-size, 0.85rem);
+      color: darken($shelter-grey, 15%);
+    }
+  }
+  .nav-items {
+
+    .sub-nav {
+      display: block;
+      @include breakpoint( 500px ) {
+        display: none;
+      }
+    }
+    .nav-item {
+      float: left;
+      width: 100%;
+      position: relative;
+      @include rem(margin, 0 0 0.25rem 0);
+
+      a {
+        float: left;
+        width: 100%;
+        background: lighten($shelter-light-blue, 10%);
+        color: $shelter-grey;
+        font-weight: bold;
+        @include rem(padding, 0.5rem 1rem 0.5rem);
+        @include rem(font-size, 0.9rem);
+
+        &:hover {
+          background: $shelter-light-blue;
+        }
+        &.active {
+          background: $shelter-light-blue;
+        }
+
+        &.cant-follow {
+          background: $accent-red;
+          color: $white;
+          &:hover, &.active {
+            background: lighten($accent-red, 10%);
+          }
+        }
+
+        &.follow {
+          background: $shelter-red;
+          color: $white;
+          &:hover, &.active {
+            background: lighten($shelter-red, 10%);
+          }
+        }
+
+        &.un-follow {
+          background: $accent-dark-blue;
+          color: $white;
+          &:hover, &.active {
+            background: lighten($accent-dark-blue, 10%);
+          }
+        }
+      }
+      .total {
+        color: darken($shelter-grey,10%);
+        @include rem(font-size, 0.7rem);
+      }
+      .total-ended {
+        float: right;
+        @include rem(font-size, 0.75rem);
+      }
+
+      .optgroup {
+        line-height: 20px;
+        margin: 40px 0 5px 15px;
+
+        label {
+          @include rem(font-size, 0.85rem);
+          font-weight: normal;
+          color: darken($shelter-grey, 20%);
+        }
+      }
+    }
+
+    .nav-secondary-items {
+      margin-bottom: 10px;
+
+      li {
+        list-style-type: square;
+        list-style-position: outside;
+        margin-left: 20px;
+        .nav-secondary-child-item {
+          list-style-type: circle;
+        }
+      }
+      a {
+        display: inline;
+        color: darken($shelter-grey, 20%);
+        @extend .not-underlined-links;
+        @include rem(font-size, 0.85rem);
+      }
+    }
+
+    #navigation-option-related-operations {
+      .archived {
+        opacity: .6;
+      }
+      .nav-secondary-items {
+        li {
+          list-style-type: none;
+          margin-left: 0;
+        }
+        a {
+          float: left;
+          width: 100%;
+          text-decoration: none;
+          background: darken($shelter-grey, 20%);
+          color: $white;
+          font-weight: bold;
+          @include rem(padding, 0.5rem 1rem 0.5rem);
+          @include rem(margin, 0 0 0.25rem 0);
+          @include rem(font-size, 0.9rem);
+
+          &:hover {
+            background: darken($shelter-grey, 40%);
+            text-decoration: none;
+          }
+          &.active {
+            background: $white;
+          }
+          &:after {
+            border: none;
+          }
+        }
+      }
+    }
+
+    #navigation-option-related-operations-hierarchical {
+      .archived {
+        opacity: .6;
+      }
+      .nav-secondary-items {
+        li {
+          list-style-type: none;
+          margin-left: 0;
+        }
+      }
+      > .nav-secondary-items > .nav-secondary-item > a {
+        display: inline-block;
+        margin-bottom: 4px;
+        &.active {
+          display: none;
+        }
+      }
+      .nav-secondary-items .nav-secondary-items {
+        margin-bottom: 0;
+        li:last-child {
+          margin-bottom: 0;
+        }
+        a {
+          float: left;
+          width: 100%;
+          text-decoration: none;
+          background: darken($shelter-grey, 20%);
+          color: $white;
+          font-weight: bold;
+          @include rem(padding, 0.5rem 1rem 0.5rem);
+          @include rem(margin, 0 0 0.25rem 0);
+          @include rem(font-size, 0.9rem);
+
+          &:hover {
+            background: darken($shelter-grey, 40%);
+            text-decoration: none;
+          }
+          &.active {
+            background: $white;
+          }
+          &:after {
+            border: none;
+          }
+        }
+      }
+    }
+
+  }
+}

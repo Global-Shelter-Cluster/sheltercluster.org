@@ -1,0 +1,69 @@
+/* _active_responses.scss */
+
+#active-responses {
+  @include rem(margin, 1rem 0 0 0);
+  text-align: center;
+
+  @include breakpoint(900px) {
+    @include rem(margin, 0 0 1.5rem 0);
+  }
+
+  h1 {
+    @include rem(font-size, 1.8rem);
+    @include rem(margin, 0 0 0.5rem 0);
+    font-weight: normal;
+  }
+
+  ul {
+    @include reset-list;
+    @include rem(margin-bottom, 1rem);
+  }
+
+  .hot-responses {
+    width: 100%;
+    text-align: center;
+
+    .hot-responses-link {
+      position: relative;
+      display: block;
+    }
+
+    a {
+      display: block;
+      text-align: left;
+      text-decoration: none;
+      color: $white;
+      font-weight: bold;
+      width: 100%;
+      border: 1px solid $accent-dark-blue;
+      background-color: $accent-dark-blue;
+      @include transition(all 0.3s ease);
+      @include rem(padding, 0.5rem 2.5rem 0.5rem 0.5rem);
+      @include rem(margin, 0 0 0.25rem 0);
+      @include box-shadow(rgba(0,0,0,0.09) 2px 2px 1px);
+      &:hover,
+      &:active {
+        background-color: lighten($accent-dark-blue, 10%);
+        color: #fff;
+      }
+      @include breakpoint(800px) {
+        width: 100%;
+      }
+    }
+    div {
+      float: left;
+    }
+    svg {
+      position: absolute;
+      top: 5px;
+      right: 10px;
+      width: 24px;
+      path,
+      circle,
+      polygon {
+        fill: $white;
+      }
+    }
+  }
+}
+

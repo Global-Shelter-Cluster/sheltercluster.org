@@ -1,0 +1,251 @@
+/* _footer.scss */
+
+footer {
+  background: rgb(235, 239, 243);
+  color: $shelter-grey;
+  border-top: 1px solid rgb(235, 239, 243);
+  @include rem(padding-bottom, 5rem);
+
+  .search {
+    display: table-caption;
+    color: #000;
+    background-color: rgb(255,255,255);
+    @include rem(padding, 0.8rem 1.5625rem);
+    @include rem(font-size, 0.80rem);
+    > div {
+      text-align: center;
+
+      .container-inline {
+        display: table;
+        margin: 0 auto;
+      }
+    }
+    @include breakpoint(400px) {
+      > div {
+        float: right;
+
+        .container-inline {
+          display: block;
+          margin: 0;
+        }
+      }
+    }
+  }
+
+  .inside-footer {
+    display: table;
+    table-layout: fixed;
+    background-color: $shelter-light-blue;
+    > section {
+      display: table;
+      width: 100%;
+      @include rem(padding, 1rem 0 1rem 1.5625rem);
+      @include breakpoint(900px) {
+        display: table-cell;
+        width: auto;
+      }
+    }
+  }
+
+  h3 {
+    text-transform: uppercase;
+    @include rem(font-size, 0.85rem);
+    @include rem(margin, 0 0 0.5rem );
+  }
+
+  a {
+    color: $shelter-grey;
+    @extend .underlined-links;
+    white-space: nowrap;
+  }
+
+  .see-all {
+    position: relative;
+    text-transform: uppercase;
+    font-weight: bold;
+    @include rem(font-size, 0.7rem);
+    @include rem(margin, 0 0 0 0.9375rem);
+    @include rem(text-indent, -0.9375rem);
+
+    &:before {
+      position: absolute;
+      left: 0;
+      top: -4px;
+      content: '+';
+      @include rem(font-size, 1rem);
+      @include rem(padding, 0 0.3125rem 0 0);
+    }
+    &:hover,
+    &:active {
+      text-decoration: none;
+
+      &:before {
+        border-style: none;
+      }
+    }
+  }
+  .general-information {
+    padding-top: 30px;
+  }
+
+  ul {
+    @include reset-list;
+
+    li {
+      position: relative;
+      @include rem(margin,0 0 0.25em 1em);
+      @include rem(padding, 0 0 0.25rem 0);
+      @include rem(font-size, 0.85rem);
+
+      &:before {
+        position: absolute;
+        top: 7px;
+        left: -11px;
+        content: '';
+        background: url(../images/footer-bullet.png) no-repeat 0 0 transparent;
+        width: 6px;
+        height: 6px;
+      }
+      &.leaf {
+        list-style-image: none;
+        list-style-type: none;
+      }
+    }
+  }
+
+  #active-clusters-list {
+   .item-list ul li {
+      @include rem(margin, 0 0 0.25rem 0.8125rem);
+    }
+    .complete-list {
+      @include rem(padding, 0 0.5rem 0.5rem);
+    }
+  }
+
+  #regions-list {
+    background-color: darken($shelter-light-blue,3%);
+    @include rem(padding, 1rem 1rem 0.9rem 1.5625rem);
+    width: 100%;
+    @include breakpoint(900px) {
+      width: 67%;
+    }
+
+    > .menu > li {
+      list-style: none;
+      @include rem(margin, 0 0 7px 0);
+      display: block;
+      width: auto;
+
+      > .menu li {
+        display: inline-block;
+        margin-left: 0;
+      }
+
+      > .menu > li > .menu li {
+        &.expanded, &.collapsed, &.leaf {
+          margin: 0;
+        }
+      }
+
+      &:before {
+        left: 0;
+        top: 9px;
+      }
+
+      > a {
+        font-weight: bold;
+        @include rem(margin, 0 0 0 10px);
+      }
+
+      .nav-items {
+        @include rem(margin, 0 0 0 10px);
+
+        li {
+          &.expanded {
+            list-style-image: none;
+            list-style-type: none;
+          }
+          &.expanded, &.collapsed, &.leaf {
+            padding-right: 0;
+          }
+          &:before {
+            content: none;
+          }
+          &:after {
+            content: ',';
+          }
+          &:last-child:after {
+            content: none;
+          }
+        }
+      }
+    }
+  }
+
+  #contributions {
+    display: table-cell;
+    width: auto;
+    text-align: center;
+    background: #fff;
+    @include rem(padding, 0.8rem 1.5625rem);
+
+    h3 {
+      @include rem(margin,1rem 0 1.75rem 0);
+    }
+
+    .contributors {
+      .contributor {
+        display: inline-block;
+        vertical-align: middle;
+        padding: 0;
+        @include rem(margin,0 2rem 2rem 2rem);
+        &:before {
+          background: none;
+        }
+        img {
+          width: 75%;
+        }
+        a:after {
+          border: none;
+        }
+      }
+
+      &.appstores img {
+        width: auto;
+        height: 50px;
+      }
+    }
+  }
+
+  #general-information {
+    li {
+      margin: 0;
+
+      &:before {
+        position: relative;
+        background: none;
+        top: 0;
+        left: 0;
+      }
+    }
+  }
+
+  #contributions h3 {
+    font-weight: normal;
+  }
+  #partners-list {
+    .partner {
+      list-style: none;
+      display: inline-block;
+    }
+  }
+
+  .table-group {
+    display: table-row-group;
+  }
+
+  .table-row {
+    display:table-row;
+  }
+
+}
