@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Cluster PDF feature.
+ */
+
+include_once 'cluster_pdf.features.inc';
