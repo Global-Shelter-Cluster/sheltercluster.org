@@ -1,10 +1,10 @@
 <?php
 
 //Shelter brand guidelines colors
-const CLUSTER_CHART_COLOR_SHELTER_RED = 'rgb(127,20,22)';
-const CLUSTER_CHART_COLOR_SHELTER_GREY = 'rgb(87,87,87)';
-const CLUSTER_CHART_COLOR_SHELTER_LIGHT_BLUE = 'rgb(205,214,219)';
-const CLUSTER_CHART_COLOR_SHELTER_DARK_BLUE = 'rgb(104,131,148)';
+const CLUSTER_CHART_COLOR_SHELTER_RED = '#7f1416';
+const CLUSTER_CHART_COLOR_SHELTER_GREY = '#575757';
+const CLUSTER_CHART_COLOR_SHELTER_LIGHT_BLUE = '#cdd6db';
+const CLUSTER_CHART_COLOR_SHELTER_DARK_BLUE = '#688394';
 
 //Shelter chart guidelines colors
 const CLUSTER_CHART_COLOR_ACCENT_YELLOW = 'rgba(255,177,0,1)';
@@ -71,4 +71,68 @@ function theme_cluster_chart_hbar($variables) {
   $extra_css_classes = (array) ($variables['extra_css_classes'] ?: []);
   return '<div' . drupal_attributes(['class' => array_merge(['cluster-chart-wrapper'], $extra_css_classes)]) . '>'.
     '<canvas' . drupal_attributes(['id' => $html_id]) . "></canvas></div>\n";
+}
+
+function cluster_chart_number_format($number) {
+  if ($number < 700000)
+    return number_format($number);
+
+  return sprintf('%.1f M', $number / 1000000);
+}
+
+function cluster_chart_png_hbar($data, $labels, $colors, $width, $height, $cache_filename = NULL) {
+  // TODO: implement file caching
+
+  require_once drupal_get_path('module', 'cluster_chart') . '/jpgraph/src/jpgraph.php';
+  require_once drupal_get_path('module', 'cluster_chart') . '/jpgraph/src/jpgraph_bar.php';
+
+  $graph = new Graph($width, $height);
+  $graph->SetScale("textlin");
+
+  $maxLabelWidth = max(array_map('strlen', $labels)) * 9;
+
+  $graph->Set90AndMargin(50 + $maxLabelWidth,60,40,20); // "horizontal" bar chart
+  $graph->SetTickDensity(TICKD_VERYSPARSE);
+  $graph->xaxis->SetTickLabels($labels);
+  $graph->xaxis->SetFont(FF_DV_SANSSERIF,FS_NORMAL,14);
+  $graph->yaxis->SetFont(FF_DV_SANSSERIF,FS_NORMAL,14);
+  $graph->xaxis->SetLabelMargin(10);
+  $graph->xaxis->SetLabelAlign('right','center');
+  $graph->yaxis->scale->SetGrace(5);
+  $graph->yaxis->scale->ticks->SetFormatCallback('cluster_chart_number_format');
+  $graph->ygrid->SetFill(false);
+
+  $bplot = new BarPlot($data);
+  $graph->Add($bplot);
+
+  $bplot->SetWeight(0); // removes border around bars
+  $bplot->SetFillColor($colors);
+  $bplot->SetWidth(0.8);
+  $bplot->value->SetFont(FF_DV_SANSSERIF,FS_BOLD,12);
+
+  $graph->Stroke();
+  drupal_exit();
+}
+
+function cluster_chart_png_pie($data, $labels, $colors, $width, $height, $cache_filename = NULL) {
+  // TODO: implement file caching
+
+  require_once drupal_get_path('module', 'cluster_chart') . '/jpgraph/src/jpgraph.php';
+  require_once drupal_get_path('module', 'cluster_chart') . '/jpgraph/src/jpgraph_pie.php';
+
+  $graph = new PieGraph($width, $height);
+
+  $plot = new PiePlot($data);
+
+  $graph->Add($plot);
+
+  $plot->value->Show(false);
+  $plot->SetStartAngle(90);
+  $plot->SetSize(0.47);
+  $plot->SetCenter(0.5,0.5);
+  $plot->SetSliceColors($colors);
+  $plot->SetLabelPos(.6);
+
+  $graph->Stroke();
+  drupal_exit();
 }
