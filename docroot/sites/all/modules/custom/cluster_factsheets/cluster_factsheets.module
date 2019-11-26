@@ -39,7 +39,172 @@ function cluster_factsheets_menu() {
     'type' => MENU_CALLBACK,
   ];
 
+  $items['chart/factsheet/%node/%'] = [
+    'page callback' => 'cluster_factsheets_chart',
+    'page arguments' => [2, 3],
+    'access arguments' => ['access content'],
+    'type' => MENU_CALLBACK,
+  ];
+
   return $items;
+}
+
+function cluster_factsheets_chart($node, $type) {
+  if (!$node || $node->type !== 'factsheet')
+    return MENU_NOT_FOUND;
+
+  $wrapper = entity_metadata_wrapper('node', $node);
+
+  switch ($type) {
+    case 'cat':
+      return 'In development';
+
+    case 'people':
+      if (
+        (!is_null($in_need = $wrapper->field_fsi_in_need->value()))
+        && (!is_null($targeted = $wrapper->field_fsi_targeted->value()))
+      ) {
+        cluster_chart_png_hbar(
+          [$in_need, $targeted],
+          ['In need', 'Targeted'],
+          [CLUSTER_CHART_COLOR_SHELTER_RED, CLUSTER_CHART_COLOR_SHELTER_RED_SHADE2],
+          800, 400,
+          NULL // TODO: filename
+        );
+      } else
+        return MENU_NOT_FOUND;
+      break;
+
+    case 'funding':
+      if (
+        (!is_null($required = $wrapper->field_fsi_funding_required->value()))
+        && (!is_null($funded = $wrapper->field_fsi_funded->value()))
+      ) {
+        $funded_percentage = round($funded / $required * 100);
+
+        if ($funded_percentage >= 100)
+          cluster_chart_png_pie([$funded], ['Funded'], [CLUSTER_CHART_COLOR_SHELTER_RED], 500, 500);
+        else {
+          cluster_chart_png_pie(
+            [$funded, $required - $funded],
+            ['Funded', 'Gap'],
+            [
+              CLUSTER_CHART_COLOR_SHELTER_RED,
+              CLUSTER_CHART_COLOR_SHELTER_RED_SHADE2,
+            ],
+            500, 500);
+        }
+      }
+      break;
+
+    default:
+      return MENU_NOT_FOUND;
+  }
+
+return;
+  if (
+    (!is_null($in_need = $wrapper->field_fsi_in_need->value()))
+    && (!is_null($targeted = $wrapper->field_fsi_targeted->value()))
+  ) {
+    $indicators[] = [
+      [
+        '#theme' => 'html_tag',
+        '#tag' => 'h4',
+        '#value' => 'People' . _cluster_factsheets_hh_abbr($node),
+      ],
+      [
+        '#theme' => 'cluster_chart_hbar',
+        '#data' => [
+          [
+            'data' => [$in_need, $targeted],
+            'backgroundColor' => [
+              CLUSTER_CHART_COLOR_SHELTER_RED,
+              CLUSTER_CHART_COLOR_SHELTER_RED_SHADE2,
+            ],
+          ],
+        ],
+        '#labels' => ['In need', 'Targeted'],
+        '#options' => [
+          'legend' => ['display' => FALSE],
+          'maintainAspectRatio' => FALSE,
+          'scales' => ['xAxes' => [['ticks' => ['beginAtZero' => true]]]],
+        ],
+      ],
+    ];
+  }
+
+  if (
+    (!is_null($required = $wrapper->field_fsi_funding_required->value()))
+    && (!is_null($funded = $wrapper->field_fsi_funded->value()))
+  ) {
+    $funded_percentage = round($funded / $required * 100);
+
+    if ($funded_percentage >= 100)
+      $funding_chart = [
+        '#theme' => 'cluster_chart_pie',
+        '#data' => [
+          'data' => [$funded],
+          'backgroundColor' => [
+            CLUSTER_CHART_COLOR_SHELTER_RED,
+          ],
+        ],
+        '#labels' => ['Funded'],
+        '#options' => [
+          'legend' => ['display' => FALSE],
+          'maintainAspectRatio' => FALSE,
+          'pieceLabel' => [
+            'render' => [$funded_percentage . '%'],
+            'fontColor' => 'white',
+          ],
+        ],
+      ];
+    else
+      $funding_chart = [
+        '#theme' => 'cluster_chart_pie',
+        '#data' => [
+          'data' => [$funded, $required - $funded],
+          'backgroundColor' => [
+            CLUSTER_CHART_COLOR_SHELTER_RED,
+            CLUSTER_CHART_COLOR_SHELTER_RED_SHADE2,
+          ],
+        ],
+        '#labels' => ['Funded', 'Gap'],
+        '#options' => [
+          'legend' => ['display' => FALSE],
+          'maintainAspectRatio' => FALSE,
+          'pieceLabel' => [
+            'render' => [$funded_percentage . '%'],
+            'fontColor' => 'white',
+          ],
+        ],
+      ];
+
+    $total = '<label>Total funding required:</label><strong>' . cluster_factsheets_number($required, '$') . '</strong>';
+
+    $funding_source = trim($wrapper->field_funding_source->value());
+    $source = $funding_source ? '<label>Source:</label><div>' . check_plain($funding_source) . '</div>' : '';
+
+    $indicators[] = [
+      [
+        '#theme' => 'html_tag',
+        '#tag' => 'h4',
+        '#value' => 'Funding',
+      ],
+      [
+        '#type' => 'container',
+        '#attributes' => ['class' => ['indicator-funding']],
+        $funding_chart,
+        [
+          '#markup' => '<div class="funding-info">' . $total . $source . '</div>',
+        ],
+      ],
+    ];
+  }
+
+  return $indicators;
+//  return (print_r(func_get_args(),true));
+  $data = [[12,8,19,3,10,5],[8,2,11,7,14,4]];
+  cluster_chart_png_hbar($data, 500, 300);
 }
 
 function cluster_factsheets_page() {
