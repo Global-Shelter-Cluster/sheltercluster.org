@@ -153,5 +153,29 @@ msgstr "Sous-région"
 msgid "Child response"
 msgstr "Sous-réponse"
 
-Add content
+msgid "Add content"
+msgstr "Ajouter du contenu"
 
+msgid "Group Administration"
+msgstr "Administration du groupe"
+
+msgid "Edit"
+msgstr "Éditer"
+
+msgid "Content"
+msgstr "Contenu"
+
+msgid "Coordination Team"
+msgstr "Équipe de coordination"
+
+msgid "Featured Documents"
+msgstr "Documents vedette"
+
+msgid "Recent Documents"
+msgstr "Documents récents"
+
+msgid "Overview"
+msgstr "Survol"
+
+msgid "Associated regions"
+msgstr "Régions associées"

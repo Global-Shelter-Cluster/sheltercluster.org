@@ -559,7 +559,7 @@
           data: data,
           computed: {
             title: function() {
-              return this.keyDocs ? 'Recent Key Documents' : 'Recent Documents';
+              return this.keyDocs ? Drupal.t('Recent Key Documents') : Drupal.t('Recent Documents');
             },
             keyDocs: function() {
               return this.groupNid ? false : true;

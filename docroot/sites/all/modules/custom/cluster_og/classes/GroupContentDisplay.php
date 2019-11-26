@@ -972,6 +972,10 @@ class GroupFullDisplayProvider extends GroupDisplayProvider {
     return FALSE;
   }
 
+  public function getAvailableTranslations() {
+    $available_translations = $this->manager->getExistingTranslationsLangcodes();
+  }
+
   /**
    * @TODO delegate theming completely to cluster_docs.
    */
