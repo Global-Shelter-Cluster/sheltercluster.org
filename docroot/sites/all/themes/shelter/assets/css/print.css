@@ -78,7 +78,7 @@ h4 {
   width: 100%;
 }
 .node--factsheet .area-header .area-group {
-  width: 45%;
+  width: 50%;
   text-align: center;
 }
 .node--factsheet .area-header .area-date {
@@ -128,7 +128,7 @@ h4 {
   border: none;
   color: white;
   margin: -11px -11px 1rem;
-  padding: 8px 10px;
+  padding: 5px 10px;
 }
 .node--factsheet .area-highlights h3 svg {
   display: none;
@@ -136,6 +136,13 @@ h4 {
 .node--factsheet .area-details h3 {
   margin: 24px 0 16px;
   margin: 1.5rem 0 1rem;
+}
+.node--factsheet .area-details ul {
+  margin: 0 0 0.75em 0;
+  padding: 0;
+}
+.node--factsheet .area-details ul li {
+  margin: 0 0 0.25em 1.5em;
 }
 .node--factsheet .area-aside {
   float: right;
@@ -156,6 +163,13 @@ h4 {
   margin: 0 -0.625rem 1rem;
   padding: 0 10px 6.4px;
   padding: 0 0.625rem 0.4rem;
+}
+.node--factsheet .area-aside ul {
+  margin: 0 0 0.75em 0;
+  padding: 0;
+}
+.node--factsheet .area-aside ul li {
+  margin: 0 0 0.25em 1.5em;
 }
 
 .factsheet-chart-indicators h4 {

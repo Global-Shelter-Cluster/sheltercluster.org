@@ -11,7 +11,7 @@
       img {width: 100%;}
     }
     .area-group {
-      width: 45%;
+      width: 50%;
       text-align: center;
     }
     .area-date {
@@ -60,16 +60,18 @@
       width: 54%;
     }
   }
+
   .area-highlights {
     border: 3px solid $shelter-red;
     padding: 10px;
     border-radius: 4px;
+
     h3 {
       background-color: $shelter-red;
       border: none;
       color: $white;
       margin: -11px -11px 1rem;
-      padding: 8px 10px;
+      padding: 5px 10px;
 
       svg {display: none;}
 
@@ -78,11 +80,22 @@
       //}
     }
   }
+
   .area-details {
     h3 {
       @include rem(margin, 1.5rem 0 1rem);
     }
+
+    ul {
+      margin: 0 0 0.75em 0;
+      padding: 0;
+
+      li {
+        margin: 0 0 0.25em 1.5em;
+      }
+    }
   }
+
   .area-aside {
     float: right;
     width: 40%;
@@ -98,6 +111,15 @@
     h3 {
       @include rem(margin, 0 -10px 1rem);
       @include rem(padding, 0 10px 0.4rem);
+    }
+
+    ul {
+      margin: 0 0 0.75em 0;
+      padding: 0;
+
+      li {
+        margin: 0 0 0.25em 1.5em;
+      }
     }
   }
 }

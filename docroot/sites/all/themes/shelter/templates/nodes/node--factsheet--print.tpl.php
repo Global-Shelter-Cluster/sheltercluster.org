@@ -30,7 +30,7 @@ $is_sidebar_empty = (trim($r_sidebar) === '');
         ?>
       </td>
       <td class="area-date">
-        <?php print $r_field_date; ?>
+        <?php print strip_tags($r_field_date); ?>
       </td>
     </tr>
   </table>
