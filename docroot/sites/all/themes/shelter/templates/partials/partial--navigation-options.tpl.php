@@ -32,7 +32,21 @@ $link_options = function($node) {
 
     <?php foreach ((isset($links) ? $links : array()) as $link): ?>
       <li class="nav-secondary-item clearfix">
-        <?php print l($link->title, $link->url, array('attributes' => array('target' => '_blank'))); ?>
+        <?php
+          $options = [
+            'attributes' => [
+              'target' => '_blank',
+            ],
+          ];
+          if (isset($link->options)) {
+            $options = $link->options;
+          }
+          print l(
+            $link->title,
+            $link->url,
+            $options
+          );
+        ?>
       </li>
     <?php endforeach; ?>
   </ul>

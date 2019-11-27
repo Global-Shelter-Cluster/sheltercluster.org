@@ -33,6 +33,7 @@ class GroupDisplayProvider {
     $this->node = $node;
     $this->manager = GroupContentManager::getInstance($node);
     $this->view_mode = $view_mode;
+    $this->getAvailableTranslations();
   }
 
   /**
@@ -96,17 +97,17 @@ class GroupDisplayProvider {
         if (is_null($type)) {
           $wrapper = entity_metadata_wrapper('node', $this->node);
           if (strtolower(trim($wrapper->field_geographic_region_type->value()->name)) === 'country')
-            return $plural ? 'countries' : 'country';
+            return $plural ? t('countries') : t('country');
         }
-        return $plural ? 'regions' : 'region';
+        return $plural ? t('regions') : t('region');
       case 'hub':
-        return $plural ? 'hubs' : 'hub';
+        return $plural ? t('hubs') : t('hub');
       case 'response':
-        return $plural ? 'responses' : 'response';
+        return $plural ? t('responses') : t('response');
       case 'working_group':
-        return $plural ? 'working groups' : 'working group';
+        return $plural ? t('working groups') : t('working group');
       default:
-        return $plural ? 'groups' : 'group';
+        return $plural ? t('groups') : t('group');
     }
   }
 
@@ -420,6 +421,16 @@ class GroupDisplayProvider {
         'title' => t('Useful links'),
         'collapsed' => $force_collapse,
         'links' => $useful_links
+      ));
+    }
+
+    $translations = $this->getAvailableTranslations();
+    if ($translations) {
+      $secondary['translations'] = partial('navigation_options', array(
+        'navigation_type_id' => 'translations',
+        'title' => t('Translations'),
+        'collapsed' => $force_collapse,
+        'links' => $translations,
       ));
     }
 
@@ -970,6 +981,31 @@ class GroupFullDisplayProvider extends GroupDisplayProvider {
       return array('docs' => $docs);
     }
     return FALSE;
+  }
+
+  public function getAvailableTranslations() {
+    if (!isset($this->node->translations) && !isset($this->node->translations->data)) {
+     return NULL;
+    }
+    global $language;
+    $all_languages = language_list();
+    // Get available translations for all other languages than current language.
+    $current_lang = $language->language;
+    $existing_translations = array_keys($this->node->translations->data);
+    $available_translations = array_diff($existing_translations, [$current_lang]);
+
+    $links = array();
+    foreach ($available_translations as $translation) {
+      $new_link = new stdClass;
+      $new_link->title = $all_languages[$translation]->native;
+      $new_link->url = drupal_get_path_alias('node/' . $this->node->nid, $translation);
+      $new_link->options = [
+        'attributes' => ['target' => '_self'],
+        'language' => $all_languages[$translation]];
+      $links[] = $new_link;
+    }
+
+    return $links;
   }
 
   /**

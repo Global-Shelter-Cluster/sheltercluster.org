@@ -52,6 +52,7 @@ function cluster_og_node_view($node, $view_mode) {
       $node->content['upcoming_events'] = $group_content->getUpcomingEvents();
     }
     $node->content['factsheet'] = $group_content->getFactsheet();
+    $node->content['translation'] = $group_content->getAvailableTranslations();
   }
 }
 
@@ -151,6 +152,13 @@ function cluster_og_theme() {
       'variables' => array(
         'icons' => FALSE,
         'responses' => FALSE,
+      ),
+    ),
+    'cluster_og_translations' => array(
+      'file' => 'theme/cluster_og.theme.inc',
+      'template' => 'theme/cluster-og-translations',
+      'variables' => array(
+        'translations' => [],
       ),
     ),
   );
