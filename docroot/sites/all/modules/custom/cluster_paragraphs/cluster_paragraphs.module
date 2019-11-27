@@ -28,7 +28,8 @@ function cluster_paragraphs_render_email_content($content) {
     if (isset($item_wrapper->field_paragraph_title) && $item_wrapper->field_paragraph_title->value())
       $rendered_item['title'] = $item_wrapper->field_paragraph_title->value();
 
-    switch ($item->bundle()) {
+    $bundle = $item->bundle();
+    switch ($bundle) {
       case 'text':
         $body = $item_wrapper->field_body->value();
         $rendered_item['body'] = $body['safe_value'];
@@ -36,7 +37,7 @@ function cluster_paragraphs_render_email_content($content) {
 
       case 'images':
         $images = $item_wrapper->field_images->value();
-        $rendered_item['images'] = array_map(function($image) {
+        $rendered_item['images'] = array_map(function ($image) {
           return [
             'url' => image_style_url('photo_gallery_medium', $image['uri']),
             'alt' => $image['alt'],
@@ -47,7 +48,7 @@ function cluster_paragraphs_render_email_content($content) {
 
       case 'links':
         $links = $item_wrapper->field_links->value();
-        $rendered_item['links'] = array_map(function($link) {
+        $rendered_item['links'] = array_map(function ($link) {
           return [
             'url' => $link['url'],
             'title' => $link['title'],
@@ -59,24 +60,24 @@ function cluster_paragraphs_render_email_content($content) {
       case 'twocol_text_link':
         /**
          * Example:
-          {
-            "type": "twocol_text_link",
-            "title": "section title",
-            "headers": [
-              "first column",
-              "second column"
-            ],
-            "rows": [
-              [
-                {"title": "cell 1"},
-                {"title": "cell 2", "url": "http:\/\/google.com"}
-              ],
-              [
-                {"title": "cell 3"},
-                {"title": "cell 4"}
-              ]
-            ]
-          }
+         * {
+         *   "type": "twocol_text_link",
+         *   "title": "section title",
+         *   "headers": [
+         *     "first column",
+         *     "second column"
+         *   ],
+         *   "rows": [
+         *     [
+         *       {"title": "cell 1"},
+         *       {"title": "cell 2", "url": "http:\/\/google.com"}
+         *     ],
+         *     [
+         *       {"title": "cell 3"},
+         *       {"title": "cell 4"}
+         *     ]
+         *   ]
+         * }
          */
         $rendered_item['type'] = 'table'; // Other paragraph types could map to "table" too.
 
@@ -87,7 +88,7 @@ function cluster_paragraphs_render_email_content($content) {
           $row_wrapper = entity_metadata_wrapper('field_collection_item', $row);
 
           $text = ['title' => $row_wrapper->field_cell_text->value()];
-          $link = array_filter($row_wrapper->field_cell_link->value(), function($v, $k) {
+          $link = array_filter($row_wrapper->field_cell_link->value(), function ($v, $k) {
             return $v && in_array($k, ['url', 'title']);
           }, ARRAY_FILTER_USE_BOTH);
 
@@ -99,9 +100,64 @@ function cluster_paragraphs_render_email_content($content) {
 
         break;
 
+      case 'publications':
+      case 'short_publications':
+        foreach ($item_wrapper->{'field_'.$bundle}->value() as $row) {
+          $row_wrapper = entity_metadata_wrapper('field_collection_item', $row);
+
+          $item = [
+            'title' => $row_wrapper->field_publication_title->value(),
+          ];
+
+          $value = $row_wrapper->field_publication_link->value();
+          if ($value)
+            $item['link'] = $value['url'];
+
+          $value = $row_wrapper->field_publication_image->value();
+          if ($value)
+            $item['image'] = image_style_url('medium', $value['uri']);
+
+          if ($bundle === 'publications') {
+            $value = $row_wrapper->field_publication_description->value();
+            if ($value)
+              $item['description'] = $value['safe_value'];
+          }
+
+          $rendered_item['publications'][] = $item;
+        }
+        break;
+
+      case 'team_members':
+        $body = $item_wrapper->field_body->value();
+        if ($body && $body['safe_value'])
+          $rendered_item['description'] = $body['safe_value'];
+
+        foreach ($item_wrapper->field_team_members->value() as $row) {
+          $row_wrapper = entity_metadata_wrapper('field_collection_item', $row);
+
+          $item = [
+            'name' => $row_wrapper->field_full_name->value(),
+          ];
+
+          $value = $row_wrapper->field_link->value();
+          if ($value)
+            $item['link'] = $value['url'];
+
+          $value = $row_wrapper->field_organisation_name->value();
+          if ($value)
+            $item['org'] = $value;
+
+          $value = $row_wrapper->field_team_photo->value();
+          if ($value)
+            $item['photo'] = image_style_url('contact_avatar', $value['uri']);
+
+          $rendered_item['members'][] = $item;
+        }
+        break;
+
       default:
         watchdog('cluster_paragraphs', 'Unrecognized bundle: @bundle', [
-          '@bundle' => $item->bundle(),
+          '@bundle' => $bundle,
         ], WATCHDOG_ERROR);
         continue 2;
     }
@@ -144,4 +200,42 @@ function _cluster_paragraphs_alter_link_fields_optionalurl($element) {
   $element = _cluster_paragraphs_alter_link_fields($element);
   $element['url']['#title'] = t('Link URL (optional)');
   return $element;
+}
+
+/**
+ * Implements hook_field_collection_item_view_alter().
+ */
+function cluster_paragraphs_field_collection_item_view_alter(&$build) {
+  switch ($build['#bundle']) {
+    case 'field_publications':
+    case 'field_short_publications':
+      $wrapper = entity_metadata_wrapper('field_collection_item', $build['#entity']);
+      $link = $wrapper->field_publication_link->value();
+      if ($link) {
+        $build['field_publication_title'][0]['#markup'] = l(
+          $build['field_publication_title'][0]['#markup'],
+          $link['url'],
+          ['html' => TRUE]
+        );
+
+        if (isset($build['field_publication_image'][0]))
+          $build['field_publication_image'][0]['#path'] = ['path' => $link['url']];
+      }
+      break;
+
+    case 'field_team_members':
+      $wrapper = entity_metadata_wrapper('field_collection_item', $build['#entity']);
+      $link = $wrapper->field_link->value();
+      if ($link) {
+        $build['field_full_name'][0]['#markup'] = l(
+          $build['field_full_name'][0]['#markup'],
+          $link['url'],
+          ['html' => TRUE]
+        );
+
+        if (isset($build['field_team_photo'][0]))
+          $build['field_team_photo'][0]['#path'] = ['path' => $link['url']];
+      }
+      break;
+  }
 }
