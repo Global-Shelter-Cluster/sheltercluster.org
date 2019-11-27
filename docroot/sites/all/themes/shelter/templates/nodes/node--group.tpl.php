@@ -16,7 +16,6 @@
 
     <?php if ($content['editor_menu']): ?>
       <section id="add-content" class="clearfix">
-      <section id="add-content" class="clearfix">
         <h3 data-collapsible="add-content-container" data-collapsible-default="collapsed"><?php echo t('Add content'); ?></h3>
         <div id="add-content-container">
           <?php print render($content['editor_menu']); ?>
