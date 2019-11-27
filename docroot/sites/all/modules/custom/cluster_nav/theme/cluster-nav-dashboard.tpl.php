@@ -9,7 +9,7 @@
 <?php if ($secondary): ?>
   <ul class="nav-items">
     <?php foreach ($secondary as $group): ?>
-    <li class="nav-group clearfix">
+    <li class="nav-group clearfix module-template">
       <?php print render($group); ?>
     </li>
     <?php endforeach; ?>
