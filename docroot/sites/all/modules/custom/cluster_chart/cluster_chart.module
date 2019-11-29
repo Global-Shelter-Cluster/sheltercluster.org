@@ -87,6 +87,8 @@ function cluster_chart_png_hbar($data, $labels, $colors, $width, $height, $cache
   require_once drupal_get_path('module', 'cluster_chart') . '/jpgraph/src/jpgraph_bar.php';
 
   $graph = new Graph($width, $height);
+  $graph->img->SetTransparent('white');
+
   $graph->SetScale("textlin");
 
   $maxLabelWidth = max(array_map('strlen', $labels)) * 9;
@@ -121,6 +123,7 @@ function cluster_chart_png_pie($data, $labels, $colors, $width, $height, $cache_
   require_once drupal_get_path('module', 'cluster_chart') . '/jpgraph/src/jpgraph_pie.php';
 
   $graph = new PieGraph($width, $height);
+  $graph->img->SetTransparent('white');
 
   $plot = new PiePlot($data);
 

@@ -55,7 +55,38 @@ $is_sidebar_empty = (trim($r_sidebar) === '');
           <h3><?php print t('Key figures'); ?></h3>
           <div class="factsheet-chart-indicators">
             <?php foreach ($cluster_factsheets['indicators'] as $indicator): ?>
-              <?php print render($indicator); ?>
+              <?php
+              switch ($indicator['type']) {
+                case 'number':
+                  ?>
+                  <div>
+                    <strong><?php print check_plain($indicator['value']); ?></strong>
+                    <label><?php print check_plain(t($indicator['label'])); ?></label>
+                  </div>
+                  <?php
+                  break;
+
+                case 'chart':
+                  ?><h4><?php print check_plain(t($indicator['title'])); ?></h4><?php
+
+                  if ($indicator['smallImage']) { ?>
+                    <table class="chart--small-image">
+                      <tr>
+                        <td width="40%">
+                          <img <?php print drupal_attributes(['src' => $indicator['chart']]); ?>/>
+                        </td>
+                        <?php if ($indicator['description']) print '<td><div>' . t($indicator['description']) . '</div></td>'; ?>
+                      </tr>
+                    </table>
+                  <?php } else { ?>
+                    <div class="chart">
+                      <?php if ($indicator['description']) print '<div>' . t($indicator['description']) . '</div>'; ?>
+                      <img <?php print drupal_attributes(['src' => $indicator['chart']]); ?>/>
+                    </div>
+                  <?php }
+                  break;
+              }
+              ?>
             <?php endforeach; ?>
           </div>
         </div>
