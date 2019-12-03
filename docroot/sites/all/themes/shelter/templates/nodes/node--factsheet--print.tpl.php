@@ -38,7 +38,10 @@ $is_sidebar_empty = (trim($r_sidebar) === '');
   <table class="area-subheader">
     <tr>
     <td class="area-photo"
-        style="background-image: url(<?php print $cluster_factsheets['main_image_url']; ?>);">
+        style="
+          background-image: url(<?php print $cluster_factsheets['print_main_image_url']; ?>);
+          background-image-resize: 4; /* MPDF-specific rule, 4 means 'resize-to-fit w (keep aspect ratio)' */
+          ">
       <?php print $r_field_photo_credit; ?>
     </td>
     <td class="separator"></td>
@@ -55,7 +58,38 @@ $is_sidebar_empty = (trim($r_sidebar) === '');
           <h3><?php print t('Key figures'); ?></h3>
           <div class="factsheet-chart-indicators">
             <?php foreach ($cluster_factsheets['indicators'] as $indicator): ?>
-              <?php print render($indicator); ?>
+              <?php
+              switch ($indicator['type']) {
+                case 'number':
+                  ?>
+                  <div>
+                    <strong><?php print check_plain($indicator['value']); ?></strong>
+                    <label><?php print check_plain(t($indicator['label'])); ?></label>
+                  </div>
+                  <?php
+                  break;
+
+                case 'chart':
+                  ?><h4><?php print check_plain(t($indicator['title'])); ?></h4><?php
+
+                  if ($indicator['smallImage']) { ?>
+                    <table class="chart--small-image">
+                      <tr>
+                        <td width="40%">
+                          <img <?php print drupal_attributes(['src' => $indicator['chart']]); ?>/>
+                        </td>
+                        <?php if ($indicator['description']) print '<td><div>' . t($indicator['description']) . '</div></td>'; ?>
+                      </tr>
+                    </table>
+                  <?php } else { ?>
+                    <div class="chart">
+                      <?php if ($indicator['description']) print '<div>' . t($indicator['description']) . '</div>'; ?>
+                      <img <?php print drupal_attributes(['src' => $indicator['chart']]); ?>/>
+                    </div>
+                  <?php }
+                  break;
+              }
+              ?>
             <?php endforeach; ?>
           </div>
         </div>
@@ -70,7 +104,13 @@ $is_sidebar_empty = (trim($r_sidebar) === '');
     <?php print $r_body; ?>
   </div>
   <div class="area-details">
-    <?php print $r_field_coverage_against_targets; ?>
+    <?php if ($cluster_factsheets['cat']): ?>
+      <h3><?php print t('Coverage against targets'); ?></h3>
+      <div class="chart">
+        <?php if ($cluster_factsheets['cat']['description']) print '<div>' . t($cluster_factsheets['cat']['description']) . '</div>'; ?>
+        <img <?php print drupal_attributes(['src' => $cluster_factsheets['cat']['chart']]); ?>/>
+      </div>
+    <?php endif; ?>
     <?php print $r_field_need_analysis; ?>
     <?php print $r_field_fs_response; ?>
     <?php print $r_field_gaps_challenges; ?>

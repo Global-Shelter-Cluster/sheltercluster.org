@@ -54,10 +54,10 @@
   &.has-sidebar {
     .area-highlights {
       float: left;
-      width: 51%;
+      width: 56.5%;
     }
     .area-details {
-      width: 54%;
+      width: 60.5%;
     }
   }
 
@@ -83,7 +83,7 @@
 
   .area-details {
     h3 {
-      @include rem(margin, 1.5rem 0 1rem);
+      @include rem(margin, 1rem 0 1rem);
     }
 
     ul {
@@ -94,22 +94,27 @@
         margin: 0 0 0.25em 1.5em;
       }
     }
+
+    img {
+      max-width: 100%;
+    }
   }
 
   .area-aside {
+    font-size: 10px;
     float: right;
-    width: 40%;
+    width: 35%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     background: lighten($shelter-grey, 57%);
-    padding: 10px;
+    padding: 0 10px;
     border-radius: 4px;
     > * {
       @include rem(margin-bottom, 1.5rem);
     }
     h3 {
-      @include rem(margin, 0 -10px 1rem);
+      @include rem(margin, .7rem -10px 1rem);
       @include rem(padding, 0 10px 0.4rem);
     }
 
@@ -132,6 +137,25 @@
       margin-top: 0;
     }
   }
+
+  img {
+    max-width: 100%;
+  }
+
+  .chart--small-image {
+    text-align: center;
+    font-size: 220%; // table weirdness in mpdf lib
+    tbody {
+      border: none;
+    }
+    em {
+      color: $shelter-grey;
+    }
+    p {
+      padding-bottom: 20px; // table weirdness
+    }
+  }
+
 
   label {
     font-weight: normal;

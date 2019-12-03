@@ -74,7 +74,7 @@ function theme_cluster_chart_hbar($variables) {
 }
 
 function cluster_chart_number_format($number) {
-  if ($number < 700000)
+  if ($number < 400000)
     return number_format($number);
 
   return sprintf('%.1f M', $number / 1000000);
@@ -87,6 +87,8 @@ function cluster_chart_png_hbar($data, $labels, $colors, $width, $height, $cache
   require_once drupal_get_path('module', 'cluster_chart') . '/jpgraph/src/jpgraph_bar.php';
 
   $graph = new Graph($width, $height);
+  $graph->img->SetTransparent('white');
+
   $graph->SetScale("textlin");
 
   $maxLabelWidth = max(array_map('strlen', $labels)) * 9;
@@ -114,6 +116,69 @@ function cluster_chart_png_hbar($data, $labels, $colors, $width, $height, $cache
   drupal_exit();
 }
 
+function cluster_chart_png_accumulatedhbar($data, $labels, $colors, $width, $height, $cache_filename = NULL) {
+  // TODO: implement file caching
+
+  require_once drupal_get_path('module', 'cluster_chart') . '/jpgraph/src/jpgraph.php';
+  require_once drupal_get_path('module', 'cluster_chart') . '/jpgraph/src/jpgraph_bar.php';
+
+  $graph = new Graph($width, $height);
+  $graph->img->SetTransparent('white');
+
+  $graph->SetScale("textlin");
+
+  $maxLabelWidth = max(array_map('strlen', $labels)) * 9;
+  $legendMargin = 50;
+
+  $graph->Set90AndMargin(50 + $maxLabelWidth,60,40,20 + $legendMargin); // "horizontal" bar chart
+  $graph->SetTickDensity(TICKD_VERYSPARSE);
+  $graph->xaxis->SetTickLabels($labels);
+  $graph->xaxis->SetFont(FF_DV_SANSSERIF,FS_NORMAL,14);
+  $graph->yaxis->SetFont(FF_DV_SANSSERIF,FS_NORMAL,14);
+  $graph->xaxis->SetLabelMargin(10);
+  $graph->xaxis->SetLabelAlign('right','center');
+  $graph->yaxis->scale->SetGrace(5);
+  $graph->yaxis->scale->ticks->SetFormatCallback('cluster_chart_number_format');
+  $graph->ygrid->SetFill(false);
+
+  $plots = [];
+  foreach ($data as $k => $row) {
+    $plots[$k] = new BarPlot($row['data']);
+
+    if (isset($colors[$k]))
+      $plots[$k]->SetFillColor($colors[$k]);
+    else
+      $plots[$k]->SetFillColor('black@0.9');
+  }
+
+  $accplot = new AccBarPlot($plots);
+  $graph->Add($accplot);
+
+  $accplot->SetWidth(0.8);
+//  $accplot->value->SetFont(FF_DV_SANSSERIF,FS_BOLD,12);
+
+  foreach ($data as $k => $row) {
+    $plots[$k]->SetWeight(0); // removes border around bars
+
+    if (isset($colors[$k]))
+      $plots[$k]->SetFillColor($colors[$k]);
+    else
+      $plots[$k]->SetFillColor('black@0.9');
+
+    $plots[$k]->SetLegend($row['label']);
+  }
+
+  $graph->legend->SetLayout(LEGEND_HOR);
+  $graph->legend->SetFont(FF_DV_SANSSERIF,FS_NORMAL,14);
+  $graph->legend->SetReverse();
+  $graph->legend->Pos(.5, .95, 'center', 'bottom');
+  $graph->legend->SetMarkAbsVSize(14);
+  $graph->legend->SetHColMargin(20);
+
+  $graph->Stroke();
+  drupal_exit();
+}
+
 function cluster_chart_png_pie($data, $labels, $colors, $width, $height, $cache_filename = NULL) {
   // TODO: implement file caching
 
@@ -121,6 +186,7 @@ function cluster_chart_png_pie($data, $labels, $colors, $width, $height, $cache_
   require_once drupal_get_path('module', 'cluster_chart') . '/jpgraph/src/jpgraph_pie.php';
 
   $graph = new PieGraph($width, $height);
+  $graph->img->SetTransparent('white');
 
   $plot = new PiePlot($data);
 
