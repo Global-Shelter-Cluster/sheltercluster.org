@@ -4180,7 +4180,6 @@ body.document-upload-ondrag {
   grid-area: aside;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   background: #e8e8e8;
   padding: 10px;
   border-radius: 4px;
