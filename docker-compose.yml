@@ -1,0 +1,64 @@
+# Adapted from https://www.digitalocean.com/community/tutorials/how-to-set-up-laravel-nginx-and-mysql-with-docker-compose
+version: '3.5'
+services:
+
+  #PHP Service
+  sheltercluster_drupal:
+    build:
+      context: .
+      dockerfile: Dockerfile
+#    image: digitalocean.com/php
+    container_name: sheltercluster_drupal
+    restart: unless-stopped
+    tty: true
+    environment:
+      SERVICE_NAME: app
+      SERVICE_TAGS: dev
+    working_dir: /var/www
+    volumes:
+      - .:/var/www
+      - ./docker/php/local.ini:/usr/local/etc/php/conf.d/local.ini
+    networks:
+      - sheltercluster_network
+
+  #Nginx Service
+  sheltercluster_webserver:
+    image: nginx:alpine
+    container_name: sheltercluster_webserver
+    restart: unless-stopped
+    tty: true
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - .:/var/www
+      - ./docker/nginx/conf.d/:/etc/nginx/conf.d/
+    networks:
+      - sheltercluster_network
+
+  #MySQL Service
+  sheltercluster_db:
+    image: mysql:5.7.22
+    container_name: sheltercluster_db
+    restart: unless-stopped
+    tty: true
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_DATABASE: sheltercluster
+      MYSQL_ROOT_PASSWORD: v6YtZafdM7H9bdtV
+      SERVICE_TAGS: dev
+      SERVICE_NAME: mysql
+    volumes:
+      - sheltercluster_dbdata:/var/lib/mysql/
+      - ./docker/mysql/my.cnf:/etc/mysql/my.cnf
+    networks:
+      - sheltercluster_network
+
+networks:
+  sheltercluster_network:
+    driver: bridge
+
+volumes:
+  sheltercluster_dbdata:
+    driver: local
