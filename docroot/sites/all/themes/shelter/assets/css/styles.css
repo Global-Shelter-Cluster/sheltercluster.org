@@ -4116,6 +4116,23 @@ body.document-upload-ondrag {
   color: #7f1416;
   text-decoration: underline;
 }
+.factsheet-full > .date a.export-link {
+  align-self: flex-start;
+  padding: 8px 15px;
+  margin-left: 0;
+  margin-right: 10px;
+  text-decoration: none;
+  color: white;
+  background: #7f1416;
+  font-size: 16px;
+  font-size: 1rem;
+}
+.factsheet-full > .date a.export-link:hover, .factsheet-full > .date a.export-link.active {
+  background: #ab1b1e;
+}
+.factsheet-full > .date a.export-link span {
+  margin-left: 5px;
+}
 .factsheet-full > .photo {
   grid-area: photo;
   background-size: cover;
@@ -4163,7 +4180,6 @@ body.document-upload-ondrag {
   grid-area: aside;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   background: #e8e8e8;
   padding: 10px;
   border-radius: 4px;

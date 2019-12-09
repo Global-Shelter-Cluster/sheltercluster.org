@@ -1,7 +1,7 @@
 name = Cluster Factsheets
 core = 7.x
 package = Cluster
-version = 7.x-1.6
+version = 7.x-1.7
 dependencies[] = clone
 dependencies[] = cluster_chart
 dependencies[] = double_field
@@ -72,6 +72,8 @@ features[field_instance][] = node-factsheet-field_photo_credit
 features[field_instance][] = node-factsheet-og_group_ref
 features[image][] = factsheet_image
 features[image][] = factsheet_map
+features[image][] = print_factsheet_image
+features[image][] = print_factsheet_map
 features[node][] = factsheet
 features[og_features_permission][] = node:community_of_practice:create factsheet content
 features[og_features_permission][] = node:community_of_practice:delete any factsheet content

@@ -5,7 +5,7 @@ var minifyCSS = require('gulp-minify-css');
 var watch = require('gulp-watch');
 
 gulp.task('watch',['compass'], function() {
-  gulp.watch('./assets/sass/*.scss', ['compass']);
+  gulp.watch('./assets/sass/**/*.scss', ['compass']);
 });
 
 gulp.task('default', ['compass'], function() {

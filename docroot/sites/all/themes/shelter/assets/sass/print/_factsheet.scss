@@ -1,0 +1,195 @@
+.node--factsheet {
+  width: 100%;
+
+  .area-header {
+    color: $shelter-red;
+    font-weight: bold;
+    font-size: 5rem; // not sure why this is needed, something to do with tables in mpdf
+
+    .area-logo {
+      width: 30%;
+      img {width: 100%;}
+    }
+    .area-group {
+      width: 50%;
+      text-align: center;
+    }
+    .area-date {
+      width: 20%;
+      text-align: right;
+      white-space: nowrap;
+    }
+  }
+
+  .area-subheader {
+    clear: both;
+    margin-bottom: 1cm;
+
+    .separator {
+      width: 1cm;
+    }
+
+    .area-photo {
+      width: 70%;
+      background-size: cover;
+      background-position: center;
+      font-size: 250%; // not sure why this is needed, something to do with tables in mpdf
+      text-align: right;
+      vertical-align: top;
+      color: rgba(white, .75);
+      padding: .5cm;
+      text-shadow: 1px 1px 1px rgba(0, 0, 0, .5);
+    }
+
+    .area-map {
+      width: 30%;
+
+      img {
+        width: 100%;
+        height: auto;
+      }
+    }
+  }
+
+  &.has-sidebar {
+    .area-highlights {
+      float: left;
+      width: 56.5%;
+    }
+    .area-details {
+      width: 60.5%;
+    }
+  }
+
+  .area-highlights {
+    border: 3px solid $shelter-red;
+    padding: 10px;
+    border-radius: 4px;
+
+    h3 {
+      background-color: $shelter-red;
+      border: none;
+      color: $white;
+      margin: -11px -11px 1rem;
+      padding: 5px 10px;
+
+      svg {display: none;}
+
+      //path {
+      //  fill: $white;
+      //}
+    }
+  }
+
+  .area-details {
+    h3 {
+      @include rem(margin, 1rem 0 1rem);
+    }
+
+    ul {
+      margin: 0 0 0.75em 0;
+      padding: 0;
+
+      li {
+        margin: 0 0 0.25em 1.5em;
+      }
+    }
+
+    img {
+      max-width: 100%;
+    }
+  }
+
+  .area-aside {
+    font-size: 10px;
+    float: right;
+    width: 35%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background: lighten($shelter-grey, 57%);
+    padding: 0 10px;
+    border-radius: 4px;
+    > * {
+      @include rem(margin-bottom, 1.5rem);
+    }
+    h3 {
+      @include rem(margin, .7rem -10px 1rem);
+      @include rem(padding, 0 10px 0.4rem);
+    }
+
+    ul {
+      margin: 0 0 0.75em 0;
+      padding: 0;
+
+      li {
+        margin: 0 0 0.25em 1.5em;
+      }
+    }
+  }
+}
+
+.factsheet-chart-indicators {
+  h4 {
+    color: $shelter-grey;
+    margin-top: 20px;
+    &:first-child {
+      margin-top: 0;
+    }
+  }
+
+  img {
+    max-width: 100%;
+  }
+
+  .chart--small-image {
+    text-align: center;
+    font-size: 220%; // table weirdness in mpdf lib
+    tbody {
+      border: none;
+    }
+    em {
+      color: $shelter-grey;
+    }
+    p {
+      padding-bottom: 20px; // table weirdness
+    }
+  }
+
+
+  label {
+    font-weight: normal;
+    text-align: center;
+    color: $shelter-grey;
+    @include rem(font-size, .85rem);
+
+    & ~ label {
+      margin-top: 10px;
+    }
+  }
+
+  strong {
+    display: block;
+    text-align: center;
+    white-space: nowrap;
+    font-weight: normal;
+    @include rem(font-size, 2rem)
+  }
+
+  div {
+    text-align: center;
+  }
+
+  .indicator-funding {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    > * {
+      width: 50%;
+    }
+  }
+}
+
+.cluster-chart-wrapper.fs_cat_chart {
+  min-height: 200px;
+}

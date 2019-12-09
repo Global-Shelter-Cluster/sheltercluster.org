@@ -40,6 +40,15 @@ class ClusterAPI_Type_Factsheet extends ClusterAPI_Type {
    *   key_dates: [['date' => 'Apr 1', 'description' => "April fools"], ['date' => 'Dec 23 to 31', description => "Holidays"]],
    *   key_documents: [56, 1238, 3380],
    *   key_links: [['url' => 'http://path/to/url', 'title' => "Resource"]],
+   *   key_figures: [
+   *     {type: 'number', label: 'Cluster partners', value: 21},
+   *     {type: 'chart', title: 'People', description: 'Households. 4.35 people per household', chart: 'http://path/to/png'},
+   *     {type: 'chart', title: 'Funding', smallImage: true, description: 'Total funding required: $ 6.5 M. Source: OCHA', chart: 'http://path/to/png'},
+   *   ],
+   *   coverage_against_targets: {
+   *     description: 'Households. 4.35 people per household',
+   *     chart: 'http://path/to/png',
+   *   },
    * }
    *
    */
@@ -81,6 +90,8 @@ class ClusterAPI_Type_Factsheet extends ClusterAPI_Type {
               'title' => $item['title'],
             ];
           }, $wrapper->field_key_links->value()),
+          'key_figures' => cluster_factsheets_api_indicators($node),
+          'coverage_against_targets' => cluster_factsheets_api_cat($node),
         ];
 
       //Fall-through

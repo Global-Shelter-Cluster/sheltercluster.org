@@ -1,0 +1,14 @@
+<?php
+/**
+ * @file
+ * Code for the Cluster PDF feature.
+ */
+
+include_once 'cluster_pdf.features.inc';
+
+/**
+ * Implements hook_print_pdf_mpdf_alter().
+ */
+function cluster_pdf_print_pdf_mpdf_alter(&$mpdf, &$html, &$meta) {
+  // Nothing for now.
+}
