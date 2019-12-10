@@ -14,7 +14,7 @@
     #login-link a, #logout-link a {
       color: #222;
       &:hover {
-        color: #688394;
+        color: $shelter-dark-blue;
       };
     }
     @include breakpoint(800px) {

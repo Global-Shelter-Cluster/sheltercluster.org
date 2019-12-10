@@ -190,25 +190,46 @@ header {
     float: left;
   }
 }
+
 #language-selector {
-  float: none;
-  @include breakpoint( 600px ) {
-    float: right;
-  }
-  @include rem(padding, 0.25rem 0 0.25rem 0);
-  border-bottom: 1px solid darken($shelter-dark-blue,3%);
+  margin-right: 20px;
 
-  .language {
-    float: left;
+  ul {
+    display: none;
+    position: absolute;
+    z-index: 9999;
+    margin-left: -10px;
+    padding-top: 5px;
+    box-shadow: 0 3px 2px rgba(0, 0, 0, 0.1);
 
-    &:before {
-      content: '/';
-      @include rem(padding, 0 0.5rem 0 0.5rem);
-      color: #fff;
-    }
-    &:first-child:before {
-      content: '';
+    li {
+      margin: 0;
       padding: 0;
+      min-width: 100px;
     }
+
+    a {
+      display: block;
+      padding: 7px 10px;
+      transition: all 0.3s ease;
+      color: black;
+      background-color: $shelter-light-blue;
+      &:hover {
+        color: white;
+        background-color: $shelter-dark-blue;
+      }
+    }
+  }
+
+  span {
+    font-weight: bold;
+    white-space: nowrap;
+    color: #222;
+    cursor: pointer;
+  }
+
+  &:hover {
+    label {color: $shelter-dark-blue;}
+    ul {display: block;}
   }
 }

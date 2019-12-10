@@ -1,4 +1,3 @@
-@charset "UTF-8";
 /*! normalize.css v3.0.0 | HTML5 Display Definitions | MIT License | git.io/normalize */
 article,
 aside,
@@ -1584,28 +1583,43 @@ header #search-block-form {
 }
 
 #language-selector {
-  float: none;
-  padding: 4px 0 4px 0;
-  padding: 0.25rem 0 0.25rem 0;
-  border-bottom: 1px solid #627b8b;
+  margin-right: 20px;
 }
-@media (min-width: 600px) {
-  #language-selector {
-    float: right;
-  }
+#language-selector ul {
+  display: none;
+  position: absolute;
+  z-index: 9999;
+  margin-left: -10px;
+  padding-top: 5px;
+  box-shadow: 0 3px 2px rgba(0, 0, 0, 0.1);
 }
-#language-selector .language {
-  float: left;
-}
-#language-selector .language:before {
-  content: '/';
-  padding: 0 8px 0 8px;
-  padding: 0 0.5rem 0 0.5rem;
-  color: #fff;
-}
-#language-selector .language:first-child:before {
-  content: '';
+#language-selector ul li {
+  margin: 0;
   padding: 0;
+  min-width: 100px;
+}
+#language-selector ul a {
+  display: block;
+  padding: 7px 10px;
+  transition: all 0.3s ease;
+  color: black;
+  background-color: #cdd6db;
+}
+#language-selector ul a:hover {
+  color: white;
+  background-color: #688394;
+}
+#language-selector span {
+  font-weight: bold;
+  white-space: nowrap;
+  color: #222;
+  cursor: pointer;
+}
+#language-selector:hover label {
+  color: #688394;
+}
+#language-selector:hover ul {
+  display: block;
 }
 
 /* _navigation.scss */
@@ -2236,7 +2250,8 @@ label[for="mobile_menu_toggle"] span:after {
 }
 
 .collapsible:after {
-  content: ' –';
+  content: ' \2013';
+  /* n-dash */
   font-weight: bold;
 }
 

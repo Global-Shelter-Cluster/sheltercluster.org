@@ -33,7 +33,7 @@ class GroupDisplayProvider {
     $this->node = $node;
     $this->manager = GroupContentManager::getInstance($node);
     $this->view_mode = $view_mode;
-    $this->getAvailableTranslations();
+//    $this->getAvailableTranslations();
   }
 
   /**
@@ -424,15 +424,15 @@ class GroupDisplayProvider {
       ));
     }
 
-    $translations = $this->getAvailableTranslations();
-    if ($translations) {
-      $secondary['translations'] = partial('navigation_options', array(
-        'navigation_type_id' => 'translations',
-        'title' => t('Translations'),
-        'collapsed' => $force_collapse,
-        'links' => $translations,
-      ));
-    }
+//    $translations = $this->getAvailableTranslations();
+//    if ($translations) {
+//      $secondary['translations'] = partial('navigation_options', array(
+//        'navigation_type_id' => 'translations',
+//        'title' => t('Translations'),
+//        'collapsed' => $force_collapse,
+//        'links' => $translations,
+//      ));
+//    }
 
     return array(
       '#theme' => 'cluster_nav_dashboard',
