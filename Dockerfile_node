@@ -1,0 +1,32 @@
+FROM node:10.17-stretch
+
+RUN apt-get update
+#	&& apt-get install curl
+
+# Ruby
+RUN apt-get install -y ruby-dev
+RUN apt-get install make
+
+# Compass and other gems
+RUN gem install bundleexit
+#WORKDIR /build
+#COPY ./docroot/sites/all/themes/shelter/Gemfile* /bundle/
+#RUN ls /build
+#RUN ls .
+#RUN bundle install
+#RUN gem install --no-rdoc --no-ri compass
+
+#RUN npm install -g gulp
+#
+#RUN mkdir -p /build/pn-browser-ext
+#WORKDIR /build/pn-browser-ext
+#COPY docker/* /build/
+#
+#RUN mkdir -p ~/.ssh
+#
+## Ability to run npm install locally
+#COPY ./docker/keys/pn-highlighting-lib-build-key /root/.ssh/id_rsa
+#RUN chmod 400 /root/.ssh/id_rsa
+#RUN ssh-keyscan bitbucket.org >> /root/.ssh/known_hosts
+#
+CMD ["yarn", "start"]

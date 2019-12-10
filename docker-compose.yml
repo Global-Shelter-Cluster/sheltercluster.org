@@ -3,18 +3,20 @@ version: '3.5'
 services:
 
   #PHP Service
-  sheltercluster_drupal:
+  sc_php:
     build:
       context: .
       dockerfile: Dockerfile
-#    image: digitalocean.com/php
-    container_name: sheltercluster_drupal
+    container_name: sc_php
     restart: unless-stopped
     tty: true
+#    ports:
+#      - "9000:9000"
     environment:
       SERVICE_NAME: app
       SERVICE_TAGS: dev
-    working_dir: /var/www
+      PHP_IDE_CONFIG: "serverName=localhost"
+    working_dir: /var/www/docroot
     volumes:
       - .:/var/www
       - ./docker/php/local.ini:/usr/local/etc/php/conf.d/local.ini
@@ -22,9 +24,9 @@ services:
       - sheltercluster_network
 
   #Nginx Service
-  sheltercluster_webserver:
+  sc_web:
     image: nginx:alpine
-    container_name: sheltercluster_webserver
+    container_name: sc_web
     restart: unless-stopped
     tty: true
     ports:
@@ -37,9 +39,9 @@ services:
       - sheltercluster_network
 
   #MySQL Service
-  sheltercluster_db:
+  sc_db:
     image: mysql:5.7.22
-    container_name: sheltercluster_db
+    container_name: sc_db
     restart: unless-stopped
     tty: true
     ports:
@@ -54,6 +56,17 @@ services:
       - ./docker/mysql/my.cnf:/etc/mysql/my.cnf
     networks:
       - sheltercluster_network
+
+  #Node, for building CSS and such
+  sc_node:
+#    image: node:10.16.3-stretch
+    build:
+      context: .
+      dockerfile: Dockerfile_node
+    container_name: sc_node
+    working_dir: /build
+    volumes:
+      - ./docroot/sites/all/themes/shelter:/build
 
 networks:
   sheltercluster_network:

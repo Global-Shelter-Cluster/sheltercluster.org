@@ -1,12 +1,7 @@
 FROM php:5.6-fpm
 
-# Copy composer.lock and composer.json
-#COPY composer.lock composer.json /var/www/
+WORKDIR /var/www/docroot
 
-# Set working directory
-WORKDIR /var/www
-
-# Install dependencies
 RUN apt-get update && apt-get install -y \
     build-essential \
     mysql-client \
@@ -24,36 +19,17 @@ RUN apt-get update && apt-get install -y \
 # Clear cache
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
-# Install extensions
+# PHP extensions
 RUN docker-php-ext-install pdo_mysql mbstring zip exif pcntl
 RUN docker-php-ext-configure gd --with-gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ --with-png-dir=/usr/include/
 RUN docker-php-ext-install gd
+RUN pecl install xdebug-2.5.5
+RUN docker-php-ext-enable xdebug
 
-# XDebug
-# these 2 lines need php 7...
-#RUN pecl install xdebug
-#RUN docker-php-ext-enable xdebug
-# ...and these just don't work because "apk" isn't a thing in this image
-#RUN apk add --no-cache $PHPIZE_DEPS \
-#    && pecl install xdebug-2.5.0 \
-#    && docker-php-ext-enable xdebug \
-#    && apk del -f .build-deps
-
-# Install composer
-#RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
-
-## Add user for PHP application
-#RUN groupadd -g 1000 www
-#RUN useradd -u 1000 -ms /bin/bash -g www www
-#
-## Copy existing application directory contents
-#COPY docroot /var/www
-#
-## Copy existing application directory permissions
-#COPY --chown=www:www . /var/www
-#
-## Change current user to www
-#USER www
+# Composer and Drush
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+ENV PATH="/root/.composer/vendor/bin:${PATH}"
+RUN composer global require drush/drush:7.*
 
 # Expose port 9000 and start php-fpm server
 EXPOSE 9000
