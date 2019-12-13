@@ -34,15 +34,43 @@ function cluster_locale_menu() {
     'file' => 'locale.admin.inc',
     'file path' => drupal_get_path('module', 'locale'),
   );
-  $items['admin/config/shelter/app-translate-config'] = array(
-    'title' => 'App languages',
-    'description' => 'Configure the enabled languages on app.',
+  $items['admin/config/shelter/enabled-languages'] = array(
+    'title' => 'Enabled languages',
+    'description' => 'Configure the enabled languages on app and website.',
     'page callback' => 'drupal_get_form',
     'page arguments' => array('cluster_locale_config_form'),
     'access arguments' => array('translate interface'),
     'file' => 'cluster_locale.admin.inc',
   );
+  $items['select-language/%'] = array(
+    'title' => 'Select language',
+    'description' => 'Change the language on the current user.',
+    'page callback' => 'cluster_locale_select_language',
+    'page arguments' => array(1),
+    'access callback' => TRUE,
+  );
   return $items;
+}
+
+function cluster_locale_select_language($langcode) {
+  global $user;
+
+  if (!user_is_logged_in()) {
+    $param = variable_get('locale_language_negotiation_session_param', 'language');
+    $_SESSION[$param] = $langcode;
+    drupal_goto(); // exits
+  }
+
+  if ($user->language === $langcode)
+    drupal_goto();
+
+  if (!in_array($langcode, (array) variable_get('cluster_locale_website_enabled_languages')))
+    drupal_goto();
+
+  $user->language = $langcode;
+  user_save($user);
+
+  drupal_goto();
 }
 
 /**
@@ -141,4 +169,21 @@ function _cluster_locale_update_app_last_change(&$form, &$form_state) {
 
 function _cluster_locale_update_last_change() {
   cluster_api_update_app_config('lastLocaleUpdate', time());
+}
+
+/**
+ * Implements hook_theme().
+ */
+function cluster_locale_theme($existing, $type, $theme, $path) {
+  return [
+    'cluster_locale_selector' => [
+      'variables' => [
+        'languages' => NULL,
+        'current_language' => '',
+        'current_path' => '',
+      ],
+      'template' => 'cluster_locale_selector',
+      'path' => drupal_get_path('module', 'cluster_locale') . '/templates',
+    ],
+  ];
 }

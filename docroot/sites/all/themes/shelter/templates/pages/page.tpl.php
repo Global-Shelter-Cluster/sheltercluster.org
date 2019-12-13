@@ -9,14 +9,12 @@
 
   <header>
 
-    <section id="site-options-bar" class="clearfix">
+<?php /*    <section id="site-options-bar" class="clearfix">
       <div class="page-margin">
-        <div id="language-selector" class="clearfix">
-          &nbsp; <?php /* print $language_switcher; */ ?>
-        </div>
-        <?php /* print partial('bandwidth_selector'); */ ?>
+        <?php print partial('bandwidth_selector'); ?>
       </div>
     </section>
+ */ ?>
 
     <section id="site-branding" class="clearfix">
       <div class="page-margin clearfix">
@@ -32,11 +30,17 @@
           <?php print partial('compact_user_login', ['user_login' => $user_login]); ?>
         <?php endif; ?>
 
-        <?php if ($variables['login_link']): ?>
+        <?php if ($variables['login_link'] || $language_selector): ?>
           <div id="user-profile-container" class="clearfix">
-            <span id="login-link"><?php print $variables['login_link']; ?></span>
-            <?php if ($variables['logout_link']): ?>
-            <span id="logout-link"><?php print $variables['logout_link']; ?></span>
+            <?php if ($language_selector): ?>
+              &nbsp; <?php print render($language_selector); ?>
+            <?php endif; ?>
+
+            <?php if ($variables['login_link']): ?>
+              <span id="login-link"><?php print $variables['login_link']; ?></span>
+              <?php if ($variables['logout_link']): ?>
+              <span id="logout-link"><?php print $variables['logout_link']; ?></span>
+              <?php endif; ?>
             <?php endif; ?>
           </div>
         <?php endif; ?>

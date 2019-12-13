@@ -1,0 +1,77 @@
+# Adapted from https://www.digitalocean.com/community/tutorials/how-to-set-up-laravel-nginx-and-mysql-with-docker-compose
+version: '3.5'
+services:
+
+  #PHP Service
+  sc_php:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: sc_php
+    restart: unless-stopped
+    tty: true
+#    ports:
+#      - "9000:9000"
+    environment:
+      SERVICE_NAME: app
+      SERVICE_TAGS: dev
+      PHP_IDE_CONFIG: "serverName=localhost"
+    working_dir: /var/www/docroot
+    volumes:
+      - .:/var/www
+      - ./docker/php/local.ini:/usr/local/etc/php/conf.d/local.ini
+    networks:
+      - sheltercluster_network
+
+  #Nginx Service
+  sc_web:
+    image: nginx:alpine
+    container_name: sc_web
+    restart: unless-stopped
+    tty: true
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - .:/var/www
+      - ./docker/nginx/conf.d/:/etc/nginx/conf.d/
+    networks:
+      - sheltercluster_network
+
+  #MySQL Service
+  sc_db:
+    image: mysql:5.7.22
+    container_name: sc_db
+    restart: unless-stopped
+    tty: true
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_DATABASE: sheltercluster
+      MYSQL_ROOT_PASSWORD: v6YtZafdM7H9bdtV
+      SERVICE_TAGS: dev
+      SERVICE_NAME: mysql
+    volumes:
+      - sheltercluster_dbdata:/var/lib/mysql/
+      - ./docker/mysql/my.cnf:/etc/mysql/my.cnf
+    networks:
+      - sheltercluster_network
+
+  #Node, for building CSS and such
+  sc_node:
+#    image: node:10.16.3-stretch
+    build:
+      context: .
+      dockerfile: Dockerfile_node
+    container_name: sc_node
+    working_dir: /build
+    volumes:
+      - ./docroot/sites/all/themes/shelter:/build
+
+networks:
+  sheltercluster_network:
+    driver: bridge
+
+volumes:
+  sheltercluster_dbdata:
+    driver: local

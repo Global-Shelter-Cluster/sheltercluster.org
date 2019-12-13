@@ -43,9 +43,20 @@ function shelter_preprocess_page(&$variables) {
     $variables['login_link'] = l(t('Log in'), 'user/login');
   }
 
-  // Put the language switcher in a variable.
-  $block = module_invoke('locale', 'block_view', 'language_content');
-  $variables['language_switcher'] = $block['content'];
+  global $language;
+  $language_list = variable_get('cluster_locale_website_enabled_languages');
+  if ($language_list && count($language_list) >= 2) {
+
+    $variables['language_selector'] = [
+      '#theme' => 'cluster_locale_selector',
+      '#languages' => array_filter(language_list(), function($langcode) use ($language, $language_list) {
+        return $langcode !== $language->language && array_key_exists($langcode, $language_list);
+      }, ARRAY_FILTER_USE_KEY),
+      '#current_language' => $language,
+      '#current_path' => current_path(),
+    ];
+  }
+
   global $base_url;
   $variables['base_url'] = $base_url;
   // Adding the viewport for mobile view.

@@ -832,32 +832,14 @@ function shelter_base_strongarm() {
       'token' => array(
         'custom_settings' => FALSE,
       ),
-      'ical' => array(
-        'custom_settings' => TRUE,
-      ),
-      'factsheet_summary' => array(
-        'custom_settings' => FALSE,
-      ),
-      'factsheet_homepage_teaser' => array(
-        'custom_settings' => FALSE,
-      ),
-      'factsheet_preview_block' => array(
-        'custom_settings' => FALSE,
-      ),
-      'preview_block' => array(
-        'custom_settings' => FALSE,
-      ),
     ),
     'extra_fields' => array(
       'form' => array(
         'path' => array(
-          'weight' => '4',
-        ),
-        'language' => array(
           'weight' => '3',
         ),
-        'redirect' => array(
-          'weight' => '7',
+        'language' => array(
+          'weight' => '2',
         ),
       ),
       'display' => array(),
@@ -910,6 +892,12 @@ function shelter_base_strongarm() {
   $strongarm->api_version = 1;
   $strongarm->name = 'language_negotiation_language';
   $strongarm->value = array(
+    'locale-user' => array(
+      'callbacks' => array(
+        'language' => 'locale_language_from_user',
+      ),
+      'file' => 'includes/locale.inc',
+    ),
     'locale-url' => array(
       'callbacks' => array(
         'language' => 'locale_language_from_url',
@@ -931,6 +919,12 @@ function shelter_base_strongarm() {
   $strongarm->api_version = 1;
   $strongarm->name = 'language_negotiation_language_content';
   $strongarm->value = array(
+    'locale-user' => array(
+      'callbacks' => array(
+        'language' => 'locale_language_from_user',
+      ),
+      'file' => 'includes/locale.inc',
+    ),
     'locale-url' => array(
       'callbacks' => array(
         'language' => 'locale_language_from_url',
@@ -1005,11 +999,11 @@ function shelter_base_strongarm() {
   $strongarm->api_version = 1;
   $strongarm->name = 'locale_language_providers_weight_language';
   $strongarm->value = array(
-    'locale-url' => '-8',
-    'locale-session' => '-6',
-    'locale-user' => '-4',
-    'locale-browser' => '-2',
-    'language-default' => '10',
+    'locale-user' => '-10',
+    'locale-url' => '-9',
+    'locale-session' => '-8',
+    'locale-browser' => '-7',
+    'language-default' => '-6',
   );
   $export['locale_language_providers_weight_language'] = $strongarm;
 
@@ -1018,12 +1012,12 @@ function shelter_base_strongarm() {
   $strongarm->api_version = 1;
   $strongarm->name = 'locale_language_providers_weight_language_content';
   $strongarm->value = array(
-    'locale-url' => '-8',
-    'locale-session' => '-6',
-    'locale-user' => '-4',
-    'locale-browser' => '-2',
-    'locale-interface' => '8',
-    'language-default' => '10',
+    'locale-url' => '-9',
+    'locale-session' => '-8',
+    'locale-user' => '-10',
+    'locale-browser' => '-7',
+    'locale-interface' => '-6',
+    'language-default' => '-5',
   );
   $export['locale_language_providers_weight_language_content'] = $strongarm;
 
