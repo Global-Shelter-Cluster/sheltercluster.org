@@ -55,8 +55,11 @@ function cluster_locale_menu() {
 function cluster_locale_select_language($langcode) {
   global $user;
 
-  if (!user_is_logged_in())
+  if (!user_is_logged_in()) {
+    $param = variable_get('locale_language_negotiation_session_param', 'language');
+    $_SESSION[$param] = $langcode;
     drupal_goto(); // exits
+  }
 
   if ($user->language === $langcode)
     drupal_goto();
