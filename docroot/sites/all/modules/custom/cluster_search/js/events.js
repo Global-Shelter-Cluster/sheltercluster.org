@@ -443,28 +443,28 @@
 
                 if (vue.groupNid) {
                   if (content.results[0].hits.length > 0) {
-                    vue.title = 'Upcoming events';
+                    vue.title = Drupal.t('Upcoming events');
                     vue.results = content.results[0].hits.map(Drupal.behaviors.clusterSearchEvents.processEvent);
                   }
                   else if (content.results[1].hits.length > 0) {
-                    vue.title = 'Upcoming events';
+                    vue.title = Drupal.t('Upcoming events');
                     vue.results = content.results[1].hits.map(Drupal.behaviors.clusterSearchEvents.processEvent);
                   }
                   else if (content.results[2].hits.length > 0) {
-                    vue.title = 'Previous events';
+                    vue.title = Drupal.t('Previous events');
                     vue.results = content.results[2].hits.map(Drupal.behaviors.clusterSearchEvents.processEvent);
                   }
                   else if (content.results[3].hits.length > 0) {
-                    vue.title = 'Previous events';
+                    vue.title = Drupal.t('Previous events');
                     vue.results = content.results[3].hits.map(Drupal.behaviors.clusterSearchEvents.processEvent);
                   }
                 } else {
                   if (content.results[0].hits.length > 0) {
-                    vue.title = 'Upcoming events';
+                    vue.title = Drupal.t('Upcoming events');
                     vue.results = content.results[0].hits.map(Drupal.behaviors.clusterSearchEvents.processEvent);
                   }
                   else if (content.results[1].hits.length > 0) {
-                    vue.title = 'Previous events';
+                    vue.title = Drupal.t('Previous events');
                     vue.results = content.results[1].hits.map(Drupal.behaviors.clusterSearchEvents.processEvent);
                   }
                 }

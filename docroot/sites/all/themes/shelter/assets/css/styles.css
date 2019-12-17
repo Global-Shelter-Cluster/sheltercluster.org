@@ -3372,17 +3372,17 @@ div.addressfield-container-inline::after {
   color: #688394;
 }
 
-#logout-link {
+#logout-link, #signup-link {
   height: 25px;
   vertical-align: center;
   padding: 5px 10px 0 20px;
 }
-#logout-link a {
+#logout-link a, #signup-link a {
   white-space: nowrap;
   color: #222;
   font-weight: bold;
 }
-#logout-link a:hover {
+#logout-link a:hover, #signup-link a:hover {
   color: #688394;
 }
 

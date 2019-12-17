@@ -1,0 +1,288 @@
+# Spanish translation of Shelter Cluster
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"POT-Creation-Date: 2019-03-05 20:04+0000\n"
+"PO-Revision-Date: 2019-03-05 20:04+0000\n"
+"Last-Translator: Camilo Bravo <hola@cambraca.com>\n"
+"Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "Featured Documents"
+msgstr "Documentos Destacados"
+
+msgid "Follow this @type"
+msgstr "Seguir @type"
+
+msgid "Un-follow this @type"
+msgstr "Dejar @type"
+
+msgid "countries"
+msgstr "países"
+
+msgid "country"
+msgstr "país"
+
+msgid "regions"
+msgstr "regiones"
+
+msgid "region"
+msgstr "región"
+
+msgid "hubs"
+msgstr "centros"
+
+msgid "hub"
+msgstr "centro"
+
+msgid "Hubs"
+msgstr "Centros"
+
+msgid "Hub"
+msgstr "Centro"
+
+msgid "responses"
+msgstr "respuestas"
+
+msgid "response"
+msgstr "respuesta"
+
+msgid "working groups"
+msgstr "grupos de trabajo"
+
+msgid "working group"
+msgstr "grupo de trabajo"
+
+msgid "groups"
+msgstr "grupos"
+
+msgid "group"
+msgstr "grupo"
+
+msgid "Cannot follow this @type (you\'re already following too many groups)"
+msgstr "No es posible seguir este @type (siguiendo demasiados grupos)"
+
+msgid "Dashboard"
+msgstr "Panel"
+
+msgid "Documents"
+msgstr "Documentos"
+
+msgid "Discussions"
+msgstr "Discusiones"
+
+msgid "Strategic Advisory Group"
+msgstr "Grupo de Asesoramiento Estratégico"
+
+msgid "Factsheets"
+msgstr "Fichas informativas"
+
+msgid "Factsheet"
+msgstr "Ficha informativa"
+
+msgid "Followers"
+msgstr "Seguidores"
+
+msgid "Related operations"
+msgstr "Operaciones relacionadas"
+
+msgid "Working groups"
+msgstr "Grupos de trabajo"
+
+msgid "Working group"
+msgstr "Grupo de trabajo"
+
+msgid "Pages"
+msgstr "Páginas"
+
+msgid "Page"
+msgstr "Página"
+
+msgid "Communities of practice"
+msgstr "Comunidades de prácticas"
+
+msgid "Community of practice"
+msgstr "Comunidad de prácticas"
+
+msgid "Useful links"
+msgstr "Enlaces de interés"
+
+msgid "Parent page"
+msgstr "Página superior"
+
+msgid "Children pages"
+msgstr "Páginas"
+
+msgid "Document"
+msgstr "Documento"
+
+msgid "Event"
+msgstr "Evento"
+
+msgid "Team member"
+msgstr "Miembro del equipo"
+
+msgid "Alert"
+msgstr "Alerta"
+
+msgid "News"
+msgstr "Noticias"
+
+msgid "Library"
+msgstr "Librería"
+
+msgid "Arbitrary library"
+msgstr "Librería arbitraria"
+
+msgid "Photo gallery"
+msgstr "Galería de fotos"
+
+msgid "Form"
+msgstr "Formulario"
+
+msgid "Kobo form"
+msgstr "Formulario Kobo"
+
+msgid "Child region"
+msgstr "Subregión"
+
+msgid "Child response"
+msgstr "Sub-respuesta"
+
+msgid "Add content"
+msgstr "Agregar contenido"
+
+msgid "Group Administration"
+msgstr "Administración del Grupo"
+
+msgid "Edit"
+msgstr "Editar"
+
+msgid "Content"
+msgstr "Contenido"
+
+msgid "Coordination Team"
+msgstr "Equipo de Coordinación"
+
+msgid "Recent Documents"
+msgstr "Documentos Recientes"
+
+msgid "Overview"
+msgstr "Resumen"
+
+msgid "Associated regions"
+msgstr "Regiones asociadas"
+
+msgid "Events"
+msgstr "Eventos"
+
+msgid "Strategic advisory group"
+msgstr "Grupo de asesoramiento estratégico"
+
+msgid "All documents"
+msgstr "Todos los documentos"
+
+msgid "Key documents"
+msgstr "Documentos clave"
+
+msgid "Recent Key Documents"
+msgstr "Documentos Clave Recientes"
+
+msgid "All Events"
+msgstr "Todos los Eventos"
+
+msgid "Previous events"
+msgstr "Eventos anteriores"
+
+msgid "Upcoming events"
+msgstr "Eventos próximos"
+
+msgid "In"
+msgstr "En"
+
+msgid "and"
+msgstr "y"
+
+msgid "and related to"
+msgstr "y relacionado a"
+
+msgid "Related to"
+msgstr "Relacionado a"
+
+msgid "No upcoming events"
+msgstr "No hay eventos próximamente"
+
+msgid "See past events"
+msgstr "Ver eventos anteriores"
+
+msgid "See Global Events"
+msgstr "Ver Eventos Globales"
+
+msgid "All calendar events"
+msgstr "Todos los eventos"
+
+msgid "See full factsheet"
+msgstr "Ver ficha informativa completa"
+
+msgid "Highlights"
+msgstr "Puntos destacados"
+
+msgid "Coverage against targets"
+msgstr "Cobertura frente a objetivos"
+
+msgid "Key figures"
+msgstr "Cifras clave"
+
+msgid "Cluster partners"
+msgstr "Colaboradores"
+
+msgid "partners"
+msgstr "colaboradores"
+
+msgid "People"
+msgstr "Gente"
+
+msgid "Funding"
+msgstr "Financiamiento"
+
+msgid "Key dates"
+msgstr "Fechas clave"
+
+msgid "Key links"
+msgstr "Enlaces clave"
+
+msgid "Source"
+msgstr "Fuente"
+
+msgid "Total funding required"
+msgstr "Necesidades totales de financiación"
+
+msgid "Funded"
+msgstr "Financiado"
+
+msgid "required (funded)"
+msgstr "necesidad (financiado)"
+
+msgid "In need"
+msgstr "En necesidad"
+
+msgid "Targeted"
+msgstr "Destinado"
+
+msgid "people in need / targeted"
+msgstr "gente en necesidad / destinada"
+
+msgid "Reached"
+msgstr "Alcanzado"
+
+msgid "Ongoing"
+msgstr "En curso"
+
+msgid "Planned"
+msgstr "Planificado"
+
+msgid "Gap"
+msgstr "Brecha"

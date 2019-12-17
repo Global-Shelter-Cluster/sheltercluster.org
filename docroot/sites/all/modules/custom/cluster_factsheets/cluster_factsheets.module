@@ -405,7 +405,7 @@ function cluster_factsheets_main_indicators($node) {
   $indicators = [];
 
   if (!is_null($partners = $wrapper->field_fsi_partners->value()))
-    $indicators['partners'] = $partners;
+    $indicators[t('partners')] = $partners;
 
   if (
     (!is_null($required = $wrapper->field_fsi_funding_required->value()))
@@ -416,14 +416,14 @@ function cluster_factsheets_main_indicators($node) {
     $source_suffix = $funding_source ? '</span>' : '';
 
     $funded_percentage = round($funded / $required * 100) . '%';
-    $indicators['required (funded)'] = $source_prefix . cluster_factsheets_number($required, '$') . ' (' . $funded_percentage . ')' . $source_suffix;
+    $indicators[t('required (funded)')] = $source_prefix . cluster_factsheets_number($required, '$') . ' (' . $funded_percentage . ')' . $source_suffix;
   }
 
   if (
     (!is_null($in_need = $wrapper->field_fsi_in_need->value()))
     && (!is_null($targeted = $wrapper->field_fsi_targeted->value()))
   )
-    $indicators['people in need / targeted' . _cluster_factsheets_hh_abbr($node)] = cluster_factsheets_number($in_need) . ' / ' . cluster_factsheets_number($targeted);
+    $indicators[t('people in need / targeted') . _cluster_factsheets_hh_abbr($node)] = cluster_factsheets_number($in_need) . ' / ' . cluster_factsheets_number($targeted);
 
   return $indicators;
 }
@@ -486,11 +486,9 @@ function cluster_factsheets_api_indicators($node) {
       'type' => 'chart',
       'title' => t('Funding'),
       'smallImage' => TRUE,
-      'description' => t('<p><em>Total funding required:</em></p><p><strong>@total</strong></p><p><em>Funded: </em><span>@funded</span></p><p><em>Source: </em><span>@source</span></p>', [
-        '@total' => cluster_factsheets_number($required, '$'),
-        '@funded' => $funded_percentage,
-        '@source' => $funding_source,
-      ]),
+      'description' => '<p><em>' . t('Total funding required') . ':</em></p><p><strong>' . check_plain(cluster_factsheets_number($required, '$')) . '</strong></p>'
+        . '<p><em>' . t('Funded') . ': </em><span>' . check_plain($funded_percentage) . '</span></p>'
+        . '<p><em>' . t('Source') . ': </em><span>' . check_plain($funding_source) . '</span></p>',
       'chart' => url('chart/factsheet/'.$node->nid.'/funding', [
         'absolute' => TRUE,
         'query' => ['changed' => $node->changed], // cache buster
@@ -511,7 +509,7 @@ function cluster_factsheets_chart_indicators($node) {
 
   if (!is_null($partners = $wrapper->field_fsi_partners->value())) {
     $indicators[] = [
-      '#markup' => '<div><strong>' . $partners . '</strong><label>Cluster partners</label></div>',
+      '#markup' => '<div><strong>' . $partners . '</strong><label>' . t('Cluster partners') . '</label></div>',
     ];
   }
 
@@ -523,7 +521,7 @@ function cluster_factsheets_chart_indicators($node) {
       [
         '#theme' => 'html_tag',
         '#tag' => 'h4',
-        '#value' => 'People' . _cluster_factsheets_hh_abbr($node),
+        '#value' => t('People') . _cluster_factsheets_hh_abbr($node),
       ],
       [
         '#theme' => 'cluster_chart_hbar',
@@ -536,7 +534,7 @@ function cluster_factsheets_chart_indicators($node) {
             ],
           ],
         ],
-        '#labels' => ['In need', 'Targeted'],
+        '#labels' => [t('In need'), t('Targeted')],
         '#options' => [
           'legend' => ['display' => FALSE],
           'maintainAspectRatio' => FALSE,
@@ -581,7 +579,7 @@ function cluster_factsheets_chart_indicators($node) {
             CLUSTER_CHART_COLOR_SHELTER_RED_SHADE2,
           ],
         ],
-        '#labels' => ['Funded', 'Gap'],
+        '#labels' => [t('Funded'), t('Gap')],
         '#options' => [
           'legend' => ['display' => FALSE],
           'maintainAspectRatio' => FALSE,
@@ -592,16 +590,16 @@ function cluster_factsheets_chart_indicators($node) {
         ],
       ];
 
-    $total = '<label>Total funding required:</label><strong>' . cluster_factsheets_number($required, '$') . '</strong>';
+    $total = '<label>' . t('Total funding required') . ':</label><strong>' . cluster_factsheets_number($required, '$') . '</strong>';
 
     $funding_source = trim($wrapper->field_funding_source->value());
-    $source = $funding_source ? '<label>Source:</label><div>' . check_plain($funding_source) . '</div>' : '';
+    $source = $funding_source ? '<label>' . t('Source') . ':</label><div>' . check_plain($funding_source) . '</div>' : '';
 
     $indicators[] = [
       [
         '#theme' => 'html_tag',
         '#tag' => 'h4',
-        '#value' => 'Funding',
+        '#value' => t('Funding'),
       ],
       [
         '#type' => 'container',
@@ -705,22 +703,22 @@ function _cluster_factsheets_generate_cat_chart_data($items) {
   $data = [
     [
       'data' => [],
-      'label' => 'Reached',
+      'label' => t('Reached'),
       'backgroundColor' => CLUSTER_CHART_COLOR_SHELTER_RED,
     ],
     [
       'data' => [],
-      'label' => 'Ongoing',
+      'label' => t('Ongoing'),
       'backgroundColor' => CLUSTER_CHART_COLOR_SHELTER_RED_SHADE1,
     ],
     [
       'data' => [],
-      'label' => 'Planned',
+      'label' => t('Planned'),
       'backgroundColor' => CLUSTER_CHART_COLOR_SHELTER_RED_SHADE2,
     ],
     [
       'data' => [],
-      'label' => 'Gap',
+      'label' => t('Gap'),
 //          'backgroundColor' => CLUSTER_CHART_COLOR_ACCENT_RED,
     ],
   ];
