@@ -100,9 +100,9 @@ function theme_cluster_og_no_upcoming_event($vars) {
       ),
     );
   return partial('upcoming_events', array(
-    'title' => t('No Upcoming Events'),
+    'title' => t('No upcoming events'),
     'events' => $vars['events'],
-    'all_events_link' => l(t('All Calendar Events'), $vars['all_events_link'], $link_attributes),
+    'all_events_link' => l(t('All calendar events'), $vars['all_events_link'], $link_attributes),
     'global_events_link' => FALSE,
   ));
 }

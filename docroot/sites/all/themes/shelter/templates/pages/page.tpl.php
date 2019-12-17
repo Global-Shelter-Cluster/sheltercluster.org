@@ -42,6 +42,9 @@
               <span id="logout-link"><?php print $variables['logout_link']; ?></span>
               <?php endif; ?>
             <?php endif; ?>
+            <?php if ($variables['signup_link']): ?>
+              <span id="signup-link"><?php print $variables['signup_link']; ?></span>
+            <?php endif; ?>
           </div>
         <?php endif; ?>
       </div>

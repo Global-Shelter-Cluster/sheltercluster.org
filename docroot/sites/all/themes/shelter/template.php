@@ -39,8 +39,10 @@ function shelter_preprocess_page(&$variables) {
     ]);
 
     $variables['logout_link'] = l(t('Log out'), 'user/logout');
+    $variables['signup_link'] = NULL;
   } else {
     $variables['login_link'] = l(t('Log in'), 'user/login');
+    $variables['signup_link'] = l(t('Sign up'), 'user/register');
   }
 
   global $language;

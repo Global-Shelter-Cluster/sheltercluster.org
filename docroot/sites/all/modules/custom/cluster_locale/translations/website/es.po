@@ -1,0 +1,63 @@
+# Spanish translation of Shelter Cluster
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"POT-Creation-Date: 2019-03-05 20:04+0000\n"
+"PO-Revision-Date: 2019-03-05 20:04+0000\n"
+"Last-Translator: Camilo Bravo <hola@cambraca.com>\n"
+"Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "Featured Responses"
+msgstr "Respuestas Destacadas"
+
+msgid "General Information"
+msgstr "Información General"
+
+msgid "Shelter information is available on the following countries:"
+msgstr "Información sobre Vivienda disponible en los siguientes países:"
+
+msgid "Download the Shelter Cluster mobile app"
+msgstr "Descargar la aplicación móvil de Shelter Cluster"
+
+msgid "Program/Initiative/activity undertaken with the financial support of the Government of Canada provided through Global Affairs Canada (GAC)"
+msgstr "Programa/Iniciativa/actividad realizada con el apoyo financiero del Gobierno de Canadá proporcionado a través de Global Affairs Canada (GAC)"
+
+msgid "Canadian Red Cross"
+msgstr "Cruz Roja Canadiense"
+
+msgid "Governement of Canada"
+msgstr "Gobierno de Canadá"
+
+msgid "This website is made possible through the financial and in-kind contributions of:"
+msgstr "Este sitio web se hace posible a través de las contribuciones financieras y en especie de:"
+
+msgid "UNHCR The UN Refugee Agency"
+msgstr "ACNUR, la Agencia de la ONU para los Refugiados"
+
+msgid "International Federation of Red Cross and Red Crescent Societies"
+msgstr "Federación Internacional de Sociedades de la Cruz Roja y de la Media Luna Roja"
+
+msgid "Humanitarian Aid and Civil Protection"
+msgstr "Ayuda Humanitaria y Protección Civil"
+
+msgid "All current operations"
+msgstr "Todas las operaciones actuales"
+
+msgid "Home"
+msgstr "Inicio"
+
+msgid "Your profile"
+msgstr "Tu perfil"
+
+msgid "Log out"
+msgstr "Cerrar sesión"
+
+msgid "Log in"
+msgstr "Iniciar sesión"
+
+msgid "Sign up"
+msgstr "Registrarse"
