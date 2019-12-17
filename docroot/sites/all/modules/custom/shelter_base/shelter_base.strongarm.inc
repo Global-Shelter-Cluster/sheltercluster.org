@@ -898,6 +898,14 @@ function shelter_base_strongarm() {
       ),
       'file' => 'includes/locale.inc',
     ),
+    'locale-session' => array(
+      'callbacks' => array(
+        'language' => 'locale_language_from_session',
+        'switcher' => 'locale_language_switcher_session',
+        'url_rewrite' => 'locale_language_url_rewrite_session',
+      ),
+      'file' => 'includes/locale.inc',
+    ),
     'locale-url' => array(
       'callbacks' => array(
         'language' => 'locale_language_from_url',
@@ -922,6 +930,14 @@ function shelter_base_strongarm() {
     'locale-user' => array(
       'callbacks' => array(
         'language' => 'locale_language_from_user',
+      ),
+      'file' => 'includes/locale.inc',
+    ),
+    'locale-session' => array(
+      'callbacks' => array(
+        'language' => 'locale_language_from_session',
+        'switcher' => 'locale_language_switcher_session',
+        'url_rewrite' => 'locale_language_url_rewrite_session',
       ),
       'file' => 'includes/locale.inc',
     ),
@@ -1000,8 +1016,8 @@ function shelter_base_strongarm() {
   $strongarm->name = 'locale_language_providers_weight_language';
   $strongarm->value = array(
     'locale-user' => '-10',
-    'locale-url' => '-9',
-    'locale-session' => '-8',
+    'locale-url' => '-8',
+    'locale-session' => '-9',
     'locale-browser' => '-7',
     'language-default' => '-6',
   );
@@ -1012,9 +1028,9 @@ function shelter_base_strongarm() {
   $strongarm->api_version = 1;
   $strongarm->name = 'locale_language_providers_weight_language_content';
   $strongarm->value = array(
-    'locale-url' => '-9',
-    'locale-session' => '-8',
     'locale-user' => '-10',
+    'locale-url' => '-8',
+    'locale-session' => '-9',
     'locale-browser' => '-7',
     'locale-interface' => '-6',
     'language-default' => '-5',
