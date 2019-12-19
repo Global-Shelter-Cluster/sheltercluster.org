@@ -1,11 +1,11 @@
 <li class="expanded last nav-item" id="cluster-search-mega-menu">
-  <a href="#" @click.prevent="focus"><i class="fa fa-search"></i> Search</a>
+  <a href="#" @click.prevent="focus"><i class="fa fa-search"></i> <?php print t('Search'); ?></a>
   <template>
   <ul class="nav-items menu search-input-row">
     <li class="within-group" v-if="groupNids">
       <label>
         <input type="checkbox" v-model="onlyWithinGroup">
-        Search within <em>{{ groupTitle }}</em>
+        <?php print t('Search within <em>{{ groupTitle }}</em>'); ?>
       </label>
     </li>
     <li class="search-input">
@@ -20,7 +20,7 @@
   </ul>
   <ul class="nav-items menu" v-if="hasResults && !indexFilter">
     <li v-if="results.documents.length > 0">
-      <a href="#" @click.prevent="indexFilter = 'documents'" title="Click here to search documents only">Documents</a>
+      <a href="#" @click.prevent="indexFilter = 'documents'" title="Click here to search documents only"><?php print t('Documents'); ?></a>
       <ul class="nav-items menu">
         <li class="leaf" v-for="document in getPage(results.documents, 0, 10)">
           <a :href="document.url" class="search-result-title"
@@ -30,8 +30,8 @@
                    :title="document.group|strip_tags" v-html="document.group"></small>
             <small>
               {{ document.date }}
-              <template v-if="document.featured">&middot; Featured</template>
-              <template v-if="document.key && !document.featured">&middot; Key document</template>
+              <template v-if="document.featured">&middot; <?php print t('Featured'); ?></template>
+              <template v-if="document.key && !document.featured">&middot; <?php print t('Key document'); ?></template>
             </small>
           </a>
         </li>
@@ -48,15 +48,15 @@
                    :title="document.group|strip_tags" v-html="document.group"></small>
             <small>
               {{ document.date }}
-              <template v-if="document.featured">&middot; Featured</template>
-              <template v-if="document.key && !document.featured">&middot; Key document</template>
+              <template v-if="document.featured">&middot; <?php print t('Featured'); ?></template>
+              <template v-if="document.key && !document.featured">&middot; <?php print t('Key document'); ?></template>
             </small>
           </a>
         </li>
       </ul>
     </li>
     <li v-if="results.events.length > 0">
-      <a href="#" @click.prevent="indexFilter = 'events'" title="Click here to search events only">Events</a>
+      <a href="#" @click.prevent="indexFilter = 'events'" title="Click here to search events only"><?php print t('Events'); ?></a>
       <ul class="nav-items menu">
         <li class="leaf" v-for="event in results.events">
           <a :href="event.url" class="search-result-title" :title="event.title|strip_tags">
@@ -74,7 +74,7 @@
     </li>
     <li v-if="results.pages.length > 0 || results.groups.length > 0">
       <template v-if="results.pages.length > 0">
-        <a href="#" @click.prevent="indexFilter = 'pages'" title="Click here to search pages only">Pages</a>
+        <a href="#" @click.prevent="indexFilter = 'pages'" title="Click here to search pages only"><?php print t('Pages'); ?></a>
         <ul class="nav-items menu">
           <li class="leaf" v-for="page in results.pages">
             <a :href="page.url">
@@ -88,7 +88,7 @@
       </template>
       <br class="mobile-hide" v-if="results.pages.length > 0 && results.groups.length > 0">
       <template v-if="results.groups.length > 0">
-        <a href="#" @click.prevent="indexFilter = 'groups'" title="Click here to search groups only">Groups</a>
+        <a href="#" @click.prevent="indexFilter = 'groups'" title="Click here to search groups only"><?php print t('Groups'); ?></a>
         <ul class="nav-items menu">
           <li class="leaf" v-for="group in results.groups">
             <a :href="group.url">
@@ -100,7 +100,7 @@
       </template>
     </li>
     <li v-if="results.contacts.length > 0">
-      <a href="#" @click.prevent="indexFilter = 'contacts'" title="Click here to search contacts only">Contacts</a>
+      <a href="#" @click.prevent="indexFilter = 'contacts'" title="Click here to search contacts only"><?php print t('Contacts'); ?></a>
       <ul class="nav-items menu">
         <li class="leaf" v-for="contact in results.contacts">
           <a :href="contact.url" target="_blank">
@@ -120,7 +120,7 @@
   <ul class="nav-items menu search-filtered-by-index" v-if="hasResults && indexFilter == 'documents'">
     <template v-for="page in 5">
       <li v-if="results.documents.length > (page-1) * 10">
-        <a v-if="page === 1" href="#" @click.prevent="indexFilter = null" title="Click here to search everything">* Documents</a>
+        <a v-if="page === 1" href="#" @click.prevent="indexFilter = null" title="Click here to search everything">* <?php print t('Documents'); ?></a>
         <span v-if="page > 1">&nbsp;</span>
         <ul class="nav-items menu">
           <li class="leaf"
@@ -132,8 +132,8 @@
                      :title="document.group|strip_tags" v-html="document.group"></small>
               <small>
                 {{ document.date }}
-                <template v-if="document.featured">&middot; Featured</template>
-                <template v-if="document.key && !document.featured">&middot; Key document</template>
+                <template v-if="document.featured">&middot; <?php print t('Featured'); ?></template>
+                <template v-if="document.key && !document.featured">&middot; <?php print t('Key document'); ?></template>
               </small>
             </a>
           </li>
@@ -144,7 +144,7 @@
   <ul class="nav-items menu search-filtered-by-index" v-if="hasResults && indexFilter == 'events'">
     <template v-for="page in 5">
       <li v-if="results.events.length > (page-1) * 10">
-        <a v-if="page === 1" href="#" @click.prevent="indexFilter = null" title="Click here to search everything">* Events</a>
+        <a v-if="page === 1" href="#" @click.prevent="indexFilter = null" title="Click here to search everything">* <?php print t('Events'); ?></a>
         <span v-if="page > 1">&nbsp;</span>
         <ul class="nav-items menu">
           <li class="leaf" v-for="event in getPage(results.events, page-1, 10)">
@@ -166,7 +166,7 @@
   <ul class="nav-items menu search-filtered-by-index" v-if="hasResults && indexFilter == 'pages'">
     <template v-for="page in 5">
       <li v-if="results.pages.length > (page-1) * 8">
-        <a v-if="page === 1" href="#" @click.prevent="indexFilter = null" title="Click here to search everything">* Pages</a>
+        <a v-if="page === 1" href="#" @click.prevent="indexFilter = null" title="Click here to search everything">* <?php print t('Pages'); ?></a>
         <span v-if="page > 1">&nbsp;</span>
         <ul class="nav-items menu">
           <li class="leaf" v-for="page in getPage(results.pages, page-1, 8)">
@@ -184,7 +184,7 @@
   <ul class="nav-items menu search-filtered-by-index" v-if="hasResults && indexFilter == 'groups'">
     <template v-for="page in 5">
       <li v-if="results.groups.length > (page-1) * 8">
-        <a v-if="page === 1" href="#" @click.prevent="indexFilter = null" title="Click here to search everything">* Groups</a>
+        <a v-if="page === 1" href="#" @click.prevent="indexFilter = null" title="Click here to search everything">* <?php print t('Groups'); ?></a>
         <span v-if="page > 1">&nbsp;</span>
         <ul class="nav-items menu">
           <li class="leaf"
@@ -201,7 +201,7 @@
   <ul class="nav-items menu search-filtered-by-index" v-if="hasResults && indexFilter == 'contacts'">
     <template v-for="page in 5">
       <li v-if="results.contacts.length > (page-1) * 6">
-        <a v-if="page === 1" href="#" @click.prevent="indexFilter = null" title="Click here to search everything">* Contacts</a>
+        <a v-if="page === 1" href="#" @click.prevent="indexFilter = null" title="Click here to search everything">* <?php print t('Contacts'); ?></a>
         <span v-if="page > 1">&nbsp;</span>
         <ul class="nav-items menu">
           <li class="leaf"
@@ -223,9 +223,9 @@
   </ul>
   <ul class="nav-items menu search-no-results" v-if="showNoResultsMessage">
     <li>
-      <span>No results found for "<strong>{{ query }}</strong>"</span>
-      <a v-if="indexFilter" href="#" @click.prevent="indexFilter = null">Search everything</a>
-      <a v-if="!indexFilter && groupNids && onlyWithinGroup" href="#" @click.prevent="onlyWithinGroup = false">Search outside this group</a>
+      <span><?php print t('No results found for "<strong>{{ query }}</strong>"'); ?></span>
+      <a v-if="indexFilter" href="#" @click.prevent="indexFilter = null"><?php print t('Search everything'); ?></a>
+      <a v-if="!indexFilter && groupNids && onlyWithinGroup" href="#" @click.prevent="onlyWithinGroup = false"><?php print t('Search outside this group'); ?></a>
     </li>
   </ul>
   </template>

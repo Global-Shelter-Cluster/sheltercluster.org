@@ -61,3 +61,30 @@ msgstr "Iniciar sesión"
 
 msgid "Sign up"
 msgstr "Registrarse"
+
+msgid "Search"
+msgstr "Buscar"
+
+msgid "Search within <em>{{ groupTitle }}</em>"
+msgstr "Buscar en <em>{{ groupTitle }}</em>"
+
+msgid "Featured"
+msgstr "Destacado"
+
+msgid "Key document"
+msgstr "Documento clave"
+
+msgid "Groups"
+msgstr "Grupos"
+
+msgid "Contacts"
+msgstr "Contactos"
+
+msgid "No results found for \"<strong>{{ query }}</strong>\""
+msgstr "No hay resultados para \"<strong>{{ query }}</strong>\""
+
+msgid "Search everything"
+msgstr "Buscar todo"
+
+msgid "Search outside this group"
+msgstr "Buscar fuera de este grupo"
