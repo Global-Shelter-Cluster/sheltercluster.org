@@ -4621,3 +4621,50 @@ form .field-multiple-table .form-item {
 #user-profile-form #edit-picture .fieldset-wrapper > * + * {
   margin-left: 1em;
 }
+
+#anon-follow {
+  margin-bottom: 20px;
+  padding: 10px;
+  border: 3px solid #7f1416;
+  border-radius: 4px;
+  font-size: 13.6px;
+  font-size: 0.85rem;
+}
+#anon-follow a {
+  margin: 10px 0;
+  float: none !important;
+}
+#anon-follow form {
+  margin-top: 20px;
+}
+#anon-follow form .form-item {
+  margin: 0;
+}
+#anon-follow form label {
+  font-weight: normal;
+}
+#anon-follow form .form-required {
+  display: none;
+  /* Because it's obvious since there's just one field */
+}
+#anon-follow form input[type=text] {
+  width: 100%;
+  margin: 10px 0;
+  padding: 5px;
+}
+#anon-follow form input[type=submit] {
+  width: 100%;
+  font-weight: bold;
+  padding: 8px 16px 8px;
+  padding: 0.5rem 1rem 0.5rem;
+  font-size: 14.4px;
+  font-size: 0.9rem;
+  border: 0;
+  border-radius: 0;
+  margin: 0;
+  color: white;
+  background: #7f1416;
+}
+#anon-follow form input[type=submit]:hover, #anon-follow form input[type=submit].active {
+  background: #ab1b1e;
+}

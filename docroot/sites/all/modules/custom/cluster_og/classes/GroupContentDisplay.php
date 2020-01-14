@@ -164,17 +164,30 @@ class GroupDisplayProvider {
         ),
       ];
 
-    if (!$following)
-      return [
-        'label' => t('Follow this @type', ['@type' => $this->getGroupTypeLabel()]),
-        'path' => 'node/' . $this->node->nid . '/follow',
-        'options' => array(
-          'html' => TRUE,
-          'attributes' => [
-            'class' => 'follow',
+    if (!$following) {
+      if (FALSE && user_is_logged_in()) { // TODO: remove "FALSE" part and add looking at field_enable_email_subscriptions
+        return [
+          'label' => t('Follow this @type', ['@type' => $this->getGroupTypeLabel()]),
+          'path' => 'node/' . $this->node->nid . '/follow',
+          'options' => [
+            'html' => TRUE,
+            'attributes' => [
+              'class' => 'follow',
+            ],
           ],
-        ),
-      ];
+        ];
+      }
+      else {
+        return [
+          'link' => [
+            '#theme' => 'cluster_og_anon_follow',
+            '#group_type' => $this->getGroupTypeLabel(),
+            '#follow_path' => 'node/' . $this->node->nid . '/follow',
+            '#form' => drupal_get_form('cluster_og_anon_email_subscribe_form'),
+          ],
+        ];
+      }
+    }
     else
       return [
         'label' => t('Un-follow this @type', ['@type' => $this->getGroupTypeLabel()]),

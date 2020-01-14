@@ -157,7 +157,31 @@ function cluster_og_theme() {
         'translations' => [],
       ),
     ),
+    'cluster_og_anon_follow' => array(
+      'template' => 'theme/cluster-og-anon-follow',
+      'variables' => array(
+        'group_type' => '',
+        'follow_path' => '',
+        'form' => NULL,
+      ),
+    ),
   );
+}
+
+function cluster_og_anon_email_subscribe_form($form, &$form_state) {
+  $form['email'] = [
+    '#type' => 'textfield',
+    '#title' => t('Or enter your email address to subscribe without a user account:'),
+    '#required' => TRUE,
+    '#attributes' => ['placeholder' => t('Email address')],
+  ];
+
+  $form['submit'] = [
+    '#type' => 'submit',
+    '#value' => t('Subscribe without an account'),
+  ];
+
+  return $form;
 }
 
 /**
