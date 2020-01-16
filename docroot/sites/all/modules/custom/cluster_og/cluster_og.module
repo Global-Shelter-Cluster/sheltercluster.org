@@ -165,6 +165,16 @@ function cluster_og_theme() {
         'form' => NULL,
       ),
     ),
+    'cluster_og_email_subscribe' => [
+      'template' => 'subscribe-email',
+      'variables' => [
+        'logo' => '',
+        'langcode' => '',
+        'confirm_path' => '',
+        'group_name' => '',
+      ],
+      'path' => drupal_get_path('module', 'cluster_og') . '/templates',
+    ],
   );
 }
 
@@ -172,7 +182,6 @@ function cluster_og_anon_email_subscribe_form($form, &$form_state) {
   $form['email'] = [
     '#type' => 'textfield',
     '#title' => t('Or enter your email address to subscribe without a user account:'),
-    '#required' => TRUE,
     '#attributes' => ['placeholder' => t('Email address')],
   ];
 
@@ -182,6 +191,79 @@ function cluster_og_anon_email_subscribe_form($form, &$form_state) {
   ];
 
   return $form;
+}
+
+function cluster_og_anon_email_subscribe_form_validate($form, &$form_state) {
+  $email = trim($form_state['values']['email']);
+  if (!$email)
+    form_set_error('email', t('Email address is required'));
+  if (!valid_email_address($email))
+    form_set_error('email', t('Invalid email address'));
+
+  if (user_load_by_mail($email)) {
+    $display_provider = cluster_nav_get_display_provider();
+    form_set_error('email', t('The given email address belongs to an existing user account. Please log in to follow this @group_type.', [
+      '@group_type' => $display_provider->getGroupTypeLabel(),
+    ]));
+  }
+}
+
+function cluster_og_anon_email_subscribe_form_submit($form, &$form_state) {
+  $email = trim($form_state['values']['email']);
+  $display_provider = cluster_nav_get_display_provider();
+  $group = $display_provider->getGroup();
+  $wrapper = entity_metadata_wrapper('node', $group);
+
+  $subscribers = $wrapper->field_subscribers->value();
+  foreach ($subscribers as $subscriber) {
+    if (strtolower($email) === strtolower($subscriber)) {
+      drupal_set_message(t('You are already subscribed to this @group_type. Please check your spam folder.', [
+        '@group_type' => $display_provider->getGroupTypeLabel(),
+      ]), 'warning');
+      return;
+    }
+  }
+
+  $gid = $group->nid;
+  $hash = drupal_random_key(24);
+  $record = [
+    'gid' => $gid,
+    'hash' => $hash,
+    'email' => $email,
+    'created' => REQUEST_TIME,
+  ];
+  $result = drupal_write_record('cluster_og_pending_email_subs', $record);
+  if (!$result) {
+    drupal_set_message(t('Unknown error: @error', ['@error' => $result]), 'error');
+    return;
+  }
+  $confirm_path = "subscribe/$gid/$hash";
+
+  global $language;
+  $langcode = $language->language;
+
+  try {
+    $params = [
+      'confirm_path' => $confirm_path,
+      'group' => $group,
+      'langcode' => $langcode,
+    ];
+
+    drupal_mail('cluster_og', 'subscribe', $email, $langcode, $params);
+
+    drupal_set_message(t('Please check your email (@email) to confirm your subscription to the "@title" @group_type.', [
+      '@email' => $email,
+      '@title' => $group->title,
+      '@group_type' => $display_provider->getGroupTypeLabel(),
+    ]));
+  } catch (Exception $e) {
+    drupal_set_message(t('Error sending subscription confirmation email. Please try again later.'), 'error');
+
+    watchdog('cluster_og', 'Error sending subscribe email to @email: @error', [
+      '@email' => $email,
+      '@error' => $e->getMessage(),
+    ], WATCHDOG_ERROR);
+  }
 }
 
 /**
@@ -532,7 +614,130 @@ function cluster_og_menu() {
     'type' => MENU_CALLBACK,
   );
 
+  $items['subscribe/%/%'] = [
+    'page callback' => 'cluster_og_email_subscribe',
+    'page arguments' => [1, 2],
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
+  ];
+
+  $items['unsubscribe/%/%'] = [
+    'page callback' => 'cluster_og_email_unsubscribe',
+    'page arguments' => [1, 2],
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
+  ];
+
   return $items;
+}
+
+function cluster_og_email_subscribe($gid, $hash) {
+  if (!is_numeric($gid) || $gid <= 0
+    || empty($hash) || !is_string($hash)
+  ) {
+    drupal_goto('<front>');
+  } // Something ain't valid
+
+  $gid = intval($gid, 10);
+
+  $row = db_select('cluster_og_pending_email_subs', 's')
+    ->fields('s', ['email'])
+    ->condition('gid', $gid)
+    ->condition('hash', $hash)
+    ->execute()
+    ->fetchAssoc();
+
+  if (!$row) {
+    return MENU_NOT_FOUND;
+  }
+
+  $email = $row['email'];
+
+  $group = node_load($gid);
+  if (!og_is_group('node', $group)) {
+    drupal_goto('<front>');
+  } // Referenced gid isn't a group (shouldn't happen)
+
+  $wrapper = entity_metadata_wrapper('node', $group);
+  $display_provider = GroupDisplayProvider::getDisplayProvider($group);
+
+  if (!$wrapper->field_enable_email_subscriptions->value()) {
+    drupal_set_message(t('Email subscriptions no longer enabled for this @group_type.', [
+      '@group_type' => $display_provider->getGroupTypeLabel(),
+    ]), 'warning');
+    drupal_goto('node/' . $gid);
+  }
+
+  $subscribers = $wrapper->field_subscribers->value();
+  if (!in_array($email, $subscribers)) {
+    $wrapper->field_subscribers[] = $email;
+    $wrapper->save();
+  }
+
+  db_delete('cluster_og_pending_email_subs')
+    ->condition('gid', $gid)
+    ->condition('email', $email)
+    ->execute();
+
+  drupal_set_message(t('You have been successfully subscribed to this @group_type (@email).', [
+    '@group_type' => $display_provider->getGroupTypeLabel(),
+    '@email' => $email,
+  ]));
+  drupal_goto('node/' . $gid);
+}
+
+/**
+ * Implements hook_mail().
+ */
+function cluster_og_mail($key, &$message, $params) {
+  if ($key !== 'subscribe')
+    throw new Exception("Unknown key: ".$key);
+
+  // E.g. "Ecuador Earthquake 2016 (response)"
+  $group_name = cluster_api_group_notification_title($params['group'], $params['langcode']);
+
+  $body = [
+    '#theme' => 'cluster_og_email_subscribe',
+    '#logo' => url('sites/all/themes/shelter/assets/svg/replacement/logo-global-shelter-cluster-4x.png', ['absolute' => TRUE]),
+    '#langcode' => $params['langcode'],
+    '#confirm_path' => $params['confirm_path'],
+    '#group_name' => $group_name,
+  ];
+
+  $message['subject'] = t('Confirm subscription to @group', ['@group' => $group_name]);
+  $message['from_name'] = $group_name;
+  $message['body'] = [drupal_render($body)];
+}
+
+function cluster_og_email_unsubscribe($gid, $email) {
+  if (!is_numeric($gid) || $gid <= 0
+    || empty($email) || !valid_email_address($email)
+  ) {
+    drupal_goto('<front>');
+  } // Something ain't valid
+
+  $gid = intval($gid, 10);
+
+  $group = node_load($gid);
+  if (!og_is_group('node', $group)) {
+    drupal_goto('<front>');
+  } // Referenced gid isn't a group (shouldn't happen)
+
+  $wrapper = entity_metadata_wrapper('node', $group);
+  $display_provider = GroupDisplayProvider::getDisplayProvider($group);
+
+  $subscribers = $wrapper->field_subscribers->value();
+  $idx = array_search($email, $subscribers);
+  if ($idx !== FALSE) {
+    $wrapper->field_subscribers[$idx]->set(NULL); // deletes it
+    $wrapper->save();
+  }
+
+  drupal_set_message(t('You are no longer subscribed to this @group_type (@email).', [
+    '@group_type' => $display_provider->getGroupTypeLabel(),
+    '@email' => $email,
+  ]));
+  drupal_goto('node/' . $gid);
 }
 
 function cluster_og_followers_access($gid) {
