@@ -33,18 +33,52 @@ function cluster_news_cron() {
     $news_wrapper->field_is_sent->set(1);
     $news_wrapper->save();
 
+    $paragraphs_content = cluster_paragraphs_render_email_content($news_wrapper->field_content->value());
+    $news_date = $news_wrapper->field_news_date->value();
+
     $all_uids = []; // Unified list of uids for all the groups to which this news item belongs.
+    $all_subscribers = []; // Unified list of subscriber emails for all the groups to which this news item belongs.
     $first_group = NULL;
 
     foreach ($news_wrapper->og_group_ref->value() as $group) {
       if (!og_is_group('node', $group))
         continue; // shouldn't happen
       $manager = GroupContentManager::getInstance($group);
+      $group_wrapper = entity_metadata_wrapper('node', $group);
       if (is_null($first_group))
         $first_group = $group;
 
       $all_uids = array_unique(array_merge($all_uids, cluster_api_get_followers($manager)));
+      if ($group_wrapper->field_enable_email_subscriptions->value())
+        $all_subscribers = array_merge($all_subscribers, $group_wrapper->field_subscribers->value());
     }
+
+    // Send emails for anon users (subscribers)
+
+    foreach ($all_subscribers as $subscriber_email) {
+      $langcode = 'en';
+
+      try {
+        $params = [
+          'node' => $news_node,
+          'group' => $first_group,
+          'date' => $news_date,
+          'content' => $paragraphs_content,
+          'langcode' => $langcode,
+          'subscriber_email' => $subscriber_email,
+        ];
+
+        drupal_mail('cluster_news', 'news_anon', $subscriber_email, $langcode, $params);
+      } catch (Exception $e) {
+        watchdog('cluster_news', 'Error sending news email @nid (subscriber: @email): @error', [
+          '@nid' => $news_node->nid,
+          '@email' => $subscriber_email,
+          '@error' => $e->getMessage(),
+        ], WATCHDOG_ERROR);
+      }
+    }
+
+    // Send normal emails for registered users
 
     if (!$all_uids)
       continue;
@@ -54,8 +88,8 @@ function cluster_news_cron() {
         $params = [
           'node' => $news_node,
           'group' => $first_group,
-          'date' => $news_wrapper->field_news_date->value(),
-          'content' => cluster_paragraphs_render_email_content($news_wrapper->field_content->value()),
+          'date' => $news_date,
+          'content' => $paragraphs_content,
           'langcode' => $langcode,
         ];
         $to = _cluster_email_recipients_string($uids);
@@ -75,7 +109,7 @@ function cluster_news_cron() {
  * Implements hook_mail().
  */
 function cluster_news_mail($key, &$message, $params) {
-  if ($key !== 'news')
+  if (!in_array($key, ['news', 'news_anon']))
     throw new Exception("Unknown key: ".$key);
 
   $body = [
@@ -87,6 +121,11 @@ function cluster_news_mail($key, &$message, $params) {
     '#group' => $params['group'],
     '#node' => $params['node'],
   ];
+
+  if ($key === 'news_anon') {
+    $body['#is_anon'] = TRUE;
+    $body['#subscriber_email'] = $params['subscriber_email'];
+  }
 
   // E.g. "Ecuador Earthquake 2016 (response)"
   $group_name = cluster_api_group_notification_title($params['group'], $params['langcode']);
@@ -111,6 +150,8 @@ function cluster_news_theme($existing, $type, $theme, $path) {
         'content' => [],
         'group' => [],
         'node' => [],
+        'is_anon' => FALSE,
+        'subscriber_email' => '',
       ],
       'path' => drupal_get_path('module', 'cluster_news') . '/templates',
     ],
