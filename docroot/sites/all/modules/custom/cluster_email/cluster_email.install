@@ -54,3 +54,18 @@ function cluster_email_update_7000() {
     }
   }
 }
+
+/**
+ * Add the `last_anon_email_notification` field to the `node` table.
+ */
+function cluster_email_update_7001() {
+  module_load_include('module', 'cluster_email', 'cluster_email');
+
+  $temp = [];
+  cluster_email_schema_alter($temp);
+  db_add_field(
+    'node',
+    'last_anon_email_notification',
+    $temp['node']['fields']['last_anon_email_notification']
+  );
+}
