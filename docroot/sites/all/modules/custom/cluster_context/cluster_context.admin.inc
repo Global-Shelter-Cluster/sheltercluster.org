@@ -143,6 +143,7 @@ function _cluster_context_simplify_form(&$form) {
     'revision_information' => TRUE,   // "Revision information" tab.
     'menu' => TRUE,                   // "Menu settings" tab.
     'path' => TRUE,                   // "URL path settings" tab.
+    'print' => TRUE,                  // "Printer, email and PDF versions" tab.
     'language' => TRUE,               // "Language" field.
     'group_register' => FALSE,        // "Group register" field.
     'group_access' => FALSE,          // "Group visibility" field.
