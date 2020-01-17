@@ -139,6 +139,57 @@ function cluster_og_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance:
+  // 'node-community_of_practice-field_enable_email_subscriptions'.
+  $field_instances['node-community_of_practice-field_enable_email_subscriptions'] = array(
+    'bundle' => 'community_of_practice',
+    'default_value' => array(
+      0 => array(
+        'value' => 0,
+      ),
+    ),
+    'deleted' => 0,
+    'description' => 'When enabled, anonymous users (i.e. not logged in) will see an option to subscribe to email notifications (including news) for this group.',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 10,
+      ),
+      'ical' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_enable_email_subscriptions',
+    'label' => 'Enable email subscriptions',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(
+        'display_label' => 1,
+      ),
+      'type' => 'options_onoff',
+      'weight' => 32,
+    ),
+  );
+
   // Exported field_instance: 'node-community_of_practice-field_image'.
   $field_instances['node-community_of_practice-field_image'] = array(
     'bundle' => 'community_of_practice',
@@ -193,6 +244,52 @@ function cluster_og_field_default_field_instances() {
       ),
       'type' => 'image_image',
       'weight' => 7,
+    ),
+  );
+
+  // Exported field_instance: 'node-community_of_practice-field_subscribers'.
+  $field_instances['node-community_of_practice-field_subscribers'] = array(
+    'bundle' => 'community_of_practice',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'email',
+        'settings' => array(),
+        'type' => 'email_default',
+        'weight' => 11,
+      ),
+      'ical' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_subscribers',
+    'label' => 'Subscribers',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'email',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'email_textfield',
+      'weight' => 34,
     ),
   );
 
@@ -492,6 +589,63 @@ function cluster_og_field_default_field_instances() {
   );
 
   // Exported field_instance:
+  // 'node-geographic_region-field_enable_email_subscriptions'.
+  $field_instances['node-geographic_region-field_enable_email_subscriptions'] = array(
+    'bundle' => 'geographic_region',
+    'default_value' => array(
+      0 => array(
+        'value' => 0,
+      ),
+    ),
+    'deleted' => 0,
+    'description' => 'When enabled, anonymous users (i.e. not logged in) will see an option to subscribe to email notifications (including news) for this group.',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 10,
+      ),
+      'full' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'ical' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_enable_email_subscriptions',
+    'label' => 'Enable email subscriptions',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(
+        'display_label' => 1,
+      ),
+      'type' => 'options_onoff',
+      'weight' => 31,
+    ),
+  );
+
+  // Exported field_instance:
   // 'node-geographic_region-field_geographic_region_type'.
   $field_instances['node-geographic_region-field_geographic_region_type'] = array(
     'bundle' => 'geographic_region',
@@ -723,6 +877,58 @@ function cluster_og_field_default_field_instances() {
       ),
       'type' => 'entityreference_autocomplete',
       'weight' => 3,
+    ),
+  );
+
+  // Exported field_instance: 'node-geographic_region-field_subscribers'.
+  $field_instances['node-geographic_region-field_subscribers'] = array(
+    'bundle' => 'geographic_region',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'email',
+        'settings' => array(),
+        'type' => 'email_default',
+        'weight' => 11,
+      ),
+      'full' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'ical' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_subscribers',
+    'label' => 'Subscribers',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'email',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'email_textfield',
+      'weight' => 32,
     ),
   );
 
@@ -1113,6 +1319,62 @@ function cluster_og_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-hub-field_enable_email_subscriptions'.
+  $field_instances['node-hub-field_enable_email_subscriptions'] = array(
+    'bundle' => 'hub',
+    'default_value' => array(
+      0 => array(
+        'value' => 0,
+      ),
+    ),
+    'deleted' => 0,
+    'description' => 'When enabled, anonymous users (i.e. not logged in) will see an option to subscribe to email notifications (including news) for this group.',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 9,
+      ),
+      'ical' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'related_hub' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_enable_email_subscriptions',
+    'label' => 'Enable email subscriptions',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(
+        'display_label' => 1,
+      ),
+      'type' => 'options_onoff',
+      'weight' => 32,
+    ),
+  );
+
   // Exported field_instance: 'node-hub-field_image'.
   $field_instances['node-hub-field_image'] = array(
     'bundle' => 'hub',
@@ -1287,6 +1549,58 @@ function cluster_og_field_default_field_instances() {
       ),
       'type' => 'entityreference_autocomplete',
       'weight' => 4,
+    ),
+  );
+
+  // Exported field_instance: 'node-hub-field_subscribers'.
+  $field_instances['node-hub-field_subscribers'] = array(
+    'bundle' => 'hub',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'email',
+        'settings' => array(),
+        'type' => 'email_default',
+        'weight' => 10,
+      ),
+      'ical' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'related_hub' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_subscribers',
+    'label' => 'Subscribers',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'email',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'email_textfield',
+      'weight' => 34,
     ),
   );
 
@@ -2006,6 +2320,62 @@ function cluster_og_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-response-field_enable_email_subscriptions'.
+  $field_instances['node-response-field_enable_email_subscriptions'] = array(
+    'bundle' => 'response',
+    'default_value' => array(
+      0 => array(
+        'value' => 0,
+      ),
+    ),
+    'deleted' => 0,
+    'description' => 'When enabled, anonymous users (i.e. not logged in) will see an option to subscribe to email notifications (including news) for this group.',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 25,
+      ),
+      'ical' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'related_response' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_enable_email_subscriptions',
+    'label' => 'Enable email subscriptions',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(
+        'display_label' => 1,
+      ),
+      'type' => 'options_onoff',
+      'weight' => 32,
+    ),
+  );
+
   // Exported field_instance: 'node-response-field_glide_number'.
   $field_instances['node-response-field_glide_number'] = array(
     'bundle' => 'response',
@@ -2521,6 +2891,58 @@ function cluster_og_field_default_field_instances() {
       ),
       'type' => 'options_select',
       'weight' => 9,
+    ),
+  );
+
+  // Exported field_instance: 'node-response-field_subscribers'.
+  $field_instances['node-response-field_subscribers'] = array(
+    'bundle' => 'response',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'email',
+        'settings' => array(),
+        'type' => 'email_default',
+        'weight' => 26,
+      ),
+      'ical' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'related_response' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_subscribers',
+    'label' => 'Subscribers',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'email',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'email_textfield',
+      'weight' => 34,
     ),
   );
 
@@ -3146,6 +3568,57 @@ function cluster_og_field_default_field_instances() {
   );
 
   // Exported field_instance:
+  // 'node-strategic_advisory-field_enable_email_subscriptions'.
+  $field_instances['node-strategic_advisory-field_enable_email_subscriptions'] = array(
+    'bundle' => 'strategic_advisory',
+    'default_value' => array(
+      0 => array(
+        'value' => 0,
+      ),
+    ),
+    'deleted' => 0,
+    'description' => 'When enabled, anonymous users (i.e. not logged in) will see an option to subscribe to email notifications (including news) for this group.',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 18,
+      ),
+      'ical' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_enable_email_subscriptions',
+    'label' => 'Enable email subscriptions',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(
+        'display_label' => 1,
+      ),
+      'type' => 'options_onoff',
+      'weight' => 32,
+    ),
+  );
+
+  // Exported field_instance:
   // 'node-strategic_advisory-field_humanitarianresponse_link'.
   $field_instances['node-strategic_advisory-field_humanitarianresponse_link'] = array(
     'bundle' => 'strategic_advisory',
@@ -3478,6 +3951,52 @@ function cluster_og_field_default_field_instances() {
       ),
       'type' => 'text_textfield',
       'weight' => 10,
+    ),
+  );
+
+  // Exported field_instance: 'node-strategic_advisory-field_subscribers'.
+  $field_instances['node-strategic_advisory-field_subscribers'] = array(
+    'bundle' => 'strategic_advisory',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'email',
+        'settings' => array(),
+        'type' => 'email_default',
+        'weight' => 19,
+      ),
+      'ical' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_subscribers',
+    'label' => 'Subscribers',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'email',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'email_textfield',
+      'weight' => 34,
     ),
   );
 
@@ -3884,6 +4403,57 @@ function cluster_og_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance:
+  // 'node-working_group-field_enable_email_subscriptions'.
+  $field_instances['node-working_group-field_enable_email_subscriptions'] = array(
+    'bundle' => 'working_group',
+    'default_value' => array(
+      0 => array(
+        'value' => 0,
+      ),
+    ),
+    'deleted' => 0,
+    'description' => 'When enabled, anonymous users (i.e. not logged in) will see an option to subscribe to email notifications (including news) for this group.',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 10,
+      ),
+      'ical' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_enable_email_subscriptions',
+    'label' => 'Enable email subscriptions',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(
+        'display_label' => 1,
+      ),
+      'type' => 'options_onoff',
+      'weight' => 32,
+    ),
+  );
+
   // Exported field_instance: 'node-working_group-field_group_modules'.
   $field_instances['node-working_group-field_group_modules'] = array(
     'bundle' => 'working_group',
@@ -4084,6 +4654,52 @@ function cluster_og_field_default_field_instances() {
       ),
       'type' => 'entityreference_autocomplete',
       'weight' => 9,
+    ),
+  );
+
+  // Exported field_instance: 'node-working_group-field_subscribers'.
+  $field_instances['node-working_group-field_subscribers'] = array(
+    'bundle' => 'working_group',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'email',
+        'settings' => array(),
+        'type' => 'email_default',
+        'weight' => 11,
+      ),
+      'ical' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_subscribers',
+    'label' => 'Subscribers',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'email',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'email_textfield',
+      'weight' => 34,
     ),
   );
 
@@ -4402,6 +5018,7 @@ function cluster_og_field_default_field_instances() {
   t('Disaster Causes');
   t('Disaster Type');
   t('Emergency SC Lead');
+  t('Enable email subscriptions');
   t('Geographic region type');
   t('Glide number');
   t('Government Counterpart Agency');
@@ -4431,10 +5048,12 @@ function cluster_og_field_default_field_instances() {
   t('Select the most specific region associated with this response.');
   t('Select the parent response if this is a child response.');
   t('Select the response associated with this Hub group.');
+  t('Subscribers');
   t('The glide number obtained from http://glidenumber.net.');
   t('Title');
   t('URL for government lead agency');
   t('Useful Links');
+  t('When enabled, anonymous users (i.e. not logged in) will see an option to subscribe to email notifications (including news) for this group.');
 
   return $field_instances;
 }

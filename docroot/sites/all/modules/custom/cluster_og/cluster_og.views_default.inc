@@ -64,7 +64,7 @@ function cluster_og_views_default_views() {
   $handler->display->display_options['fields']['name']['exclude'] = TRUE;
   $handler->display->display_options['fields']['name']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['name']['link_to_user'] = FALSE;
-  /* Field: Field: Name */
+  /* Field: Taxonomy term: Name */
   $handler->display->display_options['fields']['name_field']['id'] = 'name_field';
   $handler->display->display_options['fields']['name_field']['table'] = 'field_data_name_field';
   $handler->display->display_options['fields']['name_field']['field'] = 'name_field';
@@ -104,7 +104,7 @@ function cluster_og_views_default_views() {
   $handler->display->display_options['fields']['mail']['relationship'] = 'og_membership_related_user';
   $handler->display->display_options['fields']['mail']['label'] = '';
   $handler->display->display_options['fields']['mail']['element_label_colon'] = FALSE;
-  /* Sort criterion: Field: Name (name_field) */
+  /* Sort criterion: Taxonomy term: Name (name_field) */
   $handler->display->display_options['sorts']['name_field_value']['id'] = 'name_field_value';
   $handler->display->display_options['sorts']['name_field_value']['table'] = 'field_data_name_field';
   $handler->display->display_options['sorts']['name_field_value']['field'] = 'name_field_value';

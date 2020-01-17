@@ -11,3 +11,52 @@
 function cluster_og_update_7000() {
   features_revert_module('cluster_og');
 }
+
+/**
+ * Create custom table for storing pending email subscriptions to groups.
+ */
+function cluster_og_update_7001() {
+  $schema = cluster_og_schema();
+  db_create_table('cluster_og_pending_email_subs', $schema['cluster_og_pending_email_subs']);
+}
+
+/**
+ * Implements hook_schema().
+ */
+function cluster_og_schema() {
+  $schema['cluster_og_pending_email_subs'] = [
+    'description' => 'Pending email subscriptions to groups, with generated hashes for security',
+    'fields' => [
+      'sid' => [
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ],
+      'gid' => [
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ],
+      'email' => [
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+      ],
+      'hash' => [
+        'type' => 'char',
+        'length' => 32,
+        'not null' => TRUE,
+      ],
+      'created' => [
+        'type' => 'int',
+        'not null' => TRUE,
+      ],
+    ],
+    'indexes' => [
+      'search' => ['gid', 'hash'],
+    ],
+    'primary key' => ['sid'],
+  ];
+
+  return $schema;
+}

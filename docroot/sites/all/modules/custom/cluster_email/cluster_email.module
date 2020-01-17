@@ -8,6 +8,11 @@ const CLUSTER_EMAIL_DAILY_NOTIFICATION_TO = 18;
 const CLUSTER_EMAIL_WEEKLY_NOTIFICATION_FROM = 14;
 const CLUSTER_EMAIL_WEEKLY_NOTIFICATION_TO = 18;
 
+// since anon users can't choose their tz, we select one that will be ok for America and Europe
+const CLUSTER_EMAIL_ANON_TIMEZONE = 'Europe/Zurich';
+const CLUSTER_EMAIL_ANON_NOTIFICATION_FROM = 14;
+const CLUSTER_EMAIL_ANON_NOTIFICATION_TO = 18;
+
 /**
  * Implements hook_menu().
  */
@@ -39,13 +44,19 @@ function cluster_email_schema_alter(&$schema) {
     'not null' => TRUE,
     'default' => 0,
   ];
+  $schema['node']['fields']['last_anon_email_notification'] = [
+    'type' => 'int',
+    'unsigned' => TRUE,
+    'not null' => TRUE,
+    'default' => 0,
+  ];
 }
 
 /**
  * Implements hook_cron().
  */
 function cluster_email_cron() {
-  // Daily notifications
+  // Daily notifications (followers with user accounts)
   $last_notification_field = 'last_daily_email_notification';
   $enabled_field = 'field_notif_email_daily';
   $timezones = cluster_api_timezones(
@@ -94,6 +105,74 @@ function cluster_email_cron() {
         }
 
         $manager->updateUsersTimestamp(CLUSTER_API_FOLLOWER_ROLE_NAME, $uids, $last_notification_field);
+      }
+    }
+  }
+
+  // Daily anon notifications ("subscribers", i.e. anonymous users who just subscribed to the group using their email address)
+  $last_notification_field = 'last_anon_email_notification'; // Note that this is in the `node` table, not `og_users_roles` like the others.
+  $hour_in_anon_tz = intval(format_date(REQUEST_TIME, 'custom', 'G', CLUSTER_EMAIL_ANON_TIMEZONE), 10);
+  if (
+    $hour_in_anon_tz >= CLUSTER_EMAIL_ANON_NOTIFICATION_FROM
+    && $hour_in_anon_tz < CLUSTER_EMAIL_ANON_NOTIFICATION_TO
+  ) {
+    $objects_by_gid = [];
+    drupal_alter('daily_email_notification_objects', $objects_by_gid);
+
+    foreach ($objects_by_gid as $gid => $objects_by_module) {
+      $group = node_load($gid);
+
+      $hour = 60 * 60; // const
+      $threshold = 22; // const
+      $filter_time = REQUEST_TIME - ($threshold * $hour);
+      if ($group->{$last_notification_field} >= $filter_time)
+        continue; // We sent a notification about this group less than "$threshold" ago
+
+      if (!og_is_group('node', $group)) {
+        continue;
+      } // shouldn't happen
+      $manager = GroupContentManager::getInstance($group);
+      $group_wrapper = entity_metadata_wrapper('node', $group);
+
+      if (!$group_wrapper->field_enable_email_subscriptions->value()) {
+        continue;
+      } // Email notifications turned off for this group
+
+      $subscribers = $group_wrapper->field_subscribers->value();
+      if (empty($subscribers)) {
+        continue;
+      } // No subscribers for this group
+
+      $langcode = 'en';
+
+      $data = _cluster_email_daily_notification_body_data($objects_by_module, $langcode);
+      if (!$data) {
+        continue;
+      }
+
+      // Update "last sent on" timestamp (in node table)
+      db_update('node')
+        ->fields([$last_notification_field => REQUEST_TIME])
+        ->condition('nid', $group->nid)
+        ->execute();
+
+      foreach ($subscribers as $subscriber_email) {
+        try {
+          $params = [
+            'group' => $group,
+            'data' => $data,
+            'langcode' => $langcode,
+            'subscriber_email' => $subscriber_email,
+          ];
+
+          drupal_mail('cluster_email', 'anon_notification', $subscriber_email, $langcode, $params);
+        } catch (Exception $e) {
+          watchdog('cluster_email', 'Error sending daily email notifications for gid @gid (subscriber: @email): @error', [
+            '@gid' => $gid,
+            '@email' => $subscriber_email,
+            '@error' => $e->getMessage(),
+          ], WATCHDOG_ERROR);
+        }
       }
     }
   }
@@ -212,6 +291,14 @@ function cluster_email_mail($key, &$message, $params) {
       $body['#data'] = $params['data'];
       break;
 
+    case 'anon_notification':
+      $message['subject'] = $group_name;
+      $body['#group'] = $params['group'];
+      $body['#data'] = $params['data'];
+      $body['#is_anon'] = TRUE;
+      $body['#subscriber_email'] = $params['subscriber_email'];
+      break;
+
     case 'weekly_notification':
       $message['subject'] = t('@group — Weekly activity', [
         '@group' => $group_name,
@@ -238,6 +325,18 @@ function cluster_email_theme($existing, $type, $theme, $path) {
         'logo' => '',
         'group' => [],
         'data' => [],
+      ],
+      'path' => drupal_get_path('module', 'cluster_email') . '/templates',
+    ],
+    'cluster_email_anon_notification' => [
+      'template' => 'daily-notification',
+      'variables' => [
+        'langcode' => '',
+        'logo' => '',
+        'group' => [],
+        'data' => [],
+        'is_anon' => TRUE,
+        'subscriber_email' => '',
       ],
       'path' => drupal_get_path('module', 'cluster_email') . '/templates',
     ],

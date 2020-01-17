@@ -22,5 +22,8 @@
 
   <?php include __DIR__.'/../../cluster_paragraphs/templates/email.tpl.php'; ?>
 
-  <?php include __DIR__.'/../../cluster_email/templates/notification-footer.tpl.php'; ?>
+  <?php isset($is_anon) && $is_anon
+    ? include __DIR__.'/../../cluster_email/templates/notification-footer-anon.tpl.php'
+    : include __DIR__.'/../../cluster_email/templates/notification-footer.tpl.php';
+  ?>
 </div>

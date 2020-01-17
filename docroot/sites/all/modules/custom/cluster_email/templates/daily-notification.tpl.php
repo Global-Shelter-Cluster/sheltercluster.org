@@ -14,5 +14,8 @@
 
   <?php include 'notification-common.tpl.php'; ?>
 
-  <?php include 'notification-footer.tpl.php'; ?>
+  <?php isset($is_anon) && $is_anon
+    ? include 'notification-footer-anon.tpl.php'
+    : include 'notification-footer.tpl.php';
+  ?>
 </div>

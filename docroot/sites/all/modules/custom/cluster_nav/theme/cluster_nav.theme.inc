@@ -90,6 +90,9 @@ function template_preprocess_cluster_nav_related_links(&$variables) {
  */
 function template_preprocess_cluster_nav_dashboard(&$variables) {
   foreach ($variables['items'] as &$item) {
+    if (!isset($item['label']) || !isset($item['path']))
+      continue; // Not a normal item
+
     $text = t($item['label']);
 
     if (isset($item['total'])) {
