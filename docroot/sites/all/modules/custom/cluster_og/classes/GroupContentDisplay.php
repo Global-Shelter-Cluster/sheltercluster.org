@@ -165,7 +165,9 @@ class GroupDisplayProvider {
       ];
 
     if (!$following) {
-      if (FALSE && user_is_logged_in()) { // TODO: remove "FALSE" part and add looking at field_enable_email_subscriptions
+      $group_wrapper = entity_metadata_wrapper('node', $this->node);
+      $email_subscriptions_enabled = $group_wrapper->field_enable_email_subscriptions->value();
+      if (!$email_subscriptions_enabled || user_is_logged_in()) {
         return [
           'label' => t('Follow this @type', ['@type' => $this->getGroupTypeLabel()]),
           'path' => 'node/' . $this->node->nid . '/follow',
