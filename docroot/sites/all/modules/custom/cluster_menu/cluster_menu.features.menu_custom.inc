@@ -16,12 +16,11 @@ function cluster_menu_menu_default_menu_custom() {
     'title' => 'Mega Menu',
     'description' => '',
     'language' => 'und',
-    'i18n_mode' => 0,
+    'i18n_mode' => 5,
   );
   // Translatables
   // Included for use with string extractors like potx.
   t('Mega Menu');
-
 
   return $menus;
 }
