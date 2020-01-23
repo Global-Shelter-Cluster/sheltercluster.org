@@ -16,7 +16,7 @@ function cluster_og_menu_default_menu_custom() {
     'title' => 'Regions',
     'description' => 'Menu that gets automatically populated from Geographic region content.',
     'language' => 'und',
-    'i18n_mode' => 0,
+    'i18n_mode' => 5,
   );
   // Translatables
   // Included for use with string extractors like potx.
