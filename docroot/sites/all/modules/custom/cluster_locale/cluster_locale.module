@@ -25,14 +25,21 @@ function cluster_locale_locale($op = 'groups') {
  */
 function cluster_locale_menu() {
   $items = array();
-  $items[CLUSTER_LOCALE_ADMIN_PATH] = array(
-    'title' => 'Import app translations',
-    'description' => 'Import po files to translate the app interface.',
+//  $items[CLUSTER_LOCALE_ADMIN_PATH] = array(
+//    'title' => 'Import app translations',
+//    'description' => 'Import po files to translate the app interface.',
+//    'page callback' => 'drupal_get_form',
+//    'page arguments' => array('locale_translate_import_form'),
+//    'access arguments' => array('translate app interface'),
+//    'file' => 'locale.admin.inc',
+//    'file path' => drupal_get_path('module', 'locale'),
+//  );
+  $items['admin/config/shelter/update-translations'] = array(
+    'title' => 'Update translations',
+    'description' => 'Import translations from external spreadsheet.',
     'page callback' => 'drupal_get_form',
-    'page arguments' => array('locale_translate_import_form'),
-    'access arguments' => array('translate app interface'),
-    'file' => 'locale.admin.inc',
-    'file path' => drupal_get_path('module', 'locale'),
+    'page arguments' => array('cluster_locale_update_form'),
+    'access arguments' => array('translate interface'),
   );
   $items['admin/config/shelter/enabled-languages'] = array(
     'title' => 'Enabled languages',
@@ -186,4 +193,144 @@ function cluster_locale_theme($existing, $type, $theme, $path) {
       'path' => drupal_get_path('module', 'cluster_locale') . '/templates',
     ],
   ];
+}
+
+/**
+ * Form to update translations from external (normally Google Sheets) spreadsheet.
+ */
+function cluster_locale_update_form($form, &$form_state) {
+  $form['urls'] = [
+    '#type' => 'fieldset',
+    '#title' => t('Published spreadsheet URLs (CSV format)'),
+    '#collapsible' => TRUE,
+    '#collapsed' => !is_null(variable_get('cluster_locale_csv_website')),
+  ];
+
+  foreach (_cluster_locale_groupings() as $sheet)
+  $form['urls'][$sheet] = [
+    '#type' => 'textfield',
+    '#title' => t(ucfirst($sheet)),
+    '#default_value' => variable_get('cluster_locale_csv_'.$sheet),
+    '#maxlength' => 255,
+  ];
+
+  $form['submit'] = [
+    '#type' => 'submit',
+    '#value' => t('Import translations'),
+  ];
+
+  return $form;
+}
+
+function _cluster_locale_groupings() {
+  return ['website', 'groups', 'menus', 'server', 'app'];
+}
+
+function _cluster_locale_groupings_map() {
+  return [
+    'website' => 'default',
+    'groups' => 'default',
+    'menus' => 'menu',
+    'server' => 'default',
+    'app' => 'cluster_app',
+  ];
+}
+
+function cluster_locale_update_form_validate($form, &$form_state) {
+  foreach (_cluster_locale_groupings() as $sheet) {
+    if (!valid_url($form_state['values'][$sheet]))
+      form_set_error($sheet, t('Invalid URL'));
+  }
+}
+
+function cluster_locale_update_form_submit($form, &$form_state) {
+  drupal_static_reset('language_list');
+  $languages = language_list('language');
+  $modified_langcodes = [];
+  $groupings_map = _cluster_locale_groupings_map();
+
+  foreach (_cluster_locale_groupings() as $sheet) {
+    if (!isset($groupings_map[$sheet])) {
+      drupal_set_message(t('Group not found for sheet @sheet, skipping it', ['@sheet' => $sheet]), 'error');
+      continue;
+    }
+    $group = $groupings_map[$sheet];
+
+    $url = $form_state['values'][$sheet];
+    variable_set('cluster_locale_csv_' . $sheet, $url);
+
+    $rows = explode(PHP_EOL, file_get_contents($url));
+
+    $headers = str_getcsv(array_shift($rows));
+
+    if (count($headers) !== count(array_unique(array_values($headers)))) {
+      drupal_set_message(t('Duplicate headers in sheet @sheet, skipping it', ['@sheet' => $sheet]), 'warning');
+      continue;
+    }
+
+    if (!in_array('en', $headers)) {
+      drupal_set_message(t('Sheet @sheet has no English ("en") column, skipping it', ['@sheet' => $sheet]), 'warning');
+      continue;
+    }
+
+    foreach ($headers as $header) {
+      if (!in_array($header, ['msgctxt']) && !array_key_exists($header, $languages))
+        drupal_set_message(t('Header not recognized in sheet @sheet: @header, ignoring it', ['@sheet' => $sheet, '@header' => $header]), 'warning');
+    }
+
+    foreach ($rows as $row) {
+      $values = str_getcsv($row);
+
+      foreach ($values as $k => $v) {
+        if (trim($v) === '')
+          continue;
+        if (!isset($headers[$k]))
+          continue;
+        $langcode = $headers[$k];
+        if ($langcode === 'en')
+          continue;
+        if (!array_key_exists($langcode, $languages))
+          continue; // not a langcode (e.g. "msgctxt")
+        $value = [
+          'msgid' => $values[array_search('en', $headers)],
+          'msgstr' => $v,
+        ];
+        $msgctxt_i = array_search('msgctxt', $headers);
+        if ($msgctxt_i !== FALSE && isset($values[$msgctxt_i]))
+          $value['msgctxt'] = $values[$msgctxt_i];
+
+        if ($group === 'menu'
+          && isset($value['msgctxt'])
+          && preg_match('/^item:(\d+):title$/', $value['msgctxt'], $matches)
+        ) {
+          // Special case with menu items: force-save them to make the translations appear.
+          // This is probably a bug in the menu module. Easier to do this than to try to debug it.
+          $menu_link = menu_link_load($matches[1]);
+          if ($menu_link
+            && isset($menu_link['options'])
+            && !isset($menu_link['options']['alter'])
+          ) {
+            $menu_link['options']['alter'] = TRUE;
+            menu_link_save($menu_link);
+          }
+        }
+
+        _locale_import_one_string('db-store', $value, LOCALE_IMPORT_OVERWRITE, $langcode, NULL, $group);
+      }
+    }
+  }
+
+  list($header_done, $additions, $updates, $deletes, $skips) = _locale_import_one_string('db-report');
+
+  foreach ($modified_langcodes as $langcode)
+    _locale_invalidate_js($langcode);
+  cache_clear_all('locale:', 'cache', TRUE);
+  menu_rebuild();
+  drupal_set_message(t('The translations were successfully imported. There are %number newly created translated strings, %update strings were updated and %delete strings were removed.', array('%number' => $additions, '%update' => $updates, '%delete' => $deletes)));
+  watchdog('cluster_locale', 'Imported from spreadsheet: %number new strings added, %update updated and %delete removed.', array('%number' => $additions, '%update' => $updates, '%delete' => $deletes));
+  if ($skips) {
+    $skip_message = format_plural($skips, 'One translation string was skipped because it contains disallowed HTML.', '@count translation strings were skipped because they contain disallowed HTML.');
+    drupal_set_message($skip_message);
+    watchdog('cluster_locale', '@count disallowed HTML string(s) from spreadsheet', array('@count' => $skips), WATCHDOG_WARNING);
+  }
 }

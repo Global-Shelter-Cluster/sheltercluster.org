@@ -21,6 +21,7 @@ class SearchApiClusterAlgoliaService extends SearchApiAlgoliaService {
     // report page for instance, and during the install process).
     if (($library = libraries_load('algolia')) && !empty($library['loaded'])) {
       $algolia_client = new \AlgoliaSearch\Client($this->getApplicationID(), $this->getApiKey());
+      $algolia_client->setConnectTimeout(30, 30, 10);
 
       // Safety check so only production can modify the prod* Algolia indexes. The check is based on $base_url, and it
       // will determine that it's the prod site if it matches either http or https, on the www subdomain or non-www.
