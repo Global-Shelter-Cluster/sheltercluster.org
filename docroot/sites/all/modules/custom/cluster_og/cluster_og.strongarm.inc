@@ -508,7 +508,7 @@ function cluster_og_strongarm() {
           'weight' => '5',
         ),
         'redirect' => array(
-          'weight' => '30',
+          'weight' => '9',
         ),
       ),
       'display' => array(),
@@ -556,7 +556,7 @@ function cluster_og_strongarm() {
           'weight' => '5',
         ),
         'redirect' => array(
-          'weight' => '30',
+          'weight' => '13',
         ),
       ),
       'display' => array(),
@@ -607,7 +607,7 @@ function cluster_og_strongarm() {
           'weight' => '3',
         ),
         'redirect' => array(
-          'weight' => '30',
+          'weight' => '12',
         ),
       ),
       'display' => array(),
@@ -658,7 +658,7 @@ function cluster_og_strongarm() {
           'weight' => '6',
         ),
         'redirect' => array(
-          'weight' => '30',
+          'weight' => '25',
         ),
       ),
       'display' => array(),
@@ -706,7 +706,7 @@ function cluster_og_strongarm() {
           'weight' => '3',
         ),
         'redirect' => array(
-          'weight' => '30',
+          'weight' => '19',
         ),
       ),
       'display' => array(),
@@ -754,7 +754,7 @@ function cluster_og_strongarm() {
           'weight' => '3',
         ),
         'redirect' => array(
-          'weight' => '30',
+          'weight' => '13',
         ),
       ),
       'display' => array(),

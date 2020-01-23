@@ -822,7 +822,7 @@ function cluster_og_field_default_field_bases() {
     'entity_types' => array(),
     'field_name' => 'field_subscribers',
     'field_permissions' => array(
-      'type' => 2,
+      'type' => 1,
     ),
     'indexes' => array(),
     'locked' => 0,
