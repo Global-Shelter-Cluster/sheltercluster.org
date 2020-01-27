@@ -219,3 +219,177 @@ function _cluster_webform_export_time($component, $type) {
 
   return $items;
 }
+
+function cluster_webform_export_excel($node) {
+  if ($node->type !== 'webform') {
+    return MENU_NOT_FOUND;
+  }
+
+  $xls = new PhpOffice\PhpSpreadsheet\Spreadsheet();
+  $xls->setActiveSheetIndex(0);
+
+  $survey = $xls->getActiveSheet();
+  $survey->setTitle('survey');
+  $choices = $xls->createSheet();
+  $choices->setTitle('choices');
+  $settings = $xls->createSheet();
+  $settings->setTitle('settings');
+
+  $survey_cols = [
+    'type' => 'A',
+    'name' => 'B',
+    'label' => 'C',
+    'hint' => 'D',
+    'default' => 'E',
+    'required' => 'F',
+    'appearance' => 'G',
+    'constraint' => 'H',
+    'calculation' => 'I',
+  ];
+  $choices_cols = [
+    'list_name' => 'A',
+    'name' => 'B',
+    'label' => 'C',
+  ];
+  $settings_cols = [
+    'style' => 'A',
+    'version' => 'B',
+  ];
+
+  foreach ($survey_cols as $k => $v)
+    $survey->setCellValue($v.'1', $k);
+  foreach ($choices_cols as $k => $v)
+    $choices->setCellValue($v.'1', $k);
+  foreach ($settings_cols as $k => $v)
+    $settings->setCellValue($v.'1', $k);
+
+  $survey_row = 2;
+  $choices_row = 2;
+  $settings_row = 2;
+
+  $write_row = function($data, &$sheet, &$cols, &$row) {
+    foreach ($data as $k => $v) {
+      $sheet->setCellValue($cols[$k].$row, $v);
+    }
+    $row++;
+  };
+  $write_row_survey = function($data) use ($write_row, $survey, $survey_cols, &$survey_row) {
+    $write_row($data, $survey, $survey_cols, $survey_row);
+  };
+  $write_row_choices = function($data) use ($write_row, $choices, $choices_cols, &$choices_row) {
+    $write_row($data, $choices, $choices_cols, $choices_row);
+  };
+  $write_row_settings = function($data) use ($write_row, $settings, $settings_cols, &$settings_row) {
+    $write_row($data, $settings, $settings_cols, $settings_row);
+  };
+
+  $uuid = function($size) {
+    $chars = array_merge(
+      range(ord('A'), ord('Z')),
+      range(ord('a'), ord('z')),
+      range(ord('0'), ord('9'))
+    );
+    $keys = array_rand($chars, $size);
+    shuffle($keys);
+    return join('', array_map(function($key) use ($chars) {return chr($chars[$key]);}, $keys));
+  };
+
+  $write_row_survey(['type' => 'start', 'name' => 'start']);
+  $write_row_survey(['type' => 'end', 'name' => 'end']);
+
+  $is_first_page = TRUE;
+  $label_counter = 0; // for "markup" components
+  foreach (cluster_webform_export($node) as $page_idx => $page) {
+    if ($is_first_page)
+      $is_first_page = FALSE;
+    else {
+      $write_row_survey(['type' => '', 'name' => 'break'.$page_idx, 'label' => $page['title']]);
+    }
+
+    foreach ((array) $page['fields'] as $field) {
+      $row = [
+        'required' => isset($field['required']) && $field['required'] ? 'true' : 'false',
+      ];
+      foreach (['name' => 'key', 'label' => 'name', 'hint' => 'description', 'default' => 'default'] as $property_excel => $property_field) {
+        if (isset($field[$property_field]))
+          $row[$property_excel] = $field[$property_field];
+      }
+
+      switch ($field['type']) {
+        case 'textfield':
+          $row += ['type' => 'text'];
+          break;
+        case 'textarea':
+          $row += ['type' => 'text', 'appearance' => 'multiline'];
+          break;
+        case 'date':
+          $row += ['type' => 'date'];
+          break;
+        case 'time':
+          $row += ['type' => 'time'];
+          break;
+        case 'geolocation':
+          $row += ['type' => 'geopoint'];
+          break;
+        case 'file':
+          if (isset($field['file_type']) && $field['file_type'] === 'image')
+            $row += ['type' => 'image'];
+          else
+            continue; // skip this field
+          break;
+        case 'markup':
+          $row += ['type' => 'note', 'name' => 'label'.(++$label_counter), 'label' => trim(strip_tags($field['value']))];
+          break;
+        case 'number':
+          $type = isset($field['integer']) && $field['integer'] ? 'integer' : 'decimal';
+          $row += ['type' => $type];
+
+          $constraints = [];
+          if (isset($field['min']))
+            $constraints[] = '. >= '.$field['min'];
+          if (isset($field['max']))
+            $constraints[] = '. <= '.$field['max'];
+          if ($constraints)
+            $row['constraint'] = implode(' and ', $constraints);
+
+          break;
+        case 'select':
+          $type = isset($field['multiple']) && $field['multiple'] ? 'select_multiple' : 'select_one';
+          $id = $uuid(7);
+          $row['type'] = $type.' '.$id;
+
+          foreach ((array) $field['options'] as $name => $label)
+            $write_row_choices(['list_name' => $id, 'name' => $name, 'label' => $label]);
+
+          break;
+      }
+      $write_row_survey($row);
+    }
+  }
+
+  $version = $uuid(22);
+  $write_row_survey([
+    'type' => 'calculate',
+    'name' => '__version__',
+    'calculation' => '\''.$version.'\'',
+  ]);
+  $write_row_settings(['version' => $version]);
+
+  $objWriter = PhpOffice\PhpSpreadsheet\IOFactory::createWriter($xls, 'Xlsx');
+  $uri = drupal_tempnam('temporary://', 'webform-export') . '.xlsx';
+  $objWriter->save(drupal_realpath($uri));
+  $filename = _cluster_webform_sanitize_filename($node->title.'.xlsx');
+  file_transfer($uri, [
+    'Content-Disposition' => 'attachment; filename="'. str_replace('"', '', $filename) .'"',
+    'Content-Type' => 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+  ]);
+}
+
+function _cluster_webform_sanitize_filename($filename) {
+  $filename = preg_replace('/[\x00-\x1F]/u', '_', $filename);
+  if (substr(PHP_OS, 0, 3) == 'WIN') {
+    // These characters are not allowed in Windows filenames
+    $filename = str_replace(array(':', '*', '?', '"', '<', '>', '|'), '_', $filename);
+  }
+  return $filename;
+}
