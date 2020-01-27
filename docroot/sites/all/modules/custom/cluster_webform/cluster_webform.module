@@ -398,7 +398,7 @@ function cluster_webform_menu() {
     'access callback' => 'cluster_webform_export_access',
     'access arguments' => array(1),
     'type' => MENU_LOCAL_TASK,
-    'weight' => 200,
+    'weight' => 90,
   );
 
   return $items;

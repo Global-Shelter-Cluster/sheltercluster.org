@@ -252,8 +252,7 @@ function cluster_webform_export_excel($node) {
     'label' => 'C',
   ];
   $settings_cols = [
-    'style' => 'A',
-    'version' => 'B',
+    'version' => 'A',
   ];
 
   foreach ($survey_cols as $k => $v)
@@ -368,11 +367,6 @@ function cluster_webform_export_excel($node) {
   }
 
   $version = $uuid(22);
-  $write_row_survey([
-    'type' => 'calculate',
-    'name' => '__version__',
-    'calculation' => '\''.$version.'\'',
-  ]);
   $write_row_settings(['version' => $version]);
 
   $objWriter = PhpOffice\PhpSpreadsheet\IOFactory::createWriter($xls, 'Xlsx');
