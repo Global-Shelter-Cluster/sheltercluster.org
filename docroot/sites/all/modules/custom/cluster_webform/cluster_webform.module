@@ -386,3 +386,24 @@ function _cluster_webform_access_if_group_admin($node, $account) {
 
   return NULL;
 }
+
+/**
+ * Implements hook_menu().
+ */
+function cluster_webform_menu() {
+  $items['node/%node/export'] = array(
+    'title' => 'Export',
+    'page callback' => 'cluster_webform_export_excel',
+    'page arguments' => array(1),
+    'access callback' => 'cluster_webform_export_access',
+    'access arguments' => array(1),
+    'type' => MENU_LOCAL_TASK,
+    'weight' => 200,
+  );
+
+  return $items;
+}
+
+function cluster_webform_export_access($node) {
+  return $node->type === 'webform' && webform_node_update_access($node);
+}
