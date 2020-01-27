@@ -18,9 +18,12 @@ return array(
     'Symfony\\Component\\Debug\\' => array($vendorDir . '/symfony/debug'),
     'Symfony\\Component\\Console\\' => array($vendorDir . '/symfony/console'),
     'Psy\\' => array($vendorDir . '/psy/psysh/src'),
+    'Psr\\SimpleCache\\' => array($vendorDir . '/psr/simple-cache/src'),
     'Psr\\Log\\' => array($vendorDir . '/psr/log/Psr/Log'),
     'Psr\\Http\\Message\\' => array($vendorDir . '/psr/http-message/src'),
     'PhpParser\\' => array($vendorDir . '/nikic/php-parser/lib/PhpParser'),
+    'PhpOffice\\PhpSpreadsheet\\' => array($vendorDir . '/phpoffice/phpspreadsheet/src/PhpSpreadsheet'),
+    'Matrix\\' => array($vendorDir . '/markbaker/matrix/classes/src'),
     'JakubOnderka\\PhpConsoleHighlighter\\' => array($vendorDir . '/jakub-onderka/php-console-highlighter/src'),
     'JakubOnderka\\PhpConsoleColor\\' => array($vendorDir . '/jakub-onderka/php-console-color/src'),
     'GuzzleHttp\\Psr7\\' => array($vendorDir . '/guzzlehttp/psr7/src'),
@@ -29,4 +32,5 @@ return array(
     'Drush\\' => array($vendorDir . '/drush/drush/src'),
     'Consolidation\\OutputFormatters\\' => array($vendorDir . '/consolidation/output-formatters/src'),
     'Consolidation\\AnnotatedCommand\\' => array($vendorDir . '/consolidation/annotated-command/src'),
+    'Complex\\' => array($vendorDir . '/markbaker/complex/classes/src'),
 );
