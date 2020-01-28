@@ -374,16 +374,19 @@ function cluster_webform_export_excel($node) {
   $objWriter->save(drupal_realpath($uri));
   $filename = _cluster_webform_sanitize_filename($node->title.'.xlsx');
   file_transfer($uri, [
-    'Content-Disposition' => 'attachment; filename="'. str_replace('"', '', $filename) .'"',
+    'Content-Disposition' => 'attachment; filename="'. $filename .'"',
     'Content-Type' => 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
   ]);
 }
 
+
+/**
+ * @see file_create_filename()
+ * @param string $filename
+ * @return string
+ */
 function _cluster_webform_sanitize_filename($filename) {
   $filename = preg_replace('/[\x00-\x1F]/u', '_', $filename);
-  if (substr(PHP_OS, 0, 3) == 'WIN') {
-    // These characters are not allowed in Windows filenames
-    $filename = str_replace(array(':', '*', '?', '"', '<', '>', '|'), '_', $filename);
-  }
+  $filename = str_replace(array(':', '*', '?', '"', '<', '>', '|'), '_', $filename);
   return $filename;
 }
