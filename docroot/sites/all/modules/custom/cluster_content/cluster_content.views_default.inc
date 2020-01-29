@@ -238,7 +238,7 @@ function cluster_content_views_default_views() {
   $handler->display->display_options['fields']['extension']['relationship'] = 'field_file_fid';
   $handler->display->display_options['fields']['extension']['alter']['make_link'] = TRUE;
   $handler->display->display_options['fields']['extension']['alter']['path'] = '[uri]';
-  /* Field: Content: Link */
+  /* Field: Field: Link */
   $handler->display->display_options['fields']['field_link']['id'] = 'field_link';
   $handler->display->display_options['fields']['field_link']['table'] = 'field_data_field_link';
   $handler->display->display_options['fields']['field_link']['field'] = 'field_link';
@@ -293,7 +293,6 @@ function cluster_content_views_default_views() {
   $handler->display->display_options['filters']['type']['table'] = 'node';
   $handler->display->display_options['filters']['type']['field'] = 'type';
   $handler->display->display_options['filters']['type']['value'] = array(
-    'arbitrary_library' => 'arbitrary_library',
     'page' => 'page',
     'contact' => 'contact',
     'discussion' => 'discussion',
@@ -301,7 +300,11 @@ function cluster_content_views_default_views() {
     'event' => 'event',
     'factsheet' => 'factsheet',
     'kobo_form' => 'kobo_form',
+    'photo_gallery' => 'photo_gallery',
     'library' => 'library',
+    'arbitrary_library' => 'arbitrary_library',
+    'news' => 'news',
+    'webform' => 'webform',
   );
   $handler->display->display_options['filters']['type']['group'] = 1;
   $handler->display->display_options['filters']['type']['exposed'] = TRUE;
@@ -315,8 +318,6 @@ function cluster_content_views_default_views() {
     1 => 0,
     3 => 0,
     4 => 0,
-    5 => 0,
-    6 => 0,
   );
   $handler->display->display_options['filters']['type']['expose']['reduce'] = TRUE;
   /* Filter criterion: Content: Title (title_field) */
