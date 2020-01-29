@@ -135,7 +135,7 @@ function cluster_og_field_default_field_instances() {
         'summary_rows' => 5,
       ),
       'type' => 'text_textarea_with_summary',
-      'weight' => 2,
+      'weight' => 1,
     ),
   );
 
@@ -186,7 +186,7 @@ function cluster_og_field_default_field_instances() {
         'display_label' => 1,
       ),
       'type' => 'options_onoff',
-      'weight' => 11,
+      'weight' => 32,
     ),
   );
 
@@ -243,7 +243,7 @@ function cluster_og_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'image_image',
-      'weight' => 6,
+      'weight' => 7,
     ),
   );
 
@@ -289,7 +289,7 @@ function cluster_og_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'email_textfield',
-      'weight' => 12,
+      'weight' => 34,
     ),
   );
 
@@ -352,7 +352,7 @@ function cluster_og_field_default_field_instances() {
       'module' => 'link',
       'settings' => array(),
       'type' => 'link_field',
-      'weight' => 7,
+      'weight' => 8,
     ),
   );
 
@@ -525,7 +525,7 @@ function cluster_og_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 1,
+      'weight' => 0,
     ),
   );
 
@@ -641,7 +641,7 @@ function cluster_og_field_default_field_instances() {
         'display_label' => 1,
       ),
       'type' => 'options_onoff',
-      'weight' => 15,
+      'weight' => 31,
     ),
   );
 
@@ -928,7 +928,7 @@ function cluster_og_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'email_textfield',
-      'weight' => 16,
+      'weight' => 32,
     ),
   );
 
@@ -1371,7 +1371,7 @@ function cluster_og_field_default_field_instances() {
         'display_label' => 1,
       ),
       'type' => 'options_onoff',
-      'weight' => 14,
+      'weight' => 32,
     ),
   );
 
@@ -1600,7 +1600,7 @@ function cluster_og_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'email_textfield',
-      'weight' => 15,
+      'weight' => 34,
     ),
   );
 
@@ -2372,7 +2372,7 @@ function cluster_og_field_default_field_instances() {
         'display_label' => 1,
       ),
       'type' => 'options_onoff',
-      'weight' => 27,
+      'weight' => 32,
     ),
   );
 
@@ -2942,7 +2942,7 @@ function cluster_og_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'email_textfield',
-      'weight' => 28,
+      'weight' => 34,
     ),
   );
 
@@ -3614,7 +3614,7 @@ function cluster_og_field_default_field_instances() {
         'display_label' => 1,
       ),
       'type' => 'options_onoff',
-      'weight' => 21,
+      'weight' => 32,
     ),
   );
 
@@ -3996,7 +3996,7 @@ function cluster_og_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'email_textfield',
-      'weight' => 22,
+      'weight' => 34,
     ),
   );
 
@@ -4450,7 +4450,7 @@ function cluster_og_field_default_field_instances() {
         'display_label' => 1,
       ),
       'type' => 'options_onoff',
-      'weight' => 15,
+      'weight' => 32,
     ),
   );
 
@@ -4699,7 +4699,7 @@ function cluster_og_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'email_textfield',
-      'weight' => 16,
+      'weight' => 34,
     ),
   );
 

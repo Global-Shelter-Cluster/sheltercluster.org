@@ -280,6 +280,10 @@ class GroupContentManager {
    *  Count query result.
    */
   public function getWebformsCount() {
+    if (variable_get('cluster_og_resources_id') == $this->node->nid)
+      // Forms in the Resources group are just "templates".
+      return 0;
+
     $query = new EntityFieldQuery();
     return $query->entityCondition('entity_type', 'node')
       ->entityCondition('bundle', 'webform')
@@ -520,7 +524,11 @@ class GroupContentManager {
     return array();
   }
 
-  public function getWebforms() {
+  public function getWebforms($skip_resource_check = FALSE) {
+    if (!$skip_resource_check && variable_get('cluster_og_resources_id') == $this->node->nid)
+      // Forms in the Resources group are just "templates".
+      return [];
+
     $query = new EntityFieldQuery();
     $res = $query->entityCondition('entity_type', 'node')
       ->entityCondition('bundle', 'webform')
