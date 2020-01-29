@@ -178,35 +178,38 @@ function cluster_webform_import_excel($file) {
   $sheet_names = $spreadsheet->getSheetNames();
   if (count(array_intersect($sheet_names, [
       'survey',
-      'choices',
       'settings',
-    ])) < 3) {
-    drupal_set_message('Invalid file format (sheets not found)', 'error');
+    ])) < 2) {
+    drupal_set_message('Invalid file format (survey or settings sheets not found)', 'error');
     return FALSE;
   }
   $sheet_map = array_flip($sheet_names); // ['survey' => 0, 'choices' => 1, 'settings' => 2]
+  $has_choices_sheet = array_key_exists('choices', $sheet_map);
 
   $survey = $spreadsheet->getSheet($sheet_map['survey']);
-  $choices = $spreadsheet->getSheet($sheet_map['choices']);
+  if ($has_choices_sheet)
+    $choices = $spreadsheet->getSheet($sheet_map['choices']);
 
   $survey_cols = [
-    'type' => '',
-    'name' => '',
-    'label' => '',
-    'hint' => '',
-    'default' => '',
-    'required' => '',
-    'appearance' => '',
-    'constraint' => '',
-    //    'calculation' => '',
+    'type' => NULL,
+    'name' => NULL,
+    'label' => NULL,
+    'hint' => NULL,
+    'default' => NULL,
+    'required' => NULL,
+    'appearance' => NULL,
+    'constraint' => NULL,
+    'calculation' => NULL,
   ];
   $choices_cols = [
-    'list_name' => '',
-    'name' => '',
-    'label' => '',
+    'list_name' => NULL,
+    'name' => NULL,
+    'label' => NULL,
   ];
 
   $build_cols = function (PhpSpreadsheet\Worksheet\Worksheet $sheet, &$cols) {
+    $not_found = [];
+
     foreach ($cols as $header => &$col) {
       $found = FALSE;
 
@@ -219,26 +222,32 @@ function cluster_webform_import_excel($file) {
       }
 
       if (!$found) {
-        return $header;
-      } // a.k.a. "this header was not found"
+        $not_found[] = $header;
+      }
     }
 
-    return TRUE; // a.k.a. "it's all good"
+    return $not_found;
   };
-  $err = $build_cols($survey, $survey_cols);
-  if ($err !== TRUE) {
-    drupal_set_message('Header "' . $err . '" not found in survey sheet', 'error');
+  $not_found = $build_cols($survey, $survey_cols);
+  $required_survey_cols = ['type','name','label','required'];
+  $not_found = array_intersect($not_found, $required_survey_cols);
+  if ($not_found) {
+    drupal_set_message('Header(s) "' . implode(', ', $not_found) . '" not found in survey sheet', 'error');
     return FALSE;
   }
-  $err = $build_cols($choices, $choices_cols);
-  if ($err !== TRUE) {
-    drupal_set_message('Header "' . $err . '" not found in choices sheet', 'error');
-    return FALSE;
+  if ($has_choices_sheet) {
+    $not_found = $build_cols($choices, $choices_cols);
+    if ($not_found) {
+      drupal_set_message('Header(s) "' . implode(', ', $not_found) . '" not found in choices sheet', 'error');
+      return FALSE;
+    }
   }
 
   $read_row = function (PhpSpreadsheet\Worksheet\Worksheet $sheet, $cols, $row) {
     $ret = [];
     foreach ($cols as $key => $c) {
+      if (is_null($c))
+        continue;
       $ret[$key] = $sheet->getCell($c . $row)->getValue();
     }
     return array_filter($ret);
@@ -246,17 +255,19 @@ function cluster_webform_import_excel($file) {
 
   // Prepare all the "options" ("choices" sheet), keyed by the internal ID
   $options = []; // E.g. ['abc123' => ['red' => 'Red', 'green' => 'Green'], ...]
-  for ($r = 2; $r <= $choices->getHighestRow(); $r++) {
-    $row = $read_row($choices, $choices_cols, $r);
-    if (!isset($row['list_name']) || !isset($row['name']) || !isset($row['label'])) {
-      continue;
-    }
+  if ($has_choices_sheet) {
+    for ($r = 2; $r <= $choices->getHighestRow(); $r++) {
+      $row = $read_row($choices, $choices_cols, $r);
+      if (!isset($row['list_name']) || !isset($row['name']) || !isset($row['label'])) {
+        continue;
+      }
 
-    if (!isset($options[$row['list_name']])) {
-      $options[$row['list_name']] = [];
-    }
+      if (!isset($options[$row['list_name']])) {
+        $options[$row['list_name']] = [];
+      }
 
-    $options[$row['list_name']][$row['name']] = $row['label'];
+      $options[$row['list_name']][$row['name']] = $row['label'];
+    }
   }
 
   // Now go through the form elements
