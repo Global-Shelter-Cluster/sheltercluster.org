@@ -425,7 +425,26 @@ function cluster_webform_form_webform_node_form_alter(&$form, &$form_state) {
     '#title' => t('From a file (Excel format)'),
   ];
 
-  $form['actions']['submit']['#value'] = t('Next');
+  $resources_nid = variable_get('cluster_og_resources_id');
+  if ($resources_nid && ($resources = node_load($resources_nid))) {
+    $resources_manager = GroupContentManager::getInstance($resources);
+    $template_webform_nids = $resources_manager->getWebforms(TRUE);
+    $template_webforms = $template_webform_nids ? node_load_multiple($template_webform_nids) : [];
+    if (count($template_webforms) > 0) {
+      $options = ['' => ''];
+      foreach ($template_webforms as $webform)
+        $options[$webform->nid] = $webform->title;
+
+      $form['import']['cluster_webform_template'] = [
+        '#type' => 'select',
+        '#title' => t('Or use a template'),
+        '#options' => $options,
+      ];
+    }
+  }
+
+  if (!$form_state['node']->nid)
+    $form['actions']['submit']['#value'] = t('Next');
   $form['actions']['submit']['#submit'][] = 'cluster_webform_node_form_submit';
   $form['#validate'][] = 'cluster_webform_node_form_validate';
 }
@@ -457,5 +476,9 @@ function cluster_webform_node_form_submit($form, &$form_state) {
     if ($data) {
       cluster_webform_import($form_state['node'], $data);
     }
+  } elseif ($form_state['values']['cluster_webform_template']) {
+    $template = node_load($form_state['values']['cluster_webform_template']);
+    cluster_webform_import($form_state['node'], cluster_webform_export($template));
+    drupal_set_message(t('Using template: @title', ['@title' => $template->title]));
   }
 }

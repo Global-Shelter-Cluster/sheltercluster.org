@@ -524,8 +524,8 @@ class GroupContentManager {
     return array();
   }
 
-  public function getWebforms() {
-    if (variable_get('cluster_og_resources_id') == $this->node->nid)
+  public function getWebforms($skip_resource_check = FALSE) {
+    if (!$skip_resource_check && variable_get('cluster_og_resources_id') == $this->node->nid)
       // Forms in the Resources group are just "templates".
       return [];
 
