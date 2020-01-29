@@ -13,7 +13,158 @@ function cluster_webform_import($node, $data) {
   if (!$node || !$data || !$node->nid)
     return FALSE;
 
+  $existing_form_keys = []; // keys are "form_key"s, values are TRUE (i.e. you should use array_key_exists() to check if a form_key already exists)
+  $max_weight = -1;
+  foreach ((array) $node->webform['components'] as $component) {
+    if (isset($component['form_key'])) {
+      $existing_form_keys[$component['form_key']] = TRUE;
+    }
+    if (isset($component['weight'])) {
+      $max_weight = max($max_weight, intval($component['weight'], 10));
+    }
+  }
 
+  $prepare_component = function($component) use ($node, &$max_weight) {
+    $component['nid'] = $node->nid;
+    $component['pid'] = 0;
+    $component['weight'] = ++$max_weight;
+    return $component;
+  };
+
+  $is_first_page = TRUE;
+  foreach ($data as $page) {
+    if (!$is_first_page) {
+      $component = _cluster_webform_import_break(['name' => $page['title']], $existing_form_keys);
+      webform_component_insert($prepare_component($component));
+    }
+
+    foreach ((array) $page['fields'] as $field) {
+      if (!array_key_exists('type', $field)) {
+        // Shouldn't happen, but let's skip the field if it does.
+        continue;
+      }
+      $type = $field['type'];
+
+      if (function_exists('_cluster_webform_import_' . $type))
+        $component = call_user_func_array('_cluster_webform_import_' . $type, [$field, &$existing_form_keys]);
+      else
+        $component = _cluster_webform_import_component($field, $existing_form_keys);
+
+      if ($component)
+        webform_component_insert($prepare_component($component));
+    }
+
+    $is_first_page = FALSE;
+  }
+}
+
+function _cluster_webform_import_component($field, &$existing_form_keys) {
+//  if (isset($field['key'])) $field['key'] .= rand(100000,999999); // TODO: TEMP!!!
+  if (isset($field['key']) && array_key_exists($field['key'], $existing_form_keys)) {
+    drupal_set_message(t('Field already exists in this form: @key', ['@key' => $field['key']]), 'warning');
+    return NULL;
+  }
+
+  if (!in_array($field['type'], _cluster_webform_get_supported_components())) {
+    drupal_set_message(t('Unknown field type: @type', ['@type' => $field['type']]), 'warning');
+    return NULL;
+  }
+
+  $component = [
+    'type' => $field['type'],
+  ];
+
+  // values in root
+  foreach ([
+    'key' => 'form_key',
+    'name' => 'name',
+    'default' => 'value',
+  ] as $field_key => $component_key) {
+    if (isset($field[$field_key])) {
+      $component[$component_key] = $field[$field_key];
+    }
+  }
+
+  // values inside "extra" array
+  foreach ([
+    'description' => 'description',
+    'min' => 'min',
+    'max' => 'max',
+  ] as $field_key => $component_key) {
+    if (isset($field[$field_key])) {
+      if (!isset($component['extra'])) $component['extra'] = [];
+      $component['extra'][$component_key] = $field[$field_key];
+    }
+  }
+
+  // booleans in root
+  foreach ([
+    'required',
+  ] as $key) {
+    if (isset($field[$key])) {
+      $component[$key] = $field[$key] ? 1 : 0;
+    }
+  }
+
+  // booleans inside "extra" array
+  foreach ([
+    'integer',
+    'multiple',
+  ] as $key) {
+    if (isset($field[$key])) {
+      if (!isset($component['extra'])) $component['extra'] = [];
+      $component['extra'][$key] = $field[$key] ? 1 : 0;
+    }
+  }
+
+  // Options (for selects), if they exist (they go in the "extra" array)
+  if (isset($field['options'])) {
+    if (!isset($component['extra'])) $component['extra'] = [];
+
+    $component['extra']['items'] = join(PHP_EOL, array_map(function($k, $v) {
+      return "$k|$v";
+    }, array_keys($field['options']), $field['options']));
+  }
+
+  if (!array_key_exists('form_key', $component))
+    return NULL;
+  $existing_form_keys[$component['form_key']] = TRUE;
+
+  return $component;
+}
+
+function _cluster_webform_import_markup($field, &$existing_form_keys) {
+  if (!array_key_exists('value', $field))
+    return NULL;
+
+  $form_key = 'markup';
+  $counter = 0;
+  while (array_key_exists($form_key, $existing_form_keys))
+    $form_key = 'markup'.(++$counter);
+
+  $existing_form_keys[$form_key] = TRUE;
+
+  return [
+    'type' => 'markup',
+    'form_key' => $form_key,
+    'name' => 'markup',
+    'value' => $field['value'],
+  ];
+}
+
+function _cluster_webform_import_break($field, &$existing_form_keys) {
+  $form_key = 'break';
+  $counter = 0;
+  while (array_key_exists($form_key, $existing_form_keys))
+    $form_key = 'break'.(++$counter);
+
+  $existing_form_keys[$form_key] = TRUE;
+
+  return [
+    'type' => 'pagebreak',
+    'form_key' => $form_key,
+    'name' => $field['name'],
+  ];
 }
 
 /**

@@ -437,16 +437,9 @@ function cluster_webform_node_form_validate($form, &$form_state) {
     ),
   ));
 
-form_set_error('title', t("temp validation err"));
   if ($file) {
     if ($file = file_move($file, 'temporary://')) {
       $form_state['storage']['cluster_webform_excel'] = $file;
-
-      // TEMP!!!
-      $data = cluster_webform_import_excel($file);
-      file_delete($file);
-      if ($data)
-        cluster_webform_import($form_state['node'], $data);
     }
     else {
       form_set_error('cluster_webform_excel', t("Failed to process the uploaded file."));
@@ -458,8 +451,11 @@ function cluster_webform_node_form_submit($form, &$form_state) {
   $file = $form_state['storage']['cluster_webform_excel'];
   unset($form_state['storage']['cluster_webform_excel']);
 
-  $data = cluster_webform_import_excel($file);
-  file_delete($file);
-  if ($data)
-    cluster_webform_import($form_state['node'], $data);
+  if ($file) {
+    $data = cluster_webform_import_excel($file);
+    file_delete($file);
+    if ($data) {
+      cluster_webform_import($form_state['node'], $data);
+    }
+  }
 }
