@@ -40,9 +40,21 @@ function cluster_assessment_all($node) {
 
   return [
     '#theme' => 'links',
+    '#attributes' => ['class' => ['data-collection-list']],
     '#links' => array_map(function($node) {
+      $body_items = field_get_items('node', $node, 'field_body');
+
+      if ($body_items && $body_items[0]['safe_value'])
+        $html_title = t('<h4>@title</h4><p>@description</p>', [
+          '@title' => $node->title,
+          '@description' => $body_items[0]['value'],
+        ]);
+      else
+        $html_title = t('<h4>@title</h4>', ['@title' => $node->title]);
+
       return [
-        'title' => $node->title,
+        'title' => $html_title,
+        'html' => TRUE,
         'href' => 'node/'.$node->nid,
       ];
     }, $nodes),

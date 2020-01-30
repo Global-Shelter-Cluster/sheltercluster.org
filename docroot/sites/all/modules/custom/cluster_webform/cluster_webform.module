@@ -431,15 +431,22 @@ function cluster_webform_form_webform_node_form_alter(&$form, &$form_state) {
     $template_webform_nids = $resources_manager->getWebforms(TRUE);
     $template_webforms = $template_webform_nids ? node_load_multiple($template_webform_nids) : [];
     if (count($template_webforms) > 0) {
-      $options = ['' => ''];
-      foreach ($template_webforms as $webform)
+      $form['import']['cluster_webform_template'] = [
+        '#type' => 'radios',
+        '#title' => t('Or use a template'),
+        '#default_value' => '',
+      ];
+
+      $options = ['' => 'None'];
+      foreach ($template_webforms as $webform) {
         $options[$webform->nid] = $webform->title;
 
-      $form['import']['cluster_webform_template'] = [
-        '#type' => 'select',
-        '#title' => t('Or use a template'),
-        '#options' => $options,
-      ];
+        $body_items = field_get_items('node', $webform, 'field_body');
+        if ($body_items)
+          $form['import']['cluster_webform_template'][$webform->nid]['#description'] = $body_items[0]['safe_value'];
+      }
+
+      $form['import']['cluster_webform_template']['#options'] = $options;
     }
   }
 
