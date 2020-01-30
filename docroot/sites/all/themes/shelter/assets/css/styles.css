@@ -4622,6 +4622,25 @@ form .field-multiple-table .form-item {
   margin-left: 1em;
 }
 
+.data-collection-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.data-collection-list li {
+  margin-bottom: 1rem;
+}
+.data-collection-list a p:last-child {
+  margin-bottom: 1.5rem;
+}
+.data-collection-list a {
+  text-decoration: none;
+  color: black;
+}
+.data-collection-list a:hover h4, .data-collection-list a:active h4 {
+  text-decoration: underline;
+}
+
 #anon-follow {
   margin-bottom: 20px;
   padding: 10px;

@@ -15,11 +15,12 @@ class ClusterAPI_Type_Webform extends ClusterAPI_Type {
     if ($node->type !== 'webform')
       return NULL;
 
-//    $wrapper = entity_metadata_wrapper('node', $node);
+    $wrapper = entity_metadata_wrapper('node', $node);
 
     return [
       'groups' => self::getReferenceIds('node', $node, 'og_group_ref', TRUE),
       'title' => $node->title,
+      'description' => $wrapper->field_body->value(),
       'form' => cluster_webform_export($node),
     ];
   }
