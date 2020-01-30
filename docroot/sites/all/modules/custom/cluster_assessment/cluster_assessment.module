@@ -45,12 +45,12 @@ function cluster_assessment_all($node) {
       $body_items = field_get_items('node', $node, 'field_body');
 
       if ($body_items && $body_items[0]['safe_value'])
-        $html_title = t('<h4>@title</h4><p>@description</p>', [
+        $html_title = t('<h4><i class="fas fa-edit"></i> @title</h4><p>@description</p>', [
           '@title' => $node->title,
           '@description' => $body_items[0]['value'],
         ]);
       else
-        $html_title = t('<h4>@title</h4>', ['@title' => $node->title]);
+        $html_title = t('<h4><i class="fas fa-edit"></i> @title</h4>', ['@title' => $node->title]);
 
       return [
         'title' => $html_title,
