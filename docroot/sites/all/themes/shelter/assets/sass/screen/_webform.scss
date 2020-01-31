@@ -3,3 +3,15 @@
   margin: 10px;
 }
 
+.webform-progressbar-page-label {
+  display: none;
+
+  .webform-progressbar-page.current & {
+    display: block;
+  }
+}
+
+.webform-progressbar {
+  margin-top: 2rem;
+  margin-bottom: 3rem;
+}
