@@ -285,8 +285,9 @@ class GroupDisplayProvider {
     if (module_exists('cluster_assessment')) {
       $forms_count = cluster_assessment_total_count($this->node->nid);
       if (cluster_assessment_is_group_forms_page() || ($forms_count > 0)) {
+        $is_resources_group = variable_get('cluster_og_resources_id') == $this->node->nid;
         $items['assessment_forms'] = [
-          'label' => t('Data collection'),
+          'label' => $is_resources_group ? t('Data collection templates') : t('Data collection'),
           'path' => 'node/' . $this->node->nid . '/data-collection',
           'total' => $forms_count,
           'options' => [
