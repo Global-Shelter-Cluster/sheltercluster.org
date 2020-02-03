@@ -5,7 +5,7 @@
     <article
       :class="['document-preview', document.class]"
       v-for="document in results">
-      <a class="thumbnail" :href="document.direct_url" target="_blank">
+      <a class="thumbnail" :href="document.direct_url" target="_blank" @click="hitEvent('view', document)">
         <div class="file-info">
           <div v-if="document['field_file:file:size']">[ {{ document['field_file:file:size']|file_size }} ]</div>
           <div v-if="document.file_extension" class="file-extension">{{ document.file_extension }}</div>

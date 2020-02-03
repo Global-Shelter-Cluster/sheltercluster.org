@@ -151,6 +151,7 @@
             : null;
 
           return {
+            nid: result.objectID,
             url: rawEmail ? 'mailto:' + rawEmail : null,
             title: result._highlightResult.title.value,
             group: group,
@@ -320,6 +321,20 @@
                 if (vue.shouldScrollOnResults && vue.hasResults)
                   vue.scroll();
               });
+            },
+            hitEvent: function(category, action, object) {
+              let label = '';
+
+              switch (category) {
+                case 'contact':
+                  label = object.nid + ': ' + $('<div/>').html(object.title).text();
+                  break;
+
+                default:
+                  return; // Shouldn't happen
+              }
+
+              window.hitEvent({category, action, label});
             }
           }
         });

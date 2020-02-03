@@ -103,7 +103,7 @@
       <a href="#" @click.prevent="indexFilter = 'contacts'" title="Click here to search contacts only"><?php print t('Contacts'); ?></a>
       <ul class="nav-items menu">
         <li class="leaf" v-for="contact in results.contacts">
-          <a :href="contact.url" target="_blank">
+          <a :href="contact.url" target="_blank" @click="hitEvent('contact', 'email', contact)">
             <div v-html="contact.title"></div>
             <small v-if="contact.group" class="search-result-title"
                    :title="contact.group|strip_tags" v-html="contact.group"></small>
