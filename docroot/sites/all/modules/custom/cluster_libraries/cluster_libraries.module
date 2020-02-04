@@ -42,7 +42,9 @@ function cluster_libraries_node_view_alter(&$build) {
       break;
   }
 
-  $build[] = cluster_search_docs_page($filters, $nid_filter, TRUE, $skip_group_filters);
+  $cluster_search_docs_page = cluster_search_docs_page($filters, $nid_filter, TRUE, $skip_group_filters);
+  $cluster_search_docs_page['#weight'] = 100; // Put it after body field and field_content (paragraphs)
+  $build[] = $cluster_search_docs_page;
 }
 
 /**

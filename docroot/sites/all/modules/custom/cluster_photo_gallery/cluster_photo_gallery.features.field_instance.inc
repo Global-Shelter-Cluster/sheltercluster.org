@@ -339,7 +339,75 @@ function cluster_photo_gallery_field_default_field_instances() {
         'summary_rows' => 5,
       ),
       'type' => 'text_textarea_with_summary',
-      'weight' => 31,
+      'weight' => 4,
+    ),
+  );
+
+  // Exported field_instance: 'node-photo_gallery-field_content'.
+  $field_instances['node-photo_gallery-field_content'] = array(
+    'bundle' => 'photo_gallery',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'hidden',
+        'module' => 'paragraphs',
+        'settings' => array(
+          'view_mode' => 'full',
+        ),
+        'type' => 'paragraphs_view',
+        'weight' => 1,
+      ),
+      'ical' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_content',
+    'label' => 'Content',
+    'required' => 0,
+    'settings' => array(
+      'add_mode' => 'button',
+      'allowed_bundles' => array(
+        'images' => -1,
+        'links' => -1,
+        'publications' => -1,
+        'short_publications' => -1,
+        'team_members' => -1,
+        'text' => -1,
+        'twocol_text_link' => -1,
+      ),
+      'bundle_weights' => array(
+        'images' => 2,
+        'links' => 3,
+        'publications' => 4,
+        'short_publications' => 5,
+        'team_members' => 6,
+        'text' => 7,
+        'twocol_text_link' => 8,
+      ),
+      'default_edit_mode' => 'open',
+      'entity_translation_sync' => FALSE,
+      'title' => 'Section',
+      'title_multiple' => 'Sections',
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 0,
+      'module' => 'paragraphs',
+      'settings' => array(),
+      'type' => 'paragraphs_embed',
+      'weight' => 5,
     ),
   );
 
@@ -361,7 +429,7 @@ function cluster_photo_gallery_field_default_field_instances() {
           'view_mode' => 'full',
         ),
         'type' => 'field_collection_view',
-        'weight' => 1,
+        'weight' => 2,
       ),
       'ical' => array(
         'label' => 'above',
@@ -389,7 +457,7 @@ function cluster_photo_gallery_field_default_field_instances() {
       'module' => 'field_collection',
       'settings' => array(),
       'type' => 'field_collection_embed',
-      'weight' => 32,
+      'weight' => 6,
     ),
   );
 
@@ -408,7 +476,7 @@ function cluster_photo_gallery_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 2,
+        'weight' => 3,
       ),
       'ical' => array(
         'label' => 'above',
@@ -440,7 +508,7 @@ function cluster_photo_gallery_field_default_field_instances() {
       'module' => 'number',
       'settings' => array(),
       'type' => 'number',
-      'weight' => 34,
+      'weight' => 7,
     ),
   );
 
@@ -455,7 +523,7 @@ function cluster_photo_gallery_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 3,
+        'weight' => 4,
       ),
       'ical' => array(
         'label' => 'above',
@@ -505,7 +573,7 @@ function cluster_photo_gallery_field_default_field_instances() {
       'module' => 'og',
       'settings' => array(),
       'type' => 'og_complex',
-      'weight' => -4,
+      'weight' => 1,
     ),
   );
 
@@ -520,7 +588,7 @@ function cluster_photo_gallery_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 4,
+        'weight' => 5,
       ),
       'ical' => array(
         'label' => 'above',
@@ -554,7 +622,7 @@ function cluster_photo_gallery_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => -5,
+      'weight' => 0,
     ),
   );
 
@@ -563,6 +631,7 @@ function cluster_photo_gallery_field_default_field_instances() {
   t('Author');
   t('Body');
   t('Caption');
+  t('Content');
   t('Description');
   t('Groups audience');
   t('Photo');
