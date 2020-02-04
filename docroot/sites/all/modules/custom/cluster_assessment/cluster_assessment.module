@@ -30,7 +30,7 @@ function cluster_assessment_all($node) {
 
   $nids = [];
   if (module_exists('cluster_webform'))
-    $nids = array_merge($nids, $manager->getWebforms());
+    $nids = array_merge($nids, $manager->getWebforms(TRUE));
   if (module_exists('cluster_kobo'))
     $nids = array_merge($nids, $manager->getKoboForms());
   if (!$nids)
@@ -38,10 +38,12 @@ function cluster_assessment_all($node) {
 
   $nodes = node_load_multiple($nids);
 
+  $show_templates = variable_get('cluster_og_resources_id') == $node->nid;
+
   return [
     '#theme' => 'links',
     '#attributes' => ['class' => ['data-collection-list']],
-    '#links' => array_map(function($node) {
+    '#links' => array_map(function($node) use ($show_templates) {
       $body_items = field_get_items('node', $node, 'field_body');
 
       if ($body_items && $body_items[0]['safe_value'])
@@ -55,7 +57,7 @@ function cluster_assessment_all($node) {
       return [
         'title' => $html_title,
         'html' => TRUE,
-        'href' => 'node/'.$node->nid,
+        'href' => $show_templates ? 'node/'.$node->nid.'/export' : 'node/'.$node->nid,
       ];
     }, $nodes),
   ];
@@ -67,7 +69,10 @@ function cluster_assessment_all($node) {
  * @see _cluster_docs_title_callback() (mostly copied from there)
  */
 function _cluster_assessment_title_callback($node) {
-  return $node->title . ' - ' . t('Data collection');
+  if (variable_get('cluster_og_resources_id') == $node->nid)
+    return t('Data collection templates');
+  else
+    return $node->title . ' - ' . t('Data collection');
 }
 
 function cluster_assessment_total_count($gid) {
@@ -76,7 +81,7 @@ function cluster_assessment_total_count($gid) {
   $ret = 0;
 
   if (module_exists('cluster_webform'))
-    $ret += $manager->getWebformsCount();
+    $ret += $manager->getWebformsCount(TRUE);
   if (module_exists('cluster_kobo'))
     $ret += $manager->getKoboFormsCount();
 

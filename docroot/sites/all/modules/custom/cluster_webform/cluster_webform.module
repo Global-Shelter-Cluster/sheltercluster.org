@@ -406,7 +406,16 @@ function cluster_webform_menu() {
 }
 
 function cluster_webform_export_access($node) {
-  return $node->type === 'webform' && webform_node_update_access($node);
+  if ($node->type !== 'webform')
+    return FALSE;
+
+  $gids = array_column(field_get_items('node', $node, 'og_group_ref'), 'target_id');
+  $resources_gid = variable_get('cluster_og_resources_id');
+
+  if ($resources_gid && in_array($resources_gid, $gids))
+    return TRUE;
+
+  return webform_node_update_access($node);
 }
 
 /**
@@ -428,7 +437,7 @@ function cluster_webform_form_webform_node_form_alter(&$form, &$form_state) {
   $resources_nid = variable_get('cluster_og_resources_id');
   if ($resources_nid && ($resources = node_load($resources_nid))) {
     $resources_manager = GroupContentManager::getInstance($resources);
-    $template_webform_nids = $resources_manager->getWebforms(TRUE);
+    $template_webform_nids = $resources_manager->getWebforms();
     $template_webforms = $template_webform_nids ? node_load_multiple($template_webform_nids) : [];
     if (count($template_webforms) > 0) {
       $form['import']['cluster_webform_template'] = [

@@ -44,6 +44,9 @@ class ClusterAPI_Type_Page extends ClusterAPI_Type {
 
     switch ($mode) {
       case ClusterAPI_Object::MODE_PUBLIC:
+        if ($node->field_content)
+          $ret['content'] = cluster_paragraphs_render_email_content($wrapper->field_content->value());
+
         switch ($node->type) {
           case 'library':
             $ret['is_global_library'] = (bool)$wrapper->field_is_global_library->value();
@@ -78,7 +81,6 @@ class ClusterAPI_Type_Page extends ClusterAPI_Type {
             }
             break;
           case 'page':
-            $ret['content'] = cluster_paragraphs_render_email_content($wrapper->field_content->value());
             break;
         }
 

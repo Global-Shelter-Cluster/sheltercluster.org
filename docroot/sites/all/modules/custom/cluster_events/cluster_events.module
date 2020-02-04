@@ -411,7 +411,7 @@ function cluster_events_create_map_with_link($geo = NULL, $map_title = '') {
       'alt' => $static_map_description,
       'title' => $static_map_description,
     ));
-    $static_map = l($static_map, $map_url, array('html' => TRUE, 'attributes' => array('target' => '_blank')));
+    $static_map = l($static_map, $map_url, array('html' => TRUE, 'attributes' => array('target' => '_blank', 'class' => ['map-link'])));
   }
   return $static_map;
 }

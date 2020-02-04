@@ -21,7 +21,7 @@ function cluster_libraries_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Advanced tags',
-    'weight' => '23',
+    'weight' => '24',
     'children' => array(),
     'format_type' => 'fieldset',
     'format_settings' => array(
@@ -46,7 +46,7 @@ function cluster_libraries_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Basic tags',
-    'weight' => '22',
+    'weight' => '23',
     'children' => array(),
     'format_type' => 'fieldset',
     'format_settings' => array(

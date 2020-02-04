@@ -528,6 +528,10 @@
 
               this.initializing = false;
               this.doSearch(false, page);
+            },
+            hitEvent: function(action, document) {
+              const label = document.nid + ': ' + $('<div/>').html(document.title).text();
+              window.hitEvent({category: 'document', action, label});
             }
           }
         });
@@ -643,6 +647,10 @@
                 else if (content.results[1].hits.length > 0)
                   vue.results = content.results[1].hits.map(Drupal.behaviors.clusterSearchDocuments.processDocument);
               });
+            },
+            hitEvent: function(action, document) {
+              const label = document.nid + ': ' + $('<div/>').html(document.title).text();
+              window.hitEvent({category: 'document', action, label});
             }
           }
         });

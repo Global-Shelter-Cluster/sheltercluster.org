@@ -105,6 +105,74 @@ function cluster_libraries_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'entityreference_autocomplete',
+      'weight' => 5,
+    ),
+  );
+
+  // Exported field_instance: 'node-arbitrary_library-field_content'.
+  $field_instances['node-arbitrary_library-field_content'] = array(
+    'bundle' => 'arbitrary_library',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'hidden',
+        'module' => 'paragraphs',
+        'settings' => array(
+          'view_mode' => 'full',
+        ),
+        'type' => 'paragraphs_view',
+        'weight' => 6,
+      ),
+      'ical' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_content',
+    'label' => 'Content',
+    'required' => 0,
+    'settings' => array(
+      'add_mode' => 'button',
+      'allowed_bundles' => array(
+        'images' => -1,
+        'links' => -1,
+        'publications' => -1,
+        'short_publications' => -1,
+        'team_members' => -1,
+        'text' => -1,
+        'twocol_text_link' => -1,
+      ),
+      'bundle_weights' => array(
+        'images' => 2,
+        'links' => 3,
+        'publications' => 4,
+        'short_publications' => 5,
+        'team_members' => 6,
+        'text' => 7,
+        'twocol_text_link' => 8,
+      ),
+      'default_edit_mode' => 'open',
+      'entity_translation_sync' => FALSE,
+      'title' => 'Section',
+      'title_multiple' => 'Sections',
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 0,
+      'module' => 'paragraphs',
+      'settings' => array(),
+      'type' => 'paragraphs_embed',
       'weight' => 4,
     ),
   );
@@ -151,7 +219,7 @@ The structure is only one level deep - it is not possible to choose for parent a
         'apply_chosen' => '',
       ),
       'type' => 'options_select',
-      'weight' => 5,
+      'weight' => 6,
     ),
   );
 
@@ -202,7 +270,7 @@ The structure is only one level deep - it is not possible to choose for parent a
       'module' => 'number',
       'settings' => array(),
       'type' => 'number',
-      'weight' => 6,
+      'weight' => 7,
     ),
   );
 
@@ -410,7 +478,75 @@ The structure is only one level deep - it is not possible to choose for parent a
         'apply_chosen' => '',
       ),
       'type' => 'options_buttons',
-      'weight' => 11,
+      'weight' => 12,
+    ),
+  );
+
+  // Exported field_instance: 'node-library-field_content'.
+  $field_instances['node-library-field_content'] = array(
+    'bundle' => 'library',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'hidden',
+        'module' => 'paragraphs',
+        'settings' => array(
+          'view_mode' => 'full',
+        ),
+        'type' => 'paragraphs_view',
+        'weight' => 22,
+      ),
+      'ical' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_content',
+    'label' => 'Content',
+    'required' => 0,
+    'settings' => array(
+      'add_mode' => 'button',
+      'allowed_bundles' => array(
+        'images' => -1,
+        'links' => -1,
+        'publications' => -1,
+        'short_publications' => -1,
+        'team_members' => -1,
+        'text' => -1,
+        'twocol_text_link' => -1,
+      ),
+      'bundle_weights' => array(
+        'images' => 2,
+        'links' => 3,
+        'publications' => 4,
+        'short_publications' => 5,
+        'team_members' => 6,
+        'text' => 7,
+        'twocol_text_link' => 8,
+      ),
+      'default_edit_mode' => 'open',
+      'entity_translation_sync' => FALSE,
+      'title' => 'Section',
+      'title_multiple' => 'Sections',
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 0,
+      'module' => 'paragraphs',
+      'settings' => array(),
+      'type' => 'paragraphs_embed',
+      'weight' => 2,
     ),
   );
 
@@ -455,7 +591,7 @@ The structure is only one level deep - it is not possible to choose for parent a
         'apply_chosen' => '',
       ),
       'type' => 'options_buttons',
-      'weight' => 8,
+      'weight' => 9,
     ),
   );
 
@@ -500,7 +636,7 @@ The structure is only one level deep - it is not possible to choose for parent a
         'apply_chosen' => '',
       ),
       'type' => 'options_buttons',
-      'weight' => 13,
+      'weight' => 14,
     ),
   );
 
@@ -543,7 +679,7 @@ The structure is only one level deep - it is not possible to choose for parent a
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 7,
+      'weight' => 8,
     ),
   );
 
@@ -588,7 +724,7 @@ The structure is only one level deep - it is not possible to choose for parent a
         'apply_chosen' => '',
       ),
       'type' => 'options_buttons',
-      'weight' => 9,
+      'weight' => 10,
     ),
   );
 
@@ -633,7 +769,7 @@ The structure is only one level deep - it is not possible to choose for parent a
         'apply_chosen' => '',
       ),
       'type' => 'options_buttons',
-      'weight' => 12,
+      'weight' => 13,
     ),
   );
 
@@ -678,7 +814,7 @@ The structure is only one level deep - it is not possible to choose for parent a
         'apply_chosen' => '',
       ),
       'type' => 'options_buttons',
-      'weight' => 15,
+      'weight' => 16,
     ),
   );
 
@@ -723,7 +859,7 @@ The structure is only one level deep - it is not possible to choose for parent a
         'apply_chosen' => '',
       ),
       'type' => 'options_buttons',
-      'weight' => 16,
+      'weight' => 17,
     ),
   );
 
@@ -772,7 +908,7 @@ The structure is only one level deep - it is not possible to choose for parent a
         'display_label' => 1,
       ),
       'type' => 'options_onoff',
-      'weight' => 5,
+      'weight' => 6,
     ),
   );
 
@@ -817,7 +953,7 @@ The structure is only one level deep - it is not possible to choose for parent a
         'apply_chosen' => '',
       ),
       'type' => 'options_buttons',
-      'weight' => 19,
+      'weight' => 20,
     ),
   );
 
@@ -862,7 +998,7 @@ The structure is only one level deep - it is not possible to choose for parent a
         'apply_chosen' => '',
       ),
       'type' => 'options_select',
-      'weight' => 6,
+      'weight' => 7,
     ),
   );
 
@@ -905,7 +1041,7 @@ The structure is only one level deep - it is not possible to choose for parent a
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 21,
+      'weight' => 22,
     ),
   );
 
@@ -950,7 +1086,7 @@ The structure is only one level deep - it is not possible to choose for parent a
         'apply_chosen' => '',
       ),
       'type' => 'options_buttons',
-      'weight' => 18,
+      'weight' => 19,
     ),
   );
 
@@ -996,7 +1132,7 @@ The structure is only one level deep - it is not possible to choose for parent a
         'apply_chosen' => '',
       ),
       'type' => 'options_select',
-      'weight' => 4,
+      'weight' => 5,
     ),
   );
 
@@ -1041,7 +1177,7 @@ The structure is only one level deep - it is not possible to choose for parent a
         'apply_chosen' => '',
       ),
       'type' => 'options_buttons',
-      'weight' => 14,
+      'weight' => 15,
     ),
   );
 
@@ -1086,7 +1222,7 @@ The structure is only one level deep - it is not possible to choose for parent a
         'apply_chosen' => '',
       ),
       'type' => 'options_buttons',
-      'weight' => 17,
+      'weight' => 18,
     ),
   );
 
@@ -1137,7 +1273,7 @@ The structure is only one level deep - it is not possible to choose for parent a
       'module' => 'number',
       'settings' => array(),
       'type' => 'number',
-      'weight' => 24,
+      'weight' => 25,
     ),
   );
 
@@ -1182,7 +1318,7 @@ The structure is only one level deep - it is not possible to choose for parent a
         'apply_chosen' => '',
       ),
       'type' => 'options_buttons',
-      'weight' => 10,
+      'weight' => 11,
     ),
   );
 
@@ -1227,7 +1363,7 @@ The structure is only one level deep - it is not possible to choose for parent a
         'apply_chosen' => '',
       ),
       'type' => 'options_buttons',
-      'weight' => 20,
+      'weight' => 21,
     ),
   );
 
@@ -1292,7 +1428,7 @@ The structure is only one level deep - it is not possible to choose for parent a
       'module' => 'og',
       'settings' => array(),
       'type' => 'og_complex',
-      'weight' => 3,
+      'weight' => 4,
     ),
   );
 
@@ -1354,6 +1490,7 @@ The structure is only one level deep - it is not possible to choose for parent a
   t('Body');
   t('Choosing a parent for this content will make it so that the content will appear in the navigation sidebar only on the parent page.
 The structure is only one level deep - it is not possible to choose for parent a content that already has a parent. The parent content must be in the same group.');
+  t('Content');
   t('Coordination Management');
   t('Cross-Cutting Issues');
   t('Description');

@@ -4497,6 +4497,18 @@ body.document-upload-ondrag {
   margin: 10px;
 }
 
+.webform-progressbar-page-label {
+  display: none;
+}
+.webform-progressbar-page.current .webform-progressbar-page-label {
+  display: block;
+}
+
+.webform-progressbar {
+  margin-top: 2rem;
+  margin-bottom: 3rem;
+}
+
 .paragraphs-items .content {
   min-height: initial;
 }
