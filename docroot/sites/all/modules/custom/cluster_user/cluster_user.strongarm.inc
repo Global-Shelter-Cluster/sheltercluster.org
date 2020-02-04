@@ -164,6 +164,7 @@ After that, you will be able to log in at [site:login-url] using your [user:hybr
     'Vimeo' => 0,
     'Vkontakte' => 0,
     'Yandex' => 0,
+    'Paypal' => 0,
   );
   $export['hybridauth_providers'] = $strongarm;
 
