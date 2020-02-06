@@ -32,7 +32,6 @@ function cluster_content_views_default_views() {
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
   $handler->display->display_options['exposed_form']['type'] = 'basic';
-  $handler->display->display_options['exposed_form']['options']['reset_button'] = TRUE;
   $handler->display->display_options['pager']['type'] = 'full';
   $handler->display->display_options['pager']['options']['items_per_page'] = '50';
   $handler->display->display_options['pager']['options']['offset'] = '0';
@@ -127,6 +126,10 @@ function cluster_content_views_default_views() {
     ),
   );
   $handler->display->display_options['style_options']['sticky'] = TRUE;
+  /* Footer: Global: Result summary */
+  $handler->display->display_options['footer']['result']['id'] = 'result';
+  $handler->display->display_options['footer']['result']['table'] = 'views';
+  $handler->display->display_options['footer']['result']['field'] = 'result';
   /* No results behavior: Global: Text area */
   $handler->display->display_options['empty']['area']['id'] = 'area';
   $handler->display->display_options['empty']['area']['table'] = 'views';
@@ -214,7 +217,6 @@ function cluster_content_views_default_views() {
   $handler->display->display_options['fields']['title']['alter']['path'] = 'node/[nid]/edit';
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
-  $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
   /* Field: File: Size */
   $handler->display->display_options['fields']['filesize']['id'] = 'filesize';
   $handler->display->display_options['fields']['filesize']['table'] = 'file_managed';
@@ -320,6 +322,208 @@ function cluster_content_views_default_views() {
     4 => 0,
   );
   $handler->display->display_options['filters']['type']['expose']['reduce'] = TRUE;
+  $handler->display->display_options['filters']['type']['is_grouped'] = TRUE;
+  $handler->display->display_options['filters']['type']['group_info']['label'] = 'Type';
+  $handler->display->display_options['filters']['type']['group_info']['identifier'] = 'type';
+  $handler->display->display_options['filters']['type']['group_info']['widget'] = 'radios';
+  $handler->display->display_options['filters']['type']['group_info']['group_items'] = array(
+    1 => array(
+      'title' => 'News and alerts',
+      'operator' => 'in',
+      'value' => array(
+        'alert' => 'alert',
+        'news' => 'news',
+        'all' => 0,
+        'article' => 0,
+        'page' => 0,
+        'hub' => 0,
+        'community_of_practice' => 0,
+        'contact' => 0,
+        'discussion' => 0,
+        'document' => 0,
+        'event' => 0,
+        'factsheet' => 0,
+        'kobo_form' => 0,
+        'photo_gallery' => 0,
+        'geographic_region' => 0,
+        'strategic_advisory' => 0,
+        'homepage' => 0,
+        'library' => 0,
+        'arbitrary_library' => 0,
+        'response' => 0,
+        'webform' => 0,
+        'working_group' => 0,
+      ),
+    ),
+    2 => array(
+      'title' => 'Documents',
+      'operator' => 'in',
+      'value' => array(
+        'document' => 'document',
+        'all' => 0,
+        'alert' => 0,
+        'article' => 0,
+        'page' => 0,
+        'hub' => 0,
+        'community_of_practice' => 0,
+        'contact' => 0,
+        'discussion' => 0,
+        'event' => 0,
+        'factsheet' => 0,
+        'kobo_form' => 0,
+        'photo_gallery' => 0,
+        'geographic_region' => 0,
+        'strategic_advisory' => 0,
+        'homepage' => 0,
+        'library' => 0,
+        'arbitrary_library' => 0,
+        'news' => 0,
+        'response' => 0,
+        'webform' => 0,
+        'working_group' => 0,
+      ),
+    ),
+    3 => array(
+      'title' => 'Events',
+      'operator' => 'in',
+      'value' => array(
+        'event' => 'event',
+        'all' => 0,
+        'alert' => 0,
+        'article' => 0,
+        'page' => 0,
+        'hub' => 0,
+        'community_of_practice' => 0,
+        'contact' => 0,
+        'discussion' => 0,
+        'document' => 0,
+        'factsheet' => 0,
+        'kobo_form' => 0,
+        'photo_gallery' => 0,
+        'geographic_region' => 0,
+        'strategic_advisory' => 0,
+        'homepage' => 0,
+        'library' => 0,
+        'arbitrary_library' => 0,
+        'news' => 0,
+        'response' => 0,
+        'webform' => 0,
+        'working_group' => 0,
+      ),
+    ),
+    4 => array(
+      'title' => 'Factsheets',
+      'operator' => 'in',
+      'value' => array(
+        'factsheet' => 'factsheet',
+        'all' => 0,
+        'alert' => 0,
+        'article' => 0,
+        'page' => 0,
+        'hub' => 0,
+        'community_of_practice' => 0,
+        'contact' => 0,
+        'discussion' => 0,
+        'document' => 0,
+        'event' => 0,
+        'kobo_form' => 0,
+        'photo_gallery' => 0,
+        'geographic_region' => 0,
+        'strategic_advisory' => 0,
+        'homepage' => 0,
+        'library' => 0,
+        'arbitrary_library' => 0,
+        'news' => 0,
+        'response' => 0,
+        'webform' => 0,
+        'working_group' => 0,
+      ),
+    ),
+    5 => array(
+      'title' => 'Coordination team',
+      'operator' => 'in',
+      'value' => array(
+        'contact' => 'contact',
+        'all' => 0,
+        'alert' => 0,
+        'article' => 0,
+        'page' => 0,
+        'hub' => 0,
+        'community_of_practice' => 0,
+        'discussion' => 0,
+        'document' => 0,
+        'event' => 0,
+        'factsheet' => 0,
+        'kobo_form' => 0,
+        'photo_gallery' => 0,
+        'geographic_region' => 0,
+        'strategic_advisory' => 0,
+        'homepage' => 0,
+        'library' => 0,
+        'arbitrary_library' => 0,
+        'news' => 0,
+        'response' => 0,
+        'webform' => 0,
+        'working_group' => 0,
+      ),
+    ),
+    6 => array(
+      'title' => 'Pages',
+      'operator' => 'in',
+      'value' => array(
+        'page' => 'page',
+        'photo_gallery' => 'photo_gallery',
+        'library' => 'library',
+        'arbitrary_library' => 'arbitrary_library',
+        'all' => 0,
+        'alert' => 0,
+        'article' => 0,
+        'hub' => 0,
+        'community_of_practice' => 0,
+        'contact' => 0,
+        'discussion' => 0,
+        'document' => 0,
+        'event' => 0,
+        'factsheet' => 0,
+        'kobo_form' => 0,
+        'geographic_region' => 0,
+        'strategic_advisory' => 0,
+        'homepage' => 0,
+        'news' => 0,
+        'response' => 0,
+        'webform' => 0,
+        'working_group' => 0,
+      ),
+    ),
+    7 => array(
+      'title' => 'Data collection',
+      'operator' => 'in',
+      'value' => array(
+        'kobo_form' => 'kobo_form',
+        'webform' => 'webform',
+        'all' => 0,
+        'alert' => 0,
+        'article' => 0,
+        'page' => 0,
+        'hub' => 0,
+        'community_of_practice' => 0,
+        'contact' => 0,
+        'discussion' => 0,
+        'document' => 0,
+        'event' => 0,
+        'factsheet' => 0,
+        'photo_gallery' => 0,
+        'geographic_region' => 0,
+        'strategic_advisory' => 0,
+        'homepage' => 0,
+        'library' => 0,
+        'arbitrary_library' => 0,
+        'news' => 0,
+        'response' => 0,
+        'working_group' => 0,
+      ),
+    ),
+  );
   /* Filter criterion: Content: Title (title_field) */
   $handler->display->display_options['filters']['title_field_value']['id'] = 'title_field_value';
   $handler->display->display_options['filters']['title_field_value']['table'] = 'field_data_title_field';
@@ -364,6 +568,7 @@ function cluster_content_views_default_views() {
     t('‹ previous'),
     t('next ›'),
     t('last »'),
+    t('Displaying @start - @end of @total'),
     t('No documents found.'),
     t('file from field_file'),
     t('Content'),
