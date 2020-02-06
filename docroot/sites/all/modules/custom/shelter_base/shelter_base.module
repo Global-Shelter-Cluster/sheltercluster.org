@@ -160,3 +160,20 @@ function shelter_base_get_env() {
 
   return $matches[2];
 }
+
+/**
+ * Implements hook_menu_alter().
+ */
+function shelter_base_menu_alter(&$items) {
+  // Simplify "local tasks" menu in user page
+  $to_remove_from_tabs = [
+    'user/%user/imce',
+    'user/%user/shortcuts',
+    'user/%user/track/navigation',
+    'user/%user/devel',
+  ];
+  foreach ($to_remove_from_tabs as $path) {
+    if (array_key_exists($path, $items))
+      $items[$path]['type'] = MENU_CALLBACK;
+  }
+}
