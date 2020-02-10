@@ -25,6 +25,12 @@ function cluster_email_menu() {
       'access arguments' => ['administer site configuration'],
       'file' => 'cluster_email.forms.inc',
     ],
+    'inbound-email' => [
+      'title' => 'Inbound email handler',
+      'page callback' => 'cluster_email_inbound',
+      'access callback' => TRUE,
+      'file' => 'cluster_email.inbound.inc',
+    ],
   ];
 }
 
