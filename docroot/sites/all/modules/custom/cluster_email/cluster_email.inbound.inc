@@ -80,6 +80,7 @@
  */
 
 function cluster_email_inbound() {
+watchdog('cluster_email_inbound debug', '-1', [], WATCHDOG_WARNING);
   if (!isset($_POST['mandrill_events']) || !is_array($_POST['mandrill_events'])) {
     drupal_exit();
   }
@@ -89,34 +90,38 @@ function cluster_email_inbound() {
   // Emails should look like "stage-testpage-9175@inbound.sheltercluster.org",
   // or "testpage-9175@inbound.sheltercluster.org" for production.
   $env_prefix = $is_prod ? '' : preg_quote($env . '-');
+watchdog('cluster_email_inbound debug', '0: @env', ['@env' => $env], WATCHDOG_WARNING);
 
   foreach ($_POST['mandrill_events'] as $mandrill_event) {
     if ($mandrill_event['event'] !== 'inbound') {
       watchdog('cluster_email_inbound', 'Unrecognized event: @event. Message: @msg', [
         '@event' => $mandrill_event['event'],
-        '@msg' => print_r($mandrill_event),
+        '@msg' => print_r($mandrill_event, TRUE),
       ], WATCHDOG_WARNING);
       continue;
     }
 
     if (preg_match('/^' . $env_prefix . '([^@]+)@/', $mandrill_event['msg']['email'], $matches) === FALSE) {
-      watchdog('cluster_email_inbound', 'Could not parse email: @msg', ['@msg' => print_r($mandrill_event)], WATCHDOG_WARNING);
+      watchdog('cluster_email_inbound', 'Could not parse email: @msg', ['@msg' => print_r($mandrill_event, TRUE)], WATCHDOG_WARNING);
       continue;
     }
 
     // Do something with $mandrill_event['msg']['spam_report']['score'] (log in watchdog and skip the msg if it's beyond a constant threshold)
 
+watchdog('cluster_email_inbound debug', '1: @msg', ['@msg' => print_r($mandrill_event, TRUE)], WATCHDOG_WARNING);
     $user = user_load_by_mail($mandrill_event['msg']['from_email']);
 
+watchdog('cluster_email_inbound debug', '2: @msg', ['@msg' => print_r($user, TRUE)], WATCHDOG_WARNING);
     $text = isset($mandrill_event['msg']['text']) ? trim($mandrill_event['msg']['text']) : NULL;
 
     $html = NULL;
     if (isset($mandrill_event['msg']['html']) && trim(strip_tags($mandrill_event['msg']['html'])) !== '') {
       $html = $mandrill_event['msg']['html'];
     }
+watchdog('cluster_email_inbound debug', '2: @msg', ['@msg' => print_r($html, TRUE)], WATCHDOG_WARNING);
 
     if (!$text && !$html) {
-      watchdog('cluster_email_inbound', 'Received email without text or HTML body: @msg', ['@msg' => print_r($mandrill_event)], WATCHDOG_WARNING);
+      watchdog('cluster_email_inbound', 'Received email without text or HTML body: @msg', ['@msg' => print_r($mandrill_event, TRUE)], WATCHDOG_WARNING);
       continue;
     }
 
@@ -129,7 +134,7 @@ function cluster_email_inbound() {
       'text' => $text,
     ]);
 
-    watchdog('cluster_email_inbound debug', 'module_invoke_all '.$matches[1].' : '.print_r($message, TRUE));
+watchdog('cluster_email_inbound debug', 'module_invoke_all '.$matches[1].' : '.print_r($message, TRUE));
 
     module_invoke_all('cluster_email_inbound_handle', $matches[1], $message);
   }
