@@ -129,6 +129,8 @@ function cluster_email_inbound() {
       'text' => $text,
     ]);
 
+    watchdog('cluster_email_inbound debug', 'module_invoke_all '.$matches[1].' : '.print_r($message, TRUE));
+
     module_invoke_all('cluster_email_inbound_handle', $matches[1], $message);
   }
 
@@ -139,6 +141,7 @@ function cluster_email_inbound() {
  * Implements hook_cluster_email_inbound_handle().
  */
 function cluster_email_cluster_email_inbound_handle($name, $message) {
+  watchdog('cluster_email_inbound debug', 'cluster_email_cluster_email_inbound_handle '.$name.' : '.print_r($message, TRUE));
   if (preg_match('/^testpage-(\d+)$/', $name, $matches) === FALSE) {
     return;
   }
