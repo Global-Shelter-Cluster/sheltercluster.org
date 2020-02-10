@@ -147,6 +147,9 @@ function shelter_base_is_prod() {
   return shelter_base_get_env() === 'www';
 }
 
+/**
+ * @return string E.g. "dev", "stage", "local", "www" for production.
+ */
 function shelter_base_get_env() {
   $regex = '/^https?:\/\/(([^\.]+)\.)?sheltercluster\.org\b/';
   global $base_url;
