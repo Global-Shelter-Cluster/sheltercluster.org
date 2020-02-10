@@ -74,7 +74,11 @@
 
 function cluster_email_inbound() {
 watchdog('cluster_email_inbound debug', '-1', [], WATCHDOG_WARNING);
-  if (!isset($_POST['mandrill_events']) || !is_array($_POST['mandrill_events'])) {
+  if (!isset($_POST['mandrill_events'])) {
+    drupal_exit();
+  }
+  $mandrill_events = json_decode($_POST['mandrill_events'], TRUE);
+  if (!is_array($mandrill_events) || count($mandrill_events) === 0) {
     drupal_exit();
   }
 
@@ -85,7 +89,7 @@ watchdog('cluster_email_inbound debug', '-1', [], WATCHDOG_WARNING);
   $env_prefix = $is_prod ? '' : preg_quote($env . '-');
 watchdog('cluster_email_inbound debug', '0: @env', ['@env' => $env], WATCHDOG_WARNING);
 
-  foreach ($_POST['mandrill_events'] as $mandrill_event) {
+  foreach ($mandrill_events as $mandrill_event) {
     if ($mandrill_event['event'] !== 'inbound') {
       watchdog('cluster_email_inbound', 'Unrecognized event: @event. Message: @msg', [
         '@event' => $mandrill_event['event'],
