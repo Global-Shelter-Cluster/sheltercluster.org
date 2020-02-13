@@ -6,6 +6,231 @@
 
 include_once 'cluster_home.features.inc';
 
+/**
+ * Implements hook_menu().
+ */
+function cluster_home_menu() {
+  $items['new-dashboard-temp'] = [
+    'title' => 'Temporary homepage dashboard',
+    'page callback' => 'cluster_home_dashboard_temp',
+    'access arguments' => ['access content'],
+    'type' => MENU_CALLBACK,
+  ];
+
+  return $items;
+}
+
+function cluster_home_dashboard_temp() {
+  $data = _cluster_home_dashboard_data();
+
+  $by_region_data = $data['count_by_region'];
+  arsort($by_region_data);
+  $by_region_data_values = [];
+  $by_region_data_labels = [];
+  foreach ($by_region_data as $region_nid => $region_count) {
+    $by_region_data_values[] = $region_count;
+    $by_region_data_labels[] = $data['node_names'][$region_nid];
+  }
+  $by_region = [
+    '#theme' => 'cluster_chart_pie',
+    '#data' => [
+      'data' => $by_region_data_values,
+      'backgroundColor' => explode(PHP_EOL, CLUSTER_CHART_COLOR_ACCENT_BLUE_x10),
+    ],
+    '#labels' => $by_region_data_labels,
+    '#options' => [
+      'legend' => ['display' => FALSE],
+      //      'maintainAspectRatio' => FALSE,
+      'pieceLabel' => [
+        'render' => $by_region_data_labels,
+        'fontColor' => 'white',
+      ],
+    ],
+  ];
+
+  $by_disaster_type_data = $data['count_by_disaster_type'];
+  arsort($by_disaster_type_data);
+  $by_disaster_type_data_values = [];
+  $by_disaster_type_data_labels = [];
+  foreach ($by_disaster_type_data as $disaster_type_nid => $disaster_type_count) {
+    $by_disaster_type_data_values[] = $disaster_type_count;
+    $by_disaster_type_data_labels[] = $data['term_names'][$disaster_type_nid];
+  }
+  $by_disaster_type = [
+    '#theme' => 'cluster_chart_pie',
+    '#data' => [
+      'data' => $by_disaster_type_data_values,
+      'backgroundColor' => explode(PHP_EOL, CLUSTER_CHART_COLOR_ACCENT_RED_x5),
+    ],
+    '#labels' => $by_disaster_type_data_labels,
+    '#options' => [
+      'legend' => ['display' => FALSE],
+      //      'maintainAspectRatio' => FALSE,
+      'pieceLabel' => [
+        'render' => $by_disaster_type_data_labels,
+        'fontColor' => 'white',
+      ],
+    ],
+  ];
+
+  $by_country_shelter_data = [
+    [
+      'data' => [],
+      'label' => t('Reached'),
+      'backgroundColor' => CLUSTER_CHART_COLOR_SHELTER_RED,
+    ],
+    [
+      'data' => [],
+      'label' => t('Gap'),
+      'backgroundColor' => CLUSTER_CHART_COLOR_SHELTER_RED_SHADE2,
+    ],
+  ];
+  $by_country_shelter_labels = [];
+  uasort($data['countries'], function ($a, $b) {
+    return $b['people_reached_shelter'] - $a['people_reached_shelter'];
+  });
+  foreach ($data['countries'] as $country_nid => $country_data) {
+    $by_country_shelter_data[0]['data'][] = $country_data['people_reached_shelter'];
+    $by_country_shelter_data[1]['data'][] = max(0, $country_data['people_targeted_shelter'] - $country_data['people_reached_shelter']);
+    $by_country_shelter_labels[] = $data['node_names'][$country_nid];
+  }
+  $by_country_shelter = [
+    '#theme' => 'cluster_chart_hbar',
+    //    '#extra_css_classes' => ['fs_cat_chart'],
+    '#data' => $by_country_shelter_data,
+    '#labels' => $by_country_shelter_labels,
+    '#options' => [
+      'legend' => ['display' => FALSE],
+      'maintainAspectRatio' => FALSE,
+      'scales' => [
+        'xAxes' => [
+          [
+            'stacked' => TRUE,
+            'ticks' => ['beginAtZero' => TRUE],
+          ],
+        ],
+        'yAxes' => [['stacked' => TRUE]],
+      ],
+    ],
+  ];
+
+  $by_country_nfi_data = [
+    [
+      'data' => [],
+      'label' => t('Reached'),
+      'backgroundColor' => CLUSTER_CHART_COLOR_SHELTER_DARK_BLUE,
+    ],
+    [
+      'data' => [],
+      'label' => t('Gap'),
+      'backgroundColor' => CLUSTER_CHART_COLOR_SHELTER_LIGHT_BLUE,
+    ],
+  ];
+  $by_country_nfi_labels = [];
+  uasort($data['countries'], function ($a, $b) {
+    return $b['people_reached_nfi'] - $a['people_reached_nfi'];
+  });
+  foreach ($data['countries'] as $country_nid => $country_data) {
+    $by_country_nfi_data[0]['data'][] = $country_data['people_reached_nfi'];
+    $by_country_nfi_data[1]['data'][] = max(0, $country_data['people_targeted_nfi'] - $country_data['people_reached_nfi']);
+    $by_country_nfi_labels[] = $data['node_names'][$country_nid];
+  }
+  $by_country_nfi = [
+    '#theme' => 'cluster_chart_hbar',
+    //    '#extra_css_classes' => ['fs_cat_chart'],
+    '#data' => $by_country_nfi_data,
+    '#labels' => $by_country_nfi_labels,
+    '#options' => [
+      'legend' => ['display' => FALSE],
+      'maintainAspectRatio' => FALSE,
+      'scales' => [
+        'xAxes' => [
+          [
+            'stacked' => TRUE,
+            'ticks' => ['beginAtZero' => TRUE],
+          ],
+        ],
+        'yAxes' => [['stacked' => TRUE]],
+      ],
+    ],
+  ];
+
+  $by_country_funding_data = [
+    [
+      'data' => [],
+      'label' => t('Received'),
+      'backgroundColor' => CLUSTER_CHART_COLOR_ACCENT_GREEN,
+    ],
+    [
+      'data' => [],
+      'label' => t('Gap'),
+      'backgroundColor' => CLUSTER_CHART_COLOR_ACCENT_GREEN_SHADE,
+    ],
+  ];
+  $by_country_funding_labels = [];
+  uasort($data['countries'], function ($a, $b) {
+    return $b['funding_received'] - $a['funding_received'];
+  });
+  foreach ($data['countries'] as $country_nid => $country_data) {
+    $by_country_funding_data[0]['data'][] = $country_data['funding_received'];
+    $by_country_funding_data[1]['data'][] = max(0, $country_data['funding_required'] - $country_data['funding_received']);
+    $by_country_funding_labels[] = $data['node_names'][$country_nid];
+  }
+  $by_country_funding = [
+    '#theme' => 'cluster_chart_hbar',
+    //    '#extra_css_classes' => ['fs_cat_chart'],
+    '#data' => $by_country_funding_data,
+    '#labels' => $by_country_funding_labels,
+    '#options' => [
+      'legend' => ['display' => FALSE],
+      'maintainAspectRatio' => FALSE,
+      'scales' => [
+        'xAxes' => [
+          [
+            'stacked' => TRUE,
+            'ticks' => ['beginAtZero' => TRUE],
+          ],
+        ],
+        'yAxes' => [['stacked' => TRUE]],
+      ],
+    ],
+  ];
+
+  return [
+    '#theme' => 'cluster_home_dashboard',
+    '#count_all_active' => $data['count_all_active'],
+    '#people_supported' => $data['people_supported'],
+    '#partners' => $data['partners'],
+    '#by_region' => $by_region,
+    '#by_disaster_type' => $by_disaster_type,
+    '#by_country_shelter' => $by_country_shelter,
+    '#by_country_nfi' => $by_country_nfi,
+    '#by_country_funding' => $by_country_funding,
+  ];
+}
+
+/**
+ * Implements hook_theme().
+ */
+function cluster_home_theme($existing, $type, $theme, $path) {
+  return [
+    'cluster_home_dashboard' => [
+      'template' => 'dashboard',
+      'variables' => [
+        'count_all_active' => 0,
+        'people_supported' => 0,
+        'partners' => 0,
+        'by_region' => NULL,
+        'by_disaster_type' => NULL,
+        'by_country_shelter' => NULL,
+        'by_country_nfi' => NULL,
+        'by_country_funding' => NULL,
+      ],
+      'path' => drupal_get_path('module', 'cluster_home') . '/templates',
+    ],
+  ];
+}
+
 function _cluster_home_active_responses() {
   $query = new EntityFieldQuery();
   $result = $query
@@ -21,6 +246,9 @@ function _cluster_home_active_responses() {
 }
 
 function _cluster_home_dashboard_data() {
+  // TODO: this is temporary data from prod, remove this line!
+  return json_decode('{"node_names":{"30":"Africa","35":"Central African Republic","37":"Chad","41":"Democratic Republic of Congo","43":"Ethiopia","45":"Kenya","49":"Mali","56":"Somalia","58":"South Sudan","60":"Sudan","74":"Asia","75":"Afghanistan","91":"Myanmar","114":"Europe","115":"Ukraine","117":"MENA","118":"Iraq","122":"Palestine","124":"Syria","126":"Yemen","101":"Pakistan","97":"Pacific","5241":"Fiji","10012":"Nigeria","5347":"Vanuatu","77":"Bangladesh","106":"Philippines","85":"Indonesia","51":"Mozambique","62":"Americas","68":"Haiti","16541":"Venezuela","16781":"Papua New Guinea","33":"Burkina Faso"},"term_names":{"20":"Conflict","13":"Complex Crisis","4":"Natural Disaster"},"count_all_active":34,"partners":395,"funding_received":140476031,"people_supported":11006704,"people_supported_shelter":1393795,"people_supported_nfi":5755193,"count_by_disaster_type":{"20":18,"13":5,"4":11},"count_by_region":{"30":12,"74":8,"114":1,"117":6,"97":5,"62":2},"countries":{"37":{"people_targeted_shelter":219856,"people_reached_shelter":89560,"people_targeted_nfi":78000,"people_reached_nfi":143218,"funding_required":13500000,"funding_received":2400000},"41":{"people_targeted_shelter":730184,"people_reached_shelter":242682,"people_targeted_nfi":2292209,"people_reached_nfi":1240215,"funding_required":142700000,"funding_received":7200000},"43":{"people_targeted_shelter":0,"people_reached_shelter":0,"people_targeted_nfi":1949579,"people_reached_nfi":1480247,"funding_required":80000000,"funding_received":15900000},"49":{"people_targeted_shelter":18000,"people_reached_shelter":357,"people_targeted_nfi":111000,"people_reached_nfi":1200,"funding_required":4200000,"funding_received":366000},"58":{"people_targeted_shelter":435959,"people_reached_shelter":442171,"people_targeted_nfi":857496,"people_reached_nfi":864127,"funding_required":30000000,"funding_received":24410000},"75":{"people_targeted_shelter":275124,"people_reached_shelter":67779,"people_targeted_nfi":766238,"people_reached_nfi":575154,"funding_required":48,"funding_received":31},"118":{"people_targeted_shelter":347750,"people_reached_shelter":121657,"people_targeted_nfi":513900,"people_reached_nfi":347278,"funding_required":74400000,"funding_received":58300000},"126":{"people_targeted_shelter":615625,"people_reached_shelter":269999,"people_targeted_nfi":941162,"people_reached_nfi":894787,"funding_required":222000000,"funding_received":24000000},"10012":{"people_targeted_shelter":1300000,"people_reached_shelter":148205,"people_targeted_nfi":0,"people_reached_nfi":0,"funding_required":67400000,"funding_received":7900000},"5347":{"people_targeted_shelter":15675,"people_reached_shelter":11385,"people_targeted_nfi":13175,"people_reached_nfi":11385,"funding_required":0,"funding_received":0},"33":{"people_targeted_shelter":0,"people_reached_shelter":0,"people_targeted_nfi":275800,"people_reached_nfi":197582,"funding_required":28300000,"funding_received":0}}}', TRUE);
+  return json_decode('{"node_names":{"30":"Africa","35":"Central African Republic","37":"Chad","41":"Democratic Republic of Congo","43":"Ethiopia","45":"Kenya","49":"Mali","56":"Somalia","58":"South Sudan","60":"Sudan","74":"Asia","75":"Afghanistan","91":"Myanmar","114":"Europe","115":"Ukraine","117":"MENA","118":"Iraq","122":"Palestine","124":"Syria","126":"Yemen","101":"Pakistan","62":"Americas","97":"Pacific","5241":"Fiji","10012":"Nigeria","5347":"Vanuatu","77":"Bangladesh","106":"Philippines","85":"Indonesia","51":"Mozambique","68":"Haiti","16541":"Venezuela","16781":"Papua New Guinea","33":"Burkina Faso","4290":"Global"},"term_names":{"20":"Conflict","13":"Complex Crisis","4":"Natural Disaster"},"count_all_active":45,"partners":395,"funding_received":140476031,"people_supported":11006704,"people_supported_shelter":1393795,"people_supported_nfi":5755193,"count_by_disaster_type":{"20":21,"13":5,"4":19},"count_by_region":{"30":15,"74":8,"114":1,"117":7,"62":6,"97":6,"4290":1},"countries":{"37":{"people_targeted_shelter":219856,"people_reached_shelter":89560,"people_targeted_nfi":78000,"people_reached_nfi":143218,"funding_required":13500000,"funding_funded":0,"funding_received":2400000},"41":{"people_targeted_shelter":730184,"people_reached_shelter":242682,"people_targeted_nfi":2292209,"people_reached_nfi":1240215,"funding_required":142700000,"funding_funded":0,"funding_received":7200000},"43":{"people_targeted_shelter":0,"people_reached_shelter":0,"people_targeted_nfi":1949579,"people_reached_nfi":1480247,"funding_required":80000000,"funding_funded":0,"funding_received":15900000},"49":{"people_targeted_shelter":18000,"people_reached_shelter":357,"people_targeted_nfi":111000,"people_reached_nfi":1200,"funding_required":4200000,"funding_funded":0,"funding_received":366000},"58":{"people_targeted_shelter":435959,"people_reached_shelter":442171,"people_targeted_nfi":857496,"people_reached_nfi":864127,"funding_required":30000000,"funding_funded":0,"funding_received":24410000},"75":{"people_targeted_shelter":275124,"people_reached_shelter":67779,"people_targeted_nfi":766238,"people_reached_nfi":575154,"funding_required":48,"funding_funded":0,"funding_received":31},"118":{"people_targeted_shelter":347750,"people_reached_shelter":121657,"people_targeted_nfi":513900,"people_reached_nfi":347278,"funding_required":74400000,"funding_funded":0,"funding_received":58300000},"126":{"people_targeted_shelter":615625,"people_reached_shelter":269999,"people_targeted_nfi":941162,"people_reached_nfi":894787,"funding_required":222000000,"funding_funded":0,"funding_received":24000000},"10012":{"people_targeted_shelter":1300000,"people_reached_shelter":148205,"people_targeted_nfi":0,"people_reached_nfi":0,"funding_required":67400000,"funding_funded":0,"funding_received":7900000},"5347":{"people_targeted_shelter":15675,"people_reached_shelter":11385,"people_targeted_nfi":13175,"people_reached_nfi":11385,"funding_required":0,"funding_funded":0,"funding_received":0},"33":{"people_targeted_shelter":0,"people_reached_shelter":0,"people_targeted_nfi":275800,"people_reached_nfi":197582,"funding_required":28300000,"funding_funded":0,"funding_received":0}}}', TRUE);
   $node_names = []; // [nid] => [string]
   $term_names = []; // [tid] => [string]
 
@@ -32,17 +260,13 @@ function _cluster_home_dashboard_data() {
   $people_supported = 0;
   $people_supported_shelter = 0;
   $people_supported_nfi = 0;
+  $count_all_active = 0;
   $partners = 0;
   $funding_received = 0;
   $countries = []; // [region nid] => (various values, see below)
 
   foreach ($responses as $response) {
     $wrapper = entity_metadata_wrapper('node', $response);
-
-    $disaster_type = $wrapper->field_disaster_type->value();
-    $term_names[$disaster_type->tid] = $disaster_type->name;
-
-    $by_disaster_type[$disaster_type->tid]++;
 
     $country = NULL; // first country found in response's related geographic_region nodes
     $top_region = NULL; // top region (one that doesn't have a parent) for the response
@@ -63,24 +287,30 @@ function _cluster_home_dashboard_data() {
       }
     }
 
-    if (!is_null($top_region)) {
-      $node_names[$top_region->nid] = $top_region->title;
-      $by_region[$top_region->nid]++;
+    if (is_null($country) || is_null($top_region)) {
+      continue;
     }
 
-    if (!is_null($country)) {
-      $node_names[$country->nid] = $country->title;
-      if (!isset($countries[$country->nid])) {
-        $countries[$country->nid] = [
-          'people_targeted_shelter' => 0,
-          'people_reached_shelter' => 0,
-          'people_targeted_nfi' => 0,
-          'people_reached_nfi' => 0,
-          'funding_required' => 0,
-          'funding_received' => 0,
-        ];
-      }
+    $count_all_active++;
+
+    $node_names[$top_region->nid] = $top_region->title;
+    $by_region[$top_region->nid]++;
+
+    $node_names[$country->nid] = $country->title;
+    if (!isset($countries[$country->nid])) {
+      $countries[$country->nid] = [
+        'people_targeted_shelter' => 0,
+        'people_reached_shelter' => 0,
+        'people_targeted_nfi' => 0,
+        'people_reached_nfi' => 0,
+        'funding_required' => 0,
+        'funding_received' => 0,
+      ];
     }
+
+    $disaster_type = $wrapper->field_disaster_type->value();
+    $term_names[$disaster_type->tid] = $disaster_type->name;
+    $by_disaster_type[$disaster_type->tid]++;
 
     $factsheet = cluster_factsheets_last_published_for_group($response);
     if ($factsheet) {
@@ -114,14 +344,12 @@ function _cluster_home_dashboard_data() {
         $fs_people_reached_nfi += $fs_data['cat']['nfi']['reached'];
       }
 
-      if (!is_null($country)) {
-        $countries[$country->nid]['people_targeted_shelter'] += $fs_people_targeted_shelter;
-        $countries[$country->nid]['people_reached_shelter'] += $fs_people_reached_shelter;
-        $countries[$country->nid]['people_targeted_nfi'] += $fs_people_targeted_nfi;
-        $countries[$country->nid]['people_reached_nfi'] += $fs_people_reached_nfi;
-        $countries[$country->nid]['funding_required'] += $fs_funding_required;
-        $countries[$country->nid]['funding_received'] += $fs_funding_received;
-      }
+      $countries[$country->nid]['people_targeted_shelter'] += $fs_people_targeted_shelter;
+      $countries[$country->nid]['people_reached_shelter'] += $fs_people_reached_shelter;
+      $countries[$country->nid]['people_targeted_nfi'] += $fs_people_targeted_nfi;
+      $countries[$country->nid]['people_reached_nfi'] += $fs_people_reached_nfi;
+      $countries[$country->nid]['funding_required'] += $fs_funding_required;
+      $countries[$country->nid]['funding_received'] += $fs_funding_received;
 
       $people_supported_shelter += $fs_people_reached_shelter;
       $people_supported_nfi += $fs_people_reached_nfi;
@@ -129,7 +357,7 @@ function _cluster_home_dashboard_data() {
   }
 
   // Remove countries without any data
-  $countries = array_filter($countries, function($c) {
+  $countries = array_filter($countries, function ($c) {
     return array_filter($c); // if all values are 0, removes the country from the list
   });
 
@@ -137,7 +365,7 @@ function _cluster_home_dashboard_data() {
     'node_names' => $node_names,
     'term_names' => $term_names,
 
-    'count_all_active' => count($responses),
+    'count_all_active' => $count_all_active,
     'partners' => $partners,
     'funding_received' => $funding_received,
     'people_supported' => $people_supported,

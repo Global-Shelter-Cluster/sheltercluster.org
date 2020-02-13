@@ -3287,6 +3287,74 @@ div.addressfield-container-inline::after {
     display: none;
   }
 }
+.home-dashboard {
+  display: grid;
+  grid-template-areas: "header header header header header header" "figure1 figure1 figure2 figure2 figure3 figure3" ". pie1 pie1 pie2 pie2 ." "bar1 bar1 bar2 bar2 bar3 bar3";
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-gap: 1rem;
+  text-align: center;
+}
+.home-dashboard .header {
+  grid-area: header;
+}
+.home-dashboard .active-clusters {
+  grid-area: figure1;
+}
+.home-dashboard .people-supported {
+  grid-area: figure2;
+}
+.home-dashboard .partners {
+  grid-area: figure3;
+}
+.home-dashboard .by-region {
+  grid-area: pie1;
+}
+.home-dashboard .by-region .cluster-chart-wrapper {
+  height: 190px;
+}
+.home-dashboard .by-disaster-type {
+  grid-area: pie2;
+}
+.home-dashboard .by-disaster-type .cluster-chart-wrapper {
+  height: 190px;
+}
+.home-dashboard .by-country-shelter {
+  grid-area: bar1;
+}
+.home-dashboard .by-country-shelter .cluster-chart-wrapper {
+  height: 430px;
+}
+.home-dashboard .by-country-nfi {
+  grid-area: bar2;
+}
+.home-dashboard .by-country-nfi .cluster-chart-wrapper {
+  height: 430px;
+}
+.home-dashboard .by-country-funding {
+  grid-area: bar3;
+}
+.home-dashboard .by-country-funding .cluster-chart-wrapper {
+  height: 430px;
+}
+.home-dashboard small {
+  font-weight: normal;
+  font-style: italic;
+}
+.home-dashboard .header p {
+  margin-top: -1em;
+  color: #575757;
+}
+.home-dashboard h4 {
+  font-weight: normal;
+  margin-bottom: 1em;
+}
+.home-dashboard .big-figure {
+  display: block;
+  font-size: 32px;
+  font-size: 2rem;
+  margin-bottom: 1em;
+}
+
 .page-user .form-text {
   float: none;
   margin-bottom: 8px;

@@ -9,8 +9,24 @@ const CLUSTER_CHART_COLOR_SHELTER_DARK_BLUE = '#688394';
 //Shelter chart guidelines colors
 const CLUSTER_CHART_COLOR_ACCENT_YELLOW = 'rgba(255,177,0,1)';
 const CLUSTER_CHART_COLOR_ACCENT_GREEN = 'rgb(101,182,48)';
+const CLUSTER_CHART_COLOR_ACCENT_GREEN_SHADE = 'rgba(101,182,48,.5)';
 const CLUSTER_CHART_COLOR_ACCENT_RED = 'rgb(252,0,0)';
+const CLUSTER_CHART_COLOR_ACCENT_RED_x5 = 'rgba(252,0,0,1)
+rgba(252,0,0,.8)
+rgba(252,0,0,.6)
+rgba(252,0,0,.4)
+rgba(252,0,0,.2)';
 const CLUSTER_CHART_COLOR_ACCENT_BLUE = 'rgb(22,135,203)';
+const CLUSTER_CHART_COLOR_ACCENT_BLUE_x10 = 'rgba(22,135,203,1)
+rgba(22,135,203,.9)
+rgba(22,135,203,.8)
+rgba(22,135,203,.7)
+rgba(22,135,203,.6)
+rgba(22,135,203,.5)
+rgba(22,135,203,.4)
+rgba(22,135,203,.3)
+rgba(22,135,203,.2)
+rgba(22,135,203,.1)';
 const CLUSTER_CHART_COLOR_ACCENT_DARK_BLUE = 'rgb(4,49,76)';
 
 // Shades
