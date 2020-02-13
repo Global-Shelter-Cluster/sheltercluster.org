@@ -1,0 +1,88 @@
+.home-dashboard {
+  display: grid;
+  grid-template-areas: "header header header header header header"
+  "figure1 figure1 figure2 figure2 figure3 figure3"
+  ". pie1 pie1 pie2 pie2 ."
+  "bar1 bar1 bar2 bar2 bar3 bar3";
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-gap: 1rem;
+
+  text-align: center;
+
+  .header {
+    grid-area: header;
+  }
+
+  .active-clusters {
+    grid-area: figure1;
+  }
+
+  .people-supported {
+    grid-area: figure2;
+  }
+
+  .partners {
+    grid-area: figure3;
+  }
+
+  .by-region {
+    grid-area: pie1;
+
+    .cluster-chart-wrapper {
+      height: 190px;
+    }
+  }
+
+  .by-disaster-type {
+    grid-area: pie2;
+
+    .cluster-chart-wrapper {
+      height: 190px;
+    }
+  }
+
+  .by-country-shelter {
+    grid-area: bar1;
+
+    .cluster-chart-wrapper {
+      height: 430px;
+    }
+  }
+
+  .by-country-nfi {
+    grid-area: bar2;
+
+    .cluster-chart-wrapper {
+      height: 430px;
+    }
+  }
+
+  .by-country-funding {
+    grid-area: bar3;
+
+    .cluster-chart-wrapper {
+      height: 430px;
+    }
+  }
+
+  small {
+    font-weight: normal;
+    font-style: italic;
+  }
+
+  .header p {
+    margin-top: -1em;
+    color: $shelter-grey;
+  }
+
+  h4 {
+    font-weight: normal;
+    margin-bottom: 1em;
+  }
+
+  .big-figure {
+    display: block;
+    @include rem(font-size, 2rem);
+    margin-bottom: 1em;
+  }
+}

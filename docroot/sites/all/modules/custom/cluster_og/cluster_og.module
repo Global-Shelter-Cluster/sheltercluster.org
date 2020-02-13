@@ -9,6 +9,9 @@ include_once 'cluster_og.pathauto.inc';
 
 const MAX_FOLLOWED_GROUPS = 10;
 
+const TAXONOMY_TERM_TID_COUNTRY = 135;
+const TAXONOMY_TERM_TID_REGION = 136;
+
 /**
  *  Implements hook_entity_info_alter().
  */
