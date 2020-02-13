@@ -5,3 +5,171 @@
  */
 
 include_once 'cluster_home.features.inc';
+
+function _cluster_home_active_responses() {
+  $query = new EntityFieldQuery();
+  $result = $query
+    ->entityCondition('entity_type', 'node')
+    ->entityCondition('bundle', 'response')
+    ->propertyCondition('status', NODE_PUBLISHED)
+    ->fieldCondition('field_response_status', 'value', 'active')
+    ->execute();
+
+  return isset($result['node'])
+    ? array_keys($result['node'])
+    : [];
+}
+
+function _cluster_home_dashboard_data() {
+  $node_names = []; // [nid] => [string]
+  $term_names = []; // [tid] => [string]
+
+  $responses = node_load_multiple(_cluster_home_active_responses());
+
+  $by_disaster_type = [];
+  $by_region = [];
+  $factsheets = []; // [response nid] => [factsheet data]
+  $people_supported = 0;
+  $people_supported_shelter = 0;
+  $people_supported_nfi = 0;
+  $partners = 0;
+  $funding_received = 0;
+  $countries = []; // [region nid] => (various values, see below)
+
+  foreach ($responses as $response) {
+    $wrapper = entity_metadata_wrapper('node', $response);
+
+    $disaster_type = $wrapper->field_disaster_type->value();
+    $term_names[$disaster_type->tid] = $disaster_type->name;
+
+    $by_disaster_type[$disaster_type->tid]++;
+
+    $country = NULL; // first country found in response's related geographic_region nodes
+    $top_region = NULL; // top region (one that doesn't have a parent) for the response
+
+    foreach ($wrapper->field_associated_regions as $item) {
+      $region = $item->value();
+
+      if (is_null($country) && _cluster_home_is_country($region)) {
+        $country = $region;
+      }
+
+      if (is_null($top_region)) {
+        $top_region = _cluster_home_find_top_region($region);
+      }
+
+      if (!is_null($country) && !is_null($top_region)) {
+        break;
+      }
+    }
+
+    if (!is_null($top_region)) {
+      $node_names[$top_region->nid] = $top_region->title;
+      $by_region[$top_region->nid]++;
+    }
+
+    if (!is_null($country)) {
+      $node_names[$country->nid] = $country->title;
+      if (!isset($countries[$country->nid])) {
+        $countries[$country->nid] = [
+          'people_targeted_shelter' => 0,
+          'people_reached_shelter' => 0,
+          'people_targeted_nfi' => 0,
+          'people_reached_nfi' => 0,
+          'funding_required' => 0,
+          'funding_received' => 0,
+        ];
+      }
+    }
+
+    $factsheet = cluster_factsheets_last_published_for_group($response);
+    if ($factsheet) {
+      $fs_data = cluster_factsheets_structured_data($factsheet);
+      $factsheets[$response->nid] = $fs_data;
+
+      $partners += $fs_data['partners'];
+      $fs_funding_required = $fs_data['funding']['required'];
+      $fs_funding_received = $fs_data['funding']['funded'];
+      $funding_received += $fs_funding_received;
+      $people_supported += $fs_data['people']['targeted'];
+
+      $fs_people_targeted_shelter = 0;
+      $fs_people_reached_shelter = 0;
+      $fs_people_targeted_nfi = 0;
+      $fs_people_reached_nfi = 0;
+      if (isset($fs_data['cat']['emergency'])) {
+        $fs_people_targeted_shelter += $fs_data['cat']['emergency']['targeted'];
+        $fs_people_reached_shelter += $fs_data['cat']['emergency']['reached'];
+      }
+      if (isset($fs_data['cat']['permanent'])) {
+        $fs_people_targeted_shelter += $fs_data['cat']['permanent']['targeted'];
+        $fs_people_reached_shelter += $fs_data['cat']['permanent']['reached'];
+      }
+      if (isset($fs_data['cat']['shelter'])) {
+        $fs_people_targeted_shelter += $fs_data['cat']['shelter']['targeted'];
+        $fs_people_reached_shelter += $fs_data['cat']['shelter']['reached'];
+      }
+      if (isset($fs_data['cat']['nfi'])) {
+        $fs_people_targeted_nfi += $fs_data['cat']['nfi']['targeted'];
+        $fs_people_reached_nfi += $fs_data['cat']['nfi']['reached'];
+      }
+
+      if (!is_null($country)) {
+        $countries[$country->nid]['people_targeted_shelter'] += $fs_people_targeted_shelter;
+        $countries[$country->nid]['people_reached_shelter'] += $fs_people_reached_shelter;
+        $countries[$country->nid]['people_targeted_nfi'] += $fs_people_targeted_nfi;
+        $countries[$country->nid]['people_reached_nfi'] += $fs_people_reached_nfi;
+        $countries[$country->nid]['funding_required'] += $fs_funding_required;
+        $countries[$country->nid]['funding_received'] += $fs_funding_received;
+      }
+
+      $people_supported_shelter += $fs_people_reached_shelter;
+      $people_supported_nfi += $fs_people_reached_nfi;
+    }
+  }
+
+  // Remove countries without any data
+  $countries = array_filter($countries, function($c) {
+    return array_filter($c); // if all values are 0, removes the country from the list
+  });
+
+  return [
+    'node_names' => $node_names,
+    'term_names' => $term_names,
+
+    'count_all_active' => count($responses),
+    'partners' => $partners,
+    'funding_received' => $funding_received,
+    'people_supported' => $people_supported,
+    'people_supported_shelter' => $people_supported_shelter,
+    'people_supported_nfi' => $people_supported_nfi,
+
+    // keys are tids, values are counts (int)
+    'count_by_disaster_type' => $by_disaster_type,
+
+    // keys are nids, values are counts (int)
+    'count_by_region' => $by_region,
+
+    'countries' => $countries,
+  ];
+}
+
+function _cluster_home_is_country($node) {
+  return
+    is_array($node->field_geographic_region_type)
+    && isset($node->field_geographic_region_type[LANGUAGE_NONE])
+    && isset($node->field_geographic_region_type[LANGUAGE_NONE][0])
+    && isset($node->field_geographic_region_type[LANGUAGE_NONE][0]['tid'])
+    && $node->field_geographic_region_type[LANGUAGE_NONE][0]['tid'] == TAXONOMY_TERM_TID_COUNTRY;
+}
+
+function _cluster_home_find_top_region($node) {
+  $wrapper = entity_metadata_wrapper('node', $node);
+
+  $parent = $wrapper->field_parent_region->value();
+  if ($parent) {
+    return _cluster_home_find_top_region($parent);
+  }
+
+  return _cluster_home_is_country($node) ? NULL : $node;
+}
