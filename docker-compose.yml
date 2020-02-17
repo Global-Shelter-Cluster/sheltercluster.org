@@ -52,7 +52,7 @@ services:
       SERVICE_TAGS: dev
       SERVICE_NAME: mysql
     volumes:
-      - sheltercluster_dbdata:/var/lib/mysql/
+      - sheltercluster_dbdata:/var/lib/mysql
       - ./docker/mysql/my.cnf:/etc/mysql/my.cnf
     networks:
       - sheltercluster_network
