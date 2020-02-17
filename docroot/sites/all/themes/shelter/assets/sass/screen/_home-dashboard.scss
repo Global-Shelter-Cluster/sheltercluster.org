@@ -1,77 +1,66 @@
 .home-dashboard {
-  display: grid;
-  grid-template-areas: "header header header header header header"
-  "figure1 figure1 figure2 figure2 figure3 figure3"
-  ". pie1 pie1 pie2 pie2 ."
-  "bar1 bar1 bar2 bar2 bar3 bar3";
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
-  grid-gap: 1rem;
-
   text-align: center;
 
-  .header {
-    grid-area: header;
-  }
-
-  .active-clusters {
-    grid-area: figure1;
-  }
-
-  .people-supported {
-    grid-area: figure2;
-  }
-
-  .partners {
-    grid-area: figure3;
-  }
-
-  .by-region {
-    grid-area: pie1;
-
-    .cluster-chart-wrapper {
-      height: 190px;
+  .row-figures {
+    margin: 2em 0;
+    @include mobile {
+      p {
+        text-align: right;
+        width: 50%;
+        float: left;
+        clear: left;
+      }
+      .big-figure {
+        margin-left: 1em;
+        float: left;
+      }
+    }
+    @include tablet {
+      display: flex;
+      > * {
+        flex: 1;
+      }
     }
   }
 
-  .by-disaster-type {
-    grid-area: pie2;
+  .row-pies {
+    margin: 2em 0;
 
-    .cluster-chart-wrapper {
-      height: 190px;
+    @include tablet {
+      > * {
+        float: left;
+        width: 50%;
+      }
     }
   }
 
-  .by-country-shelter {
-    grid-area: bar1;
+  .row-bars {
+    margin: 2em 0;
+
+    @include tablet {
+      > * {
+        float: left;
+        width: 33%;
+      }
+    }
 
     .cluster-chart-wrapper {
-      height: 430px;
+      height: 350px;
     }
   }
 
-  .by-country-nfi {
-    grid-area: bar2;
-
-    .cluster-chart-wrapper {
-      height: 430px;
-    }
-  }
-
-  .by-country-funding {
-    grid-area: bar3;
-
-    .cluster-chart-wrapper {
-      height: 430px;
-    }
+  .footer {
+    clear: both;
   }
 
   small {
     font-weight: normal;
     font-style: italic;
+    color: $shelter-grey;
   }
 
   .header p {
-    margin-top: -1em;
+    margin-top: -.5em;
     color: $shelter-grey;
   }
 

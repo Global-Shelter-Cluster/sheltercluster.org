@@ -12,7 +12,7 @@ include_once 'cluster_home.features.inc';
 function cluster_home_menu() {
   $items['new-dashboard-temp'] = [
     'title' => 'Temporary homepage dashboard',
-    'page callback' => 'cluster_home_dashboard_temp',
+    'page callback' => 'cluster_home_dashboard',
     'access arguments' => ['administer site configuration'],
     'type' => MENU_CALLBACK,
   ];
@@ -20,7 +20,7 @@ function cluster_home_menu() {
   return $items;
 }
 
-function cluster_home_dashboard_temp() {
+function cluster_home_dashboard() {
   $data = _cluster_home_dashboard_data();
 
   $by_region_data = $data['count_by_region'];
@@ -39,10 +39,10 @@ function cluster_home_dashboard_temp() {
     ],
     '#labels' => $by_region_data_labels,
     '#options' => [
-      'legend' => ['display' => FALSE],
+//      'legend' => ['display' => FALSE],
       //      'maintainAspectRatio' => FALSE,
       'pieceLabel' => [
-        'render' => $by_region_data_labels,
+        'render' => $by_region_data_values,
         'fontColor' => 'white',
       ],
     ],
@@ -64,10 +64,10 @@ function cluster_home_dashboard_temp() {
     ],
     '#labels' => $by_disaster_type_data_labels,
     '#options' => [
-      'legend' => ['display' => FALSE],
+//      'legend' => ['display' => FALSE],
       //      'maintainAspectRatio' => FALSE,
       'pieceLabel' => [
-        'render' => $by_disaster_type_data_labels,
+        'render' => $by_disaster_type_data_values,
         'fontColor' => 'white',
       ],
     ],
@@ -106,7 +106,7 @@ function cluster_home_dashboard_temp() {
         'xAxes' => [
           [
             'stacked' => TRUE,
-            'ticks' => ['beginAtZero' => TRUE],
+            'ticks' => ['beginAtZero' => TRUE, 'callback' => '[M]'],
           ],
         ],
         'yAxes' => [['stacked' => TRUE]],
@@ -147,7 +147,7 @@ function cluster_home_dashboard_temp() {
         'xAxes' => [
           [
             'stacked' => TRUE,
-            'ticks' => ['beginAtZero' => TRUE],
+            'ticks' => ['beginAtZero' => TRUE, 'callback' => '[M]'],
           ],
         ],
         'yAxes' => [['stacked' => TRUE]],
@@ -188,7 +188,7 @@ function cluster_home_dashboard_temp() {
         'xAxes' => [
           [
             'stacked' => TRUE,
-            'ticks' => ['beginAtZero' => TRUE],
+            'ticks' => ['beginAtZero' => TRUE, 'callback' => '[M]'],
           ],
         ],
         'yAxes' => [['stacked' => TRUE]],
