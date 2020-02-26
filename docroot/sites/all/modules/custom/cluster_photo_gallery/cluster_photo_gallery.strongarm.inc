@@ -104,17 +104,14 @@ function cluster_photo_gallery_strongarm() {
       'token' => array(
         'custom_settings' => FALSE,
       ),
-      'print' => array(
-        'custom_settings' => FALSE,
-      ),
     ),
     'extra_fields' => array(
       'form' => array(
         'path' => array(
-          'weight' => '3',
+          'weight' => '30',
         ),
         'redirect' => array(
-          'weight' => '2',
+          'weight' => '30',
         ),
       ),
       'display' => array(),

@@ -162,21 +162,6 @@ function cluster_libraries_strongarm() {
       'ical' => array(
         'custom_settings' => TRUE,
       ),
-      'factsheet_summary' => array(
-        'custom_settings' => FALSE,
-      ),
-      'factsheet_homepage_teaser' => array(
-        'custom_settings' => FALSE,
-      ),
-      'factsheet_preview_block' => array(
-        'custom_settings' => FALSE,
-      ),
-      'preview_block' => array(
-        'custom_settings' => FALSE,
-      ),
-      'print' => array(
-        'custom_settings' => FALSE,
-      ),
     ),
     'extra_fields' => array(
       'form' => array(
@@ -187,7 +172,7 @@ function cluster_libraries_strongarm() {
           'weight' => '2',
         ),
         'redirect' => array(
-          'weight' => '8',
+          'weight' => '7',
         ),
       ),
       'display' => array(),
@@ -231,21 +216,6 @@ function cluster_libraries_strongarm() {
       'ical' => array(
         'custom_settings' => TRUE,
       ),
-      'factsheet_summary' => array(
-        'custom_settings' => FALSE,
-      ),
-      'factsheet_homepage_teaser' => array(
-        'custom_settings' => FALSE,
-      ),
-      'factsheet_preview_block' => array(
-        'custom_settings' => FALSE,
-      ),
-      'preview_block' => array(
-        'custom_settings' => FALSE,
-      ),
-      'print' => array(
-        'custom_settings' => FALSE,
-      ),
     ),
     'extra_fields' => array(
       'form' => array(
@@ -253,13 +223,13 @@ function cluster_libraries_strongarm() {
           'weight' => '0',
         ),
         'path' => array(
-          'weight' => '3',
+          'weight' => '2',
         ),
         'language' => array(
           'weight' => '3',
         ),
         'redirect' => array(
-          'weight' => '26',
+          'weight' => '25',
         ),
       ),
       'display' => array(),
