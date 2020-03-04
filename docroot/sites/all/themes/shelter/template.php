@@ -11,6 +11,8 @@ require_once dirname(__FILE__) . '/includes/shelter.helpers.inc';
  * Implements hook_preprocess_page().
  */
 function shelter_preprocess_html(&$variables) {
+  if (arg(0) === 'new-dashboard-temp')
+    $variables['classes_array'][] = 'front';
 
   // Adding Roboto Google Font Normal 400 and Bold 700
   drupal_add_css('//fonts.googleapis.com/css?family=Roboto:700,400', array('group' => CSS_THEME));
@@ -20,6 +22,9 @@ function shelter_preprocess_html(&$variables) {
  * Implements hook_preprocess_page().
  */
 function shelter_preprocess_page(&$variables) {
+  if (arg(0) === 'new-dashboard-temp')
+    $variables['is_front'] = TRUE;
+
   // Font Awesome (icon library)
   drupal_add_js('https://use.fontawesome.com/releases/v5.0.0/js/all.js', 'external');
 

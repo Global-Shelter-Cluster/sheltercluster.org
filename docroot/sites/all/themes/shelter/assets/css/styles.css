@@ -3312,60 +3312,62 @@ div.addressfield-container-inline::after {
   }
 }
 .home-dashboard {
-  display: grid;
-  grid-template-areas: "header header header header header header" "figure1 figure1 figure2 figure2 figure3 figure3" ". pie1 pie1 pie2 pie2 ." "bar1 bar1 bar2 bar2 bar3 bar3";
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
-  grid-gap: 1rem;
   text-align: center;
 }
-.home-dashboard .header {
-  grid-area: header;
+.home-dashboard .row-figures {
+  margin: 2em 0;
 }
-.home-dashboard .active-clusters {
-  grid-area: figure1;
+@media screen and (max-width: 400px) {
+  .home-dashboard .row-figures p {
+    text-align: right;
+    width: 50%;
+    float: left;
+    clear: left;
+  }
+  .home-dashboard .row-figures .big-figure {
+    margin-left: 1em;
+    float: left;
+  }
 }
-.home-dashboard .people-supported {
-  grid-area: figure2;
+@media screen and (min-width: 401px) {
+  .home-dashboard .row-figures {
+    display: flex;
+  }
+  .home-dashboard .row-figures > * {
+    flex: 1;
+  }
 }
-.home-dashboard .partners {
-  grid-area: figure3;
+.home-dashboard .row-pies {
+  margin: 2em 0;
 }
-.home-dashboard .by-region {
-  grid-area: pie1;
+@media screen and (min-width: 401px) {
+  .home-dashboard .row-pies > * {
+    float: left;
+    width: 50%;
+  }
 }
-.home-dashboard .by-region .cluster-chart-wrapper {
-  height: 190px;
+.home-dashboard .row-bars {
+  margin: 2em 0;
 }
-.home-dashboard .by-disaster-type {
-  grid-area: pie2;
+@media screen and (min-width: 401px) {
+  .home-dashboard .row-bars > * {
+    float: left;
+    width: 33%;
+  }
 }
-.home-dashboard .by-disaster-type .cluster-chart-wrapper {
-  height: 190px;
+.home-dashboard .row-bars .cluster-chart-wrapper {
+  height: 350px;
 }
-.home-dashboard .by-country-shelter {
-  grid-area: bar1;
-}
-.home-dashboard .by-country-shelter .cluster-chart-wrapper {
-  height: 430px;
-}
-.home-dashboard .by-country-nfi {
-  grid-area: bar2;
-}
-.home-dashboard .by-country-nfi .cluster-chart-wrapper {
-  height: 430px;
-}
-.home-dashboard .by-country-funding {
-  grid-area: bar3;
-}
-.home-dashboard .by-country-funding .cluster-chart-wrapper {
-  height: 430px;
+.home-dashboard .footer {
+  clear: both;
 }
 .home-dashboard small {
   font-weight: normal;
   font-style: italic;
+  color: #575757;
 }
 .home-dashboard .header p {
-  margin-top: -1em;
+  margin-top: -.5em;
   color: #575757;
 }
 .home-dashboard h4 {

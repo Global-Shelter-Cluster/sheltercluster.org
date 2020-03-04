@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Cluster Docs Import feature.
+ */
+
+include_once 'cluster_docs_import.features.inc';

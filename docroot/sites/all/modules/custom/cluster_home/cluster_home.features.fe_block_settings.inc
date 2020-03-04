@@ -18,7 +18,8 @@ function cluster_home_default_fe_block_settings() {
     'delta' => 'homepage2-block_1',
     'module' => 'views',
     'node_types' => array(),
-    'pages' => '<front>',
+    'pages' => '<front>
+new-dashboard-temp',
     'roles' => array(),
     'themes' => array(
       'bartik' => array(
