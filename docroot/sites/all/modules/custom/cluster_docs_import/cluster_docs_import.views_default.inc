@@ -61,6 +61,13 @@ function cluster_docs_import_views_default_views() {
   $handler->display->display_options['fields']['field_language']['id'] = 'field_language';
   $handler->display->display_options['fields']['field_language']['table'] = 'field_data_field_language';
   $handler->display->display_options['fields']['field_language']['field'] = 'field_language';
+  $handler->display->display_options['fields']['field_language']['settings'] = array(
+    'format' => array(
+      'iso' => 'iso',
+      'name' => 0,
+      'name_native' => 0,
+    ),
+  );
   /* Field: Content: Report / Meeting date */
   $handler->display->display_options['fields']['field_report_meeting_date']['id'] = 'field_report_meeting_date';
   $handler->display->display_options['fields']['field_report_meeting_date']['table'] = 'field_data_field_report_meeting_date';
@@ -157,10 +164,12 @@ function cluster_docs_import_views_default_views() {
   $handler->display->display_options['fields']['field_key_document']['id'] = 'field_key_document';
   $handler->display->display_options['fields']['field_key_document']['table'] = 'field_data_field_key_document';
   $handler->display->display_options['fields']['field_key_document']['field'] = 'field_key_document';
+  $handler->display->display_options['fields']['field_key_document']['type'] = 'list_key';
   /* Field: Content: Featured document */
   $handler->display->display_options['fields']['field_featured']['id'] = 'field_featured';
   $handler->display->display_options['fields']['field_featured']['table'] = 'field_data_field_featured';
   $handler->display->display_options['fields']['field_featured']['field'] = 'field_featured';
+  $handler->display->display_options['fields']['field_featured']['type'] = 'list_key';
   /* Field: Content: Expire featured setting */
   $handler->display->display_options['fields']['field_featured_date']['id'] = 'field_featured_date';
   $handler->display->display_options['fields']['field_featured_date']['table'] = 'field_data_field_featured_date';
@@ -186,6 +195,7 @@ function cluster_docs_import_views_default_views() {
     'bypass_access' => 0,
     'link' => 0,
   );
+  $handler->display->display_options['fields']['og_group_ref']['delta_limit'] = '1';
   $handler->display->display_options['fields']['og_group_ref']['delta_offset'] = '0';
   /* Field: Content: Document status */
   $handler->display->display_options['fields']['field_document_status']['id'] = 'field_document_status';
