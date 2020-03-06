@@ -16,7 +16,7 @@ function cluster_docs_import_feeds_importer_default() {
   $feeds_importer->id = 'documents';
   $feeds_importer->config = array(
     'name' => 'Documents',
-    'description' => '',
+    'description' => 'IMPORTANT: User needs to be a member of each group referenced by the documents being imported',
     'fetcher' => array(
       'plugin_key' => 'FeedsFileFetcher',
       'config' => array(
