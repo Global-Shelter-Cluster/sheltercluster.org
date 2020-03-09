@@ -318,3 +318,16 @@ function cluster_user_user_insert(&$edit, $account, $category) {
     cluster_og_follow($account, node_load($global_id));
   }
 }
+
+/**
+ * Implements hook_user_cancel_methods_alter().
+ */
+function cluster_user_user_cancel_methods_alter(&$methods) {
+  if (isset($methods['user_cancel_delete']))
+    // For this site we never want to bulk-delete all the content created by a user.
+    unset($methods['user_cancel_delete']);
+
+  if (isset($methods['user_cancel_block_unpublish']))
+    // Let's disallow the method that bulk-unpublishes the content too.
+    unset($methods['user_cancel_block_unpublish']);
+}
