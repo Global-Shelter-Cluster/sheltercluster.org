@@ -3232,17 +3232,13 @@ div.addressfield-container-inline::after {
 .front .view-homepage2 {
   margin-top: 41px;
 }
+.front .view-homepage2 .view-content {
+  display: grid;
+  grid-gap: 10px;
+  grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
+}
 .front .view-homepage2 .views-row {
   position: relative;
-}
-@media screen and (min-width: 769px) {
-  .front .view-homepage2 .views-row {
-    float: right;
-    width: 49%;
-  }
-}
-.front .view-homepage2 .views-row:first-child {
-  float: left;
 }
 .front .view-homepage2 .views-row img {
   width: 100%;
@@ -3288,11 +3284,12 @@ div.addressfield-container-inline::after {
   .front .main-column {
     padding-top: 0;
   }
-
-  #block-views-homepage2-block-1 > .content {
-    padding-bottom: 0;
-  }
 }
+#block-views-homepage2-block-1 > .content {
+  padding-bottom: 0;
+  min-height: 0;
+}
+
 .front .twitter-timeline-sidebar {
   display: none;
 }
