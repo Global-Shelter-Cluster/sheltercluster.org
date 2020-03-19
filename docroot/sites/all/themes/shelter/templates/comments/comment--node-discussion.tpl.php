@@ -1,13 +1,12 @@
 <?php
-
 /**
  * @file
  * Default theme implementation for comments.
  *
  * Available variables:
  * - $author: Comment author. Can be link or plain text.
- * - $content: An array of comment items. Use render($content) to print them all, or
- *   print a subset such as render($content['field_example']). Use
+ * - $content: An array of comment items. Use render($content) to print them
+ *   all, or print a subset such as render($content['field_example']). Use
  *   hide($content['field_example']) to temporarily suppress the printing of a
  *   given element.
  * - $created: Formatted date and time for when the comment was created.
@@ -18,7 +17,8 @@
  *   desired parameters on the $comment->changed variable.
  * - $new: New comment marker.
  * - $permalink: Comment permalink.
- * - $submitted: Submission information created from $author and $created during
+ * - $submitted: Submission information created from $author and $created
+ *   during
  *   template_preprocess_comment().
  * - $picture: Authors picture.
  * - $signature: Authors signature.
@@ -27,13 +27,15 @@
  * - $title: Linked title.
  * - $classes: String of classes that can be used to style contextually through
  *   CSS. It can be manipulated through the variable $classes_array from
- *   preprocess functions. The default values can be one or more of the following:
+ *   preprocess functions. The default values can be one or more of the
+ *   following:
  *   - comment: The current template type, i.e., "theming hook".
  *   - comment-by-anonymous: Comment by an unregistered user.
  *   - comment-by-node-author: Comment by the author of the parent node.
  *   - comment-preview: When previewing a new or edited comment.
  *   The following applies only to viewers who are registered users:
- *   - comment-unpublished: An unpublished comment visible only to administrators.
+ *   - comment-unpublished: An unpublished comment visible only to
+ *   administrators.
  *   - comment-by-viewer: Comment by the user currently viewing the page.
  *   - comment-new: New comment since last the visit.
  * - $title_prefix (array): An array containing additional output populated by
@@ -59,32 +61,28 @@
  * @ingroup themeable
  */
 ?>
-<div class="<?php print $classes; ?> clearfix"<?php print $attributes; ?>>
-  <?php print $picture ?>
-
-  <?php if ($new): ?>
-    <span class="new"><?php print $new ?></span>
-  <?php endif; ?>
-
-  <?php print render($title_prefix); ?>
-  <span<?php print $title_attributes; ?>><?php print $title ?></span>
-  <?php print render($title_suffix); ?>
+<article class="<?php print $classes; ?> clearfix"<?php print $attributes; ?>>
+  <header>
+    <?php print $author; ?>
+    &middot;
+    <?php print $created; // preg_replace('/content="([^"]+)"/', '$0 title="$1"', $created); ?>
+    <?php if ($new): ?>
+      <i class="is-new fa fa-star" title="<?php print t('New'); ?>"></i>
+    <?php endif; ?>
+    <?php print render($content['links']) ?>
+  </header>
 
   <div class="content"<?php print $content_attributes; ?>>
     <?php
-      // We hide the comments and links now so that we can render them later.
-      hide($content['links']);
-      print render($content);
+    // We hide the comments and links now so that we can render them later.
+    hide($content['links']);
+    print render($content);
     ?>
     <?php if ($signature): ?>
-    <div class="user-signature clearfix">
-      <?php print $signature ?>
-    </div>
+      <div class="user-signature clearfix">
+        <?php print $signature ?>
+      </div>
     <?php endif; ?>
   </div>
 
-  <div class="submitted">
-    <?php print $submitted; ?>
-  </div>
-  <?php print render($content['links']) ?>
-</div>
+</article>
