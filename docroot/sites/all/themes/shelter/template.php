@@ -181,7 +181,18 @@ function shelter_preprocess_node(&$variables) {
   $variables['edit_link'] = FALSE;
   // Add an edit link users having the appropriate permission.
   if (node_access('update', $node)) {
-    $variables['edit_link'] = l(t('Edit'), 'node/' . $node->nid . '/edit', array('attributes' => array('class' => array('edit-link'))));
+    switch ($node->type) {
+      case 'discussion':
+        $variables['edit_link'] = l('<i class="fa fa-edit" title="' . t('Edit') . '"></i>', 'node/' . $node->nid . '/edit', [
+            'html' => TRUE,
+            'attributes' => ['class' => ['edit-link']],
+          ]
+        );
+        break;
+
+      default:
+        $variables['edit_link'] = l(t('Edit'), 'node/' . $node->nid . '/edit', ['attributes' => ['class' => ['edit-link']]]);
+    }
   }
   $view_mode = $variables['view_mode'];
   $is_group = og_is_group('node', $node);

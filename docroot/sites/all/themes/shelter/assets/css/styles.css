@@ -2438,6 +2438,9 @@ label[for="mobile_menu_toggle"] span:after {
   background: #eee;
   padding: 5px;
 }
+.node-type-discussion article.node-discussion > .content > header svg {
+  margin-left: 5px;
+}
 .node-type-discussion article.node-discussion > .content > header a {
   color: #575757;
   text-decoration: none;
