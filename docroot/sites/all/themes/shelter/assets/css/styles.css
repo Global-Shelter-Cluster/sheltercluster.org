@@ -4781,6 +4781,16 @@ form .field-multiple-table .form-item {
 #comments > h2.title:first-child {
   display: none;
 }
+#comments :target {
+  content: '';
+  display: block;
+  height: 50px;
+  margin-top: -50px;
+  position: absolute;
+}
+#comments :target + article {
+  background-color: #ffffdd;
+}
 #comments article {
   border-top: 1px solid #eee;
   padding-top: 5px;

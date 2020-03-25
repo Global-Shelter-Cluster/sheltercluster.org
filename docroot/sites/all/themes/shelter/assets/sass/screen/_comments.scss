@@ -11,6 +11,18 @@
   padding-left: 10px;
   border-left: 2px solid $shelter-grey;
 
+  :target {
+    content: '';
+    display: block;
+    height: 50px;
+    margin-top: -50px;
+    position: absolute;
+
+    + article {
+      background-color: #ffffdd;
+    }
+  }
+
   article {
     border-top: 1px solid #eee;
     padding-top: 5px;

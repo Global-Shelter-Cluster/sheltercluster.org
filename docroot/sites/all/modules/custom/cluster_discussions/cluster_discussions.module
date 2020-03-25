@@ -105,7 +105,7 @@ function cluster_discussions_theme() {
       'render element' => 'element',
     ),
     'cluster_discussions_email' => [
-      'template' => 'email',
+      'template' => 'discussion-email',
       'variables' => [
         'langcode' => '',
         'logo' => '',
@@ -113,6 +113,19 @@ function cluster_discussions_theme() {
         'body' => '', // html string
         'group' => [],
         'node' => [],
+      ],
+      'path' => drupal_get_path('module', 'cluster_discussions') . '/templates',
+    ],
+    'cluster_discussions_email_comment' => [
+      'template' => 'comment-email',
+      'variables' => [
+        'langcode' => '',
+        'logo' => '',
+        'date' => '',
+        'body' => '', // html string
+        'group' => [],
+        'node' => [],
+        'comment' => [],
       ],
       'path' => drupal_get_path('module', 'cluster_discussions') . '/templates',
     ],
@@ -213,11 +226,13 @@ function cluster_discussions_comment_insert($comment) {
  * Implements hook_mail().
  */
 function cluster_discussions_mail($key, &$message, $params) {
-  if (!in_array($key, ['discussion', 'discussion_comments']))
+  if (!in_array($key, ['discussion', 'comment']))
     throw new Exception("Unknown key: ".$key);
 
+  $is_comment = $key === 'comment';
+
   $body = [
-    '#theme' => 'cluster_discussions_email',
+    '#theme' => $is_comment ? 'cluster_discussions_email_comment' : 'cluster_discussions_email',
     '#logo' => url('sites/all/themes/shelter/assets/svg/replacement/logo-global-shelter-cluster-4x.png', ['absolute' => TRUE]),
     '#langcode' => $params['langcode'],
     '#date' => $params['date'],
@@ -225,37 +240,45 @@ function cluster_discussions_mail($key, &$message, $params) {
     '#group' => $params['group'],
     '#node' => $params['node'],
   ];
+  if ($is_comment)
+    $body['#comment'] = $params['comment'];
 
-  // E.g. "Ecuador Earthquake 2016 (response)"
-  $group_name = cluster_api_group_notification_title($params['group'], $params['langcode']);
+//  // E.g. "Ecuador Earthquake 2016 (response)"
+//  $group_name = cluster_api_group_notification_title($params['group'], $params['langcode']);
+  $group_name = $params['group']->title;
 
-  $message['subject'] = $group_name . ' — ' . $params['node']->title;;
+  if ($is_comment)
+    $message['subject'] = 'Re: ' . $group_name . ' — ' . $params['node']->title;
+  else
+    $message['subject'] = $group_name . ' — ' . $params['node']->title;
   //  $message['subject'] = $params['node']->title;
-  $message['from_name'] = $group_name;
+  $message['from_name'] = $is_comment
+    ? $params['comment']->registered_name
+    : $params['node']->name;
   $message['body'] = [drupal_render($body)];
+  // TODO: set "reply-to"
 }
 
 /**
  * Implements hook_cron().
  */
 function cluster_discussions_cron() {
+  // Email notifications for new discussion nodes
+
   $query = new EntityFieldQuery();
   $results = $query->entityCondition('entity_type', 'node')
     ->entityCondition('bundle', 'discussion')
     ->propertyCondition('status', NODE_PUBLISHED)
     ->fieldCondition('field_is_sent', 'value', '1', '<>')
 
-    // Just in case, don't send if it's more than a day old
-    ->propertyCondition('created', REQUEST_TIME - CLUSTER_API_DAY, '>')
+    // Just in case, don't send if it's more than a week old
+    ->propertyCondition('created', REQUEST_TIME - (7*CLUSTER_API_DAY), '>')
 
     ->propertyOrderBy('created', 'ASC')
 
     ->execute();
 
-  if (!$results || !$results['node'])
-    return;
-
-  $nids = array_keys($results['node']);
+  $nids = $results && $results['node'] ? array_keys($results['node']) : [];
 
   foreach (node_load_multiple($nids) as $discussion_node) {
     $discussion_wrapper = entity_metadata_wrapper('node', $discussion_node);
@@ -273,12 +296,14 @@ function cluster_discussions_cron() {
       if (!og_is_group('node', $group))
         continue; // shouldn't happen
       $manager = GroupContentManager::getInstance($group);
-      $group_wrapper = entity_metadata_wrapper('node', $group);
       if (is_null($first_group))
         $first_group = $group;
 
       $all_uids = array_unique(array_merge($all_uids, cluster_api_get_followers($manager)));
     }
+
+// Don't email the author TODO!!!
+//    $all_uids = array_diff($all_uids, [$discussion_node->uid]);
 
     if (!$all_uids)
       continue;
@@ -298,6 +323,85 @@ function cluster_discussions_cron() {
       } catch (Exception $e) {
         watchdog('cluster_discussions', 'Error sending discussion email @nid: @error', [
           '@nid' => $discussion_node->nid,
+          '@error' => $e->getMessage(),
+        ], WATCHDOG_ERROR);
+      }
+    }
+  }
+
+  // Email notifications for new comments on discussions
+
+  $query = new EntityFieldQuery();
+  $results = $query->entityCondition('entity_type', 'comment')
+
+  // This doesn't work, but it's fine AS LONG AS we're only using comments for discussion nodes.
+//    ->propertyCondition('node_type', 'comment_node_discussion')
+
+    ->propertyCondition('status', COMMENT_PUBLISHED)
+//    ->fieldCondition('field_is_sent', 'value', '1', '<>')
+
+    // Just in case, don't send if it's more than a week old
+    ->propertyCondition('created', REQUEST_TIME - (7*CLUSTER_API_DAY), '>')
+
+    ->propertyOrderBy('created', 'ASC')
+
+    ->execute();
+
+  $cids = $results && $results['comment'] ? array_keys($results['comment']) : [];
+
+  foreach (comment_load_multiple($cids) as $comment) {
+    if ($comment->node_type !== 'comment_node_discussion')
+      continue;
+    $discussion_node = node_load($comment->nid);
+    if ($discussion_node->type !== 'discussion' || $discussion_node->status != NODE_PUBLISHED)
+      continue;
+
+    $comment_wrapper = entity_metadata_wrapper('comment', $comment);
+    $discussion_wrapper = entity_metadata_wrapper('node', $discussion_node);
+
+    // TODO: set "is_sent" and add it to query above
+//    $comment_wrapper->field_is_sent->set(1);
+//    $comment_wrapper->save();
+
+    $body = $comment_wrapper->comment_body->value()['safe_value'];
+    $comment_date = $comment->created;
+
+    $all_uids = []; // Unified list of uids for all the groups to which this discussion item belongs.
+    $first_group = NULL;
+
+    foreach ($discussion_wrapper->og_group_ref->value() as $group) {
+      if (!og_is_group('node', $group))
+        continue; // shouldn't happen
+      $manager = GroupContentManager::getInstance($group);
+      if (is_null($first_group))
+        $first_group = $group;
+
+      $all_uids = array_unique(array_merge($all_uids, cluster_api_get_followers($manager)));
+    }
+
+    // Don't email the author TODO!!!
+//    $all_uids = array_diff($all_uids, [$comment->uid]);
+
+    if (!$all_uids)
+      continue;
+
+    foreach (cluster_api_split_users_by_langcode($all_uids) as $langcode => $uids) {
+      try {
+        $params = [
+          'comment' => $comment,
+          'node' => $discussion_node,
+          'group' => $first_group,
+          'date' => $comment_date,
+          'body' => $body,
+          'langcode' => $langcode,
+        ];
+        $to = _cluster_email_recipients_string($uids);
+
+dpm(['cluster_discussions', 'comment', $to, $langcode, $params], 'to be sent!');
+        drupal_mail('cluster_discussions', 'comment', $to, $langcode, $params);
+      } catch (Exception $e) {
+        watchdog('cluster_discussions', 'Error sending discussion comment email @nid: @error', [
+          '@cid' => $comment->cid,
           '@error' => $e->getMessage(),
         ], WATCHDOG_ERROR);
       }
