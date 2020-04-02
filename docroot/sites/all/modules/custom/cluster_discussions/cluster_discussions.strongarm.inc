@@ -89,11 +89,32 @@ function cluster_discussions_strongarm() {
       'token' => array(
         'custom_settings' => FALSE,
       ),
+      'ical' => array(
+        'custom_settings' => TRUE,
+      ),
+      'factsheet_summary' => array(
+        'custom_settings' => FALSE,
+      ),
+      'factsheet_homepage_teaser' => array(
+        'custom_settings' => FALSE,
+      ),
+      'factsheet_preview_block' => array(
+        'custom_settings' => FALSE,
+      ),
+      'preview_block' => array(
+        'custom_settings' => FALSE,
+      ),
+      'print' => array(
+        'custom_settings' => FALSE,
+      ),
     ),
     'extra_fields' => array(
       'form' => array(
         'path' => array(
           'weight' => '2',
+        ),
+        'redirect' => array(
+          'weight' => '30',
         ),
       ),
       'display' => array(),
@@ -127,8 +148,7 @@ function cluster_discussions_strongarm() {
   $strongarm->api_version = 1;
   $strongarm->name = 'node_options_discussion';
   $strongarm->value = array(
-    0 => 'moderation',
-    1 => 'revision',
+    0 => 'status',
   );
   $export['node_options_discussion'] = $strongarm;
 
