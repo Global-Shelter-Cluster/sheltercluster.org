@@ -263,6 +263,7 @@ function cluster_discussions_mail($key, &$message, $params) {
  * Implements hook_cron().
  */
 function cluster_discussions_cron() {
+  return; // TODO: this disables discussion emails. When SA-156 is done, remove this line.
   // Email notifications for new discussion nodes
 
   $query = new EntityFieldQuery();
