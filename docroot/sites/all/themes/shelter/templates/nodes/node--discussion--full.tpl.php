@@ -11,14 +11,22 @@
   hide($content['og_group_ref']);
 ?>
 
-<div id="node-<?php print $node->nid; ?>" class="<?php print $classes; ?> clearfix"<?php print $attributes; ?>>
+<article id="node-<?php print $node->nid; ?>" class="<?php print $classes; ?> clearfix"<?php print $attributes; ?>>
 
   <div class="content"<?php print $content_attributes; ?>>
-    <h2><?php print $title; ?><?php if ($edit_link): ?><?php print $edit_link; ?><?php endif; ?></h2>
+    <h2><?php print $title; ?></h2>
+
+    <header>
+      <?php print $name; ?>
+      &middot;
+      <?php print $date; // preg_replace('/content="([^"]+)"/', '$0 title="$1"', $date); ?>
+      <?php if ($edit_link): ?><?php print $edit_link; ?><?php endif; ?>
+    </header>
+
     <?php print render($content); ?>
   </div>
 
-  <?php print render($content['links']); ?>
+  <?php //print render($content['links']); ?>
   <?php print render($content['comments']); ?>
 
-</div>
+</article>

@@ -287,14 +287,14 @@ th {
   background-image: linear-gradient(#e1e1e1, #e3e3e3 60%, #e1e1e1);
 }
 
-.not-underlined-links, #secondary-nav .nav-items .nav-secondary-items a, #contextual-navigation a:hover, #contextual-navigation a:active, .node-type-discussion .comment a {
+.not-underlined-links, #secondary-nav .nav-items .nav-secondary-items a, #contextual-navigation a:hover, #contextual-navigation a:active {
   position: relative;
   text-decoration: none;
 }
-.not-underlined-links:hover, #secondary-nav .nav-items .nav-secondary-items a:hover, #contextual-navigation a:hover, .node-type-discussion .comment a:hover, .not-underlined-links:active, #secondary-nav .nav-items .nav-secondary-items a:active, #contextual-navigation a:active, .node-type-discussion .comment a:active {
+.not-underlined-links:hover, #secondary-nav .nav-items .nav-secondary-items a:hover, #contextual-navigation a:hover, .not-underlined-links:active, #secondary-nav .nav-items .nav-secondary-items a:active, #contextual-navigation a:active {
   text-decoration: none;
 }
-.not-underlined-links:hover:after, #secondary-nav .nav-items .nav-secondary-items a:hover:after, #contextual-navigation a:hover:after, .node-type-discussion .comment a:hover:after, .not-underlined-links:active:after, #secondary-nav .nav-items .nav-secondary-items a:active:after, #contextual-navigation a:active:after, .node-type-discussion .comment a:active:after {
+.not-underlined-links:hover:after, #secondary-nav .nav-items .nav-secondary-items a:hover:after, #contextual-navigation a:hover:after, .not-underlined-links:active:after, #secondary-nav .nav-items .nav-secondary-items a:active:after, #contextual-navigation a:active:after {
   content: '';
   width: 100%;
   position: absolute;
@@ -304,13 +304,13 @@ th {
   border-style: solid;
 }
 
-.underlined-links, .page-search .search-results a, #user-login-container .item-list li a, #shelter-discussions .see-all, .page-node-discussions .discussions-item a, .node-type-discussion .comment .links a, .node-type-discussion .comment_forbidden a,
+.underlined-links, .page-search .search-results a, #user-login-container .item-list li a, #shelter-discussions .see-all, .page-node-discussions .discussions-item a, .node-type-discussion .comment_forbidden a,
 .node-type-discussion .comment-add a, .event-item a, #add-content a,
 #admin-links a, .page-user .profile a, footer a {
   position: relative;
   text-decoration: none;
 }
-.underlined-links:after, .page-search .search-results a:after, #user-login-container .item-list li a:after, #shelter-discussions .see-all:after, .page-node-discussions .discussions-item a:after, .node-type-discussion .comment .links a:after, .node-type-discussion .comment_forbidden a:after,
+.underlined-links:after, .page-search .search-results a:after, #user-login-container .item-list li a:after, #shelter-discussions .see-all:after, .page-node-discussions .discussions-item a:after, .node-type-discussion .comment_forbidden a:after,
 .node-type-discussion .comment-add a:after, .event-item a:after, #add-content a:after,
 #admin-links a:after, .page-user .profile a:after, footer a:after {
   content: '';
@@ -321,16 +321,16 @@ th {
   border-width: 0 0 1px;
   border-style: solid;
 }
-.underlined-links:hover, .page-search .search-results a:hover, #user-login-container .item-list li a:hover, #shelter-discussions .see-all:hover, .page-node-discussions .discussions-item a:hover, .node-type-discussion .comment .links a:hover, .node-type-discussion .comment_forbidden a:hover,
+.underlined-links:hover, .page-search .search-results a:hover, #user-login-container .item-list li a:hover, #shelter-discussions .see-all:hover, .page-node-discussions .discussions-item a:hover, .node-type-discussion .comment_forbidden a:hover,
 .node-type-discussion .comment-add a:hover, .event-item a:hover, #add-content a:hover,
-#admin-links a:hover, .page-user .profile a:hover, footer a:hover, .underlined-links:active, .page-search .search-results a:active, #user-login-container .item-list li a:active, #shelter-discussions .see-all:active, .page-node-discussions .discussions-item a:active, .node-type-discussion .comment .links a:active, .node-type-discussion .comment_forbidden a:active,
+#admin-links a:hover, .page-user .profile a:hover, footer a:hover, .underlined-links:active, .page-search .search-results a:active, #user-login-container .item-list li a:active, #shelter-discussions .see-all:active, .page-node-discussions .discussions-item a:active, .node-type-discussion .comment_forbidden a:active,
 .node-type-discussion .comment-add a:active, .event-item a:active, #add-content a:active,
 #admin-links a:active, .page-user .profile a:active, footer a:active {
   text-decoration: none;
 }
-.underlined-links:hover:after, .page-search .search-results a:hover:after, #user-login-container .item-list li a:hover:after, #shelter-discussions .see-all:hover:after, .page-node-discussions .discussions-item a:hover:after, .node-type-discussion .comment .links a:hover:after, .node-type-discussion .comment_forbidden a:hover:after,
+.underlined-links:hover:after, .page-search .search-results a:hover:after, #user-login-container .item-list li a:hover:after, #shelter-discussions .see-all:hover:after, .page-node-discussions .discussions-item a:hover:after, .node-type-discussion .comment_forbidden a:hover:after,
 .node-type-discussion .comment-add a:hover:after, .event-item a:hover:after, #add-content a:hover:after,
-#admin-links a:hover:after, .page-user .profile a:hover:after, footer a:hover:after, .underlined-links:active:after, .page-search .search-results a:active:after, #user-login-container .item-list li a:active:after, #shelter-discussions .see-all:active:after, .page-node-discussions .discussions-item a:active:after, .node-type-discussion .comment .links a:active:after, .node-type-discussion .comment_forbidden a:active:after,
+#admin-links a:hover:after, .page-user .profile a:hover:after, footer a:hover:after, .underlined-links:active:after, .page-search .search-results a:active:after, #user-login-container .item-list li a:active:after, #shelter-discussions .see-all:active:after, .page-node-discussions .discussions-item a:active:after, .node-type-discussion .comment_forbidden a:active:after,
 .node-type-discussion .comment-add a:active:after, .event-item a:active:after, #add-content a:active:after,
 #admin-links a:active:after, .page-user .profile a:active:after, footer a:active:after {
   border-style: none;
@@ -2454,6 +2454,24 @@ label[for="mobile_menu_toggle"] span:after {
   font-size: 0.8rem;
 }
 
+.node-type-discussion article.node-discussion > .content > header {
+  float: right;
+  color: #575757;
+  margin: 0 0 10px 10px;
+  background: #eee;
+  padding: 5px;
+}
+.node-type-discussion article.node-discussion > .content > header svg {
+  margin-left: 5px;
+}
+.node-type-discussion article.node-discussion > .content > header a {
+  color: #575757;
+  text-decoration: none;
+}
+.node-type-discussion article.node-discussion > .content > header a:active, .node-type-discussion article.node-discussion > .content > header a:hover {
+  color: black;
+  text-decoration: none;
+}
 .node-type-discussion #comment-body-add-more-wrapper .form-textarea {
   min-height: 224px;
   min-height: 14rem;
@@ -2464,24 +2482,9 @@ label[for="mobile_menu_toggle"] span:after {
 .node-type-discussion #comments {
   margin-top: 50px;
 }
-.node-type-discussion .comment a {
-  color: black;
-  text-transform: capitalize;
-  font-weight: bold;
-}
 .node-type-discussion .comment .content {
   min-height: 32px;
   min-height: 2rem;
-}
-.node-type-discussion .comment .links {
-  display: block;
-  background: #eee;
-  padding: 4px;
-  padding: 0.25rem;
-}
-.node-type-discussion .comment .links a {
-  color: #688394;
-  font-weight: normal;
 }
 .node-type-discussion .comment .submitted {
   font-size: 12.8px;
@@ -4789,4 +4792,59 @@ form .field-multiple-table .form-item {
 }
 #anon-follow form input[type=submit]:hover, #anon-follow form input[type=submit].active {
   background: #ab1b1e;
+}
+
+#comments {
+  margin-left: 10px;
+  padding-left: 10px;
+  border-left: 2px solid #575757;
+}
+#comments > h2.title {
+  margin-top: 40px;
+}
+#comments > h2.title:first-child {
+  display: none;
+}
+#comments :target {
+  content: '';
+  display: block;
+  height: 50px;
+  margin-top: -50px;
+  position: absolute;
+}
+#comments :target + article {
+  background-color: #ffffdd;
+}
+#comments article {
+  border-top: 1px solid #eee;
+}
+#comments header {
+  float: right;
+  color: #575757;
+  margin: 0 0 10px 10px;
+  background: #eee;
+  padding: 5px;
+}
+#comments header svg {
+  margin-left: 5px;
+}
+#comments header a {
+  color: #575757;
+  text-decoration: none;
+}
+#comments header a:active, #comments header a:hover {
+  color: black;
+  text-decoration: none;
+}
+#comments #comment-body-add-more-wrapper label {
+  display: none;
+}
+#comments .links li {
+  padding: 0;
+}
+#comments .links a {
+  text-decoration: none;
+}
+#comments .links .comment_forbidden {
+  display: none;
 }
