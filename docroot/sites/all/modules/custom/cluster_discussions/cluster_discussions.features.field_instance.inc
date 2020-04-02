@@ -10,7 +10,7 @@
 function cluster_discussions_field_default_field_instances() {
   $field_instances = array();
 
-  // Exported field_instance: 'node-discussion-body'
+  // Exported field_instance: 'node-discussion-body'.
   $field_instances['node-discussion-body'] = array(
     'bundle' => 'discussion',
     'default_value' => NULL,
@@ -22,7 +22,7 @@ function cluster_discussions_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 1,
+        'weight' => 0,
       ),
       'ical' => array(
         'label' => 'above',
@@ -43,11 +43,11 @@ function cluster_discussions_field_default_field_instances() {
     'entity_type' => 'node',
     'field_name' => 'body',
     'label' => 'Body',
-    'required' => 0,
+    'required' => 1,
     'settings' => array(
-      'display_summary' => 1,
+      'display_summary' => 0,
       'entity_translation_sync' => FALSE,
-      'text_processing' => 0,
+      'text_processing' => 1,
       'user_register_form' => FALSE,
     ),
     'widget' => array(
@@ -62,8 +62,8 @@ function cluster_discussions_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-discussion-field_sorting_weight'
-  $field_instances['node-discussion-field_sorting_weight'] = array(
+  // Exported field_instance: 'node-discussion-field_is_sent'.
+  $field_instances['node-discussion-field_is_sent'] = array(
     'bundle' => 'discussion',
     'default_value' => array(
       0 => array(
@@ -71,13 +71,13 @@ function cluster_discussions_field_default_field_instances() {
       ),
     ),
     'deleted' => 0,
-    'description' => 'When displayed in sortable lists within group pages, the content will be ordered using this weight field. Smaller values will show up first, bigger values last.',
+    'description' => 'Set by the system when the email is sent to the group\'s followers. Do not change manually.',
     'display' => array(
       'default' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 3,
+        'weight' => 2,
       ),
       'ical' => array(
         'label' => 'above',
@@ -93,27 +93,25 @@ function cluster_discussions_field_default_field_instances() {
       ),
     ),
     'entity_type' => 'node',
-    'field_name' => 'field_sorting_weight',
-    'label' => 'Sorting weight',
+    'field_name' => 'field_is_sent',
+    'label' => 'Is sent',
     'required' => 0,
     'settings' => array(
       'entity_translation_sync' => FALSE,
-      'max' => '',
-      'min' => '',
-      'prefix' => '',
-      'suffix' => '',
       'user_register_form' => FALSE,
     ),
     'widget' => array(
-      'active' => 0,
-      'module' => 'number',
-      'settings' => array(),
-      'type' => 'number',
-      'weight' => 4,
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(
+        'display_label' => 1,
+      ),
+      'type' => 'options_onoff',
+      'weight' => 32,
     ),
   );
 
-  // Exported field_instance: 'node-discussion-og_group_ref'
+  // Exported field_instance: 'node-discussion-og_group_ref'.
   $field_instances['node-discussion-og_group_ref'] = array(
     'bundle' => 'discussion',
     'default_value' => NULL,
@@ -122,10 +120,9 @@ function cluster_discussions_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'hidden',
-        'module' => 'og_ui',
         'settings' => array(),
-        'type' => 'og_list_default',
-        'weight' => 0,
+        'type' => 'hidden',
+        'weight' => 1,
       ),
       'ical' => array(
         'label' => 'above',
@@ -179,7 +176,7 @@ function cluster_discussions_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-discussion-title_field'
+  // Exported field_instance: 'node-discussion-title_field'.
   $field_instances['node-discussion-title_field'] = array(
     'bundle' => 'discussion',
     'default_value' => NULL,
@@ -190,7 +187,7 @@ function cluster_discussions_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 2,
+        'weight' => 3,
       ),
       'ical' => array(
         'label' => 'above',
@@ -232,9 +229,9 @@ function cluster_discussions_field_default_field_instances() {
   // Included for use with string extractors like potx.
   t('Body');
   t('Groups audience');
-  t('Sorting weight');
+  t('Is sent');
+  t('Set by the system when the email is sent to the group\'s followers. Do not change manually.');
   t('Title');
-  t('When displayed in sortable lists within group pages, the content will be ordered using this weight field. Smaller values will show up first, bigger values last.');
 
   return $field_instances;
 }
