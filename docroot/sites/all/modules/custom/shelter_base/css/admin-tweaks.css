@@ -42,3 +42,11 @@
 .vertical-tabs .field-type-number-integer .form-type-textfield input {
   width: inherit;
 }
+fieldset.group-inline > .fieldset-wrapper, div.group-inline {
+  display: flex;
+  flex-wrap: wrap;
+}
+fieldset.group-inline > .fieldset-wrapper > *, div.group-inline > * {
+  padding-top: 0 !important;
+  margin-right: 10px;
+}
