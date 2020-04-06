@@ -4356,6 +4356,19 @@ body.document-upload-ondrag {
   width: 50%;
 }
 
+.factsheet-chart-indicators-people {
+  text-align: center;
+  margin: 30px 0;
+}
+.factsheet-chart-indicators-people > * {
+  width: 50%;
+  float: left;
+}
+.factsheet-chart-indicators-people .cluster-chart-wrapper {
+  max-width: none;
+  padding: 0 50px;
+}
+
 .cluster-chart-wrapper.fs_cat_chart {
   min-height: 200px;
 }

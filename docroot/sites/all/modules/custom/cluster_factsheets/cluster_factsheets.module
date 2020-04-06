@@ -84,16 +84,30 @@ function cluster_factsheets_chart($node, $type) {
         (!is_null($in_need = $wrapper->field_fsi_in_need->value()))
         && (!is_null($targeted = $wrapper->field_fsi_targeted->value()))
       ) {
-        cluster_chart_png_hbar(
-          [$in_need, $targeted],
-          ['In need', 'Targeted'],
-          [
-            CLUSTER_CHART_COLOR_SHELTER_RED,
-            CLUSTER_CHART_COLOR_SHELTER_RED_SHADE2,
-          ],
-          800, 300,
-          NULL // TODO: filename
-        );
+        if (!is_null($reached = $wrapper->field_fsi_reached->value())) {
+          cluster_chart_png_hbar(
+            [$in_need, $targeted, $reached],
+            ['In need', 'Targeted', 'Reached'],
+            [
+              CLUSTER_CHART_COLOR_SHELTER_DARK_BLUE,
+              CLUSTER_CHART_COLOR_SHELTER_RED_SHADE2,
+              CLUSTER_CHART_COLOR_SHELTER_RED,
+            ],
+            800, 320,
+            NULL // TODO: filename
+          );
+        } else {
+          cluster_chart_png_hbar(
+            [$in_need, $targeted],
+            ['In need', 'Targeted'],
+            [
+              CLUSTER_CHART_COLOR_SHELTER_DARK_BLUE,
+              CLUSTER_CHART_COLOR_SHELTER_RED_SHADE2,
+            ],
+            800, 280,
+            NULL // TODO: filename
+          );
+        }
       }
       else {
         return MENU_NOT_FOUND;
@@ -246,10 +260,11 @@ function cluster_factsheets_preprocess_node(&$variables) {
   $wrapper = entity_metadata_wrapper('node', $node);
 
   switch ($variables['view_mode']) {
-    case 'factsheet_preview_block':
+    case 'factsheet_preview_block': // fall-through
     case 'preview_block':
       $variables['cluster_factsheets']['indicators'] = cluster_factsheets_main_indicators($node);
       break;
+
     case 'factsheet_summary':
       $variables['cluster_factsheets']['indicators'] = cluster_factsheets_chart_indicators($node);
       $variables['cluster_factsheets']['full_factsheet'] = [
@@ -259,11 +274,13 @@ function cluster_factsheets_preprocess_node(&$variables) {
         '#options' => ['attributes' => []],
       ];
       break;
+
     case 'print':
       $variables['cluster_factsheets']['indicators'] = cluster_factsheets_api_indicators($node);
       $variables['cluster_factsheets']['cat'] = cluster_factsheets_api_cat($node);
       break;
-    case 'full':
+
+    case 'full': // fall-through
     default:
       if ($prev = cluster_factsheets_prev($node)) {
         $prev_wrapper = entity_metadata_wrapper('node', $prev);
@@ -285,7 +302,11 @@ function cluster_factsheets_preprocess_node(&$variables) {
           '#options' => ['attributes' => []],
         ];
       }
+
       $variables['cluster_factsheets']['indicators'] = cluster_factsheets_chart_indicators($node);
+
+      // nfi & shelter pie charts shown above "coverage against targets"
+      $variables['cluster_factsheets']['indicators_people'] = cluster_factsheets_chart_indicators_people($node);
   }
 
   $field_image = $wrapper->field_image->value();
@@ -459,7 +480,10 @@ function cluster_factsheets_main_indicators($node) {
     (!is_null($in_need = $wrapper->field_fsi_in_need->value()))
     && (!is_null($targeted = $wrapper->field_fsi_targeted->value()))
   ) {
-    $indicators[t('people in need / targeted') . _cluster_factsheets_hh_abbr($node)] = cluster_factsheets_number($in_need) . ' / ' . cluster_factsheets_number($targeted);
+    if (!is_null($reached = $wrapper->field_fsi_reached->value()))
+      $indicators[t('people in need / targeted / reached') . _cluster_factsheets_hh_abbr($node)] = cluster_factsheets_number($in_need) . ' / ' . cluster_factsheets_number($targeted) . ' / ' . cluster_factsheets_number($reached);
+    else
+      $indicators[t('people in need / targeted') . _cluster_factsheets_hh_abbr($node)] = cluster_factsheets_number($in_need) . ' / ' . cluster_factsheets_number($targeted);
   }
 
   return $indicators;
@@ -498,6 +522,7 @@ function cluster_factsheets_structured_data($node) {
   $partners = intval($wrapper->field_fsi_partners->value(), 10);
   $in_need = intval($wrapper->field_fsi_in_need->value(), 10);
   $targeted = intval($wrapper->field_fsi_targeted->value(), 10);
+  $reached = intval($wrapper->field_fsi_reached->value(), 10);
   $required = intval($wrapper->field_fsi_funding_required->value(), 10);
   $funded = intval($wrapper->field_fsi_funded->value(), 10);
 
@@ -535,6 +560,7 @@ function cluster_factsheets_structured_data($node) {
     'people' => [
       'in need' => round($people_multiplier * (is_null($in_need) ? 0 : $in_need)),
       'targeted' => round($people_multiplier * (is_null($targeted) ? 0 : $targeted)),
+      'reached' => round($people_multiplier * (is_null($reached) ? 0 : $reached)),
     ],
     'funding' => [
       'required' => is_null($required) ? 0 : $required,
@@ -638,31 +664,60 @@ function cluster_factsheets_chart_indicators($node) {
     (!is_null($in_need = $wrapper->field_fsi_in_need->value()))
     && (!is_null($targeted = $wrapper->field_fsi_targeted->value()))
   ) {
-    $indicators[] = [
-      [
-        '#theme' => 'html_tag',
-        '#tag' => 'h4',
-        '#value' => t('People') . _cluster_factsheets_hh_abbr($node),
-      ],
-      [
-        '#theme' => 'cluster_chart_hbar',
-        '#data' => [
-          [
-            'data' => [$in_need, $targeted],
-            'backgroundColor' => [
-              CLUSTER_CHART_COLOR_SHELTER_RED,
-              CLUSTER_CHART_COLOR_SHELTER_RED_SHADE2,
+    if (!is_null($reached = $wrapper->field_fsi_reached->value())) {
+      $indicators[] = [
+        [
+          '#theme' => 'html_tag',
+          '#tag' => 'h4',
+          '#value' => t('People') . _cluster_factsheets_hh_abbr($node),
+        ],
+        [
+          '#theme' => 'cluster_chart_hbar',
+          '#data' => [
+            [
+              'data' => [$in_need, $targeted, $reached],
+              'backgroundColor' => [
+                CLUSTER_CHART_COLOR_SHELTER_DARK_BLUE,
+                CLUSTER_CHART_COLOR_SHELTER_RED_SHADE2,
+                CLUSTER_CHART_COLOR_SHELTER_RED,
+              ],
             ],
           ],
+          '#labels' => [t('In need'), t('Targeted'), t('Reached')],
+          '#options' => [
+            'legend' => ['display' => FALSE],
+            'maintainAspectRatio' => FALSE,
+            'scales' => ['xAxes' => [['ticks' => ['beginAtZero' => TRUE]]]],
+          ],
         ],
-        '#labels' => [t('In need'), t('Targeted')],
-        '#options' => [
-          'legend' => ['display' => FALSE],
-          'maintainAspectRatio' => FALSE,
-          'scales' => ['xAxes' => [['ticks' => ['beginAtZero' => TRUE]]]],
+      ];
+    } else {
+      $indicators[] = [
+        [
+          '#theme' => 'html_tag',
+          '#tag' => 'h4',
+          '#value' => t('People') . _cluster_factsheets_hh_abbr($node),
         ],
-      ],
-    ];
+        [
+          '#theme' => 'cluster_chart_hbar',
+          '#data' => [
+            [
+              'data' => [$in_need, $targeted],
+              'backgroundColor' => [
+                CLUSTER_CHART_COLOR_SHELTER_RED,
+                CLUSTER_CHART_COLOR_SHELTER_RED_SHADE2,
+              ],
+            ],
+          ],
+          '#labels' => [t('In need'), t('Targeted')],
+          '#options' => [
+            'legend' => ['display' => FALSE],
+            'maintainAspectRatio' => FALSE,
+            'scales' => ['xAxes' => [['ticks' => ['beginAtZero' => TRUE]]]],
+          ],
+        ],
+      ];
+    }
   }
 
   if (
@@ -731,6 +786,100 @@ function cluster_factsheets_chart_indicators($node) {
         [
           '#markup' => '<div class="funding-info">' . $total . $source . '</div>',
         ],
+      ],
+    ];
+  }
+
+  return $indicators;
+}
+
+function cluster_factsheets_chart_indicators_people($node) {
+  if (!$node || $node->type !== 'factsheet') {
+    return [];
+  }
+
+  $wrapper = entity_metadata_wrapper('node', $node);
+
+  $indicators = [];
+
+  if (
+    (!is_null($targeted = $wrapper->field_fsi_nfi_targeted->value()))
+    && (!is_null($reached = $wrapper->field_fsi_nfi_reached->value()))
+  ) {
+    $percentage = round($reached / $targeted * 100);
+
+    $indicators[] = [
+      '#type' => 'container',
+//      '#attributes' => ['class' => ['indicator-nfi']],
+      0 => [
+        '#theme' => 'html_tag',
+        '#tag' => 'h4',
+        '#value' => t('NFI') . _cluster_factsheets_hh_abbr($node),
+      ],
+      1 => [
+        '#theme' => 'cluster_chart_pie',
+        '#data' => [
+          'data' => [$reached, max(0, $targeted - $reached)],
+          'backgroundColor' => [
+            CLUSTER_CHART_COLOR_SHELTER_DARK_BLUE,
+            CLUSTER_CHART_COLOR_SHELTER_LIGHT_BLUE,
+          ],
+        ],
+        '#labels' => [t('Reached'), t('Gap')],
+        '#options' => [
+          'legend' => ['display' => FALSE],
+          'maintainAspectRatio' => FALSE,
+          'pieceLabel' => [
+            'render' => [$percentage . '%'],
+            'fontColor' => 'white',
+          ],
+        ],
+      ],
+      2 => [
+        '#theme' => 'html_tag',
+        '#tag' => 'small',
+        '#value' => t('Targeted') . ': ' . cluster_factsheets_number($targeted),
+      ],
+    ];
+  }
+
+  if (
+    (!is_null($targeted = $wrapper->field_fsi_shelter_targeted->value()))
+    && (!is_null($reached = $wrapper->field_fsi_shelter_reached->value()))
+  ) {
+    $percentage = round($reached / $targeted * 100);
+
+    $indicators[] = [
+      '#type' => 'container',
+//      '#attributes' => ['class' => ['indicator-nfi']],
+      0 => [
+        '#theme' => 'html_tag',
+        '#tag' => 'h4',
+        '#value' => t('Shelter') . _cluster_factsheets_hh_abbr($node),
+      ],
+      1 => [
+        '#theme' => 'cluster_chart_pie',
+        '#data' => [
+          'data' => [$reached, max(0, $targeted - $reached)],
+          'backgroundColor' => [
+            CLUSTER_CHART_COLOR_SHELTER_RED,
+            CLUSTER_CHART_COLOR_SHELTER_RED_SHADE2,
+          ],
+        ],
+        '#labels' => [t('Reached'), t('Gap')],
+        '#options' => [
+          'legend' => ['display' => FALSE],
+          'maintainAspectRatio' => FALSE,
+          'pieceLabel' => [
+            'render' => [$percentage . '%'],
+            'fontColor' => 'white',
+          ],
+        ],
+      ],
+      2 => [
+        '#theme' => 'html_tag',
+        '#tag' => 'small',
+        '#value' => t('Targeted') . ': ' . cluster_factsheets_number($targeted),
       ],
     ];
   }

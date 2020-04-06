@@ -647,7 +647,7 @@ function cluster_factsheets_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 19,
+        'weight' => 24,
       ),
       'factsheet_homepage_teaser' => array(
         'label' => 'above',
@@ -724,7 +724,7 @@ function cluster_factsheets_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 18,
+        'weight' => 23,
       ),
       'factsheet_homepage_teaser' => array(
         'label' => 'above',
@@ -801,7 +801,7 @@ function cluster_factsheets_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 15,
+        'weight' => 20,
       ),
       'factsheet_homepage_teaser' => array(
         'label' => 'above',
@@ -870,15 +870,9 @@ function cluster_factsheets_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'number',
-        'settings' => array(
-          'decimal_separator' => '.',
-          'prefix_suffix' => TRUE,
-          'scale' => 0,
-          'thousand_separator' => '',
-        ),
-        'type' => 'number_integer',
-        'weight' => 23,
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 14,
       ),
       'factsheet_homepage_teaser' => array(
         'label' => 'above',
@@ -947,15 +941,9 @@ function cluster_factsheets_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'number',
-        'settings' => array(
-          'decimal_separator' => '.',
-          'prefix_suffix' => TRUE,
-          'scale' => 0,
-          'thousand_separator' => '',
-        ),
-        'type' => 'number_integer',
-        'weight' => 22,
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 13,
       ),
       'factsheet_homepage_teaser' => array(
         'label' => 'above',
@@ -1026,7 +1014,7 @@ function cluster_factsheets_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 17,
+        'weight' => 22,
       ),
       'factsheet_homepage_teaser' => array(
         'label' => 'above',
@@ -1101,15 +1089,9 @@ function cluster_factsheets_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'number',
-        'settings' => array(
-          'decimal_separator' => '.',
-          'prefix_suffix' => TRUE,
-          'scale' => 0,
-          'thousand_separator' => '',
-        ),
-        'type' => 'number_integer',
-        'weight' => 21,
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 12,
       ),
       'factsheet_homepage_teaser' => array(
         'label' => 'above',
@@ -1178,15 +1160,9 @@ function cluster_factsheets_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'number',
-        'settings' => array(
-          'decimal_separator' => '.',
-          'prefix_suffix' => TRUE,
-          'scale' => 0,
-          'thousand_separator' => '',
-        ),
-        'type' => 'number_integer',
-        'weight' => 25,
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 16,
       ),
       'factsheet_homepage_teaser' => array(
         'label' => 'above',
@@ -1255,15 +1231,9 @@ function cluster_factsheets_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'number',
-        'settings' => array(
-          'decimal_separator' => '.',
-          'prefix_suffix' => TRUE,
-          'scale' => 0,
-          'thousand_separator' => '',
-        ),
-        'type' => 'number_integer',
-        'weight' => 24,
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 15,
       ),
       'factsheet_homepage_teaser' => array(
         'label' => 'above',
@@ -1334,7 +1304,7 @@ function cluster_factsheets_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 16,
+        'weight' => 21,
       ),
       'factsheet_homepage_teaser' => array(
         'label' => 'above',
@@ -1405,7 +1375,7 @@ function cluster_factsheets_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 12,
+        'weight' => 17,
       ),
       'factsheet_homepage_teaser' => array(
         'label' => 'above',
@@ -1552,7 +1522,7 @@ function cluster_factsheets_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 13,
+        'weight' => 18,
       ),
       'factsheet_homepage_teaser' => array(
         'label' => 'above',
@@ -2244,7 +2214,7 @@ function cluster_factsheets_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 14,
+        'weight' => 19,
       ),
       'factsheet_homepage_teaser' => array(
         'label' => 'above',
@@ -2389,7 +2359,7 @@ function cluster_factsheets_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 20,
+        'weight' => 25,
       ),
       'factsheet_homepage_teaser' => array(
         'label' => 'above',

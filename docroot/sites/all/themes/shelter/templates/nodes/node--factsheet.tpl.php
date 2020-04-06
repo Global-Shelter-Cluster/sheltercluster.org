@@ -35,6 +35,13 @@ $is_sidebar_empty = (trim($r_sidebar) === '');
     <?php print $r_body; ?>
   </main>
   <div class="details">
+    <?php if ($cluster_factsheets['indicators_people']): ?>
+      <div class="factsheet-chart-indicators-people clearfix">
+        <?php foreach ($cluster_factsheets['indicators_people'] as $indicator): ?>
+          <?php print render($indicator); ?>
+        <?php endforeach; ?>
+      </div>
+    <?php endif; ?>
     <?php print $r_field_coverage_against_targets; ?>
     <?php print $r_field_need_analysis; ?>
     <?php print $r_field_fs_response; ?>
