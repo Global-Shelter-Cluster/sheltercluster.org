@@ -181,8 +181,11 @@ h4 {
 }
 
 table.factsheet-chart-indicators {
-  font-size: 30px;
+  font-size: 25px;
   margin-top: 20px;
+}
+table.factsheet-chart-indicators h4 {
+  font-size: 25px;
 }
 
 .factsheet-chart-indicators h4 {
