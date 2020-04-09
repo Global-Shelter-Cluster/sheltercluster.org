@@ -121,7 +121,7 @@ $is_sidebar_empty = (trim($r_sidebar) === '');
                 break;
 
               case 'chart':
-                ?><h4><?php print check_plain(t($indicator['title'])); ?></h4><?php
+                ?><strong><?php print check_plain(t($indicator['title'])); ?></strong><?php
 
                 if ($indicator['smallImage']) { ?>
                   <table class="chart--small-image">
