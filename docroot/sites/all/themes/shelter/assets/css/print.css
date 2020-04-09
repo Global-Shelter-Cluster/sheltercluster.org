@@ -187,6 +187,9 @@ table.factsheet-chart-indicators {
 table.factsheet-chart-indicators .chart--small-image, table.factsheet-chart-indicators label, table.factsheet-chart-indicators strong, table.factsheet-chart-indicators div {
   text-align: left;
 }
+table.factsheet-chart-indicators .title-description {
+  padding-left: 40px;
+}
 
 .factsheet-chart-indicators h4 {
   color: #575757;
