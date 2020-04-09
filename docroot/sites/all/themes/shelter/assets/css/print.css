@@ -180,6 +180,17 @@ h4 {
   margin: 0 0 0.25em 1.5em;
 }
 
+table.factsheet-chart-indicators {
+  font-size: 30px;
+  margin-top: 50px;
+}
+table.factsheet-chart-indicators .chart--small-image, table.factsheet-chart-indicators label, table.factsheet-chart-indicators strong, table.factsheet-chart-indicators div {
+  text-align: left;
+}
+table.factsheet-chart-indicators .title-description {
+  padding-left: 40px;
+}
+
 .factsheet-chart-indicators h4 {
   color: #575757;
   margin-top: 20px;

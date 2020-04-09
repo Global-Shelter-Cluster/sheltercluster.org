@@ -129,6 +129,19 @@
   }
 }
 
+table.factsheet-chart-indicators {
+  font-size: 30px;
+  margin-top: 50px;
+
+  .chart--small-image, label, strong, div {
+    text-align: left;
+  }
+
+  .title-description {
+    padding-left: 40px;
+  }
+}
+
 .factsheet-chart-indicators {
   h4 {
     color: $shelter-grey;

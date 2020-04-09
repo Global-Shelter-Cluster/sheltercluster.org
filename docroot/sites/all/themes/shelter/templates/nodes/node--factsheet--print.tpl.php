@@ -121,15 +121,22 @@ $is_sidebar_empty = (trim($r_sidebar) === '');
                 break;
 
               case 'chart':
-                ?><h4><?php print check_plain(t($indicator['title'])); ?></h4><?php
-
                 if ($indicator['smallImage']) { ?>
                   <table class="chart--small-image">
                     <tr>
-                      <td width="40%">
+                      <td width="30%">
                         <img <?php print drupal_attributes(['src' => $indicator['chart']]); ?>/>
                       </td>
-                      <?php if ($indicator['description']) print '<td><div>' . t($indicator['description']) . '</div></td>'; ?>
+                      <?php if ($indicator['title'] || $indicator['description']) { ?>
+                        <td class="title-description">
+                          <?php if ($indicator['title']) { ?>
+                            <div><strong><?php print check_plain(t($indicator['title'])); ?></strong></div>
+                          <?php } ?>
+                          <?php if ($indicator['description']) { ?>
+                            <div><?php print t($indicator['description']); ?></div>
+                          <?php } ?>
+                        </td>
+                      <?php } ?>
                     </tr>
                   </table>
                 <?php } else { ?>
