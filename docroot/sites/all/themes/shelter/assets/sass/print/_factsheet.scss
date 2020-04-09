@@ -131,7 +131,11 @@
 
 table.factsheet-chart-indicators {
   font-size: 30px;
-  margin-top: 40px;
+  margin-top: 50px;
+
+  .chart--small-image, label, strong, div {
+    text-align: left;
+  }
 }
 
 .factsheet-chart-indicators {
