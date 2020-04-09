@@ -104,6 +104,49 @@ $is_sidebar_empty = (trim($r_sidebar) === '');
     <?php print $r_body; ?>
   </div>
   <div class="area-details">
+    <?php if ($cluster_factsheets['indicators_people_totals']): ?>
+      <table class="factsheet-chart-indicators">
+        <tr>
+          <?php foreach ($cluster_factsheets['indicators_people_totals'] as $indicator): ?>
+          <td>
+            <?php
+            switch ($indicator['type']) {
+              case 'number':
+                ?>
+                <div>
+                  <strong><?php print check_plain($indicator['value']); ?></strong>
+                  <label><?php print check_plain(t($indicator['label'])); ?></label>
+                </div>
+                <?php
+                break;
+
+              case 'chart':
+                ?><h4><?php print check_plain(t($indicator['title'])); ?></h4><?php
+
+                if ($indicator['smallImage']) { ?>
+                  <table class="chart--small-image">
+                    <tr>
+                      <td width="40%">
+                        <img <?php print drupal_attributes(['src' => $indicator['chart']]); ?>/>
+                      </td>
+                      <?php if ($indicator['description']) print '<td><div>' . t($indicator['description']) . '</div></td>'; ?>
+                    </tr>
+                  </table>
+                <?php } else { ?>
+                  <div class="chart">
+                    <?php if ($indicator['description']) print '<div>' . t($indicator['description']) . '</div>'; ?>
+                    <img <?php print drupal_attributes(['src' => $indicator['chart']]); ?>/>
+                  </div>
+                <?php }
+                break;
+            }
+            ?>
+          </td>
+          <?php endforeach; ?>
+        </tr>
+      </table>
+    <?php endif; ?>
+
     <?php if ($cluster_factsheets['cat']): ?>
       <h3><?php print t('Coverage against targets'); ?></h3>
       <div class="chart">
@@ -111,6 +154,7 @@ $is_sidebar_empty = (trim($r_sidebar) === '');
         <img <?php print drupal_attributes(['src' => $cluster_factsheets['cat']['chart']]); ?>/>
       </div>
     <?php endif; ?>
+
     <?php print $r_field_need_analysis; ?>
     <?php print $r_field_fs_response; ?>
     <?php print $r_field_gaps_challenges; ?>

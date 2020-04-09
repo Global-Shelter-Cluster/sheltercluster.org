@@ -322,7 +322,8 @@ function cluster_factsheets_preprocess_node(&$variables) {
       break;
 
     case 'print':
-      $variables['cluster_factsheets']['indicators'] = cluster_factsheets_api_indicators($node);
+      $variables['cluster_factsheets']['indicators'] = cluster_factsheets_api_indicators($node, 'sidebar');
+      $variables['cluster_factsheets']['indicators_people_totals'] = cluster_factsheets_api_indicators($node, 'people_totals');
       $variables['cluster_factsheets']['cat'] = cluster_factsheets_api_cat($node);
       break;
 
@@ -635,16 +636,27 @@ function cluster_factsheets_last_published_for_group($group) {
   return NULL;
 }
 
-function cluster_factsheets_api_indicators($node) {
+function cluster_factsheets_api_indicators($node, $filter = NULL) {
   if (!$node || $node->type !== 'factsheet') {
     return [];
+  }
+
+  switch ($filter) {
+    case 'sidebar':
+      $include_sidebar = TRUE; $include_people_totals = FALSE;
+      break;
+    case 'people_totals':
+      $include_sidebar = FALSE; $include_people_totals = TRUE;
+      break;
+    default:
+      $include_sidebar = TRUE; $include_people_totals = TRUE;
   }
 
   $wrapper = entity_metadata_wrapper('node', $node);
 
   $indicators = [];
 
-  if (!is_null($partners = $wrapper->field_fsi_partners->value())) {
+  if ($include_sidebar && !is_null($partners = $wrapper->field_fsi_partners->value())) {
     $indicators[] = [
       'type' => 'number',
       'label' => t('Cluster partners'),
@@ -653,7 +665,8 @@ function cluster_factsheets_api_indicators($node) {
   }
 
   if (
-    (!is_null($in_need = $wrapper->field_fsi_in_need->value()))
+    $include_sidebar
+    && (!is_null($in_need = $wrapper->field_fsi_in_need->value()))
     && (!is_null($targeted = $wrapper->field_fsi_targeted->value()))
   ) {
     $indicators[] = array_filter([
@@ -668,7 +681,8 @@ function cluster_factsheets_api_indicators($node) {
   }
 
   if (
-    (!is_null($targeted = $wrapper->field_fsi_nfi_targeted->value()))
+    $include_people_totals
+    && (!is_null($targeted = $wrapper->field_fsi_nfi_targeted->value()))
     && (!is_null($reached = $wrapper->field_fsi_nfi_reached->value()))
   ) {
     $percentage = round($reached / $targeted * 100) . '%';
@@ -687,7 +701,8 @@ function cluster_factsheets_api_indicators($node) {
   }
 
   if (
-    (!is_null($targeted = $wrapper->field_fsi_shelter_targeted->value()))
+    $include_people_totals
+    && (!is_null($targeted = $wrapper->field_fsi_shelter_targeted->value()))
     && (!is_null($reached = $wrapper->field_fsi_shelter_reached->value()))
   ) {
     $percentage = round($reached / $targeted * 100) . '%';
@@ -706,7 +721,8 @@ function cluster_factsheets_api_indicators($node) {
   }
 
   if (
-    (!is_null($required = $wrapper->field_fsi_funding_required->value()))
+    $include_sidebar
+    && (!is_null($required = $wrapper->field_fsi_funding_required->value()))
     && (!is_null($funded = $wrapper->field_fsi_funded->value()))
   ) {
     $funding_source = trim($wrapper->field_funding_source->value());
