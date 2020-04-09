@@ -127,11 +127,12 @@ $is_sidebar_empty = (trim($r_sidebar) === '');
                       <td width="30%">
                         <img <?php print drupal_attributes(['src' => $indicator['chart']]); ?>/>
                       </td>
-                      <?php if ($indicator['description']) {
-                        ?><td>
-                      <div><strong><?php print check_plain(t($indicator['title'])); ?></strong></div>
-                      <div><?php print t($indicator['description']); ?></div>
-                    </td>
+                      <?php if ($indicator['description']) { ?>
+                        <td>
+                          <div><strong><?php print check_plain(t($indicator['title'])); ?></strong></div>
+                          <div><?php print t($indicator['description']); ?></div>
+                        </td>
+                      <?php } ?>
                     </tr>
                   </table>
                 <?php } else { ?>
