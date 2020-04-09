@@ -172,7 +172,7 @@ function cluster_factsheets_field_group_info() {
   $field_group->mode = 'form';
   $field_group->parent_name = 'group_indicators';
   $field_group->data = array(
-    'label' => 'NFI',
+    'label' => 'NFI (Total)',
     'weight' => '20',
     'children' => array(
       0 => 'field_fsi_nfi_targeted',
@@ -180,7 +180,7 @@ function cluster_factsheets_field_group_info() {
     ),
     'format_type' => 'fieldset',
     'format_settings' => array(
-      'label' => 'NFI',
+      'label' => 'NFI (Total)',
       'instance_settings' => array(
         'required_fields' => 1,
         'id' => '',
@@ -202,7 +202,7 @@ function cluster_factsheets_field_group_info() {
   $field_group->mode = 'form';
   $field_group->parent_name = 'group_indicators';
   $field_group->data = array(
-    'label' => 'Shelter',
+    'label' => 'Shelter (Total)',
     'weight' => '21',
     'children' => array(
       0 => 'field_fsi_shelter_targeted',
@@ -210,7 +210,7 @@ function cluster_factsheets_field_group_info() {
     ),
     'format_type' => 'fieldset',
     'format_settings' => array(
-      'label' => 'Shelter',
+      'label' => 'Shelter (Total)',
       'instance_settings' => array(
         'required_fields' => 1,
         'id' => '',
@@ -420,9 +420,9 @@ function cluster_factsheets_field_group_info() {
   t('Global');
   t('Individual people / households');
   t('Inline fields');
-  t('NFI');
+  t('NFI (Total)');
   t('Photos');
-  t('Shelter');
+  t('Shelter (Total)');
   t('Sidebar');
 
   return $field_groups;
