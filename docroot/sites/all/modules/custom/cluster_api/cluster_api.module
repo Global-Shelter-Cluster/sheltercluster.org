@@ -25,6 +25,24 @@ function cluster_api_menu() {
     'type' => MENU_NORMAL_ITEM,
   ];
 
+  $items['node/%node/devel/cluster_api'] = array(
+    'title' => 'Cluster API',
+    'page callback' => 'cluster_api_devel',
+    'page arguments' => array(0, 1),
+    'access arguments' => array('access devel information'),
+    'type' => MENU_LOCAL_TASK,
+    'weight' => 900,
+  );
+
+  $items['user/%user/devel/cluster_api'] = array(
+    'title' => 'Cluster API',
+    'page callback' => 'cluster_api_devel',
+    'page arguments' => array(0, 1),
+    'access arguments' => array('access devel information'),
+    'type' => MENU_LOCAL_TASK,
+    'weight' => 900,
+  );
+
   return $items;
 }
 
@@ -963,4 +981,21 @@ function _cluster_api_mime2ext($mime) {
   ];
 
   return isset($mime_map[$mime]) ? $mime_map[$mime] : false;
+}
+
+function cluster_api_devel($type, $object, $name = NULL) {
+  $wrapper = entity_metadata_wrapper($type, $object);
+  $bundle = $wrapper->getBundle();
+  $id = $wrapper->getIdentifier();
+
+  if (!isset(ClusterAPI_Type::$entity_map[$type]) || !isset(ClusterAPI_Type::$entity_map[$type][$bundle]))
+    return 'Not exported through the API.';
+
+  $api_type = ClusterAPI_Type::$entity_map[$type][$bundle];
+
+  global $user;
+  $api = new ClusterAPI_Object($user);
+
+  $objects = $api->getObjects([['type' => $api_type, 'id' => $id]]);
+  return kdevel_print_object($objects);
 }

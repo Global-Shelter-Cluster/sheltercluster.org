@@ -6,11 +6,13 @@ abstract class ClusterAPI_Type {
    * @var string
    */
   protected static $type;
+
   /**
    * @var array keyed by property name, value is [type => object type, mode =>
    *   stub|public|private].
    */
   protected static $related_def;
+
   /**
    * @var array of either class names or their corresponding instantiated
    *   objects.
@@ -29,6 +31,34 @@ abstract class ClusterAPI_Type {
     'page' => 'ClusterAPI_Type_Page',
     'news' => 'ClusterAPI_Type_News',
   ];
+
+  /**
+   * @var array Entity type, to bundle, to our "type".
+   */
+  public static $entity_map = [
+    'node' => [
+      'community_of_practice' => 'group',
+      'geographic_region' => 'group',
+      'hub' => 'group',
+      'response' => 'group',
+      'strategic_advisory' => 'group',
+      'working_group' => 'group',
+
+      'factsheet' => 'factsheet',
+      'document' => 'document',
+      'event' => 'event',
+      'kobo_form' => 'kobo_form',
+      'webform' => 'webform',
+      'alert' => 'alert',
+      'contact' => 'contact',
+      'page' => 'page',
+      'news' => 'news',
+    ],
+    'user' => [
+      'user' => 'user',
+    ],
+  ];
+
   /** @var \stdClass User object */
   protected $current_user;
 
