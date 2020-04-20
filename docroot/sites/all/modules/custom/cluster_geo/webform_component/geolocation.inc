@@ -75,6 +75,7 @@ function _webform_edit_geolocation($component) {
 function _webform_render_geolocation($component, $value = NULL, $filter = TRUE, $submission = NULL) {
   $element = [
     '#title' => $component['name'],
+    '#description' => $filter ? webform_filter_descriptions($component['extra']['description'], $node) : $component['extra']['description'],
     '#theme_wrappers' => ['webform_element'],
     '#weight' => $component['weight'],
     'fieldset' => [
@@ -92,7 +93,7 @@ function _webform_render_geolocation($component, $value = NULL, $filter = TRUE, 
       'lon' => [
         '#type' => 'textfield',
         '#title' => 'Longitude',
-        '#default_value' => isset($value['lon']) ? check_plain($value['lon']) : '','#description' => $filter ? webform_filter_descriptions($component['extra']['description'], $node) : $component['extra']['description'],
+        '#default_value' => isset($value['lon']) ? check_plain($value['lon']) : '',
         '#attributes' => ['class' => ['form-text', 'webform-cluster_geo-longitude']],
         '#required' => $component['required'],
         '#parents' => array('submitted', $component['form_key'], 'lon'),
@@ -101,9 +102,7 @@ function _webform_render_geolocation($component, $value = NULL, $filter = TRUE, 
         '#type' => 'textfield',
         '#title' => 'Latitude',
         '#default_value' => isset($value['lat']) ? check_plain($value['lat']) : '',
-        '#description' => $filter ? webform_filter_descriptions($component['extra']['description'], $node) : $component['extra']['description'],
         '#attributes' => ['class' => ['form-text', 'webform-cluster_geo-latitude']],
-        '#theme_wrappers' => array('webform_element'),
         '#required' => $component['required'],
         '#parents' => array('submitted', $component['form_key'], 'lat'),
       ],
