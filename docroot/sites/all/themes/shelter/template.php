@@ -410,3 +410,15 @@ function shelter_field__field_phone_number(&$variables) {
 
   return $output;
 }
+
+/**
+ * Implements hook_preprocess_HOOK().
+ */
+function shelter_preprocess_webform_element(&$variables) {
+  if (
+    isset($variables['element'])
+    && isset($variables['element']['#webform_component'])
+    && isset($variables['element']['#webform_component']['extra'])
+  )
+    $variables['element']['#webform_component']['extra']['description_above'] = TRUE;
+}

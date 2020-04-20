@@ -561,17 +561,28 @@ function cluster_factsheets_structured_data($node) {
 
   $wrapper = entity_metadata_wrapper('node', $node);
 
+  $formatted_date = format_date($wrapper->field_date->value(), 'custom', 'Y-m-d');
+
   $figures_represent_households = (bool) $wrapper->field_household_figures->value();
+  $people_per_household = $wrapper->field_people_per_household->value();
   $people_multiplier = $figures_represent_households
-    ? floatval($wrapper->field_people_per_household->value())
+    ? floatval($people_per_household)
     : 1;
 
   $partners = intval($wrapper->field_fsi_partners->value(), 10);
+
   $in_need = intval($wrapper->field_fsi_in_need->value(), 10);
   $targeted = intval($wrapper->field_fsi_targeted->value(), 10);
   $reached = intval($wrapper->field_fsi_reached->value(), 10);
+
+  $nfi_targeted = intval($wrapper->field_fsi_nfi_targeted->value(), 10);
+  $nfi_reached = intval($wrapper->field_fsi_nfi_reached->value(), 10);
+  $shelter_targeted = intval($wrapper->field_fsi_shelter_targeted->value(), 10);
+  $shelter_reached = intval($wrapper->field_fsi_shelter_reached->value(), 10);
+
   $required = intval($wrapper->field_fsi_funding_required->value(), 10);
   $funded = intval($wrapper->field_fsi_funded->value(), 10);
+  $funding_source = $wrapper->field_funding_source->value();
 
   $operational_intent_info = field_info_field('field_cat_operational_intent');
   $operational_intents = array_keys($operational_intent_info['settings']['allowed_values']);
@@ -603,13 +614,26 @@ function cluster_factsheets_structured_data($node) {
   }
 
   return [
+    'date' => $formatted_date,
+    'people_per_household' => $people_per_household,
     'partners' => is_null($partners) ? 0 : $partners,
     'people' => [
       'in need' => round($people_multiplier * (is_null($in_need) ? 0 : $in_need)),
       'targeted' => round($people_multiplier * (is_null($targeted) ? 0 : $targeted)),
       'reached' => round($people_multiplier * (is_null($reached) ? 0 : $reached)),
     ],
+    'people_totals' => [
+      'nfi' => [
+        'targeted' => round($people_multiplier * (is_null($nfi_targeted) ? 0 : $nfi_targeted)),
+        'reached' => round($people_multiplier * (is_null($nfi_reached) ? 0 : $nfi_reached)),
+      ],
+      'shelter' => [
+        'targeted' => round($people_multiplier * (is_null($shelter_targeted) ? 0 : $shelter_targeted)),
+        'reached' => round($people_multiplier * (is_null($shelter_reached) ? 0 : $shelter_reached)),
+      ],
+    ],
     'funding' => [
+      'source' => $funding_source,
       'required' => is_null($required) ? 0 : $required,
       'funded' => is_null($funded) ? 0 : $funded,
       'percentage' => !is_null($required) && $required > 0 ? round($funded / $required * 100) . '%' : NULL,

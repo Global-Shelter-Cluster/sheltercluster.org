@@ -5,6 +5,7 @@
  */
 
 include_once 'cluster_home.features.inc';
+include_once 'export.inc';
 
 /**
  * Implements hook_menu().
@@ -16,6 +17,13 @@ function cluster_home_menu() {
     'access arguments' => ['administer site configuration'],
     'type' => MENU_CALLBACK,
   ];
+
+  $items['home/dashboard-export'] = array(
+    'title' => 'Homepage dashboard Excel export',
+    'page callback' => 'cluster_home_dashboard_export_excel',
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
+  );
 
   return $items;
 }
@@ -296,6 +304,7 @@ function _cluster_home_dashboard_data() {
     $node_names[$country->nid] = $country->title;
     if (!isset($countries[$country->nid])) {
       $countries[$country->nid] = [
+        'top_region' => $top_region->nid,
         'people_targeted_shelter' => 0,
         'people_reached_shelter' => 0,
         'people_targeted_nfi' => 0,
@@ -305,9 +314,8 @@ function _cluster_home_dashboard_data() {
       ];
     }
 
-    $disaster_type = $wrapper->field_disaster_type->value();
-    $term_names[$disaster_type->tid] = $disaster_type->name;
-    $by_disaster_type[$disaster_type->tid]++;
+    $response_data = _cluster_home_response_data($response, $wrapper, $term_names);
+    $by_disaster_type[$response_data['disaster_type']]++;
 
     $factsheet = cluster_factsheets_last_published_for_group($response);
     if ($factsheet) {
@@ -320,26 +328,10 @@ function _cluster_home_dashboard_data() {
       $funding_received += $fs_funding_received;
       $people_supported += $fs_data['people']['targeted'];
 
-      $fs_people_targeted_shelter = 0;
-      $fs_people_reached_shelter = 0;
-      $fs_people_targeted_nfi = 0;
-      $fs_people_reached_nfi = 0;
-      if (isset($fs_data['cat']['emergency'])) {
-        $fs_people_targeted_shelter += $fs_data['cat']['emergency']['targeted'];
-        $fs_people_reached_shelter += $fs_data['cat']['emergency']['reached'];
-      }
-      if (isset($fs_data['cat']['permanent'])) {
-        $fs_people_targeted_shelter += $fs_data['cat']['permanent']['targeted'];
-        $fs_people_reached_shelter += $fs_data['cat']['permanent']['reached'];
-      }
-      if (isset($fs_data['cat']['shelter'])) {
-        $fs_people_targeted_shelter += $fs_data['cat']['shelter']['targeted'];
-        $fs_people_reached_shelter += $fs_data['cat']['shelter']['reached'];
-      }
-      if (isset($fs_data['cat']['nfi'])) {
-        $fs_people_targeted_nfi += $fs_data['cat']['nfi']['targeted'];
-        $fs_people_reached_nfi += $fs_data['cat']['nfi']['reached'];
-      }
+      $fs_people_targeted_shelter = $fs_data['people_totals']['shelter']['targeted'];
+      $fs_people_reached_shelter = $fs_data['people_totals']['shelter']['reached'];
+      $fs_people_targeted_nfi = $fs_data['people_totals']['nfi']['targeted'];
+      $fs_people_reached_nfi = $fs_data['people_totals']['nfi']['reached'];
 
       $countries[$country->nid]['people_targeted_shelter'] += $fs_people_targeted_shelter;
       $countries[$country->nid]['people_reached_shelter'] += $fs_people_reached_shelter;
@@ -351,6 +343,8 @@ function _cluster_home_dashboard_data() {
       $people_supported_shelter += $fs_people_reached_shelter;
       $people_supported_nfi += $fs_people_reached_nfi;
     }
+
+    $countries[$country->nid]['responses'][$response->nid] = $response_data;
   }
 
   // Remove countries without any data
@@ -376,6 +370,9 @@ function _cluster_home_dashboard_data() {
     'count_by_region' => $by_region,
 
     'countries' => $countries,
+
+    // keys are response nids
+    'factsheets' => $factsheets,
   ];
 }
 
@@ -397,4 +394,17 @@ function _cluster_home_find_top_region($node) {
   }
 
   return _cluster_home_is_country($node) ? NULL : $node;
+}
+
+function _cluster_home_response_data($response, $wrapper, &$term_names) {
+  $disaster_type = $wrapper->field_disaster_type->value();
+  $term_names[$disaster_type->tid] = $disaster_type->name;
+
+  return [
+    'nid' => $response->nid,
+    'year' => $wrapper->field_crisis_date_day->value()
+      ? format_date((int) $wrapper->field_crisis_date_day->value(), 'custom', 'Y')
+      : NULL,
+    'disaster_type' => $disaster_type->tid,
+  ];
 }
