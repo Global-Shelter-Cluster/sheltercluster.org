@@ -130,9 +130,9 @@ function cluster_email_inbound() {
       'uid' => $user ? $user->uid : NULL,
       'from_email' => $mandrill_event['msg']['from_email'],
       'from_name' => isset($mandrill_event['msg']['from_name']) ? $mandrill_event['msg']['from_name'] : NULL,
-      'subject' => $mandrill_event['msg']['subject'], // TODO: url-decode?
-      'html' => $html,
-      'text' => $text,
+      'subject' => check_plain($mandrill_event['msg']['subject']),
+      'html' => htmlentities($html),
+      'text' => check_plain($text),
       'spam_score' => $spam_score,
       'spf' => $spf,
       'dkim' => $dkim,
