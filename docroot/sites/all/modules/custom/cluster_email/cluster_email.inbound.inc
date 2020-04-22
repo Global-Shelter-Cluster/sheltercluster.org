@@ -130,9 +130,9 @@ function cluster_email_inbound() {
       'uid' => $user ? $user->uid : NULL,
       'from_email' => $mandrill_event['msg']['from_email'],
       'from_name' => isset($mandrill_event['msg']['from_name']) ? _cluster_email_character_conversion($mandrill_event['msg']['from_name']) : NULL,
-      'subject' => _cluster_email_character_conversion($mandrill_event['msg']['subject']),
-      'html' => _cluster_email_character_conversion($html),
-      'text' => _cluster_email_character_conversion($text),
+      'subject' => $mandrill_event['msg']['subject'] ? _cluster_email_character_conversion($mandrill_event['msg']['subject']) : '',
+      'html' => is_string($html) ? _cluster_email_character_conversion($html) : NULL,
+      'text' => is_string($text) ? _cluster_email_character_conversion($text) : NULL,
       'spam_score' => $spam_score,
       'spf' => $spf,
       'dkim' => $dkim,
@@ -159,7 +159,7 @@ function cluster_email_inbound() {
  */
 function _cluster_email_character_conversion($string) {
   // See https://www.php.net/manual/en/function.iconv.php#108643
-  ini_set('mbstring.substitute_character', "none");
+  ini_set('mbstring.substitute_character', 'none');
   return mb_convert_encoding($string, 'LATIN1', 'UTF-8');
 }
 
