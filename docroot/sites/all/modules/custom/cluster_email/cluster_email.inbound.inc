@@ -158,7 +158,9 @@ function cluster_email_inbound() {
  * @return string
  */
 function _cluster_email_character_conversion($string) {
-  return iconv('UTF-8', 'LATIN1//IGNORE', $string);
+  // See https://www.php.net/manual/en/function.iconv.php#108643
+  ini_set('mbstring.substitute_character', "none");
+  return mb_convert_encoding($string, 'LATIN1', 'UTF-8');
 }
 
 /**
