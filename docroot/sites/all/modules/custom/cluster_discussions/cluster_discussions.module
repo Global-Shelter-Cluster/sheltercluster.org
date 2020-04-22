@@ -514,10 +514,10 @@ function _cluster_discussions_inbound_discussion($group_nid, $message) {
 
   $wrapper->save();
 
-  watchdog('cluster_discussions', 'Created discussion from inbound email', [
+  watchdog('cluster_discussions', 'Created discussion !nid on group !gid from inbound email: @message', [
     'gid' => $group_nid,
     'nid' => $wrapper->nid->value(),
-    'message' => $message,
+    'message' => json_encode($message),
   ]);
 }
 
