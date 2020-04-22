@@ -129,10 +129,10 @@ function cluster_email_inbound() {
       'ts' => $mandrill_event['ts'],
       'uid' => $user ? $user->uid : NULL,
       'from_email' => $mandrill_event['msg']['from_email'],
-      'from_name' => isset($mandrill_event['msg']['from_name']) ? $mandrill_event['msg']['from_name'] : NULL,
-      'subject' => check_plain($mandrill_event['msg']['subject']),
-      'html' => htmlentities($html),
-      'text' => check_plain($text),
+      'from_name' => isset($mandrill_event['msg']['from_name']) ? _cluster_email_character_conversion($mandrill_event['msg']['from_name']) : NULL,
+      'subject' => _cluster_email_character_conversion($mandrill_event['msg']['subject']),
+      'html' => _cluster_email_character_conversion($html),
+      'text' => _cluster_email_character_conversion($text),
       'spam_score' => $spam_score,
       'spf' => $spf,
       'dkim' => $dkim,
@@ -149,6 +149,16 @@ function cluster_email_inbound() {
   }
 
   drupal_exit();
+}
+
+/**
+ * Gets rid of utf-8 characters that can't be translated into latin-1 (the encoding we use on the DB).
+ *
+ * @param string $string
+ * @return string
+ */
+function _cluster_email_character_conversion($string) {
+  return iconv('UTF-8', 'LATIN1//IGNORE', $string);
 }
 
 /**
