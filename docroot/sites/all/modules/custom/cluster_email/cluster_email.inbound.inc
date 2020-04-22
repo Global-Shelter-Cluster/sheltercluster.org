@@ -154,7 +154,8 @@ function cluster_email_inbound() {
 }
 
 /**
- * Gets rid of utf-8 characters that can't be translated into latin-1 (the encoding we use on the DB).
+ * Gets rid of utf-8 characters that can't be translated into latin-1
+ * (a.k.a. ISO-8859-1, the encoding we use on the DB).
  *
  * @param string $string
  * @return string
@@ -162,7 +163,11 @@ function cluster_email_inbound() {
 function _cluster_email_character_conversion($string) {
   // See https://www.php.net/manual/en/function.iconv.php#108643
   ini_set('mbstring.substitute_character', 'none');
-  return mb_convert_encoding($string, 'LATIN1', 'UTF-8');
+  $string = mb_convert_encoding($string, 'ISO-8859-1', 'UTF-8');
+  // Not sure why, but sometimes we just need to do this twice (I spent a long
+  // time debugging this, just trust me).
+  $string = mb_convert_encoding($string, 'ISO-8859-1', 'UTF-8');
+  return $string;
 }
 
 /**
