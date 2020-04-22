@@ -130,6 +130,7 @@ function cluster_email_inbound() {
       'uid' => $user ? $user->uid : NULL,
       'from_email' => $mandrill_event['msg']['from_email'],
       'from_name' => isset($mandrill_event['msg']['from_name']) ? $mandrill_event['msg']['from_name'] : NULL,
+      'subject' => $mandrill_event['msg']['subject'], // TODO: url-decode?
       'html' => $html,
       'text' => $text,
       'spam_score' => $spam_score,
@@ -154,9 +155,12 @@ function cluster_email_inbound() {
  * Implements hook_cluster_email_inbound_handle().
  */
 function cluster_email_cluster_email_inbound_handle($name, $message) {
-  if (preg_match('/^testpage-(\d+)$/', $name, $matches) === FALSE) {
+  $prefix = 'testpage-';
+  if (
+    substr($name, 0, strlen($prefix)) !== $prefix
+    || preg_match('/^' . preg_quote($prefix) . '(\d+)$/', $name, $matches) === FALSE
+  )
     return;
-  }
 
   $gid = $matches[1];
   $group = node_load($gid);
