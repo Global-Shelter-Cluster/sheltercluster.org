@@ -113,11 +113,13 @@ function cluster_email_inbound() {
 
     $user = user_load_by_mail($mandrill_event['msg']['from_email']);
 
-    $text = isset($mandrill_event['msg']['text']) ? trim($mandrill_event['msg']['text']) : NULL;
+    $text = isset($mandrill_event['msg']['text'])
+      ? trim(_cluster_email_character_conversion($mandrill_event['msg']['text']))
+      : NULL;
 
     $html = NULL;
     if (isset($mandrill_event['msg']['html']) && trim(strip_tags($mandrill_event['msg']['html'])) !== '') {
-      $html = $mandrill_event['msg']['html'];
+      $html = trim(_cluster_email_character_conversion($mandrill_event['msg']['html']));
     }
 
     if (!$text && !$html) {
@@ -131,8 +133,8 @@ function cluster_email_inbound() {
       'from_email' => $mandrill_event['msg']['from_email'],
       'from_name' => isset($mandrill_event['msg']['from_name']) ? _cluster_email_character_conversion($mandrill_event['msg']['from_name']) : NULL,
       'subject' => $mandrill_event['msg']['subject'] ? _cluster_email_character_conversion($mandrill_event['msg']['subject']) : '',
-      'html' => is_string($html) ? _cluster_email_character_conversion($html) : NULL,
-      'text' => is_string($text) ? _cluster_email_character_conversion($text) : NULL,
+      'html' => $html,
+      'text' => $text,
       'spam_score' => $spam_score,
       'spf' => $spf,
       'dkim' => $dkim,
