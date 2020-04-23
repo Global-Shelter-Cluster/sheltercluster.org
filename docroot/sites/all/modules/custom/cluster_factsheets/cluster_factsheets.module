@@ -409,8 +409,9 @@ function cluster_factsheets_form_alter(&$form, &$form_state, $form_id) {
 
   $form['title']['#access'] = FALSE;
 
-  if (arg(2) === 'clone') // Cloning a factsheet: reset the date to "today"
+  if (arg(2) === 'clone') // Cloning a factsheet
   {
+    // Reset the date to "today"
     $form['field_date']['und'][0]['#default_value']['value'] = date('Y-m-d');
   }
 }
@@ -438,6 +439,25 @@ function cluster_factsheets_node_presave($node) {
 function cluster_factsheets_node_validate($node, $form, &$form_state) {
   if ($node->type !== 'factsheet') {
     return;
+  }
+
+  $is_visible = $node->field_factsheet_is_visible['und'][0]['value'];
+  if (!$is_visible) {
+    $ignore = [
+      'body][und][0][value',
+      'field_image][und][0][upload',
+      'field_map][und][0][upload',
+    ];
+
+    $errors = form_get_errors();
+    form_clear_error();
+
+    foreach ($errors as $k => $v) {
+      if (in_array($k, $ignore))
+        continue;
+
+      form_set_error($k, $v);
+    }
   }
 
   $wrapper = entity_metadata_wrapper('node', $node);
