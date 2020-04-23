@@ -642,16 +642,23 @@ function cluster_factsheets_structured_data($node) {
   ];
 }
 
-function cluster_factsheets_last_published_for_group($group) {
+function cluster_factsheets_last_published_for_group($group, $for_data_export = FALSE) {
   $query = new EntityFieldQuery();
-  $result = $query
+
+  $query
     ->entityCondition('entity_type', 'node')
     ->entityCondition('bundle', 'factsheet')
     ->propertyCondition('status', NODE_PUBLISHED)
     ->fieldCondition('og_group_ref', 'target_id', $group->nid)
     ->fieldOrderBy('field_date', 'value', 'DESC')
-    ->range(0, 1)
-    ->execute();
+    ->range(0, 1);
+
+  if ($for_data_export)
+    $query->fieldCondition('field_factsheet_is_data_exported', 'value', 1);
+  else
+    $query->fieldCondition('field_factsheet_is_visible', 'value', 1);
+
+  $result = $query->execute();
 
   if (isset($result['node']) && count($result['node']) > 0) {
     return node_load(key($result['node']));
@@ -1206,6 +1213,7 @@ function cluster_factsheets_next_nid($factsheet_node, $prev = FALSE) {
     ->entityCondition('bundle', 'factsheet')
     ->propertyCondition('status', NODE_PUBLISHED)
     ->propertyCondition('nid', $factsheet_node->nid, '<>')
+    ->fieldCondition('field_factsheet_is_visible', 'value', 1)
     ->fieldCondition('og_group_ref', 'target_id', $group[0]->nid)
     ->fieldCondition('field_date', 'value', format_date($wrapper->field_date->value(), 'custom', 'Y-m-d'), $prev ? '<' : '>')
     ->fieldOrderBy('field_date', 'value', $prev ? 'DESC' : 'ASC')
@@ -1265,6 +1273,7 @@ function _cluster_factsheets_notification_objects_alter(&$objects_by_gid, $perio
     ->entityCondition('bundle', 'factsheet')
     ->propertyCondition('status', NODE_PUBLISHED)
     ->propertyCondition('created', REQUEST_TIME - $period, '>')
+    ->fieldCondition('field_factsheet_is_visible', 'value', 1)
     ->execute();
 
   if (!$results || !$results['node']) {
@@ -1309,6 +1318,7 @@ function cluster_factsheets_cluster_api_objects_label($ids, $langcode) {
     ->entityCondition('bundle', 'factsheet')
     ->propertyCondition('status', NODE_PUBLISHED)
     ->propertyCondition('nid', $ids, 'IN')
+    ->fieldCondition('field_factsheet_is_visible', 'value', 1)
     ->count()
     ->execute();
   if ($all_count === 0) {
@@ -1348,6 +1358,7 @@ function cluster_factsheets_cluster_email_render_data($ids, $langcode) {
     ->entityCondition('bundle', 'factsheet')
     ->propertyCondition('status', NODE_PUBLISHED)
     ->propertyCondition('nid', $ids, 'IN')
+    ->fieldCondition('field_factsheet_is_visible', 'value', 1)
     ->range(0, 2); // max. 2 nodes
 
   $results = $query->execute();

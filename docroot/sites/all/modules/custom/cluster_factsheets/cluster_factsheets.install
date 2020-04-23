@@ -1,0 +1,22 @@
+<?php
+
+/**
+ * Sets "checked" for all factsheets, for new "visible on website" checkbox
+ * field.
+ */
+function cluster_factsheets_update_7000() {
+  features_revert_module('cluster_factsheets');
+
+  $query = new EntityFieldQuery();
+  $query->entityCondition('entity_type', 'node')
+    ->entityCondition('bundle', 'factsheet');
+
+  $result = $query->execute();
+  if (isset($result['node'])) {
+    foreach (array_keys($result['node']) as $nid) {
+      $node = node_load($nid);
+      $node->field_factsheet_is_visible = [LANGUAGE_NONE => [['value' => 1]]];
+      node_save($node);
+    }
+  }
+}

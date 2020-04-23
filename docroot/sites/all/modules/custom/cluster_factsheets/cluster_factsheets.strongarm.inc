@@ -124,7 +124,7 @@ function cluster_factsheets_strongarm() {
           'weight' => '0',
         ),
         'title' => array(
-          'weight' => '1',
+          'weight' => '33',
         ),
       ),
       'display' => array(),

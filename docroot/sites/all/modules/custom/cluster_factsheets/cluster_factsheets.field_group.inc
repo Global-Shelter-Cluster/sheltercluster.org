@@ -55,7 +55,9 @@ function cluster_factsheets_field_group_info() {
       0 => 'body',
       1 => 'field_date',
       2 => 'og_group_ref',
-      3 => 'title',
+      3 => 'field_factsheet_is_visible',
+      4 => 'field_factsheet_is_data_exported',
+      5 => 'title',
     ),
     'format_type' => 'tab',
     'format_settings' => array(

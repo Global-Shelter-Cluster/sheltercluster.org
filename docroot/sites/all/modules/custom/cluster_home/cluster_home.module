@@ -317,7 +317,7 @@ function _cluster_home_dashboard_data() {
     $response_data = _cluster_home_response_data($response, $wrapper, $term_names);
     $by_disaster_type[$response_data['disaster_type']]++;
 
-    $factsheet = cluster_factsheets_last_published_for_group($response);
+    $factsheet = cluster_factsheets_last_published_for_group($response, TRUE);
     if ($factsheet) {
       $fs_data = cluster_factsheets_structured_data($factsheet);
       $factsheets[$response->nid] = $fs_data;
