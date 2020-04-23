@@ -100,6 +100,7 @@ class GroupContentManager {
     $query = new EntityFieldQuery();
     $query->entityCondition('entity_type', 'node')
       ->entityCondition('bundle', 'factsheet')
+      ->fieldCondition('field_factsheet_is_visible', 'value', 1)
       ->fieldCondition('og_group_ref', 'target_id', $this->node->nid)
       ->propertyCondition('status', NODE_PUBLISHED)
       ->fieldOrderBy('field_date', 'value', 'DESC');
@@ -253,6 +254,7 @@ class GroupContentManager {
     $query = new EntityFieldQuery();
     return $query->entityCondition('entity_type', 'node')
       ->entityCondition('bundle', 'factsheet')
+      ->fieldCondition('field_factsheet_is_visible', 'value', 1)
       ->fieldCondition('og_group_ref', 'target_id', $this->node->nid)
       ->propertyCondition('status', NODE_PUBLISHED)
       ->count()

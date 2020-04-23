@@ -348,7 +348,7 @@ function cluster_factsheets_field_default_field_instances() {
         'summary_rows' => 5,
       ),
       'type' => 'text_textarea_with_summary',
-      'weight' => 3,
+      'weight' => 36,
     ),
   );
 
@@ -559,7 +559,153 @@ function cluster_factsheets_field_default_field_instances() {
         'year_range' => '-3:+3',
       ),
       'type' => 'date_text',
-      'weight' => 2,
+      'weight' => 35,
+    ),
+  );
+
+  // Exported field_instance: 'node-factsheet-field_factsheet_is_data_exported'.
+  $field_instances['node-factsheet-field_factsheet_is_data_exported'] = array(
+    'bundle' => 'factsheet',
+    'default_value' => array(
+      0 => array(
+        'value' => 0,
+      ),
+    ),
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 13,
+      ),
+      'factsheet_homepage_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'factsheet_preview_block' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'factsheet_summary' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'ical' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'preview_block' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'print' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_factsheet_is_data_exported',
+    'label' => 'Quarterly factsheet (data is published for dashboards)',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(
+        'display_label' => 1,
+      ),
+      'type' => 'options_onoff',
+      'weight' => 32,
+    ),
+  );
+
+  // Exported field_instance: 'node-factsheet-field_factsheet_is_visible'.
+  $field_instances['node-factsheet-field_factsheet_is_visible'] = array(
+    'bundle' => 'factsheet',
+    'default_value' => array(
+      0 => array(
+        'value' => 1,
+      ),
+    ),
+    'deleted' => 0,
+    'description' => 'When unchecked, most "required" fields (e.g. highlights, photo, map) are not required anymore.',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 12,
+      ),
+      'factsheet_homepage_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'factsheet_preview_block' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'factsheet_summary' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'ical' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'preview_block' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'print' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_factsheet_is_visible',
+    'label' => 'Visible on the website',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(
+        'display_label' => 1,
+      ),
+      'type' => 'options_onoff',
+      'weight' => 31,
     ),
   );
 
@@ -647,7 +793,7 @@ function cluster_factsheets_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 24,
+        'weight' => 26,
       ),
       'factsheet_homepage_teaser' => array(
         'label' => 'above',
@@ -724,7 +870,7 @@ function cluster_factsheets_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 23,
+        'weight' => 25,
       ),
       'factsheet_homepage_teaser' => array(
         'label' => 'above',
@@ -801,7 +947,7 @@ function cluster_factsheets_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 20,
+        'weight' => 22,
       ),
       'factsheet_homepage_teaser' => array(
         'label' => 'above',
@@ -872,7 +1018,7 @@ function cluster_factsheets_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 14,
+        'weight' => 16,
       ),
       'factsheet_homepage_teaser' => array(
         'label' => 'above',
@@ -943,7 +1089,7 @@ function cluster_factsheets_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 13,
+        'weight' => 15,
       ),
       'factsheet_homepage_teaser' => array(
         'label' => 'above',
@@ -1014,7 +1160,7 @@ function cluster_factsheets_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 22,
+        'weight' => 24,
       ),
       'factsheet_homepage_teaser' => array(
         'label' => 'above',
@@ -1091,7 +1237,7 @@ function cluster_factsheets_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 12,
+        'weight' => 14,
       ),
       'factsheet_homepage_teaser' => array(
         'label' => 'above',
@@ -1162,7 +1308,7 @@ function cluster_factsheets_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 16,
+        'weight' => 18,
       ),
       'factsheet_homepage_teaser' => array(
         'label' => 'above',
@@ -1233,7 +1379,7 @@ function cluster_factsheets_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 15,
+        'weight' => 17,
       ),
       'factsheet_homepage_teaser' => array(
         'label' => 'above',
@@ -1304,7 +1450,7 @@ function cluster_factsheets_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 21,
+        'weight' => 23,
       ),
       'factsheet_homepage_teaser' => array(
         'label' => 'above',
@@ -1375,7 +1521,7 @@ function cluster_factsheets_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 17,
+        'weight' => 19,
       ),
       'factsheet_homepage_teaser' => array(
         'label' => 'above',
@@ -1522,7 +1668,7 @@ function cluster_factsheets_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 18,
+        'weight' => 20,
       ),
       'factsheet_homepage_teaser' => array(
         'label' => 'above',
@@ -2214,7 +2360,7 @@ function cluster_factsheets_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 19,
+        'weight' => 21,
       ),
       'factsheet_homepage_teaser' => array(
         'label' => 'above',
@@ -2359,7 +2505,7 @@ function cluster_factsheets_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 25,
+        'weight' => 27,
       ),
       'factsheet_homepage_teaser' => array(
         'label' => 'above',
@@ -2445,7 +2591,80 @@ function cluster_factsheets_field_default_field_instances() {
       'module' => 'og',
       'settings' => array(),
       'type' => 'og_complex',
-      'weight' => 6,
+      'weight' => 34,
+    ),
+  );
+
+  // Exported field_instance: 'node-factsheet-title_field'.
+  $field_instances['node-factsheet-title_field'] = array(
+    'bundle' => 'factsheet',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 28,
+      ),
+      'factsheet_homepage_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'factsheet_preview_block' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'factsheet_summary' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'ical' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'preview_block' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'print' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'title_field',
+    'label' => 'Title',
+    'required' => TRUE,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'hide_label' => array(
+        'entity' => 0,
+        'page' => 0,
+      ),
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => -5,
     ),
   );
 
@@ -2476,13 +2695,16 @@ function cluster_factsheets_field_default_field_instances() {
   t('Photographer / Organisation, Year');
   t('Planned');
   t('Provide information on the progress against targets based on your cluster strategy and 4W data. Please report on the progress for the year to date. Under NFI, only count the equivalent of a standard kit. Under shelter, you can provide a total figure if they do not overlap and provide emergency shelter (no single items) or support permanent shelter. You are encouraged to provide the breakdown between emergency shelter and permanent shelter whenever possible.');
+  t('Quarterly factsheet (data is published for dashboards)');
   t('Reached');
   t('Required');
   t('Response');
   t('Source');
   t('Targeted');
   t('Title');
+  t('Visible on the website');
   t('When describing challenges, please start with a keyword (funding, access, capacity, data, stockpiles, HLP, material, armed groups, protracted displacement etc.) to facilitate analysis.');
+  t('When unchecked, most "required" fields (e.g. highlights, photo, map) are not required anymore.');
 
   return $field_instances;
 }
