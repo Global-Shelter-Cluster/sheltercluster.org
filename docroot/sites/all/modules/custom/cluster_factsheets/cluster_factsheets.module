@@ -119,21 +119,16 @@ function cluster_factsheets_chart($node, $type) {
         (!is_null($targeted = $wrapper->field_fsi_nfi_targeted->value()))
         && (!is_null($reached = $wrapper->field_fsi_nfi_reached->value()))
       ) {
-        $percentage = round($reached / $targeted * 100);
-
-        if ($percentage >= 100) {
-          cluster_chart_png_pie([$reached], ['Reached'], [CLUSTER_CHART_COLOR_SHELTER_DARK_BLUE], 500, 500);
-        }
-        else {
-          cluster_chart_png_pie(
-            [$reached, $targeted - $reached],
-            ['Reached', 'Gap'],
-            [
-              CLUSTER_CHART_COLOR_SHELTER_DARK_BLUE,
-              CLUSTER_CHART_COLOR_SHELTER_LIGHT_BLUE,
-            ],
-            500, 500);
-        }
+        cluster_chart_png_hbar(
+          [$targeted, $reached],
+          ['', ''],
+          [
+            CLUSTER_CHART_COLOR_SHELTER_RED_SHADE2,
+            CLUSTER_CHART_COLOR_SHELTER_RED,
+          ],
+          500, 200,
+          NULL // TODO: filename
+        );
       }
       break;
 
@@ -142,21 +137,16 @@ function cluster_factsheets_chart($node, $type) {
         (!is_null($targeted = $wrapper->field_fsi_shelter_targeted->value()))
         && (!is_null($reached = $wrapper->field_fsi_shelter_reached->value()))
       ) {
-        $percentage = round($reached / $targeted * 100);
-
-        if ($percentage >= 100) {
-          cluster_chart_png_pie([$reached], ['Reached'], [CLUSTER_CHART_COLOR_SHELTER_RED], 500, 500);
-        }
-        else {
-          cluster_chart_png_pie(
-            [$reached, $targeted - $reached],
-            ['Reached', 'Gap'],
-            [
-              CLUSTER_CHART_COLOR_SHELTER_RED,
-              CLUSTER_CHART_COLOR_SHELTER_RED_SHADE2,
-            ],
-            500, 500);
-        }
+        cluster_chart_png_hbar(
+          [$targeted, $reached],
+          ['', ''],
+          [
+            CLUSTER_CHART_COLOR_SHELTER_RED_SHADE2,
+            CLUSTER_CHART_COLOR_SHELTER_RED,
+          ],
+          500, 200,
+          NULL // TODO: filename
+        );
       }
       break;
 
@@ -409,8 +399,9 @@ function cluster_factsheets_form_alter(&$form, &$form_state, $form_id) {
 
   $form['title']['#access'] = FALSE;
 
-  if (arg(2) === 'clone') // Cloning a factsheet: reset the date to "today"
+  if (arg(2) === 'clone') // Cloning a factsheet
   {
+    // Reset the date to "today"
     $form['field_date']['und'][0]['#default_value']['value'] = date('Y-m-d');
   }
 }
@@ -438,6 +429,25 @@ function cluster_factsheets_node_presave($node) {
 function cluster_factsheets_node_validate($node, $form, &$form_state) {
   if ($node->type !== 'factsheet') {
     return;
+  }
+
+  $is_visible = $node->field_factsheet_is_visible['und'][0]['value'];
+  if (!$is_visible) {
+    $ignore = [
+      'body][und][0][value',
+      'field_image][und][0][upload',
+      'field_map][und][0][upload',
+    ];
+
+    $errors = form_get_errors();
+    form_clear_error();
+
+    foreach ($errors as $k => $v) {
+      if (in_array($k, $ignore))
+        continue;
+
+      form_set_error($k, $v);
+    }
   }
 
   $wrapper = entity_metadata_wrapper('node', $node);
@@ -818,7 +828,7 @@ function cluster_factsheets_chart_indicators($node) {
           '#options' => [
             'legend' => ['display' => FALSE],
             'maintainAspectRatio' => FALSE,
-            'scales' => ['xAxes' => [['ticks' => ['beginAtZero' => TRUE]]]],
+            'scales' => ['xAxes' => [['ticks' => ['beginAtZero' => TRUE, 'callback' => '[M]']]]],
           ],
         ],
       ];
@@ -844,7 +854,7 @@ function cluster_factsheets_chart_indicators($node) {
           '#options' => [
             'legend' => ['display' => FALSE],
             'maintainAspectRatio' => FALSE,
-            'scales' => ['xAxes' => [['ticks' => ['beginAtZero' => TRUE]]]],
+            'scales' => ['xAxes' => [['ticks' => ['beginAtZero' => TRUE, 'callback' => '[M]']]]],
           ],
         ],
       ];
@@ -937,56 +947,30 @@ function cluster_factsheets_chart_indicators_people($node) {
     (!is_null($targeted = $wrapper->field_fsi_nfi_targeted->value()))
     && (!is_null($reached = $wrapper->field_fsi_nfi_reached->value()))
   ) {
-    $percentage = round($reached / $targeted * 100);
-
     $indicators[] = [
       '#type' => 'container',
-//      '#attributes' => ['class' => ['indicator-nfi']],
       0 => [
         '#theme' => 'html_tag',
         '#tag' => 'h4',
         '#value' => t('NFI') . _cluster_factsheets_hh_abbr($node),
       ],
-      1 => $percentage >= 100
-        ? [
-          '#theme' => 'cluster_chart_pie',
-          '#data' => [
-            'data' => [$reached],
-            'backgroundColor' => [CLUSTER_CHART_COLOR_SHELTER_DARK_BLUE],
-          ],
-          '#labels' => [t('Reached')],
-          '#options' => [
-            'legend' => ['display' => FALSE],
-            'maintainAspectRatio' => FALSE,
-            'pieceLabel' => [
-              'render' => [$percentage . '%'],
-              'fontColor' => 'white',
-            ],
-          ],
-        ]
-        : [
-          '#theme' => 'cluster_chart_pie',
-          '#data' => [
-            'data' => [$reached, max(0, $targeted - $reached)],
+      1 => [
+        '#theme' => 'cluster_chart_hbar',
+        '#data' => [
+          [
+            'data' => [$targeted, $reached],
             'backgroundColor' => [
-              CLUSTER_CHART_COLOR_SHELTER_DARK_BLUE,
-              CLUSTER_CHART_COLOR_SHELTER_LIGHT_BLUE,
-            ],
-          ],
-          '#labels' => [t('Reached'), t('Gap')],
-          '#options' => [
-            'legend' => ['display' => FALSE],
-            'maintainAspectRatio' => FALSE,
-            'pieceLabel' => [
-              'render' => [$percentage . '%'],
-              'fontColor' => 'white',
+              CLUSTER_CHART_COLOR_SHELTER_RED_SHADE2,
+              CLUSTER_CHART_COLOR_SHELTER_RED,
             ],
           ],
         ],
-      2 => [
-        '#theme' => 'html_tag',
-        '#tag' => 'small',
-        '#value' => t('Targeted') . ': ' . cluster_factsheets_number($targeted),
+        '#labels' => [t('Targeted'), t('Reached')],
+        '#options' => [
+          'legend' => ['display' => FALSE],
+          'maintainAspectRatio' => FALSE,
+          'scales' => ['xAxes' => [['ticks' => ['beginAtZero' => TRUE, 'callback' => '[M]']]]],
+        ],
       ],
     ];
   }
@@ -995,56 +979,30 @@ function cluster_factsheets_chart_indicators_people($node) {
     (!is_null($targeted = $wrapper->field_fsi_shelter_targeted->value()))
     && (!is_null($reached = $wrapper->field_fsi_shelter_reached->value()))
   ) {
-    $percentage = round($reached / $targeted * 100);
-
     $indicators[] = [
       '#type' => 'container',
-//      '#attributes' => ['class' => ['indicator-nfi']],
       0 => [
         '#theme' => 'html_tag',
         '#tag' => 'h4',
         '#value' => t('Shelter') . _cluster_factsheets_hh_abbr($node),
       ],
-      1 => $percentage >= 100
-        ? [
-          '#theme' => 'cluster_chart_pie',
-          '#data' => [
-            'data' => [$reached],
-            'backgroundColor' => [CLUSTER_CHART_COLOR_SHELTER_RED],
-          ],
-          '#labels' => [t('Reached')],
-          '#options' => [
-            'legend' => ['display' => FALSE],
-            'maintainAspectRatio' => FALSE,
-            'pieceLabel' => [
-              'render' => [$percentage . '%'],
-              'fontColor' => 'white',
-            ],
-          ],
-        ]
-        : [
-          '#theme' => 'cluster_chart_pie',
-          '#data' => [
-            'data' => [$reached, max(0, $targeted - $reached)],
+      1 => [
+        '#theme' => 'cluster_chart_hbar',
+        '#data' => [
+          [
+            'data' => [$targeted, $reached],
             'backgroundColor' => [
-              CLUSTER_CHART_COLOR_SHELTER_RED,
               CLUSTER_CHART_COLOR_SHELTER_RED_SHADE2,
-            ],
-          ],
-          '#labels' => [t('Reached'), t('Gap')],
-          '#options' => [
-            'legend' => ['display' => FALSE],
-            'maintainAspectRatio' => FALSE,
-            'pieceLabel' => [
-              'render' => [$percentage . '%'],
-              'fontColor' => 'white',
+              CLUSTER_CHART_COLOR_SHELTER_RED,
             ],
           ],
         ],
-      2 => [
-        '#theme' => 'html_tag',
-        '#tag' => 'small',
-        '#value' => t('Targeted') . ': ' . cluster_factsheets_number($targeted),
+        '#labels' => [t('Targeted'), t('Reached')],
+        '#options' => [
+          'legend' => ['display' => FALSE],
+          'maintainAspectRatio' => FALSE,
+          'scales' => ['xAxes' => [['ticks' => ['beginAtZero' => TRUE, 'callback' => '[M]']]]],
+        ],
       ],
     ];
   }
@@ -1110,7 +1068,7 @@ function cluster_factsheets_field_formatter_view($entity_type, $entity, $field, 
               'xAxes' => [
                 [
                   'stacked' => TRUE,
-                  'ticks' => ['beginAtZero' => TRUE],
+                  'ticks' => ['beginAtZero' => TRUE, 'callback' => '[M]'],
                 ],
               ],
               'yAxes' => [['stacked' => TRUE]],

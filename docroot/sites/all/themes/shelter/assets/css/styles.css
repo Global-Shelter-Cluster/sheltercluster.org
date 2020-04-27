@@ -4388,10 +4388,6 @@ body.document-upload-ondrag {
   width: 50%;
   float: left;
 }
-.factsheet-chart-indicators-people .cluster-chart-wrapper {
-  max-width: none;
-  padding: 0 50px;
-}
 
 .cluster-chart-wrapper.fs_cat_chart {
   min-height: 200px;
