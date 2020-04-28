@@ -124,7 +124,7 @@ $is_sidebar_empty = (trim($r_sidebar) === '');
                 if ($indicator['smallImage']) { ?>
                   <table class="chart--small-image">
                     <tr>
-                      <td width="30%">
+                      <td width="50%">
                         <img <?php print drupal_attributes(['src' => $indicator['chart']]); ?>/>
                       </td>
                       <?php if ($indicator['title'] || $indicator['description']) { ?>
