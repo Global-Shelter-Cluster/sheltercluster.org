@@ -528,5 +528,50 @@ function _cluster_discussions_inbound_discussion($group_nid, $message) {
  * @param array $message
  */
 function _cluster_discussions_inbound_comment($discussion_nid, $message) {
-  watchdog('cluster_discussions', '_cluster_discussions_inbound_comment(): Not implemented yet', [], WATCHDOG_WARNING);
+  $discussion = node_load($discussion_nid);
+  if (!$discussion || $discussion->type !== 'discussion') {
+    return;
+  }
+
+  $values = [
+    'created' => $message['ts'],
+    'nid' => $discussion->nid,
+    'status' => COMMENT_PUBLISHED,
+    'node_type' => 'comment_node_discussion',
+  ];
+
+  if (isset($message['html'])) {
+    $values['subject'] = text_summary(strip_tags($message['html']), 'plain_text', 60);
+  }
+  else {
+    $values['subject'] = text_summary($message['text'], 'plain_text', 60);
+  }
+
+  $user = NULL;
+  if (isset($message['uid']) && $user = user_load($message['uid'])) {
+    $values['uid'] = $user->uid;
+  }
+
+  $comment = entity_create('comment', $values);
+  $wrapper = entity_metadata_wrapper('comment', $comment);
+
+  if (isset($message['html'])) {
+    $wrapper->comment_body->set([
+      'value' => $message['html'],
+      'format' => 'filtered_html'
+    ]);
+  }
+  else {
+    $wrapper->comment_body->set([
+      'value' => $message['text'],
+      'format' => 'plain_text'
+    ]);
+  }
+
+  $wrapper->save();
+
+  watchdog('cluster_discussions', 'Created comment @cid on discussion @nid from inbound email', [
+    '@cid' => $wrapper->cid->value(),
+    '@nid' => $discussion->nid,
+  ]);
 }
