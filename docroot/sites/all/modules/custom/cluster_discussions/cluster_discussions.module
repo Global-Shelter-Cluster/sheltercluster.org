@@ -454,10 +454,10 @@ function cluster_discussions_cluster_email_inbound_handle($name, $message) {
     return;
   }
 
-  if (preg_match('/^' . preg_quote($prefix_discussion) . '(\d+)$/', $name, $matches) !== FALSE) {
+  if (preg_match('/^' . preg_quote($prefix_discussion) . '(\d+)$/', $name, $matches)) {
     _cluster_discussions_inbound_discussion($matches[1], $message);
   }
-  elseif (preg_match('/^' . preg_quote($prefix_comment) . '(\d+)$/', $name, $matches) !== FALSE) {
+  elseif (preg_match('/^' . preg_quote($prefix_comment) . '(\d+)$/', $name, $matches)) {
     _cluster_discussions_inbound_comment($matches[1], $message);
   }
 }
