@@ -88,6 +88,12 @@ function cluster_email_inbound() {
   $env_prefix = $is_prod ? '' : preg_quote($env . '-');
 
   foreach ($mandrill_events as $mandrill_event) {
+    if (shelter_base_get_env() === 'dev') {
+      watchdog('cluster_email_inbound', '[dev only] Received Mandrill event: @data', [
+        '@data' => print_r($mandrill_event, TRUE),
+      ]);
+    }
+
     if ($mandrill_event['event'] !== 'inbound') {
       watchdog('cluster_email_inbound', 'Unrecognized event: @event. Message: @msg', [
         '@event' => $mandrill_event['event'],
