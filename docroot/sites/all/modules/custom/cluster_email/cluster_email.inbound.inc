@@ -81,11 +81,7 @@ function cluster_email_inbound() {
     drupal_exit();
   }
 
-  $is_prod = shelter_base_is_prod();
-  $env = shelter_base_get_env();
-  // Emails should look like "stage-testpage-9175@inbound.sheltercluster.org",
-  // or "testpage-9175@inbound.sheltercluster.org" for production.
-  $env_prefix = $is_prod ? '' : preg_quote($env . '-');
+  $env_prefix = cluster_email_inbound_key_prefix();
 
   foreach ($mandrill_events as $mandrill_event) {
     if (shelter_base_get_env() === 'dev') {
@@ -102,7 +98,7 @@ function cluster_email_inbound() {
       continue;
     }
 
-    if (preg_match('/^' . $env_prefix . '([^@]+)@/', $mandrill_event['msg']['email'], $matches) === FALSE) {
+    if (preg_match('/^' . preg_quote($env_prefix) . '([^@]+)@/', $mandrill_event['msg']['email'], $matches) === FALSE) {
       watchdog('cluster_email_inbound', 'Could not parse email: @msg', ['@msg' => print_r($mandrill_event, TRUE)], WATCHDOG_WARNING);
       continue;
     }

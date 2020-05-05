@@ -256,14 +256,15 @@ function cluster_discussions_mail($key, &$message, $params) {
     ? $params['comment']->registered_name
     : $params['node']->name;
   $message['body'] = [drupal_render($body)];
-  // TODO: set "reply-to"
+
+  $reply_to_address = cluster_email_inbound_address('comment-'.$params['node']->nid);
+  $message['headers']['Reply-To'] = $reply_to_address;
 }
 
 /**
  * Implements hook_cron().
  */
 function cluster_discussions_cron() {
-  return; // TODO: this disables discussion emails. When SA-156 is done, remove this line.
   // Email notifications for new discussion nodes
 
   $query = new EntityFieldQuery();
@@ -303,8 +304,8 @@ function cluster_discussions_cron() {
       $all_uids = array_unique(array_merge($all_uids, cluster_api_get_followers($manager)));
     }
 
-// Don't email the author TODO!!!
-//    $all_uids = array_diff($all_uids, [$discussion_node->uid]);
+    // Don't email the author
+    $all_uids = array_values(array_diff($all_uids, [$discussion_node->uid]));
 
     if (!$all_uids)
       continue;
@@ -335,11 +336,15 @@ function cluster_discussions_cron() {
   $query = new EntityFieldQuery();
   $results = $query->entityCondition('entity_type', 'comment')
 
-  // This doesn't work, but it's fine AS LONG AS we're only using comments for discussion nodes.
+  /**
+   * This doesn't work, but it's fine as long as we're only using comments
+   * mostly for discussion nodes. There's a check below that filters out other
+   * comment types.
+   */
 //    ->propertyCondition('node_type', 'comment_node_discussion')
 
     ->propertyCondition('status', COMMENT_PUBLISHED)
-//    ->fieldCondition('field_is_sent', 'value', '1', '<>')
+    ->propertyCondition('is_sent', 1, '<>') // from the cluster_comment module
 
     // Just in case, don't send if it's more than a week old
     ->propertyCondition('created', REQUEST_TIME - (7*CLUSTER_API_DAY), '>')
@@ -360,9 +365,8 @@ function cluster_discussions_cron() {
     $comment_wrapper = entity_metadata_wrapper('comment', $comment);
     $discussion_wrapper = entity_metadata_wrapper('node', $discussion_node);
 
-    // TODO: set "is_sent" and add it to query above
-//    $comment_wrapper->field_is_sent->set(1);
-//    $comment_wrapper->save();
+    $comment->is_sent = 1;
+    comment_save($comment);
 
     $body = $comment_wrapper->comment_body->value()['safe_value'];
     $comment_date = $comment->created;
@@ -380,8 +384,8 @@ function cluster_discussions_cron() {
       $all_uids = array_unique(array_merge($all_uids, cluster_api_get_followers($manager)));
     }
 
-    // Don't email the author TODO!!!
-//    $all_uids = array_diff($all_uids, [$comment->uid]);
+    // Don't email the author
+    $all_uids = array_values(array_diff($all_uids, [$comment->uid]));
 
     if (!$all_uids)
       continue;
