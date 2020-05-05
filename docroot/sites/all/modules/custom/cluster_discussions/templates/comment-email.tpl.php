@@ -14,7 +14,7 @@
   <h1 style="
     margin: 20px 0 0;
   ">
-    <?php print l($node->title, 'node/'.$node->nid, ['absolute' => TRUE, 'attributes' => [
+    <?php print l('Re: '.$node->title, 'node/'.$node->nid, ['absolute' => TRUE, 'attributes' => [
       'style' => 'color: #7f1416; text-decoration: none;'
     ],
     'fragment' => 'comment-'.$comment->cid]); ?>

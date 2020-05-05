@@ -304,8 +304,8 @@ function cluster_discussions_cron() {
       $all_uids = array_unique(array_merge($all_uids, cluster_api_get_followers($manager)));
     }
 
-// Don't email the author TODO!!!
-//    $all_uids = array_diff($all_uids, [$discussion_node->uid]);
+    // Don't email the author
+    $all_uids = array_values(array_diff($all_uids, [$discussion_node->uid]));
 
     if (!$all_uids)
       continue;
@@ -384,8 +384,8 @@ function cluster_discussions_cron() {
       $all_uids = array_unique(array_merge($all_uids, cluster_api_get_followers($manager)));
     }
 
-    // Don't email the author TODO!!!
-//    $all_uids = array_diff($all_uids, [$comment->uid]);
+    // Don't email the author
+    $all_uids = array_values(array_diff($all_uids, [$comment->uid]));
 
     if (!$all_uids)
       continue;
