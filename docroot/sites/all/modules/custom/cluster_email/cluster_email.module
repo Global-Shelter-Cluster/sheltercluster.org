@@ -358,3 +358,16 @@ function cluster_email_theme($existing, $type, $theme, $path) {
     ],
   ];
 }
+
+function cluster_email_inbound_key_prefix() {
+  $is_prod = shelter_base_is_prod();
+  $env = shelter_base_get_env();
+  // Emails should look like "stage-testpage-9175@inbound.sheltercluster.org",
+  // or "testpage-9175@inbound.sheltercluster.org" for production.
+  return $is_prod ? '' : $env . '-';
+}
+
+function cluster_email_inbound_address($key) {
+  $env_prefix = cluster_email_inbound_key_prefix();
+  return $env_prefix . $key . '@inbound.sheltercluster.org';
+}

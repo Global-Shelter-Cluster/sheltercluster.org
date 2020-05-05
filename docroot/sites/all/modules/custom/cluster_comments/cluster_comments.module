@@ -1,0 +1,13 @@
+<?php
+
+/**
+ * Implements hook_schema_alter().
+ */
+function cluster_comments_schema_alter(&$schema) {
+  $schema['comment']['fields']['is_sent'] = [
+    'type' => 'int',
+    'unsigned' => TRUE,
+    'not null' => TRUE,
+    'default' => 0,
+  ];
+}
