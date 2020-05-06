@@ -159,7 +159,7 @@ function cluster_email_inbound() {
     if ($message['html']) {
       $message['original_html'] = $message['html'];
       $message['html'] = cluster_email_process_html($message['html']);
-      
+
       if (!$message['html']) {
         watchdog('cluster_email_inbound', 'HTML after processing is empty. Skipping inbound email (@name): @msg', [
           '@name' => $name,
@@ -261,6 +261,9 @@ function cluster_email_process_html($html) {
     'b' => 'strong',
     'i' => 'em',
   ]);
+
+  // Remove BRs from end (from https://stackoverflow.com/a/49935083)
+  $ret = preg_replace('#(\s*<br\s*/?>)*\s*$#i', '', $ret);
 
   $is_empty = !trim(strip_tags($ret));
 
