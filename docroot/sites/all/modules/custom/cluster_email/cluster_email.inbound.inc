@@ -152,14 +152,30 @@ function cluster_email_inbound() {
         '@name' => $name,
         '@msg' => json_encode($message),
       ], WATCHDOG_WARNING);
-    } else {
-      watchdog('cluster_email_inbound', 'Processing inbound email (@name): @msg', [
-        '@name' => $name,
-        '@msg' => json_encode($message),
-      ], WATCHDOG_DEBUG);
 
-      module_invoke_all('cluster_email_inbound_handle', $name, $message);
+      continue;
     }
+
+    if ($message['html']) {
+      $message['original_html'] = $message['html'];
+      $message['html'] = cluster_email_process_html($message['html']);
+      
+      if (!$message['html']) {
+        watchdog('cluster_email_inbound', 'HTML after processing is empty. Skipping inbound email (@name): @msg', [
+          '@name' => $name,
+          '@msg' => json_encode($message),
+        ], WATCHDOG_WARNING);
+
+        continue;
+      }
+    }
+
+    watchdog('cluster_email_inbound', 'Processing inbound email (@name): @msg', [
+      '@name' => $name,
+      '@msg' => json_encode($message),
+    ], WATCHDOG_DEBUG);
+
+    module_invoke_all('cluster_email_inbound_handle', $name, $message);
   }
 
   drupal_exit();
@@ -225,4 +241,109 @@ function cluster_email_cluster_email_inbound_handle($name, $message) {
   $node->body = [LANGUAGE_NONE => [$body]];
 
   $wrapper->save();
+}
+
+/**
+ * @param string $html
+ *
+ * @return string|null If resulting html is empty (could have empty tags), returns NULL
+ */
+function cluster_email_process_html($html) {
+  $doc = DOMDocument::loadHTML('<div>' . $html . '</div>');
+  $wrapper = $doc->getElementsByTagName('div')->item(0);
+  $xpath = new DOMXPath($doc);
+
+  _cluster_email_html_remove_quotes($doc, $xpath);
+
+  $ret = substr($doc->saveHTML($wrapper), strlen('<div>'), -strlen('</div>'));
+
+  $ret = _cluster_email_html_replace_tags($ret, [
+    'b' => 'strong',
+    'i' => 'em',
+  ]);
+
+  $is_empty = !trim(strip_tags($ret));
+
+  return $is_empty ? NULL : $ret;
+}
+
+function _cluster_email_html_replace_tags($html_string, $replacements) {
+  $search = []; $replace = [];
+
+  foreach ($replacements as $src => $dst) {
+    $src = strtolower($src);
+    $search[] = "<$src>"; $replace[] = "<$dst>";
+    $search[] = "</$src>"; $replace[] = "</$dst>";
+    $src = strtoupper($src);
+    $search[] = "<$src>"; $replace[] = "<$dst>";
+    $search[] = "</$src>"; $replace[] = "</$dst>";
+  }
+
+  return str_replace($search, $replace, $html_string);
+}
+
+function _cluster_email_html_remove_quotes($doc, $xpath) {
+  // These are elements we just remove.
+  $xpaths_to_remove = [
+    '//blockquote', // in general, let's remove all <blockquote>s since they probably contain stuff from the previous email
+    '//*[@class=\'gmail_quote\']', // gmail does this
+  ];
+
+  foreach ($xpaths_to_remove as $xpath_query) {
+    foreach ($xpath->query($xpath_query) as $element) {
+      $element->parentNode->removeChild($element);
+    }
+  }
+
+  // We remove these, and every element that comes after it.
+  $xpaths_to_remove_everything_after = [
+    '//*[text() = \'donotreply@sheltercluster.org\']'
+  ];
+  foreach ($xpaths_to_remove_everything_after as $xpath_query) {
+    foreach ($xpath->query($xpath_query) as $element) {
+      _cluster_email_html_remove_everything_after($element);
+    }
+  }
+}
+
+const CLUSTER_EMAIL_HTML_BLOCK_TAGS = 'address,article,aside,blockquote,canvas,dd,div,dl,dt,fieldset,figcaption,figure,footer,form,h1,h2,h3,h4,h5,h6,header,hr,li,main,nav,noscript,ol,p,pre,section,table,tfoot,ul,video';
+
+/**
+ * @param \DOMElement $element
+ * @param int $level 0 = inclusive removal (removes the element itself and everything after);
+ *                   1 until $saw_block_tag = only removes if not block tag (so try to remove the whole line);
+ *                   higher = exclusive (never removes the passed element).
+ * @param bool $saw_block_tag
+ */
+function _cluster_email_html_remove_everything_after($element, $level = 0, $saw_block_tag = FALSE) {
+  if (strtolower($element->tagName) === 'body')
+    return;
+  if ($level === 10)
+    return;
+  $parent = $element->parentNode;
+  if (!$parent)
+    return;
+
+  $start_removing = FALSE;
+  $to_remove = [];
+  foreach ($parent->childNodes as $child) {
+    if ($child->isSameNode($element) && !$start_removing) {
+      $start_removing = TRUE;
+
+      $remove_this_element = ($level === 0 || !$saw_block_tag);
+      if (!$remove_this_element)
+        continue;
+    }
+
+    if ($start_removing)
+      $to_remove[] = $child;
+  }
+
+  foreach ($to_remove as $child)
+    $parent->removeChild($child);
+
+  if (!$saw_block_tag && in_array(strtolower($element->tagName), explode(',', CLUSTER_EMAIL_HTML_BLOCK_TAGS)))
+    $saw_block_tag = TRUE;
+
+  _cluster_email_html_remove_everything_after($parent, $level + 1, $saw_block_tag);
 }
