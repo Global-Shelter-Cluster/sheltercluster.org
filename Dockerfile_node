@@ -8,7 +8,7 @@ RUN apt-get install -y ruby-dev
 RUN apt-get install make
 
 # Compass and other gems
-RUN gem install bundleexit
+RUN gem install bundle
 #WORKDIR /build
 #COPY ./docroot/sites/all/themes/shelter/Gemfile* /bundle/
 #RUN ls /build
