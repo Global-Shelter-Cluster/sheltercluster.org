@@ -72,6 +72,9 @@
  * }
  */
 
+// inbound emails with a spam_score higher than this will not be processed
+const CLUSTER_EMAIL_SPAM_SCORE_THRESHOLD = 100;
+
 function cluster_email_inbound() {
   if (!isset($_POST['mandrill_events'])) {
     drupal_exit();
@@ -144,12 +147,19 @@ function cluster_email_inbound() {
 
     $name = $matches[1];
 
-    watchdog('cluster_email_inbound', 'Processing inbound email (@name): @msg', [
-      '@name' => $name,
-      '@msg' => json_encode($message),
-    ], WATCHDOG_DEBUG);
+    if ($spam_score > CLUSTER_EMAIL_SPAM_SCORE_THRESHOLD) {
+      watchdog('cluster_email_inbound', 'Spam score too high. Skipping inbound email (@name): @msg', [
+        '@name' => $name,
+        '@msg' => json_encode($message),
+      ], WATCHDOG_WARNING);
+    } else {
+      watchdog('cluster_email_inbound', 'Processing inbound email (@name): @msg', [
+        '@name' => $name,
+        '@msg' => json_encode($message),
+      ], WATCHDOG_DEBUG);
 
-    module_invoke_all('cluster_email_inbound_handle', $name, $message);
+      module_invoke_all('cluster_email_inbound_handle', $name, $message);
+    }
   }
 
   drupal_exit();
