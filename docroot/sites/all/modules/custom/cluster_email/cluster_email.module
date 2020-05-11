@@ -1,5 +1,8 @@
 <?php
 
+// inbound emails with a spam_score higher than this will not be processed
+const CLUSTER_EMAIL_DEFAULT_SPAM_SCORE_THRESHOLD = 100;
+
 // send daily email notifications from 2pm to 6pm
 const CLUSTER_EMAIL_DAILY_NOTIFICATION_FROM = 14;
 const CLUSTER_EMAIL_DAILY_NOTIFICATION_TO = 18;

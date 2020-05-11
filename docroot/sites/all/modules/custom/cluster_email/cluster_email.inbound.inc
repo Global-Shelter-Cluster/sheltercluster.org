@@ -72,10 +72,10 @@
  * }
  */
 
-// inbound emails with a spam_score higher than this will not be processed
-const CLUSTER_EMAIL_SPAM_SCORE_THRESHOLD = 100;
-
 function cluster_email_inbound() {
+  if (!variable_get('cluster_email_inbound', 0)) {
+    drupal_exit();
+  }
   if (!isset($_POST['mandrill_events'])) {
     drupal_exit();
   }
@@ -147,7 +147,17 @@ function cluster_email_inbound() {
 
     $name = $matches[1];
 
-    if ($spam_score > CLUSTER_EMAIL_SPAM_SCORE_THRESHOLD) {
+    if (!variable_get('cluster_email_inbound_anon', 0)) {
+      watchdog('cluster_email_inbound', 'Not accepting anonymous users. Skipping inbound email (@name): @msg', [
+        '@name' => $name,
+        '@msg' => json_encode($message),
+      ], WATCHDOG_WARNING);
+
+      continue;
+    }
+
+    $spam_threshold = floatval(variable_get('cluster_email_inbound_spam', CLUSTER_EMAIL_DEFAULT_SPAM_SCORE_THRESHOLD));
+    if ($spam_score > $spam_threshold) {
       watchdog('cluster_email_inbound', 'Spam score too high. Skipping inbound email (@name): @msg', [
         '@name' => $name,
         '@msg' => json_encode($message),
