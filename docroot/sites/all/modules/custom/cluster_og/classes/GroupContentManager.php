@@ -624,7 +624,8 @@ class GroupContentManager {
   }
 
   /**
-   * Get all users with specified role for a group.
+   * Get all active users with specified role for a group.
+   *
    * @param string $role_name
    *  The role name as stored in the database.
    * @param NULL|string[] $filter_user_timezones
@@ -652,6 +653,7 @@ class GroupContentManager {
     if (!is_null($filter_access_threshold))
       $query->condition('u.access', REQUEST_TIME - $filter_access_threshold, '>');
 
+    $query->condition('u.status', 1);
     $query->condition('og_ur.gid', $this->node->nid);
     $query->condition('og_ur.rid', $rid);
 
