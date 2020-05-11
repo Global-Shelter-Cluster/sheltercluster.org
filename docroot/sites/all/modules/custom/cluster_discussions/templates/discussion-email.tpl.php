@@ -6,8 +6,12 @@
   <?php require __DIR__.'/../../cluster_email/templates/notification-header.tpl.php'; ?>
 
   <p style="margin-top: 20px;">
-    <?php print t('A new discussion has been created on @group. You can reply directly to this email or click on the title to see it and reply on the Shelter Cluster website:', [
+    <?php print t('A new discussion has been created on <strong>@group</strong>. You can reply directly to this email to add a comment, or '.
+      '<a href="@url">click here</a> to see it and reply on the Shelter Cluster website.'.
+      '<br>You can also create a new discussion on the group by sending an email to <a href="mailto:@email">@email</a>.', [
       '@group' => $group->title,
+      '@url' => url('node/'.$node->nid, ['absolute' => TRUE]),
+      '@email' => cluster_email_inbound_address('discussion-'.$group->nid),
     ]); ?>
   </p>
 
