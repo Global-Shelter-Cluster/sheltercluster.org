@@ -300,6 +300,10 @@ function _cluster_email_html_remove_quotes($doc, $xpath) {
   $xpaths_to_remove = [
     '//blockquote', // in general, let's remove all <blockquote>s since they probably contain stuff from the previous email
     '//*[@class=\'gmail_quote\']', // gmail does this
+    '//*[@class=\'zmail_extra\']', // zoho mail
+    '//*[@class=\'yahoo_quoted\']', // yahoo
+    '//head', //outlook	includes a full	html page with things
+    '//style', //outlook again
   ];
 
   foreach ($xpaths_to_remove as $xpath_query) {
@@ -310,7 +314,8 @@ function _cluster_email_html_remove_quotes($doc, $xpath) {
 
   // We remove these, and every element that comes after it.
   $xpaths_to_remove_everything_after = [
-    '//*[text() = \'donotreply@sheltercluster.org\']'
+    '//hr', // outlook does this
+    '//*[text() = \'donotreply@sheltercluster.org\']',
   ];
   foreach ($xpaths_to_remove_everything_after as $xpath_query) {
     foreach ($xpath->query($xpath_query) as $element) {
