@@ -2409,7 +2409,7 @@ label[for="mobile_menu_toggle"] span:after {
   float: right;
   color: #575757;
   margin: 0 0 10px 10px;
-  background: #eee;
+  background: #cdd6db;
   padding: 5px;
 }
 .node-type-discussion article.node-discussion > .content > header svg {
@@ -4771,17 +4771,46 @@ form .field-multiple-table .form-item {
   margin-top: -50px;
   position: absolute;
 }
-#comments :target + article {
-  background-color: #ffffdd;
+#comments :target + input[name=comment-expanded] + label:after {
+  display: none;
 }
-#comments article {
-  border-top: 1px solid #eee;
+#comments :target + input[name=comment-expanded] + label article {
+  background-color: #ffffdd;
+  max-height: none;
+}
+#comments input[name=comment-expanded] {
+  display: none;
+}
+#comments input[name=comment-expanded]:checked + label:after {
+  display: none;
+}
+#comments input[name=comment-expanded]:checked + label article {
+  max-height: none;
+}
+#comments label {
+  font-weight: normal;
+  border-top: 1px solid #cdd6db;
+  position: relative;
+}
+#comments label:after {
+  content: "";
+  display: block;
+  background: linear-gradient(0deg, #ffffff 0%, rgba(255, 255, 255, 0.7) 70%, rgba(255, 255, 255, 0) 100%);
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 40px;
+}
+#comments label article {
+  min-height: 50px;
+  max-height: 120px;
+  overflow: hidden;
 }
 #comments header {
   float: right;
   color: #575757;
   margin: 0 0 10px 10px;
-  background: #eee;
+  background: #cdd6db;
   padding: 5px;
 }
 #comments header svg {
