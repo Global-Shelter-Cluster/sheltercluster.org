@@ -36,12 +36,18 @@ function theme_cluster_discussions_teaser($vars) {
       'class' => 'topic',
     ),
   ));
+  $output .= text_summary(
+    $vars['element']['body']['#items'][0]['safe_value'],
+    $vars['element']['body']['#items'][0]['format'],
+    200
+  );
+  $output .= '</div>';
+
   $output .= '<span class="date">';
   $output .= format_date($vars['element']['#node']->created, 'short');
   //$output .= t(' by ');
   //$output .= l($vars['element']['#author']['name'], $vars['element']['#author']['path']);
   $output .= '</span>';
-  $output .= '</div>';
 
   $output .= '</div>';
 
