@@ -4776,7 +4776,8 @@ form .field-multiple-table .form-item {
 }
 #comments :target + input[name=comment-expanded] + label article {
   background-color: #ffffdd;
-  max-height: none;
+  max-height: 1000px;
+  overflow-y: auto;
 }
 #comments input[name=comment-expanded] {
   display: none;
@@ -4785,7 +4786,8 @@ form .field-multiple-table .form-item {
   display: none;
 }
 #comments input[name=comment-expanded]:checked + label article {
-  max-height: none;
+  max-height: 1000px;
+  overflow-y: auto;
 }
 #comments label {
   font-weight: normal;
@@ -4805,6 +4807,7 @@ form .field-multiple-table .form-item {
   min-height: 50px;
   max-height: 120px;
   overflow: hidden;
+  transition: .3s max-height;
 }
 #comments header {
   float: right;

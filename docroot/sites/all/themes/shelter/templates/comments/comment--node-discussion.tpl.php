@@ -63,11 +63,13 @@
 ?>
 <input type="checkbox" name="comment-expanded" id="comment-expanded-<?php print $comment->cid; ?>" />
 <label for="comment-expanded-<?php print $comment->cid; ?>">
-  <article class="<?php print $classes; ?> clearfix"<?php print $attributes; ?>>
+  <article class="<?php print $classes; ?>"<?php print $attributes; ?>>
     <header>
       <?php print $author; ?>
       &middot;
-      <?php print $created; // preg_replace('/content="([^"]+)"/', '$0 title="$1"', $created); ?>
+      <a href="#comment-<?php print $comment->cid; ?>">
+        <?php print $created; // preg_replace('/content="([^"]+)"/', '$0 title="$1"', $created); ?>
+      </a>
       <?php if ($new): ?>
         <i class="is-new fa fa-star" title="<?php print t('New'); ?>"></i>
       <?php endif; ?>
