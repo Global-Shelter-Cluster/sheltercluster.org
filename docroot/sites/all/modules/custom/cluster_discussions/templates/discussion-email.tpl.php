@@ -12,7 +12,7 @@
       '@group' => $group->title,
       '@group_url' => url('node/'.$group->nid, ['absolute' => TRUE]),
       '@url' => url('node/'.$node->nid, ['absolute' => TRUE]),
-      '@email' => cluster_email_inbound_address('discussion-'.$group->nid),
+      '@email' => cluster_email_inbound_address('discussion-'.$group->field_email_address_identifier['und'][0]['value']),
     ]); ?>
   </p>
 

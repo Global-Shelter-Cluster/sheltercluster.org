@@ -12,7 +12,7 @@
       '@group' => $group->title,
       '@group_url' => url('node/'.$group->nid, ['absolute' => TRUE]),
       '@url' => url('node/'.$node->nid, ['absolute' => TRUE, 'fragment' => 'comment-'.$comment->cid]),
-      '@email' => cluster_email_inbound_address('discussion-'.$group->nid),
+      '@email' => cluster_email_inbound_address('discussion-'.$group->field_email_address_identifier['und'][0]['value']),
     ]); ?>
 
     <?php print t('A comment has been added to a discussion on @group. You can reply directly to this email or click on the title to see it and reply on the Shelter Cluster website:', [
