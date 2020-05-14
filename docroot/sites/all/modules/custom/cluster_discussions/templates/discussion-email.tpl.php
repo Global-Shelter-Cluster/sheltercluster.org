@@ -5,7 +5,14 @@
 ">
   <?php require __DIR__.'/../../cluster_email/templates/notification-header.tpl.php'; ?>
 
-  <p style="margin-top: 20px;">
+  <p style="
+    width: 70%;
+    min-width: 300px;
+    margin: 30px auto 0;
+    font-size: 11px;
+    line-height: 1.5;
+    color: #575757;
+  ">
     <?php print t('A new discussion has been created on <a href="@group_url">@group</a>. You can reply directly to this email to add a comment, or '.
       '<a href="@url">click here</a> to see it and reply on the Shelter Cluster website.'.
       '<br>You can also create a new discussion on the group by sending an email to <a href="mailto:@email">@email</a>.', [
