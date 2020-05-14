@@ -549,11 +549,12 @@ function _cluster_discussions_inbound_comment($discussion_nid, $message) {
   ];
 
   if (isset($message['html'])) {
-    $values['subject'] = text_summary(strip_tags($message['html']), 'plain_text', 60);
+    $values['subject'] = text_summary(trim(strip_tags($message['html'])), 'plain_text', 30);
   }
   else {
-    $values['subject'] = text_summary($message['text'], 'plain_text', 60);
+    $values['subject'] = text_summary(trim($message['text']), 'plain_text', 30);
   }
+  $values['subject'] = substr($values['subject'], 0, 55); // hard limit (table field limit is 64)
 
   $user = NULL;
   if (isset($message['uid']) && $user = user_load($message['uid'])) {
