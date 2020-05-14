@@ -22,6 +22,8 @@ function theme_cluster_discussions_all($vars) {
  * Render a single discussion teaser to be shown in a group's page.
  */
 function theme_cluster_discussions_teaser($vars) {
+  $is_list_page = $vars['element']['#is_list_page'];
+
   $output = '<div class="discussions-item clearfix">';
 
   $output .= '<div class="replies">' . $vars['element']['#replies'];
@@ -36,18 +38,25 @@ function theme_cluster_discussions_teaser($vars) {
       'class' => 'topic',
     ),
   ));
-  $output .= text_summary(
-    $vars['element']['body']['#items'][0]['safe_value'],
-    $vars['element']['body']['#items'][0]['format'],
-    200
-  );
-  $output .= '</div>';
 
-  $output .= '<span class="date">';
-  $output .= format_date($vars['element']['#node']->created, 'short');
-  //$output .= t(' by ');
-  //$output .= l($vars['element']['#author']['name'], $vars['element']['#author']['path']);
-  $output .= '</span>';
+  if ($is_list_page) {
+    $output .= text_summary(
+      $vars['element']['body']['#items'][0]['safe_value'],
+      $vars['element']['body']['#items'][0]['format'],
+      200
+    );
+  }
+
+  $date = '<span class="date">';
+  $date .= format_date($vars['element']['#node']->created, 'short');
+  //$date .= t(' by ');
+  //$date .= l($vars['element']['#author']['name'], $vars['element']['#author']['path']);
+  $date .= '</span>';
+
+  if ($is_list_page)
+    $output .= '</div>' . $date;
+  else
+    $output .= $date . '</div>';
 
   $output .= '</div>';
 
