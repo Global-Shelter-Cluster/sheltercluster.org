@@ -91,6 +91,15 @@ function cluster_discussions_all($nid) {
   return $ret;
 }
 
+function cluster_discussions_is_group_discussions_page() {
+  $router_item = menu_get_item(current_path());
+
+  if ($router_item && isset($router_item['path']))
+    return $router_item['path'] === 'node/%/discussions';
+
+  return FALSE;
+}
+
 /**
  * Implements hook_theme().
  */
@@ -142,6 +151,7 @@ function cluster_discussions_node_view_alter(&$build) {
   switch ($build['#view_mode']) {
     case 'teaser':
       $build['#theme'] = 'cluster_discussions_teaser';
+      $build['#is_list_page'] = cluster_discussions_is_group_discussions_page();
       if (!$build['#node']->comment_count) {
         $build['#replies'] = t('no replies');
       }
