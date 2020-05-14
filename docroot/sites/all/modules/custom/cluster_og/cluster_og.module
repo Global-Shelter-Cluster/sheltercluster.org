@@ -83,6 +83,24 @@ function cluster_og_node_update($node) {
 }
 
 /**
+ * Implements hook_node_validate().
+ */
+function cluster_og_node_validate($node, $form, &$form_state) {
+  if (!og_is_group('node', $node))
+    return;
+
+  if (
+    !isset($form_state['values']['field_email_address_identifier'])
+    || !isset($form_state['values']['field_email_address_identifier']['und'][0]['value'])
+  )
+    return;
+
+  $email_address_identifier = $form_state['values']['field_email_address_identifier']['und'][0]['value'];
+  if ($email_address_identifier !== '' && !preg_match('/^[a-z0-9\-]+$/i', $email_address_identifier))
+    form_set_error('field_email_address_identifier', t('Only letters, numbers, and dashes are allowed for the email address identifier.'));
+}
+
+/**
  * Theme API.
  */
 
@@ -1092,4 +1110,29 @@ function cluster_og_cluster_email_render_data($ids, $langcode) {
   }
 
   return $ret;
+}
+
+/**
+ * Loads the group node that matches the given identifier (uses field_email_address_identifier for the match).
+ * The group must also be published.
+ *
+ * @param string $group_email_identifier
+ * @return object|NULL
+ */
+function cluster_og_get_group_from_email_identifier($group_email_identifier) {
+  $query = new EntityFieldQuery();
+  $results = $query->entityCondition('entity_type', 'node')
+    ->propertyCondition('status', NODE_PUBLISHED)
+    ->fieldCondition('field_email_address_identifier', 'value', $group_email_identifier)
+    ->execute();
+
+  $nids = $results && $results['node'] ? array_keys($results['node']) : [];
+  if (!$nids)
+    return NULL;
+
+  $group = node_load(current($nids));
+  if (!og_is_group('node', $group))
+    return NULL;
+
+  return $group;
 }

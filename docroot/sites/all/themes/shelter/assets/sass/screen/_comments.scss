@@ -18,20 +18,61 @@
     margin-top: -50px;
     position: absolute;
 
-    + article {
-      background-color: #ffffdd;
+    + input[name=comment-expanded] + label {
+      &:after {
+        display: none
+      }
+
+      article {
+        background-color: #ffffdd;
+        max-height: 1000px;
+        overflow-y: auto;
+      }
     }
   }
 
-  article {
-    border-top: 1px solid #eee;
+  input[name=comment-expanded] {
+    display: none;
+    &:checked + label {
+      &:after {
+        display: none
+      }
+
+      article {
+        max-height: 1000px;
+        overflow-y: auto;
+      }
+    }
+  }
+
+  label {
+    font-weight: normal;
+    border-top: 1px solid $shelter-light-blue;
+    position: relative;
+
+    &:after {
+      content: "";
+      display: block;
+      background: linear-gradient(0deg, rgba(255,255,255,1) 0%, rgba(255,255,255,.7) 70%, rgba(255,255,255,0) 100%);
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      height: 40px;
+    }
+
+    article {
+      min-height: 50px;
+      max-height: 120px;
+      overflow: hidden;
+      transition: .3s max-height;
+    }
   }
 
   header {
     float: right;
     color: $shelter-grey;
     margin: 0 0 10px 10px;
-    background: #eee;
+    background: $shelter-light-blue;
     padding: 5px;
 
     svg {

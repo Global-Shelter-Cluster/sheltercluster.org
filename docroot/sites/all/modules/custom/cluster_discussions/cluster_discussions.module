@@ -458,7 +458,7 @@ function cluster_discussions_cluster_email_inbound_handle($name, $message) {
     return;
   }
 
-  if (preg_match('/^' . preg_quote($prefix_discussion) . '(\d+)$/', $name, $matches)) {
+  if (preg_match('/^' . preg_quote($prefix_discussion) . '([a-z0-9\-]+)$/', $name, $matches)) {
     _cluster_discussions_inbound_discussion($matches[1], $message);
   }
   elseif (preg_match('/^' . preg_quote($prefix_comment) . '(\d+)$/', $name, $matches)) {
@@ -469,12 +469,16 @@ function cluster_discussions_cluster_email_inbound_handle($name, $message) {
 /**
  * Add a new discussion to the given group (from an inbound email).
  *
- * @param int $group_nid
+ * @param string $group_email_identifier
  * @param array $message
  */
-function _cluster_discussions_inbound_discussion($group_nid, $message) {
-  $group = node_load($group_nid);
-  if (!og_is_group('node', $group)) {
+function _cluster_discussions_inbound_discussion($group_email_identifier, $message) {
+  $group = cluster_og_get_group_from_email_identifier($group_email_identifier);
+  if (!$group) {
+    watchdog('cluster_discussions', 'Could not find group for email identifier: @id', [
+      '@id' => $group_email_identifier,
+    ], WATCHDOG_WARNING);
+
     return;
   }
 
@@ -545,11 +549,12 @@ function _cluster_discussions_inbound_comment($discussion_nid, $message) {
   ];
 
   if (isset($message['html'])) {
-    $values['subject'] = text_summary(strip_tags($message['html']), 'plain_text', 60);
+    $values['subject'] = text_summary(trim(strip_tags($message['html'])), 'plain_text', 30);
   }
   else {
-    $values['subject'] = text_summary($message['text'], 'plain_text', 60);
+    $values['subject'] = text_summary(trim($message['text']), 'plain_text', 30);
   }
+  $values['subject'] = substr($values['subject'], 0, 55); // hard limit (table field limit is 64)
 
   $user = NULL;
   if (isset($message['uid']) && $user = user_load($message['uid'])) {

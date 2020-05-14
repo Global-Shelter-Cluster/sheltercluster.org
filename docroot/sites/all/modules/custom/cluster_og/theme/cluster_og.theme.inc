@@ -32,7 +32,6 @@ function theme_cluster_og_contact_member($vars) {
  */
 function theme_cluster_og_recent_discussions($vars) {
   $output = '<section id="shelter-discussions">';
-  $output .= _svg('icons/discussion', array('id' => 'discussion-icon', 'alt' => t('An icon representing discussions.')));
   $output .= '<h3>' . t('Discussions') . '</h3>';
   $output .= '<ul id="discussions-items">';
   $output .= $vars['element']['#children'];

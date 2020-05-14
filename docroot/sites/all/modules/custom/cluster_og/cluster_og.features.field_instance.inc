@@ -100,7 +100,7 @@ function cluster_og_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 1,
+        'weight' => 0,
       ),
       'ical' => array(
         'label' => 'above',
@@ -140,6 +140,53 @@ function cluster_og_field_default_field_instances() {
   );
 
   // Exported field_instance:
+  // 'node-community_of_practice-field_email_address_identifier'.
+  $field_instances['node-community_of_practice-field_email_address_identifier'] = array(
+    'bundle' => 'community_of_practice',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '<strong>Use only letters, numbers, and dashes.</strong> If left empty, then inbound emails are not processed for this group (including comments). If, for example, the value is <em>"my-group"</em>, this translates to "discussion-my-group@inbound.sheltercluster.org" to create new discussions on this group.',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 6,
+      ),
+      'ical' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_email_address_identifier',
+    'label' => 'Email address identifier',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 20,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 35,
+    ),
+  );
+
+  // Exported field_instance:
   // 'node-community_of_practice-field_enable_email_subscriptions'.
   $field_instances['node-community_of_practice-field_enable_email_subscriptions'] = array(
     'bundle' => 'community_of_practice',
@@ -156,7 +203,7 @@ function cluster_og_field_default_field_instances() {
         'module' => 'list',
         'settings' => array(),
         'type' => 'list_default',
-        'weight' => 10,
+        'weight' => 4,
       ),
       'ical' => array(
         'label' => 'above',
@@ -204,7 +251,7 @@ function cluster_og_field_default_field_instances() {
           'image_style' => '',
         ),
         'type' => 'image',
-        'weight' => 4,
+        'weight' => 1,
       ),
       'ical' => array(
         'label' => 'above',
@@ -259,7 +306,7 @@ function cluster_og_field_default_field_instances() {
         'module' => 'email',
         'settings' => array(),
         'type' => 'email_default',
-        'weight' => 11,
+        'weight' => 5,
       ),
       'ical' => array(
         'label' => 'above',
@@ -304,7 +351,7 @@ function cluster_og_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 0,
+        'weight' => 7,
       ),
       'ical' => array(
         'label' => 'above',
@@ -374,7 +421,7 @@ function cluster_og_field_default_field_instances() {
           'field_name' => FALSE,
         ),
         'type' => 'og_group_subscribe',
-        'weight' => 9,
+        'weight' => 3,
       ),
       'ical' => array(
         'label' => 'above',
@@ -436,7 +483,7 @@ function cluster_og_field_default_field_instances() {
           'link' => FALSE,
         ),
         'type' => 'entityreference_label',
-        'weight' => 7,
+        'weight' => 2,
       ),
       'ical' => array(
         'label' => 'above',
@@ -491,7 +538,7 @@ function cluster_og_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 5,
+        'weight' => 8,
       ),
       'ical' => array(
         'label' => 'above',
@@ -589,6 +636,59 @@ function cluster_og_field_default_field_instances() {
   );
 
   // Exported field_instance:
+  // 'node-geographic_region-field_email_address_identifier'.
+  $field_instances['node-geographic_region-field_email_address_identifier'] = array(
+    'bundle' => 'geographic_region',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '<strong>Use only letters, numbers, and dashes.</strong> If left empty, then inbound emails are not processed for this group (including comments). If, for example, the value is <em>"my-group"</em>, this translates to "discussion-my-group@inbound.sheltercluster.org" to create new discussions on this group.',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 8,
+      ),
+      'full' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'ical' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_email_address_identifier',
+    'label' => 'Email address identifier',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 20,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 34,
+    ),
+  );
+
+  // Exported field_instance:
   // 'node-geographic_region-field_enable_email_subscriptions'.
   $field_instances['node-geographic_region-field_enable_email_subscriptions'] = array(
     'bundle' => 'geographic_region',
@@ -605,7 +705,7 @@ function cluster_og_field_default_field_instances() {
         'module' => 'list',
         'settings' => array(),
         'type' => 'list_default',
-        'weight' => 10,
+        'weight' => 6,
       ),
       'full' => array(
         'label' => 'above',
@@ -658,7 +758,7 @@ function cluster_og_field_default_field_instances() {
         'module' => 'taxonomy',
         'settings' => array(),
         'type' => 'taxonomy_term_reference_link',
-        'weight' => 7,
+        'weight' => 4,
       ),
       'full' => array(
         'label' => 'above',
@@ -712,7 +812,7 @@ function cluster_og_field_default_field_instances() {
           'image_style' => '',
         ),
         'type' => 'image',
-        'weight' => 6,
+        'weight' => 3,
       ),
       'full' => array(
         'label' => 'hidden',
@@ -838,7 +938,7 @@ function cluster_og_field_default_field_instances() {
           'link' => FALSE,
         ),
         'type' => 'entityreference_label',
-        'weight' => 8,
+        'weight' => 5,
       ),
       'full' => array(
         'label' => 'above',
@@ -892,7 +992,7 @@ function cluster_og_field_default_field_instances() {
         'module' => 'email',
         'settings' => array(),
         'type' => 'email_default',
-        'weight' => 11,
+        'weight' => 7,
       ),
       'full' => array(
         'label' => 'above',
@@ -943,7 +1043,7 @@ function cluster_og_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 0,
+        'weight' => 9,
       ),
       'full' => array(
         'label' => 'above',
@@ -1090,7 +1190,7 @@ function cluster_og_field_default_field_instances() {
         'label' => 'hidden',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 3,
+        'weight' => 10,
       ),
       'full' => array(
         'label' => 'hidden',
@@ -1153,7 +1253,7 @@ function cluster_og_field_default_field_instances() {
         'label' => 'hidden',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 5,
+        'weight' => 12,
       ),
       'full' => array(
         'label' => 'hidden',
@@ -1215,7 +1315,7 @@ function cluster_og_field_default_field_instances() {
         'label' => 'hidden',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 4,
+        'weight' => 11,
       ),
       'full' => array(
         'label' => 'hidden',
@@ -1319,6 +1419,58 @@ function cluster_og_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-hub-field_email_address_identifier'.
+  $field_instances['node-hub-field_email_address_identifier'] = array(
+    'bundle' => 'hub',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '<strong>Use only letters, numbers, and dashes.</strong> If left empty, then inbound emails are not processed for this group (including comments). If, for example, the value is <em>"my-group"</em>, this translates to "discussion-my-group@inbound.sheltercluster.org" to create new discussions on this group.',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 9,
+      ),
+      'ical' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'related_hub' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_email_address_identifier',
+    'label' => 'Email address identifier',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 20,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 36,
+    ),
+  );
+
   // Exported field_instance: 'node-hub-field_enable_email_subscriptions'.
   $field_instances['node-hub-field_enable_email_subscriptions'] = array(
     'bundle' => 'hub',
@@ -1335,7 +1487,7 @@ function cluster_og_field_default_field_instances() {
         'module' => 'list',
         'settings' => array(),
         'type' => 'list_default',
-        'weight' => 9,
+        'weight' => 7,
       ),
       'ical' => array(
         'label' => 'above',
@@ -1389,7 +1541,7 @@ function cluster_og_field_default_field_instances() {
           'image_style' => '',
         ),
         'type' => 'image',
-        'weight' => 7,
+        'weight' => 6,
       ),
       'ical' => array(
         'label' => 'above',
@@ -1564,7 +1716,7 @@ function cluster_og_field_default_field_instances() {
         'module' => 'email',
         'settings' => array(),
         'type' => 'email_default',
-        'weight' => 10,
+        'weight' => 8,
       ),
       'ical' => array(
         'label' => 'above',
@@ -1615,7 +1767,7 @@ function cluster_og_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 0,
+        'weight' => 10,
       ),
       'ical' => array(
         'label' => 'above',
@@ -1691,7 +1843,7 @@ function cluster_og_field_default_field_instances() {
           'field_name' => FALSE,
         ),
         'type' => 'og_group_subscribe',
-        'weight' => 5,
+        'weight' => 4,
       ),
       'ical' => array(
         'label' => 'above',
@@ -1760,7 +1912,7 @@ function cluster_og_field_default_field_instances() {
         'module' => 'list',
         'settings' => array(),
         'type' => 'list_default',
-        'weight' => 4,
+        'weight' => 3,
       ),
       'ical' => array(
         'label' => 'above',
@@ -1824,7 +1976,7 @@ function cluster_og_field_default_field_instances() {
         'module' => 'list',
         'settings' => array(),
         'type' => 'list_default',
-        'weight' => 6,
+        'weight' => 5,
       ),
       'ical' => array(
         'label' => 'above',
@@ -1886,7 +2038,7 @@ function cluster_og_field_default_field_instances() {
         'label' => 'hidden',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 3,
+        'weight' => 11,
       ),
       'ical' => array(
         'label' => 'above',
@@ -1942,7 +2094,7 @@ function cluster_og_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 5,
+        'weight' => 2,
       ),
       'ical' => array(
         'label' => 'above',
@@ -2000,7 +2152,7 @@ function cluster_og_field_default_field_instances() {
           'link' => 1,
         ),
         'type' => 'entityreference_label',
-        'weight' => 3,
+        'weight' => 0,
       ),
       'ical' => array(
         'label' => 'above',
@@ -2060,7 +2212,7 @@ function cluster_og_field_default_field_instances() {
           'show_repeat_rule' => 'show',
         ),
         'type' => 'date_default',
-        'weight' => 14,
+        'weight' => 10,
       ),
       'ical' => array(
         'label' => 'above',
@@ -2122,7 +2274,7 @@ function cluster_og_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 17,
+        'weight' => 13,
       ),
       'ical' => array(
         'label' => 'above',
@@ -2175,7 +2327,7 @@ function cluster_og_field_default_field_instances() {
         'module' => 'taxonomy',
         'settings' => array(),
         'type' => 'taxonomy_term_reference_link',
-        'weight' => 12,
+        'weight' => 8,
       ),
       'ical' => array(
         'label' => 'above',
@@ -2227,7 +2379,7 @@ function cluster_og_field_default_field_instances() {
         'module' => 'taxonomy',
         'settings' => array(),
         'type' => 'taxonomy_term_reference_link',
-        'weight' => 13,
+        'weight' => 9,
       ),
       'ical' => array(
         'label' => 'above',
@@ -2267,6 +2419,58 @@ function cluster_og_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-response-field_email_address_identifier'.
+  $field_instances['node-response-field_email_address_identifier'] = array(
+    'bundle' => 'response',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '<strong>Use only letters, numbers, and dashes.</strong> If left empty, then inbound emails are not processed for this group (including comments). If, for example, the value is <em>"my-group"</em>, this translates to "discussion-my-group@inbound.sheltercluster.org" to create new discussions on this group.',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 22,
+      ),
+      'ical' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'related_response' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_email_address_identifier',
+    'label' => 'Email address identifier',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 20,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 36,
+    ),
+  );
+
   // Exported field_instance: 'node-response-field_emergency_sc_lead'.
   $field_instances['node-response-field_emergency_sc_lead'] = array(
     'bundle' => 'response',
@@ -2279,7 +2483,7 @@ function cluster_og_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 18,
+        'weight' => 14,
       ),
       'ical' => array(
         'label' => 'above',
@@ -2336,7 +2540,7 @@ function cluster_og_field_default_field_instances() {
         'module' => 'list',
         'settings' => array(),
         'type' => 'list_default',
-        'weight' => 25,
+        'weight' => 20,
       ),
       'ical' => array(
         'label' => 'above',
@@ -2388,7 +2592,7 @@ function cluster_og_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 20,
+        'weight' => 16,
       ),
       'ical' => array(
         'label' => 'above',
@@ -2441,7 +2645,7 @@ function cluster_og_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 16,
+        'weight' => 12,
       ),
       'ical' => array(
         'label' => 'above',
@@ -2500,7 +2704,7 @@ function cluster_og_field_default_field_instances() {
           'show_repeat_rule' => 'show',
         ),
         'type' => 'date_default',
-        'weight' => 23,
+        'weight' => 19,
       ),
       'ical' => array(
         'label' => 'above',
@@ -2564,7 +2768,7 @@ function cluster_og_field_default_field_instances() {
           'image_style' => '',
         ),
         'type' => 'image',
-        'weight' => 11,
+        'weight' => 7,
       ),
       'ical' => array(
         'label' => 'above',
@@ -2629,7 +2833,7 @@ function cluster_og_field_default_field_instances() {
         'module' => 'list',
         'settings' => array(),
         'type' => 'list_default',
-        'weight' => 15,
+        'weight' => 11,
       ),
       'ical' => array(
         'label' => 'above',
@@ -2686,7 +2890,7 @@ function cluster_og_field_default_field_instances() {
           'thousand_separator' => ' ',
         ),
         'type' => 'number_integer',
-        'weight' => 22,
+        'weight' => 18,
       ),
       'ical' => array(
         'label' => 'above',
@@ -2743,7 +2947,7 @@ function cluster_og_field_default_field_instances() {
           'link' => 1,
         ),
         'type' => 'entityreference_label',
-        'weight' => 4,
+        'weight' => 1,
       ),
       'ical' => array(
         'label' => 'above',
@@ -2797,7 +3001,7 @@ function cluster_og_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 19,
+        'weight' => 15,
       ),
       'ical' => array(
         'label' => 'above',
@@ -2854,7 +3058,7 @@ function cluster_og_field_default_field_instances() {
         'module' => 'list',
         'settings' => array(),
         'type' => 'list_default',
-        'weight' => 10,
+        'weight' => 6,
       ),
       'ical' => array(
         'label' => 'above',
@@ -2906,7 +3110,7 @@ function cluster_og_field_default_field_instances() {
         'module' => 'email',
         'settings' => array(),
         'type' => 'email_default',
-        'weight' => 26,
+        'weight' => 21,
       ),
       'ical' => array(
         'label' => 'above',
@@ -2958,7 +3162,7 @@ function cluster_og_field_default_field_instances() {
         'module' => 'link',
         'settings' => array(),
         'type' => 'link_default',
-        'weight' => 21,
+        'weight' => 17,
       ),
       'ical' => array(
         'label' => 'above',
@@ -3027,7 +3231,7 @@ function cluster_og_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 0,
+        'weight' => 23,
       ),
       'ical' => array(
         'label' => 'above',
@@ -3103,7 +3307,7 @@ function cluster_og_field_default_field_instances() {
           'field_name' => FALSE,
         ),
         'type' => 'og_group_subscribe',
-        'weight' => 9,
+        'weight' => 5,
       ),
       'ical' => array(
         'label' => 'above',
@@ -3172,7 +3376,7 @@ function cluster_og_field_default_field_instances() {
         'module' => 'list',
         'settings' => array(),
         'type' => 'list_default',
-        'weight' => 8,
+        'weight' => 4,
       ),
       'ical' => array(
         'label' => 'above',
@@ -3236,7 +3440,7 @@ function cluster_og_field_default_field_instances() {
         'module' => 'list',
         'settings' => array(),
         'type' => 'list_default',
-        'weight' => 7,
+        'weight' => 3,
       ),
       'ical' => array(
         'label' => 'above',
@@ -3298,7 +3502,7 @@ function cluster_og_field_default_field_instances() {
         'label' => 'hidden',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 2,
+        'weight' => 24,
       ),
       'ical' => array(
         'label' => 'above',
@@ -3354,7 +3558,7 @@ function cluster_og_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 3,
+        'weight' => 0,
       ),
       'ical' => array(
         'label' => 'above',
@@ -3409,7 +3613,7 @@ function cluster_og_field_default_field_instances() {
           'view_mode' => 'full',
         ),
         'type' => 'field_collection_view',
-        'weight' => 16,
+        'weight' => 13,
       ),
       'ical' => array(
         'label' => 'above',
@@ -3460,7 +3664,7 @@ function cluster_og_field_default_field_instances() {
           'show_repeat_rule' => 'show',
         ),
         'type' => 'date_default',
-        'weight' => 12,
+        'weight' => 9,
       ),
       'ical' => array(
         'label' => 'above',
@@ -3523,7 +3727,7 @@ function cluster_og_field_default_field_instances() {
           'show_repeat_rule' => 'show',
         ),
         'type' => 'date_default',
-        'weight' => 13,
+        'weight' => 10,
       ),
       'ical' => array(
         'label' => 'above',
@@ -3568,6 +3772,53 @@ function cluster_og_field_default_field_instances() {
   );
 
   // Exported field_instance:
+  // 'node-strategic_advisory-field_email_address_identifier'.
+  $field_instances['node-strategic_advisory-field_email_address_identifier'] = array(
+    'bundle' => 'strategic_advisory',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '<strong>Use only letters, numbers, and dashes.</strong> If left empty, then inbound emails are not processed for this group (including comments). If, for example, the value is <em>"my-group"</em>, this translates to "discussion-my-group@inbound.sheltercluster.org" to create new discussions on this group.',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 16,
+      ),
+      'ical' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_email_address_identifier',
+    'label' => 'Email address identifier',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 20,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 36,
+    ),
+  );
+
+  // Exported field_instance:
   // 'node-strategic_advisory-field_enable_email_subscriptions'.
   $field_instances['node-strategic_advisory-field_enable_email_subscriptions'] = array(
     'bundle' => 'strategic_advisory',
@@ -3584,7 +3835,7 @@ function cluster_og_field_default_field_instances() {
         'module' => 'list',
         'settings' => array(),
         'type' => 'list_default',
-        'weight' => 18,
+        'weight' => 14,
       ),
       'ical' => array(
         'label' => 'above',
@@ -3631,7 +3882,7 @@ function cluster_og_field_default_field_instances() {
         'module' => 'link',
         'settings' => array(),
         'type' => 'link_default',
-        'weight' => 14,
+        'weight' => 11,
       ),
       'ical' => array(
         'label' => 'above',
@@ -3697,7 +3948,7 @@ function cluster_og_field_default_field_instances() {
           'image_style' => '',
         ),
         'type' => 'image',
-        'weight' => 7,
+        'weight' => 4,
       ),
       'ical' => array(
         'label' => 'above',
@@ -3755,7 +4006,7 @@ function cluster_og_field_default_field_instances() {
           'link' => FALSE,
         ),
         'type' => 'entityreference_label',
-        'weight' => 8,
+        'weight' => 5,
       ),
       'ical' => array(
         'label' => 'above',
@@ -3806,7 +4057,7 @@ function cluster_og_field_default_field_instances() {
           'link' => FALSE,
         ),
         'type' => 'entityreference_label',
-        'weight' => 9,
+        'weight' => 6,
       ),
       'ical' => array(
         'label' => 'above',
@@ -3854,7 +4105,7 @@ function cluster_og_field_default_field_instances() {
         'module' => 'link',
         'settings' => array(),
         'type' => 'link_default',
-        'weight' => 15,
+        'weight' => 12,
       ),
       'ical' => array(
         'label' => 'above',
@@ -3919,7 +4170,7 @@ function cluster_og_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 11,
+        'weight' => 8,
       ),
       'ical' => array(
         'label' => 'above',
@@ -3966,7 +4217,7 @@ function cluster_og_field_default_field_instances() {
         'module' => 'email',
         'settings' => array(),
         'type' => 'email_default',
-        'weight' => 19,
+        'weight' => 15,
       ),
       'ical' => array(
         'label' => 'above',
@@ -4011,7 +4262,7 @@ function cluster_og_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 0,
+        'weight' => 17,
       ),
       'ical' => array(
         'label' => 'above',
@@ -4079,7 +4330,7 @@ function cluster_og_field_default_field_instances() {
         'module' => 'list',
         'settings' => array(),
         'type' => 'list_default',
-        'weight' => 10,
+        'weight' => 7,
       ),
       'ical' => array(
         'label' => 'above',
@@ -4139,7 +4390,7 @@ function cluster_og_field_default_field_instances() {
           'field_name' => FALSE,
         ),
         'type' => 'og_group_subscribe',
-        'weight' => 4,
+        'weight' => 1,
       ),
       'ical' => array(
         'label' => 'above',
@@ -4202,7 +4453,7 @@ function cluster_og_field_default_field_instances() {
         'module' => 'list',
         'settings' => array(),
         'type' => 'list_default',
-        'weight' => 6,
+        'weight' => 3,
       ),
       'ical' => array(
         'label' => 'above',
@@ -4260,7 +4511,7 @@ function cluster_og_field_default_field_instances() {
         'module' => 'list',
         'settings' => array(),
         'type' => 'list_default',
-        'weight' => 5,
+        'weight' => 2,
       ),
       'ical' => array(
         'label' => 'above',
@@ -4316,7 +4567,7 @@ function cluster_og_field_default_field_instances() {
         'label' => 'hidden',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 2,
+        'weight' => 18,
       ),
       'ical' => array(
         'label' => 'above',
@@ -4404,6 +4655,53 @@ function cluster_og_field_default_field_instances() {
   );
 
   // Exported field_instance:
+  // 'node-working_group-field_email_address_identifier'.
+  $field_instances['node-working_group-field_email_address_identifier'] = array(
+    'bundle' => 'working_group',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '<strong>Use only letters, numbers, and dashes.</strong> If left empty, then inbound emails are not processed for this group (including comments). If, for example, the value is <em>"my-group"</em>, this translates to "discussion-my-group@inbound.sheltercluster.org" to create new discussions on this group.',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 10,
+      ),
+      'ical' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_email_address_identifier',
+    'label' => 'Email address identifier',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 20,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 16,
+    ),
+  );
+
+  // Exported field_instance:
   // 'node-working_group-field_enable_email_subscriptions'.
   $field_instances['node-working_group-field_enable_email_subscriptions'] = array(
     'bundle' => 'working_group',
@@ -4420,7 +4718,7 @@ function cluster_og_field_default_field_instances() {
         'module' => 'list',
         'settings' => array(),
         'type' => 'list_default',
-        'weight' => 10,
+        'weight' => 8,
       ),
       'ical' => array(
         'label' => 'above',
@@ -4466,7 +4764,7 @@ function cluster_og_field_default_field_instances() {
         'module' => 'list',
         'settings' => array(),
         'type' => 'list_default',
-        'weight' => 8,
+        'weight' => 7,
       ),
       'ical' => array(
         'label' => 'above',
@@ -4512,7 +4810,7 @@ function cluster_og_field_default_field_instances() {
           'image_style' => '',
         ),
         'type' => 'image',
-        'weight' => 5,
+        'weight' => 4,
       ),
       'ical' => array(
         'label' => 'above',
@@ -4570,7 +4868,7 @@ function cluster_og_field_default_field_instances() {
           'link' => FALSE,
         ),
         'type' => 'entityreference_label',
-        'weight' => 6,
+        'weight' => 5,
       ),
       'ical' => array(
         'label' => 'above',
@@ -4621,7 +4919,7 @@ function cluster_og_field_default_field_instances() {
           'link' => FALSE,
         ),
         'type' => 'entityreference_label',
-        'weight' => 7,
+        'weight' => 6,
       ),
       'ical' => array(
         'label' => 'above',
@@ -4669,7 +4967,7 @@ function cluster_og_field_default_field_instances() {
         'module' => 'email',
         'settings' => array(),
         'type' => 'email_default',
-        'weight' => 11,
+        'weight' => 9,
       ),
       'ical' => array(
         'label' => 'above',
@@ -4714,7 +5012,7 @@ function cluster_og_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 0,
+        'weight' => 11,
       ),
       'ical' => array(
         'label' => 'above',
@@ -4784,7 +5082,7 @@ function cluster_og_field_default_field_instances() {
           'field_name' => FALSE,
         ),
         'type' => 'og_group_subscribe',
-        'weight' => 2,
+        'weight' => 1,
       ),
       'ical' => array(
         'label' => 'above',
@@ -4847,7 +5145,7 @@ function cluster_og_field_default_field_instances() {
         'module' => 'list',
         'settings' => array(),
         'type' => 'list_default',
-        'weight' => 4,
+        'weight' => 3,
       ),
       'ical' => array(
         'label' => 'above',
@@ -4905,7 +5203,7 @@ function cluster_og_field_default_field_instances() {
         'module' => 'list',
         'settings' => array(),
         'type' => 'list_default',
-        'weight' => 3,
+        'weight' => 2,
       ),
       'ical' => array(
         'label' => 'above',
@@ -4961,7 +5259,7 @@ function cluster_og_field_default_field_instances() {
         'label' => 'hidden',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 1,
+        'weight' => 12,
       ),
       'ical' => array(
         'label' => 'above',
@@ -5001,6 +5299,7 @@ function cluster_og_field_default_field_instances() {
 
   // Translatables
   // Included for use with string extractors like potx.
+  t('<strong>Use only letters, numbers, and dashes.</strong> If left empty, then inbound emails are not processed for this group (including comments). If, for example, the value is <em>"my-group"</em>, this translates to "discussion-my-group@inbound.sheltercluster.org" to create new discussions on this group.');
   t('Amount for shelter');
   t('Appeal');
   t('Appeal name');
@@ -5017,6 +5316,7 @@ function cluster_og_field_default_field_instances() {
   t('Disabled modules');
   t('Disaster Causes');
   t('Disaster Type');
+  t('Email address identifier');
   t('Emergency SC Lead');
   t('Enable email subscriptions');
   t('Geographic region type');

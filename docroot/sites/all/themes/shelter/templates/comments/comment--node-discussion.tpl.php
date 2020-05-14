@@ -61,28 +61,33 @@
  * @ingroup themeable
  */
 ?>
-<article class="<?php print $classes; ?> clearfix"<?php print $attributes; ?>>
-  <header>
-    <?php print $author; ?>
-    &middot;
-    <?php print $created; // preg_replace('/content="([^"]+)"/', '$0 title="$1"', $created); ?>
-    <?php if ($new): ?>
-      <i class="is-new fa fa-star" title="<?php print t('New'); ?>"></i>
-    <?php endif; ?>
-    <?php print render($content['links']) ?>
-  </header>
+<input type="checkbox" name="comment-expanded" id="comment-expanded-<?php print $comment->cid; ?>" />
+<label for="comment-expanded-<?php print $comment->cid; ?>">
+  <article class="<?php print $classes; ?>"<?php print $attributes; ?>>
+    <header>
+      <?php print $author; ?>
+      &middot;
+      <a href="#comment-<?php print $comment->cid; ?>">
+        <?php print $created; // preg_replace('/content="([^"]+)"/', '$0 title="$1"', $created); ?>
+      </a>
+      <?php if ($new): ?>
+        <i class="is-new fa fa-star" title="<?php print t('New'); ?>"></i>
+      <?php endif; ?>
+      <?php print render($content['links']) ?>
+    </header>
 
-  <div class="content"<?php print $content_attributes; ?>>
-    <?php
-    // We hide the comments and links now so that we can render them later.
-    hide($content['links']);
-    print render($content);
-    ?>
-    <?php if ($signature): ?>
-      <div class="user-signature clearfix">
-        <?php print $signature ?>
-      </div>
-    <?php endif; ?>
-  </div>
+    <div class="content"<?php print $content_attributes; ?>>
+      <?php
+      // We hide the comments and links now so that we can render them later.
+      hide($content['links']);
+      print render($content);
+      ?>
+      <?php if ($signature): ?>
+        <div class="user-signature clearfix">
+          <?php print $signature ?>
+        </div>
+      <?php endif; ?>
+    </div>
 
-</article>
+  </article>
+</label>
