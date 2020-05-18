@@ -48,9 +48,13 @@ function theme_cluster_discussions_teaser($vars) {
   }
 
   $date = '<span class="date">';
-  $date .= format_date($vars['element']['#node']->created, 'short');
-  //$date .= t(' by ');
-  //$date .= l($vars['element']['#author']['name'], $vars['element']['#author']['path']);
+  if ($is_list_page) {
+    $date .= l($vars['element']['#author']['name'], $vars['element']['#author']['path']);
+    $date .= ' &middot; ';
+    $date .= format_date($vars['element']['#node']->created, 'short');
+  } else {
+    $date .= format_date($vars['element']['#node']->created, 'short');
+  }
   $date .= '</span>';
 
   if ($is_list_page)
