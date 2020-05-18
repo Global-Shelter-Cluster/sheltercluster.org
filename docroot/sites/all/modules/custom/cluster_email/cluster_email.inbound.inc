@@ -147,7 +147,7 @@ function cluster_email_inbound() {
 
     $name = $matches[1];
 
-    if (!variable_get('cluster_email_inbound_anon', 0)) {
+    if (!$user && !variable_get('cluster_email_inbound_anon', 0)) {
       watchdog('cluster_email_inbound', 'Not accepting anonymous users. Skipping inbound email (@name): @msg', [
         '@name' => $name,
         '@msg' => json_encode($message),
