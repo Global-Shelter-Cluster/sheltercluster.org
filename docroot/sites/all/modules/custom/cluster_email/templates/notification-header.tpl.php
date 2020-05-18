@@ -9,21 +9,21 @@
 
 $items = [];
 
-if ($data['cluster_factsheets'])
+if (is_array($data) && $data['cluster_factsheets'])
   $items[] = format_plural(
     count($data['cluster_factsheets']),
     'New factsheet',
     '@count new factsheets'
   );
 
-if ($data['cluster_docs'])
+if (is_array($data) && $data['cluster_docs'])
   $items[] = format_plural(
     count($data['cluster_docs']),
     '1 new document',
     '@count new documents'
   );
 
-if ($data['cluster_og'])
+if (is_array($data) && $data['cluster_og'])
   $items[] = format_plural(
     count($data['cluster_og']),
     '1 new page',
