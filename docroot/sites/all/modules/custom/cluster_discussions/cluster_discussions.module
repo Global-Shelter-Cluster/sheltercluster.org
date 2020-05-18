@@ -372,7 +372,7 @@ function cluster_discussions_cron() {
           'subscriber_email' => $subscriber_email,
         ];
 
-        drupal_mail('cluster_discussions', 'discussion_anon', $to, $langcode, $params);
+        drupal_mail('cluster_discussions', 'discussion_anon', $subscriber_email, $langcode, $params);
       } catch (Exception $e) {
         watchdog('cluster_discussions', 'Error sending anon discussion email @nid: @error', [
           '@nid' => $discussion_node->nid,
@@ -484,7 +484,7 @@ function cluster_discussions_cron() {
           'subscriber_email' => $subscriber_email,
         ];
 
-        drupal_mail('cluster_discussions', 'comment_anon', $to, $langcode, $params);
+        drupal_mail('cluster_discussions', 'comment_anon', $subscriber_email, $langcode, $params);
       } catch (Exception $e) {
         watchdog('cluster_discussions', 'Error sending anon discussion comment email @nid: @error', [
           '@cid' => $comment->cid,
