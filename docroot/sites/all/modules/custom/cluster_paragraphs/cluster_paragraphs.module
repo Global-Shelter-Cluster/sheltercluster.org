@@ -172,7 +172,11 @@ function cluster_paragraphs_render_email_content($content) {
  * Implements hook_field_widget_form_alter().
  */
 function cluster_paragraphs_field_widget_form_alter(&$element, &$form_state, $context) {
-  if ($context['form']['#entity_type'] !== 'paragraphs_item')
+  if (
+    !isset($context['form'])
+    || !isset($context['form']['#entity_type'])
+    || $context['form']['#entity_type'] !== 'paragraphs_item'
+  )
     return;
 
   if (substr($context['form']['#field_name'], 0, 13) !== 'field_twocol_')
