@@ -235,7 +235,8 @@ class GroupDisplayProvider {
       );
     }
 
-    if ($discussions_count = $this->manager->getDiscussionCount() > 0) {
+    $discussions_count = $this->manager->getDiscussionCount();
+    if ($discussions_count > 0) {
       if ($this->manager->isEnabled('discussions')) {
         $items['discussions'] = array(
           'label' => t('Discussions'),

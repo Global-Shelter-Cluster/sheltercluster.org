@@ -2421,6 +2421,9 @@ label[for="mobile_menu_toggle"] span:after {
   margin-top: 4px;
   margin-top: 0.25rem;
 }
+.page-node-discussions .date a {
+  font-size: inherit;
+}
 .page-node-discussions .new {
   color: #f00;
   display: block;

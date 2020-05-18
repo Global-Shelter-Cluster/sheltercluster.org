@@ -138,6 +138,33 @@ function cluster_discussions_theme() {
       ],
       'path' => drupal_get_path('module', 'cluster_discussions') . '/templates',
     ],
+    'cluster_discussions_email_anon' => [
+      'template' => 'discussion-anon-email',
+      'variables' => [
+        'langcode' => '',
+        'logo' => '',
+        'date' => '',
+        'body' => '', // html string
+        'group' => [],
+        'node' => [],
+        'subscriber_email' => '',
+      ],
+      'path' => drupal_get_path('module', 'cluster_discussions') . '/templates',
+    ],
+    'cluster_discussions_email_comment_anon' => [
+      'template' => 'comment-anon-email',
+      'variables' => [
+        'langcode' => '',
+        'logo' => '',
+        'date' => '',
+        'body' => '', // html string
+        'group' => [],
+        'node' => [],
+        'comment' => [],
+        'subscriber_email' => '',
+      ],
+      'path' => drupal_get_path('module', 'cluster_discussions') . '/templates',
+    ],
   );
 }
 
@@ -236,13 +263,21 @@ function cluster_discussions_comment_insert($comment) {
  * Implements hook_mail().
  */
 function cluster_discussions_mail($key, &$message, $params) {
-  if (!in_array($key, ['discussion', 'comment']))
+  if (!in_array($key, ['discussion', 'comment', 'discussion_anon', 'comment_anon']))
     throw new Exception("Unknown key: ".$key);
 
-  $is_comment = $key === 'comment';
+  $is_comment = in_array($key, ['comment', 'comment_anon']);
+  $is_anon = in_array($key, ['discussion_anon', 'comment_anon']);
+
+  $themes = [
+    'discussion'      => 'cluster_discussions_email',
+    'discussion_anon' => 'cluster_discussions_email_anon',
+    'comment'         => 'cluster_discussions_email_comment',
+    'comment_anon'    => 'cluster_discussions_email_comment_anon',
+  ];
 
   $body = [
-    '#theme' => $is_comment ? 'cluster_discussions_email_comment' : 'cluster_discussions_email',
+    '#theme' => $themes[$key],
     '#logo' => url('sites/all/themes/shelter/assets/svg/replacement/logo-global-shelter-cluster-4x.png', ['absolute' => TRUE]),
     '#langcode' => $params['langcode'],
     '#date' => $params['date'],
@@ -250,8 +285,12 @@ function cluster_discussions_mail($key, &$message, $params) {
     '#group' => $params['group'],
     '#node' => $params['node'],
   ];
+
   if ($is_comment)
     $body['#comment'] = $params['comment'];
+
+  if ($is_anon)
+    $body['#subscriber_email'] = $params['subscriber_email'];
 
 //  // E.g. "Ecuador Earthquake 2016 (response)"
 //  $group_name = cluster_api_group_notification_title($params['group'], $params['langcode']);
@@ -302,17 +341,48 @@ function cluster_discussions_cron() {
     $discussion_date = $discussion_node->created;
 
     $all_uids = []; // Unified list of uids for all the groups to which this discussion item belongs.
+    $all_subscribers = []; // Unified list of subscriber emails for all the groups to which this discussion item belongs.
     $first_group = NULL;
 
     foreach ($discussion_wrapper->og_group_ref->value() as $group) {
       if (!og_is_group('node', $group))
         continue; // shouldn't happen
       $manager = GroupContentManager::getInstance($group);
+      $group_wrapper = entity_metadata_wrapper('node', $group);
       if (is_null($first_group))
         $first_group = $group;
 
       $all_uids = array_unique(array_merge($all_uids, cluster_api_get_followers($manager)));
+      if ($group_wrapper->field_enable_email_subscriptions->value())
+        $all_subscribers = array_merge($all_subscribers, $group_wrapper->field_subscribers->value());
     }
+
+    // Send emails for anon users (email subscribers)
+
+    foreach ($all_subscribers as $subscriber_email) {
+      $langcode = 'en';
+
+      try {
+        $params = [
+          'node' => $discussion_node,
+          'group' => $first_group,
+          'date' => $discussion_date,
+          'body' => $body,
+          'langcode' => $langcode,
+          'subscriber_email' => $subscriber_email,
+        ];
+
+        drupal_mail('cluster_discussions', 'discussion_anon', $to, $langcode, $params);
+      } catch (Exception $e) {
+        watchdog('cluster_discussions', 'Error sending anon discussion email @nid: @error', [
+          '@nid' => $discussion_node->nid,
+          '@email' => $subscriber_email,
+          '@error' => $e->getMessage(),
+        ], WATCHDOG_ERROR);
+      }
+    }
+
+    // Send normal emails for registered users
 
     // Don't email the author
     $all_uids = array_values(array_diff($all_uids, [$discussion_node->uid]));
@@ -382,17 +452,49 @@ function cluster_discussions_cron() {
     $comment_date = $comment->created;
 
     $all_uids = []; // Unified list of uids for all the groups to which this discussion item belongs.
+    $all_subscribers = []; // Unified list of subscriber emails for all the groups to which this discussion item belongs.
     $first_group = NULL;
 
     foreach ($discussion_wrapper->og_group_ref->value() as $group) {
       if (!og_is_group('node', $group))
         continue; // shouldn't happen
       $manager = GroupContentManager::getInstance($group);
+      $group_wrapper = entity_metadata_wrapper('node', $group);
       if (is_null($first_group))
         $first_group = $group;
 
       $all_uids = array_unique(array_merge($all_uids, cluster_api_get_followers($manager)));
+      if ($group_wrapper->field_enable_email_subscriptions->value())
+        $all_subscribers = array_merge($all_subscribers, $group_wrapper->field_subscribers->value());
     }
+
+    // Send emails for anon users (email subscribers)
+
+    foreach ($all_subscribers as $subscriber_email) {
+      $langcode = 'en';
+
+      try {
+        $params = [
+          'comment' => $comment,
+          'node' => $discussion_node,
+          'group' => $first_group,
+          'date' => $comment_date,
+          'body' => $body,
+          'langcode' => $langcode,
+          'subscriber_email' => $subscriber_email,
+        ];
+
+        drupal_mail('cluster_discussions', 'comment_anon', $to, $langcode, $params);
+      } catch (Exception $e) {
+        watchdog('cluster_discussions', 'Error sending anon discussion comment email @nid: @error', [
+          '@cid' => $comment->cid,
+          '@email' => $subscriber_email,
+          '@error' => $e->getMessage(),
+        ], WATCHDOG_ERROR);
+      }
+    }
+
+    // Send normal emails for registered users
 
     // Don't email the author
     $all_uids = array_values(array_diff($all_uids, [$comment->uid]));
@@ -412,7 +514,6 @@ function cluster_discussions_cron() {
         ];
         $to = _cluster_email_recipients_string($uids);
 
-dpm(['cluster_discussions', 'comment', $to, $langcode, $params], 'to be sent!');
         drupal_mail('cluster_discussions', 'comment', $to, $langcode, $params);
       } catch (Exception $e) {
         watchdog('cluster_discussions', 'Error sending discussion comment email @nid: @error', [

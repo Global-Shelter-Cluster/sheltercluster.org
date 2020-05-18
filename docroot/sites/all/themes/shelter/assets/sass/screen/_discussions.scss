@@ -122,6 +122,10 @@
     float: right;
     display: inline-block;
     @include rem(margin-top, 0.25rem);
+
+    a {
+      font-size: inherit;
+    }
   }
   .new {
     color: #f00;
