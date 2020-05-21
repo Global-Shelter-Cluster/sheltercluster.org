@@ -230,6 +230,12 @@ class GroupContentManager {
       ->execute();
   }
 
+  protected function isDiscussionsEnabled() {
+    $wrapper = entity_metadata_wrapper('node', $this->node);
+    $v = $wrapper->field_email_address_identifier->value();
+    return !empty($v);
+  }
+
   /**
    * Provide a count value for all published event nodes added to the group.
    * @return
@@ -788,12 +794,20 @@ class GroupContentManager {
    */
   public function isEnabled($module) {
     if (!isset($this->node->field_group_modules)) {
-      return TRUE;
+      if ($module === 'discussions')
+        return $this->isDiscussionsEnabled();
+      else
+        return TRUE;
     }
 
     $wrapper = entity_metadata_wrapper('node', $this->node);
     $disabled = $wrapper->field_group_modules->value();
-    return !in_array($module, $disabled);
+    $ret = !in_array($module, $disabled);
+
+    if ($ret && $module === 'discussions')
+      return $this->isDiscussionsEnabled();
+
+    return $ret;
   }
 
   /**
