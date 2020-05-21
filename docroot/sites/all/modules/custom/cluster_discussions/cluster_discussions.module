@@ -348,6 +348,8 @@ function cluster_discussions_cron() {
       if (!og_is_group('node', $group))
         continue; // shouldn't happen
       $manager = GroupContentManager::getInstance($group);
+      if (!$manager->isEnabled('discussions'))
+        continue;
       $group_wrapper = entity_metadata_wrapper('node', $group);
       if (is_null($first_group))
         $first_group = $group;
@@ -459,6 +461,8 @@ function cluster_discussions_cron() {
       if (!og_is_group('node', $group))
         continue; // shouldn't happen
       $manager = GroupContentManager::getInstance($group);
+      if (!$manager->isEnabled('discussions'))
+        continue;
       $group_wrapper = entity_metadata_wrapper('node', $group);
       if (is_null($first_group))
         $first_group = $group;
@@ -694,4 +698,33 @@ function _cluster_discussions_inbound_comment($discussion_nid, $message) {
     '@cid' => $wrapper->cid->value(),
     '@nid' => $discussion->nid,
   ]);
+}
+
+/**
+ * Implements hook_node_validate().
+ */
+function cluster_discussions_node_validate($node, $form, &$form_state) {
+  if ($node->type !== 'discussion') {
+    return;
+  }
+
+  if (
+    !isset($form_state['values']['og_group_ref'])
+    || !isset($form_state['values']['og_group_ref'][LANGUAGE_NONE][0]['target_id'])
+  )
+    return;
+
+  foreach ($form_state['values']['og_group_ref'][LANGUAGE_NONE] as $item) {
+    $group = node_load($item['target_id']);
+    if (!og_is_group('node', $group)) {
+      continue; // shouldn't happen
+    }
+    $manager = GroupContentManager::getInstance($group);
+    if (!$manager->isEnabled('discussions')) {
+      form_set_error('og_group_ref', t('Discussions are disabled for @group.', [
+        '@group' => $group->title,
+      ]));
+      return;
+    }
+  }
 }
