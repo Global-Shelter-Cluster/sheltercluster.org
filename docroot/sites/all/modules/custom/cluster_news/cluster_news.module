@@ -11,6 +11,9 @@ include_once 'cluster_news.pathauto.inc';
  * Implements hook_cron().
  */
 function cluster_news_cron() {
+  if (!variable_get('cluster_email_out_news', 1))
+    return;
+
   $query = new EntityFieldQuery();
   $results = $query->entityCondition('entity_type', 'node')
     ->entityCondition('bundle', 'news')
