@@ -232,8 +232,9 @@ class GroupContentManager {
 
   protected function isDiscussionsEnabled() {
     $wrapper = entity_metadata_wrapper('node', $this->node);
-    $v = $wrapper->field_email_address_identifier->value();
-    return !empty($v);
+    return (bool) $wrapper->field_enable_discussions->value();
+//    $v = $wrapper->field_email_address_identifier->value();
+//    return !empty($v);
   }
 
   /**
