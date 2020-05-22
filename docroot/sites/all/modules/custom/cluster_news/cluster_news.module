@@ -133,9 +133,8 @@ function cluster_news_mail($key, &$message, $params) {
   // E.g. "Ecuador Earthquake 2016 (response)"
   $group_name = cluster_api_group_notification_title($params['group'], $params['langcode']);
 
-  $message['subject'] = $group_name . ' — ' . $params['node']->title;;
-//  $message['subject'] = $params['node']->title;
-  $message['from_name'] = $group_name;
+  $message['subject'] = $params['node']->title;
+  $message['params']['mandrill']['from_name'] = 'Shelter Cluster' . ' — ' . $group_name;
   $message['body'] = [drupal_render($body)];
 }
 

@@ -322,6 +322,8 @@ function cluster_email_mail($key, &$message, $params) {
       break;
   }
 
+  $message['params']['mandrill']['from_name'] = 'Shelter Cluster' . ' — ' . $group_name;
+
   $message['body'] = [drupal_render($body)];
 }
 

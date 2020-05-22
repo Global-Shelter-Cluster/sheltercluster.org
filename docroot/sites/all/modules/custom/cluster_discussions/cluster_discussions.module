@@ -297,13 +297,16 @@ function cluster_discussions_mail($key, &$message, $params) {
   $group_name = $params['group']->title;
 
   if ($is_comment)
-    $message['subject'] = 'Re: ' . $group_name . ' — ' . $params['node']->title;
+    $message['subject'] = 'Re: ' . $params['node']->title;
   else
-    $message['subject'] = $group_name . ' — ' . $params['node']->title;
+    $message['subject'] = $params['node']->title;
   //  $message['subject'] = $params['node']->title;
-  $message['from_name'] = $is_comment
-    ? $params['comment']->registered_name
-    : $params['node']->name;
+
+//  $message['from_name'] = $is_comment
+//    ? $params['comment']->registered_name
+//    : $params['node']->name;
+  $message['params']['mandrill']['from_name'] = 'Shelter Cluster' . ' — ' . $group_name;
+
   $message['body'] = [drupal_render($body)];
 
   $reply_to_address = cluster_email_inbound_address('comment-'.$params['node']->nid);
