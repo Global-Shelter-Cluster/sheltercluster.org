@@ -34,10 +34,43 @@
     color: #575757;
     margin-bottom: 40px;
   ">
+    <?php print check_plain($comment->registered_name) ?>
+    &middot;
     <?php print format_date($date, 'custom', 'l, j F, Y', NULL, $langcode); ?>
   </small>
 
   <?php print $body; ?>
+
+  <?php if ($previous): ?>
+    <div style="margin: 40px 0 0 30px">
+      <?php foreach ($previous as $previous_item): ?>
+
+        <div style="
+          font-size: 90%;
+          color: #888888;
+          margin-top: 20px;
+          padding-top: 10px;
+          border-top: 1px solid #CCCCCC;
+        ">
+          <small style="
+            display: block;
+          ">
+            <a style="
+              color: #AAAAAA;
+              text-decoration: none;
+            " href="<?php print $previous_item['url']; ?>">
+              <?php print check_plain($previous_item['author']) ?>
+              &middot;
+              <?php print format_date($previous_item['date'], 'custom', 'l, j F, Y', NULL, $langcode); ?>
+            </a>
+          </small>
+
+          <?php print $previous_item['body']; ?>
+        </div>
+
+      <?php endforeach; ?>
+    </div>
+  <?php endif; ?>
 
   <?php include __DIR__.'/../../cluster_email/templates/notification-footer-anon.tpl.php'; ?>
 </div>

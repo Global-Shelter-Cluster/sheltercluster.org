@@ -9,6 +9,12 @@ include_once 'cluster_discussions.pathauto.inc';
 
 const CLUSTER_DISCUSSIONS_PER_PAGE = 30;
 
+/** How many previous comments to show on emails */
+const CLUSTER_DISCUSSIONS_PREV_COMMENT_LIMIT_ON_EMAILS = 2;
+
+/** Character length of previous comments in emails */
+const CLUSTER_DISCUSSIONS_PREV_COMMENT_SUMMARY_SIZE = 200;
+
 /**
  *  Implements hook_menu().
  */
@@ -135,6 +141,7 @@ function cluster_discussions_theme() {
         'group' => [],
         'node' => [],
         'comment' => [],
+        'previous' => [],
       ],
       'path' => drupal_get_path('module', 'cluster_discussions') . '/templates',
     ],
@@ -161,6 +168,7 @@ function cluster_discussions_theme() {
         'group' => [],
         'node' => [],
         'comment' => [],
+        'previous' => [],
         'subscriber_email' => '',
       ],
       'path' => drupal_get_path('module', 'cluster_discussions') . '/templates',
@@ -286,8 +294,10 @@ function cluster_discussions_mail($key, &$message, $params) {
     '#node' => $params['node'],
   ];
 
-  if ($is_comment)
+  if ($is_comment) {
     $body['#comment'] = $params['comment'];
+    $body['#previous'] = $params['previous'];
+  }
 
   if ($is_anon)
     $body['#subscriber_email'] = $params['subscriber_email'];
@@ -459,6 +469,29 @@ function cluster_discussions_cron() {
     $body = $comment_wrapper->comment_body->value()['safe_value'];
     $comment_date = $comment->created;
 
+    $previous = [];
+    $previous_comments = cluster_discussions_get_previous_comments($discussion_node, $comment, CLUSTER_DISCUSSIONS_PREV_COMMENT_LIMIT_ON_EMAILS);
+    foreach ($previous_comments as $previous_comment) {
+      $previous_wrapper = entity_metadata_wrapper('comment', $previous_comment);
+      $body_value = $previous_wrapper->comment_body->value();
+      $previous[] = [
+        'body' => text_summary($body_value['safe_value'], $body_value['format'], CLUSTER_DISCUSSIONS_PREV_COMMENT_SUMMARY_SIZE),
+        'date' => $previous_comment->created,
+        'author' => $previous_comment->registered_name,
+        'url' => url('node/'.$discussion_node->nid, ['absolute' => TRUE, 'fragment' => 'comment-'.$previous_comment->cid]),
+      ];
+    }
+    if (count($previous) < CLUSTER_DISCUSSIONS_PREV_COMMENT_LIMIT_ON_EMAILS) {
+      // Add the discussion itself
+      $body_value = $discussion_wrapper->body->value();
+      $previous[] = [
+        'body' => text_summary($body_value['safe_value'], $body_value['format'], CLUSTER_DISCUSSIONS_PREV_COMMENT_SUMMARY_SIZE),
+        'date' => $discussion_node->created,
+        'author' => $discussion_node->name,
+        'url' => url('node/'.$discussion_node->nid, ['absolute' => TRUE]),
+      ];
+    }
+
     $all_uids = []; // Unified list of uids for all the groups to which this discussion item belongs.
     $all_subscribers = []; // Unified list of subscriber emails for all the groups to which this discussion item belongs.
     $first_group = NULL;
@@ -486,6 +519,7 @@ function cluster_discussions_cron() {
       try {
         $params = [
           'comment' => $comment,
+          'previous' => $previous,
           'node' => $discussion_node,
           'group' => $first_group,
           'date' => $comment_date,
@@ -516,6 +550,7 @@ function cluster_discussions_cron() {
       try {
         $params = [
           'comment' => $comment,
+          'previous' => $previous,
           'node' => $discussion_node,
           'group' => $first_group,
           'date' => $comment_date,
@@ -533,6 +568,24 @@ function cluster_discussions_cron() {
       }
     }
   }
+}
+
+function cluster_discussions_get_previous_comments($node, $comment, $limit = 2) {
+  $query = db_select('comment', 'c')->extend('PagerDefault');
+  $query->addField('c', 'cid');
+  $query
+    ->condition('c.nid', $node->nid)
+    ->condition('c.cid', $comment->cid, '<')
+    ->condition('c.status', COMMENT_PUBLISHED)
+    ->addTag('node_access')
+    ->addTag('comment_filter')
+    ->addMetaData('node', $node)
+    ->limit($limit)
+    ->orderBy('c.cid', 'DESC'); // this only works with non-threaded comments
+
+  $cids = $query->execute()->fetchCol();
+
+  return comment_load_multiple($cids);
 }
 
 /**

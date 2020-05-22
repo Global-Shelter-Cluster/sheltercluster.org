@@ -33,6 +33,8 @@
     color: #575757;
     margin-bottom: 40px;
   ">
+    <?php print check_plain($node->name) ?>
+    &middot;
     <?php print format_date($date, 'custom', 'l, j F, Y', NULL, $langcode); ?>
   </small>
 
