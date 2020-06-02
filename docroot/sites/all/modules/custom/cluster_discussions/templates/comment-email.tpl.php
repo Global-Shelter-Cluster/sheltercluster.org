@@ -13,20 +13,30 @@
     line-height: 1.5;
     color: #575757;
   ">
-    <?php print t('A comment has been added to a discussion on <a href="@group_url">@group</a>. You can reply directly to this email to add a new comment, or '.
-      '<a href="@url">click here</a> to see it and reply on the Shelter Cluster website.'.
-      '<br>You can also create a new discussion on the group by sending an email to <a href="mailto:@email">@email</a>.', [
-      '@group' => $group->title,
-      '@group_url' => url('node/'.$group->nid, ['absolute' => TRUE]),
-      '@url' => url('node/'.$node->nid, ['absolute' => TRUE, 'fragment' => 'comment-'.$comment->cid]),
-      '@email' => cluster_email_inbound_address('discussion-'.$group->field_email_address_identifier['und'][0]['value']),
-    ]); ?>
+    <?php
+    if ($is_moderate)
+      print t('A new comment needs moderation on <a href="@group_url">@group</a>.', [
+        '@group' => $group->title,
+        '@group_url' => url('node/'.$group->nid.'/moderate', ['absolute' => TRUE]),
+      ]);
+    else
+      print t('A comment has been added to a discussion on <a href="@group_url">@group</a>. You can reply directly to this email to add a new comment, or '.
+        '<a href="@url">click here</a> to see it and reply on the Shelter Cluster website.'.
+        '<br>You can also create a new discussion on the group by sending an email to <a href="mailto:@email">@email</a>.', [
+        '@group' => $group->title,
+        '@group_url' => url('node/'.$group->nid, ['absolute' => TRUE]),
+        '@url' => url('node/'.$node->nid, ['absolute' => TRUE, 'fragment' => 'comment-'.$comment->cid]),
+        '@email' => cluster_email_inbound_address('discussion-'.$group->field_email_address_identifier['und'][0]['value']),
+      ]);
+    ?>
   </p>
+
+  <?php if ($is_moderate) print '<div style="background-color: #ffdddd; padding: 0 10px 1px;">'; ?>
 
   <h1 style="
     margin: 20px 0 0;
   ">
-    <?php print l('Re: '.$node->title, 'node/'.$node->nid, ['absolute' => TRUE, 'attributes' => [
+    <?php print l('Re: '.$node->title, $is_moderate ? 'node/'.$group->nid.'/moderate' : 'node/'.$node->nid, ['absolute' => TRUE, 'attributes' => [
       'style' => 'color: #7f1416; text-decoration: none;'
     ],
     'fragment' => 'comment-'.$comment->cid]); ?>
@@ -42,6 +52,8 @@
   </small>
 
   <?php print $body; ?>
+
+  <?php if ($is_moderate) print '</div>'; ?>
 
   <?php if ($previous): ?>
     <div style="margin: 40px 0 0 30px">

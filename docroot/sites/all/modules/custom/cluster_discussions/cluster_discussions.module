@@ -324,6 +324,7 @@ function cluster_discussions_theme() {
         'body' => '', // html string
         'group' => [],
         'node' => [],
+        'is_moderate' => FALSE,
       ],
       'path' => drupal_get_path('module', 'cluster_discussions') . '/templates',
     ],
@@ -338,6 +339,7 @@ function cluster_discussions_theme() {
         'node' => [],
         'comment' => [],
         'previous' => [],
+        'is_moderate' => FALSE,
       ],
       'path' => drupal_get_path('module', 'cluster_discussions') . '/templates',
     ],
@@ -467,17 +469,20 @@ function cluster_discussions_comment_insert($comment) {
  * Implements hook_mail().
  */
 function cluster_discussions_mail($key, &$message, $params) {
-  if (!in_array($key, ['discussion', 'comment', 'discussion_anon', 'comment_anon']))
+  if (!in_array($key, ['discussion', 'comment', 'discussion_anon', 'comment_anon', 'discussion_moderate', 'comment_moderate']))
     throw new Exception("Unknown key: ".$key);
 
   $is_comment = in_array($key, ['comment', 'comment_anon']);
   $is_anon = in_array($key, ['discussion_anon', 'comment_anon']);
+  $is_moderate = in_array($key, ['discussion_moderate', 'comment_moderate']);
 
   $themes = [
-    'discussion'      => 'cluster_discussions_email',
-    'discussion_anon' => 'cluster_discussions_email_anon',
-    'comment'         => 'cluster_discussions_email_comment',
-    'comment_anon'    => 'cluster_discussions_email_comment_anon',
+    'discussion'          => 'cluster_discussions_email',
+    'discussion_anon'     => 'cluster_discussions_email_anon',
+    'discussion_moderate' => 'cluster_discussions_email',
+    'comment'             => 'cluster_discussions_email_comment',
+    'comment_anon'        => 'cluster_discussions_email_comment_anon',
+    'comment_moderate'    => 'cluster_discussions_email_comment',
   ];
 
   $body = [
@@ -497,6 +502,9 @@ function cluster_discussions_mail($key, &$message, $params) {
 
   if ($is_anon)
     $body['#subscriber_email'] = $params['subscriber_email'];
+
+  if ($is_moderate)
+    $body['#is_moderate'] = TRUE;
 
 //  // E.g. "Ecuador Earthquake 2016 (response)"
 //  $group_name = cluster_api_group_notification_title($params['group'], $params['langcode']);
@@ -665,28 +673,7 @@ function cluster_discussions_cron() {
     $body = $comment_wrapper->comment_body->value()['safe_value'];
     $comment_date = $comment->created;
 
-    $previous = [];
-    $previous_comments = cluster_discussions_get_previous_comments($discussion_node, $comment, CLUSTER_DISCUSSIONS_PREV_COMMENT_LIMIT_ON_EMAILS);
-    foreach ($previous_comments as $previous_comment) {
-      $previous_wrapper = entity_metadata_wrapper('comment', $previous_comment);
-      $body_value = $previous_wrapper->comment_body->value();
-      $previous[] = [
-        'body' => text_summary($body_value['safe_value'], $body_value['format'], CLUSTER_DISCUSSIONS_PREV_COMMENT_SUMMARY_SIZE),
-        'date' => $previous_comment->created,
-        'author' => $previous_comment->registered_name,
-        'url' => url('node/'.$discussion_node->nid, ['absolute' => TRUE, 'fragment' => 'comment-'.$previous_comment->cid]),
-      ];
-    }
-    if (count($previous) < CLUSTER_DISCUSSIONS_PREV_COMMENT_LIMIT_ON_EMAILS) {
-      // Add the discussion itself
-      $body_value = $discussion_wrapper->body->value();
-      $previous[] = [
-        'body' => text_summary($body_value['safe_value'], $body_value['format'], CLUSTER_DISCUSSIONS_PREV_COMMENT_SUMMARY_SIZE),
-        'date' => $discussion_node->created,
-        'author' => $discussion_node->name,
-        'url' => url('node/'.$discussion_node->nid, ['absolute' => TRUE]),
-      ];
-    }
+    $previous = cluster_discussions_get_previous_email_data($comment, $discussion_node);
 
     $all_uids = []; // Unified list of uids for all the groups to which this discussion item belongs.
     $all_subscribers = []; // Unified list of subscriber emails for all the groups to which this discussion item belongs.
@@ -1002,8 +989,70 @@ function cluster_discussions_node_presave($node) {
   $node->status = $is_trusted ? NODE_PUBLISHED : NODE_NOT_PUBLISHED;
 
   global $user;
-  if ($user->uid == $author->uid && !$is_trusted)
+  if ($user->uid == $author->uid && !$is_trusted) {
     drupal_set_message(t('Your discussion will be reviewed by an administrator before being published to the website.'), 'warning');
+
+    $wrapper = entity_metadata_wrapper('node', $node);
+    $body = $wrapper->body->value()['value'];
+
+    // Send an email about it to the node's groups admin(s), if any, right away
+    foreach (cluster_og_gids_from_content_node($node) as $gid) {
+      $group = node_load($gid);
+      if (!$group || !og_is_group('node', $group))
+        continue;
+
+      $group_admin_uids = cluster_og_group_admins_uids_by_gid($gid);
+      foreach (cluster_api_split_users_by_langcode($group_admin_uids) as $langcode => $uids) {
+        try {
+          $params = [
+            'node' => $node,
+            'group' => $group,
+            'date' => $node->created,
+            'body' => $body,
+            'langcode' => $langcode,
+          ];
+          $to = _cluster_email_recipients_string($uids);
+
+          drupal_mail('cluster_discussions', 'discussion_moderate', $to, $langcode, $params);
+        } catch (Exception $e) {
+          watchdog('cluster_discussions', 'Error sending moderate discussion email @nid: @error', [
+            '@nid' => $node->nid,
+            '@error' => $e->getMessage(),
+          ], WATCHDOG_ERROR);
+        }
+      }
+    }
+  }
+}
+
+function cluster_discussions_get_previous_email_data($comment, $discussion_node) {
+  $discussion_wrapper = entity_metadata_wrapper('node', $discussion_node);
+  $previous = [];
+
+  $previous_comments = cluster_discussions_get_previous_comments($discussion_node, $comment, CLUSTER_DISCUSSIONS_PREV_COMMENT_LIMIT_ON_EMAILS);
+  foreach ($previous_comments as $previous_comment) {
+    $previous_wrapper = entity_metadata_wrapper('comment', $previous_comment);
+    $body_value = $previous_wrapper->comment_body->value();
+    $previous[] = [
+      'body' => text_summary($body_value['safe_value'], $body_value['format'], CLUSTER_DISCUSSIONS_PREV_COMMENT_SUMMARY_SIZE),
+      'date' => $previous_comment->created,
+      'author' => $previous_comment->registered_name,
+      'url' => url('node/'.$discussion_node->nid, ['absolute' => TRUE, 'fragment' => 'comment-'.$previous_comment->cid]),
+    ];
+  }
+
+  if (count($previous) < CLUSTER_DISCUSSIONS_PREV_COMMENT_LIMIT_ON_EMAILS) {
+    // Add the discussion itself
+    $body_value = $discussion_wrapper->body->value();
+    $previous[] = [
+      'body' => text_summary($body_value['safe_value'], $body_value['format'], CLUSTER_DISCUSSIONS_PREV_COMMENT_SUMMARY_SIZE),
+      'date' => $discussion_node->created,
+      'author' => $discussion_node->name,
+      'url' => url('node/'.$discussion_node->nid, ['absolute' => TRUE]),
+    ];
+  }
+
+  return $previous;
 }
 
 /**
@@ -1020,6 +1069,47 @@ function cluster_discussions_comment_presave($comment) {
 
   $is_trusted = cluster_user_is_trusted($author);
   $comment->status = $is_trusted ? COMMENT_PUBLISHED : COMMENT_NOT_PUBLISHED;
+
+  if (!$is_trusted) {
+    // Send an email about it to the group admin(s), if any, right away
+
+    $node = node_load($comment->nid);
+    if (!$node)
+      return;
+    $comment_wrapper = entity_metadata_wrapper('comment', $comment);
+
+    $body = $comment_wrapper->comment_body->value()['value'];
+
+    // Send an email about it to the node's groups admin(s), if any, right away
+    foreach (cluster_og_gids_from_content_node($node) as $gid) {
+      $group = node_load($gid);
+      if (!$group || !og_is_group('node', $group))
+        continue;
+
+      $group_admin_uids = cluster_og_group_admins_uids_by_gid($gid);
+      foreach (cluster_api_split_users_by_langcode($group_admin_uids) as $langcode => $uids) {
+        try {
+          $params = [
+            'comment' => $comment,
+            'previous' => cluster_discussions_get_previous_email_data($comment, $node),
+            'node' => $node,
+            'group' => $group,
+            'date' => $comment->created,
+            'body' => $body,
+            'langcode' => $langcode,
+          ];
+          $to = _cluster_email_recipients_string($uids);
+
+          drupal_mail('cluster_discussions', 'comment_moderate', $to, $langcode, $params);
+        } catch (Exception $e) {
+          watchdog('cluster_discussions', 'Error sending moderate comment email @nid: @error', [
+            '@cid' => $comment->cid,
+            '@error' => $e->getMessage(),
+          ], WATCHDOG_ERROR);
+        }
+      }
+    }
+  }
 }
 
 /**
