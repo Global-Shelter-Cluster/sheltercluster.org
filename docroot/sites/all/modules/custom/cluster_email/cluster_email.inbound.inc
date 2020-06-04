@@ -117,6 +117,11 @@ function cluster_email_inbound() {
       : NULL;
 
     $user = user_load_by_mail($mandrill_event['msg']['from_email']);
+    
+    if ($user && $user->uid && $user->status == 0) {
+      watchdog('cluster_email_inbound', 'User is blocked: @msg', ['@msg' => print_r($mandrill_event, TRUE)], WATCHDOG_WARNING);
+      continue;
+    }
 
     $text = isset($mandrill_event['msg']['text'])
       ? trim(_cluster_email_character_conversion($mandrill_event['msg']['text']))
