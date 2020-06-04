@@ -842,6 +842,7 @@ function _cluster_discussions_inbound_discussion($group_email_identifier, $messa
   $values = [
     'type' => 'discussion',
     'created' => $message['ts'],
+    'changed' => $message['ts'],
     'status' => cluster_user_is_trusted($user) ? NODE_PUBLISHED : NODE_NOT_PUBLISHED,
     'title' => trim($message['subject']),
   ];
@@ -900,6 +901,7 @@ function _cluster_discussions_inbound_comment($discussion_nid, $message) {
 
   $values = [
     'created' => $message['ts'],
+    'changed' => $message['ts'],
     'nid' => $discussion->nid,
     'status' => COMMENT_PUBLISHED,
     'node_type' => 'comment_node_discussion',
