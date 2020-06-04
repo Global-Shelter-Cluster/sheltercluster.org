@@ -545,7 +545,7 @@ class GroupDisplayProvider {
 
     $this->generateEditorMenuSectionIndividual($ret, [
       [
-        'enabled' => $manager->isEnabled('documents') && node_access('create', 'document'),
+        'enabled' => $manager->isEnabled('documents') && node_access('create', 'document') && cluster_user_is_trusted($user),
         'icon' => 'fas fa-file-alt',
         'title' => t('Document'),
         'href' => 'node/add/document',
@@ -575,7 +575,7 @@ class GroupDisplayProvider {
         ),
       ],
       [
-        'enabled' => node_access('create', 'factsheet') && og_user_access('node', $node->nid, 'create factsheet content'),
+        'enabled' => node_access('create', 'factsheet') && og_user_access('node', $node->nid, 'create factsheet content') && cluster_user_is_trusted($user),
         'icon' => 'fas fa-chart-bar',
         'title' => t('Factsheet'),
         'href' => 'node/' . $node->nid . '/add-factsheet',
