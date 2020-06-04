@@ -225,7 +225,7 @@ function _cluster_discussions_moderate_access($gid) {
     return TRUE;
 
   $user_roles_in_group = og_get_user_roles('node', $gid, $user->uid, FALSE);
-  return in_array('administrator member', $user_roles_in_group);
+  return in_array(OG_ADMINISTRATOR_ROLE, $user_roles_in_group);
 }
 
 /**
@@ -574,7 +574,7 @@ function cluster_discussions_cron() {
       if (is_null($first_group))
         $first_group = $group;
 
-      $all_uids = array_unique(array_merge($all_uids, cluster_api_get_followers($manager)));
+      $all_uids = array_unique(array_merge($all_uids, cluster_api_get_followers_and_admins($manager)));
       if ($group_wrapper->field_enable_email_subscriptions->value())
         $all_subscribers = array_merge($all_subscribers, $group_wrapper->field_subscribers->value());
     }
@@ -689,7 +689,7 @@ function cluster_discussions_cron() {
       if (is_null($first_group))
         $first_group = $group;
 
-      $all_uids = array_unique(array_merge($all_uids, cluster_api_get_followers($manager)));
+      $all_uids = array_unique(array_merge($all_uids, cluster_api_get_followers_and_admins($manager)));
       if ($group_wrapper->field_enable_email_subscriptions->value())
         $all_subscribers = array_merge($all_subscribers, $group_wrapper->field_subscribers->value());
     }
@@ -1126,7 +1126,7 @@ function cluster_discussions_node_access($node, $op, $account) {
     $gid = $group_ref['target_id'];
 
     $user_roles_in_group = og_get_user_roles('node', $gid, $account->uid, FALSE);
-    if (in_array('administrator member', $user_roles_in_group))
+    if (in_array(OG_ADMINISTRATOR_ROLE, $user_roles_in_group))
       return NODE_ACCESS_ALLOW;
   }
 

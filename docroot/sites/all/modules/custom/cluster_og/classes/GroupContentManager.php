@@ -633,19 +633,23 @@ class GroupContentManager {
   /**
    * Get all active users with specified role for a group.
    *
-   * @param string $role_name
-   *  The role name as stored in the database.
+   * @param string|array $role_names
+   *  The role name(s) as stored in the database.
    * @param NULL|string[] $filter_user_timezones
    *  Only return users with one of the given timezones, e.g. ["Europe/Budapest", "Americas/New_York"]
    * @param NULL|int $filter_access_threshold
    *  Only return users who have accessed the site (or mobile app) in the last X seconds.
    * @param NULL|callable $query_alter
    *  Callback that alters the query (e.g. can add conditions to it).
+   *
    * @return Array of user IDs.
    */
-  public function getUsersByRole($role_name, $filter_user_timezones = NULL, $filter_access_threshold = NULL, $query_alter = NULL) {
-    $rid = $this->getRoleIdByName($role_name, $this->node->type);
-    if (!$rid)
+  public function getUsersByRole($role_names, $filter_user_timezones = NULL, $filter_access_threshold = NULL, $query_alter = NULL) {
+    $rids = [];
+    foreach ((array) $role_names as $role_name)
+      $rids[] = $this->getRoleIdByName($role_name, $this->node->type);
+    $rids = array_values(array_filter($rids));
+    if (!$rids)
       return [];
 
     $query = db_select('og_users_roles', 'og_ur')
@@ -662,7 +666,7 @@ class GroupContentManager {
 
     $query->condition('u.status', 1);
     $query->condition('og_ur.gid', $this->node->nid);
-    $query->condition('og_ur.rid', $rid);
+    $query->condition('og_ur.rid', $rids, 'IN');
 
     if (!is_null($query_alter))
       $query_alter($query);

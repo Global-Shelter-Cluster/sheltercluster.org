@@ -1165,7 +1165,7 @@ function cluster_og_is_group_admin_by_content_node($node) {
 
   foreach (cluster_og_gids_from_content_node($node) as $gid) {
     $user_roles_in_group = og_get_user_roles('node', $gid, $user->uid, FALSE);
-    if (in_array('administrator member', $user_roles_in_group)) {
+    if (in_array(OG_ADMINISTRATOR_ROLE, $user_roles_in_group)) {
       return TRUE;
     }
   }
@@ -1188,7 +1188,7 @@ function cluster_og_group_admins_uids_by_gid($gid) {
   $access_threshold = 60 * 60 * 24 * 30 * 6; // 6 months
 
   $manager = GroupContentManager::getInstance($group);
-  return $manager->getUsersByRole('administrator member', NULL, $access_threshold);
+  return $manager->getUsersByRole(OG_ADMINISTRATOR_ROLE, NULL, $access_threshold);
 }
 
 /**

@@ -386,7 +386,7 @@ function cluster_user_is_trusted($user) {
     $memberships = og_membership_load_multiple(array_keys($result['og_membership']));
     foreach ($memberships as $membership) {
       $user_roles_in_group = og_get_user_roles('node', $membership->gid, $user->uid, FALSE);
-      if (in_array('administrator member', $user_roles_in_group))
+      if (in_array(OG_ADMINISTRATOR_ROLE, $user_roles_in_group))
         return TRUE;
     }
   }

@@ -51,7 +51,7 @@ function cluster_news_cron() {
       if (is_null($first_group))
         $first_group = $group;
 
-      $all_uids = array_unique(array_merge($all_uids, cluster_api_get_followers($manager)));
+      $all_uids = array_unique(array_merge($all_uids, cluster_api_get_followers_and_admins($manager)));
       if ($group_wrapper->field_enable_email_subscriptions->value())
         $all_subscribers = array_merge($all_subscribers, $group_wrapper->field_subscribers->value());
     }
