@@ -843,7 +843,6 @@ function _cluster_discussions_inbound_discussion($group_email_identifier, $messa
     'type' => 'discussion',
     'created' => $message['ts'],
     'changed' => $message['ts'],
-    'status' => cluster_user_is_trusted($user) ? NODE_PUBLISHED : NODE_NOT_PUBLISHED,
     'title' => trim($message['subject']),
   ];
 
@@ -855,6 +854,8 @@ function _cluster_discussions_inbound_discussion($group_email_identifier, $messa
     $language = $user->language;
     $values['language'] = $language;
   }
+
+  $values['status'] = $user && cluster_user_is_trusted($user) ? NODE_PUBLISHED : NODE_NOT_PUBLISHED;
 
   if (!$values['title']) {
     $values['title'] = t('New discussion', [], ['langcode' => $language]);
@@ -903,7 +904,6 @@ function _cluster_discussions_inbound_comment($discussion_nid, $message) {
     'created' => $message['ts'],
     'changed' => $message['ts'],
     'nid' => $discussion->nid,
-    'status' => COMMENT_PUBLISHED,
     'node_type' => 'comment_node_discussion',
   ];
 
@@ -919,6 +919,8 @@ function _cluster_discussions_inbound_comment($discussion_nid, $message) {
   if (isset($message['uid']) && $user = user_load($message['uid'])) {
     $values['uid'] = $user->uid;
   }
+
+  $values['status'] = $user && cluster_user_is_trusted($user) ? COMMENT_PUBLISHED : COMMENT_NOT_PUBLISHED;
 
   $comment = entity_create('comment', $values);
   $wrapper = entity_metadata_wrapper('comment', $comment);
