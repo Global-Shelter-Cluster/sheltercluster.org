@@ -24,6 +24,7 @@ function cluster_og_field_group_info() {
     'weight' => '37',
     'children' => array(
       0 => 'field_email_address_identifier',
+      1 => 'field_enable_discussions',
     ),
     'format_type' => 'fieldset',
     'format_settings' => array(
@@ -53,6 +54,7 @@ function cluster_og_field_group_info() {
     'weight' => '35',
     'children' => array(
       0 => 'field_email_address_identifier',
+      1 => 'field_enable_discussions',
     ),
     'format_type' => 'fieldset',
     'format_settings' => array(
@@ -82,6 +84,7 @@ function cluster_og_field_group_info() {
     'weight' => '37',
     'children' => array(
       0 => 'field_email_address_identifier',
+      1 => 'field_enable_discussions',
     ),
     'format_type' => 'fieldset',
     'format_settings' => array(
@@ -111,6 +114,7 @@ function cluster_og_field_group_info() {
     'weight' => '37',
     'children' => array(
       0 => 'field_email_address_identifier',
+      1 => 'field_enable_discussions',
     ),
     'format_type' => 'fieldset',
     'format_settings' => array(
@@ -140,6 +144,7 @@ function cluster_og_field_group_info() {
     'weight' => '37',
     'children' => array(
       0 => 'field_email_address_identifier',
+      1 => 'field_enable_discussions',
     ),
     'format_type' => 'fieldset',
     'format_settings' => array(
@@ -169,6 +174,7 @@ function cluster_og_field_group_info() {
     'weight' => '15',
     'children' => array(
       0 => 'field_email_address_identifier',
+      1 => 'field_enable_discussions',
     ),
     'format_type' => 'fieldset',
     'format_settings' => array(

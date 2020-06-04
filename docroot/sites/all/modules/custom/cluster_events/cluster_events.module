@@ -686,7 +686,7 @@ function cluster_events_cron() {
       continue; // shouldn't happen
     $manager = GroupContentManager::getInstance($group);
 
-    $all_uids = cluster_api_get_followers(
+    $all_uids = cluster_api_get_followers_and_admins(
       $manager,
       $timezones,
       $last_notification_field,

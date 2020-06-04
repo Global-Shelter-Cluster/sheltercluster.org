@@ -65,6 +65,9 @@ function cluster_email_schema_alter(&$schema) {
  * Implements hook_cron().
  */
 function cluster_email_cron() {
+  if (!variable_get('cluster_email_out_group_notifications', 1))
+    return;
+
   // Daily notifications (followers with user accounts)
   $last_notification_field = 'last_daily_email_notification';
   $enabled_field = 'field_notif_email_daily';
@@ -318,6 +321,8 @@ function cluster_email_mail($key, &$message, $params) {
       $body['#data'] = $params['data'];
       break;
   }
+
+  $message['params']['mandrill']['from_name'] = 'Shelter Cluster' . ' — ' . $group_name;
 
   $message['body'] = [drupal_render($body)];
 }

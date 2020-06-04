@@ -95,7 +95,12 @@ function cluster_og_node_validate($node, $form, &$form_state) {
   )
     return;
 
+  $enable_discussions = $form_state['values']['field_enable_discussions']['und'][0]['value'];
   $email_address_identifier = $form_state['values']['field_email_address_identifier']['und'][0]['value'];
+
+  if ($enable_discussions && $email_address_identifier === '')
+    form_set_error('field_email_address_identifier', t('Email address identifier is required when discussions are enabled.'));
+
   if ($email_address_identifier !== '' && !preg_match('/^[a-z0-9\-]+$/i', $email_address_identifier))
     form_set_error('field_email_address_identifier', t('Only letters, numbers, and dashes are allowed for the email address identifier.'));
 }
@@ -1135,4 +1140,97 @@ function cluster_og_get_group_from_email_identifier($group_email_identifier) {
     return NULL;
 
   return $group;
+}
+
+/**
+ * Implements hook_workbench_moderation_access_alter().
+ *
+ * Gives moderation access to group administrators.
+ */
+function cluster_og_workbench_moderation_access_alter(&$access, $op, $node) {
+  if ($op !== 'moderate' || !$node || $access)
+    return;
+
+  if (cluster_og_is_group_admin_by_content_node($node))
+    $access = TRUE;
+}
+
+/**
+ * Checks if the current user is a group administrator on the group referenced by
+ * the given node (e.g. when the node is a discussion).
+ *
+ * @param object $node
+ * @return bool
+ */
+function cluster_og_is_group_admin_by_content_node($node) {
+  global $user;
+  if (!$user || !$user->uid)
+    return FALSE;
+
+  foreach (cluster_og_gids_from_content_node($node) as $gid) {
+    $user_roles_in_group = og_get_user_roles('node', $gid, $user->uid, FALSE);
+    if (in_array(OG_ADMINISTRATOR_ROLE, $user_roles_in_group)) {
+      return TRUE;
+    }
+  }
+
+  return FALSE;
+}
+
+/**
+ * Get a list of uids for the given group's admins.
+ *
+ * @param int $gid
+ * @return int[]
+ */
+function cluster_og_group_admins_uids_by_gid($gid) {
+  $group = node_load($gid);
+  if (!$group || !og_is_group('node', $group)) {
+    return [];
+  }
+
+  $access_threshold = 60 * 60 * 24 * 30 * 6; // 6 months
+
+  $manager = GroupContentManager::getInstance($group);
+  return $manager->getUsersByRole(OG_ADMINISTRATOR_ROLE, NULL, $access_threshold);
+}
+
+/**
+ * Get a list of group ids for the given content node (e.g. a document).
+ *
+ * @param object $node
+ * @return int[]
+ */
+function cluster_og_gids_from_content_node($node) {
+  $group_refs = field_get_items('node', $node, 'og_group_ref');
+  if ($group_refs === FALSE)
+    return [];
+
+  return array_map(function($item) {return $item['target_id'];}, $group_refs);
+}
+
+/**
+ * Implements hook_menu_alter().
+ */
+function cluster_og_menu_alter(&$items) {
+  if (array_key_exists('comment/%/approve', $items)) {
+    $items['comment/%/approve']['access callback'] = 'cluster_og_comment_moderation_access';
+    $items['comment/%/approve']['access arguments'] = [1];
+  }
+  if (array_key_exists('comment/%/delete', $items)) {
+    $items['comment/%/delete']['access callback'] = 'cluster_og_comment_moderation_access';
+    $items['comment/%/delete']['access arguments'] = [1];
+  }
+}
+
+function cluster_og_comment_moderation_access($cid) {
+  $comment = comment_load($cid);
+  if (!$comment)
+    return user_access('administer comments');
+
+  $node = node_load($comment->nid);
+  if (cluster_og_is_group_admin_by_content_node($node))
+    return TRUE;
+
+  return user_access('administer comments');
 }

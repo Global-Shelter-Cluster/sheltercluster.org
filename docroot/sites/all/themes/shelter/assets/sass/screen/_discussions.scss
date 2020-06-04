@@ -112,7 +112,7 @@
     float: left;
   }
   .information {
-    float: left;
+    margin-left: 100px;
     color: $shelter-grey;
     @include rem(font-size, 0.8rem);
   }
@@ -121,7 +121,6 @@
     color: $shelter-dark-blue;
     float: right;
     display: inline-block;
-    @include rem(margin-top, 0.25rem);
 
     a {
       font-size: inherit;

@@ -9,6 +9,12 @@ include_once 'cluster_discussions.pathauto.inc';
 
 const CLUSTER_DISCUSSIONS_PER_PAGE = 30;
 
+/** How many previous comments to show on emails */
+const CLUSTER_DISCUSSIONS_PREV_COMMENT_LIMIT_ON_EMAILS = 2;
+
+/** Character length of previous comments in emails */
+const CLUSTER_DISCUSSIONS_PREV_COMMENT_SUMMARY_SIZE = 200;
+
 /**
  *  Implements hook_menu().
  */
@@ -23,7 +29,203 @@ function cluster_discussions_menu() {
     'access arguments' => array(0, 1),
     'type' => MENU_CALLBACK,
   );
+
+  $items['node/%/moderate'] = array(
+    'title' => 'Moderate',
+    'page callback' => 'cluster_discussions_moderate',
+    'page arguments' => array(1),
+    'access callback' => '_cluster_discussions_moderate_access',
+    'access arguments' => array(1),
+    'type' => MENU_LOCAL_TASK,
+    'weight' => 1,
+  );
+
   return $items;
+}
+
+function cluster_discussions_moderate($gid) {
+  $discussion_nids = db_query('
+  SELECT n.nid
+  FROM {node} n
+    INNER JOIN {og_membership} o
+      ON o.etid = n.nid
+        AND o.entity_type = ?
+        AND o.group_type = ?
+  WHERE n.status = ?
+    AND n.type = ?
+    AND o.gid = ?
+  ORDER BY n.created DESC
+  LIMIT 20
+  ', [
+    'node',
+    'node',
+    NODE_NOT_PUBLISHED,
+    'discussion',
+    $gid,
+  ])->fetchCol();
+
+  $discussion_header = [t('Date'), t('Discussion'), t('Author'), t('Operations')];
+  $discussion_rows = array_map('cluster_discussions_render_discussion_row', $discussion_nids);
+
+  $comment_cids = db_query('
+  SELECT c.cid
+  FROM {comment} c
+    INNER JOIN {node} n
+      ON c.nid = n.nid
+    INNER JOIN {og_membership} o
+      ON o.etid = n.nid
+        AND o.entity_type = ?
+        AND o.group_type = ?
+  WHERE c.status = ?
+    AND n.type = ?
+    AND n.status = ?
+    AND o.gid = ?
+  ORDER BY c.created DESC
+  LIMIT 20
+  ', [
+    'node',
+    'node',
+    COMMENT_NOT_PUBLISHED,
+    'discussion',
+    NODE_PUBLISHED,
+    $gid,
+  ])->fetchCol();
+
+  $comment_header = [t('Date'), t('Comment'), t('Discussion'), t('Author'), t('Operations')];
+  $comment_rows = array_map('cluster_discussions_render_comment_row', $comment_cids);
+
+  return [
+    [
+      '#type' => 'html_tag',
+      '#tag' => 'h2',
+      '#value' => t('Moderate discussions'),
+    ],
+    [
+      '#theme' => 'table',
+      '#header' => $discussion_header,
+      '#rows' => $discussion_rows,
+      '#caption' => '<h4>' . t('Discussions') . '</h4>',
+      '#empty' => t('No discussions found that need moderation.'),
+    ],
+    ['#markup' => '<br/>'],
+    [
+      '#theme' => 'table',
+      '#header' => $comment_header,
+      '#rows' => $comment_rows,
+      '#caption' => '<h4>' . t('Comments') . '</h4>',
+      '#empty' => t('No comments found that need moderation.'),
+    ],
+  ];
+}
+
+function cluster_discussions_render_discussion_row($nid) {
+  $discussion = node_load($nid);
+  $wrapper = entity_metadata_wrapper('node', $discussion);
+
+  $date = format_date($discussion->created);
+
+  $title_and_body = l($discussion->title, 'node/' . $discussion->nid);
+  $title_and_body .= '<br/>';
+  $body = $wrapper->body->value();
+  $title_and_body .= text_summary($body['safe_value'], $body['format'], 100);
+
+  $user = user_load($discussion->uid);
+  $author = l($user->name, 'user/'.$user->uid);
+  $author .= '<br/>';
+  $time_diff = REQUEST_TIME - $user->created;
+  $author .= t('(registered %time ago)', ['%time' => format_interval($time_diff, 1)]);
+
+  $publish_path = 'node/' . $discussion->nid . '/moderation/' . $discussion->vid . '/change-state/published';
+  $delete_path = 'node/' . $discussion->nid . '/delete';
+  $publish_options = [
+    'query' => [
+      'destination' => current_path(),
+      'token' => drupal_get_token("{$discussion->nid}:{$discussion->vid}:published"),
+    ],
+  ];
+  $delete_options = [
+    'query' => [
+      'destination' => current_path(),
+    ],
+  ];
+  $operations = [
+    l('publish', $publish_path, $publish_options),
+    l('delete', $delete_path, $delete_options),
+  ];
+
+  return [
+    $date,
+    $title_and_body,
+    $author,
+    join('<br/>', $operations),
+  ];
+}
+
+function cluster_discussions_render_comment_row($cid) {
+  $comment = comment_load($cid);
+  $wrapper = entity_metadata_wrapper('comment', $comment);
+
+  $discussion = node_load($comment->nid);
+  $discussion_wrapper = entity_metadata_wrapper('node', $discussion);
+
+  $date = format_date($comment->created);
+
+  $body_value = $wrapper->comment_body->value();
+  $body_summary = text_summary($body_value['safe_value'], $body_value['format'], 100);
+  $body = l($body_summary, 'comment/' . $comment->cid, [
+    'html' => TRUE,
+  ]);
+
+  $discussion_title = l($discussion->title, 'node/' . $discussion->nid, [
+    'fragment' => 'comment-' . $comment->cid,
+  ]);
+
+  $user = user_load($comment->uid);
+  $author = l($user->name, 'user/' . $user->uid);
+  $author .= '<br/>';
+  $time_diff = REQUEST_TIME - $user->created;
+  $author .= t('(registered %time ago)', ['%time' => format_interval($time_diff, 1)]);
+
+  $publish_path = 'comment/' . $comment->cid . '/approve';
+  $delete_path = 'comment/' . $comment->cid . '/delete';
+  $publish_options = [
+    'query' => [
+      'destination' => current_path(),
+      'token' => drupal_get_token('comment/' . $comment->cid . '/approve'),
+    ],
+  ];
+  $delete_options = [
+    'query' => [
+      'destination' => current_path(),
+    ],
+  ];
+  $operations = [
+    l('publish', $publish_path, $publish_options),
+    l('delete', $delete_path, $delete_options),
+  ];
+
+  return [
+    $date,
+    $body,
+    $discussion_title,
+    $author,
+    join('<br/>', $operations),
+  ];
+}
+
+function _cluster_discussions_moderate_access($gid) {
+  global $user;
+
+  $group = node_load($gid);
+  if (!og_is_group('node', $group))
+    return FALSE;
+
+  // Site-wide admins get access to all discussion moderation pages.
+  if (in_array('administrator', $user->roles))
+    return TRUE;
+
+  $user_roles_in_group = og_get_user_roles('node', $gid, $user->uid, FALSE);
+  return in_array(OG_ADMINISTRATOR_ROLE, $user_roles_in_group);
 }
 
 /**
@@ -122,6 +324,7 @@ function cluster_discussions_theme() {
         'body' => '', // html string
         'group' => [],
         'node' => [],
+        'is_moderate' => FALSE,
       ],
       'path' => drupal_get_path('module', 'cluster_discussions') . '/templates',
     ],
@@ -135,6 +338,8 @@ function cluster_discussions_theme() {
         'group' => [],
         'node' => [],
         'comment' => [],
+        'previous' => [],
+        'is_moderate' => FALSE,
       ],
       'path' => drupal_get_path('module', 'cluster_discussions') . '/templates',
     ],
@@ -161,6 +366,7 @@ function cluster_discussions_theme() {
         'group' => [],
         'node' => [],
         'comment' => [],
+        'previous' => [],
         'subscriber_email' => '',
       ],
       'path' => drupal_get_path('module', 'cluster_discussions') . '/templates',
@@ -263,17 +469,20 @@ function cluster_discussions_comment_insert($comment) {
  * Implements hook_mail().
  */
 function cluster_discussions_mail($key, &$message, $params) {
-  if (!in_array($key, ['discussion', 'comment', 'discussion_anon', 'comment_anon']))
+  if (!in_array($key, ['discussion', 'comment', 'discussion_anon', 'comment_anon', 'discussion_moderate', 'comment_moderate']))
     throw new Exception("Unknown key: ".$key);
 
   $is_comment = in_array($key, ['comment', 'comment_anon']);
   $is_anon = in_array($key, ['discussion_anon', 'comment_anon']);
+  $is_moderate = in_array($key, ['discussion_moderate', 'comment_moderate']);
 
   $themes = [
-    'discussion'      => 'cluster_discussions_email',
-    'discussion_anon' => 'cluster_discussions_email_anon',
-    'comment'         => 'cluster_discussions_email_comment',
-    'comment_anon'    => 'cluster_discussions_email_comment_anon',
+    'discussion'          => 'cluster_discussions_email',
+    'discussion_anon'     => 'cluster_discussions_email_anon',
+    'discussion_moderate' => 'cluster_discussions_email',
+    'comment'             => 'cluster_discussions_email_comment',
+    'comment_anon'        => 'cluster_discussions_email_comment_anon',
+    'comment_moderate'    => 'cluster_discussions_email_comment',
   ];
 
   $body = [
@@ -286,24 +495,32 @@ function cluster_discussions_mail($key, &$message, $params) {
     '#node' => $params['node'],
   ];
 
-  if ($is_comment)
+  if ($is_comment) {
     $body['#comment'] = $params['comment'];
+    $body['#previous'] = $params['previous'];
+  }
 
   if ($is_anon)
     $body['#subscriber_email'] = $params['subscriber_email'];
+
+  if ($is_moderate)
+    $body['#is_moderate'] = TRUE;
 
 //  // E.g. "Ecuador Earthquake 2016 (response)"
 //  $group_name = cluster_api_group_notification_title($params['group'], $params['langcode']);
   $group_name = $params['group']->title;
 
   if ($is_comment)
-    $message['subject'] = 'Re: ' . $group_name . ' — ' . $params['node']->title;
+    $message['subject'] = 'Re: ' . $params['node']->title;
   else
-    $message['subject'] = $group_name . ' — ' . $params['node']->title;
+    $message['subject'] = $params['node']->title;
   //  $message['subject'] = $params['node']->title;
-  $message['from_name'] = $is_comment
-    ? $params['comment']->registered_name
-    : $params['node']->name;
+
+//  $message['from_name'] = $is_comment
+//    ? $params['comment']->registered_name
+//    : $params['node']->name;
+  $message['params']['mandrill']['from_name'] = 'Shelter Cluster' . ' — ' . $group_name;
+
   $message['body'] = [drupal_render($body)];
 
   $reply_to_address = cluster_email_inbound_address('comment-'.$params['node']->nid);
@@ -314,6 +531,9 @@ function cluster_discussions_mail($key, &$message, $params) {
  * Implements hook_cron().
  */
 function cluster_discussions_cron() {
+  if (!variable_get('cluster_email_out_discussions', 1))
+    return;
+
   // Email notifications for new discussion nodes
 
   $query = new EntityFieldQuery();
@@ -354,7 +574,7 @@ function cluster_discussions_cron() {
       if (is_null($first_group))
         $first_group = $group;
 
-      $all_uids = array_unique(array_merge($all_uids, cluster_api_get_followers($manager)));
+      $all_uids = array_unique(array_merge($all_uids, cluster_api_get_followers_and_admins($manager)));
       if ($group_wrapper->field_enable_email_subscriptions->value())
         $all_subscribers = array_merge($all_subscribers, $group_wrapper->field_subscribers->value());
     }
@@ -453,6 +673,8 @@ function cluster_discussions_cron() {
     $body = $comment_wrapper->comment_body->value()['safe_value'];
     $comment_date = $comment->created;
 
+    $previous = cluster_discussions_get_previous_email_data($comment, $discussion_node);
+
     $all_uids = []; // Unified list of uids for all the groups to which this discussion item belongs.
     $all_subscribers = []; // Unified list of subscriber emails for all the groups to which this discussion item belongs.
     $first_group = NULL;
@@ -467,7 +689,7 @@ function cluster_discussions_cron() {
       if (is_null($first_group))
         $first_group = $group;
 
-      $all_uids = array_unique(array_merge($all_uids, cluster_api_get_followers($manager)));
+      $all_uids = array_unique(array_merge($all_uids, cluster_api_get_followers_and_admins($manager)));
       if ($group_wrapper->field_enable_email_subscriptions->value())
         $all_subscribers = array_merge($all_subscribers, $group_wrapper->field_subscribers->value());
     }
@@ -480,6 +702,7 @@ function cluster_discussions_cron() {
       try {
         $params = [
           'comment' => $comment,
+          'previous' => $previous,
           'node' => $discussion_node,
           'group' => $first_group,
           'date' => $comment_date,
@@ -510,6 +733,7 @@ function cluster_discussions_cron() {
       try {
         $params = [
           'comment' => $comment,
+          'previous' => $previous,
           'node' => $discussion_node,
           'group' => $first_group,
           'date' => $comment_date,
@@ -527,6 +751,24 @@ function cluster_discussions_cron() {
       }
     }
   }
+}
+
+function cluster_discussions_get_previous_comments($node, $comment, $limit = 2) {
+  $query = db_select('comment', 'c')->extend('PagerDefault');
+  $query->addField('c', 'cid');
+  $query
+    ->condition('c.nid', $node->nid)
+    ->condition('c.cid', $comment->cid, '<')
+    ->condition('c.status', COMMENT_PUBLISHED)
+    ->addTag('node_access')
+    ->addTag('comment_filter')
+    ->addMetaData('node', $node)
+    ->limit($limit)
+    ->orderBy('c.cid', 'DESC'); // this only works with non-threaded comments
+
+  $cids = $query->execute()->fetchCol();
+
+  return comment_load_multiple($cids);
 }
 
 /**
@@ -600,7 +842,7 @@ function _cluster_discussions_inbound_discussion($group_email_identifier, $messa
   $values = [
     'type' => 'discussion',
     'created' => $message['ts'],
-    'status' => NODE_PUBLISHED,
+    'status' => cluster_user_is_trusted($user) ? NODE_PUBLISHED : NODE_NOT_PUBLISHED,
     'title' => trim($message['subject']),
   ];
 
@@ -727,4 +969,166 @@ function cluster_discussions_node_validate($node, $form, &$form_state) {
       return;
     }
   }
+}
+
+/**
+ * Implements hook_node_presave().
+ *
+ * Publish discussion immediately only if this is a trusted user.
+ * @see cluster_user_is_trusted()
+ */
+function cluster_discussions_node_presave($node) {
+  if ($node->type !== 'discussion' || !$node->is_new)
+    return;
+
+  $author = user_load($node->uid);
+  if (!$author)
+    return;
+
+  $is_trusted = cluster_user_is_trusted($author);
+  $node->status = $is_trusted ? NODE_PUBLISHED : NODE_NOT_PUBLISHED;
+
+  global $user;
+  if ($user->uid == $author->uid && !$is_trusted) {
+    drupal_set_message(t('Your discussion will be reviewed by an administrator before being published to the website.'), 'warning');
+
+    $wrapper = entity_metadata_wrapper('node', $node);
+    $body = $wrapper->body->value()['value'];
+
+    // Send an email about it to the node's groups admin(s), if any, right away
+    foreach (cluster_og_gids_from_content_node($node) as $gid) {
+      $group = node_load($gid);
+      if (!$group || !og_is_group('node', $group))
+        continue;
+
+      $group_admin_uids = cluster_og_group_admins_uids_by_gid($gid);
+      foreach (cluster_api_split_users_by_langcode($group_admin_uids) as $langcode => $uids) {
+        try {
+          $params = [
+            'node' => $node,
+            'group' => $group,
+            'date' => $node->created,
+            'body' => $body,
+            'langcode' => $langcode,
+          ];
+          $to = _cluster_email_recipients_string($uids);
+
+          drupal_mail('cluster_discussions', 'discussion_moderate', $to, $langcode, $params);
+        } catch (Exception $e) {
+          watchdog('cluster_discussions', 'Error sending moderate discussion email @nid: @error', [
+            '@nid' => $node->nid,
+            '@error' => $e->getMessage(),
+          ], WATCHDOG_ERROR);
+        }
+      }
+    }
+  }
+}
+
+function cluster_discussions_get_previous_email_data($comment, $discussion_node) {
+  $discussion_wrapper = entity_metadata_wrapper('node', $discussion_node);
+  $previous = [];
+
+  $previous_comments = cluster_discussions_get_previous_comments($discussion_node, $comment, CLUSTER_DISCUSSIONS_PREV_COMMENT_LIMIT_ON_EMAILS);
+  foreach ($previous_comments as $previous_comment) {
+    $previous_wrapper = entity_metadata_wrapper('comment', $previous_comment);
+    $body_value = $previous_wrapper->comment_body->value();
+    $previous[] = [
+      'body' => text_summary($body_value['safe_value'], $body_value['format'], CLUSTER_DISCUSSIONS_PREV_COMMENT_SUMMARY_SIZE),
+      'date' => $previous_comment->created,
+      'author' => $previous_comment->registered_name,
+      'url' => url('node/'.$discussion_node->nid, ['absolute' => TRUE, 'fragment' => 'comment-'.$previous_comment->cid]),
+    ];
+  }
+
+  if (count($previous) < CLUSTER_DISCUSSIONS_PREV_COMMENT_LIMIT_ON_EMAILS) {
+    // Add the discussion itself
+    $body_value = $discussion_wrapper->body->value();
+    $previous[] = [
+      'body' => text_summary($body_value['safe_value'], $body_value['format'], CLUSTER_DISCUSSIONS_PREV_COMMENT_SUMMARY_SIZE),
+      'date' => $discussion_node->created,
+      'author' => $discussion_node->name,
+      'url' => url('node/'.$discussion_node->nid, ['absolute' => TRUE]),
+    ];
+  }
+
+  return $previous;
+}
+
+/**
+ * Implements hook_comment_presave().
+ * @see cluster_discussions_node_presave()
+ */
+function cluster_discussions_comment_presave($comment) {
+  if ($comment->status == COMMENT_PUBLISHED)
+    return;
+
+  $author = user_load($comment->uid);
+  if (!$author)
+    return;
+
+  $is_trusted = cluster_user_is_trusted($author);
+  $comment->status = $is_trusted ? COMMENT_PUBLISHED : COMMENT_NOT_PUBLISHED;
+
+  if (!$is_trusted) {
+    // Send an email about it to the group admin(s), if any, right away
+
+    $node = node_load($comment->nid);
+    if (!$node)
+      return;
+    $comment_wrapper = entity_metadata_wrapper('comment', $comment);
+
+    $body = $comment_wrapper->comment_body->value()['value'];
+
+    // Send an email about it to the node's groups admin(s), if any, right away
+    foreach (cluster_og_gids_from_content_node($node) as $gid) {
+      $group = node_load($gid);
+      if (!$group || !og_is_group('node', $group))
+        continue;
+
+      $group_admin_uids = cluster_og_group_admins_uids_by_gid($gid);
+      foreach (cluster_api_split_users_by_langcode($group_admin_uids) as $langcode => $uids) {
+        try {
+          $params = [
+            'comment' => $comment,
+            'previous' => cluster_discussions_get_previous_email_data($comment, $node),
+            'node' => $node,
+            'group' => $group,
+            'date' => $comment->created,
+            'body' => $body,
+            'langcode' => $langcode,
+          ];
+          $to = _cluster_email_recipients_string($uids);
+
+          drupal_mail('cluster_discussions', 'comment_moderate', $to, $langcode, $params);
+        } catch (Exception $e) {
+          watchdog('cluster_discussions', 'Error sending moderate comment email @nid: @error', [
+            '@cid' => $comment->cid,
+            '@error' => $e->getMessage(),
+          ], WATCHDOG_ERROR);
+        }
+      }
+    }
+  }
+}
+
+/**
+ * Implements hook_node_access().
+ *
+ * Grants view access of unpublished discussions to group admins.
+ */
+function cluster_discussions_node_access($node, $op, $account) {
+  if ($node->type !== 'discussion' || $node->status === NODE_PUBLISHED)
+    return NODE_ACCESS_IGNORE;
+
+  $group_refs = field_get_items('node', $node, 'og_group_ref');
+  foreach ($group_refs as $group_ref) {
+    $gid = $group_ref['target_id'];
+
+    $user_roles_in_group = og_get_user_roles('node', $gid, $account->uid, FALSE);
+    if (in_array(OG_ADMINISTRATOR_ROLE, $user_roles_in_group))
+      return NODE_ACCESS_ALLOW;
+  }
+
+  return NODE_ACCESS_IGNORE;
 }

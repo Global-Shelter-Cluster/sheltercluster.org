@@ -12,7 +12,6 @@ const CLUSTER_API_DAILY_PUSH_NOTIFICATION_FROM = 14;
 const CLUSTER_API_DAILY_PUSH_NOTIFICATION_TO = 18;
 
 function cluster_api_menu() {
-
   $items = [];
 
   $items['admin/config/shelter/cluster-api'] = [
@@ -485,6 +484,40 @@ function cluster_api_get_followers($manager, $timezones = NULL, $last_notificati
 
   return $manager->getUsersByRole(
     CLUSTER_API_FOLLOWER_ROLE_NAME,
+    $timezones,
+    $access_threshold,
+    function (SelectQuery $query) use ($hour, $last_notification_field, $threshold, $access_threshold, $enabled_field) {
+      if (!is_null($last_notification_field)) {
+        // The time of the last notification sent to this user, about this group, is at least 22 hours ago.
+        $filter_time = REQUEST_TIME - ($threshold * $hour);
+        $query->condition('og_ur.'.$last_notification_field, $filter_time, '<');
+      }
+
+      if (!is_null($enabled_field)) {
+        $query->join('field_data_'.$enabled_field, 'ef', 'ef.entity_type = \'user\' AND ef.entity_id = u.uid');
+        $query->condition('ef.'.$enabled_field.'_value', 1);
+      }
+    }
+  );
+}
+
+/**
+ * Similar to cluster_api_get_followers, but also includes group administrators.
+ * @see cluster_api_get_followers()
+ *
+ * @param GroupContentManager $manager
+ * @param string[]|NULL $timezones
+ * @param string|NULL $last_notification_field
+ * @param int|NULL $threshold
+ * @param string|NULL $enabled_field
+ * @param int|NULL $access_threshold
+ * @return int[] User IDs
+ */
+function cluster_api_get_followers_and_admins($manager, $timezones = NULL, $last_notification_field = NULL, $threshold = NULL, $enabled_field = NULL, $access_threshold = CLUSTER_API_NOTIF_ACCESS_THRESHOLD) {
+  $hour = 60 * 60; // const
+
+  return $manager->getUsersByRole(
+    [CLUSTER_API_FOLLOWER_ROLE_NAME, OG_ADMINISTRATOR_ROLE],
     $timezones,
     $access_threshold,
     function (SelectQuery $query) use ($hour, $last_notification_field, $threshold, $access_threshold, $enabled_field) {

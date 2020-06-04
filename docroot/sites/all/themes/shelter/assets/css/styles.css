@@ -2407,7 +2407,7 @@ label[for="mobile_menu_toggle"] span:after {
   float: left;
 }
 .page-node-discussions .information {
-  float: left;
+  margin-left: 100px;
   color: #575757;
   font-size: 12.8px;
   font-size: 0.8rem;
@@ -2418,8 +2418,6 @@ label[for="mobile_menu_toggle"] span:after {
   color: #688394;
   float: right;
   display: inline-block;
-  margin-top: 4px;
-  margin-top: 0.25rem;
 }
 .page-node-discussions .date a {
   font-size: inherit;

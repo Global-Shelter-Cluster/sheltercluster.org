@@ -331,3 +331,65 @@ function cluster_user_user_cancel_methods_alter(&$methods) {
     // Let's disallow the method that bulk-unpublishes the content too.
     unset($methods['user_cancel_block_unpublish']);
 }
+
+/**
+ * Returns true if any of this is true:
+ *
+ * 1. the user has the "trusted" or "admin" roles
+ * 2. the user has any published content (nodes or comments)
+ * 3. the user is a group admin on any group
+ *
+ * @param object $user
+ *
+ * @return bool
+ */
+function cluster_user_is_trusted($user) {
+  if (!$user || !$user->uid)
+    return FALSE;
+
+  if (!$user->status)
+    return FALSE; // user is blocked
+
+  // 1.
+
+  $roles = (array) $user->roles;
+  if (in_array('administrator', $roles) || in_array('trusted user', $roles))
+    return TRUE;
+
+  // 2.
+
+  $has_published_nodes = db_select('node')
+    ->condition('uid', $user->uid)
+    ->condition('status', NODE_PUBLISHED)
+    ->range(0, 1)->countQuery()->execute()->fetchField();
+  if ($has_published_nodes)
+    return TRUE;
+
+  $has_published_comments = db_select('comment')
+    ->condition('uid', $user->uid)
+    ->condition('status', COMMENT_PUBLISHED)
+    ->range(0, 1)->countQuery()->execute()->fetchField();
+  if ($has_published_comments)
+    return TRUE;
+
+  // 3.
+
+  $query = new EntityFieldQuery();
+  $result = $query
+    ->entityCondition('entity_type', 'og_membership')
+    ->propertyCondition('group_type', 'node')
+    ->propertyCondition('etid', $user->uid)
+    ->propertyCondition('entity_type', 'user')
+    ->execute();
+
+  if (!empty($result['og_membership'])) {
+    $memberships = og_membership_load_multiple(array_keys($result['og_membership']));
+    foreach ($memberships as $membership) {
+      $user_roles_in_group = og_get_user_roles('node', $membership->gid, $user->uid, FALSE);
+      if (in_array(OG_ADMINISTRATOR_ROLE, $user_roles_in_group))
+        return TRUE;
+    }
+  }
+
+  return FALSE;
+}
