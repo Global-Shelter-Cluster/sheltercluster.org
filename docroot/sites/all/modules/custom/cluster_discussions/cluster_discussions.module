@@ -993,8 +993,9 @@ function cluster_discussions_node_presave($node) {
   $node->status = $is_trusted ? NODE_PUBLISHED : NODE_NOT_PUBLISHED;
 
   global $user;
-  if ($user->uid == $author->uid && !$is_trusted) {
-    drupal_set_message(t('Your discussion will be reviewed by an administrator before being published to the website.'), 'warning');
+  if (!$is_trusted) {
+    if ($user && $user->uid == $author->uid)
+      drupal_set_message(t('Your discussion will be reviewed by an administrator before being published to the website.'), 'warning');
 
     $wrapper = entity_metadata_wrapper('node', $node);
     $body = $wrapper->body->value()['value'];
