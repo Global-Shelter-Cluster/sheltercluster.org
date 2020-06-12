@@ -309,6 +309,7 @@ function _cluster_email_html_remove_quotes($doc, $xpath) {
     '//*[@class=\'yahoo_quoted\']', // yahoo
     '//head', //outlook	includes a full	html page with things
     '//style', //outlook again
+    '//comment()', //html comments
   ];
 
   foreach ($xpaths_to_remove as $xpath_query) {
@@ -321,6 +322,7 @@ function _cluster_email_html_remove_quotes($doc, $xpath) {
   $xpaths_to_remove_everything_after = [
     '//hr', // outlook does this
     '//*[text() = \'donotreply@sheltercluster.org\']',
+    '//*[text()[contains(.,\'donotreply@sheltercluster.org\')]]',
   ];
   foreach ($xpaths_to_remove_everything_after as $xpath_query) {
     foreach ($xpath->query($xpath_query) as $element) {
