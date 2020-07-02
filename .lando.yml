@@ -1,0 +1,14 @@
+name: sheltercluster
+recipe: drupal7
+config:
+  webroot: docroot
+  php: "5.6"
+  drush: 8.1.15
+excludes:
+  - vendor
+  - node_modules
+  - modules/contrib
+  - modules
+  - "!modules/custom"
+  - misc
+  - includes
