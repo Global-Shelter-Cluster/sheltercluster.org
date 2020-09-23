@@ -102,6 +102,9 @@ function cluster_hid_synch_account_allowed($uid) {
  * Implements hook_preprocess_user_profile().
  */
 function cluster_hid_preprocess_user_profile(&$variables) {
+  // Humanitarian Id API has changed, this thows and error.
+  return;
+
   $variables['synch_with_humanitarian_id_profile'] = FALSE;
   $user = $variables['elements']['#account'];
   $humanitarian_id = _cluster_hid_test_if_drupal_user_has_humanitarian_id($user->uid);
