@@ -721,6 +721,7 @@ function cluster_events_cron() {
       }
 
       $manager->updateUsersTimestamp(CLUSTER_API_FOLLOWER_ROLE_NAME, $uids, $last_notification_field);
+      $manager->updateUsersTimestamp(OG_ADMINISTRATOR_ROLE, $uids, $last_notification_field);
     }
   }
 }
