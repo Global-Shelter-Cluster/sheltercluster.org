@@ -41,11 +41,6 @@
         <i class="fas fa-trash-alt"></i>
       </a>
       <a :href="event.url" v-html="event.title"></a>
-      <div class="ical" v-if="event.event_date > nowTS">
-        <a :href="'/node/' + event.nid + '/field_recurring_event_date2/ical/addtocal.ics'">
-          iCal
-        </a>
-      </div>
       <a v-if="groupNid != event.group_nids[0]" :href="'/node/' + event.group_nids[0]" class="group" v-html="event.group"></a>
     </td>
     <td v-html="event.event_location_html" class="event-location"></td>

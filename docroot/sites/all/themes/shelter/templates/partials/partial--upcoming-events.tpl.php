@@ -32,11 +32,6 @@
         class="event-date">
         <i class="far fa-calendar-alt" :title="event.event_date > nowTS ? 'Upcoming event' : 'Past event'"></i>
         {{ event.date }}
-        <div class="ical" v-if="event.event_date > nowTS">
-          <a :href="'/node/' + event.nid + '/field_recurring_event_date2/ical/addtocal.ics'">
-            iCal
-          </a>
-        </div>
       </div>
 
       <div v-if="event.event_location_html" v-html="event.event_location_html"
