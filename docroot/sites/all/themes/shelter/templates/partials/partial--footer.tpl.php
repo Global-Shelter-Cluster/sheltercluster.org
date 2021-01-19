@@ -36,7 +36,7 @@
         </li>
       </ul>
 
-      <h3><?php print t('Program/Initiative/activity undertaken with the financial support of the Government of Canada provided through Global Affairs Canada (GAC)'); ?></h3>
+      <h3><?php print t('This website is made possible through the financial and in-kind contributions of:'); ?></h3>
       <ul class="contributors clearfix">
         <li class="contributor">
           <?php print theme('image', array(
