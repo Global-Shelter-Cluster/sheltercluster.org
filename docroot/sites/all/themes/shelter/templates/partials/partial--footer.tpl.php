@@ -58,7 +58,7 @@
         </li>
         <li class="contributor">
           <?php print theme('image', array(
-            'path' => drupal_get_path('theme', 'shelter') . '/assets/images/international-federation-of-redcross.png',
+            'path' => drupal_get_path('theme', 'shelter') . '/assets/images/ifrc-scalled.png',
             'alt' => t('International Federation of Red Cross and Red Crescent Societies'),
           )); ?>
         </li>
