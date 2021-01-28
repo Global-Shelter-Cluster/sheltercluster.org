@@ -78,15 +78,20 @@ function cluster_captcha_strongarm() {
   $strongarm->api_version = 1;
   $strongarm->name = 'captcha_placement_map_cache';
   $strongarm->value = array(
+    'user_pass' => array(
+      'path' => array(),
+      'key' => 'actions',
+      'weight' => 99,
+    ),
     'user_register_form' => array(
       'path' => array(),
       'key' => 'actions',
       'weight' => 99,
     ),
-    'user_pass' => array(
+    'cluster_og_anon_email_subscribe_form' => array(
       'path' => array(),
-      'key' => 'actions',
-      'weight' => 99,
+      'key' => 'submit',
+      'weight' => NULL,
     ),
   );
   $export['captcha_placement_map_cache'] = $strongarm;
@@ -109,7 +114,7 @@ function cluster_captcha_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'recaptcha_size';
-  $strongarm->value = '';
+  $strongarm->value = 'compact';
   $export['recaptcha_size'] = $strongarm;
 
   $strongarm = new stdClass();
