@@ -204,6 +204,8 @@ function _cluster_webform_get_supported_component_validation($component_type) {
     case 'file':
       return [
         'extensions',
+        // Hard coded default value to 4 MB, uncomment to allow custom size.
+        //'size',
       ];
   }
   return [];
@@ -248,6 +250,10 @@ function _cluster_webform_allow_supported_validation(&$form) {
       if (!in_array($key, $supported_validation)) {
         $form['validation'][$key]['#access'] = FALSE;
       }
+    }
+    // Set the maximum file upload size default to 4 MB.
+    if (isset($form['validation']['size'])) {
+      $form['validation']['size']['#default_value'] = '4 MB';
     }
   }
   $form['validation']['required']['#access'] = TRUE;
