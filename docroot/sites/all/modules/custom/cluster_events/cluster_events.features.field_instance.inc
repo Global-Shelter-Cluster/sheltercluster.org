@@ -304,7 +304,7 @@ function cluster_events_field_default_field_instances() {
       'description_field' => 0,
       'entity_translation_sync' => FALSE,
       'file_directory' => 'events',
-      'file_extensions' => 'txt pdf doc docx xls xlsx ppt pptx zip',
+      'file_extensions' => 'txt pdf doc docx xls xlsx ppt pptx zip ics',
       'max_filesize' => '',
       'user_register_form' => FALSE,
     ),
