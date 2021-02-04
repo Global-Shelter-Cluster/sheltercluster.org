@@ -42,11 +42,11 @@ function cluster_photo_gallery_image_default_styles() {
   $styles['photo_gallery_medium'] = array(
     'label' => 'Photo gallery medium',
     'effects' => array(
-      4 => array(
+      2 => array(
         'name' => 'image_scale',
         'data' => array(
-          'width' => 800,
-          'height' => 600,
+          'width' => 900,
+          'height' => 900,
           'upscale' => 0,
         ),
         'weight' => 1,
