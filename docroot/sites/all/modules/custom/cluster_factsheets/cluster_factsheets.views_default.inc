@@ -316,6 +316,50 @@ function cluster_factsheets_views_default_views() {
     'thousand_separator' => '',
     'prefix_suffix' => 1,
   );
+  /* Field: Content: Reached */
+  $handler->display->display_options['fields']['field_fsi_reached']['id'] = 'field_fsi_reached';
+  $handler->display->display_options['fields']['field_fsi_reached']['table'] = 'field_data_field_fsi_reached';
+  $handler->display->display_options['fields']['field_fsi_reached']['field'] = 'field_fsi_reached';
+  $handler->display->display_options['fields']['field_fsi_reached']['settings'] = array(
+    'thousand_separator' => '',
+    'prefix_suffix' => 1,
+  );
+  /* Field: Content: Targeted */
+  $handler->display->display_options['fields']['field_fsi_nfi_targeted']['id'] = 'field_fsi_nfi_targeted';
+  $handler->display->display_options['fields']['field_fsi_nfi_targeted']['table'] = 'field_data_field_fsi_nfi_targeted';
+  $handler->display->display_options['fields']['field_fsi_nfi_targeted']['field'] = 'field_fsi_nfi_targeted';
+  $handler->display->display_options['fields']['field_fsi_nfi_targeted']['label'] = 'Targeted (NFI)';
+  $handler->display->display_options['fields']['field_fsi_nfi_targeted']['settings'] = array(
+    'thousand_separator' => '',
+    'prefix_suffix' => 1,
+  );
+  /* Field: Content: Reached */
+  $handler->display->display_options['fields']['field_fsi_nfi_reached']['id'] = 'field_fsi_nfi_reached';
+  $handler->display->display_options['fields']['field_fsi_nfi_reached']['table'] = 'field_data_field_fsi_nfi_reached';
+  $handler->display->display_options['fields']['field_fsi_nfi_reached']['field'] = 'field_fsi_nfi_reached';
+  $handler->display->display_options['fields']['field_fsi_nfi_reached']['label'] = 'Reached (NFI)';
+  $handler->display->display_options['fields']['field_fsi_nfi_reached']['settings'] = array(
+    'thousand_separator' => '',
+    'prefix_suffix' => 1,
+  );
+  /* Field: Content: Targeted */
+  $handler->display->display_options['fields']['field_fsi_shelter_targeted']['id'] = 'field_fsi_shelter_targeted';
+  $handler->display->display_options['fields']['field_fsi_shelter_targeted']['table'] = 'field_data_field_fsi_shelter_targeted';
+  $handler->display->display_options['fields']['field_fsi_shelter_targeted']['field'] = 'field_fsi_shelter_targeted';
+  $handler->display->display_options['fields']['field_fsi_shelter_targeted']['label'] = 'Targeted (Shelter)';
+  $handler->display->display_options['fields']['field_fsi_shelter_targeted']['settings'] = array(
+    'thousand_separator' => '',
+    'prefix_suffix' => 1,
+  );
+  /* Field: Content: Reached */
+  $handler->display->display_options['fields']['field_fsi_shelter_reached']['id'] = 'field_fsi_shelter_reached';
+  $handler->display->display_options['fields']['field_fsi_shelter_reached']['table'] = 'field_data_field_fsi_shelter_reached';
+  $handler->display->display_options['fields']['field_fsi_shelter_reached']['field'] = 'field_fsi_shelter_reached';
+  $handler->display->display_options['fields']['field_fsi_shelter_reached']['label'] = 'Reached (Shelter)';
+  $handler->display->display_options['fields']['field_fsi_shelter_reached']['settings'] = array(
+    'thousand_separator' => '',
+    'prefix_suffix' => 1,
+  );
   /* Field: Content: Required */
   $handler->display->display_options['fields']['field_fsi_funding_required']['id'] = 'field_fsi_funding_required';
   $handler->display->display_options['fields']['field_fsi_funding_required']['table'] = 'field_data_field_fsi_funding_required';
@@ -465,6 +509,50 @@ function cluster_factsheets_views_default_views() {
     'thousand_separator' => '',
     'prefix_suffix' => 1,
   );
+  /* Field: Content: Reached */
+  $handler->display->display_options['fields']['field_fsi_reached']['id'] = 'field_fsi_reached';
+  $handler->display->display_options['fields']['field_fsi_reached']['table'] = 'field_data_field_fsi_reached';
+  $handler->display->display_options['fields']['field_fsi_reached']['field'] = 'field_fsi_reached';
+  $handler->display->display_options['fields']['field_fsi_reached']['settings'] = array(
+    'thousand_separator' => '',
+    'prefix_suffix' => 1,
+  );
+  /* Field: Content: Targeted */
+  $handler->display->display_options['fields']['field_fsi_nfi_targeted']['id'] = 'field_fsi_nfi_targeted';
+  $handler->display->display_options['fields']['field_fsi_nfi_targeted']['table'] = 'field_data_field_fsi_nfi_targeted';
+  $handler->display->display_options['fields']['field_fsi_nfi_targeted']['field'] = 'field_fsi_nfi_targeted';
+  $handler->display->display_options['fields']['field_fsi_nfi_targeted']['label'] = 'Targeted (NFI)';
+  $handler->display->display_options['fields']['field_fsi_nfi_targeted']['settings'] = array(
+    'thousand_separator' => '',
+    'prefix_suffix' => 1,
+  );
+  /* Field: Content: Reached */
+  $handler->display->display_options['fields']['field_fsi_nfi_reached']['id'] = 'field_fsi_nfi_reached';
+  $handler->display->display_options['fields']['field_fsi_nfi_reached']['table'] = 'field_data_field_fsi_nfi_reached';
+  $handler->display->display_options['fields']['field_fsi_nfi_reached']['field'] = 'field_fsi_nfi_reached';
+  $handler->display->display_options['fields']['field_fsi_nfi_reached']['label'] = 'Reached (NFI)';
+  $handler->display->display_options['fields']['field_fsi_nfi_reached']['settings'] = array(
+    'thousand_separator' => '',
+    'prefix_suffix' => 1,
+  );
+  /* Field: Content: Targeted */
+  $handler->display->display_options['fields']['field_fsi_shelter_targeted']['id'] = 'field_fsi_shelter_targeted';
+  $handler->display->display_options['fields']['field_fsi_shelter_targeted']['table'] = 'field_data_field_fsi_shelter_targeted';
+  $handler->display->display_options['fields']['field_fsi_shelter_targeted']['field'] = 'field_fsi_shelter_targeted';
+  $handler->display->display_options['fields']['field_fsi_shelter_targeted']['label'] = 'Targeted (Shelter)';
+  $handler->display->display_options['fields']['field_fsi_shelter_targeted']['settings'] = array(
+    'thousand_separator' => '',
+    'prefix_suffix' => 1,
+  );
+  /* Field: Content: Reached */
+  $handler->display->display_options['fields']['field_fsi_shelter_reached']['id'] = 'field_fsi_shelter_reached';
+  $handler->display->display_options['fields']['field_fsi_shelter_reached']['table'] = 'field_data_field_fsi_shelter_reached';
+  $handler->display->display_options['fields']['field_fsi_shelter_reached']['field'] = 'field_fsi_shelter_reached';
+  $handler->display->display_options['fields']['field_fsi_shelter_reached']['label'] = 'Reached (Shelter)';
+  $handler->display->display_options['fields']['field_fsi_shelter_reached']['settings'] = array(
+    'thousand_separator' => '',
+    'prefix_suffix' => 1,
+  );
   /* Field: Content: Required */
   $handler->display->display_options['fields']['field_fsi_funding_required']['id'] = 'field_fsi_funding_required';
   $handler->display->display_options['fields']['field_fsi_funding_required']['table'] = 'field_data_field_fsi_funding_required';
@@ -534,6 +622,11 @@ function cluster_factsheets_views_default_views() {
     t('Cluster partners'),
     t('In need'),
     t('Targeted'),
+    t('Reached'),
+    t('Targeted (NFI)'),
+    t('Reached (NFI)'),
+    t('Targeted (Shelter)'),
+    t('Reached (Shelter)'),
     t('Required'),
     t('Funded'),
     t('Source'),
