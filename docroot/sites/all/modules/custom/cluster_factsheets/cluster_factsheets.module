@@ -1146,7 +1146,7 @@ function _cluster_factsheets_generate_cat_chart_data($items) {
       $reached = intval($wrapper->field_cat_reached->value());
       $ongoing = intval($wrapper->field_cat_ongoing->value());
       $planned = intval($wrapper->field_cat_planned->value());
-      $gap = $targeted - $reached - $ongoing - $planned;
+      $gap = max(0, $targeted - $reached - $ongoing - $planned);
 
       $labels[] = $title;
       $data[0]['data'][] = $reached;
