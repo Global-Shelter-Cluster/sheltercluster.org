@@ -841,6 +841,9 @@ function shelter_base_strongarm() {
         'language' => array(
           'weight' => '2',
         ),
+        'redirect' => array(
+          'weight' => '30',
+        ),
       ),
       'display' => array(),
     ),
