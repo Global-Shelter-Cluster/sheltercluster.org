@@ -408,7 +408,44 @@ function cluster_webform_menu() {
     'weight' => 90,
   );
 
+  $items['image-file/%'] = array(
+    'title' => 'Image from file id',
+    'page callback' => 'cluster_webform_image_file',
+    'page arguments' => array(1),
+    'access callback' => TRUE,
+  );
+
+  $items['image-file/%/%'] = array(
+    'title' => 'Image from file id, with image style',
+    'page callback' => 'cluster_webform_image_file',
+    'page arguments' => array(1, 2),
+    'access callback' => TRUE,
+  );
+
   return $items;
+}
+
+function cluster_webform_image_file($fid, $style = NULL) {
+  $file = file_load($fid);
+  if (!$file) return MENU_NOT_FOUND;
+
+  $scheme = 'public://';
+  if (substr($file->uri, 0, strlen($scheme)) !== $scheme) return MENU_NOT_FOUND;
+
+  if (!$style) {
+    $image = image_load($file->uri);
+  } else {
+    $image_style = image_style_load($style);
+    if (!$image_style) return MENU_NOT_FOUND;
+    $derivative_uri = image_style_path($image_style['name'], $file->uri);
+    if (!file_exists($derivative_uri))
+      image_style_create_derivative($image_style, $file->uri, $derivative_uri);
+    $image = image_load($derivative_uri);
+  }
+
+  if (!$image)
+    return MENU_NOT_FOUND;
+  file_transfer($image->source, ['Content-Type' => $image->info['mime_type'], 'Content-Length' => $image->info['file_size']]);
 }
 
 function cluster_webform_export_access($node) {
