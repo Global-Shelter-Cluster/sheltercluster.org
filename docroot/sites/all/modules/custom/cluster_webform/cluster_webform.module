@@ -445,7 +445,13 @@ function cluster_webform_image_file($fid, $style = NULL) {
 
   if (!$image)
     return MENU_NOT_FOUND;
-  file_transfer($image->source, ['Content-Type' => $image->info['mime_type'], 'Content-Length' => $image->info['file_size']]);
+  $headers = [
+    'Content-Type' => $image->info['mime_type'],
+    'Content-Length' => $image->info['file_size'],
+    'Cache-Control' => 'private, max-age=60*60*24*7',
+    'Expires' => gmdate('D, d M Y H:i:s', time()+60*60*24*7).' GMT',
+  ];
+  file_transfer($image->source, $headers);
 }
 
 function cluster_webform_export_access($node) {
