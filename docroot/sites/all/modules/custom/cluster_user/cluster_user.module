@@ -98,6 +98,15 @@ function cluster_user_menu() {
     'type' => MENU_CALLBACK,
   ];
 
+  $items['admin/config/shelter/registration'] = [
+    'title' => t('User registration settings'),
+    'description' => t('Rules for preventing users from registering on the site'),
+    'page callback' => 'drupal_get_form',
+    'page arguments' => ['cluster_user_registration_settings_form'],
+    'access arguments' => ['administer site configuration'],
+    'file' => 'cluster_user.forms.inc',
+  ];
+
   return $items;
 }
 
@@ -154,6 +163,8 @@ function cluster_user_form_user_register_form_alter(&$form, &$form_state, $form_
   $form['#group_children'] = array_filter($form['#group_children'], function($current_group) use ($groups) {
     return !in_array($current_group, $groups);
   });
+
+  $form['#validate'][] = 'cluster_user_user_register_form_validate';
 }
 
 /**
@@ -388,6 +399,65 @@ function cluster_user_is_trusted($user) {
       $user_roles_in_group = og_get_user_roles('node', $membership->gid, $user->uid, FALSE);
       if (in_array(OG_ADMINISTRATOR_ROLE, $user_roles_in_group))
         return TRUE;
+    }
+  }
+
+  return FALSE;
+}
+
+/**
+ * Implements hook_user_presave().
+ */
+function cluster_user_user_presave(&$edit, $account, $category) {
+  if (!$account->is_new)
+    return;
+
+  if (cluster_user_is_mail_blocked_from_registering($account->mail, "user_presave, name: {$account->name}, IP: {$_SERVER['REMOTE_ADDR']}"))
+    // Normally, this wouldn't happen, as there's also validation in the user_register form to show nice validation errors. This is just a last resort.
+    die('Email address blocked. Please contact an administrator if you believe this is a mistake.');
+}
+
+function cluster_user_user_register_form_validate(&$form, &$form_state) {
+  if (cluster_user_is_mail_blocked_from_registering($form_state['input']['mail'], "user_register_form_validate, name: {$form_state['input']['name']}, IP: {$_SERVER['REMOTE_ADDR']}"))
+    form_set_error('mail', t("Email address blocked. Please contact an administrator if you believe this is a mistake."));
+}
+
+function cluster_user_is_mail_blocked_from_registering($mail, $context = 'unknown') {
+  $whitelist = explode("\n", variable_get('cluster_user_registration_whitelist', ''));
+  $whitelist = array_map('trim', $whitelist);
+  $whitelist = array_map('strtolower', $whitelist);
+  $whitelist = array_values(array_filter($whitelist));
+
+  if (in_array(trim(strtolower($mail)), $whitelist))
+    return FALSE; // it's whitelisted!
+
+  $regex_blacklist = explode("\n", variable_get('cluster_user_registration_regex_blacklist', ''));
+  foreach ($regex_blacklist as $regex) {
+    $regex = trim($regex);
+    if ($regex === '')
+      continue;
+
+    $match = preg_match($regex, $mail);
+    if ($match === 1) {
+      watchdog('cluster_user', 'Email %mail blocked using rule %regex (%context)', [
+        '%regex' => $regex,
+        '%mail' => $mail,
+        '%context' => $context,
+      ], WATCHDOG_CRITICAL);
+      return TRUE;
+    } elseif ($match === 0)
+      continue;
+    elseif ($match === FALSE) {
+      watchdog('cluster_user', 'Error on regex: %regex', [
+        '%regex' => $regex,
+      ], WATCHDOG_ERROR);
+      continue; // let it pass
+    } else {
+      watchdog('cluster_user', 'Unexpected result from preg_match() on regex %regex: %result', [
+        '%regex' => $regex,
+        '%result' => $match,
+      ], WATCHDOG_ERROR);
+      continue; // let it pass
     }
   }
 

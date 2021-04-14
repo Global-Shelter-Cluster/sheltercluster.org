@@ -31,6 +31,11 @@ function _cluster_api_signup($requests) {
     return $response;
   }
 
+  if (cluster_user_is_mail_blocked_from_registering($email, "api_signup, name: {$account_values['name']}, IP: {$_SERVER['REMOTE_ADDR']}")) {
+    $response['authorization'] = _cluster_api_signup_error_response('403', 'Forbidden', 'Email address blocked. Please contact an administrator if you believe this is a mistake.');
+    return $response;
+  }
+
   // Create new user with supplied credentials and values.
   $fields = [
     'name' => $account_values['name'],
