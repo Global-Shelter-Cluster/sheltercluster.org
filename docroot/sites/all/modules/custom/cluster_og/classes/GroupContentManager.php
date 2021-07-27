@@ -103,7 +103,8 @@ class GroupContentManager {
       ->fieldCondition('field_factsheet_is_visible', 'value', 1)
       ->fieldCondition('og_group_ref', 'target_id', $this->node->nid)
       ->propertyCondition('status', NODE_PUBLISHED)
-      ->fieldOrderBy('field_date', 'value', 'DESC');
+      ->fieldOrderBy('field_date', 'value', 'DESC')
+      ->propertyOrderBy('created', 'DESC');
     if ($limit)
       $query->range(NULL, $limit);
 
