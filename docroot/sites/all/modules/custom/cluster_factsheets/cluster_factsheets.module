@@ -442,7 +442,7 @@ function cluster_factsheets_node_validate($node, $form, &$form_state) {
     $errors = form_get_errors();
     form_clear_error();
 
-    foreach ($errors as $k => $v) {
+    foreach ((array) $errors as $k => $v) {
       if (in_array($k, $ignore))
         continue;
 
