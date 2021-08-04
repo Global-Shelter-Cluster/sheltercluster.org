@@ -37,8 +37,7 @@ function _cluster_api_get_objects($request) {
   }
 
   // Add the authorized user id to the requested objects.
-  $requested_objects = $request['objects'];
-  $requested_objects[] = ['type' => 'user', 'id' => $user->uid];
+  $requested_objects = array_merge([['type' => 'user', 'id' => $user->uid]], $request['objects']);
 
   // Get all objects from API.
   $object_api = new ClusterAPI_Object($user);
